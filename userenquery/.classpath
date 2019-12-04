@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" output="target/classes" path="src/main/java">
+		<attributes>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry excluding="**" kind="src" output="target/classes" path="src/main/resources">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" output="target/test-classes" path="src/test/java">
+		<attributes>
+			<attribute name="test" value="true"/>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/soap.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/sqljdbc4.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/enterprise.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/wsc-23.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/log4j-1.2.15.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/postgresql-9.1-903.jdbc4.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/jasperreports-5.0.1.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/json-simple-1.1.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/jsoup-1.11.3.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/com.lowagie.text-2.1.7.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/commons-beanutils-1.8.3.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/commons-collections-3.2.1-1.0.0.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/commons-digester-2.1.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/commons-logging-1.2.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/commons-logging-1.2-javadoc.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/jxl-2.6.12.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/httpclient-4.3.3.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/java-json.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/partner.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/javax.servlet-3.0.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/ccavutil.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/Apache Tomcat v9.0 (2)"/>
+	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="output" path="target/classes"/>
+</classpath>
