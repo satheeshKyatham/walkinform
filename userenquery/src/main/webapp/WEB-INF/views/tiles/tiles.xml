@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC  "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"  "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">  
+
+<tiles-definitions>  
+ 
+   <!-- Base Definition -->
+   <definition name="base-definition"   template="/WEB-INF/views/tiles/layouts/defaultLayout.jsp">  
+       <put-attribute name="title" value="" />  
+       <put-attribute name="header" value="/WEB-INF/views/tiles/template/defaultHeader.jsp" />  
+       <put-attribute name="menu" value="/WEB-INF/views/tiles/template/defaultMenu.jsp" />  
+       <put-attribute name="body" value="" />  
+       <put-attribute name="footer" value="/WEB-INF/views/tiles/template/defaultFooter.jsp" />
+         
+   </definition> 
+     
+    <definition name="downloadfile"  template="/WEB-INF/views/pages/downloadApk.jsp"> 
+       <put-attribute name="title" value="Download Apk" />  
+     </definition> 
+    <definition name="project" extends="base-definition">  
+       <put-attribute name="title" value="Desk" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/project.jsp" />  
+   </definition> 
+   <definition name="usermaster" extends="base-definition">  
+       <put-attribute name="title" value="Desk" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/user.jsp" />  
+   </definition>
+   <definition name="userprojectmap" extends="base-definition">  
+       <put-attribute name="title" value="Desk" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/userproject.jsp" />  
+   </definition>
+   <definition name="projectassign" extends="base-definition">  
+       <put-attribute name="title" value="Desk" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/projectassign.jsp" />  
+   </definition>
+   
+    <definition name="enquiryInfo"  template="/WEB-INF/views/pages/enquiryInfo.jsp"> 
+       <put-attribute name="title" value="Dashboard" />  
+     </definition> 
+   <definition name="enquiryCPInfo"  template="/WEB-INF/views/pages/enquiryCPInfo.jsp"> 
+       <put-attribute name="title" value="Dashboard" />  
+     </definition> 
+   <definition name="index"  template="/WEB-INF/views/pages/index.jsp"> 
+       <put-attribute name="title" value="Dashboard" />  
+     </definition> 
+  	<definition name="success"  template="/WEB-INF/views/pages/success.jsp"> 
+       <put-attribute name="title" value="Dashboard" />  
+     </definition> 
+     <definition name="cpsuccess"  template="/WEB-INF/views/pages/cpsuccess.jsp"> 
+       <put-attribute name="title" value="Dashboard" />  
+     </definition> 
+     <definition name="salesInfo"  template="/WEB-INF/views/pages/salesInfo.jsp"> 
+       <put-attribute name="title" value="Dashboard" />  
+     </definition> 
+     <definition name="salesLoginNew"  template="/WEB-INF/views/pages/salesLoginNew.jsp"> 
+      <put-attribute name="title" value="Dashboard" />  
+     </definition>
+     <definition name="salesSearch"  template="/WEB-INF/views/pages/salesSearch.jsp"> 
+       <put-attribute name="title" value="Dashboard" /> 
+     </definition>
+    <definition name="salesdesk"  template="/WEB-INF/views/pages/salesdesk.jsp"> 
+       <put-attribute name="title" value="Sales Desk" />  
+    </definition>
+       <definition name="saleslogin"  template="/WEB-INF/views/pages/saleslogin.jsp"> 
+       <put-attribute name="title" value="Sales Desk Login" />  
+    </definition>
+  <definition name="loginPage"  template="/WEB-INF/views/pages/loginPage.jsp"> 
+       <put-attribute name="footer" value="/WEB-INF/views/tiles/template/defaultFooter.jsp" />   
+       <put-attribute name="title" value="Login" />  
+     </definition> 
+     
+     
+      <definition name="about"  template="/WEB-INF/views/pages/about.jsp"> 
+       <put-attribute name="title" value="about" />  
+     </definition> 
+       <definition name="costsheet"  template="/WEB-INF/views/pages/costsheet.jsp"> 
+       <put-attribute name="title" value="costsheet" />  
+     </definition> 
+	<definition name="inventory"  template="/WEB-INF/views/pages/inventory.jsp"> 
+       <put-attribute name="title" value="inventory" />  
+     </definition>
+    <!-- <definition name="admininventory" extends="base-definition"> 
+       <put-attribute name="title" value="Admin Inventry" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/admininventory.jsp" />
+     </definition> -->
+     <definition name="admininventory" template="/WEB-INF/views/pages/admininventory.jsp"> 
+       <put-attribute name="title" value="Admin Inventry" />  
+     </definition>
+     
+     <definition name="otherCharges" extends="base-definition"> 
+       <put-attribute name="title" value="Add Other Charges" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/otherCharges.jsp" /> 
+     </definition>
+     
+     <definition name="triggerLog" extends="base-definition"> 
+       <put-attribute name="title" value="triggerLog" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/triggerLog.jsp" /> 
+     </definition>
+     
+     <definition name="schemeCharges" extends="base-definition"> 
+       <put-attribute name="title" value="Add Scheme Charges" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/scheme.jsp" /> 
+     </definition>
+     
+     
+      <definition name="carParkCharges" extends="base-definition" > 
+       <put-attribute name="title" value="Add Car Park Charges" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/carParkCharges.jsp" /> 
+     </definition>
+     
+     <definition name="paymentPlanBSP" extends="base-definition"> 
+       <put-attribute name="title" value="Add Payment Plan Wise BSP" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/paymentPlanBSP.jsp" /> 
+     </definition>
+     
+     <definition name="tnc" extends="base-definition"> 
+       <put-attribute name="title" value="Add Payment Plan Wise T and C" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/tnc.jsp" /> 
+     </definition>
+     
+     <definition name="enqOnMap"  template="/WEB-INF/views/pages/enqOnMap.jsp"> 
+       <put-attribute name="title" value="enqOnMap" />  
+     </definition>
+     
+     <definition name="home"  template="/WEB-INF/views/pages/home.jsp"> 
+       <put-attribute name="title" value="home" />  
+     </definition> 
+      <definition name="forgetpassword"  template="/WEB-INF/views/pages/forgetpassword.jsp"> 
+       <put-attribute name="footer" value="/WEB-INF/views/tiles/template/defaultFooter.jsp" />   
+       <put-attribute name="title" value="Forget Password" />  
+     </definition> 
+     <definition name="changepassword" extends="base-definition">  
+       <put-attribute name="title" value="Change Password" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/changepassword.jsp" />  
+   </definition> 
+
+ 	<definition name="tempsession" template="/WEB-INF/views/pages/tempsession.jsp">  
+     
+   </definition>  <definition name="subscribe" template="/WEB-INF/views/pages/subscribe.jsp">  
+       <put-attribute name="title" value="Subscribe" />  
+       
+   </definition> 
+   <definition name="adminRqst"  template="/WEB-INF/views/pages/adminRqst.jsp"> 
+       <put-attribute name="title" value="adminRqst" />  
+     </definition> 
+
+   
+   <!-- Home Page -->
+   <definition name="vendor" extends="base-definition">  
+       <put-attribute name="title" value="Vendor" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/vendor.jsp" />  
+   </definition> 
+  <!--  <definition name="home" extends="base-definition">  
+       <put-attribute name="title" value="Welcome" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/home.jsp" />  
+   </definition>   -->
+
+   <!-- Product Page -->
+   <definition name="category1" extends="base-definition">  
+       <put-attribute name="title" value="Category 1" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/category1.jsp" />  
+   </definition>  
+   <definition name="category2" extends="base-definition">  
+       <put-attribute name="title" value="Category 2" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/category2.jsp" />  
+   </definition> 
+   <definition name="category3" extends="base-definition">  
+       <put-attribute name="title" value="Category 3" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/category3.jsp" />  
+   </definition>  
+   <!-- Contact-us Page -->
+   <definition name="contactus" extends="base-definition">  
+       <put-attribute name="title" value="Contact Us" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/contactus.jsp" />  
+   </definition>  
+    <definition name="aboutus" extends="base-definition">  
+       <put-attribute name="title" value="About Us" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/aboutus.jsp" />  
+   </definition>  
+   <definition name="advertise" extends="base-definition" >  
+       <put-attribute name="title" value="Advertise" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/advertise.jsp" />  
+   </definition>  
+   <definition name="reports" extends="base-definition">  
+       <put-attribute name="title" value="About Us" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/reports.jsp" />  
+   </definition>
+     
+ <!--   <definition name="salesdesk" extends="base-definition">  
+       <put-attribute name="title" value="About Us" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/adddesk.jsp" />  
+   </definition> -->
+   <definition name="assigndesk"  extends="base-definition"> 
+       <put-attribute name="title" value="Sales Desk" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/salesdeskassign.jsp" />  
+    </definition>
+     <!-- <definition name="assigntoken"  extends="base-definition"> 
+       <put-attribute name="title" value="Sales Desk" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/assigntoken.jsp" />  
+    </definition> -->
+    <definition name="assigntoken"  template="/WEB-INF/views/pages/assigntoken.jsp"> 
+       <put-attribute name="title" value="Sales Desk" />  
+       <!-- <put-attribute name="body" value="/WEB-INF/views/pages/assigntoken.jsp" />  --> 
+    </definition>
+    <definition name="misreport"  template="/WEB-INF/views/pages/misreport.jsp"> 
+       <put-attribute name="title" value="MIS Report Page" />  
+    </definition>
+    <definition name="paymentsuccess"  template="/WEB-INF/views/pages/paymentsuccess.jsp"> 
+       <put-attribute name="title" value="Payment Success" />  
+    </definition>
+    
+    <definition name="assignedusers"  template="/WEB-INF/views/pages/assignedusers.jsp"> 
+       <put-attribute name="title" value="Dashboard" />  
+    </definition>
+     <definition name="bankpayment"  template="/WEB-INF/views/pages/bankpayment.jsp"> 
+       <put-attribute name="title" value="Eoi" /> 
+     </definition>
+     <definition name="createdoffers" extends="base-definition"> 
+        <put-attribute name="title" value="Created Offers List" /> 
+        <put-attribute name="body" value="/WEB-INF/views/pages/createdoffers.jsp" /> 
+    </definition>
+     
+</tiles-definitions>

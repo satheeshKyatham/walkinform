@@ -1,0 +1,101 @@
+var pageContext = $("#pageContext").val()+"/";	
+
+
+regionList();
+
+function regionList () {
+	$('#regionList').empty();	
+	var urlRegionList = pageContext+"regionList?project_code=test";
+	
+	$.getJSON(urlRegionList, function (data) {
+		$('#regionList').append('<option value="">Select</option>');
+		$.each(data, function (index, value) {
+			$('#regionList').append("<option value='"+value.region__c+"'>"+value.region__c+"</option>");
+		});					
+	}).done(function() {
+	});
+}
+
+function projectDataList (){
+	$('#projectDataList').empty();	
+	var urlTower = pageContext+"projectDataList?region="+$('#regionList').val();
+	$.getJSON(urlTower, function (data) {
+		$('#projectDataList').append('<option value="">Select</option>');
+		$.each(data, function (index, value) {
+			$('#projectDataList').append("<option value='"+value.sfid+"'>"+value.name+  " / " +value.propstrength__project_code__c+ "</option>");
+		});					
+	}).done(function() {
+		
+	});
+}
+
+
+function paymentPlanDropdown (){
+	$('#ppDropdown').empty();
+	
+	var urlpayemntPlan = pageContext+"getpaymentPlanListData?projectcode="+$("#projectDataList").val();
+	
+	$.getJSON(urlpayemntPlan, function (data) {
+		$.each(data, function (index, value) {
+			$('#ppDropdown').append('<option value='+value.sfid+'>'+value.name+'</option>');
+		});					
+	}).done(function() {
+		towerList ();
+	});
+}
+
+function towerList (e, source) {
+	$('#towerMst').empty();	
+	debugger;
+	var projectNameVal = $("#projectDataList").val();
+	//var urlTower = pageContext+"getTower?project_code="+projectNameVal;
+	
+	var urlTower = pageContext+"getTowerMaster?project_code="+projectNameVal;
+	
+	
+	$.getJSON(urlTower, function (data) {
+		$('#towerMst').append('<option name="" value="">Select</option>');
+		$.each(data, function (index, value) {
+			$('#towerMst').append("<option name='"+value.sfid+"' value='"+value.tower_code__c+"'>"+value.tower_name__c+"</option>");
+		});					
+	}).done(function() {
+		
+	});
+}
+
+/*Typology*/
+function inventoryUnitTypeMst () {
+	debugger;
+	$('#typoMst').empty();
+	var towerCode = $('#towerMst').val();
+	var projectNameVal = $('#projectDataList').val();
+	
+	var urlProject = pageContext+"getunittype?project_code="+projectNameVal+"&tower_code="+towerCode+"&floor_code="
+	
+	//$('#typoMst').append("<option value=''>All</option> ");
+	
+	$.getJSON(urlProject, function (data) {
+		$.each(data, function (index, value) {
+			$('#typoMst').append("<option value='"+value.propstrength__unit_type__c+"'>"+value.propstrength__unit_type__c+"</option>");
+		});					
+	}).done(function() {
+		
+	});	
+}
+/*END Typology*/
+
+
+function addBSPCharge () {
+	$.post(pageContext+"insertBSPForPP",{"bsp_amount_per": $('#bsp_amount_per').val(), "bsp_amount":$('#bsp_amount').val(),  "project_id":$('#projectDataList').val(), "project_name":$('#projectDataList :selected').text(), "pymt_plan_id":$('#ppDropdown').val()
+		, "pymt_plan_name":$('#ppDropdown :selected').text(), "region_id":$('#regionList').val(), "region_name":$('#regionList :selected').text()
+		, "tower_id":$('#towerMst').find('option:selected').attr('name'), "typology_name":$('#typoMst').val()},function(data){				 
+		
+	}).done(function(data){
+		swal({
+			title: data.insertStatus,
+		    text: "",
+		    timer: 2000,
+		    type: "success",
+		});
+	});
+}

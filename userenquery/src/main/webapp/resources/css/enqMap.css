@@ -1,0 +1,8 @@
+.pinInfoWindow {padding: 0;
+    list-style-type: none;
+    margin-bottom: 0;}
+    
+.pinInfoWindow li {margin-bottom: 12px;}    
+.pinInfoWindow li:last-child {margin-bottom: 0px !important;}  
+
+.pinInfoWindow li label {margin-bottom: 0; width: 90px;} 
