@@ -1,0 +1,147 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"  pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
+<%@ page isELIgnored="false" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+ <html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Users</title>
+
+<link rel="shortcut icon" href="<c:url value='/resources/images/favicon.ico' />" type="image/x-icon">
+<link rel="icon" href="<c:url value='/resources/images/favicon.ico' />" type="image/x-icon">
+<link rel="stylesheet" href="<c:url value='/resources/css/bootstrap.min.css' />" type="text/css" />
+     
+	<link rel="stylesheet" href="<c:url value='/resources/css/inner.css' />">
+	<link rel="stylesheet" href="<c:url value='/resources/css/style.css' />">
+	
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+	
+<script src="<c:url value='/resources/js/jquery-1.12.4.min.js'/>"></script>
+<script src="<c:url value='/resources/js/bootstrap.min.js'/>"></script>
+<script type="text/javascript" charset="utf8" src="<c:url value='/resources/js/jquery.dataTables.js'/>"></script>
+<script type="text/javascript" charset="utf8" src="<c:url value='/resources/js/separate/kycdetails.js'/>"></script>
+</head> 
+<%! String projectname,projectid ,projectrole,userid;%>
+<%
+projectname = request.getParameter("projectname");
+projectid = request.getParameter("projectid");
+HttpSession ses=request.getSession(); 
+if(ses!=null){
+	//  projectname=(String)ses.getAttribute("PRONAME");
+	 // projectid=(String)ses.getAttribute("PROID");
+	  projectrole=(String)ses.getAttribute("ROLE");
+	 userid=(String)ses.getAttribute("USERID");
+	
+	
+}else{
+	 // Todo Login page
+} 
+%> 
+<body>
+<input type="hidden" id="contextPath" value="${pageContext.request.contextPath}">
+<input type="hidden" id="projectname" value="<%=projectname %>">
+<input type="hidden" id="projectid" value="<%=projectid%>">
+<input type="hidden" id="role" value="<%= projectrole %>">
+<input type="hidden" id="userid" value="<%= userid %>">
+  <!-- <input type="text" > -->
+  
+  <nav class="navbar topMainBar">
+	  <div class="container">
+	    <div class="navbar-header" style="width:100%;">
+      	<a class="navbar-brand" href="#">
+			<img class="topLogo" src="<c:url value='/resources/images/gplLogo.jpg' />"/>
+		</a>
+		<ul class="nav navbar-nav navbar-right pull-right">
+			 <li><a href="${pageContext.request.contextPath}/saleslogin">Logout</a></li>
+		</ul> 
+	    </div>
+		
+		 
+		
+	    
+	  </div>
+	</nav>
+		<div class="titleCol">
+			<h4 class="">
+				<span id="projectTitle"><%= projectname %></span>					
+			</h4>
+			<div class="clearfix"></div>
+		</div>	
+		
+	
+	  	<div class="col-md-12">
+	   		<div>
+				<ul class="nav nav-tabs tabNav">
+					<li onclick="getCMKYCDetails()" class="active" id="KYC_Admin_Details_Id">
+						<a href="#tab1" data-toggle="tab">KYC</a>
+					</li>
+					 <li id="salesTabId" onclick="getKYCApprovalView()">
+						<a href="#tab2" data-toggle="tab">KYC Approve/Reject</a>
+					</li>  
+				</ul>
+				<div class=""></div>
+			</div>
+		
+	   		<div class="tab-content formTabCont">
+	   		<div class="tab-pane active" id="tab1">
+				<div class="commonLoad" id="mainPageLoad" style="display: none;"></div>
+				
+				<div class="col-md-12">
+					
+					<div class="clearfix"></div>
+					<table class="table table-bordered" id="KYC_Admin_Details">
+						<thead>
+							<tr>
+								<th>Enquiry No</th>
+								<th>Customer Name</th>
+								<th>Mobile No</th>
+								<th>KYC Status</th>
+								<th>View/Fill KYC</th>
+								
+								<!-- <th style="word-break: break-word; width:200px !important">Email</th> -->
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+					<div class="clearfix"></div>
+				</div>
+				<div class="clearfix"></div>
+				</div>
+	   		
+				<div class="tab-pane" id="tab2"> 
+				  	<iframe id="kyc_approval_iframe" width="100%" height="400px"></iframe>
+				</div>
+				
+				
+				<div class="clearfix"></div>
+			</div>
+		  <div class="clearfix"></div>
+		</div>  
+	  
+    	 
+     	<div class="clearfix"></div>
+	<!-- </div> -->
+	
+	<!-- <script type="text/javascript">
+	$(document).ready(function () {
+		$('#dtOrderExample').DataTable({
+		"order": [[ 3, "desc" ]]
+		});
+		$('.dataTables_length').addClass('bs-select');
+		});
+	</script> -->
+	
+	
+	
+	
+	
+</body>
+</html>
+
+	
+<!-- </html> -->

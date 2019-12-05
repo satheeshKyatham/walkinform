@@ -1395,7 +1395,13 @@
       <div class="modal-body">
         <div class="col-md-6 col-xs-12">
 	       <div id="my_camera"></div><br/>
-	          <button   class="btn btnDefaultBlue btn-default" onClick="take_snapshot()">Take Snapshot</button>
+	       		<input id="webAttachmentRowID"/>
+	          
+	          <div id="snapshotBtnCol">
+	          		
+	          </div>
+	          <div class="clearfix"></div>
+	          
 	          <input type="hidden" name="image" class="image-tag">
 	          <div class="clearfix"></div>
 	     </div>

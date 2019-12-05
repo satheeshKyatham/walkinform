@@ -1674,6 +1674,7 @@ if(ses!=null){
 <%-- <script type="text/javascript" src="<c:url value='/resources/js/jquery.countdownTimer.js'/>"></script> --%>
 <script src="<c:url value='/resources/js/enquiryRequest/common.js?v=15'/>"></script>
 <script src="<c:url value='/resources/js/separate/costsheet.js?v=15'/>"></script>
+<script src="<c:url value='/resources/js/separate/webcamAttachmentCS.js?v=15'/>"></script>
 
 
 <script src="<c:url value='/resources/js/separate/storeEOIPaymentDtl.js?v=15'/>"></script>

@@ -27,6 +27,7 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.xml.bind.DatatypeConverter;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -3665,10 +3666,11 @@ public class WebServiceController<MultipartFormDataInput> {
 	    		@RequestParam(value = "panAttach" , required=false) MultipartFile panAttach,
 	    		@RequestParam(value = "receiptAttach" , required=false) MultipartFile receiptAttach,
 	    		@RequestParam("rowCount") String rowCount,
+	    		@RequestParam("panAttachWebcam") String panAttachWebcam,
+	    		@RequestParam("receiptAttachWebcam") String receiptAttachWebcam,
 	    		@RequestParam("enqID") String enqID,
 	    		HttpServletRequest request, HttpServletResponse response
 	    		) throws ServletException, IOException {
-			
 			
 			String rootPath = System.getProperty("catalina.home");
 			
@@ -3684,9 +3686,40 @@ public class WebServiceController<MultipartFormDataInput> {
 				BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(aserverFile));
 				stream.write(abytes);
 				stream.close();
-			
 			}
-			 
+			
+			if(panAttachWebcam != null) {
+				String base64String = panAttachWebcam;
+		        String[] strings = base64String.split(",");
+		        String extension;
+		        switch (strings[0]) {//check image's extension
+		            case "data:image/jpeg;base64":
+		                extension = ".jpeg";
+		                break;
+		            case "data:image/png;base64":
+		                extension = ".png";
+		                break;
+		            default://should write cases for more images types
+		                extension = ".jpg";
+		                break;
+		        }
+		        //convert base64 string to binary data
+		        File ad_dir = new File(rootPath + File.separator + "bookingReference" + File.separator + enqID + File.separator + rowCount);
+				String ad_path =ad_dir +File.separator+rowCount+"PAN"+extension;
+				if (!ad_dir.exists()) {
+					ad_dir.mkdirs();	
+				}
+		        
+		        byte[] data = DatatypeConverter.parseBase64Binary(strings[1]);
+		       // String path = "C:\\Users\\gc.atulbhanushali\\Desktop\\test_image." + extension;
+		        File file = new File(ad_path);
+		        try (OutputStream outputStream = new FileOutputStream(file)) {
+		            outputStream.write(data);
+		        } catch (IOException e) {
+		            e.printStackTrace();
+		        }
+			}	
+			
 			if(receiptAttach!=null) {
 				File ad_dir = new File(rootPath + File.separator + "bookingReference" + File.separator + enqID + File.separator + rowCount);
 				String ad_path =ad_dir +File.separator+rowCount+"Receipt"+"_"+receiptAttach.getOriginalFilename();
@@ -3699,6 +3732,38 @@ public class WebServiceController<MultipartFormDataInput> {
 				BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(aserverFile));
 				stream.write(abytes);
 				stream.close();
+			}
+			
+			if(receiptAttachWebcam != null) {
+				String base64String = receiptAttachWebcam;
+		        String[] strings = base64String.split(",");
+		        String extension;
+		        switch (strings[0]) {//check image's extension
+		            case "data:image/jpeg;base64":
+		                extension = ".jpeg";
+		                break;
+		            case "data:image/png;base64":
+		                extension = ".png";
+		                break;
+		            default://should write cases for more images types
+		                extension = ".jpg";
+		                break;
+		        }
+		        //convert base64 string to binary data
+		        File ad_dir = new File(rootPath + File.separator + "bookingReference" + File.separator + enqID + File.separator + rowCount);
+				String ad_path =ad_dir +File.separator+rowCount+"Receipt"+extension;
+				if (!ad_dir.exists()) {
+					ad_dir.mkdirs();	
+				}
+		        
+		        byte[] data = DatatypeConverter.parseBase64Binary(strings[1]);
+		       // String path = "C:\\Users\\gc.atulbhanushali\\Desktop\\test_image." + extension;
+		        File file = new File(ad_path);
+		        try (OutputStream outputStream = new FileOutputStream(file)) {
+		            outputStream.write(data);
+		        } catch (IOException e) {
+		            e.printStackTrace();
+		        }
 			}
 			
 			

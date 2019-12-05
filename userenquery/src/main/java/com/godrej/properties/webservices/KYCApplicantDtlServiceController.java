@@ -32,7 +32,7 @@ public class KYCApplicantDtlServiceController<MultipartFormDataInput> {
 		return gson.toJson(kYCapplicantDtlService.getApplicantData(enqName, contactSFID));
 	}
 	
-	@RequestMapping(value = "/getKYCData", method = RequestMethod.POST)
+	@RequestMapping(value = "/getKYCData", method = RequestMethod.GET)
 	public String getKYCData(@RequestParam("userid") String userid, @RequestParam("projectid") String projectid) {
 		Gson gson = new GsonBuilder().disableHtmlEscaping().serializeNulls().create();
 		return gson.toJson(kYCapplicantDtlService.getKYCData(userid, projectid));

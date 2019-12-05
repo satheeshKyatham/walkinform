@@ -2421,11 +2421,22 @@ function printPdfData(generateFrom) {
 var amI = 0;
 var amNum = 4; 
 
-
+var amNumRowID = 0;
 
 function addMorePtBtn () {
+	
+	amNumRowID = amI+1;
+	
+	
+	var id= "'"+"csPayRowID"+amNumRowID+"'";
+		
+	var attachPAN = "'attachPAN'";
+	var attachRec = "'attachRec'";
+	
+	
+	
        if(amI < amNum) { 
-             $('#csPtCol tr:last-child').after('<tr class="csPtDataRow csPtFileSize"><td class="txtCenter"><input style="display:none;" class="gpl_cs_payment_details_id" value="-1"><input type="checkbox" class="paymentCScheck" checked></td><td><select onchange="csPtDd(this)" class="full form-control input-sm csPtDropDown requiredField"><option value="">Select</option><option value="Cheque">Cheque</option><option value="NEFT">NEFT/Credit</option><option value="Swipe">Swipe</option></select></td><td><input class="full form-control input-sm csPtBankName requiredField" placeholder="Bank Name"/></td><td><input class="full form-control input-sm csPtBranch requiredField" placeholder="Branch Name"/></td><td><input class="full form-control input-sm csPtTransactionId requiredField" placeholder="Transaction ID" /></td><td><input type="date" class="full form-control input-sm csPtTransactionDate requiredField" placeholder="Transaction Date"/></td><td><input  class="numericField numericWithoutDecimal full form-control input-sm csPtTransactionAmount requiredField" maxlength="10" onkeyup="csPtcalculateGrandTotal()" placeholder="Transaction Amount" name="amount"/></td> <td> <input type="file" class="full form-control input-sm panAttach"/> </td> <td> <input type="file" class="full form-control input-sm receiptAttach"/>  <td><textarea class="full form-control input-sm csPtDescription" placeholder="Description"></textarea></td><td class="removeCsPtCol txtCenter"><i onclick="removeCsPtCol(this)" class="fa fa-times-circle"></i></td></tr>');
+             $('#csPtCol tr:last-child').after('<tr id="csPayRowID'+amNumRowID+'" class="csPtDataRow csPtFileSize"><td class="txtCenter"><input style="display:none;" class="gpl_cs_payment_details_id" value="-1"><input type="checkbox" class="paymentCScheck" checked></td><td><select onchange="csPtDd(this)" class="full form-control input-sm csPtDropDown requiredField"><option value="">Select</option><option value="Cheque">Cheque</option><option value="NEFT">NEFT/Credit</option><option value="Swipe">Swipe</option></select></td><td><input class="full form-control input-sm csPtBankName requiredField" placeholder="Bank Name"/></td><td><input class="full form-control input-sm csPtBranch requiredField" placeholder="Branch Name"/></td><td><input class="full form-control input-sm csPtTransactionId requiredField" placeholder="Transaction ID" /></td><td><input type="date" class="full form-control input-sm csPtTransactionDate requiredField" placeholder="Transaction Date"/></td><td><input  class="numericField numericWithoutDecimal full form-control input-sm csPtTransactionAmount requiredField" maxlength="10" onkeyup="csPtcalculateGrandTotal()" placeholder="Transaction Amount" name="amount"/></td> <td> <input type="file" class="full form-control input-sm panAttach"/> <input class="panAttachWebcam"/> <a  class="btn btnDefaultBlue btn-default webcamBtn" data-toggle="modal" data-target="#webcamBox" onclick="webcamAttachment(this, '+id+', '+attachPAN+')">Capture</a> </td> <td> <input type="file" class="full form-control input-sm receiptAttach"/> <input class="receiptAttachWebcam"/> <a  class="btn btnDefaultBlue btn-default webcamBtn" data-toggle="modal" data-target="#webcamBox" onclick="webcamAttachment(this, '+id+', '+attachRec+')">Capture</a> <td><textarea class="full form-control input-sm csPtDescription" placeholder="Description"></textarea></td><td class="removeCsPtCol txtCenter"><i onclick="removeCsPtCol(this)" class="fa fa-times-circle"></i></td></tr>');
              amI++;
        }else {
              swal({
@@ -2524,6 +2535,9 @@ function csPymtData (balance_details_primeryId) {
              formData.append('panAttach', $(this).find('.panAttach')[0].files[0]);
              formData.append('receiptAttach', $(this).find('.receiptAttach')[0].files[0]);
              formData.append('rowCount', i);
+             
+             formData.append('panAttachWebcam', $(this).find('.panAttachWebcam').val());
+             formData.append('receiptAttachWebcam', $(this).find('.receiptAttachWebcam').val());
              
               formData.append('enqID', $('#enquirysfid').val());
              
@@ -2685,6 +2699,11 @@ function getEOIPaymentRecord () {
              var disableRow = '';
              var status = '';
              
+             var csPayRowID0 = "'csPayRowID0'";
+             
+             var attachPAN = "'attachPAN'";
+         	 var attachRec = "'attachRec'";
+             
              if(obj!=null){
                     
                     for(i = 0; i< obj.length; i++){    
@@ -2739,7 +2758,7 @@ function getEOIPaymentRecord () {
                     
                     html += '<tr><th colspan="11"  style="text-align:left; font-size: 14px; background-color: #ebebeb;">Payment at the time of booking</th></tr>'
                            
-                           +' <tr class="csPtDataRow csPtFileSize" ><td class="txtCenter">'
+                           +' <tr id="csPayRowID0" class="csPtDataRow csPtFileSize" ><td class="txtCenter">'
                                  +'<input style="display:none;" class="gpl_cs_payment_details_id" value="-1">'
                                  + '<input type="checkbox" class="paymentCScheck" checked>'
                            + '</td>'
@@ -2770,9 +2789,13 @@ function getEOIPaymentRecord () {
              
                            + '<td>'
                                  + '<input type="file" class="full form-control input-sm panAttach"/>'
+                                 + '<input class="panAttachWebcam"/>'
+                                 + '<a  class="btn btnDefaultBlue btn-default webcamBtn" data-toggle="modal" data-target="#webcamBox" onclick="webcamAttachment(this, '+csPayRowID0+', '+attachPAN+')">Capture</a>'
                            + '</td>'
                            + '<td>'
                                  + '<input type="file" class="full form-control input-sm receiptAttach"/>'
+                                 + '<input class="receiptAttachWebcam"/>'
+                                 + '<a  class="btn btnDefaultBlue btn-default webcamBtn" data-toggle="modal" data-target="#webcamBox" onclick="webcamAttachment(this, '+csPayRowID0+', '+attachRec+')">Capture</a>'
                            + '</td>'
              
                            + '<td>'
@@ -2788,7 +2811,7 @@ function getEOIPaymentRecord () {
              } else {
                     html += '<tr><th colspan="11" style="text-align:left; font-size: 14px; background-color: #ebebeb;">Payment at the time of booking</th></tr>'
                            
-                           +' <tr class="csPtDataRow csPtFileSize"><td class="txtCenter">'
+                           +' <tr id="csPayRowID0" class="csPtDataRow csPtFileSize"><td class="txtCenter">'
                                         +'<input style="display:none;" class="gpl_cs_payment_details_id" value="-1">'
                                         + '<input type="checkbox" class="paymentCScheck" checked>'
                                  + '</td>'
@@ -2818,10 +2841,14 @@ function getEOIPaymentRecord () {
                                  + '</td>'
                     
                                  + '<td class="txtCenter">'
-                                        + '<input type="file" class="full form-control input-sm panAttach"/><a  class="btn btnDefaultBlue btn-default webcamBtn" data-toggle="modal" data-target="#webcamBox" onclick="webcamAttachment()">Webcam</a>' //<a  class="btn btnDefaultBlue btn-default webcamBtn" data-toggle="modal" data-target="#webcamBox" onclick="webcamAttachment()">Webcam</a>
+                                        + '<input type="file" class="full form-control input-sm panAttach"/>'
+                                        + '<input class="panAttachWebcam"/>'
+                                        + '<a  class="btn btnDefaultBlue btn-default webcamBtn" data-toggle="modal" data-target="#webcamBox" onclick="webcamAttachment(this, '+csPayRowID0+', '+attachPAN+')">Capture</a>'
                                  + '</td>'
                                  + '<td>'
                                         + '<input type="file" class="full form-control input-sm receiptAttach"/>'
+                                        + '<input class="receiptAttachWebcam"/>'
+                                        + '<a  class="btn btnDefaultBlue btn-default webcamBtn" data-toggle="modal" data-target="#webcamBox" onclick="webcamAttachment(this, '+csPayRowID0+', '+attachRec+')">Capture</a>'
                                  + '</td>'
                     
                                  + '<td>'
@@ -2945,28 +2972,3 @@ function getSchemePromotional () {
 	});
 }
 //END New Drop Down for Scheme
-
-
-
-//webcam attachment
-function webcamAttachment() {
-	Webcam.set({
-		width: 520,
-		height: 400,
-		image_format: 'jpeg',
-		jpeg_quality: 120
-	});
-
-	Webcam.attach( '#my_camera' );
-}
-
-
-
-function take_snapshot() {
-	Webcam.snap( function(data_uri) {
-	$(".image-tag").val(data_uri);
-	document.getElementById('results').innerHTML = '<img src="'+data_uri+'"/>';
-	});
-}
-// END webcam attachment
-

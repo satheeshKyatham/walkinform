@@ -27,7 +27,8 @@ public class KYCApplicantDtl implements Serializable{
 	//@Column(name="propstrength__sharing_ratio__c") private double propstrength__sharing_ratio__c;
 	//@Column(name="passport_no__c") private String passport_no__c;
 	//@Column(name="nationality_a__c") private String nationality_a__c;
-	@Column(name="resident") private String propstrength__resident_status__c;
+	//@Column(name="resident") private String propstrength__resident_status__c;
+	@Column(name="resident") private String nationality_a__c;
 	
 	@Column(name="p_house_no") private String residential_street1__c;
 	@Column(name="permanent_address") private String residential_street2__c;
@@ -47,6 +48,9 @@ public class KYCApplicantDtl implements Serializable{
 	
 	@Column(name="isactive") private String isactive;
 	
+	
+	@Column(name="address_proof_type") private String address_proof_type;
+	@Column(name="address_proof_no") private String address_proof_no;
 	
 	public int getId() {
 		return id;
@@ -91,12 +95,7 @@ public class KYCApplicantDtl implements Serializable{
 	public void setMobile_number__c(String mobile_number__c) {
 		this.mobile_number__c = mobile_number__c;
 	}
-	public String getPropstrength__resident_status__c() {
-		return propstrength__resident_status__c;
-	}
-	public void setPropstrength__resident_status__c(String propstrength__resident_status__c) {
-		this.propstrength__resident_status__c = propstrength__resident_status__c;
-	}
+	
 	public String getResidential_street1__c() {
 		return residential_street1__c;
 	}
@@ -179,4 +178,22 @@ public class KYCApplicantDtl implements Serializable{
 		this.isactive = isactive;
 	}
 	//@Column(name="salutation") private String salutation;
+	public String getNationality_a__c() {
+		return nationality_a__c;
+	}
+	public void setNationality_a__c(String nationality_a__c) {
+		this.nationality_a__c = nationality_a__c;
+	}
+	public String getAddress_proof_type() {
+		return address_proof_type;
+	}
+	public void setAddress_proof_type(String address_proof_type) {
+		this.address_proof_type = address_proof_type;
+	}
+	public String getAddress_proof_no() {
+		return address_proof_no;
+	}
+	public void setAddress_proof_no(String address_proof_no) {
+		this.address_proof_no = address_proof_no;
+	}
 }

@@ -105,9 +105,9 @@ public class KYCApplicantDtlDaoImpl extends AbstractDao<Integer, KYCApplicantDtl
 		Session session = sessionFactory.getCurrentSession();
 		
 		String whereCondintion=" ";
-		if(userid!=null)
+		if(userid!=null && userid.length()>0)
 			whereCondintion=" where userid ="+userid+"";
-		if(userid!=null && projectid!=null)
+		if(userid!=null && userid.length()>0 && projectid!=null)
 			whereCondintion=" where userid ="+userid+" and project_sfid='"+projectid+"'";
 		else
 			whereCondintion=" where project_sfid='"+projectid+"'";

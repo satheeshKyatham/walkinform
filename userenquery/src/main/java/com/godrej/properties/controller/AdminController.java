@@ -139,6 +139,10 @@ public class AdminController {
 		 return "paymentsuccess";
 	}
 	
+	@RequestMapping(value = { "/kycrole"}, method = RequestMethod.GET)
+	public String kycrole(ModelMap model,HttpServletRequest request) {
+		 return "kycrole";
+	}
 	
 	
 }

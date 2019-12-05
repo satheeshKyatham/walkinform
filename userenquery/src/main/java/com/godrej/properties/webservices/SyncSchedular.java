@@ -16,9 +16,9 @@ import com.godrej.properties.service.EnquiryReportService;
 import com.godrej.properties.service.HoldInventoryEntryService;
 import com.godrej.properties.service.PushEnquiryDataService;
 
-@Configuration
+/*@Configuration
 @EnableScheduling
-@Controller
+@Controller*/
 public class SyncSchedular {
 	private Logger LOG=LoggerFactory.getLogger(getClass());
 	@Autowired
@@ -33,30 +33,30 @@ public class SyncSchedular {
 	
 	/*@Scheduled(fixedRate=60*60*1000)*/	
 	/*@RequestMapping("/syncContactAndEnquiry")*/
-	@ResponseBody
-	@Scheduled(cron="0 0/2 * * * ?")/* 2 min schedular time*/
-	public void hourlySchedular(){
+	//@ResponseBody
+	//@Scheduled(cron="0 0/2 * * * ?")/* 2 min schedular time*/
+	/*public void hourlySchedular(){
 		LOG.info("hourlySchedular ::*************");
 		pushEnqDataService.syncContactSfidToEnquiry();
-	}
-	@ResponseBody
-	@Scheduled(cron="0 0/2 * * * ?")/* 2 min schedular time*/
-	@RequestMapping("/updateCustomContactAndEnquiry")
+	}*/
+	//@ResponseBody
+	//@Scheduled(cron="0 0/2 * * * ?")/* 2 min schedular time*/
+	/*@RequestMapping("/updateCustomContactAndEnquiry")
 	public void customUpdateSchedular(){
 		LOG.info("customUpdateSchedular ::*************");
 		contactReportService.updateContactSfidToCustomContact();
 		enquiryReportService.updateEnquirySfidToCustomEnquiry();
-	}
+	}*/
 	
 	
-	@ResponseBody
-	@Scheduled(cron = "0/30 * * * * ?")//@Scheduled(cron = "0/20 * * * * ?")/* 30 Sec schedular time*///"0/15 * * * * *" //--20 Sec "*/20 * * * * *"
-	@RequestMapping("/updateBulkInventoryStatus")
+	//@ResponseBody
+	//@Scheduled(cron = "0/30 * * * * ?")//@Scheduled(cron = "0/20 * * * * ?")/* 30 Sec schedular time*///"0/15 * * * * *" //--20 Sec "*/20 * * * * *"
+	/*@RequestMapping("/updateBulkInventoryStatus")
 	public void updateBulkInventoryStatus(){
 		LOG.info("updateBulkInventoryStatus ::*************");
 		HoldInventoryEntry updateHold = new HoldInventoryEntry ();
 		updateHold.setStatusai("I");
 		updateHold.setHoldstatusyn("N");
 		holdInventoryEntryService.updatePreviousHold(updateHold);//20
-	}
+	}*/
 }

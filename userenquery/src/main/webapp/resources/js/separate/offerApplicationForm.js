@@ -50,6 +50,8 @@ function getofferApplicantDetails (e, offerSFID, enqSFID, contactSFID, offerName
 		//var applicantCase = '';
 		
 		var dataStatus = '';
+		var aadhaarNo = '';
+		var passportNo = '';
 		
 		if(obj!=null){
 			var objLength = obj.length;
@@ -149,15 +151,23 @@ function getofferApplicantDetails (e, offerSFID, enqSFID, contactSFID, offerName
 				}
 				
 				
+				if (obj[i].address_proof_type == 'Aadhaar') {
+					aadhaarNo = obj[i].address_proof_no;
+				} else if (obj[i].address_proof_type == 'Passport') {
+					passportNo = obj[i].address_proof_no;
+				}
+				
+				
 				appType += "<td>"+obj[i].propstrength__type__c+"</td>";
 				fullName +="<td>"+obj[i].name+"</td>";
 				pan +="<td>"+obj[i].propstrength__income_tax_permanent_account_no__c+"</td>";
 				email +="<td>"+obj[i].email+"</td>";
-				aadhar_card_no__c +="<td>"+obj[i].aadhar_card_no__c+"</td>";
+				//aadhar_card_no__c +="<td>"+obj[i].aadhar_card_no__c+"</td>";
+				aadhar_card_no__c +="<td>"+aadhaarNo+"</td>";
 				mobile_number__c +="<td>"+obj[i].mobile_number__c+"</td>";
 				propstrength__sharing_ratio__c +="<td>"+sharingRatio+"</td>";
-				//propstrength__sharing_ratio__c +="<td>"+obj[i].propstrength__sharing_ratio__c+"</td>";
-				passport_no__c +="<td>"+obj[i].passport_no__c+"</td>";
+				//passport_no__c +="<td>"+obj[i].passport_no__c+"</td>";
+				passport_no__c +="<td>"+passportNo+"</td>";
 				nationality_a__c +="<td>"+obj[i].nationality_a__c+"</td>";
 				propstrength__resident_status__c +="<td>"+obj[i].propstrength__resident_status__c+"</td>";
 				permanentAddress +="<td>"+ obj[i].residential_street1__c+", "+ obj[i].residential_street2__c+" "+ obj[i].residential_street3__c+" "+ obj[i].residential_city__c+", "+ obj[i].residential_post_code__c+", "+ obj[i].residential_state__c+", "+ obj[i].residential_country__c +"</td>";
