@@ -218,5 +218,7 @@
         <put-attribute name="title" value="Created Offers List" /> 
         <put-attribute name="body" value="/WEB-INF/views/pages/createdoffers.jsp" /> 
     </definition>
-     
+    <definition name="kycrole"  template="/WEB-INF/views/pages/kycrole.jsp"> 
+       <put-attribute name="title" value="KYC Role" /> 
+     </definition>
 </tiles-definitions>
