@@ -37,6 +37,6 @@ if(ses!=null){
 	<li><a href="${pageContext.request.contextPath}/createdoffers?projectid=a1l6F0000080irTQAQ">Created Offers List</a></li>
 	<li><a href="${pageContext.request.contextPath}/triggerLog">Trigger Log</a></li>
 	
-	<li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
+	<li><a href="${pageContext.request.contextPath}/saleslogin">Logout</a></li>
 	</ul> 
 </nav>
