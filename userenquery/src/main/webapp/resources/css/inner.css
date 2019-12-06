@@ -417,6 +417,8 @@ background-position: center; background-repeat: no-repeat; background-size: 40px
 #offerOPTInfo {margin-top: 10px; color: #008642;}
 
 
-.webcamBtn {text-transform: capitalize;  padding: 5px !important;  font-size: 12px;  margin-top: 5px;  text-align: center;}
+.webcamBtn {text-transform: capitalize;  font-size: 12px;  margin-top: 2px;  text-align: center; display: block;}
+.webcamBtn span {font-weight: 700;}
 
 
+.panAttachWebcam, .receiptAttachWebcam {display:none;}

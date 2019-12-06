@@ -1,5 +1,13 @@
 // https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false
 // //code.jquery.com/jquery-1.11.0.min.js
+
+$.ajaxSetup({
+    statusCode: {
+        401: function(){
+          location.reload();
+        }
+    }
+});
 var pageContext = $("#pageContext").val()+"/";	
 
 //getEnqDataForMap();

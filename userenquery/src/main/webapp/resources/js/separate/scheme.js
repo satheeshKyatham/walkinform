@@ -1,3 +1,10 @@
+$.ajaxSetup({
+    statusCode: {
+        401: function(){
+          location.reload();
+        }
+    }
+});
 var pageContext = $("#pageContext").val()+"/";	
 
 function addschemeCharge () {

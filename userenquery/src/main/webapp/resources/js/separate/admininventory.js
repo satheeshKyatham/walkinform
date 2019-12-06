@@ -3,7 +3,13 @@
 //var urlDomin = "http://localhost:8080/UserEnqury/";
 
 //var urlDomin = $('#contextPath').val()+"/";
-
+$.ajaxSetup({
+    statusCode: {
+        401: function(){
+          location.reload();
+        }
+    }
+});
 var pageContext = $("#contextPath").val()+"/";	
 
 

@@ -5,6 +5,13 @@
 /*let formData = new FormData();
 formData.append('key1', 'value1');
 formData.append('key2', 'value2');*/
+$.ajaxSetup({
+    statusCode: {
+        401: function(){
+          location.reload();
+        }
+    }
+});
 function insertAuditLogCostsheet()
 {
 	debugger;
