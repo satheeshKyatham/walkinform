@@ -2811,9 +2811,6 @@ function getEOIPaymentRecord () {
                            + '<td class="removeCsPtCol txtCenter"><i onclick="removeCsPtCol(this)" class="fa fa-times-circle"></i></td> </tr>';
                     
                     
-                    
-                    
-                    
                     $("#csPtCol tbody tr:first-child").after(html);
              } else {
                     html += '<tr><th colspan="11" style="text-align:left; font-size: 14px; background-color: #ebebeb;">Payment at the time of booking</th></tr>'
