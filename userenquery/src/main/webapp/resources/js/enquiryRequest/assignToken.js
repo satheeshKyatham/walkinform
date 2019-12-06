@@ -134,6 +134,12 @@ $(document).ready(function() {
 					$("#appDetails tbody").append(val);
 					i = i+1
 				});
+				$('#appDetails').DataTable(
+						{
+							destroy: true
+							//processing:true,
+							//serverSide:true
+						});
 			}).done(function() {
 				
 				//$('#appDetails').DataTable();

@@ -1245,7 +1245,7 @@ function updateBSP (timeid) {
 	   				showConfirmButton: false
 	   			});
 	   			
-	   			generateKYCLinkViaOffer(event,this,'N');
+	   			generateKYCLinkViaOffer(event,this,'N',offerJson.offer_sfid);
 	       	   
 	            printPdfData(generateFrom);
 	            

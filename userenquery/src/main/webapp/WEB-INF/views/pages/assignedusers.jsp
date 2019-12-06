@@ -26,12 +26,9 @@
 	
 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
 	
-<script src="<c:url value='/resources/js/jquery-1.12.4.min.js'/>"></script>
-<script src="<c:url value='/resources/js/bootstrap.min.js'/>"></script>
-<script src="<c:url value='/resources/js/salesdesk.js?v=15'/>"></script>
-<script src="<c:url value='/resources/js/enquiryRequest/assignedUser.js?v=15'/>"></script>
-<script src="<c:url value='/resources/js/separate/offer.js?v=15'/>"></script>
-<script src="<c:url value='/resources/js/enquiryRequest/misreportforClosing.js?v=15'/>"></script>
+<%-- <script src="<c:url value='/resources/js/jquery-1.12.4.min.js'/>"></script>
+<script src="<c:url value='/resources/js/bootstrap.min.js'/>"></script> --%>
+
 <%-- <script src="<c:url value='/resources/js/enquiryRequest/kycdetails.js'/>"></script> --%>
 </head> 
 <%! String projectname,projectid ,projectrole,userid;%>
@@ -290,8 +287,14 @@ if(ses!=null){
 		$('.dataTables_length').addClass('bs-select');
 		});
 	</script> -->
-	
+	<script src="<c:url value='/resources/js/jquery-1.12.4.min.js'/>"></script>
+	<script src="<c:url value='/resources/js/bootstrap.min.js'/>"></script>  
 	<script type="text/javascript" charset="utf8" src="<c:url value='/resources/js/jquery.dataTables.js'/>"></script>
+	<script src="<c:url value='/resources/js/salesdesk.js?v=15'/>"></script>
+	<script src="<c:url value='/resources/js/enquiryRequest/assignedUser.js?v=15'/>"></script>
+	<script src="<c:url value='/resources/js/separate/offer.js?v=15'/>"></script>
+	<script src="<c:url value='/resources/js/enquiryRequest/misreportforClosing.js?v=15'/>"></script>
+	
 	<script src="<c:url value='/resources/js/separate/applicationForm.js?v=15'/>"></script>
 	<script src="<c:url value='/resources/js/separate/offerApplicationForm.js?v=15'/>"></script>
 	
