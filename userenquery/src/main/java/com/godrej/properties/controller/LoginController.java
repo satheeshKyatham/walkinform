@@ -71,34 +71,13 @@ public class LoginController {
 	
 	
 	/*Logout*/
-	@RequestMapping(value = {"/logout"}, method = RequestMethod.GET  )
-	public @ResponseBody ModelAndView logoutUser(HttpServletRequest request,HttpServletResponse response) {		 
-
-		
-		
-		request.getParameter("logout");
-		
-			
-		HttpSession session=request.getSession();
-		session.getAttribute("UserData");
-		
-		
-		session.setAttribute("UserData", null);
-		
-		session.invalidate();
-		
-		ModelAndView model = new ModelAndView();
-		model.setViewName("index");
-		
-		
-		
-		/*RequestDtl requestDtl= new RequestDtl();
-		requestDtl.setRequest_user_id(request.getParameter("userId"));
-		
-		requestService.saveRequest(requestDtl);
-		ModelAndView model = new ModelAndView();
-		model.setViewName("UserDashBoard");*/
-		
+	@RequestMapping(value = {"/logout"}, method = RequestMethod.GET)
+	public @ResponseBody ModelAndView logoutUser(HttpServletRequest request,HttpServletResponse response) {		
+		request.getParameter("logout");			
+		HttpSession session=request.getSession();		
+		session.setAttribute("UserData", null);	
+		session.invalidate();		
+		ModelAndView model = new ModelAndView("redirect:/saleslogin");
 		return model;
 	}
 	

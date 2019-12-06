@@ -1,4 +1,12 @@
 //Createing for EOI view button
+$.ajaxSetup({
+    statusCode: {
+        401: function(){
+          location.reload();
+        }
+    }
+});
+
 var isEoiAllow=false;
 
 var channelPartnerArray=[];

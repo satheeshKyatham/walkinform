@@ -1,3 +1,11 @@
+$.ajaxSetup({
+    statusCode: {
+        401: function(){
+          location.reload();
+        }
+    }
+});
+
 var option ='';
 	var reasignOption ='';
 $(document).ready(function() {

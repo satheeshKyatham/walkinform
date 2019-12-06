@@ -138,7 +138,15 @@ public class AdminController {
 		cCGatwayService.setPaymentSuccessResponse(respDesc);
 		 return "paymentsuccess";
 	}
+	@RequestMapping(value = { "/sessiontimeout"}, method = RequestMethod.GET)
+	public String sessiontimeout(HttpServletRequest request) {
+		
+		 return "sessiontimeout";
+	}
 	
-	
+	@RequestMapping(value = { "/kycrole"}, method = RequestMethod.GET)
+	public String kycrole(ModelMap model,HttpServletRequest request) {
+		 return "kycrole";
+	}
 	
 }

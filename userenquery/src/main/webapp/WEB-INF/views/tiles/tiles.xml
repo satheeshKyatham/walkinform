@@ -63,6 +63,9 @@
        <definition name="saleslogin"  template="/WEB-INF/views/pages/saleslogin.jsp"> 
        <put-attribute name="title" value="Sales Desk Login" />  
     </definition>
+    <definition name="sessiontimeout"  template="/WEB-INF/views/pages/sessiontimeout.jsp"> 
+       <put-attribute name="title" value="Session Timeout" />  
+    </definition>
   <definition name="loginPage"  template="/WEB-INF/views/pages/loginPage.jsp"> 
        <put-attribute name="footer" value="/WEB-INF/views/tiles/template/defaultFooter.jsp" />   
        <put-attribute name="title" value="Login" />  
@@ -218,5 +221,7 @@
         <put-attribute name="title" value="Created Offers List" /> 
         <put-attribute name="body" value="/WEB-INF/views/pages/createdoffers.jsp" /> 
     </definition>
-     
+    <definition name="kycrole"  template="/WEB-INF/views/pages/kycrole.jsp"> 
+       <put-attribute name="title" value="KYC Role" /> 
+     </definition>
 </tiles-definitions>

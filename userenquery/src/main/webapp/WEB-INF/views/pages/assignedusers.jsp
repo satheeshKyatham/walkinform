@@ -6,6 +6,12 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
  <html>
+ <%
+	 response.addHeader("Expires","0");
+	 response.addHeader("Pragma","no-cache");
+	 response.setHeader("Cache-Control","no-cache,no-store, must-revalidate, pre-check=0, post-check=0, max-age=0, s-maxage=0");
+	 response.addHeader("X-Frame-Options", "DENY");
+	 %>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -26,7 +32,7 @@
 <script src="<c:url value='/resources/js/enquiryRequest/assignedUser.js?v=15'/>"></script>
 <script src="<c:url value='/resources/js/separate/offer.js?v=15'/>"></script>
 <script src="<c:url value='/resources/js/enquiryRequest/misreportforClosing.js?v=15'/>"></script>
-<script src="<c:url value='/resources/js/enquiryRequest/kycdetails.js'/>"></script>
+<%-- <script src="<c:url value='/resources/js/enquiryRequest/kycdetails.js'/>"></script> --%>
 </head> 
 <%! String projectname,projectid ,projectrole,userid;%>
 <%
@@ -112,6 +118,9 @@ if(ses!=null){
 					</li>
 					<li onclick="getKYCCMDetails()" id="KYC_CM_Details_Tab_Id">
 						<a href="#tab5" data-toggle="tab">KYC</a>
+					</li>
+					<li onclick="getKYCCMApprovalView()" id="KYC_CM_Approval_Tab_Id">
+						<a href="#tab6" data-toggle="tab">KYC Approve/Reject</a>
 					</li>
 				</ul>
 				<div class=""></div>
@@ -235,31 +244,35 @@ if(ses!=null){
 				
 				
 				<div class="tab-pane" id="tab5">
-				<div class="commonLoad" id="mainPageLoad" style="display: none;"></div>
-				
-				<div class="col-md-12">
-					
-					<div class="clearfix"></div>
-					<table class="table table-bordered" id="KYC_CM_Details">
-						<thead>
-							<tr>
-								<th>Enquiry No</th>
-								<th>Mobile No</th>
-								<th>KYC Status</th>
-								<th>View/Fill KYC</th>
-								<th>Approve KYC</th>
-								
-								<!-- <th style="word-break: break-word; width:200px !important">Email</th> -->
-							</tr>
-						</thead>
-						<tbody>
-						</tbody>
-					</table>
-					<div class="clearfix"></div>
-				</div>
+					<div class="commonLoad" id="mainPageLoad" style="display: none;"></div>
+					<div class="col-md-12">
+						<div class="clearfix"></div>
+						<table class="table table-bordered" id="KYC_CM_Details">
+							<thead>
+								<tr>
+									<th>Enquiry No</th>
+									<th>Customer Name</th>
+									<th>Mobile No</th>
+									<th>KYC Status</th>
+									<th>View/Fill KYC</th>
+									
+									<!-- <th style="word-break: break-word; width:200px !important">Email</th> -->
+								</tr>
+							</thead>
+							<tbody>
+							</tbody>
+						</table>
+						<div class="clearfix"></div>
+					</div>
 				<div class="clearfix"></div>
 				</div>
 				
+				<div class="clearfix"></div>
+				<div class="tab-pane" id="tab6">
+					<div class="commonLoad" id="mainPageLoad" style="display: none;"></div>
+					<iframe id="kyc_cm_approval_iframe" width="100%" height="400px"></iframe>
+				<div class="clearfix"></div>
+				</div>
 				<div class="clearfix"></div>
 			</div>
 		  <div class="clearfix"></div>
