@@ -7,7 +7,7 @@ $.ajaxSetup({
 });
 $(document).ready(function() {
 	debugger
-	var seconds = 3;
+	var seconds = 5;
 	$("#lblCount").html(seconds);
 	 setInterval(function () {
 		 	if(seconds>0){
