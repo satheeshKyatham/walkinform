@@ -8,6 +8,14 @@ You should have received a copy of the GNU General Public License along with thi
  *
 */
 
+$.ajaxSetup({
+    statusCode: {
+        401: function(){
+          location.reload();
+        }
+    }
+});
+
 (function( $ ){
 	var editorObj;
 	var methods = {

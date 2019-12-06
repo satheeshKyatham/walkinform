@@ -7,6 +7,12 @@
 <!DOCTYPE html>
 <!-- saved from url=(0049)http://safety.stepupitsolutions.com:83/Local.aspx -->
 <html xmlns="http://www.w3.org/1999/xhtml">
+<%
+	 response.addHeader("Expires","0");
+	 response.addHeader("Pragma","no-cache");
+	 response.setHeader("Cache-Control","no-cache,no-store, must-revalidate, pre-check=0, post-check=0, max-age=0, s-maxage=0");
+	 response.addHeader("X-Frame-Options", "DENY");
+	 %>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title> Godrej </title>

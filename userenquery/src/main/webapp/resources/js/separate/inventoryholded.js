@@ -1,3 +1,11 @@
+$.ajaxSetup({
+    statusCode: {
+        401: function(){
+          location.reload();
+        }
+    }
+});
+
 var pageContext = $("#contextPath").val()+"/";
 towerLists();
 function towerLists()

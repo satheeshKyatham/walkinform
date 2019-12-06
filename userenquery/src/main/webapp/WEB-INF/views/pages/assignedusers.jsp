@@ -6,6 +6,12 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
  <html>
+ <%
+	 response.addHeader("Expires","0");
+	 response.addHeader("Pragma","no-cache");
+	 response.setHeader("Cache-Control","no-cache,no-store, must-revalidate, pre-check=0, post-check=0, max-age=0, s-maxage=0");
+	 response.addHeader("X-Frame-Options", "DENY");
+	 %>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,12 +26,9 @@
 	
 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
 	
-<script src="<c:url value='/resources/js/jquery-1.12.4.min.js'/>"></script>
-<script src="<c:url value='/resources/js/bootstrap.min.js'/>"></script>
-<script src="<c:url value='/resources/js/salesdesk.js?v=15'/>"></script>
-<script src="<c:url value='/resources/js/enquiryRequest/assignedUser.js?v=15'/>"></script>
-<script src="<c:url value='/resources/js/separate/offer.js?v=15'/>"></script>
-<script src="<c:url value='/resources/js/enquiryRequest/misreportforClosing.js?v=15'/>"></script>
+<%-- <script src="<c:url value='/resources/js/jquery-1.12.4.min.js'/>"></script>
+<script src="<c:url value='/resources/js/bootstrap.min.js'/>"></script> --%>
+
 <%-- <script src="<c:url value='/resources/js/enquiryRequest/kycdetails.js'/>"></script> --%>
 </head> 
 <%! String projectname,projectid ,projectrole,userid;%>
@@ -284,8 +287,14 @@ if(ses!=null){
 		$('.dataTables_length').addClass('bs-select');
 		});
 	</script> -->
-	
+	<script src="<c:url value='/resources/js/jquery-1.12.4.min.js'/>"></script>
+	<script src="<c:url value='/resources/js/bootstrap.min.js'/>"></script>  
 	<script type="text/javascript" charset="utf8" src="<c:url value='/resources/js/jquery.dataTables.js'/>"></script>
+	<script src="<c:url value='/resources/js/salesdesk.js?v=15'/>"></script>
+	<script src="<c:url value='/resources/js/enquiryRequest/assignedUser.js?v=15'/>"></script>
+	<script src="<c:url value='/resources/js/separate/offer.js?v=15'/>"></script>
+	<script src="<c:url value='/resources/js/enquiryRequest/misreportforClosing.js?v=15'/>"></script>
+	
 	<script src="<c:url value='/resources/js/separate/applicationForm.js?v=15'/>"></script>
 	<script src="<c:url value='/resources/js/separate/offerApplicationForm.js?v=15'/>"></script>
 	

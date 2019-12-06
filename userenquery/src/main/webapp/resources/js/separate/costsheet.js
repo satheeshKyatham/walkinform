@@ -1,3 +1,10 @@
+$.ajaxSetup({
+    statusCode: {
+        401: function(){
+          location.reload();
+        }
+    }
+});
 var pageContext = $("#pageContext").val()+'/'; 
 var urlDomin = pageContext;
 var pdfSrc = pageContext+"Costsheet?name="     
@@ -1238,7 +1245,7 @@ function updateBSP (timeid) {
 	   				showConfirmButton: false
 	   			});
 	   			
-	   			generateKYCLinkViaOffer(event,this,'N');
+	   			generateKYCLinkViaOffer(event,this,'N',offerJson.offer_sfid);
 	       	   
 	            printPdfData(generateFrom);
 	            

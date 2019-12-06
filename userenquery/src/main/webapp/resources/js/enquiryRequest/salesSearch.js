@@ -1,3 +1,11 @@
+$.ajaxSetup({
+    statusCode: {
+        401: function(){
+          location.reload();
+        }
+    }
+});
+
 $(document).ready(function(){
 	$("#mainPageLoad").fadeOut("slow"); 
 });

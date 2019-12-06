@@ -2523,6 +2523,8 @@ public class WebServiceController<MultipartFormDataInput> {
 				@RequestParam("password") String password,
 				//@RequestParam("projectId") String projectId,
 				HttpServletRequest req) {
+		 HttpSession session1 = req.getSession(true);
+			/*session1.setMaxInactiveInterval(1 * 60);*/
 		 GsonBuilder gsonBuilder = new GsonBuilder();
 		 Gson gson = gsonBuilder.create(); 
 		 UserMaster master= new UserMaster();

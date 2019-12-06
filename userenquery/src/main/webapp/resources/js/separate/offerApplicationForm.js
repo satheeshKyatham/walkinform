@@ -1,4 +1,11 @@
 //function getofferApplicantDetails (e, enqName) {
+$.ajaxSetup({
+    statusCode: {
+        401: function(){
+          location.reload();
+        }
+    }
+});
 
 function getofferApplicantDetails (e, offerSFID, enqSFID, contactSFID, offerName, enqName, propSFID, rowId, sourceCall) {	
 	

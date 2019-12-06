@@ -71,34 +71,13 @@ public class LoginController {
 	
 	
 	/*Logout*/
-	@RequestMapping(value = {"/logout"}, method = RequestMethod.GET  )
-	public @ResponseBody ModelAndView logoutUser(HttpServletRequest request,HttpServletResponse response) {		 
-
-		
-		
-		request.getParameter("logout");
-		
-			
-		HttpSession session=request.getSession();
-		session.getAttribute("UserData");
-		
-		
-		session.setAttribute("UserData", null);
-		
-		session.invalidate();
-		
-		ModelAndView model = new ModelAndView();
-		model.setViewName("index");
-		
-		
-		
-		/*RequestDtl requestDtl= new RequestDtl();
-		requestDtl.setRequest_user_id(request.getParameter("userId"));
-		
-		requestService.saveRequest(requestDtl);
-		ModelAndView model = new ModelAndView();
-		model.setViewName("UserDashBoard");*/
-		
+	@RequestMapping(value = {"/logout"}, method = RequestMethod.GET)
+	public @ResponseBody ModelAndView logoutUser(HttpServletRequest request,HttpServletResponse response) {		
+		request.getParameter("logout");			
+		HttpSession session=request.getSession();		
+		session.setAttribute("UserData", null);	
+		session.invalidate();		
+		ModelAndView model = new ModelAndView("redirect:/saleslogin");
 		return model;
 	}
 	
@@ -190,6 +169,9 @@ public class LoginController {
 		  boolean logins=false;
 		  HashMap<String, String> UserData = new HashMap<String, String>();
 		try{
+			if(username !=null) {
+				username = username.toLowerCase();
+			}
 			webService= new CallWebServices("MobileService.asmx?wsdl","GodrejiteLogin");
 			webService.getProperties().add(webService.new RequestProperty("strUserName", username));
 			webService.getProperties().add(webService.new RequestProperty("strPassword", password));

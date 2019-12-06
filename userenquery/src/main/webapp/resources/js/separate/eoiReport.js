@@ -1,3 +1,11 @@
+$.ajaxSetup({
+    statusCode: {
+        401: function(){
+          location.reload();
+        }
+    }
+});
+
 $(document).ready(function() {
 	var today = new Date();
 	document.getElementById("txtEOIFromDate").value = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);

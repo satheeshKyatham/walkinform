@@ -508,7 +508,8 @@
 						<div class="clearfix"></div>
 						<div id="isReferredByChannelPartnerCP" class="sourceCol animated">
 							<div class="col-md-6 col-xs-12">
-								<div class="group">
+								<div class="group posRelative">
+									<div class="commonLoad" id="channelPartnerLoader" style="display:none;"></div>
 									<input type="text" id="channelPartnerNameSearch" onkeyup="getChannelPartners(event,this);" data-id="channelPartnerName" class= "requiredHidden enquiryFields autocomplete-off isReferredByChannelPartnerCP requiredField"  required="required"  /><!--  -->
 									<input type="hidden" id="channelPartnerSfid" name="channelPartner.sfid" class="isReferredByChannelPartnerCP"/>
 									<input type="hidden" id="channelPartnerId" name="channelPartner.channelPartnerId" class="isReferredByChannelPartnerCP"/>
