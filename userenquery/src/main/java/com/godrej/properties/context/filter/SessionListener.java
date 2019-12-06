@@ -13,7 +13,7 @@ public class SessionListener implements HttpSessionListener{
     public void sessionCreated(HttpSessionEvent event) {
         System.out.println("session created");
         HttpSession session  = event.getSession();
-        event.getSession().setMaxInactiveInterval(1*60);
+        event.getSession().setMaxInactiveInterval(15*60);
     }
 
     public void sessionDestroyed(HttpSessionEvent event) {
