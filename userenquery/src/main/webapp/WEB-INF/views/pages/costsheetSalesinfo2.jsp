@@ -7,6 +7,12 @@
 <%@page import="java.util.HashMap"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%
+	 response.addHeader("Expires","0");
+	 response.addHeader("Pragma","no-cache");
+	 response.setHeader("Cache-Control","no-cache,no-store, must-revalidate, pre-check=0, post-check=0, max-age=0, s-maxage=0");
+	 response.addHeader("X-Frame-Options", "DENY");
+	 %>
 
 
 
@@ -1383,23 +1389,26 @@
  
 
 
-
+<audio id="audio" src="<c:url value='/resources/css/camera-shutter-click-01.wav' />" autostart="false" ></audio>
 <!-- Webcam Modal -->
-<div class="modal fade" id="webcamBox" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="webcamBox" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" data-keyboard="false">
   <div class="modal-dialog" role="document" style="width:1200px;">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <button type="button" class="close" onclick="closeWebcamModel()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel">Webcam</h4>
       </div>
       <div class="modal-body">
         <div class="col-md-6 col-xs-12">
 	       <div id="my_camera"></div><br/>
-	       		<input id="webAttachmentRowID"/>
+	       		<input id="webAttachmentRowID" style="display:none;"/>
 	          
-	          <div id="snapshotBtnCol">
+	          <div id="snapshotBtnCol" class="pull-left">
 	          		
 	          </div>
+	          <div class="pull-left" style="margin-left:20px;">
+	       		<button type="button" class="btn btnDefaultBlue btn-default" onclick="closeWebcamModel()">Close</button>
+	       		</div>
 	          <div class="clearfix"></div>
 	          
 	          <input type="hidden" name="image" class="image-tag">
@@ -1413,9 +1422,9 @@
 	     </div>
 	     <div class="clearfix"></div>
       </div>
-      <div class="modal-footer">
+      <!-- <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
+      </div> -->
     </div>
   </div>
 </div>

@@ -1,3 +1,10 @@
+$.ajaxSetup({
+    statusCode: {
+        401: function(){
+          location.reload();
+        }
+    }
+});
 var pageContext = $("#pageContext").val()+'/'; 
 var urlDomin = pageContext;
 var pdfSrc = pageContext+"Costsheet?name="     
@@ -2436,7 +2443,7 @@ function addMorePtBtn () {
 	
 	
        if(amI < amNum) { 
-             $('#csPtCol tr:last-child').after('<tr id="csPayRowID'+amNumRowID+'" class="csPtDataRow csPtFileSize"><td class="txtCenter"><input style="display:none;" class="gpl_cs_payment_details_id" value="-1"><input type="checkbox" class="paymentCScheck" checked></td><td><select onchange="csPtDd(this)" class="full form-control input-sm csPtDropDown requiredField"><option value="">Select</option><option value="Cheque">Cheque</option><option value="NEFT">NEFT/Credit</option><option value="Swipe">Swipe</option></select></td><td><input class="full form-control input-sm csPtBankName requiredField" placeholder="Bank Name"/></td><td><input class="full form-control input-sm csPtBranch requiredField" placeholder="Branch Name"/></td><td><input class="full form-control input-sm csPtTransactionId requiredField" placeholder="Transaction ID" /></td><td><input type="date" class="full form-control input-sm csPtTransactionDate requiredField" placeholder="Transaction Date"/></td><td><input  class="numericField numericWithoutDecimal full form-control input-sm csPtTransactionAmount requiredField" maxlength="10" onkeyup="csPtcalculateGrandTotal()" placeholder="Transaction Amount" name="amount"/></td> <td> <input type="file" class="full form-control input-sm panAttach"/> <input class="panAttachWebcam"/> <a  class="btn btnDefaultBlue btn-default webcamBtn" data-toggle="modal" data-target="#webcamBox" onclick="webcamAttachment(this, '+id+', '+attachPAN+')">Capture</a> </td> <td> <input type="file" class="full form-control input-sm receiptAttach"/> <input class="receiptAttachWebcam"/> <a  class="btn btnDefaultBlue btn-default webcamBtn" data-toggle="modal" data-target="#webcamBox" onclick="webcamAttachment(this, '+id+', '+attachRec+')">Capture</a> <td><textarea class="full form-control input-sm csPtDescription" placeholder="Description"></textarea></td><td class="removeCsPtCol txtCenter"><i onclick="removeCsPtCol(this)" class="fa fa-times-circle"></i></td></tr>');
+             $('#csPtCol tr:last-child').after('<tr id="csPayRowID'+amNumRowID+'" class="csPtDataRow csPtFileSize"><td class="txtCenter"><input style="display:none;" class="gpl_cs_payment_details_id" value="-1"><input type="checkbox" class="paymentCScheck" checked></td><td><select onchange="csPtDd(this)" class="full form-control input-sm csPtDropDown requiredField"><option value="">Select</option><option value="Cheque">Cheque</option><option value="NEFT">NEFT/Credit</option><option value="Swipe">Swipe</option></select></td><td><input class="full form-control input-sm csPtBankName requiredField" placeholder="Bank Name"/></td><td><input class="full form-control input-sm csPtBranch requiredField" placeholder="Branch Name"/></td><td><input class="full form-control input-sm csPtTransactionId requiredField" placeholder="Transaction ID" /></td><td><input type="date" class="full form-control input-sm csPtTransactionDate requiredField" placeholder="Transaction Date"/></td><td><input  class="numericField numericWithoutDecimal full form-control input-sm csPtTransactionAmount requiredField" maxlength="10" onkeyup="csPtcalculateGrandTotal()" placeholder="Transaction Amount" name="amount"/></td> <td> <input type="file" class="full form-control input-sm panAttach"/> <input class="panAttachWebcam"/> <a  class="webcamBtn" data-toggle="modal" data-target="#webcamBox" onclick="webcamAttachment(this, '+id+', '+attachPAN+')">or <span>Capture Image</span></a> </td> <td> <input type="file" class="full form-control input-sm receiptAttach"/> <input class="receiptAttachWebcam"/> <a  class="webcamBtn" data-toggle="modal" data-target="#webcamBox" onclick="webcamAttachment(this, '+id+', '+attachRec+')">or <span>Capture Image</span></a> <td><textarea class="full form-control input-sm csPtDescription" placeholder="Description"></textarea></td><td class="removeCsPtCol txtCenter"><i onclick="removeCsPtCol(this)" class="fa fa-times-circle"></i></td></tr>');
              amI++;
        }else {
              swal({
@@ -2790,21 +2797,18 @@ function getEOIPaymentRecord () {
                            + '<td>'
                                  + '<input type="file" class="full form-control input-sm panAttach"/>'
                                  + '<input class="panAttachWebcam"/>'
-                                 + '<a  class="btn btnDefaultBlue btn-default webcamBtn" data-toggle="modal" data-target="#webcamBox" onclick="webcamAttachment(this, '+csPayRowID0+', '+attachPAN+')">Capture</a>'
+                                 + '<a  class="webcamBtn" data-toggle="modal" data-target="#webcamBox" onclick="webcamAttachment(this, '+csPayRowID0+', '+attachPAN+')">or <span>Capture Image</span></a>'
                            + '</td>'
                            + '<td>'
                                  + '<input type="file" class="full form-control input-sm receiptAttach"/>'
                                  + '<input class="receiptAttachWebcam"/>'
-                                 + '<a  class="btn btnDefaultBlue btn-default webcamBtn" data-toggle="modal" data-target="#webcamBox" onclick="webcamAttachment(this, '+csPayRowID0+', '+attachRec+')">Capture</a>'
+                                 + '<a  class="webcamBtn" data-toggle="modal" data-target="#webcamBox" onclick="webcamAttachment(this, '+csPayRowID0+', '+attachRec+')">or <span>Capture Image</span></a>'
                            + '</td>'
              
                            + '<td>'
                                  + '<textarea class="full form-control input-sm csPtDescription" placeholder="Description"></textarea>'
                            + '</td>'
                            + '<td class="removeCsPtCol txtCenter"><i onclick="removeCsPtCol(this)" class="fa fa-times-circle"></i></td> </tr>';
-                    
-                    
-                    
                     
                     
                     $("#csPtCol tbody tr:first-child").after(html);
@@ -2843,12 +2847,12 @@ function getEOIPaymentRecord () {
                                  + '<td class="txtCenter">'
                                         + '<input type="file" class="full form-control input-sm panAttach"/>'
                                         + '<input class="panAttachWebcam"/>'
-                                        + '<a  class="btn btnDefaultBlue btn-default webcamBtn" data-toggle="modal" data-target="#webcamBox" onclick="webcamAttachment(this, '+csPayRowID0+', '+attachPAN+')">Capture</a>'
+                                        + '<a  class="webcamBtn" data-toggle="modal" data-target="#webcamBox" onclick="webcamAttachment(this, '+csPayRowID0+', '+attachPAN+')">or <span>Capture Image</span></a>'
                                  + '</td>'
                                  + '<td>'
                                         + '<input type="file" class="full form-control input-sm receiptAttach"/>'
                                         + '<input class="receiptAttachWebcam"/>'
-                                        + '<a  class="btn btnDefaultBlue btn-default webcamBtn" data-toggle="modal" data-target="#webcamBox" onclick="webcamAttachment(this, '+csPayRowID0+', '+attachRec+')">Capture</a>'
+                                        + '<a  class="webcamBtn" data-toggle="modal" data-target="#webcamBox" onclick="webcamAttachment(this, '+csPayRowID0+', '+attachRec+')">or <span>Capture Image</span></a>'
                                  + '</td>'
                     
                                  + '<td>'

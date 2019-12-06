@@ -1,4 +1,10 @@
-
+$.ajaxSetup({
+    statusCode: {
+        401: function(){
+          location.reload();
+        }
+    }
+});
 
 //alert(pageContext);
 function getCreatedOfferList () {

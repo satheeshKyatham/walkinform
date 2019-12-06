@@ -1,3 +1,10 @@
+$.ajaxSetup({
+    statusCode: {
+        401: function(){
+          location.reload();
+        }
+    }
+});
 var amIEoi = 0;
 var amNumEoi = 4; 
 

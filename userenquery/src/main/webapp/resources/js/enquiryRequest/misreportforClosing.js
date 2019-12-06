@@ -2,7 +2,13 @@
  * Added By Satheesh K - For MIS Report
  * 
  */
-
+$.ajaxSetup({
+    statusCode: {
+        401: function(){
+          location.reload();
+        }
+    }
+});
 $(document).ready(function() {
 	debugger;
 	var today = new Date();

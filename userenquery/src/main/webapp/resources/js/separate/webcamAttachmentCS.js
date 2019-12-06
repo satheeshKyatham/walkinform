@@ -22,21 +22,46 @@ function webcamAttachment(e, webAttachmentRowID, source) {
 	
 }
 
+
 function panTakeSnapshot() {
+	//shutter.play();
+	
+	var sound = document.getElementById("audio");
+    sound.play()
+	
 	Webcam.snap( function(data_uri) {
 		var id = "#"+$('#webAttachmentRowID').val() + " ";
 		
 		$(id + ".panAttachWebcam").val(data_uri);
 		document.getElementById('results').innerHTML = '<img src="'+data_uri+'"/>';
 	});
+	
+	//$('#webcamBox').modal('hide');
+	
+	//Webcam.reset();
 }
 
 function recTakeSnapshot() {
+	//shutter.play();
+	 
+	var sound = document.getElementById("audio");
+    sound.play()
+	
 	Webcam.snap( function(data_uri) {
 		var id = "#"+$('#webAttachmentRowID').val() + " ";
 		
 		$(id + ".receiptAttachWebcam").val(data_uri);
 		document.getElementById('results').innerHTML = '<img src="'+data_uri+'"/>';
 	});
+	
+	//$('#webcamBox').modal('hide');
+	
+	//Webcam.reset();
+}
+
+
+function closeWebcamModel() {
+	$('#webcamBox').modal('hide');
+	Webcam.reset();
 }
 // END webcam attachment

@@ -1,6 +1,13 @@
 /* Author : Satheesh Kyatham*
  * 
  */
+$.ajaxSetup({
+    statusCode: {
+        401: function(){
+          location.reload();
+        }
+    }
+});
 getCMKYCDetails();
 function getCMKYCDetails()
 {
