@@ -190,6 +190,9 @@ public class LoginController {
 		  boolean logins=false;
 		  HashMap<String, String> UserData = new HashMap<String, String>();
 		try{
+			if(username !=null) {
+				username = username.toLowerCase();
+			}
 			webService= new CallWebServices("MobileService.asmx?wsdl","GodrejiteLogin");
 			webService.getProperties().add(webService.new RequestProperty("strUserName", username));
 			webService.getProperties().add(webService.new RequestProperty("strPassword", password));
