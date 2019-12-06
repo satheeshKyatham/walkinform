@@ -197,7 +197,8 @@ function onProjectSelect()
 			  }
 		  else if($('#loged_role').val()=='14')//KYC Role
 		  {
-			  alert("KYC Role");
+			  //alert("KYC Role");
+			  window.location.href = "kycrole?projectid="+$('#projectSelected').val()+"&projectname="+$('#projectSelected option:selected').text();
 			 // window.location.href = "assignedusers?userId=" + $('#loged_userid').val()+"&projectid="+$('#projectSelected').val()+"&projectname="+$('#projectSelected option:selected').text() ;
 		  }
 	 

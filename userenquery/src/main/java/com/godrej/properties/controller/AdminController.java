@@ -148,5 +148,6 @@ public class AdminController {
 	public String kycrole(ModelMap model,HttpServletRequest request) {
 		 return "kycrole";
 	}
+
 	
 }

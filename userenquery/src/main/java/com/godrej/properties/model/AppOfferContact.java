@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name="salesforce.contact")
@@ -41,6 +42,8 @@ public class AppOfferContact implements Serializable{
 	@Column(name="country__c") private String country__c;
 	@Column(name="postal_code__c") private String postal_code__c;
 	
+	@Transient
+	private String propstrength__type__c;
 	
 	public int getId() {
 		return id;
@@ -166,5 +169,11 @@ public class AppOfferContact implements Serializable{
 	}
 	public void setNationality_a__c(String nationality_a__c) {
 		this.nationality_a__c = nationality_a__c;
+	}
+	public String getPropstrength__type__c() {
+		return propstrength__type__c;
+	}
+	public void setPropstrength__type__c(String propstrength__type__c) {
+		this.propstrength__type__c = propstrength__type__c;
 	}
 }
