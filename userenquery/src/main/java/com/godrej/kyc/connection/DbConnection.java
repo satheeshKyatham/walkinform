@@ -61,7 +61,6 @@ public class DbConnection
 		       		/*.getConnection("jdbc:postgresql://10.2.90.49:5432/gplsurvey",
 		        		  "gplsurvey","gplsurvey");*/
 		       c.setAutoCommit(false);
-		       //System.out.println("Opened database successfully");
 		    } 
 		    catch (Exception e) 
 		    {

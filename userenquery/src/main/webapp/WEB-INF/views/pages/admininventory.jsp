@@ -111,5 +111,5 @@ if(ses!=null){
 </body>
 
 
- <script src="<c:url value='/resources/js/separate/admininventory.js?v=15'/>"></script>	
+ <script src="<c:url value='/resources/js/separate/admininventory.js?v=16'/>"></script>	
 <!-- </html> -->

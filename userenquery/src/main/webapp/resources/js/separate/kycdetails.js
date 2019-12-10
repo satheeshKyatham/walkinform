@@ -20,11 +20,17 @@ function getCMKYCDetails()
 	var i = 0;
 	$.getJSON(urlPP, function (data) {
 		$.each(data, function (index, value) {
+			/*if(value.phone_number=="4447775522")
+				{
+					console.log("value.kycapproval_status:"+value.kycapproval_status);
+				}*/
 			var kycStatus ="";
 			if(value.kycapproval_status=="Y")
-					kycStatus="Yes";
+					kycStatus="KYC Approved";
 			else if(value.kycapproval_status=="N")
-				kycStatus="No";
+				kycStatus="KYC Rejected";
+			else
+				kycStatus="KYC link sent to customer";
 			
 			var val = $("<tr><td>"+value.enquiryid+"</td><td>"+value.application_name+"</td><td>"+value.phone_number+"</td><td>"+kycStatus+"</td><td><a href="+value.kyclink+"&isrole=Y target='_blank'>Link</a></td></tr>");
 			$("#KYC_Admin_Details tbody").append(val);

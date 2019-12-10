@@ -2532,7 +2532,7 @@ public class WebServiceController<MultipartFormDataInput> {
 			 master.setMsg("Credential can not be empty.");
 			 gson.toJson(master);
 		 }
-		
+		 emailid=emailid.toLowerCase();
 		 master.setUser_name(emailid);
 		 master.setEmailid(emailid);
 		 master.setPassword(password);
@@ -3689,8 +3689,8 @@ public class WebServiceController<MultipartFormDataInput> {
 				stream.write(abytes);
 				stream.close();
 			}
-			
-			if(panAttachWebcam != null) {
+
+			if(panAttachWebcam != null && !panAttachWebcam.equals("") && !panAttachWebcam.equals("undefined")) {
 				String base64String = panAttachWebcam;
 		        String[] strings = base64String.split(",");
 		        String extension;
@@ -3736,7 +3736,7 @@ public class WebServiceController<MultipartFormDataInput> {
 				stream.close();
 			}
 			
-			if(receiptAttachWebcam != null) {
+			if(receiptAttachWebcam != null && !receiptAttachWebcam.equals("") && !receiptAttachWebcam.equals("undefined")) {
 				String base64String = receiptAttachWebcam;
 		        String[] strings = base64String.split(",");
 		        String extension;
@@ -4589,7 +4589,9 @@ public class WebServiceController<MultipartFormDataInput> {
 					String enq = getEnquiryComments.enquiryData(enqSFID);
 					
 					JsonObject jobj = new Gson().fromJson(enq, JsonObject.class);
-					String Old_Comments__c = jobj.get("Old_Comments__c").getAsString();
+					String Old_Comments__c="";
+					if(jobj.get("Old_Comments__c")!=null)
+						Old_Comments__c = jobj.get("Old_Comments__c").getAsString();
 					
 					if(Old_Comments__c!=null) {
 						 return Old_Comments__c;

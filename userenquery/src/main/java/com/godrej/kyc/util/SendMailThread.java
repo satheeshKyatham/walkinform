@@ -11,10 +11,15 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.godrej.properties.context.filter.SessionListener;
+
 public class SendMailThread implements Runnable{
 
 	String to,message,subject,cc;
-	
+	private Logger log = LoggerFactory.getLogger(getClass());
 	public SendMailThread(String to,String cc,String subject,String message)
 	{
 		this.to = to;
@@ -57,8 +62,8 @@ public class SendMailThread implements Runnable{
 	    	  
 		      Message message1 = new MimeMessage(session);
 		      message1.setFrom(new InternetAddress(from));
-		      System.out.println("TO E-mail Address :::: User Enq:-"+to);
-		      System.out.println("CC E-mail Address :::: User Enq: -"+cc);
+		      log.info("TO E-mail Address :::: User Enq:-",to);
+		      log.info("CC E-mail Address :::: User Enq: -",cc);
 		      message1.setRecipients(Message.RecipientType.TO,InternetAddress.parse(to));
 		      if(cc!=null && cc.length()>0)
 		      {
@@ -70,12 +75,12 @@ public class SendMailThread implements Runnable{
 		      message1.setSubject(subject);
 		      message1.setText(message);  
 		      Transport.send(message1);
-		      System.out.println("Sent message successfully....");
+		      log.info("Sent message successfully....");
 	      
 		} catch (AddressException e) {
-			e.printStackTrace();
+			log.error("Error AddressException: ",e);
 		} catch (MessagingException e) {
-			e.printStackTrace();
+			log.error("Error MessagingException: ",e);
 		}
 	}
 

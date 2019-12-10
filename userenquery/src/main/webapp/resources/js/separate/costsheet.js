@@ -2791,7 +2791,7 @@ function getEOIPaymentRecord () {
                                  + '<input type="date" class="full form-control input-sm csPtTransactionDate requiredField" placeholder="Transaction Date"/>'
                            + '</td>'
                            + '<td>'
-                                 + '<input class="numericField full form-control input-sm csPtTransactionAmount requiredField" maxlength="10" onkeyup="csPtcalculateGrandTotal()" name="amount" placeholder="Transaction Amount"/>'
+                                 + '<input class="numericField numericWithoutDecimal full form-control input-sm csPtTransactionAmount requiredField" maxlength="10" onkeyup="csPtcalculateGrandTotal()" name="amount" placeholder="Transaction Amount"/>'
                            + '</td>'
              
                            + '<td>'

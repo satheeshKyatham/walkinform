@@ -290,13 +290,13 @@ if(ses!=null){
 	<script src="<c:url value='/resources/js/jquery-1.12.4.min.js'/>"></script>
 	<script src="<c:url value='/resources/js/bootstrap.min.js'/>"></script>  
 	<script type="text/javascript" charset="utf8" src="<c:url value='/resources/js/jquery.dataTables.js'/>"></script>
-	<script src="<c:url value='/resources/js/salesdesk.js?v=15'/>"></script>
-	<script src="<c:url value='/resources/js/enquiryRequest/assignedUser.js?v=15'/>"></script>
-	<script src="<c:url value='/resources/js/separate/offer.js?v=15'/>"></script>
-	<script src="<c:url value='/resources/js/enquiryRequest/misreportforClosing.js?v=15'/>"></script>
+	<script src="<c:url value='/resources/js/salesdesk.js?v=16'/>"></script>
+	<script src="<c:url value='/resources/js/enquiryRequest/assignedUser.js?v=16'/>"></script>
+	<script src="<c:url value='/resources/js/separate/offer.js?v=16'/>"></script>
+	<script src="<c:url value='/resources/js/enquiryRequest/misreportforClosing.js?v=16'/>"></script>
 	
-	<script src="<c:url value='/resources/js/separate/applicationForm.js?v=15'/>"></script>
-	<script src="<c:url value='/resources/js/separate/offerApplicationForm.js?v=15'/>"></script>
+	<script src="<c:url value='/resources/js/separate/applicationForm.js?v=16'/>"></script>
+	<script src="<c:url value='/resources/js/separate/offerApplicationForm.js?v=16'/>"></script>
 	
 	
 	

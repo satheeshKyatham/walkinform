@@ -422,3 +422,5 @@ background-position: center; background-repeat: no-repeat; background-size: 40px
 
 
 .panAttachWebcam, .receiptAttachWebcam {display:none;}
+
+#channelPartnerLoader {background-position: 4px 4px !important; background-size: 25px 25px !important; background-attachment: inherit !important;}

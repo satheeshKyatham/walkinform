@@ -73,9 +73,11 @@ function getKYCCMDetails()
 		$.each(data, function (index, value) {
 			var kycStatus ="";
 			if(value.kycapproval_status=="Y")
-					kycStatus="Yes";
+					kycStatus="KYC Approved";
 			else if(value.kycapproval_status=="N")
-				kycStatus="No";
+				kycStatus="KYC Rejected";
+			else
+				kycStatus="KYC link sent to customer";
 			var val = $("<tr><td>"+value.enquiryid+"</td><td>"+value.application_name+"</td><td>"+value.phone_number+"</td><td>"+kycStatus+"</td><td><a href="+value.kyclink+"&isrole=Y target='_blank'>Link</a></td></tr>");
 			$("#KYC_CM_Details tbody").append(val);
 			
@@ -100,7 +102,6 @@ function getKYCCMDetails()
 function getKYCCMApprovalView()
 {
 	var url=$("#contextPath").val();
-	alert(url);
 	debugger
 	 var url_string = window.location.href; //window.location.href
 	   var url = new URL(url_string);
