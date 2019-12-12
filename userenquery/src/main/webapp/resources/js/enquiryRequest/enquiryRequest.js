@@ -829,6 +829,7 @@ function isReferredChanged(cpHS){
 		$(".hideChannelPartnerType").show();*/
 	}
 }
+
 /* END Auto fill address*/
 function getChannelPartners(event,el){
 	//debugger;
@@ -836,11 +837,16 @@ function getChannelPartners(event,el){
 	$("#brokerContact").empty();
     $("#channelPartnerName").val("");
 	var text=$(el).val();
-	if(text.length>=3){		
-		fetchAsyncData("getChannelPartnerList",text,"GET","loadChannelPartners");		
+	if(text.length==3){	
+		$("#channelPartnerNameSearch").attr('readonly', true);
+		$("#channelPartnerLoader").show();
+		fetchSyncData("getChannelPartnerList",text,"GET","loadChannelPartners");
+
 	}else if(text.length==0){
 		channelPartnerArray=[];
-	}
+	}/*else{
+		channelPartnerArray = filterMatches(channelPartnerArray, text);
+	}*/
 	/*if(text.length>=3){
 		
 		var resp=fetchData("getChannelPartnerList",text,"GET");
@@ -856,6 +862,9 @@ function loadChannelPartners(resp){
 	/*alert(partnerList.length);*/
 	channelPartnerArray=partnerList;
 	refreshChannelPartnerList();
+	$("#channelPartnerLoader").hide();
+	$("#channelPartnerNameSearch").attr('readonly', false);
+
 }
 function refreshChannelPartnerList(){
 	
@@ -883,6 +892,7 @@ function refreshChannelPartnerList(){
             return false;
         }
     });
+
 }
 
 function loadBrokerContacts(){
