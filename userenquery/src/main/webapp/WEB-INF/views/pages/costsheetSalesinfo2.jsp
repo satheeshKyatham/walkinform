@@ -1312,9 +1312,9 @@
 					
 					<div class="bottomBar" id="updateBtnCol" style="margin-top: 30px; position: inherit; box-shadow: none;">
 						<button class="btn btn-primary btnCommon creatOfferBtnCommon" id="updateCRM" ><span></span> Create Offer</button>
-						<a id="btnkyclink" class="btn btn-primary btnCommon" onclick="generateKYCLink(event,this,'N');"> <span>Generate
+						<!-- <a id="btnkyclink" class="btn btn-primary btnCommon" onclick="generateKYCLink(event,this,'N');"> <span>Generate
 							KYC Link</span>
-						</a>
+						</a> -->
 						<div id="otpApprovalCol" style="display:none; margin-top:20px;">
 							<div style="margin-bottom:20px;">
 								<input type="" placeholder="OTP"  onkeyup="otpStatus()"  id="otpInput" class="form-control input-sm" style="width: 100px; display: initial; display:none;" /> 
