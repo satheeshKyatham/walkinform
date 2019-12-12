@@ -99,9 +99,10 @@ function fetchSyncData(addr,id,reqMethod,callback){
 		});
 	}
 
-function filterMatches(words, regexp) {
+function filterMatches(words, input) {
     return words.filter(function (word) {
-         return regexp.test(word);
+    	var regExp = new RegExp(input.toLowerCase());
+         return regExp.test(word.name.toLowerCase());
     });
 }
 

@@ -844,9 +844,11 @@ function getChannelPartners(event,el){
 
 	}else if(text.length==0){
 		channelPartnerArray=[];
-	}/*else{
+	}else{
 		channelPartnerArray = filterMatches(channelPartnerArray, text);
-	}*/
+		console.log(channelPartnerArray);
+		refreshChannelPartnerList();
+	}
 	/*if(text.length>=3){
 		
 		var resp=fetchData("getChannelPartnerList",text,"GET");
