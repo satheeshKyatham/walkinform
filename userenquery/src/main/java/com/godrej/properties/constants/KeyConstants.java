@@ -34,13 +34,20 @@ public class KeyConstants {
 	public static final String CCPRDAPI= "https://api.ccavenue.com/apis/servlet/DoWebTrans";
 	public static final String CCSANDBOXAPI= "https://apitest.ccavenue.com/apis/servlet/DoWebTrans";
 	
-	
-	public static final String SFDC_USERNAME = "external.app@godrejproperties.com";
+	//Production Credentials
+	/*public static final String SFDC_USERNAME = "external.app@godrejproperties.com";
 	public static final String SFDC_PASSWORD= "Nov@12345Svgw3cZob0A7HWlJs8I07Jcdb";
 	public static final String SFDC_LOGINURL= "https://godrej.my.salesforce.com";
 	public static final String SFDC_GRANTSERVICE= "/services/oauth2/token?grant_type=password";
 	public static final String SFDC_CLIENTID = "3MVG9Y6d_Btp4xp7lt5FL02Cc.bHBCI_vpcrJYvpeBev1Ob5nXpobkxkmhygUekoOvbQMscya0i3r7EacuDWz";
-	public static final String SFDC_CLIENTSECRET = "332639414523432900";
+	public static final String SFDC_CLIENTSECRET = "332639414523432900";*/
+	
+	public static final String SFDC_USERNAME = "appadmin@godrejproperties.com";
+	public static final String SFDC_PASSWORD= "apiadmin@2019VNfEJzl43L7Mar6a6EHSRBqvs";
+	public static final String SFDC_LOGINURL= "https://godrej.my.salesforce.com";
+	public static final String SFDC_GRANTSERVICE= "/services/oauth2/token?grant_type=password";
+	public static final String SFDC_CLIENTID = "3MVG9Y6d_Btp4xp7lt5FL02Cc.VrY2x6HA5K.VU9tuKI0QMM6fkndLpgKvlJbsP4IM_1M5Pi_7E51res6e6Hd";
+	public static final String SFDC_CLIENTSECRET = "2B6529FF8055727D581688C832A68204937E06BF4791D5363C76F5821D8739FB";
 	
 	//Sandbox Credentials
 	/*static final String USERNAME = "sachin_more@magicsoftware.com";//pass@12345fp0D4yeOj49FYAowsRSgDm0H

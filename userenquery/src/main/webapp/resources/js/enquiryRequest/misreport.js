@@ -54,7 +54,7 @@ function getAllEnquiryFormReport()
 		if (i == 0){
 		}	
 		
-	}).error(function() { $("#mainPageLoad").hide();alert("error"); });
+	}).error(function() { $("#mainPageLoad").hide(); });
 
 	
 	}

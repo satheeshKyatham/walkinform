@@ -67,6 +67,45 @@ function fetchAsyncData(addr,id,reqMethod,callback){
 		});
 	}
 
+function fetchSyncData(addr,id,reqMethod,callback){
+	    /*$("#mainPageLoad").show();*/
+		var url;
+	    var baseUrl=$("#contextPath").val();
+		
+		if(id==null){
+			url=addr;
+		}else{
+			url=addr+"/"+id;
+		}
+	/*setTimeout(function(){*/
+		jQuery.ajax({
+			type : reqMethod,
+			contentType : "application/json",
+			url : baseUrl+"/"+url,
+			dataType:"json",
+	        async:false,
+	        success : function(data) {
+	        	try{
+	        		window[callback](data);
+	        	}catch (e){
+	        		console.log(e);
+	        		urlResponseHandler(data);
+	        	}
+			},
+			error : function(ex) {
+				console.log(ex);
+				return null;
+			}
+		});
+	}
+
+function filterMatches(words, input) {
+    return words.filter(function (word) {
+    	var regExp = new RegExp(input.toLowerCase());
+         return regExp.test(word.name.toLowerCase());
+    });
+}
+
 function isEmpty(value){
 	if(typeof(value)=='object' || typeof(value)=='string'){
 		return $.isEmptyObject(value);

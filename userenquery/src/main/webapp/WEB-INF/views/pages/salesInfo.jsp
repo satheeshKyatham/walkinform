@@ -223,7 +223,7 @@ if(ses!=null){
 				</li>
 				
 				
-				<li id="costsheetTab" onclick="holdExistData(); getSchemeSource();">
+				<li id="costsheetTab" onclick="holdExistData(); getSchemeSource(); carparkTypeMstList();">
 				<!-- <li id="costsheetTab" onclick="holdExistData(); schemeDropdown (); getSchemeSource();"> -->
 					<a href="#costsheetTabCont" data-toggle="tab">Costsheet</a>
 				</li>

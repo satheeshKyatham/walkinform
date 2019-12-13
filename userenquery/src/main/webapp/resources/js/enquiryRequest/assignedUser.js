@@ -62,7 +62,7 @@ function getPendingAssignList()
 				if (i == 0){
 				}	
 				 
-			}).error(function() { alert("error");
+			}).error(function() { //alert("error");
 			 $("#amsearch").prop("disabled", false);
 			 $('#amsearch span').html('');
 			});

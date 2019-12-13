@@ -173,8 +173,11 @@ function loadData () {
        
        getCarParkCharges ();
        
-       $('#carParks').text($("#carParkType").val());
-       $('.carParks').text($("#carParkType").val());
+       //$('#carParks').text($("#carParkType").val());
+       //$('.carParks').text($("#carParkType").val());
+       
+       $('#carParks').text($('#carParkType').find('option:selected').attr("data-name"));
+       $('.carParks').text($('#carParkType').find('option:selected').attr("data-name"));
        
        $('.noOfCarPark').text($("#carParkCount select").val());
        $('#noOfCarPark').text($("#carParkCount select").val());
@@ -1138,7 +1141,7 @@ function updateBSP (timeid) {
        }
        
        var generateFrom = 'Offered';
-       var csPath =    $('#region__c').val() +'/'+  $('#marketingProjectName').val() + '/' + $('#towerTval').text() + '/' + floorName + '/' + generateFrom+"-"+$('#enquirysfid').val()+'-'+$('#unitSfid').val()+'-'+$('#projectId').val();
+       var csPath =    $('#region__c').val() +'/'+  $('#marketingProjectName').val() + '/' + $('#towerTval').text() + '/' + floorName + '/' + $('#unitTval').text() + '/' + generateFrom+"-"+$('#enquirysfid').val()+'-'+$('#unitSfid').val()+'-'+$('#projectId').val();
        
        var bsp_offer = $("#scOtherChrgAmount0").text();
        var saleble_offer = $('.a6').text();
@@ -1193,7 +1196,7 @@ function updateBSP (timeid) {
               "projectsfid":$('#projectsfid').val(),"enquirysfid":$('#enquirysfid').val(),"primarycontactsfid":$('#primarycontactsfid').val(), "sentToCrmYN":"Y", "timeid":"0"
               ,"propid":$('#unitSfid').val(),"ppid":$('#paymentPlanChangeID').val(),"offerthrough":offerthrough,"brokersfid":brokerAccountSfid
               ,"discount_Value":discount_Value,"balance_amnt":$('#balance_amnt').val(),"balance_amnt_description":$('#balance_amnt_description').val()
-              ,"car_park_type":$('#carParkType').val(),"scheme_rate":$('#getPln').find('option:selected').attr("data-valuerate"),"scheme_name":$("#getPln :selected").text(),"userid":$('#userid').val(),"enquiry_name":$('#enquiry_name').val() 
+              ,"car_park_type":$('#carParkType').find('option:selected').attr("data-name"),"scheme_rate":$('#getPln').find('option:selected').attr("data-valuerate"),"scheme_name":$("#getPln :selected").text(),"userid":$('#userid').val(),"enquiry_name":$('#enquiry_name').val() 
               ,"costsheet_commitment":$('#costsheet_commitment').val(),"prepaymentamt":prepaymentAmount,"bankname":bankname,"trxdate":trxdate,"trxno":trxno,"paymentmode":paymentmode, "tdsPaidBy":tdsPaidBy,"isOthers":isOthers, "costsheet_path": csPath, "cs_final_amount":$('#csFinalAmountInput').val(),"bankGL":$('#towerBankGLCode').val() 
        },function(data){                       
        
@@ -1323,6 +1326,14 @@ function getCarParkCharges () {
                     $("#carParkAmount").val(obj.amount);
              } else {
                     $("#carParkAmount").val(0);
+	                if ($('#carParkType').val() != -1){    
+                    	swal({
+	                    	title: "Car park charge amount not maintained against the selected option, under 'Car Park Type' field",
+		          			text: "",
+		          			//timer: 8000,
+		          			type: "warning",
+		                });
+	                }	
              }
     });
 }
@@ -2367,11 +2378,11 @@ function printPdfData(generateFrom) {
              $('#csCommitmentTxt').html("<h5>Sales Comments: </h5><span style='font-size:8px !important;'>"+$('#costsheet_commitment').val()+"</span>");
        } 
              
-       $.post(pageContext+"printCSdata",{"floorTval":$('#floorTval').text(), "towerName":$('#towerTval').text(), "regionName":$('#region__c').val(), "projectSfid":$('#projectId').val(),"unitSfid":$('#unitSfid').val(),"enqSfid":enqSfid,"csData":$('#getCSDataForPrint').html(), "projectName":$('#marketingProjectName').val(), "currentDate":$.datepicker.formatDate('dd/mm/yy', new Date())},function(data){                           
+       $.post(pageContext+"printCSdata",{"unitTval":$('#unitTval').text(), "floorTval":$('#floorTval').text(), "towerName":$('#towerTval').text(), "regionName":$('#region__c').val(), "projectSfid":$('#projectId').val(),"unitSfid":$('#unitSfid').val(),"enqSfid":enqSfid,"csData":$('#getCSDataForPrint').html(), "projectName":$('#marketingProjectName').val(), "currentDate":$.datepicker.formatDate('dd/mm/yy', new Date())},function(data){                           
              
        }).done(function(data){
              
-    	   var win = window.open(pageContext+'Costsheet?name='+enqSfid+'-'+$('#unitSfid').val()+'-'+$('#projectId').val() +'&region='+$('#region__c').val() + '&project='+$('#marketingProjectName').val()+'&tower='+$('#towerTval').text()+'&floor=' + $('#floorTval').text() + '&from=costsheet', '_blank');
+    	   var win = window.open(pageContext+'Costsheet?name='+enqSfid+'-'+$('#unitSfid').val()+'-'+$('#projectId').val() +'&region='+$('#region__c').val() + '&project='+$('#marketingProjectName').val()+'&tower='+$('#towerTval').text()+'&floor=' + $('#floorTval').text() + '&unit=' + $('#unitTval').text() + '&from=costsheet', '_blank');
            
              
              //var win = window.open(pageContext+'Costsheet?name='+enqSfid, '_blank');
@@ -2631,24 +2642,13 @@ function csPymtData (balance_details_primeryId) {
 
 
 $("#carParkType").change(function () {
-       //$('#carParkCount select option:selected').removeAttr('selected');
-       
-       $('#carParkCountDD').empty();
-       if ($('#carParkType option:selected').val() == 'covered' || $('#carParkType option:selected').val() == 'open' || $('#carParkType option:selected').val() == 'Covered/Stacked') {
-             
-             $('#carParkCountDD').append('<select class="full form-control"><option value="1">1</option> <option value="2">2</option> <option value="3">3</option>  <option value="4">4</option> </select>');
-             
-             
-             
-             
-             //$('#carParkCount select option[value=1]').attr('selected','selected');
-             $('#carParkCount').show();
+    $('#carParkCountDD').empty();
+    if ($('#carParkType option:selected').val() != -1) {
+		$('#carParkCountDD').append('<select class="full form-control"><option value="1">1</option> <option value="2">2</option> <option value="3">3</option>  <option value="4">4</option> </select>');
+		$('#carParkCount').show();
     } else {
-       
-       $('#carParkCountDD').append('<select class="full form-control"><option value="0">0</option></select>');
-       
-       //$('#carParkCount select option[value=0]').attr('selected','selected');
-       $('#carParkCount').hide();
+        $('#carParkCountDD').append('<select class="full form-control"><option value="0">0</option></select>');
+        $('#carParkCount').hide();
     }
 });
 
@@ -2976,3 +2976,18 @@ function getSchemePromotional () {
 	});
 }
 //END New Drop Down for Scheme
+
+
+// Carpark Dropdown List
+function carparkTypeMstList (){
+	$('#carParkType').empty();	
+	var urlTower = pageContext+"getCarparkNameCS?projectSFID="+$('#projectId').val();
+	$.getJSON(urlTower, function (data) {
+		$('#carParkType').append('<option value="-1" data-name="" >Select</option>');
+		$.each(data, function (index, value) {
+			$('#carParkType').append("<option data-name='"+value.carpark_type+"' value='"+value.id+"'>"+value.carpark_type+ "</option>");
+		});					
+	}).done(function() {
+	});
+}
+// END Carpark Dropdown List

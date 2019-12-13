@@ -29,6 +29,8 @@ function getCMKYCDetails()
 					kycStatus="KYC Approved";
 			else if(value.kycapproval_status=="N")
 				kycStatus="KYC Rejected";
+			else if(value.issubmitted=="Y")
+				kycStatus="KYC submitted";
 			else
 				kycStatus="KYC link sent to customer";
 			
@@ -45,7 +47,7 @@ function getCMKYCDetails()
 	}).done(function() {
 		$("#mainPageLoad").hide();
 		
-	}).error(function() { $("#mainPageLoad").hide();alert("error"); });
+	}).error(function() { $("#mainPageLoad").hide(); });
 
 	
 	

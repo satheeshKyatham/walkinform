@@ -20,7 +20,7 @@ public class iTextHTMLtoPDF {
 	public static void main( String[] args ) throws DocumentException, IOException
     {
 		try {
-			PDFReport("floorTval", "towerName", "regionName", "projectSfid", "unitSfid", 20, "20", "ProjectName", "Date", "enqSfid");
+			PDFReport("unitTval", "floorTval", "towerName", "regionName", "projectSfid", "unitSfid", 20, "20", "ProjectName", "Date", "enqSfid");
 		} catch (JRException e) {
 			// TODO Auto-generated catch block
 			logger.error("Error : ",e);
@@ -30,7 +30,7 @@ public class iTextHTMLtoPDF {
 		}	
     }
 	
-	public static void PDFReport(String floorTval, String towerName, String regionName, String projectSfid, String unitSfid, long timeId, String csData, String projectName, String currentDate, String enqSfid) throws JRException, IOException {
+	public static void PDFReport(String unitTval, String floorTval, String towerName, String regionName, String projectSfid, String unitSfid, long timeId, String csData, String projectName, String currentDate, String enqSfid) throws JRException, IOException {
 		
 		try {
 			
@@ -51,7 +51,7 @@ public class iTextHTMLtoPDF {
 	      
 	      
 			//Create Folder	      
-			File ad_dir = new File(rootPath + File.separator + "costSheetPDF" + File.separator + regionName + File.separator + projectName + File.separator + towerName + File.separator + floorName);
+			File ad_dir = new File(rootPath + File.separator + "costSheetPDF" + File.separator + regionName + File.separator + projectName + File.separator + towerName + File.separator + floorName + File.separator + unitTval);
 			String ad_path =ad_dir +File.separator;
 			if (!ad_dir.exists()) {
 				ad_dir.mkdirs();	

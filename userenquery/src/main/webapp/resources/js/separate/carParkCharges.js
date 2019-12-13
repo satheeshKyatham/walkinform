@@ -49,4 +49,39 @@ function projectDataList (){
 }
 
 
+function getCarparkTypeList (){
+	$('#parkType').empty();	
+	var urlTower = pageContext+"getCarparkTypeMst?projectSFID="+$('#projectDataList').val();
+	$.getJSON(urlTower, function (data) {
+		$.each(data, function (index, value) {
+			$('#parkType').append("<option value='"+value.id+"'>"+value.carpark_type+ "</option>");
+		});					
+	}).done(function() {
+	});
+}
 
+
+
+
+
+
+function insertMaster () {
+	var call = 'insertCarparkType';
+	
+	$.post(pageContext+call,{"region":$('#regionList').val(),
+		"projectName":$('#projectDataList option:selected').text(),
+		"projectid":$('#projectDataList').val(), 
+		"carparkName": $('#carParkTypeName').val()},function(data){				 
+		
+	}).done(function(data){
+		
+		if (data == 'inserted') {
+			swal({
+				title: "Successfully Submitted",
+			    text: "",
+			    timer: 2000,
+			    type: "success",
+			});
+		}
+	});
+}

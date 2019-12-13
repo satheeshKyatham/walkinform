@@ -790,7 +790,7 @@ public class WebServiceController<MultipartFormDataInput> {
 	
 	
 	@RequestMapping(value = { "/printCSdata" }, method = RequestMethod.POST)
-	public synchronized String printCSdata (@RequestParam("floorTval") String floorTval, @RequestParam("towerName") String towerName, @RequestParam("regionName") String regionName, @RequestParam("projectSfid") String projectSfid, @RequestParam("unitSfid") String unitSfid, @RequestParam("enqSfid") String enqSfid, @RequestParam("csData") String csData, @RequestParam("projectName") String projectName, @RequestParam("currentDate") String currentDate) throws JRException, IOException{
+	public synchronized String printCSdata (@RequestParam("unitTval") String unitTval, @RequestParam("floorTval") String floorTval, @RequestParam("towerName") String towerName, @RequestParam("regionName") String regionName, @RequestParam("projectSfid") String projectSfid, @RequestParam("unitSfid") String unitSfid, @RequestParam("enqSfid") String enqSfid, @RequestParam("csData") String csData, @RequestParam("projectName") String projectName, @RequestParam("currentDate") String currentDate) throws JRException, IOException{
 		log.info("Enter Print Costsheet");
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		Gson gson = gsonBuilder.create();
@@ -802,7 +802,7 @@ public class WebServiceController<MultipartFormDataInput> {
 		 */
 		log.info("");
 		iTextHTMLtoPDF solution = new iTextHTMLtoPDF ();
-		solution.PDFReport(floorTval, towerName, regionName, projectSfid, unitSfid, timeId ,csData, projectName, currentDate, enqSfid); 
+		solution.PDFReport(unitTval, floorTval, towerName, regionName, projectSfid, unitSfid, timeId ,csData, projectName, currentDate, enqSfid); 
 		
 		return gson.toJson(timeId);
 	}
@@ -825,17 +825,20 @@ public class WebServiceController<MultipartFormDataInput> {
 	
 	/* insert carpark charges against Payment Plan */
 	@RequestMapping(value = "/insertCarparkCharges", method = RequestMethod.POST)
-	public CarParkCharges insertCarparkCharges( @RequestParam("project_id") String project_id,  @RequestParam("project_name") String project_name,  @RequestParam("region_id") String region_id, @RequestParam("region_name") String region_name, @RequestParam("parkType") String parkType, @RequestParam("parkTypeName") String parkTypeName, @RequestParam("carParkAmount") String carParkAmount) // add parameter 
+	public CarParkCharges insertCarparkCharges( @RequestParam("project_id") String project_id,  @RequestParam("project_name") String project_name,  @RequestParam("region_id") String region_id, @RequestParam("region_name") String region_name, @RequestParam("parkType") int parkType, @RequestParam("parkTypeName") String parkTypeName, @RequestParam("carParkAmount") String carParkAmount) // add parameter 
 	{	
 		CarParkCharges oc = new CarParkCharges();
 		
 		oc.setAmount(carParkAmount);
 		oc.setIsactive("A");
-		oc.setPark_type(parkType);
+		oc.setPark_type(parkTypeName);
 		oc.setProject_id(project_id);
 		oc.setProject_name(project_name);
 		oc.setRegion_id(region_id);
 		oc.setRegion_name(region_name);
+		
+		oc.setCarpark_type_mst_id(parkType);
+		
 		
 		carParkChargesService.insertCPAmount(oc);
 		

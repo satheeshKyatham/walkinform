@@ -58,7 +58,7 @@ function getAllEnquiryFormReport()
 	}).done(function() {
 		$("#mainPageLoad").hide();
 		
-	}).error(function() { $("#mainPageLoad").hide();alert("error"); });
+	}).error(function() { $("#mainPageLoad").hide(); });
 
 	
 	}
@@ -73,9 +73,11 @@ function getKYCCMDetails()
 		$.each(data, function (index, value) {
 			var kycStatus ="";
 			if(value.kycapproval_status=="Y")
-					kycStatus="KYC Approved";
+				kycStatus="KYC Approved";
 			else if(value.kycapproval_status=="N")
 				kycStatus="KYC Rejected";
+			else if(value.issubmitted=="Y")
+				kycStatus="KYC submitted";
 			else
 				kycStatus="KYC link sent to customer";
 			var val = $("<tr><td>"+value.enquiryid+"</td><td>"+value.application_name+"</td><td>"+value.phone_number+"</td><td>"+kycStatus+"</td><td><a href="+value.kyclink+"&isrole=Y target='_blank'>Link</a></td></tr>");
@@ -95,7 +97,7 @@ function getKYCCMDetails()
 	}).done(function() {
 		
 		$("#mainPageLoad").hide();
-	}).error(function() { $("#mainPageLoad").hide();alert("error"); });
+	}).error(function() { $("#mainPageLoad").hide(); });
 
 	
 	}

@@ -15,6 +15,7 @@ public class SessionListener implements HttpSessionListener{
         HttpSession session  = event.getSession();
 //        event.getSession().setMaxInactiveInterval(4320*60); //3days session out 3*24*60*60
         event.getSession().setMaxInactiveInterval(60*60);
+//        event.getSession().setMaxInactiveInterval(1*60);
     }
 
     public void sessionDestroyed(HttpSessionEvent event) {

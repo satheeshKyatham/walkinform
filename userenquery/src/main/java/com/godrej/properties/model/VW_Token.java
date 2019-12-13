@@ -11,7 +11,8 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 @Entity
-@Table(name="salesforce.vw_token_details")
+//@Table(name="salesforce.vw_token_details")
+@Table(name="salesforce.vw_token_details_uat")
 public class VW_Token {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="nv_token_id") private int nv_token_id;

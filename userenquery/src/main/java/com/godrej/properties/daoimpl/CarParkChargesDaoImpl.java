@@ -27,7 +27,7 @@ public class CarParkChargesDaoImpl extends AbstractDao<Integer, CarParkCharges> 
 	public CarParkCharges getCharges(String parkType, String projectSFID) {	 
 		
 		Session session = this.sessionFactory.getCurrentSession();
-		List<CarParkCharges> list  =session.createQuery(" FROM  CarParkCharges where project_id = '"+projectSFID+"' and isactive = 'A' and park_type = '"+parkType+"' ").list();
+		List<CarParkCharges> list  =session.createQuery(" FROM  CarParkCharges where project_id = '"+projectSFID+"' and isactive = 'A' and carpark_type_mst_id = "+parkType+" order by gpl_cs_carpark_charges_id DESC").list();
 		
 		if(list.size()>0)
 		{
