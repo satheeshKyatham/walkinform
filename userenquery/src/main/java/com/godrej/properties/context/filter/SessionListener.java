@@ -11,13 +11,14 @@ public class SessionListener implements HttpSessionListener{
 	private Logger log = LoggerFactory.getLogger(SessionListener.class);
 	@Override
     public void sessionCreated(HttpSessionEvent event) {
-        System.out.println("session created");
+		log.info("session created");
         HttpSession session  = event.getSession();
-        event.getSession().setMaxInactiveInterval(15*60);
+//        event.getSession().setMaxInactiveInterval(4320*60); //3days session out 3*24*60*60
+        event.getSession().setMaxInactiveInterval(60*60);
     }
 
     public void sessionDestroyed(HttpSessionEvent event) {
-       System.out.println("session destroyed");
+    	log.info("session destroyed");
        HttpSession session  = event.getSession();
        session.invalidate();
       

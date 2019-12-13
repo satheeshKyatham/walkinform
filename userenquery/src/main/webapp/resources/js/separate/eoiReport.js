@@ -42,7 +42,11 @@ function getEOIReport () {
 				
 				//tab = obj1[i].preferences.replace(/|/g, "</div><div>");
 				
-				tab = obj1[i].preferences.replace(/\|/g, "</div><div class='prefTab'>");
+				if (obj1[i].preferences != null && obj1[i].preferences != "" && obj1[i].preferences != undefined && obj1[i].preferences != "undefined") {
+					tab = obj1[i].preferences.replace(/\|/g, "</div><div class='prefTab'>");
+				}
+				
+				//tab = "";
 				
 				html += "<tr>" +
 							" <td>"+obj1[i].enq_sfid+"</td>" +

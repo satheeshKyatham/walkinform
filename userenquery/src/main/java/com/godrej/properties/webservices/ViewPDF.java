@@ -28,7 +28,7 @@ public class ViewPDF extends HttpServlet {
 		String projectName=request.getParameter("project");
 		String towerName=request.getParameter("tower");
 		String floorName=request.getParameter("floor");
-
+		String unitName=request.getParameter("unit");
 		
 		String rootPath = System.getProperty("catalina.home");
 		
@@ -50,7 +50,7 @@ public class ViewPDF extends HttpServlet {
 				floorNameVal = floorName;
 			}
 		
-			file = new File(rootPath+"\\costSheetPDF\\"+ regionName + File.separator + projectName + File.separator + towerName + File.separator + floorNameVal + File.separator + fileName + ".pdf");
+			file = new File(rootPath+"\\costSheetPDF\\"+ regionName + File.separator + projectName + File.separator + towerName + File.separator + floorNameVal + File.separator + unitName + File.separator + fileName + ".pdf");
 		} else if (from.equals("ofrList")) {
 			file = new File(rootPath+"\\costSheetPDF\\"+ fileName + ".pdf");
 		}

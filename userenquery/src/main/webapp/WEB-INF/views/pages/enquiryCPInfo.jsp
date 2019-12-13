@@ -1284,18 +1284,18 @@
     
     <script src="<c:url value='/resources/js/bootstrap-slider.min.js' />"></script>
     
-	<script src="<c:url value='/resources/js/springForm.js?v=15' />"></script>
-	<script src="<c:url value='/resources/js/commonValidation.js?v=15' />"></script>
-	<script src="<c:url value='/resources/js/utility.js?v=15' />"></script>
-	<script src="<c:url value='/resources/js/enquiryRequest/enquiryCPRequest.js?v=15' />" /></script>
-	<%-- <script src="<c:url value='/resources/js/enquiryRequest/salesRequest.js?v=15' />"></script> --%>
+	<script src="<c:url value='/resources/js/springForm.js?v=16' />"></script>
+	<script src="<c:url value='/resources/js/commonValidation.js?v=16' />"></script>
+	<script src="<c:url value='/resources/js/utility.js?v=16' />"></script>
+	<script src="<c:url value='/resources/js/enquiryRequest/enquiryCPRequest.js?v=16' />" /></script>
+	<%-- <script src="<c:url value='/resources/js/enquiryRequest/salesRequest.js?v=16' />"></script> --%>
 	
     <script src="<c:url value='/resources/js/intlTelInput.js' />"></script>
     <script src="<c:url value='/resources/js/sweetalert2.min.js' />"></script>
   	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/8.4.7/js/intlTelInput.js"></script> -->
 	
-	<script src="<c:url value='/resources/js/index.js?v=15' />"></script>
-	<script src="<c:url value='/resources/js/separate/storeEOIPaymentDtlCP.js?v=15' />"></script>
+	<script src="<c:url value='/resources/js/index.js?v=16' />"></script>
+	<script src="<c:url value='/resources/js/separate/storeEOIPaymentDtlCP.js?v=16' />"></script>
 	
 	
 	<script>
