@@ -3692,7 +3692,7 @@ public class WebServiceController<MultipartFormDataInput> {
 				stream.write(abytes);
 				stream.close();
 			}
-			
+
 			if(panAttachWebcam != null && !panAttachWebcam.equals("") && !panAttachWebcam.equals("undefined")) {
 				String base64String = panAttachWebcam;
 		        String[] strings = base64String.split(",");
