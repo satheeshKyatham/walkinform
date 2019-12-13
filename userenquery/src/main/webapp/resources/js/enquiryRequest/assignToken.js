@@ -142,7 +142,7 @@ $(document).ready(function() {
 						//});
 			}).done(function() {
 				
-				//$('#appDetails').DataTable();
+				$('#appDetails').DataTable();
 				$("#assignTouserLoader").hide();
 				
 				
@@ -152,7 +152,7 @@ $(document).ready(function() {
 					//$("#appDetails tbody").empty();				
 				}	
 				
-			}).error(function() { alert("error"); });
+			}).error(function() {  });
 		}
 		function getAssignedList()
 		{
