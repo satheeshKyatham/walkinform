@@ -212,11 +212,11 @@ if(ses!=null){
 							<input id="submitId" type="submit" value="Downlaod In Excel">
 						</fieldset>
 					</form:form>
-					<table class="table table-bordered" id="misReportDetails">
+					<table class="table table-bordered" id="misReportDetails_CM">
 						<thead>
 							<!-- <tbody> -->
 							<tr>
-								<th>Project Name</th>
+								<th>Project Name123</th>
 								<th>Enquiry No</th>
 								<th>Mobile No</th>
 								<th>Token No</th>

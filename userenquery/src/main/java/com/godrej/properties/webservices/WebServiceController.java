@@ -1935,18 +1935,18 @@ public class WebServiceController<MultipartFormDataInput> {
 					//Create Offer through SFDC API
 					String offerId = creatOffer.PropOffer(bspDis,token,projectsfid,enquirysfid,primarycontactsfid,propid,ppid,offerthrough,brokersfid,discount_Value,enquiry_name,prepaymentamt,bankname,trxdate,trxno,paymentmode,tdsPaidBy,isOthers,bankGL);
 					
-					/*JsonObject jobj = new Gson().fromJson(offerId, JsonObject.class);
+					JsonObject jobj = new Gson().fromJson(offerId, JsonObject.class);
 					String offerid = jobj.get("offerid").getAsString();
-					String message = jobj.get("message").getAsString();*/
+					String message = jobj.get("message").getAsString();
 					
-					JSONObject ob = new JSONObject(offerId);  
+					/*JSONObject ob = new JSONObject(offerId);  
 					JSONArray arr = ob.getJSONArray("offers");
 					String offerid="";
 
 					for(int i=0; i<arr.length(); i++){   
 					  JSONObject o = arr.getJSONObject(i);  
 					  offerid=o.get("offerId").toString(); 
-					}
+					}*/
 					
 					//Update offer created flag in sfdc property table through HEROKU
 					if(offerid!=null && offerid.length()==18)

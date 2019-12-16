@@ -832,7 +832,7 @@ function isReferredChanged(cpHS){
 
 /* END Auto fill address*/
 function getChannelPartners(event,el){
-	//debugger;
+	debugger;
 	event.preventDefault();
 	$("#brokerContact").empty();
     $("#channelPartnerName").val("");
@@ -845,9 +845,9 @@ function getChannelPartners(event,el){
 	}else if(text.length==0){
 		channelPartnerArray=[];
 	}else{
-		channelPartnerArray = filterMatches(channelPartnerArray, text);
-		console.log(channelPartnerArray);
-		refreshChannelPartnerList();
+		var channelPartners = filterMatches(channelPartnerArray, text);
+		console.log(channelPartners);
+		refreshChannelPartners(channelPartners);
 	}
 	/*if(text.length>=3){
 		
@@ -875,6 +875,34 @@ function refreshChannelPartnerList(){
         source: function (request, response) {
             //data :: JSON list defined
             response($.map(channelPartnerArray, function (value, key) {
+                 return {
+                     label: value.name,
+                     value: value.sfid,
+                     attr: value.channelPartnerId
+                 }
+             }));
+        },
+        select: function (event, el) {  
+        	event.preventDefault();
+        	//debugger;
+        	/*fetchAsyncData("getBrokerContactByCPSfid",el.item.value,"GET","loadBrokerContacts");*/
+        	$("#channelPartnerNameSearch").val(el.item.label);
+        	$("#channelPartnerName").val(el.item.label);
+        	$("#channelPartnerSfid").val(el.item.value);
+        	$("#channelPartnerId").val(el.item.attr);
+        	loadBrokerContacts();
+            return false;
+        }
+    });
+
+}
+function refreshChannelPartners(channelPartners){
+	
+	/*$("#channelPartnerName").autocomplete({*/
+	$("#channelPartnerNameSearch").autocomplete({
+        source: function (request, response) {
+            //data :: JSON list defined
+            response($.map(channelPartners, function (value, key) {
                  return {
                      label: value.name,
                      value: value.sfid,

@@ -36,23 +36,27 @@ function getAllEnquiryFormReport()
 	$("#downloadCSV").append("<input type='hidden' value='"+$('#txtToDate').val()+"' name='todate' id='txtToDate1'/>");
 	//alert($('#txtFromDate').val());
 	//alert($('#txtToDate').val());
+	$("#misReportDetails").dataTable().fnDestroy();
 	$("#misReportDetails tbody").empty();
 	 $("#mainPageLoad").show();//$('#projectid').val() -- $('#txtFromDate').val()
 	var urlPP = "misReport?projectid="+$('#projectid').val()+"&userid=&fromdate="+$('#txtFromDate').val()+"&todate="+$('#txtToDate').val();
 	var i = 0
-	debugger;
 	$.getJSON(urlPP, function (data) {
 		$.each(data, function (index, value) {
 
-			var val = $("<tr><tr><td>"+value.projectname+"</td><td>"+value.enquiryname+"</td><td>"+value.mobilephone+"</td><td>"+value.tokenno+"</td><td>"+value.created+"</td><td>"+value.name+"</td><td>"+value.email+"</td><td>"+value.budget+"</td><td>"+value.carpet_area_requirement+"</td><td>"+value.walk_in_source__c+"</td><td>"+value.user_name+"</td><td>"+value.attended+"</td></tr></tr>");
+			var val = $("<tr><td>"+value.projectname+"</td><td>"+value.enquiryname+"</td><td>"+value.mobilephone+"</td><td>"+value.tokenno+"</td><td>"+value.created+"</td><td>"+value.name+"</td><td>"+value.email+"</td><td>"+value.budget+"</td><td>"+value.carpet_area_requirement+"</td><td>"+value.walk_in_source__c+"</td><td>"+value.user_name+"</td><td>"+value.attended+"</td></tr>");
 			$("#misReportDetails tbody").append(val);
 			i = i+1
 		});
+		$('#misReportDetails').DataTable(
+				{
+					destroy: true
+					//processing:true,
+					//serverSide:true
+				});
 	}).done(function() {
 		$("#mainPageLoad").hide();
-		$('#misReportDetails').DataTable();
-		if (i == 0){
-		}	
+		//$('#misReportDetails').DataTable();	
 		
 	}).error(function() { $("#mainPageLoad").hide(); });
 
