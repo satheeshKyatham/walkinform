@@ -201,6 +201,10 @@ function onProjectSelect()
 			  window.location.href = "kycrole?projectid="+$('#projectSelected').val()+"&projectname="+$('#projectSelected option:selected').text();
 			 // window.location.href = "assignedusers?userId=" + $('#loged_userid').val()+"&projectid="+$('#projectSelected').val()+"&projectname="+$('#projectSelected option:selected').text() ;
 		  }
+		  else if($('#loged_role').val()=='15')//KYC Role
+		  {
+			  window.location.href = "paymentapproval?projectid="+$('#projectSelected').val()+"&projectname="+$('#projectSelected option:selected').text();;
+		  }
 	 
 		$("#loginMsg").html('');
 	}

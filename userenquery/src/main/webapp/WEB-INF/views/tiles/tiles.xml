@@ -224,4 +224,7 @@
     <definition name="kycrole"  template="/WEB-INF/views/pages/kycrole.jsp"> 
        <put-attribute name="title" value="KYC Role" /> 
      </definition>
+     <definition name="paymentapproval"  template="/WEB-INF/views/pages/paymentapproval.jsp"> 
+       <put-attribute name="title" value="Payment Approval Role" /> 
+     </definition>
 </tiles-definitions>

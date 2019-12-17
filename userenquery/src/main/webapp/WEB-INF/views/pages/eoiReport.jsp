@@ -39,27 +39,58 @@
 
 <div class="commonLoad" id="mainPageLoad" style="display: none;"></div>
 
-<form:form action="downloadEOICSV" method="post">
+<%-- <form:form action="downloadEOICSV" method="post">
 	<div id="eoiReportCSVInputCol"> </div>
 
 	<fieldset style="width: 400px;">
 		<input type="submit" value="Downlaod In Excel">
 	</fieldset>
-</form:form>
+</form:form> --%>
 
-<table class="table table-bordered" id="eoiReportTable">
-	<thead>
-		<tr>
-			<th>Enq SFID</th>
-			<th>Preferences</th>
-			<th>Payment Type</th>
-			<th>Bank Name</th>
-			<th>Branch</th>
-			<th>Transaction ID</th>
-			<th>Transaction Date</th>	
-			<th>Transaction Amount</th>
-		</tr>
-	</thead>
-	<tbody>
-	</tbody>
-</table>
+<div class="wrapperEOIRepo1">
+	<div class="divEOI1"></div>
+</div>
+
+<div class="wrapperEOIRepo2">
+	
+	<div class="divEOI2" style="overflow: auto;">
+		<table class="table table-bordered" id="eoiReportTable">
+			<thead>
+				<tr>
+					<!-- <th>Region</th>
+					<th>Project Name</th> -->
+					<th>ENQ_Name</th>
+					<th>Customer Name</th>
+					<th>Customer Mobile</th>
+					<th>Customer Email</th>
+					<th>Walkin Date</th>
+					<th>Walk-in Source</th>
+					
+					
+					<th>Verticle </th>
+					<th>Closing Manager</th>
+					<th>Date Of EOI</th>
+					<th>Total Payment Done</th>
+					<th>Total Payment Approved</th>
+					
+					<th>Typology Name1</th>
+					<th>Floor_Band1</th>
+					<th>Tower Name1</th>
+					
+					<th>Typology Name2</th>
+					<th>Floor Band2</th>
+					<th>Tower Name2</th>
+					
+					<th>Typology Name3</th>
+					<th>Floor Band3</th>
+					<th>Tower Name3</th>
+				</tr>
+			</thead>
+			<tbody>
+			</tbody>
+		</table>
+	</div>
+	
+	
+	<div class="clearfix"></div>
+</div>

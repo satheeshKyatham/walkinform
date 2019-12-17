@@ -15,6 +15,9 @@ $(document).ready(function() {
 
 function getEOIReport () {
 	
+	$("#eoiReportTable").DataTable().destroy();
+	
+	
 	$("#eoiReportCSVInputCol").empty();
 	
 	$("#eoiReportCSVInputCol").append("<input type='hidden' value='"+$('#txtEOIFromDate').val()+"' name='fromdate' />");
@@ -42,23 +45,49 @@ function getEOIReport () {
 				
 				//tab = obj1[i].preferences.replace(/|/g, "</div><div>");
 				
+				//var typology_name3 = obj1[i].typology_name3.replace(/null/g, "-");
+				
+				
 				if (obj1[i].preferences != null && obj1[i].preferences != "" && obj1[i].preferences != undefined && obj1[i].preferences != "undefined") {
 					tab = obj1[i].preferences.replace(/\|/g, "</div><div class='prefTab'>");
 				}
 				
 				//tab = "";
 				
+				
 				html += "<tr>" +
-							" <td>"+obj1[i].enq_sfid+"</td>" +
-							" <td><div class='prefTab'>"+tab+"</div></td>" +
-							" <td>"+obj1[i].payment_type+"</td>" +
-							" <td>"+obj1[i].bank_name+"</td>" +
-							" <td>"+obj1[i].branch+"</td>" +
-							" <td>"+obj1[i].transaction_id+"</td>" +
-							" <td>"+obj1[i].transaction_date+"</td>" +
-							" <td>"+obj1[i].transaction_amount+"</td>" +
+							// " <td>"+obj1[i].region__c+"</td>" +
+							// " <td>"+obj1[i].project_name+"</td>" +
+							" <td>"+obj1[i].enq_name+"</td>" +
+							" <td>"+obj1[i].customer_name+"</td>" +
+							" <td>"+obj1[i].customer_mobile+"</td>" +
+							" <td>"+obj1[i].customer_email+"</td>" +
+							" <td>"+obj1[i].walkin_date+"</td>" +
+							" <td>"+obj1[i].walk_in_source__c+"</td>" +
+							
+							
+							" <td>"+obj1[i].verticle__c+"</td>" +
+							" <td>"+obj1[i].closing_manager_name__c+"</td>" +
+							" <td>"+obj1[i].date_of_eoi__c+"</td>" +
+							" <td>"+obj1[i].total_payment_done+"</td>" +
+							" <td>"+obj1[i].total_payment_approved+"</td>" +
+							
+							" <td>"+obj1[i].typology_name1+"</td>" +
+							" <td>"+obj1[i].floor_band1+"</td>" +
+							" <td>"+obj1[i].tower_name1+"</td>" +
+							
+							" <td>"+obj1[i].typology_name2+"</td>" +
+							" <td>"+obj1[i].floor_band2+"</td>" +
+							" <td>"+obj1[i].tower_name2+"</td>" +
+							
+							" <td>"+obj1[i].typology_name3+"</td>" +
+							" <td>"+obj1[i].floor_band3+"</td>" +
+							" <td>"+obj1[i].tower_name3+"</td>" +
+							
 						" </tr>";
 			}
+			
+			html = html.replace(/null/g, " - ");
 			
 			//html = html.replace(/null/g, "");
 			
@@ -75,5 +104,20 @@ function getEOIReport () {
 		});*/
 		
 		$('#eoiReportTab i').hide();
+		
+		//$('#eoiReportTable').dataTable({
+			//"ordering": true,
+			//"bDestroy": true
+		//});
+		
+		 $('#eoiReportTable').DataTable( {
+			 dom: 'Bfrtip',
+			 "buttons": [
+				 { "extend": 'excel', "text":'Export To Excel',"className": 'btn btn-default btn-xs' }
+		      ],
+		 });
+		
+		
+		
 	});	
 }

@@ -381,7 +381,8 @@ public class EnquiryRequestServiceImpl implements EnquiryRequestService {
 		/*=======Start==========*/
 		//dest.setAssignTo(src.getClosingmanagers());
 		/*=========End========*/
-		dest.setClosingmanagers(src.getClosingmanagers());
+		if(!src.getClosingmanagers().equals("null"))
+			dest.setClosingmanagers(src.getClosingmanagers());
 		String manager=src.getClosingmanagers()==null?"":src.getClosingmanagers();
 		if(dest.getOtherChannelPartner()!=null){
 			dest.setOtherChannelPartner(src.getOtherChannelPartner());

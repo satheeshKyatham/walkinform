@@ -4347,18 +4347,19 @@ public class WebServiceController<MultipartFormDataInput> {
 			String whereCondition = "";
 			
 			if((fromDate!=null && fromDate.length()>0) && (toDate!=null && toDate.length()>0)) {
-				whereCondition = " project_sfid= '"+projectSfid+"' and Date(created) between '"+fromDate+"' and '"+toDate+"' order by created desc ";
+				whereCondition = " project_sfid= '"+projectSfid+"' and Date(date_of_eoi__c) between '"+fromDate+"' and '"+toDate+"' order by date_of_eoi__c desc ";
 			} else if(projectSfid!=null && projectSfid.length()>0) {
-				whereCondition = " project_sfid= '"+projectSfid+"' order by created desc ";
+				whereCondition = " project_sfid= '"+projectSfid+"' order by date_of_eoi__c desc ";
 			}
 			
-			//whereCondition = "project_sfid=" + "'"+projectSfid+"'";
+			//whereCondition = " project_sfid= '"+projectSfid+"'  ";
 			
 			return gson.toJson(eOIReportService.getEOIReportDtl(whereCondition));
 		}
 		/* END EOI Report */
 		
 		/* Download EOI Report */
+		/*
 		@RequestMapping(value = "/downloadEOICSV")
 		public void downloadEOICSV(HttpServletResponse response,HttpServletRequest resquest) throws IOException {
 
@@ -4420,8 +4421,6 @@ public class WebServiceController<MultipartFormDataInput> {
 					rows.add("");
 				rows.add(",");
 				
-				//Branch, Transaction ID, Transaction Date, Transaction Amount
-				
 				if(mislist.get(i).getBranch()!=null && mislist.get(i).getBranch().length()>0)
 					rows.add(mislist.get(i).getBranch());
 				else
@@ -4458,6 +4457,8 @@ public class WebServiceController<MultipartFormDataInput> {
 			
 		    out.flush();
 		}
+		*/
+		
 		/* END Download EOI Report */
 		@RequestMapping(value = "/insertAuditLog", method = RequestMethod.POST, produces = "application/json")
 		public String insertAuditLog(@RequestBody AuditLogDto auditLogDto)
