@@ -112,5 +112,5 @@ function getKYCCMApprovalView()
 
 	var frameElement = document.getElementById("kyc_cm_approval_iframe");
 //	frameElement.src = "http://kyc.gplapps.com:8081/kycform/kycApproval?projectid="+projectid+"&userid="+userid;
-	frameElement.src = "/kycformuat/kycApproval?projectid="+projectid+"&userid="+userid;
+	frameElement.src = "/kycform/kycApproval?projectid="+projectid+"&userid="+userid;
 	}
