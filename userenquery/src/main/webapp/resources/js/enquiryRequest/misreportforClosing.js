@@ -35,35 +35,35 @@ function getAllEnquiryFormReport()
 
 	$("#downloadCSV").append("<input type='hidden' value='"+$('#txtFromDateclsoing').val()+"' name='fromdate' id='txtFromDate1'/>");
 	$("#downloadCSV").append("<input type='hidden' value='"+$('#txtToDate').val()+"' name='todate' id='txtToDate1'/>");
-	//alert($('#txtFromDate').val());
-	//alert($('#txtToDate').val());
-	$("#misReportDetails tbody").empty();
+	//$("#misReportDetails_CM tbody").empty();
 	 $("#mainPageLoad").show();//$('#projectid').val() -- $('#txtFromDate').val()//
 	var urlPP = "misReport?projectid="+$('#projectid').val()+"&userid="+$('#userid').val()+"&fromdate="+$('#txtFromDateclsoing').val()+"&todate="+$('#txtToDate').val();
 	var i = 0
-	debugger;
+	$("#misReportDetails_CM").dataTable().fnDestroy();
+	$("#misReportDetails_CM tbody").empty();
 	$.getJSON(urlPP, function (data) {
 		$.each(data, function (index, value) {
 
 			var val = $("<tr><td>"+value.projectname+"</td><td>"+value.enquiryname+"</td><td>"+value.mobilephone+"</td><td>"+value.tokenno+"</td><td>"+value.created+"</td><td>"+value.name+"</td><td style='word-break: break-word;'>"+value.email+"</td><td>"+value.budget+"</td><td>"+value.carpet_area_requirement+"</td><td>"+value.walk_in_source__c+"</td><td>"+value.user_name+"</td><td>"+value.attended+"</td></tr>");
-			$("#misReportDetails tbody").append(val);
+			$("#misReportDetails_CM tbody").append(val);
 			i = i+1
 		});
-		$('#misReportDetails').DataTable(
+		
+		$('#misReportDetails_CM').DataTable(
 				{
+					//"bDestroy": false
 					destroy: true
-					//processing:true,
-					//serverSide:true
 				});
 	}).done(function() {
 		$("#mainPageLoad").hide();
 		
-	}).error(function() { $("#mainPageLoad").hide();alert("error"); });
+	}).error(function() { $("#mainPageLoad").hide(); });
 
 	
 	}
 function getKYCCMDetails()
 {
+	$("#KYC_CM_Details").dataTable().fnDestroy();
 	$("#KYC_CM_Details tbody").empty();
 	 $("#mainPageLoad").show();
 	var urlPP = "getKYCData?userid="+$('#userid').val()+"&projectid="+$('#projectid').val();
@@ -73,9 +73,11 @@ function getKYCCMDetails()
 		$.each(data, function (index, value) {
 			var kycStatus ="";
 			if(value.kycapproval_status=="Y")
-					kycStatus="KYC Approved";
+				kycStatus="KYC Approved";
 			else if(value.kycapproval_status=="N")
 				kycStatus="KYC Rejected";
+			else if(value.issubmitted=="Y")
+				kycStatus="KYC submitted";
 			else
 				kycStatus="KYC link sent to customer";
 			var val = $("<tr><td>"+value.enquiryid+"</td><td>"+value.application_name+"</td><td>"+value.phone_number+"</td><td>"+kycStatus+"</td><td><a href="+value.kyclink+"&isrole=Y target='_blank'>Link</a></td></tr>");
@@ -95,7 +97,7 @@ function getKYCCMDetails()
 	}).done(function() {
 		
 		$("#mainPageLoad").hide();
-	}).error(function() { $("#mainPageLoad").hide();alert("error"); });
+	}).error(function() { $("#mainPageLoad").hide(); });
 
 	
 	}
@@ -110,5 +112,5 @@ function getKYCCMApprovalView()
 
 	var frameElement = document.getElementById("kyc_cm_approval_iframe");
 //	frameElement.src = "http://kyc.gplapps.com:8081/kycform/kycApproval?projectid="+projectid+"&userid="+userid;
-	frameElement.src = "/kycform/kycApproval?projectid="+projectid+"&userid="+userid;
+	frameElement.src = "/kycformuat/kycApproval?projectid="+projectid+"&userid="+userid;
 	}

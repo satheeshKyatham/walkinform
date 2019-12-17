@@ -209,10 +209,10 @@ if(ses!=null){
 						<input type="hidden" value="<%=userid%>" name="userid"/>
 						<fieldset style="width: 400px;">
 							<h3>Download Enquiry Form Submitted Data</h3>
-							<input id="submitId" type="submit" value="Downlaod In Excel">
+							<input id="submitId" type="submit" value="Download In Excel">
 						</fieldset>
 					</form:form>
-					<table class="table table-bordered" id="misReportDetails">
+					<table class="table table-bordered" id="misReportDetails_CM">
 						<thead>
 							<!-- <tbody> -->
 							<tr>

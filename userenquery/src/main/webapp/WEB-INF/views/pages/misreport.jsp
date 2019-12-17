@@ -223,6 +223,11 @@ projectid=request.getParameter("projectid");
 
 
 <script type="text/javascript" charset="utf8" src="<c:url value='/resources/js/jquery.dataTables.js'/>"></script>
+
+<script src="<c:url value='/resources/js/dataTables.buttons.min.js'/>"></script>
+<script src="<c:url value='/resources/js/jszip.min.js'/>"></script>
+<script src="<c:url value='/resources/js/buttons.html5.min.js'/>"></script>
+
 <script src="<c:url value='/resources/js/enquiryRequest/misreport.js?v=16'/>"></script>
 <script src="<c:url value='/resources/js/separate/eoiReport.js?v=16'/>"></script>
 

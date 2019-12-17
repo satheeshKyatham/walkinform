@@ -29,6 +29,8 @@ function getCMKYCDetails()
 					kycStatus="KYC Approved";
 			else if(value.kycapproval_status=="N")
 				kycStatus="KYC Rejected";
+			else if(value.issubmitted=="Y")
+				kycStatus="KYC submitted";
 			else
 				kycStatus="KYC link sent to customer";
 			
@@ -45,7 +47,7 @@ function getCMKYCDetails()
 	}).done(function() {
 		$("#mainPageLoad").hide();
 		
-	}).error(function() { $("#mainPageLoad").hide();alert("error"); });
+	}).error(function() { $("#mainPageLoad").hide(); });
 
 	
 	
@@ -53,11 +55,10 @@ function getCMKYCDetails()
 
 function getKYCApprovalView()
 {
-	debugger;
 	 var url_string = window.location.href; //window.location.href
 	   var url = new URL(url_string);
 	   var projectid = url.searchParams.get("projectid");
 	var frameElement = document.getElementById("kyc_approval_iframe");
 //	frameElement.src = "http://kyc.gplapps.com:8081/kycform/kycApproval?projectid="+projectid+"&userid=0";
-	frameElement.src = "/kycform/kycApproval?projectid="+projectid+"&userid=0";
+	frameElement.src = "/kycformuat/kycApproval?projectid="+projectid+"&userid=0";
 	}

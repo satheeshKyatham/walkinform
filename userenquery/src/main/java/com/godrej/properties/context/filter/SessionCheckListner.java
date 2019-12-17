@@ -23,6 +23,12 @@ public class SessionCheckListner extends HandlerInterceptorAdapter {
 		filterUrlList.add("/authenticationDevice");
 		filterUrlList.add("/android_generateTokenMobile");
 		filterUrlList.add("/android_generateTokenMobileEOI");
+		filterUrlList.add("/generateWalkinToken");
+		filterUrlList.add("/android_generateToken");
+		filterUrlList.add("/getdeatails");
+		filterUrlList.add("/userinfo");
+		filterUrlList.add("/loginvalidator");
+		
 	}
 
 	@Override

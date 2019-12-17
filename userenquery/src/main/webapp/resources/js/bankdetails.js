@@ -137,9 +137,14 @@ function savePaymentInfo(event,el){
 function savePaymentInfoResp(resp){
 	
 		swal(resp.message);
+		/*1 - Start - 17-12-2019 Requested from - Prakash -- Hide redirection button on EOI Tab*/
 		var url=$("#contextPath").val();
 		window.location.href =url+ "/assignedusers?userId="+$("#userid").val()+"&projectid="+$("#projectid").val()+"&projectname="+$("#projectname").val()  ;
-		
+		/* END */
+		/* Start - Page Refresh methods calling - After uncomment 1 */
+		/*getEOITabPaymentRecord (); 
+		getEOITabPreferencRecord();*/
+		/* END */
 	/*showOnChangeFields(resp);*/
 }
 

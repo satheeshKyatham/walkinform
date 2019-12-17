@@ -234,11 +234,11 @@ public class CreateOffer {
 			throw new ServletException(e);
 		}
 //		HttpPost httpost = new HttpPost("https://godrej.my.salesforce.com/services/apexrest/api/CreateOfferPrepayment");
-//		HttpPost httpost = new HttpPost(KeyConstants.SFDC_OFFERAPI);
-		HttpPost httpost = new HttpPost(KeyConstants.SFDC_OFFERAPI_BULKY);
+		HttpPost httpost = new HttpPost(KeyConstants.SFDC_OFFERAPI);
+//		HttpPost httpost = new HttpPost(KeyConstants.SFDC_OFFERAPI_BULKY);
 		
 		httpost.addHeader("Authorization", "OAuth " + loginAccessToken);
-		StringEntity messageEntity = new StringEntity("[{\"ei\":"+account.toString()+"}]", ContentType.create("application/json"));
+		StringEntity messageEntity = new StringEntity("{\"ei\":"+account.toString()+"}", ContentType.create("application/json"));
 		httpost.setEntity(messageEntity);
 	
 		CloseableHttpResponse  closeableresponse = httpclient.execute(httpost);

@@ -59,7 +59,7 @@ $(document).ready(function() {
 		{	
 			
 			//alert ("Test 132465 654 465 65478 46 5465 46");
-			
+			$("#appDetails").dataTable().fnDestroy();
 			$("#appDetails tbody").empty();
 			$("#assignTouserLoader").show();
 			
@@ -75,8 +75,6 @@ $(document).ready(function() {
 						name='';
 					else
 						name=value.contact_name;
-					debugger;
-					
 					
 					var userlist ="";
 					if(option.indexOf("userSelected") != -1){
@@ -88,7 +86,6 @@ $(document).ready(function() {
 					var code = str.substr(0, 3);
 					code=code.replace("+","%2B");
 					var mobileNo = str.substr(3, 13);
-					debugger;
 					var countryCode = value.countrycode;
 					if(countryCode==undefined)
 						{
@@ -134,12 +131,12 @@ $(document).ready(function() {
 					$("#appDetails tbody").append(val);
 					i = i+1
 				});
-				//$('#appDetails').DataTable(
-					//	{
-						//	destroy: true
+				$('#appDetails').DataTable(
+						{
+							destroy: true
 							//processing:true,
 							//serverSide:true
-						//});
+						});
 			}).done(function() {
 				
 				//$('#appDetails').DataTable();
@@ -152,10 +149,11 @@ $(document).ready(function() {
 					//$("#appDetails tbody").empty();				
 				}	
 				
-			}).error(function() { alert("error"); });
+			}).error(function() {  });
 		}
 		function getAssignedList()
 		{
+			$("#assinedDetails").dataTable().fnDestroy();
 			 $("#assignedLoader").show();
 			 $("#assinedDetails tbody").empty();
 			var urlPPtoken = "gettokenassignentrys?tokenType="+$('#typeSelected').val()+"&projectid="+$('#projectid').val()+"&date="+$('#txtFromDate').val();
@@ -164,12 +162,10 @@ $(document).ready(function() {
 			
 			$.getJSON(urlPPtoken, function (data) {
 				$.each(data, function (index, value) {
-					debugger;
 					var userlist ="";
 					if(reasignOption.indexOf("userReAssSelected") != -1){
 						   userlist = reasignOption.replace("userReAssSelected","userReAssSelected"+value.nv_token_id);
 						}
-					debugger;
 					if(userlist.indexOf(value.window_assign) != -1){
 						   userlist = userlist.replace("value="+value.window_assign,"value="+value.window_assign+" selected");
 						}
@@ -180,11 +176,11 @@ $(document).ready(function() {
 					var countryCode = value.countrycode;
 					if(countryCode==undefined)
 						{
-						countryCode="%2B91";
+							countryCode="%2B91";
 						}
 					else
 						{
-						countryCode=countryCode.replace("+","%2B");
+							countryCode=countryCode.replace("+","%2B");
 						}
 					var finalMobile="";
 					if(value.mobileno.includes("+91"))
@@ -227,10 +223,14 @@ $(document).ready(function() {
 				//	$("#assinedDetails tbody").append("<tr><td><a target='_blank'  href='"+rowurl+"'>"+value.type+value.queue+"</a></td><td>"+mobileNo+"</td><td>"+userlist+""+value.user_name+"</td><td ><input class='editRow' onclick='onEdit(this)' type='button' value='Edit'/>  <input onclick='onSave(this,"+value.nv_token_id+","+value.type+value.queue+","+value.contact_name+")' class='saveRow' style='display:none;' type='button' value='Save'/><input onclick='onCancel(this)' class='cancelRow' style='display:none;' type='button' value='Cancel'/></td></tr>");					
 
 					i = i+1
-				});					
+				});		
+				$('#assinedDetails').DataTable(
+						{
+							destroy: true
+						});
 			}).done(function() {
 				
-				$('#assinedDetails').DataTable();
+				//$('#assinedDetails').DataTable();
 				$("#assignedLoader").hide();
 				
 				if (i == 0){
