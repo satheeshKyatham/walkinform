@@ -1517,7 +1517,7 @@ if(ses!=null){
 						</a>
 						<%} %>
 						<a class="btn btn-primary blue_btn  mrgR15" id="btneoi" style="display:none;" onclick="generateEOI(event,this);">
-							<span>Generate EOI</span>
+							<span>Save & Generate EOI</span>
 						</a>				
 						<div class="clearfix"></div>
 					</div>
