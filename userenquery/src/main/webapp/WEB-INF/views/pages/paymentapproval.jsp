@@ -26,6 +26,7 @@
 <script src="<c:url value='/resources/js/jquery-1.12.4.min.js'/>"></script>
 <script src="<c:url value='/resources/js/bootstrap.min.js'/>"></script>
 <script type="text/javascript" charset="utf8" src="<c:url value='/resources/js/jquery.dataTables.js'/>"></script>
+<script type="text/javascript" charset="utf8" src="<c:url value='/resources/js/payment/paymentapprove.js'/>"></script>
 </head> 
 <%! String projectname,projectid ,projectrole,userid;%>
 <%
@@ -77,13 +78,13 @@ if(ses!=null){
 	  	<div class="col-md-12">
 	   		<div>
 				<ul class="nav nav-tabs tabNav">
-					<li onclick="" class="active" id="Payment_ApprReject_Id">
+					<li onclick="getPendingPaymentDetails()" class="active" id="Payment_Pending_Id">
 						<a href="#tab1" data-toggle="tab">Payment Approve/Reject</a>
 					</li>
-					 <li id="Payment_Approve_Id" onclick="">
+					 <li id="Payment_Approve_Id" onclick="getApprovedPaymentDetails()">
 						<a href="#tab2" data-toggle="tab">Payment Approved List</a>
 					</li>
-					<li id="Payment_Reject_Id" onclick="">
+					<li id="Payment_Reject_Id" onclick="getRejectedPaymentDetails()">
 						<a href="#tab3" data-toggle="tab">Payment Rejected List</a>
 					</li>    
 				</ul>
@@ -95,11 +96,14 @@ if(ses!=null){
 				<div class="commonLoad" id="mainPageLoad" style="display: none;"></div>
 				
 				<div class="col-md-12">
-					
+					<button onclick="approvedEOIPayment()">Approved All</button>
+					<button onclick="rejectEOIPayment()">Reject All</button>
 					<div class="clearfix"></div>
-					<table class="table table-bordered" id="Payment_ApprReject">
+					<table class="table table-bordered" id="Payment_Pending">
 						<thead>
 							<tr>
+							<th style="display:none">ID</th>
+								<th></th>
 								<th>Enquiry No</th>
 								<th>Payment Type</th>
 								<th>Bank Name</th>
@@ -113,17 +117,19 @@ if(ses!=null){
 						</tbody>
 					</table>
 					<div class="clearfix"></div>
+					
 				</div>
 				<div class="clearfix"></div>
 				</div>
 	   		
 				<div class="tab-pane" id="tab2">
-					<div class="commonLoad" id="mainPageLoad" style="display: none;"></div>
+					<div class="commonLoad" id="mainPageLoad2" style="display: none;"></div>
 					<div class="col-md-12">
 						<div class="clearfix"></div>
-						<table class="table table-bordered" id="Payment_Approval">
+						<table class="table table-bordered" id="Payment_Approved">
 							<thead>
 								<tr>
+									
 									<th>Enquiry No</th>
 									<th>Payment Type</th>
 									<th>Bank Name</th>
@@ -142,7 +148,7 @@ if(ses!=null){
 				</div>
 				<div class="clearfix"></div>
 				<div class="tab-pane" id="tab3"> 
-				<div class="commonLoad" id="mainPageLoad" style="display: none;"></div>
+				<div class="commonLoad" id="mainPageLoad3" style="display: none;"></div>
 					<div class="col-md-12">
 						<div class="clearfix"></div>
 						<table class="table table-bordered" id="Payment_Reject">

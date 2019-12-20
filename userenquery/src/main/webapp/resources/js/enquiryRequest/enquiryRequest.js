@@ -837,7 +837,15 @@ function getChannelPartners(event,el){
 	$("#brokerContact").empty();
     $("#channelPartnerName").val("");
 	var text=$(el).val();
-	if(text.length==3){	
+	
+	if(text.length>=3){		
+		fetchAsyncData("getChannelPartnerList",text,"GET","loadChannelPartners");		
+	}else if(text.length==0){
+		channelPartnerArray=[];
+	}
+	
+	/*Vivek Changes Start*/
+	/*if(text.length==3 || text.length==5 || text.length==7  || text.length==9 || text.length==11 || text.length==13){	
 		$("#channelPartnerNameSearch").attr('readonly', true);
 		$("#channelPartnerLoader").show();
 		fetchSyncData("getChannelPartnerList",text,"GET","loadChannelPartners");
@@ -848,7 +856,8 @@ function getChannelPartners(event,el){
 		var channelPartners = filterMatches(channelPartnerArray, text);
 		console.log(channelPartners);
 		refreshChannelPartners(channelPartners);
-	}
+	}*/
+	/*Vivek Changes END*/
 	/*if(text.length>=3){
 		
 		var resp=fetchData("getChannelPartnerList",text,"GET");

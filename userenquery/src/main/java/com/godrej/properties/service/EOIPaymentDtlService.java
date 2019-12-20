@@ -8,7 +8,9 @@ import com.godrej.properties.model.ExtraCharges;
 public interface EOIPaymentDtlService {
 	void insertPaymentDtl(List<EOIPaymentDtl> pymtDtl);
 	
-	List<EOIPaymentDtl> getEOIPaymentRecord(String enqSfid);
+	public List<EOIPaymentDtl> getEOIPaymentRecord(String enqSfid);
 	
 	void updateEOIForOffer(List<EOIPaymentDtl> charges);
+	public List<EOIPaymentDtl> getCommonEOIPaymentEntrys(String whereCondition);
+	public void paymentEOIApproveReject(String whereCondition);
 }
