@@ -2474,50 +2474,33 @@ function removeCsPtCol (e) {
 }
 
 function csPtDd (e) {
-       //if ($(e).val() == 'Bank') {
        $(e).closest("tr").find('.csPtReachMexLength').remove();  
        if ($(e).val() == 'Cheque') {
-              
-          
-              $(e).closest("tr").find(".csPtTransactionId").val("");
-                 $(e).closest("tr").find(".csPtTransactionId").attr("maxlength","10");       
-              
-              $(e).closest("tr").find(".csPtTransactionId").after("<small class='csPtReachMexLength'>ID can be max 10 characters long.</small>");              
-            
-              $(e).closest("tr").find('.panAttach').prop('disabled', false);
-       
-             $(e).closest("tr").find('.csPtBankName').prop('disabled', false);
-             $(e).closest("tr").find('.csPtBranch').prop('disabled', false);
-       
+    	   $(e).closest("tr").find(".csPtTransactionId").val("");
+    	   $(e).closest("tr").find(".csPtTransactionId").attr("maxlength","10");       
+           $(e).closest("tr").find(".csPtTransactionId").after("<small class='csPtReachMexLength'>ID can be max 10 characters long.</small>");              
+           $(e).closest("tr").find('.panAttach').prop('disabled', false);
+           $(e).closest("tr").find('.csPtBankName').prop('disabled', false);
+           $(e).closest("tr").find('.csPtBranch').prop('disabled', false);
        } else  if ($(e).val() == 'NEFT') {
-          $(e).closest("tr").find(".csPtTransactionId").val("");
-          $(e).closest("tr").find(".csPtTransactionId").attr("maxlength","15");
-          $(e).closest("tr").find(".csPtTransactionId").after("<small class='csPtReachMexLength'>ID can be max 15 characters long.</small>");
-             //$(e).closest("tr").find('.panAttach').prop('disabled', true);
-             
-             $(e).closest("tr").find('.csPtBankName').prop('disabled', false);
-             $(e).closest("tr").find('.csPtBranch').prop('disabled', false);
+    	   $(e).closest("tr").find(".csPtTransactionId").val("");
+    	   $(e).closest("tr").find(".csPtTransactionId").attr("maxlength","15");
+    	   $(e).closest("tr").find(".csPtTransactionId").after("<small class='csPtReachMexLength'>ID can be max 15 characters long.</small>");
+           $(e).closest("tr").find('.csPtBankName').prop('disabled', false);
+           $(e).closest("tr").find('.csPtBranch').prop('disabled', false);
        }else  if ($(e).val() == 'Swipe') {
-          $(e).closest("tr").find(".csPtTransactionId").val("");
-          $(e).closest("tr").find(".csPtTransactionId").attr("maxlength","15");
-          $(e).closest("tr").find(".csPtTransactionId").after("<small class='csPtReachMexLength'>ID can be max 15 characters long.</small>"); 
-             //$(e).closest("tr").find('.panAttach').prop('disabled', true);
-             
-             $(e).closest("tr").find('.csPtBankName').prop('disabled', false);
-             $(e).closest("tr").find('.csPtBranch').prop('disabled', false);
+    	   $(e).closest("tr").find(".csPtTransactionId").val("");
+    	   $(e).closest("tr").find(".csPtTransactionId").attr("maxlength","15");
+    	   $(e).closest("tr").find(".csPtTransactionId").after("<small class='csPtReachMexLength'>ID can be max 15 characters long.</small>"); 
+           $(e).closest("tr").find('.csPtBankName').prop('disabled', false);
+           $(e).closest("tr").find('.csPtBranch').prop('disabled', false);
        }
        else {
-          
-          $(e).closest("tr").find(".csPtTransactionId").val("");
-          $(e).closest("tr").find(".csPtTransactionId").removeAttr("maxlength");
-          
-             $(e).closest("tr").find('.panAttach').val("");
-             $(e).closest("tr").find('.csPtBankName').val("");
-             $(e).closest("tr").find('.csPtBranch').val("");
-             
-             /*$(e).closest("tr").find('.csPtBankName').prop('disabled', true);
-             $(e).closest("tr").find('.csPtBranch').prop('disabled', true);
-             $(e).closest("tr").find('.panAttach').prop('disabled', true);*/
+    	   $(e).closest("tr").find(".csPtTransactionId").val("");
+    	   $(e).closest("tr").find(".csPtTransactionId").removeAttr("maxlength");
+           $(e).closest("tr").find('.panAttach').val("");
+           $(e).closest("tr").find('.csPtBankName').val("");
+           $(e).closest("tr").find('.csPtBranch').val("");
        }      
 }
 

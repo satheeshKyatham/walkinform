@@ -148,6 +148,10 @@ public class AdminController {
 	public String kycrole(ModelMap model,HttpServletRequest request) {
 		 return "kycrole";
 	}
+	@RequestMapping(value = { "/paymentapproval"}, method = RequestMethod.GET)
+	public String paymentApproval(ModelMap model,HttpServletRequest request) {
+		 return "paymentapproval";
+	}
 
 	
 }

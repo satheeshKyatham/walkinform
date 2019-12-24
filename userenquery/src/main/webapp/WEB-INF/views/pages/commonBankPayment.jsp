@@ -118,10 +118,11 @@
 			<div class="clearfix"></div>
 			<!-- New EOI Dtl -->
 			<div class="col-md-12" style="margin-bottom:20px;">
-				<p onclick="addMoreEoiRowBtn()">
-					<i class="fa fa-plus-circle"></i> Add More
-				</p>
-				<table class="table table-bordered  bgWhite" id="EOIMultipleTable">
+				<h4 class="mrgT0">
+					Preference Details
+				</h4>
+				
+				<table class="table table-bordered  bgWhite mrgB8" id="EOIMultipleTable">
 					<tbody>
 						<tr class="subHead">
 							<th>
@@ -171,6 +172,10 @@
 						</tr>
 					</tbody>
 				</table>
+				
+				<p class="addMoreBtn" onclick="addMoreEoiRowBtn()">
+					<i class="fa fa-plus-circle"></i> Add More
+				</p>
 			</div>
 			<!-- END EOI Dtl -->
 			
@@ -179,10 +184,11 @@
 			
 			<!-- New EOI Payment Dtl -->
 			<div class="col-md-12" style="margin-bottom:50px;">
-				<p onclick="addMorePtBtnEoi()">
-					<i class="fa fa-plus-circle"></i> Add More
-				</p>
-				<table class="table table-bordered  bgWhite" id="csPtColEoi">
+				<h4 class="mrgT0">
+					Payment Details
+				</h4>
+				
+				<table class="table table-bordered  bgWhite mrgB8" id="csPtColEoi">
 					<tbody>
 						<tr class="subHead">
 							<th>Status</th>
@@ -243,7 +249,7 @@
 								<input type="date" class="full form-control input-sm csPtTransactionDateEoi requiredField" placeholder="Transaction Date"/>
 							</td>
 							<td>
-								<input class="numericField full form-control input-sm csPtTransactionAmountEoi requiredField" onkeyup="csPtcalculateGrandTotalEoi()" name="amount" placeholder="Transaction Amount"/>
+								<input maxlength="10" class="numericWithoutDecimal numericField full form-control input-sm csPtTransactionAmountEoi requiredField" onkeyup="csPtcalculateGrandTotalEoi()" name="amount" placeholder="Transaction Amount"/>
 							</td>
 							
 							<td>
@@ -261,6 +267,9 @@
 						
 					</tbody>
 				</table>
+				<p class="addMoreBtn" onclick="addMorePtBtnEoi()">
+					<i class="fa fa-plus-circle"></i> Add More
+				</p>
 				
 				<div style="display:none;">
 					<span>Total transaction amount: </span><span id="csPtGrandtotalEoi"></span>

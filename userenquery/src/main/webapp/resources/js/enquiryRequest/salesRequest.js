@@ -1163,7 +1163,7 @@ function generateKYCLink(event,el,isEOI){
 		userid=$("#userid").val();
 	var mobile=$('#mobileNo').val();
 		   	$.ajax({
-		   		url: '/kycformuat/genSmsKycLink?mobilestr='+mobile+"&projectid="+$("#projectid").val()+"&projectname="+$('#projectName').val()+"&enqid="+$('#enquirysfid').val()+"&emailid="+$('#useremailID').val()+"&isEOI="+isEOI+"&userid="+userid+"&offersfid=",
+		   		url: '/kycform/genSmsKycLink?mobilestr='+mobile+"&projectid="+$("#projectid").val()+"&projectname="+$('#projectName').val()+"&enqid="+$('#enquirysfid').val()+"&emailid="+$('#useremailID').val()+"&isEOI="+isEOI+"&userid="+userid+"&offersfid=",
 				/*data: sendingData,*/
 			    type: 'POST', 	  
 			    success: function(data) 
@@ -1189,7 +1189,7 @@ function generateKYCLinkViaOffer(event,el,isEOI,offersfid){
 		userid=$("#userid").val();
 	var mobile=$('#mobileNo').val();
 		   	$.ajax({
-		   		url: '/kycformuat/genSmsKycLink?mobilestr='+mobile+"&projectid="+$("#projectid").val()+"&projectname="+$('#projectName').val()+"&enqid="+$('#enquirysfid').val()+"&emailid="+$('#useremailID').val()+"&isEOI="+isEOI+"&userid="+userid+"&offersfid="+offersfid+"",
+		   		url: '/kycform/genSmsKycLink?mobilestr='+mobile+"&projectid="+$("#projectid").val()+"&projectname="+$('#projectName').val()+"&enqid="+$('#enquirysfid').val()+"&emailid="+$('#useremailID').val()+"&isEOI="+isEOI+"&userid="+userid+"&offersfid="+offersfid+"",
 				/*data: sendingData,*/
 			    type: 'POST', 	  
 			    success: function(data) 

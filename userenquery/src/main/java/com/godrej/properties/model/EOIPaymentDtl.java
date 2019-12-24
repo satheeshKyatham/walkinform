@@ -80,6 +80,8 @@ public class EOIPaymentDtl implements Serializable{
 	@Column(name = "isfromcp") private String isfromcp;
 	@Transient
 	private String offerid;
+	@Transient
+	private String name;
 	
 	@Transient
 	private String context= System.getProperty("catalina.home");
@@ -265,5 +267,15 @@ public class EOIPaymentDtl implements Serializable{
 	public void setIsfromcp(String isfromcp) {
 		this.isfromcp = isfromcp;
 	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+
 	
 }

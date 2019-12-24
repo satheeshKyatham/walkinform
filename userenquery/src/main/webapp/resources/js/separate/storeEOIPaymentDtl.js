@@ -16,7 +16,7 @@ var NumEoiDtl = 4;
 
 function addMorePtBtnEoi () {
 	if(amIEoi < amNumEoi) {
-		$('#csPtColEoi tr:last-child').after('<tr class="csPtDataRowEoi"> <td></td> <td><input class="csPtEnqSfidEoi" style="display:none;" value="'+$('#enquirysfid').val()+'"/>  <select onchange="csPtDdEoi(this)" class="full form-control input-sm csPtDropDownEoi requiredField"><option value="">Select</option><option value="Cheque">Cheque</option><option value="NEFT">NEFT/Credit</option><option value="Swipe">Swipe</option></select></td><td><input class="full form-control input-sm csPtBankNameEoi requiredField" placeholder="Bank Name"/></td><td><input class="full form-control input-sm csPtBranchEoi requiredField" placeholder="Branch Name"/></td><td><input class="full form-control input-sm csPtTransactionIdEoi requiredField" placeholder="Transaction ID" /></td><td><input type="date" class="full form-control input-sm csPtTransactionDateEoi requiredField" placeholder="Transaction Date"/></td><td><input  class="numericField full form-control input-sm csPtTransactionAmountEoi requiredField" onkeyup="csPtcalculateGrandTotalEoi()" placeholder="Transaction Amount" name="amount"/></td> <td> <input type="file" class="full form-control input-sm panAttachEoi requiredField"  accept="application/pdf,image/*"> </td> <td> <input type="file" class="requiredField full form-control input-sm receiptAttachEoi" accept="application/pdf,image/*"/>  <td><textarea class="full form-control input-sm csPtDescriptionEoi" placeholder="Description"></textarea></td><td class="removeCsPtColEoi txtCenter"><i onclick="removeCsPtColEoi(this)" class="fa fa-times-circle"></i></td></tr>');
+		$('#csPtColEoi tr:last-child').after('<tr class="csPtDataRowEoi"> <td></td> <td><input class="csPtEnqSfidEoi" style="display:none;" value="'+$('#enquirysfid').val()+'"/>  <select onchange="csPtDdEoi(this)" class="full form-control input-sm csPtDropDownEoi requiredField"><option value="">Select</option><option value="Cheque">Cheque</option><option value="NEFT">NEFT/Credit</option><option value="Swipe">Swipe</option></select></td><td><input class="full form-control input-sm csPtBankNameEoi requiredField" placeholder="Bank Name"/></td><td><input class="full form-control input-sm csPtBranchEoi requiredField" placeholder="Branch Name"/></td><td><input class="full form-control input-sm csPtTransactionIdEoi requiredField" placeholder="Transaction ID" /></td><td><input type="date" class="full form-control input-sm csPtTransactionDateEoi requiredField" placeholder="Transaction Date"/></td><td><input maxlength="10" class="numericWithoutDecimal  numericField full form-control input-sm csPtTransactionAmountEoi requiredField" onkeyup="csPtcalculateGrandTotalEoi()" placeholder="Transaction Amount" name="amount"/></td> <td> <input type="file" class="full form-control input-sm panAttachEoi requiredField"  accept="application/pdf,image/*"> </td> <td> <input type="file" class="requiredField full form-control input-sm receiptAttachEoi" accept="application/pdf,image/*"/>  <td><textarea class="full form-control input-sm csPtDescriptionEoi" placeholder="Description"></textarea></td><td class="removeCsPtColEoi txtCenter"><i onclick="removeCsPtColEoi(this)" class="fa fa-times-circle redColr cursorPoint"></i></td></tr>');
 		amIEoi++;
 	}else {
 		swal({
@@ -36,35 +36,39 @@ function removeCsPtColEoi (e) {
 }
 
 function csPtDdEoi (e) {
-	//if ($(e).val() == 'Bank') {
+	$(e).closest("tr").find('.csPtReachMexLengthEOI').remove();
 	if ($(e).val() == 'Cheque') {
-		
+		$(e).closest("tr").find(".csPtTransactionIdEoi ").val("");
+		$(e).closest("tr").find(".csPtTransactionIdEoi ").attr("maxlength","10");       
+        $(e).closest("tr").find(".csPtTransactionIdEoi ").after("<small class='csPtReachMexLengthEOI'>ID can be max 10 characters long.</small>");
+        
 		$(e).closest("tr").find('.panAttachEoi').prop('disabled', false);
-	
 		$(e).closest("tr").find('.csPtBankNameEoi').prop('disabled', false);
 		$(e).closest("tr").find('.csPtBranchEoi').prop('disabled', false);
-	
 	} else  if ($(e).val() == 'NEFT') {
-		
-		//$(e).closest("tr").find('.panAttachEoi').prop('disabled', true);
+		$(e).closest("tr").find(".csPtTransactionIdEoi").val("");
+  	   	$(e).closest("tr").find(".csPtTransactionIdEoi").attr("maxlength","15");
+  	   	$(e).closest("tr").find(".csPtTransactionIdEoi").after("<small class='csPtReachMexLengthEOI'>ID can be max 15 characters long.</small>");
 		
 		$(e).closest("tr").find('.csPtBankNameEoi').prop('disabled', false);
 		$(e).closest("tr").find('.csPtBranchEoi').prop('disabled', false);
 	}else  if ($(e).val() == 'Swipe') {
-		
-		//$(e).closest("tr").find('.panAttachEoi').prop('disabled', true);
+		$(e).closest("tr").find(".csPtTransactionIdEoi").val("");
+ 	   	$(e).closest("tr").find(".csPtTransactionIdEoi").attr("maxlength","15");
+ 	   	$(e).closest("tr").find(".csPtTransactionIdEoi").after("<small class='csPtReachMexLengthEOI'>ID can be max 15 characters long.</small>"); 
 		
 		$(e).closest("tr").find('.csPtBankNameEoi').prop('disabled', false);
 		$(e).closest("tr").find('.csPtBranchEoi').prop('disabled', false);
 	}
 	else {
+		$(e).closest("tr").find(".csPtTransactionIdEoi").val("");
+  	    $(e).closest("tr").find(".csPtTransactionIdEoi").removeAttr("maxlength");
+		
 		$(e).closest("tr").find('.panAttachEoi').val("");
 		$(e).closest("tr").find('.csPtBankNameEoi').val("");
 		$(e).closest("tr").find('.csPtBranchEoi').val("");
-		
 		$(e).closest("tr").find('.csPtBankNameEoi').prop('disabled', true);
 		$(e).closest("tr").find('.csPtBranchEoi').prop('disabled', true);
-		//$(e).closest("tr").find('.panAttachEoi').prop('disabled', true);
 	}	
 }
 
@@ -425,7 +429,7 @@ function addMoreEoiRowBtn () {
 					+"<textarea class='full form-control input-sm descriptionEOI' placeholder='Description'></textarea>"
 				+"</td>"
 				
-				+ "<td class='txtCenter'><i onclick='removeEOIRow(this)' class='fa fa-times-circle'></i></td> </tr>" ;
+				+ "<td class='txtCenter'><i onclick='removeEOIRow(this)' class='fa fa-times-circle redColr cursorPoint'></i></td> </tr>" ;
 				
 				$('#EOIMultipleTable tr:last-child').after(html);
 				
