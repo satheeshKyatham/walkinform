@@ -39,4 +39,19 @@ public class PaymentEOIReportController {
 	}
 	
 	
+	@RequestMapping(value = "/getPaymentEOIReportSales", method = RequestMethod.GET, produces = "application/json")
+	public String getEOIReportDtlSales(@RequestParam("userid") String userid, @RequestParam("projectSfid") String projectSfid, @RequestParam("fromDate") String fromDate, @RequestParam("toDate") String toDate) {
+		Gson gson = new GsonBuilder().disableHtmlEscaping().serializeNulls().create();
+		String whereCondition = "";
+		
+		if((fromDate!=null && fromDate.length()>0) && (toDate!=null && toDate.length()>0)  &&  userid!=null && userid.length()>0   ) {
+			whereCondition = " project_sfid= '"+projectSfid+"' and Date(date_of_eoi__c) between '"+fromDate+"' and '"+toDate+"' and userid = "+userid+" order by date_of_eoi__c desc, enq_name  ";
+		} else if(projectSfid!=null && projectSfid.length()>0 &&  userid!=null && userid.length()>0 ) {
+			whereCondition = " project_sfid= '"+projectSfid+"' and userid = "+userid+"  order by date_of_eoi__c desc, enq_name  ";
+		}
+		
+		return gson.toJson(paymentEOIReportService.getPaymentEOIReportDtl(whereCondition));
+	}
+	
+	
 }

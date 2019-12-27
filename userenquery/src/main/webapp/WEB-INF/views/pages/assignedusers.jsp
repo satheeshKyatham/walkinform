@@ -119,6 +119,16 @@ if(ses!=null){
 					<li onclick="getKYCCMApprovalView()" id="KYC_CM_Approval_Tab_Id">
 						<a href="#tab6" data-toggle="tab">KYC Approve/Reject</a>
 					</li>
+				
+					<!-- EOI Report -->	
+					<li onclick="getEOIReportSales()" id="eoiReportTabSales">
+						<a href="#eoiReportSales" data-toggle="tab">EOI Report <i class="fa fa-spinner fa-spin" style="display:none;"></i> </a>
+					</li>
+					<li onclick="getPaymentEOIReportSales()" id="paymentEOIReportTabSales">
+						<a href="#paymentEOIReportSales" data-toggle="tab">Payment Report <i class="fa fa-spinner fa-spin" style="display:none;"></i> </a>
+					</li>
+					<!-- END EOI Report -->
+					
 				</ul>
 				<div class=""></div>
 			</div>
@@ -130,8 +140,12 @@ if(ses!=null){
 							
 							<i class="glyphicon glyphicon-filter" style="border-right: 1px solid #333; margin-right: 10px; padding-right: 10px;"></i>
 							<div class="form-group">
-								<label for="exampleInputNameDate">Date</label> 
-								<input class="form-control" type="date" name="" id="txtFromDate">
+								<label for="exampleInputNameDate">From Date</label> 
+								<input class="form-control" type="date" name="" id="txtFromDateAssigned">
+							</div>
+							<div class="form-group">
+								<label for="exampleInputNameDate">To Date</label> 
+								<input class="form-control" type="date" name="" id="txtToDateAssigned">
 							</div>
 							<div class="form-group">
 								<!-- <input class="form-control" type="button" value="Search" name="Search" id="amsearch" onclick="loadData()"/> -->
@@ -271,6 +285,18 @@ if(ses!=null){
 				<div class="clearfix"></div>
 				</div>
 				<div class="clearfix"></div>
+				
+				<!-- END EOI Reports -->
+				<div class="tab-pane" id="eoiReportSales">
+					<%@ include file="/WEB-INF/views/pages/eoiReportSales.jsp" %>
+				</div>		
+				<div class="tab-pane" id="paymentEOIReportSales">
+					<%@ include file="/WEB-INF/views/pages/paymentEOIReportSales.jsp" %>
+				</div>		
+				<!-- EOI Reports -->
+				
+				
+				<div class="clearfix"></div>
 			</div>
 		  <div class="clearfix"></div>
 		</div>  
@@ -298,6 +324,7 @@ if(ses!=null){
 	<script src="<c:url value='/resources/js/separate/applicationForm.js?v=18'/>"></script>
 	<script src="<c:url value='/resources/js/separate/offerApplicationForm.js?v=18'/>"></script>
 	
+	<script src="<c:url value='/resources/js/separate/eoiReportSales.js?v=18'/>"></script>
 	
 	
 </body>

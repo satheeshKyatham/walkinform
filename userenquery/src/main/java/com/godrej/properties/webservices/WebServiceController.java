@@ -534,6 +534,10 @@ public class WebServiceController<MultipartFormDataInput> {
 	  model.setViewName("tnc");
 	  return model; }
 	  
+	  @RequestMapping(value = { "/tncEOI" }, method = RequestMethod.GET) public
+	  ModelAndView tncAgainstEOI() { ModelAndView model = new ModelAndView();
+	  model.setViewName("tncEOI");
+	  return model; }
 	  
 	  @RequestMapping(value = { "/carParkCharges" }, method = RequestMethod.GET) public
 	  ModelAndView carParkCharges() { ModelAndView model = new ModelAndView();
@@ -2560,7 +2564,7 @@ public class WebServiceController<MultipartFormDataInput> {
 			 if(isAD) {
 				 master= validateUser(master,"A");
 			 }else {
-				 master.setMsg("Please check your username and password. If you still can't login , your account might be locked, please send email to mailadmin@godrejinds.com");
+				 master.setMsg("Please check your username and password. If you still can't login , your account might be locked, please send email to servicedesk@godrejinds.com");
 				 return gson.toJson(master);
 			 }
 		 }else {
@@ -2777,8 +2781,8 @@ public class WebServiceController<MultipartFormDataInput> {
 	 
 } 
 	@RequestMapping(value = { "/gettokenEntrys"}, method = RequestMethod.GET)
-	public String getTokenEntrys(@RequestParam("tokenType") String tokenType,@RequestParam("ProjectId") String projectId,@RequestParam("date") String inputDate) {
-		List<VW_Token> tokens=tokenService.getTokenList(tokenType,projectId,inputDate);
+	public String getTokenEntrys(@RequestParam("tokenType") String tokenType,@RequestParam("ProjectId") String projectId,@RequestParam("date") String inputDate,@RequestParam("todate") String toDate) {
+		List<VW_Token> tokens=tokenService.getTokenList(tokenType,projectId,inputDate,toDate);
 		//model.addAttribute("tokens",tokens );
 		
 		/*if(tokens!=null)
@@ -2798,8 +2802,8 @@ public class WebServiceController<MultipartFormDataInput> {
 	}
 	
 	@RequestMapping(value = { "/gettokenassignentrys"}, method = RequestMethod.GET)
-	public String getTokenAssignEntrys(@RequestParam("tokenType") String tokenType,@RequestParam("projectid") String projectid,@RequestParam("date") String inputDate) {
-		List<VW_Token> tokens=tokenService.getTokenAssignList(tokenType,projectid,inputDate);
+	public String getTokenAssignEntrys(@RequestParam("tokenType") String tokenType,@RequestParam("projectid") String projectid,@RequestParam("date") String inputDate,@RequestParam("todate") String toDate) {
+		List<VW_Token> tokens=tokenService.getTokenAssignList(tokenType,projectid,inputDate,toDate);
 		Gson gson = new GsonBuilder().disableHtmlEscaping().create();
 		 return gson.toJson(tokens);
 	}
@@ -2841,7 +2845,7 @@ public class WebServiceController<MultipartFormDataInput> {
 			e.printStackTrace();
 		}
 		System.out.println("cust_mobileNo");
-		SendSMS.SMSSend(cust_mobileNo, strencryptedText);
+		//SendSMS.SMSSend(cust_mobileNo, strencryptedText);
 		
 		
 		Gson gson = new GsonBuilder().disableHtmlEscaping().create();
@@ -3060,9 +3064,9 @@ public class WebServiceController<MultipartFormDataInput> {
 	}
 	
 	@RequestMapping(value = { "/getAssignedUserToken"}, method = RequestMethod.GET)
-	public String getAssignedUserWiseToken(@RequestParam("projectid") String projectid,@RequestParam("user_id") String userId,@RequestParam("fromdate") String fromdate) {
+	public String getAssignedUserWiseToken(@RequestParam("projectid") String projectid,@RequestParam("user_id") String userId,@RequestParam("fromdate") String fromdate,@RequestParam("todate") String todate) {
 		Gson gson = new GsonBuilder().serializeNulls().create();
-		List<AssignedUser> assign=assignUserService.getassignedusers(userId,projectid,fromdate);
+		List<AssignedUser> assign=assignUserService.getassignedusers(userId,projectid,fromdate,todate);
 		if(assign!=null)
 		{
 			for(int i=0;assign.size()>i;i++)
@@ -3364,7 +3368,7 @@ public class WebServiceController<MultipartFormDataInput> {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			SendSMS.SMSSend(mobile,msg);
+			//SendSMS.SMSSend(mobile,msg);
 		}
 		
 		
@@ -4356,6 +4360,21 @@ public class WebServiceController<MultipartFormDataInput> {
 			
 			return gson.toJson(eOIReportService.getEOIReportDtl(whereCondition));
 		}
+		
+		
+		@RequestMapping(value = "/getEOIReportSales", method = RequestMethod.GET, produces = "application/json")
+		public String getEOIReportDtlSales(@RequestParam("userid") String userid, @RequestParam("projectSfid") String projectSfid, @RequestParam("fromDate") String fromDate, @RequestParam("toDate") String toDate) {
+			Gson gson = new GsonBuilder().disableHtmlEscaping().serializeNulls().create();
+			String whereCondition = "";
+			
+			if((fromDate!=null && fromDate.length()>0) && (toDate!=null && toDate.length()>0)  &&  userid!=null && userid.length()>0) {
+				whereCondition = " project_sfid= '"+projectSfid+"' and Date(date_of_eoi__c) between '"+fromDate+"' and '"+toDate+"' and userid = "+userid+"  order by date_of_eoi__c desc ";
+			} else if(projectSfid!=null && projectSfid.length()>0  &&  userid!=null && userid.length()>0) {
+				whereCondition = " project_sfid= '"+projectSfid+"' and userid = "+userid+"  order by date_of_eoi__c desc ";
+			}
+			return gson.toJson(eOIReportService.getEOIReportDtl(whereCondition));
+		}
+		
 		/* END EOI Report */
 		
 		/* Download EOI Report */

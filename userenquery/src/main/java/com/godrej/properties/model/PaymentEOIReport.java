@@ -40,6 +40,9 @@ public class PaymentEOIReport implements Serializable{
 	@Column(name="payment_status") private String payment_status;
 	@Column(name="project_sfid") private String project_sfid;
 	
+	@Column(name="userid") private  int userid ;
+	
+	
 	public int getId() {
 		return id;
 	}
@@ -168,5 +171,11 @@ public class PaymentEOIReport implements Serializable{
 	}
 	public void setProject_sfid(String project_sfid) {
 		this.project_sfid = project_sfid;
+	}
+	public int getUserid() {
+		return userid;
+	}
+	public void setUserid(int userid) {
+		this.userid = userid;
 	}
 }

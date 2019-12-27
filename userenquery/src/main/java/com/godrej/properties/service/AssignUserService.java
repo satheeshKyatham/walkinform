@@ -6,6 +6,6 @@ import com.godrej.properties.model.AssignedUser;
 
 public interface AssignUserService {
 
-	List<AssignedUser> getassignedusers(String user_id, String projectId,String fromdate);
+	List<AssignedUser> getassignedusers(String user_id, String projectId,String fromdate,String todate);
 
 }

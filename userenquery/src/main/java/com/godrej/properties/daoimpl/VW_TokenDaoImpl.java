@@ -23,12 +23,12 @@ public class VW_TokenDaoImpl extends AbstractDao<Integer, VW_Token> implements V
 	}
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<VW_Token> getTokenAssignList(String tokenType,String projectid,String inputDate) {
+	public List<VW_Token> getTokenAssignList(String tokenType,String projectid,String inputDate,String toDate) {
 		Session session = this.sessionFactory.getCurrentSession();
 		List<VW_Token> list=null;
 		if(inputDate!=null && inputDate.length()>0)
 		{
-			list = session.createQuery("  FROM VW_Token where  type='" + tokenType+ "' and projectname='"+projectid+"' and Date(created)='"+inputDate+"' and queue is not null and window_assign is not null order by queue asc ").list();
+			list = session.createQuery("  FROM VW_Token where  type='" + tokenType+ "' and projectname='"+projectid+"' and Date(created) between '"+inputDate+"' and '"+toDate+"' and queue is not null and window_assign is not null order by queue asc ").list();
 		}
 		else
 			list = session.createQuery("  FROM VW_Token where  type='" + tokenType+ "' and projectname='"+projectid+"' and queue is not null and window_assign is not null order by queue asc ").list();
@@ -42,12 +42,12 @@ public class VW_TokenDaoImpl extends AbstractDao<Integer, VW_Token> implements V
 	 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<VW_Token> getTokenList(String tokenType,String projectId,String inputDate) {
+	public List<VW_Token> getTokenList(String tokenType,String projectId,String inputDate,String toDate) {
 		Session session = this.sessionFactory.getCurrentSession();
 		List<VW_Token> list = null;
 		if(inputDate!=null && inputDate.length()>0)
 		{
-			list = session.createQuery( "  FROM VW_Token where  type='" + tokenType + "' and window_assign is null and isactive='Y' and projectname='"+projectId+"' and Date(created)='"+inputDate+"' order by queue asc ").list();
+			list = session.createQuery( "  FROM VW_Token where  type='" + tokenType + "' and window_assign is null and isactive='Y' and projectname='"+projectId+"' and Date(created) between '"+inputDate+"' and '"+toDate+"' order by queue asc ").list();
 		}
 		else
 			list = session.createQuery( "  FROM VW_Token where  type='" + tokenType + "' and window_assign is null and isactive='Y' and projectname='"+projectId+"' order by queue asc ").list();

@@ -359,7 +359,7 @@ if(ses!=null){
 					<div class="clearfix"></div>
 					
 					<div class="col-md-2 radioBtnWrp mrgT0" style="margin-top:-16px !important;">
-						  <div class="titleF">Have we met before<strong class="mndt">*</strong></div>
+						  <div class="titleF">Have you visited site before<strong class="mndt">*</strong></div>
 							<div class="radioBtnCol" data-toggle="buttons">
 							  <label class="btn btn-primary active contactSalesView">
 								<input type="radio" id="haveWeMetBeforeY" class="haveWeMetBefore" name="enquiryReport.haveWeMetBefore" checked value="Yes">Yes
@@ -1347,7 +1347,7 @@ if(ses!=null){
 						
 						<div class="col-md-3 col-sm-6 col-xs-12">
 							<div class="group">
-								<select class="sales_submitted" id="trigger1" name="enquiryReport.trigger1">
+								<select class="requiredField sales_submitted" id="trigger1" name="enquiryReport.trigger1">
 						            <option value=""></option>
 									<option value="Location">Location</option>
 								    <option value="MLP">MLP</option>
@@ -1367,7 +1367,7 @@ if(ses!=null){
 								    <option value="USP concept">USP concept</option>
 								</select>
 								<span class="highlight"></span><span class="bar"></span>
-								<label class="select-label">Trigger 1 for purchase</label>
+								<label class="select-label">Trigger 1 for purchase<strong class="mndt">*</strong></label>
 							</div>
 							<div class="clearfix"></div>
 						</div>
@@ -1401,7 +1401,7 @@ if(ses!=null){
 						
 						<div class="col-md-3 col-sm-6 col-xs-12">
 							<div class="group">
-								<select class="sales_submitted" id="barrier1" name="enquiryReport.barrier1">
+								<select class="requiredField sales_submitted" id="barrier1" name="enquiryReport.barrier1">
 						            <option value=""></option>
 									<option value="OCR issue">OCR issue</option>
 								    <option value="Loan eligibility">Loan eligibility</option>
@@ -1423,7 +1423,7 @@ if(ses!=null){
 								    <option value="Site lacks proper access">Site lacks proper access</option>
 								</select>
 								<span class="highlight"></span><span class="bar"></span>
-								<label class="select-label">Barrier 1 for purchase</label>
+								<label class="select-label">Barrier 1 for purchase<strong class="mndt">*</strong></label>
 							</div>
 							<div class="clearfix"></div>
 						</div>
@@ -1457,7 +1457,36 @@ if(ses!=null){
 						</div>
 						
 						<!-- END of Barriers & Triggers -->
-						
+						<div class="col-md-3 col-sm-6 col-xs-12">
+							<div class="group">
+								<select class="sales_submitted" id="sourcingManagerId" name="">
+						            <option value=""></option>
+									<option value="OCR issue">OCR issue</option>
+								</select>
+								<span class="highlight"></span><span class="bar"></span>
+								<label class="select-label">Sourcing Manager</label>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+						<div class="col-md-3 col-sm-6 col-xs-12">
+							<div class="group">
+								<select class="sales_submitted" id="verticalId" name="verticle__c">
+						            <option value=""></option>
+									<option value="International">International</option>
+									<option value="Cross">Cross</option>
+									<option value="Corporate">Corporate</option>
+									<option value="Loyalty/ Referral">Loyalty/ Referral</option>
+									<option value="Employee">Employee</option>
+									<option value="Region CP">Region CP</option>
+									<option value="Region Direct">Region Direct</option>
+									<option value="International Team">International Team</option>
+									<option value="International Type">International Type</option>
+								</select>
+								<span class="highlight"></span><span class="bar"></span>
+								<label class="select-label">Vertical</label>
+							</div>
+							<div class="clearfix"></div>
+						</div>
 						
 						<div class="col-md-12 col-xs-12">
 							<div class="group">
@@ -1682,8 +1711,9 @@ if(ses!=null){
 <script src="<c:url value='/resources/js/separate/costsheet.js?v=18'/>"></script>
 <script src="<c:url value='/resources/js/separate/webcamAttachmentCS.js?v=18'/>"></script>
 
-
 <script src="<c:url value='/resources/js/separate/storeEOIPaymentDtl.js?v=18'/>"></script>
+<script src="<c:url value='/resources/js/separate/eoiFormPrint.js?v=18'/>"></script>
+
 
 <%-- <script src="<c:url value='/resources/js/separate/storeEOIPaymentDtl.js?v=15'/>"></script> --%>
 <!-- END Costsheet --> 

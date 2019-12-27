@@ -112,7 +112,8 @@ function csPymtDataEoi () {
 		i++
 	});
 	
-	
+	var eoiFormPath =   'costSheetPDF/'+$('#region__c').val()+'/'+$('#marketingProjectName').val()+'/'+'EOI Details'+'/'+$('#enquiry_name').val()+'/eoi_form_'+$('#enquiry_name').val()+'.pdf';
+    
 	var arrayData = [];
 	$("#csPtColEoi .csPtDataRowEoi").each(function () {
 	    var csPtData = {};
@@ -131,6 +132,11 @@ function csPymtDataEoi () {
 	    csPtData.project_name = $('#projectname').val();
 	    csPtData.user_email = $('#useremailID').val();
 	    csPtData.user_name = $('#username').val();
+	    
+	    csPtData.userid = $('#userid').val();
+	    csPtData.eoi_form_path = eoiFormPath;
+	    		
+	    		//"Noida\Godrej North Estate, Delhi"
 	    
 	    csPtData.isactive = 'N';
 	    
@@ -155,7 +161,7 @@ function csPymtDataEoi () {
 	
 	$.post(pageContext+"insertEOIPaymentDtl",{"paymentDtlJson" : JSON.stringify(arrayData)},function(data){				 
 	}).done(function(data){
-		
+		getEOIPreferencPrint();
 	});
 }
 
@@ -485,6 +491,13 @@ function addMoreEoiRowBtn () {
 
 //Insert EOI Dtl
 function insertEOIPreference () {
+	swal({
+		title: "Please wait, submitting the EOI ...",
+		text: "",
+		type: "warning",
+		allowOutsideClick: false,
+		showConfirmButton: false
+	});
 	
 	var pageContext = $("#pageContext").val()+"/";
 	
@@ -501,7 +514,7 @@ function insertEOIPreference () {
 	    ((''+day).length<2 ? '0' : '') + day;
 
 	
-	
+	var eoiFormPath =   'costSheetPDF/'+$('#region__c').val()+'/'+$('#marketingProjectName').val()+'/'+'EOI Details'+'/'+$('#enquiry_name').val()+'/eoi_form_'+$('#enquiry_name').val()+'.pdf';
 	var arrayData = [];
 	$("#EOIMultipleTable .EOIDtlRow").each(function () {
 	    var csPtData = {};
@@ -541,7 +554,7 @@ function insertEOIPreference () {
 	    csPtData.isactive = "Y";
 	    
 	    csPtData.token_no = $('#token').val().substring(1);
-	    
+	    csPtData.eoi_form_path = eoiFormPath;
 	    
 	    
 	    
@@ -557,7 +570,7 @@ function insertEOIPreference () {
 	
 	$.post(pageContext+"insertEOIDtl",{"eoiDataJson" : JSON.stringify(arrayData)},function(data){				 
 	}).done(function(data){
-		
+		csPymtDataEoi();
 	});
 }
 //END Insert EOI Dtl

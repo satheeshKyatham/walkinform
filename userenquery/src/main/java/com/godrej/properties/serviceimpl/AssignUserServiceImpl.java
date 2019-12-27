@@ -28,9 +28,9 @@ public class AssignUserServiceImpl implements AssignUserService {
 	 
 
 	@Override
-	public List<AssignedUser> getassignedusers(String user_id,String projectId,String fromdate) {
+	public List<AssignedUser> getassignedusers(String user_id,String projectId,String fromdate,String todate) {
 		// TODO Auto-generated method stub
-		return assignUserDao.getassignedusers(user_id,projectId,fromdate);
+		return assignUserDao.getassignedusers(user_id,projectId,fromdate,todate);
 	}
 	 
 	 

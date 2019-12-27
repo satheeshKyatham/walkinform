@@ -10,7 +10,8 @@ $.ajaxSetup({
 });
 $(document).ready(function() {
 	 var today = new Date();
-	 document.getElementById("txtFromDate").value = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
+	 document.getElementById("txtFromDateAssigned").value = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
+	 document.getElementById("txtToDateAssigned").value = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
 	
 	loadData();
 });
@@ -28,7 +29,7 @@ function getPendingAssignList()
 	
 			$("#dtOrderExample tbody").empty();
 			 $("#mainPageLoad").show();
-			var urlPP = "getAssignedUserToken?projectid="+$('#projectid').val()+"&user_id="+$('#userid').val()+"&fromdate="+$('#txtFromDate').val();
+			var urlPP = "getAssignedUserToken?projectid="+$('#projectid').val()+"&user_id="+$('#userid').val()+"&fromdate="+$('#txtFromDateAssigned').val()+"&todate="+$('#txtToDateAssigned').val();
 			var i = 0
 			//alert("Alert");
 			$.getJSON(urlPP, function (data) {

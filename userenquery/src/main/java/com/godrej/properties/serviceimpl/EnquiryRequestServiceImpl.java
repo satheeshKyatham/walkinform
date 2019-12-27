@@ -293,7 +293,13 @@ public class EnquiryRequestServiceImpl implements EnquiryRequestService {
 			//src.getChannelPartner().getSfid();
 		}
 		else
+		{
 			dest.setWalkInSource(src.getWalkInSource());
+			if(src.getWalkInSource().equals("Referral") && src.getEnquiryReport().getReferredby()!=null)
+			{
+				dest.getEnquiryReport().setReferredby(src.getEnquiryReport().getReferredby());
+			}
+		}
 		/* Update Site visit done to ensure sync delays does not violate source protection*/
 		if(dest.getSite_Visit_Done__c()==null || dest.getSite_Visit_Done__c()==0)
 			dest.setSite_Visit_Done__c(1.0);
@@ -402,6 +408,43 @@ public class EnquiryRequestServiceImpl implements EnquiryRequestService {
 			dest.setLost_reason_c__c(src.getLost_reason_c__c());
 		if(src.getEnquiryReport().getEnquiryNonEditComment()!=null)
 			dest.setOtherChannelPartner(src.getEnquiryReport().getEnquiryNonEditComment());
+		/* Trigger 1,2 and Barrier 1, 2 pushing to SFDC Enquiry Object from Sales Tab -  
+	     * Change By Satheesh Kyatham- 25-12-2019
+	     * Request From - Prakash Idnani*/
+		/*=======Start==========*/
+		if(src.getEnquiryReport().getTrigger1()!=null)
+			dest.setTrigger_1__c(src.getEnquiryReport().getTrigger1());
+		if(src.getEnquiryReport().getTrigger2()!=null)
+			dest.setTrigger_2__c(src.getEnquiryReport().getTrigger2());
+		if(src.getEnquiryReport().getBarrier1()!=null)
+			dest.setBarrier_1__c(src.getEnquiryReport().getBarrier1());
+		if(src.getEnquiryReport().getBarrier2()!=null)
+			dest.setBarrier_2__c(src.getEnquiryReport().getBarrier2());
+		/*=========End========*/
+		
+		/* Selected Follow type and follow Date value are pushing to Enquiry Object, -  
+	     * Change By - Satheesh Kyatham- 25-12-2019
+	     * Request From - Prakash Idnani*/
+		/*=======Start==========*/
+		if(src.getEnquiryReport().getFollowType()!=null)
+		{
+			if(src.getEnquiryReport().getFollowType().equals("Call"))
+				dest.setFollow_up_reason__c(KeyConstants.FOLLOW_TYPE_CALL);
+			else if(src.getEnquiryReport().getFollowType().equals("Revisit"))
+				dest.setFollow_up_reason__c(KeyConstants.FOLLOW_TYPE_REVISIT);
+			else 
+				dest.setFollow_up_reason__c(src.getEnquiryReport().getFollowType());
+		}
+		if(src.getEnquiryReport().getFollowDate()!=null)
+			dest.setFollow_up_Date_Time__c(src.getEnquiryReport().getFollowDate());
+		/*=========End========*/
+		/* Selected Sourcing Manager and Vertical value are pushing to Enquiry Object and Display, -  
+	     * Change By - Satheesh Kyatham- 27-12-2019
+	     * Request From - Prakash Idnani*/
+		/*=======Start==========*/
+		if(src.getVerticle__c()!=null)
+			dest.setVerticle__c(src.getVerticle__c());
+		/*=========End========*/
 		return dest;
 	}
 	
@@ -466,6 +509,12 @@ public class EnquiryRequestServiceImpl implements EnquiryRequestService {
 					{
 						enquiries.add(enquiry);
 					}
+					/* Changes By - Satheesh K   -- Requested By : Prakash Idnani
+					 * Changes done on - 24-12-2019 -- Request from Business to resolve multiple enquiry creation.*/ 
+					else if(lastModifyDays < KeyConstants.LAST_MODIFY_DAYS_LIMIT_45) //PropStrength__Request_Status__c 
+					{
+						enquiries.add(enquiry);
+					}
 				}
 				//4) If 3) gives 0 results then latest enquires checked for Appointment propsed and site visit requested counter >0
 				if(enquiries.size()==0)
@@ -510,26 +559,129 @@ public class EnquiryRequestServiceImpl implements EnquiryRequestService {
 						enquiry.getContact().setHasError(true);
 						name= "customer & ";
 					}
-					enquiry.setHasError(true);
-					enquiry.setNonEdit("ENQUIRY");						
-					enquiry.setMessage("Scenario 1: "+"Cannot edit "+name+" enquiry details");
-					enquiries.add(enquiry);						
-					System.out.println("Scenario 1: "+"Cannot edit "+name+"enquiry details");
+					/* Changes By - Satheesh K   -- Requested By : Prakash Idnani
+					 * Changes done on - 24-12-2019 -- Request from Business to resolve if walk-in source blank.*/ 
+					if(enquiry.getWalkInSource()!=null)
+					{
+						enquiry.setHasError(true);
+						enquiry.setNonEdit("ENQUIRY");						
+						enquiry.setMessage("Scenario 1: "+"Cannot edit "+name+" enquiry details");
+						enquiries.add(enquiry);						
+						System.out.println("Scenario 1: "+"Cannot edit "+name+"enquiry details");
+					}
+					else //if(enquiry.getEnquiryStatus().equals(KeyConstants.ENQUIRY_STATUS_FOR_ASSINED_SALES))
+					{
+						if(name!=null && name.length()>0)
+						{
+							enquiry.setHasError(true);
+							enquiry.setNonEdit("CONTACT");						
+							enquiry.setMessage("Scenario 5: "+"Cannot edit "+name+" details");
+							System.out.println("Scenario 5: "+"Cannot edit "+name+" details");
+						}
+						enquiries.add(enquiry);						
+						
+					}
 				}
 				else if(enquiries.size()>1)//6) If 3) gives more than 1 results then select latest ENQ basis site visit date
 				{
-					//pick latest one basis site visit done
-					enquiries.sort(Comparator.comparing(EnquiryDto::getDateOfSiteVisit).reversed());
-					EnquiryDto enquiry = enquiries.get(0);
-					if(KeyConstants.RECORD_TYPE_CUSTOMER.equals(enquiry.getContact().getRecordType())){
-						enquiry.getContact().setHasError(true);
-						name= "customer & ";
+				
+					List<EnquiryDto> enquiriesSort=new ArrayList<>();
+					for( EnquiryDto enqSort: enquiries)
+					{
+						if(enqSort.getDateOfSiteVisit()!=null)
+							enquiriesSort.add(enqSort);
+						
 					}
-					enquiry.setHasError(true);
-					enquiry.setNonEdit("ENQUIRY");						
-					enquiry.setMessage("Scenario 1: "+"Cannot edit "+name+" enquiry details");
-					enquiries.add(enquiry);						
-					System.out.println("Scenario 1: "+"Cannot edit "+name+" enquiry details");
+					//pick latest one basis site visit done
+					//enquiries.sort(Comparator.comparing(EnquiryDto::getDateOfSiteVisit).reversed());
+					if(enquiriesSort.size()>0)
+					{
+						enquiriesSort.sort(Comparator.comparing(EnquiryDto::getDateOfSiteVisit).reversed());
+
+						EnquiryDto enquiry = enquiriesSort.get(0);
+						if(KeyConstants.RECORD_TYPE_CUSTOMER.equals(enquiry.getContact().getRecordType())){
+							enquiry.getContact().setHasError(true);
+							name= "customer & ";
+						}
+						/* Changes By - Satheesh K   -- Requested By : Prakash Idnani
+						 * Changes done on - 24-12-2019 -- Request from Business to resolve if walk-in source blank.*/ 
+						if(enquiry.getWalkInSource()!=null)
+						{
+							enquiry.setHasError(true);
+							enquiry.setNonEdit("ENQUIRY");						
+							enquiry.setMessage("Scenario 1: "+"Cannot edit "+name+" enquiry details");
+							enquiries.add(enquiry);						
+							System.out.println("Scenario 1: "+"Cannot edit "+name+" enquiry details");
+						}
+						else
+						{
+							if(name!=null && name.length()>0)
+							{
+								enquiry.setHasError(true);
+								enquiry.setNonEdit("CONTACT");						
+								enquiry.setMessage("Scenario 5: "+"Cannot edit "+name+" details");
+								System.out.println("Scenario 5: "+"Cannot edit "+name+" details");
+							}
+							enquiries.add(enquiry);						
+							
+						}
+					}
+					else
+					{
+						
+						List<EnquiryDto> enquiriesStatusSort=new ArrayList<>();
+						for( EnquiryDto enqSort: enquiries)
+						{
+							if(enqSort.getEnquiryStatus().equals(KeyConstants.ENQUIRY_STATUS_FOR_ASSINED_SALES))
+								enquiriesStatusSort.add(enqSort);
+							
+						}
+						EnquiryDto enquiry=new EnquiryDto();
+						if(enquiriesStatusSort.size()==0)
+						{
+							enquiries.sort(Comparator.comparing(EnquiryDto::getLastModifiedDate).reversed());
+							enquiry = enquiries.get(0);
+						}
+							
+						else if(enquiriesStatusSort.size()>=1)
+						{
+							enquiriesStatusSort.sort(Comparator.comparing(EnquiryDto::getLastModifiedDate).reversed());
+							enquiry = enquiriesStatusSort.get(0);
+						}
+						
+						//EnquiryDto enquiry = enquiriesStatusSort.get(0);
+						if(KeyConstants.RECORD_TYPE_CUSTOMER.equals(enquiry.getContact().getRecordType())){
+							enquiry.getContact().setHasError(true);
+							name= "customer & ";
+						}
+						/* Changes By - Satheesh K   -- Requested By : Prakash Idnani
+						 * Changes done on - 24-12-2019 -- Request from Business to resolve if walk-in source blank.*/ 
+						if(enquiry.getWalkInSource()!=null)
+						{
+							enquiry.setHasError(true);
+							enquiry.setNonEdit("ENQUIRY");						
+							enquiry.setMessage("Scenario 1: "+"Cannot edit "+name+" enquiry details");
+							enquiries.add(enquiry);						
+							System.out.println("Scenario 1: "+"Cannot edit "+name+" enquiry details");
+						}
+						else
+						{
+							if(name!=null && name.length()>0)
+							{
+								enquiry.setHasError(true);
+								enquiry.setNonEdit("CONTACT");						
+								enquiry.setMessage("Scenario 5: "+"Cannot edit "+name+" details");
+								System.out.println("Scenario 5: "+"Cannot edit "+name+" details");
+							}
+							enquiries.add(enquiry);						
+							
+						}
+					
+					}
+					
+					
+					
+					
 				}
 			}
 			

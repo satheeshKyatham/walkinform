@@ -639,6 +639,10 @@ function loadEnquiryReport(enq){
 		$("#barrier1").val(enq.enquiryReport.barrier1);
 		$("#trigger2").val(enq.enquiryReport.trigger2);
 		$("#barrier2").val(enq.enquiryReport.barrier2);
+		//alert(enq.sourcing_Managers__c);
+		//alert(enq.verticle__c);
+		
+		$("#verticalId").val(enq.verticle__c);
 		$("#LostReasonID").val(enq.lost_reason_c__c);
 		
 		//$( "#followDate" ).datepicker({ defaultDate: new Date(enq.enquiryReport.followDate) });
@@ -1163,7 +1167,7 @@ function generateKYCLink(event,el,isEOI){
 		userid=$("#userid").val();
 	var mobile=$('#mobileNo').val();
 		   	$.ajax({
-		   		url: '/kycform/genSmsKycLink?mobilestr='+mobile+"&projectid="+$("#projectid").val()+"&projectname="+$('#projectName').val()+"&enqid="+$('#enquirysfid').val()+"&emailid="+$('#useremailID').val()+"&isEOI="+isEOI+"&userid="+userid+"&offersfid=",
+		   		url: '/kycformuat/genSmsKycLink?mobilestr='+mobile+"&projectid="+$("#projectid").val()+"&projectname="+$('#projectName').val()+"&enqid="+$('#enquirysfid').val()+"&emailid="+$('#useremailID').val()+"&isEOI="+isEOI+"&userid="+userid+"&offersfid=",
 				/*data: sendingData,*/
 			    type: 'POST', 	  
 			    success: function(data) 
@@ -1189,7 +1193,7 @@ function generateKYCLinkViaOffer(event,el,isEOI,offersfid){
 		userid=$("#userid").val();
 	var mobile=$('#mobileNo').val();
 		   	$.ajax({
-		   		url: '/kycform/genSmsKycLink?mobilestr='+mobile+"&projectid="+$("#projectid").val()+"&projectname="+$('#projectName').val()+"&enqid="+$('#enquirysfid').val()+"&emailid="+$('#useremailID').val()+"&isEOI="+isEOI+"&userid="+userid+"&offersfid="+offersfid+"",
+		   		url: '/kycformuat/genSmsKycLink?mobilestr='+mobile+"&projectid="+$("#projectid").val()+"&projectname="+$('#projectName').val()+"&enqid="+$('#enquirysfid').val()+"&emailid="+$('#useremailID').val()+"&isEOI="+isEOI+"&userid="+userid+"&offersfid="+offersfid+"",
 				/*data: sendingData,*/
 			    type: 'POST', 	  
 			    success: function(data) 

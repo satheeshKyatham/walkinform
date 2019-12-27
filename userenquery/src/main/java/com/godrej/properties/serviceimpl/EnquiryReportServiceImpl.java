@@ -75,6 +75,10 @@ public class EnquiryReportServiceImpl implements EnquiryReportService{
 		dest.setDesiredUnitType(src.getDesiredUnitType());
 		dest.setCarpetAreaRequirement(src.getCarpetAreaRequirement());
 		dest.setCpComments(src.getCpComments());
+		if(src.getReferredby()!=null)
+		{
+			dest.setReferredby(src.getReferredby());
+		}
 		return update(dest);
 	}
 

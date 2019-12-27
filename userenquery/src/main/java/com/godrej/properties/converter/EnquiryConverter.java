@@ -117,6 +117,44 @@ public class EnquiryConverter implements CommonConverter<Enquiry, EnquiryDto>{
 		dto.setSite_visit_requested__c(entity.getSite_visit_requested__c());
 		//dto.setClosing_manager_name__c(entity.getClosing_manager_name__c());
 		//dto.setClosingmanagers(entity.getClosingmanagers());
+		
+		/* Trigger 1,2 and Barrier 1, 2 pushing to SFDC Enquiry Object from Sales Tab -  
+	     * Change By Satheesh Kyatham- 25-12-2019
+	     * Request From - Prakash Idnani*/
+		/*=======Start==========*/
+		if(entity.getTrigger_1__c()!=null)
+			dto.setTrigger_1__c(entity.getTrigger_1__c());
+		if(entity.getTrigger_2__c()!=null)
+			dto.setTrigger_2__c(entity.getTrigger_2__c());
+		if(entity.getBarrier_1__c()!=null)
+			dto.setBarrier_1__c(entity.getBarrier_1__c());
+		if(entity.getBarrier_2__c()!=null)
+			dto.setBarrier_2__c(entity.getBarrier_2__c());
+		/*=========End========*/
+		/* Selected Follow type and follow Date value are pushing to Enquiry Object, -  
+	     * Change By - Satheesh Kyatham- 25-12-2019
+	     * Request From - Prakash Idnani*/
+		/*=======Start==========*/
+		if(entity.getFollow_up_reason__c()!=null)
+			dto.setFollow_up_reason__c(entity.getFollow_up_reason__c());
+		if(entity.getFollow_up_Date_Time__c()!=null)
+			dto.setFollow_up_Date_Time__c(entity.getFollow_up_Date_Time__c());
+		/*=========End========*/
+		if(entity.getEnquiryReport()!=null)
+		{
+		if(entity.getEnquiryReport().getReferredby()!=null)
+			dto.setReferredbyDto(entity.getEnquiryReport().getReferredby());
+		}
+		
+		/* Sourcing Manager and Vertical Drop downs adding on Sales Tab for passing drop down values to SFDC, -  
+	     * Change By - Satheesh Kyatham- 27-12-2019
+	     * Request From - Prakash Idnani*/
+		/*=======Start==========*/
+		if(entity.getVerticle__c()!=null)
+			dto.setVerticle__c(entity.getVerticle__c());
+		if(entity.getSourcing_Managers__c()!=null)
+			dto.setSourcing_Managers__c(entity.getSourcing_Managers__c());
+		/*=========End========*/
 		return dto;
 	}
 
@@ -156,7 +194,7 @@ public class EnquiryConverter implements CommonConverter<Enquiry, EnquiryDto>{
 		
 		/*Lost Reason selected value Display/Push into enquiry -  Change By Satheesh Kyatham- 25-10-2019*/
 		/*=======Start==========*/
-		if(dto.getLost_reason_c__c()!=null)
+		if(dto.getLost_reason_c__c()!=null && dto.getLost_reason_c__c().length()>0)
 			entity.setLost_reason_c__c(dto.getLost_reason_c__c());
 		/*=========End========*/
 		
@@ -212,6 +250,38 @@ public class EnquiryConverter implements CommonConverter<Enquiry, EnquiryDto>{
 		//entity.setClosing_manager_name__c(dto.getClosing_manager_name__c());
 		//entity.setClosingmanagers(dto.getClosingmanagers());
 		
+		/* Trigger 1,2 and Barrier 1, 2 pushing to SFDC Enquiry Object from Sales Tab -  
+	     * Change By Satheesh Kyatham- 25-12-2019
+	     * Request From - Prakash Idnani*/
+		/*=======Start==========*/
+		if(dto.getTrigger_1__c()!=null)
+			entity.setTrigger_1__c(dto.getTrigger_1__c());
+		if(dto.getTrigger_2__c()!=null)
+			entity.setTrigger_2__c(dto.getTrigger_2__c());
+		if(dto.getBarrier_1__c()!=null)
+			entity.setBarrier_1__c(dto.getBarrier_1__c());
+		if(dto.getBarrier_2__c()!=null)
+			entity.setBarrier_2__c(dto.getBarrier_2__c());
+		/*=========End========*/
+		/* Selected Follow type and follow Date value are pushing to Enquiry Object, -  
+	     * Change By - Satheesh Kyatham- 25-12-2019
+	     * Request From - Prakash Idnani*/
+		/*=======Start==========*/
+		if(dto.getFollow_up_reason__c()!=null)
+			entity.setFollow_up_reason__c(dto.getFollow_up_reason__c());
+		if(dto.getFollow_up_Date_Time__c()!=null)
+			entity.setFollow_up_Date_Time__c(dto.getFollow_up_Date_Time__c());
+		/*=========End========*/
+		/* Sourcing Manager and Vertical Drop downs adding on Sales Tab for passing drop down values to SFDC, -  
+	     * Change By - Satheesh Kyatham- 27-12-2019
+	     * Request From - Prakash Idnani*/
+		/*=======Start==========*/
+		if(dto.getVerticle__c()!=null)
+			entity.setVerticle__c(dto.getVerticle__c());
+		/*=========End========*/
+		
+		if(dto.getEnquiryReport().getReferredby()!=null)
+			entity.getEnquiryReport().setReferredby(dto.getEnquiryReport().getReferredby());
 		return entity;
 	}
 

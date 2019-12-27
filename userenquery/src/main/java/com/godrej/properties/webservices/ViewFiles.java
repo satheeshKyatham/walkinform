@@ -33,6 +33,9 @@ public class ViewFiles extends HttpServlet {
 		
 		if (from.equals("EOIbookingReference")) {
 			file = new File(rootPath+"\\"+from+"\\"+eid+"\\"+fid+"\\"+fileName);
+		} else if (from.equals("eoiForm")) {
+			file = new File(rootPath+"\\"+fileName);
+			fileName = file.getName();
 		}
 		
 	    response.setHeader("Content-Type",    getServletContext().getMimeType(file.getName()));

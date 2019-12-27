@@ -22,15 +22,15 @@
 		
 		<div class="form-group">
 			<label for="exampleInputNameDate">From Date</label> 
-			<input class="form-control" type="date" name="" id="txtEOIFromDate">
+			<input class="form-control" type="date" name="" id="txtEOIFromSalesDate">
 		</div>
 		<div class="form-group">
 			<label for="exampleInputNameDate">To Date</label> 
-			<input class="form-control" type="date" name="" id="txtEOIToDate">
+			<input class="form-control" type="date" name="" id="txtEOIToSalesDate">
 		</div>
 		<div class="form-group">
 			<label for="exampleInputNameDate">Search</label> 
-			<input class="form-control" type="button" value="Search" name="Search" onclick="getEOIReport()"/>
+			<input class="form-control" type="button" value="Search" name="Search" onclick="getEOIReportSales()"/>
 		</div>
 	</div>
 	<div class="clearfix"></div>
@@ -39,13 +39,7 @@
 
 <div class="commonLoad" id="mainPageLoad" style="display: none;"></div>
 
-<%-- <form:form action="downloadEOICSV" method="post">
-	<div id="eoiReportCSVInputCol"> </div>
 
-	<fieldset style="width: 400px;">
-		<input type="submit" value="Downlaod In Excel">
-	</fieldset>
-</form:form> --%>
 
 <div class="wrapperEOIRepo1">
 	<div class="divEOI1"></div>
@@ -54,13 +48,12 @@
 <div class="wrapperEOIRepo2">
 	
 	<div class="divEOI2" style="overflow: auto;">
-		<table class="table table-bordered" id="eoiReportTable">
+		<table class="table table-bordered" id="eoiReportTableSales">
 			<thead>
 				<tr>
 					<!-- <th>Region</th>
 					<th>Project Name</th> -->
 					<th>ENQ_Name</th>
-					<th>PDF</th>
 					<th>Customer Name</th>
 					<th>Customer Mobile</th>
 					<th>Customer Email</th>

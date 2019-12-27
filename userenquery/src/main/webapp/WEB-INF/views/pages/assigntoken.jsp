@@ -131,8 +131,10 @@ projectid=request.getParameter("projectid");
 							</select>
 						</div>
 						<div class="form-group">
-							<label for="exampleInputNameDate">Date</label> 
+							<label for="exampleInputNameDate">From Date</label> 
 							<input class="form-control" type="date" name="" id="txtFromDate">
+							<label for="exampleInputNameDate">To Date</label> 
+							<input class="form-control" type="date" name="" id="txtToDate">
 						</div>
 						<div class="form-group">
 							<input class="form-control" type="button" value="Search" name="Search" id="amsearch" onclick="loadData()"/>
