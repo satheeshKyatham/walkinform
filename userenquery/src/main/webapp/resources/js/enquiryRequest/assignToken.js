@@ -12,6 +12,7 @@ $(document).ready(function() {
 	
 	 var today = new Date();
 	 document.getElementById("txtFromDate").value = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
+	 document.getElementById("txtToDate").value = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
 	
 	    var value = $(this).val();
 	    if(value!='-1'){
@@ -63,7 +64,7 @@ $(document).ready(function() {
 			$("#appDetails tbody").empty();
 			$("#assignTouserLoader").show();
 			
-			var urlPP = "gettokenEntrys?tokenType="+$('#typeSelected').val()+"&ProjectId="+$('#projectid').val()+"&date="+$('#txtFromDate').val();
+			var urlPP = "gettokenEntrys?tokenType="+$('#typeSelected').val()+"&ProjectId="+$('#projectid').val()+"&date="+$('#txtFromDate').val()+"&todate="+$('#txtToDate').val();
 			var i = 0
 			
 			$.getJSON(urlPP, function (data) {
@@ -133,7 +134,11 @@ $(document).ready(function() {
 				});
 				$('#appDetails').DataTable(
 						{
-							destroy: true
+							destroy: true,
+							language: {
+						       // search: "_INPUT_",
+						        searchPlaceholder: "Search by name"
+						    }
 							//processing:true,
 							//serverSide:true
 						});
@@ -156,7 +161,7 @@ $(document).ready(function() {
 			$("#assinedDetails").dataTable().fnDestroy();
 			 $("#assignedLoader").show();
 			 $("#assinedDetails tbody").empty();
-			var urlPPtoken = "gettokenassignentrys?tokenType="+$('#typeSelected').val()+"&projectid="+$('#projectid').val()+"&date="+$('#txtFromDate').val();
+			var urlPPtoken = "gettokenassignentrys?tokenType="+$('#typeSelected').val()+"&projectid="+$('#projectid').val()+"&date="+$('#txtFromDate').val()+"&todate="+$('#txtToDate').val();
 			//$("#mainPageLoad").show();
 			var i = 0
 			
@@ -200,7 +205,7 @@ $(document).ready(function() {
 
 					var editButtonShow ="";
 					var prorityNo ="";
-					if(value.isdone=="Attended" || value.isdone=="Started")
+					if(value.isdone=="Attended")//|| value.isdone=="Started"
 						{
 							editButtonShow="<td></td>";
 						}
@@ -226,7 +231,11 @@ $(document).ready(function() {
 				});		
 				$('#assinedDetails').DataTable(
 						{
-							destroy: true
+							destroy: true,
+							language: {
+							       // search: "_INPUT_",
+							        searchPlaceholder: "Search by name"
+							    }
 						});
 			}).done(function() {
 				
@@ -311,7 +320,7 @@ $(document).ready(function() {
 					},
 					function(data) {	
 						var dd = JSON.parse(data);
-						if(dd.isdone=="S" || dd.isdone=="Y")
+						if(dd.isdone=="Y")//dd.isdone=="S" || 
 							{
 							swal({
 								title: "Assigned user already started the session on this token",

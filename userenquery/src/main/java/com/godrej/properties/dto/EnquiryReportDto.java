@@ -84,7 +84,12 @@ public class EnquiryReportDto extends CommonDto{
     private String trigger2;
     private String barrier2;
     /*=========End========*/
-    
+    /* Referred by added on Enquiry page, on select of walk-in source as referral -  
+     * Change By Satheesh Kyatham- 25-12-2019
+     * Request From - Prakash Idnani*/
+    /*=======Start==========*/
+    private String referredby;
+    /*=========End========*/
     public String getProjectId() {
 		return projectId;
 	}
@@ -347,6 +352,12 @@ public class EnquiryReportDto extends CommonDto{
 	}
 	public void setBarrier2(String barrier2) {
 		this.barrier2 = barrier2;
+	}
+	public String getReferredby() {
+		return referredby;
+	}
+	public void setReferredby(String referredby) {
+		this.referredby = referredby;
 	}
 	
 	

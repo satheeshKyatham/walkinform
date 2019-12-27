@@ -15,6 +15,7 @@ import org.springframework.stereotype.Repository;
 import com.godrej.properties.dao.AbstractDao;
 import com.godrej.properties.dao.EOIPaymentDtlDao;
 import com.godrej.properties.model.EOIPaymentDtl;
+import com.godrej.properties.model.EOIPaymentModel;
 
 @SuppressWarnings("unchecked")
 @Repository("eOIpaymentDtlDao")
@@ -78,21 +79,24 @@ public class EOIPaymentDtlDaoImpl extends AbstractDao<Integer, EOIPaymentDtl> im
 				+ " ,eoiPay.transaction_id,eoiPay.transaction_date,eoiPay.transaction_amount,eoiPay.description,eoiPay.total_amount "
 				+ " ,eoiPay.gpl_cs_balance_details_id,eoiPay.pan_attach,cheque_attach,user_email,eoiPay.user_name,eoiPay.project_name,eoiPay.isfromcp "
 				+ " from salesforce.gpl_cs_eoi_payment_details eoiPay "
-				+ " inner join salesforce.propstrength__request__c req on(eoiPay.enq_sfid=req.sfid) "+whereCondition+" ", EOIPaymentDtl.class);
+				+ " inner join salesforce.propstrength__request__c req on(eoiPay.enq_sfid=req.sfid) "+whereCondition+" ", EOIPaymentModel.class);
 		//order by b.id
-		list = (List<EOIPaymentDtl>)q.getResultList();
+		list = (List<EOIPaymentModel>)q.getResultList();
 		
 		Log.info("Final Size::{}",list.size());
 		if (list.size() > 0) {
-			return list;
+			return null;
 		}
-		return list;*/
+		return null;*/
 		
 		List<Object[]> results = session.createQuery("select eoiPay.id,eoiPay.project_sfid,eoiPay.userid,eoiPay.payment_type,eoiPay.bank_name,eoiPay.branch,eoiPay.isactive,eoiPay.enq_sfid,req.name "
 				+ " ,eoiPay.transaction_id,eoiPay.transaction_date,eoiPay.transaction_amount,eoiPay.description,eoiPay.total_amount "
 				+ " ,eoiPay.gpl_cs_balance_details_id,eoiPay.pan_attach,eoiPay.cheque_attach,eoiPay.user_email,eoiPay.user_name,eoiPay.project_name,eoiPay.isfromcp "
-				+ " from EOIPaymentDtl eoiPay "
-				+ " inner join Enquiry req on(eoiPay.enq_sfid=req.sfid) "+whereCondition+" ").getResultList();
+				//+ " ,c.name as customername,c.mobile__c "
+				+ "from EOIPaymentDtl eoiPay "
+				+ " inner join Enquiry req on(eoiPay.enq_sfid=req.sfid) "
+				//+ " inner join Contact c on(req.contactId=c.channelPartner) "
+				+ ""+whereCondition+" ").getResultList();
 
 		for (Object[] result : results) {
 			EOIPaymentDtl dtl = new EOIPaymentDtl();
@@ -108,12 +112,14 @@ public class EOIPaymentDtlDaoImpl extends AbstractDao<Integer, EOIPaymentDtl> im
 			dtl.setDescription(result[12].toString());
 			dtl.setTotal_amount(result[13].toString());
 			//dtl.setGpl_cs_balance_details_id(Integer.parseInt(result[13].toString()));
-			dtl.setPan_attach(result[14].toString());
-			dtl.setCheque_attach(result[15].toString());
-			dtl.setUser_email(result[16].toString());
-			dtl.setUser_name(result[17].toString());
+			dtl.setPan_attach(result[15].toString());
+			dtl.setCheque_attach(result[16].toString());
+			dtl.setUser_email(result[17].toString());
+			dtl.setUser_name(result[18].toString());
 			dtl.setName(result[8].toString());
 			dtl.setProject_sfid(result[1].toString());
+			//dtl.setCustomerName(result[21].toString());
+			//dtl.setMobileNo(result[22].toString());
 			list.add(dtl);
 		}
 		return list;

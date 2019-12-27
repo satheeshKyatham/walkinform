@@ -79,7 +79,7 @@ if(ses!=null){
 	   		<div>
 				<ul class="nav nav-tabs tabNav">
 					<li onclick="getPendingPaymentDetails()" class="active" id="Payment_Pending_Id">
-						<a href="#tab1" data-toggle="tab">Payment Approve/Reject</a>
+						<a href="#tab1" data-toggle="tab">Payment Approval Pending</a>
 					</li>
 					 <li id="Payment_Approve_Id" onclick="getApprovedPaymentDetails()">
 						<a href="#tab2" data-toggle="tab">Payment Approved List</a>
@@ -96,7 +96,7 @@ if(ses!=null){
 				<div class="commonLoad" id="mainPageLoad" style="display: none;"></div>
 				
 				<div class="col-md-12">
-					<button onclick="approvedEOIPayment()">Approved All</button>
+					<button onclick="approvedEOIPayment()">Approve All</button>
 					<button onclick="rejectEOIPayment()">Reject All</button>
 					<div class="clearfix"></div>
 					<table class="table table-bordered" id="Payment_Pending">
@@ -105,12 +105,16 @@ if(ses!=null){
 							<th style="display:none">ID</th>
 								<th></th>
 								<th>Enquiry No</th>
+								<!-- <th>Customer Name</th>
+								<th>Mobile No</th> -->
 								<th>Payment Type</th>
 								<th>Bank Name</th>
 								<th>Branch</th>
 								<th>Trx ID</th>
 								<th>Trx Date</th>
 								<th>Trx Amount</th>
+								<th>PAN Attachment</th>
+								<th>Cheque/Receipt Attachment</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -131,6 +135,8 @@ if(ses!=null){
 								<tr>
 									
 									<th>Enquiry No</th>
+									<!-- <th>Customer Name</th>
+									<th>Mobile No</th> -->
 									<th>Payment Type</th>
 									<th>Bank Name</th>
 									<th>Branch</th>
@@ -155,6 +161,8 @@ if(ses!=null){
 							<thead>
 								<tr>
 									<th>Enquiry No</th>
+									<!-- <th>Customer Name</th>
+									<th>Mobile No</th> -->
 									<th>Payment Type</th>
 									<th>Bank Name</th>
 									<th>Branch</th>

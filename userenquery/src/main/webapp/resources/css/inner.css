@@ -2,14 +2,18 @@
 .mrgR25 {margin-right:25px !important;}
 
 .mrgR15 {margin-right:15px !important;}
+.mrgB8 {margin-bottom:8px !important;}
 
 .txtCenter {text-align:center !important;}
 
 .padLR0 {padding-left:0 !important; padding-right:0 !important;}
 
+.displayIB {display: inline-block !important;}
+
 .fa-spin {color: #0077b9 !important;}
 .colorWhite {color:#ffffff !important;}
-
+.redColr {color: #ca0000 !important;}
+.cursorPoint {cursor: pointer !important;}
 
 .fnt14 {font-size:14px !important;}
 
@@ -406,7 +410,7 @@ background-position: center; background-repeat: no-repeat; background-size: 40px
     background-color: #f4f4f4; margin-bottom: 3px;}
     
 
-.csPtReachMexLength {color:#137a00;}  
+.csPtReachMexLength, .csPtReachMexLengthEOI {color:#137a00;}  
 
 
 .offerPaymentCol ul {padding:10px 0 !important; list-style: none; background-color: #f6f6f6; border: 1px solid #ccc; margin-bottom:0 !important;}
@@ -424,3 +428,6 @@ background-position: center; background-repeat: no-repeat; background-size: 40px
 .panAttachWebcam, .receiptAttachWebcam {display:none;}
 
 #channelPartnerLoader {background-position: 4px 4px !important; background-size: 25px 25px !important; background-attachment: inherit !important;}
+
+
+.addMoreBtn {display: inline-block; cursor: pointer; color: #0077b9;}

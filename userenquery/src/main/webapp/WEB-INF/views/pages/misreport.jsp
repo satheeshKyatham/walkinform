@@ -119,10 +119,13 @@ projectid=request.getParameter("projectid");
 					<a href="#tab3" data-toggle="tab">Created Offer List</a>
 				</li> 
 				<li onclick="getApplicationList()" id="applicationsListCol">
-					<a href="#applications" data-toggle="tab">Applications <i class="fa fa-spinner fa-spin" style="display:none;"></i> <span class="alphaCol">Beta</span></a>
+					<a href="#applications" data-toggle="tab">Applications <i class="fa fa-spinner fa-spin" style="display:none;"></i> </a>
 				</li>
 				<li onclick="getEOIReport()" id="eoiReportTab">
 					<a href="#eoiReport" data-toggle="tab">EOI Report <i class="fa fa-spinner fa-spin" style="display:none;"></i> </a>
+				</li>
+				<li onclick="getPaymentEOIReport()" id="paymentEOIReportTab">
+					<a href="#paymentEOIReport" data-toggle="tab">Payment Report <i class="fa fa-spinner fa-spin" style="display:none;"></i> </a>
 				</li>
 			</ul>
 			<div class=""></div>
@@ -208,6 +211,10 @@ projectid=request.getParameter("projectid");
 				
 			<div class="tab-pane" id="eoiReport">
 				<%@ include file="/WEB-INF/views/pages/eoiReport.jsp" %>
+			</div>		
+				
+			<div class="tab-pane" id="paymentEOIReport">
+				<%@ include file="/WEB-INF/views/pages/paymentEOIReport.jsp" %>
 			</div>		
 				
 				

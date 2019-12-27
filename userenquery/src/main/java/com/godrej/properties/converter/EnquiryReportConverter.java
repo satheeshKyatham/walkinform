@@ -156,6 +156,8 @@ public class EnquiryReportConverter implements CommonConverter<EnquiryReport, En
 			enquiry.setTrigger2(dto.getTrigger2().trim());
 		if(dto.getBarrier2()!=null)
 			enquiry.setBarrier2(dto.getBarrier2().trim());
+		if(dto.getReferredby()!=null)
+			enquiry.setReferredby(dto.getReferredby());
 		return enquiry;
 	}
 

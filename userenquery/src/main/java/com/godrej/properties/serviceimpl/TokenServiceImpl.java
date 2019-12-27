@@ -68,15 +68,15 @@ public class TokenServiceImpl implements TokenService {
 	}
 
 	@Override
-	public List<VW_Token> getTokenList(String tokenType,String projectId,String inputDate) {
+	public List<VW_Token> getTokenList(String tokenType,String projectId,String inputDate,String toDate) {
 		// TODO Auto-generated method stub
-		return vw_tokenDao.getTokenList(tokenType,projectId,inputDate);
+		return vw_tokenDao.getTokenList(tokenType,projectId,inputDate,toDate);
 	}
 	
 	@Override
-	public List<VW_Token> getTokenAssignList(String tokenType,String projectid,String inputDate) {
+	public List<VW_Token> getTokenAssignList(String tokenType,String projectid,String inputDate,String toDate) {
 		// TODO Auto-generated method stub
-		return vw_tokenDao.getTokenAssignList(tokenType,projectid,inputDate);
+		return vw_tokenDao.getTokenAssignList(tokenType,projectid,inputDate,toDate);
 	}
 
 

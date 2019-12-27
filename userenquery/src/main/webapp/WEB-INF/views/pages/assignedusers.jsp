@@ -130,8 +130,12 @@ if(ses!=null){
 							
 							<i class="glyphicon glyphicon-filter" style="border-right: 1px solid #333; margin-right: 10px; padding-right: 10px;"></i>
 							<div class="form-group">
-								<label for="exampleInputNameDate">Date</label> 
-								<input class="form-control" type="date" name="" id="txtFromDate">
+								<label for="exampleInputNameDate">From Date</label> 
+								<input class="form-control" type="date" name="" id="txtFromDateAssigned">
+							</div>
+							<div class="form-group">
+								<label for="exampleInputNameDate">To Date</label> 
+								<input class="form-control" type="date" name="" id="txtToDateAssigned">
 							</div>
 							<div class="form-group">
 								<!-- <input class="form-control" type="button" value="Search" name="Search" id="amsearch" onclick="loadData()"/> -->

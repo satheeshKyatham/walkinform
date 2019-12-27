@@ -265,7 +265,7 @@
 					<div class="clearfix"></div>
 					
 					<div class="col-md-2 radioBtnWrp mrgT0" style="margin-top:-16px !important;">
-						  <div class="titleF">Have we met before <strong class="mndt">*</strong>
+						  <div class="titleF">Have you visited site before <strong class="mndt">*</strong>
 						  	<div class="clearfix"></div>
 						  </div>
 							<div class="radioBtnCol" data-toggle="buttons">
@@ -547,7 +547,7 @@
 						<div id="isReferredByChannelPartnerD" class="sourceCol animated" style="display: none;">
 							<div class="col-md-6 col-xs-12">
 								<div class="group">
-									<select class="isReferredByChannelPartnerD requiredField enquiryFields" disabled="disabled" id="walkInSource" name="walkInSource">
+									<select class="isReferredByChannelPartnerD requiredField enquiryFields" disabled="disabled" id="walkInSource" name="walkInSource" onchange="onSelectWalkinSrcReferral(event,this);">
 									    <option value=""></option>
 										<c:forEach var="communcationMediumList" items="${communcationMediumList}">
 	
@@ -559,7 +559,18 @@
 									<label class="select-label">How did you come to know about this project? <strong class="mndt">*</strong></label>
 								</div>
 							</div>
-							
+							<!--  Referred by added on Enquiry page, on select of walk-in source as referral -  
+     						* Change By Satheesh Kyatham- 25-12-2019
+     						* Request From - Prakash Idnani -->
+     						<!-- Start -->
+							<div class="referred_by_name ccol-md-3 col-xs-6">
+								<div class="group">
+									<input type="text" class="autocomplete-off" id="referredbyId" name="enquiryReport.referredby"/>
+									<span class="highlight"></span><span class="bar"></span>
+									<label>Referred by</label>
+								</div>
+							</div>
+							<!-- END -->
 							<!-- Instracted BY Ganesh -- comment by A -->
 							<!-- <div class="col-md-6 col-xs-12">
 								<div class="group">

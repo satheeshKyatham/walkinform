@@ -315,13 +315,13 @@ function submitWithFile(formId,action, callback){
 		        				//alert("PAN ::: " + $(this).find('.panAttachEoi')[0].files[0].size);
 		        				
 		        				//alert("Receipt ::: " + $(this).find('.receiptAttachEoi')[0].files[0].size);
-		        				
+		        				if ($(this).find('.panAttachEoi').get(0).files.length != 0){
 		        				if ($(this).find('.panAttachEoi')[0].files[0].size < 5242880 && $(this).find('.receiptAttachEoi')[0].files[0].size < 5242880 ) {
 		        					
 		        				} else {
 		        					sizeValidate++;
 		        				}
-		        				
+		        				}
 		        			});
 		        			
 		        			if (sizeValidate < 1) {

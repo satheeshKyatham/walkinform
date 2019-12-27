@@ -42,7 +42,7 @@ public class AssignUserDaoImpl extends AbstractDao<Integer, AssignedUser> implem
 	
 	
 	@Override
-	public List<AssignedUser> getassignedusers(String user_id,String projectId,String fromdate) {
+	public List<AssignedUser> getassignedusers(String user_id,String projectId,String fromdate,String todate) {
 		Session session = this.sessionFactory.getCurrentSession();	
 		
 		List<AssignedUser> list=null;
@@ -76,7 +76,7 @@ public class AssignUserDaoImpl extends AbstractDao<Integer, AssignedUser> implem
 			+ " LEFT JOIN salesforce.contact c ON req.propstrength__primary_contact__c = c.sfid "
 			+ " LEFT JOIN salesforce.gpl_cs_balance_details bdetails ON req.sfid = bdetails.enquiry_sfid AND bdetails.isactive = 'A' "
 			+ " LEFT JOIN salesforce.propstrength__offer__c offername ON bdetails.offer_sfid = offername.sfid AND offername.propstrength__status__c = 'Closed Won' "
-			+ " WHERE a.isactive = 'Y' AND window_assign = '"+user_id+"' and projectname= '"+projectId+"' and Date(a.created)= '"+fromdate+"' order by isdone asc ", AssignedUser.class);
+			+ " WHERE a.isactive = 'Y' AND window_assign = '"+user_id+"' and projectname= '"+projectId+"' and Date(a.created) between '"+fromdate+"' and '"+todate+"' order by isdone asc ", AssignedUser.class);
 		
 		
 		

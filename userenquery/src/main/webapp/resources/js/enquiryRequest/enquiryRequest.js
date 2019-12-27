@@ -22,6 +22,7 @@ $(document).ready(function(){
 	 $(this).scrollTop(0);
 });
 function onPageLoad(){
+	$(".referred_by_name").hide();
 	//debugger	
 		var projectName=$('#projectName').val();
 	    if(projectName!=""){
@@ -284,6 +285,18 @@ function populateBasicInfo(enq,contact){
 			
 			//$('#walkInSource').find('option[value='+enq.walkInSource+']').attr('selected','selected');
 			$('#walkInSource').val(enq.walkInSource);
+			/*if(enq.walkInSource==='Referral')
+				{
+					$(".referred_by_name").show();
+					$('#referredbyId').val(enq.referredbyDto);
+					$("#referredbyId").addClass('disableInputs');
+				}
+			else
+				{
+					$(".referred_by_name").hide();
+				}*/
+			//alert(enq.enquiryReport.referredby);
+			
 			$('#walkInSourceDetail').val(enq.walkInSourceDetail);
 			
 			//$('#otherChannelPartnerName').val(enq.otherChannelPartner);
@@ -1263,3 +1276,22 @@ function initialize() {
 		});
 	});
 }*/
+ /* Referred by added on Enquiry page, on select of walk-in source as referral -  
+	* Change By Satheesh Kyatham- 25-12-2019
+	* Request From - Prakash Idnani*/
+		/*  Start  */
+function onSelectWalkinSrcReferral(event,el)
+{
+		var val=$(el).val();
+		if(val=="Referral")
+			{
+			$('.referred_by_name').show();
+			}
+		else
+			{
+			$('.referred_by_name').hide();
+			}
+		//var brkContId=$("#brkCont"+val).attr('idVal');
+		//$("#brokerContactId").val(brkContId);
+	}
+/*  END  */

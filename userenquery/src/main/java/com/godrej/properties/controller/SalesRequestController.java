@@ -228,7 +228,7 @@ public class SalesRequestController {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		   SendSMS.SMSSend(enq.getContact().getMobile(), strencryptedText);
+		   //SendSMS.SMSSend(enq.getContact().getMobile(), strencryptedText);
 		
 			
 			LOG.info(MessageConstants.ENQUIRY_UPDATE_SUCCCESS);

@@ -20,9 +20,9 @@ public interface TokenService {
 
 	String checkPriceDetails(PriceSheet pricesheet);
 
-	List<VW_Token> getTokenList(String tokenType, String projectId, String inputDate);
+	List<VW_Token> getTokenList(String tokenType, String projectId, String inputDate,String toDate);
 
-	List<VW_Token> getTokenAssignList(String tokenType, String projectid, String inputDate);
+	List<VW_Token> getTokenAssignList(String tokenType, String projectid, String inputDate,String toDate);
 
 	List<Token> getTokenList(String tokenType);
 
