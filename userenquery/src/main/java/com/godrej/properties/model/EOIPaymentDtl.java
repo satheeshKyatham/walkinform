@@ -75,7 +75,9 @@ public class EOIPaymentDtl implements Serializable{
 	@Column(name = "project_name")
 	private String project_name;
 	
-
+	@Column(name = "eoi_form_path")
+	private String eoi_form_path;
+	
 	@Column(name = "gpl_cs_balance_details_id") private int gpl_cs_balance_details_id;
 	@Column(name = "isfromcp") private String isfromcp;
 	@Transient
@@ -297,6 +299,12 @@ public class EOIPaymentDtl implements Serializable{
 		this.mobileNo = mobileNo;
 	}
 
+	public String getEoi_form_path() {
+		return eoi_form_path;
+	}
 
+	public void setEoi_form_path(String eoi_form_path) {
+		this.eoi_form_path = eoi_form_path;
+	}
 	
 }
