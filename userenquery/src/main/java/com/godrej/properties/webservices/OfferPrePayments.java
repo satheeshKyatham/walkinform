@@ -149,7 +149,7 @@ public class OfferPrePayments {
 					else
 						account.put("BankGL","");
 					
-					if(ecData1.get(i).getPayment_type().equals("NEFT") || ecData1.get(i).getPayment_type().equals("Swipe"))
+					if(ecData1.get(i).getPayment_type().equals("NEFT") || ecData1.get(i).getPayment_type().equals("Swipe") || ecData1.get(i).getPayment_type().equals("Wire Transfer"))
 					{
 						account.put("RTGSNEFT",ecData1.get(i).getTransaction_id());
 					}

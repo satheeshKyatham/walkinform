@@ -205,7 +205,7 @@ public class CreateOffer {
 			else
 				account.put("BankGL","");
 			
-			if(paymentmode.equals("NEFT") || paymentmode.equals("Swipe"))
+			if(paymentmode.equals("NEFT") || paymentmode.equals("Swipe") || paymentmode.equals("Wire Transfer"))
 			{
 				account.put("RTGS_NEFT",trxno);
 			}

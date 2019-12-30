@@ -233,6 +233,7 @@
 									<option value="Cheque">Cheque</option>
 									<option value="NEFT">NEFT/Credit</option>
 									<option value="Swipe">Swipe</option>
+									<option value="Wire Transfer">Wire Transfer (PayZap, Google Pay)</option>
 									<!--<option value="Online">Online</option>-->
 								</select>
 							</td>
