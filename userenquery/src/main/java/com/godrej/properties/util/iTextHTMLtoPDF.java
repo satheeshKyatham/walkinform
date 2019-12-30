@@ -131,6 +131,41 @@ public static void ApplicationFormPDF(String appFormData, String enqSfid, String
 	}
 	
 	
-	
+	/* EOI Form Print */
+	public static void EOIFormPDF(String appFormData, String regionName, String projectName, String enqName) throws JRException, IOException {
+		try {
+			Document document = new Document(PageSize.A4);
+	      
+	      	document.setMargins(20, 20, 20, 80);
+	      	
+	      	String rootPath = System.getProperty("catalina.home");
+	      	//Create Folder	      
+			File ad_dir = new File(rootPath + File.separator + "costSheetPDF" + File.separator + regionName + File.separator + projectName + File.separator + "EOI Details" + File.separator + enqName);
+			String ad_path =ad_dir +File.separator;
+			if (!ad_dir.exists()) {
+				ad_dir.mkdirs();	
+			}
+	      	
+	      	PdfWriter pdfWriter = PdfWriter.getInstance
+	           (document, new FileOutputStream(ad_path+"eoi_form_"+enqName+".pdf"));
+	     
+	      	HeaderFooterPageEvent event = new HeaderFooterPageEvent();
+	      	pdfWriter.setPageEvent(event);
+	      	
+	      	document.open();
+			 
+	      	XMLWorkerHelper worker = XMLWorkerHelper.getInstance();
+	      
+	      	String str = "<html><head><style>body{font-size:12px;}.table-bordered {border: 0; border-color: #333333; border-right-width: 1px; border-right-style: solid;  border-bottom-width: 1px; border-bottom-style: solid;} table {font-size:12px; border-collapse: collapse; border-spacing: 1px; width:100%;} th,td {padding:8px;} th {border: 0; border-color: #333333; border-left-width: 1px; border-left-style: solid;  border-top-width: 1px; border-top-style: solid; border-collapse: collapse; border-spacing: 1px; } td {border: 0; border-color: #333333; border-left-width: 1px; border-left-style: solid;  border-top-width: 1px; border-top-style: solid; border-collapse: collapse; border-spacing: 1px; }</style></head><body>"+appFormData+"</body></html>";
+	      	worker.parseXHtml(pdfWriter, document, new StringReader(str));
+	      	document.close();
+	    }
+	    catch (Exception e) {
+	    	logger.error("Error :-",e);
+	    }
+	}
+	/* END EOI Form Print */
+
+
 	
 }

@@ -52,7 +52,7 @@
 					<th>Customer Email</th>
 					<th>Walkin Date</th>
 					<th>Walk-In Source</th>
-					<th>Verticle</th>
+					<th>Vertical </th>
 					<th>Closing Manager</th>
 					<th>Date of EOI</th>
 					<th>Payment Type</th>

@@ -35,4 +35,5 @@ public interface TokenDao {
 
 	/* String updateReAssignToken(String tokenID, String assinedto); */
 	String updateEnqSalesTab(int enqid,String email);
+	String getSalesUserSFID(int enqid, String email);
 }

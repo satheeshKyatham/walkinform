@@ -1413,3 +1413,21 @@ function getEnqDtlFromSFDCAPI () {
     });
 
 }
+getClosingManagersList();
+function getClosingManagersList()
+{
+	
+	       var urlGetUsers = "getUserProjectMapping?projectid="+$('#projectid').val();
+	       var j = 0
+	       var option="";
+	    	$.getJSON(urlGetUsers, function (data) {
+	    		option = "<option>Select User</option>";
+	    		$.each(data, function (index, value) {
+	    			option = option+"<option value="+value.emailid+">"+value.user_name+"</option>";
+	    			j = j+1
+	    		});		
+	    		//option=option+"</select>";
+	    	}).done(function() {
+	    		$("#sourcingManagerId").append(option);
+	    	});
+	    }

@@ -8,37 +8,32 @@ $.ajaxSetup({
 
 $(document).ready(function() {
 	var today = new Date();
-	document.getElementById("txtEOIFromDate").value = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
-	document.getElementById("txtEOIToDate").value = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
-	document.getElementById("txtpaymentEOIFromDate").value = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
-	document.getElementById("txtpaymentEOIToDate").value = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
+	document.getElementById("txtEOIFromSalesDate").value = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
+	document.getElementById("txtEOIToSalesDate").value = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
+	document.getElementById("txtpaymentEOIFromSalesDate").value = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
+	document.getElementById("txtpaymentEOIToSalesDate").value = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
 });
 
 
-function getEOIReport () {
+function getEOIReportSales () {
 	
-	$("#eoiReportTable").DataTable().destroy();
+	$("#eoiReportTableSales").DataTable().destroy();
 	
-	$("#eoiReportCSVInputCol").empty();
+	$('#eoiReportTabSales i').show();
 	
-	$("#eoiReportCSVInputCol").append("<input type='hidden' value='"+$('#txtEOIFromDate').val()+"' name='fromdate' />");
-	$("#eoiReportCSVInputCol").append("<input type='hidden' value='"+$('#txtEOIToDate').val()+"' name='todate' />");
-	$("#eoiReportCSVInputCol").append("<input type='hidden' value='"+$('#projectid').val()+"' name='projectSfid' />");
-	
-	$('#eoiReportTab i').show();
-	
-	$("#eoiReportTable tbody").empty();
-	$.get("getEOIReport",{"projectSfid":$('#projectid').val(), "fromDate":$('#txtEOIFromDate').val(), "toDate":$('#txtEOIToDate').val()},function(data){				 
+	$("#eoiReportTableSales tbody").empty();
+	$.get("getEOIReportSales",{"userid":$('#userid').val(), "projectSfid":$('#projectid').val(), "fromDate":$('#txtEOIFromSalesDate').val(), "toDate":$('#txtEOIToSalesDate').val()},function(data){				 
 		var obj =JSON.stringify(data);
 		var obj1 =JSON.parse(obj);
 		
-		
+		var pageContext = $("#pageContext").val()+"/";
 		
 		var html = '';
 		
 		var tab = '';
 		var eoiTarget = '';
 		var icon = '';
+		
 		
 		//alert(obj1.length);
 		if(obj1!=null) {
@@ -56,11 +51,7 @@ function getEOIReport () {
 				
 				//tab = "";
 				
-				
-				
-				
-				// eoiFormPath =   'costSheetPDF/'+$('#region__c').val()+'/'+$('#marketingProjectName').val()+'/'+'EOI Details'+'/'+$('#enquiry_name').val()+'/eoi_form_'+$('#enquiry_name').val()+'.pdf';
-			     eoiTarget = pageContext+'file?name='+obj1[i].eoi_form_path+"&from=eoiForm";
+				eoiTarget = pageContext+'file?name='+obj1[i].eoi_form_path+"&from=eoiForm";
 				
 				
 			     if (obj1[i].eoi_form_path != null) {
@@ -68,15 +59,12 @@ function getEOIReport () {
 			     } else {
 			    	 icon = "";
 			     }
-			     
 				
 				html += "<tr>" +
 							// " <td>"+obj1[i].region__c+"</td>" +
 							// " <td>"+obj1[i].project_name+"</td>" +
 							" <td>"+obj1[i].enq_name+"</td>" +
-							
 							" <td><a target='_blank' href='"+eoiTarget+"'>"+icon+"</td>" +
-							
 							" <td>"+obj1[i].customer_name+"</td>" +
 							" <td>"+obj1[i].customer_mobile+"</td>" +
 							" <td>"+obj1[i].customer_email+"</td>" +
@@ -109,7 +97,7 @@ function getEOIReport () {
 			
 			//html = html.replace(/null/g, "");
 			
-			$("#eoiReportTable tbody").append(html);
+			$("#eoiReportTableSales tbody").append(html);
 			
 			
 		} else {
@@ -121,14 +109,24 @@ function getEOIReport () {
 			"bDestroy": true
 		});*/
 		
-		$('#eoiReportTab i').hide();
+		$('#eoiReportTabSales i').hide();
 		
-		//$('#eoiReportTable').dataTable({
+		//$('#eoiReportTableSales').dataTable({
 			//"ordering": true,
 			//"bDestroy": true
 		//});
 		
-		 $('#eoiReportTable').DataTable( {
+		 /*$('#eoiReportTableSales').DataTable( {
+			 dom: 'Bfrtip',
+			 "buttons": [
+				 { "extend": 'excel', "text":'Export To Excel',"className": 'btn btn-default btn-xs' }
+		      ],
+		      "order": []
+		 });*/
+		
+		
+		
+		$('#eoiReportTableSales').DataTable( {
 			 dom: 'Bfrtip',
 			 "buttons": [
 				 { "extend": 'excel', "text":'Export To Excel',"className": 'btn btn-default btn-xs' }
@@ -142,14 +140,14 @@ function getEOIReport () {
 }
 
 /* -------- Payment EOI Report ---------- */
-function getPaymentEOIReport () {
+function getPaymentEOIReportSales () {
 	
-	$("#paymentEOIReportTable").DataTable().destroy();
+	$("#paymentEOIReportTableSales").DataTable().destroy();
 	
-	$('#paymentEOIReportTab i').show();
+	$('#paymentEOIReportTabSales i').show();
 	
-	$("#paymentEOIReportTable tbody").empty();
-	$.get("getPaymentEOIReport",{"projectSfid":$('#projectid').val(), "fromDate":$('#txtpaymentEOIFromDate').val(), "toDate":$('#txtpaymentEOIToDate').val()},function(data){				 
+	$("#paymentEOIReportTableSales tbody").empty();
+	$.get("getPaymentEOIReportSales",{"userid":$('#userid').val(), "projectSfid":$('#projectid').val(), "fromDate":$('#txtpaymentEOIFromSalesDate').val(), "toDate":$('#txtpaymentEOIToSalesDate').val()},function(data){				 
 		var obj =JSON.stringify(data);
 		var obj1 =JSON.parse(obj);
 		var html = '';
@@ -190,15 +188,15 @@ function getPaymentEOIReport () {
 			
 			html = html.replace(/null/g, " - ");
 			
-			$("#paymentEOIReportTable tbody").append(html);
+			$("#paymentEOIReportTableSales tbody").append(html);
 			
 		} else {
 			alert ("Data not found");
 		}
 	}).done(function(data){
-		$('#paymentEOIReportTab i').hide();
+		$('#paymentEOIReportTabSales i').hide();
 		
-		 $('#paymentEOIReportTable').DataTable( {
+		 $('#paymentEOIReportTableSales').DataTable( {
 			 dom: 'Bfrtip',
 			 "buttons": [
 				 { "extend": 'excel', "text":'Export To Excel',"className": 'btn btn-default btn-xs' }

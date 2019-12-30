@@ -47,6 +47,10 @@ public class EOIReport implements Serializable{
 	
 	@Column(name="date_of_eoi__c") private Date date_of_eoi__c;
 	
+	@Column(name="userid") private int userid;
+	
+	@Column(name="eoi_form_path") private String eoi_form_path;
+	
 	
 	public int getId() {
 		return id;
@@ -188,5 +192,17 @@ public class EOIReport implements Serializable{
 	}
 	public void setDate_of_eoi__c(Date date_of_eoi__c) {
 		this.date_of_eoi__c = date_of_eoi__c;
+	}
+	public int getUserid() {
+		return userid;
+	}
+	public void setUserid(int userid) {
+		this.userid = userid;
+	}
+	public String getEoi_form_path() {
+		return eoi_form_path;
+	}
+	public void setEoi_form_path(String eoi_form_path) {
+		this.eoi_form_path = eoi_form_path;
 	}
 }

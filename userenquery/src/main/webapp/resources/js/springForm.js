@@ -325,8 +325,10 @@ function submitWithFile(formId,action, callback){
 		        			});
 		        			
 		        			if (sizeValidate < 1) {
-		        				csPymtDataEoi ();
+		        				//Move csPymtDataEoi () in insertEOIPreference()
+		        				//csPymtDataEoi ();
 				        		insertEOIPreference();
+				        		
 		        			} else {
 		        				swal({
 		        					title: "File size must be less than 5 MB",

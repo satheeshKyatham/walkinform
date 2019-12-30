@@ -93,6 +93,7 @@ public class EnquiryDto extends CommonDto {
    	private String verticle__c;
    	private String sourcing_Managers__c;
    	private String referredbyDto;
+   	private String closingManagerDto;
    	
 	public String getClosing_manager_name__c() {
 		return closing_manager_name__c;
@@ -550,6 +551,14 @@ public class EnquiryDto extends CommonDto {
 
 	public void setSourcing_Managers__c(String sourcing_Managers__c) {
 		this.sourcing_Managers__c = sourcing_Managers__c;
+	}
+
+	public String getClosingManagerDto() {
+		return closingManagerDto;
+	}
+
+	public void setClosingManagerDto(String closingManagerDto) {
+		this.closingManagerDto = closingManagerDto;
 	}
 	
 	

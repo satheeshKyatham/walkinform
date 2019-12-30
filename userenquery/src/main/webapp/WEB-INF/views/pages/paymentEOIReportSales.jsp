@@ -21,31 +21,20 @@
 		<i class="glyphicon glyphicon-filter" style="border-right: 1px solid #333; margin-right: 10px; padding-right: 10px;"></i>
 		
 		<div class="form-group">
-			<label for="exampleInputNameDate">From Date</label> 
-			<input class="form-control" type="date" name="" id="txtEOIFromDate">
+			<label>From Date</label> 
+			<input class="form-control" type="date" name="" id="txtpaymentEOIFromSalesDate">
 		</div>
 		<div class="form-group">
-			<label for="exampleInputNameDate">To Date</label> 
-			<input class="form-control" type="date" name="" id="txtEOIToDate">
+			<label>To Date</label> 
+			<input class="form-control" type="date" name="" id="txtpaymentEOIToSalesDate">
 		</div>
 		<div class="form-group">
-			<label for="exampleInputNameDate">Search</label> 
-			<input class="form-control" type="button" value="Search" name="Search" onclick="getEOIReport()"/>
+			<label>Search</label> 
+			<input class="form-control" type="button" value="Search" name="Search" onclick="getPaymentEOIReportSales()"/>
 		</div>
 	</div>
 	<div class="clearfix"></div>
 </div>
-
-
-<div class="commonLoad" id="mainPageLoad" style="display: none;"></div>
-
-<%-- <form:form action="downloadEOICSV" method="post">
-	<div id="eoiReportCSVInputCol"> </div>
-
-	<fieldset style="width: 400px;">
-		<input type="submit" value="Downlaod In Excel">
-	</fieldset>
-</form:form> --%>
 
 <div class="wrapperEOIRepo1">
 	<div class="divEOI1"></div>
@@ -54,37 +43,27 @@
 <div class="wrapperEOIRepo2">
 	
 	<div class="divEOI2" style="overflow: auto;">
-		<table class="table table-bordered" id="eoiReportTable">
+		<table class="table table-bordered" id="paymentEOIReportTableSales">
 			<thead>
 				<tr>
-					<!-- <th>Region</th>
-					<th>Project Name</th> -->
-					<th>ENQ_Name</th>
-					<th>PDF</th>
+					<th>ENQ Name</th>
 					<th>Customer Name</th>
 					<th>Customer Mobile</th>
 					<th>Customer Email</th>
 					<th>Walkin Date</th>
-					<th>Walk-in Source</th>
-					
-					
+					<th>Walk-In Source</th>
 					<th>Vertical</th>
 					<th>Closing Manager</th>
-					<th>Date Of EOI</th>
-					<th>Total Payment Done</th>
-					<th>Total Payment Approved</th>
-					
-					<th>Typology Name1</th>
-					<th>Floor_Band1</th>
-					<th>Tower Name1</th>
-					
-					<th>Typology Name2</th>
-					<th>Floor Band2</th>
-					<th>Tower Name2</th>
-					
-					<th>Typology Name3</th>
-					<th>Floor Band3</th>
-					<th>Tower Name3</th>
+					<th>Date of EOI</th>
+					<th>Payment Type</th>
+					<th>Bank</th>
+					<th>Branch</th>
+					<th>Transaction ID</th>
+					<th>Transaction Date</th>
+					<th>Transaction Amount</th>
+					<th>Description</th>
+					<th>Payment Status</th>
+					<th>Transaction Amount</th>
 				</tr>
 			</thead>
 			<tbody>
