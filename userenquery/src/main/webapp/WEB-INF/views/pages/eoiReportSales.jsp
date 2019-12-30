@@ -62,7 +62,7 @@
 					<th>Walk-in Source</th>
 					
 					
-					<th>Verticle </th>
+					<th>Vertical</th>
 					<th>Closing Manager</th>
 					<th>Date Of EOI</th>
 					<th>Total Payment Done</th>
