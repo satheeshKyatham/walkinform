@@ -316,6 +316,11 @@ if(ses!=null){
 	<script src="<c:url value='/resources/js/jquery-1.12.4.min.js'/>"></script>
 	<script src="<c:url value='/resources/js/bootstrap.min.js'/>"></script>  
 	<script type="text/javascript" charset="utf8" src="<c:url value='/resources/js/jquery.dataTables.js'/>"></script>
+	
+	<script src="<c:url value='/resources/js/dataTables.buttons.min.js'/>"></script>
+	<script src="<c:url value='/resources/js/jszip.min.js'/>"></script>
+	<script src="<c:url value='/resources/js/buttons.html5.min.js'/>"></script>
+	
 	<script src="<c:url value='/resources/js/salesdesk.js?v=18'/>"></script>
 	<script src="<c:url value='/resources/js/enquiryRequest/assignedUser.js?v=18'/>"></script>
 	<script src="<c:url value='/resources/js/separate/offer.js?v=18'/>"></script>

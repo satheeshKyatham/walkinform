@@ -253,10 +253,10 @@
 							</td>
 							
 							<td>
-								<input type="file" class="full form-control input-sm panAttachEoi requiredField" accept="application/pdf,image/*"/>
+								<input type="file" class="full form-control input-sm panAttachEoi" accept="application/pdf,image/*"/>
 							</td>
 							<td>
-								<input type="file" class="numericField full form-control input-sm receiptAttachEoi requiredField" accept="application/pdf,image/*"/>
+								<input type="file" class="numericField full form-control input-sm receiptAttachEoi" accept="application/pdf,image/*"/>
 							</td>
 							
 							<td>

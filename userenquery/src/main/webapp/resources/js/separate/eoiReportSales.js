@@ -124,6 +124,8 @@ function getEOIReportSales () {
 		      "order": []
 		 });*/
 		
+		
+		
 		$('#eoiReportTableSales').DataTable( {
 			 dom: 'Bfrtip',
 			 "buttons": [
@@ -131,6 +133,8 @@ function getEOIReportSales () {
 		      ],
 		      "order": []
 		 });
+		
+		
 		
 	});	
 }
@@ -156,7 +160,7 @@ function getPaymentEOIReportSales () {
 				if (obj1[i].payment_status == 'Y' || obj1[i].payment_status == 'O') {
 					paymentStatus = 'Approved'
 				} else if (obj1[i].payment_status == 'N') {
-					paymentStatus = 'Rejected'
+					paymentStatus = 'Not Approved'
 				}
 				
 				

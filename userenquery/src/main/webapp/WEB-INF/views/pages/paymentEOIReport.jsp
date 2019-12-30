@@ -47,7 +47,6 @@
 			<thead>
 				<tr>
 					<th>ENQ Name</th>
-					<th>PDF</th>
 					<th>Customer Name</th>
 					<th>Customer Mobile</th>
 					<th>Customer Email</th>
