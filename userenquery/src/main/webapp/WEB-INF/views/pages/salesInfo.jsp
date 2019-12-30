@@ -1459,10 +1459,9 @@ if(ses!=null){
 						<!-- END of Barriers & Triggers -->
 						<div class="col-md-3 col-sm-6 col-xs-12">
 							<div class="group">
-								<select class="sales_submitted" id="sourcingManagerId" name="">
-						            <option value=""></option>
-									<option value="OCR issue">OCR issue</option>
-								</select>
+							<!-- <div id="sourcingManagerId"></div> -->
+							<select class="sales_submitted" id="sourcingManagerId" name="closingManagerDto">
+							</select>
 								<span class="highlight"></span><span class="bar"></span>
 								<label class="select-label">Sourcing Manager</label>
 							</div>
@@ -1470,7 +1469,7 @@ if(ses!=null){
 						</div>
 						<div class="col-md-3 col-sm-6 col-xs-12">
 							<div class="group">
-								<select class="sales_submitted" id="verticalId" name="verticle__c">
+								<select class="sales_submitted disableInputs" id="verticalId" name="verticle__c">
 						            <option value=""></option>
 									<option value="International">International</option>
 									<option value="Cross">Cross</option>
@@ -1710,6 +1709,7 @@ if(ses!=null){
 <script src="<c:url value='/resources/js/enquiryRequest/common.js?v=18'/>"></script>
 <script src="<c:url value='/resources/js/separate/costsheet.js?v=18'/>"></script>
 <script src="<c:url value='/resources/js/separate/webcamAttachmentCS.js?v=18'/>"></script>
+
 
 <script src="<c:url value='/resources/js/separate/storeEOIPaymentDtl.js?v=18'/>"></script>
 <script src="<c:url value='/resources/js/separate/eoiFormPrint.js?v=18'/>"></script>

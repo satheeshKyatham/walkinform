@@ -2845,7 +2845,7 @@ public class WebServiceController<MultipartFormDataInput> {
 			e.printStackTrace();
 		}
 		System.out.println("cust_mobileNo");
-		//SendSMS.SMSSend(cust_mobileNo, strencryptedText);
+		SendSMS.SMSSend(cust_mobileNo, strencryptedText);
 		
 		
 		Gson gson = new GsonBuilder().disableHtmlEscaping().create();
@@ -3368,7 +3368,7 @@ public class WebServiceController<MultipartFormDataInput> {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			//SendSMS.SMSSend(mobile,msg);
+			SendSMS.SMSSend(mobile,msg);
 		}
 		
 		
