@@ -313,17 +313,17 @@
     
     <script src="<c:url value='/resources/js/jquery-1.12.4.min.js' />"></script>
     <script src="<c:url value='/resources/js/bootstrap.min.js' />"  ></script>
-	<script src="<c:url value='/resources/js/anypicker.js?v=18'/>"></script>
+	<script src="<c:url value='/resources/js/anypicker.js?v=20'/>"></script>
 	<script src="<c:url value='/resources/js/jquery.touchSwipe.min.js' />"></script>
 	<link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel = "stylesheet">
     <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-    <script src="<c:url value='/resources/js/bankdetails.js?v=18' />"></script>
-	<script src="<c:url value='/resources/js/springForm.js?v=18' />"></script>
-	<script src="<c:url value='/resources/js/commonValidation.js?v=18' />"></script>
-	<script src="<c:url value='/resources/js/utility.js?v=18' />"></script> 
+    <script src="<c:url value='/resources/js/bankdetails.js?v=20' />"></script>
+	<script src="<c:url value='/resources/js/springForm.js?v=20' />"></script>
+	<script src="<c:url value='/resources/js/commonValidation.js?v=20' />"></script>
+	<script src="<c:url value='/resources/js/utility.js?v=20' />"></script> 
 	<%-- <script src="<c:url value='/resources/js/enquiryRequest/salesRequest.js' />"></script> --%>
 	
-    <script src="<c:url value='/resources/js/intlTelInput.js?v=18' />"></script>
+    <script src="<c:url value='/resources/js/intlTelInput.js?v=20' />"></script>
     <script src="<c:url value='/resources/js/sweetalert2.min.js' />"></script>
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/8.4.7/js/intlTelInput.js"></script> -->
 	<script src="<c:url value='/resources/js/moment.js' />"></script>
