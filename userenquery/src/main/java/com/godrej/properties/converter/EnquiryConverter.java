@@ -278,6 +278,8 @@ public class EnquiryConverter implements CommonConverter<Enquiry, EnquiryDto>{
 		/*=======Start==========*/
 		if(dto.getVerticle__c()!=null)
 			entity.setVerticle__c(dto.getVerticle__c());
+		if(dto.getSourcing_Managers__c()!=null)
+			entity.setSourcing_Managers__c(dto.getSourcing_Managers__c());
 		/*=========End========*/
 		
 		if(dto.getEnquiryReport().getReferredby()!=null)

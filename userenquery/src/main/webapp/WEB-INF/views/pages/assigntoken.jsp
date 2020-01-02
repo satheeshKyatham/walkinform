@@ -211,11 +211,11 @@ projectid=request.getParameter("projectid");
 <script src="<c:url value='/resources/js/jquery-1.12.4.min.js'/>"></script>
 <script src="<c:url value='/resources/js/bootstrap.min.js'/>"></script>  
 <script type="text/javascript" charset="utf8" src="<c:url value='/resources/js/jquery.dataTables.js'/>"></script>
-<script src="<c:url value='/resources/js/enquiryRequest/assignToken.js?v=16'/>"></script>
-<script src="<c:url value='/resources/js/salesdesk.js?v=16'/>"></script>
+<script src="<c:url value='/resources/js/enquiryRequest/assignToken.js?v=20'/>"></script>
+<script src="<c:url value='/resources/js/salesdesk.js?v=20'/>"></script>
 <script src="<c:url value='/resources/js/sweetalert.min.js'/>"></script>
 
-<script src="<c:url value='/resources/js/separate/eoiData.js?v=16'/>"></script>
+<script src="<c:url value='/resources/js/separate/eoiData.js?v=20'/>"></script>
 
 </body>
 </html>  

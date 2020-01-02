@@ -80,9 +80,9 @@
 	<script src="<c:url value='/resources/js/jquery-1.12.4.min.js' />"></script>
 	<script src="<c:url value='/resources/js/bootstrap.min.js'/>"></script>
 	<script src="<c:url value='/resources/js/sweetalert.min.js'/>"></script>
-	<script src="<c:url value='/resources/js/separate/editor.js?v=18'/>"></script>
+	<script src="<c:url value='/resources/js/separate/editor.js?v=20'/>"></script>
 	
-	<script src="<c:url value='/resources/js/separate/tncEOI.js?v=18'/>"></script>
+	<script src="<c:url value='/resources/js/separate/tncEOI.js?v=20'/>"></script>
 	
 	
 	

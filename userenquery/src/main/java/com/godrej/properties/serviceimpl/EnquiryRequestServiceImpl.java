@@ -30,6 +30,7 @@ import com.godrej.properties.service.ContactReportService;
 import com.godrej.properties.service.EnquiryReportService;
 import com.godrej.properties.service.EnquiryRequestService;
 import com.godrej.properties.service.PushEnquiryDataService;
+import com.godrej.properties.service.TokenService;
 import com.godrej.properties.service.UserContactService;
 import com.godrej.properties.util.CommonUtil;
 import com.godrej.properties.util.DateUtil;
@@ -54,6 +55,9 @@ public class EnquiryRequestServiceImpl implements EnquiryRequestService {
 	
 	@Autowired
 	private CountryDao countryDao;
+	
+	@Autowired
+	private TokenService tokenService;
 			
 	@Override
 	public EnquiryDto save(EnquiryDto dto) {
@@ -444,6 +448,12 @@ public class EnquiryRequestServiceImpl implements EnquiryRequestService {
 		/*=======Start==========*/
 		if(src.getVerticle__c()!=null)
 			dest.setVerticle__c(src.getVerticle__c());
+		if(src.getClosingManagerDto()!=null)
+		{
+			dest.getClosingManagerDto();
+			dest.setSourcing_Managers__c(tokenService.getSalesUserSFID(src.getEnquiryId(), src.getClosingManagerDto()));
+		}
+		
 		/*=========End========*/
 		return dest;
 	}

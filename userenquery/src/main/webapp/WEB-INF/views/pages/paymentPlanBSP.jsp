@@ -101,7 +101,7 @@
 	<script src="<c:url value='/resources/js/sweetalert.min.js'/>"></script>
 	
 	
-	<script src="<c:url value='/resources/js/separate/paymentPlanBSP.js?v=18'/>"></script>
+	<script src="<c:url value='/resources/js/separate/paymentPlanBSP.js?v=20'/>"></script>
 	
 	
 	

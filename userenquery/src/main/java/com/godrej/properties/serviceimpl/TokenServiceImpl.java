@@ -135,4 +135,9 @@ public class TokenServiceImpl implements TokenService {
 		return tokenDao.updateEnqSalesTab(enqid, email);
 	}
 
+	@Override
+	public String getSalesUserSFID(int enqid, String email) {
+		// TODO Auto-generated method stub
+		return tokenDao.getSalesUserSFID(enqid,email);
+	}
 }

@@ -39,4 +39,5 @@ public interface TokenService {
 	
 	Token getTokenDetails(String tokenID);
 	String updateEnqSalesTab(int enqid,String email);
+	String getSalesUserSFID(int enqid, String email);
 }

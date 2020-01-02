@@ -1459,10 +1459,9 @@ if(ses!=null){
 						<!-- END of Barriers & Triggers -->
 						<div class="col-md-3 col-sm-6 col-xs-12">
 							<div class="group">
-								<select class="sales_submitted" id="sourcingManagerId" name="">
-						            <option value=""></option>
-									<option value="OCR issue">OCR issue</option>
-								</select>
+							<!-- <div id="sourcingManagerId"></div> -->
+							<select class="sales_submitted" id="sourcingManagerId" name="closingManagerDto">
+							</select>
 								<span class="highlight"></span><span class="bar"></span>
 								<label class="select-label">Sourcing Manager</label>
 							</div>
@@ -1470,7 +1469,7 @@ if(ses!=null){
 						</div>
 						<div class="col-md-3 col-sm-6 col-xs-12">
 							<div class="group">
-								<select class="sales_submitted" id="verticalId" name="verticle__c">
+								<select class="sales_submitted disableInputs" id="verticalId" name="verticle__c">
 						            <option value=""></option>
 									<option value="International">International</option>
 									<option value="Cross">Cross</option>
@@ -1633,19 +1632,19 @@ if(ses!=null){
     <!-- For Webcam attachments -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.25/webcam.min.js"></script>
 
-	<script src="<c:url value='/resources/js/springForm.js?v=18' />"></script>
-	<script src="<c:url value='/resources/js/commonValidation.js?v=18' />"></script>
-	<script src="<c:url value='/resources/js/utility.js?v=18' />"></script>
+	<script src="<c:url value='/resources/js/springForm.js?v=20' />"></script>
+	<script src="<c:url value='/resources/js/commonValidation.js?v=20' />"></script>
+	<script src="<c:url value='/resources/js/utility.js?v=20' />"></script>
 	<%-- <script src="<c:url value='/resources/js/enquiryRequest/enquiryRequest.js' />"></script> --%>
-	<script src="<c:url value='/resources/js/enquiryRequest/salesRequest.js?v=18' />"></script>	
+	<script src="<c:url value='/resources/js/enquiryRequest/salesRequest.js?v=20' />"></script>	
     <script src="<c:url value='/resources/js/intlTelInput.js' />"></script>
    
     <script src="<c:url value='/resources/js/sweetalert2.min.js' />"></script>
    
    
   	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/8.4.7/js/intlTelInput.js"></script> -->
-	<script src="<c:url value='/resources/js/bankdetails.js?v=18' />"></script>
-	<script src="<c:url value='/resources/js/index.js?v=18' />"></script>
+	<script src="<c:url value='/resources/js/bankdetails.js?v=20' />"></script>
+	<script src="<c:url value='/resources/js/index.js?v=20' />"></script>
 	
 	<script>
 	
@@ -1707,12 +1706,13 @@ if(ses!=null){
 <!-- Costsheet --> 
 <script src="<c:url value='/resources/js/jquery.tabletojson.min.js'/>"></script>
 <%-- <script type="text/javascript" src="<c:url value='/resources/js/jquery.countdownTimer.js'/>"></script> --%>
-<script src="<c:url value='/resources/js/enquiryRequest/common.js?v=18'/>"></script>
-<script src="<c:url value='/resources/js/separate/costsheet.js?v=18'/>"></script>
-<script src="<c:url value='/resources/js/separate/webcamAttachmentCS.js?v=18'/>"></script>
+<script src="<c:url value='/resources/js/enquiryRequest/common.js?v=20'/>"></script>
+<script src="<c:url value='/resources/js/separate/costsheet.js?v=20'/>"></script>
+<script src="<c:url value='/resources/js/separate/webcamAttachmentCS.js?v=20'/>"></script>
 
-<script src="<c:url value='/resources/js/separate/storeEOIPaymentDtl.js?v=18'/>"></script>
-<script src="<c:url value='/resources/js/separate/eoiFormPrint.js?v=18'/>"></script>
+
+<script src="<c:url value='/resources/js/separate/storeEOIPaymentDtl.js?v=20'/>"></script>
+<script src="<c:url value='/resources/js/separate/eoiFormPrint.js?v=20'/>"></script>
 
 
 <%-- <script src="<c:url value='/resources/js/separate/storeEOIPaymentDtl.js?v=15'/>"></script> --%>
