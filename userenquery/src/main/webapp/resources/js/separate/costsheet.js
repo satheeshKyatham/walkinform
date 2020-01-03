@@ -2271,6 +2271,7 @@ var HoldReverseTimer = function(min, sec){
                if (countStatus == 'countEnd'){
                       $('.holdCountdown').html('0:00');
                       $('#inventoryBreadcrumb').empty();
+                      seconds = 0;
                }else {
                       $('.holdCountdown').html(minutes + ':' + seconds);
                }

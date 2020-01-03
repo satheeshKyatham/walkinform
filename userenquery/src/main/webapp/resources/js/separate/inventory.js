@@ -326,7 +326,9 @@ function releaseFromHold (e, sfid, holdedBy) {
 			HoldReverseTimer(min, sec);*/
 			
 			inventoryLoad("releaseUnit");
-			//HoldReverseTimer(0, 0);
+			HoldReverseTimer(-1, -1);
+			
+
 		});
 	} else {
 		
