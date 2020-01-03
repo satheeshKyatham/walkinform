@@ -296,7 +296,7 @@ public class TokenDaoImpl extends AbstractDao<Integer, Token> implements TokenDa
 			return q.getResultList().get(0).toString();
 		}
 		else
-			return "";
+			return null;
 		/*if(i>0)
 		{
 			Query query = session.createNativeQuery(" update salesforce.propstrength__request__c set Sourcing_Managers__c='"+q.getResultList().get(0)+"' where  id="+enqid+" ");

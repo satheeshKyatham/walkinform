@@ -40,10 +40,9 @@ public class EnqAndBookingDtl implements Serializable{
 	@Column(name="jv_city__c") private String jv_city__c;
 	@Column(name="is_purchase_for_self_use_or_investment__c") private String is_purchase_for_self_use_or_investment__c;
 	@Column(name="walk_in_source__c") private String walk_in_source__c;
-	
 	@Column(name="marketing_project_name__c") private String marketing_project_name__c;
-	
 	@Column(name="propstrength__total_basic_sales_price__c") private double propstrength__total_basic_sales_price__c;
+	@Column(name="rera_registration_number__c") private String rera_registration_number__c;
 	
 	public double getPropstrength__revised_agreement_amount__c() {
 		return propstrength__revised_agreement_amount__c;
@@ -209,5 +208,11 @@ public class EnqAndBookingDtl implements Serializable{
 	}
 	public void setPropstrength__total_basic_sales_price__c(double propstrength__total_basic_sales_price__c) {
 		this.propstrength__total_basic_sales_price__c = propstrength__total_basic_sales_price__c;
+	}
+	public String getRera_registration_number__c() {
+		return rera_registration_number__c;
+	}
+	public void setRera_registration_number__c(String rera_registration_number__c) {
+		this.rera_registration_number__c = rera_registration_number__c;
 	}
 }

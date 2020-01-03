@@ -244,7 +244,7 @@ function printEOIForm(regionName, projectName, enqName, projectNameWithoutCity) 
 		    win.focus();
 		    
              swal({
-            	 title: "EOI Successfully Generated.",
+            	 title: "EOI Successfully Generated & KYC Link Sent.",
             	 text: "",
             	 icon: "success",
             	 type: "success",

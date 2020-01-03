@@ -3815,7 +3815,7 @@ public class WebServiceController<MultipartFormDataInput> {
 		
 		
 		@RequestMapping(value = { "/printApplicationForm" }, method = RequestMethod.POST)
-		public synchronized String printApplicationForm (@RequestParam("appFormData") String appFormData, @RequestParam("enqSfid") String enqSfid, @RequestParam("projectName") String projectName) throws JRException, IOException{
+		public synchronized String printApplicationForm (@RequestParam("reraRegistrationNo") String reraRegistrationNo, @RequestParam("appFormData") String appFormData, @RequestParam("enqSfid") String enqSfid, @RequestParam("projectName") String projectName) throws JRException, IOException{
 			
 			GsonBuilder gsonBuilder = new GsonBuilder();
 			Gson gson = gsonBuilder.create();
@@ -3827,7 +3827,7 @@ public class WebServiceController<MultipartFormDataInput> {
 			 */
 			
 			iTextHTMLtoPDF solution = new iTextHTMLtoPDF ();
-			solution.ApplicationFormPDF(appFormData,enqSfid,projectName); 
+			solution.ApplicationFormPDF(appFormData,enqSfid,projectName, reraRegistrationNo); 
 			
 			return gson.toJson("");
 		}	

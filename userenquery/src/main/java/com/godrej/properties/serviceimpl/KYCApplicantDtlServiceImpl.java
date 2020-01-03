@@ -26,7 +26,10 @@ public class KYCApplicantDtlServiceImpl implements KYCApplicantDtlService{
 
 	@Override
 	public List<EOIData> getKYCData(String userid, String projectid) {
-		// TODO Auto-generated method stub
 		return kYCapplicantDtlDao.getKYCData(userid, projectid);
+	}
+	@Override
+	public EOIData getKYCStatus(String enquiryName, String projectid) {
+		return kYCapplicantDtlDao.getKYCStatus(enquiryName, projectid);
 	}
 }

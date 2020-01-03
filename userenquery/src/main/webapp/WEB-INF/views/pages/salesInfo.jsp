@@ -1457,7 +1457,7 @@ if(ses!=null){
 						</div>
 						
 						<!-- END of Barriers & Triggers -->
-						<div class="col-md-3 col-sm-6 col-xs-12">
+						<div class="col-md-3 col-sm-6 col-xs-12" id="sourcingManagerIdDiv">
 							<div class="group">
 							<!-- <div id="sourcingManagerId"></div> -->
 							<select class="sales_submitted" id="sourcingManagerId" name="closingManagerDto">
@@ -1636,7 +1636,7 @@ if(ses!=null){
 	<script src="<c:url value='/resources/js/commonValidation.js?v=20' />"></script>
 	<script src="<c:url value='/resources/js/utility.js?v=20' />"></script>
 	<%-- <script src="<c:url value='/resources/js/enquiryRequest/enquiryRequest.js' />"></script> --%>
-	<script src="<c:url value='/resources/js/enquiryRequest/salesRequest.js?v=20' />"></script>	
+	<script src="<c:url value='/resources/js/enquiryRequest/salesRequest.js?v=20.1' />"></script>	
     <script src="<c:url value='/resources/js/intlTelInput.js' />"></script>
    
     <script src="<c:url value='/resources/js/sweetalert2.min.js' />"></script>

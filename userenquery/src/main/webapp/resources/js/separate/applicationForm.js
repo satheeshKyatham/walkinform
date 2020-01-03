@@ -5,6 +5,9 @@ $.ajaxSetup({
         }
     }
 });
+
+var reraRegistrationNo = '';
+
 function getApplicationList () {
 	
 	
@@ -231,18 +234,18 @@ function getApplicantDetails (e, applicationBookingId18, enqId, rowId) {
 										+ '<tr><td>Full Name</td>'+fullName+'</tr>'
 										+ '<tr><td>Date of Birth</td>'+birthdate+'</tr>'
 										+ '<tr><td>PAN</td>'+pan+'</tr>'
-										+ '<tr><td>Aadhar No.</td>'+aadhar_card_no__c+'</tr>'  
+										//+ '<tr><td>Aadhar No.</td>'+aadhar_card_no__c+'</tr>'  
 										+ '<tr><td>Payment share for TDS</td>'+propstrength__sharing_ratio__c+'</tr>'
 										+ '<tr><td>Nationality</td>'+nationality_a__c+'</tr>'
 										+ '<tr><td>Residential Status</td>'+propstrength__resident_status__c+'</tr>'
-										+ '<tr><td>Passport No.</td>'+passport_no__c+'</tr>' 
+										//+ '<tr><td>Passport No.</td>'+passport_no__c+'</tr>' 
 										+ '<tr><td>Permanent Address</td>'+permanentAddress+'</tr>'
 										+ '<tr><td>Mobile No.</td>'+mobile_number__c+'</tr>'
 										+ '<tr><td>Email</td>'+email+'</tr>'  
 										+ '<tr><td>Address for Communication</td>'+communicationAddress+'</tr>'
 										+ "<tr> "
 											+ '<td colspan="'+parseInt(objLength+1)+'" style="font-size:10px;">' 
-												+ "Note: Applicant's passport size photograph and photocopies of PAN Card/OCI/PIO and Passport/Voter Card to be mandatorily submitted along with this Application Form. *All compliance in terms of the Foreign Exchange Management Act, 1999 and its amendments shall be the sole responsibility of the Applicant. By providing Applicant's personal information in this Application Form, the Applicant/s hereby consents and authorizes Godrej Properties Limited or/and its affiliates to communicate with the Applicant/s  by email(s), call(s), SMS(es), electronic communication(s) using digital media or via any other mode of communication in relation to any of the information pertaining to the Project."
+												+ "Note: Applicant's passport size photograph and photocopies of PAN Card/OCI/PIO and Voter Card to be mandatorily submitted along with this Application Form. *All compliance in terms of the Foreign Exchange Management Act, 1999 and its amendments shall be the sole responsibility of the Applicant. By providing Applicant's personal information in this Application Form, the Applicant/s hereby consents and authorizes Godrej Properties Limited or/and its affiliates to communicate with the Applicant/s  by email(s), call(s), SMS(es), electronic communication(s) using digital media or via any other mode of communication in relation to any of the information pertaining to the Project."
 											+ "</td> " 
 										"</tr>" +
 										
@@ -289,6 +292,14 @@ function getEnqAndBookingDtl (enqId, applicationBookingId18, rowId) {
 		$('#modeOfBooking tbody').empty();
 		
 		if(obj!=null){
+			
+			if (obj[0].rera_registration_number__c != undefined){
+				reraRegistrationNo = obj[0].rera_registration_number__c;
+			} else {
+				reraRegistrationNo = '';
+			}
+			
+			
 			if (obj[0].propstrength__enquiry_type__c != "Partner") {
 				
 				if (obj[0].walk_in_source__c != undefined){
@@ -359,7 +370,11 @@ function getEnqAndBookingDtl (enqId, applicationBookingId18, rowId) {
 			
 			//$('#carpetAreaCost').text(parseFloat(obj[0].propstrength__revised_agreement_amount__c/parseFloat(parseFloat(obj[0].carpet_area_converted__c)+parseFloat(obj[0].appurtenant_area_sq_mt__c))*obj[0].carpet_area_converted__c).toFixed(2));
 			$('#carpetAreaCost').text(parseFloat(obj[0].propstrength__total_basic_sales_price__c/parseFloat(parseFloat(obj[0].carpet_area_converted__c)+parseFloat(obj[0].appurtenant_area_sq_mt__c))*obj[0].carpet_area_converted__c).toFixed(2));
-			$('#exclusiveAreasCost').text(parseFloat(obj[0].propstrength__total_basic_sales_price__c/parseFloat(parseFloat(obj[0].carpet_area_converted__c)+parseFloat(obj[0].appurtenant_area_sq_mt__c))*obj[0].appurtenant_area_sq_mt__c).toFixed(2));
+			
+			//$('#exclusiveAreasCost').text(parseFloat(obj[0].propstrength__total_basic_sales_price__c/parseFloat(parseFloat(obj[0].carpet_area_converted__c)+parseFloat(obj[0].appurtenant_area_sq_mt__c))*obj[0].appurtenant_area_sq_mt__c).toFixed(2));
+			
+			$('#exclusiveAreasCost').text(Math.round(obj[0].propstrength__total_basic_sales_price__c/parseFloat(parseFloat(obj[0].carpet_area_converted__c)+parseFloat(obj[0].appurtenant_area_sq_mt__c))*obj[0].appurtenant_area_sq_mt__c));
+			
 			//$('#exclusiveAreasCost').text(parseFloat(obj[0].propstrength__revised_agreement_amount__c/parseFloat(parseFloat(obj[0].carpet_area_converted__c)+parseFloat(obj[0].appurtenant_area_sq_mt__c))*obj[0].appurtenant_area_sq_mt__c).toFixed(2));
 			$('#totalSaleConsideration').text(Math.round(parseFloat(parseFloat($('#carpetAreaCost').text())+parseFloat($('#exclusiveAreasCost').text())+parseFloat($('#otherCharges').text()) ).toFixed(2)));
 			
@@ -380,7 +395,7 @@ function getEnqAndBookingDtl (enqId, applicationBookingId18, rowId) {
 function printApplicationForm(applicationBookingId18, rowId) {
 	var pageContext = $("#pageContext").val()+"/";
 	
-	$.post(pageContext+"printApplicationForm",{"enqSfid":applicationBookingId18,"appFormData":$('#printApplicationForm').html(),"projectName":$('#appProjectName').val()},function(data){				 
+	$.post(pageContext+"printApplicationForm",{"enqSfid":applicationBookingId18,"appFormData":$('#printApplicationForm').html(),"projectName":$('#appProjectName').val(),"reraRegistrationNo":reraRegistrationNo},function(data){				 
 		
 	}).done(function(data){
 		

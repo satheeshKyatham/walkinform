@@ -448,10 +448,12 @@ public class EnquiryRequestServiceImpl implements EnquiryRequestService {
 		/*=======Start==========*/
 		if(src.getVerticle__c()!=null)
 			dest.setVerticle__c(src.getVerticle__c());
-		if(src.getClosingManagerDto()!=null)
+		if(src.getClosingManagerDto()!=null && src.getClosingManagerDto().length()>0)
 		{
 			dest.getClosingManagerDto();
-			dest.setSourcing_Managers__c(tokenService.getSalesUserSFID(src.getEnquiryId(), src.getClosingManagerDto()));
+			String sourcingManager = tokenService.getSalesUserSFID(src.getEnquiryId(), src.getClosingManagerDto());
+			if(sourcingManager!=null && sourcingManager.length()>0)
+				dest.setSourcing_Managers__c(sourcingManager);
 		}
 		
 		/*=========End========*/
