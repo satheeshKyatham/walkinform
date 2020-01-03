@@ -1247,8 +1247,24 @@ function updateBSP (timeid) {
 	   				allowOutsideClick: false,
 	   				showConfirmButton: false
 	   			});
-	   			
-	   			generateKYCLinkViaOffer(event,this,'N',offerJson.offer_sfid);
+	   			//Get for KYC Status
+    		   $.post(pageContext+"getKYCStatus",{"enquiryName":$("#enquiry_name").val(),"projectid":$('#projectId').val()},function(data){                       
+    		        
+    		    }).done(function(data){
+    		          var obj =JSON.parse(data);
+    		          var kycStatus="";
+    		          if(obj!=null)
+    		        	  {
+    		        	  	kycStatus = obj.issubmitted;
+    		        	  }
+    		          debugger;
+    		          if(kycStatus!="Y")
+	       			   {
+	   	   				generateKYCLinkViaOffer(event,this,'N',offerJson.offer_sfid);
+	       			   }
+    		    });
+    		   
+    		   
 	       	   
 	            printPdfData(generateFrom);
 	            
