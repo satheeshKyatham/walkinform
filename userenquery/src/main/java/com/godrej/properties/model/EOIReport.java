@@ -59,6 +59,8 @@ public class EOIReport implements Serializable{
 	
 	@Column(name="eoi_form_path") private String eoi_form_path;
 	
+	@Column(name="sourcing_manager_name__c") private String sourcing_manager_name__c;
+	
 	
 	public int getId() {
 		return id;
@@ -249,4 +251,11 @@ public class EOIReport implements Serializable{
 	public void setPreference_des3(String preference_des3) {
 		this.preference_des3 = preference_des3;
 	}
+	public String getSourcing_manager_name__c() {
+		return sourcing_manager_name__c;
+	}
+	public void setSourcing_manager_name__c(String sourcing_manager_name__c) {
+		this.sourcing_manager_name__c = sourcing_manager_name__c;
+	}
+	
 }

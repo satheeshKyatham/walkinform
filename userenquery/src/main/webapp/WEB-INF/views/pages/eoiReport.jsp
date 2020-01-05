@@ -66,6 +66,7 @@
 					<th>Customer Email</th>
 					<th>Walkin Date</th>
 					<th>Walk-in Source</th>
+					<th>Sourcing Manager Name</th>
 					
 					
 					<th>Vertical</th>
