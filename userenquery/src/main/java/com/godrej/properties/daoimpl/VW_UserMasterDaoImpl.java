@@ -91,7 +91,7 @@ public class VW_UserMasterDaoImpl extends AbstractDao<Integer, Vw_UserMaster> im
 		Session session = this.sessionFactory.getCurrentSession();
 		List<Vw_UserProjectMapping> list =null;
 		
-		 list =session.createQuery(" from Vw_UserProjectMapping where user_id = '"+userid+"'").list();
+		 list =session.createQuery(" from Vw_UserProjectMapping where user_id = '"+userid+"' order by projectName").list();
 	 
 		if(list.size()>0)
 			return list;
