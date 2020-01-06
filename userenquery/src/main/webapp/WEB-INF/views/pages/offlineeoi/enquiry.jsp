@@ -93,18 +93,37 @@
 		
 		<div class="filterColBg">
 				<div class="filterCol">
-				  <div class="form-group col-md-3">
+				  <div class="form-group col-md-2">	
+						<div class="group" style="min-height: auto; margin-bottom: 0;">				
+						  <div class="input-group" id="contactInputDiv"> 
+						  <input type="text" value="${countryCode}" class="autocomplete-off form-control mobile requiredField contactNoDiv" id="enCountryCode"  maxlength="4"  tabindex="-1">
+						  <span class="highlight"></span><span class="bar"></span>
+								<label>Country Code</label>
+						</div>
+						</div>
+				  </div>
+				  
+				   <div class="form-group col-md-2">
 					
 						<div class="group" style="min-height: auto; margin-bottom: 0;">				
 						  <div class="input-group" id="contactInputDiv"> 
-						  <!-- onkeyup="getExistingInfo();" -->
-						  <input type="text" value="${countryCode}" class="autocomplete-off form-control mobile requiredField contactNoDiv" id="enCountryCode"  maxlength="4"  tabindex="-1">
 							  <input type="text" value="${mobileNo}" class="autocomplete-off form-control mobile requiredField contactNoDiv" id="enMobileNo"  maxlength="10"  tabindex="-1">
-							  <span id="searchEnquiryInput" class="input-group-addon contactNoDiv" data-toggle="modal" >
-								<i class="glyphicon glyphicon-search contactNoDiv" ></i>
-							  </span>
 							  <span class="highlight"></span><span class="bar"></span>
 								<label>Contact no.</label>
+							</div>
+						</div>
+				  </div>
+				  
+				   <div class="form-group col-md-2">
+						<div class="group" style="min-height: auto; margin-bottom: 0;">				
+						  <div class="input-group" id="contactInputDiv"> 
+							<select id="visitType" name="visitType" class="form-control" style="background-color: #fff;">
+							            <option value="Road show" selected>Road Show</option>									
+                                        <option value="Site visit">Site Visit</option>                                                                                                            
+                                        <option value="Home visit">Home Visit</option>
+							</select>
+							  <span class="highlight"></span><span class="bar"></span>
+								<label>Visit Type</label>
 							</div>
 						</div>
 				  </div>
@@ -124,6 +143,15 @@
 					
 					<div class="clearfix"></div>
 					</div>
+					
+									   <div class="form-group col-md-2">
+						<div class="group" style="min-height: auto; margin-bottom: 0;">				
+						<div class="input-group" id="contactInputDiv"> 
+							<button class="btn blue_btn" id="getEnquiry">Search</button>
+						</div>
+						</div>
+				  </div>
+					
 				  
 			  <div class="clearfix"></div>
 			</div>
@@ -590,6 +618,10 @@
 					<a class="btn btn-primary btnNext" onclick="saveBaseInfo(event,this);">
 						<span>Submit</span>
 					</a>
+					
+					<a class="btn btn-primary btnNext" >
+						<span>Button</span>
+					</a>
 					<div class="clearfix"></div>
 				</div>
 				</form:form>
@@ -662,6 +694,7 @@
 	
 	<script src="<c:url value='/resources/js/offline/offlineEOI.js?v=20'/>"></script>
 
+	
 	<script>
 	
 		var rcpNO = $("#isReferredByChannelPartnerD").removeClass("shake");
