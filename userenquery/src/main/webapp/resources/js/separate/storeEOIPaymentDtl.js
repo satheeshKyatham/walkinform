@@ -571,6 +571,7 @@ function insertEOIPreference () {
 	$.post(pageContext+"insertEOIDtl",{"eoiDataJson" : JSON.stringify(arrayData)},function(data){				 
 	}).done(function(data){
 		csPymtDataEoi();
+		generateKYCLink(event,this,'Y');
 	});
 }
 //END Insert EOI Dtl

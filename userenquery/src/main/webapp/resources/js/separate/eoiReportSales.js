@@ -70,6 +70,7 @@ function getEOIReportSales () {
 							" <td>"+obj1[i].customer_email+"</td>" +
 							" <td>"+obj1[i].walkin_date+"</td>" +
 							" <td>"+obj1[i].walk_in_source__c+"</td>" +
+							" <td>"+obj1[i].sourcing_manager_name__c+"</td>" +
 							
 							
 							" <td>"+obj1[i].verticle__c+"</td>" +
@@ -81,14 +82,21 @@ function getEOIReportSales () {
 							" <td>"+obj1[i].typology_name1+"</td>" +
 							" <td>"+obj1[i].floor_band1+"</td>" +
 							" <td>"+obj1[i].tower_name1+"</td>" +
+							" <td>"+obj1[i].unit1+"</td>" +
+							" <td>"+obj1[i].preference_des1+"</td>" +
+							
 							
 							" <td>"+obj1[i].typology_name2+"</td>" +
 							" <td>"+obj1[i].floor_band2+"</td>" +
 							" <td>"+obj1[i].tower_name2+"</td>" +
+							" <td>"+obj1[i].unit2+"</td>" +
+							" <td>"+obj1[i].preference_des2+"</td>" +
 							
 							" <td>"+obj1[i].typology_name3+"</td>" +
 							" <td>"+obj1[i].floor_band3+"</td>" +
 							" <td>"+obj1[i].tower_name3+"</td>" +
+							" <td>"+obj1[i].unit3+"</td>" +
+							" <td>"+obj1[i].preference_des3+"</td>" +
 							
 						" </tr>";
 			}

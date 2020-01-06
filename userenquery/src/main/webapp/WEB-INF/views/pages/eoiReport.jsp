@@ -66,6 +66,7 @@
 					<th>Customer Email</th>
 					<th>Walkin Date</th>
 					<th>Walk-in Source</th>
+					<th>Sourcing Manager Name</th>
 					
 					
 					<th>Vertical</th>
@@ -78,13 +79,22 @@
 					<th>Floor_Band1</th>
 					<th>Tower Name1</th>
 					
+					<th>Unit1</th>
+					<th>Description1</th>
+					
 					<th>Typology Name2</th>
 					<th>Floor Band2</th>
 					<th>Tower Name2</th>
 					
+					<th>Unit2</th>
+					<th>Description2</th>
+					
 					<th>Typology Name3</th>
 					<th>Floor Band3</th>
 					<th>Tower Name3</th>
+					
+					<th>Unit3</th>
+					<th>Description3</th>
 				</tr>
 			</thead>
 			<tbody>

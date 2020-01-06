@@ -49,6 +49,8 @@ $(document).ready(function(){
 		});
 	 
 	 $(this).scrollTop(0);
+	
+	 getClosingManagersList();
 });
 function generatePaymentLink(){
 	$.get("quickInvoiceGenerator", {
@@ -643,6 +645,8 @@ function loadEnquiryReport(enq){
 		//alert(enq.verticle__c);
 		
 		$("#verticalId").val(enq.verticle__c);
+		//alert("53435"+enq.sourcing_Managers__c);
+		$("#sourcingManagerId").val(enq.sourcing_Managers__c);
 		$("#LostReasonID").val(enq.lost_reason_c__c);
 		
 		//$( "#followDate" ).datepicker({ defaultDate: new Date(enq.enquiryReport.followDate) });
@@ -1172,7 +1176,7 @@ function generateKYCLink(event,el,isEOI){
 			    type: 'POST', 	  
 			    success: function(data) 
 			    {
-			    	swal('KYC Link Sent...!');
+			    	//swal('KYC Link Sent...!');
 			    	  $("#mainPageLoad").hide();
 			    },
 			    beforeSend : function() {
@@ -1413,15 +1417,22 @@ function getEnqDtlFromSFDCAPI () {
     });
 
 }
-getClosingManagersList();
+
 function getClosingManagersList()
 {
-	
+	 //sourcingManagerIdDiv
+	//alert($('#walkInSource').val());
+	if(($('#isReferredByChannelPartnerInput').val()==='Direct') && ($('#walkInSource').val()==='Digital' || $('#walkInSource').val()==='Newspaper'
+			|| $('#walkInSource').val()==='Hoardings' || $('#walkInSource').val()==='Radio' || $('#walkInSource').val()==='Word of Mouth'))
+		$('#sourcingManagerIdDiv').hide();
+	else
+		$('#sourcingManagerIdDiv').show();
+	//
 	       var urlGetUsers = "getUserProjectMapping?projectid="+$('#projectid').val();
 	       var j = 0
 	       var option="";
 	    	$.getJSON(urlGetUsers, function (data) {
-	    		option = "<option>Select User</option>";
+	    		option = "<option value=''>Select User</option>";
 	    		$.each(data, function (index, value) {
 	    			option = option+"<option value="+value.emailid+">"+value.user_name+"</option>";
 	    			j = j+1

@@ -118,4 +118,14 @@ public class KYCApplicantDtlDaoImpl extends AbstractDao<Integer, KYCApplicantDtl
 			return list;
 		return list;
 	}
+
+	@Override
+	public EOIData getKYCStatus(String enquiryName, String projectid) {
+		Session session = sessionFactory.getCurrentSession();
+		@SuppressWarnings("unchecked")
+		List<EOIData> list = session.createQuery(" from EOIData where enquiryid ='"+enquiryName+"'").list();
+		if (list.size() > 0)
+			return list.get(0);
+		return null;
+	}
 }

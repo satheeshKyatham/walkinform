@@ -562,14 +562,15 @@
 				<!-- <a class="btn btn-primary blue_btn  mrgR15"	 id="eoiclose" style="display: none;"
 				onclick="savePaymentInfo(event,this);"> <span> Close</span></a> -->
 				<a class="btn blue_btn  mrgR15 eoi_submitted"	 id="eoisaveclose"
-				onclick="savePaymentInfo(event,this);"> <span>Save EOI </span></a>
+				onclick="savePaymentInfo(event,this);"> <span>Save EOI & Generate
+						KYC Link</span></a>
 				
 				<!--17-12-2019 Requested from - Prakash -- Hide Generate KYC button from UI and backed functionality added on Save EOI button Click And Exit & Close buttons also hide -->
 				<!-- <a class="btn blue_btn  mrgR15" style="padding: 7px 10px;" data-toggle="modal" data-target="#myModal"> <span>Exit & Close</span></a> -->
-				<a id="btnkyclink" class="btn blue_btn btn-primary mrgR15"
+				<!-- <a id="btnkyclink" class="btn blue_btn btn-primary mrgR15"
 					onclick="generateKYCLink(event,this,'Y');"> <span>Generate
 						KYC Link</span>
-				</a>
+				</a> -->
 				
 				
 				
