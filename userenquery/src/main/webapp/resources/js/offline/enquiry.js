@@ -537,7 +537,6 @@ function populateOtherInfo(data){
 }*/
 
 function savebasicInfoResp(data){
-	//debugger
 	var enq=data.objectMap.EnquiryRequest;
 	var contact =enq.contact;
 	console.log("mobileNo:-"+contact.mobileNo);
@@ -546,8 +545,6 @@ function savebasicInfoResp(data){
 	
 	$(".enquiryId").removeAttr('disabled');
 	$(".contactId").removeAttr('disabled');
-	/*$('.enquirysfid').removeAttr('disabled');*/
-	/*$('.enquirysfid').val(enq.sfid);*/
 	$(".enquiryId").val(enq.enquiryId);
 	$(".contactId").val(contact.contactId);
 	
@@ -559,7 +556,6 @@ function savebasicInfoResp(data){
 	if(data.success){
 		$("#mainPageLoad").hide();
 		var hasParam=$('#hasParam').val();
-		debugger;
 		if(hasParam==="true"){
 			//alert("Success");	
 			var url=$("#contextPath").val();
@@ -567,30 +563,9 @@ function savebasicInfoResp(data){
         	var mobileNo=$("#mobileNo").val();
         	countryCode=countryCode.replace("+", "%2B");
         	var code=countryCode+mobileNo;
-        	
-        	var code = contact.mobileNo;
-        	
+        	code = contact.mobileNo;
         	code=code.replace("+", "%2B");
-        	
-        	//alert($("#projectSfid").val());//generateWalkinToken
-//        	window.location.href=url+"/"+"generateWalkinToken"+"?enquiryid="+enq.enquiryId+"&mobileno="+code+"&projectSFID="+$("#projectSfid").val()+"&projectName="+$("#projectName").val();
-        	//window.location.href=url+"/"+"generateWalkinToken"+"?enquiryid="+enq.enquiryId+"&mobileno="+code+"&projectSFID="+$("#projectSfid").val()+"&projectName="+$("#projectName").val();
-            debugger;
-            
-           /* console.log("Channel Partner Name:-"+enq.channelPartner);
-            console.log("Other Channel Partner Name:-"+enq.otherChannelPartner);
-            console.log("Channel Partner Flag:-"+enq.isReferredByChannelPartnerFlag);
-			var cpname=""; 
-			if(enq.channelPartner!=null && enq.channelPartner!=undefined)
-				{
-					cpname = enq.channelPartner.name
-				}
-			else if(enq.isReferredByChannelPartnerFlag="O")
-				{
-					cpname=enq.otherChannelPartner;
-				}*/
-			
-			$.get(url+"/generateWalkinToken",{"enquiryid":enq.enquiryId,"mobileno":contact.mobileNo,"projectSFID":$("#projectSfid").val(),"projectName":$("#projectName").val()
+			$.get(url+"/generateWalkinTokenOffline",{"enquiryid":enq.enquiryId,"mobileno":contact.mobileNo,"projectSFID":$("#projectSfid").val(),"projectName":$("#projectName").val()
         		,"countryCode":contact.countryCode},function(data){//,"cpflag":enq.isReferredByChannelPartnerFlag,"cpname":cpname				 
         	}).done(function(data){
         	});
@@ -603,8 +578,8 @@ function savebasicInfoResp(data){
 		        dangerMode: true,
 		      }).then(function(isConfirm) {
 		        if (isConfirm) {
-		        	window.location.href=url+"/"+"success"+"?enquiryid="+enq.enquiryId+"&mobileno="+code+"&projectSFID="+$("#projectSfid").val()+"&projectName="+$("#projectName").val();
-		        	console.log('OK');
+/*		        	window.location.href=url+"/"+"success"+"?enquiryid="+enq.enquiryId+"&mobileno="+code+"&projectSFID="+$("#projectSfid").val()+"&projectName="+$("#projectName").val();
+*/		        	console.log('OK');
 		        	
 		        } 
 		      });	 		
@@ -722,7 +697,7 @@ function populateEnquiryList(enquiryList){
 	$('#multiEnq').modal({backdrop: 'static', keyboard: false})  
 }
 function hideEnquirySourceByEnquiryType(enquiryTypeCode,enq){
-	debugger;
+	
    if(!isEmpty(enquiryTypeCode)){
 	if(enquiryTypeCode=='CP'){
 		$(".hideDirectType").hide();
@@ -766,7 +741,7 @@ function hideEnquirySourceByEnquiryType(enquiryTypeCode,enq){
   }
 }
 function isReferredChanged(cpHS){
-	//debugger;
+	//
 	$("div.sourceCol").hide();
 	$("#isReferredByChannelPartner"+cpHS).show();
 	$(".isReferredByChannelPartner"+cpHS).removeAttr("disabled");
@@ -802,7 +777,7 @@ function isReferredChanged(cpHS){
 
 /* END Auto fill address*/
 function getChannelPartners(event,el){
-	debugger;
+	
 	event.preventDefault();
 	$("#brokerContact").empty();
     $("#channelPartnerName").val("");
@@ -838,7 +813,7 @@ function getChannelPartners(event,el){
 	*/
 }
 function loadChannelPartners(resp){
-	//debugger;
+	//
 	var partnerList=resp.objectMap.channelPartnerList;
 	/*alert(partnerList.length);*/
 	channelPartnerArray=partnerList;
@@ -863,7 +838,7 @@ function refreshChannelPartnerList(){
         },
         select: function (event, el) {  
         	event.preventDefault();
-        	//debugger;
+        	//
         	/*fetchAsyncData("getBrokerContactByCPSfid",el.item.value,"GET","loadBrokerContacts");*/
         	$("#channelPartnerNameSearch").val(el.item.label);
         	$("#channelPartnerName").val(el.item.label);
@@ -891,7 +866,7 @@ function refreshChannelPartners(channelPartners){
         },
         select: function (event, el) {  
         	event.preventDefault();
-        	//debugger;
+        	//
         	/*fetchAsyncData("getBrokerContactByCPSfid",el.item.value,"GET","loadBrokerContacts");*/
         	$("#channelPartnerNameSearch").val(el.item.label);
         	$("#channelPartnerName").val(el.item.label);
