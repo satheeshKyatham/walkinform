@@ -205,6 +205,16 @@ function onProjectSelect()
 		  {
 			  window.location.href = "paymentapproval?projectid="+$('#projectSelected').val()+"&projectname="+$('#projectSelected option:selected').text();;
 		  }
+		  else if($('#loged_role').val()=='17')
+		  {
+			  var option = "<select class='inputLabel' onchange='onChangeRole()' id='roleSelected' style='border-color: #000000 !important;   width: 100%;    min-height: 33px;    margin-bottom: 5px;'><option>Select Type</option>";
+				$("#role_page").empty();
+				option = option+"<option value='IM'>Inventory Manager</option>";
+				option = option+"<option value='AM'>Allocation Manager</option>";
+				option = option+"<option value='MIS'>MIS Report</option>";
+				option = option+"<option value='OFFLINEADM'>Offline EOI</option>";
+				$("#role_page").append(option);
+		  }
 	 
 		$("#loginMsg").html('');
 	}
@@ -223,6 +233,9 @@ function onChangeRole()
 		window.location.href = "admininventory/"+$('#projectSelected').val()+"/"+$('#projectSelected option:selected').text()+"/"+ $('#loged_userid').val()+"/";
 	else if($("#roleSelected").val()=='PADMIN')
 		window.location.href = "usermaster";
+	else if($("#roleSelected").val()=='OFFLINEADM'){
+		window.location.href = "offlineEOI";
+	}
 		//window.location.href = "assignedusers?userId=" + $('#loged_userid').val()+"&projectid="+$('#projectSelected').val()+"&projectname="+$('#projectSelected option:selected').text() ;
  //window.location.href = "assignedusers?userId=" + $('#loged_userid').val()+"&projectid="+$('#projectSelected').val()+"&projectname="+$('#projectSelected option:selected').text() ;
 

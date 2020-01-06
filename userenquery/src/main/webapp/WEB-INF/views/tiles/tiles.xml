@@ -60,9 +60,13 @@
     <definition name="salesdesk"  template="/WEB-INF/views/pages/salesdesk.jsp"> 
        <put-attribute name="title" value="Sales Desk" />  
     </definition>
-       <definition name="saleslogin"  template="/WEB-INF/views/pages/saleslogin.jsp"> 
+    <definition name="saleslogin"  template="/WEB-INF/views/pages/saleslogin.jsp"> 
        <put-attribute name="title" value="Sales Desk Login" />  
     </definition>
+    <definition name="offlineeoi"  template="/WEB-INF/views/pages/offlineeoi/enquiry.jsp"> 
+       <put-attribute name="title" value="Offline EOI" />  
+    </definition>
+    
     <definition name="sessiontimeout"  template="/WEB-INF/views/pages/sessiontimeout.jsp"> 
        <put-attribute name="title" value="Session Timeout" />  
     </definition>

@@ -431,3 +431,10 @@ background-position: center; background-repeat: no-repeat; background-size: 40px
 
 
 .addMoreBtn {display: inline-block; cursor: pointer; color: #0077b9;}
+
+
+
+.filterCol {background-color: #f0f0f0;  padding-top: 10px; padding-top: 22px;}
+.filterColBg {margin-bottom: 15px;}
+
+.filterCol input {background-color: #ffffff !important;}

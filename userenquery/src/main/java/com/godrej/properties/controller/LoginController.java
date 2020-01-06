@@ -27,7 +27,6 @@ import com.godrej.properties.util.CallWebServices;
 @SuppressWarnings({"unused"})
 @Controller
 @RequestMapping("/")
- 
 public class LoginController {
 	String userId=null;
 	String userFunction = null;
