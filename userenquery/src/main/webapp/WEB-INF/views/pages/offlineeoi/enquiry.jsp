@@ -687,6 +687,7 @@
 				<input type="hidden" name="projectType" id="projectType" value="Residential">
 				<input type="hidden" name="enquirySource" id="enquirySource" value="Walk-in">
 				<input type="hidden" name="enquiryRating" value="Hot" id="enquiryRating">
+				<input type="hidden" value="${projectSfid}" name="project.sfid" id="projectSfid" class="projectSfid">
 				<input type="hidden" value="${countryCode}" name="contact.countryCode" id="countryCode"><!--  +91-->
 				<input type="hidden" value="1" name="project.projectId" id="projectId"> 
 				<input type="hidden" value="${projectSfid}" name="contact.contactReport.projectId" id="contact_projectId"> 
