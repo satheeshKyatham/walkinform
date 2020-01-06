@@ -136,6 +136,532 @@
 		
 			<div class="clearfix"></div>
 			<ul class="nav nav-tabs tabNav">
+
+				<li id="" class="active">
+						<a href="#tab1" data-toggle="tab">Enquiry</a>
+			</li>
+			
+			<li id="" onclick="getTowerEOI()">
+						<a href="#tab2" data-toggle="tab">EOI</a>
+			</li>
+			</ul>
+			<div class=""></div>
+		</div>
+		
+		
+		
+		<div class="tab-content formTabCont">
+			
+			
+			<div class="tab-pane active" id="tab1">
+				<form:form modelAttribute="EnquiryRequest" id="enquiryRequestBasicInfoForm">
+				<input type="hidden" value="${projectName}" id="projectName" name="projectName">
+				<input type="hidden" value="${AssignTO}" id="assignTO" name="assignTo">
+				<input type="hidden" class="enquiryId" disabled="disabled" name="enquiryId">
+				<input type="hidden" class="contactId" disabled="disabled" name="contact.contactId">
+				<input type="hidden" name="projectType" id="projectType" value="Residential">
+				<input type="hidden" name="enquirySource" id="enquirySource" value="Walk-in">
+				<input type="hidden" name="enquiryRating" value="Hot" id="enquiryRating">
+				<input type="hidden" value="${countryCode}" name="contact.countryCode" id="countryCode"><!--  +91-->
+				<input type="hidden" value="1" name="project.projectId" id="projectId"> 
+				<input type="hidden" value="${projectSfid}" name="contact.contactReport.projectId" id="contact_projectId"> 
+				<input type="hidden" value="Site Visit Done" name="enquiryStatus" id="enquiryStatus">
+				<input type="hidden" class="enquiryReportId" name="enquiryReport.enquiryReportId">
+				<input type="hidden" class="enquiryprojectidId" name="enquiryReport.projectId"  value="${projectSfid}">
+				<input type="hidden" class="contactReportId" name="contact.contactReport.contactReportId">
+				<div class="row "> <!-- bounceInLeft animated -->
+					<div class="col-md-12 commonErrorCol commonErrorDiv" style="display: none">
+						<div class="alert alert-danger">
+						  	Kindly fill the <strong>required</strong> fields.
+						</div>
+					</div>
+					<div class="col-md-12 commonErrorCol commonMessageDiv" style="display: none">
+						<div class="alert alert-danger">
+						  	<strong id="commonBoldMessage"></strong>
+						</div>
+					</div>
+					<div class="col-md-3 col-sm-6 col-xs-12">
+						<div class="group">				
+						  <div class="input-group" id="contactDiv"> 
+						      <input type="hidden" id="hiddenMobileNo" value="${mobileNo}">
+							  <input type="text" value="${countryCode}" class="autocomplete-off form-control mobile requiredField contactNoDiv" id="mobileNo" name="contact.mobileNo" maxlength="10" onkeyup="getExistingInfo();" tabindex="-1">
+							  <span onclick="getExistingInfo();" class="input-group-addon contactNoDiv" data-toggle="modal" >
+								<i class="glyphicon glyphicon-search contactNoDiv" ></i>
+							  </span>
+							  <span class="highlight"></span><span class="bar"></span>
+								<label>Contact no.<strong class="mndt">*</strong></label>
+							</div>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+					
+					
+					<div class="col-md-3 col-sm-6 col-xs-6">
+						<div class="group">
+							<input type="text" id="firstName" class="contactFields autocomplete-off requiredField" required="required" name="contact.firstName"/>
+							<span class="highlight"></span><span class="bar"></span>
+							<label>First name <strong class="mndt">*</strong></label>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+					
+					<div class="col-md-3 col-sm-6 col-xs-6">
+						<div class="group">
+							<input type="text" id="lastName" class="contactFields autocomplete-off requiredField" required="required" name="contact.lastName"/>
+							<span class="highlight"></span><span class="bar"></span>
+							<label>Last name <strong class="mndt">*</strong></label>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+					
+					<!-- field Removed -->
+					<div class="col-md-3 col-sm-6 col-xs-12">
+						<div class="group">
+							<input type="text" id="email" class="contactFields autocomplete-off requiredField emailaddress" name="contact.otherEmail" onkeyup="this.value = this.value.toLowerCase();"/>
+							<span class="highlight"></span><span class="bar"></span>
+							<label>Email ID <strong class="mndt">*</strong></label>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+					
+					<div class="clearfix"></div>
+					
+					<div class="col-md-2 radioBtnWrp mrgT0" style="margin-top:-16px !important;">
+						  <div class="titleF">Have you visited site before <strong class="mndt">*</strong>
+						  	<div class="clearfix"></div>
+						  </div>
+							<div class="radioBtnCol" data-toggle="buttons">
+							  <label class="btn btn-primary active enquiryFields">
+								<input type="radio" id="haveWeMetBeforeY" class="haveWeMetBefore " name="enquiryReport.haveWeMetBefore" checked value="Yes">Yes
+							  </label>
+							  <label class="btn btn-primary enquiryFields">
+								<input type="radio" id="haveWeMetBeforeN" class="haveWeMetBefore " name="enquiryReport.haveWeMetBefore" value="No">No
+							  </label>
+						</div>
+						
+						<div class="clearfix"></div>
+						</div>
+						
+						
+						
+						<div class="col-md-2 col-xs-12">
+							<div class="group">
+								<select id="ageGroup" name="contact.contactReport.ageGroup" class="contactFields">
+								        <option value=""></option>
+								        <option value="Less than 20">Less than 20</option>
+								        <option value="Between 21-25">Between 21-25</option>
+								        <option value="Between 26 -35">Between 26 -35</option>
+								        <option value="Between 36 - 45">Between 36 - 45</option>
+								        <option value="Between 46 -60">Between 46 -60</option>
+								        <option value="Greater than 60">Greater than 60</option>
+								</select>
+								<span class="highlight"></span><span class="bar"></span>
+								
+								<label class="select-label">Age Group <strong class="mndt"></strong></label>
+								<div class="clearfix"></div>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+						
+						
+						
+						
+						<div class="clearfix"></div>
+						
+						
+						
+						
+						<div id="address" style="padding-top: 45px; margin-bottom: 40px; border-top: 1px solid #ccc; border-bottom: 1px solid #ccc;">
+						
+												
+						<div class="col-md-4 col-sm-12">
+							<div class="group">
+							  <input class="autocomplete-off autocomplete contactFields requiredField" required="required" type="text" id="addressLine2" name="contact.addressLine2" />
+							  <span class="highlight"></span>
+							  <span class="bar"></span>
+							  <label>Residence Location <strong class="mndt"> *</strong></label>
+							</div>
+						</div>
+						
+						
+						<!-- Add new field -->
+						<div class="col-md-2 col-sm-6 col-xs-6">
+							<div class="group">
+								<input class="autocomplete-off administrative_area_level_1 contactFields requiredField" type="text" id="residentialState" name="contact.residentialState"/>
+								<span class="highlight"></span><span class="bar"></span>
+								<label>State <strong class="mndt"> *</strong></label>
+							</div>
+						</div>
+						<div class="col-md-2 col-sm-6 col-xs-6">
+							<div class="group">
+								<input class="autocomplete-off country contactFields requiredField" type="text" id="residentialCountry" name="contact.residentialCountry"/>
+								<span class="highlight"></span><span class="bar"></span>
+								<label>Country<strong class="mndt"> *</strong></label>
+							</div>
+						</div>
+						<!-- END Add new field -->
+												
+						<div class="col-md-2 col-sm-6 col-xs-6">
+							<div class="group">
+								<input class="autocomplete-off locality contactFields requiredField" type="text" name="contact.city" id="city"/>
+								<span class="highlight"></span><span class="bar"></span>
+								<label>City <strong class="mndt"> *</strong></label>
+							</div>
+						</div>
+						
+						<div class="col-md-2 col-sm-6 col-xs-6">
+							<div class="group">
+								<input class="autocomplete-off postal_code contactFields" type="text" name="contact.pinCode" id="pinCode" maxlength="6"/>
+								<span class="highlight"></span><span class="bar"></span>
+								<label>Pin Code</label>
+							</div>	
+						</div>
+						<div class="clearfix"></div>
+					</div>
+					
+					
+					<div style="border-bottom: 1px solid #ccc; margin-bottom: 45px;">
+							<div class="col-md-2 col-xs-6">
+								<div class="group">
+									<select id="employmentStatus" name="contact.contactReport.employmentStatus" class="contactFields">
+									        <option value=""></option>
+									        <option value="Salaried">Salaried</option>
+									        <option value="Business">Business</option>
+									        <option value="Professional">Professional</option>
+									        <option value="Retired">Retired</option>
+									        <option value="Homemaker">Homemaker</option>							       		        					    
+									</select>
+									<span class="highlight"></span><span class="bar"></span>
+									<label class="select-label">Occupation<strong class="mndt"></strong></label>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+							<div class="col-md-3 col-xs-6">
+								<div class="group">
+									<input type="text" id="companyName" name="contact.companyName" class="contactFields autocomplete-off"/>
+									<span class="highlight"></span><span class="bar"></span>
+									<label>Organisation Name<strong class="mndt"></strong></label>
+								</div>
+								<div class="clearfix"></div>
+					    	</div>
+							
+							
+							<div id="address2">
+								<div class="col-md-3 col-xs-12">
+									<div class="group">
+									  <input class="autocomplete-off autocomplete contactFields" type="text"  id="officeAddress" name="contact.contactReport.officeAddress"/> <!-- autocomplete -->
+									  <span class="highlight"></span> <span class="bar"></span>
+									  <label>Office Location</label>
+									</div>
+									<div class="clearfix"></div>
+								</div>
+								
+								<div style="display:none;">
+									<input class="contactFields" type="text"  id="officelat" name="contact.contactReport.officelat"/>
+									<input class="contactFields" type="text"  id="officelng" name="contact.contactReport.officelng"/>
+									<input class="contactFields" type="text"  id="reslat" name="contact.contactReport.reslat"/>
+									<input class="contactFields" type="text"  id="reslng" name="contact.contactReport.reslng"/>
+								</div>
+								
+								<div class="col-md-2 col-xs-6">
+									<div class="group">
+										<input class="autocomplete-off contactFields  locality" type="text" id="officeCity" name="contact.contactReport.officeCity"/> <!-- locality -->
+										<span class="highlight"></span><span class="bar"></span>
+										<label>City</label>
+									</div>
+									<div class="clearfix"></div>
+								</div> 
+								<div class="col-md-2 col-xs-6">
+									<div class="group">
+										<input class="autocomplete-off contactFields postal_code" type="text" maxlength="6" id="officePinCode" name="contact.contactReport.officePincode"/> <!-- postal_code -->
+										<span class="highlight"></span><span class="bar"></span>
+										<label>Pin Code</label>
+									</div>
+									<div class="clearfix"></div>
+								</div>
+							</div>
+							
+							<div class="clearfix"></div>
+						</div>
+					
+						
+					
+					<div class="clearfix"></div>
+					
+					<!-- Are you accompanied/ referred by a channel partner?  -->
+					<div>
+						<div class="col-md-12 radioBtnWrp mrgT0">
+							<div class="titleF" id="enquirySourceTextDiv">Are you accompanied/ referred by a channel partner? <strong class="mndt">*</strong></div>
+							<input type="hidden" name="isReferredByChannelPartner" id="isReferredByChannelPartnerInput" >
+							<input type="hidden" id="hiddenEnquiryType" value="${enquiryType}">
+							<div class="radioBtnCol" data-toggle="buttons">
+							  <label class="btn btn-primary active hideChannelPartnerType enquiryFields" labelName="isReferredByChannelPartner" value="CP" >
+								<input type="radio" id="isReferredByChannelPartnerRadioCP" propValue="Partner" class="hideChannelPartnerType" name="isReferredByChannelPartnerFlag" checked value="CP"> Yes
+							  </label>
+							  <label class="btn btn-primary hideDirectType enquiryFields" labelName="isReferredByChannelPartner" value="D" >
+								<input type="radio" id="isReferredByChannelPartnerRadioD" propValue="Direct" class="hideDirectType" name="isReferredByChannelPartnerFlag" value="D"> No
+							  </label>
+							  <label class="btn btn-primary hideChannelPartnerType enquiryFields" labelName="isReferredByChannelPartner"  value="O" >
+								<input type="radio" id="isReferredByChannelPartnerRadioO" propValue="Partner" class="hideChannelPartnerType" name="isReferredByChannelPartnerFlag" value="O"> Other
+							  </label>
+							</div>
+						</div>
+						<div class="clearfix"></div>
+						<div id="isReferredByChannelPartnerCP" class="sourceCol animated">
+							<div class="col-md-6 col-xs-12">
+								<div class="group posRelative">
+									<div class="commonLoad" id="channelPartnerLoader" style="display:none;"></div>
+									<input type="text" id="channelPartnerNameSearch" onkeyup="getChannelPartners(event,this);" data-id="channelPartnerName" class= "requiredHidden enquiryFields autocomplete-off isReferredByChannelPartnerCP requiredField"  required="required"  /><!--  -->
+									<input type="hidden" id="channelPartnerSfid" name="channelPartner.sfid" class="isReferredByChannelPartnerCP"/>
+									<input type="hidden" id="channelPartnerId" name="channelPartner.channelPartnerId" class="isReferredByChannelPartnerCP"/>
+									
+									<input type="hidden"  id="channelPartnerName" name="channelPartner.name" class="isReferredByChannelPartnerCP"/>
+									
+									<span class="highlight"></span><span class="bar"></span>
+									<label>Enter channel partner name <strong class="mndt">*</strong></label>
+								</div>
+							</div>
+	
+	
+							<div class="col-md-6 col-xs-12" style="display: none">
+								<div class="group">
+									<input type="hidden" id="brokerContactId" name="brokerContact.contactId" >
+									<select class="isReferredByChannelPartnerCP enquiryFields" id="brokerContact"  name="brokerContact.sfid" onchange="brokerContactChanged(event,this);">
+									</select>
+									<span class="highlight"></span><span class="bar"></span>
+									<label class="select-label">Select broker contact </label>
+								</div>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+						
+						<div id="isReferredByChannelPartnerD" class="sourceCol animated" style="display: none;">
+							<div class="col-md-6 col-xs-12">
+								<div class="group">
+									<select class="isReferredByChannelPartnerD requiredField enquiryFields" disabled="disabled" id="walkInSource" name="walkInSource" onchange="onSelectWalkinSrcReferral(event,this);">
+									    <option value=""></option>
+										<c:forEach var="communcationMediumList" items="${communcationMediumList}">
+	
+	                                       <option value="${communcationMediumList.code}">${communcationMediumList.name}</option>
+	
+	                                     </c:forEach>
+									</select>
+									<span class="highlight"></span><span class="bar"></span>
+									<label class="select-label">How did you come to know about this project? <strong class="mndt">*</strong></label>
+								</div>
+							</div>
+							<!--  Referred by added on Enquiry page, on select of walk-in source as referral -  
+     						* Change By Satheesh Kyatham- 25-12-2019
+     						* Request From - Prakash Idnani -->
+     						<!-- Start -->
+							<div class="referred_by_name ccol-md-3 col-xs-6">
+								<div class="group">
+									<input type="text" class="autocomplete-off" id="referredbyId" name="enquiryReport.referredby"/>
+									<span class="highlight"></span><span class="bar"></span>
+									<label>Referred by</label>
+								</div>
+							</div>
+							<!-- END -->
+							<div class="clearfix"></div>
+						</div>
+						
+						<div id="isReferredByChannelPartnerO" class="sourceCol animated" style="display: none;">
+							<div class="col-md-6 col-xs-12">
+								<div class="group">
+									<input class="autocomplete-off isReferredByChannelPartnerO requiredField enquiryFields" type="text" required="required" disabled="disabled" name="cpComment" id="otherChannelPartnerName"/>
+									<span class="highlight"></span><span class="bar"></span>
+									<label>Enter channel partner name <strong class="mndt">*</strong></label>
+								</div>
+							</div>	
+							<div class="clearfix"></div>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+					<!-- END Are you accompanied/ referred by a channel partner? --> 
+					
+					
+					
+					
+					
+					<!-- New filed -->
+					
+					
+					<div class="clearfix"></div>
+					
+					<div>
+						
+						
+						
+					<div class="formDivider" >
+						<div class="col-md-2 col-sm-6 col-xs-12">
+							<div class="group">
+								<select  id="purpose" name="enquiryReport.purpose" class="enquiryFields">
+								            <option value=""></option>									
+	                                        <option value="Personal use">Personal use</option>                                    
+	                                        <option value="Investment">Investment</option> 
+	                             </select>
+								<span class="highlight"></span><span class="bar"></span>
+								<label class="select-label">Purchase Purpose<strong class="mndt"></strong></label>
+							</div>
+							<div class="clearfix"></div>
+						</div> 
+						
+						<div class="clearfix"></div>
+						<div class="col-md-12 col-sm-12 col-xs-12 radioBtnWrp padMLR15" radioName="desiredUnitType" id="desiredUnitType">
+							<div class="titleF">Requirement <strong class="mndt">*</strong></div>
+							<div class="radioBtnCol requiredRadio" data-toggle="buttons">
+							     <label class='btn btn-primary'> <!-- enquiryFields -->
+							          <input type='radio' id='desiredUnitType0' class="desiredUnitType " name='enquiryReport.desiredUnitType' value='1 BHK'>1 BHK</label>
+							     <label class='btn btn-primary '> <!-- enquiryFields -->
+							          <input type='radio' id='desiredUnitType1' class="desiredUnitType " name='enquiryReport.desiredUnitType' value='2 BHK'>2 BHK</label>
+							     <label class='btn btn-primary '> <!-- enquiryFields -->
+							          <input type='radio' id='desiredUnitType2' class="desiredUnitType " name='enquiryReport.desiredUnitType' value='3 BHK'>3 BHK</label>
+							     <label class='btn btn-primary '> <!-- enquiryFields -->
+							          <input type='radio' id='desiredUnitType2' class="desiredUnitType " name='enquiryReport.desiredUnitType' value='4 BHK'>4 BHK</label>
+							     
+							     <label class='btn btn-primary '> <!-- enquiryFields -->
+							          <input type='radio' id='desiredUnitType3' class="desiredUnitType " name='enquiryReport.desiredUnitType' value='Others'>Others</label>
+							     <%-- <c:forEach var="requirement" items="${requirementList}" varStatus="loop">
+							       <c:choose>
+							        <c:when test="${loop.index==0}">
+							          <label class='btn btn-primary active'>
+							          <input type='radio' id='desiredUnitType${loop.index}' name='desiredUnitType' value='${requirement.code}' checked>${requirement.name}</label>
+                                     </c:when>
+                                    <c:otherwise>
+                                    <label class='btn btn-primary'>
+							          <input type='radio' id='desiredUnitType${loop.index}' name='desiredUnitType' value='${requirement.code}' checked>${requirement.name}</label>
+                                     </c:otherwise>
+                                    </c:choose>
+                                 </c:forEach> --%>							 
+							</div>
+
+							<div class="claerfix"></div>
+						</div>	
+						<div class="clearfix"></div>
+						<!-- Added By A -->
+						
+						<div class="col-md-6 col-xs-12" style="padding-left: 25px; padding-right: 25px; min-height: 150px; display:none;">
+							<label style="margin-left: -10px; margin-bottom: 30px; font-weight:normal">Carpet Area  </label>
+							<input style="width:100%" id="ex14"  data-slider-value="900" type="text" name="enquiryReport.carpetAreaRequirement"/>
+							<div class="clearfix"></div>
+						</div>	
+						<div class="col-md-6 col-xs-12" style="padding-left: 25px; padding-right: 25px; min-height: 150px;">
+							<label style="margin-left: -10px; margin-bottom: 30px; font-weight:normal">  Budget  </label>
+							<input style="width:100%" id="ex13" type="text" name="enquiryReport.budget" data-slider-value="0" data-slider-step="1" />
+							<div class="clearfix"></div>
+						</div>
+						
+						
+						
+						
+						<!-- END Added By A -->
+						<div class="clearfix"></div>
+						
+						<input id="budget"  style="display:none;"/>
+						<input id="carpetAreaRequirement" style="display:none;"/>
+												
+						
+					</div>
+						
+					
+						<!-- END New filed -->
+					
+					
+					
+						
+						
+					
+						<div class="clearfix"></div>
+					</div>
+					
+					
+					
+					<div class="clearfix"></div>
+					
+					<div > 
+						
+						
+						 
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				
+				<div class="txtCenter">
+					<a class="btn btn-primary btnNext" onclick="saveBaseInfo(event,this);">
+						<span>Submit</span>
+					</a>
+					<div class="clearfix"></div>
+				</div>
+				</form:form>
+			</div>
+			
+			<div class="tab-pane" id="tab2">
+				<%@ include file="/WEB-INF/views/pages/offlineeoi/eoiForm.jsp" %>
+			</div>
+						
+		</div>
+	<div class="clearfix"></div>
+	</div>
+
+<!-- Modal -->
+<div class="modal fade" id="multiEnq" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        	<table class="table table-bordered" id="enquiryTable">
+		      <thead>
+		        <tr>
+		          <th>#</th>
+		          <th>Enquiry Date</th>
+		          <th>Enquiry Id</th>
+		          <th>Type</th>
+		          <th>Status</th>
+		          <th>Source</th>
+		          <th>Owner</th>
+		        </tr>
+		      </thead>
+		      <tbody>
+		      </tbody>
+		    </table>
+      </div>
+      <div class="modal-footer">
+        <span id="notSelectError" style="color: red ;display: none; float:left">Please select enquiry..</span>
+         <button type="button" class="btn btn-primary blue_btn" data-dismiss="modal" onclick="populateEnquiry(event,this);">Save changes</button>
+        <input type="hidden" value="15">
+      </div>
+    </div>
+  </div>
+</div>
+	
+	
+	
+	
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    
+    
+    <script src="<c:url value='/resources/js/jquery-1.12.4.min.js' />"></script>
+    <script src="<c:url value='/resources/js/bootstrap.min.js' />"  ></script>
+	<script src="<c:url value='/resources/js/anypicker.js'/>"></script>
+	<script src="<c:url value='/resources/js/jquery.touchSwipe.min.js' />"></script>
+	<link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel = "stylesheet">
+    <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    
+    <script src="<c:url value='/resources/js/bootstrap-slider.min.js' />"></script>
+    
+	<script src="<c:url value='/resources/js/springForm.js?v=18' />"></script>
+	<script src="<c:url value='/resources/js/commonValidation.js?v=18' />"></script>
+	<script src="<c:url value='/resources/js/utility.js?v=18' />"></script>
+	<script src="<c:url value='/resources/js/offline/enquiry.js?v=18' />"></script>	
+    <script src="<c:url value='/resources/js/intlTelInput.js' />"></script>
+    <script src="<c:url value='/resources/js/sweetalert2.min.js' />"></script>
+	
+	<script src="<c:url value='/resources/js/index.js?v=18' />"></script>
+	
+	<script src="<c:url value='/resources/js/offline/offlineEOI.js?v=20'/>"></script>
+=======
 				<li id="">
 						<a href="#tab1" data-toggle="tab">Enquiry</a>
 			</li>
@@ -658,6 +1184,7 @@
     <script src="<c:url value='/resources/js/sweetalert2.min.js' />"></script>
 	
 	<script src="<c:url value='/resources/js/index.js?v=18' />"></script>
+>>>>>>> refs/remotes/origin/master
 	
 	<script>
 	
