@@ -169,7 +169,7 @@
 						<a href="#tab1" data-toggle="tab">Enquiry</a>
 			</li>
 			
-			<li id="" onclick="getTowerEOI()">
+			<li id="" onclick="getTowerEOI()" style="display:none;">
 						<a href="#tab2" data-toggle="tab">EOI</a>
 			</li>
 			</ul>
