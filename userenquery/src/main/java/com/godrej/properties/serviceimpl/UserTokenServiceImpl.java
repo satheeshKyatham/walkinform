@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.godrej.kyc.util.StringEncDec;
+import com.godrej.properties.dto.UserTokenDto;
 import com.godrej.properties.model.Token;
 import com.godrej.properties.service.TokenService;
 import com.godrej.properties.service.UserTokenService;
@@ -28,7 +29,7 @@ public class UserTokenServiceImpl implements UserTokenService{
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
-	public String sendToken(String enquiryId, String mobileNo, String projectSFID, String projectName,
+	public UserTokenDto sendToken(String enquiryId, String mobileNo, String projectSFID, String projectName,
 			String countryCode, String userId) {
 
 		Token token = new Token();
@@ -53,8 +54,10 @@ public class UserTokenServiceImpl implements UserTokenService{
 		
 		String tokenId = String.valueOf(token.getNv_token_id());
 		tokenService.updateAssignStatus(tokenId, userId);
-
-		return "success";
+		UserTokenDto userToken =  new UserTokenDto();
+		userToken.setTokenId(tokenId);
+		userToken.setTokenNo(token.getDocNo());
+		return userToken;
 	}
 
 	public void sendTokenSMS(String mobile ,String token,String projName) throws UnsupportedEncodingException {//,String cpflag,String cpName
