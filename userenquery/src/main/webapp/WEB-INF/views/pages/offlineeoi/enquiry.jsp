@@ -96,7 +96,7 @@
 				  <div class="form-group col-md-2">	
 						<div class="group" style="min-height: auto; margin-bottom: 0;">				
 						  <div class="input-group" id="contactInputDiv"> 
-						  <input type="text" value="${countryCode}" class="autocomplete-off form-control mobile requiredField contactNoDiv" id="enCountryCode"  maxlength="4"  tabindex="-1">
+						  <input type="text" value="${countryCode}" class="autocomplete-off form-control requiredField contactNoDiv" id="enCountryCode"  maxlength="4"  tabindex="-1">
 						  <span class="highlight"></span><span class="bar"></span>
 								<label>Country Code</label>
 						</div>
@@ -190,8 +190,12 @@
 				<input type="hidden" name="projectType" id="projectType" value="Residential">
 				<input type="hidden" name="enquirySource" id="enquirySource" value="Walk-in">
 				<input type="hidden" name="enquiryRating" value="Hot" id="enquiryRating">
+				<input type="hidden" value="${projectSfid}" name="project.sfid" id="projectSfid" class="projectSfid">
+				<input type="hidden" value="${userId}" name="logginUserId" id="logginUserId" class="logginUserId">
 				<input type="hidden" value="${countryCode}" name="contact.countryCode" id="countryCode"><!--  +91-->
-				<input type="hidden" value="1" name="project.projectId" id="projectId"> 
+				<input type="hidden" value="1" name="project.projectId" id="projectId">
+				<input type="hidden" value="" name="tokenId" id="tokenId"/>
+				<input type="hidden" value="" name="tokenNo" id="tokenNo"/> 
 				<input type="hidden" value="${projectSfid}" name="contact.contactReport.projectId" id="contact_projectId"> 
 				<input type="hidden" value="Site Visit Done" name="enquiryStatus" id="enquiryStatus">
 				<input type="hidden" class="enquiryReportId" name="enquiryReport.enquiryReportId">
@@ -619,8 +623,8 @@
 						<span>Submit</span>
 					</a>
 					
-					<a class="btn btn-primary btnNext" >
-						<span>Button</span>
+					<a class="btn btn-primary btnNext" onclick="openClosingMDashboard(event,this);">
+						<span>Open Dashboard</span>
 					</a>
 					<div class="clearfix"></div>
 				</div>

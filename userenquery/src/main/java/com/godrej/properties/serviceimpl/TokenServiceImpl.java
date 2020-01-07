@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +30,7 @@ public class TokenServiceImpl implements TokenService {
 	@Autowired
 	PriceSheetDao priceDao;
 
+	private Logger log = LoggerFactory.getLogger(getClass());
 	@Override
 	public Token generateToken(String mobileno, String type) {
 		// TODO Auto-generated method stub
@@ -139,5 +142,13 @@ public class TokenServiceImpl implements TokenService {
 	public String getSalesUserSFID(int enqid, String email) {
 		// TODO Auto-generated method stub
 		return tokenDao.getSalesUserSFID(enqid,email);
+	}
+	public Token getTokenByEnquiry(String enquirySfid) {
+		try {
+			return tokenDao.getTokenByEnquiry(enquirySfid);
+		}catch (Exception e) {
+			log.error("Error",e);
+		}
+		return null;
 	}
 }

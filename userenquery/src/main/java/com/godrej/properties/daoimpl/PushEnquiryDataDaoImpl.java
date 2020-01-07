@@ -333,6 +333,7 @@ public class PushEnquiryDataDaoImpl  extends AAbstractDao<Enquiry> implements Pu
 			cust.setTransactionType(enqqty.getTransactionType());
 			cust.setWalkInSource(enqqty.getWalkInSource());
 			cust.setWalkInSourceDetail(enqqty.getWalkInSourceDetail());
+			cust.setSourcing_Managers__c(enqqty.getSourcing_Managers__c());
 			return cust;
 		}		
 		return null;

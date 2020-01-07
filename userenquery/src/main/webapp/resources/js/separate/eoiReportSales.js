@@ -71,9 +71,8 @@ function getEOIReportSales () {
 							" <td>"+obj1[i].walkin_date+"</td>" +
 							" <td>"+obj1[i].walk_in_source__c+"</td>" +
 							" <td>"+obj1[i].sourcing_manager_name__c+"</td>" +
-							
-							
 							" <td>"+obj1[i].verticle__c+"</td>" +
+							" <td>"+obj1[i].broker_account_name+"</td>" +
 							" <td>"+obj1[i].closing_manager_name__c+"</td>" +
 							" <td>"+obj1[i].date_of_eoi__c+"</td>" +
 							" <td>"+obj1[i].total_payment_done+"</td>" +

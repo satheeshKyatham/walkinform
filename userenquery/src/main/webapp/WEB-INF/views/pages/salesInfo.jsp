@@ -66,11 +66,13 @@
     
   </head>
   
-  <%! String projectname,projectid ,projectrole,userid,email,userName;%>
+  <%! String projectname,projectid ,projectrole,userid,email,userName,roleid;%>
 <%HttpSession ses=request.getSession(); 
 
 projectid =request.getParameter("projectSfid");
 projectname =request.getParameter("projectName");
+if(request.getParameterMap().containsKey("roleid"))
+	roleid = request.getParameter("roleid");
 if(ses!=null){
 	  //projectname=(String)ses.getAttribute("PRONAME");
 	 // projectid=(String)ses.getAttribute("PROID");
@@ -111,6 +113,8 @@ if(ses!=null){
 	
 	
 	<input  id="userid" value="<%= userid %>">
+	<input  id="roleid" value="<%= roleid %>">
+	
 </div>
 <!-- END Inventory -->   
    
@@ -1636,7 +1640,7 @@ if(ses!=null){
 	<script src="<c:url value='/resources/js/commonValidation.js?v=20' />"></script>
 	<script src="<c:url value='/resources/js/utility.js?v=20' />"></script>
 	<%-- <script src="<c:url value='/resources/js/enquiryRequest/enquiryRequest.js' />"></script> --%>
-	<script src="<c:url value='/resources/js/enquiryRequest/salesRequest.js?v=20.1' />"></script>	
+	<script src="<c:url value='/resources/js/enquiryRequest/salesRequest.js?v=20.2' />"></script>	
     <script src="<c:url value='/resources/js/intlTelInput.js' />"></script>
    
     <script src="<c:url value='/resources/js/sweetalert2.min.js' />"></script>

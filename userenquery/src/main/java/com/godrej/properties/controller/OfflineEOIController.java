@@ -1,6 +1,10 @@
 package com.godrej.properties.controller;
 
 import java.util.List;
+import java.util.Optional;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,22 +46,64 @@ public class OfflineEOIController {
 	private EnquiryReportService enquiryReportService;
 
 	
-	@GetMapping(value = "/offlineEOI/{countrycode}/{mobileno}/{projectid}/{projectname}/{userid}/{enquiryType}")
-	public ModelAndView offlineEOI(@PathVariable("countrycode") String countrycode,@PathVariable("mobileno") String mobileno,
-			@PathVariable("projectid") String projectid,@PathVariable("projectname") String projectname,
-			@PathVariable("userid") Integer userid,@PathVariable("enquiryType")String enquiryType){
+	@GetMapping(value = {"/offlineEOI","/offlineEOI/{countrycode}/{mobileno}/{projectid}/{projectname}/{userid}/{enquiryType}"})
+	public ModelAndView offlineEOI(@PathVariable("countrycode") Optional<String> countrycode,@PathVariable("mobileno") Optional<String> mobileno,
+			@PathVariable("projectid") Optional<String> projectid,@PathVariable("projectname") Optional<String> projectname,
+			@PathVariable("userid") Optional<String> userid,@PathVariable("enquiryType")Optional<String> enquiryType
+			,HttpServletRequest request){
 		ModelAndView view=new ModelAndView("offlineeoi");
 		boolean hasParam=true;
+		String mobile  =null;
+		String countryCode=null;
+		String projectId=null;
+		String userId =null;
+		String projectName= null;
+		String typeOfEnquiry =null;
+		HttpSession session = request.getSession();
+		if(session ==null) {
+			return view;
+		}
+		
+		if(mobileno.isPresent()) {
+			mobile = mobileno.get();
+		} /*
+			 * else { mobile = (String) session.getAttribute("USERMOBILENO"); }
+			 */
+		if(countrycode.isPresent()) {
+			countryCode = countrycode.get();
+		} /*
+			 * else { countryCode = (String) session.getAttribute("PROID"); }
+			 */
+		if(projectid.isPresent()) {
+			projectId = projectid.get();
+		}else {
+			projectId = (String) session.getAttribute("PROID");
+		}
+		if(projectname.isPresent()) {
+			projectName=projectname.get();
+		}else {
+			projectName  = (String) session.getAttribute("PRONAME");
+		}
+		if(enquiryType.isPresent()) {
+			typeOfEnquiry = enquiryType.get();
+		} /*
+			 * else { typeOfEnquiry = (String) session.getAttribute("PROID"); }
+			 */
+		if(userid.isPresent()) {
+			userId= userid.get();
+		}else {
+			userId=(String) session.getAttribute("USERID");
+		}
 		view.addObject("hasParam",hasParam);
-		view.addObject("mobileNo",mobileno);
-		view.addObject("countryCode",countrycode);
-		view.addObject("projectSfid",projectid);
-		view.addObject("userId",userid);
-		view.addObject("projectName",projectname);
-		view.addObject("enquiryType",enquiryType);
+		view.addObject("mobileNo",mobile);
+		view.addObject("countryCode",countryCode);
+		view.addObject("projectSfid",projectId);
+		view.addObject("userId",userId);
+		view.addObject("projectName",projectName);
+		view.addObject("enquiryType",typeOfEnquiry);
 		view.addObject("recordTypeProspect",KeyConstants.RECORD_TYPE_PROSPECT);
 		view.addObject("recordTypeCustomer",KeyConstants.RECORD_TYPE_CUSTOMER);
-		ProjectLaunch projectLaunch=projectLaunchService.getProjectSaleMgrID(projectid);
+		ProjectLaunch projectLaunch=projectLaunchService.getProjectSaleMgrID(projectId);
 		if(projectLaunch!=null) {
 			view.addObject("AssignTO",projectLaunch.getSalesmanager_sfid());
 		}

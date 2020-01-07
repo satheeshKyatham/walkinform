@@ -21,10 +21,11 @@ $(document).ready(function(){
 	$("#enquiryRequestBasicInfoForm").find("input,select,textarea").attr("tabIndex","-1");
 	 $(this).scrollTop(0);
 	 
-	 $("#searchEnquiryInput").on("click",getEnquiry);
+	 $("#getEnquiry").on("click",getEnquiry);
 });
 
 function getEnquiry(){
+	$("#getEnquiry").attr('disabled',true);
 	var inputMobile =  $('#enMobileNo').val();
 	var inputCountryCode =  $('#enCountryCode').val();
 	$('#mobileNo').val(inputMobile);
@@ -85,6 +86,17 @@ function getExistingInfoByMobileAndProject(){
 	}
 }
 function populateEnquiryAndContact(resp){
+	if(resp ==null){
+		return;
+	}
+	if(resp.objectMap==null){
+		return;
+	}
+	var userToken =  resp.objectMap.userToken;
+	if(userToken !=null){
+		$("#tokenId").val(userToken.tokenId);
+		$("#tokenNo").val(userToken.tokenNo);
+	}
 	var enquiryList=resp.objectMap.enquiryList;
 	var contact=resp.objectMap.contact;
 	if(!isEmpty(enquiryList)){
@@ -189,7 +201,7 @@ function populateEnquiryAndContact(resp){
 		    $("#officeCity").val("");
 		    $("#officePinCode").val("");
 	}
-
+	$("#getEnquiry").attr('disabled',false);
 }
 function saveBaseInfo(event,el){
     event.preventDefault();
@@ -439,9 +451,6 @@ function enqSlider(){
 
 	}
 	
-	
-	
-
 
 
 }
@@ -568,6 +577,9 @@ function savebasicInfoResp(data){
 			$.get(url+"/generateWalkinTokenOffline",{"enquiryid":enq.enquiryId,"mobileno":contact.mobileNo,"projectSFID":$("#projectSfid").val(),"projectName":$("#projectName").val()
         		,"countryCode":contact.countryCode},function(data){//,"cpflag":enq.isReferredByChannelPartnerFlag,"cpname":cpname				 
         	}).done(function(data){
+        		console.log(data);
+	        	$("#tokenId").val(data.tokenId);
+	        	$("#tokenNo").val(data.tokenNo);
         	});
 			
 			swal({
@@ -580,7 +592,6 @@ function savebasicInfoResp(data){
 		        if (isConfirm) {
 /*		        	window.location.href=url+"/"+"success"+"?enquiryid="+enq.enquiryId+"&mobileno="+code+"&projectSFID="+$("#projectSfid").val()+"&projectName="+$("#projectName").val();
 */		        	console.log('OK');
-		        	
 		        } 
 		      });	 		
 		}else{
@@ -1227,3 +1238,22 @@ function onSelectWalkinSrcReferral(event,el)
 		//$("#brokerContactId").val(brkContId);
 	}
 /*  END  */
+
+//Code for Offline EOI to Closing Manager Page Redirect
+function openClosingMDashboard()
+{
+	var countryCodeEN = $("#countryCode").val();
+	countryCodeEN =countryCodeEN.replace("+","%2B");
+	window.location.href = "salesDetails?tokenid="+$("#tokenId").val()
+		+"&countrycode="+ countryCodeEN
+		+"&mobileno="+$("#mobileNo").val() 
+		+"&userId=" +$('#logginUserId').val()
+		+"&projectSfid="+$('#projectSfid').val()
+		+"&projectName="+$('#projectName').val()
+		+"&token="+ $("#tokenNo").val()
+		+"&isView=N&salesViewType=N&roleid="+ $("#roleid").val();
+	//alert("safdf");
+	//?tokenid=42911&countrycode=%2B91&mobileno=7777771111
+	//&projectSfid=a1l6F000008DnniQAC&projectName=Godrej%20North%20Estate
+	//&token=W6&isView=N&salesViewType=N
+	}
