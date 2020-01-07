@@ -619,8 +619,8 @@
 						<span>Submit</span>
 					</a>
 					
-					<a class="btn btn-primary btnNext" >
-						<span>Button</span>
+					<a class="btn btn-primary btnNext" onclick="openClosingMDashboard(event,this);">
+						<span>Open Dashboard</span>
 					</a>
 					<div class="clearfix"></div>
 				</div>

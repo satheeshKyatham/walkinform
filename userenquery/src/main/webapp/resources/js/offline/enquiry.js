@@ -1227,3 +1227,10 @@ function onSelectWalkinSrcReferral(event,el)
 		//$("#brokerContactId").val(brkContId);
 	}
 /*  END  */
+
+//Code for Offline EOI to Closing Manager Page Redirect
+function openClosingMDashboard()
+{
+	window.location.href = "assignedusers?userId=" + $('#loged_userid').val()+"&projectid="+$('#projectSelected').val()+"&projectname="+$('#projectSelected option:selected').text() ;
+	//alert("safdf");
+	}
