@@ -21,10 +21,11 @@ $(document).ready(function(){
 	$("#enquiryRequestBasicInfoForm").find("input,select,textarea").attr("tabIndex","-1");
 	 $(this).scrollTop(0);
 	 
-	 $("#searchEnquiryInput").on("click",getEnquiry);
+	 $("#getEnquiry").on("click",getEnquiry);
 });
 
 function getEnquiry(){
+	$("#getEnquiry").attr('disabled',true);
 	var inputMobile =  $('#enMobileNo').val();
 	var inputCountryCode =  $('#enCountryCode').val();
 	$('#mobileNo').val(inputMobile);
@@ -189,7 +190,7 @@ function populateEnquiryAndContact(resp){
 		    $("#officeCity").val("");
 		    $("#officePinCode").val("");
 	}
-
+	$("#getEnquiry").attr('disabled',false);
 }
 function saveBaseInfo(event,el){
     event.preventDefault();
@@ -439,9 +440,6 @@ function enqSlider(){
 
 	}
 	
-	
-	
-
 
 
 }
@@ -1231,6 +1229,15 @@ function onSelectWalkinSrcReferral(event,el)
 //Code for Offline EOI to Closing Manager Page Redirect
 function openClosingMDashboard()
 {
-	window.location.href = "assignedusers?userId=" + $('#loged_userid').val()+"&projectid="+$('#projectSelected').val()+"&projectname="+$('#projectSelected option:selected').text() ;
+	window.location.href = "salesDetails?tokenid=42911"
+		+"&countrycode=%2B91&mobileno=7777771111" 
+		+"&userId=" +$('#loged_userid').val()
+		+"&projectSfid="+$('#projectSelected').val()
+		+"&projectName="+$('#projectSelected option:selected').text()
+		+"token=W6"
+		+"&isView=N&salesViewType=N";
 	//alert("safdf");
+	//?tokenid=42911&countrycode=%2B91&mobileno=7777771111
+	//&projectSfid=a1l6F000008DnniQAC&projectName=Godrej%20North%20Estate
+	//&token=W6&isView=N&salesViewType=N
 	}
