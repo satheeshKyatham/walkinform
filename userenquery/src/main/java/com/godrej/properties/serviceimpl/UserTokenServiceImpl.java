@@ -25,7 +25,8 @@ public class UserTokenServiceImpl implements UserTokenService{
  	@Autowired
 	private	TokenService tokenService; 
 
- 	private Logger log = LoggerFactory.getLogger(getClass());
+ 	@SuppressWarnings("unused")
+	private Logger log = LoggerFactory.getLogger(getClass());
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
@@ -56,7 +57,7 @@ public class UserTokenServiceImpl implements UserTokenService{
 		tokenService.updateAssignStatus(tokenId, userId);
 		UserTokenDto userToken =  new UserTokenDto();
 		userToken.setTokenId(tokenId);
-		userToken.setTokenNo(token.getDocNo());
+		userToken.setTokenNo(token.getType()+token.getQueue());
 		return userToken;
 	}
 

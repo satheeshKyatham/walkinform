@@ -307,4 +307,13 @@ public class TokenDaoImpl extends AbstractDao<Integer, Token> implements TokenDa
 			return "No Entry Found";*/
 	}
 	
+	public Token getTokenByEnquiry(String enquirySfid) {
+		Session session = this.sessionFactory.getCurrentSession();	
+		List<Token> list  =session.createQuery("  FROM Token where  enquiry_18='"+enquirySfid+"'").list();
+		if(list.size()>0) {
+			
+			return list.get(0);
+		}
+		return null;
+	}
 }

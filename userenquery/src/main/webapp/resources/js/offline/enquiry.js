@@ -86,6 +86,17 @@ function getExistingInfoByMobileAndProject(){
 	}
 }
 function populateEnquiryAndContact(resp){
+	if(resp ==null){
+		return;
+	}
+	if(resp.objectMap==null){
+		return;
+	}
+	var userToken =  resp.objectMap.userToken;
+	if(userToken !=null){
+		$("#tokenId").val(userToken.tokenId);
+		$("#tokenNo").val(userToken.tokenNo);
+	}
 	var enquiryList=resp.objectMap.enquiryList;
 	var contact=resp.objectMap.contact;
 	if(!isEmpty(enquiryList)){
@@ -566,6 +577,9 @@ function savebasicInfoResp(data){
 			$.get(url+"/generateWalkinTokenOffline",{"enquiryid":enq.enquiryId,"mobileno":contact.mobileNo,"projectSFID":$("#projectSfid").val(),"projectName":$("#projectName").val()
         		,"countryCode":contact.countryCode},function(data){//,"cpflag":enq.isReferredByChannelPartnerFlag,"cpname":cpname				 
         	}).done(function(data){
+        		console.log(data);
+	        	$("#tokenId").val(data.tokenId);
+	        	$("#tokenNo").val(data.tokenNo);
         	});
 			
 			swal({
@@ -578,7 +592,6 @@ function savebasicInfoResp(data){
 		        if (isConfirm) {
 /*		        	window.location.href=url+"/"+"success"+"?enquiryid="+enq.enquiryId+"&mobileno="+code+"&projectSFID="+$("#projectSfid").val()+"&projectName="+$("#projectName").val();
 */		        	console.log('OK');
-		        	
 		        } 
 		      });	 		
 		}else{
@@ -1229,12 +1242,15 @@ function onSelectWalkinSrcReferral(event,el)
 //Code for Offline EOI to Closing Manager Page Redirect
 function openClosingMDashboard()
 {
-	window.location.href = "salesDetails?tokenid=42911"
-		+"&countrycode=%2B91&mobileno=7777771111" 
-		+"&userId=" +$('#loged_userid').val()
-		+"&projectSfid="+$('#projectSelected').val()
-		+"&projectName="+$('#projectSelected option:selected').text()
-		+"token=W6"
+	var countryCodeEN = $("#countryCode").val();
+	countryCodeEN =countryCodeEN.replace("+","%2B");
+	window.location.href = "salesDetails?tokenid="+$("#tokenId").val()
+		+"&countrycode="+ countryCodeEN
+		+"&mobileno="+$("#mobileNo").val() 
+		+"&userId=" +$('#logginUserId').val()
+		+"&projectSfid="+$('#projectSfid').val()
+		+"&projectName="+$('#projectName').val()
+		+"&token="+ $("#tokenNo").val()
 		+"&isView=N&salesViewType=N";
 	//alert("safdf");
 	//?tokenid=42911&countrycode=%2B91&mobileno=7777771111
