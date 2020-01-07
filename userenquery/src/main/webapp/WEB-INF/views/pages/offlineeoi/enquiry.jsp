@@ -169,7 +169,7 @@
 						<a href="#tab1" data-toggle="tab">Enquiry</a>
 			</li>
 			
-			<li id="" onclick="getTowerEOI()">
+			<li id="" onclick="getTowerEOI()" style="display:none;">
 						<a href="#tab2" data-toggle="tab">EOI</a>
 			</li>
 			</ul>
@@ -619,8 +619,8 @@
 						<span>Submit</span>
 					</a>
 					
-					<a class="btn btn-primary btnNext" >
-						<span>Button</span>
+					<a class="btn btn-primary btnNext" onclick="openClosingMDashboard(event,this);">
+						<span>Open Dashboard</span>
 					</a>
 					<div class="clearfix"></div>
 				</div>

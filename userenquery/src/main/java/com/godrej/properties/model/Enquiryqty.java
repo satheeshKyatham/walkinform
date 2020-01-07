@@ -82,6 +82,25 @@ public class Enquiryqty extends CommonModel{
 	@Column(name="appointment__c") private Double appointment__c;
 	@Column(name="site_visit_requested__c") private Double site_visit_requested__c;
 	
+	@Column(name="Lost_reason_c__c") private String lost_reason_c__c;
+	@Column(name="Verticle__c")
+   	private String verticle__c;
+    @Column(name="Sourcing_Managers__c")
+   	private String sourcing_Managers__c;
+   
+
+    @Column(name="Trigger_1__c")
+   	private String trigger_1__c;
+    @Column(name="Trigger_2__c")
+   	private String trigger_2__c;
+    @Column(name="Barrier_1__c")
+   	private String barrier_1__c;
+    @Column(name="Barrier_2__c")
+   	private String barrier_2__c;
+    @Column(name="Follow_up_reason__c")
+   	private String follow_up_reason__c;
+    @Column(name="Follow_up_Date_Time__c")
+   	private Date follow_up_Date_Time__c;
 	public String getClosing_manager_name__c() {
 		return closing_manager_name__c;
 	}
@@ -510,6 +529,77 @@ public class Enquiryqty extends CommonModel{
 		this.site_visit_requested__c = site_visit_requested__c;
 	}
 
+	public String getLost_reason_c__c() {
+		return lost_reason_c__c;
+	}
+
+	public void setLost_reason_c__c(String lost_reason_c__c) {
+		this.lost_reason_c__c = lost_reason_c__c;
+	}
+
+	public String getVerticle__c() {
+		return verticle__c;
+	}
+
+	public void setVerticle__c(String verticle__c) {
+		this.verticle__c = verticle__c;
+	}
+
+	public String getSourcing_Managers__c() {
+		return sourcing_Managers__c;
+	}
+
+	public void setSourcing_Managers__c(String sourcing_Managers__c) {
+		this.sourcing_Managers__c = sourcing_Managers__c;
+	}
+
+	public String getTrigger_1__c() {
+		return trigger_1__c;
+	}
+
+	public void setTrigger_1__c(String trigger_1__c) {
+		this.trigger_1__c = trigger_1__c;
+	}
+
+	public String getTrigger_2__c() {
+		return trigger_2__c;
+	}
+
+	public void setTrigger_2__c(String trigger_2__c) {
+		this.trigger_2__c = trigger_2__c;
+	}
+
+	public String getBarrier_1__c() {
+		return barrier_1__c;
+	}
+
+	public void setBarrier_1__c(String barrier_1__c) {
+		this.barrier_1__c = barrier_1__c;
+	}
+
+	public String getBarrier_2__c() {
+		return barrier_2__c;
+	}
+
+	public void setBarrier_2__c(String barrier_2__c) {
+		this.barrier_2__c = barrier_2__c;
+	}
+
+	public String getFollow_up_reason__c() {
+		return follow_up_reason__c;
+	}
+
+	public void setFollow_up_reason__c(String follow_up_reason__c) {
+		this.follow_up_reason__c = follow_up_reason__c;
+	}
+
+	public Date getFollow_up_Date_Time__c() {
+		return follow_up_Date_Time__c;
+	}
+
+	public void setFollow_up_Date_Time__c(Date follow_up_Date_Time__c) {
+		this.follow_up_Date_Time__c = follow_up_Date_Time__c;
+	}
 
 	
 }

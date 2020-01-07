@@ -218,6 +218,14 @@ function onProjectSelect()
 				option = option+"<option value='KYCA'>KYC Approval</option></select>";
 				$("#role_page").append(option);
 		  }
+		  else if($('#loged_role').val()=='17')
+		  {
+			  $("#role_page").empty();
+			  var option = "<select class='inputLabel' onchange='onChangeRole()' id='roleSelected' style='border-color: #000000 !important;   width: 100%;    min-height: 33px;    margin-bottom: 5px;'><option>Select Type</option>";
+				option = option+"<option value='CM'>Closing Manager</option>";
+				option = option+"<option value='OFFLINEADM'>OFFLINE EOI</option></select>";
+				$("#role_page").append(option);
+		  }
 	 
 		$("#loginMsg").html('');
 	}
