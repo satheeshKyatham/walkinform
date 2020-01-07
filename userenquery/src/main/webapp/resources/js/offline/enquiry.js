@@ -1234,8 +1234,8 @@ function openClosingMDashboard()
 		+"&userId=" +$('#loged_userid').val()
 		+"&projectSfid="+$('#projectSelected').val()
 		+"&projectName="+$('#projectSelected option:selected').text()
-		+"&token=W6"
-		+"&isView=N&salesViewType=N&roleid="+$('#roleid').val();
+		+"token=W6"
+		+"&isView=N&salesViewType=N";
 	//alert("safdf");
 	//?tokenid=42911&countrycode=%2B91&mobileno=7777771111
 	//&projectSfid=a1l6F000008DnniQAC&projectName=Godrej%20North%20Estate
