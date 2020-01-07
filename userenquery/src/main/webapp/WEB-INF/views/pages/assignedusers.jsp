@@ -230,7 +230,7 @@ if(ses!=null){
 						<thead>
 							<!-- <tbody> -->
 							<tr>
-								<th>Project Name123</th>
+								<th>Project Name</th>
 								<th>Enquiry No</th>
 								<th>Mobile No</th>
 								<th>Token No</th>
