@@ -58,14 +58,16 @@
 			<img class="topLogo" src="<c:url value='/resources/images/gplLogo.jpg' />"/>
 		</a>
 	    </div> 
-		
+			
 		
 	    <!-- Collect the nav links, forms, and other content for toggling -->
 	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	      
 	     
 	      <ul class="nav navbar-nav navbar-right">
-	      	
+	      	<!-- <ul class="nav navbar-nav navbar-right pull-right"> -->
+				 <li><a href="${pageContext.request.contextPath}/saleslogin">Logout</a></li>
+			<!-- </ul>  -->
 			
 	      </ul> 
 	    </div>
