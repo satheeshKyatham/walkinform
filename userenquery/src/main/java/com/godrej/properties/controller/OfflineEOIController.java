@@ -94,6 +94,7 @@ public class OfflineEOIController {
 		}else {
 			userId=(String) session.getAttribute("USERID");
 		}
+		String roleId = (String)session.getAttribute("ROLE");
 		view.addObject("hasParam",hasParam);
 		view.addObject("mobileNo",mobile);
 		view.addObject("countryCode",countryCode);
@@ -101,6 +102,7 @@ public class OfflineEOIController {
 		view.addObject("userId",userId);
 		view.addObject("projectName",projectName);
 		view.addObject("enquiryType",typeOfEnquiry);
+		view.addObject("roleId", roleId);
 		view.addObject("recordTypeProspect",KeyConstants.RECORD_TYPE_PROSPECT);
 		view.addObject("recordTypeCustomer",KeyConstants.RECORD_TYPE_CUSTOMER);
 		ProjectLaunch projectLaunch=projectLaunchService.getProjectSaleMgrID(projectId);
