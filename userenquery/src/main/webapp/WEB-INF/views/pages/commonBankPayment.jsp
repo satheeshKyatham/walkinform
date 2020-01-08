@@ -560,9 +560,13 @@
 				onclick="savePaymentInfo(event,this);"> <span> Close</span></a> -->
 				<a class="btn blue_btn  mrgR15 eoi_submitted"	 id="eoisaveclose" onclick="savePaymentInfo(event,this);"> 
 				<%
-				if(request.getParameterMap().containsKey("roleid"))
+				if(request.getParameterMap().containsKey("roleId"))
 				{
-					int roleid = Integer.parseInt(request.getParameter("roleid"));
+					String roleIdString = (String) request.getParameter("roleId");
+					int roleid = 0;
+					if(roleIdString !=null){
+						roleid = Integer.parseInt(roleIdString);
+					}
 					if(roleid==17)
 					{
 						%>

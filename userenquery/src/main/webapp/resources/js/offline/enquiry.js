@@ -1248,6 +1248,7 @@ function openClosingMDashboard()
 		+"&countrycode="+ countryCodeEN
 		+"&mobileno="+$("#mobileNo").val() 
 		+"&userId=" +$('#logginUserId').val()
+		+"&roleId=" +$('#logginRoleId').val()
 		+"&projectSfid="+$('#projectSfid').val()
 		+"&projectName="+$('#projectName').val()
 		+"&token="+ $("#tokenNo").val()
