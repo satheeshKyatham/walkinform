@@ -76,7 +76,7 @@ public class VW_MISReportServiceImpl implements VW_MISReportService {
 				mis.setLost_reason_c__c(checkNull(mislist.get(i).getLost_reason_c__c()));
 				
 				mis.setVerticle__c(checkNull(mislist.get(i).getVerticle__c()));
-				
+				mis.setSourcingname(checkNull(mislist.get(i).getSourcingname()));
 				
 				finalMislist.add(mis);
 			}
