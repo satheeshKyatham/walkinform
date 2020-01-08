@@ -252,7 +252,7 @@ function printEOIForm(regionName, projectName, enqName, projectNameWithoutCity) 
              }).then(function(isConfirm) {
             	 //Changes by Satheesh - for EOI form
             	 if (isConfirm) {
-            		 if($('#roleId').val()==='17')
+            		 if($('#roleid').val()==='17')
             			 {
             			 	window.location.href =pageContext+ "offlineEOI";
             			 }
