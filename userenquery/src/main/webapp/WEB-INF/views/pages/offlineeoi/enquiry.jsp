@@ -92,8 +92,23 @@
 			    <input type="hidden" id="recordTypeCustomer" value="${recordTypeCustomer}">
 		
 		<div class="filterColBg">
-				<div class="filterCol">
-				  <div class="form-group col-md-2">	
+			<div class="filterCol">
+
+			<div class="col-md-3 col-sm-6 col-xs-12">
+				<div class="group">
+					<div class="input-group" id="contactDiv">
+						<input type="hidden" id="hiddenMobileNo" value="${mobileNo}">
+						<input type="text" value="${countryCode}"
+							class="autocomplete-off form-control mobile requiredField contactNoDiv"
+							id="mobileNo" name="mobileNo" maxlength="10" tabindex="-1">
+						 <span class="highlight"></span><span class="bar"></span> <label>Contact
+							no.<strong class="mndt">*</strong>
+						</label>
+					</div>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+				<%-- <div class="form-group col-md-2">	
 						<div class="group" style="min-height: auto; margin-bottom: 0;">				
 						  <div class="input-group" id="contactInputDiv"> 
 						  <input type="text" value="${countryCode}" class="autocomplete-off form-control requiredField contactNoDiv" id="enCountryCode"  maxlength="4"  tabindex="-1">
@@ -113,47 +128,48 @@
 							</div>
 						</div>
 				  </div>
-				  
-				   <div class="form-group col-md-2">
-						<div class="group" style="min-height: auto; margin-bottom: 0;">				
-						  <div class="input-group" id="contactInputDiv"> 
-							<select id="visitType" name="visitType" class="form-control" style="background-color: #fff;">
-							            <option value="Road show" selected>Road Show</option>									
-                                        <option value="Site visit">Site Visit</option>                                                                                                            
-                                        <option value="Home visit">Home Visit</option>
-							</select>
-							  <span class="highlight"></span><span class="bar"></span>
-								<label>Visit Type</label>
-							</div>
+ 				   --%>
+				<div class="form-group col-md-2">
+					<div class="group" style="min-height: auto; margin-bottom: 0;">
+						<div class="input-group" id="contactInputDiv">
+							<select id="visitType" name="visitType" class="form-control"
+								style="background-color: #fff;">
+								<option value="Road show" selected>Road Show</option>
+								<option value="Site visit">Site Visit</option>
+								<option value="Home visit">Home Visit</option>
+							</select> <span class="highlight"></span><span class="bar"></span> <label>Visit
+								Type</label>
 						</div>
-				  </div>
-				  
-				  <div class="col-md-4 radioBtnWrp mrgT0" style="margin-bottom: 0; margin-top:-16px !important;">
-					  <div class="titleF">Are you referred by a channel partner?
-					  	<div class="clearfix"></div>
-					  </div>
-						<div class="radioBtnCol" data-toggle="buttons">
-						  <label class="btn btn-primary active ">
-							<input type="radio" id="" class=" " name="" checked value="Yes">Yes
-						  </label>
-						  <label class="btn btn-primary enquiryFields">
-							<input type="radio" id="" class=" " name="" value="No">No
-						  </label>
 					</div>
-					
+				</div>
+
+				<div class="col-md-4 radioBtnWrp mrgT0"
+					style="margin-bottom: 0; margin-top: -16px !important;">
+					<div class="titleF">
+						Are you referred by a channel partner?
+						<div class="clearfix"></div>
+					</div>
+					<div class="radioBtnCol" data-toggle="buttons">
+						<label class="btn btn-primary active "> <input
+							type="radio" id="" class=" " name="" checked value="Yes">Yes
+						</label> <label class="btn btn-primary enquiryFields"> <input
+							type="radio" id="" class=" " name="" value="No">No
+						</label>
+					</div>
+
 					<div class="clearfix"></div>
-					</div>
-					
-									   <div class="form-group col-md-2">
-						<div class="group" style="min-height: auto; margin-bottom: 0;">				
-						<div class="input-group" id="contactInputDiv"> 
+				</div>
+
+				<div class="form-group col-md-2">
+					<div class="group" style="min-height: auto; margin-bottom: 0;">
+						<div class="input-group" id="contactInputDiv">
 							<button class="btn blue_btn" id="getEnquiry">Search</button>
 						</div>
-						</div>
-				  </div>
-					
-				  
-			  <div class="clearfix"></div>
+					</div>
+				</div>
+
+
+				<div class="clearfix"></div>
 			</div>
 			<div class="clearfix"></div>
 		</div>
@@ -213,21 +229,6 @@
 						  	<strong id="commonBoldMessage"></strong>
 						</div>
 					</div>
-					<div class="col-md-3 col-sm-6 col-xs-12">
-						<div class="group">				
-						  <div class="input-group" id="contactDiv"> 
-						      <input type="hidden" id="hiddenMobileNo" value="${mobileNo}">
-							  <input type="text" value="${countryCode}" class="autocomplete-off form-control mobile requiredField contactNoDiv" id="mobileNo" name="contact.mobileNo" maxlength="10" onkeyup="getExistingInfo();" tabindex="-1">
-							  <span onclick="getExistingInfo();" class="input-group-addon contactNoDiv" data-toggle="modal" >
-								<i class="glyphicon glyphicon-search contactNoDiv" ></i>
-							  </span>
-							  <span class="highlight"></span><span class="bar"></span>
-								<label>Contact no.<strong class="mndt">*</strong></label>
-							</div>
-						</div>
-						<div class="clearfix"></div>
-					</div>
-					
 					
 					<div class="col-md-3 col-sm-6 col-xs-6">
 						<div class="group">
