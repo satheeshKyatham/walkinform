@@ -70,6 +70,7 @@
 					
 					
 					<th>Vertical</th>
+					<th>CP</th>
 					<th>Closing Manager</th>
 					<th>Date Of EOI</th>
 					<th>Total Payment Done</th>

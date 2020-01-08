@@ -74,6 +74,10 @@ public class VW_MISReportServiceImpl implements VW_MISReportService {
 				mis.setBarrier1(checkNull(mislist.get(i).getBarrier1()));
 				mis.setBarrier2(checkNull(mislist.get(i).getBarrier2()));
 				mis.setLost_reason_c__c(checkNull(mislist.get(i).getLost_reason_c__c()));
+				
+				mis.setVerticle__c(checkNull(mislist.get(i).getVerticle__c()));
+				
+				
 				finalMislist.add(mis);
 			}
 		}

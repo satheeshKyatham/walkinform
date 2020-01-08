@@ -562,7 +562,11 @@
 				<%
 				if(request.getParameterMap().containsKey("roleid"))
 				{
-					int roleid = Integer.parseInt(request.getParameter("roleid"));
+					String roleIdString = (String) request.getParameter("roleid");
+					int roleid = 0;
+					if(roleIdString !=null){
+						roleid = Integer.parseInt(roleIdString);
+					}
 					if(roleid==17)
 					{
 						%>

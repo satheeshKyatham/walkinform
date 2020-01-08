@@ -52,14 +52,11 @@ public class EOIReport implements Serializable{
 	@Column(name="tower_name1") private String tower_name1;
 	@Column(name="tower_name2") private String tower_name2;
 	@Column(name="tower_name3") private String tower_name3;
-	
 	@Column(name="date_of_eoi__c") private Date date_of_eoi__c;
-	
 	@Column(name="userid") private int userid;
-	
 	@Column(name="eoi_form_path") private String eoi_form_path;
-	
 	@Column(name="sourcing_manager_name__c") private String sourcing_manager_name__c;
+	@Column(name="broker_account_name") private String broker_account_name;
 	
 	
 	public int getId() {
@@ -257,5 +254,10 @@ public class EOIReport implements Serializable{
 	public void setSourcing_manager_name__c(String sourcing_manager_name__c) {
 		this.sourcing_manager_name__c = sourcing_manager_name__c;
 	}
-	
+	public String getBroker_account_name() {
+		return broker_account_name;
+	}
+	public void setBroker_account_name(String broker_account_name) {
+		this.broker_account_name = broker_account_name;
+	}
 }
