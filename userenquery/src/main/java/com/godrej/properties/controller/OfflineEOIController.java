@@ -44,7 +44,6 @@ public class OfflineEOIController {
 	
 	@Autowired
 	private EnquiryReportService enquiryReportService;
-
 	
 	@GetMapping(value = {"/offlineEOI","/offlineEOI/{countrycode}/{mobileno}/{projectid}/{projectname}/{userid}/{enquiryType}"})
 	public ModelAndView offlineEOI(@PathVariable("countrycode") Optional<String> countrycode,@PathVariable("mobileno") Optional<String> mobileno,
@@ -66,14 +65,10 @@ public class OfflineEOIController {
 		
 		if(mobileno.isPresent()) {
 			mobile = mobileno.get();
-		} /*
-			 * else { mobile = (String) session.getAttribute("USERMOBILENO"); }
-			 */
+		}
 		if(countrycode.isPresent()) {
 			countryCode = countrycode.get();
-		} /*
-			 * else { countryCode = (String) session.getAttribute("PROID"); }
-			 */
+		}
 		if(projectid.isPresent()) {
 			projectId = projectid.get();
 		}else {
@@ -86,9 +81,7 @@ public class OfflineEOIController {
 		}
 		if(enquiryType.isPresent()) {
 			typeOfEnquiry = enquiryType.get();
-		} /*
-			 * else { typeOfEnquiry = (String) session.getAttribute("PROID"); }
-			 */
+		}
 		if(userid.isPresent()) {
 			userId= userid.get();
 		}else {
@@ -112,9 +105,11 @@ public class OfflineEOIController {
 		else {
 			/* show error page*/
 		}
-		List<ReferenceListDto> communcationMediumList=referenceListService.getReferenceListByReferenceCode(KeyConstants.REFERENCE_CODE_COMMUNICATION_MEDIUM);
-		view.addObject("communcationMediumList",communcationMediumList);
 		
+		List<ReferenceListDto> communcationMediumList=referenceListService.getReferenceListByReferenceCode(KeyConstants.REFERENCE_CODE_COMMUNICATION_MEDIUM);	
+		view.addObject("communcationMediumList",communcationMediumList);
+		List<ReferenceListDto> visitTypes=referenceListService.getReferenceListByReferenceCode(KeyConstants.REFERENCE_CODE_VISIT_TYPE);
+		view.addObject("visitTypes", visitTypes);
 		return view;		 
 	}
 	
