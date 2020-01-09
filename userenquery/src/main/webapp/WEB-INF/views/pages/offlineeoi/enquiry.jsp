@@ -57,21 +57,19 @@
       	<a class="navbar-brand" href="#">
 			<img class="topLogo" src="<c:url value='/resources/images/gplLogo.jpg' />"/>
 		</a>
-	    </div> 
-			
-		
-	    <!-- Collect the nav links, forms, and other content for toggling -->
-	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-	      
-	     
-	      <ul class="nav navbar-nav navbar-right">
-	      	<!-- <ul class="nav navbar-nav navbar-right pull-right"> -->
-				 <li><a href="${pageContext.request.contextPath}/saleslogin">Logout</a></li>
-			<!-- </ul>  -->
-			
-	      </ul> 
 	    </div>
-	  </div>
+
+
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse"
+			id="bs-example-navbar-collapse-1">
+
+
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="${pageContext.request.contextPath}/saleslogin">Logout</a></li>
+			</ul>
+		</div>
+	</div>
 	</nav>
    
 	
@@ -110,36 +108,19 @@
 				</div>
 				<div class="clearfix"></div>
 			</div>
-				<%-- <div class="form-group col-md-2">	
-						<div class="group" style="min-height: auto; margin-bottom: 0;">				
-						  <div class="input-group" id="contactInputDiv"> 
-						  <input type="text" value="${countryCode}" class="autocomplete-off form-control requiredField contactNoDiv" id="enCountryCode"  maxlength="4"  tabindex="-1">
-						  <span class="highlight"></span><span class="bar"></span>
-								<label>Country Code</label>
-						</div>
-						</div>
-				  </div>
-				  
-				   <div class="form-group col-md-2">
-					
-						<div class="group" style="min-height: auto; margin-bottom: 0;">				
-						  <div class="input-group" id="contactInputDiv"> 
-							  <input type="text" value="${mobileNo}" class="autocomplete-off form-control mobile requiredField contactNoDiv" id="enMobileNo"  maxlength="10"  tabindex="-1">
-							  <span class="highlight"></span><span class="bar"></span>
-								<label>Contact no.</label>
-							</div>
-						</div>
-				  </div>
- 				   --%>
 				<div class="form-group col-md-2">
 					<div class="group" style="min-height: auto; margin-bottom: 0;">
 						<div class="input-group" id="contactInputDiv">
 							<select id="visitType" name="visitType" class="form-control"
 								style="background-color: #fff;">
+								<c:forEach var="visitType" items="${visitTypes}">
+									<option value="${visitType.code}">${visitType.name}</option>
+								</c:forEach>
+<!-- 										
 								<option value="Road show" selected>Road Show</option>
 								<option value="Site visit">Site Visit</option>
 								<option value="Home visit">Home Visit</option>
-							</select> <span class="highlight"></span><span class="bar"></span> <label>Visit
+ -->							</select> <span class="highlight"></span><span class="bar"></span> <label>Visit
 								Type</label>
 						</div>
 					</div>
@@ -557,18 +538,7 @@
 							     
 							     <label class='btn btn-primary '> <!-- enquiryFields -->
 							          <input type='radio' id='desiredUnitType3' class="desiredUnitType " name='enquiryReport.desiredUnitType' value='Others'>Others</label>
-							     <%-- <c:forEach var="requirement" items="${requirementList}" varStatus="loop">
-							       <c:choose>
-							        <c:when test="${loop.index==0}">
-							          <label class='btn btn-primary active'>
-							          <input type='radio' id='desiredUnitType${loop.index}' name='desiredUnitType' value='${requirement.code}' checked>${requirement.name}</label>
-                                     </c:when>
-                                    <c:otherwise>
-                                    <label class='btn btn-primary'>
-							          <input type='radio' id='desiredUnitType${loop.index}' name='desiredUnitType' value='${requirement.code}' checked>${requirement.name}</label>
-                                     </c:otherwise>
-                                    </c:choose>
-                                 </c:forEach> --%>							 
+		 
 							</div>
 
 							<div class="claerfix"></div>
