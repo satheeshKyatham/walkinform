@@ -25,6 +25,7 @@ $(document).ready(function(){
 });
 
 function getEnquiry(){
+	$("#mainPageLoad").show();
 	$("#getEnquiry").attr('disabled',true);
 /*	var inputMobile =  $('#enMobileNo').val();
 	var inputCountryCode =  $('#enCountryCode').val();
