@@ -278,19 +278,17 @@
 	<div class="modal fade" id="holdBlockRsionModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	  <div class="modal-dialog" role="document">
 	    <div class="modal-content">
-	      <!-- <div class="modal-header">
+	      <div class="modal-header">
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-	      </div> -->
+	        <h4 class="modal-title" id="ModalLabelAdmin"> </h4>
+	      </div>
 	      <div class="modal-body">
-	        <textarea id="holdBlockReasonInput" rows="4" cols="50">
-			
-			</textarea>
+	        <textarea id="holdBlockReasonInput" rows="4" cols="50"></textarea>
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	        <button id="tempModalBtn" onclick="SaveForHold('temp')" 			type="button" class="btn btn-primary">Hold</button>
-	        <button id="blockModalBtn" onclick="SaveForHold('block')" 	type="button" class="btn btn-primary">Block</button>
+	        <button type="button" class="btn btn-primary btn-default" data-dismiss="modal">Close</button>
+	        <button id="tempModalBtn" onclick="SaveForHold('temp')" 	type="button" style="color: #fff; background-color: #0077b9;" class="btn btn-primary">Hold</button>
+	        <button id="blockModalBtn" onclick="SaveForHold('block')" 	type="button" style="color: #fff; background-color: #0077b9;" class="btn btn-primary">Block</button>
 	      </div>
 	    </div>
 	  </div>

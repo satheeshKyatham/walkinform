@@ -51,24 +51,27 @@
 		
 			<div class="clearfix"></div>
 			
+			<div class="col-md-12">
+				<table class="table table-bordered" id="inventoryReportDtl">
+					<thead>
+						<tr>
+							<th>Hold/ Block</th>
+							<th>Tower</th>
+							<th>Floor No.</th>
+							<th>Unit</th>
+							<th>Unit Type</th>
+							<th>Admin</th>
+							<th>Hold/ Block Reason</th>
+							<th>Hold/ Block Behalf (name)</th>
+							<th>Hold/ Block Behalf (email)</th>
+						</tr>
+					</thead>
+					<tbody>
+					</tbody>
+				</table>
+				<div class="clearfix"></div>
+			</div>
 			
-			<table class="table table-bordered" id="inventoryReport">
-				<thead>
-					<tr>
-						<th>Hold/ Block</th>
-						<th>Tower</th>
-						<th>Floor No.</th>
-						<th>Unit</th>
-						<th>Unit Type</th>
-						<th>Admin</th>
-						<th>Hold/ Block Reason</th>
-						<th>Hold/ Block Behalf (name)</th>
-						<th>Hold/ Block Behalf (email)</th>
-					</tr>
-				</thead>
-				<tbody>
-				</tbody>
-			</table>
 			
 			
 			

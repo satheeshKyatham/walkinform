@@ -82,12 +82,17 @@ $(document).ready(function(){
 
 function holdBlockResion (source) {
 	$('#holdBlockRsionModal').modal('show');
+	
+	$('#holdBlockReasonInput').val('');
+	
 	if (source == "tempBtn") {
 		$('#blockModalBtn').hide();
 		$('#tempModalBtn').show();
+		$('#ModalLabelAdmin').text('Reason for Hold');
 	} else if (source == "blockBtn") {
 		$('#tempModalBtn').hide();
 		$('#blockModalBtn').show();
+		$('#ModalLabelAdmin').text('Reason for Block');
 	}
 }
 

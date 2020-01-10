@@ -15,11 +15,11 @@ var pageContext = $("#contextPath").val()+"/";
 
 function getInventoryReportDtl () {
 	
-	$("#inventoryReport").DataTable().destroy();
+	$("#inventoryReportDtl").DataTable().destroy();
 	
 	//$('#eoiReportTabSales i').show();
 	
-	$("#inventoryReport tbody").empty();
+	$("#inventoryReportDtl tbody").empty();
 	$.get(pageContext+"getInventoryReport",{"projectSfid":$('#projectid').val(), "towerCode":$('#towerMstReport').val()},function(data){				 
 		var obj =JSON.stringify(data);
 		var obj1 =JSON.parse(obj);
@@ -66,7 +66,7 @@ function getInventoryReportDtl () {
 			html = html.replace(/null/g, " - ");
 			
 			
-			$("#inventoryReport tbody").append(html);
+			$("#inventoryReportDtl tbody").append(html);
 			
 			
 		} else {
@@ -76,7 +76,7 @@ function getInventoryReportDtl () {
 		
 		//$('#eoiReportTabSales i').hide();
 		
-		$('#inventoryReport').DataTable( {
+		$('#inventoryReportDtl').DataTable( {
 			 dom: 'Bfrtip',
 			 "buttons": [
 				 { "extend": 'excel', "text":'Export To Excel',"className": 'btn btn-default btn-xs' }
