@@ -138,7 +138,7 @@
 				</div>
 				<div class="form-group col-md-3" id="btnreleasesave" style="display: none;">
 					<label> &nbsp; </label>
-					<button  onclick="SaveForRelease()" style="line-height:0; color: #fff; background-color: #0077b9;" class="form-control btn btn-primary">
+					<button  onclick="SaveForRelease()" id="releaseUnitBtnAdmin" style="line-height:0; color: #fff; background-color: #0077b9;" class="form-control btn btn-primary">
 						Release Unit
 					</button>
 				</div>
@@ -283,8 +283,23 @@
 	        <h4 class="modal-title" id="ModalLabelAdmin"> </h4>
 	      </div>
 	      <div class="modal-body">
-	        <textarea id="holdBlockReasonInput" rows="4" cols="50"></textarea>
+	      	
+			<div class="form-group col-md-6">
+				<label>User</label>
+				<select class='form-control' id='userListInventory'>
+		      		<option value="">Select</option>
+		      	</select>
+			</div>
+			<div class="clearfix"></div>
+			<div class="form-group col-md-12">
+				<label>Reason</label>
+				<textarea class='form-control' id="holdBlockReasonInput" rows="4" cols="50"></textarea>
+			</div>
+	        
+	        <small id="holdBlockInputInfo" style="color:#d10000;"></small>
+	        <div class="clearfix"></div>
 	      </div>
+	      <div class="clearfix"></div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-primary btn-default" data-dismiss="modal">Close</button>
 	        <button id="tempModalBtn" onclick="SaveForHold('temp')" 	type="button" style="color: #fff; background-color: #0077b9;" class="btn btn-primary">Hold</button>

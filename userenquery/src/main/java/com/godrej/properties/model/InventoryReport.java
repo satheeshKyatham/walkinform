@@ -34,6 +34,8 @@ public class InventoryReport implements Serializable{
 	@Column(name="admin_emailid") private String	admin_emailid;
 	@Column(name="propstrength__active__c") private boolean	propstrength__active__c;
 	@Column(name="tower_name__c") private String tower_name__c;
+	@Column(name="created_at") private Date created_at;
+	@Column(name="hold_behalf_email") private String hold_behalf_email;
 	
 	public int getId() {
 		return id;
@@ -133,5 +135,17 @@ public class InventoryReport implements Serializable{
 	}
 	public void setTower_name__c(String tower_name__c) {
 		this.tower_name__c = tower_name__c;
+	}
+	public Date getCreated_at() {
+		return created_at;
+	}
+	public void setCreated_at(Date created_at) {
+		this.created_at = created_at;
+	}
+	public String getHold_behalf_email() {
+		return hold_behalf_email;
+	}
+	public void setHold_behalf_email(String hold_behalf_email) {
+		this.hold_behalf_email = hold_behalf_email;
 	}
 }

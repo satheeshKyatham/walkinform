@@ -26,13 +26,14 @@ public class InventoryReportDaoImpl implements InventoryReportDao{
 		
 		Query q = session.createNativeQuery(" SELECT  "
 				+ " a.gpl_cs_hold_admin_unit_id, "
+				+ " a.created_at, "
 				+ " a.sfid as unit_sfid, "
 				+ " a.customer_id as admin_userid, "
 				+ " a.project_id, " 
 				+ " a.hold_reason,  "
 				+ " a.hold_status,  "
 				+ " a.hold_description, " 
-				+ " a.hold_behalf_username, "
+				//+ " a.hold_behalf_username, "
 				+ " b.floor_number__c,  "
 				+ " b.propstrength__house_unit_no__c, " 
 				+ " b.tower_code__c, "
@@ -40,11 +41,14 @@ public class InventoryReportDaoImpl implements InventoryReportDao{
 				+ " c.user_name as admin_name,  "
 				+ " c.emailid as admin_emailid, "
 				+ " b.propstrength__active__c, "
-				+ " b.tower_name__c "
+				+ " b.tower_name__c, "
+				+ " d.user_name as hold_behalf_username, "
+				+ " d.emailid as hold_behalf_email "
 				+ " FROM salesforce.gpl_cs_hold_admin_unit a "
 				+ " INNER JOIN salesforce.propstrength__property__c b ON   b.sfid = a.sfid AND b.propstrength__active__c = true "
 				+ " LEFT JOIN salesforce.mst_user c ON cast(a.customer_id as integer) = c.user_id "
-				+ " where "+whereCondition+"  and a.hold_reason in ('block', 'temp') and  a.hold_status = true  order by b.floor_number__c ", InventoryReport.class);
+				+ " LEFT JOIN salesforce.mst_user d ON a.hold_behalf_userid = d.user_id  "
+				+ " where "+whereCondition+"  and a.hold_reason in ('block', 'temp') and  a.hold_status = true  order by a.created_at desc  ", InventoryReport.class);
 		
 		authors = q.getResultList();
 		

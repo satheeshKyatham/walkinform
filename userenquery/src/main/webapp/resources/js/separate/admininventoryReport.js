@@ -57,7 +57,7 @@ function getInventoryReportDtl () {
 							" <td>"+obj1[i].hold_description+"</td>" +
 							
 							" <td>"+obj1[i].hold_behalf_username+"</td>" +
-							" <td></td>" +
+							" <td>"+obj1[i].hold_behalf_email+"</td>" +
 							
 							
 						" </tr>";

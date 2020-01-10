@@ -17,7 +17,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Users</title>
 <link rel="stylesheet" href="<c:url value='/resources/css/bootstrap.min.css' />" type="text/css" />
-     <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/jquery.dataTables.css' /> ">
+     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
      <link rel="stylesheet" href="<c:url value='/resources/css/sweetalert2.min.css' />">  
 	<link rel="stylesheet" href="<c:url value='/resources/css/inner.css' />">
 	<link rel="stylesheet" href="<c:url value='/resources/css/style.css' />">

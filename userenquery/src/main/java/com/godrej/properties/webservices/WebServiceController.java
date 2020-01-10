@@ -3491,7 +3491,9 @@ public class WebServiceController<MultipartFormDataInput> {
 				@RequestParam("userId") String userId 
 				,@RequestParam("unitsfid") String unitsfid
 				,@RequestParam("holdmsg") String holdmsg
-				,@RequestParam("reasonInput") String reasonInput) {
+				,@RequestParam("reasonInput") String reasonInput
+				,@RequestParam("holdBlockBehalfOfName") String holdBlockBehalfOfName
+				,@RequestParam("holdBlockBehalfOfID") int holdBlockBehalfOfID) {
 		 
 		 String [] data= unitsfid.split(",");
 		 for (int i=0;i<data.length;i++){
@@ -3504,10 +3506,11 @@ public class WebServiceController<MultipartFormDataInput> {
 			 inventoryAdmin.setHold_status(true);
 			 
 			 inventoryAdmin.setHold_description(reasonInput);
-			 inventoryAdmin.setHold_behalf_username("Test");
+			 inventoryAdmin.setHold_behalf_username(holdBlockBehalfOfName);
+			 inventoryAdmin.setHold_behalf_userid(holdBlockBehalfOfID);
 			 
 			 inventoryService.saveHoldInventoryAdmin(inventoryAdmin);
-			 
+			 //-------------------------
 			 HoldInventoryAdminLog inventoryAdminLog= new HoldInventoryAdminLog();
 			 inventoryAdminLog.setUnitSfid(data[i]);
 			 inventoryAdminLog.setProject_id(projectId);
@@ -3517,7 +3520,8 @@ public class WebServiceController<MultipartFormDataInput> {
 			 inventoryAdminLog.setHold_status(true);
 			 
 			 inventoryAdminLog.setHold_description(reasonInput);
-			 inventoryAdminLog.setHold_behalf_username("Test");
+			 inventoryAdminLog.setHold_behalf_username(holdBlockBehalfOfName);
+			 inventoryAdminLog.setHold_behalf_userid(holdBlockBehalfOfID);
 			 
 			 inventoryService.saveHoldInventoryAdminLog(inventoryAdminLog);
 		 }

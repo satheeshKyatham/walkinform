@@ -50,6 +50,9 @@ public class HoldInventoryAdminLog implements Serializable{
 	@Column(name = "hold_behalf_username")
 	private String hold_behalf_username;
 	
+	@Column(name = "hold_behalf_userid")
+	private int hold_behalf_userid;
+	
 	 
 	public boolean isHold_status() {
 		return hold_status;
@@ -141,5 +144,13 @@ public class HoldInventoryAdminLog implements Serializable{
 
 	public void setHold_behalf_username(String hold_behalf_username) {
 		this.hold_behalf_username = hold_behalf_username;
+	}
+
+	public int getHold_behalf_userid() {
+		return hold_behalf_userid;
+	}
+
+	public void setHold_behalf_userid(int hold_behalf_userid) {
+		this.hold_behalf_userid = hold_behalf_userid;
 	}
 }
