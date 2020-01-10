@@ -34,7 +34,9 @@ public class SyncSchedular {
 	/*@Scheduled(fixedRate=60*60*1000)*/	
 	/*@RequestMapping("/syncContactAndEnquiry")*/
 	@ResponseBody
-	@Scheduled(cron="0 0/2 * * * ?")/* 2 min schedular time*/
+	//@Scheduled(cron="0 0/2 * * * ?")
+	/* 2 min schedular time*/
+	@Scheduled(cron="0 0/2 * * * ?")
 	public void hourlySchedular(){
 		LOG.info("hourlySchedular ::*************");
 		pushEnqDataService.syncContactSfidToEnquiry();

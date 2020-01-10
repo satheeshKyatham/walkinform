@@ -283,7 +283,10 @@ public class EnquiryRequestController {
 				enquiryDto =  enquiryList.get(0);
 			}
 			
-			String enquirySfid = String.valueOf(enquiryDto.getEnquiryId());
+			String enquirySfid = null;
+			if(enquiryDto !=null) {
+				enquirySfid= String.valueOf(enquiryDto.getEnquiryId());
+			}
 			Token token = tokenService.getTokenByEnquiry(enquirySfid);
 			UserTokenDto userToken = getUserToken(token);
 			resp.addObject("enquiryList", enquiryList);

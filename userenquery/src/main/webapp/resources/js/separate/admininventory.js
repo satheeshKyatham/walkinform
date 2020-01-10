@@ -14,32 +14,41 @@ var pageContext = $("#contextPath").val()+"/";
 
 
 $(document).ready(function(){
-    $('[data-toggle="popover"]').popover();
+    $('[data-toggle="popover"]').popover({
+    	trigger : 'hover'
+    });
     
 	 $('#searchadmintype').change(function(){ 
-		    var value = $(this).val();
-	if(value=='all'){
-		 $('.checkboxhide').hide();  
-		$("#btnholdsave").hide();
-		$("#btnholdsave2").hide();
-		$("#btnreleasesave").hide();
-	}else if(value=='t'){
-		$('.checkboxhide').show();
-		$("#btnholdsave").hide();
-		$("#btnholdsave2").hide();
-		$("#btnreleasesave").show();
-		inventoryLoad ();
-	}else if(value=='f'){
-		$('.checkboxhide').show();
-		$("#btnholdsave").show();
-		$("#btnholdsave2").show();
-		$("#btnreleasesave").hide();
-		inventoryLoad ()
-	}
-		   
-		   // getFloor(value);
+		 	if ( $('#towerMst option:selected').val() != '') {
+		 		var value = $(this).val();
+				if(value=='all'){
+					 $('.checkboxhide').hide();  
+					$("#btnholdsave").hide();
+					$("#btnholdsave2").hide();
+					$("#btnreleasesave").hide();
+				}else if(value=='t'){
+					$('.checkboxhide').show();
+					$("#btnholdsave").hide();
+					$("#btnholdsave2").hide();
+					$("#btnreleasesave").show();
+					inventoryLoad ();
+				}else if(value=='f'){
+					$('.checkboxhide').show();
+					$("#btnholdsave").show();
+					$("#btnholdsave2").show();
+					$("#btnreleasesave").hide();
+					inventoryLoad ()
+				}
+			   // getFloor(value);
+			} else {
+				swal({
+					title: "Please select the Tower",
+				    text: "",
+				    timer: 3000,
+				    type: "warning",
+				});
+			}
 		});
-
 });
 
 
@@ -71,7 +80,37 @@ $(document).ready(function(){
 
 
 
-
+function holdBlockResion (source) {
+	var favorite = [];
+	$.each($("input[name='unit']:checked"), function(){ 
+		favorite.push($(this).val());
+	});
+	
+	if(favorite=='' || favorite==null){
+		swal({
+			title: "Please select the Unit",
+		    text: "",
+		   // timer: 3000,
+		    type: "warning",
+		});
+		return false;
+	} 
+	
+	
+	$('#holdBlockRsionModal').modal('show');
+	
+	$('#holdBlockReasonInput').val('');
+	
+	if (source == "tempBtn") {
+		$('#blockModalBtn').hide();
+		$('#tempModalBtn').show();
+		$('#ModalLabelAdmin').text('Reason for Hold');
+	} else if (source == "blockBtn") {
+		$('#tempModalBtn').hide();
+		$('#blockModalBtn').show();
+		$('#ModalLabelAdmin').text('Reason for Block');
+	}
+}
 
 
 
@@ -86,7 +125,7 @@ function getInventoryRec () {
 			title: "Please select the Tower",
 		    text: "",
 		    timer: 3000,
-		    type: "error",
+		    type: "warning",
 		});
 	}
 }
@@ -98,9 +137,20 @@ function SaveForRelease(){
          favorite.push($(this).val());
      });
 
-     $('#inventoryLoader').show();
+     if(favorite=='' || favorite==null){
+ 		swal({
+ 			title: "Please select the Unit",
+ 		    text: "",
+ 		   // timer: 3000,
+ 		    type: "warning",
+ 		});
+ 		return false;
+ 	}
+     
+    $("#releaseUnitBtnAdmin").attr("disabled", true);
+     
+    $('#inventoryLoader').show();
    	$.ajax({
-
  	    url: pageContext+'updateAdminUnit',
  	    data: {projectid : $("#projectid").val(),
  	    	userId : $("#userid").val(),
@@ -109,50 +159,90 @@ function SaveForRelease(){
  	    },
  	    type: 'POST',
  	    success: function(data) { 
- 	    		alert("Unit Release");
+	 	    	swal({
+					title: "Successfully Submitted",
+				    text: "",
+				    timer: 3000,
+				    type: "success",
+				});
  	    		$('#inventoryLoader').hide();
  	    		inventoryLoad ();
+ 	    		$("#releaseUnitBtnAdmin").attr("disabled", false);
  	    },
  	    error: function(data) {
- 	    	
- 	     }
+ 	    	$("#releaseUnitBtnAdmin").attr("disabled", false);
+ 	    }
  	});
-	
 }
 
 function SaveForHold(msg) {
+	$("#holdBlockInputInfo").text("");
 	
-	 var favorite = [];
-     $.each($("input[name='unit']:checked"), function(){ 
-         favorite.push($(this).val());
-     });
-if(favorite=='' || favorite==null){
-	alert("Select Unit");
-	return false;
-}
-$('#inventoryLoader').show();
+	var favorite = [];
+	$.each($("input[name='unit']:checked"), function(){ 
+		favorite.push($(this).val());
+	});
+	
+	if(favorite=='' || favorite==null){
+		$("#holdBlockInputInfo").text("Select Unit");
+		return false;
+	} else {
+		$("#holdBlockInputInfo").text("");
+	}
+	
+	if($("#userListInventory").val().trim()==''){
+		$("#holdBlockInputInfo").text("Select user");
+		return false;
+	} else {
+		$("#holdBlockInputInfo").text("");
+	}
+	
+	
+	$("#tempModalBtn").attr("disabled", true);
+	$("#blockModalBtn").attr("disabled", true);
+	
+	$('#inventoryLoader').show();
+	
   	$.ajax({
-
 	    url: pageContext+'saveAdminUnit',
-	    data: {projectid : $("#projectid").val(),
-	    	userId : $("#userid").val(),
-	    	unitsfid:favorite.join(","),
-	    	holdmsg:msg
-	      	  //projectId:$("#projectselection option:selected").val()
+	    data: {
+			projectid : $("#projectid").val(),
+			userId : $("#userid").val(),
+			unitsfid:favorite.join(","),
+			holdmsg:msg,
+			reasonInput : $("#holdBlockReasonInput").val(),
+			holdBlockBehalfOfName : $('#userListInventory option:selected').text(),
+			holdBlockBehalfOfID : $("#userListInventory").val(),
 	    },
 	    type: 'POST',
 	    success: function(data) { 
-	    		alert("Unit Hold");
+	    		$('#holdBlockRsionModal').modal('hide');
+	    		$("#tempModalBtn").attr("disabled", false);
+	    		$("#blockModalBtn").attr("disabled", false);
+		    	swal({
+					title: "Successfully Submitted",
+				    text: "",
+				    timer: 3000,
+				    type: "success",
+				});
 	    		inventoryLoad ();
 	    		$('#inventoryLoader').hide();
 	    },
 	    error: function(data) {
+	    	$('#holdBlockRsionModal').modal('hide');
+	    	swal({
+				title: "There was problem in submitting record at this time. Please try again",
+			    text: "",
+			    //timer: 3000,
+			    type: "warning",
+			});
 	    	
-	     }
+	    	$("#tempModalBtn").attr("disabled", false);
+    		$("#blockModalBtn").attr("disabled", false);
+	    }
 	});
-	
-      
 }
+
 function inventoryLoad (){
 	//alert ("Test 4654567685456");
 	
@@ -441,8 +531,9 @@ function towerList (e, source) {
 		
 		$('#towerMst').append('<option value="">Select</option>');
 		$.each(data, function (index, value) {
-			
 			$('#towerMst').append("<option value='"+value.tower_code__c+"'>"+value.tower_name__c+"</option>");
+			
+			$('#towerMstReport').append("<option value='"+value.tower_code__c+"'>"+value.tower_name__c+"</option>");
 		});					
 	}).done(function() {
 			
@@ -485,6 +576,22 @@ function inventoryUnitTypeMst () {
 	});	
 }
 /*END Typology*/
+projectWiseUserList();
 
-
-
+function projectWiseUserList () {
+	var urlGetUsers = pageContext+"getUserProjectMapping?projectid="+$('#projectid').val();
+   
+	$.getJSON(urlGetUsers, function (data) {
+		
+		$.each(data, function (index, value) {
+			var name='';
+			if(value.name==undefined)
+				name='';
+			else
+				name=value.name;
+			$('#userListInventory').append("<option value="+value.user_id+">"+value.user_name+"</option>");  
+		});		
+	}).done(function() {
+		 
+	});
+}

@@ -57,21 +57,19 @@
       	<a class="navbar-brand" href="#">
 			<img class="topLogo" src="<c:url value='/resources/images/gplLogo.jpg' />"/>
 		</a>
-	    </div> 
-			
-		
-	    <!-- Collect the nav links, forms, and other content for toggling -->
-	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-	      
-	     
-	      <ul class="nav navbar-nav navbar-right">
-	      	<!-- <ul class="nav navbar-nav navbar-right pull-right"> -->
-				 <li><a href="${pageContext.request.contextPath}/saleslogin">Logout</a></li>
-			<!-- </ul>  -->
-			
-	      </ul> 
 	    </div>
-	  </div>
+
+
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse"
+			id="bs-example-navbar-collapse-1">
+
+
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="${pageContext.request.contextPath}/saleslogin">Logout</a></li>
+			</ul>
+		</div>
+	</div>
 	</nav>
    
 	
@@ -102,7 +100,7 @@
 						<input type="hidden" id="hiddenMobileNo" value="${mobileNo}">
 						<input type="text" value="${countryCode}"
 							class="autocomplete-off form-control mobile requiredField contactNoDiv"
-							id="mobileNo" name="mobileNo" maxlength="10" tabindex="-1">
+							id="enMobileNo" name="enMobileNo" maxlength="10" tabindex="-1">
 						 <span class="highlight"></span><span class="bar"></span> <label>Contact
 							no.<strong class="mndt">*</strong>
 						</label>
@@ -110,36 +108,19 @@
 				</div>
 				<div class="clearfix"></div>
 			</div>
-				<%-- <div class="form-group col-md-2">	
-						<div class="group" style="min-height: auto; margin-bottom: 0;">				
-						  <div class="input-group" id="contactInputDiv"> 
-						  <input type="text" value="${countryCode}" class="autocomplete-off form-control requiredField contactNoDiv" id="enCountryCode"  maxlength="4"  tabindex="-1">
-						  <span class="highlight"></span><span class="bar"></span>
-								<label>Country Code</label>
-						</div>
-						</div>
-				  </div>
-				  
-				   <div class="form-group col-md-2">
-					
-						<div class="group" style="min-height: auto; margin-bottom: 0;">				
-						  <div class="input-group" id="contactInputDiv"> 
-							  <input type="text" value="${mobileNo}" class="autocomplete-off form-control mobile requiredField contactNoDiv" id="enMobileNo"  maxlength="10"  tabindex="-1">
-							  <span class="highlight"></span><span class="bar"></span>
-								<label>Contact no.</label>
-							</div>
-						</div>
-				  </div>
- 				   --%>
 				<div class="form-group col-md-2">
 					<div class="group" style="min-height: auto; margin-bottom: 0;">
 						<div class="input-group" id="contactInputDiv">
 							<select id="visitType" name="visitType" class="form-control"
 								style="background-color: #fff;">
+								<c:forEach var="visitType" items="${visitTypes}">
+									<option value="${visitType.code}">${visitType.name}</option>
+								</c:forEach>
+<!-- 										
 								<option value="Road show" selected>Road Show</option>
 								<option value="Site visit">Site Visit</option>
 								<option value="Home visit">Home Visit</option>
-							</select> <span class="highlight"></span><span class="bar"></span> <label>Visit
+ -->							</select> <span class="highlight"></span><span class="bar"></span> <label>Visit
 								Type</label>
 						</div>
 					</div>
@@ -201,6 +182,7 @@
 			
 			<div class="tab-pane active" id="tab1">
 				<form:form modelAttribute="EnquiryRequest" id="enquiryRequestBasicInfoForm">
+
 				<input type="hidden" value="${projectName}" id="projectName" name="projectName">
 				<input type="hidden" value="${AssignTO}" id="assignTO" name="assignTo">
 				<input type="hidden" class="enquiryId" disabled="disabled" name="enquiryId">
@@ -211,7 +193,7 @@
 				<input type="hidden" value="${projectSfid}" name="project.sfid" id="projectSfid" class="projectSfid">
 				<input type="hidden" value="${userId}" name="logginUserId" id="logginUserId" class="logginUserId">
 				<input type="hidden" value="${roleId}" name="logginRoleId" id="logginRoleId" class="logginRoleId">
-				<input type="hidden" value="${countryCode}" name="contact.countryCode" id="countryCode"><!--  +91-->
+				<input type="hidden" value="${countryCode}" name="contact.countryCode" id="countryCode" ><!--  +91-->
 				<input type="hidden" value="1" name="project.projectId" id="projectId">
 				<input type="hidden" value="" name="tokenId" id="tokenId"/>
 				<input type="hidden" value="" name="tokenNo" id="tokenNo"/> 
@@ -231,7 +213,19 @@
 						  	<strong id="commonBoldMessage"></strong>
 						</div>
 					</div>
-					
+			<div class="col-md-3 col-sm-6 col-xs-12">
+				<div class="group">
+					<div class="input-group" id="contactDiv">
+						<input type="text" value="${countryCode}"
+							class="autocomplete-off form-control mobile requiredField readonly contactNoDiv"
+							id="inputMobileNo" name="contact.mobileNo" maxlength="10" tabindex="-1">
+						 <span class="highlight"></span><span class="bar"></span> <label>Contact
+							no.<strong class="mndt">*</strong>
+						</label>
+					</div>
+				</div>
+				<div class="clearfix"></div>
+			</div>
 					<div class="col-md-3 col-sm-6 col-xs-6">
 						<div class="group">
 							<input type="text" id="firstName" class="contactFields autocomplete-off requiredField" required="required" name="contact.firstName"/>
@@ -557,18 +551,7 @@
 							     
 							     <label class='btn btn-primary '> <!-- enquiryFields -->
 							          <input type='radio' id='desiredUnitType3' class="desiredUnitType " name='enquiryReport.desiredUnitType' value='Others'>Others</label>
-							     <%-- <c:forEach var="requirement" items="${requirementList}" varStatus="loop">
-							       <c:choose>
-							        <c:when test="${loop.index==0}">
-							          <label class='btn btn-primary active'>
-							          <input type='radio' id='desiredUnitType${loop.index}' name='desiredUnitType' value='${requirement.code}' checked>${requirement.name}</label>
-                                     </c:when>
-                                    <c:otherwise>
-                                    <label class='btn btn-primary'>
-							          <input type='radio' id='desiredUnitType${loop.index}' name='desiredUnitType' value='${requirement.code}' checked>${requirement.name}</label>
-                                     </c:otherwise>
-                                    </c:choose>
-                                 </c:forEach> --%>							 
+		 
 							</div>
 
 							<div class="claerfix"></div>

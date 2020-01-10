@@ -17,7 +17,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Users</title>
 <link rel="stylesheet" href="<c:url value='/resources/css/bootstrap.min.css' />" type="text/css" />
-     
+     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+     <link rel="stylesheet" href="<c:url value='/resources/css/sweetalert2.min.css' />">  
 	<link rel="stylesheet" href="<c:url value='/resources/css/inner.css' />">
 	<link rel="stylesheet" href="<c:url value='/resources/css/style.css' />">
 <script src="<c:url value='/resources/js/jquery-1.12.4.min.js'/>"></script>
@@ -81,9 +82,12 @@ if(ses!=null){
 				<li class="active" id="basicInfoTabId">
 					<a href="#tab1" data-toggle="tab">Admin Inventory</a>
 				</li>
-				 <li id="salesTabId" onclick="">
+				 <!-- <li id="salesTabId" onclick="">
 					<a href="#tab2" data-toggle="tab">Hold Inventory</a>
-				</li>  
+				</li> -->
+				<li>
+					<a href="#inventoryReport" data-toggle="tab">Held/ Blocked Inventory Report</a>
+				</li>
 			</ul>
 			<div class=""></div>
 		</div>
@@ -106,10 +110,21 @@ if(ses!=null){
 		 		<%-- <jsp:include page="inventoryhold.jsp"></jsp:include> --%>
 				<%@ include file="/WEB-INF/views/pages/inventoryhold.jsp" %>
 			</div>
+			
+			<div class="tab-pane" id="inventoryReport" >
+				<%@ include file="/WEB-INF/views/pages/inventoryReport.jsp" %>
+			</div>
+			
 	 	</div>
 	</div>
 </body>
 
+	<script type="text/javascript" charset="utf8" src="<c:url value='/resources/js/jquery.dataTables.js'/>"></script>
+	<script src="<c:url value='/resources/js/dataTables.buttons.min.js'/>"></script>
+<script src="<c:url value='/resources/js/jszip.min.js'/>"></script>
+<script src="<c:url value='/resources/js/buttons.html5.min.js'/>"></script>
 
- <script src="<c:url value='/resources/js/separate/admininventory.js?v=20'/>"></script>	
+ <script src="<c:url value='/resources/js/sweetalert2.min.js' />"></script>
+ <script src="<c:url value='/resources/js/separate/admininventory.js?v=20'/>"></script>
+ <script src="<c:url value='/resources/js/separate/admininventoryReport.js?v=20'/>"></script>	
 <!-- </html> -->

@@ -81,5 +81,8 @@ public class KeyConstants {
 	public static final String FOLLOW_TYPE_CALL = "Required Call from Sales Executive(SE)";
 	public static final String FOLLOW_TYPE_REVISIT = "Interested In Site Visit";
 	
+	public static final String REFERENCE_CODE_VISIT_TYPE="VISIT_TYPE";
+
+	
 }
 
