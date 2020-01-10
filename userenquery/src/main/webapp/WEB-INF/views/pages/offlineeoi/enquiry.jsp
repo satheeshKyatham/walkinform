@@ -203,7 +203,17 @@
 				<input type="hidden" class="enquiryprojectidId" name="enquiryReport.projectId"  value="${projectSfid}">
 				<input type="hidden" class="contactReportId" name="contact.contactReport.contactReportId">
 				<div class="row "> <!-- bounceInLeft animated -->
-							<div class="col-md-3 col-sm-6 col-xs-12">
+					<div class="col-md-12 commonErrorCol commonErrorDiv" style="display: none">
+						<div class="alert alert-danger">
+						  	Kindly fill the <strong>required</strong> fields.
+						</div>
+					</div>
+					<div class="col-md-12 commonErrorCol commonMessageDiv" style="display: none">
+						<div class="alert alert-danger">
+						  	<strong id="commonBoldMessage"></strong>
+						</div>
+					</div>
+			<div class="col-md-3 col-sm-6 col-xs-12">
 				<div class="group">
 					<div class="input-group" id="contactDiv">
 						<input type="text" value="${countryCode}"
@@ -216,17 +226,6 @@
 				</div>
 				<div class="clearfix"></div>
 			</div>
-					<div class="col-md-12 commonErrorCol commonErrorDiv" style="display: none">
-						<div class="alert alert-danger">
-						  	Kindly fill the <strong>required</strong> fields.
-						</div>
-					</div>
-					<div class="col-md-12 commonErrorCol commonMessageDiv" style="display: none">
-						<div class="alert alert-danger">
-						  	<strong id="commonBoldMessage"></strong>
-						</div>
-					</div>
-					
 					<div class="col-md-3 col-sm-6 col-xs-6">
 						<div class="group">
 							<input type="text" id="firstName" class="contactFields autocomplete-off requiredField" required="required" name="contact.firstName"/>
