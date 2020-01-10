@@ -14,32 +14,41 @@ var pageContext = $("#contextPath").val()+"/";
 
 
 $(document).ready(function(){
-    $('[data-toggle="popover"]').popover();
+    $('[data-toggle="popover"]').popover({
+    	trigger : 'hover'
+    });
     
 	 $('#searchadmintype').change(function(){ 
-		    var value = $(this).val();
-	if(value=='all'){
-		 $('.checkboxhide').hide();  
-		$("#btnholdsave").hide();
-		$("#btnholdsave2").hide();
-		$("#btnreleasesave").hide();
-	}else if(value=='t'){
-		$('.checkboxhide').show();
-		$("#btnholdsave").hide();
-		$("#btnholdsave2").hide();
-		$("#btnreleasesave").show();
-		inventoryLoad ();
-	}else if(value=='f'){
-		$('.checkboxhide').show();
-		$("#btnholdsave").show();
-		$("#btnholdsave2").show();
-		$("#btnreleasesave").hide();
-		inventoryLoad ()
-	}
-		   
-		   // getFloor(value);
+		 	if ( $('#towerMst option:selected').val() != '') {
+		 		var value = $(this).val();
+				if(value=='all'){
+					 $('.checkboxhide').hide();  
+					$("#btnholdsave").hide();
+					$("#btnholdsave2").hide();
+					$("#btnreleasesave").hide();
+				}else if(value=='t'){
+					$('.checkboxhide').show();
+					$("#btnholdsave").hide();
+					$("#btnholdsave2").hide();
+					$("#btnreleasesave").show();
+					inventoryLoad ();
+				}else if(value=='f'){
+					$('.checkboxhide').show();
+					$("#btnholdsave").show();
+					$("#btnholdsave2").show();
+					$("#btnreleasesave").hide();
+					inventoryLoad ()
+				}
+			   // getFloor(value);
+			} else {
+				swal({
+					title: "Please select the Tower",
+				    text: "",
+				    timer: 3000,
+				    type: "warning",
+				});
+			}
 		});
-
 });
 
 
@@ -71,7 +80,16 @@ $(document).ready(function(){
 
 
 
-
+function holdBlockResion (source) {
+	$('#holdBlockRsionModal').modal('show');
+	if (source == "tempBtn") {
+		$('#blockModalBtn').hide();
+		$('#tempModalBtn').show();
+	} else if (source == "blockBtn") {
+		$('#tempModalBtn').hide();
+		$('#blockModalBtn').show();
+	}
+}
 
 
 
@@ -86,7 +104,7 @@ function getInventoryRec () {
 			title: "Please select the Tower",
 		    text: "",
 		    timer: 3000,
-		    type: "error",
+		    type: "warning",
 		});
 	}
 }
@@ -122,23 +140,26 @@ function SaveForRelease(){
 
 function SaveForHold(msg) {
 	
-	 var favorite = [];
-     $.each($("input[name='unit']:checked"), function(){ 
-         favorite.push($(this).val());
-     });
-if(favorite=='' || favorite==null){
-	alert("Select Unit");
-	return false;
-}
-$('#inventoryLoader').show();
+	var favorite = [];
+	$.each($("input[name='unit']:checked"), function(){ 
+		favorite.push($(this).val());
+	});
+	
+	if(favorite=='' || favorite==null){
+		alert("Select Unit");
+		return false;
+	}
+	
+	$('#inventoryLoader').show();
+	
   	$.ajax({
-
 	    url: pageContext+'saveAdminUnit',
-	    data: {projectid : $("#projectid").val(),
-	    	userId : $("#userid").val(),
-	    	unitsfid:favorite.join(","),
-	    	holdmsg:msg
-	      	  //projectId:$("#projectselection option:selected").val()
+	    data: {
+			projectid : $("#projectid").val(),
+			userId : $("#userid").val(),
+			unitsfid:favorite.join(","),
+			holdmsg:msg,
+			reasonInput : $("#holdBlockReasonInput").val(),
 	    },
 	    type: 'POST',
 	    success: function(data) { 
@@ -146,13 +167,10 @@ $('#inventoryLoader').show();
 	    		inventoryLoad ();
 	    		$('#inventoryLoader').hide();
 	    },
-	    error: function(data) {
-	    	
-	     }
+	    error: function(data) { }
 	});
-	
-      
 }
+
 function inventoryLoad (){
 	//alert ("Test 4654567685456");
 	
@@ -441,8 +459,9 @@ function towerList (e, source) {
 		
 		$('#towerMst').append('<option value="">Select</option>');
 		$.each(data, function (index, value) {
-			
 			$('#towerMst').append("<option value='"+value.tower_code__c+"'>"+value.tower_name__c+"</option>");
+			
+			$('#towerMstReport').append("<option value='"+value.tower_code__c+"'>"+value.tower_name__c+"</option>");
 		});					
 	}).done(function() {
 			

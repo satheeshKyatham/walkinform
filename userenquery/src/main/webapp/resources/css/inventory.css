@@ -52,6 +52,8 @@
 .ilAvailable {background-color: #a4ed46;}
 .holdForReallocation {background-color: #ff86e1;}
 .allotedThroughOffer {background-color: #f6df00;}
+.unitBlockAdmin {background-color: #00e0ec;} 
+
 
 
 #inventoryBreadcrumb .breadcrumb {border-radius: 0 !important;}
@@ -61,9 +63,15 @@
 
  
 
-.unitBlock {background-color: #aaf7fb!important;}
+/* .unitBlock {background-color: #aaf7fb!important;} */
+.unitBlock {background-color: #00e0ec !important;}
 
 /* .unitTemp {background-color: #ff8282 !important;} */
 .unitTemp {background-color: #ff5252  !important;}
  
-.unitTempAdmin {background-color: #4b3fc0!important;}
+/* .unitTempAdmin {background-color: #4b3fc0!important;} */
+.unitTempAdmin {background-color: #ff821c !important;}
+
+
+.rowBlockClr {border-left: 5px solid #00e0ec;}
+.rowHoldClr {border-left: 5px solid #ff821c;}

@@ -44,6 +44,12 @@ public class HoldInventoryAdmin implements Serializable{
 	@Column(name = "hold_reason")
 	private String hold_reason;
 	
+	@Column(name = "hold_description")
+	private String hold_description;
+	
+	@Column(name = "hold_behalf_username")
+	private String hold_behalf_username;
+	
 	
 	 
 	public boolean isHold_status() {
@@ -120,5 +126,21 @@ public class HoldInventoryAdmin implements Serializable{
 
 	public void setProject_id(String project_id) {
 		this.project_id = project_id;
+	}
+
+	public String getHold_description() {
+		return hold_description;
+	}
+
+	public void setHold_description(String hold_description) {
+		this.hold_description = hold_description;
+	}
+
+	public String getHold_behalf_username() {
+		return hold_behalf_username;
+	}
+
+	public void setHold_behalf_username(String hold_behalf_username) {
+		this.hold_behalf_username = hold_behalf_username;
 	}
 }

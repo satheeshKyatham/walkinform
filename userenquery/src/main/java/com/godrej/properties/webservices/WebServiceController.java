@@ -3491,7 +3491,7 @@ public class WebServiceController<MultipartFormDataInput> {
 				@RequestParam("userId") String userId 
 				,@RequestParam("unitsfid") String unitsfid
 				,@RequestParam("holdmsg") String holdmsg
-				) {
+				,@RequestParam("reasonInput") String reasonInput) {
 		 
 		 String [] data= unitsfid.split(",");
 		 for (int i=0;i<data.length;i++){
@@ -3502,6 +3502,10 @@ public class WebServiceController<MultipartFormDataInput> {
 			 inventoryAdmin.setCustomer_id(userId);
 			 inventoryAdmin.setHold_reason(holdmsg);
 			 inventoryAdmin.setHold_status(true);
+			 
+			 inventoryAdmin.setHold_description(reasonInput);
+			 inventoryAdmin.setHold_behalf_username("Test");
+			 
 			 inventoryService.saveHoldInventoryAdmin(inventoryAdmin);
 			 
 			 HoldInventoryAdminLog inventoryAdminLog= new HoldInventoryAdminLog();
@@ -3511,6 +3515,9 @@ public class WebServiceController<MultipartFormDataInput> {
 			 inventoryAdminLog.setCustomer_id(userId);
 			 inventoryAdminLog.setHold_reason(holdmsg);
 			 inventoryAdminLog.setHold_status(true);
+			 
+			 inventoryAdminLog.setHold_description(reasonInput);
+			 inventoryAdminLog.setHold_behalf_username("Test");
 			 
 			 inventoryService.saveHoldInventoryAdminLog(inventoryAdminLog);
 		 }
