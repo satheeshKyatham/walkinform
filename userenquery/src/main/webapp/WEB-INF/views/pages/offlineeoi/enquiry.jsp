@@ -100,7 +100,7 @@
 						<input type="hidden" id="hiddenMobileNo" value="${mobileNo}">
 						<input type="text" value="${countryCode}"
 							class="autocomplete-off form-control mobile requiredField contactNoDiv"
-							id="mobileNo" name="mobileNo" maxlength="10" tabindex="-1">
+							id="enMobileNo" name="enMobileNo" maxlength="10" tabindex="-1">
 						 <span class="highlight"></span><span class="bar"></span> <label>Contact
 							no.<strong class="mndt">*</strong>
 						</label>
@@ -182,6 +182,7 @@
 			
 			<div class="tab-pane active" id="tab1">
 				<form:form modelAttribute="EnquiryRequest" id="enquiryRequestBasicInfoForm">
+
 				<input type="hidden" value="${projectName}" id="projectName" name="projectName">
 				<input type="hidden" value="${AssignTO}" id="assignTO" name="assignTo">
 				<input type="hidden" class="enquiryId" disabled="disabled" name="enquiryId">
@@ -192,7 +193,7 @@
 				<input type="hidden" value="${projectSfid}" name="project.sfid" id="projectSfid" class="projectSfid">
 				<input type="hidden" value="${userId}" name="logginUserId" id="logginUserId" class="logginUserId">
 				<input type="hidden" value="${roleId}" name="logginRoleId" id="logginRoleId" class="logginRoleId">
-				<input type="hidden" value="${countryCode}" name="contact.countryCode" id="countryCode"><!--  +91-->
+				<input type="hidden" value="${countryCode}" name="contact.countryCode" id="countryCode" ><!--  +91-->
 				<input type="hidden" value="1" name="project.projectId" id="projectId">
 				<input type="hidden" value="" name="tokenId" id="tokenId"/>
 				<input type="hidden" value="" name="tokenNo" id="tokenNo"/> 
@@ -202,6 +203,19 @@
 				<input type="hidden" class="enquiryprojectidId" name="enquiryReport.projectId"  value="${projectSfid}">
 				<input type="hidden" class="contactReportId" name="contact.contactReport.contactReportId">
 				<div class="row "> <!-- bounceInLeft animated -->
+							<div class="col-md-3 col-sm-6 col-xs-12">
+				<div class="group">
+					<div class="input-group" id="contactDiv">
+						<input type="text" value="${countryCode}"
+							class="autocomplete-off form-control mobile requiredField readonly contactNoDiv"
+							id="inputMobileNo" name="contact.mobileNo" maxlength="10" tabindex="-1">
+						 <span class="highlight"></span><span class="bar"></span> <label>Contact
+							no.<strong class="mndt">*</strong>
+						</label>
+					</div>
+				</div>
+				<div class="clearfix"></div>
+			</div>
 					<div class="col-md-12 commonErrorCol commonErrorDiv" style="display: none">
 						<div class="alert alert-danger">
 						  	Kindly fill the <strong>required</strong> fields.

@@ -27,10 +27,10 @@ $(document).ready(function(){
 function getEnquiry(){
 	$("#mainPageLoad").show();
 	$("#getEnquiry").attr('disabled',true);
-/*	var inputMobile =  $('#enMobileNo').val();
-	var inputCountryCode =  $('#enCountryCode').val();
-	$('#mobileNo').val(inputMobile);
-	$('#countryCode').val(inputCountryCode);*/
+	var inputMobile =  $('#enMobileNo').val();
+	var inputCountryCode =  $('.selected-dial-code').text();
+	$('#inputMobileNo').val(inputMobile);
+	$('#countryCode').val(inputCountryCode);
 	getExistingInfoByMobileAndProject();
 	
 }
@@ -62,7 +62,7 @@ function onPageLoad(){
     
     var mobileNo=$('#hiddenMobileNo').val();
     if(mobileNo!=""){
-      $("#mobileNo").val(mobileNo);
+      $("#inputMobileNo").val(mobileNo);
       /*getExistingInfo();*/
       getExistingInfoByMobileAndProject();
       $("#contactDiv").addClass('disableCol');
@@ -73,7 +73,7 @@ function onPageLoad(){
 }
 function getExistingInfoByMobileAndProject(){
 	//debugger
-	var mobileNo=$("#mobileNo").val();
+	var mobileNo=$("#inputMobileNo").val();
 	var project=$('.projectSfid').val();
 //	if(mobileNo.length==10 && project!=""){
 	if(project!=""){
@@ -592,7 +592,7 @@ function savebasicInfoResp(data){
 			//alert("Success");	
 			var url=$("#contextPath").val();
 			var countryCode=$("#countryCode").val();
-        	var mobileNo=$("#mobileNo").val();
+        	var mobileNo=$("#inputMobileNo").val();
         	countryCode=countryCode.replace("+", "%2B");
         	var code=countryCode+mobileNo;
         	code = contact.mobileNo;
@@ -661,7 +661,7 @@ function switchToNextTab(){
 function getExistingInfo(){
 	
 	/*$("#mainPageLoad").show();*/	
-	var mobileNo=$('#mobileNo').val();
+	var mobileNo=$('#inputMobileNo').val();
 	if(mobileNo.length==10){		
 		var countryCode=$('#countryCode').val();
 		/*var url=$("#contextPath").val();*/
@@ -1265,11 +1265,11 @@ function onSelectWalkinSrcReferral(event,el)
 //Code for Offline EOI to Closing Manager Page Redirect
 function openClosingMDashboard()
 {
-	var countryCodeEN = $("#countryCode").val();
+	var countryCodeEN = $('.selected-dial-code').text();
 	countryCodeEN =countryCodeEN.replace("+","%2B");
 	window.location.href = "salesDetails?tokenid="+$("#tokenId").val()
 		+"&countrycode="+ countryCodeEN
-		+"&mobileno="+$("#mobileNo").val() 
+		+"&mobileno="+$("#inputMobileNo").val() 
 		+"&userId=" +$('#logginUserId').val()
 		+"&roleid=" +$('#logginRoleId').val()
 		+"&projectSfid="+$('#projectSfid').val()
