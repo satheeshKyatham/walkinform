@@ -560,6 +560,7 @@
 				onclick="savePaymentInfo(event,this);"> <span> Close</span></a> -->
 				<a class="btn blue_btn  mrgR15 eoi_submitted"	 id="eoisaveclose" onclick="savePaymentInfo(event,this);"> 
 				<%
+				
 				if(request.getParameterMap().containsKey("roleid"))
 				{
 					String roleIdString = (String) request.getParameter("roleid");
@@ -575,7 +576,9 @@
 					else{%>
 						<span>Save EOI & Generate KYC Link</span>
 				<%}}
-				%>
+				else{%>
+						<span>Save EOI & Generate KYC Link</span>
+				<%}%>
 				</a>
 				
 				<!--17-12-2019 Requested from - Prakash -- Hide Generate KYC button from UI and backed functionality added on Save EOI button Click And Exit & Close buttons also hide -->
