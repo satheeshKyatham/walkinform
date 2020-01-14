@@ -12,6 +12,7 @@ import com.godrej.properties.dao.EOIEnquiryDao;
 import com.godrej.properties.model.CoApplicant;
 import com.godrej.properties.model.EOIData;
 import com.godrej.properties.model.Token;
+import com.godrej.properties.model.VWEOILimitAmount;
 
 
 
@@ -60,7 +61,7 @@ public class EOIEnquiryDaoImpl extends AbstractDao<Integer, EOIData> implements 
 
 	@Override
 	public void UpdateToken(Token token) {
-		getSession().createSQLQuery("Update  nv_eoi_form set token_no='"+token.getNv_token_id()+"' where phone_number like '%"+token.getMobileno()+"'").executeUpdate();
+		getSession().createSQLQuery("Update  salesforce.nv_eoi_form set token_no='"+token.getNv_token_id()+"' where phone_number like '%"+token.getMobileno()+"' and project_sfid='"+token.getProjectname()+"'").executeUpdate();
 		
 	}
 
@@ -84,6 +85,18 @@ public class EOIEnquiryDaoImpl extends AbstractDao<Integer, EOIData> implements 
 		if(list.size()>0)
 		{
 			return list;
+		}
+		return null;
+	}
+
+	@Override
+	public VWEOILimitAmount getEOITokenType(String enqsfid) {
+		Session session = this.sessionFactory.getCurrentSession();	
+		@SuppressWarnings("unchecked")
+		List<VWEOILimitAmount> list =session.createQuery(" from VWEOILimitAmount where enq_sfid='"+enqsfid+"'").list();
+		if(list.size()>0)
+		{
+			return list.get(0);
 		}
 		return null;
 	}
