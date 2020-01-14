@@ -1640,7 +1640,7 @@ if(ses!=null){
 	<script src="<c:url value='/resources/js/commonValidation.js?v=20' />"></script>
 	<script src="<c:url value='/resources/js/utility.js?v=20' />"></script>
 	<%-- <script src="<c:url value='/resources/js/enquiryRequest/enquiryRequest.js' />"></script> --%>
-	<script src="<c:url value='/resources/js/enquiryRequest/salesRequest.js?v=20.2' />"></script>	
+	<script src="<c:url value='/resources/js/enquiryRequest/salesRequest.js?v=21' />"></script>	
     <script src="<c:url value='/resources/js/intlTelInput.js' />"></script>
    
     <script src="<c:url value='/resources/js/sweetalert2.min.js' />"></script>

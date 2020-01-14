@@ -1,6 +1,8 @@
 package com.godrej.properties.controller;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -72,7 +74,7 @@ public class Test {
  
         isAfter = date1.after(date2);
         System.out.println("date 1 is after date 2 ? :- " + isAfter);*/
-		String offerId="{'Sucess':true,'errorMessage':'','offers':[{'offerId':'a1X2s0000004gVPEAY','offerErrorMessage':''}]}";
+		/*String offerId="{'Sucess':true,'errorMessage':'','offers':[{'offerId':'a1X2s0000004gVPEAY','offerErrorMessage':''}]}";
 		
 				JSONObject ob = new JSONObject(offerId);  
 				org.json.JSONArray arr = ob.getJSONArray("offers");
@@ -81,7 +83,13 @@ public class Test {
 				  JSONObject o = arr.getJSONObject(i);  
 				  System.out.println(o); 
 				  System.out.println(o.get("offerId")); 
-				}
+				}*/
+		 String str = "4434";
+	      if(str.matches("[0-9]+")) {
+	         System.out.println("String contains only digits!");
+	      }
+	      else
+	    	  System.out.println("String contains Alpha Numeric!");
 	}
 
 }

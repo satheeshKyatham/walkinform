@@ -2655,14 +2655,41 @@ public class WebServiceController<MultipartFormDataInput> {
 		 }
 		 
 		 if(type.equals("E")) {
-			 if(loginAD(master)) {
+			 LdapUserDetailsDto dto = new LdapUserDetailsDto();
+			 dto.setEmail(emailid);
+			 dto.setPassword(password);
+			 LdapUserDetailsDto ldap= ldapServiceController.getLdapUserDetails(dto);
+			 //boolean isAD=loginAD(master);
+			 boolean isAD=ldap.isIsvalid();
+			 
+			 if(isAD) {
+				 master=validateUser(master,type);
+				 return gson.toJson(master);	 
+			 }
+			 else if(isAD==false)
+			 {
+				 master=validateUser(master,type);
+				 if(master.getUser_id()==0)
+				 {
+					 master.setMsg("Invalid credentials.");
+					 return gson.toJson(master);
+				 }
+				 return gson.toJson(master);	
+			 }
+			 else {
+				 master.setMsg("Invalid credentials.");
+				 return gson.toJson(master);	
+				  
+			 }
+			 /*if(loginAD(master)) {
 				 master=	 validateUser(master,type);
 				 return gson.toJson(master);	 
 			 }else {
 				 master.setMsg("Invalid credentials.");
 				 return gson.toJson(master);	
 				  
-			 }
+			 }*/
+			 
 		 }else if(type.equals("U")) {
 			 
 			 master=validateUser(master,type);
@@ -3195,12 +3222,18 @@ public class WebServiceController<MultipartFormDataInput> {
 				/*if( data.getEoi_preferred_unit__c()!=null && data.getEoi_enquiry__c() )
 					token.setType("G");
 				else*/ 
-				if(data.getEoi_enquiry__c())
+				/*if(data.getEoi_enquiry__c())
 					token.setType("E");
 				else {
 					token.setType("W");
 					return gson.toJson(token);
+				}*/
+				token.setType(userEOIService.getEOITokenType(data.getSfid()));
+				if(token.getType().equals("W"))
+				{
+					return gson.toJson(token);
 				}
+				
 				token.setEnqName(data.getName());
 				token.setAmount(String.valueOf(data.getTransactionAmount()));
 				token.setUniqe_no(""+data.getEnquiryId().toString().trim());
@@ -3216,7 +3249,8 @@ public class WebServiceController<MultipartFormDataInput> {
 				String encStr = enc.encrypt(mobileNo);
 				token.setEncStr(encStr);
 				token.setEnqName(data.getName());
-				if(token.getType().equals("E"))
+				token.setPriorityNo(data.getPriority_no__c());
+				if(token.getType().equals("E") || token.getType().equals("G"))
 				{
 					//data
 					//data.getPriority_no__c();
@@ -3248,17 +3282,18 @@ public class WebServiceController<MultipartFormDataInput> {
 				token.setCreated(new Timestamp(new Date().getTime()));
 				token.setMobileno(data.getPhone_number());
 				token.setProjectname(projectname);
-				
-				if(data.getEoi_amount().equals("500000"))
+				//Configuration of EOI Limit amount
+				/*if(data.getEoi_amount().equals("500000"))
 					token.setType("G");
 				else
-					token.setType("E");
-				
+					token.setType("E");*/
+				token.setType(userEOIService.getEOITokenType(data.getEnquiryid()));
 				token.setAmount(data.getEoi_amount());
 				token.setUniqe_no(data.getBarcode_numeric());
 				token.setUniqe_str(data.getBarcode_str());
 				token.setIsactive("Y");
 				token=tokenService.generateToken(token); 
+				token.setProjectname(projectname);
 				userEOIService.UpdateToken(token);
 			//	send_sms(token.getMobileno(),""+token.getType()+token.getQueue());
 			//	String subject = "Thanks welcome";
@@ -3362,7 +3397,7 @@ public class WebServiceController<MultipartFormDataInput> {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			SendSMS.SMSSend(mobile,msg);
+			SendSMS.ShreeSMSSend(mobile,msg);
 		}
 		
 		private void sendTokenSMS(String mobile ,String token,String projName) throws UnsupportedEncodingException {//,String cpflag,String cpName
@@ -3491,7 +3526,9 @@ public class WebServiceController<MultipartFormDataInput> {
 				@RequestParam("userId") String userId 
 				,@RequestParam("unitsfid") String unitsfid
 				,@RequestParam("holdmsg") String holdmsg
-				) {
+				,@RequestParam("reasonInput") String reasonInput
+				,@RequestParam("holdBlockBehalfOfName") String holdBlockBehalfOfName
+				,@RequestParam("holdBlockBehalfOfID") int holdBlockBehalfOfID) {
 		 
 		 String [] data= unitsfid.split(",");
 		 for (int i=0;i<data.length;i++){
@@ -3502,8 +3539,13 @@ public class WebServiceController<MultipartFormDataInput> {
 			 inventoryAdmin.setCustomer_id(userId);
 			 inventoryAdmin.setHold_reason(holdmsg);
 			 inventoryAdmin.setHold_status(true);
-			 inventoryService.saveHoldInventoryAdmin(inventoryAdmin);
 			 
+			 inventoryAdmin.setHold_description(reasonInput);
+			 inventoryAdmin.setHold_behalf_username(holdBlockBehalfOfName);
+			 inventoryAdmin.setHold_behalf_userid(holdBlockBehalfOfID);
+			 
+			 inventoryService.saveHoldInventoryAdmin(inventoryAdmin);
+			 //-------------------------
 			 HoldInventoryAdminLog inventoryAdminLog= new HoldInventoryAdminLog();
 			 inventoryAdminLog.setUnitSfid(data[i]);
 			 inventoryAdminLog.setProject_id(projectId);
@@ -3511,6 +3553,10 @@ public class WebServiceController<MultipartFormDataInput> {
 			 inventoryAdminLog.setCustomer_id(userId);
 			 inventoryAdminLog.setHold_reason(holdmsg);
 			 inventoryAdminLog.setHold_status(true);
+			 
+			 inventoryAdminLog.setHold_description(reasonInput);
+			 inventoryAdminLog.setHold_behalf_username(holdBlockBehalfOfName);
+			 inventoryAdminLog.setHold_behalf_userid(holdBlockBehalfOfID);
 			 
 			 inventoryService.saveHoldInventoryAdminLog(inventoryAdminLog);
 		 }

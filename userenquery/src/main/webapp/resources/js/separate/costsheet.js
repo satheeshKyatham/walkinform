@@ -1161,7 +1161,17 @@ function updateBSP (timeid) {
        var brokerAccountSfid="";
       
        if ($('#channelPartnerSfidCS').val() === "") {
-    	   offerthrough = "Direct";
+    	   
+    	   if($('#walkInSource').val()==="Referral")
+    		   offerthrough = "Referral";
+    	   else if($('#walkInSource').val()==="Corporate")
+    		   offerthrough = "Corporate";
+    	   else if($('#walkInSource').val()==="Godrej Employee")
+    		   offerthrough = "Employee";
+    	   else
+    		   offerthrough = "Direct";
+    	   
+    	   //$('#walkInSource').val()
     	   brokerAccountSfid ="";
        } else {
     	   offerthrough = "Broker";

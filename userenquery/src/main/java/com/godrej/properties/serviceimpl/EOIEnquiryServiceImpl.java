@@ -14,6 +14,7 @@ import com.godrej.properties.dao.EOIEnquiryDao;
 import com.godrej.properties.model.CoApplicant;
 import com.godrej.properties.model.EOIData;
 import com.godrej.properties.model.Token;
+import com.godrej.properties.model.VWEOILimitAmount;
 import com.godrej.properties.service.EOIEnquiryService;
 import com.godrej.properties.util.UniqeGenerator;
 import com.google.zxing.WriterException;
@@ -79,6 +80,23 @@ public class EOIEnquiryServiceImpl implements EOIEnquiryService {
 	public List<CoApplicant> getCoapplicantData(String enqid) {
 		// TODO Auto-generated method stub
 		return userEOIDao.getCoapplicantData(enqid);
+	}
+
+	@Override
+	public String getEOITokenType(String enqsfid) {
+		VWEOILimitAmount eoiAmount = userEOIDao.getEOITokenType(enqsfid);
+		String tokenType="";
+		if(eoiAmount!=null && (eoiAmount.getEoi_sum_amount()>=eoiAmount.getEoi_limit_amount()))
+		{
+			tokenType="G";
+		}
+		else if(eoiAmount!=null && (eoiAmount.getEoi_sum_amount()<eoiAmount.getEoi_limit_amount()))
+		{
+			tokenType="E";
+		}
+		else
+			tokenType="W";
+		return tokenType;
 	}
 
 //	@Override
