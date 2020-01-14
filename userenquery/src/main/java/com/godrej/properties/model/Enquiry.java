@@ -2,10 +2,7 @@ package com.godrej.properties.model;
 
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.Convert;
-import javax.persistence.Converter;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -15,13 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
-
-import org.hibernate.annotations.NaturalId;
-import org.hibernate.annotations.Type;
 
 import com.godrej.properties.common.model.CommonModel;
-import com.godrej.properties.converter.DecimalConverter;
 
 @Entity
 //@Table(name = "salesforce.propstrength__request__c")
@@ -81,6 +73,7 @@ public class Enquiry extends CommonModel{
 	@Column(name="site_visit_requested__c") private Double site_visit_requested__c;
 	@Column(name="Lost_reason_c__c") private String lost_reason_c__c;
 	
+	private String visitType;
 	public String getClosing_manager_name__c() {
 		return closing_manager_name__c;
 	}
@@ -594,6 +587,15 @@ public class Enquiry extends CommonModel{
 
 	public void setSourcing_Managers__c(String sourcing_Managers__c) {
 		this.sourcing_Managers__c = sourcing_Managers__c;
+	}
+
+	@Column(name = "visit_type")
+	public String getVisitType() {
+		return visitType;
+	}
+
+	public void setVisitType(String visitType) {
+		this.visitType = visitType;
 	}
 
 	

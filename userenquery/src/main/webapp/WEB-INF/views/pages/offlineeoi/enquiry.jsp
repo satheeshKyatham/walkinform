@@ -111,41 +111,6 @@
 				<div class="form-group col-md-2">
 					<div class="group" style="min-height: auto; margin-bottom: 0;">
 						<div class="input-group" id="contactInputDiv">
-							<select id="visitType" name="visitType" class="form-control"
-								style="background-color: #fff;">
-								<c:forEach var="visitType" items="${visitTypes}">
-									<option value="${visitType.code}">${visitType.name}</option>
-								</c:forEach>
-<!-- 										
-								<option value="Road show" selected>Road Show</option>
-								<option value="Site visit">Site Visit</option>
-								<option value="Home visit">Home Visit</option>
- -->							</select> <span class="highlight"></span><span class="bar"></span> <label>Visit
-								Type</label>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-4 radioBtnWrp mrgT0"
-					style="margin-bottom: 0; margin-top: -16px !important;">
-					<div class="titleF">
-						Are you referred by a channel partner?
-						<div class="clearfix"></div>
-					</div>
-					<div class="radioBtnCol" data-toggle="buttons">
-						<label class="btn btn-primary active "> <input
-							type="radio" id="" class=" " name="" checked value="Yes">Yes
-						</label> <label class="btn btn-primary enquiryFields"> <input
-							type="radio" id="" class=" " name="" value="No">No
-						</label>
-					</div>
-
-					<div class="clearfix"></div>
-				</div>
-
-				<div class="form-group col-md-2">
-					<div class="group" style="min-height: auto; margin-bottom: 0;">
-						<div class="input-group" id="contactInputDiv">
 							<button class="btn blue_btn" id="getEnquiry">Search</button>
 						</div>
 					</div>
@@ -255,6 +220,21 @@
 					</div>
 					
 					<div class="clearfix"></div>
+					
+									<div class="form-group col-md-2">
+					<div class="group" style="min-height: auto; margin-bottom: 0;">
+						<div class="input-group" id="contactInputDiv">
+							<select id="visitType" name="visitType" class="form-control"
+								style="background-color: #fff;">
+								<c:forEach var="visitType" items="${visitTypes}">
+									<option value="${visitType.code}">${visitType.name}</option>
+								</c:forEach>
+							</select> <span class="highlight"></span><span class="bar"></span> 
+							<label>Visit Type</label>
+						</div>
+					</div>
+				</div>
+					
 					
 					<div class="col-md-2 radioBtnWrp mrgT0" style="margin-top:-16px !important;">
 						  <div class="titleF">Have you visited site before <strong class="mndt">*</strong>
@@ -510,9 +490,6 @@
 					<!-- END Are you accompanied/ referred by a channel partner? --> 
 					
 					
-					
-					
-					
 					<!-- New filed -->
 					
 					
@@ -570,9 +547,7 @@
 							<div class="clearfix"></div>
 						</div>
 						
-						
-						
-						
+					
 						<!-- END Added By A -->
 						<div class="clearfix"></div>
 						
@@ -582,25 +557,14 @@
 						
 					</div>
 						
-					
 						<!-- END New filed -->
-					
-					
-					
-						
-						
 					
 						<div class="clearfix"></div>
 					</div>
 					
-					
-					
 					<div class="clearfix"></div>
 					
 					<div > 
-						
-						
-						 
 					</div>
 					<div class="clearfix"></div>
 				</div>
