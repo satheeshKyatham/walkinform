@@ -86,7 +86,10 @@ if(ses!=null){
 					<a href="#tab2" data-toggle="tab">Hold Inventory</a>
 				</li> -->
 				<li>
-					<a href="#inventoryReport" data-toggle="tab">Held/ Blocked Inventory Report</a>
+					<a href="#inventoryReport" data-toggle="tab">Hold/ Block Inventory Report</a>
+				</li>
+				<li>
+					<a href="#inventorySalesHoldReport" data-toggle="tab">Closing Manager Hold Inventory Report</a>
 				</li>
 			</ul>
 			<div class=""></div>
@@ -115,6 +118,10 @@ if(ses!=null){
 				<%@ include file="/WEB-INF/views/pages/inventoryReport.jsp" %>
 			</div>
 			
+			<div class="tab-pane" id="inventorySalesHoldReport" >
+				<%@ include file="/WEB-INF/views/pages/inventorySalesHoldReport.jsp" %>
+			</div>
+			
 	 	</div>
 	</div>
 </body>
@@ -126,5 +133,7 @@ if(ses!=null){
 
  <script src="<c:url value='/resources/js/sweetalert2.min.js' />"></script>
  <script src="<c:url value='/resources/js/separate/admininventory.js?v=20'/>"></script>
- <script src="<c:url value='/resources/js/separate/admininventoryReport.js?v=20'/>"></script>	
+ <script src="<c:url value='/resources/js/separate/admininventoryReport.js?v=20'/>"></script>
+ <script src="<c:url value='/resources/js/separate/salesHoldinventoryReport.js?v=20'/>"></script>
+ 	
 <!-- </html> -->

@@ -69,7 +69,6 @@ function generatePaymentLink(){
 			&enq_sfid=12345dfdsaf
 		*/
 	}, function(data) {
-		debugger;
 		//alert(data);
 		 alert("Link Send o mobile no");
 	});
@@ -79,7 +78,6 @@ function checkStatus(){
 		"reference_no" : $('#firstName').val() ,
 		"order_no": $('#email').val() 
 	}, function(data) {
-		debugger;
 		//alert(data);
 		 //alert("Link Send o mobile no");
 	});
@@ -90,7 +88,6 @@ function getTower(){
 	$.get("getTowerMaster", { "project_code" : $('.projectSfid').val() 
 	}, function(data) {
 	 
-		debugger;
 		$("#tower").html("");
 		var html="";
 		html=html+ '<option value=""></option>';
@@ -116,7 +113,6 @@ function getfband(code){
 		"project_code" : $('.projectSfid').val(),
 		"tower_code":code
 	}, function(data) {
-		debugger;
 		$("#fband").html("");
 		var html="";
 		html=html+ '<option value=""></option>';
@@ -139,7 +135,6 @@ function getUnit(code){
 		"project_code" : $('.projectSfid').val(),
 		"tower_code":code,"floor_code":"","unit":""
 	}, function(data) {
-		debugger;
 		$("#unit").html("");
 		var html="";
 		html=html+ '<option value=""></option>';
@@ -164,7 +159,6 @@ function getFloor(code){
 		"project_code" : $('.projectSfid').val(),
 		"tower_code":code
 	}, function(data) {
-		debugger;
 		$("#floor").html("");
 		var html="";
 		html=html+ '<option value=""></option>';
@@ -184,7 +178,6 @@ function getunittype(tcode,fcode){
 		"tower_code":tcode,
 		"floor_code":fcode
 	}, function(data) {
-		debugger;
 		$("#radioBtnCol").html("");
 		var html="";
 		for(var i=0;i<data.length;i++){
@@ -218,7 +211,6 @@ function getDealDone(){
 	}); 
 }
 function onPageLoad(){
-	debugger	
 	    if($("#isView").val()=='Y'){
             $("#salesTabId").hide();
             $("#basicInfoSaveBtn").hide();
@@ -473,7 +465,6 @@ function saveOtherRequest(event,el){
 }
 
 function populateBasicInfo(enq,contact){
- debugger
 		if(!isEmpty(enq)){
 			$('.enquiryId').val(enq.enquiryId);
 			$('#enquirysfid').val(enq.sfid);
@@ -724,9 +715,6 @@ function salesSlider (){
 
 
 function loadContactReport(contact){
-	debugger;
-	 
-	debugger;
 	if(!isEmpty(contact) && !isEmpty(contact.contactReport)){
 		var contactReportId=contact.contactReport==null?'':contact.contactReport.contactReportId;
 		$('.contactReportId').val(contactReportId);
@@ -1055,7 +1043,6 @@ function populateEnquiryList(enquiryList){
 }
 
 function isReferredChanged(cpHS){
-	debugger;
 	$("div.sourceCol").hide();
 	$("#isReferredByChannelPartner"+cpHS).show();
 	$(".isReferredByChannelPartner"+cpHS).removeAttr("disabled");
@@ -1089,7 +1076,6 @@ function isReferredChanged(cpHS){
 }
 /* END Auto fill address*/
 function getChannelPartners(event,el){
-	debugger;
 	event.preventDefault();
 	$("#brokerContact").empty();
 	var text=$(el).val();
@@ -1108,7 +1094,6 @@ function getChannelPartners(event,el){
 	*/
 }
 function loadChannelPartners(resp){
-	debugger;
 	var partnerList=resp.objectMap.channelPartnerList;
 	/*alert(partnerList.length);*/
 	channelPartnerArray=partnerList;
@@ -1183,7 +1168,6 @@ function generateKYCLink(event,el,isEOI){
 		        	$("#mainPageLoad").show();
 		        },
 			    error: function(e) {
-			    	debugger;
 			    	alert(e);
 			    	$("#mainPageLoad").hide();
 			    }
@@ -1209,7 +1193,6 @@ function generateKYCLinkViaOffer(event,el,isEOI,offersfid){
 		        	$("#mainPageLoad").show();
 		        },
 			    error: function(e) {
-			    	debugger;
 			    	alert(e);
 			    	$("#mainPageLoad").hide();
 			    }
@@ -1423,7 +1406,7 @@ function getClosingManagersList()
 	 //sourcingManagerIdDiv
 	//alert($('#walkInSource').val());
 	if(($('#isReferredByChannelPartnerInput').val()==='Direct') && ($('#walkInSource').val()==='Digital' || $('#walkInSource').val()==='Newspaper'
-			|| $('#walkInSource').val()==='Hoardings' || $('#walkInSource').val()==='Radio' || $('#walkInSource').val()==='Word of Mouth'))
+			|| $('#walkInSource').val()==='Hoarding' || $('#walkInSource').val()==='Radio' || $('#walkInSource').val()==='Word of mouth' || $('#walkInSource').val()==='Exhibition'))
 		$('#sourcingManagerIdDiv').hide();
 	else
 		$('#sourcingManagerIdDiv').show();
