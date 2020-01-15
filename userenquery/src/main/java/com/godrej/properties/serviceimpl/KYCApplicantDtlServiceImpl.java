@@ -6,11 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.godrej.properties.dao.ApplicantDtlDao;
 import com.godrej.properties.dao.KYCApplicantDtlDao;
 import com.godrej.properties.model.EOIData;
 import com.godrej.properties.model.KYCApplicantDtl;
-import com.godrej.properties.service.ApplicantDtlService;
 import com.godrej.properties.service.KYCApplicantDtlService;
 
 @Service("kYCapplicantDtlService")

@@ -55,7 +55,6 @@ public class EnquiryConverter implements CommonConverter<Enquiry, EnquiryDto>{
 		dto.setIsReferredByChannelPartnerFlag(entity.getIsReferredByChannelPartnerFlag());
 		dto.setOtherChannelPartner(entity.getOtherChannelPartner());
 		dto.setProject(projectConverter.entityToDto(entity.getProject()));
-		dto.setVisitType(entity.getVisitType());
 		/*Purchase of purpose selected value push into enquiry -  Change By Satheesh Kyatham- 26-09-2019*/
 		/*=======Start==========*/
 		if(entity.getEnquiryReport()!=null)
@@ -179,7 +178,6 @@ public class EnquiryConverter implements CommonConverter<Enquiry, EnquiryDto>{
 		entity.setIsReferredByChannelPartnerFlag(dto.getIsReferredByChannelPartnerFlag());
 		entity.setOtherChannelPartner(dto.getOtherChannelPartner());
 		entity.setProject(projectConverter.dtoToEntity(dto.getProject()));
-		entity.setVisitType(dto.getVisitType());
 		/*Purchase of purpose selected value push into enquiry -  Change By Satheesh Kyatham- 26-09-2019*/
 		/*=======Start==========*/
 		if(dto.getEnquiryReport()!=null)

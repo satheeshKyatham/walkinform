@@ -124,7 +124,7 @@
 <script src="<c:url value='/resources/js/jquery-1.12.4.min.js'/>"></script>
   
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
-<script src="<c:url value='/resources/js/salesdesk.js?v=20.2'/>"></script>
+<script src="<c:url value='/resources/js/salesdesk.js?v=18.01'/>"></script>
 	<script type="text/javascript">
 	var option ='';
 	var reasignOption ='';

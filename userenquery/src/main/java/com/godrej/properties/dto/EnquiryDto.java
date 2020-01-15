@@ -2,8 +2,6 @@ package com.godrej.properties.dto;
 
 import java.util.Date;
 
-import javax.persistence.Column;
-
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.godrej.properties.common.dto.CommonDto;
@@ -94,7 +92,6 @@ public class EnquiryDto extends CommonDto {
    	private String sourcing_Managers__c;
    	private String referredbyDto;
    	private String closingManagerDto;
-   	private String visitType;
 	public String getClosing_manager_name__c() {
 		return closing_manager_name__c;
 	}
@@ -559,14 +556,6 @@ public class EnquiryDto extends CommonDto {
 
 	public void setClosingManagerDto(String closingManagerDto) {
 		this.closingManagerDto = closingManagerDto;
-	}
-
-	public String getVisitType() {
-		return visitType;
-	}
-
-	public void setVisitType(String visitType) {
-		this.visitType = visitType;
 	}
 	
 }

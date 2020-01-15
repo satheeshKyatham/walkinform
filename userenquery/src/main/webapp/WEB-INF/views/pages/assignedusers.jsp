@@ -265,8 +265,10 @@ if(ses!=null){
 									<th>Customer Name</th>
 									<th>Mobile No</th>
 									<th>KYC Status</th>
+									<th>Offer Number</th>
 									<th>View/Fill KYC</th>
-									
+									<th>View Cost Sheet</th>
+									<th>View Application Form</th>
 									<!-- <th style="word-break: break-word; width:200px !important">Email</th> -->
 								</tr>
 							</thead>
@@ -321,15 +323,15 @@ if(ses!=null){
 	<script src="<c:url value='/resources/js/jszip.min.js'/>"></script>
 	<script src="<c:url value='/resources/js/buttons.html5.min.js'/>"></script>
 	
-	<script src="<c:url value='/resources/js/salesdesk.js?v=20'/>"></script>
-	<script src="<c:url value='/resources/js/enquiryRequest/assignedUser.js?v=20'/>"></script>
-	<script src="<c:url value='/resources/js/separate/offer.js?v=20'/>"></script>
-	<script src="<c:url value='/resources/js/enquiryRequest/misreportforClosing.js?v=20'/>"></script>
+	<script src="<c:url value='/resources/js/salesdesk.js?v=18.01'/>"></script>
+	<script src="<c:url value='/resources/js/enquiryRequest/assignedUser.js?v=18.01'/>"></script>
+	<script src="<c:url value='/resources/js/separate/offer.js?v=18.01'/>"></script>
+	<script src="<c:url value='/resources/js/enquiryRequest/misreportforClosing.js?v=18.01'/>"></script>
 	
-	<script src="<c:url value='/resources/js/separate/applicationForm.js?v=20'/>"></script>
-	<script src="<c:url value='/resources/js/separate/offerApplicationForm.js?v=20'/>"></script>
+	<script src="<c:url value='/resources/js/separate/applicationForm.js?v=18.01'/>"></script>
+	<script src="<c:url value='/resources/js/separate/offerApplicationForm.js?v=18.01'/>"></script>
 	
-	<script src="<c:url value='/resources/js/separate/eoiReportSales.js?v=20'/>"></script>
+	<script src="<c:url value='/resources/js/separate/eoiReportSales.js?v=18.01'/>"></script>
 	
 	
 </body>

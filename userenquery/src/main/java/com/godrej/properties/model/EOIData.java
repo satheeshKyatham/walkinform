@@ -78,7 +78,15 @@ public class EOIData implements Serializable{
 	@Column(name="kyclink") private String kyclink;
 	@Column(name="kycapproval_status") private String kycapproval_status;
 	@Column(name="kycreject_comment") private String kycreject_comment;
-	
+	@Column(name="offername")
+	private String offerName;
+
+	@Column(name="offersfid")
+	private String offerSfid;
+	@Column(name = "contactsfid")
+	private String contactSfid;
+	@Column(name = "enquirysfid")
+	private String enquirySfid;
 	public String getUserdocid() {
 		return userdocid;
 	}
@@ -417,6 +425,29 @@ public class EOIData implements Serializable{
 	public void setKycreject_comment(String kycreject_comment) {
 		this.kycreject_comment = kycreject_comment;
 	}
+	public String getOfferName() {
+		return offerName;
+	}
+	public void setOfferName(String offerName) {
+		this.offerName = offerName;
+	}
+	public String getOfferSfid() {
+		return offerSfid;
+	}
+	public void setOfferSfid(String offerSfid) {
+		this.offerSfid = offerSfid;
+	}
+	public String getContactSfid() {
+		return contactSfid;
+	}
+	public void setContactSfid(String contactSfid) {
+		this.contactSfid = contactSfid;
+	}
+	public String getEnquirySfid() {
+		return enquirySfid;
+	}
+	public void setEnquirySfid(String enquirySfid) {
+		this.enquirySfid = enquirySfid;
+	}
 
-	
 }

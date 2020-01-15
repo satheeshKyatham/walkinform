@@ -224,7 +224,7 @@
 									<div class="form-group col-md-2">
 					<div class="group" style="min-height: auto; margin-bottom: 0;">
 						<div class="input-group" id="contactInputDiv">
-							<select id="visitType" name="visitType" class="form-control"
+							<select id="visitType" name="enquiryReport.visitType" class="form-control"
 								style="background-color: #fff;">
 								<c:forEach var="visitType" items="${visitTypes}">
 									<option value="${visitType.code}">${visitType.name}</option>

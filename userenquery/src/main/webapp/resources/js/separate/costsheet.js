@@ -89,7 +89,7 @@ $("#getCSData").click(function (){
               		   swal({
 
           	   				//title: "There is some technical problem, please try again.",
-              			   	title: "There was problem in fetching cost sheet data at this time. Please try again by clicking get details.", 
+              			   	title: "111 There was problem in fetching cost sheet data at this time. Please try again by clicking get details.", 
 
           	   				text: "",
           	   				type: "warning",
@@ -105,7 +105,7 @@ $("#getCSData").click(function (){
 	              	swal({
 
 	          			//title: "There is some technical problem, please try again.",
-	              		title: "There was problem in fetching cost sheet data at this time. Please try again by clicking get details.",
+	              		title: "222 There was problem in fetching cost sheet data at this time. Please try again by clicking get details.",
 
 	          			text: "",
 	          			timer: 8000,
