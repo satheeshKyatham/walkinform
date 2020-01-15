@@ -83,7 +83,7 @@ function getKYCCMDetails()
 			var offerSfid = value.offerSfid==null?'':value.offerSfid;
 			var offerName = value.offerName==null?'':value.offerName;
 			var enquiryid = value.enquiryid==null?'':value.enquiryid;
-			
+			var costsheetPath = value.costsheetPath==null?'':value.costsheetPath;
 			var val = $("<tr data-offerSfid='" +value.offerSfid+ " '>" +
 					"<td>"+value.enquiryid+"</td><td>"
 					+value.application_name
@@ -98,7 +98,7 @@ function getKYCCMDetails()
 					+"&isrole=Y target='_blank'>Link</a></td>"
 					+"</td><td><a target=\"_blank\" " +
 					"href=\"/walkinform/Costsheet?" +
-					"name=Noida/Godrej North Estate, Delhi/GODREJ VESTAMARK S2/21st Floor/Offered-a1u2s0000000PcsAAE-a1s6F00000CHzLDQA1-a1l6F000008DnniQAC"
+					"name="+costsheetPath
 					+"&amp;from=ofrList\"><i class=\"fa fa-file\"></i></a></td>"
 					+"<td><button isrole=Y class='btn btnDefaultBlue btn-default' " +
 						"onclick='getofferApplicantDetails(this,\""+
