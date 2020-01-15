@@ -123,23 +123,6 @@ public class OfflineEOIController {
 		resp.addObject("requirementList", requirementList);
 		return resp;
 	}
-
-
-	/*
-	 * private EnquiryUserDto getEnquiryUser(HttpServletRequest request) {
-	 * EnquiryUserDto enquiryUser = new EnquiryUserDto(); HttpSession session =
-	 * request.getSession(false); String userName = (String)
-	 * session.getAttribute("USERNAME"); String userMobile = (String)
-	 * session.getAttribute("USERMOBILENO"); String userId = (String)
-	 * session.getAttribute("USERID"); String userEmail = (String)
-	 * session.getAttribute("USEREMAIL"); String role = (String)
-	 * session.getAttribute("ROLE"); String projectName = (String)
-	 * session.getAttribute("PRONAME"); String projectId = (String)
-	 * session.getAttribute("PROID"); String closingMgr = (String)
-	 * session.getAttribute("Closingmgr");
-	 * 
-	 * return enquiryUser; }
-	 */
 		
 	
 	@PostMapping("/saveOfflineEnquiry")
@@ -151,12 +134,10 @@ public class OfflineEOIController {
 			if(null!=enq.getContact()){
 				enq.getContact().setIsActive("Y");
 			}
-			
-			//Save enquiry and contact
 			if(null==enq.getEnquiryId()){
 				enq=enquiryRequestService.save(enq);
 				resp.setMessage(MessageConstants.ENQUIRY_SAVE_SUCCCESS);
-			}//Update enquiry and contact Details
+			}
 			else{
 				EnquiryDto dest=enquiryRequestService.findById(enq);
 				enq=enquiryRequestService.updateBaseInfo(enq, dest);

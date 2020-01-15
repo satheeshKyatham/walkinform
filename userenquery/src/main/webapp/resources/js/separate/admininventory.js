@@ -532,8 +532,8 @@ function towerList (e, source) {
 		$('#towerMst').append('<option value="">Select</option>');
 		$.each(data, function (index, value) {
 			$('#towerMst').append("<option value='"+value.tower_code__c+"'>"+value.tower_name__c+"</option>");
-			
 			$('#towerMstReport').append("<option value='"+value.tower_code__c+"'>"+value.tower_name__c+"</option>");
+			$('#towerMstSalesHoldReport').append("<option value='"+value.tower_code__c+"'>"+value.tower_name__c+"</option>");
 		});					
 	}).done(function() {
 			

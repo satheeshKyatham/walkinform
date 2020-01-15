@@ -47,7 +47,7 @@
 .inventoryLegendsCol ul li span {width: 10px; height: 10px; display: inline-block; border-radius: 100px;}
 
 
-.holdforDiscussion {background-color: #ff821c;}
+.holdforDiscussion {background-color: #e24c8d;}
 .soldOut {background-color: #f84747;}
 .ilAvailable {background-color: #a4ed46;}
 .holdForReallocation {background-color: #ff86e1;}
@@ -70,8 +70,8 @@
 .unitTemp {background-color: #ff5252  !important;}
  
 /* .unitTempAdmin {background-color: #4b3fc0!important;} */
-.unitTempAdmin {background-color: #ff821c !important;}
+.unitTempAdmin {background-color: #e24c8d  !important;}
 
 
-.rowBlockClr {border-left: 5px solid #00e0ec;}
-.rowHoldClr {border-left: 5px solid #ff821c;}
+.rowBlockClr {background-color: #dafdff !important;}
+.rowHoldClr {background-color: #ffdaea !important;}

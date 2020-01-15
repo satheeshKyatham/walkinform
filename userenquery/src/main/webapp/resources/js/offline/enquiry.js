@@ -37,7 +37,6 @@ function getEnquiry(){
 
 function onPageLoad(){
 	$(".referred_by_name").hide();
-	//debugger	
 		var projectName=$('#projectName').val();
 	    if(projectName!=""){
 	    	$("#projectTitle").html(projectName);
@@ -47,7 +46,6 @@ function onPageLoad(){
 	if(hasParam==="true"){
 	    var enquiryType=$("#hiddenEnquiryType").val();
 	    $("#isReferredByChannelPartnerRadio"+enquiryType).trigger("click");
-	    /*isReferredChanged(enquiryType);*/
 	    hideEnquirySourceByEnquiryType(enquiryType,null);
 	}
    
@@ -63,7 +61,6 @@ function onPageLoad(){
     var mobileNo=$('#hiddenMobileNo').val();
     if(mobileNo!=""){
       $("#inputMobileNo").val(mobileNo);
-      /*getExistingInfo();*/
       getExistingInfoByMobileAndProject();
       $("#contactDiv").addClass('disableCol');
     }else{
@@ -72,17 +69,11 @@ function onPageLoad(){
    
 }
 function getExistingInfoByMobileAndProject(){
-	//debugger
 	var mobileNo=$("#inputMobileNo").val();
 	var project=$('.projectSfid').val();
-//	if(mobileNo.length==10 && project!=""){
 	if(project!=""){
 		var countryCode=$('#countryCode').val();
-		/*var url=$("#contextPath").val();*/
-		//Change By Satheesh Kyatham
-		//var resp=fetchData("getExistingRecords/"+countryCode+mobileNo+"/"+project,null,"GET");
 		var resp=fetchData("getExistingRecords/"+countryCode+"/"+mobileNo+"/"+project,null,"GET");
-		//debugger
 		populateEnquiryAndContact(resp);
 	}
 }
@@ -103,9 +94,9 @@ function populateEnquiryAndContact(resp){
 	if(!isEmpty(enquiryList)){
 		/*populateEnquiryList(enquiryList);*/
 		var enq=enquiryList[0];
-		var contact=enq.contact;
-		populateBasicInfo(enq,contact);
-		populateAddressInfo(enq,contact);
+		var enqContact=enq.contact;
+		populateBasicInfo(enq,enqContact);
+		populateAddressInfo(enq,enqContact);
 	}else if(!isEmpty(contact)){
 		$("#enquiryTable tbody").empty();
 		$('.enquiryId').val("");
@@ -113,6 +104,7 @@ function populateEnquiryAndContact(resp){
 	  	$('.enquiryId').removeAttr("disabled");
 		$('#channelPartnerName').val("");
 		$("#channelPartnerNameSearch").val("");
+		$("#channelPartnerNameSearch").attr('readonly', false);
 		$('#channelPartnerSfid').val("");
 		$('#channelPartnerId').val("");
 		$('#brokerContact').val("");
@@ -142,7 +134,7 @@ function populateEnquiryAndContact(resp){
 			$('#commonBoldMessage').html("");
 		}
 	}else{			
-		
+	    $("#budget").val("");
 		enqSlider();
 	 
 			    $('.enquiryId').val("");
@@ -154,6 +146,8 @@ function populateEnquiryAndContact(resp){
 				$('#channelPartnerSfid').val("");
 				$('#channelPartnerId').val("");
 				$('#brokerContact').val("");
+				$("#channelPartnerNameSearch").removeClass('disableInputs');
+				$("#channelPartnerNameSearch").attr('readonly', false);
 				var hasParam=$('#hasParam').val();
 				if(hasParam==="true"){
 				   var enquiryType=$("#hiddenEnquiryType").val();
@@ -163,13 +157,9 @@ function populateEnquiryAndContact(resp){
 				   $("#isReferredByChannelPartnerRadioCP").trigger("click");
 				   hideEnquirySourceByEnquiryType(null,null);
 				}
-				/*$('#isReferredByChannelPartnerInput').val("Partner");
-			    $('label[labelName="isReferredByChannelPartner"][value="CP"]').trigger("click");
-			   */ 
 				$('#walkInSource').val("");
 			    $('#walkInSourceDetail').val("");
 			    $('#otherChannelPartnerName').val("");
-			    /*$('input[name="desiredUnitType"][value="'+enq.desiredUnitType+'"]').trigger('click');*/
 			    $("#desiredUnitType0").trigger("click");
 			$('.contactId').val("");
 			$('.contactId').removeAttr("disabled");				
@@ -188,7 +178,6 @@ function populateEnquiryAndContact(resp){
 			$('#locality').val("");
 			$('#locality').val("");
 		    $("#purpose").val("");
-		    $("#budget").val("");
 		    $("#carpetAreaRequirement").val("");
 		    $("#employmentStatus").val("");
 		    $("#companyName").val("");
@@ -198,6 +187,11 @@ function populateEnquiryAndContact(resp){
 			$('#officelng').val("");
 			$('#reslat').val("");
 			$('#reslng').val("");
+			
+		    $(".enquiryFields").removeAttr("readonly","readonly");
+		    $("#enquiryComments").val("");
+		    $(".enquiryFields").removeClass('disableInputs');
+
 		    
 		    $("#officeCity").val("");
 		    $("#officePinCode").val("");
@@ -210,10 +204,6 @@ function saveBaseInfo(event,el){
 	 $(this).scrollTop(0);
 }
 
-/*function saveAddressInfo(event,el){
-	submitIt("enquiryRequestAddressInfoForm","saveAddressInfo","saveAddressInfoResp");
-}*/
-
 function saveRequirementRequest(event,el){
 	submitIt("enquiryRequestRequirementInfoForm","saveRequirementInfo","saveRequirementInfoResp");
 	 $(this).scrollTop(0);
@@ -225,16 +215,15 @@ function saveOtherRequest(event,el){
 }
 
 function populateBasicInfo(enq,contact){
-	//alert("test543");
 		if(!isEmpty(enq)){
 			$('.enquiryId').val(enq.enquiryId);
-			/*$('.enquirysfid').val(enq.sfid);*/
-			/*$('.enquirysfid').removeAttr("disabled");*/
 			$('.enquiryId').removeAttr("disabled");
-			/*$('isReferredByChannelPartner')*/
 			var projectSfid=enq.project==null?"":enq.project.sfid;
 			$('.projectSfid').val(projectSfid);
 			var channelPartner=enq.channelPartner;
+			var visitType = enq.visitType;
+			$("#visitType").val(visitType);
+			$("formVisitType").val(visitType);
 			
 			var brokerContact=enq.brokerContact;
 			if(!isEmpty(channelPartner)){
@@ -249,9 +238,7 @@ function populateBasicInfo(enq,contact){
 				$('#brokerContactId').val(brokerContact.contactId);
 			}
 			$('#isReferredByChannelPartnerInput').val(enq.isReferredByChannelPartner);
-			var cpHS=enq.isReferredByChannelPartnerFlag;
-			/*$('label[labelName="isReferredByChannelPartner"]').removeClass("active");*/
-			 
+			var cpHS=enq.isReferredByChannelPartnerFlag;			 
 			if(cpHS!=null && cpHS!=""){
 			   $('label[labelName="isReferredByChannelPartner"][value="'+cpHS+'"]').trigger("click");
 			   hideEnquirySourceByEnquiryType(cpHS,null);
@@ -267,68 +254,25 @@ function populateBasicInfo(enq,contact){
 			    }
 				hideEnquirySourceByEnquiryType(null,enq);
 			}
-			/*isReferredChanged(cpHS);*/
-			
-			//$('#walkInSource option[value="'+enq.walkInSource+'"]').attr('selected','selected');
-			
-			//$('#walkInSource').find('option[value='+enq.walkInSource+']').attr('selected','selected');
-			
-			
-			//$('#walkInSource').find('option[value='+enq.walkInSource+']').attr('selected','selected');
-			$('#walkInSource').val(enq.walkInSource);
-			/*if(enq.walkInSource==='Referral')
-				{
-					$(".referred_by_name").show();
-					$('#referredbyId').val(enq.referredbyDto);
-					$("#referredbyId").addClass('disableInputs');
-				}
-			else
-				{
-					$(".referred_by_name").hide();
-				}*/
-			//alert(enq.enquiryReport.referredby);
-			
+			$('#walkInSource').val(enq.walkInSource);			
 			$('#walkInSourceDetail').val(enq.walkInSourceDetail);
-			
-			//$('#otherChannelPartnerName').val(enq.otherChannelPartner);
-			/*$('input[name="desiredUnitType"][value="'+enq.desiredUnitType+'"]').trigger('click');*/
-			
+						
 			$('.enquiryId').val(enq.enquiryId);
-			/*$('.enquirysfid').val(enq.sfid);*/
 			loadEnquiryReport(enq);
 			if(!isEmpty(contact=enq.contact)){
 				contact=enq.contact;
 			}else if(!isEmpty(enq.contactId)){
 				contact=enq.contactId;
 			}
-			/* $("#enquiryComments").val(enq.otherChannelPartner);*/
 			 if(enq.hasError && enq.nonEdit==="ENQUIRY")
 			 {
 			    $(".enquiryFields").attr("readonly","readonly");
 			    $(".enquiryFields").addClass('disableInputs');
-			   /* $("#enquiryCommentsDiv").css('display','block');*/
-			   /* $("#enquiryComments").attr('name',"enquiryNonEditComment");
-			    $("#enquiryComments").addClass('requiredField');*/
-			  /*  $("#enquiryComments").val(enq.otherChannelPartner);*/
-			    
-			   /* if(contact.recordType==$("#recordTypeProspect").val())
-			    {
-			    	 $(".contactFields").attr("readonly","readonly");
-			    	 $(".contactFields").addClass('disableInputs');
-			    }*/
 			 }else{
 			    $(".enquiryFields").removeAttr("readonly","readonly");
-			   /* $("#enquiryCommentsDiv").css('display','none');
-			    $("#enquiryComments").removeAttr('name',"enquiryNonEditComment");
-			    $("#enquiryComments").removeClass('requiredField');*/
 			    $("#enquiryComments").val("");
 			    $(".enquiryFields").removeClass('disableInputs');
 			    
-			   /* if(contact.recordType==$("#recordTypeProspect").val())
-			    {			    	
-			    	$(".contactFields").removeAttr("readonly","readonly");
-			    	$(".contactFields").removeClass('disableInputs');
-			    }*/
 			 }	
 			 if(enq.hasError){
 					$(".commonMessageDiv").css('display','block');
@@ -351,7 +295,6 @@ function populateBasicInfo(enq,contact){
 		    	$(".contactFields").removeAttr("readonly","readonly");
 		    	$(".contactFields").removeClass('disableInputs');
 		    }
-			/*$('#salutation').val(contact.salutation);*/
 			$('.contactId').val(contact.contactId);
 			$('.contactId').removeAttr("disabled");
 			
@@ -359,9 +302,6 @@ function populateBasicInfo(enq,contact){
 			$('#lastName').val(contact.lastName);
 			$('#email').val(contact.otherEmail);
 			$('#dateOfBirth').val(getDate(contact.dateOfBirth));
-			/*$('#ageGroup').val(contact.ageGroup);
-			$('#industry').val(contact.industry);*/
-			
 			$('#addressLine1').val(contact.addressLine1);
 			var addressLine3=contact.addressLine3==null?"":contact.addressLine3;
 			var addressLine2=(contact.addressLine2==null || contact.addressLine2=='null')?"":contact.addressLine2;
@@ -377,9 +317,6 @@ function populateBasicInfo(enq,contact){
 		 $(this).scrollTop(0);
 }
 function loadEnquiryReport(enq){
-	//debugger
-	//alert();
-	//debugger
 	if(!isEmpty(enq) && !isEmpty(enq.enquiryReport)){
 		var enquiryReportId=enq.enquiryReport==null?'':enq.enquiryReport.enquiryReportId;
 		$('.enquiryReportId').val(enquiryReportId);	
@@ -399,43 +336,18 @@ function loadEnquiryReport(enq){
 		$('#otherChannelPartnerName').val(enq.enquiryReport.cpComments);
 	}
 	 $(this).scrollTop(0);
-	 
-	 
-	 
 	 enqSlider();
 }
 
 
 
 function enqSlider(){
-
-
 	if(flag){  
-		// Without JQuery
 		try{
 			 $('#ex13').bootstrapSlider('destroy');
 		}catch(err){
 			/*console.log(err);*/
 		}
-	/*	var slider = new Slider("#ex13", {
-		    ticks: [2000000, 10000000, 20000000, 30000000, 40000000, 50000000],
-		    ticks_labels: ['20L', '1Cr', '2Cr', '3Cr', '4Cr', '5Cr' ],
-		    ticks_positions: [0, 20, 40, 60, 80, 100],
-		    //ticks_snap_bounds: 60,
-		    tooltip: 'always',
-		   step: 100000,
-		   value: $("#budget").val(),
-		   formatter: function(value) {
-			   			   
-				if(value >= 10000000) value = (value/10000000).toFixed(2) + ' Cr';
-				else if(value >= 100000) value = (value/100000).toFixed(2) + ' Lac';
-				else if(value >= 1000) value = (value/1000).toFixed(2) + ' K';
-							   
-			   return value;
-			}
-		    
-		});
-			*/
 			
 		 $("#ex13").bootstrapSlider({
 		    ticks: [2000000, 10000000, 20000000, 30000000, 40000000, 50000000],
@@ -458,24 +370,14 @@ function enqSlider(){
 		    ticks: [200, 500, 1000, 1500, 2000, 2500],
 		    ticks_labels: ['200', '500', '1000', '1500', '2000', '2500' ],
 		    ticks_positions: [0, 20, 40, 60, 80, 100],
-		    //ticks_snap_bounds: 60,
 		    tooltip: 'always',
 		   step: 50,
 		   value: $("#carpetAreaRequirement").val(),
-			formatter: function(value) {
-			   
-			   
-			   
+			formatter: function(value) {  
 			   return value + ' sqft';
-			}
-		    
+			}		    
 		});
-		
-
 	}
-	
-
-
 }
 
 
@@ -506,10 +408,6 @@ function loadContactReport(contact){
 function populateAddressInfo(enq,contact){
 		if(!isEmpty(enq)){
 			$('.enquiryId').val(enq.enquiryId);
-			/*$('.enquirysfid').val(enq.sfid);*/
-			/*$('#budget').val(enq.budget);*/
-			/*$('#purpose').val(enq.purpose);*/
-			/*$('#requiredPossesionTimeLine').val(enq.requiredPossesionTimeLine);*/
 			if(!isEmpty(enq.contact)){
 				contact=enq.contact;
 			}else if(!isEmpty(enq.contactId)){
@@ -519,54 +417,12 @@ function populateAddressInfo(enq,contact){
 		}
 		
 		if(!isEmpty(contact)){
-			/*$('#currentResidence').val(contact.currentResidenceType);
-			$('input[name="currentOwnershipType"]').val(contact.currentOwnershipType);
-			$('#occupation').val(contact.occupation);*/
-			/*$('#officeLocality').val(contact.officeLocality);*/
 			$('#companyName').val(contact.companyName);
-			/*$('#designation').val(contact.designation);
-			$('#officeCity').val(contact.officeCity);
-			$('#officePinCode').val(contact.officePinCode);
-			$('#officeAddress').val(contact.companyLocality);*/
 			$('.contactId').val(contact.contactId);
 			$('.contactId').removeAttr("disabled");
 		}
 	}
 
-/*function populateRequirementInfo(data){
-	if(!isEmpty(data)){
-		var enq=data.objectMap.enquiry;
-		var contact;
-
-		if(!isEmpty(enq)){
-			
-			contact=enq.contact;
-		}else{
-			contact=data.objectMap.contact;
-		}
-		
-		if(!isEmpty(contact)){
-			$('.contactId').val(contact.contactId);
-		}
-	}
-}
-
-function populateOtherInfo(data){
-	if(!isEmpty(data)){
-		var enq=data.objectMap.enquiry;
-		var contact;
-		if(!isEmpty(enq)){
-			$('.enquiryId').val(enq.enquiryId);
-			contact=enq.contact;
-		}else{
-			contact=data.objectMap.contact;
-		}
-		
-		if(!isEmpty(contact)){
-			
-		}
-	}
-}*/
 
 function savebasicInfoResp(data){
 	var enq=data.objectMap.EnquiryRequest;
@@ -613,12 +469,10 @@ function savebasicInfoResp(data){
 		        dangerMode: true,
 		      }).then(function(isConfirm) {
 		        if (isConfirm) {
-/*		        	window.location.href=url+"/"+"success"+"?enquiryid="+enq.enquiryId+"&mobileno="+code+"&projectSFID="+$("#projectSfid").val()+"&projectName="+$("#projectName").val();
-*/		        	console.log('OK');
+		        	console.log('OK');
 		        } 
 		      });	 		
 		}else{
-			/*showMessage(data);*/
 			if(data.success){
 				switchToNextTab();
 			}
@@ -637,13 +491,6 @@ function saveRequirementInfoResp(data){
 	}
 }
 
-/*function saveAddressInfoResp(data){
-	showMessage(data);
-	if(data.success){
-		switchToNextTab();
-	}
-}
-*/
 function saveOtherInfoResp(data){
 	showMessage(data);
 }
@@ -660,29 +507,21 @@ function switchToNextTab(){
 
 function getExistingInfo(){
 	
-	/*$("#mainPageLoad").show();*/	
 	var mobileNo=$('#inputMobileNo').val();
 	if(mobileNo.length==10){		
 		var countryCode=$('#countryCode').val();
-		/*var url=$("#contextPath").val();*/
-		//Change By Satheesh Kyatham
-//		var resp=fetchData("getExistingRecords",countryCode+mobileNo,"GET");
 		var resp=fetchData("getExistingRecords",countryCode+"/"+mobileNo,"GET");
 		populateEnquiryAndContact(resp);
 	}
 }
 
 function populateEnquiry(event){
-	//debugger
-	/*event.preventDefault();*/
 	$('#mainPageLoad').show();
 	$("#notSelectError").hide();
 	var selectedEnq=$("input[name='enquiryRowId']:checked").val();
 	    $('#multiEnq').modal('hide');
 		var enq=enqArray["enquiry"+selectedEnq];
 		var contact;
-		/*var channelPartner=enq.channelPartner==null?'':enq.channelPartner;*/
-		/*var brokerContact=enq.brokerContact==null?'':enq.brokerContact;*/
 		if(!(isEmpty(enq.contact))){
 			contact=enq.contact;
 		}else{
@@ -692,18 +531,10 @@ function populateEnquiry(event){
 		populateAddressInfo(enq,contact);
 		$("html, body").animate({ scrollTop: 0 }, "slow");
 		$(".commonErrorDiv").css('display','none');
-	/*if(!isEmpty(channelPartner) && !isEmpty(brokerContact) && enq.isReferredByChannelPartner==='Partner'){
-		 $("#isReferredByChannelPartnerRadioCP").trigger("click");
-	}else if(enq.isReferredByChannelPartner==='Direct' && !isEmpty(enq.walkInSource)){
-		 $("#isReferredByChannelPartnerRadioD").trigger("click");
-	}else if(enq.isReferredByChannelPartner==='Partner' && !isEmpty(enq.otherChannelPartner)){
-		 $("#isReferredByChannelPartnerRadioO").trigger("click");
-    }*/
 	$('#mainPageLoad').hide();
 }
 
 function populateEnquiryList(enquiryList){
-	//debugger
 	var tr="";
 	
 	$("#enquiryTable tbody").empty();
@@ -727,7 +558,6 @@ function populateEnquiryList(enquiryList){
 		
 		$("#enquiryTable tbody").append(tr);
 	});
-	/*$('#multiEnq').modal('show');*/
 	$('#multiEnq').modal({backdrop: 'static', keyboard: false})  
 }
 function hideEnquirySourceByEnquiryType(enquiryTypeCode,enq){
@@ -742,7 +572,7 @@ function hideEnquirySourceByEnquiryType(enquiryTypeCode,enq){
 		if($("#isReferredByChannelPartnerInput").val()!="Direct"){
 			isReferredChanged("D");
 		}
-		$(".hideDirectType").hide();/*$(".hideDirectType").show();*/
+		$(".hideDirectType").hide();
 		$("#enquirySourceTextDiv").hide();
 	}else if(enquiryTypeCode=='O'){
 		$(".hideDirectType").hide();
@@ -761,7 +591,7 @@ function hideEnquirySourceByEnquiryType(enquiryTypeCode,enq){
 			if($("#isReferredByChannelPartnerInput").val()!="Direct"){
 				isReferredChanged("D");
 			}
-			$(".hideDirectType").hide();/*$(".hideDirectType").show();*/
+			$(".hideDirectType").hide();
 			$("#enquirySourceTextDiv").hide();
 		}else if(enq.isReferredByChannelPartner==='Partner' && !isEmpty(enq.otherChannelPartner)){
 			$(".hideDirectType").hide();
@@ -788,24 +618,18 @@ function isReferredChanged(cpHS){
 		$("#isReferredByChannelPartnerRadioO").prop("checked",false);
 		$(".isReferredByChannelPartnerD").attr("disabled","disabled");
 		$(".isReferredByChannelPartnerO").attr("disabled","disabled");
-	/*	$(".hideDirectType").hide();
-		$(".hideChannelPartnerType").show();*/
 	}else if(cpHS=='D'){
 		$("#isReferredByChannelPartnerRadioCP").prop("checked",false);
 		$("#isReferredByChannelPartnerRadioO").prop("checked",false);
 		
 		$(".isReferredByChannelPartnerCP").attr("disabled","disabled");
 		$(".isReferredByChannelPartnerO").attr("disabled","disabled");
-		/*$(".hideChannelPartnerType").hide();
-		$(".hideDirectType").show();*/
 	}else if(cpHS=='O'){
 		$("#isReferredByChannelPartnerRadioD").prop("checked",false);
 		$("#isReferredByChannelPartnerRadioCP").prop("checked",false);
 		
 		$(".isReferredByChannelPartnerD").attr("disabled","disabled");
 		$(".isReferredByChannelPartnerCP").attr("disabled","disabled");
-		/*$(".hideDirectType").hide();
-		$(".hideChannelPartnerType").show();*/
 	}
 }
 
@@ -822,34 +646,10 @@ function getChannelPartners(event,el){
 	}else if(text.length==0){
 		channelPartnerArray=[];
 	}
-	
-	/*Vivek Changes Start*/
-	/*if(text.length==3 || text.length==5 || text.length==7  || text.length==9 || text.length==11 || text.length==13){	
-		$("#channelPartnerNameSearch").attr('readonly', true);
-		$("#channelPartnerLoader").show();
-		fetchSyncData("getChannelPartnerList",text,"GET","loadChannelPartners");
 
-	}else if(text.length==0){
-		channelPartnerArray=[];
-	}else{
-		var channelPartners = filterMatches(channelPartnerArray, text);
-		console.log(channelPartners);
-		refreshChannelPartners(channelPartners);
-	}*/
-	/*Vivek Changes END*/
-	/*if(text.length>=3){
-		
-		var resp=fetchData("getChannelPartnerList",text,"GET");
-		req=resp;
-		var partnerList=resp.objectMap.channelPartnerList;
-		channelPartnerArray=partnerList;
-		refreshChannelPartnerList();
-	*/
 }
 function loadChannelPartners(resp){
-	//
 	var partnerList=resp.objectMap.channelPartnerList;
-	/*alert(partnerList.length);*/
 	channelPartnerArray=partnerList;
 	refreshChannelPartnerList();
 	$("#channelPartnerLoader").hide();
@@ -857,11 +657,8 @@ function loadChannelPartners(resp){
 
 }
 function refreshChannelPartnerList(){
-	
-	/*$("#channelPartnerName").autocomplete({*/
 	$("#channelPartnerNameSearch").autocomplete({
         source: function (request, response) {
-            //data :: JSON list defined
             response($.map(channelPartnerArray, function (value, key) {
                  return {
                      label: value.name,
@@ -872,8 +669,6 @@ function refreshChannelPartnerList(){
         },
         select: function (event, el) {  
         	event.preventDefault();
-        	//
-        	/*fetchAsyncData("getBrokerContactByCPSfid",el.item.value,"GET","loadBrokerContacts");*/
         	$("#channelPartnerNameSearch").val(el.item.label);
         	$("#channelPartnerName").val(el.item.label);
         	$("#channelPartnerSfid").val(el.item.value);
@@ -885,11 +680,8 @@ function refreshChannelPartnerList(){
 
 }
 function refreshChannelPartners(channelPartners){
-	
-	/*$("#channelPartnerName").autocomplete({*/
 	$("#channelPartnerNameSearch").autocomplete({
         source: function (request, response) {
-            //data :: JSON list defined
             response($.map(channelPartners, function (value, key) {
                  return {
                      label: value.name,
@@ -900,8 +692,6 @@ function refreshChannelPartners(channelPartners){
         },
         select: function (event, el) {  
         	event.preventDefault();
-        	//
-        	/*fetchAsyncData("getBrokerContactByCPSfid",el.item.value,"GET","loadBrokerContacts");*/
         	$("#channelPartnerNameSearch").val(el.item.label);
         	$("#channelPartnerName").val(el.item.label);
         	$("#channelPartnerSfid").val(el.item.value);
@@ -923,7 +713,6 @@ function loadBrokerContacts(){
 	$("#"+id).empty();
 	$("#"+id).append("<option value=''></option>" );
 	$.each(list,function(index,object){
-		//debugger
 		firstName=object.firstName==null?'':object.firstName;
 	    lastName=object.lastName==null?'':object.lastName;
 		$("#"+id).append("<option value='"+object.sfid+"' id='brkCont"+object.sfid+"' idVal='"+object.contactId+"'>"+firstName+" "+lastName+" </option>" );
@@ -936,39 +725,11 @@ function brokerContactChanged(event,el){
 	var brkContId=$("#brkCont"+val).attr('idVal');
 	$("#brokerContactId").val(brkContId);
 }
-//$(document).ready(function(){
-//	/* DOB date picker */
-//	$(".ip-de").AnyPicker({
-//		mode: "datetime",
-//		//minValue: new Date(),
-//		dateTimeFormat: "MMM yyyy",	
-//		//maxValue: new Date("2031-01-01"),
-//		//maxValue: new Date("2019-01-01"),
-//		//maxValue: new Date("2031-01-01"),
-//		
-//		minValue: new Date(2019, 01),
-//		maxValue: new Date(2030, 01)
-//	
-//			
-//	});
-//	/* END DOB date picker */
-//});
-
-
-
 
 
 /*Auto fill address*/
 var autocomplete = {};
 var autocompletesWraps = ['address','address2'];
-
-/*var address_form = {sublocality_level_1:'long_name', sublocality_level_2:'long_name', street_address:'long_name', sublocality_level_3:'long_name', Street:'long_name', route: 'long_name',locality: 'long_name',country:'long_name',administrative_area_level_1: 'long_name', administrative_area_level_2: 'long_name',  postal_code: 'short_name' };
-var address2_form = {sublocality_level_1:'long_name',sublocality_level_2:'long_name', street_address:'long_name', sublocality_level_3:'long_name', Street:'long_name', route: 'long_name',locality: 'long_name',country:'long_name',administrative_area_level_1: 'long_name', administrative_area_level_2: 'long_name',  postal_code: 'short_name' };*/
-
-
-/*var address_form = 	{route: 'long_name',xyz:'',administrative_area_level_1:'long_name',sublocality_level_1:'long_name', sublocality_level_2:'long_name', locality: 'long_name',country:'long_name',administrative_area_level_1: 'long_name', administrative_area_level_2: 'long_name',  postal_code: 'short_name' };
-var address2_form = {route: 'long_name',xyz:'',administrative_area_level_1:'long_name',sublocality_level_1:'long_name',sublocality_level_2:'long_name', locality: 'long_name',country:'long_name',administrative_area_level_1: 'long_name', administrative_area_level_2: 'long_name',  postal_code: 'short_name' };*/
-
 
 var address_form = 	{xyz:'', street_number: 'long_name', route: 'long_name', sublocality_level_1:'long_name', sublocality_level_2:'long_name', sublocality_level_3:'long_name', locality: 'long_name',country:'long_name',administrative_area_level_1: 'long_name', administrative_area_level_2: 'long_name',  postal_code: 'short_name' };
 var address2_form = {xyz:'', street_number: 'long_name', route: 'long_name', sublocality_level_1:'long_name', sublocality_level_2:'long_name', sublocality_level_3:'long_name', locality: 'long_name',country:'long_name',administrative_area_level_1: 'long_name', administrative_area_level_2: 'long_name',  postal_code: 'short_name' };
@@ -1086,162 +847,6 @@ function initialize() {
 }
 
 
-/*function initialize() {
-	
-	
-
-	$.each(autocompletesWraps, function(index, name) {
-	
-		if($('#'+name).length == 0) {
-			return;
-		}
-		 
-		autocomplete[name] = new google.maps.places.Autocomplete($('#'+name+' .autocomplete')[0], { types: ['geocode','establishment'] });
-		
-		//var subLocNew = '';
-		
-		google.maps.event.addListener(autocomplete[name], 'place_changed', function() {
-			
-			var place = autocomplete[name].getPlace();
-			var form = eval(name+'_form');
-
-			if (name == "address") {
-				$('#reslat').val("");
-				$('#reslng').val("");
-				
-				
-				$('#reslat').val(place.geometry.location.lat());
-				$('#reslng').val(place.geometry.location.lng());
-			} else if (name == "address2") {
-				$('#officelat').val("");
-				$('#officelng').val("");
-				
-				
-				$('#officelat').val(place.geometry.location.lat());
-				$('#officelng').val(place.geometry.location.lng());
-			}
-
-
-			for (var component in form) {
-				
-				//subLocNew + 
-				
-				if (component == 'street_number'){
-					alert ("Test ::: " + subLocNew + component);
-					
-				}
-				
-				
-				//console.log ($('#'+name+' .'+component).val(''));
-				
-				if (component == 'xyz'){
-					alert ("place.name ::: " + place.name);
-				}
-				
-				
-				
-				
-				$('#'+name+' .'+component).val('');
-				$('#'+name+' .'+component).attr('disabled', false);
-				$('#'+name+' .'+component).addClass('hasVal');
-			}
-			
-			$('#'+name+ ' .autocomplete').val('');		
-			
-			$('#'+name+ ' .autocomplete').val(place.name);
-			
-			
-			for (var i = 0; i < place.address_components.length; i++) {
-				var addressType = place.address_components[i].types[0];
-				if (typeof form[addressType] !== 'undefined') {
-					
-					
-					alert ("Place Name ::: " + place.name);
-					
-					
-					if (addressType == "locality"){
-						alert ("locality ::: " + place.address_components[i][form[addressType]]);
-					}
-					
-					if (addressType == "sublocality"){
-						alert ("sublocality ::: " + place.address_components[i][form[addressType]]);
-					}
-					
-					if (addressType == "postal_code"){
-						alert ("postal_code ::: " + place.address_components[i][form[addressType]]);
-					}
-					
-					if (addressType == "country"){
-						alert ("country ::: " + place.address_components[i][form[addressType]]);
-					}
-					
-					if (addressType == "administrative_area_level_1"){
-						alert ("administrative_area_level_1 ::: " + place.address_components[i][form[addressType]]);
-					}
-					
-					if (addressType == "administrative_area_level_2"){
-						alert ("administrative_area_level_2 ::: " + place.address_components[i][form[addressType]]);
-					}
-					
-					if (addressType == "administrative_area_level_3"){
-						alert ("administrative_area_level_3 ::: " + place.address_components[i][form[addressType]]);
-					}
-					
-					
-					
-					if (addressType == "route"){
-					//subLocNew + place.address_components[i][form[addressType]];
-								
-						alert ("route ::: " + place.address_components[i][form[addressType]]);
-						
-						$('#'+name+ ' .autocomplete').val(place.address_components[i][form[addressType]]);
-						//$('#'+name+ ' .autocomplete').val(', '+place.address_components[i][form[addressType]]);
-						
-						
-						//$('#comboAdd').append(place.address_components[i][form[addressType]] + ',');
-						
-					} 
-					if (addressType == "sublocality_level_2"){
-					//subLocNew + place.address_components[i][form[addressType]];
-						
-						
-						alert ("sub2 ::: " + place.address_components[i][form[addressType]]);
-					
-						$('#'+name+ ' .autocomplete').val($('#'+name+ ' .autocomplete').val()+', '+place.address_components[i][form[addressType]]);
-					
-					
-					//$('#comboAdd').append(place.address_components[i][form[addressType]] + ',');
-					}
-					if (addressType == "sublocality_level_3"){
-						alert ("sublocality_level_3" + place.address_components[i][form[addressType]]);
-						
-						$('#'+name+ ' .autocomplete').val($('#'+name+ ' .autocomplete').val()+', '+place.address_components[i][form[addressType]]);
-						
-						//$('#comboAdd').append(place.address_components[i][form[addressType]] + ',');
-						
-					} if (addressType == "sublocality_level_1"){
-						
-						alert ("sublocality_level_1" + place.address_components[i][form[addressType]]);
-						
-						$('#'+name+ ' .autocomplete').val($('#'+name+ ' .autocomplete').val()+', '+place.address_components[i][form[addressType]]);
-					} 
-					
-					
-					
-				
-					var val = place.address_components[i][form[addressType]];
-					$('#' +name+ '.'+addressType).val(val);
-					 
-				
-					
-					var val = place.address_components[i][form[addressType]];
-					$('#'+name+' .'+addressType).val(val);
-					//console.log (val);
-				}
-			}
-		});
-	});
-}*/
  /* Referred by added on Enquiry page, on select of walk-in source as referral -  
 	* Change By Satheesh Kyatham- 25-12-2019
 	* Request From - Prakash Idnani*/
@@ -1257,12 +862,10 @@ function onSelectWalkinSrcReferral(event,el)
 			{
 			$('.referred_by_name').hide();
 			}
-		//var brkContId=$("#brkCont"+val).attr('idVal');
-		//$("#brokerContactId").val(brkContId);
 	}
 /*  END  */
 
-//Code for Offline EOI to Closing Manager Page Redirect
+/*Code for Offline EOI to Closing Manager Page Redirect */
 function openClosingMDashboard()
 {
 	var countryCodeEN = $('.selected-dial-code').text();
@@ -1276,8 +879,4 @@ function openClosingMDashboard()
 		+"&projectName="+$('#projectName').val()
 		+"&token="+ $("#tokenNo").val()
 		+"&isView=N&salesViewType=N&roleid="+ $("#roleid").val();
-	//alert("safdf");
-	//?tokenid=42911&countrycode=%2B91&mobileno=7777771111
-	//&projectSfid=a1l6F000008DnniQAC&projectName=Godrej%20North%20Estate
-	//&token=W6&isView=N&salesViewType=N
 	}
