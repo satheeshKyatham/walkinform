@@ -51,7 +51,7 @@
 				 <div class="form-group col-md-3">
 					<label>Typology</label>
 					<select id="typoMst" class="form-control">
-						<option value='0'>Select</option> 
+						<!-- <option value='typologyAll'>All</option> -->
 					</select>
 				 </div>
 		    	<div class="form-group col-md-3">
@@ -82,7 +82,7 @@
 		    	
 		    	<div class="form-group col-md-3">
 		    		<label style="display: block;"> &nbsp; </label>
-		    		<button id="bspAgainestBtn" style="display:none;" type="submit" class="btn btn-default btn-primary" onclick="addBSPCharge()">Submit</button>
+		    		<button type="submit" class="btn btn-default btn-primary" onclick="addBSPCharge()">Submit</button>
 		    		<div class="clearfix"></div>
 		    	</div>
 		    	
