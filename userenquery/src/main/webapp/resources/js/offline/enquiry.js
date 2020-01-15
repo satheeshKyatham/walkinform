@@ -221,9 +221,6 @@ function populateBasicInfo(enq,contact){
 			var projectSfid=enq.project==null?"":enq.project.sfid;
 			$('.projectSfid').val(projectSfid);
 			var channelPartner=enq.channelPartner;
-			var visitType = enq.visitType;
-			$("#visitType").val(visitType);
-			$("formVisitType").val(visitType);
 			
 			var brokerContact=enq.brokerContact;
 			if(!isEmpty(channelPartner)){
@@ -334,6 +331,8 @@ function loadEnquiryReport(enq){
 		$('#budget').val(enq.enquiryReport.budget);
 		$("#carpetAreaRequirement").val(enq.enquiryReport.carpetAreaRequirement);
 		$('#otherChannelPartnerName').val(enq.enquiryReport.cpComments);
+		var visitType = enq.enquiryReport.visitType;
+		$("#visitType").val(visitType);
 	}
 	 $(this).scrollTop(0);
 	 enqSlider();

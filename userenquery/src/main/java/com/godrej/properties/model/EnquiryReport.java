@@ -82,6 +82,8 @@ public class EnquiryReport extends CommonModel{
     @Column(name="barrier1") private String barrier1;
     @Column(name="trigger2") private String trigger2;
     @Column(name="barrier2") private String barrier2;
+    
+	private String visitType;
     /*=========End========*/
     /* Referred by added on Enquiry page, on select of walk-in source as referral -  
      * Change By Satheesh Kyatham- 25-12-2019
@@ -375,8 +377,13 @@ public class EnquiryReport extends CommonModel{
 	public void setReferredby(String referredby) {
 		this.referredby = referredby;
 	}
-	
+	@Column(name = "visit_type")
+	public String getVisitType() {
+		return visitType;
+	}
 
-
+	public void setVisitType(String visitType) {
+		this.visitType = visitType;
+	}
 
 }
