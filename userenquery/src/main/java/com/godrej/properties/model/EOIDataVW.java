@@ -39,6 +39,8 @@ public class EOIDataVW implements Serializable{
 	private String contactSfid;
 	@Column(name = "enquirysfid")
 	private String enquirySfid;
+	@Column(name="costsheet_path")	
+	private String costsheetPath;
 	public String getUserdocid() {
 		return userdocid;
 	}
@@ -124,6 +126,10 @@ public class EOIDataVW implements Serializable{
 	public void setEnquirySfid(String enquirySfid) {
 		this.enquirySfid = enquirySfid;
 	}
-
-
+	public String getCostsheetPath() {
+		return costsheetPath;
+	}
+	public void setCostsheetPath(String costsheetPath) {
+		this.costsheetPath = costsheetPath;
+	}
 }
