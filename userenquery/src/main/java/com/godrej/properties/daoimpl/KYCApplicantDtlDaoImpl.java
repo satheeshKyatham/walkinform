@@ -111,9 +111,12 @@ public class KYCApplicantDtlDaoImpl extends AbstractDao<Integer, KYCApplicantDtl
 			whereCondintion=" where userid ="+userid+" and project_sfid='"+projectid+"'";
 		else
 			whereCondintion=" where project_sfid='"+projectid+"'";
-		
+		/* Changed by Vivek Birdi
+		   Picking up data from view instead of table
+		  */
 		@SuppressWarnings("unchecked")
-		List<EOIData> list = session.createQuery(" from EOIData "+whereCondintion+"").list();
+/*		List<EOIData> list = session.createQuery(" from EOIData "+whereCondintion+"").list();*/
+		List<EOIData> list = session.createQuery(" from EOIDataVW "+whereCondintion+"").list();
 		if (list.size() > 0)
 			return list;
 		return list;

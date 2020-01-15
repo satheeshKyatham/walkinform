@@ -265,8 +265,10 @@ if(ses!=null){
 									<th>Customer Name</th>
 									<th>Mobile No</th>
 									<th>KYC Status</th>
+									<th>Offer Number</th>
 									<th>View/Fill KYC</th>
-									
+									<th>View Cost Sheet</th>
+									<th>View Application Form</th>
 									<!-- <th style="word-break: break-word; width:200px !important">Email</th> -->
 								</tr>
 							</thead>

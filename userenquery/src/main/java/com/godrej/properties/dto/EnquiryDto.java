@@ -2,8 +2,6 @@ package com.godrej.properties.dto;
 
 import java.util.Date;
 
-import javax.persistence.Column;
-
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.godrej.properties.common.dto.CommonDto;
