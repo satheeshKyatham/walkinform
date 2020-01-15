@@ -2,8 +2,6 @@ package com.godrej.properties.dto;
 
 import java.util.Date;
 
-import javax.persistence.Column;
-
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -66,6 +64,7 @@ public class EnquiryReportDto extends CommonDto{
 	
     
     private String followType;
+   	private String visitType;
     
     @DateTimeFormat(pattern=KeyConstants.DEFAULT_DATE_FORMAT)
     private Date followDate;
@@ -358,8 +357,14 @@ public class EnquiryReportDto extends CommonDto{
 	}
 	public void setReferredby(String referredby) {
 		this.referredby = referredby;
+	}	
+	public String getVisitType() {
+		return visitType;
 	}
-	
-	
+
+	public void setVisitType(String visitType) {
+		this.visitType = visitType;
+	}
+
 	
 }

@@ -73,7 +73,7 @@ public class Enquiry extends CommonModel{
 	@Column(name="site_visit_requested__c") private Double site_visit_requested__c;
 	@Column(name="Lost_reason_c__c") private String lost_reason_c__c;
 	
-	private String visitType;
+
 	public String getClosing_manager_name__c() {
 		return closing_manager_name__c;
 	}
@@ -588,16 +588,6 @@ public class Enquiry extends CommonModel{
 	public void setSourcing_Managers__c(String sourcing_Managers__c) {
 		this.sourcing_Managers__c = sourcing_Managers__c;
 	}
-
-	@Column(name = "visit_type")
-	public String getVisitType() {
-		return visitType;
-	}
-
-	public void setVisitType(String visitType) {
-		this.visitType = visitType;
-	}
-
 	
 	
 }

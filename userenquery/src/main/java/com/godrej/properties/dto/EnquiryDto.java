@@ -94,7 +94,6 @@ public class EnquiryDto extends CommonDto {
    	private String sourcing_Managers__c;
    	private String referredbyDto;
    	private String closingManagerDto;
-   	private String visitType;
 	public String getClosing_manager_name__c() {
 		return closing_manager_name__c;
 	}
@@ -559,14 +558,6 @@ public class EnquiryDto extends CommonDto {
 
 	public void setClosingManagerDto(String closingManagerDto) {
 		this.closingManagerDto = closingManagerDto;
-	}
-
-	public String getVisitType() {
-		return visitType;
-	}
-
-	public void setVisitType(String visitType) {
-		this.visitType = visitType;
 	}
 	
 }

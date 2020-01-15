@@ -81,6 +81,7 @@ public class EnquiryReportConverter implements CommonConverter<EnquiryReport, En
 		dto.setProjectId(entity.getProjectId());
 		dto.setTower(entity.getTower());
 		dto.setTokenno(entity.getTokenno());
+		dto.setVisitType(entity.getVisitType());
 		if(entity.getTrigger1()!=null)
 			dto.setTrigger1(entity.getTrigger1().trim());
 		if(entity.getBarrier1()!=null)
@@ -148,6 +149,7 @@ public class EnquiryReportConverter implements CommonConverter<EnquiryReport, En
 		enquiry.setFloorBand(dto.getFloorBand());
 		enquiry.setProjectId(dto.getProjectId());
 		enquiry.setTokenno(dto.getTokenno());
+		enquiry.setVisitType(dto.getVisitType());
 		if(dto.getTrigger1()!=null)
 			enquiry.setTrigger1(dto.getTrigger1().trim());
 		if(dto.getBarrier1()!=null)
