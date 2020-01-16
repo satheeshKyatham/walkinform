@@ -37,7 +37,7 @@ function getEOIPreferencPrint () {
 	
 	}).fail(function(xhr, status, error) {
     	swal({
-    		title: "There was problem in generating PDF at this time. Please try again from EOI report.",
+    		title: "111 There was problem in generating PDF at this time. Please try again from EOI report.",
 			text: "",
 			timer: 8000,
 			type: "warning",
@@ -74,7 +74,7 @@ function getEOIPaymentPrint () {
 		
 	}).fail(function(xhr, status, error) {
     	swal({
-    		title: "There was problem in generating PDF at this time. Please try again from EOI report.",
+    		title: "222 There was problem in generating PDF at this time. Please try again from EOI report.",
 			text: "",
 			timer: 8000,
 			type: "warning",
@@ -99,7 +99,7 @@ function tncEOIData () {
     	
     }).fail(function(xhr, status, error) {
     	swal({
-    		title: "There was problem in generating PDF at this time. Please try again from EOI report.",
+    		title: "333 There was problem in generating PDF at this time. Please try again from EOI report.",
 			text: "",
 			timer: 8000,
 			type: "warning",
@@ -145,7 +145,7 @@ function enqAndProjectDtl () {
           
 	}).fail(function(xhr, status, error) {
     	swal({
-    		title: "There was problem in generating PDF at this time. Please try again from EOI report.",
+    		title: "444 There was problem in generating PDF at this time. Please try again from EOI report.",
 			text: "",
 			timer: 8000,
 			type: "warning",
@@ -212,7 +212,7 @@ function eoiApplicantDetails (contactSFID, enqName, regionName, projectName, pro
 		
 	}).fail(function(xhr, status, error) {
     	swal({
-    		title: "There was problem in generating PDF at this time. Please try again from EOI report.",
+    		title: "555 There was problem in generating PDF at this time. Please try again from EOI report.",
 			text: "",
 			timer: 8000,
 			type: "warning",
@@ -267,7 +267,7 @@ function printEOIForm(regionName, projectName, enqName, projectNameWithoutCity) 
 		
 	}).fail(function(xhr, status, error) {
     	swal({
-    		title: "There was problem in generating PDF at this time. Please try again from EOI report.",
+    		title: "666 There was problem in generating PDF at this time. Please try again from EOI report.",
 			text: "",
 			timer: 8000,
 			type: "warning",
