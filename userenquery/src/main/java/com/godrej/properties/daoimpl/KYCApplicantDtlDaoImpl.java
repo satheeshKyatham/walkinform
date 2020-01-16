@@ -12,8 +12,8 @@ import org.springframework.stereotype.Repository;
 import com.godrej.properties.dao.AbstractDao;
 import com.godrej.properties.dao.KYCApplicantDtlDao;
 import com.godrej.properties.model.AppOfferContact;
-import com.godrej.properties.model.ApplicantDtl;
 import com.godrej.properties.model.EOIData;
+import com.godrej.properties.model.EOIDataVW;
 import com.godrej.properties.model.KYCApplicantDtl;
 
 @Repository("kYCapplicantDtlDao")
@@ -122,6 +122,24 @@ public class KYCApplicantDtlDaoImpl extends AbstractDao<Integer, KYCApplicantDtl
 		return list;
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<EOIDataVW> getKYCDataVW(String userid, String projectid) {
+		Session session = sessionFactory.getCurrentSession();
+		
+		String whereCondintion=" ";
+		if(userid!=null && userid.length()>0)
+			whereCondintion=" where userid ="+userid+"";
+		if(userid!=null && userid.length()>0 && projectid!=null)
+			whereCondintion=" where userid ="+userid+" and project_sfid='"+projectid+"'";
+		else
+			whereCondintion=" where project_sfid='"+projectid+"'";
+		/* Changed by Vivek Birdi
+		   Picking up data from view instead of table
+		  */
+		return session.createQuery(" from EOIDataVW "+whereCondintion+"").list();
+	}
+	
 	@Override
 	public EOIData getKYCStatus(String enquiryName, String projectid) {
 		Session session = sessionFactory.getCurrentSession();

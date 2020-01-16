@@ -23,7 +23,7 @@
      
 	<link rel="stylesheet" href="<c:url value='/resources/css/inner.css' />">
 	<link rel="stylesheet" href="<c:url value='/resources/css/style.css' />">
-	
+	<link rel="stylesheet" href="<c:url value='/resources/css/font-awesome.css' />">
 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
 	
 <%-- <script src="<c:url value='/resources/js/jquery-1.12.4.min.js'/>"></script>
@@ -185,7 +185,8 @@ if(ses!=null){
 					</div>
 				</div>
 				<div class="tab-pane" id="tab2">
-					<%@ include file="/WEB-INF/views/pages/createdoffers.jsp" %>
+					<%-- <%@ include file="/WEB-INF/views/pages/createdoffers.jsp" %> --%>
+					<%@ include file="/WEB-INF/views/pages/createdOfferTab.jsp" %>
 				</div>
 				
 				<div class="tab-pane" id="applications">

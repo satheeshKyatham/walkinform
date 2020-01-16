@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.godrej.properties.dao.KYCApplicantDtlDao;
 import com.godrej.properties.model.EOIData;
+import com.godrej.properties.model.EOIDataVW;
 import com.godrej.properties.model.KYCApplicantDtl;
 import com.godrej.properties.service.KYCApplicantDtlService;
 
@@ -25,6 +26,10 @@ public class KYCApplicantDtlServiceImpl implements KYCApplicantDtlService{
 	@Override
 	public List<EOIData> getKYCData(String userid, String projectid) {
 		return kYCapplicantDtlDao.getKYCData(userid, projectid);
+	}
+	@Override
+	public List<EOIDataVW> getKYCDataVW(String userid, String projectid) {
+		return kYCapplicantDtlDao.getKYCDataVW(userid, projectid);
 	}
 	@Override
 	public EOIData getKYCStatus(String enquiryName, String projectid) {
