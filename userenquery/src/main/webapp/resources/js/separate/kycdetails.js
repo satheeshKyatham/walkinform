@@ -86,7 +86,8 @@ function getKYCApprovalView()
 	 var url_string = window.location.href; //window.location.href
 	   var url = new URL(url_string);
 	   var projectid = url.searchParams.get("projectid");
+	   
 	var frameElement = document.getElementById("kyc_approval_iframe");
 //	frameElement.src = "http://kyc.gplapps.com:8081/kycform/kycApproval?projectid="+projectid+"&userid=0";
-	frameElement.src = "/kycform/kycApproval?projectid="+projectid+"&userid=0";
+	frameElement.src = "/kycform/kycApproval?projectid="+projectid+"&userid=0&adminid="+$('#userid').val();
 	}
