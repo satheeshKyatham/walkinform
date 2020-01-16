@@ -18,6 +18,7 @@ function getCMKYCDetails()
 	 $("#mainPageLoad").show();
 	var urlPP = "getKYCData?userid=&projectid="+projectid;
 	var i = 0;
+	
 	$.getJSON(urlPP, function (data) {
 		$.each(data, function (index, value) {
 			/*if(value.phone_number=="4447775522")
@@ -33,8 +34,35 @@ function getCMKYCDetails()
 				kycStatus="KYC submitted";
 			else
 				kycStatus="KYC link sent to customer";
-			
-			var val = $("<tr><td>"+value.enquiryid+"</td><td>"+value.application_name+"</td><td>"+value.phone_number+"</td><td>"+kycStatus+"</td><td><a href="+value.kyclink+"&isrole=Y target='_blank'>Link</a></td></tr>");
+			var offerSfid = value.offerSfid==null?'':value.offerSfid;
+			var offerName = value.offerName==null?'':value.offerName;
+			var enquiryid = value.enquiryid==null?'':value.enquiryid;
+			var costsheetPath = value.costsheetPath==null?'':value.costsheetPath;
+			var appFormHtml="<td>";
+			if(value.kycapproval_status==='Y'){
+				appFormHtml = appFormHtml+ 
+				 "<button isrole=Y class='btn btnDefaultBlue btn-default' " +
+				 "onclick='getofferApplicantDetails(this,\""+
+				  offerSfid+"\",\""+value.enquirySfid+"\",\""+value.contactSfid
+				  +"\",\""+offerName+"\",\""+enquiryid+"\",\"\",\"\",\"\")'>" +
+				  "<i class='fa fa-print printficon'></button>";	
+				}
+			appFormHtml = appFormHtml+"</td>";
+			var val = $("<tr><td>"+value.enquiryid
+					+"</td><td>"+value.application_name
+					+"</td><td>"+value.phone_number
+					+"</td><td>"+kycStatus
+					+"</td>"
+					+"<td>"+offerName
+					+"</td><td><a href="
+					+value.kyclink
+					+"&isrole=Y target='_blank'>Link</a></td>"
+					+"</td><td><a class='btn btnDefaultBlue btn-sm btn-default' target=\"_blank\" " +
+					"href=\"/walkinform/Costsheet?" +
+					"name="+costsheetPath
+					+"&amp;from=ofrList\"><i class=\"fa fa-file\"></i></a></td>"
+					+appFormHtml
+					+"</tr>");
 			$("#KYC_Admin_Details tbody").append(val);
 			i = i+1
 		});
