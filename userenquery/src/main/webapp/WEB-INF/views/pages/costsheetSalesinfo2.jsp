@@ -271,6 +271,7 @@
 							<div class="counterCol">
 								<div class="counterTxt1">Property Release in</div>
 								<span class="holdCountdown">00:00</span> 
+								<span id="holdCountZero" style="font-size: 28px !important;">00:00</span> 
 								<span>min.</span>
 								<div class="clearfix"></div>
 							</div>

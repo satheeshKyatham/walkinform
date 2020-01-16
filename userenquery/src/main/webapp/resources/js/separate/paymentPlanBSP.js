@@ -48,6 +48,7 @@ function paymentPlanDropdown (){
 		});					
 	}).done(function() {
 		towerList ();
+		$('#bspAgainestBtn').show();
 	});
 }
 
@@ -61,7 +62,7 @@ function towerList (e, source) {
 	
 	
 	$.getJSON(urlTower, function (data) {
-		$('#towerMst').append('<option name="" value="">Select</option>');
+		$('#towerMst').append('<option name="0" value="0">Select</option>');
 		$.each(data, function (index, value) {
 			$('#towerMst').append("<option name='"+value.sfid+"' value='"+value.tower_code__c+"'>"+value.tower_name__c+"</option>");
 		});					
@@ -72,14 +73,13 @@ function towerList (e, source) {
 
 /*Typology*/
 function inventoryUnitTypeMst () {
-	debugger;
 	$('#typoMst').empty();
 	var towerCode = $('#towerMst').val();
 	var projectNameVal = $('#projectDataList').val();
 	
 	var urlProject = pageContext+"getunittype?project_code="+projectNameVal+"&tower_code="+towerCode+"&floor_code="
 	
-	//$('#typoMst').append("<option value=''>All</option> ");
+	$('#typoMst').append("<option value='0'>Select</option> ");
 	
 	$.getJSON(urlProject, function (data) {
 		$.each(data, function (index, value) {
@@ -93,7 +93,19 @@ function inventoryUnitTypeMst () {
 
 
 function addBSPCharge () {
-	$.post(pageContext+"insertBSPForPP",{"bsp_amount_per": $('#bsp_amount_per').val(), "bsp_amount":$('#bsp_amount').val(),  "project_id":$('#projectDataList').val(), "project_name":$('#projectDataList :selected').text(), "pymt_plan_id":$('#ppDropdown').val()
+	
+	var bspAmountPerVal = 0;
+	var bspAmountVal = $('#bsp_amount').val();
+	
+	if ($('#bsp_amount_per').val().trim() != '') {
+		bspAmountPerVal = $('#bsp_amount_per').val();
+	} 
+	
+	if ($('#bsp_amount').val().trim() != '') {
+		bspAmountVal = $('#bsp_amount').val();
+	}  
+	
+	$.post(pageContext+"insertBSPForPP",{"bsp_amount_per": bspAmountPerVal, "bsp_amount":bspAmountVal,  "project_id":$('#projectDataList').val(), "project_name":$('#projectDataList :selected').text(), "pymt_plan_id":$('#ppDropdown').val()
 		, "pymt_plan_name":$('#ppDropdown :selected').text(), "region_id":$('#regionList').val(), "region_name":$('#regionList :selected').text()
 		, "tower_id":$('#towerMst').find('option:selected').attr('name'), "typology_name":$('#typoMst').val()},function(data){				 
 		

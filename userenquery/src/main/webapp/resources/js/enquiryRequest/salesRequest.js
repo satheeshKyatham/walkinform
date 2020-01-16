@@ -276,9 +276,11 @@ function getEnquiryForSales(){
 	populateSearchEnquiry(resp,true);
 	
 	if(token.includes("G")||token.includes("E")){
-		$("#salesTabId").remove();
+//		$("#salesTabId").remove();
+		$("#salesTabId").show();
 		
 		$("#paymentDetailsTab").show();
+		$("#eoisaveclose").hide();
 		
 	}
 	

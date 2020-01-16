@@ -700,6 +700,15 @@ public class WebServiceController<MultipartFormDataInput> {
 	{	
 		BSPAgainstPymtPlan oc = new BSPAgainstPymtPlan();
 		
+		if (tower_id.contains("0")) {
+			tower_id = null;
+		} 
+		
+		if (typology_name.contains("0")) {
+			typology_name = null;
+		}
+		
+		
 		oc.setBsp_amount(bsp_amount);
 		oc.setIsactive("A");
 		oc.setProject_id(project_id);
