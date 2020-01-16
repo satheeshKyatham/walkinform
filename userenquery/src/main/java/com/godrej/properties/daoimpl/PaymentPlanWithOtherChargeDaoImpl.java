@@ -28,6 +28,16 @@ public class PaymentPlanWithOtherChargeDaoImpl extends AbstractDao<Integer, Paym
 		Session session = this.sessionFactory.getCurrentSession();	
 		
 		List<PaymentPlanWithOtherCharge> authors =null;
+		
+		String conditionString = "";
+		
+		if (projectid.equals("a1l2s00000000X5AAI")) {
+			conditionString = " and b1.propstrength__part_of_cop__c = 't' ";
+		} else {
+			conditionString = " ";
+		}
+		
+		
 		/*if(projectid.equals("a1l6F0000080irTQAQ"))
 		{
 			Query q = session.createNativeQuery("SELECT row_number() OVER () AS row_no, a.*, b.sum,COALESCE(c.propstrength__fixed_charge__c, cast(0 as double precision)) AS propstrength__fixed_charge__c,c.propstrength__type__c AS other_charge_type,CASE WHEN c.propstrength__rate_per_unit_area__c IS NULL THEN cast(0 as double precision) ELSE c.propstrength__rate_per_unit_area__c END AS propstrength__rate_per_unit_area__c,c.propstrength__property__c FROM salesforce.vw_payment_plan_and_other_charges_test a "
@@ -107,6 +117,8 @@ public class PaymentPlanWithOtherChargeDaoImpl extends AbstractDao<Integer, Paym
 				+ " b1.propstrength__st_on_completion_certificate__c, "
 				+ " b1.propstrength__sta_applicable__c, "
 				
+				//Add new col for remove other charges
+				+ " b1.propstrength__part_of_cop__c, "
 				
 				
 				+ " a.id, " 
@@ -148,7 +160,7 @@ public class PaymentPlanWithOtherChargeDaoImpl extends AbstractDao<Integer, Paym
 				
 				+ " Left Join salesforce.propstrength__property__c d on CAST(c.propstrength__property__c as text)  = CAST(d.sfid as text) "
 				+ " Left Join salesforce.propstrength__tower__c e on CAST(d.propstrength__tower__c as text)  = CAST(e.sfid as text) " 
-				+ " where   c.propstrength__property__c = '"+unitSfid+"'  and a.propstrength__payment_plan__c = '"+paymentPlanSfid+"' order by a.name " , PaymentPlanWithOtherCharge.class);
+				+ " where   c.propstrength__property__c = '"+unitSfid+"'  and a.propstrength__payment_plan__c = '"+paymentPlanSfid+"' "+conditionString+" order by a.name " , PaymentPlanWithOtherCharge.class);
 		authors = (List<PaymentPlanWithOtherCharge>)q.getResultList();
 			
 			

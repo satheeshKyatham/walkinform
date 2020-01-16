@@ -276,7 +276,7 @@ function getEnqAndOfferDtl (enqSFID, offerSFID, rowId) {
 					walkinSource = obj[0].walk_in_source__c;
 				}
 				
-				$('#modeOfBookingOffer tbody').append('<tr> <td> Direct or Channel Partner : <span>Direct</span> </td> <td>Walk In Source : <span>'+walkinSource+'</span></td></tr>');;
+				$('#modeOfBookingOffer tbody').append('<tr> <td> Direct or Channel Partner : <span>Direct</span> </td> <td>Walk In Source : <span>'+walkinSource+'</span></td></tr>');
 				
 			} else {
 				
@@ -361,11 +361,13 @@ function getEnqAndOfferDtl (enqSFID, offerSFID, rowId) {
 			$('#modeOfBookingOffer').remove();
 		}
 		
-	}).done(function(obj){
-		
+	}).done(function(obj){		
 		convertNumberToWords ();
-		
-		getOfferReceivedPaymentDtl(offerSFID, rowId);
+		if(offerSFID ==null || offerSFID==''){
+			getOfferReceivedPaymentDtlWithEnquiry (enqSFID, rowId)
+		}else{
+			getOfferReceivedPaymentDtl(offerSFID, rowId);
+		}
 	});	
 }
 
@@ -375,7 +377,6 @@ function getEnqAndOfferDtl (enqSFID, offerSFID, rowId) {
 function getOfferReceivedPaymentDtl (offerSFID, rowId) {
 	
 	$('#paymentDtltableOffer tbody').find("tr:gt(0)").remove();
-	
 	
 	//offerSFID = "a1X2s0000004GU1EAM";
 	
@@ -407,6 +408,39 @@ function getOfferReceivedPaymentDtl (offerSFID, rowId) {
 	});	
 }
 
+function getOfferReceivedPaymentDtlWithEnquiry (enquirySFID, rowId) {
+	
+	$('#paymentDtltableOffer tbody').find("tr:gt(0)").remove();
+	
+	//offerSFID = "a1X2s0000004GU1EAM";
+	
+	$.post("getOfferReceivedPaymentDtl",{"offerSFID":enquirySFID},function(data){				 
+		
+		var html = '';
+		var obj =JSON.parse(data);
+		
+		if(obj!=null){
+			for(i = 0; i< obj.length; i++){ 
+				
+				html += "<tr> " +
+							"<td>"+obj[i].propstrength__payment_type__c+"</td> " +
+							"<td>"+obj[i].propstrength__bank_name_auto__c+"</td>" +
+							"<td>"+obj[i].propstrength__amount__c+"</td>" +
+							"<td>"+obj[i].propstrength__crn_no__c+"</td>" +
+							"<td>"+obj[i].propstrength__cheque_demand_draft_number__c+"</td>" +
+							/*"<td>"+obj[i].propstrength__ifsc_rtgs_code__c+"</td>" +*/
+						"</tr>";
+			}
+			
+			html = html.replace(/undefined/g, "");
+			
+			$('#paymentDtltableOffer tbody').append(html);
+			
+		}
+	}).done(function(data){
+		printApplicationOfferForm(enquirySFID, rowId);
+	});	
+}
 
 
 

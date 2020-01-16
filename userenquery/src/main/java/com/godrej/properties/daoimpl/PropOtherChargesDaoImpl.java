@@ -66,7 +66,15 @@ public class PropOtherChargesDaoImpl extends AbstractDao<Integer, PropOtherCharg
 					+ " FROM salesforce.vw_prop_other_charges a where a.propstrength__Property__c = '"+propSfid+"' ", PropOtherCharges.class);
 			authors = q.getResultList();
 		*/
-			
+		String conditionString = "";
+		
+		if (projectId.equals("a1l2s00000000X5AAI")) {
+			conditionString = " AND  propstrength__other_charges__c.propstrength__part_of_cop__c ='t' ";
+		} else {
+			conditionString = " ";
+		}
+		
+		
 			
 			Query q = session.createNativeQuery("SELECT row_number() OVER (ORDER BY propstrength__property_charges__c.propstrength__property__c) AS row_number, propstrength__property_charges__c.propstrength__property__c, "
 					+ " CASE WHEN propstrength__property_charges__c.propstrength__rate_per_unit_area__c IS NULL THEN cast(0 as double precision)  ELSE propstrength__property_charges__c.propstrength__rate_per_unit_area__c END AS propstrength__rate_per_unit_area__c, "
@@ -104,7 +112,7 @@ public class PropOtherChargesDaoImpl extends AbstractDao<Integer, PropOtherCharg
 					+ " LEFT JOIN salesforce.propstrength__tax_record__c ON CAST(propstrength__service_tax_mapping__c.propstrength__tax_record__c as text) = CAST(propstrength__tax_record__c.sfid as text) "
 					+ " LEFT JOIN salesforce.propstrength__property__c ON CAST(propstrength__property_charges__c.propstrength__property__c as text) = CAST(propstrength__property__c.sfid as text) "
 					+ " LEFT JOIN salesforce.propstrength__tower__c ON CAST(propstrength__property__c.propstrength__tower__c as text) = CAST(propstrength__tower__c.sfid as text) "
-					+ " where propstrength__Property__c = '"+propSfid+"' " , PropOtherCharges.class);
+					+ " where propstrength__Property__c = '"+propSfid+"'  "+conditionString+" " , PropOtherCharges.class);
 			authors = q.getResultList();
 			
 			

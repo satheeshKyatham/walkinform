@@ -80,7 +80,37 @@ function getKYCCMDetails()
 				kycStatus="KYC submitted";
 			else
 				kycStatus="KYC link sent to customer";
-			var val = $("<tr><td>"+value.enquiryid+"</td><td>"+value.application_name+"</td><td>"+value.phone_number+"</td><td>"+kycStatus+"</td><td><a href="+value.kyclink+"&isrole=Y target='_blank'>Link</a></td></tr>");
+			var offerSfid = value.offerSfid==null?'':value.offerSfid;
+			var offerName = value.offerName==null?'':value.offerName;
+			var enquiryid = value.enquiryid==null?'':value.enquiryid;
+			var costsheetPath = value.costsheetPath==null?'':value.costsheetPath;
+			var val = $("<tr data-offerSfid='" +value.offerSfid+ " '>" +
+					"<td>"+value.enquiryid+"</td><td>"
+					+value.application_name
+					+"</td><td>"
+					+value.phone_number
+					+"</td><td>"
+					+kycStatus
+					+"</td>"
+					+"<td>"+offerName
+					+"</td><td><a href="
+					+value.kyclink
+					+"&isrole=Y target='_blank'>Link</a></td>"
+					+"</td><td><a target=\"_blank\" " +
+					"href=\"/walkinform/Costsheet?" +
+					"name="+costsheetPath
+					+"&amp;from=ofrList\"><i class=\"fa fa-file\"></i></a></td>"
+					+"<td><button isrole=Y class='btn btnDefaultBlue btn-default' " +
+						"onclick='getofferApplicantDetails(this,\""+
+						offerSfid+"\",\""+value.enquirySfid+"\",\""+value.contactSfid
+						+"\",\""+offerName+"\",\""+enquiryid+"\",\"\",\"\",\"\")'>" +
+						"<i class='fa fa-print printficon'></button></td>"
+						+"</tr>"
+					);
+			/*
+			 * <button class="btn btnDefaultBlue btn-default" 
+			 * onclick="getofferApplicantDetails(this, &quot;a1X2s0000004GTcEAM&quot;, &quot;a1u2s0000000PcsAAE&quot;,  &quot;0032s000001axeGAAQ&quot;,  &quot;OFFER-2019-11-0020597&quot;,  &quot;ENQ - 04918431&quot;, &quot;a1s6F00000CHzLDQA1&quot;, &quot;0&quot;, &quot;offer&quot;)">
+			 * <i class="fa fa-print printficon"></i></button>*/
 			$("#KYC_CM_Details tbody").append(val);
 			
 			

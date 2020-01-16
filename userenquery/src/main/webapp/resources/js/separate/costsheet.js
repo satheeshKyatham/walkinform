@@ -89,7 +89,7 @@ $("#getCSData").click(function (){
               		   swal({
 
           	   				//title: "There is some technical problem, please try again.",
-              			   	title: "There was problem in fetching cost sheet data at this time. Please try again by clicking get details.", 
+              			   	title: "111 There was problem in fetching cost sheet data at this time. Please try again by clicking get details.", 
 
           	   				text: "",
           	   				type: "warning",
@@ -105,7 +105,7 @@ $("#getCSData").click(function (){
 	              	swal({
 
 	          			//title: "There is some technical problem, please try again.",
-	              		title: "There was problem in fetching cost sheet data at this time. Please try again by clicking get details.",
+	              		title: "222 There was problem in fetching cost sheet data at this time. Please try again by clicking get details.",
 
 	          			text: "",
 	          			timer: 8000,
@@ -447,8 +447,12 @@ function loadData () {
              $('.craParkTypeLabel').html('');
              $('.noOfCarParkLabel').html('');
        }else {
-             $('.craParkTypeLabel').text('Car Park Type');
-             $('.noOfCarParkLabel').text('No. of Car Park');
+    	   if ($('#projectId').val() == 'a1l2s00000000X5AAI') {     
+	        	$('.craParkTypeLabel').text('Covered Car Park Space');
+	        }  else {
+	        	$('.craParkTypeLabel').text('Car Park Type');
+	        }
+	        $('.noOfCarParkLabel').text('No. of Car Park');
        }
        
        
@@ -1290,6 +1294,7 @@ function updateBSP (timeid) {
 	   				console.log("Offer SFID after API Offer ID:-"+data.offer_sfid)
 	   				//var offerJson = JSON.parse(data);
 	   				csPymtData (offerJson);
+	   				
 	   			}
 	            
 	            var url=$("#contextPath").val();
@@ -1928,7 +1933,7 @@ function newOtherCharges2 () {
                            
                     } else if (value.propstrength__part_of_cop__c == false) {
                            //otherChrgRowtotal = parseInt(amount*(gstHalf+100)/100);
-                           $('#tentativeCharges tbody').append('<tr> <th> '+value.propstrength__other_charge_code__c+' </th> <td class="txtRight" id="tentativeChargesAmount'+i+'" style="text-align:right;"> '+amount+' </td>  </tr>');
+                    		$('#tentativeCharges tbody').append('<tr> <th> '+value.propstrength__other_charge_code__c+' </th> <td class="txtRight" id="tentativeChargesAmount'+i+'" style="text-align:right;"> '+amount+' </td>  </tr>');
                            $('#printTentativeCharges tbody').append('<tr> <th> '+value.propstrength__other_charge_code__c+' </th> <td class="txtRight" id="tentativeChargesAmount'+i+'" style="text-align:right;"> '+amount+' </td>  </tr>');
                            tentativeChargesV2 = parseFloat(parseFloat($("#tentativeChargesAmount"+i).text()) + parseFloat(tentativeChargesV2)).toFixed(2);
                     }
@@ -1958,6 +1963,20 @@ function newOtherCharges2 () {
              var discountVal = 0;
              var carpetAreaAmount = 0;
              var exclusiveAreaAmount = 0;
+             
+             if ($('#projectId').val() == 'a1l2s00000000X5AAI') {
+            	 $('#tentativeCharges tbody').append("<tr> " +
+            	 			"<th> Electricity Charges </th> <td class='txtRight' style='text-align:right;'> 0 </td>  </tr>" +
+            	 			"<tr> <th> Legal Charges </th> <td class='txtRight' style='text-align:right;'> 0 </td>  </tr>" +
+            	 			"<tr> <th> Club Development Charges </th> <td class='txtRight' style='text-align:right;'> 0 </td>  </tr>");
+            	 		
+            	 
+            	 $('#printTentativeCharges tbody').append("<tr> " +
+         	 			"<th> Electricity Charges </th> <td class='txtRight' style='text-align:right;'> 0 </td>  </tr>" +
+         	 			"<tr> <th> Legal Charges </th> <td class='txtRight' style='text-align:right;'> 0 </td>  </tr>" +
+         	 			"<tr> <th> Club Development Charges </th> <td class='txtRight' style='text-align:right;'> 0 </td>  </tr>");
+             }
+             
              
              //alert ("otherChrgCgstTotal ::: " + otherChrgCgstTotal);
              
@@ -2082,6 +2101,9 @@ function newOtherCharges2 () {
              //-----------------
              
              $('#printSalesConsideration tbody').append('<tr> <th class="subHead"> Consideration/Price (A) </th> <th class="txtRight" id="salesConsiderationTotal" style="text-align:right;">'+ parseFloat(parseFloat(salesConsiderationV2)+parseFloat($('#scOtherChrgAmount0').text())).toFixed(2) +'</th>    </tr>');
+             
+             
+             
              
              $('#tentativeCharges tbody').append('<tr> <th class="subHead"> Total Estimated and Tentative other charges (B) </th> <th class="txtRight" id="tentativeChargesTotal" style="text-align:right;">'+tentativeChargesV2+'</th>    </tr>');
              $('#printTentativeCharges tbody').append('<tr> <th class="subHead"> Total Estimated and Tentative other charges (B) </th> <th class="txtRight" id="tentativeChargesTotal" style="text-align:right;">'+tentativeChargesV2+'</th>    </tr>');
@@ -2297,7 +2319,7 @@ var HoldReverseTimer = function(min, sec){
                if (countStatus == 'countEnd'){
                       $('.holdCountdown').html('0:00');
                       $('#inventoryBreadcrumb').empty();
-                      seconds = 0;
+                     // seconds = 0;
                }else {
                       $('.holdCountdown').html(minutes + ':' + seconds);
                }

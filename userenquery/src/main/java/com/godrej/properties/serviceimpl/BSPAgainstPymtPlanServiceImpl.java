@@ -63,7 +63,8 @@ public class BSPAgainstPymtPlanServiceImpl implements BSPAgainstPymtPlanService{
 			{
 				if((payBSPList.get(i).getBsp_amount()!=null && payBSPList.get(i).getBsp_amount().length()>0) && (payBSPList.get(i).getProject_id()!=null && payBSPList.get(i).getProject_id().length()>0) && (payBSPList.get(i).getTowerid()!=null && payBSPList.get(i).getTowerid().length()>0) && (payBSPList.get(i).getPymt_plan_id()!=null && payBSPList.get(i).getPymt_plan_id().length()>0) && (payBSPList.get(i).getTypology()!=null && payBSPList.get(i).getTypology().length()>0))
 				{
-					if(payBSPList.get(i).getTowerid().contains(towerCode) && payBSPList.get(i).getTypology().contains(typology))
+					BSPAgainstPymtPlan payBSP =payBSPList.get(i);
+					if(payBSP.getTowerid().contains(towerCode) && payBSP.getTypology().contains(typology))
 					{
 						valueCheck =true;
 						return bspAmountReturn=Integer.parseInt(payBSPList.get(i).getBsp_amount());
@@ -76,7 +77,8 @@ public class BSPAgainstPymtPlanServiceImpl implements BSPAgainstPymtPlanService{
 				{
 					if((payBSPList.get(i).getBsp_amount()!=null && payBSPList.get(i).getBsp_amount().length()>0) && (payBSPList.get(i).getProject_id()!=null && payBSPList.get(i).getProject_id().length()>0) && (payBSPList.get(i).getTowerid()!=null && payBSPList.get(i).getTowerid().length()>0) && (payBSPList.get(i).getPymt_plan_id()!=null && payBSPList.get(i).getPymt_plan_id().length()>0))
 					{
-						if((payBSPList.get(i).getTowerid().contains(towerCode)) && (payBSPList.get(i).getTypology().trim().length()<=0))
+						BSPAgainstPymtPlan payBSP =payBSPList.get(i);
+						if((payBSP.getTowerid().contains(towerCode)) && (payBSP.getTypology().trim().length()<=0))
 						{
 							valueCheck =true;
 							return bspAmountReturn=Integer.parseInt(payBSPList.get(i).getBsp_amount());
@@ -90,8 +92,9 @@ public class BSPAgainstPymtPlanServiceImpl implements BSPAgainstPymtPlanService{
 				{
 					if((payBSPList.get(i).getBsp_amount()!=null && payBSPList.get(i).getBsp_amount().length()>0) && (payBSPList.get(i).getProject_id()!=null && payBSPList.get(i).getProject_id().length()>0) && (payBSPList.get(i).getPymt_plan_id()!=null && payBSPList.get(i).getPymt_plan_id().length()>0))
 					{
-						
-						if( (payBSPList.get(i).getPymt_plan_id().contains(paymentPlanID)) && (payBSPList.get(i).getTowerid()==null) && (payBSPList.get(i).getTypology()==null))
+					
+						BSPAgainstPymtPlan payBSP =payBSPList.get(i);
+						if( (payBSP.getPymt_plan_id().contains(paymentPlanID)) && (payBSP.getTowerid()==null) && (payBSP.getTypology()==null))
 						{
 							valueCheck =true;
 							return bspAmountReturn=Integer.parseInt(payBSPList.get(i).getBsp_amount());

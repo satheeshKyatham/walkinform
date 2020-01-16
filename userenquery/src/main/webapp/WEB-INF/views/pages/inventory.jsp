@@ -167,7 +167,7 @@
 					
 					<label class="containerCheckbox">Hold for Discussion
 					  <input>
-					  <span class="checkmark holdforDiscussion"></span>
+					  <span class="checkmark holdforDiscussion" style="background-color: #ff953f !important;"></span>
 					</label>
 					
 					<label class="containerCheckbox">Sold Out
