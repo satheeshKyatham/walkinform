@@ -80,10 +80,20 @@ function getAllotmentDashboardReport () {
 							" <td>"+obj1[i].verticle__c+"</td>" +
 							" <td>"+obj1[i].brokername+"</td>" +
 							" <td>"+obj1[i].closing_manager_name__c+"</td>" +
-							" <td>"+obj1[i].closing_manager_name__c+"</td>" +
-							" <td>"+obj1[i].date_of_eoi__c+"</td>" +
-							" <td>"+obj1[i].total_payment_done+"</td>" +
-							" <td>"+obj1[i].total_payment_approved+"</td>" +
+							" <td>"+obj1[i].propstrength__request_source__c+"</td>" +
+							" <td>"+obj1[i].propstrength__enquiry_type__c+"</td>" +
+							" <td>"+obj1[i].offername+"</td>" +
+							" <td>"+obj1[i].propstrength__super_area__c+"</td>" +
+							
+							
+							" <td>"+obj1[i].propstrength__carpet_area__c+"</td>" +
+							" <td>"+obj1[i].propstrength__unit_type__c+"</td>" +
+							" <td>"+obj1[i].propstrength__total_basic_sale_price__c+"</td>" +
+							" <td>"+obj1[i].propstrength__total_sales_consideration__c+"</td>" +
+							" <td>"+obj1[i].user_name+"</td>" +
+							" <td>"+obj1[i].eoi_amount+"</td>" +
+							" <td>"+obj1[i].offeramount+"</td>" +
+							" <td>"+(parseFloat(obj1[i].eoi_amount)+parseFloat(obj1[i].offeramount))+"</td>" +
 							
 						" </tr>";
 			}
