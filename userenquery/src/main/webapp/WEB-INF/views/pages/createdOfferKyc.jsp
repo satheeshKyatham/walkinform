@@ -121,11 +121,12 @@
   		</tr>
    		<tr>
 		    <th rowspan="2">D</th>
-		    <td rowspan="2">Car Park Space(s):</td>
+		    <td rowspan="2">Covered Car Park Space(s):</td>
   		</tr>
   		
   		<tr>
-		    <td colspan="2" >As per Annexure B-I</td>
+<!-- 		    <td colspan="2" >As per Annexure B-I</td> -->
+				<td colspan="2" ></td>
   		</tr>
   		
   		<tr>
@@ -137,15 +138,16 @@
   		</tr>
    		<tr>
 		    <th>F</th>
-		    <td>Common Areas</td>
+		    <td>Common Areas and Facilties</td>
 		    <td colspan="2">As per <b>Annexure D.</b></td>
   		</tr>
-  		<tr>
-		    <th>G</th>
-		    <td>Facilities</td>
-		    <td colspan="2">As per <b>Annexure E.</b></td>
+   		<tr>
+		    <th></th>
+		    <td></td>
+		    <td colspan="2"></b></td>
   		</tr>
-  		<tr>
+ 
+   		<tr>
 		    <th rowspan="9" style="vertical-align: top;">2</th>
 		    <th colspan="4">Sale Consideration</th>
   		</tr>
@@ -167,7 +169,8 @@
   		<tr>
 		    <th>D</th>
 		    <td>Proportionate Common Areas Charges including Club house development Charges calculated on the Carpet Area</td>
-		    <td colspan="2">Not Applicable</td>
+		    <!-- <td colspan="2">Not Applicable</td> -->
+		    <td colspan="2">Cost included in the carpet area's cost</td>
   		</tr>
   		<tr>
 		    <th>E</th>
@@ -195,7 +198,8 @@
   		<tr>
 		    <th>G</th>
 		    <td>Payment Schedule</td>
-		    <td colspan="2">As per <b>Annexure F.</b></td>
+		   <!--  <td colspan="2">As per <b>Annexure F.</b></td> -->
+		   <td colspan="2">As per <b>Annexure E.</b></td>
 		</tr>
   		<tr>
 		    <th>3</th>

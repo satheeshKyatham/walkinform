@@ -165,16 +165,16 @@ function getofferApplicantDetails (e, offerSFID, enqSFID, contactSFID, offerName
 				} else if (obj[i].address_proof_type == 'Passport') {
 					passportNo = obj[i].address_proof_no;
 				}
-				
-				
+				var lastName = obj[i].lastName==null?'':obj[i].lastName;
 				appType += "<td>"+obj[i].propstrength__type__c+"</td>";
-				fullName +="<td>"+obj[i].name+"</td>";
+				fullName +="<td>"+obj[i].name + ' ' + lastName + "</td>";
 				pan +="<td>"+obj[i].propstrength__income_tax_permanent_account_no__c+"</td>";
 				email +="<td>"+obj[i].email+"</td>";
 				//aadhar_card_no__c +="<td>"+obj[i].aadhar_card_no__c+"</td>";
 				aadhar_card_no__c +="<td>"+aadhaarNo+"</td>";
 				mobile_number__c +="<td>"+obj[i].mobile_number__c+"</td>";
-				propstrength__sharing_ratio__c +="<td>"+sharingRatio+"</td>";
+/*				propstrength__sharing_ratio__c +="<td>"+sharingRatio+"</td>";*/
+				propstrength__sharing_ratio__c +="<td> As per <b> Annexure G </b> </td>";
 				//passport_no__c +="<td>"+obj[i].passport_no__c+"</td>";
 				passport_no__c +="<td>"+passportNo+"</td>";
 				nationality_a__c +="<td>"+obj[i].nationality_a__c+"</td>";
@@ -204,7 +204,8 @@ function getofferApplicantDetails (e, offerSFID, enqSFID, contactSFID, offerName
 										+ '<tr><td>Date of Birth</td>'+birthdate+'</tr>'
 										+ '<tr><td>PAN</td>'+pan+'</tr>'
 										//+ '<tr><td>Aadhar No.</td>'+aadhar_card_no__c+'</tr>'  
-										+ '<tr><td>Payment share for TDS</td>'+propstrength__sharing_ratio__c+'</tr>'
+/*										+ '<tr><td>Payment share for TDS</td>'+propstrength__sharing_ratio__c+'</tr>'*/
+										+ '<tr><td>TDS Status</td>'+propstrength__sharing_ratio__c+'</tr>'
 										+ '<tr><td>Nationality</td>'+nationality_a__c+'</tr>'
 										+ '<tr><td>Residential Status</td>'+propstrength__resident_status__c+'</tr>'
 										//+ '<tr><td>Passport No.</td>'+passport_no__c+'</tr>' 
