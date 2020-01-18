@@ -283,6 +283,11 @@ public class EnquiryConverter implements CommonConverter<Enquiry, EnquiryDto>{
 		
 		if(dto.getEnquiryReport().getReferredby()!=null)
 			entity.getEnquiryReport().setReferredby(dto.getEnquiryReport().getReferredby());
+		if(dto.getPriority_no__c()!=null)
+			entity.setPriority_no__c(dto.getPriority_no__c());
+		entity.setEoi_enquiry__c(dto.getEoi_enquiry__c());
+		
+		
 		return entity;
 	}
 

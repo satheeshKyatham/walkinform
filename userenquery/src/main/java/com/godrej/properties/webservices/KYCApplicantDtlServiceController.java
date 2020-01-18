@@ -36,7 +36,7 @@ public class KYCApplicantDtlServiceController {
 	@GetMapping(value = "/getKYCData")
 	public String getKYCData(@RequestParam("userid") String userid, @RequestParam("projectid") String projectid) {
 		Gson gson = new GsonBuilder().disableHtmlEscaping().serializeNulls().create();
-		return gson.toJson(kYCapplicantDtlService.getKYCData(userid, projectid));
+		return gson.toJson(kYCapplicantDtlService.getKYCDataVW(userid, projectid));
 	}
 	
 	@PostMapping(value = "/getKYCStatus")

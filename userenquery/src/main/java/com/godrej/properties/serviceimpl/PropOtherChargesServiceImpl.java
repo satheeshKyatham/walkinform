@@ -30,8 +30,12 @@ public class PropOtherChargesServiceImpl implements PropOtherChargesService{
 	}
 	/*Changes By Satheesh for Inventory Update*/
 	@Override
+	public String updatePropertyStatus(String propSfid, boolean isPMAY ) {
+		return propOtherChargesDao.updatePropertyStatus(propSfid, isPMAY);
+	}
+
+	@Override
 	public String updatePropertyStatus(String propSfid) {
-		// TODO Auto-generated method stub
 		return propOtherChargesDao.updatePropertyStatus(propSfid);
 	}
 }

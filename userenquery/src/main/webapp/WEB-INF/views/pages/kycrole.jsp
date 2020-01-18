@@ -18,6 +18,10 @@
 	<link rel="stylesheet" href="<c:url value='/resources/css/inner.css' />">
 	<link rel="stylesheet" href="<c:url value='/resources/css/style.css' />">
 	
+	<link rel="stylesheet" href="<c:url value='/resources/css/font-awesome.css' />">
+	
+	
+	
 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
 	
 <script src="<c:url value='/resources/js/jquery-1.12.4.min.js'/>"></script>
@@ -43,6 +47,7 @@ if(ses!=null){
 %> 
 <body>
 <input type="hidden" id="contextPath" value="${pageContext.request.contextPath}">
+<input id="pageContext" value="${pageContext.request.contextPath}" style="display:none;"/>
 <input type="hidden" id="projectname" value="<%=projectname %>">
 <input type="hidden" id="projectid" value="<%=projectid%>">
 <input type="hidden" id="role" value="<%= projectrole %>">
@@ -61,8 +66,6 @@ if(ses!=null){
 	    </div>
 		
 		 
-		
-	    
 	  </div>
 	</nav>
 		<div class="titleCol">
@@ -100,9 +103,10 @@ if(ses!=null){
 								<th>Customer Name</th>
 								<th>Mobile No</th>
 								<th>KYC Status</th>
+								<th>Offer Number</th>
 								<th>View/Fill KYC</th>
-								
-								<!-- <th style="word-break: break-word; width:200px !important">Email</th> -->
+								<th>Costsheet</th>
+								<th>Application Form</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -111,8 +115,13 @@ if(ses!=null){
 					<div class="clearfix"></div>
 				</div>
 				<div class="clearfix"></div>
+				<div id= "applicationFormKyc">
+					<%@ include file="/WEB-INF/views/pages/createdOfferKyc.jsp" %>
 				</div>
-	   		
+				<div class="clearfix"></div>
+				</div>
+				
+	  	 		
 				<div class="tab-pane" id="tab2"> 
 				  	<iframe id="kyc_approval_iframe" width="100%" height="400px"></iframe>
 				</div>
@@ -125,21 +134,12 @@ if(ses!=null){
 	  
     	 
      	<div class="clearfix"></div>
-	<!-- </div> -->
+	<script src="<c:url value='/resources/js/salesdesk.js?v=18.01'/>"></script>
+	<script src="<c:url value='/resources/js/separate/offer.js?v=18.01'/>"></script>
 	
-	<!-- <script type="text/javascript">
-	$(document).ready(function () {
-		$('#dtOrderExample').DataTable({
-		"order": [[ 3, "desc" ]]
-		});
-		$('.dataTables_length').addClass('bs-select');
-		});
-	</script> -->
-	
-	
-	
-	
-	
+	<script src="<c:url value='/resources/js/separate/applicationForm.js?v=18.01'/>"></script>
+	<script src="<c:url value='/resources/js/separate/offerApplicationForm.js?v=18.01'/>"></script>
+		
 </body>
 </html>
 

@@ -175,4 +175,21 @@ public class PropOtherChargesDaoImpl extends AbstractDao<Integer, PropOtherCharg
 		return "updated";
 		
 	}
+	
+	@Override
+	public String updatePropertyStatus(String propSfid, boolean isPMAY) {
+		Session session = this.sessionFactory.getCurrentSession();	
+		StringBuilder jpql =  new StringBuilder();
+		jpql.append("update salesforce.propstrength__property__c ")
+		.append(" set propstrength__property_alloted_through_offer__c='t' ")
+		.append(" , propstrength__pmay_abatement__c =:isPMAY ")
+		.append(" where sfid= :sfid");
+		
+		Query q = session.createNativeQuery(jpql.toString());
+		q.setParameter("isPMAY", isPMAY);
+		q.setParameter("sfid", propSfid);
+		q.executeUpdate();
+		return "updated";
+		
+	}
 }

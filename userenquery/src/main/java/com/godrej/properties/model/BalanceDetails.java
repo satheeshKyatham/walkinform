@@ -69,6 +69,9 @@ public class BalanceDetails implements Serializable{
 	@Transient
 	private String offer_successMsg;
 	
+	@Column(name = "gst_tax")
+	private double gst_tax;
+	
 	public int getId() {
 		return id;
 	}
@@ -229,5 +232,12 @@ public class BalanceDetails implements Serializable{
 	public void setOffer_successMsg(String offer_successMsg) {
 		this.offer_successMsg = offer_successMsg;
 	}
-	
+
+	public double getGst_tax() {
+		return gst_tax;
+	}
+
+	public void setGst_tax(double gst_tax) {
+		this.gst_tax = gst_tax;
+	}
 }

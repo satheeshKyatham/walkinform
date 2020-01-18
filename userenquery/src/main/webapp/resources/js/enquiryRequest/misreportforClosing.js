@@ -84,6 +84,16 @@ function getKYCCMDetails()
 			var offerName = value.offerName==null?'':value.offerName;
 			var enquiryid = value.enquiryid==null?'':value.enquiryid;
 			var costsheetPath = value.costsheetPath==null?'':value.costsheetPath;
+			var appFormHtml="<td>";
+			if(value.kycapproval_status==='Y'){
+				appFormHtml = appFormHtml+ 
+				 "<button isrole=Y class='btn btnDefaultBlue btn-default' " +
+				 "onclick='getofferApplicantDetails(this,\""+
+				  offerSfid+"\",\""+value.enquirySfid+"\",\""+value.contactSfid
+				  +"\",\""+offerName+"\",\""+enquiryid+"\",\"\",\"\",\"\")'>" +
+				  "<i class='fa fa-print printficon'></button>";	
+				}
+			appFormHtml = appFormHtml+"</td>";
 			var val = $("<tr data-offerSfid='" +value.offerSfid+ " '>" +
 					"<td>"+value.enquiryid+"</td><td>"
 					+value.application_name
@@ -100,11 +110,7 @@ function getKYCCMDetails()
 					"href=\"/walkinform/Costsheet?" +
 					"name="+costsheetPath
 					+"&amp;from=ofrList\"><i class=\"fa fa-file\"></i></a></td>"
-					+"<td><button isrole=Y class='btn btnDefaultBlue btn-default' " +
-						"onclick='getofferApplicantDetails(this,\""+
-						offerSfid+"\",\""+value.enquirySfid+"\",\""+value.contactSfid
-						+"\",\""+offerName+"\",\""+enquiryid+"\",\"\",\"\",\"\")'>" +
-						"<i class='fa fa-print printficon'></button></td>"
+					+appFormHtml
 						+"</tr>"
 					);
 			/*
