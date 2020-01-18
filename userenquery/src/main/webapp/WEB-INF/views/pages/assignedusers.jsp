@@ -330,7 +330,7 @@ if(ses!=null){
 	<script src="<c:url value='/resources/js/enquiryRequest/misreportforClosing.js?v=18.02'/>"></script>
 	
 	<script src="<c:url value='/resources/js/separate/applicationForm.js?v=18.02'/>"></script>
-	<script src="<c:url value='/resources/js/separate/offerApplicationForm.js?v=18.02'/>"></script>
+	<script src="<c:url value='/resources/js/separate/offerApplicationForm.js?v=18.03'/>"></script>
 	
 	<script src="<c:url value='/resources/js/separate/eoiReportSales.js?v=18.02'/>"></script>
 	

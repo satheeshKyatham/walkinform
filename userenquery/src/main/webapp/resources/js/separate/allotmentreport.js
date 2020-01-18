@@ -41,32 +41,12 @@ function getAllotmentDashboardReport () {
 		//alert(obj1.length);
 		if(obj1!=null) {
 			for(var i=0;i<obj1.length;i++){
-				
-				
-				//tab = obj1[i].preferences.replace(/|/g, "</div><div>");
-				
-				//var typology_name3 = obj1[i].typology_name3.replace(/null/g, "-");
-				
-				
 				if (obj1[i].preferences != null && obj1[i].preferences != "" && obj1[i].preferences != undefined && obj1[i].preferences != "undefined") {
 					tab = obj1[i].preferences.replace(/\|/g, "</div><div class='prefTab'>");
 				}
-				
-				//tab = "";
-				
-				
-				
-				
-				// eoiFormPath =   'costSheetPDF/'+$('#region__c').val()+'/'+$('#marketingProjectName').val()+'/'+'EOI Details'+'/'+$('#enquiry_name').val()+'/eoi_form_'+$('#enquiry_name').val()+'.pdf';
-			     eoiTarget = pageContext+'file?name='+obj1[i].eoi_form_path+"&from=eoiForm";
-				
-				
-			     if (obj1[i].eoi_form_path != null) {
-			    	 icon = "<i class='fa fa-file'><i>";
-			     } else {
-			    	 icon = "";
-			     }
-			     
+				var offerAmount =0; 
+				if(obj1[i].offeramount!=null)
+					offerAmount=obj1[i].offeramount;
 				
 				html += "<tr>" +
 							" <td>"+obj1[i].priority_no__c+"</td>" +
@@ -84,17 +64,16 @@ function getAllotmentDashboardReport () {
 							" <td>"+obj1[i].propstrength__enquiry_type__c+"</td>" +
 							" <td>"+obj1[i].offername+"</td>" +
 							" <td>"+obj1[i].propstrength__super_area__c+"</td>" +
-							
-							
 							" <td>"+obj1[i].propstrength__carpet_area__c+"</td>" +
 							" <td>"+obj1[i].propstrength__unit_type__c+"</td>" +
 							" <td>"+obj1[i].propstrength__total_basic_sale_price__c+"</td>" +
 							" <td>"+obj1[i].propstrength__total_sales_consideration__c+"</td>" +
 							" <td>"+obj1[i].user_name+"</td>" +
-							" <td>"+obj1[i].eoi_amount+"</td>" +
 							" <td>"+obj1[i].offeramount+"</td>" +
-							" <td>"+(parseFloat(obj1[i].eoi_amount)+parseFloat(obj1[i].offeramount))+"</td>" +
-							
+							" <td>"+obj1[i].propStrength__Property_Name__c+"</td>" +
+							" <td>"+obj1[i].propStrength__House_Unit_No__c+"</td>" +
+							" <td>"+obj1[i].actula_5_per+"</td>" +
+							" <td>"+obj1[i].diffamount+"</td>" +
 						" </tr>";
 			}
 			
@@ -106,7 +85,7 @@ function getAllotmentDashboardReport () {
 			
 			
 		} else {
-			alert ("Data not found");
+			//alert ("Data not found");
 		}
 	}).done(function(data){
 		/*$('#applicationTable').dataTable({
@@ -132,4 +111,20 @@ function getAllotmentDashboardReport () {
 		
 		
 	});	
+	
+	$.get("getAllotmentDayMISReport",{"projectSfid":$('#projectid').val()},function(data){
+	}).done(function(data){
+		$("#allotmentmisReport tbody").empty();
+		var html = "<tr>" +
+					" <td>"+data.totalArealSold+" Sq. Ft.</td>" +
+					" <td>"+parseFloat(data.totalBSP).toFixed(2)+" Cr.</td>" +
+					" <td>"+data.totalEtoken+"</td>" +
+					" <td>"+data.unitcount+"</td>" +
+					" <td>"+data.kycApprovedCount+"</td>" +
+					" <td>"+data.bookingcount+"</td>" +
+					
+					" </tr>";
+	
+	$("#allotmentmisReport tbody").append(html);
+		});
 }

@@ -12,9 +12,24 @@
 	 response.addHeader("X-Frame-Options", "DENY");
 	 %>
 <input id="pageContext" value="${pageContext.request.contextPath}" style="display:none;"/>
-
-
+<label style="font-size: 22px">Allotment Journey So Far</label>
+<table class="table table-bordered" id="allotmentmisReport" style="font-size: 16px;">
+			<thead>
+				<tr>
+					<th>Total Saleable Area Sold : </th>
+					<th>Total BSP (Subject to payment realization) : </th>
+					<th>Allotment Walk-ins(E Token) </th>
+					<th>Total Units sold  : </th>
+					<th>KYC Approved  : </th>
+					<th>Total Application/Booking </th>
+					
+				</tr>
+			</thead>
+			<tbody>
+			</tbody>
+		</table>
 <div class="well center-block">
+
 	<div class="form-inline">
 		
 		<i class="glyphicon glyphicon-filter" style="border-right: 1px solid #333; margin-right: 10px; padding-right: 10px;"></i>
@@ -52,6 +67,13 @@
 
 <div class="wrapperEOIRepo2">
 	
+	<div>
+	
+	
+		
+		
+	</div>
+	
 	<div class="divEOI2" style="overflow: auto;">
 		<table class="table table-bordered" id="allotmentReportTable">
 			<thead>
@@ -76,9 +98,12 @@
 					<th>Total Basic Price</th>
 					<th>Sales Consideration</th>
 					<th>Created By</th>
-					<th>EOI Amount</th>
 					<th>Booking Amount</th>
-					<th>Total Amount</th>
+					
+					<th>Property Name</th>
+					<th>Unit No</th>
+					<th>5% Amount</th>
+					<th>Balance Amt. w.r.t 5%</th>
 				</tr>
 			</thead>
 			<tbody>
