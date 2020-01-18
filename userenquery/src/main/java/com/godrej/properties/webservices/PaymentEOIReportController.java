@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.godrej.properties.service.EOIReportService;
 import com.godrej.properties.service.PaymentEOIReportService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -22,6 +23,9 @@ public class PaymentEOIReportController {
 	
 	@Autowired
 	private PaymentEOIReportService paymentEOIReportService;
+	
+	@Autowired
+ 	private EOIReportService eOIReportService;
 	
 	
 	@RequestMapping(value = "/getPaymentEOIReport", method = RequestMethod.GET, produces = "application/json")
@@ -53,5 +57,12 @@ public class PaymentEOIReportController {
 		return gson.toJson(paymentEOIReportService.getPaymentEOIReportDtl(whereCondition));
 	}
 	
+	@RequestMapping(value = "/getAllotmentDayReport", method = RequestMethod.GET, produces = "application/json")
+	public String getAllotmentDayReport(@RequestParam("projectSfid") String projectSfid, @RequestParam("fromDate") String fromDate, @RequestParam("toDate") String toDate) {
+		Gson gson = new GsonBuilder().disableHtmlEscaping().serializeNulls().create();
+		String whereCondition = " project_sfid= '"+projectSfid+"' and Date(offer_date__c) between '"+fromDate+"' and '"+toDate+"' order by offer_date__c desc  ";
+		
+		return gson.toJson(eOIReportService.getAllotmentReport(whereCondition));
+	}
 	
 }

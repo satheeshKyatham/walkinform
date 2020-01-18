@@ -2284,7 +2284,7 @@ function newOtherCharges2 () {
              if (discount_Value != 0) {
                     $('#totalDiscountCol').empty();
                     
-                    $('#totalDicountView').show();
+                   
                     
                     var printDiscountHtml = '';
                     
@@ -2306,7 +2306,19 @@ function newOtherCharges2 () {
                                                      +'</div>'; 
                     
                     
-                    $('#totalDiscountCol').append(printDiscountHtml);
+                    if ($('#projectid').val() != "a1l2s00000000X5AAI") {
+                    	$('#totalDiscountCol').append(printDiscountHtml);
+                    	$('#totalDicountView').show();
+                    } else {
+                    	$('#totalDiscountCol').append('');
+                    	$('#totalDicountView').hide();
+                    }
+                    
+                    
+                    
+                    
+                    
+                    
              } else {
                     $('#totalDicountView').hide();
                     $('#totalDiscountCol').html('');
