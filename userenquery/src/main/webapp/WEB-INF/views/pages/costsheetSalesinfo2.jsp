@@ -620,9 +620,15 @@
 												<td></td>
 											</tr>
 											
+											<tr>
+												<th class="subHead">Facing</th>
+												<td id="propFacingType" style="text-align:left;" ></td>
+												<th class="subHead"></th>
+												<td></td>
+											</tr>
+											
 										</tbody>
 									</table>
-									<div class="clearfix"></div>
 								</div>
 								<div class="clearfix"></div>
 						 	</div>
@@ -882,6 +888,13 @@
 						<tr>
 							<th class="subHead">Exclusive Area Amount</th>
 							<td class="exclusiveAreaAmount" style="text-align:right;" ></td>
+							<th class="subHead"></th>
+							<td></td>
+						</tr>
+						
+						<tr>
+							<th class="subHead">Facing</th>
+							<td class="propFacingType" style="text-align:left;" ></td>
 							<th class="subHead"></th>
 							<td></td>
 						</tr>

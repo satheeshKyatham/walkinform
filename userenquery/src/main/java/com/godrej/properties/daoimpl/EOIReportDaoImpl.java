@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.godrej.properties.dao.EOIReportDao;
+import com.godrej.properties.model.AllotmentReport;
 import com.godrej.properties.model.EOIReport;
 
 @Repository("eOIReportDao")
@@ -80,6 +81,22 @@ public class EOIReportDaoImpl implements EOIReportDao{
 		
 		if (authors.size() > 0)
 			return authors;
+
+		return null;
+	}
+
+	@Override
+	public List<AllotmentReport> getAllotmentReport(String whereCondition) {
+		Session session = this.sessionFactory.getCurrentSession();	
+		
+		List<AllotmentReport> allot=null;
+		Query q = session.createNativeQuery(" SELECT * FROM salesforce.vw_allotment_report "
+				+ " where "+whereCondition+"  ", AllotmentReport.class);
+		
+		allot = q.getResultList();
+		
+		if (allot.size() > 0)
+			return allot;
 
 		return null;
 	}

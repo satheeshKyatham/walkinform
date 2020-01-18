@@ -127,6 +127,9 @@ projectid=request.getParameter("projectid");
 				<li onclick="getPaymentEOIReport()" id="paymentEOIReportTab">
 					<a href="#paymentEOIReport" data-toggle="tab">Payment Report <i class="fa fa-spinner fa-spin" style="display:none;"></i> </a>
 				</li>
+				<li id="allotmentReportID" onclick="getAllotmentDashboardReport()">
+					<a href="#allotmentReportTab" data-toggle="tab">Allotment Day Report<i class="fa fa-spinner fa-spin" style="display:none;"></i></a>
+				</li>
 			</ul>
 			<div class=""></div>
 		</div>	
@@ -215,8 +218,13 @@ projectid=request.getParameter("projectid");
 				
 			<div class="tab-pane" id="paymentEOIReport">
 				<%@ include file="/WEB-INF/views/pages/paymentEOIReport.jsp" %>
-			</div>		
-				
+			</div>	
+			<%-- <div class="tab-pane" id="tab7" >
+					<%@ include file="/WEB-INF/views/pages/createofferPayment.jsp" %>
+				</div> --%>	
+			<div class="tab-pane" id="allotmentReportTab">
+				<%@ include file="/WEB-INF/views/pages/allotmentReport.jsp" %>
+			</div>	
 				
 			</div>
 	</div>
@@ -237,7 +245,7 @@ projectid=request.getParameter("projectid");
 
 <script src="<c:url value='/resources/js/enquiryRequest/misreport.js?v=18.01'/>"></script>
 <script src="<c:url value='/resources/js/separate/eoiReport.js?v=18.01'/>"></script>
-
+<script src="<c:url value='/resources/js/separate/allotmentreport.js?v=18.01'/>"></script>
 <%-- <script src="<c:url value='/resources/js/separate/offer.js?v=18.01'/>"></script> --%>
 
 </body>

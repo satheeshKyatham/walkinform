@@ -309,6 +309,9 @@ function loadData () {
                            $('#towerTval').text(value.towerName);
                            $('.towerTval').text(value.towerName);
                            
+                           $('.propFacingType').text(value.property_facing__c);
+                           $('#propFacingType').text(value.property_facing__c);
+                           
                            
                            // Not in use - 20191025
                            if (plnVal == ''){
@@ -534,6 +537,11 @@ function bspTaxRecord (taxTag) {
                     propstrength__new_pmay_gst__c =        parseFloat(propstrength__new_pmay_gst__c+value.propstrength__new_pmay_gst__c);
              });    
              
+             /*propstrength__tax_percentage__c = getTaxPercentage(basicSaleprice, projectSfid, currentTaxRate);
+             propstrength__new_tax_percentage__c = getTaxPercentage(basicSaleprice, projectSfid, currentTaxRate);
+             propstrength__pmay_gst__c = getTaxPercentage(basicSaleprice, projectSfid, currentTaxRate);
+             propstrength__new_pmay_gst__c = getTaxPercentage(basicSaleprice, projectSfid, currentTaxRate);*/
+             
              if (taxTag == 'oldTaxPercentage') {
                     
                     $('#bspGSTTax').val(propstrength__tax_percentage__c);
@@ -568,7 +576,23 @@ function bspTaxRecord (taxTag) {
        });
 }
 
-
+function getTaxPercentage(basicSaleprice, projectSfid, currentTaxRate){
+	try{
+		if(basicSaleprice==null || projectSfid == null || currentTaxRate == null){
+			return 0;
+		}
+		if(projectSfid != 'a1l2s00000000X5AAI'){
+			return currentTaxRate;
+		}
+		if(basicSaleprice>4500000){
+			return 5;
+		}
+		return 1;
+	}catch (e) {
+		console.log(e);
+		return 0;
+	}
+}
 
 
 function paymentPlanOtherCharges (firstRowObj){
@@ -1200,13 +1224,23 @@ function updateBSP (timeid) {
        });
        
        var tdsPaidBy = '';
-       
+       var bspTaxGST = 0;
+       var salesConsiderationTotal = 0;
        
        if ($('#tdsPaidByDD').val() != '') {
              tdsPaidBy = $('#tdsPaidByDD').val();
        }
        
-       $.post(pageContext+"updateBSP",{"bspDis":bspVal,"token":$('#token').val(),
+       if ($('#bspGSTTax').val() != null && $('#bspGSTTax').val().trim() != '') {
+    	   bspTaxGST = $('#bspGSTTax').val();
+       } 
+       
+       if ($('#salesConsiderationTotal').text() != null && $('#salesConsiderationTotal').text().trim() != '') {
+    	   salesConsiderationTotal = $('#salesConsiderationTotal').text();
+       }
+       
+       
+       $.post(pageContext+"updateBSP",{"salesConsiderationTotal":salesConsiderationTotal, "bspTaxGST":bspTaxGST, "bspDis":bspVal,"token":$('#token').val(),
               "projectsfid":$('#projectsfid').val(),"enquirysfid":$('#enquirysfid').val(),"primarycontactsfid":$('#primarycontactsfid').val(), "sentToCrmYN":"Y", "timeid":"0"
               ,"propid":$('#unitSfid').val(),"ppid":$('#paymentPlanChangeID').val(),"offerthrough":offerthrough,"brokersfid":brokerAccountSfid
               ,"discount_Value":discount_Value,"balance_amnt":$('#balance_amnt').val(),"balance_amnt_description":$('#balance_amnt_description').val()
@@ -2085,6 +2119,8 @@ function newOtherCharges2 () {
              
              //otherChargesGSTTotalV2 = parseInt(otherChargesGSTTotalV2)+parseInt(((bspAmount*2/3)*bspTax)/100);
              //otherChargesGSTTotalV2 = parseInt(otherChargesGSTTotalV2)+parseInt(((finalFlatAmount*2/3)*bspTax)/100);
+             bspTax = getTaxPercentage(finalFlatAmount, $('#projectid').val(), bspTax);
+             $('#bspGSTTax').val(bspTax);
              otherChargesGSTTotalV2 = parseFloat(parseFloat(otherChargesGSTTotalV2)+parseFloat(((finalFlatAmount)*bspTax)/100)).toFixed(2);
              
              

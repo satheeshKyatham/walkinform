@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.godrej.properties.dao.EOIReportDao;
+import com.godrej.properties.model.AllotmentReport;
 import com.godrej.properties.model.EOIReport;
 import com.godrej.properties.service.EOIReportService;
 
@@ -21,5 +22,11 @@ public class EOIReportServiceImpl implements EOIReportService{
 	public List<EOIReport> getEOIReportDtl(String whereCondition) {
 		// TODO Auto-generated method stub
 		return eOIReportDao.getEOIReportDtl(whereCondition);
+	}
+
+	@Override
+	public List<AllotmentReport> getAllotmentReport(String whereCondition) {
+		// TODO Auto-generated method stub
+		return eOIReportDao.getAllotmentReport(whereCondition);
 	}
 }

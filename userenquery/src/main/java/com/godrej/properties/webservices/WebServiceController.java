@@ -1845,7 +1845,7 @@ public class WebServiceController<MultipartFormDataInput> {
 	
 	// @RequestParam("customerContact") long contact,
 	@RequestMapping(value = { "/updateBSP" }, method = RequestMethod.POST)
-	public String updateBSP (@RequestParam("bspDis") String bspDis, @RequestParam("token") String token, @RequestParam("projectsfid") String projectsfid,   @RequestParam("enquirysfid") String enquirysfid,  @RequestParam("primarycontactsfid") String primarycontactsfid,   @RequestParam("sentToCrmYN") String sentToCrmYN
+	public String updateBSP (@RequestParam("salesConsiderationTotal") double salesConsiderationTotal,  @RequestParam("bspTaxGST") double bspTaxGST,   @RequestParam("bspDis") String bspDis, @RequestParam("token") String token, @RequestParam("projectsfid") String projectsfid,   @RequestParam("enquirysfid") String enquirysfid,  @RequestParam("primarycontactsfid") String primarycontactsfid,   @RequestParam("sentToCrmYN") String sentToCrmYN
 			, @RequestParam("timeid") String timeid_str, @RequestParam("propid") String propid, @RequestParam("ppid") String ppid
 			, @RequestParam("offerthrough") String offerthrough, @RequestParam("brokersfid") String brokersfid, @RequestParam("discount_Value") String discount_Value_str
 			, @RequestParam("balance_amnt") String balanceAmnt,@RequestParam("balance_amnt_description") String balanceAmntDes
@@ -1960,11 +1960,18 @@ public class WebServiceController<MultipartFormDataInput> {
 					  JSONObject o = arr.getJSONObject(i);  
 					  offerid=o.get("offerId").toString(); 
 					}*/
-					
+					 
 					//Update offer created flag in sfdc property table through HEROKU
-					if(offerid!=null && offerid.length()==18)
-						propOtherChargesService.updatePropertyStatus(propid);
-
+					if((offerid!=null && offerid.length()==18)) {
+						if("a1l2s00000000X5AAI".equals(projectsfid)) {
+							boolean isPMAY = isUnderPMAY(offerid, projectsfid,salesConsiderationTotal );
+							propOtherChargesService.updatePropertyStatus(propid, isPMAY);
+						}
+						else {
+							propOtherChargesService.updatePropertyStatus(propid);
+						}
+					}
+						
 					//Insert offer related details in custome table
 					
 					action.setAmount(balanceAmnt);
@@ -1981,6 +1988,7 @@ public class WebServiceController<MultipartFormDataInput> {
 					action.setCostsheet_commitment(costsheet_commitment);
 					action.setCostsheet_path(costsheet_path);
 					action.setCs_final_amount(cs_final_amount);
+					action.setGst_tax(bspTaxGST);
 					
 					if(userid!=null && userid.length()>0)
 					{
@@ -2006,6 +2014,10 @@ public class WebServiceController<MultipartFormDataInput> {
 		
 	}
 	
+	
+	private boolean isUnderPMAY(String offerId, String projectSfid, double basicSalePrice) {
+		return (offerId!=null && offerId.length()==18 && "a1l2s00000000X5AAI".equals(projectSfid) && basicSalePrice <=4500000) ;
+	}
 	@RequestMapping(value = { "/getcreatedOffersList" }, method = RequestMethod.GET)
 	public String getcreatedOffersList(@RequestParam("projectid") String projectid) {
 		GsonBuilder gsonBuilder = new GsonBuilder();
@@ -2265,6 +2277,7 @@ public class WebServiceController<MultipartFormDataInput> {
 			 paymentPlanJson.setPropstrength__category__c(paym.getPropstrength__category__c());
 			 paymentPlanJson.setPropstrength__pmay_abatement__c(paym.isPropstrength__pmay_abatement__c());
 			 paymentPlanJson.setBank__c(paym.getBank__c());
+			 paymentPlanJson.setProperty_facing__c(paym.getProperty_facing__c());
 			 //paymentPlanJson.set (paym.getSfid());
 			 
 			 

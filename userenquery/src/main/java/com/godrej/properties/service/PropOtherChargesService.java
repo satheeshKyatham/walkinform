@@ -9,4 +9,5 @@ public interface PropOtherChargesService {
 	String getPropertyTypeStatus(String propSfid);
 	/*Changes By Satheesh for Inventory Update*/
 	String updatePropertyStatus(String propSfid);
+	public String updatePropertyStatus(String propSfid, boolean isPMAY );
 }

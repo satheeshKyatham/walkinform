@@ -62,6 +62,10 @@ public class PaymentPlan implements Serializable{
 	@Column(name="propstrength__pmay_abatement__c") private boolean  propstrength__pmay_abatement__c;
 	@Column(name="bank__c") private String  bank__c;
 	
+	@Column(name="property_facing__c") private String  property_facing__c;
+
+	
+	
 	/* @Column(name="tower_sfid") private String tower_sfid; */
 	
 	public boolean isPropstrength__allotted__c() {
@@ -277,5 +281,10 @@ public class PaymentPlan implements Serializable{
 	public void setBank__c(String bank__c) {
 		this.bank__c = bank__c;
 	}
-	
+	public String getProperty_facing__c() {
+		return property_facing__c;
+	}
+	public void setProperty_facing__c(String property_facing__c) {
+		this.property_facing__c = property_facing__c;
+	}
 }
