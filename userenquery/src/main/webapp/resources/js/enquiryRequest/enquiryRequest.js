@@ -170,6 +170,7 @@ function populateEnquiryAndContact(resp){
 		    $("#budget").val("");
 		    $("#carpetAreaRequirement").val("");
 		    $("#employmentStatus").val("");
+		    $('#designationCust').val("");
 		    $("#companyName").val("");
 		    $("#officeAddress").val("");
 		    
@@ -426,9 +427,9 @@ function enqSlider(){
 		
 		// Without JQuery
 		var slider = new Slider("#ex13", {
-		    ticks: [2000000, 10000000, 20000000, 30000000, 40000000, 50000000],
-		    ticks_labels: ['20L', '1Cr', '2Cr', '3Cr', '4Cr', '5Cr' ],
-		    ticks_positions: [0, 20, 40, 60, 80, 100],
+		    ticks: [2000000, 10000000, 20000000, 40000000, 50000000, 100000000, 150000000,200000000],
+		    ticks_labels: ['20L', '1Cr', '2Cr', '4Cr', '5Cr', '10Cr','15Cr','20Cr'],
+		    ticks_positions: [0,15,30, 45, 60, 75,87, 100],
 		    //ticks_snap_bounds: 60,
 		    tooltip: 'always',
 		   step: 100000,
@@ -512,6 +513,7 @@ function loadContactReport(contact){
 		
 		$('#ageGroup').val(contact.contactReport.ageGroup);
 		$('#employmentStatus').val(contact.contactReport.employmentStatus);
+		$('#designationCust').val(contact.designation);
 	}
 }
 function populateAddressInfo(enq,contact){
