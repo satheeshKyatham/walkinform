@@ -740,6 +740,8 @@ function loadContactReport(contact){
 		$('#officeAddress').val(contact.contactReport.officeAddress);
 		$('#ageGroup').val(contact.contactReport.ageGroup);
 		$('#employmentStatus').val(contact.contactReport.employmentStatus);
+		$('#designationCustSales').val(contact.designation);
+		
 	}
 }
 function populateAddressInfo(enq,contact){
@@ -930,6 +932,7 @@ function populateSearchEnquiry(resp,isSaleView){
 		    $("#budget").val("");
 		    $("#carpetAreaRequirement").val("");
 		    $("#employmentStatus").val("");
+		    $('#designationCustSales').val("");
 		    $("#companyName").val("");
 		    $("#officeAddress").val("");
 		    $("#officeCity").val("");

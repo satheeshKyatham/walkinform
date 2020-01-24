@@ -515,7 +515,45 @@ if(ses!=null){
 							</div>
 							<div class="clearfix"></div>
 						</div>
-						
+						<div class="col-md-2 col-xs-6">
+								<div class="group">
+									<select id="designationCustSales" name="contact.designation" class="contactSalesView">
+									        <option value=""></option>
+									        <option value="Owner / Proprietor">Owner / Proprietor</option>
+									        <option value="CEO">CEO</option>
+									        <option value="AVP & Above">AVP & Above</option>
+									        <option value="Middle Management">Middle Management</option>
+									        <option value="Executive">Executive</option>
+									        <option value="Manager">Manager</option>
+									        <option value="Assistant Manager">Assistant Manager</option>
+									        <option value="Software Engineer">Software Engineer</option>
+									        <option value="Analyst">Analyst</option>
+									        <option value="Associate">Associate</option>
+									        <option value="Consultant">Consultant</option>
+									        <option value="General Manager">General Manager</option>
+									        <option value="Vice President">Vice President</option>
+									        <option value="Ass. Vice President">Ass. Vice President</option>
+									        <option value="Chairman">Chairman</option>
+									        <option value="Vice Chairman">Vice Chairman</option>
+									        <option value="CMO">CMO</option>
+									       	<option value="COO">COO</option>
+									       	<option value="CTO">CTO</option>
+									       	<option value="CXO">CXO</option>
+									        <option value="Director & Above">Director & Above</option>
+									       	<option value="Executive Director">Executive Director</option>
+									       	<option value="Managing Director">Managing Director</option>
+									       	<option value="Officer">Officer</option>
+									        <option value="Product Head">Product Head</option>
+									       	<option value="Department Head">Department Head</option>
+									       	<option value="Professor">Professor</option>
+									       	<option value="Team Lead">Team Lead</option>
+									        <option value="Doctor">Doctor</option>							       		        					    
+									</select>
+									<span class="highlight"></span><span class="bar"></span>
+									<label class="select-label">Designation<strong class="mndt"></strong></label>
+								</div>
+								<div class="clearfix"></div>
+							</div>
 						<div class="col-md-3 col-xs-6">
 							<div class="group">
 								<input type="text" id="companyName" name="contact.companyName" class="autocomplete-off contactSalesView"/>
@@ -1636,19 +1674,19 @@ if(ses!=null){
     <!-- For Webcam attachments -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.25/webcam.min.js"></script>
 
-	<script src="<c:url value='/resources/js/springForm.js?v=18.01' />"></script>
-	<script src="<c:url value='/resources/js/commonValidation.js?v=18.01' />"></script>
-	<script src="<c:url value='/resources/js/utility.js?v=18.01' />"></script>
+	<script src="<c:url value='/resources/js/springForm.js?v=18.02' />"></script>
+	<script src="<c:url value='/resources/js/commonValidation.js?v=18.02' />"></script>
+	<script src="<c:url value='/resources/js/utility.js?v=18.02' />"></script>
 	<%-- <script src="<c:url value='/resources/js/enquiryRequest/enquiryRequest.js' />"></script> --%>
-	<script src="<c:url value='/resources/js/enquiryRequest/salesRequest.js?v=18.01' />"></script>	
+	<script src="<c:url value='/resources/js/enquiryRequest/salesRequest.js?v=18.03' />"></script>	
     <script src="<c:url value='/resources/js/intlTelInput.js' />"></script>
    
     <script src="<c:url value='/resources/js/sweetalert2.min.js' />"></script>
    
    
   	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/8.4.7/js/intlTelInput.js"></script> -->
-	<script src="<c:url value='/resources/js/bankdetails.js?v=18.01' />"></script>
-	<script src="<c:url value='/resources/js/index.js?v=18.01' />"></script>
+	<script src="<c:url value='/resources/js/bankdetails.js?v=18.02' />"></script>
+	<script src="<c:url value='/resources/js/index.js?v=18.02' />"></script>
 	
 	<script>
 	
@@ -1705,18 +1743,18 @@ if(ses!=null){
  <script src="<c:url value='/resources/js/moment.js' />"></script>
  <script src="<c:url value='/resources/js/bootstrap-datetimepicker.min.js' />"></script> 
  
- <script src="<c:url value='/resources/js/separate/inventory.js?v=18.01'/>"></script>
+ <script src="<c:url value='/resources/js/separate/inventory.js?v=18.02'/>"></script>
  
 <!-- Costsheet --> 
 <script src="<c:url value='/resources/js/jquery.tabletojson.min.js'/>"></script>
 <%-- <script type="text/javascript" src="<c:url value='/resources/js/jquery.countdownTimer.js'/>"></script> --%>
-<script src="<c:url value='/resources/js/enquiryRequest/common.js?v=18.01'/>"></script>
-<script src="<c:url value='/resources/js/separate/costsheet.js?v=18.01'/>"></script>
-<script src="<c:url value='/resources/js/separate/webcamAttachmentCS.js?v=18.01'/>"></script>
+<script src="<c:url value='/resources/js/enquiryRequest/common.js?v=18.02'/>"></script>
+<script src="<c:url value='/resources/js/separate/costsheet.js?v=18.03'/>"></script>
+<script src="<c:url value='/resources/js/separate/webcamAttachmentCS.js?v=18.02'/>"></script>
 
 
-<script src="<c:url value='/resources/js/separate/storeEOIPaymentDtl.js?v=18.01'/>"></script>
-<script src="<c:url value='/resources/js/separate/eoiFormPrint.js?v=18.01'/>"></script>
+<script src="<c:url value='/resources/js/separate/storeEOIPaymentDtl.js?v=18.02'/>"></script>
+<script src="<c:url value='/resources/js/separate/eoiFormPrint.js?v=18.02'/>"></script>
 
 
 <%-- <script src="<c:url value='/resources/js/separate/storeEOIPaymentDtl.js?v=15'/>"></script> --%>

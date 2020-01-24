@@ -1,5 +1,7 @@
 package com.godrej.properties.model;
 
+import java.sql.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -32,16 +34,19 @@ public class AllotmentReport {
 	@Column(name="propstrength__super_area__c") private Double propstrength__super_area__c;
 	@Column(name="propstrength__carpet_area__c") private Double	propstrength__carpet_area__c;
 	@Column(name="propstrength__unit_type__c") private String	propstrength__unit_type__c;
-	
 	@Column(name="propstrength__total_sales_consideration__c") private String	propstrength__total_sales_consideration__c;
 	@Column(name="propstrength__total_basic_sale_price__c") private String	propstrength__total_basic_sale_price__c;
-	
 	@Column(name="userid") private Integer userid;
 	@Column(name="user_name") private String	user_name;
 	@Column(name="priority_no__c") private String	priority_no__c;
-	@Column(name="transaction_amount") private Double	eoi_amount;
 	@Column(name="offeramount") private String	offeramount;
-	@Column(name="offer_date__c") private String	offer_date__c;
+	@Column(name="offer_date__c") private Date	offer_date__c;
+	@Column(name="project_sfid") private String	project_sfid;
+	
+	@Column(name="PropStrength__Property_Name__c") private String	propStrength__Property_Name__c;
+	@Column(name="PropStrength__House_Unit_No__c") private String	propStrength__House_Unit_No__c;
+	@Column(name="actula_5_per") private Double	actula_5_per;
+	@Column(name="diffamount") private String diffamount;
 	public int getId() {
 		return id;
 	}
@@ -174,30 +179,48 @@ public class AllotmentReport {
 	public void setPriority_no__c(String priority_no__c) {
 		this.priority_no__c = priority_no__c;
 	}
-	public Double getEoi_amount() {
-		return eoi_amount;
-	}
-	public void setEoi_amount(Double eoi_amount) {
-		this.eoi_amount = eoi_amount;
-	}
 	public String getOfferamount() {
 		return offeramount;
 	}
 	public void setOfferamount(String offeramount) {
 		this.offeramount = offeramount;
 	}
-	public String getOffer_date__c() {
+	public Date getOffer_date__c() {
 		return offer_date__c;
 	}
-	public void setOffer_date__c(String offer_date__c) {
+	public void setOffer_date__c(Date offer_date__c) {
 		this.offer_date__c = offer_date__c;
+	}
+	public String getProject_sfid() {
+		return project_sfid;
+	}
+	public void setProject_sfid(String project_sfid) {
+		this.project_sfid = project_sfid;
+	}
+	public String getPropStrength__Property_Name__c() {
+		return propStrength__Property_Name__c;
+	}
+	public void setPropStrength__Property_Name__c(String propStrength__Property_Name__c) {
+		this.propStrength__Property_Name__c = propStrength__Property_Name__c;
+	}
+	public String getPropStrength__House_Unit_No__c() {
+		return propStrength__House_Unit_No__c;
+	}
+	public void setPropStrength__House_Unit_No__c(String propStrength__House_Unit_No__c) {
+		this.propStrength__House_Unit_No__c = propStrength__House_Unit_No__c;
+	}
+	public String getDiffamount() {
+		return diffamount;
+	}
+	public void setDiffamount(String diffamount) {
+		this.diffamount = diffamount;
+	}
+	public Double getActula_5_per() {
+		return actula_5_per;
+	}
+	public void setActula_5_per(Double actula_5_per) {
+		this.actula_5_per = actula_5_per;
 	}
 	
 	
-	
-	
-	
-	
-	
-
 }
