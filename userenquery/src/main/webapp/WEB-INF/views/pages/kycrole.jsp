@@ -134,11 +134,11 @@ if(ses!=null){
 	  
     	 
      	<div class="clearfix"></div>
-	<script src="<c:url value='/resources/js/salesdesk.js?v=18.01'/>"></script>
-	<script src="<c:url value='/resources/js/separate/offer.js?v=18.01'/>"></script>
+	<script src="<c:url value='/resources/js/salesdesk.js?v=18.03'/>"></script>
+	<script src="<c:url value='/resources/js/separate/offer.js?v=18.03'/>"></script>
 	
-	<script src="<c:url value='/resources/js/separate/applicationForm.js?v=18.01'/>"></script>
-	<script src="<c:url value='/resources/js/separate/offerApplicationForm.js?v=18.01'/>"></script>
+	<script src="<c:url value='/resources/js/separate/applicationForm.js?v=18.03'/>"></script>
+	<script src="<c:url value='/resources/js/separate/offerApplicationForm.js?v=18.03'/>"></script>
 		
 </body>
 </html>

@@ -330,17 +330,27 @@ function inventoryLoad (){
 					else if (obj1[j].hold_reason==='temp') {
 						unitStatus="unitTemp";
 					}
-					
 					else
 						unitStatus = "unitSold";
+					var value = $("#searchadmintype").val();
+					if(value=='t' || value=='f'){
+						 unitcheckbox='<input type="checkbox" value='+unitSfid+' name="unit" > '; 
+						}
+					
 				} else if (obj1[j].propstrength__allotted__c == 't'){
 					dropdown = "";
 					caret = "";
 					unitStatus = "";
-					if(obj1[j].hold_reason==='block')
-						unitStatus="unitBlock";
+					if(obj1[j].hold_reason==='block'){
+						if (obj1[j].eoi_unit_locked == true) {
+							unitStatus="unitEOIBlockAdmin";
+						}else {
+							unitStatus="unitBlock";
+						}
+					}
 					else if(obj1[j].hold_reason==='temp')
 						unitStatus="unitTempAdmin";
+					 
 					else
 						unitStatus = "unitSold";
 					var value = $("#searchadmintype").val();

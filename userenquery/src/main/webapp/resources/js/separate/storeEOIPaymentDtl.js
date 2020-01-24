@@ -161,6 +161,7 @@ function csPymtDataEoi () {
 	
 	$.post(pageContext+"insertEOIPaymentDtl",{"paymentDtlJson" : JSON.stringify(arrayData)},function(data){				 
 	}).done(function(data){
+		holdUnitForEOI('eoi_block');
 		getEOIPreferencPrint();
 	});
 }
@@ -318,27 +319,86 @@ function getTypologyEOI (e){
 		$(e).closest('.EOIDtlRow').find('.typologyListEOI').append(html);
 	});
 }
+/*
+function getUnitEOI (e) {
+	 
+	$.post(pageContext+"getInventoryRecords",{"project_code" : $('.projectSfid').val(),"tower_code":$(e).val(),"floor_code":"","unit":""},function(data){				 
+		
+	}).done(function(data){
+		alert (data);
+		
+		var obj =JSON.parse(data);
+		var html="";
+		
+		alert ("obj ::: " + obj)
+		$(e).closest('.EOIDtlRow').find(".unitListEOI").find("option:gt(0)").remove();
+		if(obj!=null){
+			for(var i=0;i<obj.length;i++){
+				html=html+'<option value="'+obj[i].sfid+'">'+obj[i].propstrength__house_unit_no__c+'</option>';
+			}
+		}
+		$(e).closest('.EOIDtlRow').find(".unitListEOI").append(html);
+	});	
+}*/
 
 
+
+function getUnitEOI (e) {
+	$(e).closest('.EOIDtlRow').find(".unitListEOI").find("option:gt(0)").remove();
+	
+	$.get("getInventoryRecords",{"project_code" : $('.projectSfid').val(),"tower_code":$(e).val(),"floor_code":"","unit":""},function(data){				 
+		var obj =JSON.stringify(data);
+		var obj1 =JSON.parse(obj);
+		var html = '';
+		
+		if(obj1!=null) {
+			for(var i=0;i<obj1.length;i++){
+				if (obj1[i].eoi_unit_locked != true && obj1[i].hold_status != true) {
+					html += '<option value="'+obj1[i].sfid+'">'+obj1[i].propstrength__house_unit_no__c+'</option>';
+				}
+				
+			}
+			
+			$(e).closest('.EOIDtlRow').find(".unitListEOI").append(html);
+			
+			
+		} else {
+			alert ("Data not found");
+		}
+	}).done(function(data){
+		
+	});	
+}
+
+
+
+
+
+
+
+
+/*
 function getUnitEOI (e){
-	$.get("gethouseunit", {
+	$.get("getInventoryRecords", {
+	
 		"project_code" : $('.projectSfid').val(),
 		"tower_code":$(e).val(),"floor_code":"","unit":""
 	}, function(data) {
-		
+		var obj =JSON.parse(data);
 		$(e).closest('.EOIDtlRow').find(".unitListEOI").find("option:gt(0)").remove();
 		
 		var html="";
 		
-		if(data!=null){
-			for(var i=0;i<data.length;i++) {
-				html=html+'<option value="'+data[i].sfid+'">'+data[i].propstrength__house_unit_no__c+'</option>';
+		if(obj!=null){
+			for(var i=0;i<obj.length;i++) {
+					
+					html=html+'<option value="'+obj[i].sfid+'">'+obj[i].propstrength__house_unit_no__c+'</option>';
 			}
 		}
 		
 		$(e).closest('.EOIDtlRow').find(".unitListEOI").append(html);
 	});
-}
+}*/
 
 
 function getfbandEOI(e) {
@@ -631,4 +691,58 @@ function getEOITabPreferencRecord () {
 	}).done(function(obj){
 		
 	});	
+}
+
+
+
+function holdUnitForEOI(msg) {
+	var favorite = [];
+	$.each($("#EOIMultipleTable .unitListEOI"), function(){ 
+		if ($(this).val() != 0) {
+			favorite.push($(this).val());
+		}	
+	});
+	
+	if(favorite=='' || favorite==null){
+		swal({
+			title: "EOI submitting without any unit preference",
+		    text: "",
+		    //timer: 3000,
+		    type: "warning",
+		});
+		//return false;
+	}
+	
+	
+  	$.ajax({
+	    url: pageContext+'saveAdminUnit',
+	    data: {
+			projectid : $("#projectid").val(),
+			userId : $("#userid").val(),
+			unitsfid:favorite.join(","),
+			holdmsg:msg,
+			reasonInput : "EOI Block",
+			holdBlockBehalfOfName : $('#username').val(),
+			holdBlockBehalfOfID : $("#userid").val(),
+	    },
+	    type: 'POST',
+	    success: function(data) { 
+		    	/*swal({
+					title: "Successfully Submitted",
+				    text: "",
+				    timer: 3000,
+				    type: "success",
+				});*/
+	    		//inventoryLoad ();
+	    		//$('#inventoryLoader').hide();
+	    },
+	    error: function(data) {
+	    	swal({
+				title: "There was problem in holding EOI unit at this time. Please try again",
+			    text: "",
+			    //timer: 3000,
+			    type: "warning",
+			});
+	    }
+	});
 }

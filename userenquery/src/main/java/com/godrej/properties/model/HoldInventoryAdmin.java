@@ -53,7 +53,10 @@ public class HoldInventoryAdmin implements Serializable{
 	@Column(name = "hold_behalf_userid")
 	private int hold_behalf_userid;
 	
-	 
+	@Column(name = "eoi_unit_locked")
+	private boolean eoi_unit_locked; 
+	
+	
 	public boolean isHold_status() {
 		return hold_status;
 	}
@@ -150,5 +153,13 @@ public class HoldInventoryAdmin implements Serializable{
 	}
 	public void setHold_behalf_userid(int hold_behalf_userid) {
 		this.hold_behalf_userid = hold_behalf_userid;
+	}
+
+	public boolean isEoi_unit_locked() {
+		return eoi_unit_locked;
+	}
+
+	public void setEoi_unit_locked(boolean eoi_unit_locked) {
+		this.eoi_unit_locked = eoi_unit_locked;
 	}
 }

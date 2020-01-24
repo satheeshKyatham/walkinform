@@ -178,6 +178,7 @@
 				<li><span class="soldOut"></span> Sold Out</li>
 				<li><span class="holdforDiscussion"></span> Hold </li>
 				<li><span class="unitBlockAdmin"></span> Block</li>
+				<li><span class="unitEOIBlockAdmin"></span> EOI Hold</li>
 				
 				
 				<!-- <li><span class="allotedThroughOffer"></span> Alloted through offer</li>

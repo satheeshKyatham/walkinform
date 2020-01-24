@@ -129,7 +129,7 @@ function populatePaymentDetails(enq){
 function savePaymentInfo(event,el){
 	//debugger;
 	   // event.preventDefault();
-	    $("#enquiryStatus").val("EOI");
+	    //$("#enquiryStatus").val("EOI");
 	    submitIt("enquiryRequestBasicInfoForm","saveBaseInfo","savebasicInfoResp");
 	    submitWithFile("bankPaymentForm","savePaymentInfo","savePaymentInfoResp");
 	    
