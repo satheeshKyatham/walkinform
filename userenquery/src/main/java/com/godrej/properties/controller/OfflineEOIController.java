@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -45,10 +46,10 @@ public class OfflineEOIController {
 	@Autowired
 	private EnquiryReportService enquiryReportService;
 	
-	@GetMapping(value = {"/offlineEOI","/offlineEOI/{countrycode}/{mobileno}/{projectid}/{projectname}/{userid}/{enquiryType}"})
-	public ModelAndView offlineEOI(@PathVariable("countrycode") Optional<String> countrycode,@PathVariable("mobileno") Optional<String> mobileno,
-			@PathVariable("projectid") Optional<String> projectid,@PathVariable("projectname") Optional<String> projectname,
-			@PathVariable("userid") Optional<String> userid,@PathVariable("enquiryType")Optional<String> enquiryType
+	@GetMapping(value = {"/offlineEOI"})
+	public ModelAndView offlineEOI(@RequestParam("countrycode") Optional<String> countrycode,@RequestParam("mobileno") Optional<String> mobileno,
+			@RequestParam("projectid") Optional<String> projectid,@RequestParam("projectname") Optional<String> projectname,
+			@RequestParam("userid") Optional<String> userid,@RequestParam("enquiryType")Optional<String> enquiryType
 			,HttpServletRequest request){
 		ModelAndView view=new ModelAndView("offlineeoi");
 		boolean hasParam=true;
