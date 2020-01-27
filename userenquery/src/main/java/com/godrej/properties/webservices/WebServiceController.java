@@ -2740,7 +2740,7 @@ public class WebServiceController<MultipartFormDataInput> {
 		ArrayList<String> rows = new ArrayList<String>();
 		rows.add("Project Name,Tokenno,Created,Enquiry Name,Mobile Phone,Customer Name,Email,have_we_met_before,age_a__c,residenceaddress,officelocation,"
 				+ "empstatus,company_name__c,is_purchase_for_self_use_or_investment__c,budget"
-				+ ",typology_requirement,walk_in_source__c,advertisementname,brokername,current_residence_configuration,current_residence_ownership,source_of_funding,customer_classification,ethnicity,unit_availability,accompanied_by,deal_negotiation,construction_status,timeframe_to_book,enquirynoneditcomment,verticle,sourcingname,closingname,closingemail,own_contribution_receipt,Assined To,IsAttended,CP Comments,FollowType,FollowDate"
+				+ ",typology_requirement,walk_in_source__c,advertisementname,brokername,current_residence_configuration,current_residence_ownership,source_of_funding,customer_classification,ethnicity,unit_availability,accompanied_by,deal_negotiation,construction_status,timeframe_to_book,enquirynoneditcomment,verticle,sourcingname,closingname,closingemail,own_contribution_receipt,loan_eligibility,Assined To,IsAttended,CP Comments,FollowType,FollowDate"
 				+ ",Trigger 1,Trigger 2,Barrier 1,Barrier 2,Lost Reason,Designation");
 		rows.add("\n");
 		String fromdate = resquest.getParameter("fromdate");
@@ -2847,8 +2847,8 @@ public class WebServiceController<MultipartFormDataInput> {
 			rows.add(",");
 			rows.add(mislist.get(i).getOwn_contribution_receipt());
 			rows.add(",");
-			/*rows.add(mislist.get(i).getLoan_eligibility());
-			rows.add(",");*/
+			rows.add(mislist.get(i).getLoan_eligibility());
+			rows.add(",");
 			rows.add(mislist.get(i).getUser_name());
 			rows.add(",");
 			rows.add(mislist.get(i).getAttended());
