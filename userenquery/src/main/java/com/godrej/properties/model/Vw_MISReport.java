@@ -77,7 +77,7 @@ public class Vw_MISReport {
 	@Column(name="Lost_reason_c__c") private String Lost_reason_c__c;
 	
 	@Column(name="verticle__c") private String verticle__c;
-	
+	@Column(name="designation__c") private String designation__c;
 	
 	public int getRow_number() {
 		return row_number;
@@ -415,4 +415,11 @@ public class Vw_MISReport {
 	public void setVerticle__c(String verticle__c) {
 		this.verticle__c = verticle__c;
 	}
+	public String getDesignation__c() {
+		return designation__c;
+	}
+	public void setDesignation__c(String designation__c) {
+		this.designation__c = designation__c;
+	}
+	
 }

@@ -249,7 +249,7 @@ function onChangeRole()
 	else if($("#roleSelected").val()=='KYCA')
 		window.location.href = "kycrole?projectid="+$('#projectSelected').val()+"&projectname="+$('#projectSelected option:selected').text();
 	else if($("#roleSelected").val()=='OFFLINEADM'){
-		window.location.href = "offlineEOI";
+		window.location.href = "offlineEOI?projectid="+$('#projectSelected').val()+"&projectname="+$('#projectSelected option:selected').text();
 	}
 
 		//window.location.href = "assignedusers?userId=" + $('#loged_userid').val()+"&projectid="+$('#projectSelected').val()+"&projectname="+$('#projectSelected option:selected').text() ;

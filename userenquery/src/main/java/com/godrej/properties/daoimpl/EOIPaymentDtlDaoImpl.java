@@ -75,19 +75,20 @@ public class EOIPaymentDtlDaoImpl extends AbstractDao<Integer, EOIPaymentDtl> im
 		Session session = this.sessionFactory.getCurrentSession();
 		//List<EOIPaymentDtl> list = session.createQuery( "  FROM EOIPaymentDtl "+whereCondition+"").list();
 		List<EOIPaymentDtl> list=new ArrayList<EOIPaymentDtl>();
-		/*Query q = session.createNativeQuery("select eoiPay.gpl_cs_eoi_payment_details_id,eoiPay.project_sfid,eoiPay.userid,eoiPay.payment_type,eoiPay.bank_name,eoiPay.branch,eoiPay.isactive,eoiPay.enq_sfid,req.name "
+		/*List<EOIPaymentModel> listNew=new ArrayList<EOIPaymentModel>();
+		Query q = session.createNativeQuery("select eoiPay.gpl_cs_eoi_payment_details_id,eoiPay.project_sfid,eoiPay.userid,eoiPay.payment_type,eoiPay.bank_name,eoiPay.branch,eoiPay.isactive,eoiPay.enq_sfid,req.name "
 				+ " ,eoiPay.transaction_id,eoiPay.transaction_date,eoiPay.transaction_amount,eoiPay.description,eoiPay.total_amount "
 				+ " ,eoiPay.gpl_cs_balance_details_id,eoiPay.pan_attach,cheque_attach,user_email,eoiPay.user_name,eoiPay.project_name,eoiPay.isfromcp "
 				+ " from salesforce.gpl_cs_eoi_payment_details eoiPay "
-				+ " inner join salesforce.propstrength__request__c req on(eoiPay.enq_sfid=req.sfid) "+whereCondition+" ", EOIPaymentModel.class);
+				+ " inner join salesforce.propstrength__request__c req on(eoiPay.enq_sfid=req.sfid) "+whereCondition+" ");
 		//order by b.id
-		list = (List<EOIPaymentModel>)q.getResultList();
+		list = (List<EOIPaymentDtl>)q.getResultList();
 		
 		Log.info("Final Size::{}",list.size());
-		if (list.size() > 0) {
+		if (listNew.size() > 0) {
 			return null;
-		}
-		return null;*/
+		}*/
+		//return null;
 		
 		List<Object[]> results = session.createQuery("select eoiPay.id,eoiPay.project_sfid,eoiPay.userid,eoiPay.payment_type,eoiPay.bank_name,eoiPay.branch,eoiPay.isactive,eoiPay.enq_sfid,req.name "
 				+ " ,eoiPay.transaction_id,eoiPay.transaction_date,eoiPay.transaction_amount,eoiPay.description,eoiPay.total_amount "

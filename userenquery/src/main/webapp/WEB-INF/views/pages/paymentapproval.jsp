@@ -96,8 +96,8 @@ if(ses!=null){
 				<div class="commonLoad" id="mainPageLoad" style="display: none;"></div>
 				
 				<div class="col-md-12">
-					<button onclick="approvedEOIPayment()">Approve All</button>
-					<button onclick="rejectEOIPayment()">Reject All</button>
+					<button onclick="approvedEOIPayment()">Approve Selected</button>
+					<button onclick="rejectEOIPayment()">Reject Selected</button>
 					<div class="clearfix"></div>
 					<table class="table table-bordered" id="Payment_Pending">
 						<thead>
