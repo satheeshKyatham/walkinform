@@ -95,7 +95,7 @@ if(ses!=null){
 	   		<div class="tab-pane active" id="tab1">
 				<div class="commonLoad" id="mainPageLoad" style="display: none;"></div>
 				
-				<div class="col-md-12">
+				<div class="col-md-12" style="overflow: auto;">
 					<button onclick="approvedEOIPayment()">Approve Selected</button>
 					<button onclick="rejectEOIPayment()">Reject Selected</button>
 					<div class="clearfix"></div>
@@ -104,9 +104,11 @@ if(ses!=null){
 							<tr>
 							<th style="display:none">ID</th>
 								<th></th>
+								<th>Created Date</th>
 								<th>Enquiry No</th>
-								<!-- <th>Customer Name</th>
-								<th>Mobile No</th> -->
+								<th>Customer Name</th>
+								<th>Mobile No</th>
+								<th>Closing Manager</th>
 								<th>Payment Type</th>
 								<th>Bank Name</th>
 								<th>Branch</th>
@@ -134,9 +136,11 @@ if(ses!=null){
 							<thead>
 								<tr>
 									
+									<th>Created Date</th>
 									<th>Enquiry No</th>
-									<!-- <th>Customer Name</th>
-									<th>Mobile No</th> -->
+									<th>Customer Name</th>
+									<th>Mobile No</th>
+									<th>Closing Manager</th>
 									<th>Payment Type</th>
 									<th>Bank Name</th>
 									<th>Branch</th>
@@ -160,9 +164,11 @@ if(ses!=null){
 						<table class="table table-bordered" id="Payment_Reject">
 							<thead>
 								<tr>
+									<th>Created Date</th>
 									<th>Enquiry No</th>
-									<!-- <th>Customer Name</th>
-									<th>Mobile No</th> -->
+									<th>Customer Name</th>
+									<th>Mobile No</th>
+									<th>Closing Manager</th>
 									<th>Payment Type</th>
 									<th>Bank Name</th>
 									<th>Branch</th>
@@ -183,6 +189,8 @@ if(ses!=null){
 		  <div class="clearfix"></div>
 		</div>  
      	<div class="clearfix"></div>
-	
+	<script src="<c:url value='/resources/js/dataTables.buttons.min.js'/>"></script>
+	<script src="<c:url value='/resources/js/jszip.min.js'/>"></script>
+	<script src="<c:url value='/resources/js/buttons.html5.min.js'/>"></script>
 </body>
 </html>

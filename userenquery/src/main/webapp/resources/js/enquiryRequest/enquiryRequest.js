@@ -635,7 +635,7 @@ function savebasicInfoResp(data){
 					cpname=enq.otherChannelPartner;
 				}*/
 			
-			$.get(url+"/generateWalkinToken",{"enquiryid":enq.enquiryId,"mobileno":contact.mobileNo,"projectSFID":$("#projectSfid").val(),"projectName":$("#projectName").val()
+			$.get(url+"/generateWalkinToken",{"enquiryid":enq.enquiryId,"mobileno":contact.mobile,"projectSFID":$("#projectSfid").val(),"projectName":$("#projectName").val()
         		,"countryCode":contact.countryCode},function(data){//,"cpflag":enq.isReferredByChannelPartnerFlag,"cpname":cpname				 
         	}).done(function(data){
         	});

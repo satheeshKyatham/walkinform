@@ -1,6 +1,7 @@
 package com.godrej.properties.model;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -80,6 +81,7 @@ public class EOIPaymentDtl implements Serializable{
 	
 	@Column(name = "gpl_cs_balance_details_id") private int gpl_cs_balance_details_id;
 	@Column(name = "isfromcp") private String isfromcp;
+	@Column(name = "created") private Timestamp createdDate;
 	@Transient
 	private String offerid;
 	@Transient
@@ -306,5 +308,15 @@ public class EOIPaymentDtl implements Serializable{
 	public void setEoi_form_path(String eoi_form_path) {
 		this.eoi_form_path = eoi_form_path;
 	}
+
+	public Timestamp getCreatedDate() {
+		return createdDate;
+	}
+
+	public void setCreatedDate(Timestamp createdDate) {
+		this.createdDate = createdDate;
+	}
+
+
 	
 }
