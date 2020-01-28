@@ -22,5 +22,6 @@ public interface EOIEnquiryService {
 
 	void UpdateToken(Token token);
 	public List<CoApplicant> getCoapplicantData(String enqid);
+	public String getEOITokenType(String enqsfid);
 
 }

@@ -1,6 +1,7 @@
 package com.godrej.properties.model;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -75,11 +76,21 @@ public class EOIPaymentDtl implements Serializable{
 	@Column(name = "project_name")
 	private String project_name;
 	
-
+	@Column(name = "eoi_form_path")
+	private String eoi_form_path;
+	
 	@Column(name = "gpl_cs_balance_details_id") private int gpl_cs_balance_details_id;
 	@Column(name = "isfromcp") private String isfromcp;
+	@Column(name = "created") private Timestamp createdDate;
 	@Transient
 	private String offerid;
+	@Transient
+	private String name;
+	
+	@Transient
+	private String customerName;
+	@Transient
+	private String mobileNo;
 	
 	@Transient
 	private String context= System.getProperty("catalina.home");
@@ -265,5 +276,47 @@ public class EOIPaymentDtl implements Serializable{
 	public void setIsfromcp(String isfromcp) {
 		this.isfromcp = isfromcp;
 	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getCustomerName() {
+		return customerName;
+	}
+
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
+	}
+
+	public String getMobileNo() {
+		return mobileNo;
+	}
+
+	public void setMobileNo(String mobileNo) {
+		this.mobileNo = mobileNo;
+	}
+
+	public String getEoi_form_path() {
+		return eoi_form_path;
+	}
+
+	public void setEoi_form_path(String eoi_form_path) {
+		this.eoi_form_path = eoi_form_path;
+	}
+
+	public Timestamp getCreatedDate() {
+		return createdDate;
+	}
+
+	public void setCreatedDate(Timestamp createdDate) {
+		this.createdDate = createdDate;
+	}
+
+
 	
 }

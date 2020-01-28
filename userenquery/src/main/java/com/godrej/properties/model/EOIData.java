@@ -78,7 +78,7 @@ public class EOIData implements Serializable{
 	@Column(name="kyclink") private String kyclink;
 	@Column(name="kycapproval_status") private String kycapproval_status;
 	@Column(name="kycreject_comment") private String kycreject_comment;
-	
+
 	public String getUserdocid() {
 		return userdocid;
 	}
@@ -418,5 +418,4 @@ public class EOIData implements Serializable{
 		this.kycreject_comment = kycreject_comment;
 	}
 
-	
 }

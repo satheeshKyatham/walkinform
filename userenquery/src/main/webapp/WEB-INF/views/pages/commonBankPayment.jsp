@@ -11,9 +11,6 @@
 
 
 
-
-
-
 <!-- <div class="tab-pane active" id="tab1"> -->
 	<form:form id="bankPaymentForm" modelAttribute="EnquiryRequest"
 		enctype="multipart/form-data">
@@ -118,10 +115,11 @@
 			<div class="clearfix"></div>
 			<!-- New EOI Dtl -->
 			<div class="col-md-12" style="margin-bottom:20px;">
-				<p onclick="addMoreEoiRowBtn()">
-					<i class="fa fa-plus-circle"></i> Add More
-				</p>
-				<table class="table table-bordered  bgWhite" id="EOIMultipleTable">
+				<h4 class="mrgT0">
+					Preference Details
+				</h4>
+				
+				<table class="table table-bordered  bgWhite mrgB8" id="EOIMultipleTable">
 					<tbody>
 						<tr class="subHead">
 							<th>
@@ -171,6 +169,10 @@
 						</tr>
 					</tbody>
 				</table>
+				
+				<p class="addMoreBtn" onclick="addMoreEoiRowBtn()">
+					<i class="fa fa-plus-circle"></i> Add More
+				</p>
 			</div>
 			<!-- END EOI Dtl -->
 			
@@ -179,10 +181,11 @@
 			
 			<!-- New EOI Payment Dtl -->
 			<div class="col-md-12" style="margin-bottom:50px;">
-				<p onclick="addMorePtBtnEoi()">
-					<i class="fa fa-plus-circle"></i> Add More
-				</p>
-				<table class="table table-bordered  bgWhite" id="csPtColEoi">
+				<h4 class="mrgT0">
+					Payment Details
+				</h4>
+				
+				<table class="table table-bordered  bgWhite mrgB8" id="csPtColEoi">
 					<tbody>
 						<tr class="subHead">
 							<th>Status</th>
@@ -227,6 +230,7 @@
 									<option value="Cheque">Cheque</option>
 									<option value="NEFT">NEFT/Credit</option>
 									<option value="Swipe">Swipe</option>
+									<option value="Wire Transfer">Wire Transfer (PayZap, Google Pay)</option>
 									<!--<option value="Online">Online</option>-->
 								</select>
 							</td>
@@ -243,14 +247,14 @@
 								<input type="date" class="full form-control input-sm csPtTransactionDateEoi requiredField" placeholder="Transaction Date"/>
 							</td>
 							<td>
-								<input class="numericField full form-control input-sm csPtTransactionAmountEoi requiredField" onkeyup="csPtcalculateGrandTotalEoi()" name="amount" placeholder="Transaction Amount"/>
+								<input maxlength="10" class="numericWithoutDecimal numericField full form-control input-sm csPtTransactionAmountEoi requiredField" onkeyup="csPtcalculateGrandTotalEoi()" name="amount" placeholder="Transaction Amount"/>
 							</td>
 							
 							<td>
-								<input type="file" class="full form-control input-sm panAttachEoi requiredField" accept="application/pdf,image/*"/>
+								<input type="file" class="full form-control input-sm panAttachEoi" accept="application/pdf,image/*"/>
 							</td>
 							<td>
-								<input type="file" class="numericField full form-control input-sm receiptAttachEoi requiredField" accept="application/pdf,image/*"/>
+								<input type="file" class="numericField full form-control input-sm receiptAttachEoi" accept="application/pdf,image/*"/>
 							</td>
 							
 							<td>
@@ -261,6 +265,9 @@
 						
 					</tbody>
 				</table>
+				<p class="addMoreBtn" onclick="addMorePtBtnEoi()">
+					<i class="fa fa-plus-circle"></i> Add More
+				</p>
 				
 				<div style="display:none;">
 					<span>Total transaction amount: </span><span id="csPtGrandtotalEoi"></span>
@@ -543,7 +550,7 @@
 		</div>
 
 		<div class="clearfix"></div>
-		<div class="btnWrp">
+		<div class="btnWrp" style="z-index: 10;">
 			<div class="btnCol">
 				<a class="btn btn-primary btnPrevious"> <span>Previous</span>
 				
@@ -551,15 +558,35 @@
 				
 				<!-- <a class="btn btn-primary blue_btn  mrgR15"	 id="eoiclose" style="display: none;"
 				onclick="savePaymentInfo(event,this);"> <span> Close</span></a> -->
-				<a class="btn blue_btn  mrgR15 eoi_submitted"	 id="eoisaveclose"
-				onclick="savePaymentInfo(event,this);"> <span>Save EOI </span></a>
+				<a class="btn blue_btn  mrgR15 eoi_submitted"	 id="eoisaveclose" onclick="savePaymentInfo(event,this);"> 
+				<%
+				
+				if(request.getParameterMap().containsKey("roleid"))
+				{
+					String roleIdString = (String) request.getParameter("roleid");
+					int roleid = 0;
+					if(roleIdString !=null){
+						roleid = Integer.parseInt(roleIdString);
+					}
+					if(roleid==17)
+					{
+						%>
+						<span>Save EOI, Generate KYC Link & Go To Offline EOI</span>
+				<%}
+					else{%>
+						<span>Save EOI & Generate KYC Link</span>
+				<%}}
+				else{%>
+						<span>Save EOI & Generate KYC Link</span>
+				<%}%>
+				</a>
 				
 				<!--17-12-2019 Requested from - Prakash -- Hide Generate KYC button from UI and backed functionality added on Save EOI button Click And Exit & Close buttons also hide -->
 				<!-- <a class="btn blue_btn  mrgR15" style="padding: 7px 10px;" data-toggle="modal" data-target="#myModal"> <span>Exit & Close</span></a> -->
-				<a id="btnkyclink" class="btn blue_btn btn-primary mrgR15"
+				<!-- <a id="btnkyclink" class="btn blue_btn btn-primary mrgR15"
 					onclick="generateKYCLink(event,this,'Y');"> <span>Generate
 						KYC Link</span>
-				</a>
+				</a> -->
 				
 				
 				
@@ -597,4 +624,142 @@
 </div>
 
 
+<!-- <button onclick="getEOIPreferencPrint();">Test Print</button> -->
 
+<!-- EOI Print Form -->
+
+<div id="printEOIForm" class="col-md-8" style="border: 1px dotted #ccc; margin: 0 auto; float: none; margin-top: 40px; padding-top: 15px;">
+		<!-- <div style="padding-bottom:10px;"><b style="font-size:18px; text-align:center;">EOI Form: <span id="projectNameEOIPrint"></span></b></div> -->
+		
+		<table class="table table-bordered" style="margin-bottom:20px; border-color: #ffffff; padding:0px;">
+		    <tbody style="border-color: #ffffff; padding:0px;">
+		    	<tr style="border-color: #ffffff; padding:0px;">
+		    		<td style="border-color: #ffffff; padding:0px;"><b style="font-size:18px; text-align:left;">EOI Form: <span id="projectNameEOIPrint"></span></b></td>
+		    		<td class="dateOfEOIPrint" style="text-align:right; border-color: #ffffff; padding:0px;"></td>
+		    	</tr>
+		    </tbody>
+		 </table>
+		
+		
+		<div style="padding-bottom:10px;"><b>Applicant Details</b></div>
+		<table id="" style="margin-bottom:20px;" class="table table-bordered">
+		    <tbody>
+				<tr>
+					<td>Name of Primary Applicant</td> <td id="priAppNameEOIPrint"></td>
+				</tr>
+				<tr>
+					<td>Email Address of Primary Applicant</td> <td id="priAppEmailEOIPrint"></td>
+				</tr>
+				<tr>
+					<td>Mobile No. of Primary Applicant</td> <td id="priAppMobileEOIPrint"></td>
+				</tr>
+				<tr>
+					<td>Name of Second Applicant</td> <td id="secondAppNameEOIPrint"></td>
+				</tr>
+				<tr>
+					<td>Name of Third Applicant</td> <td id="thirdAppNameEOIPrint"></td>
+				</tr>
+				
+				
+				<tr>
+					<td>PAN Card No.</td> <td id="priAppPANEOIPrint"></td>
+				</tr>
+				<tr>
+					<td>Aadhar Card No.</td> <td id="priAppAadharEOIPrint"></td>
+				</tr>
+				<tr>
+					<td>Residence Address</td> <td id="priAppResAddsEOIPrint"></td>
+				</tr>
+				
+				
+				<tr>
+					<td>Area / Location</td> <td id="priAppAreaLocationEOIPrint"></td>
+				</tr>
+				<tr>
+					<td>City</td> <td id="priAppCityEOIPrint"></td>
+				</tr>
+				<tr>
+					<td>PIN Code.</td> <td id="priAppPinCodeEOIPrint"></td>
+				</tr>
+		    </tbody>
+		  </table>
+		
+		
+		<div  style="padding-bottom:10px;"><b>Preference(s)</b></div>
+		<table id="EOIMultipleTablePrint" style="margin-bottom:20px;" class="table table-bordered">
+		    <thead>
+				<tr>
+					<th>Typology</th>
+					<th>Ticket Size</th>
+					<th>Floor Band</th>
+					<th>Tower</th>
+					<th>Facing</th>
+					<th>Description</th>
+		      	</tr>
+		    </thead>
+		    <tbody>
+		      
+		    </tbody>
+		 </table>
+	
+	
+		<div style="padding-bottom:10px;"><b>Payment Details</b></div>
+		<table id="EOIMultiplePaymentPrint" style="margin-bottom:20px;" class="table table-bordered">
+			<thead>
+				<tr>
+					<th>Name of Payer</th>
+					<th>Mode of Payment</th>
+					<th>Amount (in Rs.)</th>
+					<th>Bank Name</th>
+					<th>Branch Name</th>
+					<th>Cheque No./ Txn ID</th>
+					<th>Description</th>
+		      	</tr>
+			</thead>
+		    <tbody>
+		      
+		    </tbody>
+		</table>
+		
+		<table style="margin-bottom:20px;" class="table table-bordered">
+			<tr>
+				<td colspan='2'><b>Closing Manager Name:</b> <span id="closingMangrEOIPrint"></span></td>
+			</tr>
+			<tr>
+				<td style="height:40px; width:60%;"><b>Signature:</b></td>
+				<td><b>Date:</b> <span class="dateOfEOIPrint"></span></td>
+			</tr>
+		</table>
+		
+		
+		<table id="" style="margin-bottom:20px;" class="table table-bordered">
+		    <tbody>
+				<tr>
+					<td><b>Source:</b> <span id="enqTypeEOIPrint"></span></td>
+					<td><b>Vertical:</b> <span id="verticalEOIPrint"></span></td>
+				</tr>		
+				<tr>	
+					<th colspan="2">RERA ID (Channel Partner):</th>
+		      	</tr>
+		      	<tr>	
+					<td colspan="2"><b>Sourcing Manager Name:</b>  <span id="sourcingMngrEOIPrint"></span></td>
+		      	</tr>		      
+		    </tbody>
+		</table>
+		<div style="page-break-before: always"></div>
+		<table class="table table-bordered">
+			<tbody>
+				<tr>
+					<th>
+						Terms and Conditions
+					</th>
+				</tr>
+				<tr>
+					<td id="tncDataEOI">									
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	
+</div>
+<!-- END EOI Print Form -->

@@ -22,6 +22,9 @@ public class KeyConstants {
 	public static final String RECORD_TYPE_CUSTOMER = "01290000000uHV8AAM";
 	public static final int SITE_VISIT_DAYS_LIMIT = 90;
 	public static final int LAST_MODIFY_DAYS_LIMIT  = 30;
+	public static final int LAST_MODIFY_DAYS_LIMIT_45  = 45;
+	public static final String ENQUIRY_STATUS_FOR_ASSINED_SALES  = "Assigned to Sales";
+	
 	
 	public static final String COMMON_EMAIL  = "marketing@godrejproperties.com";
 	public static final String BASE_PATH  = "C:\\userenquiry\\EOI\\";
@@ -73,6 +76,13 @@ public class KeyConstants {
 	public static final String SFDC_OFFERAPI = "https://godrej.my.salesforce.com/services/apexrest/api/CreateOfferPrepayment";
 	public static final String SFDC_OFFERAPI_BULKY = "https://godrej.my.salesforce.com/services/apexrest/api/CreateOfferPrepaymentBulky";
 	public static final String SFDC_OFFERPREPAYMENTAPI = "https://godrej.my.salesforce.com/services/apexrest/api/OfferPrepayments";
+	
+	//Follow Type Constants
+	public static final String FOLLOW_TYPE_CALL = "Required Call from Sales Executive(SE)";
+	public static final String FOLLOW_TYPE_REVISIT = "Interested In Site Visit";
+	
+	public static final String REFERENCE_CODE_VISIT_TYPE="VISIT_TYPE";
+
 	
 }
 

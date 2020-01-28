@@ -29,6 +29,7 @@ import com.godrej.properties.constants.KeyConstants;
 import com.godrej.properties.constants.MessageConstants;
 import com.godrej.properties.dto.ContactDto;
 import com.godrej.properties.dto.EnquiryDto;
+import com.godrej.properties.dto.UserTokenDto;
 import com.godrej.properties.master.dto.ReferenceListDto;
 import com.godrej.properties.master.service.ReferenceListService;
 import com.godrej.properties.model.Contact;
@@ -274,13 +275,23 @@ public class EnquiryRequestController {
 		try{
 			List<EnquiryDto> enquiryList=enquiryRequestService.getEnquiriesByMobileNo(countryCode,mobileNo,projectSfid,"");
 			ContactDto contact=null;
+			EnquiryDto enquiryDto =null;
 			if(CommonUtil.isCollectionEmpty(enquiryList)){
 			  contact=userContactService.findMobileNoExist(countryCode,mobileNo);			  
 			}else {
 				contact=enquiryList.get(0).getContact();
+				enquiryDto =  enquiryList.get(0);
 			}
+			
+			String enquirySfid = null;
+			if(enquiryDto !=null) {
+				enquirySfid= String.valueOf(enquiryDto.getEnquiryId());
+			}
+			Token token = tokenService.getTokenByEnquiry(enquirySfid);
+			UserTokenDto userToken = getUserToken(token);
 			resp.addObject("enquiryList", enquiryList);
 			resp.addObject("contact", contact);
+			resp.addObject("userToken", userToken);
 			resp.setSuccess(true);
 			resp.setMessage(MessageConstants.ENQUIRY_GET_SUCCESS);
 			LOG.info(MessageConstants.ENQUIRY_GET_SUCCESS);
@@ -294,6 +305,15 @@ public class EnquiryRequestController {
 		return resp;
 	}
 	
+	private UserTokenDto getUserToken(Token token) {
+		UserTokenDto userToken =  new UserTokenDto();
+		if(token==null) {
+			return null;
+		}
+		userToken.setTokenId(String.valueOf(token.getNv_token_id()));
+		userToken.setTokenNo(token.getType()+token.getQueue());
+		return userToken;
+	}
 	private void send_sms(String mobile ,String token,String projName) throws UnsupportedEncodingException {
 		
 	 	String msg=	"Thank you for your interest in "+projName+". Your token no is "+ token+	". Regards, Godrej Properties.";

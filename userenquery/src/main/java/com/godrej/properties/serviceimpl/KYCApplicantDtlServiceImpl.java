@@ -6,11 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.godrej.properties.dao.ApplicantDtlDao;
 import com.godrej.properties.dao.KYCApplicantDtlDao;
 import com.godrej.properties.model.EOIData;
+import com.godrej.properties.model.EOIDataVW;
 import com.godrej.properties.model.KYCApplicantDtl;
-import com.godrej.properties.service.ApplicantDtlService;
 import com.godrej.properties.service.KYCApplicantDtlService;
 
 @Service("kYCapplicantDtlService")
@@ -26,7 +25,14 @@ public class KYCApplicantDtlServiceImpl implements KYCApplicantDtlService{
 
 	@Override
 	public List<EOIData> getKYCData(String userid, String projectid) {
-		// TODO Auto-generated method stub
 		return kYCapplicantDtlDao.getKYCData(userid, projectid);
+	}
+	@Override
+	public List<EOIDataVW> getKYCDataVW(String userid, String projectid) {
+		return kYCapplicantDtlDao.getKYCDataVW(userid, projectid);
+	}
+	@Override
+	public EOIData getKYCStatus(String enquiryName, String projectid) {
+		return kYCapplicantDtlDao.getKYCStatus(enquiryName, projectid);
 	}
 }

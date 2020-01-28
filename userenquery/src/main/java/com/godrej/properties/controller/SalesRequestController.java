@@ -204,10 +204,12 @@ public class SalesRequestController {
 			 String USERMOBILENO=(String)session.getAttribute("USERMOBILENO");
 			 String USERNAME=(String)session.getAttribute("USERNAME");
 			 String USEREMAIL=(String)session.getAttribute("USEREMAIL");
+			 
 			EnquiryDto dest=enquiryRequestService.getEnquiryById(enq);
 			if(dest==null) {
 				dest=new EnquiryDto();
 			}
+			
 			enq=enquiryRequestService.updateAddressInfo(enq, dest);
 			resp.setMessage("Enquiry Updated.");
 			resp.setSuccess(true);
@@ -222,6 +224,7 @@ public class SalesRequestController {
 			String strencryptedText="";
 			
 			tokenService.updateEnqSalesTab(enq.getEnquiryId(), USEREMAIL);
+			
 			try {
 				strencryptedText = URLEncoder.encode(textsms, "UTF-8");
 			} catch (UnsupportedEncodingException e) {

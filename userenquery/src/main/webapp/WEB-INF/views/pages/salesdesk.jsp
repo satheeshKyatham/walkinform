@@ -31,7 +31,7 @@
 <link rel="stylesheet" href="<c:url value='/resources/css/bootstrap.min.css' />" type="text/css" />
  <script src="<c:url value='/resources/js/bootstrap.min.js'/>"></script>
 
-<script src="<c:url value='/resources/js/salesdesk.js?v=18'/>"></script>
+<script src="<c:url value='/resources/js/salesdesk.js?v=18.02'/>"></script>
 <script src="<c:url value='/resources/js/jquery-1.12.4.min.js'/>"></script>
 </head>
 <body>
@@ -40,9 +40,9 @@
   <div class="col-md-8" style="margin-top:10px; margin-bottom:10px;">
   <input type="hidden" id="userid" value="<%= session.getAttribute("USERID")%>" />
   <input type="hidden" id="proid" value="<%= session.getAttribute("PROID")%> "/>
-   <input type="hidden" id="role" value="<%= session.getAttribute("ROLE")%> "/>
+  <input type="hidden" id="role" value="<%= session.getAttribute("ROLE")%> "/>
   <input type="text" id="useremail" value="<%= session.getAttribute("USEREMAIL")%>" />
-   <input type="text" id="proame" value="<%= session.getAttribute("PRONAME")%>" />
+  <input type="text" id="proame" value="<%= session.getAttribute("PRONAME")%>" />
   
   <table>
     <!-- here should go some titles... -->

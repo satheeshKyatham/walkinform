@@ -2,8 +2,6 @@ package com.godrej.properties.dto;
 
 import java.util.Date;
 
-import javax.persistence.Column;
-
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -66,6 +64,7 @@ public class EnquiryReportDto extends CommonDto{
 	
     
     private String followType;
+   	private String visitType;
     
     @DateTimeFormat(pattern=KeyConstants.DEFAULT_DATE_FORMAT)
     private Date followDate;
@@ -84,7 +83,12 @@ public class EnquiryReportDto extends CommonDto{
     private String trigger2;
     private String barrier2;
     /*=========End========*/
-    
+    /* Referred by added on Enquiry page, on select of walk-in source as referral -  
+     * Change By Satheesh Kyatham- 25-12-2019
+     * Request From - Prakash Idnani*/
+    /*=======Start==========*/
+    private String referredby;
+    /*=========End========*/
     public String getProjectId() {
 		return projectId;
 	}
@@ -348,7 +352,19 @@ public class EnquiryReportDto extends CommonDto{
 	public void setBarrier2(String barrier2) {
 		this.barrier2 = barrier2;
 	}
-	
-	
+	public String getReferredby() {
+		return referredby;
+	}
+	public void setReferredby(String referredby) {
+		this.referredby = referredby;
+	}	
+	public String getVisitType() {
+		return visitType;
+	}
+
+	public void setVisitType(String visitType) {
+		this.visitType = visitType;
+	}
+
 	
 }

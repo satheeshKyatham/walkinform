@@ -214,6 +214,7 @@ public class UserContactServiceImpl implements UserContactService {
 		dest.setResidentialCountry(src.getResidentialCountry());
 		/*dest.setIndustry(src.getIndustry());*/
 		dest.setCompanyName(src.getCompanyName());
+		dest.setDesignation(src.getDesignation());
 		//dest.setOtherEmail(src.getOtherEmail());
 		return dest;
 	}

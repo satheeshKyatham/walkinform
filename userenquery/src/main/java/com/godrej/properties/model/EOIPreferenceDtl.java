@@ -82,6 +82,9 @@ private static final long serialVersionUID = 1L;
 	@Column(name = "token_no")
 	private int token_no;
 	
+	@Column(name = "eoi_form_path")
+	private String eoi_form_path;
+	
 	@Transient
 	private String eoi_date_string;
 	
@@ -263,5 +266,13 @@ private static final long serialVersionUID = 1L;
 
 	public void setEoi_date_string(String eoi_date_string) {
 		this.eoi_date_string = eoi_date_string;
+	}
+
+	public String getEoi_form_path() {
+		return eoi_form_path;
+	}
+
+	public void setEoi_form_path(String eoi_form_path) {
+		this.eoi_form_path = eoi_form_path;
 	}
 }

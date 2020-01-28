@@ -51,7 +51,7 @@ public class EnqAndOfferDtl implements Serializable{
 	@Column(name="propstrength__total_other_charges__c") private double propstrength__total_other_charges__c;
 	
 	@Column(name="propstrength__primary_contact__c") private String propstrength__primary_contact__c;
-	
+	@Column(name="rera_registration_number__c") private String rera_registration_number__c;
 	
 	
 	public int getId() {
@@ -221,5 +221,11 @@ public class EnqAndOfferDtl implements Serializable{
 	}
 	public void setPropstrength__primary_contact__c(String propstrength__primary_contact__c) {
 		this.propstrength__primary_contact__c = propstrength__primary_contact__c;
+	}
+	public String getRera_registration_number__c() {
+		return rera_registration_number__c;
+	}
+	public void setRera_registration_number__c(String rera_registration_number__c) {
+		this.rera_registration_number__c = rera_registration_number__c;
 	}
 }

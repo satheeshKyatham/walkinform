@@ -285,5 +285,35 @@ public class TokenDaoImpl extends AbstractDao<Integer, Token> implements TokenDa
 		
 		
 	}
+
+	@Override
+	public String getSalesUserSFID(int enqid, String email) {
+		Session session = this.sessionFactory.getCurrentSession();
+		Query q = session.createNativeQuery("select sfid from  salesforce.case_escalation_users_detail__c where email__c ='"+email+"' ");
+		int i = q.getResultList().size();
+		if(i>0)
+		{
+			return q.getResultList().get(0).toString();
+		}
+		else
+			return null;
+		/*if(i>0)
+		{
+			Query query = session.createNativeQuery(" update salesforce.propstrength__request__c set Sourcing_Managers__c='"+q.getResultList().get(0)+"' where  id="+enqid+" ");
+			System.out.println("After execute..."+query.executeUpdate());
+			return "updated CM";
+		}
+		else
+			return "No Entry Found";*/
+	}
 	
+	public Token getTokenByEnquiry(String enquirySfid) {
+		Session session = this.sessionFactory.getCurrentSession();	
+		List<Token> list  =session.createQuery("  FROM Token where  enquiry_18='"+enquirySfid+"'").list();
+		if(list.size()>0) {
+			
+			return list.get(0);
+		}
+		return null;
+	}
 }

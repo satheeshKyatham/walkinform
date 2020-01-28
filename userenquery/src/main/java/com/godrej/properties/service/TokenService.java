@@ -5,7 +5,6 @@ import java.util.List;
 import com.godrej.properties.model.PriceSheet;
 import com.godrej.properties.model.Token;
 import com.godrej.properties.model.VW_Token;
-import com.google.gson.JsonElement;
 
 public interface TokenService {
 	Token generateToken(String mobileno, String type);
@@ -20,9 +19,9 @@ public interface TokenService {
 
 	String checkPriceDetails(PriceSheet pricesheet);
 
-	List<VW_Token> getTokenList(String tokenType, String projectId, String inputDate);
+	List<VW_Token> getTokenList(String tokenType, String projectId, String inputDate,String toDate);
 
-	List<VW_Token> getTokenAssignList(String tokenType, String projectid, String inputDate);
+	List<VW_Token> getTokenAssignList(String tokenType, String projectid, String inputDate,String toDate);
 
 	List<Token> getTokenList(String tokenType);
 
@@ -39,4 +38,6 @@ public interface TokenService {
 	
 	Token getTokenDetails(String tokenID);
 	String updateEnqSalesTab(int enqid,String email);
+	String getSalesUserSFID(int enqid, String email);
+	public Token getTokenByEnquiry(String enquirySfid);
 }

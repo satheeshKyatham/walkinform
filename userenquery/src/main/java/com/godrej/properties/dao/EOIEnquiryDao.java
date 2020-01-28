@@ -5,6 +5,7 @@ import java.util.List;
 import com.godrej.properties.model.CoApplicant;
 import com.godrej.properties.model.EOIData;
 import com.godrej.properties.model.Token;
+import com.godrej.properties.model.VWEOILimitAmount;
 
 
 public interface EOIEnquiryDao {
@@ -19,5 +20,6 @@ public interface EOIEnquiryDao {
 	List<EOIData> getAllData();
 
 	public List<CoApplicant> getCoapplicantData(String enqid);
+	public VWEOILimitAmount getEOITokenType(String enqsfid);
 	//void save(EOIData s);
 }

@@ -69,6 +69,9 @@ public class PaymentPlanJson {
 	private boolean  propstrength__pmay_abatement__c;
 	private String  bank__c;
 	
+	private String  property_facing__c;
+	
+	
 	
 	public String getBalcony_area_sq_ft__c() {
 		return balcony_area_sq_ft__c;
@@ -431,5 +434,10 @@ public class PaymentPlanJson {
 	public void setBank__c(String bank__c) {
 		this.bank__c = bank__c;
 	}
-	
+	public String getProperty_facing__c() {
+		return property_facing__c;
+	}
+	public void setProperty_facing__c(String property_facing__c) {
+		this.property_facing__c = property_facing__c;
+	}
 }

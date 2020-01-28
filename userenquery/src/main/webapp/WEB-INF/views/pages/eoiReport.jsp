@@ -60,14 +60,17 @@
 					<!-- <th>Region</th>
 					<th>Project Name</th> -->
 					<th>ENQ_Name</th>
+					<th>PDF</th>
 					<th>Customer Name</th>
 					<th>Customer Mobile</th>
 					<th>Customer Email</th>
 					<th>Walkin Date</th>
 					<th>Walk-in Source</th>
+					<th>Sourcing Manager Name</th>
 					
 					
-					<th>Verticle </th>
+					<th>Vertical</th>
+					<th>CP</th>
 					<th>Closing Manager</th>
 					<th>Date Of EOI</th>
 					<th>Total Payment Done</th>
@@ -77,13 +80,22 @@
 					<th>Floor_Band1</th>
 					<th>Tower Name1</th>
 					
+					<th>Unit1</th>
+					<th>Description1</th>
+					
 					<th>Typology Name2</th>
 					<th>Floor Band2</th>
 					<th>Tower Name2</th>
 					
+					<th>Unit2</th>
+					<th>Description2</th>
+					
 					<th>Typology Name3</th>
 					<th>Floor Band3</th>
 					<th>Tower Name3</th>
+					
+					<th>Unit3</th>
+					<th>Description3</th>
 				</tr>
 			</thead>
 			<tbody>

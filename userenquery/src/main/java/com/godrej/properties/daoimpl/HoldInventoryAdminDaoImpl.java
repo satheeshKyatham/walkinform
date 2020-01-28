@@ -34,7 +34,7 @@ public class HoldInventoryAdminDaoImpl extends AbstractDao<Integer, HoldInventor
 			if(list1.size()>0) {
 
 				Query query = session.createQuery(" update HoldInventoryAdmin set hold_status="+inventoryAdmin.isHold_status()
-				+",hold_reason='"+inventoryAdmin.getHold_reason()+"' where project_id ='" +inventoryAdmin.getProject_id()+"' and unitSfid ='"+inventoryAdmin.getUnitSfid()+"'");
+				+",hold_reason='"+inventoryAdmin.getHold_reason()+"', hold_description='"+inventoryAdmin.getHold_description()+"',  hold_behalf_username='"+inventoryAdmin.getHold_behalf_username()+"',  hold_behalf_userid='"+inventoryAdmin.getHold_behalf_userid()+"',  created_at= now()  where project_id ='" +inventoryAdmin.getProject_id()+"' and unitSfid ='"+inventoryAdmin.getUnitSfid()+"'");
 				query.executeUpdate();
 			
 			}else {

@@ -82,6 +82,14 @@ public class EnquiryReport extends CommonModel{
     @Column(name="barrier1") private String barrier1;
     @Column(name="trigger2") private String trigger2;
     @Column(name="barrier2") private String barrier2;
+    
+	private String visitType;
+    /*=========End========*/
+    /* Referred by added on Enquiry page, on select of walk-in source as referral -  
+     * Change By Satheesh Kyatham- 25-12-2019
+     * Request From - Prakash Idnani*/
+    /*=======Start==========*/
+    @Column(name="referredby") private String referredby;
     /*=========End========*/
     public String getProjectId() {
 		return projectId;
@@ -363,8 +371,19 @@ public class EnquiryReport extends CommonModel{
 	public void setBarrier2(String barrier2) {
 		this.barrier2 = barrier2;
 	}
-	
+	public String getReferredby() {
+		return referredby;
+	}
+	public void setReferredby(String referredby) {
+		this.referredby = referredby;
+	}
+	@Column(name = "visit_type")
+	public String getVisitType() {
+		return visitType;
+	}
 
-
+	public void setVisitType(String visitType) {
+		this.visitType = visitType;
+	}
 
 }

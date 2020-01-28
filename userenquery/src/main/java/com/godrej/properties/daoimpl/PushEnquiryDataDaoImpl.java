@@ -333,6 +333,7 @@ public class PushEnquiryDataDaoImpl  extends AAbstractDao<Enquiry> implements Pu
 			cust.setTransactionType(enqqty.getTransactionType());
 			cust.setWalkInSource(enqqty.getWalkInSource());
 			cust.setWalkInSourceDetail(enqqty.getWalkInSourceDetail());
+			cust.setSourcing_Managers__c(enqqty.getSourcing_Managers__c());
 			return cust;
 		}		
 		return null;
@@ -429,17 +430,29 @@ public class PushEnquiryDataDaoImpl  extends AAbstractDao<Enquiry> implements Pu
 		//.append(" LEFT JOIN FETCH e.contactId cs ")
 		.append(" LEFT JOIN FETCH e.channelPartner cp ")
 		.append(" LEFT JOIN FETCH e.brokerContact bc ")
-		.append(" LEFT JOIN FETCH e.enquiryReport er ")
-		.append(" WHERE c.mobile=:mobile ")
-		.append(" AND c.countryCode=:countryCode ")
-		.append(" AND p.sfid=:projectSfid ")
+		.append(" LEFT JOIN FETCH e.enquiryReport er ");
+		
+		if(mobileNo.matches("[0-9]+")) {
+			jpql.append(" WHERE c.mobile=:mobile ")
+			.append(" AND c.countryCode=:countryCode ");
+		}
+		else
+			jpql.append(" WHERE e.priority_no__c=:Priority_No__c ");
+		
+		jpql.append(" AND p.sfid=:projectSfid ")
 		.append(" AND e.eoi_enquiry__c=:eoi_enquiry__c ");
 		Map<String, Object> params=new HashMap<>();
-		/*String code=mobileNo.substring(0,3);
-		String mobile=mobileNo.substring(3);*/
-		params.put("countryCode",countryCode);
-		params.put("mobile",mobileNo);
-		/*params.put("mobileNo",mobile);*/
+	     
+		if(mobileNo.matches("[0-9]+")) {
+	    	  params.put("countryCode",countryCode);
+	  		  params.put("mobile",mobileNo);
+	      }
+	      else
+	      {
+	    	  params.put("Priority_No__c", mobileNo);
+	      }
+		
+		
 		params.put("projectSfid", projectSfid);
 		params.put("eoi_enquiry__c", true);
 		

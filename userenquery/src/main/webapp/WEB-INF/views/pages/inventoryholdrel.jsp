@@ -64,8 +64,8 @@
 					<label>Unit Status </label>
 					<select id="searchadmintype" class="form-control">
 						<option value='all'>All</option>
-						<option value='f'>Available</option>
-						<option value='t'>Hold</option>
+						<option value='f'>Action against inventory</option>
+						<option value='t'>Held/ Blocked inventory</option>
 					</select>
 				 </div>
 				 
@@ -113,31 +113,37 @@
 						Get Details
 					</button>
 				</div>
-				<div class="form-group col-md-3" id="btnholdsave" style="display: none;">
-					<label> &nbsp; </label>
-					<button  onclick="SaveForHold('temp')" style="line-height:0; color: #fff; background-color: #0077b9;" class="form-control btn btn-primary">
-						Temporary Hold 
-					</button>
-				</div>
-				<div class="form-group col-md-3" id="btnholdsave2" style="display: none;">
-					<label> &nbsp; </label>
-					<button  onclick="SaveForHold('block')" style="line-height:0; color: #fff; background-color: #0077b9;" class="form-control btn btn-primary">
-						Unit Block 
-					</button>
-				</div>
-				<div class="form-group col-md-3" id="btnreleasesave" style="display: none;">
-					<label> &nbsp; </label>
-					<button  onclick="SaveForRelease()" style="line-height:0; color: #fff; background-color: #0077b9;" class="form-control btn btn-primary">
-						Release Unit
-					</button>
-				</div>
-				
 				<div class="form-group col-md-1">
 					<label> &nbsp; </label>
 					<button onclick="getInventoryRec()" style="line-height:0; padding:0" class="form-control btn btn-default">
 						<i class="glyphicon glyphicon-repeat"></i>
 					</button>
 				</div>
+				
+				<div class="clearfix"></div>
+				<hr> 
+				<div class="clearfix"></div>
+				
+				<div class="form-group col-md-3" id="btnholdsave" style="display: none;">
+					<label> &nbsp; </label>
+					<button  onclick="holdBlockResion('tempBtn')" placement="right"  data-container="body" data-toggle="popover" data-content="Selected units are viewing as sold out on sales manager inventory screen"  style="line-height:0; color: #fff; background-color: #0077b9;" class="form-control btn btn-primary">
+						Hold 
+					</button> <!-- onclick="SaveForHold('temp')" -->
+				</div>
+				<div class="form-group col-md-3" id="btnholdsave2" style="display: none;">
+					<label> &nbsp; </label>
+					<button  onclick="holdBlockResion('blockBtn')" style="line-height:0; color: #fff; background-color: #0077b9;" class="form-control btn btn-primary">
+						Block 
+					</button> <!-- onclick="SaveForHold('block')" -->
+				</div>
+				<div class="form-group col-md-3" id="btnreleasesave" style="display: none;">
+					<label> &nbsp; </label>
+					<button  onclick="SaveForRelease()" id="releaseUnitBtnAdmin" style="line-height:0; color: #fff; background-color: #0077b9;" class="form-control btn btn-primary">
+						Release Unit
+					</button>
+				</div>
+				
+				
 				
 				
 				
@@ -168,8 +174,12 @@
 		<div class="inventoryLegendsCol col-md-12">
 			<ul>
 				<li><span class="ilAvailable"></span> Available</li>
-				<li><span class="holdforDiscussion"></span> Hold for Discussion </li>
+				<!-- <li><span class="holdforDiscussion"></span> Hold for Discussion </li> -->
 				<li><span class="soldOut"></span> Sold Out</li>
+				<li><span class="holdforDiscussion"></span> Hold </li>
+				<li><span class="unitBlockAdmin"></span> Block</li>
+				
+				
 				<!-- <li><span class="allotedThroughOffer"></span> Alloted through offer</li>
 				<li><span class="holdForReallocation"></span> Hold for Reallocation</li> -->
 			</ul>
@@ -262,4 +272,40 @@
 		<div class="clearfix"></div>
 	</div>
 	
+	
+	
+	<!-- Model -->
+	<div class="modal fade" id="holdBlockRsionModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title" id="ModalLabelAdmin"> </h4>
+	      </div>
+	      <div class="modal-body">
+	      	
+			<div class="form-group col-md-6">
+				<label>User</label>
+				<select class='form-control' id='userListInventory'>
+		      		<option value="">Select</option>
+		      	</select>
+			</div>
+			<div class="clearfix"></div>
+			<div class="form-group col-md-12">
+				<label>Reason</label>
+				<textarea class='form-control' id="holdBlockReasonInput" rows="4" cols="50"></textarea>
+			</div>
+	        
+	        <small id="holdBlockInputInfo" style="color:#d10000;"></small>
+	        <div class="clearfix"></div>
+	      </div>
+	      <div class="clearfix"></div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-primary btn-default" data-dismiss="modal">Close</button>
+	        <button id="tempModalBtn" onclick="SaveForHold('temp')" 	type="button" style="color: #fff; background-color: #0077b9;" class="btn btn-primary">Hold</button>
+	        <button id="blockModalBtn" onclick="SaveForHold('block')" 	type="button" style="color: #fff; background-color: #0077b9;" class="btn btn-primary">Block</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
 	

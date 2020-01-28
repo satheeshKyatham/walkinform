@@ -52,6 +52,9 @@ public class KYCApplicantDtl implements Serializable{
 	@Column(name="address_proof_type") private String address_proof_type;
 	@Column(name="address_proof_no") private String address_proof_no;
 	
+	@Column(name = "last_name")
+	private String lastName;
+	
 	public int getId() {
 		return id;
 	}
@@ -195,5 +198,11 @@ public class KYCApplicantDtl implements Serializable{
 	}
 	public void setAddress_proof_no(String address_proof_no) {
 		this.address_proof_no = address_proof_no;
+	}
+	public String getLastName() {
+		return lastName;
+	}
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 }

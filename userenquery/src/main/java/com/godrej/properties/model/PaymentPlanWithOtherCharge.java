@@ -52,10 +52,9 @@ public class PaymentPlanWithOtherCharge {
 	@Column(name="paymentplan_name") private String paymentplan_name;
 	
 	
-	/*
-	 * @Column(name="propstrength__part_of_cop__c") private boolean
-	 * propstrength__part_of_cop__c;
-	 */
+	
+	 @Column(name="propstrength__part_of_cop__c") private boolean propstrength__part_of_cop__c;
+	
 	
 	@Column(name="sum") private double sum;
 	
@@ -247,5 +246,11 @@ public class PaymentPlanWithOtherCharge {
 	}
 	public void setPaymentplan_name(String paymentplan_name) {
 		this.paymentplan_name = paymentplan_name;
+	}
+	public boolean isPropstrength__part_of_cop__c() {
+		return propstrength__part_of_cop__c;
+	}
+	public void setPropstrength__part_of_cop__c(boolean propstrength__part_of_cop__c) {
+		this.propstrength__part_of_cop__c = propstrength__part_of_cop__c;
 	}
 }

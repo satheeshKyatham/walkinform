@@ -37,6 +37,14 @@ public class EOIReport implements Serializable{
 	@Column(name="typology_name2") private String typology_name2;
 	@Column(name="typology_name3") private String typology_name3;
 	
+	@Column(name="unit1") private String unit1;
+	@Column(name="unit2") private String unit2;
+	@Column(name="unit3") private String unit3;
+	
+	@Column(name="preference_des1") private String preference_des1;
+	@Column(name="preference_des2") private String preference_des2;
+	@Column(name="preference_des3") private String preference_des3;
+	
 	@Column(name="floor_band1") private String floor_band1;
 	@Column(name="floor_band2") private String floor_band2;
 	@Column(name="floor_band3") private String floor_band3;
@@ -44,8 +52,11 @@ public class EOIReport implements Serializable{
 	@Column(name="tower_name1") private String tower_name1;
 	@Column(name="tower_name2") private String tower_name2;
 	@Column(name="tower_name3") private String tower_name3;
-	
 	@Column(name="date_of_eoi__c") private Date date_of_eoi__c;
+	@Column(name="userid") private int userid;
+	@Column(name="eoi_form_path") private String eoi_form_path;
+	@Column(name="sourcing_manager_name__c") private String sourcing_manager_name__c;
+	@Column(name="broker_account_name") private String broker_account_name;
 	
 	
 	public int getId() {
@@ -188,5 +199,65 @@ public class EOIReport implements Serializable{
 	}
 	public void setDate_of_eoi__c(Date date_of_eoi__c) {
 		this.date_of_eoi__c = date_of_eoi__c;
+	}
+	public int getUserid() {
+		return userid;
+	}
+	public void setUserid(int userid) {
+		this.userid = userid;
+	}
+	public String getEoi_form_path() {
+		return eoi_form_path;
+	}
+	public void setEoi_form_path(String eoi_form_path) {
+		this.eoi_form_path = eoi_form_path;
+	}
+	public String getUnit1() {
+		return unit1;
+	}
+	public void setUnit1(String unit1) {
+		this.unit1 = unit1;
+	}
+	public String getUnit2() {
+		return unit2;
+	}
+	public void setUnit2(String unit2) {
+		this.unit2 = unit2;
+	}
+	public String getUnit3() {
+		return unit3;
+	}
+	public void setUnit3(String unit3) {
+		this.unit3 = unit3;
+	}
+	public String getPreference_des1() {
+		return preference_des1;
+	}
+	public void setPreference_des1(String preference_des1) {
+		this.preference_des1 = preference_des1;
+	}
+	public String getPreference_des2() {
+		return preference_des2;
+	}
+	public void setPreference_des2(String preference_des2) {
+		this.preference_des2 = preference_des2;
+	}
+	public String getPreference_des3() {
+		return preference_des3;
+	}
+	public void setPreference_des3(String preference_des3) {
+		this.preference_des3 = preference_des3;
+	}
+	public String getSourcing_manager_name__c() {
+		return sourcing_manager_name__c;
+	}
+	public void setSourcing_manager_name__c(String sourcing_manager_name__c) {
+		this.sourcing_manager_name__c = sourcing_manager_name__c;
+	}
+	public String getBroker_account_name() {
+		return broker_account_name;
+	}
+	public void setBroker_account_name(String broker_account_name) {
+		this.broker_account_name = broker_account_name;
 	}
 }

@@ -50,6 +50,7 @@ public class Token {
 	@Transient private String encStr;
 	@Transient private String typeCount;
 	@Transient private String typeName;
+	@Transient private String priorityNo;
 	
 	
 	
@@ -208,6 +209,12 @@ public class Token {
 	}
 	public void setCountrycode(String countrycode) {
 		this.countrycode = countrycode;
+	}
+	public String getPriorityNo() {
+		return priorityNo;
+	}
+	public void setPriorityNo(String priorityNo) {
+		this.priorityNo = priorityNo;
 	}
 	
 }
