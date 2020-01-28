@@ -690,10 +690,10 @@ function getMatchingTen(word){
 			matcher = matcher.toLowerCase();
 			var partnerName = partner.name== null? "":partner.name.replace(/ /g,"").toLowerCase();
 			var matchedName =partnerName.includes(matcher);
-			if(matchedName){
+			if(matchedName && !result.includes(partner)){
 				counter++;
 			}
-			return matchedName && counter <11;
+			return matchedName && counter <11 && !result.includes(partner);
 		});
 	}
 	if(result ==null){
@@ -702,8 +702,9 @@ function getMatchingTen(word){
 	if(includedValues !=null && includedValues.length>0){
 		result =  result.concat(includedValues);
 	}
-	 var uniqueArray = result.filter((item,index) => result.indexOf(item) === index)
-	return uniqueArray;
+	return result;
+/*	 var uniqueArray = result.filter((item,index) => result.indexOf(item) === index)
+	return uniqueArray;*/
 }
 function loadChannelPartners(resp){
 	var partnerList=resp.objectMap.channelPartnerList;
