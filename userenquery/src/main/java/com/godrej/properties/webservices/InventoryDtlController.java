@@ -34,11 +34,15 @@ public class InventoryDtlController {
  	
  	
  	@RequestMapping(value = "/getInventoryRecords", method = RequestMethod.GET, produces = "application/json")
-	public String getHouseUnitList(@RequestParam("project_code") String project_code ,@RequestParam("tower_code") String tower_code,@RequestParam("floor_code") String floor_code,@RequestParam("unit") String unit) {
+	public String getHouseUnitList(@RequestParam("project_code") String project_code ,@RequestParam("tower_code") String tower_code, @RequestParam("unitType") String unitType) {
 		Gson gson = new GsonBuilder().disableHtmlEscaping().serializeNulls().create();
 		String whereCondition = "";
 		
-		whereCondition = "  propstrength__project_name__c='"+project_code+"'  and tower_code__c='"+tower_code+"' "; 
+		if (unitType.equals("0")) {
+			whereCondition = "  propstrength__project_name__c='"+project_code+"'  and tower_code__c='"+tower_code+"' "; 
+		} else {
+			whereCondition = "  propstrength__project_name__c='"+project_code+"'  and tower_code__c='"+tower_code+"' and propstrength__unit_type__c ='"+unitType+"' ";
+		}
 		
 		//whereCondition = "propstrength__project__c=" + "'"+projectSfid+"'";
 		

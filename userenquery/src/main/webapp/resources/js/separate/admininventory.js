@@ -81,6 +81,8 @@ $(document).ready(function(){
 
 
 function holdBlockResion (source) {
+	$('#enqsfidInput').val('');
+	
 	var favorite = [];
 	$.each($("input[name='unit']:checked"), function(){ 
 		favorite.push($(this).val());
@@ -102,10 +104,16 @@ function holdBlockResion (source) {
 	$('#holdBlockReasonInput').val('');
 	
 	if (source == "tempBtn") {
+		$('#enqsfidInput').show();
+		
 		$('#blockModalBtn').hide();
 		$('#tempModalBtn').show();
 		$('#ModalLabelAdmin').text('Reason for Hold');
+		
+		
 	} else if (source == "blockBtn") {
+		$('#enqsfidInput').hide();
+		
 		$('#tempModalBtn').hide();
 		$('#blockModalBtn').show();
 		$('#ModalLabelAdmin').text('Reason for Block');
@@ -133,8 +141,11 @@ function getInventoryRec () {
 
 function SaveForRelease(){
 	 var favorite = [];
+	 var unitNameArray = [];
+	 
      $.each($("input[name='unit']:checked"), function(){ 
          favorite.push($(this).val());
+         unitNameArray.push($(this).next().text());
      });
 
      if(favorite=='' || favorite==null){
@@ -154,7 +165,8 @@ function SaveForRelease(){
  	    url: pageContext+'updateAdminUnit',
  	    data: {projectid : $("#projectid").val(),
  	    	userId : $("#userid").val(),
- 	    	unitsfid:favorite.join(",")
+ 	    	unitsfid:favorite.join(","),
+ 	    	unitNames:unitNameArray.join(",")
  	      	  //projectId:$("#projectselection option:selected").val()
  	    },
  	    type: 'POST',
@@ -213,20 +225,37 @@ function SaveForHold(msg) {
 			reasonInput : $("#holdBlockReasonInput").val(),
 			holdBlockBehalfOfName : $('#userListInventory option:selected').text(),
 			holdBlockBehalfOfID : $("#userListInventory").val(),
+			enqSFID : $("#enqsfidInput").val(),
 	    },
 	    type: 'POST',
 	    success: function(data) { 
-	    		$('#holdBlockRsionModal').modal('hide');
-	    		$("#tempModalBtn").attr("disabled", false);
-	    		$("#blockModalBtn").attr("disabled", false);
-		    	swal({
-					title: "Successfully Submitted",
-				    text: "",
-				    timer: 3000,
-				    type: "success",
-				});
-	    		inventoryLoad ();
-	    		$('#inventoryLoader').hide();
+		    		
+			    	if (data == 'duplicateRecords') {
+			    		swal({
+		                	title: "Unit is already block",
+		          			text: "",
+		          			//timer: 8000,
+		          			type: "warning",
+		                });
+			    		
+			    		inventoryLoad ();
+			    		$('#inventoryLoader').hide();
+			    	} else if (data == 'success')  {
+			    		$('#holdBlockRsionModal').modal('hide');
+			    		$("#tempModalBtn").attr("disabled", false);
+			    		$("#blockModalBtn").attr("disabled", false);
+				    	swal({
+							title: "Successfully Submitted",
+						    text: "",
+						    timer: 3000,
+						    type: "success",
+						});
+			    		inventoryLoad ();
+			    		$('#inventoryLoader').hide();
+			    	}
+	    	
+	    	
+	    			
 	    },
 	    error: function(data) {
 	    	$('#holdBlockRsionModal').modal('hide');
@@ -332,25 +361,20 @@ function inventoryLoad (){
 					}
 					else
 						unitStatus = "unitSold";
-					var value = $("#searchadmintype").val();
-					if(value=='t' || value=='f'){
-						 unitcheckbox='<input type="checkbox" value='+unitSfid+' name="unit" > '; 
-						}
-					
 				} else if (obj1[j].propstrength__allotted__c == 't'){
 					dropdown = "";
 					caret = "";
 					unitStatus = "";
 					if(obj1[j].hold_reason==='block'){
+						unitStatus="unitBlock";
+					}
+					else if(obj1[j].hold_reason==='temp'){
 						if (obj1[j].eoi_unit_locked == true) {
 							unitStatus="unitEOIBlockAdmin";
 						}else {
-							unitStatus="unitBlock";
+							unitStatus="unitTempAdmin";
 						}
 					}
-					else if(obj1[j].hold_reason==='temp')
-						unitStatus="unitTempAdmin";
-					 
 					else
 						unitStatus = "unitSold";
 					var value = $("#searchadmintype").val();

@@ -1,5 +1,7 @@
 package com.godrej.properties.service;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 import com.godrej.properties.model.HoldInventoryAdmin;
@@ -13,9 +15,19 @@ public interface InventoryService {
 	List<InventoryAdmin> getUnitDtlAdmin(String projectId, String towerMst, String typoMst, String holdMst, String soldMst,
 			String unitAvailable,String facing);
 
-	void saveHoldInventoryAdmin(HoldInventoryAdmin inventoryAdmin);
+	//void saveHoldInventoryAdmin(HoldInventoryAdmin inventoryAdmin);
 
 	void saveHoldInventoryAdminLog(HoldInventoryAdminLog inventoryAdminLog);
 
 	void updateHoldInventoryAdmin(HoldInventoryAdmin inventoryAdmin);
+	
+	
+	
+	
+	void holdInventoryAdmin(String projectId, String userId, String unitsfid, String holdmsg, String reasonInput, String holdBlockBehalfOfName, int holdBlockBehalfOfID, String  enqSFID);
+
+	 
+	
+ 
+	
 }

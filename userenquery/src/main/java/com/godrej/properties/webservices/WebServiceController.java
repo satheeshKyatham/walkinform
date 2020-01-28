@@ -2741,7 +2741,7 @@ public class WebServiceController<MultipartFormDataInput> {
 		rows.add("Project Name,Tokenno,Created,Enquiry Name,Mobile Phone,Customer Name,Email,have_we_met_before,age_a__c,residenceaddress,officelocation,"
 				+ "empstatus,company_name__c,is_purchase_for_self_use_or_investment__c,budget"
 				+ ",typology_requirement,walk_in_source__c,advertisementname,brokername,current_residence_configuration,current_residence_ownership,source_of_funding,customer_classification,ethnicity,unit_availability,accompanied_by,deal_negotiation,construction_status,timeframe_to_book,enquirynoneditcomment,verticle,sourcingname,closingname,closingemail,own_contribution_receipt,loan_eligibility,Assined To,IsAttended,CP Comments,FollowType,FollowDate"
-				+ ",Trigger 1,Trigger 2,Barrier 1,Barrier 2,Lost Reason");
+				+ ",Trigger 1,Trigger 2,Barrier 1,Barrier 2,Lost Reason,Designation");
 		rows.add("\n");
 		String fromdate = resquest.getParameter("fromdate");
 		System.out.println("fromdate:-"+fromdate);
@@ -2872,6 +2872,11 @@ public class WebServiceController<MultipartFormDataInput> {
 			rows.add(",");
 			rows.add(mislist.get(i).getLost_reason_c__c());
 			rows.add(",");
+			if(mislist.get(i).getDesignation__c()!=null)
+				rows.add(mislist.get(i).getDesignation__c().toString());
+			else
+				rows.add("");
+			
 			//rows.add(mislist.get(i).getFollowtype());
 			//rows.add(",");
 			
@@ -3318,15 +3323,6 @@ public class WebServiceController<MultipartFormDataInput> {
 				,@RequestParam("holdBlockBehalfOfName") String holdBlockBehalfOfName
 				,@RequestParam("holdBlockBehalfOfID") int holdBlockBehalfOfID) {
 		 
-		boolean eoiHoldStatus = false;	
-			
-		if (holdmsg.equals("eoi_block")) {
-			eoiHoldStatus = true;
-			holdmsg = "block";
-		} else {
-			eoiHoldStatus = false;
-		}
-			
 		 String [] data= unitsfid.split(",");
 		 for (int i=0;i<data.length;i++){
 			 HoldInventoryAdmin inventoryAdmin= new HoldInventoryAdmin();
@@ -3341,8 +3337,6 @@ public class WebServiceController<MultipartFormDataInput> {
 			 inventoryAdmin.setHold_behalf_username(holdBlockBehalfOfName);
 			 inventoryAdmin.setHold_behalf_userid(holdBlockBehalfOfID);
 			 
-			 inventoryAdmin.setEoi_unit_locked(eoiHoldStatus);
-			 
 			 inventoryService.saveHoldInventoryAdmin(inventoryAdmin);
 			 //-------------------------
 			 HoldInventoryAdminLog inventoryAdminLog= new HoldInventoryAdminLog();
@@ -3356,7 +3350,6 @@ public class WebServiceController<MultipartFormDataInput> {
 			 inventoryAdminLog.setHold_description(reasonInput);
 			 inventoryAdminLog.setHold_behalf_username(holdBlockBehalfOfName);
 			 inventoryAdminLog.setHold_behalf_userid(holdBlockBehalfOfID);
-			 inventoryAdminLog.setEoi_unit_locked(eoiHoldStatus);
 			 
 			 inventoryService.saveHoldInventoryAdminLog(inventoryAdminLog);
 		 }
@@ -3378,10 +3371,8 @@ public class WebServiceController<MultipartFormDataInput> {
 			 inventoryAdmin.setCustomer_id(userId);
 			 inventoryAdmin.setHold_reason("Release Admin");
 			 inventoryAdmin.setHold_status(false);
-			 inventoryAdmin.setEoi_unit_locked(false);
-			 
 			 inventoryService.updateHoldInventoryAdmin(inventoryAdmin);
-			 //-------------------------------------
+			 
 			 HoldInventoryAdminLog inventoryAdminLog= new HoldInventoryAdminLog();
 			 inventoryAdminLog.setUnitSfid(data[i]);
 			 inventoryAdminLog.setProject_id(projectId);
@@ -3389,7 +3380,6 @@ public class WebServiceController<MultipartFormDataInput> {
 			 inventoryAdminLog.setCustomer_id(userId);
 			 inventoryAdminLog.setHold_reason("Release Admin");
 			 inventoryAdminLog.setHold_status(false);
-			 inventoryAdminLog.setEoi_unit_locked(false);
 			 
 			 inventoryService.saveHoldInventoryAdminLog(inventoryAdminLog);
 		 }

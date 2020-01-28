@@ -49,7 +49,7 @@ public class InventoryDtlDaoImpl extends AbstractDao<Integer, InventoryDtl> impl
 				+ " AND propStrength__active__c = true AND"
 				+ " propStrength__allotted__c = false AND "
 				+ " propstrength__property_on_hold_for_reallocation__c = false AND"
-				+ " propstrength__property_alloted_through_offer__c = false ", InventoryDtl.class);
+				+ " propstrength__property_alloted_through_offer__c = false order by propstrength__house_unit_no__c ASC ", InventoryDtl.class);
 
 		authors = q.getResultList();
 		

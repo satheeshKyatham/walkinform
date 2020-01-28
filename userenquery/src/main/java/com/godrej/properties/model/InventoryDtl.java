@@ -30,7 +30,9 @@ public class InventoryDtl implements Serializable{
 	@Column(name="propstrength__project_name__c") private boolean  propstrength__project_name__c;
 	@Column(name="eoi_unit_locked") private boolean  eoi_unit_locked;
 	@Column(name="hold_status") private boolean  hold_status;
-	 
+	@Column(name="propstrength__unit_type__c") private String  propstrength__unit_type__c; 
+	
+	
 	public String getSfid() {
 		return sfid;
 	}

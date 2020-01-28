@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
+//@Table(name="salesforce.gpl_cs_hold_admin_unit")
 @Table(name="salesforce.gpl_cs_hold_admin_unit")
 public class HoldInventoryAdmin implements Serializable{
 	
@@ -56,11 +57,16 @@ public class HoldInventoryAdmin implements Serializable{
 	@Column(name = "eoi_unit_locked")
 	private boolean eoi_unit_locked; 
 	
+	@Column(name = "enq_sfid")
+	private String enq_sfid;
 	
 	public boolean isHold_status() {
 		return hold_status;
 	}
 
+	@Column(name="version")
+	private int version;
+	
 	public void setHold_status(boolean hold_status) {
 		this.hold_status = hold_status;
 	}
@@ -161,5 +167,21 @@ public class HoldInventoryAdmin implements Serializable{
 
 	public void setEoi_unit_locked(boolean eoi_unit_locked) {
 		this.eoi_unit_locked = eoi_unit_locked;
+	}
+
+	public String getEnq_sfid() {
+		return enq_sfid;
+	}
+
+	public void setEnq_sfid(String enq_sfid) {
+		this.enq_sfid = enq_sfid;
+	}
+	
+	public int getVersion() {
+		return version;
+	}
+
+	public void setVersion(int version) {
+		this.version = version;
 	}
 }

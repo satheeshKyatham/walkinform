@@ -34,6 +34,15 @@ public class ChannelPartnerDaoImpl extends AAbstractDao<ChannelPartner> implemen
 	}
 
 	@Override
+	@Transactional(readOnly=true)
+	public List<ChannelPartnerDto> getChannelPartners() {
+		 StringBuilder jpql=new StringBuilder();
+		 // Condition added default id 
+		 jpql.append(" SELECT c FROM ChannelPartner c where c.recordTypeId = '0126F000000uazCQAQ'  and propstrength__active__c='Yes' ORDER BY c.name ASC");
+		 List<ChannelPartner> channelPartnerList=getEntities(jpql.toString(),null);
+		 return channelPartnerConverter.entityToDto(channelPartnerList);
+	}
+	@Override
 	public ChannelPartner getChannelPartnerBySfid(String sfid) {
 		StringBuilder jpql=new StringBuilder();
 		 // Condition added default id 

@@ -4,7 +4,6 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
@@ -16,7 +15,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.godrej.properties.master.service.SysConfigService;
 import com.godrej.properties.model.HoldInventoryEntry;
 import com.godrej.properties.model.Inventory;
 import com.godrej.properties.model.ZzholdTest;
@@ -32,6 +33,8 @@ public class InventoryController {
 
 	private Logger log = LoggerFactory.getLogger(getClass());
 	
+	private static final int HOLD_TIME=5*60*1000;
+	
  	@Autowired
  	private HoldInventoryEntryService holdInventoryEntryService;
  	
@@ -41,23 +44,23 @@ public class InventoryController {
 	@Autowired
  	private ZZrequestProcessService zZrequestProcessService;
 	
+	@Autowired
+	private SysConfigService sysConfigService;
  	
  	@Autowired
  	private ZZExistService zZExistService;
 
 	@PostMapping(value = { "/holdExistData" })
-	public String holdExistData (@RequestParam("projectNameId") String projectNameId, @RequestParam("customerId") String customerId) {
+	public @ResponseBody String holdExistData (@RequestParam("projectNameId") String projectNameId, @RequestParam("customerId") String customerId) {
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		Gson gson = gsonBuilder.create();		
 		List<HoldInventoryEntry> plans = holdInventoryEntryService.holdDataExist(projectNameId, customerId);
 		
 		ArrayList<HoldInventoryEntry> intList = new ArrayList<>(); 
 		
-		
 		if (plans != null) {
 			for(int k=0;k<plans.size();k++) {
 				
-				java.util.Date date = new java.util.Date();
 	    		Timestamp currentTpm = new Timestamp(System.currentTimeMillis());
 
 	    		Calendar cal = Calendar.getInstance();
@@ -65,9 +68,12 @@ public class InventoryController {
 
 	    		// add a bunch of seconds to the calendar
 	    		cal.add(Calendar.SECOND, 98765);
-
+	    		int holdTime = sysConfigService.getValueAsInt(SysConfigService.HOLD_TIME, projectNameId);
+	    		if(holdTime==0) {
+	    			holdTime =HOLD_TIME;
+	    		}
 	    		// create a second time stamp
-	    		Timestamp timestampValue = new Timestamp(plans.get(k).getCreated_at().getTime()+ 5*60*1000);
+	    		Timestamp timestampValue = new Timestamp(plans.get(k).getCreated_at().getTime()+ holdTime);
 
 	    		long milliseconds = timestampValue.getTime() - currentTpm.getTime();
 	    		int seconds = (int) milliseconds / 1000;
@@ -100,26 +106,23 @@ public class InventoryController {
 	
 	
 	/* Added for Get Inventory */
-	@RequestMapping(value = "/getInventoryDetails", method = RequestMethod.POST)
-	public String getUnitDtl(@RequestParam("projectId") String projectId, @RequestParam("towerMst") String towerMst, @RequestParam("typoMst") String typoMst, @RequestParam("holdMst") String holdMst, @RequestParam("soldMst") String soldMst, @RequestParam("facing") String facing , @RequestParam("unitAvailable") String unitAvailable) {
+	@PostMapping(value = "/getInventoryDetails")
+	public @ResponseBody String getUnitDtl(@RequestParam("projectId") String projectId, @RequestParam("towerMst") String towerMst, @RequestParam("typoMst") String typoMst, @RequestParam("holdMst") String holdMst, @RequestParam("soldMst") String soldMst, @RequestParam("facing") String facing , @RequestParam("unitAvailable") String unitAvailable) {
 			GsonBuilder gsonBuilder = new GsonBuilder();
 			Gson gson = gsonBuilder.create();
 						
 			
 			List<Inventory> plans=inventoryService.getUnitDtl(projectId, towerMst, typoMst, holdMst, soldMst,facing, unitAvailable);
 			
-			HashSet<Integer> floor=new HashSet<Integer>();
-			HashMap<String, ArrayList<Inventory>>  hashMap= new HashMap<String, ArrayList<Inventory>>();
-			
-			ArrayList<Inventory> inventories = new ArrayList<Inventory>();
+			HashSet<Integer> floor=new HashSet<>();
 			ArrayList<ArrayList<Inventory>> mainList = new ArrayList<>();
-			if(plans !=null && plans.size()>0)
+			if(plans !=null && !plans.isEmpty())
 			{
 				for(int i=0;i<plans.size();i++) {
 					floor.add(Integer.valueOf(plans.get(i).getFloor_number__c()));
 				}
 				
-				List<Integer> list = new ArrayList<Integer>(floor); 
+				List<Integer> list = new ArrayList<>(floor); 
 				Collections.sort(list); 
                 
                 for(int j=0;j<list.size();j++) {
@@ -130,8 +133,7 @@ public class InventoryController {
                 		if(list.get(j).toString().equals(plans.get(k).getFloor_number__c())) {
                 			
                 			if (plans.get(k).getCreated_at() != null && !(plans.get(k).getHoldstatusyn().equals("N"))  && !(plans.get(k).getHoldIntervalstatusAI().equals("I"))  ) {
-                    			System.out.println("Not null Value");
-                        		java.util.Date date = new java.util.Date();
+                    			log.info("Not null Value");
                         		Timestamp currentTpm = new Timestamp(System.currentTimeMillis());
                         		Calendar cal = Calendar.getInstance();
                         		cal.setTimeInMillis(currentTpm.getTime());
@@ -140,7 +142,8 @@ public class InventoryController {
                         		cal.add(Calendar.SECOND, 98765);
 
                         		// create a second time stamp
-                        		Timestamp timestampValue = new Timestamp(plans.get(k).getCreated_at().getTime()+ 5*60*1000);
+                	    		int holdTime = sysConfigService.getValueAsInt(SysConfigService.HOLD_TIME, projectId);
+                        		Timestamp timestampValue = new Timestamp(plans.get(k).getCreated_at().getTime()+ holdTime);
 
                         		long milliseconds = timestampValue.getTime() - currentTpm.getTime();
                         		int seconds = (int) milliseconds / 1000;
@@ -162,7 +165,7 @@ public class InventoryController {
                         			plans.get(k).setFlagForHold("Hold");
                         			plans.get(k).setHoldMin(minutes);
                         			plans.get(k).setHoldSec(seconds);
-                        			System.out.println("Hold IF");
+                        			log.info("Hold IF");
                         		}
                         		else
                         		{
@@ -184,7 +187,7 @@ public class InventoryController {
 	
 	
 	@RequestMapping(value = { "/zzholdTesting" }, method = RequestMethod.POST)
-	public String rqstAction(@RequestParam("testSFID") String testSFID, @RequestParam("property_on_hold") String property_on_hold , @RequestParam("crm_user") String crm_user) {
+	public @ResponseBody String rqstAction(@RequestParam("testSFID") String testSFID, @RequestParam("property_on_hold") String property_on_hold , @RequestParam("crm_user") String crm_user) {
 		
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		Gson gson = gsonBuilder.create();
@@ -204,7 +207,7 @@ public class InventoryController {
 	
 	
 	@RequestMapping(value = { "/zzExist" }, method = RequestMethod.POST)
-	public synchronized String zzCheckReq (@RequestParam("zzsfid") String zzsfid, @RequestParam("property_on_hold") String property_on_hold , @RequestParam("crm_user") String crm_user) {
+	public @ResponseBody String zzCheckReq (@RequestParam("zzsfid") String zzsfid, @RequestParam("property_on_hold") String property_on_hold , @RequestParam("crm_user") String crm_user) {
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		Gson gson = gsonBuilder.create();
 		

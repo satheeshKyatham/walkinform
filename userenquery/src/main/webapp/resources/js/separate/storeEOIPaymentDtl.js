@@ -161,7 +161,7 @@ function csPymtDataEoi () {
 	
 	$.post(pageContext+"insertEOIPaymentDtl",{"paymentDtlJson" : JSON.stringify(arrayData)},function(data){				 
 	}).done(function(data){
-		holdUnitForEOI('eoi_block');
+		//holdUnitForEOI('eoi_block');
 		getEOIPreferencPrint();
 	});
 }
@@ -305,6 +305,7 @@ function getTypologyEOI (e){
 	}, function(data) {
 		
 		$(e).closest('.EOIDtlRow').find('.typologyListEOI').find("option:gt(0)").remove();
+		$(e).closest('.EOIDtlRow').find('.unitListEOI').find("option:gt(0)").remove();
 		
 		var html="";
 		
@@ -346,7 +347,7 @@ function getUnitEOI (e) {
 function getUnitEOI (e) {
 	$(e).closest('.EOIDtlRow').find(".unitListEOI").find("option:gt(0)").remove();
 	
-	$.get("getInventoryRecords",{"project_code" : $('.projectSfid').val(),"tower_code":$(e).val(),"floor_code":"","unit":""},function(data){				 
+	$.get("getInventoryRecords",{"project_code" : $('.projectSfid').val(),  "tower_code":$(e).closest('.EOIDtlRow').find(".towerListEOI").val(),  "unitType":$(e).closest('.EOIDtlRow').find(".typologyListEOI").val()},function(data){				 
 		var obj =JSON.stringify(data);
 		var obj1 =JSON.parse(obj);
 		var html = '';
@@ -363,7 +364,7 @@ function getUnitEOI (e) {
 			
 			
 		} else {
-			alert ("Data not found");
+			//alert ("Data not found");
 		}
 	}).done(function(data){
 		
@@ -477,8 +478,8 @@ function addMoreEoiRowBtn () {
 					+"</select>"
 				+"</td>"
 				+"<td>"
-					+"<select class='full form-control input-sm typologyListEOI'>"
-						+"<option value=''>Select Tyology</option>"
+					+"<select class='full form-control input-sm typologyListEOI' onchange='getUnitEOI(this)'>"
+						+"<option value='0'>Select Typology</option>"
 					+"</select>"
 				+"</td>"
 				+"<td>"
@@ -697,9 +698,12 @@ function getEOITabPreferencRecord () {
 
 function holdUnitForEOI(msg) {
 	var favorite = [];
+	//var unitNameArray = [];
+	
 	$.each($("#EOIMultipleTable .unitListEOI"), function(){ 
 		if ($(this).val() != 0) {
 			favorite.push($(this).val());
+			//unitNameArray.push($(this).find('option:selected').text());
 		}	
 	});
 	
@@ -724,10 +728,24 @@ function holdUnitForEOI(msg) {
 			reasonInput : "EOI Block",
 			holdBlockBehalfOfName : $('#username').val(),
 			holdBlockBehalfOfID : $("#userid").val(),
+			enqSFID : $('#enquirysfid').val(),
+			//unitNames:unitNameArray.join(","),
 	    },
 	    type: 'POST',
 	    success: function(data) { 
-		    	/*swal({
+		    	if (data == 'duplicateRecords') {
+		    		swal({
+                    	title: "Unit is already block",
+	          			text: "",
+	          			//timer: 8000,
+	          			type: "warning",
+	                });
+		    	} else if (data == 'success')  {
+		    		insertEOIPreference ();
+		    	}
+	    	
+	    	
+	    		/*swal({
 					title: "Successfully Submitted",
 				    text: "",
 				    timer: 3000,
