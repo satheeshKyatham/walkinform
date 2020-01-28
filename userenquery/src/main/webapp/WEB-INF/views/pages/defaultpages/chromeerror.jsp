@@ -15,7 +15,7 @@
 					<img src="<c:url value="/resources/images/logo.png"/>">
 				</div>
 			<div class="clearfix"></div>
-			<h2>For Better Experience, Please Use Chrome Browser...</h2>
+			<h2>Please Open D4U application in Chrome Browser...</h2>
 		</div>	
 	</body>
 </html>

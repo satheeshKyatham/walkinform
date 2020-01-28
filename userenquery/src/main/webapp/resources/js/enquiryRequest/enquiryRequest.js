@@ -9,6 +9,7 @@ $.ajaxSetup({
 var flag = true;
 
 var channelPartnerArray=[];
+var channelPartners = [];
 var enqArray=[];
 $(document).ready(function(){
 	//debugger
@@ -57,7 +58,16 @@ function onPageLoad(){
     }else{
       $("#contactDiv").removeClass('disableCol');
     }  
-   
+    fetchChannelPartners();
+}
+
+function fetchChannelPartners(){
+	var url=$("#contextPath").val();
+	$.get(url+"/getChannelPartners",function(data){				 
+	}).done(function(data){
+		channelPartners=data.objectMap.channelPartnerList;
+	});
+
 }
 function getExistingInfoByMobileAndProject(){
 	//debugger
@@ -847,41 +857,69 @@ function isReferredChanged(cpHS){
 
 /* END Auto fill address*/
 function getChannelPartners(event,el){
-	debugger;
 	event.preventDefault();
 	$("#brokerContact").empty();
     $("#channelPartnerName").val("");
 	var text=$(el).val();
 	
-	if(text.length>=3){		
-		fetchAsyncData("getChannelPartnerList",text,"GET","loadChannelPartners");		
-	}else if(text.length==0){
-		channelPartnerArray=[];
-	}
-	
-	/*Vivek Changes Start*/
-	/*if(text.length==3 || text.length==5 || text.length==7  || text.length==9 || text.length==11 || text.length==13){	
-		$("#channelPartnerNameSearch").attr('readonly', true);
-		$("#channelPartnerLoader").show();
-		fetchSyncData("getChannelPartnerList",text,"GET","loadChannelPartners");
+if(channelPartners.length>0){
+    	
+    	var partnerList = getMatchingTen(text);
+    	filterChannelPartners(partnerList);
+    }
+    else{
+    
+    	if(text.length>=3){		
+    		fetchAsyncData("getChannelPartnerList",text,"GET","loadChannelPartners");		
+    	}else if(text.length==0){
+    		channelPartnerArray=[];
+    	}
 
-	}else if(text.length==0){
-		channelPartnerArray=[];
-	}else{
-		var channelPartners = filterMatches(channelPartnerArray, text);
-		console.log(channelPartners);
-		refreshChannelPartners(channelPartners);
-	}*/
-	/*Vivek Changes END*/
-	/*if(text.length>=3){
-		
-		var resp=fetchData("getChannelPartnerList",text,"GET");
-		req=resp;
-		var partnerList=resp.objectMap.channelPartnerList;
-		channelPartnerArray=partnerList;
-		refreshChannelPartnerList();
-	*/
+    }
 }
+
+function getMatchingTen(word){
+	if(word ==null){
+		return;
+	}
+	var counter =0;
+	var result = channelPartners.filter(function (partner){
+		var matcher = word.replace(/ /g,"");
+		matcher = matcher.toLowerCase();
+		var partnerName = partner.name== null? "":partner.name.replace(/ /g,"").toLowerCase();
+		var wordLength = matcher.length;
+		var name = partnerName.substring(0,wordLength)
+		/*var matchedName =partnerName.includes(matcher);*/
+		var matchedName = name==matcher;
+		if(matchedName){
+			counter++;
+		}
+		return matchedName && counter <11;
+	});
+	var includedValues =[];
+	if(result ==null || result.length<10){
+		includedValues = channelPartners.filter(function (partner){
+			var matcher = word.replace(/ /g,"");
+			matcher = matcher.toLowerCase();
+			var partnerName = partner.name== null? "":partner.name.replace(/ /g,"").toLowerCase();
+			var matchedName =partnerName.includes(matcher);
+			if(matchedName && !result.includes(partner)){
+				counter++;
+			}
+			return matchedName && counter <11 && !result.includes(partner);
+		});
+	}
+	if(result ==null){
+		result=[];
+	}
+	if(includedValues !=null && includedValues.length>0){
+		result =  result.concat(includedValues);
+	}
+	/*var uniqueArray = result.filter((item,index) => result.indexOf(item) === index)
+	return uniqueArray;*/
+	return result;
+}
+
 function loadChannelPartners(resp){
 	//debugger;
 	var partnerList=resp.objectMap.channelPartnerList;
@@ -891,6 +929,12 @@ function loadChannelPartners(resp){
 	$("#channelPartnerLoader").hide();
 	$("#channelPartnerNameSearch").attr('readonly', false);
 
+}
+function filterChannelPartners(partnerList){
+	channelPartnerArray=partnerList;
+	refreshChannelPartnerList();
+	$("#channelPartnerLoader").hide();
+	$("#channelPartnerNameSearch").attr('readonly', false);
 }
 function refreshChannelPartnerList(){
 	
