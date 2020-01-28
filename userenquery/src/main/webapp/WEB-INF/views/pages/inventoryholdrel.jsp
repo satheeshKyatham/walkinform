@@ -178,6 +178,7 @@
 				<li><span class="soldOut"></span> Sold Out</li>
 				<li><span class="holdforDiscussion"></span> Hold </li>
 				<li><span class="unitBlockAdmin"></span> Block</li>
+				<li><span class="unitEOIBlockAdmin"></span> EOI Hold</li>
 				
 				
 				<!-- <li><span class="allotedThroughOffer"></span> Alloted through offer</li>
@@ -283,7 +284,11 @@
 	        <h4 class="modal-title" id="ModalLabelAdmin"> </h4>
 	      </div>
 	      <div class="modal-body">
-	      	
+	      	<div class="form-group col-md-6">
+				<label>ENQ SFID</label>
+		      	<input class='form-control' id="enqsfidInput"> 
+			</div>
+			<div class="clearfix"></div>
 			<div class="form-group col-md-6">
 				<label>User</label>
 				<select class='form-control' id='userListInventory'>

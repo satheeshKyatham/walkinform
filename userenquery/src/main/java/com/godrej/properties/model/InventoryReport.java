@@ -37,6 +37,15 @@ public class InventoryReport implements Serializable{
 	@Column(name="created_at") private Date created_at;
 	@Column(name="hold_behalf_email") private String hold_behalf_email;
 	
+	@Column(name="enq_name") private String enq_name;
+	@Column(name="customer_name") private String customer_name;
+	@Column(name="customer_mobile") private String customer_mobile;
+	@Column(name="enq_sfid") private String enq_sfid;
+	
+	@Column(name="eoi_unit_locked") private boolean	eoi_unit_locked;
+	
+	
+	
 	public int getId() {
 		return id;
 	}
@@ -147,5 +156,35 @@ public class InventoryReport implements Serializable{
 	}
 	public void setHold_behalf_email(String hold_behalf_email) {
 		this.hold_behalf_email = hold_behalf_email;
+	}
+	public String getEnq_name() {
+		return enq_name;
+	}
+	public void setEnq_name(String enq_name) {
+		this.enq_name = enq_name;
+	}
+	public String getCustomer_name() {
+		return customer_name;
+	}
+	public void setCustomer_name(String customer_name) {
+		this.customer_name = customer_name;
+	}
+	public String getCustomer_mobile() {
+		return customer_mobile;
+	}
+	public void setCustomer_mobile(String customer_mobile) {
+		this.customer_mobile = customer_mobile;
+	}
+	public String getEnq_sfid() {
+		return enq_sfid;
+	}
+	public void setEnq_sfid(String enq_sfid) {
+		this.enq_sfid = enq_sfid;
+	}
+	public boolean isEoi_unit_locked() {
+		return eoi_unit_locked;
+	}
+	public void setEoi_unit_locked(boolean eoi_unit_locked) {
+		this.eoi_unit_locked = eoi_unit_locked;
 	}
 }

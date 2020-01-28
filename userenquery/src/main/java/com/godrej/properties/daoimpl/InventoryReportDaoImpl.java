@@ -25,6 +25,12 @@ public class InventoryReportDaoImpl implements InventoryReportDao{
 		List<InventoryReport> authors=null;
 		
 		Query q = session.createNativeQuery(" SELECT  "
+				+ " e.name as enq_name, "
+				+ " f.name as customer_name, "
+				+ " f.mobile__c as customer_mobile, "
+				+ " a.enq_sfid, "
+				+ " a.eoi_unit_locked, "
+				
 				+ " a.gpl_cs_hold_admin_unit_id, "
 				+ " a.created_at, "
 				+ " a.sfid as unit_sfid, "
@@ -48,6 +54,10 @@ public class InventoryReportDaoImpl implements InventoryReportDao{
 				+ " INNER JOIN salesforce.propstrength__property__c b ON   b.sfid = a.sfid AND b.propstrength__active__c = true "
 				+ " LEFT JOIN salesforce.mst_user c ON cast(a.customer_id as integer) = c.user_id "
 				+ " LEFT JOIN salesforce.mst_user d ON a.hold_behalf_userid = d.user_id  "
+				
+				+ " LEFT  JOIN salesforce.propstrength__request__c e ON e.sfid = a.enq_sfid " 
+				+ " LEFT JOIN salesforce.contact f ON f.sfid = e.propstrength__primary_contact__c "
+				
 				+ " where "+whereCondition+"  and a.hold_reason in ('block', 'temp') and  a.hold_status = true  order by a.created_at desc  ", InventoryReport.class);
 		
 		authors = q.getResultList();

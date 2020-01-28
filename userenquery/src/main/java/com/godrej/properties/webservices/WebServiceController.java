@@ -3321,69 +3321,66 @@ public class WebServiceController<MultipartFormDataInput> {
 				,@RequestParam("holdmsg") String holdmsg
 				,@RequestParam("reasonInput") String reasonInput
 				,@RequestParam("holdBlockBehalfOfName") String holdBlockBehalfOfName
-				,@RequestParam("holdBlockBehalfOfID") int holdBlockBehalfOfID) {
-		 
-		 String [] data= unitsfid.split(",");
-		 for (int i=0;i<data.length;i++){
-			 HoldInventoryAdmin inventoryAdmin= new HoldInventoryAdmin();
-			 inventoryAdmin.setUnitSfid(data[i]);
-			 inventoryAdmin.setProject_id(projectId);
-			 inventoryAdmin.setCreated_at(new Timestamp(new Date ().getTime()));
-			 inventoryAdmin.setCustomer_id(userId);
-			 inventoryAdmin.setHold_reason(holdmsg);
-			 inventoryAdmin.setHold_status(true);
-			 
-			 inventoryAdmin.setHold_description(reasonInput);
-			 inventoryAdmin.setHold_behalf_username(holdBlockBehalfOfName);
-			 inventoryAdmin.setHold_behalf_userid(holdBlockBehalfOfID);
-			 
-			 inventoryService.saveHoldInventoryAdmin(inventoryAdmin);
-			 //-------------------------
-			 HoldInventoryAdminLog inventoryAdminLog= new HoldInventoryAdminLog();
-			 inventoryAdminLog.setUnitSfid(data[i]);
-			 inventoryAdminLog.setProject_id(projectId);
-			 inventoryAdminLog.setCreated_at(new Timestamp(new Date ().getTime()));
-			 inventoryAdminLog.setCustomer_id(userId);
-			 inventoryAdminLog.setHold_reason(holdmsg);
-			 inventoryAdminLog.setHold_status(true);
-			 
-			 inventoryAdminLog.setHold_description(reasonInput);
-			 inventoryAdminLog.setHold_behalf_username(holdBlockBehalfOfName);
-			 inventoryAdminLog.setHold_behalf_userid(holdBlockBehalfOfID);
-			 
-			 inventoryService.saveHoldInventoryAdminLog(inventoryAdminLog);
-		 }
-		 return "";
+				,@RequestParam("holdBlockBehalfOfID") int holdBlockBehalfOfID
+				,@RequestParam("enqSFID") String enqSFID) {
+		
+		
+			
+		 try {
+			 inventoryService.holdInventoryAdmin(projectId, userId, unitsfid, holdmsg, reasonInput, holdBlockBehalfOfName, holdBlockBehalfOfID, enqSFID);
+		} catch (Exception e) {
+			log.error("error", e);
+			return "duplicateRecords";
+		}
+		 return "success";
 	 }
 		@RequestMapping(value = "/updateAdminUnit", method = RequestMethod.POST)
 		public String updateAdminUnit(
 				@RequestParam("projectid") String projectId,
 				@RequestParam("userId") String userId 
 				,@RequestParam("unitsfid") String unitsfid
+				,@RequestParam("unitNames") String unitNames
 				) {
 		 
-		 String [] data= unitsfid.split(",");
-		 for (int i=0;i<data.length;i++){
-			 HoldInventoryAdmin inventoryAdmin= new HoldInventoryAdmin();
-			 inventoryAdmin.setUnitSfid(data[i]);
-			 inventoryAdmin.setProject_id(projectId);
-			 inventoryAdmin.setCreated_at(new Timestamp(new Date ().getTime()));
-			 inventoryAdmin.setCustomer_id(userId);
-			 inventoryAdmin.setHold_reason("Release Admin");
-			 inventoryAdmin.setHold_status(false);
-			 inventoryService.updateHoldInventoryAdmin(inventoryAdmin);
-			 
-			 HoldInventoryAdminLog inventoryAdminLog= new HoldInventoryAdminLog();
-			 inventoryAdminLog.setUnitSfid(data[i]);
-			 inventoryAdminLog.setProject_id(projectId);
-			 inventoryAdminLog.setCreated_at(new Timestamp(new Date ().getTime()));
-			 inventoryAdminLog.setCustomer_id(userId);
-			 inventoryAdminLog.setHold_reason("Release Admin");
-			 inventoryAdminLog.setHold_status(false);
-			 
-			 inventoryService.saveHoldInventoryAdminLog(inventoryAdminLog);
-		 }
-		 return "";
+			
+				 String [] data= unitsfid.split(",");
+				 String [] units= unitNames.split(",");
+				 StringBuilder error = new StringBuilder();
+				 for (int i=0;i<data.length;i++){
+					try {
+						HoldInventoryAdmin inventoryAdmin = new HoldInventoryAdmin();
+						inventoryAdmin.setUnitSfid(data[i]);
+						inventoryAdmin.setProject_id(projectId);
+						inventoryAdmin.setCreated_at(new Timestamp(new Date().getTime()));
+						inventoryAdmin.setCustomer_id(userId);
+						inventoryAdmin.setHold_reason("Release Admin");
+						inventoryAdmin.setHold_status(false);
+						inventoryAdmin.setEoi_unit_locked(false);
+		
+						inventoryService.updateHoldInventoryAdmin(inventoryAdmin);
+		
+						// -------------------------------------
+						HoldInventoryAdminLog inventoryAdminLog = new HoldInventoryAdminLog();
+						inventoryAdminLog.setUnitSfid(data[i]);
+						inventoryAdminLog.setProject_id(projectId);
+						inventoryAdminLog.setCreated_at(new Timestamp(new Date().getTime()));
+						inventoryAdminLog.setCustomer_id(userId);
+						inventoryAdminLog.setHold_reason("Release Admin");
+						inventoryAdminLog.setHold_status(false);
+						inventoryAdminLog.setEoi_unit_locked(false);
+		
+						inventoryService.saveHoldInventoryAdminLog(inventoryAdminLog);
+					} catch (Exception e) {
+						log.error("error", e);
+						error.append("/n Problem in releasing Unit - ")
+						.append(units[i]);
+					}
+				}
+		String errorMessage = error.toString();
+		if(errorMessage!=null && !errorMessage.isEmpty()){
+			return errorMessage;
+		}
+		 return "success";
 	 }
 		@RequestMapping(value ="/generateWalkinToken", method = RequestMethod.GET)
 		public String success(@RequestParam("enquiryid") String enquiryId,

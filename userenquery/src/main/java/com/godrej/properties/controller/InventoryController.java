@@ -186,7 +186,7 @@ public class InventoryController {
 	 /* END Added for Get Inventory */
 	
 	
-	@RequestMapping(value = { "/zzholdTesting" }, method = RequestMethod.POST)
+	@PostMapping(value = { "/zzholdTesting" })
 	public @ResponseBody String rqstAction(@RequestParam("testSFID") String testSFID, @RequestParam("property_on_hold") String property_on_hold , @RequestParam("crm_user") String crm_user) {
 		
 		GsonBuilder gsonBuilder = new GsonBuilder();
@@ -206,7 +206,7 @@ public class InventoryController {
 	
 	
 	
-	@RequestMapping(value = { "/zzExist" }, method = RequestMethod.POST)
+	@PostMapping(value = { "/zzExist" })
 	public @ResponseBody String zzCheckReq (@RequestParam("zzsfid") String zzsfid, @RequestParam("property_on_hold") String property_on_hold , @RequestParam("crm_user") String crm_user) {
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		Gson gson = gsonBuilder.create();

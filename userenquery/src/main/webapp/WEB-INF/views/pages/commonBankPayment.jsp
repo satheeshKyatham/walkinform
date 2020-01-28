@@ -148,8 +148,8 @@
 								</select>
 							</td>
 							<td>
-								<select class="full form-control input-sm typologyListEOI">
-									<option value="">Select Tyology</option>
+								<select class="full form-control input-sm typologyListEOI" onchange="getUnitEOI(this)">
+									<option value="0">Select Typology</option>
 								</select>
 							</td>
 							<td>

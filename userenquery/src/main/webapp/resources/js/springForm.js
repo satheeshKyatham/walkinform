@@ -327,7 +327,9 @@ function submitWithFile(formId,action, callback){
 		        			if (sizeValidate < 1) {
 		        				//Move csPymtDataEoi () in insertEOIPreference()
 		        				//csPymtDataEoi ();
-				        		insertEOIPreference();
+				        		//insertEOIPreference();
+		        				
+		        				holdUnitForEOI('eoi_block');
 				        		
 		        			} else {
 		        				swal({

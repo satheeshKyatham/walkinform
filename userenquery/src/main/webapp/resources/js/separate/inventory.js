@@ -165,7 +165,13 @@ function inventoryLoad (callFrom){
 					if(obj1[j].hold_reason==='block')
 						unitStatus="unitBlock";
 					else if (obj1[j].hold_reason==='temp') {
-						unitStatus="unitTemp";
+						if (obj1[j].eoi_unit_locked == true && obj1[j].enq_sfid == $('#enquirysfid').val()) {
+							unitStatus="unitEOIBlockAdmin";
+							dropdown = "<ul class='dropdown-menu'>  <li><a onclick='viewCostsheet(this, "+unitSfid+", "+houseNo+", "+floorNo+", "+towerCode+")'>View Costsheet</a></li> </ul>";
+							caret = "caret";
+						}else {
+							unitStatus="unitTemp";
+						}
 					}
 					
 					else

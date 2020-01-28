@@ -420,7 +420,7 @@ function addMoreEoiRowBtn () {
 				+"</td>"
 				+"<td>"
 					+"<select class='full form-control input-sm typologyListEOI'>"
-						+"<option value=''>Select Tyology</option>"
+						+"<option value=''>Select Typology</option>"
 					+"</select>"
 				+"</td>"
 				+"<td>"

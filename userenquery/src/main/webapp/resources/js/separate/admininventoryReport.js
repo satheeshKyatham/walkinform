@@ -33,13 +33,18 @@ function getInventoryReportDtl () {
 			for(var i=0;i<obj1.length;i++){
 				
 				
-				if (obj1[i].hold_reason == 'temp') {
+				if  (obj1[i].hold_reason == 'temp' && obj1[i].eoi_unit_locked == true){
+					rowColor = "rowEOIHoldClr";
+					hold_reason = 'EOI Hold';
+				}
+				
+				else if (obj1[i].hold_reason == 'temp') {
 					rowColor = "rowHoldClr";
 					hold_reason = 'Hold';
 				} else if (obj1[i].hold_reason == 'block'){
 					rowColor = "rowBlockClr";
 					hold_reason = 'Block';
-				}
+				} 
 				
 				
 				
@@ -47,6 +52,12 @@ function getInventoryReportDtl () {
 				html += "<tr class='"+rowColor+"'>" +
 							
 							" <td>"+hold_reason+"</td>" +
+							
+							"<td>"+obj1[i].enq_name+"</td>" +
+							"<td>"+obj1[i].customer_name+"</td>" +
+							"<td>"+obj1[i].customer_mobile+"</td>" +
+							
+							
 							" <td>"+obj1[i].tower_name__c+"</td>" +
 							" <td>"+obj1[i].floor_number__c+"</td>" +
 							" <td>"+obj1[i].propstrength__house_unit_no__c+"</td>" +
