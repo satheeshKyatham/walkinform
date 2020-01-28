@@ -1,5 +1,8 @@
-
-
+if (navigator.userAgent.indexOf('Chrome') ==-1)
+{
+	alert("For Better Experience, Please Use Chrome Browser...");
+	window.location = "chromeerror"
+}
 function startsession( value,mobileno,token,submitedSates,countryCode){
 	 
 	//update start session

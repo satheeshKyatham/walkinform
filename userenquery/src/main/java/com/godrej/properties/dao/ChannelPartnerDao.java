@@ -12,4 +12,5 @@ public interface ChannelPartnerDao {
 	public ChannelPartner getChannelPartnerBySfid(String sfid);
 
 	public int getChannelPartnerId(String sfid);
+	public List<ChannelPartnerDto> getChannelPartners();
 }

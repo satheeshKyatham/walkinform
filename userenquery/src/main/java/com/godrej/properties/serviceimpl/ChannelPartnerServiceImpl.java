@@ -25,6 +25,11 @@ public class ChannelPartnerServiceImpl implements ChannelPartnerService {
 
 	@Override
 	@Transactional(readOnly=true, propagation=Propagation.SUPPORTS)
+	public List<ChannelPartnerDto> getChannelPartners(){
+		return channelPartnerDao.getChannelPartners();
+	}
+	@Override
+	@Transactional(readOnly=true, propagation=Propagation.SUPPORTS)
 	public int getChannelPartnerId(String sfid) {
 		return channelPartnerDao.getChannelPartnerId(sfid);
 	}

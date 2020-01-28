@@ -153,5 +153,9 @@ public class AdminController {
 		 return "paymentapproval";
 	}
 
+	@RequestMapping(value = { "/chromeerror"}, method = RequestMethod.GET)
+	public String chromeerror(ModelMap model,HttpServletRequest request) {
+		 return "chromeerror";
+	}
 	
 }

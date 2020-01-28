@@ -26,5 +26,14 @@ public class ChannelPartnerController {
 		resp.addObject("channelPartnerList", channelPartnerList);
 		return resp;
 	}
+	
+	@GetMapping("/getChannelPartners")
+	@ResponseBody
+	public CustomResponseDto getChannelPartners(){
+		CustomResponseDto resp =new CustomResponseDto();
+		List<ChannelPartnerDto> channelPartnerList=channelPartnerService.getChannelPartners();
+		resp.addObject("channelPartnerList", channelPartnerList);
+		return resp;
+	}
 
 }

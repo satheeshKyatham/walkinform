@@ -10,4 +10,5 @@ public interface ChannelPartnerService {
 	
 	public int getChannelPartnerId(String sfid);
 
+	public List<ChannelPartnerDto> getChannelPartners();
 }
