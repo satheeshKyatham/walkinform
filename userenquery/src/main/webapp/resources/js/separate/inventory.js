@@ -47,32 +47,43 @@ function holdExistData () {
 	}).done(function(data){
 		var obj =JSON.parse(data);
 		
-		for(var i=0;i<obj.length;i++){
-			
-			holdMinVar = obj[i].holdMin;
-			holdSecVar = obj[i].holdSec;
-			
-			if (holdMinVar == 'undefined' || holdMinVar == null){
-				holdMinVar = 0;
-			} else if (holdSecVar == 'undefined' || holdSecVar == null) {
-				holdSec = 0;
+		if (obj.length > 0) {
+			for(var i=0;i<obj.length;i++){
+				
+				holdMinVar = obj[i].holdMin;
+				holdSecVar = obj[i].holdSec;
+				
+				if (holdMinVar == 'undefined' || holdMinVar == null){
+					holdMinVar = 0;
+				} else if (holdSecVar == 'undefined' || holdSecVar == null) {
+					holdSec = 0;
+				} else {
+					$('#holdCountZero').hide();
+				}
+				
+				//holdCounter(holdMinVar, holdSecVar);
+				
+				clearInterval(interval);
+				
+				//HoldReverseTimer(0, 15);
+				
+				
+				
+				HoldReverseTimer(holdMinVar, holdSecVar);
+				
+				var unitId =  '"'+obj[i].unitSfid+'"';
+				var customerId = '"'+obj[i].customer_id+'"';
+				
+				$('#inventoryBreadcrumb').empty();
+				
+				$('#inventoryBreadcrumb').append('<div style="min-height: 40px; text-align: right; background-color: #0077b9; color: #fff; padding-right: 15px; "> Property Release in <span class="holdCountdown"></span> min. </div>');
+				$('#inventoryBreadcrumb').append("<nav aria-label='breadcrumb'><ol class='breadcrumb'> <li class='breadcrumb-item'><a>Held by You</a></li> <li class='breadcrumb-item'> Tower: "+obj[i].tower_name+" </li> <li class='breadcrumb-item'>Floor: "+obj[i].floor_no+"</li>  <li class='breadcrumb-item'>Unit No: "+obj[i].unit_no+" </li>  <li class='breadcrumb-item pull-right' onclick='releaseFromHold(this, "+unitId+", "+customerId+")'><a>Release Unit for other</a></li> </ol></nav>");
 			}
-			
-			//holdCounter(holdMinVar, holdSecVar);
-			
-			clearInterval(interval);
-			
-			//HoldReverseTimer(0, 15);
-			HoldReverseTimer(holdMinVar, holdSecVar);
-			
-			var unitId =  '"'+obj[i].unitSfid+'"';
-			var customerId = '"'+obj[i].customer_id+'"';
-			
-			$('#inventoryBreadcrumb').empty();
-			
-			$('#inventoryBreadcrumb').append('<div style="min-height: 40px; text-align: right; background-color: #0077b9; color: #fff; padding-right: 15px; "> Property Release in <span class="holdCountdown"></span> min. </div>');
-			$('#inventoryBreadcrumb').append("<nav aria-label='breadcrumb'><ol class='breadcrumb'> <li class='breadcrumb-item'><a>Held by You</a></li> <li class='breadcrumb-item'> Tower: "+obj[i].tower_name+" </li> <li class='breadcrumb-item'>Floor: "+obj[i].floor_no+"</li>  <li class='breadcrumb-item'>Unit No: "+obj[i].unit_no+" </li>  <li class='breadcrumb-item pull-right' onclick='releaseFromHold(this, "+unitId+", "+customerId+")'><a>Release Unit for other</a></li> </ol></nav>");
-		}
+		} else {
+			$('#holdCountZero').hide();
+		} 
+		
+		
 	});	
 }
 
@@ -248,6 +259,8 @@ function holdInterval (e, sfid, unitNo, floor, towerCode) {
 						$('#unitSfid').val(sfid);
 						$('#towerSfid').val(towerCode);
 						
+						$('.holdCountdown').show();
+						$('#holdCountZero').hide();
 					
 							$('#costsheetTab a').trigger('click');
 						  //holdCounter ();
@@ -325,8 +338,13 @@ function releaseFromHold (e, sfid, holdedBy) {
 			
 			HoldReverseTimer(min, sec);*/
 			
+			$('.holdCountdown').hide();
+			$('#holdCountZero').show();
+			
 			inventoryLoad("releaseUnit");
 			//HoldReverseTimer(0, 0);
+			
+
 		});
 	} else {
 		

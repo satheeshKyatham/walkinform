@@ -289,15 +289,7 @@ public class WebServiceController<MultipartFormDataInput> {
 	
 	@Autowired
 	private DailyUserUplaodService dailyUserUplaodService;
-	
-	@Autowired
- 	private ZZrequestProcessService zZrequestProcessService;
- 	
- 	
- 	@Autowired
- 	private ZZExistService zZExistService;
- 	
- 	
+	 	
  	@Autowired
  	private HoldIntervalService holdIntervalService;
  	
@@ -534,6 +526,10 @@ public class WebServiceController<MultipartFormDataInput> {
 	  model.setViewName("tnc");
 	  return model; }
 	  
+	  @RequestMapping(value = { "/tncEOI" }, method = RequestMethod.GET) public
+	  ModelAndView tncAgainstEOI() { ModelAndView model = new ModelAndView();
+	  model.setViewName("tncEOI");
+	  return model; }
 	  
 	  @RequestMapping(value = { "/carParkCharges" }, method = RequestMethod.GET) public
 	  ModelAndView carParkCharges() { ModelAndView model = new ModelAndView();
@@ -695,6 +691,15 @@ public class WebServiceController<MultipartFormDataInput> {
 			, @RequestParam("region_name") String region_name, @RequestParam("tower_id") String tower_id, @RequestParam("typology_name") String typology_name) // add parameter 
 	{	
 		BSPAgainstPymtPlan oc = new BSPAgainstPymtPlan();
+		
+		if (tower_id.contains("0")) {
+			tower_id = null;
+		} 
+		
+		if (typology_name.contains("0")) {
+			typology_name = null;
+		}
+		
 		
 		oc.setBsp_amount(bsp_amount);
 		oc.setIsactive("A");
@@ -1330,232 +1335,6 @@ public class WebServiceController<MultipartFormDataInput> {
 	}
 	
 	
-	@RequestMapping(value = { "/holdExistData" }, method = RequestMethod.POST)
-	public String holdExistData (@RequestParam("projectNameId") String projectNameId, @RequestParam("customerId") String customerId) {
-		GsonBuilder gsonBuilder = new GsonBuilder();
-		Gson gson = gsonBuilder.create();
-		
-		//HoldInventoryEntry holdUnitDtl = holdInventoryEntryService.holdDataExist(projectNameId, customerId);
-		
-		List<HoldInventoryEntry> plans = holdInventoryEntryService.holdDataExist(projectNameId, customerId);
-		
-		ArrayList<HoldInventoryEntry> intList = new ArrayList<>(); 
-		
-		
-		if (plans != null) {
-			for(int k=0;k<plans.size();k++) {
-				
-				java.util.Date date = new java.util.Date();
-	    		Timestamp currentTpm = new Timestamp(System.currentTimeMillis());
-
-	    		Calendar cal = Calendar.getInstance();
-	    		cal.setTimeInMillis(currentTpm.getTime());
-
-	    		// add a bunch of seconds to the calendar
-	    		cal.add(Calendar.SECOND, 98765);
-
-	    		// create a second time stamp
-	    		Timestamp timestampValue = new Timestamp(plans.get(k).getCreated_at().getTime()+ 5*60*1000);
-
-	    		long milliseconds = timestampValue.getTime() - currentTpm.getTime();
-	    		int seconds = (int) milliseconds / 1000;
-
-	    		int hours = seconds / 3600;
-	    		int minutes = (seconds % 3600) / 60;
-	    		seconds = (seconds % 3600) % 60;
-
-	    		System.out.println("currentTpm: " + currentTpm);
-	    		System.out.println("timestampValue: " + timestampValue);
-
-	    		System.out.println("Difference: ");
-	    		System.out.println(" Hours: " + hours);
-	    		System.out.println(" Minutes: " + minutes);
-	    		System.out.println(" Seconds: " + seconds);
-				
-	    		
-				
-				plans.get(k).setHoldMin(minutes);
-				plans.get(k).setHoldSec(seconds);
-				
-				
-				intList.add(plans.get(k));
-			}
-			
-			return gson.toJson(intList);
-		} else {
-			return gson.toJson("");
-		}
-	}
-	
-	
-	
-	
-	/* Added for Get Inventory */
-	@RequestMapping(value = "/getInventoryDetails", method = RequestMethod.POST)
-	public String getUnitDtl(@RequestParam("projectId") String projectId, @RequestParam("towerMst") String towerMst, @RequestParam("typoMst") String typoMst, @RequestParam("holdMst") String holdMst, @RequestParam("soldMst") String soldMst, @RequestParam("facing") String facing , @RequestParam("unitAvailable") String unitAvailable) {
-			GsonBuilder gsonBuilder = new GsonBuilder();
-			Gson gson = gsonBuilder.create();
-			
-			
-			
-			/*Inventory Hold Update commented on Inventory Load -  Change By Satheesh Kyatham- 03-10-2019*/
-			/*=======Start==========*/
-			/*HoldInventoryEntry updateHold = new HoldInventoryEntry ();
-			updateHold.setStatusai("I");
-			updateHold.setHoldstatusyn("N");
-			holdInventoryEntryService.updatePreviousHold(updateHold);*/
-			/*=========End========*/
-			
-			
-			
-			
-			
-			
-			
-			List<Inventory> plans=inventoryService.getUnitDtl(projectId, towerMst, typoMst, holdMst, soldMst,facing, unitAvailable);
-			
-			HashSet<Integer> floor=new HashSet<Integer>();
-			HashMap<String, ArrayList<Inventory>>  hashMap= new HashMap<String, ArrayList<Inventory>>();
-			
-			ArrayList<Inventory> inventories = new ArrayList<Inventory>();
-			ArrayList<ArrayList<Inventory>> mainList = new ArrayList<>();
-			if(plans !=null && plans.size()>0)
-			{
-				for(int i=0;i<plans.size();i++) {
-					floor.add(Integer.valueOf(plans.get(i).getFloor_number__c()));
-				}
-				
-				List<Integer> list = new ArrayList<Integer>(floor); 
-				Collections.sort(list); 
-				
-				
-       
-                
-                for(int j=0;j<list.size();j++) {
-                	ArrayList<Inventory> intList = new ArrayList<>(); 
-                	
-                	
-                	for(int k=0;k<plans.size();k++) {
-                		if(list.get(j).toString().equals(plans.get(k).getFloor_number__c())) {
-                			
-                			if (plans.get(k).getCreated_at() != null && !(plans.get(k).getHoldstatusyn().equals("N"))  && !(plans.get(k).getHoldIntervalstatusAI().equals("I"))  ) {
-                    			System.out.println("Not null Value");
-                        		java.util.Date date = new java.util.Date();
-                        		Timestamp currentTpm = new Timestamp(System.currentTimeMillis());
-                        		Calendar cal = Calendar.getInstance();
-                        		cal.setTimeInMillis(currentTpm.getTime());
-
-                        		// add a bunch of seconds to the calendar
-                        		cal.add(Calendar.SECOND, 98765);
-
-                        		// create a second time stamp
-                        		Timestamp timestampValue = new Timestamp(plans.get(k).getCreated_at().getTime()+ 5*60*1000);
-
-                        		long milliseconds = timestampValue.getTime() - currentTpm.getTime();
-                        		int seconds = (int) milliseconds / 1000;
-
-                        		int hours = seconds / 3600;
-                        		int minutes = (seconds % 3600) / 60;
-                        		seconds = (seconds % 3600) % 60;
-
-                        		System.out.println("currentTpm: " + currentTpm);
-                        		System.out.println("timestampValue: " + timestampValue);
-
-                        		System.out.println("Difference: ");
-                        		System.out.println(" Hours: " + hours);
-                        		System.out.println(" Minutes: " + minutes);
-                        		System.out.println(" Seconds: " + seconds);
-                        		
-                        		if(timestampValue.compareTo(currentTpm) > 0)
-                        		{	
-                        			plans.get(k).setFlagForHold("Hold");
-                        			plans.get(k).setHoldMin(minutes);
-                        			plans.get(k).setHoldSec(seconds);
-                        			System.out.println("Hold IF");
-                        		}
-                        		else
-                        		{
-                        			plans.get(k).setFlagForHold("Release");
-                        		}
-                    			
-                    		} else {
-                    			
-                    		}
-                			intList.add(plans.get(k));
-                		}	
-        			}
-                	 mainList.add(intList);
-    			}
-			}
-			return gson.toJson(mainList);
-	}
-	 /* END Added for Get Inventory */
-	
-	
-	@RequestMapping(value = { "/zzholdTesting" }, method = RequestMethod.POST)
-	public String rqstAction(@RequestParam("testSFID") String testSFID, @RequestParam("property_on_hold") String property_on_hold , @RequestParam("crm_user") String crm_user) {
-		
-		GsonBuilder gsonBuilder = new GsonBuilder();
-		Gson gson = gsonBuilder.create();
-		
-		ZzholdTest action = new ZzholdTest ();
-		
-		action.setSfid(testSFID);
-		action.setPropstrength__property_on_hold_for_reallocation__c(property_on_hold);
-		action.setRegistration_crm_user__c(crm_user);
-		
-		
-		//action.set
-		//action.setAdmin_status(actionAR);
-		
-		zZrequestProcessService.zzupdateRqst(action);
-		
-		//unitExistsService.updateUnitDtl (uDtl);
-		
-		return gson.toJson("");
-	}
-	
-	
-	
-	@RequestMapping(value = { "/zzExist" }, method = RequestMethod.POST)
-	public synchronized String zzCheckReq (@RequestParam("zzsfid") String zzsfid, @RequestParam("property_on_hold") String property_on_hold , @RequestParam("crm_user") String crm_user) {
-		GsonBuilder gsonBuilder = new GsonBuilder();
-		Gson gson = gsonBuilder.create();
-		
-		
-		
-		ZzholdTest uDtl = zZExistService.unitExist(zzsfid);
-		
-		//System.out.println("Unit Exist ::: " + unitNo);
-		
-		
-		if (uDtl != null && !uDtl.equals("")) {
-			System.out.println("Not Null");
-			return gson.toJson("Sorry this unit no longer available");
-		}else {
-			System.out.println("Null");
-			
-			
-			ZzholdTest action = new ZzholdTest ();
-			action.setSfid(zzsfid);
-			action.setPropstrength__property_on_hold_for_reallocation__c(property_on_hold);
-			action.setRegistration_crm_user__c(crm_user);
-			zZrequestProcessService.zzupdateRqst(action);
-			
-			
-			return gson.toJson("New Record");
-			
-		}
-		/*ZzholdTest action = new ZzholdTest ();
-		action.setSfid(testSFID);
-		action.setPropstrength__property_on_hold_for_reallocation__c(property_on_hold);
-		action.setRegistration_crm_user__c(crm_user);
-		zZrequestProcessService.zzupdateRqst(action);*/
-	}
-	
-	/* END Added For testing */
-	
-	
 	
 	
 	@RequestMapping(value = { "/otpRequestOC" }, method = RequestMethod.POST)
@@ -1832,7 +1611,7 @@ public class WebServiceController<MultipartFormDataInput> {
 	
 	// @RequestParam("customerContact") long contact,
 	@RequestMapping(value = { "/updateBSP" }, method = RequestMethod.POST)
-	public String updateBSP (@RequestParam("bspDis") String bspDis, @RequestParam("token") String token, @RequestParam("projectsfid") String projectsfid,   @RequestParam("enquirysfid") String enquirysfid,  @RequestParam("primarycontactsfid") String primarycontactsfid,   @RequestParam("sentToCrmYN") String sentToCrmYN
+	public String updateBSP (@RequestParam("salesConsiderationTotal") double salesConsiderationTotal,  @RequestParam("bspTaxGST") double bspTaxGST,   @RequestParam("bspDis") String bspDis, @RequestParam("token") String token, @RequestParam("projectsfid") String projectsfid,   @RequestParam("enquirysfid") String enquirysfid,  @RequestParam("primarycontactsfid") String primarycontactsfid,   @RequestParam("sentToCrmYN") String sentToCrmYN
 			, @RequestParam("timeid") String timeid_str, @RequestParam("propid") String propid, @RequestParam("ppid") String ppid
 			, @RequestParam("offerthrough") String offerthrough, @RequestParam("brokersfid") String brokersfid, @RequestParam("discount_Value") String discount_Value_str
 			, @RequestParam("balance_amnt") String balanceAmnt,@RequestParam("balance_amnt_description") String balanceAmntDes
@@ -1947,11 +1726,18 @@ public class WebServiceController<MultipartFormDataInput> {
 					  JSONObject o = arr.getJSONObject(i);  
 					  offerid=o.get("offerId").toString(); 
 					}*/
-					
+					 
 					//Update offer created flag in sfdc property table through HEROKU
-					if(offerid!=null && offerid.length()==18)
-						propOtherChargesService.updatePropertyStatus(propid);
-
+					if((offerid!=null && offerid.length()==18)) {
+						if("a1l2s00000000X5AAI".equals(projectsfid)) {
+							boolean isPMAY = isUnderPMAY(offerid, projectsfid,salesConsiderationTotal );
+							propOtherChargesService.updatePropertyStatus(propid, isPMAY);
+						}
+						else {
+							propOtherChargesService.updatePropertyStatus(propid);
+						}
+					}
+						
 					//Insert offer related details in custome table
 					
 					action.setAmount(balanceAmnt);
@@ -1968,6 +1754,7 @@ public class WebServiceController<MultipartFormDataInput> {
 					action.setCostsheet_commitment(costsheet_commitment);
 					action.setCostsheet_path(costsheet_path);
 					action.setCs_final_amount(cs_final_amount);
+					action.setGst_tax(bspTaxGST);
 					
 					if(userid!=null && userid.length()>0)
 					{
@@ -1993,6 +1780,10 @@ public class WebServiceController<MultipartFormDataInput> {
 		
 	}
 	
+	
+	private boolean isUnderPMAY(String offerId, String projectSfid, double basicSalePrice) {
+		return (offerId!=null && offerId.length()==18 && "a1l2s00000000X5AAI".equals(projectSfid) && basicSalePrice <=4500000) ;
+	}
 	@RequestMapping(value = { "/getcreatedOffersList" }, method = RequestMethod.GET)
 	public String getcreatedOffersList(@RequestParam("projectid") String projectid) {
 		GsonBuilder gsonBuilder = new GsonBuilder();
@@ -2252,6 +2043,7 @@ public class WebServiceController<MultipartFormDataInput> {
 			 paymentPlanJson.setPropstrength__category__c(paym.getPropstrength__category__c());
 			 paymentPlanJson.setPropstrength__pmay_abatement__c(paym.isPropstrength__pmay_abatement__c());
 			 paymentPlanJson.setBank__c(paym.getBank__c());
+			 paymentPlanJson.setProperty_facing__c(paym.getProperty_facing__c());
 			 //paymentPlanJson.set (paym.getSfid());
 			 
 			 
@@ -2560,7 +2352,7 @@ public class WebServiceController<MultipartFormDataInput> {
 			 if(isAD) {
 				 master= validateUser(master,"A");
 			 }else {
-				 master.setMsg("Please check your username and password. If you still can't login , your account might be locked, please send email to mailadmin@godrejinds.com");
+				 master.setMsg("Please check your username and password. If you still can't login , your account might be locked, please send email to servicedesk@godrejinds.com");
 				 return gson.toJson(master);
 			 }
 		 }else {
@@ -2651,14 +2443,41 @@ public class WebServiceController<MultipartFormDataInput> {
 		 }
 		 
 		 if(type.equals("E")) {
-			 if(loginAD(master)) {
+			 LdapUserDetailsDto dto = new LdapUserDetailsDto();
+			 dto.setEmail(emailid);
+			 dto.setPassword(password);
+			 LdapUserDetailsDto ldap= ldapServiceController.getLdapUserDetails(dto);
+			 //boolean isAD=loginAD(master);
+			 boolean isAD=ldap.isIsvalid();
+			 
+			 if(isAD) {
+				 master=validateUser(master,type);
+				 return gson.toJson(master);	 
+			 }
+			 else if(isAD==false)
+			 {
+				 master=validateUser(master,type);
+				 if(master.getUser_id()==0)
+				 {
+					 master.setMsg("Invalid credentials.");
+					 return gson.toJson(master);
+				 }
+				 return gson.toJson(master);	
+			 }
+			 else {
+				 master.setMsg("Invalid credentials.");
+				 return gson.toJson(master);	
+				  
+			 }
+			 /*if(loginAD(master)) {
 				 master=	 validateUser(master,type);
 				 return gson.toJson(master);	 
 			 }else {
 				 master.setMsg("Invalid credentials.");
 				 return gson.toJson(master);	
 				  
-			 }
+			 }*/
+			 
 		 }else if(type.equals("U")) {
 			 
 			 master=validateUser(master,type);
@@ -2777,8 +2596,8 @@ public class WebServiceController<MultipartFormDataInput> {
 	 
 } 
 	@RequestMapping(value = { "/gettokenEntrys"}, method = RequestMethod.GET)
-	public String getTokenEntrys(@RequestParam("tokenType") String tokenType,@RequestParam("ProjectId") String projectId,@RequestParam("date") String inputDate) {
-		List<VW_Token> tokens=tokenService.getTokenList(tokenType,projectId,inputDate);
+	public String getTokenEntrys(@RequestParam("tokenType") String tokenType,@RequestParam("ProjectId") String projectId,@RequestParam("date") String inputDate,@RequestParam("todate") String toDate) {
+		List<VW_Token> tokens=tokenService.getTokenList(tokenType,projectId,inputDate,toDate);
 		//model.addAttribute("tokens",tokens );
 		
 		/*if(tokens!=null)
@@ -2798,8 +2617,8 @@ public class WebServiceController<MultipartFormDataInput> {
 	}
 	
 	@RequestMapping(value = { "/gettokenassignentrys"}, method = RequestMethod.GET)
-	public String getTokenAssignEntrys(@RequestParam("tokenType") String tokenType,@RequestParam("projectid") String projectid,@RequestParam("date") String inputDate) {
-		List<VW_Token> tokens=tokenService.getTokenAssignList(tokenType,projectid,inputDate);
+	public String getTokenAssignEntrys(@RequestParam("tokenType") String tokenType,@RequestParam("projectid") String projectid,@RequestParam("date") String inputDate,@RequestParam("todate") String toDate) {
+		List<VW_Token> tokens=tokenService.getTokenAssignList(tokenType,projectid,inputDate,toDate);
 		Gson gson = new GsonBuilder().disableHtmlEscaping().create();
 		 return gson.toJson(tokens);
 	}
@@ -2921,8 +2740,8 @@ public class WebServiceController<MultipartFormDataInput> {
 		ArrayList<String> rows = new ArrayList<String>();
 		rows.add("Project Name,Tokenno,Created,Enquiry Name,Mobile Phone,Customer Name,Email,have_we_met_before,age_a__c,residenceaddress,officelocation,"
 				+ "empstatus,company_name__c,is_purchase_for_self_use_or_investment__c,budget"
-				+ ",typology_requirement,walk_in_source__c,advertisementname,brokername,current_residence_configuration,current_residence_ownership,source_of_funding,customer_classification,ethnicity,unit_availability,accompanied_by,deal_negotiation,construction_status,timeframe_to_book,enquirynoneditcomment,closingname,closingemail,own_contribution_receipt,loan_eligibility,Assined To,IsAttended,CP Comments,FollowType,FollowDate"
-				+ ",Trigger 1,Trigger 2,Barrier 1,Barrier 2,Lost Reason");
+				+ ",typology_requirement,walk_in_source__c,advertisementname,brokername,current_residence_configuration,current_residence_ownership,source_of_funding,customer_classification,ethnicity,unit_availability,accompanied_by,deal_negotiation,construction_status,timeframe_to_book,enquirynoneditcomment,verticle,sourcingname,closingname,closingemail,own_contribution_receipt,loan_eligibility,Assined To,IsAttended,CP Comments,FollowType,FollowDate"
+				+ ",Trigger 1,Trigger 2,Barrier 1,Barrier 2,Lost Reason,Designation");
 		rows.add("\n");
 		String fromdate = resquest.getParameter("fromdate");
 		System.out.println("fromdate:-"+fromdate);
@@ -3009,6 +2828,19 @@ public class WebServiceController<MultipartFormDataInput> {
 			else
 				rows.add(mislist.get(i).getEnquirynoneditcomment().trim().replaceAll("\\n|\\r", " "));
 			rows.add(",");
+			
+			if(mislist.get(i).getVerticle__c()!=null)
+				rows.add(mislist.get(i).getVerticle__c());
+			else 
+				rows.add("");
+			rows.add(",");
+			
+			if(mislist.get(i).getSourcingname()!=null)
+				rows.add(mislist.get(i).getSourcingname());
+			else
+				rows.add("");
+			rows.add(",");
+			
 			rows.add(mislist.get(i).getClosingname());
 			rows.add(",");
 			rows.add(mislist.get(i).getClosingemail());
@@ -3040,6 +2872,11 @@ public class WebServiceController<MultipartFormDataInput> {
 			rows.add(",");
 			rows.add(mislist.get(i).getLost_reason_c__c());
 			rows.add(",");
+			if(mislist.get(i).getDesignation__c()!=null)
+				rows.add(mislist.get(i).getDesignation__c().toString());
+			else
+				rows.add("");
+			
 			//rows.add(mislist.get(i).getFollowtype());
 			//rows.add(",");
 			
@@ -3060,9 +2897,9 @@ public class WebServiceController<MultipartFormDataInput> {
 	}
 	
 	@RequestMapping(value = { "/getAssignedUserToken"}, method = RequestMethod.GET)
-	public String getAssignedUserWiseToken(@RequestParam("projectid") String projectid,@RequestParam("user_id") String userId,@RequestParam("fromdate") String fromdate) {
+	public String getAssignedUserWiseToken(@RequestParam("projectid") String projectid,@RequestParam("user_id") String userId,@RequestParam("fromdate") String fromdate,@RequestParam("todate") String todate) {
 		Gson gson = new GsonBuilder().serializeNulls().create();
-		List<AssignedUser> assign=assignUserService.getassignedusers(userId,projectid,fromdate);
+		List<AssignedUser> assign=assignUserService.getassignedusers(userId,projectid,fromdate,todate);
 		if(assign!=null)
 		{
 			for(int i=0;assign.size()>i;i++)
@@ -3178,12 +3015,18 @@ public class WebServiceController<MultipartFormDataInput> {
 				/*if( data.getEoi_preferred_unit__c()!=null && data.getEoi_enquiry__c() )
 					token.setType("G");
 				else*/ 
-				if(data.getEoi_enquiry__c())
+				/*if(data.getEoi_enquiry__c())
 					token.setType("E");
 				else {
 					token.setType("W");
 					return gson.toJson(token);
+				}*/
+				token.setType(userEOIService.getEOITokenType(data.getSfid()));
+				if(token.getType().equals("W"))
+				{
+					return gson.toJson(token);
 				}
+				
 				token.setEnqName(data.getName());
 				token.setAmount(String.valueOf(data.getTransactionAmount()));
 				token.setUniqe_no(""+data.getEnquiryId().toString().trim());
@@ -3199,7 +3042,8 @@ public class WebServiceController<MultipartFormDataInput> {
 				String encStr = enc.encrypt(mobileNo);
 				token.setEncStr(encStr);
 				token.setEnqName(data.getName());
-				if(token.getType().equals("E"))
+				token.setPriorityNo(data.getPriority_no__c());
+				if(token.getType().equals("E") || token.getType().equals("G"))
 				{
 					//data
 					//data.getPriority_no__c();
@@ -3231,17 +3075,18 @@ public class WebServiceController<MultipartFormDataInput> {
 				token.setCreated(new Timestamp(new Date().getTime()));
 				token.setMobileno(data.getPhone_number());
 				token.setProjectname(projectname);
-				
-				if(data.getEoi_amount().equals("500000"))
+				//Configuration of EOI Limit amount
+				/*if(data.getEoi_amount().equals("500000"))
 					token.setType("G");
 				else
-					token.setType("E");
-				
+					token.setType("E");*/
+				token.setType(userEOIService.getEOITokenType(data.getEnquiryid()));
 				token.setAmount(data.getEoi_amount());
 				token.setUniqe_no(data.getBarcode_numeric());
 				token.setUniqe_str(data.getBarcode_str());
 				token.setIsactive("Y");
 				token=tokenService.generateToken(token); 
+				token.setProjectname(projectname);
 				userEOIService.UpdateToken(token);
 			//	send_sms(token.getMobileno(),""+token.getType()+token.getQueue());
 			//	String subject = "Thanks welcome";
@@ -3345,7 +3190,7 @@ public class WebServiceController<MultipartFormDataInput> {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			SendSMS.SMSSend(mobile,msg);
+			SendSMS.ShreeSMSSend(mobile,msg);
 		}
 		
 		private void sendTokenSMS(String mobile ,String token,String projName) throws UnsupportedEncodingException {//,String cpflag,String cpName
@@ -3474,7 +3319,9 @@ public class WebServiceController<MultipartFormDataInput> {
 				@RequestParam("userId") String userId 
 				,@RequestParam("unitsfid") String unitsfid
 				,@RequestParam("holdmsg") String holdmsg
-				) {
+				,@RequestParam("reasonInput") String reasonInput
+				,@RequestParam("holdBlockBehalfOfName") String holdBlockBehalfOfName
+				,@RequestParam("holdBlockBehalfOfID") int holdBlockBehalfOfID) {
 		 
 		 String [] data= unitsfid.split(",");
 		 for (int i=0;i<data.length;i++){
@@ -3485,8 +3332,13 @@ public class WebServiceController<MultipartFormDataInput> {
 			 inventoryAdmin.setCustomer_id(userId);
 			 inventoryAdmin.setHold_reason(holdmsg);
 			 inventoryAdmin.setHold_status(true);
-			 inventoryService.saveHoldInventoryAdmin(inventoryAdmin);
 			 
+			 inventoryAdmin.setHold_description(reasonInput);
+			 inventoryAdmin.setHold_behalf_username(holdBlockBehalfOfName);
+			 inventoryAdmin.setHold_behalf_userid(holdBlockBehalfOfID);
+			 
+			 inventoryService.saveHoldInventoryAdmin(inventoryAdmin);
+			 //-------------------------
 			 HoldInventoryAdminLog inventoryAdminLog= new HoldInventoryAdminLog();
 			 inventoryAdminLog.setUnitSfid(data[i]);
 			 inventoryAdminLog.setProject_id(projectId);
@@ -3494,6 +3346,10 @@ public class WebServiceController<MultipartFormDataInput> {
 			 inventoryAdminLog.setCustomer_id(userId);
 			 inventoryAdminLog.setHold_reason(holdmsg);
 			 inventoryAdminLog.setHold_status(true);
+			 
+			 inventoryAdminLog.setHold_description(reasonInput);
+			 inventoryAdminLog.setHold_behalf_username(holdBlockBehalfOfName);
+			 inventoryAdminLog.setHold_behalf_userid(holdBlockBehalfOfID);
 			 
 			 inventoryService.saveHoldInventoryAdminLog(inventoryAdminLog);
 		 }
@@ -3811,7 +3667,7 @@ public class WebServiceController<MultipartFormDataInput> {
 		
 		
 		@RequestMapping(value = { "/printApplicationForm" }, method = RequestMethod.POST)
-		public synchronized String printApplicationForm (@RequestParam("appFormData") String appFormData, @RequestParam("enqSfid") String enqSfid, @RequestParam("projectName") String projectName) throws JRException, IOException{
+		public synchronized String printApplicationForm (@RequestParam("reraRegistrationNo") String reraRegistrationNo, @RequestParam("appFormData") String appFormData, @RequestParam("enqSfid") String enqSfid, @RequestParam("projectName") String projectName) throws JRException, IOException{
 			
 			GsonBuilder gsonBuilder = new GsonBuilder();
 			Gson gson = gsonBuilder.create();
@@ -3823,7 +3679,7 @@ public class WebServiceController<MultipartFormDataInput> {
 			 */
 			
 			iTextHTMLtoPDF solution = new iTextHTMLtoPDF ();
-			solution.ApplicationFormPDF(appFormData,enqSfid,projectName); 
+			solution.ApplicationFormPDF(appFormData,enqSfid,projectName, reraRegistrationNo); 
 			
 			return gson.toJson("");
 		}	
@@ -4356,6 +4212,21 @@ public class WebServiceController<MultipartFormDataInput> {
 			
 			return gson.toJson(eOIReportService.getEOIReportDtl(whereCondition));
 		}
+		
+		
+		@RequestMapping(value = "/getEOIReportSales", method = RequestMethod.GET, produces = "application/json")
+		public String getEOIReportDtlSales(@RequestParam("userid") String userid, @RequestParam("projectSfid") String projectSfid, @RequestParam("fromDate") String fromDate, @RequestParam("toDate") String toDate) {
+			Gson gson = new GsonBuilder().disableHtmlEscaping().serializeNulls().create();
+			String whereCondition = "";
+			
+			if((fromDate!=null && fromDate.length()>0) && (toDate!=null && toDate.length()>0)  &&  userid!=null && userid.length()>0) {
+				whereCondition = " project_sfid= '"+projectSfid+"' and Date(date_of_eoi__c) between '"+fromDate+"' and '"+toDate+"' and userid = "+userid+"  order by date_of_eoi__c desc ";
+			} else if(projectSfid!=null && projectSfid.length()>0  &&  userid!=null && userid.length()>0) {
+				whereCondition = " project_sfid= '"+projectSfid+"' and userid = "+userid+"  order by date_of_eoi__c desc ";
+			}
+			return gson.toJson(eOIReportService.getEOIReportDtl(whereCondition));
+		}
+		
 		/* END EOI Report */
 		
 		/* Download EOI Report */

@@ -89,7 +89,7 @@ $("#getCSData").click(function (){
               		   swal({
 
           	   				//title: "There is some technical problem, please try again.",
-              			   	title: "There was problem in fetching cost sheet data at this time. Please try again by clicking get details.", 
+              			   	title: "111 There was problem in fetching cost sheet data at this time. Please try again by clicking get details.", 
 
           	   				text: "",
           	   				type: "warning",
@@ -105,7 +105,7 @@ $("#getCSData").click(function (){
 	              	swal({
 
 	          			//title: "There is some technical problem, please try again.",
-	              		title: "There was problem in fetching cost sheet data at this time. Please try again by clicking get details.",
+	              		title: "222 There was problem in fetching cost sheet data at this time. Please try again by clicking get details.",
 
 	          			text: "",
 	          			timer: 8000,
@@ -309,6 +309,9 @@ function loadData () {
                            $('#towerTval').text(value.towerName);
                            $('.towerTval').text(value.towerName);
                            
+                           $('.propFacingType').text(value.property_facing__c);
+                           $('#propFacingType').text(value.property_facing__c);
+                           
                            
                            // Not in use - 20191025
                            if (plnVal == ''){
@@ -447,8 +450,12 @@ function loadData () {
              $('.craParkTypeLabel').html('');
              $('.noOfCarParkLabel').html('');
        }else {
-             $('.craParkTypeLabel').text('Car Park Type');
-             $('.noOfCarParkLabel').text('No. of Car Park');
+    	   if ($('#projectId').val() == 'a1l2s00000000X5AAI') {     
+	        	$('.craParkTypeLabel').text('Covered Car Park Space');
+	        }  else {
+	        	$('.craParkTypeLabel').text('Car Park Type');
+	        }
+	        $('.noOfCarParkLabel').text('No. of Car Park');
        }
        
        
@@ -530,6 +537,11 @@ function bspTaxRecord (taxTag) {
                     propstrength__new_pmay_gst__c =        parseFloat(propstrength__new_pmay_gst__c+value.propstrength__new_pmay_gst__c);
              });    
              
+             /*propstrength__tax_percentage__c = getTaxPercentage(basicSaleprice, projectSfid, currentTaxRate);
+             propstrength__new_tax_percentage__c = getTaxPercentage(basicSaleprice, projectSfid, currentTaxRate);
+             propstrength__pmay_gst__c = getTaxPercentage(basicSaleprice, projectSfid, currentTaxRate);
+             propstrength__new_pmay_gst__c = getTaxPercentage(basicSaleprice, projectSfid, currentTaxRate);*/
+             
              if (taxTag == 'oldTaxPercentage') {
                     
                     $('#bspGSTTax').val(propstrength__tax_percentage__c);
@@ -564,7 +576,23 @@ function bspTaxRecord (taxTag) {
        });
 }
 
-
+function getTaxPercentage(basicSaleprice, projectSfid, currentTaxRate){
+	try{
+		if(basicSaleprice==null || projectSfid == null || currentTaxRate == null){
+			return 0;
+		}
+		if(projectSfid != 'a1l2s00000000X5AAI'){
+			return currentTaxRate;
+		}
+		if(basicSaleprice>4500000){
+			return 5;
+		}
+		return 1;
+	}catch (e) {
+		console.log(e);
+		return 0;
+	}
+}
 
 
 function paymentPlanOtherCharges (firstRowObj){
@@ -1161,7 +1189,17 @@ function updateBSP (timeid) {
        var brokerAccountSfid="";
       
        if ($('#channelPartnerSfidCS').val() === "") {
-    	   offerthrough = "Direct";
+    	   
+    	   if($('#walkInSource').val()==="Referral")
+    		   offerthrough = "Referral";
+    	   else if($('#walkInSource').val()==="Corporate")
+    		   offerthrough = "Corporate";
+    	   else if($('#walkInSource').val()==="Godrej Employee")
+    		   offerthrough = "Employee";
+    	   else
+    		   offerthrough = "Direct";
+    	   
+    	   //$('#walkInSource').val()
     	   brokerAccountSfid ="";
        } else {
     	   offerthrough = "Broker";
@@ -1186,13 +1224,23 @@ function updateBSP (timeid) {
        });
        
        var tdsPaidBy = '';
-       
+       var bspTaxGST = 0;
+       var salesConsiderationTotal = 0;
        
        if ($('#tdsPaidByDD').val() != '') {
              tdsPaidBy = $('#tdsPaidByDD').val();
        }
        
-       $.post(pageContext+"updateBSP",{"bspDis":bspVal,"token":$('#token').val(),
+       if ($('#bspGSTTax').val() != null && $('#bspGSTTax').val().trim() != '') {
+    	   bspTaxGST = $('#bspGSTTax').val();
+       } 
+       
+       if ($('#salesConsiderationTotal').text() != null && $('#salesConsiderationTotal').text().trim() != '') {
+    	   salesConsiderationTotal = $('#salesConsiderationTotal').text();
+       }
+       
+       
+       $.post(pageContext+"updateBSP",{"salesConsiderationTotal":salesConsiderationTotal, "bspTaxGST":bspTaxGST, "bspDis":bspVal,"token":$('#token').val(),
               "projectsfid":$('#projectsfid').val(),"enquirysfid":$('#enquirysfid').val(),"primarycontactsfid":$('#primarycontactsfid').val(), "sentToCrmYN":"Y", "timeid":"0"
               ,"propid":$('#unitSfid').val(),"ppid":$('#paymentPlanChangeID').val(),"offerthrough":offerthrough,"brokersfid":brokerAccountSfid
               ,"discount_Value":discount_Value,"balance_amnt":$('#balance_amnt').val(),"balance_amnt_description":$('#balance_amnt_description').val()
@@ -1247,8 +1295,24 @@ function updateBSP (timeid) {
 	   				allowOutsideClick: false,
 	   				showConfirmButton: false
 	   			});
-	   			
-	   			generateKYCLinkViaOffer(event,this,'N',offerJson.offer_sfid);
+	   			//Get for KYC Status
+    		   $.post(pageContext+"getKYCStatus",{"enquiryName":$("#enquiry_name").val(),"projectid":$('#projectId').val()},function(data){                       
+    		        
+    		    }).done(function(data){
+    		          var obj =JSON.parse(data);
+    		          var kycStatus="";
+    		          if(obj!=null)
+    		        	  {
+    		        	  	kycStatus = obj.issubmitted;
+    		        	  }
+    		          debugger;
+    		          if(kycStatus!="Y")
+	       			   {
+	   	   				generateKYCLinkViaOffer(event,this,'N',offerJson.offer_sfid);
+	       			   }
+    		    });
+    		   
+    		   
 	       	   
 	            printPdfData(generateFrom);
 	            
@@ -1264,6 +1328,7 @@ function updateBSP (timeid) {
 	   				console.log("Offer SFID after API Offer ID:-"+data.offer_sfid)
 	   				//var offerJson = JSON.parse(data);
 	   				csPymtData (offerJson);
+	   				
 	   			}
 	            
 	            var url=$("#contextPath").val();
@@ -1902,7 +1967,7 @@ function newOtherCharges2 () {
                            
                     } else if (value.propstrength__part_of_cop__c == false) {
                            //otherChrgRowtotal = parseInt(amount*(gstHalf+100)/100);
-                           $('#tentativeCharges tbody').append('<tr> <th> '+value.propstrength__other_charge_code__c+' </th> <td class="txtRight" id="tentativeChargesAmount'+i+'" style="text-align:right;"> '+amount+' </td>  </tr>');
+                    		$('#tentativeCharges tbody').append('<tr> <th> '+value.propstrength__other_charge_code__c+' </th> <td class="txtRight" id="tentativeChargesAmount'+i+'" style="text-align:right;"> '+amount+' </td>  </tr>');
                            $('#printTentativeCharges tbody').append('<tr> <th> '+value.propstrength__other_charge_code__c+' </th> <td class="txtRight" id="tentativeChargesAmount'+i+'" style="text-align:right;"> '+amount+' </td>  </tr>');
                            tentativeChargesV2 = parseFloat(parseFloat($("#tentativeChargesAmount"+i).text()) + parseFloat(tentativeChargesV2)).toFixed(2);
                     }
@@ -1932,6 +1997,20 @@ function newOtherCharges2 () {
              var discountVal = 0;
              var carpetAreaAmount = 0;
              var exclusiveAreaAmount = 0;
+             
+             if ($('#projectId').val() == 'a1l2s00000000X5AAI') {
+            	 $('#tentativeCharges tbody').append("<tr> " +
+            	 			"<th> Electricity Charges </th> <td class='txtRight' style='text-align:right;'> 0 </td>  </tr>" +
+            	 			"<tr> <th> Legal Charges </th> <td class='txtRight' style='text-align:right;'> 0 </td>  </tr>" +
+            	 			"<tr> <th> Club Development Charges </th> <td class='txtRight' style='text-align:right;'> 0 </td>  </tr>");
+            	 		
+            	 
+            	 $('#printTentativeCharges tbody').append("<tr> " +
+         	 			"<th> Electricity Charges </th> <td class='txtRight' style='text-align:right;'> 0 </td>  </tr>" +
+         	 			"<tr> <th> Legal Charges </th> <td class='txtRight' style='text-align:right;'> 0 </td>  </tr>" +
+         	 			"<tr> <th> Club Development Charges </th> <td class='txtRight' style='text-align:right;'> 0 </td>  </tr>");
+             }
+             
              
              //alert ("otherChrgCgstTotal ::: " + otherChrgCgstTotal);
              
@@ -2040,6 +2119,8 @@ function newOtherCharges2 () {
              
              //otherChargesGSTTotalV2 = parseInt(otherChargesGSTTotalV2)+parseInt(((bspAmount*2/3)*bspTax)/100);
              //otherChargesGSTTotalV2 = parseInt(otherChargesGSTTotalV2)+parseInt(((finalFlatAmount*2/3)*bspTax)/100);
+             bspTax = getTaxPercentage(finalFlatAmount, $('#projectid').val(), bspTax);
+             $('#bspGSTTax').val(bspTax);
              otherChargesGSTTotalV2 = parseFloat(parseFloat(otherChargesGSTTotalV2)+parseFloat(((finalFlatAmount)*bspTax)/100)).toFixed(2);
              
              
@@ -2056,6 +2137,9 @@ function newOtherCharges2 () {
              //-----------------
              
              $('#printSalesConsideration tbody').append('<tr> <th class="subHead"> Consideration/Price (A) </th> <th class="txtRight" id="salesConsiderationTotal" style="text-align:right;">'+ parseFloat(parseFloat(salesConsiderationV2)+parseFloat($('#scOtherChrgAmount0').text())).toFixed(2) +'</th>    </tr>');
+             
+             
+             
              
              $('#tentativeCharges tbody').append('<tr> <th class="subHead"> Total Estimated and Tentative other charges (B) </th> <th class="txtRight" id="tentativeChargesTotal" style="text-align:right;">'+tentativeChargesV2+'</th>    </tr>');
              $('#printTentativeCharges tbody').append('<tr> <th class="subHead"> Total Estimated and Tentative other charges (B) </th> <th class="txtRight" id="tentativeChargesTotal" style="text-align:right;">'+tentativeChargesV2+'</th>    </tr>');
@@ -2200,7 +2284,7 @@ function newOtherCharges2 () {
              if (discount_Value != 0) {
                     $('#totalDiscountCol').empty();
                     
-                    $('#totalDicountView').show();
+                   
                     
                     var printDiscountHtml = '';
                     
@@ -2222,7 +2306,19 @@ function newOtherCharges2 () {
                                                      +'</div>'; 
                     
                     
-                    $('#totalDiscountCol').append(printDiscountHtml);
+                    if ($('#projectid').val() != "a1l2s00000000X5AAI") {
+                    	$('#totalDiscountCol').append(printDiscountHtml);
+                    	$('#totalDicountView').show();
+                    } else {
+                    	$('#totalDiscountCol').append('');
+                    	$('#totalDicountView').hide();
+                    }
+                    
+                    
+                    
+                    
+                    
+                    
              } else {
                     $('#totalDicountView').hide();
                     $('#totalDiscountCol').html('');
@@ -2271,6 +2367,7 @@ var HoldReverseTimer = function(min, sec){
                if (countStatus == 'countEnd'){
                       $('.holdCountdown').html('0:00');
                       $('#inventoryBreadcrumb').empty();
+                     // seconds = 0;
                }else {
                       $('.holdCountdown').html(minutes + ':' + seconds);
                }
@@ -2454,7 +2551,7 @@ function addMorePtBtn () {
 	
 	
        if(amI < amNum) { 
-             $('#csPtCol tr:last-child').after('<tr id="csPayRowID'+amNumRowID+'" class="csPtDataRow csPtFileSize"><td class="txtCenter"><input style="display:none;" class="gpl_cs_payment_details_id" value="-1"><input type="checkbox" class="paymentCScheck" checked></td><td><select onchange="csPtDd(this)" class="full form-control input-sm csPtDropDown requiredField"><option value="">Select</option><option value="Cheque">Cheque</option><option value="NEFT">NEFT/Credit</option><option value="Swipe">Swipe</option></select></td><td><input class="full form-control input-sm csPtBankName requiredField" placeholder="Bank Name"/></td><td><input class="full form-control input-sm csPtBranch requiredField" placeholder="Branch Name"/></td><td><input class="full form-control input-sm csPtTransactionId requiredField" placeholder="Transaction ID" /></td><td><input type="date" class="full form-control input-sm csPtTransactionDate requiredField" placeholder="Transaction Date"/></td><td><input  class="numericField numericWithoutDecimal full form-control input-sm csPtTransactionAmount requiredField" maxlength="10" onkeyup="csPtcalculateGrandTotal()" placeholder="Transaction Amount" name="amount"/></td> <td> <input type="file" class="full form-control input-sm panAttach"/> <input class="panAttachWebcam"/> <a  class="webcamBtn" data-toggle="modal" data-target="#webcamBox" onclick="webcamAttachment(this, '+id+', '+attachPAN+')">or <span>Capture Image</span></a> </td> <td> <input type="file" class="full form-control input-sm receiptAttach"/> <input class="receiptAttachWebcam"/> <a  class="webcamBtn" data-toggle="modal" data-target="#webcamBox" onclick="webcamAttachment(this, '+id+', '+attachRec+')">or <span>Capture Image</span></a> <td><textarea class="full form-control input-sm csPtDescription" placeholder="Description"></textarea></td><td class="removeCsPtCol txtCenter"><i onclick="removeCsPtCol(this)" class="fa fa-times-circle"></i></td></tr>');
+             $('#csPtCol tr:last-child').after('<tr id="csPayRowID'+amNumRowID+'" class="csPtDataRow csPtFileSize"><td class="txtCenter"><input style="display:none;" class="gpl_cs_payment_details_id" value="-1"><input type="checkbox" class="paymentCScheck" checked></td><td><select onchange="csPtDd(this)" class="full form-control input-sm csPtDropDown requiredField"><option value="">Select</option><option value="Cheque">Cheque</option><option value="NEFT">NEFT/Credit</option><option value="Swipe">Swipe</option><option value="Wire Transfer">Wire Transfer (PayZap, Google Pay)</option></select></td><td><input class="full form-control input-sm csPtBankName requiredField" placeholder="Bank Name"/></td><td><input class="full form-control input-sm csPtBranch requiredField" placeholder="Branch Name"/></td><td><input class="full form-control input-sm csPtTransactionId requiredField" placeholder="Transaction ID" /></td><td><input type="date" class="full form-control input-sm csPtTransactionDate requiredField" placeholder="Transaction Date"/></td><td><input  class="numericField numericWithoutDecimal full form-control input-sm csPtTransactionAmount requiredField" maxlength="10" onkeyup="csPtcalculateGrandTotal()" placeholder="Transaction Amount" name="amount"/></td> <td> <input type="file" class="full form-control input-sm panAttach"/> <input class="panAttachWebcam"/> <a  class="webcamBtn" data-toggle="modal" data-target="#webcamBox" onclick="webcamAttachment(this, '+id+', '+attachPAN+')">or <span>Capture Image</span></a> </td> <td> <input type="file" class="full form-control input-sm receiptAttach"/> <input class="receiptAttachWebcam"/> <a  class="webcamBtn" data-toggle="modal" data-target="#webcamBox" onclick="webcamAttachment(this, '+id+', '+attachRec+')">or <span>Capture Image</span></a> <td><textarea class="full form-control input-sm csPtDescription" placeholder="Description"></textarea></td><td class="removeCsPtCol txtCenter"><i onclick="removeCsPtCol(this)" class="fa fa-times-circle"></i></td></tr>');
              amI++;
        }else {
              swal({
@@ -2474,50 +2571,33 @@ function removeCsPtCol (e) {
 }
 
 function csPtDd (e) {
-       //if ($(e).val() == 'Bank') {
        $(e).closest("tr").find('.csPtReachMexLength').remove();  
        if ($(e).val() == 'Cheque') {
-              
-          
-              $(e).closest("tr").find(".csPtTransactionId").val("");
-                 $(e).closest("tr").find(".csPtTransactionId").attr("maxlength","10");       
-              
-              $(e).closest("tr").find(".csPtTransactionId").after("<small class='csPtReachMexLength'>ID can be max 10 characters long.</small>");              
-            
-              $(e).closest("tr").find('.panAttach').prop('disabled', false);
-       
-             $(e).closest("tr").find('.csPtBankName').prop('disabled', false);
-             $(e).closest("tr").find('.csPtBranch').prop('disabled', false);
-       
+    	   $(e).closest("tr").find(".csPtTransactionId").val("");
+    	   $(e).closest("tr").find(".csPtTransactionId").attr("maxlength","10");       
+           $(e).closest("tr").find(".csPtTransactionId").after("<small class='csPtReachMexLength'>ID can be max 10 characters long.</small>");              
+           $(e).closest("tr").find('.panAttach').prop('disabled', false);
+           $(e).closest("tr").find('.csPtBankName').prop('disabled', false);
+           $(e).closest("tr").find('.csPtBranch').prop('disabled', false);
        } else  if ($(e).val() == 'NEFT') {
-          $(e).closest("tr").find(".csPtTransactionId").val("");
-          $(e).closest("tr").find(".csPtTransactionId").attr("maxlength","15");
-          $(e).closest("tr").find(".csPtTransactionId").after("<small class='csPtReachMexLength'>ID can be max 15 characters long.</small>");
-             //$(e).closest("tr").find('.panAttach').prop('disabled', true);
-             
-             $(e).closest("tr").find('.csPtBankName').prop('disabled', false);
-             $(e).closest("tr").find('.csPtBranch').prop('disabled', false);
-       }else  if ($(e).val() == 'Swipe') {
-          $(e).closest("tr").find(".csPtTransactionId").val("");
-          $(e).closest("tr").find(".csPtTransactionId").attr("maxlength","15");
-          $(e).closest("tr").find(".csPtTransactionId").after("<small class='csPtReachMexLength'>ID can be max 15 characters long.</small>"); 
-             //$(e).closest("tr").find('.panAttach').prop('disabled', true);
-             
-             $(e).closest("tr").find('.csPtBankName').prop('disabled', false);
-             $(e).closest("tr").find('.csPtBranch').prop('disabled', false);
+    	   $(e).closest("tr").find(".csPtTransactionId").val("");
+    	   $(e).closest("tr").find(".csPtTransactionId").attr("maxlength","15");
+    	   $(e).closest("tr").find(".csPtTransactionId").after("<small class='csPtReachMexLength'>ID can be max 15 characters long.</small>");
+           $(e).closest("tr").find('.csPtBankName').prop('disabled', false);
+           $(e).closest("tr").find('.csPtBranch').prop('disabled', false);
+       }else  if ($(e).val() == 'Swipe' || $(e).val() == 'Wire Transfer') {
+    	   $(e).closest("tr").find(".csPtTransactionId").val("");
+    	   $(e).closest("tr").find(".csPtTransactionId").attr("maxlength","15");
+    	   $(e).closest("tr").find(".csPtTransactionId").after("<small class='csPtReachMexLength'>ID can be max 15 characters long.</small>"); 
+           $(e).closest("tr").find('.csPtBankName').prop('disabled', false);
+           $(e).closest("tr").find('.csPtBranch').prop('disabled', false);
        }
        else {
-          
-          $(e).closest("tr").find(".csPtTransactionId").val("");
-          $(e).closest("tr").find(".csPtTransactionId").removeAttr("maxlength");
-          
-             $(e).closest("tr").find('.panAttach').val("");
-             $(e).closest("tr").find('.csPtBankName').val("");
-             $(e).closest("tr").find('.csPtBranch').val("");
-             
-             /*$(e).closest("tr").find('.csPtBankName').prop('disabled', true);
-             $(e).closest("tr").find('.csPtBranch').prop('disabled', true);
-             $(e).closest("tr").find('.panAttach').prop('disabled', true);*/
+    	   $(e).closest("tr").find(".csPtTransactionId").val("");
+    	   $(e).closest("tr").find(".csPtTransactionId").removeAttr("maxlength");
+           $(e).closest("tr").find('.panAttach').val("");
+           $(e).closest("tr").find('.csPtBankName').val("");
+           $(e).closest("tr").find('.csPtBranch').val("");
        }      
 }
 
@@ -2776,6 +2856,7 @@ function getEOIPaymentRecord () {
                                  + '<option value="Cheque">Cheque</option>'
                                  + '<option value="NEFT">NEFT/Credit</option>'
                                  + '<option value="Swipe">Swipe</option>'
+                                 + '<option value="Wire Transfer">Wire Transfer (PayZap, Google Pay)</option>'
                                  + '</select>'
                            + '</td>'
                            + '<td>'
@@ -2826,6 +2907,7 @@ function getEOIPaymentRecord () {
                                         + '<option value="Cheque">Cheque</option>'
                                         + '<option value="NEFT">NEFT/Credit</option>'
                                         + '<option value="Swipe">Swipe</option>'
+                                        + '<option value="Wire Transfer">Wire Transfer (PayZap, Google Pay)</option>'
                                         + '</select>'
                                  + '</td>'
                                  + '<td>'

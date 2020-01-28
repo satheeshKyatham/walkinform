@@ -7,6 +7,8 @@ $.ajaxSetup({
     }
 });
 
+var reraRegistrationNo = '';
+
 function getofferApplicantDetails (e, offerSFID, enqSFID, contactSFID, offerName, enqName, propSFID, rowId, sourceCall) {	
 	
 	
@@ -163,16 +165,16 @@ function getofferApplicantDetails (e, offerSFID, enqSFID, contactSFID, offerName
 				} else if (obj[i].address_proof_type == 'Passport') {
 					passportNo = obj[i].address_proof_no;
 				}
-				
-				
+				var lastName = obj[i].lastName==null?'':obj[i].lastName;
 				appType += "<td>"+obj[i].propstrength__type__c+"</td>";
-				fullName +="<td>"+obj[i].name+"</td>";
+				fullName +="<td>"+obj[i].name + ' ' + lastName + "</td>";
 				pan +="<td>"+obj[i].propstrength__income_tax_permanent_account_no__c+"</td>";
 				email +="<td>"+obj[i].email+"</td>";
 				//aadhar_card_no__c +="<td>"+obj[i].aadhar_card_no__c+"</td>";
 				aadhar_card_no__c +="<td>"+aadhaarNo+"</td>";
 				mobile_number__c +="<td>"+obj[i].mobile_number__c+"</td>";
-				propstrength__sharing_ratio__c +="<td>"+sharingRatio+"</td>";
+/*				propstrength__sharing_ratio__c +="<td>"+sharingRatio+"</td>";*/
+				propstrength__sharing_ratio__c +="<td> As per <b> Annexure G </b> </td>";
 				//passport_no__c +="<td>"+obj[i].passport_no__c+"</td>";
 				passport_no__c +="<td>"+passportNo+"</td>";
 				nationality_a__c +="<td>"+obj[i].nationality_a__c+"</td>";
@@ -201,18 +203,19 @@ function getofferApplicantDetails (e, offerSFID, enqSFID, contactSFID, offerName
 										+ '<tr><td>Full Name</td>'+fullName+'</tr>'
 										+ '<tr><td>Date of Birth</td>'+birthdate+'</tr>'
 										+ '<tr><td>PAN</td>'+pan+'</tr>'
-										+ '<tr><td>Aadhar No.</td>'+aadhar_card_no__c+'</tr>'  
-										+ '<tr><td>Payment share for TDS</td>'+propstrength__sharing_ratio__c+'</tr>'
+										//+ '<tr><td>Aadhar No.</td>'+aadhar_card_no__c+'</tr>'  
+/*										+ '<tr><td>Payment share for TDS</td>'+propstrength__sharing_ratio__c+'</tr>'*/
+										+ '<tr><td>TDS Status</td>'+propstrength__sharing_ratio__c+'</tr>'
 										+ '<tr><td>Nationality</td>'+nationality_a__c+'</tr>'
 										+ '<tr><td>Residential Status</td>'+propstrength__resident_status__c+'</tr>'
-										+ '<tr><td>Passport No.</td>'+passport_no__c+'</tr>' 
+										//+ '<tr><td>Passport No.</td>'+passport_no__c+'</tr>' 
 										+ '<tr><td>Permanent Address</td>'+permanentAddress+'</tr>'
 										+ '<tr><td>Mobile No.</td>'+mobile_number__c+'</tr>'
 										+ '<tr><td>Email</td>'+email+'</tr>'  
 										+ '<tr><td>Address for Communication</td>'+communicationAddress+'</tr>'
 										+ "<tr> "
 											+ '<td colspan="'+parseInt(objLength+1)+'" style="font-size:10px;">' 
-												+ "Note: Applicant's passport size photograph and photocopies of PAN Card/OCI/PIO and Passport/Voter Card to be mandatorily submitted along with this Application Form. *All compliance in terms of the Foreign Exchange Management Act, 1999 and its amendments shall be the sole responsibility of the Applicant. By providing Applicant's personal information in this Application Form, the Applicant/s hereby consents and authorizes Godrej Properties Limited or/and its affiliates to communicate with the Applicant/s  by email(s), call(s), SMS(es), electronic communication(s) using digital media or via any other mode of communication in relation to any of the information pertaining to the Project."
+												+ "Note: Applicant's passport size photograph and photocopies of PAN Card/OCI/PIO and Voter Card to be mandatorily submitted along with this Application Form. *All compliance in terms of the Foreign Exchange Management Act, 1999 and its amendments shall be the sole responsibility of the Applicant. By providing Applicant's personal information in this Application Form, the Applicant/s hereby consents and authorizes Godrej Properties Limited or/and its affiliates to communicate with the Applicant/s  by email(s), call(s), SMS(es), electronic communication(s) using digital media or via any other mode of communication in relation to any of the information pertaining to the Project."
 											+ "</td> " 
 										"</tr>" +
 										
@@ -261,13 +264,20 @@ function getEnqAndOfferDtl (enqSFID, offerSFID, rowId) {
 		$('#modeOfBookingOffer tbody').empty();
 		
 		if(obj!=null){
+			
+			if (obj[0].rera_registration_number__c != undefined){
+				reraRegistrationNo = obj[0].rera_registration_number__c;
+			} else {
+				reraRegistrationNo = '';
+			}
+			
 			if (obj[0].propstrength__enquiry_type__c != "Partner") {
 				
 				if (obj[0].walk_in_source__c != undefined){
 					walkinSource = obj[0].walk_in_source__c;
 				}
 				
-				$('#modeOfBookingOffer tbody').append('<tr> <td> Direct or Channel Partner : <span>Direct</span> </td> <td>Walk In Source : <span>'+walkinSource+'</span></td></tr>');;
+				$('#modeOfBookingOffer tbody').append('<tr> <td> Direct or Channel Partner : <span>Direct</span> </td> <td>Walk In Source : <span>'+walkinSource+'</span></td></tr>');
 				
 			} else {
 				
@@ -340,7 +350,10 @@ function getEnqAndOfferDtl (enqSFID, offerSFID, rowId) {
 			var netMinTotalOther = obj[0].propstrength__net_revenue__c-obj[0].propstrength__total_other_charges__c;
 			
 			$('#carpetAreaCostOffer').text(parseFloat(netMinTotalOther/parseFloat(parseFloat(obj[0].carpet_area_converted__c)+parseFloat(obj[0].appurtenant_area_sq_mt__c))*obj[0].carpet_area_converted__c).toFixed(2));
-			$('#exclusiveAreasCostOffer').text(parseFloat(netMinTotalOther/parseFloat(parseFloat(obj[0].carpet_area_converted__c)+parseFloat(obj[0].appurtenant_area_sq_mt__c))*obj[0].appurtenant_area_sq_mt__c).toFixed(2));
+			//$('#exclusiveAreasCostOffer').text(parseFloat(netMinTotalOther/parseFloat(parseFloat(obj[0].carpet_area_converted__c)+parseFloat(obj[0].appurtenant_area_sq_mt__c))*obj[0].appurtenant_area_sq_mt__c).toFixed(2));
+			
+			$('#exclusiveAreasCostOffer').text(Math.round(netMinTotalOther/parseFloat(parseFloat(obj[0].carpet_area_converted__c)+parseFloat(obj[0].appurtenant_area_sq_mt__c))*obj[0].appurtenant_area_sq_mt__c));
+			
 			$('#totalSaleConsiderationOffer').text(Math.round(parseFloat(parseFloat($('#carpetAreaCostOffer').text())+parseFloat($('#exclusiveAreasCostOffer').text())+parseFloat($('#otherChargesOffer').text()) ).toFixed(2)));
 	
 			
@@ -349,11 +362,13 @@ function getEnqAndOfferDtl (enqSFID, offerSFID, rowId) {
 			$('#modeOfBookingOffer').remove();
 		}
 		
-	}).done(function(obj){
-		
+	}).done(function(obj){		
 		convertNumberToWords ();
-		
-		getOfferReceivedPaymentDtl(offerSFID, rowId);
+		if(offerSFID ==null || offerSFID==''){
+			getOfferReceivedPaymentDtlWithEnquiry (enqSFID, rowId)
+		}else{
+			getOfferReceivedPaymentDtl(offerSFID, rowId);
+		}
 	});	
 }
 
@@ -363,7 +378,6 @@ function getEnqAndOfferDtl (enqSFID, offerSFID, rowId) {
 function getOfferReceivedPaymentDtl (offerSFID, rowId) {
 	
 	$('#paymentDtltableOffer tbody').find("tr:gt(0)").remove();
-	
 	
 	//offerSFID = "a1X2s0000004GU1EAM";
 	
@@ -395,6 +409,39 @@ function getOfferReceivedPaymentDtl (offerSFID, rowId) {
 	});	
 }
 
+function getOfferReceivedPaymentDtlWithEnquiry (enquirySFID, rowId) {
+	
+	$('#paymentDtltableOffer tbody').find("tr:gt(0)").remove();
+	
+	//offerSFID = "a1X2s0000004GU1EAM";
+	
+	$.post("getOfferReceivedPaymentDtl",{"offerSFID":enquirySFID},function(data){				 
+		
+		var html = '';
+		var obj =JSON.parse(data);
+		
+		if(obj!=null){
+			for(i = 0; i< obj.length; i++){ 
+				
+				html += "<tr> " +
+							"<td>"+obj[i].propstrength__payment_type__c+"</td> " +
+							"<td>"+obj[i].propstrength__bank_name_auto__c+"</td>" +
+							"<td>"+obj[i].propstrength__amount__c+"</td>" +
+							"<td>"+obj[i].propstrength__crn_no__c+"</td>" +
+							"<td>"+obj[i].propstrength__cheque_demand_draft_number__c+"</td>" +
+							/*"<td>"+obj[i].propstrength__ifsc_rtgs_code__c+"</td>" +*/
+						"</tr>";
+			}
+			
+			html = html.replace(/undefined/g, "");
+			
+			$('#paymentDtltableOffer tbody').append(html);
+			
+		}
+	}).done(function(data){
+		printApplicationOfferForm(enquirySFID, rowId);
+	});	
+}
 
 
 
@@ -486,7 +533,7 @@ function convertNumberToWords() {
 function printApplicationOfferForm(offerSFID, rowId) {
 	var pageContext = $("#pageContext").val()+"/";
 	
-	$.post(pageContext+"printApplicationForm",{"enqSfid":offerSFID,"appFormData":$('#printApplicationFormOffer').html(),"projectName":$('#appProjectNameOffer').val()},function(data){				 
+	$.post(pageContext+"printApplicationForm",{"enqSfid":offerSFID,"appFormData":$('#printApplicationFormOffer').html(),"projectName":$('#appProjectNameOffer').val(),"reraRegistrationNo":reraRegistrationNo},function(data){				 
 		
 	}).done(function(data){
 		

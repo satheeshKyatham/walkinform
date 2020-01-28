@@ -23,7 +23,7 @@
      
 	<link rel="stylesheet" href="<c:url value='/resources/css/inner.css' />">
 	<link rel="stylesheet" href="<c:url value='/resources/css/style.css' />">
-	
+	<link rel="stylesheet" href="<c:url value='/resources/css/font-awesome.css' />">
 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
 	
 <%-- <script src="<c:url value='/resources/js/jquery-1.12.4.min.js'/>"></script>
@@ -119,6 +119,16 @@ if(ses!=null){
 					<li onclick="getKYCCMApprovalView()" id="KYC_CM_Approval_Tab_Id">
 						<a href="#tab6" data-toggle="tab">KYC Approve/Reject</a>
 					</li>
+				
+					<!-- EOI Report -->	
+					<li onclick="getEOIReportSales()" id="eoiReportTabSales">
+						<a href="#eoiReportSales" data-toggle="tab">EOI Report <i class="fa fa-spinner fa-spin" style="display:none;"></i> </a>
+					</li>
+					<li onclick="getPaymentEOIReportSales()" id="paymentEOIReportTabSales">
+						<a href="#paymentEOIReportSales" data-toggle="tab">Payment Report <i class="fa fa-spinner fa-spin" style="display:none;"></i> </a>
+					</li>
+					<!-- END EOI Report -->
+					
 				</ul>
 				<div class=""></div>
 			</div>
@@ -130,8 +140,12 @@ if(ses!=null){
 							
 							<i class="glyphicon glyphicon-filter" style="border-right: 1px solid #333; margin-right: 10px; padding-right: 10px;"></i>
 							<div class="form-group">
-								<label for="exampleInputNameDate">Date</label> 
-								<input class="form-control" type="date" name="" id="txtFromDate">
+								<label for="exampleInputNameDate">From Date</label> 
+								<input class="form-control" type="date" name="" id="txtFromDateAssigned">
+							</div>
+							<div class="form-group">
+								<label for="exampleInputNameDate">To Date</label> 
+								<input class="form-control" type="date" name="" id="txtToDateAssigned">
 							</div>
 							<div class="form-group">
 								<!-- <input class="form-control" type="button" value="Search" name="Search" id="amsearch" onclick="loadData()"/> -->
@@ -171,7 +185,8 @@ if(ses!=null){
 					</div>
 				</div>
 				<div class="tab-pane" id="tab2">
-					<%@ include file="/WEB-INF/views/pages/createdoffers.jsp" %>
+					<%-- <%@ include file="/WEB-INF/views/pages/createdoffers.jsp" %> --%>
+					<%@ include file="/WEB-INF/views/pages/createdOfferTab.jsp" %>
 				</div>
 				
 				<div class="tab-pane" id="applications">
@@ -216,7 +231,7 @@ if(ses!=null){
 						<thead>
 							<!-- <tbody> -->
 							<tr>
-								<th>Project Name123</th>
+								<th>Project Name</th>
 								<th>Enquiry No</th>
 								<th>Mobile No</th>
 								<th>Token No</th>
@@ -251,8 +266,10 @@ if(ses!=null){
 									<th>Customer Name</th>
 									<th>Mobile No</th>
 									<th>KYC Status</th>
+									<th>Offer Number</th>
 									<th>View/Fill KYC</th>
-									
+									<th>View Cost Sheet</th>
+									<th>View Application Form</th>
 									<!-- <th style="word-break: break-word; width:200px !important">Email</th> -->
 								</tr>
 							</thead>
@@ -270,6 +287,18 @@ if(ses!=null){
 					<iframe id="kyc_cm_approval_iframe" width="100%" height="400px"></iframe>
 				<div class="clearfix"></div>
 				</div>
+				<div class="clearfix"></div>
+				
+				<!-- END EOI Reports -->
+				<div class="tab-pane" id="eoiReportSales">
+					<%@ include file="/WEB-INF/views/pages/eoiReportSales.jsp" %>
+				</div>		
+				<div class="tab-pane" id="paymentEOIReportSales">
+					<%@ include file="/WEB-INF/views/pages/paymentEOIReportSales.jsp" %>
+				</div>		
+				<!-- EOI Reports -->
+				
+				
 				<div class="clearfix"></div>
 			</div>
 		  <div class="clearfix"></div>
@@ -290,14 +319,20 @@ if(ses!=null){
 	<script src="<c:url value='/resources/js/jquery-1.12.4.min.js'/>"></script>
 	<script src="<c:url value='/resources/js/bootstrap.min.js'/>"></script>  
 	<script type="text/javascript" charset="utf8" src="<c:url value='/resources/js/jquery.dataTables.js'/>"></script>
-	<script src="<c:url value='/resources/js/salesdesk.js?v=18'/>"></script>
-	<script src="<c:url value='/resources/js/enquiryRequest/assignedUser.js?v=18'/>"></script>
-	<script src="<c:url value='/resources/js/separate/offer.js?v=18'/>"></script>
-	<script src="<c:url value='/resources/js/enquiryRequest/misreportforClosing.js?v=18'/>"></script>
 	
-	<script src="<c:url value='/resources/js/separate/applicationForm.js?v=18'/>"></script>
-	<script src="<c:url value='/resources/js/separate/offerApplicationForm.js?v=18'/>"></script>
+	<script src="<c:url value='/resources/js/dataTables.buttons.min.js'/>"></script>
+	<script src="<c:url value='/resources/js/jszip.min.js'/>"></script>
+	<script src="<c:url value='/resources/js/buttons.html5.min.js'/>"></script>
 	
+	<script src="<c:url value='/resources/js/salesdesk.js?v=18.02'/>"></script>
+	<script src="<c:url value='/resources/js/enquiryRequest/assignedUser.js?v=18.02'/>"></script>
+	<script src="<c:url value='/resources/js/separate/offer.js?v=18.02'/>"></script>
+	<script src="<c:url value='/resources/js/enquiryRequest/misreportforClosing.js?v=18.02'/>"></script>
+	
+	<script src="<c:url value='/resources/js/separate/applicationForm.js?v=18.02'/>"></script>
+	<script src="<c:url value='/resources/js/separate/offerApplicationForm.js?v=18.03'/>"></script>
+	
+	<script src="<c:url value='/resources/js/separate/eoiReportSales.js?v=18.02'/>"></script>
 	
 	
 </body>

@@ -102,7 +102,7 @@
 			
 			<tr>
 				<td colspan="2">
-					I/We, the Applicant/s mentioned below, request that I/we be allotted a residential flat / unit / apartment / commercial unit in terms of Annexure A in this Application <span id="projectPhasOffer"></span> in "<span id="projectNameLocationOffer"></span>", <!-- project situated at ______________________ ("Project") --> details whereof are as under.
+					We, the Applicant/s mentioned below, request that we be allotted a residential flat / unit / apartment / commercial unit in terms of Annexure A in this Application <span id="projectPhasOffer"></span> in "<span id="projectNameLocationOffer"></span>", <!-- project situated at ______________________ ("Project") --> details whereof are as under.
 				</td> 
 			</tr>
 		</tbody>
@@ -130,8 +130,11 @@
 	
 	<div  style="padding-bottom:10px;"><b>3. PURPOSE OF PURCHASE:</b> <span id="selfUseInvestmentOffer"></span></div>
 	
+	<div  style="padding-bottom:10px;"><b>4. FINANCE FROM BANK/FINANCIAL INSTITUTION:</b> <span>YES / NO</span></div>
+	<div  style="padding-bottom:12px; padding-left:10px;"> IF <b>YES</b>, PREFERRED FINANCIAL INSTITUTION: _______________________________ </div>
+	
 	<div style="page-break-before: always"></div>
-	<div style="padding-bottom:10px;"><b>4. DETAILS OF FLAT/UNIT ("Flat"/"Unit") SALE CONSIDERATION AND ESTIMATED OTHER CHARGES:</b></div>
+	<div style="padding-bottom:10px;"><b>5. DETAILS OF FLAT/UNIT ("Flat"/"Unit") SALE CONSIDERATION AND ESTIMATED OTHER CHARGES:</b></div>
 	<table class="table table-bordered"  style="margin-bottom:15px;">
 		<tr>
 			<th rowspan="11" style="vertical-align: top; width:10px;">1</th>
@@ -254,14 +257,14 @@
 	<table class="table table-bordered" style="margin-bottom:15px;">		
 		<tbody>	
 			<tr>
-				<th rowspan="4">5.</th>
-				<td colspan="2">In addition to the sale consideration, estimated other charges, I/we agree and undertake to pay the following amounts as and when demanded by the Developer, towards:</td>
+				<th rowspan="4">6.</th>
+				<td colspan="2">In addition to the sale consideration, estimated other charges, we agree and undertake to pay the following amounts as and when demanded by the Developer, towards:</td>
 			</tr>
 			
 			<tr>
 				<td style="width:10px;">a)</td>
 				<td>
-					All applicable and future taxes, levies, duties, cesses, charges including but not limited to goods and services tax (GST)  and/or TDS, land under construction tax, property tax, External Development Charges (EDC), Infrastructure Development Charges (IDC), lease rent, and/or all other direct/indirect taxes/duties, impositions levied by the Central and/or State Government and/or any local, public or statutory authorities/ bodies ("<strong>Statutory Charges</strong>") in respect of the Flat/Unit and/or the transaction contemplated herein and/or in respect of the sale consideration and/or the other amounts payable by me. The quantum of such taxes, levies, duties, cesses, charges as decided/quantified by the Developer shall be binding on me. 
+					All applicable and future taxes, levies, duties, cesses, charges including but not limited to goods and services tax (GST)  and/or TDS, land under construction tax as demanded by the authorities, property tax, External Development Charges (EDC), Infrastructure Development Charges (IDC), lease rent, and/or all other direct/indirect taxes/duties, impositions levied by the Central and/or State Government and/or any local, public or statutory authorities/ bodies ("<strong>Statutory Charges/ Other Charges</strong>") in respect of the Flat/Unit and/or the transaction contemplated herein and/or in respect of the sale consideration and/or the other amounts payable by me. The quantum of such taxes, levies, duties, cesses, charges as decided/quantified by the Developer shall be binding on me. 
 				</td>
 			</tr>
 			
@@ -284,42 +287,42 @@
 			</tr>
 			
 			<tr>
-				<th>6.</th>
+				<th>7.</th>
 				<td colspan="2">
 					I/We further confirm that I/we am submitting this Application Form after understanding the entire manner and scope of development to be undertaken in the Project, including the details of the Carpet Area, Exclusive Area, Common Areas and Facilities being provided, without relying on any of the publicity materials / advertisements published in any form or any channel by the Developer/DM or any third party in the past. I/We am/are aware and I/we confirm that the advisements / publicity material released in the past does not provide any warranty and may not be providing complete details / disclosures as may be required under the Real Estate (Regulation and Development) Act, 2016 ("RERA") read with the applicable Rules framed thereunder and I/we am/are not relying on the same for my/our decision to purchase the Flat/ Unit. I/We further confirm and undertake to not make any claim against the Developer/DM or seek cancellation of the Application Form / allotment or refund of the monies paid by me/us by reason of anything contained in the publicity material / advertisement published in any form or in any channel, by the Developer or any third party in the past. I/We acknowledge that I/we have not relied upon the interiors depicted / illustrated in marketing collaterals/ the sample flat / mock flat and its colour, texture, the fitting(s) / fixture(s) or any installations depicted therein and understand that the same is shown only as a suggested layout/ furnishing options without any obligation on the part of the Developer/DM to provide the same.
 				</td>
 			</tr>
 			
 			<tr>
-				<th>7.</th>
+				<th>8.</th>
 				<td colspan="2">
 					I/We acknowledge, agree and undertake that I/we shall neither hold the Developer/DM or any of its affiliates liable/ responsible for any representation/ commitment/offer made by any third party to me/us nor make any claims/demands on the Developer/DM or any of its affiliates with respect thereto.
 				</td>
 			</tr>
 			
 			<tr>
-				<th>8.</th>
+				<th>9.</th>
 				<td colspan="2">
 					Save and except the information / disclosure contained herein and on RERA website, I/we confirm and undertake not to make any claim against the Developer/DM or seek cancellation of this Application Form / allotment letter/ Agreement for Sale or refund of the monies paid by me by reason of anything contained in other information / disclosure not forming part of this Application Form / allotment letter/ Agreement for Sale or the RERA website.
 				</td>
 			</tr>
 			
 			<tr>
-				<th>9.</th>
+				<th>10.</th>
 				<td colspan="2">
 					I/We have fully read and understood the Terms and Conditions attached hereto as <strong>Annexure A</strong> which contains broad terms, conditions, representations, covenants, etc. as well as the terms of the Agreement for Sale uploaded on RERA website and do hereby agree, undertake and covenant to abide and be bound by them and also by the area, sale consideration, estimated other charges and payment terms as set out herein. The Terms and Conditions as mentioned in Annexure A forms an integral part of this Application Form and shall always be read together with this Application Form and be construed accordingly.
 				</td>
 			</tr>
 			
 			<tr>
-				<th>10.</th>
+				<th>11.</th>
 				<td colspan="2">
 					I/We have taken the decision to purchase the Flat/Unit in the Project out of my/our own free will after giving careful consideration to the nature and scope of the entire development explained to me/us in person including the disclosures contained herein as well as made available on RERA website and remitted the amounts payable thereof fully conscious of my rights, liabilities and obligations. All the above information provided by me/us is true and nothing has been concealed or suppressed. I/We further undertake to inform the Developer promptly of any changes to the above information and particulars furnished by me/us.
 				</td>
 			</tr>
 			
 			<tr>
-				<th>11.</th>
+				<th>12.</th>
 				<td colspan="2">
 					
 					<div>

@@ -22,6 +22,7 @@ $(document).ready(function(){
 	 $(this).scrollTop(0);
 });
 function onPageLoad(){
+	$(".referred_by_name").hide();
 	//debugger	
 		var projectName=$('#projectName').val();
 	    if(projectName!=""){
@@ -169,6 +170,7 @@ function populateEnquiryAndContact(resp){
 		    $("#budget").val("");
 		    $("#carpetAreaRequirement").val("");
 		    $("#employmentStatus").val("");
+		    $('#designationCust').val("");
 		    $("#companyName").val("");
 		    $("#officeAddress").val("");
 		    
@@ -284,6 +286,18 @@ function populateBasicInfo(enq,contact){
 			
 			//$('#walkInSource').find('option[value='+enq.walkInSource+']').attr('selected','selected');
 			$('#walkInSource').val(enq.walkInSource);
+			/*if(enq.walkInSource==='Referral')
+				{
+					$(".referred_by_name").show();
+					$('#referredbyId').val(enq.referredbyDto);
+					$("#referredbyId").addClass('disableInputs');
+				}
+			else
+				{
+					$(".referred_by_name").hide();
+				}*/
+			//alert(enq.enquiryReport.referredby);
+			
 			$('#walkInSourceDetail').val(enq.walkInSourceDetail);
 			
 			//$('#otherChannelPartnerName').val(enq.otherChannelPartner);
@@ -413,9 +427,9 @@ function enqSlider(){
 		
 		// Without JQuery
 		var slider = new Slider("#ex13", {
-		    ticks: [2000000, 10000000, 20000000, 30000000, 40000000, 50000000],
-		    ticks_labels: ['20L', '1Cr', '2Cr', '3Cr', '4Cr', '5Cr' ],
-		    ticks_positions: [0, 20, 40, 60, 80, 100],
+		    ticks: [2000000, 10000000, 20000000, 40000000, 50000000, 100000000, 150000000,200000000],
+		    ticks_labels: ['20L', '1Cr', '2Cr', '4Cr', '5Cr', '10Cr','15Cr','20Cr'],
+		    ticks_positions: [0,15,30, 45, 60, 75,87, 100],
 		    //ticks_snap_bounds: 60,
 		    tooltip: 'always',
 		   step: 100000,
@@ -499,6 +513,7 @@ function loadContactReport(contact){
 		
 		$('#ageGroup').val(contact.contactReport.ageGroup);
 		$('#employmentStatus').val(contact.contactReport.employmentStatus);
+		$('#designationCust').val(contact.designation);
 	}
 }
 function populateAddressInfo(enq,contact){
@@ -620,7 +635,7 @@ function savebasicInfoResp(data){
 					cpname=enq.otherChannelPartner;
 				}*/
 			
-			$.get(url+"/generateWalkinToken",{"enquiryid":enq.enquiryId,"mobileno":contact.mobileNo,"projectSFID":$("#projectSfid").val(),"projectName":$("#projectName").val()
+			$.get(url+"/generateWalkinToken",{"enquiryid":enq.enquiryId,"mobileno":contact.mobile,"projectSFID":$("#projectSfid").val(),"projectName":$("#projectName").val()
         		,"countryCode":contact.countryCode},function(data){//,"cpflag":enq.isReferredByChannelPartnerFlag,"cpname":cpname				 
         	}).done(function(data){
         	});
@@ -837,7 +852,15 @@ function getChannelPartners(event,el){
 	$("#brokerContact").empty();
     $("#channelPartnerName").val("");
 	var text=$(el).val();
-	if(text.length==3){	
+	
+	if(text.length>=3){		
+		fetchAsyncData("getChannelPartnerList",text,"GET","loadChannelPartners");		
+	}else if(text.length==0){
+		channelPartnerArray=[];
+	}
+	
+	/*Vivek Changes Start*/
+	/*if(text.length==3 || text.length==5 || text.length==7  || text.length==9 || text.length==11 || text.length==13){	
 		$("#channelPartnerNameSearch").attr('readonly', true);
 		$("#channelPartnerLoader").show();
 		fetchSyncData("getChannelPartnerList",text,"GET","loadChannelPartners");
@@ -848,7 +871,8 @@ function getChannelPartners(event,el){
 		var channelPartners = filterMatches(channelPartnerArray, text);
 		console.log(channelPartners);
 		refreshChannelPartners(channelPartners);
-	}
+	}*/
+	/*Vivek Changes END*/
 	/*if(text.length>=3){
 		
 		var resp=fetchData("getChannelPartnerList",text,"GET");
@@ -1254,3 +1278,22 @@ function initialize() {
 		});
 	});
 }*/
+ /* Referred by added on Enquiry page, on select of walk-in source as referral -  
+	* Change By Satheesh Kyatham- 25-12-2019
+	* Request From - Prakash Idnani*/
+		/*  Start  */
+function onSelectWalkinSrcReferral(event,el)
+{
+		var val=$(el).val();
+		if(val=="Referral")
+			{
+			$('.referred_by_name').show();
+			}
+		else
+			{
+			$('.referred_by_name').hide();
+			}
+		//var brkContId=$("#brkCont"+val).attr('idVal');
+		//$("#brokerContactId").val(brkContId);
+	}
+/*  END  */

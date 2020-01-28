@@ -60,9 +60,13 @@
     <definition name="salesdesk"  template="/WEB-INF/views/pages/salesdesk.jsp"> 
        <put-attribute name="title" value="Sales Desk" />  
     </definition>
-       <definition name="saleslogin"  template="/WEB-INF/views/pages/saleslogin.jsp"> 
+    <definition name="saleslogin"  template="/WEB-INF/views/pages/saleslogin.jsp"> 
        <put-attribute name="title" value="Sales Desk Login" />  
     </definition>
+    <definition name="offlineeoi"  template="/WEB-INF/views/pages/offlineeoi/enquiry.jsp"> 
+       <put-attribute name="title" value="Offline EOI" />  
+    </definition>
+    
     <definition name="sessiontimeout"  template="/WEB-INF/views/pages/sessiontimeout.jsp"> 
        <put-attribute name="title" value="Session Timeout" />  
     </definition>
@@ -118,6 +122,11 @@
      <definition name="tnc" extends="base-definition"> 
        <put-attribute name="title" value="Add Payment Plan Wise T and C" />  
        <put-attribute name="body" value="/WEB-INF/views/pages/tnc.jsp" /> 
+     </definition>
+     
+     <definition name="tncEOI" extends="base-definition"> 
+       <put-attribute name="title" value="Add Project Wise T and C for EOI Form" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/tncEOI.jsp" /> 
      </definition>
      
      <definition name="enqOnMap"  template="/WEB-INF/views/pages/enqOnMap.jsp"> 

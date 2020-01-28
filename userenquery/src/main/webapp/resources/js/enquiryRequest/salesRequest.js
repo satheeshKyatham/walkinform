@@ -49,6 +49,8 @@ $(document).ready(function(){
 		});
 	 
 	 $(this).scrollTop(0);
+	
+	 getClosingManagersList();
 });
 function generatePaymentLink(){
 	$.get("quickInvoiceGenerator", {
@@ -67,7 +69,6 @@ function generatePaymentLink(){
 			&enq_sfid=12345dfdsaf
 		*/
 	}, function(data) {
-		debugger;
 		//alert(data);
 		 alert("Link Send o mobile no");
 	});
@@ -77,7 +78,6 @@ function checkStatus(){
 		"reference_no" : $('#firstName').val() ,
 		"order_no": $('#email').val() 
 	}, function(data) {
-		debugger;
 		//alert(data);
 		 //alert("Link Send o mobile no");
 	});
@@ -88,7 +88,6 @@ function getTower(){
 	$.get("getTowerMaster", { "project_code" : $('.projectSfid').val() 
 	}, function(data) {
 	 
-		debugger;
 		$("#tower").html("");
 		var html="";
 		html=html+ '<option value=""></option>';
@@ -114,7 +113,6 @@ function getfband(code){
 		"project_code" : $('.projectSfid').val(),
 		"tower_code":code
 	}, function(data) {
-		debugger;
 		$("#fband").html("");
 		var html="";
 		html=html+ '<option value=""></option>';
@@ -137,7 +135,6 @@ function getUnit(code){
 		"project_code" : $('.projectSfid').val(),
 		"tower_code":code,"floor_code":"","unit":""
 	}, function(data) {
-		debugger;
 		$("#unit").html("");
 		var html="";
 		html=html+ '<option value=""></option>';
@@ -162,7 +159,6 @@ function getFloor(code){
 		"project_code" : $('.projectSfid').val(),
 		"tower_code":code
 	}, function(data) {
-		debugger;
 		$("#floor").html("");
 		var html="";
 		html=html+ '<option value=""></option>';
@@ -182,7 +178,6 @@ function getunittype(tcode,fcode){
 		"tower_code":tcode,
 		"floor_code":fcode
 	}, function(data) {
-		debugger;
 		$("#radioBtnCol").html("");
 		var html="";
 		for(var i=0;i<data.length;i++){
@@ -216,7 +211,6 @@ function getDealDone(){
 	}); 
 }
 function onPageLoad(){
-	debugger	
 	    if($("#isView").val()=='Y'){
             $("#salesTabId").hide();
             $("#basicInfoSaveBtn").hide();
@@ -282,9 +276,11 @@ function getEnquiryForSales(){
 	populateSearchEnquiry(resp,true);
 	
 	if(token.includes("G")||token.includes("E")){
-		$("#salesTabId").remove();
+//		$("#salesTabId").remove();
+		$("#salesTabId").show();
 		
 		$("#paymentDetailsTab").show();
+		$("#eoisaveclose").hide();
 		
 	}
 	
@@ -471,7 +467,6 @@ function saveOtherRequest(event,el){
 }
 
 function populateBasicInfo(enq,contact){
- debugger
 		if(!isEmpty(enq)){
 			$('.enquiryId').val(enq.enquiryId);
 			$('#enquirysfid').val(enq.sfid);
@@ -639,6 +634,12 @@ function loadEnquiryReport(enq){
 		$("#barrier1").val(enq.enquiryReport.barrier1);
 		$("#trigger2").val(enq.enquiryReport.trigger2);
 		$("#barrier2").val(enq.enquiryReport.barrier2);
+		//alert(enq.sourcing_Managers__c);
+		//alert(enq.verticle__c);
+		
+		$("#verticalId").val(enq.verticle__c);
+		//alert("53435"+enq.sourcing_Managers__c);
+		$("#sourcingManagerId").val(enq.sourcing_Managers__c);
 		$("#LostReasonID").val(enq.lost_reason_c__c);
 		
 		//$( "#followDate" ).datepicker({ defaultDate: new Date(enq.enquiryReport.followDate) });
@@ -716,9 +717,6 @@ function salesSlider (){
 
 
 function loadContactReport(contact){
-	debugger;
-	 
-	debugger;
 	if(!isEmpty(contact) && !isEmpty(contact.contactReport)){
 		var contactReportId=contact.contactReport==null?'':contact.contactReport.contactReportId;
 		$('.contactReportId').val(contactReportId);
@@ -742,6 +740,8 @@ function loadContactReport(contact){
 		$('#officeAddress').val(contact.contactReport.officeAddress);
 		$('#ageGroup').val(contact.contactReport.ageGroup);
 		$('#employmentStatus').val(contact.contactReport.employmentStatus);
+		$('#designationCustSales').val(contact.designation);
+		
 	}
 }
 function populateAddressInfo(enq,contact){
@@ -932,6 +932,7 @@ function populateSearchEnquiry(resp,isSaleView){
 		    $("#budget").val("");
 		    $("#carpetAreaRequirement").val("");
 		    $("#employmentStatus").val("");
+		    $('#designationCustSales').val("");
 		    $("#companyName").val("");
 		    $("#officeAddress").val("");
 		    $("#officeCity").val("");
@@ -1047,7 +1048,6 @@ function populateEnquiryList(enquiryList){
 }
 
 function isReferredChanged(cpHS){
-	debugger;
 	$("div.sourceCol").hide();
 	$("#isReferredByChannelPartner"+cpHS).show();
 	$(".isReferredByChannelPartner"+cpHS).removeAttr("disabled");
@@ -1081,7 +1081,6 @@ function isReferredChanged(cpHS){
 }
 /* END Auto fill address*/
 function getChannelPartners(event,el){
-	debugger;
 	event.preventDefault();
 	$("#brokerContact").empty();
 	var text=$(el).val();
@@ -1100,7 +1099,6 @@ function getChannelPartners(event,el){
 	*/
 }
 function loadChannelPartners(resp){
-	debugger;
 	var partnerList=resp.objectMap.channelPartnerList;
 	/*alert(partnerList.length);*/
 	channelPartnerArray=partnerList;
@@ -1168,14 +1166,13 @@ function generateKYCLink(event,el,isEOI){
 			    type: 'POST', 	  
 			    success: function(data) 
 			    {
-			    	swal('KYC Link Sent...!');
+			    	//swal('KYC Link Sent...!');
 			    	  $("#mainPageLoad").hide();
 			    },
 			    beforeSend : function() {
 		        	$("#mainPageLoad").show();
 		        },
 			    error: function(e) {
-			    	debugger;
 			    	alert(e);
 			    	$("#mainPageLoad").hide();
 			    }
@@ -1201,7 +1198,6 @@ function generateKYCLinkViaOffer(event,el,isEOI,offersfid){
 		        	$("#mainPageLoad").show();
 		        },
 			    error: function(e) {
-			    	debugger;
 			    	alert(e);
 			    	$("#mainPageLoad").hide();
 			    }
@@ -1409,3 +1405,28 @@ function getEnqDtlFromSFDCAPI () {
     });
 
 }
+
+function getClosingManagersList()
+{
+	 //sourcingManagerIdDiv
+	//alert($('#walkInSource').val());
+	if(($('#isReferredByChannelPartnerInput').val()==='Direct') && ($('#walkInSource').val()==='Digital' || $('#walkInSource').val()==='Newspaper'
+			|| $('#walkInSource').val()==='Hoarding' || $('#walkInSource').val()==='Radio' || $('#walkInSource').val()==='Word of mouth' || $('#walkInSource').val()==='Exhibition'))
+		$('#sourcingManagerIdDiv').hide();
+	else
+		$('#sourcingManagerIdDiv').show();
+	//
+	       var urlGetUsers = "getUserProjectMapping?projectid="+$('#projectid').val();
+	       var j = 0
+	       var option="";
+	    	$.getJSON(urlGetUsers, function (data) {
+	    		option = "<option value=''>Select User</option>";
+	    		$.each(data, function (index, value) {
+	    			option = option+"<option value="+value.emailid+">"+value.user_name+"</option>";
+	    			j = j+1
+	    		});		
+	    		//option=option+"</select>";
+	    	}).done(function() {
+	    		$("#sourcingManagerId").append(option);
+	    	});
+	    }

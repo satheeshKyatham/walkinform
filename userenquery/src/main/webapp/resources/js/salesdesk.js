@@ -205,6 +205,27 @@ function onProjectSelect()
 		  {
 			  window.location.href = "paymentapproval?projectid="+$('#projectSelected').val()+"&projectname="+$('#projectSelected option:selected').text();;
 		  }
+		  else if($('#loged_role').val()=='16')
+		  {
+			  $("#role_page").empty();
+			  var option = "<select class='inputLabel' onchange='onChangeRole()' id='roleSelected' style='border-color: #000000 !important;   width: 100%;    min-height: 33px;    margin-bottom: 5px;'><option>Select Type</option>";
+				option = option+"<option value='IM'>Inventory Manager</option>";
+				option = option+"<option value='AM'>Allocation Manager</option>";
+				option = option+"<option value='CM'>Closing Manager</option>";
+				option = option+"<option value='MIS'>MIS Report</option>";
+				//option = option+"<option value='PADMIN'>Admin Panel</option>";
+				option = option+"<option value='EOIPA'>EOI Payment Approval</option>";
+				option = option+"<option value='KYCA'>KYC Approval</option></select>";
+				$("#role_page").append(option);
+		  }
+		  else if($('#loged_role').val()=='17')
+		  {
+			  $("#role_page").empty();
+			  var option = "<select class='inputLabel' onchange='onChangeRole()' id='roleSelected' style='border-color: #000000 !important;   width: 100%;    min-height: 33px;    margin-bottom: 5px;'><option>Select Type</option>";
+				option = option+"<option value='CM'>Closing Manager</option>";
+				option = option+"<option value='OFFLINEADM'>OFFLINE EOI</option></select>";
+				$("#role_page").append(option);
+		  }
 	 
 		$("#loginMsg").html('');
 	}
@@ -223,6 +244,14 @@ function onChangeRole()
 		window.location.href = "admininventory/"+$('#projectSelected').val()+"/"+$('#projectSelected option:selected').text()+"/"+ $('#loged_userid').val()+"/";
 	else if($("#roleSelected").val()=='PADMIN')
 		window.location.href = "usermaster";
+	else if($("#roleSelected").val()=='EOIPA')
+		window.location.href = "paymentapproval?projectid="+$('#projectSelected').val()+"&projectname="+$('#projectSelected option:selected').text();
+	else if($("#roleSelected").val()=='KYCA')
+		window.location.href = "kycrole?projectid="+$('#projectSelected').val()+"&projectname="+$('#projectSelected option:selected').text();
+	else if($("#roleSelected").val()=='OFFLINEADM'){
+		window.location.href = "offlineEOI?projectid="+$('#projectSelected').val()+"&projectname="+$('#projectSelected option:selected').text();
+	}
+
 		//window.location.href = "assignedusers?userId=" + $('#loged_userid').val()+"&projectid="+$('#projectSelected').val()+"&projectname="+$('#projectSelected option:selected').text() ;
  //window.location.href = "assignedusers?userId=" + $('#loged_userid').val()+"&projectid="+$('#projectSelected').val()+"&projectname="+$('#projectSelected option:selected').text() ;
 

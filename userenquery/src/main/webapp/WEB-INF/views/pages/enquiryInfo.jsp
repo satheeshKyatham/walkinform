@@ -265,7 +265,7 @@
 					<div class="clearfix"></div>
 					
 					<div class="col-md-2 radioBtnWrp mrgT0" style="margin-top:-16px !important;">
-						  <div class="titleF">Have we met before <strong class="mndt">*</strong>
+						  <div class="titleF">Have you visited site before <strong class="mndt">*</strong>
 						  	<div class="clearfix"></div>
 						  </div>
 							<div class="radioBtnCol" data-toggle="buttons">
@@ -433,6 +433,46 @@
 								</div>
 								<div class="clearfix"></div>
 							</div>
+							<div class="col-md-2 col-xs-6">
+								<div class="group">
+									<select id="designationCust" name="contact.designation" class="contactFields">
+									        <option value=""></option>
+									        <option value="Owner / Proprietor">Owner / Proprietor</option>
+									        <option value="CEO">CEO</option>
+									        <option value="AVP & Above">AVP & Above</option>
+									        <option value="Middle Management">Middle Management</option>
+									        <option value="Executive">Executive</option>
+									        <option value="Manager">Manager</option>
+									        <option value="Assistant Manager">Assistant Manager</option>
+									        <option value="Software Engineer">Software Engineer</option>
+									        <option value="Analyst">Analyst</option>
+									        <option value="Associate">Associate</option>
+									        <option value="Consultant">Consultant</option>
+									        <option value="General Manager">General Manager</option>
+									        <option value="Vice President">Vice President</option>
+									        <option value="Ass. Vice President">Ass. Vice President</option>
+									        <option value="Chairman">Chairman</option>
+									        <option value="Vice Chairman">Vice Chairman</option>
+									        <option value="CMO">CMO</option>
+									       	<option value="COO">COO</option>
+									       	<option value="CTO">CTO</option>
+									       	<option value="CXO">CXO</option>
+									        <option value="Director & Above">Director & Above</option>
+									       	<option value="Executive Director">Executive Director</option>
+									       	<option value="Managing Director">Managing Director</option>
+									       	<option value="Officer">Officer</option>
+									        <option value="Product Head">Product Head</option>
+									       	<option value="Department Head">Department Head</option>
+									       	<option value="Professor">Professor</option>
+									       	<option value="Team Lead">Team Lead</option>
+									        <option value="Doctor">Doctor</option>							       		        					    
+									</select>
+									<span class="highlight"></span><span class="bar"></span>
+									<label class="select-label">Designation<strong class="mndt"></strong></label>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+							
 							<div class="col-md-3 col-xs-6">
 								<div class="group">
 									<input type="text" id="companyName" name="contact.companyName" class="contactFields autocomplete-off"/>
@@ -547,7 +587,7 @@
 						<div id="isReferredByChannelPartnerD" class="sourceCol animated" style="display: none;">
 							<div class="col-md-6 col-xs-12">
 								<div class="group">
-									<select class="isReferredByChannelPartnerD requiredField enquiryFields" disabled="disabled" id="walkInSource" name="walkInSource">
+									<select class="isReferredByChannelPartnerD requiredField enquiryFields" disabled="disabled" id="walkInSource" name="walkInSource" onchange="onSelectWalkinSrcReferral(event,this);">
 									    <option value=""></option>
 										<c:forEach var="communcationMediumList" items="${communcationMediumList}">
 	
@@ -559,7 +599,18 @@
 									<label class="select-label">How did you come to know about this project? <strong class="mndt">*</strong></label>
 								</div>
 							</div>
-							
+							<!--  Referred by added on Enquiry page, on select of walk-in source as referral -  
+     						* Change By Satheesh Kyatham- 25-12-2019
+     						* Request From - Prakash Idnani -->
+     						<!-- Start -->
+							<div class="referred_by_name ccol-md-3 col-xs-6">
+								<div class="group">
+									<input type="text" class="autocomplete-off" id="referredbyId" name="enquiryReport.referredby"/>
+									<span class="highlight"></span><span class="bar"></span>
+									<label>Referred by</label>
+								</div>
+							</div>
+							<!-- END -->
 							<!-- Instracted BY Ganesh -- comment by A -->
 							<!-- <div class="col-md-6 col-xs-12">
 								<div class="group">
@@ -1201,17 +1252,17 @@
     
     <script src="<c:url value='/resources/js/bootstrap-slider.min.js' />"></script>
     
-	<script src="<c:url value='/resources/js/springForm.js?v=18' />"></script>
-	<script src="<c:url value='/resources/js/commonValidation.js?v=18' />"></script>
-	<script src="<c:url value='/resources/js/utility.js?v=18' />"></script>
-	<script src="<c:url value='/resources/js/enquiryRequest/enquiryRequest.js?v=18' />" /></script>
+	<script src="<c:url value='/resources/js/springForm.js?v=18.02' />"></script>
+	<script src="<c:url value='/resources/js/commonValidation.js?v=18.02' />"></script>
+	<script src="<c:url value='/resources/js/utility.js?v=18.02' />"></script>
+	<script src="<c:url value='/resources/js/enquiryRequest/enquiryRequest.js?v=18.03' />" /></script>
 	<%-- <script src="<c:url value='/resources/js/enquiryRequest/salesRequest.js?v=1' />"></script> --%>
 	
     <script src="<c:url value='/resources/js/intlTelInput.js' />"></script>
     <script src="<c:url value='/resources/js/sweetalert2.min.js' />"></script>
   	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/8.4.7/js/intlTelInput.js"></script> -->
 	
-	<script src="<c:url value='/resources/js/index.js?v=18' />"></script>
+	<script src="<c:url value='/resources/js/index.js?v=18.02' />"></script>
 	
 	<script>
 	

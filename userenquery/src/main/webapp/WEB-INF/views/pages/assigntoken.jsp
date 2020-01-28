@@ -131,8 +131,10 @@ projectid=request.getParameter("projectid");
 							</select>
 						</div>
 						<div class="form-group">
-							<label for="exampleInputNameDate">Date</label> 
+							<label for="exampleInputNameDate">From Date</label> 
 							<input class="form-control" type="date" name="" id="txtFromDate">
+							<label for="exampleInputNameDate">To Date</label> 
+							<input class="form-control" type="date" name="" id="txtToDate">
 						</div>
 						<div class="form-group">
 							<input class="form-control" type="button" value="Search" name="Search" id="amsearch" onclick="loadData()"/>
@@ -209,11 +211,11 @@ projectid=request.getParameter("projectid");
 <script src="<c:url value='/resources/js/jquery-1.12.4.min.js'/>"></script>
 <script src="<c:url value='/resources/js/bootstrap.min.js'/>"></script>  
 <script type="text/javascript" charset="utf8" src="<c:url value='/resources/js/jquery.dataTables.js'/>"></script>
-<script src="<c:url value='/resources/js/enquiryRequest/assignToken.js?v=16'/>"></script>
-<script src="<c:url value='/resources/js/salesdesk.js?v=16'/>"></script>
+<script src="<c:url value='/resources/js/enquiryRequest/assignToken.js?v=18.02'/>"></script>
+<script src="<c:url value='/resources/js/salesdesk.js?v=18.02'/>"></script>
 <script src="<c:url value='/resources/js/sweetalert.min.js'/>"></script>
 
-<script src="<c:url value='/resources/js/separate/eoiData.js?v=16'/>"></script>
+<script src="<c:url value='/resources/js/separate/eoiData.js?v=18.02'/>"></script>
 
 </body>
 </html>  
