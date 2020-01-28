@@ -143,9 +143,6 @@ public class InventoryController {
 
                         		// create a second time stamp
                 	    		int holdTime = sysConfigService.getValueAsInt(SysConfigService.HOLD_TIME, projectId);
-                	    		if(holdTime==0) {
-                	    			holdTime =HOLD_TIME;
-                	    		}
                         		Timestamp timestampValue = new Timestamp(plans.get(k).getCreated_at().getTime()+ holdTime);
 
                         		long milliseconds = timestampValue.getTime() - currentTpm.getTime();

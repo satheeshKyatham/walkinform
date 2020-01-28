@@ -2741,7 +2741,7 @@ public class WebServiceController<MultipartFormDataInput> {
 		rows.add("Project Name,Tokenno,Created,Enquiry Name,Mobile Phone,Customer Name,Email,have_we_met_before,age_a__c,residenceaddress,officelocation,"
 				+ "empstatus,company_name__c,is_purchase_for_self_use_or_investment__c,budget"
 				+ ",typology_requirement,walk_in_source__c,advertisementname,brokername,current_residence_configuration,current_residence_ownership,source_of_funding,customer_classification,ethnicity,unit_availability,accompanied_by,deal_negotiation,construction_status,timeframe_to_book,enquirynoneditcomment,verticle,sourcingname,closingname,closingemail,own_contribution_receipt,loan_eligibility,Assined To,IsAttended,CP Comments,FollowType,FollowDate"
-				+ ",Trigger 1,Trigger 2,Barrier 1,Barrier 2,Lost Reason");
+				+ ",Trigger 1,Trigger 2,Barrier 1,Barrier 2,Lost Reason,Designation");
 		rows.add("\n");
 		String fromdate = resquest.getParameter("fromdate");
 		System.out.println("fromdate:-"+fromdate);
@@ -2872,6 +2872,11 @@ public class WebServiceController<MultipartFormDataInput> {
 			rows.add(",");
 			rows.add(mislist.get(i).getLost_reason_c__c());
 			rows.add(",");
+			if(mislist.get(i).getDesignation__c()!=null)
+				rows.add(mislist.get(i).getDesignation__c().toString());
+			else
+				rows.add("");
+			
 			//rows.add(mislist.get(i).getFollowtype());
 			//rows.add(",");
 			
