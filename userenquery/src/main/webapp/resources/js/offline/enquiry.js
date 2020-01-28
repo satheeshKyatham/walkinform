@@ -52,7 +52,6 @@ function onPageLoad(){
    
     var projectSfid=$('.projectSfid').val();
     if(projectSfid==""){
-    	$('.projectSfid').val("a1l6F000002dTpoQAE");/*val("a20O0000002agRG");*/
     }
     var countryCode=$('#countryCode').val();
     if(countryCode==""){
@@ -703,7 +702,8 @@ function getMatchingTen(word){
 	if(includedValues !=null && includedValues.length>0){
 		result =  result.concat(includedValues);
 	}
-	return result;
+	 var uniqueArray = result.filter((item,index) => result.indexOf(item) === index)
+	return uniqueArray;
 }
 function loadChannelPartners(resp){
 	var partnerList=resp.objectMap.channelPartnerList;
