@@ -87,7 +87,7 @@ public class HoldInventoryAdminDaoImpl extends AbstractDao<Integer, HoldInventor
 				+" , hold_reason='"+inventoryAdmin.getHold_reason()+"' , eoi_unit_locked='"+inventoryAdmin.isEoi_unit_locked()+"' , "
 				+ " version =(SELECT coalesce(MAX(VERSION),0) +1 "
 				+ " FROM salesforce.gpl_cs_hold_admin_unit B WHERE A.sfid=B.sfid)"
-				+ " where A.project_id ='" +inventoryAdmin.getProject_id()+"' and A.sfid ='"+inventoryAdmin.getUnitSfid()+"'");
+				+ " where A.project_id ='" +inventoryAdmin.getProject_id()+"' and A.hold_status = true and A.sfid ='"+inventoryAdmin.getUnitSfid()+"'");
 				query.executeUpdate();
 			
 			}
