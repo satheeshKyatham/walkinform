@@ -34,7 +34,7 @@ public class SysConfigServiceImpl implements SysConfigService{
 	@Autowired 
 	private SysConfigDao sysConfigDao;
 
-	/* @PostConstruct */
+	@PostConstruct
 	@Transactional(propagation = Propagation.REQUIRED)
 	public void postInit() {
 		load();
@@ -100,7 +100,7 @@ public class SysConfigServiceImpl implements SysConfigService{
 			return "0";
 		}
 		
-		return config.getName();
+		return config.getValue();
 	}
 
 	private SysConfigDto convertEntityToDto(SysConfig sysConfig) {
