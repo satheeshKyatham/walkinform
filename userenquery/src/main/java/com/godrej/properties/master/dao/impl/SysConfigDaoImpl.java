@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.godrej.properties.dao.AbstractDao;
 import com.godrej.properties.master.dao.SysConfigDao;
@@ -16,7 +17,8 @@ import com.godrej.properties.master.model.SysConfig;
  *
  */
 @Repository
-public class SysConfigDaoImpl extends AbstractDao<SysConfigDto, SysConfig> implements SysConfigDao{
+@Transactional
+public class SysConfigDaoImpl extends AbstractDao<SysConfig, SysConfig> implements SysConfigDao{
 
 
 	@Override

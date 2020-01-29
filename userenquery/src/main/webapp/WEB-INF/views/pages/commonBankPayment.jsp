@@ -135,6 +135,9 @@
 								Floor Band
 							</th>
 							<th>
+								Car Park Type
+							</th>
+							<th>
 								Description
 							</th>
 							<th style="width:32px;"></th>
@@ -143,13 +146,13 @@
 						<tr class="EOIDtlRow"> <!-- csPtDataRowEoi -->
 							<td>
 								<input class="csPtEnqSfidEoi" style="display:none;" />
-								<select class="full form-control input-sm towerListEOI requiredField"  onchange="getTypologyEOI(this); getUnitEOI(this); getfbandEOI(this);">
+								<select class="full form-control input-sm towerListEOI requiredField"  onchange="getTypologyEOI(this); getUnitEOI(this); getfbandEOI(this); getCarparkEOIMst(this);">
 									<option value="">Select Tower</option>
 								</select>
 							</td>
 							<td>
-								<select class="full form-control input-sm typologyListEOI" onchange="getUnitEOI(this)">
-									<option value="0">Select Typology</option>
+								<select class="full form-control input-sm typologyListEOI requiredField" onchange="getUnitEOI(this)">
+									<option value="">Select Typology</option>
 								</select>
 							</td>
 							<td>
@@ -160,6 +163,11 @@
 							<td>
 								<select class="full form-control input-sm floorListEOI">
 									<option value="">Select Floor Band</option>
+								</select>
+							</td>
+							<td>
+								<select class="full form-control input-sm carparkListEOI">
+									<option data-carparkname="" value="-1">Select Car Park</option>
 								</select>
 							</td>
 							<td style="width:150px;">

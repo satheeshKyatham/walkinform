@@ -88,6 +88,12 @@ private static final long serialVersionUID = 1L;
 	@Transient
 	private String eoi_date_string;
 	
+	@Column(name = "eoi_carpark_mst_id")
+	private int eoi_carpark_mst_id;
+	
+	@Column(name = "eoi_carpark_name")
+	private String eoi_carpark_name;
+	
 	
 	public int getId() {
 		return id;
@@ -274,5 +280,21 @@ private static final long serialVersionUID = 1L;
 
 	public void setEoi_form_path(String eoi_form_path) {
 		this.eoi_form_path = eoi_form_path;
+	}
+
+	public int getEoi_carpark_mst_id() {
+		return eoi_carpark_mst_id;
+	}
+
+	public void setEoi_carpark_mst_id(int eoi_carpark_mst_id) {
+		this.eoi_carpark_mst_id = eoi_carpark_mst_id;
+	}
+
+	public String getEoi_carpark_name() {
+		return eoi_carpark_name;
+	}
+
+	public void setEoi_carpark_name(String eoi_carpark_name) {
+		this.eoi_carpark_name = eoi_carpark_name;
 	}
 }

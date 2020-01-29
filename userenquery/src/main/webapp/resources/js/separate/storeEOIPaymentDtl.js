@@ -347,7 +347,15 @@ function getUnitEOI (e) {
 function getUnitEOI (e) {
 	$(e).closest('.EOIDtlRow').find(".unitListEOI").find("option:gt(0)").remove();
 	
-	$.get("getInventoryRecords",{"project_code" : $('.projectSfid').val(),  "tower_code":$(e).closest('.EOIDtlRow').find(".towerListEOI").val(),  "unitType":$(e).closest('.EOIDtlRow').find(".typologyListEOI").val()},function(data){				 
+	var typologyListEOI = 0;
+	
+	if ($(e).closest('.EOIDtlRow').find(".typologyListEOI").val().trim() != "") {
+		typologyListEOI = $(e).closest('.EOIDtlRow').find(".typologyListEOI").val();
+	}
+	
+	
+	
+	$.get("getInventoryRecords",{"project_code" : $('.projectSfid').val(),  "tower_code":$(e).closest('.EOIDtlRow').find(".towerListEOI").val(),  "unitType":typologyListEOI},function(data){				 
 		var obj =JSON.stringify(data);
 		var obj1 =JSON.parse(obj);
 		var html = '';
@@ -473,13 +481,13 @@ function addMoreEoiRowBtn () {
 				
 				 "<td>"
 					+" <input class='csPtEnqSfidEoi' style='display:none;' /> "
-					+" <select class='full form-control input-sm towerListEOI requiredField'  onchange='getTypologyEOI(this); getUnitEOI(this); getfbandEOI(this);'>"
+					+" <select class='full form-control input-sm towerListEOI requiredField'  onchange='getTypologyEOI(this); getUnitEOI(this); getfbandEOI(this); getCarparkEOIMst(this);'>"
 					+"<option value=''>Select Tower</option>"
 					+"</select>"
 				+"</td>"
 				+"<td>"
-					+"<select class='full form-control input-sm typologyListEOI' onchange='getUnitEOI(this)'>"
-						+"<option value='0'>Select Typology</option>"
+					+"<select class='full form-control input-sm typologyListEOI requiredField' onchange='getUnitEOI(this)'>"
+						+"<option value=''>Select Typology</option>"
 					+"</select>"
 				+"</td>"
 				+"<td>"
@@ -490,6 +498,11 @@ function addMoreEoiRowBtn () {
 				+"<td>"
 					+"<select class='full form-control input-sm floorListEOI'>"
 						+"<option value='0'>Select Floor Band</option>"
+					+"</select>"
+				+"</td>"
+				+"<td>"
+					+"<select class='full form-control input-sm carparkListEOI'>"
+						+"<option data-carparkname='' value='-1'>Select Car Park</option>"
 					+"</select>"
 				+"</td>"
 				+"<td>"
@@ -618,6 +631,10 @@ function insertEOIPreference () {
 	    csPtData.eoi_form_path = eoiFormPath;
 	    
 	    
+	    csPtData.eoi_carpark_name =  $(this).find('.carparkListEOI option:selected').attr("data-carparkname");
+	    csPtData.eoi_carpark_mst_id =  $(this).find('.carparkListEOI option:selected').val();
+	   
+	    
 	    
 	    csPtData.eoi_date_string = currentDate;
 	    
@@ -679,6 +696,7 @@ function getEOITabPreferencRecord () {
 								+ '<td style="text-align:center;">'+obj[i].typology_name+'</td>' 
 								+ '<td style="text-align:center;">'+obj[i].unit_name+'</td>' 
 								+ '<td style="text-align:center;">'+obj[i].floor_band+'</td>' 
+								+ '<td style="text-align:center;">'+obj[i].eoi_carpark_name+'</td>'
 								+ '<td style="text-align:center;">'+obj[i].description+'</td>' 
 								+ '<td></td>' 
 							"</tr>";
@@ -707,60 +725,75 @@ function holdUnitForEOI(msg) {
 		}	
 	});
 	
-	if(favorite=='' || favorite==null){
-		swal({
+	if(favorite != '' && favorite != null){
+		/*swal({
 			title: "EOI submitting without any unit preference",
 		    text: "",
 		    //timer: 3000,
 		    type: "warning",
-		});
+		});*/
 		//return false;
+		
+		$.ajax({
+		    url: pageContext+'saveAdminUnit',
+		    data: {
+				projectid : $("#projectid").val(),
+				userId : $("#userid").val(),
+				unitsfid:favorite.join(","),
+				holdmsg:msg,
+				reasonInput : "EOI Block",
+				holdBlockBehalfOfName : $('#username').val(),
+				holdBlockBehalfOfID : $("#userid").val(),
+				enqSFID : $('#enquirysfid').val(),
+				//unitNames:unitNameArray.join(","),
+		    },
+		    type: 'POST',
+		    success: function(data) { 
+			    	if (data == 'duplicateRecords') {
+			    		swal({
+	                    	title: "Unit is already block",
+		          			text: "",
+		          			//timer: 8000,
+		          			type: "warning",
+		                });
+			    	} else if (data == 'success')  {
+			    		insertEOIPreference ();
+			    	}
+		    },
+		    error: function(data) {
+		    	swal({
+					title: "There was problem in holding EOI unit at this time. Please try again",
+				    text: "",
+				    //timer: 3000,
+				    type: "warning",
+				});
+		    }
+		});
+	} else {
+		insertEOIPreference ();
 	}
 	
-	
-  	$.ajax({
-	    url: pageContext+'saveAdminUnit',
-	    data: {
-			projectid : $("#projectid").val(),
-			userId : $("#userid").val(),
-			unitsfid:favorite.join(","),
-			holdmsg:msg,
-			reasonInput : "EOI Block",
-			holdBlockBehalfOfName : $('#username').val(),
-			holdBlockBehalfOfID : $("#userid").val(),
-			enqSFID : $('#enquirysfid').val(),
-			//unitNames:unitNameArray.join(","),
-	    },
-	    type: 'POST',
-	    success: function(data) { 
-		    	if (data == 'duplicateRecords') {
-		    		swal({
-                    	title: "Unit is already block",
-	          			text: "",
-	          			//timer: 8000,
-	          			type: "warning",
-	                });
-		    	} else if (data == 'success')  {
-		    		insertEOIPreference ();
-		    	}
-	    	
-	    	
-	    		/*swal({
-					title: "Successfully Submitted",
-				    text: "",
-				    timer: 3000,
-				    type: "success",
-				});*/
-	    		//inventoryLoad ();
-	    		//$('#inventoryLoader').hide();
-	    },
-	    error: function(data) {
-	    	swal({
-				title: "There was problem in holding EOI unit at this time. Please try again",
-			    text: "",
-			    //timer: 3000,
-			    type: "warning",
-			});
-	    }
+}
+
+
+
+function getCarparkEOIMst(e) {
+	 
+	$.get("getCarparkEOIMst", {
+		"project_sfid" : $('.projectSfid').val()
+	}, function(data) {
+
+		$(e).closest('.EOIDtlRow').find(".carparkListEOI").find("option:gt(0)").remove();
+		
+		var html="";
+		
+		if(data!=null){
+			for(var i=0;i<data.length;i++){
+				html=html+'<option data-carparkname="'+data[i].name+'"  value="'+data[i].id+'">'+data[i].name+'</option>';
+			}
+		}
+		 
+		$(e).closest('.EOIDtlRow').find(".carparkListEOI").append(html);
+		
 	});
 }

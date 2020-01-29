@@ -46,7 +46,7 @@
 	<div id="map-canvas" style="height:700px;"></div>
 	<script src="<c:url value='/resources/js/jquery-1.12.4.min.js' />"></script>
 	<script src="<c:url value='/resources/js/bootstrap.min.js'/>"></script>
-	<script src="<c:url value='/resources/js/separate/enqMap.js?v=18.02'/>"></script>
+	<script src="<c:url value='/resources/js/separate/enqMap.js?v=18.05'/>"></script>
 	<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB1YQeqmJoubsXBr0BLkIqOtwWyYk2mKJQ&libraries=places" async defer></script> -->
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCGiIJnQmPDp3qoLF0j6xt8msWAD-7FC2I&libraries=places" async defer></script>
 	
