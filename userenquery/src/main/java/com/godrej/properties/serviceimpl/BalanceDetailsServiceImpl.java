@@ -29,8 +29,13 @@ public class BalanceDetailsServiceImpl implements BalanceDetailsService{
 
 	@Override
 	public List<BalanceDetails> getCreatedOffersList(String projectid) {
-		// TODO Auto-generated method stub
 		return dao.getCreatedOffersList(projectid);
+	}
+
+
+	@Override
+	public void eCRMCancelledOfferInactive() {
+		dao.eCRMCancelledOfferInactive();
 	}
 	
 }

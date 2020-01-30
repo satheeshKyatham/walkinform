@@ -251,10 +251,11 @@ function printEOIForm(regionName, projectName, enqName, projectNameWithoutCity) 
             	 dangerMode: true,
              }).then(function(isConfirm) {
             	 //Changes by Satheesh - for EOI form
+            	 debugger;
             	 if (isConfirm) {
             		 if($('#roleid').val()==='17')
             			 {
-            			 	window.location.href =pageContext+ "offlineEOI";
+            			 	window.location.href =pageContext+ "offlineEOI?userId="+$("#userid").val()+"&projectid="+$("#projectid").val()+"&projectname="+$("#projectname").val();
             			 }
             		 else
             			 window.location.href =pageContext+ "assignedusers?userId="+$("#userid").val()+"&projectid="+$("#projectid").val()+"&projectname="+$("#projectname").val();

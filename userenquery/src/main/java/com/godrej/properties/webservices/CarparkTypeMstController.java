@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.godrej.properties.model.CarparkTypeEOI;
 import com.godrej.properties.model.CarparkTypeMst;
-import com.godrej.properties.model.ProjectRegion;
-import com.godrej.properties.model.SchemePromotional;
+import com.godrej.properties.model.TowerBand;
+import com.godrej.properties.service.CarparkTypeEOIService;
 import com.godrej.properties.service.CarparkTypeMstService;
-import com.godrej.properties.service.EnqAndOfferDtlService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -29,6 +29,9 @@ public class CarparkTypeMstController {
 	@Autowired
 	private CarparkTypeMstService carparkTypeMstService;
 	
+	@Autowired
+	private CarparkTypeEOIService carparkTypeEOIService;
+	
 	
 	@RequestMapping(value = "/getCarparkTypeMst", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
 	public String getCarparkType(@RequestParam("projectSFID") String projectSFID) {
@@ -40,6 +43,15 @@ public class CarparkTypeMstController {
 		return gson.toJson(carparkTypeList);
 	}
 	
+	
+	@RequestMapping(value = "/getCarparkEOIMst", method = RequestMethod.GET, produces = "application/json")
+	public String getCarparkEOI(@RequestParam("project_sfid") String project_sfid) {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		Gson gson = gsonBuilder.create();
+		List<CarparkTypeEOI> plans=carparkTypeEOIService.getTowerBand(project_sfid);
+		
+		return gson.toJson(plans);
+	}
 	
 	
 	@RequestMapping(value = "/insertCarparkType", method = RequestMethod.POST)
