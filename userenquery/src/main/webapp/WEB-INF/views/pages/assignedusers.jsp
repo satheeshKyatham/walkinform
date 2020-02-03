@@ -332,7 +332,7 @@ if(ses!=null){
 	<script src="<c:url value='/resources/js/separate/applicationForm.js?v=18.05'/>"></script>
 	<script src="<c:url value='/resources/js/separate/offerApplicationForm.js?v=18.05'/>"></script>
 	
-	<script src="<c:url value='/resources/js/separate/eoiReportSales.js?v=18.05'/>"></script>
+	<script src="<c:url value='/resources/js/separate/eoiReportSales.js?v=18.06'/>"></script>
 	
 	
 </body>

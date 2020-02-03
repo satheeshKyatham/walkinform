@@ -11,14 +11,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.godrej.properties.model.HoldInventoryEntry;
+import com.godrej.properties.service.BalanceDetailsService;
 import com.godrej.properties.service.ContactReportService;
 import com.godrej.properties.service.EnquiryReportService;
 import com.godrej.properties.service.HoldInventoryEntryService;
 import com.godrej.properties.service.PushEnquiryDataService;
 
 /*@Configuration
-@EnableScheduling
-@Controller*/
+@EnableScheduling*/
+@Controller
 public class SyncSchedular {
 	private Logger LOG=LoggerFactory.getLogger(getClass());
 	@Autowired
@@ -27,6 +28,8 @@ public class SyncSchedular {
 	private ContactReportService contactReportService;
 	@Autowired
 	private EnquiryReportService enquiryReportService;
+	@Autowired
+	private BalanceDetailsService balanceDetailsService;
 	
 	@Autowired
 	private HoldInventoryEntryService holdInventoryEntryService;
@@ -60,5 +63,13 @@ public class SyncSchedular {
 		updateHold.setStatusai("I");
 		updateHold.setHoldstatusyn("N");
 		holdInventoryEntryService.updatePreviousHold(updateHold);//20
+	}
+	/*For SFDC Cancelled offer inactive in D4U*/
+	@ResponseBody
+	@Scheduled(cron = "0 0/55 * * * ?")//@Scheduled(cron = "0/20 * * * * ?")/* 30 Sec schedular time*///"0/15 * * * * *" //--20 Sec "*/20 * * * * *"
+	@RequestMapping("/cancelledOfferInactive")
+	public void cancelledOfferInactive(){
+		LOG.info("cancelledOfferInactive ::*************");
+		balanceDetailsService.eCRMCancelledOfferInactive();
 	}
 }

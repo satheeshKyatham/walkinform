@@ -273,6 +273,7 @@ function getEOITabPaymentRecord () {
 
 $("#paymentDetailsTab").click(function(){
 	getTowerEOI ();
+	getTokenTypeEOI();
 });
 
 function getTowerEOI (){
@@ -294,6 +295,59 @@ function getTowerEOI (){
 	});
 }
 
+/* Added By Satheesh K - 30-01-2020*/
+function getTokenTypeEOI (){
+	/*$.get("getTowerMaster", { "project_code" : $('.projectSfid').val() 
+	
+	}, function(data) {
+		
+		$('.towerListEOI').find("option:gt(0)").remove();	
+		
+		var html="";
+		
+		html=html+'<option value="All">All11</option>';
+		
+		for(var i=0;i<data.length;i++) {
+			html=html+'<option value="'+data[i].tower_code__c+'">'+data[i].tower_name__c+'</option>';
+		}
+		
+		$(".towerListEOI").append(html);
+	});*/
+	$('.tokenTypeEOI').find("option:gt(0)").remove();
+	var html="";
+	if($("#projectsfid").val()=='a1l6F000009D6IMQA0')
+		{
+			html='<option value="F">GOLD</option><option value="F">PLATINUM</option><option value="T">EXPRESS</option>';
+		}
+	else if($("#projectsfid").val()=='a1l6F000008DnniQAC' || $("#projectsfid").val()=='a1l2s00000000pEAAQ' || $("#projectsfid").val()=='a1l6F000008iZJMQA2')
+		{
+			html='<option value="F">REFUNDABLE</option><option value="T">NON-REFUNDABLE</option>';
+		}
+		
+	
+	$(".tokenTypeEOI").append(html);
+}
+/* Added By Satheesh K - 30-01-2020*/
+
+function tokenTypeChangeEOI(e)
+{
+	debugger;
+	//$(e).find("option:selected").text();
+	var val = $(e).val();
+	if(val=='F')
+		{
+		$('.unitListEOI option[value=0]').prop('selected', true);
+		$('.floorListEOI').prop("disabled", false);
+		
+		//$('.unitListEOI').find("option:selected").text('Select Unit');
+		$('.unitListEOI').prop("disabled", true);
+		}
+	else
+		{
+		$('.unitListEOI').prop("disabled", false);
+		}
+	
+}
 //$('#tower').val(),""
 
 function getTypologyEOI (e){
@@ -431,6 +485,8 @@ function getfbandEOI(e) {
 		
 	});
 }
+
+
 
 function unitChangeConditionEOI (e){
 	if ($(e).val() != 0) {
@@ -639,7 +695,13 @@ function insertEOIPreference () {
 	    csPtData.eoi_date_string = currentDate;
 	    
 	    //-------------------------------------------
-	    
+	    /* Added By Satheesh K - 30-01-2020*/
+		var val = $('.tokenTypeEOI').val();
+		if(val=='F')
+			csPtData.tokenTypeId = "1";
+		else
+			csPtData.tokenTypeId = "2";
+	    csPtData.tokenTypeName = $('.tokenTypeEOI').find("option:selected").text();
 	    
 	    
 	    arrayData.push(csPtData);

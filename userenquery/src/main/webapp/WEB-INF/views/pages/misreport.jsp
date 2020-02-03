@@ -244,7 +244,7 @@ projectid=request.getParameter("projectid");
 <script src="<c:url value='/resources/js/buttons.html5.min.js'/>"></script>
 
 <script src="<c:url value='/resources/js/enquiryRequest/misreport.js?v=18.05'/>"></script>
-<script src="<c:url value='/resources/js/separate/eoiReport.js?v=18.05'/>"></script>
+<script src="<c:url value='/resources/js/separate/eoiReport.js?v=18.06'/>"></script>
 <script src="<c:url value='/resources/js/separate/allotmentreport.js?v=18.05'/>"></script>
 <%-- <script src="<c:url value='/resources/js/separate/offer.js?v=18.05'/>"></script> --%>
 

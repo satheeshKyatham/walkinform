@@ -94,7 +94,10 @@ private static final long serialVersionUID = 1L;
 	@Column(name = "eoi_carpark_name")
 	private String eoi_carpark_name;
 	
-	
+	@Column(name = "tokentypename")
+	private String tokenTypeName;
+	@Column(name = "tokentypeid")
+	private int tokenTypeId;
 	public int getId() {
 		return id;
 	}
@@ -297,4 +300,22 @@ private static final long serialVersionUID = 1L;
 	public void setEoi_carpark_name(String eoi_carpark_name) {
 		this.eoi_carpark_name = eoi_carpark_name;
 	}
+
+	public String getTokenTypeName() {
+		return tokenTypeName;
+	}
+
+	public void setTokenTypeName(String tokenTypeName) {
+		this.tokenTypeName = tokenTypeName;
+	}
+
+	public int getTokenTypeId() {
+		return tokenTypeId;
+	}
+
+	public void setTokenTypeId(int tokenTypeId) {
+		this.tokenTypeId = tokenTypeId;
+	}
+	
+	
 }

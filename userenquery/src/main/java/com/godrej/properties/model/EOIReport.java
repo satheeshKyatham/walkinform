@@ -52,6 +52,11 @@ public class EOIReport implements Serializable{
 	@Column(name="tower_name1") private String tower_name1;
 	@Column(name="tower_name2") private String tower_name2;
 	@Column(name="tower_name3") private String tower_name3;
+	
+	@Column(name="eoi_carpark_name1") private String eoi_carpark_name1;
+	@Column(name="eoi_carpark_name2") private String eoi_carpark_name2;
+	@Column(name="eoi_carpark_name3") private String eoi_carpark_name3;
+	@Column(name="tokentypename") private String tokentypename;
 	@Column(name="date_of_eoi__c") private Date date_of_eoi__c;
 	@Column(name="userid") private int userid;
 	@Column(name="eoi_form_path") private String eoi_form_path;
@@ -260,4 +265,30 @@ public class EOIReport implements Serializable{
 	public void setBroker_account_name(String broker_account_name) {
 		this.broker_account_name = broker_account_name;
 	}
+	public String getEoi_carpark_name1() {
+		return eoi_carpark_name1;
+	}
+	public void setEoi_carpark_name1(String eoi_carpark_name1) {
+		this.eoi_carpark_name1 = eoi_carpark_name1;
+	}
+	public String getEoi_carpark_name2() {
+		return eoi_carpark_name2;
+	}
+	public void setEoi_carpark_name2(String eoi_carpark_name2) {
+		this.eoi_carpark_name2 = eoi_carpark_name2;
+	}
+	public String getEoi_carpark_name3() {
+		return eoi_carpark_name3;
+	}
+	public void setEoi_carpark_name3(String eoi_carpark_name3) {
+		this.eoi_carpark_name3 = eoi_carpark_name3;
+	}
+	public String getTokentypename() {
+		return tokentypename;
+	}
+	public void setTokentypename(String tokentypename) {
+		this.tokentypename = tokentypename;
+	}
+	
+	
 }
