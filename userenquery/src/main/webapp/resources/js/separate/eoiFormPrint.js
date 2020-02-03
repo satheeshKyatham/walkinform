@@ -14,21 +14,24 @@ function getEOIPreferencPrint () {
 	$.post(pageContext+"getEOITabPreferencRecord",{"enqSfid":$('#enquirysfid').val()},function(data){
 		var html = '';
 		var obj =JSON.parse(data);
-		
+		var eoiTokenType="";
 		if(obj!=null){
-			for(i = 0; i< obj.length; i++){    
+			for(i = 0; i< obj.length; i++){
+				eoiTokenType = obj[i].tokenTypeName;
 				html += 	'<tr>'
+								//+ '<td>'+obj[i].tokenTypeName+'</td>'
 								+ '<td>'+obj[i].typology_name+'</td>'
 								+ '<td></td>'
 								+ '<td>'+obj[i].floor_band+'</td>'
-								+ '<td>'+obj[i].tower_name+'</td>' 
-								+ '<td></td>'
+								+ '<td>'+obj[i].tower_name+'</td>'
+								+ '<td>'+obj[i].eoi_carpark_name+'</td>'
 								+ '<td>'+obj[i].description+'</td>' 
 							"</tr>";
 			}
 			
 			html = html.replace(/undefined/g, "");
-		
+			//
+			$("#tokenTypeEOIPrint").text(eoiTokenType);
 			$("#EOIMultipleTablePrint tbody").append(html);
 		}
 	}).done(function(obj){
@@ -115,7 +118,7 @@ function enqAndProjectDtl () {
 	$('.dateOfEOIPrint').text('');
 	$('#enqTypeEOIPrint').text('');
 	$('#sourcingMngrEOIPrint').text('');
-	
+	$('#channelpartnerNameEOIPrint').text('');
 	var contactSFID = '';
 	var enqName = '';
 	var regionName = '';
@@ -130,9 +133,11 @@ function enqAndProjectDtl () {
 			$('#verticalEOIPrint').text(obj[0].verticle__c);
 			$('#projectNameEOIPrint').text(obj[0].marketing_project_name__c);
 			$('.dateOfEOIPrint').text(obj[0].date_of_eoi__c);
-			$('#enqTypeEOIPrint').text(obj[0].propstrength__enquiry_type__c);
+			/*$('#enqTypeEOIPrint').text(obj[0].propstrength__enquiry_type__c);*/
+			$('#enqTypeEOIPrint').text(obj[0].walk_in_source__c);
 			$('#sourcingMngrEOIPrint').text(obj[0].sourcing_manager_name__c);
-  
+			$('#channelpartnerNameEOIPrint').text(obj[0].broker_name);
+			
 			contactSFID = obj[0].propstrength__primary_contact__c;
 			enqName = obj[0].enq_name;
 			regionName = obj[0].region__c;

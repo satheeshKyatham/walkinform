@@ -113,6 +113,12 @@
 			
 			
 			<div class="clearfix"></div>
+			<div class="col-md-12" style="margin-bottom:20px;">
+				<h4>Select EOI Token Type</h4>
+				<select class="form-control tokenTypeEOI requiredField" style="width: 200px"  onchange="tokenTypeChangeEOI(this)">
+					<option value="">Select Token Type</option>
+				</select>
+			</div>
 			<!-- New EOI Dtl -->
 			<div class="col-md-12" style="margin-bottom:20px;">
 				<h4 class="mrgT0">
@@ -262,7 +268,7 @@
 								<input type="file" class="full form-control input-sm panAttachEoi" accept="application/pdf,image/*"/>
 							</td>
 							<td>
-								<input type="file" class="numericField full form-control input-sm receiptAttachEoi" accept="application/pdf,image/*"/>
+								<input type="file" class="numericField full form-control input-sm receiptAttachEoi requiredField" accept="application/pdf,image/*"/>
 							</td>
 							
 							<td>
@@ -692,7 +698,11 @@
 		    </tbody>
 		  </table>
 		
-		
+		<table style="margin-bottom:20px;" class="table table-bordered">
+			<tr>
+				<td colspan='2'><b>EOI Token Type:</b> <span id="tokenTypeEOIPrint"></span></td>
+			</tr>
+		</table>
 		<div  style="padding-bottom:10px;"><b>Preference(s)</b></div>
 		<table id="EOIMultipleTablePrint" style="margin-bottom:20px;" class="table table-bordered">
 		    <thead>
@@ -701,7 +711,7 @@
 					<th>Ticket Size</th>
 					<th>Floor Band</th>
 					<th>Tower</th>
-					<th>Facing</th>
+					<th>Car Park Type</th>
 					<th>Description</th>
 		      	</tr>
 		    </thead>
@@ -747,7 +757,8 @@
 					<td><b>Vertical:</b> <span id="verticalEOIPrint"></span></td>
 				</tr>		
 				<tr>	
-					<th colspan="2">RERA ID (Channel Partner):</th>
+					<!-- <th colspan="2">RERA ID (Channel Partner):</th> -->
+					<td colspan="2"><b>Channel Partner :</b>  <span id="channelpartnerNameEOIPrint"></span></td>
 		      	</tr>
 		      	<tr>	
 					<td colspan="2"><b>Sourcing Manager Name:</b>  <span id="sourcingMngrEOIPrint"></span></td>
