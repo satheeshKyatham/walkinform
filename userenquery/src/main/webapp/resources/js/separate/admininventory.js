@@ -23,17 +23,21 @@ $(document).ready(function(){
 		 		var value = $(this).val();
 				if(value=='all'){
 					 $('.checkboxhide').hide();  
+					 $('#btnEOIHOldSave').hide();
 					$("#btnholdsave").hide();
 					$("#btnholdsave2").hide();
 					$("#btnreleasesave").hide();
 				}else if(value=='t'){
 					$('.checkboxhide').show();
 					$("#btnholdsave").hide();
+					$('#btnEOIHOldSave').hide();
 					$("#btnholdsave2").hide();
+					$("#btnEOIHOldSave").hide();
 					$("#btnreleasesave").show();
 					inventoryLoad ();
 				}else if(value=='f'){
 					$('.checkboxhide').show();
+					$('#btnEOIHOldSave').show();
 					$("#btnholdsave").show();
 					$("#btnholdsave2").show();
 					$("#btnreleasesave").hide();
@@ -104,19 +108,31 @@ function holdBlockResion (source) {
 	$('#holdBlockReasonInput').val('');
 	
 	if (source == "tempBtn") {
-		$('#enqsfidInput').show();
-		
+		$('#enqsfidInputField').hide();
+		$('#userListField').show();
 		$('#blockModalBtn').hide();
+		$('#tempEOIModalBtn').hide();
 		$('#tempModalBtn').show();
 		$('#ModalLabelAdmin').text('Reason for Hold');
 		
 		
 	} else if (source == "blockBtn") {
-		$('#enqsfidInput').hide();
+		$('#enqsfidInputField').hide();
 		
 		$('#tempModalBtn').hide();
+		$('#tempEOIModalBtn').hide();
 		$('#blockModalBtn').show();
 		$('#ModalLabelAdmin').text('Reason for Block');
+	} else if (source == "eoiHoldBtn") {
+		$('#ModalLabelAdmin').text('Reason for EOI Hold');
+		$('#userListField').hide();
+		$('#enqsfidInputField').show();
+
+		$('#blockModalBtn').hide();
+		$('#tempModalBtn').hide();
+		$('#tempEOIModalBtn').show();
+		
+		
 	}
 }
 
@@ -202,12 +218,50 @@ function SaveForHold(msg) {
 		$("#holdBlockInputInfo").text("");
 	}
 	
-	if($("#userListInventory").val().trim()==''){
-		$("#holdBlockInputInfo").text("Select user");
-		return false;
-	} else {
-		$("#holdBlockInputInfo").text("");
+	var holdBlockBehalfOfNameVal = '';
+	var holdBlockBehalfOfIDVal = '';
+	var enqSFIDval = '';
+	
+	if (msg == 'eoi_block') {
+		///msg = 'temp';
+		
+		//holdBlockBehalfOfNameVal = $('#userListInventory option:selected').text();
+		//holdBlockBehalfOfIDVal = $("#userListInventory").val();
+		
+		holdBlockBehalfOfNameVal = '';
+		holdBlockBehalfOfIDVal = $("#userid").val();
+		
+		
+		if($("#enqsfidInput").val().trim() != ''){
+			enqSFIDval = $("#enqsfidInput").val();
+			
+			$("#holdBlockInputInfo").text("");
+		} else {
+			$("#holdBlockInputInfo").text("Select ENQ Name");
+			return false;
+		}
+		
+	} else if (msg == 'temp' || msg == 'block') {
+		
+		/*if($("#userListInventory").val().trim()==''){
+			$("#holdBlockInputInfo").text("Select user");
+			return false;
+		} else {
+			$("#holdBlockInputInfo").text("");
+		}*/
+		
+		if($("#userListInventory").val().trim() != ''){
+			holdBlockBehalfOfNameVal = $('#userListInventory option:selected').text();
+			holdBlockBehalfOfIDVal = $("#userListInventory").val();
+			
+			$("#holdBlockInputInfo").text("");
+		} else {
+			$("#holdBlockInputInfo").text("Select user");
+			return false;
+		}
 	}
+	
+	
 	
 	
 	$("#tempModalBtn").attr("disabled", true);
@@ -223,9 +277,9 @@ function SaveForHold(msg) {
 			unitsfid:favorite.join(","),
 			holdmsg:msg,
 			reasonInput : $("#holdBlockReasonInput").val(),
-			holdBlockBehalfOfName : $('#userListInventory option:selected').text(),
-			holdBlockBehalfOfID : $("#userListInventory").val(),
-			enqSFID : $("#enqsfidInput").val(),
+			holdBlockBehalfOfName : holdBlockBehalfOfNameVal,
+			holdBlockBehalfOfID : holdBlockBehalfOfIDVal,
+			enqSFID : enqSFIDval,
 	    },
 	    type: 'POST',
 	    success: function(data) { 

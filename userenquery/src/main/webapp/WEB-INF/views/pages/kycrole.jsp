@@ -107,6 +107,7 @@ if(ses!=null){
 								<th>View/Fill KYC</th>
 								<th>Costsheet</th>
 								<th>Application Form</th>
+								<th>Sum Amount</th>
 							</tr>
 						</thead>
 						<tbody>
