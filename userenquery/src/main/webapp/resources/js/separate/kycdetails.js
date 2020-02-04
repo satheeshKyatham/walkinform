@@ -39,6 +39,13 @@ function getCMKYCDetails()
 			var enquiryid = value.enquiryid==null?'':value.enquiryid;
 			var costsheetPath = value.costsheetPath==null?'':value.costsheetPath;
 			var appFormHtml="<td>";
+			var totalAmt='';
+			if(value.totalamount==null)
+				{
+				totalAmt="";
+				}
+			else
+				totalAmt=value.totalamount;
 			if(value.kycapproval_status==='Y'){
 				appFormHtml = appFormHtml+ 
 				 "<button isrole=Y class='btn btnDefaultBlue btn-default' " +
@@ -62,8 +69,7 @@ function getCMKYCDetails()
 					"name="+costsheetPath
 					+"&amp;from=ofrList\"><i class=\"fa fa-file\"></i></a></td>"
 					+appFormHtml
-					+"<td><a href='' target='_blank'>Amount</a></td>"+
-					
+					+"<td><a type='button' data-toggle='modal' data-target='#paymentDetails_KYC' onclick='getKYCPaymentDetails(this,\""+value.offerSfid+"\")'>"+totalAmt+"</a></td>"+//<a href='#' onclick='getKYCPaymentDetails(this)' target='_blank'>Amount</a>
 					+"</tr>");
 			$("#KYC_Admin_Details tbody").append(val);
 			i = i+1
@@ -92,4 +98,43 @@ function getKYCApprovalView()
 	var frameElement = document.getElementById("kyc_approval_iframe");
 //	frameElement.src = "http://kyc.gplapps.com:8081/kycform/kycApproval?projectid="+projectid+"&userid=0";
 	frameElement.src = "/kycform/kycApproval?projectid="+projectid+"&userid=0&adminid="+$('#userid').val();
+	}
+
+function getKYCPaymentDetails(e,offersfid)
+{
+	//alert("Open:-"+offersfid);
+	//paymentDetails_table_KYC
+	
+	$("#prePaymentDetails_table_KYC tbody").empty();
+	$.get("getPrePayemntData",{"offersfid":offersfid},function(data){				 
+		var obj =JSON.stringify(data);
+		var obj1 =JSON.parse(obj);
+		
+		var html = '';
+
+		
+		//alert(obj1.length);
+		if(obj1!=null) {
+			for(var i=0;i<obj1.length;i++){
+				html += "<tr>" +
+							" <td>"+obj1[i].propstrength__payment_mode__c+"</td>" +
+							" <td>"+obj1[i].propstrength__bank_name__c+"</td>" +
+							//" <td></td>" +
+							" <td>"+obj1[i].propstrength__cheque_demand_draft_number__c+"</td>" +//propStrength__Cheque_Demand_Draft_No__c
+							" <td>"+obj1[i].propstrength__instrument_date__c+"</td>" +
+							" <td>"+obj1[i].propstrength__amount__c+"</td>" +
+							//" <td></td>" +
+							//" <td></td>" +
+							//" <td></td>" +
+							
+						" </tr>";
+			}
+			
+			html = html.replace(/null/g, " - ");
+			
+			//html = html.replace(/null/g, "");
+			
+			$("#prePaymentDetails_table_KYC tbody").append(html);
+		}
+	});
 	}
