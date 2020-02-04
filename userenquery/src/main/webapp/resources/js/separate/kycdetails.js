@@ -62,6 +62,8 @@ function getCMKYCDetails()
 					"name="+costsheetPath
 					+"&amp;from=ofrList\"><i class=\"fa fa-file\"></i></a></td>"
 					+appFormHtml
+					+"<td><a href='' target='_blank'>Amount</a></td>"+
+					
 					+"</tr>");
 			$("#KYC_Admin_Details tbody").append(val);
 			i = i+1
