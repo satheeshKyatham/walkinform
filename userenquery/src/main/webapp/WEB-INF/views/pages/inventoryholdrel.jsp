@@ -130,6 +130,15 @@
 						Hold 
 					</button> <!-- onclick="SaveForHold('temp')" -->
 				</div>
+				
+				<div class="form-group col-md-3" id="btnEOIHOldSave" style="display:none;" >
+					<label> &nbsp; </label>
+					<button onclick="holdBlockResion('eoiHoldBtn')" style="line-height:0; color: #fff; background-color: #0077b9;" class="form-control btn btn-primary">
+						EOI Hold 
+					</button>
+				</div>
+				
+				
 				<div class="form-group col-md-3" id="btnholdsave2" style="display: none;">
 					<label> &nbsp; </label>
 					<button  onclick="holdBlockResion('blockBtn')" style="line-height:0; color: #fff; background-color: #0077b9;" class="form-control btn btn-primary">
@@ -284,12 +293,29 @@
 	        <h4 class="modal-title" id="ModalLabelAdmin"> </h4>
 	      </div>
 	      <div class="modal-body">
-	      	<div class="form-group col-md-6">
+	      	<div class="form-group col-md-6" id="enqsfidInputField">
 				<label>ENQ SFID</label>
 		      	<input class='form-control' id="enqsfidInput"> 
 			</div>
+			
 			<div class="clearfix"></div>
+			
 			<div class="form-group col-md-6">
+			  <div class="form-group">
+			    <label>ENQ Name</label>
+			    <div class="input-group">
+			    	<div class="input-group-addon">ENQ -</div>
+			      <input type="text" class="form-control" id="">
+			      <div class="input-group-addon">
+						<i class="glyphicon glyphicon-search"></i>
+					</div>
+			    </div>
+			  </div>
+			</div>
+			
+			
+			<div class="clearfix"></div>
+			<div class="form-group col-md-6" id="userListField">
 				<label>User</label>
 				<select class='form-control' id='userListInventory'>
 		      		<option value="">Select</option>
@@ -308,6 +334,7 @@
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-primary btn-default" data-dismiss="modal">Close</button>
 	        <button id="tempModalBtn" onclick="SaveForHold('temp')" 	type="button" style="color: #fff; background-color: #0077b9;" class="btn btn-primary">Hold</button>
+	        <button id="tempEOIModalBtn" onclick="SaveForHold('eoi_block')" 	type="button" style="color: #fff; background-color: #0077b9;" class="btn btn-primary">EOI Hold</button>
 	        <button id="blockModalBtn" onclick="SaveForHold('block')" 	type="button" style="color: #fff; background-color: #0077b9;" class="btn btn-primary">Block</button>
 	      </div>
 	    </div>
