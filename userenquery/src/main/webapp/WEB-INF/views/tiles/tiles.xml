@@ -236,4 +236,7 @@
      <definition name="paymentapproval"  template="/WEB-INF/views/pages/paymentapproval.jsp"> 
        <put-attribute name="title" value="Payment Approval Role" /> 
      </definition>
+     <definition name="chromeerror"  template="/WEB-INF/views/pages/defaultpages/chromeerror.jsp"> 
+       <put-attribute name="title" value="Default Browser" />  
+    </definition>
 </tiles-definitions>

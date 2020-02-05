@@ -161,6 +161,7 @@ function csPymtDataEoi () {
 	
 	$.post(pageContext+"insertEOIPaymentDtl",{"paymentDtlJson" : JSON.stringify(arrayData)},function(data){				 
 	}).done(function(data){
+		//holdUnitForEOI('eoi_block');
 		getEOIPreferencPrint();
 	});
 }
@@ -272,6 +273,7 @@ function getEOITabPaymentRecord () {
 
 $("#paymentDetailsTab").click(function(){
 	getTowerEOI ();
+	getTokenTypeEOI();
 });
 
 function getTowerEOI (){
@@ -293,6 +295,59 @@ function getTowerEOI (){
 	});
 }
 
+/* Added By Satheesh K - 30-01-2020*/
+function getTokenTypeEOI (){
+	/*$.get("getTowerMaster", { "project_code" : $('.projectSfid').val() 
+	
+	}, function(data) {
+		
+		$('.towerListEOI').find("option:gt(0)").remove();	
+		
+		var html="";
+		
+		html=html+'<option value="All">All11</option>';
+		
+		for(var i=0;i<data.length;i++) {
+			html=html+'<option value="'+data[i].tower_code__c+'">'+data[i].tower_name__c+'</option>';
+		}
+		
+		$(".towerListEOI").append(html);
+	});*/
+	$('.tokenTypeEOI').find("option:gt(0)").remove();
+	var html="";
+	if($("#projectsfid").val()=='a1l6F000009D6IMQA0')
+		{
+			html='<option value="F">GOLD</option><option value="F">PLATINUM</option><option value="T">EXPRESS</option>';
+		}
+	else if($("#projectsfid").val()=='a1l6F000008DnniQAC' || $("#projectsfid").val()=='a1l2s00000000pEAAQ' || $("#projectsfid").val()=='a1l6F000008iZJMQA2')
+		{
+			html='<option value="F">REFUNDABLE</option><option value="T">NON-REFUNDABLE</option>';
+		}
+		
+	
+	$(".tokenTypeEOI").append(html);
+}
+/* Added By Satheesh K - 30-01-2020*/
+
+function tokenTypeChangeEOI(e)
+{
+	debugger;
+	//$(e).find("option:selected").text();
+	var val = $(e).val();
+	if(val=='F')
+		{
+		$('.unitListEOI option[value=0]').prop('selected', true);
+		$('.floorListEOI').prop("disabled", false);
+		
+		//$('.unitListEOI').find("option:selected").text('Select Unit');
+		$('.unitListEOI').prop("disabled", true);
+		}
+	else
+		{
+		$('.unitListEOI').prop("disabled", false);
+		}
+	
+}
 //$('#tower').val(),""
 
 function getTypologyEOI (e){
@@ -304,6 +359,7 @@ function getTypologyEOI (e){
 	}, function(data) {
 		
 		$(e).closest('.EOIDtlRow').find('.typologyListEOI').find("option:gt(0)").remove();
+		$(e).closest('.EOIDtlRow').find('.unitListEOI').find("option:gt(0)").remove();
 		
 		var html="";
 		
@@ -318,27 +374,94 @@ function getTypologyEOI (e){
 		$(e).closest('.EOIDtlRow').find('.typologyListEOI').append(html);
 	});
 }
+/*
+function getUnitEOI (e) {
+	 
+	$.post(pageContext+"getInventoryRecords",{"project_code" : $('.projectSfid').val(),"tower_code":$(e).val(),"floor_code":"","unit":""},function(data){				 
+		
+	}).done(function(data){
+		alert (data);
+		
+		var obj =JSON.parse(data);
+		var html="";
+		
+		alert ("obj ::: " + obj)
+		$(e).closest('.EOIDtlRow').find(".unitListEOI").find("option:gt(0)").remove();
+		if(obj!=null){
+			for(var i=0;i<obj.length;i++){
+				html=html+'<option value="'+obj[i].sfid+'">'+obj[i].propstrength__house_unit_no__c+'</option>';
+			}
+		}
+		$(e).closest('.EOIDtlRow').find(".unitListEOI").append(html);
+	});	
+}*/
 
 
+
+function getUnitEOI (e) {
+	$(e).closest('.EOIDtlRow').find(".unitListEOI").find("option:gt(0)").remove();
+	
+	var typologyListEOI = 0;
+	
+	if ($(e).closest('.EOIDtlRow').find(".typologyListEOI").val().trim() != "") {
+		typologyListEOI = $(e).closest('.EOIDtlRow').find(".typologyListEOI").val();
+	}
+	
+	
+	
+	$.get("getInventoryRecords",{"project_code" : $('.projectSfid').val(),  "tower_code":$(e).closest('.EOIDtlRow').find(".towerListEOI").val(),  "unitType":typologyListEOI},function(data){				 
+		var obj =JSON.stringify(data);
+		var obj1 =JSON.parse(obj);
+		var html = '';
+		
+		if(obj1!=null) {
+			for(var i=0;i<obj1.length;i++){
+				if (obj1[i].eoi_unit_locked != true && obj1[i].hold_status != true) {
+					html += '<option value="'+obj1[i].sfid+'">'+obj1[i].propstrength__house_unit_no__c+'</option>';
+				}
+				
+			}
+			
+			$(e).closest('.EOIDtlRow').find(".unitListEOI").append(html);
+			
+			
+		} else {
+			//alert ("Data not found");
+		}
+	}).done(function(data){
+		
+	});	
+}
+
+
+
+
+
+
+
+
+/*
 function getUnitEOI (e){
-	$.get("gethouseunit", {
+	$.get("getInventoryRecords", {
+	
 		"project_code" : $('.projectSfid').val(),
 		"tower_code":$(e).val(),"floor_code":"","unit":""
 	}, function(data) {
-		
+		var obj =JSON.parse(data);
 		$(e).closest('.EOIDtlRow').find(".unitListEOI").find("option:gt(0)").remove();
 		
 		var html="";
 		
-		if(data!=null){
-			for(var i=0;i<data.length;i++) {
-				html=html+'<option value="'+data[i].sfid+'">'+data[i].propstrength__house_unit_no__c+'</option>';
+		if(obj!=null){
+			for(var i=0;i<obj.length;i++) {
+					
+					html=html+'<option value="'+obj[i].sfid+'">'+obj[i].propstrength__house_unit_no__c+'</option>';
 			}
 		}
 		
 		$(e).closest('.EOIDtlRow').find(".unitListEOI").append(html);
 	});
-}
+}*/
 
 
 function getfbandEOI(e) {
@@ -362,6 +485,8 @@ function getfbandEOI(e) {
 		
 	});
 }
+
+
 
 function unitChangeConditionEOI (e){
 	if ($(e).val() != 0) {
@@ -412,13 +537,13 @@ function addMoreEoiRowBtn () {
 				
 				 "<td>"
 					+" <input class='csPtEnqSfidEoi' style='display:none;' /> "
-					+" <select class='full form-control input-sm towerListEOI requiredField'  onchange='getTypologyEOI(this); getUnitEOI(this); getfbandEOI(this);'>"
+					+" <select class='full form-control input-sm towerListEOI requiredField'  onchange='getTypologyEOI(this); getUnitEOI(this); getfbandEOI(this); getCarparkEOIMst(this);'>"
 					+"<option value=''>Select Tower</option>"
 					+"</select>"
 				+"</td>"
 				+"<td>"
-					+"<select class='full form-control input-sm typologyListEOI'>"
-						+"<option value=''>Select Tyology</option>"
+					+"<select class='full form-control input-sm typologyListEOI requiredField' onchange='getUnitEOI(this)'>"
+						+"<option value=''>Select Typology</option>"
 					+"</select>"
 				+"</td>"
 				+"<td>"
@@ -429,6 +554,11 @@ function addMoreEoiRowBtn () {
 				+"<td>"
 					+"<select class='full form-control input-sm floorListEOI'>"
 						+"<option value='0'>Select Floor Band</option>"
+					+"</select>"
+				+"</td>"
+				+"<td>"
+					+"<select class='full form-control input-sm carparkListEOI'>"
+						+"<option data-carparkname='' value='-1'>Select Car Park</option>"
 					+"</select>"
 				+"</td>"
 				+"<td>"
@@ -557,11 +687,21 @@ function insertEOIPreference () {
 	    csPtData.eoi_form_path = eoiFormPath;
 	    
 	    
+	    csPtData.eoi_carpark_name =  $(this).find('.carparkListEOI option:selected').attr("data-carparkname");
+	    csPtData.eoi_carpark_mst_id =  $(this).find('.carparkListEOI option:selected').val();
+	   
+	    
 	    
 	    csPtData.eoi_date_string = currentDate;
 	    
 	    //-------------------------------------------
-	    
+	    /* Added By Satheesh K - 30-01-2020*/
+		var val = $('.tokenTypeEOI').val();
+		if(val=='F')
+			csPtData.tokenTypeId = "1";
+		else
+			csPtData.tokenTypeId = "2";
+	    csPtData.tokenTypeName = $('.tokenTypeEOI').find("option:selected").text();
 	    
 	    
 	    arrayData.push(csPtData);
@@ -618,6 +758,7 @@ function getEOITabPreferencRecord () {
 								+ '<td style="text-align:center;">'+obj[i].typology_name+'</td>' 
 								+ '<td style="text-align:center;">'+obj[i].unit_name+'</td>' 
 								+ '<td style="text-align:center;">'+obj[i].floor_band+'</td>' 
+								+ '<td style="text-align:center;">'+obj[i].eoi_carpark_name+'</td>'
 								+ '<td style="text-align:center;">'+obj[i].description+'</td>' 
 								+ '<td></td>' 
 							"</tr>";
@@ -631,4 +772,90 @@ function getEOITabPreferencRecord () {
 	}).done(function(obj){
 		
 	});	
+}
+
+
+
+function holdUnitForEOI(msg) {
+	var favorite = [];
+	//var unitNameArray = [];
+	
+	$.each($("#EOIMultipleTable .unitListEOI"), function(){ 
+		if ($(this).val() != 0) {
+			favorite.push($(this).val());
+			//unitNameArray.push($(this).find('option:selected').text());
+		}	
+	});
+	
+	if(favorite != '' && favorite != null){
+		/*swal({
+			title: "EOI submitting without any unit preference",
+		    text: "",
+		    //timer: 3000,
+		    type: "warning",
+		});*/
+		//return false;
+		
+		$.ajax({
+		    url: pageContext+'saveAdminUnit',
+		    data: {
+				projectid : $("#projectid").val(),
+				userId : $("#userid").val(),
+				unitsfid:favorite.join(","),
+				holdmsg:msg,
+				reasonInput : "EOI Block",
+				holdBlockBehalfOfName : $('#username').val(),
+				holdBlockBehalfOfID : $("#userid").val(),
+				enqSFID : $('#enquirysfid').val(),
+				//unitNames:unitNameArray.join(","),
+		    },
+		    type: 'POST',
+		    success: function(data) { 
+			    	if (data == 'duplicateRecords') {
+			    		swal({
+	                    	title: "Unit is already block",
+		          			text: "",
+		          			//timer: 8000,
+		          			type: "warning",
+		                });
+			    	} else if (data == 'success')  {
+			    		insertEOIPreference ();
+			    	}
+		    },
+		    error: function(data) {
+		    	swal({
+					title: "There was problem in holding EOI unit at this time. Please try again",
+				    text: "",
+				    //timer: 3000,
+				    type: "warning",
+				});
+		    }
+		});
+	} else {
+		insertEOIPreference ();
+	}
+	
+}
+
+
+
+function getCarparkEOIMst(e) {
+	 
+	$.get("getCarparkEOIMst", {
+		"project_sfid" : $('.projectSfid').val()
+	}, function(data) {
+
+		$(e).closest('.EOIDtlRow').find(".carparkListEOI").find("option:gt(0)").remove();
+		
+		var html="";
+		
+		if(data!=null){
+			for(var i=0;i<data.length;i++){
+				html=html+'<option data-carparkname="'+data[i].name+'"  value="'+data[i].id+'">'+data[i].name+'</option>';
+			}
+		}
+		 
+		$(e).closest('.EOIDtlRow').find(".carparkListEOI").append(html);
+		
+	});
 }

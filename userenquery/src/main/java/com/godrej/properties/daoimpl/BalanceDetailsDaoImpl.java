@@ -2,7 +2,10 @@ package com.godrej.properties.daoimpl;
 
 import java.util.List;
 
-import org.hibernate.Query;
+import javax.persistence.Query;
+
+import org.apache.commons.logging.Log;
+import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +18,7 @@ import com.godrej.properties.model.BalanceDetails;
 @SuppressWarnings("unchecked")
 @Repository("balanceDetailsDao")
 public class BalanceDetailsDaoImpl extends AbstractDao<Integer, BalanceDetails> implements BalanceDetailsDao {
+	private Logger logger = Logger.getLogger(getClass());
 	@Autowired
 	private SessionFactory sessionFactory;
 	
@@ -51,5 +55,18 @@ public class BalanceDetailsDaoImpl extends AbstractDao<Integer, BalanceDetails> 
 			return list;
 		}
 		return null;
+	}
+
+	@Override
+	public void eCRMCancelledOfferInactive() {
+		Session session = this.sessionFactory.getCurrentSession();	
+		try
+		{
+			Query query = session.createNativeQuery(" update salesforce.gpl_cs_balance_details set isactive='I' from (select csbalance.offer_sfid,csbalance.isactive as offerstate,csbalance.gpl_cs_balance_details_id as balanceid from salesforce.gpl_cs_balance_details csbalance inner join salesforce.propstrength__offer__c offer on(csbalance.offer_sfid=offer.sfid) "
+					+ " where csbalance.offer_sfid is not null and csbalance.isactive='A' and offer.PropStrength__Status__c ='Cancelled') a where a.balanceid=gpl_cs_balance_details_id and isactive=a.offerstate");
+			query.executeUpdate();
+		}catch (Exception e) {
+			logger.error("Error eCRMCancelledOfferInactive:-",e);
+		}
 	}
 }

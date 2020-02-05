@@ -1628,7 +1628,8 @@ $("#testSubmit").click(function (){
 
 
 paymentPlanDropdown ();
-
+getSchemeSource(); 
+carparkTypeMstList();
 
 function paymentPlanDropdown (){
        $('#ppDropdown').empty();

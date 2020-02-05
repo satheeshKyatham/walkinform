@@ -75,6 +75,7 @@ function getEOIReportSales () {
 							" <td>"+obj1[i].broker_account_name+"</td>" +
 							" <td>"+obj1[i].closing_manager_name__c+"</td>" +
 							" <td>"+obj1[i].date_of_eoi__c+"</td>" +
+							" <td>"+obj1[i].tokentypename+"</td>" +
 							" <td>"+obj1[i].total_payment_done+"</td>" +
 							" <td>"+obj1[i].total_payment_approved+"</td>" +
 							
@@ -82,6 +83,7 @@ function getEOIReportSales () {
 							" <td>"+obj1[i].floor_band1+"</td>" +
 							" <td>"+obj1[i].tower_name1+"</td>" +
 							" <td>"+obj1[i].unit1+"</td>" +
+							" <td>"+obj1[i].eoi_carpark_name1+"</td>" +
 							" <td>"+obj1[i].preference_des1+"</td>" +
 							
 							
@@ -89,12 +91,14 @@ function getEOIReportSales () {
 							" <td>"+obj1[i].floor_band2+"</td>" +
 							" <td>"+obj1[i].tower_name2+"</td>" +
 							" <td>"+obj1[i].unit2+"</td>" +
+							" <td>"+obj1[i].eoi_carpark_name2+"</td>" +
 							" <td>"+obj1[i].preference_des2+"</td>" +
 							
 							" <td>"+obj1[i].typology_name3+"</td>" +
 							" <td>"+obj1[i].floor_band3+"</td>" +
 							" <td>"+obj1[i].tower_name3+"</td>" +
 							" <td>"+obj1[i].unit3+"</td>" +
+							" <td>"+obj1[i].eoi_carpark_name3+"</td>" +
 							" <td>"+obj1[i].preference_des3+"</td>" +
 							
 						" </tr>";

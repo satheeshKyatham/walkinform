@@ -95,9 +95,7 @@ public class Inventory implements Serializable{
 	@Transient
 	private int holdSec;
 	
-	
 	/* Balram */
-	
 	
 	@Column(name = "hold_status")
 	private String hold_status;
@@ -105,6 +103,11 @@ public class Inventory implements Serializable{
 	@Column(name = "hold_reason")
 	private String hold_reason;
 	
+	@Column(name = "eoi_unit_locked")
+	private boolean eoi_unit_locked;
+	
+	@Column(name = "enq_sfid")
+	private String enq_sfid;	
 	
 	
 	public String isHold_status() {
@@ -330,7 +333,20 @@ public class Inventory implements Serializable{
 	public void setProperty_Facing__c(String property_Facing__c) {
 		Property_Facing__c = property_Facing__c;
 	}
-	
-	
-	
+
+	public boolean isEoi_unit_locked() {
+		return eoi_unit_locked;
+	}
+
+	public void setEoi_unit_locked(boolean eoi_unit_locked) {
+		this.eoi_unit_locked = eoi_unit_locked;
+	}
+
+	public String getEnq_sfid() {
+		return enq_sfid;
+	}
+
+	public void setEnq_sfid(String enq_sfid) {
+		this.enq_sfid = enq_sfid;
+	}
 }

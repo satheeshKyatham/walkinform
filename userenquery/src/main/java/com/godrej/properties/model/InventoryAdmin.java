@@ -88,6 +88,9 @@ public class InventoryAdmin implements Serializable{
 	@Column(name = "hold_reason")
 	private String hold_reason;
 	
+	@Column(name = "eoi_unit_locked")
+	private boolean eoi_unit_locked;
+	
 	
 	
 	public String isHold_status() {
@@ -279,5 +282,12 @@ public class InventoryAdmin implements Serializable{
 	public void setPropStrength__Property_Alloted_Through_Offer__c(String propStrength__Property_Alloted_Through_Offer__c) {
 		PropStrength__Property_Alloted_Through_Offer__c = propStrength__Property_Alloted_Through_Offer__c;
 	}
-	
+
+	public boolean isEoi_unit_locked() {
+		return eoi_unit_locked;
+	}
+
+	public void setEoi_unit_locked(boolean eoi_unit_locked) {
+		this.eoi_unit_locked = eoi_unit_locked;
+	}
 }

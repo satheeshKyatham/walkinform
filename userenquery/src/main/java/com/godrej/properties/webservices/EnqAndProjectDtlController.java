@@ -30,5 +30,4 @@ public class EnqAndProjectDtlController<MultipartFormDataInput> {
 			
 		return gson.toJson(enqAndProjectDtlService.getEnqAndProjectData(enqId));
 	}
-	
 }

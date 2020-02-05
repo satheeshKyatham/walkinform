@@ -9,6 +9,7 @@ $.ajaxSetup({
 var flag = true;
 
 var channelPartnerArray=[];
+var channelPartners = [];
 var enqArray=[];
 $(document).ready(function(){
 	//debugger
@@ -51,7 +52,6 @@ function onPageLoad(){
    
     var projectSfid=$('.projectSfid').val();
     if(projectSfid==""){
-    	$('.projectSfid').val("a1l6F000002dTpoQAE");/*val("a20O0000002agRG");*/
     }
     var countryCode=$('#countryCode').val();
     if(countryCode==""){
@@ -66,7 +66,17 @@ function onPageLoad(){
     }else{
       $("#contactDiv").removeClass('disableCol');
     }  
-   
+    fetchChannelPartners();
+}
+
+function fetchChannelPartners(){
+	var url=$("#contextPath").val();
+	$.get(url+"/getChannelPartners",function(data){//,"cpflag":enq.isReferredByChannelPartnerFlag,"cpname":cpname				 
+	}).done(function(data){
+		channelPartners=data.objectMap.channelPartnerList;
+		console.log(channelPartners);
+	});
+
 }
 function getExistingInfoByMobileAndProject(){
 	var mobileNo=$("#inputMobileNo").val();
@@ -638,14 +648,63 @@ function getChannelPartners(event,el){
 	event.preventDefault();
 	$("#brokerContact").empty();
     $("#channelPartnerName").val("");
-	var text=$(el).val();
-	
-	if(text.length>=3){		
-		fetchAsyncData("getChannelPartnerList",text,"GET","loadChannelPartners");		
-	}else if(text.length==0){
-		channelPartnerArray=[];
-	}
+    var text=$(el).val();
+    if(channelPartners.length>0){
+    	
+    	var partnerList = getMatchingTen(text);
+    	filterChannelPartners(partnerList);
+    }
+    else{
+    
+    	if(text.length>=3){		
+    		fetchAsyncData("getChannelPartnerList",text,"GET","loadChannelPartners");		
+    	}else if(text.length==0){
+    		channelPartnerArray=[];
+    	}
 
+    }
+}
+
+function getMatchingTen(word){
+	if(word ==null){
+		return;
+	}
+	var counter =0;
+	var result = channelPartners.filter(function (partner){
+		var matcher = word.replace(/ /g,"");
+		matcher = matcher.toLowerCase();
+		var partnerName = partner.name== null? "":partner.name.replace(/ /g,"").toLowerCase();
+		var wordLength = matcher.length;
+		var name = partnerName.substring(0,wordLength)
+		/*var matchedName =partnerName.includes(matcher);*/
+		var matchedName = name==matcher;
+		if(matchedName){
+			counter++;
+		}
+		return matchedName && counter <11;
+	});
+	var includedValues =[];
+	if(result ==null || result.length<10){
+		includedValues = channelPartners.filter(function (partner){
+			var matcher = word.replace(/ /g,"");
+			matcher = matcher.toLowerCase();
+			var partnerName = partner.name== null? "":partner.name.replace(/ /g,"").toLowerCase();
+			var matchedName =partnerName.includes(matcher);
+			if(matchedName && !result.includes(partner)){
+				counter++;
+			}
+			return matchedName && counter <11 && !result.includes(partner);
+		});
+	}
+	if(result ==null){
+		result=[];
+	}
+	if(includedValues !=null && includedValues.length>0){
+		result =  result.concat(includedValues);
+	}
+	return result;
+/*	 var uniqueArray = result.filter((item,index) => result.indexOf(item) === index)
+	return uniqueArray;*/
 }
 function loadChannelPartners(resp){
 	var partnerList=resp.objectMap.channelPartnerList;
@@ -655,6 +714,14 @@ function loadChannelPartners(resp){
 	$("#channelPartnerNameSearch").attr('readonly', false);
 
 }
+
+function filterChannelPartners(partnerList){
+	channelPartnerArray=partnerList;
+	refreshChannelPartnerList();
+	$("#channelPartnerLoader").hide();
+	$("#channelPartnerNameSearch").attr('readonly', false);
+}
+
 function refreshChannelPartnerList(){
 	$("#channelPartnerNameSearch").autocomplete({
         source: function (request, response) {

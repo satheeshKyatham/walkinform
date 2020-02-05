@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.godrej.properties.service.EOIPaymentDtlService;
+import com.godrej.properties.service.PrePaymentReceivedService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -18,6 +19,9 @@ public class PaymentServiceController {
 	
 	@Autowired
 	private EOIPaymentDtlService eoiPaymentService;
+	
+	@Autowired
+	private PrePaymentReceivedService prePaymentService;
 	
 	@GetMapping(value = "/getPendingPaymentData", produces = "application/json")
 	public String getPendingPaymentData(@RequestParam("projectid") String projectid)
@@ -46,4 +50,11 @@ public class PaymentServiceController {
 	{
 		eoiPaymentService.paymentEOIApproveReject(paymentEOIDtlJson);	
 	}
+	@GetMapping(value = "/getPrePayemntData", produces = "application/json")
+	public String getPrePayemntData(@RequestParam("offersfid") String offersfid)
+	{
+		Gson gson = new GsonBuilder().disableHtmlEscaping().serializeNulls().create();
+		return gson.toJson(prePaymentService.getPrePaymentDetails(offersfid));	
+	}
+	
 }

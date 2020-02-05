@@ -1,4 +1,26 @@
 
+//navigator.userAgent.indexOf('Chrome') ==-1 ||
+if (navigator.userAgent.indexOf('Chrome') ==-1)//navigator.userAgent.indexOf('CriOS')<0
+{
+	console.log('Chrome Agent',+navigator.userAgent.indexOf('Chrome'));
+	if(navigator.userAgent.indexOf('CriOS')<0)
+		{
+			console.log('CriOS Agent',+navigator.userAgent.indexOf('Chrome'));
+			alert("Please Open D4U application in IOS Chrome Browser...");
+			window.location = "chromeerror"
+		}
+	else if(navigator.userAgent.indexOf('CriOS')>0)
+		{
+			console.log('chrome restrict');
+		}
+	else
+		{
+			console.log('Chrome Else Agent',+navigator.userAgent.indexOf('Chrome'));
+			alert("Please Open D4U application in IOS Chrome Browser...");
+			window.location = "chromeerror"
+		}
+		
+}
 
 function startsession( value,mobileno,token,submitedSates,countryCode){
 	 

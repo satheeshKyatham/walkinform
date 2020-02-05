@@ -12,6 +12,7 @@ $.ajaxSetup({
 });
 var pageContext = $("#contextPath").val()+"/";	
 
+var enqSFIDforHoldUnit = '';
 
 $(document).ready(function(){
     $('[data-toggle="popover"]').popover({
@@ -23,17 +24,21 @@ $(document).ready(function(){
 		 		var value = $(this).val();
 				if(value=='all'){
 					 $('.checkboxhide').hide();  
+					 $('#btnEOIHOldSave').hide();
 					$("#btnholdsave").hide();
 					$("#btnholdsave2").hide();
 					$("#btnreleasesave").hide();
 				}else if(value=='t'){
 					$('.checkboxhide').show();
 					$("#btnholdsave").hide();
+					$('#btnEOIHOldSave').hide();
 					$("#btnholdsave2").hide();
+					$("#btnEOIHOldSave").hide();
 					$("#btnreleasesave").show();
 					inventoryLoad ();
 				}else if(value=='f'){
 					$('.checkboxhide').show();
+					$('#btnEOIHOldSave').show();
 					$("#btnholdsave").show();
 					$("#btnholdsave2").show();
 					$("#btnreleasesave").hide();
@@ -81,6 +86,8 @@ $(document).ready(function(){
 
 
 function holdBlockResion (source) {
+	//$('#enqsfidInput').val('');
+	
 	var favorite = [];
 	$.each($("input[name='unit']:checked"), function(){ 
 		favorite.push($(this).val());
@@ -99,16 +106,39 @@ function holdBlockResion (source) {
 	
 	$('#holdBlockRsionModal').modal('show');
 	
+	$('#enqNameInput').val('');
 	$('#holdBlockReasonInput').val('');
+	enqSFIDforHoldUnit = '';
+	
+	$('#enqDtlTable tbody').empty();
+	$('#enqDtlTable tbody').append("<tr><td colspan='3' style='text-align:center;'>No records found</td></tr>");
 	
 	if (source == "tempBtn") {
+		$('#enqsfidInputField').hide();
+		$('#userListField').show();
 		$('#blockModalBtn').hide();
+		$('#tempEOIModalBtn').hide();
 		$('#tempModalBtn').show();
 		$('#ModalLabelAdmin').text('Reason for Hold');
+		
+		
 	} else if (source == "blockBtn") {
+		$('#enqsfidInputField').hide();
+		
 		$('#tempModalBtn').hide();
+		$('#tempEOIModalBtn').hide();
 		$('#blockModalBtn').show();
 		$('#ModalLabelAdmin').text('Reason for Block');
+	} else if (source == "eoiHoldBtn") {
+		$('#ModalLabelAdmin').text('Reason for EOI Hold');
+		$('#userListField').hide();
+		$('#enqsfidInputField').show();
+
+		$('#blockModalBtn').hide();
+		$('#tempModalBtn').hide();
+		$('#tempEOIModalBtn').show();
+		
+		
 	}
 }
 
@@ -133,8 +163,11 @@ function getInventoryRec () {
 
 function SaveForRelease(){
 	 var favorite = [];
+	 var unitNameArray = [];
+	 
      $.each($("input[name='unit']:checked"), function(){ 
          favorite.push($(this).val());
+         unitNameArray.push($(this).next().text());
      });
 
      if(favorite=='' || favorite==null){
@@ -154,7 +187,8 @@ function SaveForRelease(){
  	    url: pageContext+'updateAdminUnit',
  	    data: {projectid : $("#projectid").val(),
  	    	userId : $("#userid").val(),
- 	    	unitsfid:favorite.join(",")
+ 	    	unitsfid:favorite.join(","),
+ 	    	unitNames:unitNameArray.join(",")
  	      	  //projectId:$("#projectselection option:selected").val()
  	    },
  	    type: 'POST',
@@ -190,12 +224,59 @@ function SaveForHold(msg) {
 		$("#holdBlockInputInfo").text("");
 	}
 	
-	if($("#userListInventory").val().trim()==''){
-		$("#holdBlockInputInfo").text("Select user");
-		return false;
-	} else {
-		$("#holdBlockInputInfo").text("");
+	var holdBlockBehalfOfNameVal = '';
+	var holdBlockBehalfOfIDVal = '';
+	var enqSFIDval = '';
+	
+	if (msg == 'eoi_block') {
+		///msg = 'temp';
+		
+		//holdBlockBehalfOfNameVal = $('#userListInventory option:selected').text();
+		//holdBlockBehalfOfIDVal = $("#userListInventory").val();
+		
+		holdBlockBehalfOfNameVal = '';
+		holdBlockBehalfOfIDVal = $("#userid").val();
+		
+		
+		if(enqSFIDforHoldUnit != '' && enqSFIDforHoldUnit != undefined){
+			enqSFIDval = enqSFIDforHoldUnit;
+			
+			$("#holdBlockInputInfo").text("");
+		} else {
+			$("#holdBlockInputInfo").text("Select ENQ Name");
+			return false;
+		}
+		
+		/*if($("#enqsfidInput").val().trim() != ''){
+			enqSFIDval = $("#enqsfidInput").val();
+			
+			$("#holdBlockInputInfo").text("");
+		} else {
+			$("#holdBlockInputInfo").text("Select ENQ Name");
+			return false;
+		}*/
+		
+	} else if (msg == 'temp' || msg == 'block') {
+		
+		/*if($("#userListInventory").val().trim()==''){
+			$("#holdBlockInputInfo").text("Select user");
+			return false;
+		} else {
+			$("#holdBlockInputInfo").text("");
+		}*/
+		
+		if($("#userListInventory").val().trim() != ''){
+			holdBlockBehalfOfNameVal = $('#userListInventory option:selected').text();
+			holdBlockBehalfOfIDVal = $("#userListInventory").val();
+			
+			$("#holdBlockInputInfo").text("");
+		} else {
+			$("#holdBlockInputInfo").text("Select user");
+			return false;
+		}
 	}
+	
+	
 	
 	
 	$("#tempModalBtn").attr("disabled", true);
@@ -211,22 +292,39 @@ function SaveForHold(msg) {
 			unitsfid:favorite.join(","),
 			holdmsg:msg,
 			reasonInput : $("#holdBlockReasonInput").val(),
-			holdBlockBehalfOfName : $('#userListInventory option:selected').text(),
-			holdBlockBehalfOfID : $("#userListInventory").val(),
+			holdBlockBehalfOfName : holdBlockBehalfOfNameVal,
+			holdBlockBehalfOfID : holdBlockBehalfOfIDVal,
+			enqSFID : enqSFIDval,
 	    },
 	    type: 'POST',
 	    success: function(data) { 
-	    		$('#holdBlockRsionModal').modal('hide');
-	    		$("#tempModalBtn").attr("disabled", false);
-	    		$("#blockModalBtn").attr("disabled", false);
-		    	swal({
-					title: "Successfully Submitted",
-				    text: "",
-				    timer: 3000,
-				    type: "success",
-				});
-	    		inventoryLoad ();
-	    		$('#inventoryLoader').hide();
+		    		
+			    	if (data == 'duplicateRecords') {
+			    		swal({
+		                	title: "Unit is already block",
+		          			text: "",
+		          			//timer: 8000,
+		          			type: "warning",
+		                });
+			    		
+			    		inventoryLoad ();
+			    		$('#inventoryLoader').hide();
+			    	} else if (data == 'success')  {
+			    		$('#holdBlockRsionModal').modal('hide');
+			    		$("#tempModalBtn").attr("disabled", false);
+			    		$("#blockModalBtn").attr("disabled", false);
+				    	swal({
+							title: "Successfully Submitted",
+						    text: "",
+						    timer: 3000,
+						    type: "success",
+						});
+			    		inventoryLoad ();
+			    		$('#inventoryLoader').hide();
+			    	}
+	    	
+	    	
+	    			
 	    },
 	    error: function(data) {
 	    	$('#holdBlockRsionModal').modal('hide');
@@ -330,17 +428,22 @@ function inventoryLoad (){
 					else if (obj1[j].hold_reason==='temp') {
 						unitStatus="unitTemp";
 					}
-					
 					else
 						unitStatus = "unitSold";
 				} else if (obj1[j].propstrength__allotted__c == 't'){
 					dropdown = "";
 					caret = "";
 					unitStatus = "";
-					if(obj1[j].hold_reason==='block')
+					if(obj1[j].hold_reason==='block'){
 						unitStatus="unitBlock";
-					else if(obj1[j].hold_reason==='temp')
-						unitStatus="unitTempAdmin";
+					}
+					else if(obj1[j].hold_reason==='temp'){
+						if (obj1[j].eoi_unit_locked == true) {
+							unitStatus="unitEOIBlockAdmin";
+						}else {
+							unitStatus="unitTempAdmin";
+						}
+					}
 					else
 						unitStatus = "unitSold";
 					var value = $("#searchadmintype").val();
@@ -594,4 +697,48 @@ function projectWiseUserList () {
 	}).done(function() {
 		 
 	});
+}
+
+
+
+
+
+function enqDtlForAdminHold () {
+	$("#enqDtlTable tbody").empty();
+	
+	var enqName = "ENQ - " + $('#enqNameInput').val().trim();
+	
+	
+	$.post(pageContext+"getEnqForAdminInventoryHold",{"enqName":enqName, "projectSFID":$('#projectid').val()},function(data){                      
+		 var obj =JSON.parse(data);
+		 var html = '';
+		 enqSFIDforHoldUnit = '';
+			
+         if (obj != null) {
+        	 for(var i=0;i<obj.length;i++){
+        		
+        		 
+        		 html += "<tr>" +
+        		 	" <td>"+obj[i].enq_name+"</td>" +
+					" <td>"+obj[i].mobile__c+"</td>" +
+					" <td>"+obj[i].name+"</td>" +
+				" </tr>";
+        		 enqSFIDforHoldUnit = obj[i].enq_sfid;
+        		 /*obj[i].propstrength__primary_contact__c;
+     			obj[i].enq_name;
+     			obj[i].region__c;
+     			obj[i].marketing_project_name__c;
+     			obj[i].projectNameWithoutCity;*/
+        	 }
+        	 
+        	 $("#enqDtlTable tbody").append(html);
+         } else {
+        	 $("#enqDtlTable tbody").append("<tr><td colspan='3'>No records found</td></tr>");
+         }
+         
+	}).done(function(data){
+          
+	}).fail(function(xhr, status, error) {
+    	 
+    });
 }
