@@ -71,6 +71,7 @@ function getKYCCMDetails()
 	//var val="";
 	$.getJSON(urlPP, function (data) {
 		$.each(data, function (index, value) {
+			console.log("property name",value);
 			var kycStatus ="";
 			if(value.kycapproval_status=="Y")
 				kycStatus="KYC Approved";
@@ -81,6 +82,7 @@ function getKYCCMDetails()
 			else
 				kycStatus="KYC link sent to customer";
 			var offerSfid = value.offerSfid==null?'':value.offerSfid;
+			var propertyName = value==null?'':value.property_name1__c==null?'':value.property_name1__c;
 			var offerName = value.offerName==null?'':value.offerName;
 			var enquiryid = value.enquiryid==null?'':value.enquiryid;
 			var costsheetPath = value.costsheetPath==null?'':value.costsheetPath;
@@ -95,24 +97,14 @@ function getKYCCMDetails()
 				}
 			appFormHtml = appFormHtml+"</td>";
 			var val = $("<tr data-offerSfid='" +value.offerSfid+ " '>" +
-					"<td>"+value.enquiryid+"</td><td>"
-					+value.application_name
-					+"</td><td>"
-					+value.phone_number
-					+"</td><td>"
-					+kycStatus
-					+"</td>"
-					+"<td>"+offerName
-					+"</td><td><a href="
-					+value.kyclink
-					+"&isrole=Y target='_blank'>Link</a></td>"
-					+"</td><td><a target=\"_blank\" " +
-					"href=\"/walkinform/Costsheet?" +
-					"name="+costsheetPath
-					+"&amp;from=ofrList\"><i class=\"fa fa-file\"></i></a></td>"
-					+appFormHtml
-						+"</tr>"
-					);
+					"<td>"+value.enquiryid+"</td>" +
+					"<td>"+value.application_name +"</td> " +
+					"<td>"+value.phone_number+"</td>" +
+					"<td>"+kycStatus+"</td>"+
+					"<td>"+offerName+"</td>" +
+					"<td>"+propertyName+"</td>" +
+					"<td><a href="+value.kyclink+"&isrole=Y target='_blank'>Link</a></td></td>"+
+					"<td><a target=\"_blank\" " +"href=\"/walkinform/Costsheet?" +"name="+costsheetPath+"&amp;from=ofrList\"><i class=\"fa fa-file\"></i></a></td>"+appFormHtml+"</tr>");
 			/*
 			 * <button class="btn btnDefaultBlue btn-default" 
 			 * onclick="getofferApplicantDetails(this, &quot;a1X2s0000004GTcEAM&quot;, &quot;a1u2s0000000PcsAAE&quot;,  &quot;0032s000001axeGAAQ&quot;,  &quot;OFFER-2019-11-0020597&quot;,  &quot;ENQ - 04918431&quot;, &quot;a1s6F00000CHzLDQA1&quot;, &quot;0&quot;, &quot;offer&quot;)">

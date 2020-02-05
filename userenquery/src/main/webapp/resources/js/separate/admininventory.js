@@ -704,13 +704,15 @@ function projectWiseUserList () {
 
 
 function enqDtlForAdminHold () {
-	$("#enqDtlTable tbody").empty();
+	//$("#enqDtlTable tbody").empty();
 	
 	var enqName = "ENQ - " + $('#enqNameInput').val().trim();
 	
 	
 	$.post(pageContext+"getEnqForAdminInventoryHold",{"enqName":enqName, "projectSFID":$('#projectid').val()},function(data){                      
-		 var obj =JSON.parse(data);
+		$("#enqDtlTable tbody").empty();
+		
+		var obj =JSON.parse(data);
 		 var html = '';
 		 enqSFIDforHoldUnit = '';
 			

@@ -72,7 +72,6 @@ public class InventoryAdmin implements Serializable{
 	@Column(name = "statusai")
 	private String holdIntervalstatusAI;
 	
-	
 	@Column(name = "created_at")
 	private Timestamp created_at;
 	

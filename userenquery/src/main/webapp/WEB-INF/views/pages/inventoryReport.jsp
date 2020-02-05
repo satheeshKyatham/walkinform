@@ -45,6 +45,7 @@
 				<ul>
 					<li><span class="holdforDiscussion"></span> Hold </li>
 					<li><span class="unitBlockAdmin"></span> Block</li>
+					<li><span class="unitEOIBlockAdmin"></span> EOI Hold</li>
 				</ul>
 				<div class="clearfix"></div>
 			</div>

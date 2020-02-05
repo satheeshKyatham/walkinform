@@ -175,7 +175,10 @@
 					  <span class="checkmark soldOut"></span>
 					</label>
 					
-			
+					<label class="containerCheckbox">Admin Hold
+					  <input>
+					  <span class="checkmark holdforDiscussion"></span>
+					</label>
 			
 			
 			

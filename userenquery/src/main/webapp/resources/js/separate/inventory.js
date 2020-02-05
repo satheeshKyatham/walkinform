@@ -164,12 +164,18 @@ function inventoryLoad (callFrom){
 					unitStatus = "";
 					if(obj1[j].hold_reason==='block')
 						unitStatus="unitBlock";
-					else if (obj1[j].hold_reason==='temp') {
+					else if (obj1[j].hold_reason==='temp' && obj1[j].propstrength__property_on_hold_for_reallocation__c != 't' && obj1[j].sfdc_propstrength__allotted__c != true  && obj1[j].PropStrength__Property_Alloted_Through_Offer__c != 't') {
 						if (obj1[j].eoi_unit_locked == true && obj1[j].enq_sfid == $('#enquirysfid').val()) {
 							unitStatus="unitEOIBlockAdmin";
 							dropdown = "<ul class='dropdown-menu'>  <li><a onclick='viewCostsheet(this, "+unitSfid+", "+houseNo+", "+floorNo+", "+towerCode+")'>View Costsheet</a></li> </ul>";
 							caret = "caret";
-						}else {
+						
+						//add condition not equal to tru for alloted, offer through alloted and hold for reallocation
+						} else if (obj1[j].hold_reason==='temp' && obj1[j].hold_behalf_userid == $('#userid').val()) {
+							unitStatus="unitTempAdmin";
+							dropdown = "<ul class='dropdown-menu'>  <li><a onclick='viewCostsheet(this, "+unitSfid+", "+houseNo+", "+floorNo+", "+towerCode+")'>View Costsheet</a></li> </ul>";
+							caret = "caret";
+						} else {
 							unitStatus="unitTemp";
 						}
 					}
