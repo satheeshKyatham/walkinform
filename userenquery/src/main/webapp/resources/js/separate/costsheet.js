@@ -285,9 +285,10 @@ function loadData () {
                            
                            //$('#addlBspPer').val(value.bsp_per);                
                            
+                           var bspPerAddition = (value.BasicSalePricepersquarefeet*value.bsp_per/100);
                            
                            $('.a3_bsp').text(parseFloat(value.BasicSalePricepersquarefeet));
-                           $('.a3').text(parseFloat(parseFloat(value.BasicSalePricepersquarefeet)+parseFloat(value.bsp_amount)-(otherScheme)).toFixed(2));
+                           $('.a3').text(parseFloat(parseFloat(value.BasicSalePricepersquarefeet)+parseFloat(value.bsp_amount)+parseFloat(bspPerAddition)-(otherScheme)).toFixed(2));
                            
                            $('#discountPsqf').val(otherScheme);
                            

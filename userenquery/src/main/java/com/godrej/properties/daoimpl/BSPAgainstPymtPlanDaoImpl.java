@@ -52,4 +52,16 @@ public class BSPAgainstPymtPlanDaoImpl extends AbstractDao<Integer, BSPAgainstPy
 	}
 	
 	
+	
+	@Override
+	public List<BSPAgainstPymtPlan> getPaymentPlanPerBSP(String paymentPlanID) {
+		Session session = this.sessionFactory.getCurrentSession();
+		List<BSPAgainstPymtPlan> list  =session.createQuery("  FROM  BSPAgainstPymtPlan  where pymt_plan_id='"+paymentPlanID+"'" ).list();
+		if(list.size()>0)
+		{
+			return list;
+		}
+		return null;
+	}
+	
 }

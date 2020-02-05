@@ -70,7 +70,7 @@ public class PaymentPlanJson {
 	private String  bank__c;
 	
 	private String  property_facing__c;
-	
+	private double bsp_per;
 	
 	
 	public String getBalcony_area_sq_ft__c() {
@@ -439,5 +439,11 @@ public class PaymentPlanJson {
 	}
 	public void setProperty_facing__c(String property_facing__c) {
 		this.property_facing__c = property_facing__c;
+	}
+	public double getBsp_per() {
+		return bsp_per;
+	}
+	public void setBsp_per(double bsp_per) {
+		this.bsp_per = bsp_per;
 	}
 }

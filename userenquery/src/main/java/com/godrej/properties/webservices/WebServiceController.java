@@ -2001,9 +2001,14 @@ public class WebServiceController<MultipartFormDataInput> {
 		List<PaymentPlan> plans=paymentPlanService.getProjectPlan(project_code,unit,towerCode,pymtPlanSfid);
 		List<PaymentPlanJson> paymentPlanJsons = new ArrayList<>();
 		//Need to Change Here
-		int bspAmount=0;
+		double bspAmount=0;
+		
+		double bspPerVal=0;
+		
 		if(plans.size()>0)
-			bspAmount =bSPAgainstPymtPlanService.getPaymentPlanBSPList(project_code,unit,towerCode,pymtPlanSfid,plans.get(0).getPropstrength__unit_type__c());	
+			bspAmount =bSPAgainstPymtPlanService.getPaymentPlanBSPList(project_code,unit,towerCode,pymtPlanSfid,plans.get(0).getPropstrength__unit_type__c());
+			bspPerVal =bSPAgainstPymtPlanService.getPaymentPlanPerBSP(project_code,unit,towerCode,pymtPlanSfid,plans.get(0).getPropstrength__unit_type__c()); 
+		
 		 if(plans.size()>0)	{
 			 PaymentPlan paym =plans.get(0);
 			 PaymentPlanJson paymentPlanJson= new PaymentPlanJson();
@@ -2036,6 +2041,9 @@ public class WebServiceController<MultipartFormDataInput> {
 			 
 //			 paymentPlanJson.setBsp_amount(paym.getBsp_amount());
 			 paymentPlanJson.setBsp_amount(String.valueOf(bspAmount));//Added By Satheesh
+			 
+			 paymentPlanJson.setBsp_per(bspPerVal);
+			 
 			 paymentPlanJson.setAppurtenant_area_sq_mt__c(paym.getAppurtenant_area_sq_mt__c());
 			 
 			 
