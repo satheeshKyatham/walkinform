@@ -9,25 +9,25 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.godrej.properties.service.EnqAndProjectDtlService;
+import com.godrej.properties.service.EnqDtlProjectWiseService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 @CrossOrigin(origins="*")
 @RestController
-public class EnqAndProjectDtlController<MultipartFormDataInput> {
+public class EnqDtlProjectWiseController<MultipartFormDataInput> {
 	
 	@Autowired
 	ServletContext context;
 	
 	@Autowired
-	private EnqAndProjectDtlService enqAndProjectDtlService;
+	private EnqDtlProjectWiseService enqDtlProjectWiseService;
 	
-	@RequestMapping(value = "/getEnqAndProjectDtl", method = RequestMethod.POST)
-	public String getEnqAndProjectDtl(@RequestParam("enqId") String enqId) {
+	@RequestMapping(value = "/getEnqForAdminInventoryHold", method = RequestMethod.POST)
+	public String getEnqDtl(@RequestParam("enqName") String enqName, @RequestParam("projectSFID") String projectSFID) {
 		GsonBuilder gsonBuilder = new GsonBuilder();
-		Gson gson = gsonBuilder.create();
+		Gson gson = gsonBuilder.create();	
 			
-		return gson.toJson(enqAndProjectDtlService.getEnqAndProjectData(enqId));
+		return gson.toJson(enqDtlProjectWiseService.getEnqForAdminUnitHold(enqName, projectSFID));
 	}
 }

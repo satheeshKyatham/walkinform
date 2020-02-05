@@ -293,25 +293,46 @@
 	        <h4 class="modal-title" id="ModalLabelAdmin"> </h4>
 	      </div>
 	      <div class="modal-body">
-	      	<div class="form-group col-md-6" id="enqsfidInputField">
+	      	<!-- <div class="form-group col-md-6" id="enqsfidInputField">
 				<label>ENQ SFID</label>
 		      	<input class='form-control' id="enqsfidInput"> 
-			</div>
+			</div> -->
 			
 			<div class="clearfix"></div>
 			
-			<div class="form-group col-md-6">
-			  <div class="form-group">
-			    <label>ENQ Name</label>
-			    <div class="input-group">
-			    	<div class="input-group-addon">ENQ -</div>
-			      <input type="text" class="form-control" id="">
-			      <div class="input-group-addon">
-						<i class="glyphicon glyphicon-search"></i>
-					</div>
-			    </div>
-			  </div>
+			
+			<div id="enqsfidInputField">
+				<div class="form-group col-md-6">
+				  <div class="form-group">
+				    <label>ENQ Name</label>
+				    <div class="input-group">
+				    	<div class="input-group-addon">ENQ -</div>
+				      	<input type="text" class="form-control" id="enqNameInput">
+				      	<div class="input-group-addon" onclick="enqDtlForAdminHold();">
+							<i class="glyphicon glyphicon-search"></i>
+						</div>
+				    </div>
+				  </div>
+				</div>
+				<div class="clearfix"></div>
+				<div class="col-md-12">
+					<table class="table table-bordered" id="enqDtlTable">
+						<thead>
+							<tr>
+								<th>ENQ Name</th>
+								<th>Mobile</th>
+								<th>Name</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr><td colspan='3' style="text-align:center;">No records found</td></tr>
+						</tbody>
+					</table>
+					<div class="clearfix"></div>
+				</div>
+				<div class="clearfix"></div>
 			</div>
+			
 			
 			
 			<div class="clearfix"></div>

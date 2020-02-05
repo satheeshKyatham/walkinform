@@ -107,7 +107,7 @@ if(ses!=null){
 								<th>View/Fill KYC</th>
 								<th>Costsheet</th>
 								<th>Application Form</th>
-								<th>Sum Amount</th>
+								<th>Total Amount</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -135,6 +135,81 @@ if(ses!=null){
 	  
     	 
      	<div class="clearfix"></div>
+     	
+     	<!-- Model -->
+	<div class="modal fade" id="paymentDetails_KYC" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	  <div class="modal-dialog" role="document" style="width: 100%;">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title" id="ModalLabelAdmin">PrePayment Details</h4>
+	      </div>
+	      <div class="modal-body">
+	      <div class="col-md-12" style="margin-bottom:50px;">
+				<table class="table table-bordered" id="prePaymentDetails_table_KYC">
+						<thead>
+							<tr>
+								<th>Payment Type </th>
+								<th>Bank Name</th>
+								<!-- <th>Branch</th> -->
+								<th>Transaction ID</th>
+								<th>Transaction</br>Date</th>
+								<th>Transaction Amount</th>
+								<!-- <th>PAN Attachment</th>
+								<th>Receipt/</br>Cheque Attachment</th>
+								<th>Description</th> -->
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+				<div class="clearfix"></div>
+			</div>
+	      	<!-- <div class="form-group col-md-6" id="enqsfidInputField">
+				<label>ENQ SFID</label>
+		      	<input class='form-control' id="enqsfidInput"> 
+			</div>
+			
+			<div class="clearfix"></div>
+			
+			<div class="form-group col-md-6">
+			  <div class="form-group">
+			    <label>ENQ Name</label>
+			    <div class="input-group">
+			    	<div class="input-group-addon">ENQ -</div>
+			      <input type="text" class="form-control" id="">
+			      <div class="input-group-addon">
+						<i class="glyphicon glyphicon-search"></i>
+					</div>
+			    </div>
+			  </div>
+			</div>
+			
+			
+			<div class="clearfix"></div>
+			<div class="form-group col-md-6" id="userListField">
+				<label>User</label>
+				<select class='form-control' id='userListInventory'>
+		      		<option value="">Select</option>
+		      	</select>
+			</div>
+			<div class="clearfix"></div>
+			<div class="form-group col-md-12">
+				<label>Reason</label>
+				<textarea class='form-control' id="holdBlockReasonInput" rows="4" cols="50"></textarea>
+			</div>
+	        
+	        <small id="holdBlockInputInfo" style="color:#d10000;"></small> 
+	        <div class="clearfix"></div>
+	      </div>-->
+	      <div class="clearfix"></div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-primary btn-default" data-dismiss="modal">Close</button>
+	        <!-- <button id="tempModalBtn" onclick="SaveForHold('temp')" 	type="button" style="color: #fff; background-color: #0077b9;" class="btn btn-primary">Hold</button> -->
+	      </div>
+	    </div>
+	  </div>
+	</div>
 	<script src="<c:url value='/resources/js/salesdesk.js?v=18.05'/>"></script>
 	<script src="<c:url value='/resources/js/separate/offer.js?v=18.05'/>"></script>
 	

@@ -41,6 +41,9 @@ public class EOIDataVW implements Serializable{
 	private String enquirySfid;
 	@Column(name="costsheet_path")	
 	private String costsheetPath;
+	
+	@Column(name="totalamount")	
+	private String totalamount;
 	public String getUserdocid() {
 		return userdocid;
 	}
@@ -132,4 +135,11 @@ public class EOIDataVW implements Serializable{
 	public void setCostsheetPath(String costsheetPath) {
 		this.costsheetPath = costsheetPath;
 	}
+	public String getTotalamount() {
+		return totalamount;
+	}
+	public void setTotalamount(String totalamount) {
+		this.totalamount = totalamount;
+	}
+	
 }
