@@ -308,40 +308,50 @@ function submitWithFile(formId,action, callback){
 		       			//window[callback](data);
 		        		if (action == 'savePaymentInfo') {
 		        			
-		        			var sizeValidate = 0;
-		        			
-		        			$("#csPtColEoi .csPtDataRowEoi").each(function () {
-		        				
-		        				//alert("PAN ::: " + $(this).find('.panAttachEoi')[0].files[0].size);
-		        				
-		        				//alert("Receipt ::: " + $(this).find('.receiptAttachEoi')[0].files[0].size);
-		        				if ($(this).find('.panAttachEoi').get(0).files.length != 0){
-		        				if ($(this).find('.panAttachEoi')[0].files[0].size < 5242880 && $(this).find('.receiptAttachEoi')[0].files[0].size < 5242880 ) {
-		        					
-		        				} else {
-		        					sizeValidate++;
-		        				}
-		        				}
-		        			});
-		        			
-		        			if (sizeValidate < 1) {
-		        				//Move csPymtDataEoi () in insertEOIPreference()
-		        				//csPymtDataEoi ();
-				        		//insertEOIPreference();
-		        				
-		        				holdUnitForEOI('eoi_block');
-				        		
+		        			if ($('#enquiry_name').val().trim() != '' ) {
+		        				var sizeValidate = 0;
+			        			
+			        			$("#csPtColEoi .csPtDataRowEoi").each(function () {
+			        				
+			        				//alert("PAN ::: " + $(this).find('.panAttachEoi')[0].files[0].size);
+			        				
+			        				//alert("Receipt ::: " + $(this).find('.receiptAttachEoi')[0].files[0].size);
+			        				if ($(this).find('.panAttachEoi').get(0).files.length != 0){
+			        				if ($(this).find('.panAttachEoi')[0].files[0].size < 5242880 && $(this).find('.receiptAttachEoi')[0].files[0].size < 5242880 ) {
+			        					
+			        				} else {
+			        					sizeValidate++;
+			        				}
+			        				}
+			        			});
+			        			
+			        			if (sizeValidate < 1) {
+			        				//Move csPymtDataEoi () in insertEOIPreference()
+			        				//csPymtDataEoi ();
+					        		//insertEOIPreference();
+			        				
+			        				holdUnitForEOI('eoi_block');
+					        		
+			        			} else {
+			        				swal({
+			        					title: "File size must be less than 5 MB",
+			        				    text: "",
+			        				   // timer: 3000,
+			        				    type: "error",
+			        				});
+			        				//alert ("File size must be less than 5 MB");
+			        			}
+			        			
+			        			window[callback](data);
 		        			} else {
 		        				swal({
-		        					title: "File size must be less than 5 MB",
-		        				    text: "",
-		        				   // timer: 3000,
-		        				    type: "error",
-		        				});
-		        				//alert ("File size must be less than 5 MB");
+		        	   				title: "Enquiry not synced at this time. Please try again after few minutes",
+		        	   				text: "",
+		        	   				type: "warning",
+		        	   				allowOutsideClick: true,
+		        	   				showConfirmButton: true
+		        	   			});
 		        			}
-		        			
-		        			window[callback](data);
 			        	}
 		        	}catch(e){
 		        		console.log(e);
