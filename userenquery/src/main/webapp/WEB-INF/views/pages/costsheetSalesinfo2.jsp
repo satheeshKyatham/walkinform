@@ -1325,7 +1325,7 @@
 					<div class="clearfix"></div>
 					
 					<div class="bottomBar" id="updateBtnCol" style="margin-top: 30px; position: inherit; box-shadow: none;">
-						<button class="btn btn-primary btnCommon creatOfferBtnCommon" id="updateCRM" ><span></span> Create Offer</button>
+						<button class="btn btn-primary btnCommon creatOfferBtnCommon" id="updateCRM" ><span class="spanLoad"></span> Create Offer for : <span class="customerNameBtn"></span></button>
 						<!-- <a id="btnkyclink" class="btn btn-primary btnCommon" onclick="generateKYCLink(event,this,'N');"> <span>Generate
 							KYC Link</span>
 						</a> -->
@@ -1342,7 +1342,7 @@
 								<div class="clearfix"></div>
 							</div>
 							<div class="clearfix"></div>
-							<button class="btn btn-primary btnCommon creatOfferBtnCommon" id="snedApproval"  style="display:none;"><span></span> Create Offer</button>
+							<button class="btn btn-primary btnCommon creatOfferBtnCommon" id="snedApproval"  style="display:none;"><span class="spanLoad"></span> Create Offer for : <span class="customerNameBtn"></span></button>
 							<div class="clearfix"></div>
 						</div>
 						<div class="clearfix"></div>

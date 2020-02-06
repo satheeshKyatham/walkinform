@@ -1159,7 +1159,7 @@ function adminUpdateBSP (e,timeid, disVal){
 
 function updateBSP (timeid) {
        
-       $('.creatOfferBtnCommon span').html('<i class="fa fa-spinner fa-spin" style="color:#fff !important"></i>');
+       $('.creatOfferBtnCommon span.spanLoad').html('<i class="fa fa-spinner fa-spin" style="color:#fff !important"></i>');
        
        var floorName = '';
        
@@ -1253,7 +1253,7 @@ function updateBSP (timeid) {
     	   var offerJson = JSON.parse(data);
     	   if (offerJson.offer_successMsg == "errorNoUnit101") {
     		   $('#updateBtnCol button').prop("disabled", false);
-    		   $('.creatOfferBtnCommon span').html('');  
+    		   $('.creatOfferBtnCommon span.spanLoad').html('');  
     		   
     		   swal({
 	   				title: "This unit is no longer available please select another unit.",
@@ -1264,7 +1264,7 @@ function updateBSP (timeid) {
 	   			});
     	   } else if (offerJson.offer_successMsg == "errorUnitInactive102") {
     		   $('#updateBtnCol button').prop("disabled", false);
-    		   $('.creatOfferBtnCommon span').html('');  
+    		   $('.creatOfferBtnCommon span.spanLoad').html('');  
     		   
     		   swal({
 	   				title: "Inventory is not activated.",
@@ -1275,7 +1275,7 @@ function updateBSP (timeid) {
 	   			});
     	   } else if (offerJson.offer_successMsg == "errorInCode103") {
     		   $('#updateBtnCol button').prop("disabled", false);
-    		   $('.creatOfferBtnCommon span').html('');  
+    		   $('.creatOfferBtnCommon span.spanLoad').html('');  
     		   
     		   swal({
 
@@ -1336,7 +1336,7 @@ function updateBSP (timeid) {
 	            
 	            getDealDone();
 	                
-	            $('.creatOfferBtnCommon span').html('');
+	            $('.creatOfferBtnCommon span.spanLoad').html('');
     	   }
     	   
     }).fail(function(xhr, status, error) {
@@ -1352,7 +1352,7 @@ function updateBSP (timeid) {
 			timer: 8000,
 			type: "warning",
         });
-       $('.creatOfferBtnCommon span').html('');
+       $('.creatOfferBtnCommon span.spanLoad').html('');
        
     });
        

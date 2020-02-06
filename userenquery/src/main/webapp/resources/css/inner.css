@@ -438,3 +438,8 @@ background-position: center; background-repeat: no-repeat; background-size: 40px
 .filterColBg {margin-bottom: 15px;}
 
 .filterCol input {background-color: #ffffff !important;}
+
+
+.enquiryDtlCol {border: 1px solid #ccc; padding: 15px; margin-bottom: 20px; border-top: 0; color: #000000; background-color: #ceeeff; border-radius: 0px 0px 8px 8px; box-shadow: 1px 2px 4px #ccc;}
+
+.customerNameBtn {font-weight: 700;}

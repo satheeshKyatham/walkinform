@@ -130,7 +130,7 @@ if(ses!=null){
 	        <span class="icon-bar"></span>
 	        <span class="icon-bar"></span>
 	      </button> -->
-      	<a class="navbar-brand" href="#">
+      	<a class="navbar-brand" href="#" style="margin-left: 0px;">
 			<img class="topLogo" src="<c:url value='/resources/images/gplLogo.jpg' />"/>
 		</a>
 		
@@ -155,7 +155,6 @@ if(ses!=null){
 		
 		<!-- <div class="proTopTitle" id="projectTitle">
 		  
-			GODREJ AQUA
 		</div> -->
 		
 	    <!-- Collect the nav links, forms, and other content for toggling -->
@@ -166,17 +165,57 @@ if(ses!=null){
 	  </div>
 	</nav>
    
+	<div class="container">
+		<div class="enquiryDtlCol">
+			<div class="col-md-3">
+				<div>
+					<strong>Project</strong>
+				</div>
+				<div id="projectTitle"> </div>
+				<div class="clearfix"></div>
+			</div>
+			
+			<div class="col-md-3">
+				<div>
+					<strong>Enquiry</strong>
+				</div>
+				<div id="hdrEnqName"></div>
+				<div class="clearfix"></div>
+			</div>
+			
+			<div class="col-md-3">
+				<div>
+					<strong>Customer Name</strong>
+				</div>
+				<div id="hdrCustomerName"></div>
+				<div class="clearfix"></div>
+			</div>
+			
+			<div class="col-md-3">
+				<div>
+					<strong>Customer Mobile No.</strong>
+				</div>
+				<div id="hdrCustomerMobileNo"></div>
+				<div class="clearfix"></div>
+			</div>
+			
+			<div class="clearfix"></div>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+   
+   
 	
 	<div class="container formCol swipeCard posRelative">
 			
 		<div class="commonLoad" id="mainPageLoad" style="display:none;"></div>	
 			
-		<div class="titleCol">
+		<!-- <div class="titleCol">
 			<h4 class="">
 				<span id="projectTitle"></span>					
 			</h4>
 			<div class="clearfix"></div>
-		</div>	
+		</div>	 -->
 		<div class="clearfix"></div>	
 				<input type="hidden" id="contextPath" value="${pageContext.request.contextPath}">
 				<input type="hidden" id="hasParam" value="${hasParam}">
