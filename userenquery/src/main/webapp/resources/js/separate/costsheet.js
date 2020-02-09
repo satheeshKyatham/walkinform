@@ -285,9 +285,10 @@ function loadData () {
                            
                            //$('#addlBspPer').val(value.bsp_per);                
                            
+                           var bspPerAddition = (value.BasicSalePricepersquarefeet*value.bsp_per/100);
                            
                            $('.a3_bsp').text(parseFloat(value.BasicSalePricepersquarefeet));
-                           $('.a3').text(parseFloat(parseFloat(value.BasicSalePricepersquarefeet)+parseFloat(value.bsp_amount)-(otherScheme)).toFixed(2));
+                           $('.a3').text(parseFloat(parseFloat(value.BasicSalePricepersquarefeet)+parseFloat(value.bsp_amount)+parseFloat(bspPerAddition)-(otherScheme)).toFixed(2));
                            
                            $('#discountPsqf').val(otherScheme);
                            
@@ -1158,7 +1159,7 @@ function adminUpdateBSP (e,timeid, disVal){
 
 function updateBSP (timeid) {
        
-       $('.creatOfferBtnCommon span').html('<i class="fa fa-spinner fa-spin" style="color:#fff !important"></i>');
+       $('.creatOfferBtnCommon span.spanLoad').html('<i class="fa fa-spinner fa-spin" style="color:#fff !important"></i>');
        
        var floorName = '';
        
@@ -1252,7 +1253,7 @@ function updateBSP (timeid) {
     	   var offerJson = JSON.parse(data);
     	   if (offerJson.offer_successMsg == "errorNoUnit101") {
     		   $('#updateBtnCol button').prop("disabled", false);
-    		   $('.creatOfferBtnCommon span').html('');  
+    		   $('.creatOfferBtnCommon span.spanLoad').html('');  
     		   
     		   swal({
 	   				title: "This unit is no longer available please select another unit.",
@@ -1263,7 +1264,7 @@ function updateBSP (timeid) {
 	   			});
     	   } else if (offerJson.offer_successMsg == "errorUnitInactive102") {
     		   $('#updateBtnCol button').prop("disabled", false);
-    		   $('.creatOfferBtnCommon span').html('');  
+    		   $('.creatOfferBtnCommon span.spanLoad').html('');  
     		   
     		   swal({
 	   				title: "Inventory is not activated.",
@@ -1274,7 +1275,7 @@ function updateBSP (timeid) {
 	   			});
     	   } else if (offerJson.offer_successMsg == "errorInCode103") {
     		   $('#updateBtnCol button').prop("disabled", false);
-    		   $('.creatOfferBtnCommon span').html('');  
+    		   $('.creatOfferBtnCommon span.spanLoad').html('');  
     		   
     		   swal({
 
@@ -1335,7 +1336,7 @@ function updateBSP (timeid) {
 	            
 	            getDealDone();
 	                
-	            $('.creatOfferBtnCommon span').html('');
+	            $('.creatOfferBtnCommon span.spanLoad').html('');
     	   }
     	   
     }).fail(function(xhr, status, error) {
@@ -1351,7 +1352,7 @@ function updateBSP (timeid) {
 			timer: 8000,
 			type: "warning",
         });
-       $('.creatOfferBtnCommon span').html('');
+       $('.creatOfferBtnCommon span.spanLoad').html('');
        
     });
        
@@ -2306,8 +2307,8 @@ function newOtherCharges2 () {
                                                             +'<label style="display: block;">'+yres+'</label>'
                                                      +'</div>'; 
                     
-                    
-                    if ($('#projectid').val() != "a1l2s00000000X5AAI") {
+                    //Forest Grove at Godrej Park Greens / Godrej Hillside 2 / Godrej Nurture, Bengaluru
+                    if ($('#projectid').val() != "a1l2s00000000X5AAI"  && $('#projectid').val() != "a1l6F000009D6IMQA0" && $('#projectid').val() != "a1l2s00000000pEAAQ") {
                     	$('#totalDiscountCol').append(printDiscountHtml);
                     	$('#totalDicountView').show();
                     } else {

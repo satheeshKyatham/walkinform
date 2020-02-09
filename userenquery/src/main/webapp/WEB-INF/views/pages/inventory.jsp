@@ -59,7 +59,7 @@
 						<option value='typologyAll'>All</option>
 					</select>
 				 </div>
-				 <div class="form-group col-md-3 col-sm-6">
+				 <div class="form-group col-md-3 col-sm-6" style="display:none;">
 					<label>Facing</label>
 					<select id="facing" class="form-control">
 						<option value='0'>Select Facing</option>
@@ -175,9 +175,15 @@
 					  <span class="checkmark soldOut"></span>
 					</label>
 					
+					<label class="containerCheckbox">Your Hold Unit
+					  <input>
+					  <span class="checkmark holdforDiscussion"></span>
+					</label>
 			
-			
-			
+					<label class="containerCheckbox">Customer Hold Unit
+					  <input>
+					  <span class="checkmark unitEOIBlockAdmin"></span>
+					</label>
 			
 			
 			

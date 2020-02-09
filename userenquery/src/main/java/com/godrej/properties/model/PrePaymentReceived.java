@@ -11,7 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="salesforce.propstrength__prepayment_received__c")
+@Table(name="salesforce.vw_propstrength__prepayment_received__c")
 public class PrePaymentReceived {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id") private int id;
@@ -31,7 +31,13 @@ public class PrePaymentReceived {
 	@Column(name="propstrength__crn_no__c") private String propstrength__crn_no__c;
 	@Column(name="PropStrength__Cheque_Demand_Draft_No__c") private String propStrength__Cheque_Demand_Draft_No__c;
 	
+	@Column(name="pan_attach") private String pan_attach;
+	@Column(name="cheque_attach") private String cheque_attach;
+	@Column(name="description") private String description;
+	
 	@Column(name="sfid") private String sfid;
+	@Column(name="propstrength__request__c") private String enq_sfid;
+	
 	public int getId() {
 		return id;
 	}
@@ -134,6 +140,31 @@ public class PrePaymentReceived {
 	public void setPropStrength__Cheque_Demand_Draft_No__c(String propStrength__Cheque_Demand_Draft_No__c) {
 		this.propStrength__Cheque_Demand_Draft_No__c = propStrength__Cheque_Demand_Draft_No__c;
 	}
+	public String getPan_attach() {
+		return pan_attach;
+	}
+	public void setPan_attach(String pan_attach) {
+		this.pan_attach = pan_attach;
+	}
+	public String getCheque_attach() {
+		return cheque_attach;
+	}
+	public void setCheque_attach(String cheque_attach) {
+		this.cheque_attach = cheque_attach;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public String getEnq_sfid() {
+		return enq_sfid;
+	}
+	public void setEnq_sfid(String enq_sfid) {
+		this.enq_sfid = enq_sfid;
+	}
+	
 	
 	
 }

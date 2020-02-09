@@ -29,35 +29,12 @@ public class BSPAgainstPymtPlanServiceImpl implements BSPAgainstPymtPlanService{
 	}
 
 	@Override
-	public int getPaymentPlanBSPList(String project_code,String unit,String towerCode,String paymentPlanID,String typology) {
-		// TODO Auto-generated method stub
+	public double getPaymentPlanBSPList(String project_code,String unit,String towerCode,String paymentPlanID,String typology) {
 		List<BSPAgainstPymtPlan> payBSPList = dao.getPaymentPlanBSPList(paymentPlanID);
-		int bspAmountReturn = 0;
+		double bspAmountReturn = 0;
 		if(payBSPList!=null)
 		{
 			
-			/*for(int i=0;i<payBSPList.size();i++)
-			{
-				if(payBSPList.get(i).getTowerid().matches("a2F6F000003vxYSUAY"))
-				{
-					System.out.println("Equal");
-					
-				}
-				else
-				{
-					System.out.println("Not Equal");
-				}
-				
-				if(payBSPList.get(i).getTowerid().contains("a2F6F000003vxYSUAY"))
-				{
-					System.out.println("Equal Contains");
-					
-				}
-				else
-				{
-					System.out.println("Not Equal Contains");
-				}
-			}*/
 			boolean valueCheck=false;
 			for(int i=0;i<payBSPList.size();i++)
 			{
@@ -67,7 +44,7 @@ public class BSPAgainstPymtPlanServiceImpl implements BSPAgainstPymtPlanService{
 					if(payBSP.getTowerid().contains(towerCode) && payBSP.getTypology().contains(typology))
 					{
 						valueCheck =true;
-						return bspAmountReturn=Integer.parseInt(payBSPList.get(i).getBsp_amount());
+						return bspAmountReturn=Double.parseDouble(payBSPList.get(i).getBsp_amount());
 					}
 				}
 			}
@@ -81,7 +58,7 @@ public class BSPAgainstPymtPlanServiceImpl implements BSPAgainstPymtPlanService{
 						if((payBSP.getTowerid().contains(towerCode)) && (payBSP.getTypology().trim().length()<=0))
 						{
 							valueCheck =true;
-							return bspAmountReturn=Integer.parseInt(payBSPList.get(i).getBsp_amount());
+							return bspAmountReturn=Double.parseDouble(payBSPList.get(i).getBsp_amount());
 						}
 					}
 				}
@@ -97,7 +74,8 @@ public class BSPAgainstPymtPlanServiceImpl implements BSPAgainstPymtPlanService{
 						if( (payBSP.getPymt_plan_id().contains(paymentPlanID)) && (payBSP.getTowerid()==null) && (payBSP.getTypology()==null))
 						{
 							valueCheck =true;
-							return bspAmountReturn=Integer.parseInt(payBSPList.get(i).getBsp_amount());
+							
+							return bspAmountReturn=Double.parseDouble(payBSPList.get(i).getBsp_amount());
 						}
 					}	
 				}
@@ -106,4 +84,66 @@ public class BSPAgainstPymtPlanServiceImpl implements BSPAgainstPymtPlanService{
 		return bspAmountReturn;
 	}
 	
+	
+	
+	
+	
+	
+	
+	
+	@Override
+	public double getPaymentPlanPerBSP(String project_code,String unit,String towerCode,String paymentPlanID,String typology) {
+		List<BSPAgainstPymtPlan> payBSPList = dao.getPaymentPlanPerBSP(paymentPlanID);
+		double bspPerReturn = 0;
+		if(payBSPList!=null)
+		{
+			
+			boolean valueCheck=false;
+			for(int i=0;i<payBSPList.size();i++)
+			{
+				if((payBSPList.get(i).getBsp_amount()!=null && payBSPList.get(i).getBsp_amount().length()>0) && (payBSPList.get(i).getProject_id()!=null && payBSPList.get(i).getProject_id().length()>0) && (payBSPList.get(i).getTowerid()!=null && payBSPList.get(i).getTowerid().length()>0) && (payBSPList.get(i).getPymt_plan_id()!=null && payBSPList.get(i).getPymt_plan_id().length()>0) && (payBSPList.get(i).getTypology()!=null && payBSPList.get(i).getTypology().length()>0))
+				{
+					BSPAgainstPymtPlan payBSP =payBSPList.get(i);
+					if(payBSP.getTowerid().contains(towerCode) && payBSP.getTypology().contains(typology))
+					{
+						valueCheck =true;
+						return bspPerReturn=payBSPList.get(i).getBsp_per();
+					}
+				}
+			}
+			if(!valueCheck)
+			{
+				for(int i=0;i<payBSPList.size();i++)
+				{
+					if((payBSPList.get(i).getBsp_amount()!=null && payBSPList.get(i).getBsp_amount().length()>0) && (payBSPList.get(i).getProject_id()!=null && payBSPList.get(i).getProject_id().length()>0) && (payBSPList.get(i).getTowerid()!=null && payBSPList.get(i).getTowerid().length()>0) && (payBSPList.get(i).getPymt_plan_id()!=null && payBSPList.get(i).getPymt_plan_id().length()>0))
+					{
+						BSPAgainstPymtPlan payBSP =payBSPList.get(i);
+						if((payBSP.getTowerid().contains(towerCode)) && (payBSP.getTypology().trim().length()<=0))
+						{
+							valueCheck =true;
+							return bspPerReturn=payBSPList.get(i).getBsp_per();
+						}
+					}
+				}
+			}
+			if(!valueCheck)
+			{
+				for(int i=0;i<payBSPList.size();i++)
+				{
+					if((payBSPList.get(i).getBsp_amount()!=null && payBSPList.get(i).getBsp_amount().length()>0) && (payBSPList.get(i).getProject_id()!=null && payBSPList.get(i).getProject_id().length()>0) && (payBSPList.get(i).getPymt_plan_id()!=null && payBSPList.get(i).getPymt_plan_id().length()>0))
+					{
+					
+						BSPAgainstPymtPlan payBSP =payBSPList.get(i);
+						if( (payBSP.getPymt_plan_id().contains(paymentPlanID)) && (payBSP.getTowerid()==null) && (payBSP.getTypology()==null))
+						{
+							valueCheck =true;
+							
+							return bspPerReturn=payBSPList.get(i).getBsp_per();
+						}
+					}	
+				}
+			}
+		}
+		return bspPerReturn;
+	}
 }

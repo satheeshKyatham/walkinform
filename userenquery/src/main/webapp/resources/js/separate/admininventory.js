@@ -12,6 +12,7 @@ $.ajaxSetup({
 });
 var pageContext = $("#contextPath").val()+"/";	
 
+var enqSFIDforHoldUnit = '';
 
 $(document).ready(function(){
     $('[data-toggle="popover"]').popover({
@@ -85,7 +86,7 @@ $(document).ready(function(){
 
 
 function holdBlockResion (source) {
-	$('#enqsfidInput').val('');
+	//$('#enqsfidInput').val('');
 	
 	var favorite = [];
 	$.each($("input[name='unit']:checked"), function(){ 
@@ -105,7 +106,12 @@ function holdBlockResion (source) {
 	
 	$('#holdBlockRsionModal').modal('show');
 	
+	$('#enqNameInput').val('');
 	$('#holdBlockReasonInput').val('');
+	enqSFIDforHoldUnit = '';
+	
+	$('#enqDtlTable tbody').empty();
+	$('#enqDtlTable tbody').append("<tr><td colspan='3' style='text-align:center;'>No records found</td></tr>");
 	
 	if (source == "tempBtn") {
 		$('#enqsfidInputField').hide();
@@ -232,14 +238,23 @@ function SaveForHold(msg) {
 		holdBlockBehalfOfIDVal = $("#userid").val();
 		
 		
-		if($("#enqsfidInput").val().trim() != ''){
-			enqSFIDval = $("#enqsfidInput").val();
+		if(enqSFIDforHoldUnit != '' && enqSFIDforHoldUnit != undefined){
+			enqSFIDval = enqSFIDforHoldUnit;
 			
 			$("#holdBlockInputInfo").text("");
 		} else {
 			$("#holdBlockInputInfo").text("Select ENQ Name");
 			return false;
 		}
+		
+		/*if($("#enqsfidInput").val().trim() != ''){
+			enqSFIDval = $("#enqsfidInput").val();
+			
+			$("#holdBlockInputInfo").text("");
+		} else {
+			$("#holdBlockInputInfo").text("Select ENQ Name");
+			return false;
+		}*/
 		
 	} else if (msg == 'temp' || msg == 'block') {
 		
@@ -682,4 +697,50 @@ function projectWiseUserList () {
 	}).done(function() {
 		 
 	});
+}
+
+
+
+
+
+function enqDtlForAdminHold () {
+	//$("#enqDtlTable tbody").empty();
+	
+	var enqName = "ENQ - " + $('#enqNameInput').val().trim();
+	
+	
+	$.post(pageContext+"getEnqForAdminInventoryHold",{"enqName":enqName, "projectSFID":$('#projectid').val()},function(data){                      
+		$("#enqDtlTable tbody").empty();
+		
+		var obj =JSON.parse(data);
+		 var html = '';
+		 enqSFIDforHoldUnit = '';
+			
+         if (obj != null) {
+        	 for(var i=0;i<obj.length;i++){
+        		
+        		 
+        		 html += "<tr>" +
+        		 	" <td>"+obj[i].enq_name+"</td>" +
+					" <td>"+obj[i].mobile__c+"</td>" +
+					" <td>"+obj[i].name+"</td>" +
+				" </tr>";
+        		 enqSFIDforHoldUnit = obj[i].enq_sfid;
+        		 /*obj[i].propstrength__primary_contact__c;
+     			obj[i].enq_name;
+     			obj[i].region__c;
+     			obj[i].marketing_project_name__c;
+     			obj[i].projectNameWithoutCity;*/
+        	 }
+        	 
+        	 $("#enqDtlTable tbody").append(html);
+         } else {
+        	 $("#enqDtlTable tbody").append("<tr><td colspan='3'>No records found</td></tr>");
+         }
+         
+	}).done(function(data){
+          
+	}).fail(function(xhr, status, error) {
+    	 
+    });
 }

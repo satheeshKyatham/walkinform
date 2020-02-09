@@ -104,8 +104,9 @@ if(ses!=null){
 								<th>Mobile No</th>
 								<th>KYC Status</th>
 								<th>Offer Number</th>
+								<th>Unit Number</th>
 								<th>View/Fill KYC</th>
-								<th>Costsheet</th>
+								<th>Cost sheet</th>
 								<th>Application Form</th>
 								<th>Total Amount</th>
 							</tr>
@@ -155,9 +156,9 @@ if(ses!=null){
 								<th>Transaction ID</th>
 								<th>Transaction</br>Date</th>
 								<th>Transaction Amount</th>
-								<!-- <th>PAN Attachment</th>
+								<th>PAN Attachment</th>
 								<th>Receipt/</br>Cheque Attachment</th>
-								<th>Description</th> -->
+								<th>Description</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -165,50 +166,13 @@ if(ses!=null){
 					</table>
 				<div class="clearfix"></div>
 			</div>
-	      	<!-- <div class="form-group col-md-6" id="enqsfidInputField">
-				<label>ENQ SFID</label>
-		      	<input class='form-control' id="enqsfidInput"> 
-			</div>
-			
-			<div class="clearfix"></div>
-			
-			<div class="form-group col-md-6">
-			  <div class="form-group">
-			    <label>ENQ Name</label>
-			    <div class="input-group">
-			    	<div class="input-group-addon">ENQ -</div>
-			      <input type="text" class="form-control" id="">
-			      <div class="input-group-addon">
-						<i class="glyphicon glyphicon-search"></i>
-					</div>
-			    </div>
-			  </div>
-			</div>
-			
-			
-			<div class="clearfix"></div>
-			<div class="form-group col-md-6" id="userListField">
-				<label>User</label>
-				<select class='form-control' id='userListInventory'>
-		      		<option value="">Select</option>
-		      	</select>
-			</div>
-			<div class="clearfix"></div>
-			<div class="form-group col-md-12">
-				<label>Reason</label>
-				<textarea class='form-control' id="holdBlockReasonInput" rows="4" cols="50"></textarea>
-			</div>
-	        
-	        <small id="holdBlockInputInfo" style="color:#d10000;"></small> 
-	        <div class="clearfix"></div>
-	      </div>-->
 	      <div class="clearfix"></div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-primary btn-default" data-dismiss="modal">Close</button>
-	        <!-- <button id="tempModalBtn" onclick="SaveForHold('temp')" 	type="button" style="color: #fff; background-color: #0077b9;" class="btn btn-primary">Hold</button> -->
 	      </div>
 	    </div>
 	  </div>
+	</div>
 	</div>
 	<script src="<c:url value='/resources/js/salesdesk.js?v=18.05'/>"></script>
 	<script src="<c:url value='/resources/js/separate/offer.js?v=18.05'/>"></script>

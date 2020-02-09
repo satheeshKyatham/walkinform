@@ -109,6 +109,12 @@ public class Inventory implements Serializable{
 	@Column(name = "enq_sfid")
 	private String enq_sfid;	
 	
+	@Column(name = "hold_behalf_userid") 
+	private int hold_behalf_userid;
+	
+	@Column(name = "sfdc_propstrength__allotted__c")
+	private boolean sfdc_propstrength__allotted__c;
+	
 	
 	public String isHold_status() {
 		return hold_status;
@@ -348,5 +354,21 @@ public class Inventory implements Serializable{
 
 	public void setEnq_sfid(String enq_sfid) {
 		this.enq_sfid = enq_sfid;
+	}
+
+	public int getHold_behalf_userid() {
+		return hold_behalf_userid;
+	}
+
+	public void setHold_behalf_userid(int hold_behalf_userid) {
+		this.hold_behalf_userid = hold_behalf_userid;
+	}
+
+	public boolean isSfdc_propstrength__allotted__c() {
+		return sfdc_propstrength__allotted__c;
+	}
+
+	public void setSfdc_propstrength__allotted__c(boolean sfdc_propstrength__allotted__c) {
+		this.sfdc_propstrength__allotted__c = sfdc_propstrength__allotted__c;
 	}
 }

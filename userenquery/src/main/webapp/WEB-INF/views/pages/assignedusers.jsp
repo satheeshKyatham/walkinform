@@ -267,6 +267,7 @@ if(ses!=null){
 									<th>Mobile No</th>
 									<th>KYC Status</th>
 									<th>Offer Number</th>
+									<th>Property Name</th>
 									<th>View/Fill KYC</th>
 									<th>View Cost Sheet</th>
 									<th>View Application Form</th>

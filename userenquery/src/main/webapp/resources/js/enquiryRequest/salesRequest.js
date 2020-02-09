@@ -249,7 +249,11 @@ function onPageLoad(){
     }
     var mobileNo=$('#hiddenMobileNo').val();
     if(mobileNo!=""){
-      $("#mobileNo").val(mobileNo);
+      
+    	$('#hdrCustomerMobileNo').text($('.selected-dial-code').text()+" "+mobileNo);
+    	
+    	$("#mobileNo").val(mobileNo);
+    	
       if($("#viewType").val()==="SALESVIEW" && $("#loginRole").val()==="SALES"){
     	  getEnquiryForSales();
     	  
@@ -471,6 +475,9 @@ function populateBasicInfo(enq,contact){
 			$('.enquiryId').val(enq.enquiryId);
 			$('#enquirysfid').val(enq.sfid);
 			$('#enquiry_name').val(enq.name);
+			
+			$('#hdrEnqName').text(enq.name);
+			
 			$('#primarycontactsfid').val(enq.contact.sfid);
 			$('#projectsfid').val(enq.project.sfid);
 			/*$('.enquirysfid').val(enq.sfid);*/
@@ -536,11 +543,18 @@ function populateBasicInfo(enq,contact){
 		
 		if(!isEmpty(contact)){
 			/*$('#salutation').val(contact.salutation);*/
+			
+			//Added By A
+			$('#hdrCustomerName').text(contact.firstName+" "+contact.lastName);
+			$('.customerNameBtn').text('"'+contact.firstName+' '+contact.lastName+'"')
+			//END Added By A
+			
 			$('.contactId').val(contact.contactId);
 			$('.contactId').removeAttr("disabled");
 			
 			$('#firstName').val(contact.firstName);
 			$('#lastName').val(contact.lastName);
+			
 			$('#email').val(contact.otherEmail);
 			$('#dateOfBirth').val(getDate(contact.dateOfBirth));
 		/*	$('#ageGroup').val(contact.ageGroup);*/

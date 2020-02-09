@@ -40,12 +40,15 @@ function getCMKYCDetails()
 			var costsheetPath = value.costsheetPath==null?'':value.costsheetPath;
 			var appFormHtml="<td>";
 			var totalAmt='';
-			if(value.totalamount==null)
+			var propertName ='';
+			if(value.totalamount!=null)
 				{
-				totalAmt="";
+					totalAmt=value.totalamount;
 				}
-			else
-				totalAmt=value.totalamount;
+			if(value.property_name1__c!=null)
+			{
+				propertName=value.property_name1__c;
+			}
 			if(value.kycapproval_status==='Y'){
 				appFormHtml = appFormHtml+ 
 				 "<button isrole=Y class='btn btnDefaultBlue btn-default' " +
@@ -61,7 +64,7 @@ function getCMKYCDetails()
 					+"</td><td>"+kycStatus
 					+"</td>"
 					+"<td>"+offerName
-					+"</td><td><a href="
+					+"</td><td>"+propertName+"</td><td><a href="
 					+value.kyclink
 					+"&isrole=Y target='_blank'>Link</a></td>"
 					+"</td><td><a class='btn btnDefaultBlue btn-sm btn-default' target=\"_blank\" " +
@@ -116,16 +119,39 @@ function getKYCPaymentDetails(e,offersfid)
 		//alert(obj1.length);
 		if(obj1!=null) {
 			for(var i=0;i<obj1.length;i++){
+				var chequeNo = '';
+				var panTarget='';
+				var reciptTarget='';
+				if(obj1[i].propstrength__cheque_demand_draft_number__c==0)
+				{
+					chequeNo=obj1[i].propstrength__ifsc_rtgs_code__c;
+					if(chequeNo==null)
+						chequeNo=obj1[i].propStrength__Cheque_Demand_Draft_No__c;
+				}
+			else
+				chequeNo=obj1[i].propstrength__cheque_demand_draft_number__c;
+	
+				var pageContext = $("#pageContext").val()+"/";
+				if(obj1[i].pan_attach!="")
+					{
+					panTarget = pageContext+"file?name="+obj1[i].pan_attach+"&from=EOIbookingReference&eid="+obj1[i].enq_sfid+"&fid="+obj1[i].pan_attach.charAt(0);
+					}
+				if(obj1[i].cheque_attach!="")
+					{
+						reciptTarget = pageContext+"file?name="+ encodeURIComponent(obj1[i].cheque_attach)+"&from=EOIbookingReference&eid="+obj1[i].enq_sfid+"&fid="+obj1[i].cheque_attach.charAt(0);
+					}
+				
+				
 				html += "<tr>" +
 							" <td>"+obj1[i].propstrength__payment_mode__c+"</td>" +
 							" <td>"+obj1[i].propstrength__bank_name__c+"</td>" +
 							//" <td></td>" +
-							" <td>"+obj1[i].propstrength__cheque_demand_draft_number__c+"</td>" +//propStrength__Cheque_Demand_Draft_No__c
+							" <td>"+chequeNo+"</td>" +//propStrength__Cheque_Demand_Draft_No__c
 							" <td>"+obj1[i].propstrength__instrument_date__c+"</td>" +
 							" <td>"+obj1[i].propstrength__amount__c+"</td>" +
-							//" <td></td>" +
-							//" <td></td>" +
-							//" <td></td>" +
+							" <td><a target='_blank' href="+panTarget+">"+obj1[i].pan_attach+"</a></td>" +
+							" <td><a target='_blank' href="+reciptTarget+">"+obj1[i].cheque_attach+"</a></td>" +
+							" <td>"+obj1[i].description+"</td>" +
 							
 						" </tr>";
 			}

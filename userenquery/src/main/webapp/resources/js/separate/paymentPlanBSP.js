@@ -95,7 +95,7 @@ function inventoryUnitTypeMst () {
 function addBSPCharge () {
 	
 	var bspAmountPerVal = 0;
-	var bspAmountVal = $('#bsp_amount').val();
+	var bspAmountVal = 0;
 	
 	if ($('#bsp_amount_per').val().trim() != '') {
 		bspAmountPerVal = $('#bsp_amount_per').val();
