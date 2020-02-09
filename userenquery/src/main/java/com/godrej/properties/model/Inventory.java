@@ -95,6 +95,10 @@ public class Inventory implements Serializable{
 	@Transient
 	private int holdSec;
 	
+	 @Column(name = "hold_for_time") 
+	 private int holdForTime;
+
+	
 	/* Balram */
 	
 	@Column(name = "hold_status")
@@ -371,4 +375,17 @@ public class Inventory implements Serializable{
 	public void setSfdc_propstrength__allotted__c(boolean sfdc_propstrength__allotted__c) {
 		this.sfdc_propstrength__allotted__c = sfdc_propstrength__allotted__c;
 	}
+
+	public int getHoldForTime() {
+		return holdForTime;
+	}
+
+	public void setHoldForTime(int holdForTime) {
+		this.holdForTime = holdForTime;
+	}
+
+	public String getHold_status() {
+		return hold_status;
+	}
+	
 }

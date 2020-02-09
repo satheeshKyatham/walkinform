@@ -1240,15 +1240,20 @@ function updateBSP (timeid) {
     	   salesConsiderationTotal = $('#salesConsiderationTotal').text();
        }
        
-       
+       var price = $("#salesConsiderationTotal").text();
+       var priceWithTax = $("#salesConsiderationTotal").text();
+       var plannedPayment = $("#tokenBaseAmount").text();
+       var plannedPaymentWithTax = $("#tokenAmount").text();
+       var paymentDetails = getPaymentDetails();
        $.post(pageContext+"updateBSP",{"salesConsiderationTotal":salesConsiderationTotal, "bspTaxGST":bspTaxGST, "bspDis":bspVal,"token":$('#token').val(),
               "projectsfid":$('#projectsfid').val(),"enquirysfid":$('#enquirysfid').val(),"primarycontactsfid":$('#primarycontactsfid').val(), "sentToCrmYN":"Y", "timeid":"0"
               ,"propid":$('#unitSfid').val(),"ppid":$('#paymentPlanChangeID').val(),"offerthrough":offerthrough,"brokersfid":brokerAccountSfid
               ,"discount_Value":discount_Value,"balance_amnt":$('#balance_amnt').val(),"balance_amnt_description":$('#balance_amnt_description').val()
               ,"car_park_type":$('#carParkType').find('option:selected').attr("data-name"),"scheme_rate":$('#getPln').find('option:selected').attr("data-valuerate"),"scheme_name":$("#getPln :selected").text(),"userid":$('#userid').val(),"enquiry_name":$('#enquiry_name').val() 
               ,"costsheet_commitment":$('#costsheet_commitment').val(),"prepaymentamt":prepaymentAmount,"bankname":bankname,"trxdate":trxdate,"trxno":trxno,"paymentmode":paymentmode, "tdsPaidBy":tdsPaidBy,"isOthers":isOthers, "costsheet_path": csPath, "cs_final_amount":$('#csFinalAmountInput').val(),"bankGL":$('#towerBankGLCode').val() 
-       },function(data){                       
-       
+       ,"paymentDetails": paymentDetails,"price":convertToNumber(price),"priceWithTax":convertToNumber(priceWithTax)
+       ,"plannedPayment":convertToNumber(plannedPayment),"plannedPaymentWithTax":convertToNumber(plannedPaymentWithTax)},
+       function(data){                       
        }).done(function(data){
     	   var offerJson = JSON.parse(data);
     	   if (offerJson.offer_successMsg == "errorNoUnit101") {
@@ -1337,6 +1342,20 @@ function updateBSP (timeid) {
 	            getDealDone();
 	                
 	            $('.creatOfferBtnCommon span.spanLoad').html('');
+    	   }else{
+    		   $('#updateBtnCol button').prop("disabled", false);
+    		   $('.creatOfferBtnCommon span.spanLoad').html('');  
+    		   
+    		   swal({
+
+	   				//title: "There is some technical problem, please try again.",
+    			   	title: offerJson.offer_successMsg,
+
+	   				text: "",
+	   				type: "warning",
+	   				allowOutsideClick: true,
+	   				showConfirmButton: true
+	   			});
     	   }
     	   
     }).fail(function(xhr, status, error) {
@@ -1357,6 +1376,67 @@ function updateBSP (timeid) {
     });
        
 }
+
+
+function getPaymentDetails(){
+    var arrayData = [];
+    $("#csPtCol .csPtDataRow").each(function () {
+       
+          if ($(this).find('.paymentCScheck').is(':checked')) {
+                 var csPtData = {};
+              csPtData.enq_sfid = $('#enquirysfid').val();
+              csPtData.payment_type = $(this).find('.csPtDropDown').val();
+              csPtData.bank_name = $(this).find('.csPtBankName').val();
+              csPtData.branch = $(this).find('.csPtBranch').val();
+              csPtData.transaction_id = $(this).find('.csPtTransactionId').val();
+              csPtData.transaction_amount = $(this).find('.csPtTransactionAmount').val();
+              csPtData.description = $(this).find('.csPtDescription').val();
+              csPtData.total_amount = $('#csPtGrandtotal').text().trim();
+              csPtData.bankGL=$('#towerBankGLCode').val();
+              csPtData.userid = $('#userid').val();
+              
+              csPtData.transaction_date_string = $(this).find('.csPtTransactionDate').val();
+              
+              csPtData.gpl_cs_eoi_payment_details_id = $(this).find('.gpl_cs_payment_details_id').val();
+              
+              
+              if($(this).find('.panAttach').val() != "" ||  $(this).find('.panAttach').attr('data-fileName') != "" &&  $(this).find('.panAttach').attr('data-fileName') != undefined) {
+                 if($(this).find('.panAttach').attr('name') == "panAttach") {
+                       csPtData.pan_attach = $(this).find('.panAttach').attr('data-fileName');
+                 } else {
+                       csPtData.pan_attach = k+"PAN_"+$(this).find('.panAttach')[0].files[0].name;
+                 }
+              }else {
+                 csPtData.pan_attach ="";
+              }
+              
+              if ($(this).find('.receiptAttach').val() != "" || $(this).find('.receiptAttach').attr('data-fileName') != "" && $(this).find('.receiptAttach').attr('data-fileName') != undefined) {
+                 if($(this).find('.receiptAttach').attr('name') == "receiptAttach") {
+                       csPtData.cheque_attach = $(this).find('.receiptAttach').attr('data-fileName');
+                 } else {
+                       csPtData.cheque_attach = k+"Receipt_"+$(this).find('.receiptAttach')[0].files[0].name;
+                 }
+              }else {
+                 csPtData.cheque_attach ="";
+              }
+          
+              
+              arrayData.push(csPtData);
+              k++
+          }
+    });
+
+    return JSON.stringify(arrayData);
+}
+
+function convertToNumber(value){
+	var number = Number(value);
+	if(number=='NaN'){
+		return 0;
+	}
+	return number;
+}
+
 
 $('#snedApproval').click (function () {
        sendForApproval ();
