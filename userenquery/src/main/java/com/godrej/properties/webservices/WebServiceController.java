@@ -13,7 +13,6 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
@@ -29,13 +28,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.xml.bind.DatatypeConverter;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -58,7 +54,6 @@ import com.godrej.properties.dto.EnquiryDto;
 import com.godrej.properties.dto.LdapUserDetailsDto;
 import com.godrej.properties.model.ADLoginPass;
 import com.godrej.properties.model.AssignedUser;
-import com.godrej.properties.model.AuditLog;
 import com.godrej.properties.model.BSPAgainstPymtPlan;
 import com.godrej.properties.model.BSPTaxRecord;
 import com.godrej.properties.model.BalanceDetails;
@@ -72,7 +67,6 @@ import com.godrej.properties.model.DailyUserMater;
 import com.godrej.properties.model.EOIData;
 import com.godrej.properties.model.EOIPaymentDtl;
 import com.godrej.properties.model.EOIPreferenceDtl;
-import com.godrej.properties.model.EOIReport;
 import com.godrej.properties.model.Enquiry;
 import com.godrej.properties.model.ExtraCharges;
 import com.godrej.properties.model.ExtraChargesHis;
@@ -112,8 +106,8 @@ import com.godrej.properties.model.Vw_MISReport;
 import com.godrej.properties.model.Vw_UserMaster;
 import com.godrej.properties.model.Vw_UserProjectMapping;
 import com.godrej.properties.model.WithoutOtherChargesPP;
-import com.godrej.properties.model.ZzholdTest;
 import com.godrej.properties.service.AdLoginUserService;
+import com.godrej.properties.service.AdminUnitHoldStatusService;
 import com.godrej.properties.service.ApplicantDtlService;
 import com.godrej.properties.service.ApplicationDtlService;
 import com.godrej.properties.service.AssignUserService;
@@ -145,7 +139,6 @@ import com.godrej.properties.service.HeaderSchemeService;
 import com.godrej.properties.service.HoldIntervalService;
 import com.godrej.properties.service.HoldInventoryEntryService;
 import com.godrej.properties.service.InventoryService;
-import com.godrej.properties.service.KYCApplicantDtlService;
 import com.godrej.properties.service.OTPRequestOCService;
 import com.godrej.properties.service.OrderDataMapppingService;
 import com.godrej.properties.service.OtherChargesService;
@@ -182,8 +175,6 @@ import com.godrej.properties.service.VW_MISReportService;
 import com.godrej.properties.service.VW_OfferWithBalanceService;
 import com.godrej.properties.service.VW_UserMasterService;
 import com.godrej.properties.service.WithoutOtherChargesPPService;
-import com.godrej.properties.service.ZZExistService;
-import com.godrej.properties.service.ZZrequestProcessService;
 import com.godrej.properties.util.CallWebServices;
 import com.godrej.properties.util.GeneratePDF;
 import com.godrej.properties.util.OtpGenerate;
@@ -439,6 +430,10 @@ public class WebServiceController<MultipartFormDataInput> {
 	
 	@Autowired
 	private GetEnquiryComments getEnquiryComments;
+	
+	@Autowired
+ 	private AdminUnitHoldStatusService adminUnitHoldStatusService;
+	
 	
 	@RequestMapping(value = "/activeproject", method = RequestMethod.GET, produces = "application/json")
 	public String project() {
@@ -1679,6 +1674,9 @@ public class WebServiceController<MultipartFormDataInput> {
 				JsonArray  jsonArray = root.getAsJsonArray();
 				 
 				Boolean inventoryStatusCondition = false;
+				
+				Boolean adminUnitStatus = adminUnitHoldStatusService.getAdminUnitHold(propid);
+				
 				
 				if (jsonArray.size() > 0) {
 					 JsonObject  jsonObject1 = jsonArray.get(0).getAsJsonObject();
