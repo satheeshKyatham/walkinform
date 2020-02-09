@@ -267,10 +267,11 @@ if(ses!=null){
 									<th>Mobile No</th>
 									<th>KYC Status</th>
 									<th>Offer Number</th>
-									<th>Property Name</th>
+									<th>Unit Number</th>
 									<th>View/Fill KYC</th>
 									<th>View Cost Sheet</th>
 									<th>View Application Form</th>
+									<th>Total Amount</th>
 									<!-- <th style="word-break: break-word; width:200px !important">Email</th> -->
 								</tr>
 							</thead>
@@ -280,6 +281,43 @@ if(ses!=null){
 						<div class="clearfix"></div>
 					</div>
 				<div class="clearfix"></div>
+				 	<!-- Model -->
+					<div class="modal fade" id="paymentDetails_KYC_CM" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+					  <div class="modal-dialog" role="document" style="width: 100%;">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					        <h4 class="modal-title" id="ModalLabelAdmin">PrePayment Details</h4>
+					      </div>
+					      <div class="modal-body">
+					      <div class="col-md-12" style="margin-bottom:50px;">
+								<table class="table table-bordered" id="prePaymentDetails_table_KYC_CM">
+										<thead>
+											<tr>
+												<th>Payment Type </th>
+												<th>Bank Name</th>
+												<!-- <th>Branch</th> -->
+												<th>Transaction ID</th>
+												<th>Transaction</br>Date</th>
+												<th>Transaction Amount</th>
+												<th>PAN Attachment</th>
+												<th>Receipt/</br>Cheque Attachment</th>
+												<th>Description</th>
+											</tr>
+										</thead>
+										<tbody>
+										</tbody>
+									</table>
+								<div class="clearfix"></div>
+							</div>
+					      <div class="clearfix"></div>
+					      <div class="modal-footer">
+					        <button type="button" class="btn btn-primary btn-default" data-dismiss="modal">Close</button>
+					      </div>
+					    </div>
+					  </div>
+					</div>
+					</div>
 				</div>
 				
 				<div class="clearfix"></div>
