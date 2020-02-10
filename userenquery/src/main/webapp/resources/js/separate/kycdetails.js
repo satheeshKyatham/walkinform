@@ -49,7 +49,7 @@ function getCMKYCDetails()
 			{
 				propertName=value.property_name1__c;
 			}
-			if(value.kycapproval_status==='Y'){
+			if(value.kycapproval_status=='Y'){
 				appFormHtml = appFormHtml+ 
 				 "<button isrole=Y class='btn btnDefaultBlue btn-default' " +
 				 "onclick='getofferApplicantDetails(this,\""+
@@ -72,8 +72,8 @@ function getCMKYCDetails()
 					"name="+costsheetPath
 					+"&amp;from=ofrList\"><i class=\"fa fa-file\"></i></a></td>"
 					+appFormHtml
-					+"<td><a type='button' data-toggle='modal' data-target='#paymentDetails_KYC' onclick='getKYCPaymentDetails(this,\""+value.offerSfid+"\")'>"+totalAmt+"</a></td>"+//<a href='#' onclick='getKYCPaymentDetails(this)' target='_blank'>Amount</a>
-					+"</tr>");
+/*					+"<td><a type='button' data-toggle='modal' data-target='#paymentDetails_KYC' onclick='getKYCPaymentDetails(this,\""+value.offerSfid+"\")'>"+totalAmt+"</a></td>"+//<a href='#' onclick='getKYCPaymentDetails(this)' target='_blank'>Amount</a>
+*/					+"</tr>");
 			$("#KYC_Admin_Details tbody").append(val);
 			i = i+1
 		});

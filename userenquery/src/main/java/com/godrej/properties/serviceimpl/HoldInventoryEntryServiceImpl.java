@@ -7,9 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.godrej.properties.dao.HoldInventoryEntryDao;
-import com.godrej.properties.dao.InventoryDao;
 import com.godrej.properties.model.HoldInventoryEntry;
-import com.godrej.properties.model.Inventory;
 import com.godrej.properties.service.HoldInventoryEntryService;
 
 @Service("holdInventoryEntryService")

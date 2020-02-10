@@ -124,12 +124,12 @@
 				<hr> 
 				<div class="clearfix"></div>
 				
-				<div class="form-group col-md-3" id="btnholdsave" style="display: none;">
+				<!-- <div class="form-group col-md-3" id="btnholdsave" style="display: none;">
 					<label> &nbsp; </label>
 					<button  onclick="holdBlockResion('tempBtn')" placement="right"  data-container="body" data-toggle="popover" data-content="Selected units are viewing as sold out on sales manager inventory screen"  style="line-height:0; color: #fff; background-color: #0077b9;" class="form-control btn btn-primary">
 						Hold 
-					</button> <!-- onclick="SaveForHold('temp')" -->
-				</div>
+					</button>  
+				</div> -->
 				
 				<div class="form-group col-md-3" id="btnEOIHOldSave" style="display:none;" >
 					<label> &nbsp; </label>
@@ -185,7 +185,7 @@
 				<li><span class="ilAvailable"></span> Available</li>
 				<!-- <li><span class="holdforDiscussion"></span> Hold for Discussion </li> -->
 				<li><span class="soldOut"></span> Sold Out</li>
-				<li><span class="holdforDiscussion"></span> Hold </li>
+				<!-- <li><span class="holdforDiscussion"></span> Hold </li> -->
 				<li><span class="unitBlockAdmin"></span> Block</li>
 				<li><span class="unitEOIBlockAdmin"></span> EOI Hold</li>
 				

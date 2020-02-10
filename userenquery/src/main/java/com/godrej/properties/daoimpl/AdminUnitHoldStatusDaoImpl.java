@@ -79,15 +79,15 @@ public class AdminUnitHoldStatusDaoImpl extends AbstractDao<Integer, HoldInvento
 		List<HoldInventoryAdmin> authors=null;
 		
 		Query q = session.createNativeQuery(" select * from salesforce.gpl_cs_hold_admin_unit "
-				+ " where sfid = '"+unitSFID+"'  ", HoldInventoryAdmin.class);
+				+ " where sfid = '"+unitSFID+"' and  hold_status = true ", HoldInventoryAdmin.class);
 
 		authors = q.getResultList();
 		
-		if (authors.size() > 0)
+		if (authors.size() > 0) {
 			return true;
-
-		return null;
-		
+		} else {
+			return false;
+		}
 		
 	}
 	

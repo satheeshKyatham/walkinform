@@ -53,7 +53,9 @@ if(ses!=null){
 <input type="hidden" id="role" value="<%= projectrole %>">
 <input type="hidden" id="userid" value="<%= userid %>">
   <!-- <input type="text" > -->
-  
+    <script type="text/javascript">
+  var offerTemplate = '${offerTemplate}';
+  </script>
   <nav class="navbar topMainBar">
 	  <div class="container">
 	    <div class="navbar-header" style="width:100%;">
@@ -108,7 +110,7 @@ if(ses!=null){
 								<th>View/Fill KYC</th>
 								<th>Cost sheet</th>
 								<th>Application Form</th>
-								<th>Total Amount</th>
+	<!-- 							<th>Total Amount</th> -->
 							</tr>
 						</thead>
 						<tbody>
@@ -118,7 +120,8 @@ if(ses!=null){
 				</div>
 				<div class="clearfix"></div>
 				<div id= "applicationFormKyc">
-					<%@ include file="/WEB-INF/views/pages/createdOfferKyc.jsp" %>
+					<%-- <%@ include file="/WEB-INF/views/pages/createdOfferKyc.jsp" %> --%>
+					<%@ include file="/WEB-INF/views/pages/createOfferKYCTemplate.jsp" %>
 				</div>
 				<div class="clearfix"></div>
 				</div>
@@ -179,7 +182,7 @@ if(ses!=null){
 	
 	<script src="<c:url value='/resources/js/separate/applicationForm.js?v=18.05'/>"></script>
 	<script src="<c:url value='/resources/js/separate/offerApplicationForm.js?v=18.05'/>"></script>
-		
+	<script src="<c:url value='/resources/js/demo/offerTemplate.js?v=18.05'/>"></script>	
 </body>
 </html>
 

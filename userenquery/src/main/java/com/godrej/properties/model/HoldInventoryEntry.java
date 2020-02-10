@@ -64,6 +64,9 @@ public class HoldInventoryEntry implements Serializable{
 	@Column(name="version")
 	private int version;
 	
+	@Column(name="hold_for_time")
+	private int holdForTime;
+	
 	public int getId() {
 		return id;
 	}
@@ -186,6 +189,14 @@ public class HoldInventoryEntry implements Serializable{
 
 	public void setVersion(int version) {
 		this.version = version;
+	}
+
+	public int getHoldForTime() {
+		return holdForTime;
+	}
+
+	public void setHoldForTime(int holdForTime) {
+		this.holdForTime = holdForTime;
 	}
 	
 }

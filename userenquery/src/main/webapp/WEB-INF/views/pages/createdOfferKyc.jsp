@@ -22,16 +22,6 @@
 		</tbody>
 	</table>
 	
-	<!-- <table class="table table-bordered"  style="margin-bottom:15px;">
-		<tbody>
-			<tr>
-				<td>Sales order No.: <span id="salesorderNo"></span></td> 
-				<td>Customer ID: <span id="SAPCustomerCode"></span></td> 
-				<td>Date: <span id="bookingDate"></span></td> 
-			</tr>
-		</tbody>
-	</table> -->
-	
 	<table class="table table-bordered"  style="margin-bottom:15px;">
 		<tbody>
 			<tr>

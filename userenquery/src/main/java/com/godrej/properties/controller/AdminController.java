@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.godrej.properties.constants.KeyConstants;
+import com.godrej.properties.master.dto.TemplateDto;
+import com.godrej.properties.master.service.TemplateService;
 import com.godrej.properties.model.BalanceDetails;
 import com.godrej.properties.model.Token;
 import com.godrej.properties.service.BalanceDetailsService;
@@ -45,6 +47,9 @@ public class AdminController {
 	
 	@Autowired
 	private BalanceDetailsService balanceDetailsService;
+	
+	@Autowired
+	private TemplateService templateService;
 	
 	@RequestMapping(value = { "/usermaster"}, method = RequestMethod.GET)
 	public String userMaster(ModelMap model,HttpServletRequest request) {
@@ -146,7 +151,14 @@ public class AdminController {
 	
 	@RequestMapping(value = { "/kycrole"}, method = RequestMethod.GET)
 	public String kycrole(ModelMap model,HttpServletRequest request) {
-		 return "kycrole";
+		String projectSfid = request.getParameter("projectid");
+		TemplateDto template = templateService.getTemplate(projectSfid);
+		if(template !=null) {
+			String templateText =  template.getBigText()==null?"":template.getBigText();
+			templateText= templateText.replace("'","\\'");
+			model.addAttribute("offerTemplate", templateText);
+		}
+		return "kycrole";
 	}
 	@RequestMapping(value = { "/paymentapproval"}, method = RequestMethod.GET)
 	public String paymentApproval(ModelMap model,HttpServletRequest request) {

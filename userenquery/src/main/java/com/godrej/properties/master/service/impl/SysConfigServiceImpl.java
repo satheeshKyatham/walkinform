@@ -14,10 +14,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.godrej.properties.dto.SysConfigEnum;
 import com.godrej.properties.master.dao.SysConfigDao;
 import com.godrej.properties.master.dto.SysConfigDto;
 import com.godrej.properties.master.model.SysConfig;
 import com.godrej.properties.master.service.SysConfigService;
+import com.itextpdf.text.pdf.PdfStructTreeController.returnType;
 
 /**
  * 
@@ -52,7 +54,6 @@ public class SysConfigServiceImpl implements SysConfigService{
 			if(config == null) {
 				return "No value against key - " + key;
 			}
-			String value = config.getValue();
 			configMap.put(key, config);
 		}catch (Exception e) {
 			log.error("Error", e);
@@ -97,7 +98,7 @@ public class SysConfigServiceImpl implements SysConfigService{
 	public String getValue(String name) {
 		SysConfig config = configMap.get(name);
 		if(config == null || !"Y".equalsIgnoreCase(config.getIsActive())) {
-			return "0";
+			return null;
 		}
 		
 		return config.getValue();
@@ -138,6 +139,9 @@ public class SysConfigServiceImpl implements SysConfigService{
 	@Override
 	public int getValueAsInt(String key) {
 		String value  = getValue(key);
+		if(value == null) {
+			return 0;
+		}
 		try {
 			return Integer.parseInt(value);
 		}catch (Exception e) {
@@ -149,6 +153,9 @@ public class SysConfigServiceImpl implements SysConfigService{
 	public int getValueAsInt(String key, String recordId) {
 		String mapKey= getMapKey(key, recordId);
 		String value  = getValue(mapKey);
+		if(value ==  null) {
+			return 0;
+		}
 		try {
 			return Integer.parseInt(value);
 		}catch (Exception e) {
@@ -157,6 +164,39 @@ public class SysConfigServiceImpl implements SysConfigService{
 		return 0;
 	}
 	
+	@Override
+	public int getValueAsInt(SysConfigEnum value, String recordId) {
+		String key =  value.toString();
+		return getValueAsInt(key, recordId);
+	}
+	
+	@Override
+	public String getValue(String key, String recordId) {
+		String mapKey =  getMapKey(key, recordId);
+		return getValue(mapKey);
+	}
+	
+	@Override
+	public String getValue(SysConfigEnum value, String recordId) {
+		String key = value.toString();
+		return getValue(key, recordId);
+	}
+	
+	@Override
+	public Double getValueAsDouble(SysConfigEnum param, String recordId) {
+		String key = param.toString();
+		String mapKey= getMapKey(key, recordId);
+		String value  = getValue(mapKey);
+		if(value ==  null) {
+			return 0d;
+		}
+		try {
+			return Double.valueOf(value);
+		}catch (Exception e) {
+			log.error("Error: ", e);
+		}
+		return 0d;
+	}
 	private String getMapKey(String key, String recordId) {
 		String record = recordId==null?"":"-"+recordId;
 		String configName =  key == null?"":key;

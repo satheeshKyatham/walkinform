@@ -54,7 +54,9 @@ if(ses!=null){
 <input type="hidden" id="role" value="<%= projectrole %>">
 <input type="hidden" id="userid" value="<%= userid %>">
   <!-- <input type="text" > -->
-  
+ <script type="text/javascript">
+  var offerTemplate = '${offerTemplate}';
+ </script>
   <nav class="navbar topMainBar">
 	  <div class="container">
 	    <!-- Brand and toggle get grouped for better mobile display -->
@@ -372,7 +374,7 @@ if(ses!=null){
 	<script src="<c:url value='/resources/js/separate/offerApplicationForm.js?v=18.05'/>"></script>
 	
 	<script src="<c:url value='/resources/js/separate/eoiReportSales.js?v=18.06'/>"></script>
-	
+	<script src="<c:url value='/resources/js/demo/offerTemplate.js?v=18.05'/>"></script>
 	
 </body>
 </html>
