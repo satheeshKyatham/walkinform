@@ -175,10 +175,10 @@
 					  <span class="checkmark soldOut"></span>
 					</label>
 					
-					<label class="containerCheckbox">Your Hold Unit
+					<!-- <label class="containerCheckbox">Your Hold Unit
 					  <input>
 					  <span class="checkmark holdforDiscussion"></span>
-					</label>
+					</label>  -->
 			
 					<label class="containerCheckbox">Customer Hold Unit
 					  <input>
