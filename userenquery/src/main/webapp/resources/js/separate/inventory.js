@@ -171,11 +171,15 @@ function inventoryLoad (callFrom){
 							caret = "caret";
 						
 						//add condition not equal to tru for alloted, offer through alloted and hold for reallocation
-						} else if (obj1[j].hold_reason==='temp' && obj1[j].hold_behalf_userid == $('#userid').val()) {
+						} 
+						
+						/*else if (obj1[j].hold_reason==='temp' && obj1[j].hold_behalf_userid == $('#userid').val()) {
 							unitStatus="unitTempAdmin";
 							dropdown = "<ul class='dropdown-menu'>  <li><a onclick='viewCostsheet(this, "+unitSfid+", "+houseNo+", "+floorNo+", "+towerCode+")'>View Costsheet</a></li> </ul>";
 							caret = "caret";
-						} else {
+						}*/
+						
+						else {
 							unitStatus="unitTemp";
 						}
 					}
