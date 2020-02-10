@@ -17,6 +17,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.godrej.properties.constants.KeyConstants;
 import com.godrej.properties.master.dto.ReferenceListDto;
+import com.godrej.properties.master.dto.TemplateDto;
+import com.godrej.properties.master.service.TemplateService;
 import com.godrej.properties.model.AssignedUser;
 import com.godrej.properties.model.ProjectLaunch;
 import com.godrej.properties.model.Token;
@@ -43,6 +45,9 @@ public class SalesDeskController {
 	@Autowired
  	private ProjectLaunchService projectLaunchService;
  	
+	@Autowired
+	private TemplateService templateService;
+
 	@RequestMapping(value = { "/salesdesk"}, method = RequestMethod.GET)
 	public String indexPost(ModelMap model,HttpServletRequest request,@RequestParam("id") String id) {
 		List<Token> tokens=tokenService.getuniqeTypes();
@@ -78,21 +83,12 @@ public class SalesDeskController {
 	 
 	@RequestMapping(value = { "/assignedusers"}, method = RequestMethod.GET)
 	public String assignedusers(ModelMap model,HttpServletRequest request,@RequestParam("userId") String user_id,@RequestParam("projectid")  String projectid) {
-		//HttpSession session=request.getSession();
-		//String projectId=(String)session.getAttribute("PROID");
-		
-		//+330*60*1000
-		/*List<AssignedUser> assign=assignUserService.getassignedusers(user_id,projectid);
-		if(assign!=null)
-		{
-			for(int i=0;assign.size()>i;i++)
-			{
-				Timestamp later = new Timestamp(assign.get(i).getStarteddate().getTime() + (330*60*1000));
-				assign.get(i).setStarteddate(later);
-				//assign.add(assignData);
-			}
+		TemplateDto template = templateService.getTemplate(projectid);
+		if(template !=null) {
+			String templateText =  template.getBigText()==null?"":template.getBigText();
+			templateText= templateText.replace("'","\\'");
+			model.addAttribute("offerTemplate", templateText);
 		}
-		model.addAttribute("assignList",assign );*/
 		 return "assignedusers";
 	}
 	

@@ -69,6 +69,7 @@ public class KeyConstants {
 	public static final String ERROR_MSG_101 = "errorNoUnit101";//This unit is no longer available please select another unit.
 	public static final String ERROR_MSG_102 = "errorUnitInactive102"; //Inventory is not activated
 	public static final String ERROR_MSG_103 = "errorInCode103"; //Yes, There is some technical problem.
+	public static final String ERROR_MSG_104 = "errorInCode104"; //Payment validation Error.
 	
 	public static final String SUCCESS_MSG_101 = "successOfferCreate101"; //Offer Successfully Created
 	public static final String SUCCESS_MSG_102 = "successUnitAvailable102"; //Unit Available

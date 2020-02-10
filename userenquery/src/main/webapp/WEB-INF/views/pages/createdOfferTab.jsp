@@ -25,6 +25,7 @@
 	</tbody>
 </table>
 <div id="applicationForm">
-	<%@ include file="/WEB-INF/views/pages/createdOfferKyc.jsp" %>
+	<%-- <%@ include file="/WEB-INF/views/pages/createdOfferKyc.jsp" %> --%>
+	<%@ include file="/WEB-INF/views/pages/createOfferKYCTemplate.jsp" %>
 </div>
 

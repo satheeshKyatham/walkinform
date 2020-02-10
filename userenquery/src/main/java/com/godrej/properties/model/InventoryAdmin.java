@@ -90,7 +90,9 @@ public class InventoryAdmin implements Serializable{
 	@Column(name = "eoi_unit_locked")
 	private boolean eoi_unit_locked;
 	
-	
+	@Column(name = "hold_for_time") 
+	private int holdForTime;
+
 	
 	public String isHold_status() {
 		return hold_status;
@@ -289,4 +291,13 @@ public class InventoryAdmin implements Serializable{
 	public void setEoi_unit_locked(boolean eoi_unit_locked) {
 		this.eoi_unit_locked = eoi_unit_locked;
 	}
+
+	public int getHoldForTime() {
+		return holdForTime;
+	}
+
+	public void setHoldForTime(int holdForTime) {
+		this.holdForTime = holdForTime;
+	}
+	
 }

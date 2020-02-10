@@ -56,7 +56,6 @@ import com.godrej.properties.model.ADLoginPass;
 import com.godrej.properties.model.AssignedUser;
 import com.godrej.properties.model.BSPAgainstPymtPlan;
 import com.godrej.properties.model.BSPTaxRecord;
-import com.godrej.properties.model.BalanceDetails;
 import com.godrej.properties.model.BillingData;
 import com.godrej.properties.model.CarParkCharges;
 import com.godrej.properties.model.Contact;
@@ -72,8 +71,6 @@ import com.godrej.properties.model.ExtraCharges;
 import com.godrej.properties.model.ExtraChargesHis;
 import com.godrej.properties.model.HoldInventoryAdmin;
 import com.godrej.properties.model.HoldInventoryAdminLog;
-import com.godrej.properties.model.HoldInventoryEntry;
-import com.godrej.properties.model.Inventory;
 import com.godrej.properties.model.InventoryAdmin;
 import com.godrej.properties.model.OTPRequestOC;
 import com.godrej.properties.model.OrderDataMapping;
@@ -107,7 +104,6 @@ import com.godrej.properties.model.Vw_UserMaster;
 import com.godrej.properties.model.Vw_UserProjectMapping;
 import com.godrej.properties.model.WithoutOtherChargesPP;
 import com.godrej.properties.service.AdLoginUserService;
-import com.godrej.properties.service.AdminUnitHoldStatusService;
 import com.godrej.properties.service.ApplicantDtlService;
 import com.godrej.properties.service.ApplicationDtlService;
 import com.godrej.properties.service.AssignUserService;
@@ -157,7 +153,6 @@ import com.godrej.properties.service.PushEnquiryDataService;
 import com.godrej.properties.service.ReceivedPaymentDtlService;
 import com.godrej.properties.service.RequestActionService;
 import com.godrej.properties.service.RqstProcessService;
-import com.godrej.properties.service.SalesUnitHoldStatusService;
 import com.godrej.properties.service.SchemeChargeService;
 import com.godrej.properties.service.SchemeMappingService;
 import com.godrej.properties.service.SchemePromotionalService;
@@ -430,14 +425,7 @@ public class WebServiceController<MultipartFormDataInput> {
 	private InventoryStatusController inventoryStatusController;	
 	
 	@Autowired
-	private GetEnquiryComments getEnquiryComments;
-	
-	@Autowired
- 	private AdminUnitHoldStatusService adminUnitHoldStatusService;
-	
-	@Autowired
- 	private SalesUnitHoldStatusService salesUnitHoldStatusService;
-	
+	private GetEnquiryComments getEnquiryComments;	
 	
 	
 	@RequestMapping(value = "/activeproject", method = RequestMethod.GET, produces = "application/json")
@@ -1385,109 +1373,6 @@ public class WebServiceController<MultipartFormDataInput> {
 	}
 	
 	
-	/* Added HOLD interval 20190515 */
-	@RequestMapping(value = { "/holdInventoryRqst" }, method = RequestMethod.POST)
-	public String holdInventoryRqst(@RequestParam("customerId") String customerId,
-			@RequestParam("unitSfid") String unitSfid, @RequestParam("projectNameId") String projectNameId,
-			@RequestParam("towerCode") String towerCode, @RequestParam("towerName") String towerName,
-			@RequestParam("unitNo") String unitNo, @RequestParam("floorNo") String floorNo,
-			@RequestParam("userid") int userid) {
-
-		GsonBuilder gsonBuilder = new GsonBuilder();
-		Gson gson = gsonBuilder.create();
-
-		/* Inventory bulk update - Commented By Satheesh Kyatham- 03-10-2019 */
-		/* =======Start========== */
-		/*
-		 * HoldInventoryEntry updateHold = new HoldInventoryEntry ();
-		 * 
-		 * updateHold.setUnitSfid(unitSfid); updateHold.setCustomer_id(customerId);
-		 * updateHold.setProject_id(projectNameId); updateHold.setStatusai("I");
-		 * updateHold.setHoldstatusyn("N");
-		 * holdInventoryEntryService.updatePreviousHold(updateHold);
-		 */
-		/* =========End======== */
-
-		if(userid == 0) {
-			log.info("No user info");
-			return gson.toJson("No user session.");
-		}
-
-//		HoldInventoryEntry holdUnitDtl = holdInventoryEntryService.holdExist(projectNameId, customerId); /*Vivek Birdi- Changed logic*/
-		HoldInventoryEntry holdUnitDtl = holdInventoryEntryService.getHolding(Integer.valueOf(userid));
-		
-				
-		if (holdUnitDtl != null && !holdUnitDtl.equals("")) {
-			log.info("You can not Hold more than One unit");
-			return gson.toJson("You can not hold more than one unit");
-		} else {
-//			Inventory uDtl = holdIntervalService.unitExist(unitSfid, projectNameId, towerCode);
-			Inventory uDtl = holdIntervalService.getHeldUnit(unitSfid);
-			log.info("After Unit Exit Query************************* HOLD Issue");
-			if (uDtl != null && !uDtl.equals("")) {
-				log.info("Unit Exit Query Entry found************************* HOLD Issue");
-				return gson.toJson("Sorry this unit is Held by someone else, Please Try again after some time");
-			} else {
-				log.info("Unit Exit Query No Entry found************************* HOLD Issue");
-				HoldInventoryEntry action = new HoldInventoryEntry();
-				action.setUnitSfid(unitSfid);
-				action.setHoldstatusyn("Y");
-				action.setStatusai("A");
-				action.setCustomer_id(customerId);
-				action.setProject_id(projectNameId);
-				
-				action.setTower_name(towerName);
-				action.settower_code(towerCode);
-				action.setFloor_no(floorNo);
-				action.setUnit_no(unitNo);
-				action.setUser_id(userid);
-
-				// action.setCreated_at(getIndianTime(new
-				// Timestamp(System.currentTimeMillis())));
-				action.setCreated_at(new Timestamp(System.currentTimeMillis()));
-				log.info("Before Insert************************* HOLD Issue");
-
-				try {
-					holdInventoryEntryService.insertHoldRqst(action);
-				}catch (Exception e) {
-					log.error("Exception while holding inventory , Only one person can hold the inventory at a time");
-					return gson.toJson("Sorry this unit is Held by someone else, Please Try again after some time");
-				}
-				log.info("After Insert************************* HOLD Issue");
-				return "inserted";
-			}
-		}
-	}
-	/* END Added for HOLD interval */
-
-	/* Manual release From Hold Unit */
-	@RequestMapping(value = { "/releaseFromHold" }, method = RequestMethod.POST)
-	public  String releaseFromHold(@RequestParam("customerId") String customerId,
-			@RequestParam("unitSfid") String unitSfid, @RequestParam("projectNameId") String projectNameId) {
-
-		GsonBuilder gsonBuilder = new GsonBuilder();
-		Gson gson = gsonBuilder.create();
-		try
-		{
-				HoldInventoryEntry action = new HoldInventoryEntry();
-		
-				Integer version = holdInventoryEntryService.getCurrentVersion(projectNameId, unitSfid, customerId)+1;
-				action.setUnitSfid(unitSfid);
-				action.setCustomer_id(customerId);
-				action.setProject_id(projectNameId);
-				action.setStatusai("I");
-				action.setHoldstatusyn("N");
-				action.setVersion(version);	
-				holdInventoryEntryService.updateForelease(action);
-		}
-		catch (Exception e) {
-			log.info("Error :- ",e);
-		}
-		return gson.toJson("");
-	}
-	
-	
-	
 	@RequestMapping(value = { "/sendForApproval" }, method = RequestMethod.POST)
 	public String sendForApproval(@RequestParam("timeid") String  timeid, 
 								 @RequestParam("actionAR") String actionAR,
@@ -1608,180 +1493,6 @@ public class WebServiceController<MultipartFormDataInput> {
 		return gson.toJson(userList);
 	}
 	
-	
-	// @RequestParam("customerContact") long contact,
-	@RequestMapping(value = { "/updateBSP" }, method = RequestMethod.POST)
-	public String updateBSP (@RequestParam("salesConsiderationTotal") double salesConsiderationTotal,  @RequestParam("bspTaxGST") double bspTaxGST,   @RequestParam("bspDis") String bspDis, @RequestParam("token") String token, @RequestParam("projectsfid") String projectsfid,   @RequestParam("enquirysfid") String enquirysfid,  @RequestParam("primarycontactsfid") String primarycontactsfid,   @RequestParam("sentToCrmYN") String sentToCrmYN
-			, @RequestParam("timeid") String timeid_str, @RequestParam("propid") String propid, @RequestParam("ppid") String ppid
-			, @RequestParam("offerthrough") String offerthrough, @RequestParam("brokersfid") String brokersfid, @RequestParam("discount_Value") String discount_Value_str
-			, @RequestParam("balance_amnt") String balanceAmnt,@RequestParam("balance_amnt_description") String balanceAmntDes
-			, @RequestParam("car_park_type") String car_park_type,@RequestParam("scheme_rate") String scheme_rate_str,@RequestParam("scheme_name") String scheme_name
-			,@RequestParam("userid") String userid,@RequestParam("enquiry_name") String enquiry_name,@RequestParam("costsheet_commitment") String costsheet_commitment
-			,@RequestParam("prepaymentamt") String prepaymentamt
-			,@RequestParam("bankname") String bankname
-			,@RequestParam("trxdate") String trxdate
-			,@RequestParam("trxno") String trxno
-			,@RequestParam("paymentmode") String paymentmode
-			,@RequestParam("tdsPaidBy") String tdsPaidBy
-			,@RequestParam("isOthers") boolean isOthers
-			
-			,@RequestParam("costsheet_path") String costsheet_path
-			,@RequestParam("cs_final_amount") double cs_final_amount
-			,@RequestParam("bankGL") String bankGL
-			
-			) throws JRException, IOException {
-		
-		
-	//log.info(" Create Offer Controller Parameters 1 - bspDis : "+bspDis+" token :"+token+" projectsfid :"+projectsfid+" enquirysfid :"+enquirysfid+" primarycontactsfid :"+primarycontactsfid+" sentToCrmYN :"+sentToCrmYN);
-	//log.info(" Create Offer Controller Parameters 2 - timeid_str : "+timeid_str+" propid :"+propid+" ppid :"+ppid+" offerthrough :"+offerthrough+" brokersfid :"+brokersfid+" discount_Value_str :"+discount_Value_str);	
-	//log.info(" Create Offer Controller Parameters 3 - balanceAmnt :"+balanceAmnt+" balanceAmntDes :"+balanceAmntDes+" car_park_type :"+car_park_type+" scheme_rate_str :"+scheme_rate_str+" scheme_name :"+scheme_name+" userid :"+userid+" enquiry_name :"+enquiry_name+" costsheet_commitment :"+costsheet_commitment+" prepaymentamt :"+prepaymentamt);
-	//log.info(" Create Offer Controller Parameters 4 - bankname :"+bankname+" trxdate :"+trxdate+" trxno :"+trxno+" paymentmode :"+paymentmode+" tdsPaidBy :"+tdsPaidBy+" isOthers :"+isOthers+" costsheet_path :"+costsheet_path+" cs_final_amount :"+cs_final_amount);
-		
-		
-		GsonBuilder gsonBuilder = new GsonBuilder();
-		Gson gson = gsonBuilder.create();
-		
-		UnitDtl bspRate = new UnitDtl ();
-		
-		// Condtion and validation added for post parameter
-		int scheme_rate = 0;
-		double discount_Value = 0;
-		int timeid = 0;
-		if(!"".equals(scheme_rate_str) && !scheme_rate_str.equals("other"))
-		{
-			scheme_rate=Integer.valueOf(scheme_rate_str);
-		}
-		if(!"".equals(discount_Value_str))
-		{
-			 discount_Value = Double.parseDouble(discount_Value_str);
-		}
-		if(!"".equals(timeid_str))
-			timeid=Integer.valueOf(timeid_str);
-		
-		bspRate.setSenttocrm(sentToCrmYN);
-		bspRate.setTimeid(timeid);
-		
-		bSPUpdateService.updateBSP(bspRate);
-		
-		
-		String errorMsg1 = KeyConstants.ERROR_MSG_101; //This unit is no longer available please select another unit.
-		String errorMsg2 = KeyConstants.ERROR_MSG_102; //Inventory is not activated
-		String errorMsg3 = KeyConstants.ERROR_MSG_103; //Yes, There is some technical problem.
-		String successMsg1 = KeyConstants.SUCCESS_MSG_101; //Offer Successfully Created
-		BalanceDetails action = new BalanceDetails ();
-		
-		try {
-			if (!"".equals(projectsfid) && !"".equals(propid)) {
-				//Add by A for check unit status
-				String propStatus = inventoryStatusController.inventoryStatus(projectsfid, propid);
-				
-				JsonElement root = new JsonParser().parse(propStatus);
-				JsonArray  jsonArray = root.getAsJsonArray();
-				 
-				Boolean inventoryStatusCondition = false;
-				
-				Boolean adminUnitStatus = adminUnitHoldStatusService.getAdminUnitHold(propid);
-				Boolean salesUnitStatus = salesUnitHoldStatusService.getSalesUnitHold(propid);
-				
-				if (jsonArray.size() > 0) {
-					 JsonObject  jsonObject1 = jsonArray.get(0).getAsJsonObject();
-					 String propertyoholdforreallocation = jsonObject1.get("propertyoholdforreallocation").getAsString();
-					 String PropertyForWebsite = jsonObject1.get("PropertyForWebsite").getAsString();
-					 String PropertyForSales = jsonObject1.get("PropertyForSales").getAsString();
-					 String PropertyForCP = jsonObject1.get("PropertyForCP").getAsString();
-					 String Propertyallotedthroughoffer = jsonObject1.get("Propertyallotedthroughoffer").getAsString();
-					 String alloted = jsonObject1.get("alloted").getAsString();
-					 String active = jsonObject1.get("active").getAsString();
-					 
-					 if (propertyoholdforreallocation != null && PropertyForWebsite != null && PropertyForSales != null && PropertyForCP != null && Propertyallotedthroughoffer != null && alloted != null && active != null) {
-						 if (active.equals("true")) {
-							 if (Propertyallotedthroughoffer.equals("false") && alloted.equals("false") && adminUnitStatus == false && salesUnitStatus == false) {
-								 inventoryStatusCondition = true;
-							 } else {
-								 action.setOffer_successMsg(errorMsg1);
-								 return gson.toJson(action);
-							 }
-						 } else {
-							 action.setOffer_successMsg(errorMsg2);
-							 return gson.toJson(action);
-						 }
-					 }
-				} else {
-					System.out.println(" Create Offer Controller - Yes, There is some technical problem (code:1) ");
-					log.info(" Create Offer Controller - Yes, There is some technical problem (code:1) ");
-					action.setOffer_successMsg(errorMsg3);
-					return gson.toJson(action);
-				}
-				
-				if(inventoryStatusCondition) {
-					//Create Offer through SFDC API
-					String offerId = creatOffer.PropOffer(bspDis,token,projectsfid,enquirysfid,primarycontactsfid,propid,ppid,offerthrough,brokersfid,discount_Value,enquiry_name,prepaymentamt,bankname,trxdate,trxno,paymentmode,tdsPaidBy,isOthers,bankGL);
-					
-					JsonObject jobj = new Gson().fromJson(offerId, JsonObject.class);
-					String offerid = jobj.get("offerid").getAsString();
-					String message = jobj.get("message").getAsString();
-					
-					/*JSONObject ob = new JSONObject(offerId);  
-					JSONArray arr = ob.getJSONArray("offers");
-					String offerid="";
-
-					for(int i=0; i<arr.length(); i++){   
-					  JSONObject o = arr.getJSONObject(i);  
-					  offerid=o.get("offerId").toString(); 
-					}*/
-					 
-					//Update offer created flag in sfdc property table through HEROKU
-					if((offerid!=null && offerid.length()==18)) {
-						if("a1l2s00000000X5AAI".equals(projectsfid)) {
-							boolean isPMAY = isUnderPMAY(offerid, projectsfid,salesConsiderationTotal );
-							propOtherChargesService.updatePropertyStatus(propid, isPMAY);
-						}
-						else {
-							propOtherChargesService.updatePropertyStatus(propid);
-						}
-					}
-						
-					//Insert offer related details in custome table
-					
-					action.setAmount(balanceAmnt);
-					action.setDescription(balanceAmntDes);
-					action.setContact_sfid(primarycontactsfid);
-					action.setEnquiry_sfid(enquirysfid);
-					action.setOffer_sfid(offerid);
-					action.setIsactive("A");
-					action.setPaymentplan_sfid(ppid);
-					action.setCar_park_type(car_park_type);
-					action.setScheme_name(scheme_name);
-					action.setScheme_rate(scheme_rate);
-					action.setProject_sfid(projectsfid);
-					action.setCostsheet_commitment(costsheet_commitment);
-					action.setCostsheet_path(costsheet_path);
-					action.setCs_final_amount(cs_final_amount);
-					action.setGst_tax(bspTaxGST);
-					
-					if(userid!=null && userid.length()>0)
-					{
-						if(!userid.equals("null"))
-							action.setUserid(Integer.valueOf(userid));
-					}
-					action.setOffer_successMsg(successMsg1);
-					
-					return gson.toJson(balanceDetailsService.insertBalanceDetails(action));
-				} else {
-					log.info(" Create Offer Controller - Yes, There is some technical problem (code:2) ");
-					action.setOffer_successMsg(errorMsg3);
-					return gson.toJson(action);
-				}
-			}
-		}
-		catch(Exception e){
-			log.info("Error :-",e);
-		}
-		log.info(" Create Offer Controller - Yes, There is some technical problem (code:3) ");
-		action.setOffer_successMsg(errorMsg3);
-		return gson.toJson(action);
-		
-	}
 	
 	
 	private boolean isUnderPMAY(String offerId, String projectSfid, double basicSalePrice) {
@@ -3278,8 +2989,8 @@ public class WebServiceController<MultipartFormDataInput> {
 	                			
 	                			if (plans.get(k).getCreated_at() != null && !(plans.get(k).getHoldstatusyn().equals("N"))  && !(plans.get(k).getHoldIntervalstatusAI().equals("I"))  ) {
 	   //                 			System.out.println("Not null Value");
-	                    			
-	                    			Timestamp timestampValue = new Timestamp(plans.get(k).getCreated_at().getTime()+ 5*60*1000);
+	                				int holdTime = plans.get(k).getHoldForTime();
+	                    			Timestamp timestampValue = new Timestamp(plans.get(k).getCreated_at().getTime()+ holdTime);
 	                        		Timestamp currentTpm = new Timestamp(System.currentTimeMillis());
 	                        		
 	                        		if(timestampValue.compareTo(currentTpm) > 0)

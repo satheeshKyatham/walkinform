@@ -21,6 +21,7 @@ import com.godrej.properties.master.service.SysConfigService;
 import com.godrej.properties.model.HoldInventoryEntry;
 import com.godrej.properties.model.Inventory;
 import com.godrej.properties.model.ZzholdTest;
+import com.godrej.properties.service.HoldIntervalService;
 import com.godrej.properties.service.HoldInventoryEntryService;
 import com.godrej.properties.service.InventoryService;
 import com.godrej.properties.service.ZZExistService;
@@ -50,6 +51,10 @@ public class InventoryController {
  	@Autowired
  	private ZZExistService zZExistService;
 
+ 	@Autowired
+ 	private HoldIntervalService holdIntervalService;
+
+ 	
 	@PostMapping(value = { "/holdExistData" })
 	public @ResponseBody String holdExistData (@RequestParam("projectNameId") String projectNameId, @RequestParam("customerId") String customerId) {
 		GsonBuilder gsonBuilder = new GsonBuilder();
@@ -58,50 +63,159 @@ public class InventoryController {
 		
 		ArrayList<HoldInventoryEntry> intList = new ArrayList<>(); 
 		
-		if (plans != null) {
-			for(int k=0;k<plans.size();k++) {
+		if (plans == null || plans.isEmpty()) {
+			return gson.toJson("");
+		}
+		for (int k = 0; k < plans.size(); k++) {
+
+			Timestamp currentTpm = new Timestamp(System.currentTimeMillis());
+
+			Calendar cal = Calendar.getInstance();
+			cal.setTimeInMillis(currentTpm.getTime());
+
+			// add a bunch of seconds to the calendar
+			cal.add(Calendar.SECOND, 98765);
+
+			HoldInventoryEntry plan = plans.get(k);
+			if(plan == null || plan.getCreated_at() == null ) {
+				continue;
+			}
+			Timestamp createdAt  = plan.getCreated_at();
+			long time = createdAt.getTime();
+			// create a second time stamp
+			int holdTime =  plan.getHoldForTime();
+			Timestamp timestampValue = new Timestamp(time+ holdTime);
+
+			long milliseconds = timestampValue.getTime() - currentTpm.getTime();
+			int seconds = (int) milliseconds / 1000;
+
+			int hours = seconds / 3600;
+			int minutes = (seconds % 3600) / 60;
+			seconds = (seconds % 3600) % 60;
+
+			log.info("currentTpm: " + currentTpm);
+			log.info("timestampValue: " + timestampValue);
+
+			log.info("Difference: ");
+			log.info(" Hours: " + hours);
+			log.info(" Minutes: " + minutes);
+			log.info(" Seconds: " + seconds);
+			plans.get(k).setHoldMin(minutes);
+			plans.get(k).setHoldSec(seconds);
+
+			intList.add(plans.get(k));
+		}
+			
+		return gson.toJson(intList);
+		
+	}
+	
+	
+	/* Added HOLD interval 20190515 */
+	@PostMapping(value = { "/holdInventoryRqst" })
+	public @ResponseBody String holdInventoryRqst(@RequestParam("customerId") String customerId,
+			@RequestParam("unitSfid") String unitSfid, @RequestParam("projectNameId") String projectNameId,
+			@RequestParam("towerCode") String towerCode, @RequestParam("towerName") String towerName,
+			@RequestParam("unitNo") String unitNo, @RequestParam("floorNo") String floorNo,
+			@RequestParam("userid") int userid) {
+
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		Gson gson = gsonBuilder.create();
+
+		/* Inventory bulk update - Commented By Satheesh Kyatham- 03-10-2019 */
+		/* =======Start========== */
+		/*
+		 * HoldInventoryEntry updateHold = new HoldInventoryEntry ();
+		 * 
+		 * updateHold.setUnitSfid(unitSfid); updateHold.setCustomer_id(customerId);
+		 * updateHold.setProject_id(projectNameId); updateHold.setStatusai("I");
+		 * updateHold.setHoldstatusyn("N");
+		 * holdInventoryEntryService.updatePreviousHold(updateHold);
+		 */
+		/* =========End======== */
+
+		if(userid == 0) {
+			log.info("No user info");
+			return gson.toJson("No user session.");
+		}
+
+
+		HoldInventoryEntry holdUnitDtl = holdInventoryEntryService.getHolding(Integer.valueOf(userid));
+		
 				
-	    		Timestamp currentTpm = new Timestamp(System.currentTimeMillis());
-
-	    		Calendar cal = Calendar.getInstance();
-	    		cal.setTimeInMillis(currentTpm.getTime());
-
-	    		// add a bunch of seconds to the calendar
-	    		cal.add(Calendar.SECOND, 98765);
+		if (holdUnitDtl != null && !holdUnitDtl.equals("")) {
+			log.info("You can not Hold more than One unit");
+			return gson.toJson("You can not hold more than one unit");
+		} else {
+			Inventory uDtl = holdIntervalService.getHeldUnit(unitSfid);
+			log.info("After Unit Exit Query************************* HOLD Issue");
+			if (uDtl != null && !uDtl.equals("")) {
+				log.info("Unit Exit Query Entry found************************* HOLD Issue");
+				return gson.toJson("Sorry this unit is Held by someone else, Please Try again after some time");
+			} else {
+				log.info("Unit Exit Query No Entry found************************* HOLD Issue");
+				
 	    		int holdTime = sysConfigService.getValueAsInt(SysConfigService.HOLD_TIME, projectNameId);
 	    		if(holdTime==0) {
 	    			holdTime =HOLD_TIME;
 	    		}
-	    		// create a second time stamp
-	    		Timestamp timestampValue = new Timestamp(plans.get(k).getCreated_at().getTime()+ holdTime);
 
-	    		long milliseconds = timestampValue.getTime() - currentTpm.getTime();
-	    		int seconds = (int) milliseconds / 1000;
-
-	    		int hours = seconds / 3600;
-	    		int minutes = (seconds % 3600) / 60;
-	    		seconds = (seconds % 3600) % 60;
-
-	    		log.info("currentTpm: " + currentTpm);
-	    		log.info("timestampValue: " + timestampValue);
-
-	    		log.info("Difference: ");
-	    		log.info(" Hours: " + hours);
-	    		log.info(" Minutes: " + minutes);
-	    		log.info(" Seconds: " + seconds);
-				plans.get(k).setHoldMin(minutes);
-				plans.get(k).setHoldSec(seconds);
 				
+				HoldInventoryEntry action = new HoldInventoryEntry();
+				action.setUnitSfid(unitSfid);
+				action.setHoldstatusyn("Y");
+				action.setStatusai("A");
+				action.setCustomer_id(customerId);
+				action.setProject_id(projectNameId);
 				
-				intList.add(plans.get(k));
+				action.setTower_name(towerName);
+				action.settower_code(towerCode);
+				action.setFloor_no(floorNo);
+				action.setUnit_no(unitNo);
+				action.setUser_id(userid);
+				action.setHoldForTime(holdTime);
+
+				action.setCreated_at(new Timestamp(System.currentTimeMillis()));
+				log.info("Before Insert************************* HOLD Issue");
+
+				try {
+					holdInventoryEntryService.insertHoldRqst(action);
+				}catch (Exception e) {
+					log.error("Exception while holding inventory , Only one person can hold the inventory at a time");
+					return gson.toJson("Sorry this unit is Held by someone else, Please Try again after some time");
+				}
+				log.info("After Insert************************* HOLD Issue");
+				return "inserted";
 			}
-			
-			return gson.toJson(intList);
-		} else {
-			return gson.toJson("");
 		}
 	}
-	
+	/* END Added for HOLD interval */
+
+	/* Manual release From Hold Unit */
+	@PostMapping(value = { "/releaseFromHold" })
+	public @ResponseBody  String releaseFromHold(@RequestParam("customerId") String customerId,
+			@RequestParam("unitSfid") String unitSfid, @RequestParam("projectNameId") String projectNameId) {
+
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		Gson gson = gsonBuilder.create();
+		try
+		{
+				HoldInventoryEntry action = new HoldInventoryEntry();
+		
+				Integer version = holdInventoryEntryService.getCurrentVersion(projectNameId, unitSfid, customerId)+1;
+				action.setUnitSfid(unitSfid);
+				action.setCustomer_id(customerId);
+				action.setProject_id(projectNameId);
+				action.setStatusai("I");
+				action.setHoldstatusyn("N");
+				action.setVersion(version);	
+				holdInventoryEntryService.updateForelease(action);
+		}
+		catch (Exception e) {
+			log.info("Error :- ",e);
+		}
+		return gson.toJson("");
+	}
 	
 	
 	
@@ -142,7 +256,8 @@ public class InventoryController {
                         		cal.add(Calendar.SECOND, 98765);
 
                         		// create a second time stamp
-                	    		int holdTime = sysConfigService.getValueAsInt(SysConfigService.HOLD_TIME, projectId);
+                	    		int holdTime = plans.get(k).getHoldForTime();
+							/* sysConfigService.getValueAsInt(SysConfigService.HOLD_TIME, projectId); */
                         		Timestamp timestampValue = new Timestamp(plans.get(k).getCreated_at().getTime()+ holdTime);
 
                         		long milliseconds = timestampValue.getTime() - currentTpm.getTime();
