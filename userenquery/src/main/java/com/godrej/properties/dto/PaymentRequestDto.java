@@ -8,6 +8,7 @@ public class PaymentRequestDto {
 	private Double plannedPaymentWithTax;
 	private Double price;
 	private Double priceWithTax;
+	private Double tokenTax;
 	
 	public String getProjectSfid() {
 		return projectSfid;
@@ -44,5 +45,11 @@ public class PaymentRequestDto {
 	}
 	public void setPriceWithTax(Double priceWithTax) {
 		this.priceWithTax = priceWithTax;
+	}
+	public Double getTokenTax() {
+		return tokenTax;
+	}
+	public void setTokenTax(Double tokenTax) {
+		this.tokenTax = tokenTax;
 	}	
 }

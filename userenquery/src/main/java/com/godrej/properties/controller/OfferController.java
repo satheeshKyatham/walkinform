@@ -90,6 +90,7 @@ public class OfferController {
 			,@RequestParam("plannedPaymentWithTax") Double plannedPaymentWithTax
 			,@RequestParam("price") Double price
 			,@RequestParam("priceWithTax") Double priceWithTax
+			,@RequestParam("tokenTax") Double tokenTax
 			) throws JRException, IOException {
 		
 
@@ -112,6 +113,7 @@ public class OfferController {
 		paymentRequest.setPlannedPaymentWithTax(plannedPaymentWithTax);
 		paymentRequest.setPrice(price);
 		paymentRequest.setPriceWithTax(priceWithTax);
+		paymentRequest.setTokenTax(tokenTax);
 		
 		Errors errors=  new Errors();
 		offerValidator.validate(paymentRequest, errors);

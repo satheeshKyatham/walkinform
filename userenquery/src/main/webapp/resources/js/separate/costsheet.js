@@ -1257,6 +1257,7 @@ function updateBSP (timeid) {
        var priceWithTax = $("#salesConsiderationTotal").text();
        var plannedPayment = $("#tokenBaseAmount").text();
        var plannedPaymentWithTax = $("#tokenAmount").text();
+       var tokenTax= $("#tokenGST").text();
        var paymentDetails = getPaymentDetails();
        $.post(pageContext+"updateBSP",{"salesConsiderationTotal":salesConsiderationTotal, "bspTaxGST":bspTaxGST, "bspDis":bspVal,"token":$('#token').val(),
               "projectsfid":$('#projectsfid').val(),"enquirysfid":$('#enquirysfid').val(),"primarycontactsfid":$('#primarycontactsfid').val(), "sentToCrmYN":"Y", "timeid":"0"
@@ -1265,7 +1266,8 @@ function updateBSP (timeid) {
               ,"car_park_type":$('#carParkType').find('option:selected').attr("data-name"),"scheme_rate":$('#getPln').find('option:selected').attr("data-valuerate"),"scheme_name":$("#getPln :selected").text(),"userid":$('#userid').val(),"enquiry_name":$('#enquiry_name').val() 
               ,"costsheet_commitment":$('#costsheet_commitment').val(),"prepaymentamt":prepaymentAmount,"bankname":bankname,"trxdate":trxdate,"trxno":trxno,"paymentmode":paymentmode, "tdsPaidBy":tdsPaidBy,"isOthers":isOthers, "costsheet_path": csPath, "cs_final_amount":$('#csFinalAmountInput').val(),"bankGL":$('#towerBankGLCode').val() 
        ,"paymentDetails": paymentDetails,"price":convertToNumber(price),"priceWithTax":convertToNumber(priceWithTax)
-       ,"plannedPayment":convertToNumber(plannedPayment),"plannedPaymentWithTax":convertToNumber(plannedPaymentWithTax)},
+       ,"plannedPayment":convertToNumber(plannedPayment),"plannedPaymentWithTax":convertToNumber(plannedPaymentWithTax)
+       ,"tokenTax":convertToNumber(tokenTax)},
        function(data){                       
        }).done(function(data){
     	   var offerJson = JSON.parse(data);
