@@ -154,7 +154,9 @@ public class AdminController {
 		String projectSfid = request.getParameter("projectid");
 		TemplateDto template = templateService.getTemplate(projectSfid);
 		if(template !=null) {
-			model.addAttribute("offerTemplate", template.getBigText());
+			String templateText =  template.getBigText()==null?"":template.getBigText();
+			templateText= templateText.replace("'","\\'");
+			model.addAttribute("offerTemplate", templateText);
 		}
 		return "kycrole";
 	}
