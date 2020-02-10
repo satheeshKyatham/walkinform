@@ -153,6 +153,7 @@ import com.godrej.properties.service.PushEnquiryDataService;
 import com.godrej.properties.service.ReceivedPaymentDtlService;
 import com.godrej.properties.service.RequestActionService;
 import com.godrej.properties.service.RqstProcessService;
+import com.godrej.properties.service.SalesUnitHoldStatusService;
 import com.godrej.properties.service.SchemeChargeService;
 import com.godrej.properties.service.SchemeMappingService;
 import com.godrej.properties.service.SchemePromotionalService;
@@ -426,6 +427,9 @@ public class WebServiceController<MultipartFormDataInput> {
 	
 	@Autowired
 	private GetEnquiryComments getEnquiryComments;	
+	
+	@Autowired
+	private SalesUnitHoldStatusService salesUnitHoldStatusService;
 	
 	
 	@RequestMapping(value = "/activeproject", method = RequestMethod.GET, produces = "application/json")
@@ -4112,7 +4116,7 @@ public class WebServiceController<MultipartFormDataInput> {
 		//check inventory status
 		// @RequestParam("customerContact") long contact,
 		@RequestMapping(value = { "/getInventoryStatus" }, method = RequestMethod.POST)
-		public String getInventoryStatus (@RequestParam("projectsfid") String projectsfid,  @RequestParam("propid") String propid ) throws JRException, IOException {
+		public String getInventoryStatus (@RequestParam("userid") String userid, @RequestParam("projectsfid") String projectsfid,  @RequestParam("propid") String propid ) throws JRException, IOException {
 			
 			log.info(" Check inventory status Parameters - projectsfid : "+projectsfid+" propid :"+propid);
 			
@@ -4133,7 +4137,7 @@ public class WebServiceController<MultipartFormDataInput> {
 					JsonArray  jsonArray = root.getAsJsonArray();
 					 
 					//Boolean adminUnitStatus = adminUnitHoldStatusService.getAdminUnitHold(propid);
-					//Boolean salesUnitStatus = salesUnitHoldStatusService.getSalesUnitHold(propid);
+					Boolean salesUnitStatus = salesUnitHoldStatusService.getSalesUnitHold(propid, userid);
 					
 					if (jsonArray.size() > 0) {
 						 JsonObject  jsonObject1 = jsonArray.get(0).getAsJsonObject();
@@ -4147,7 +4151,7 @@ public class WebServiceController<MultipartFormDataInput> {
 						 
 						 if (propertyoholdforreallocation != null && PropertyForWebsite != null && PropertyForSales != null && PropertyForCP != null && Propertyallotedthroughoffer != null && alloted != null && active != null) {
 							 if (active.equals("true")) {
-								 if (Propertyallotedthroughoffer.equals("false") && alloted.equals("false") ) {
+								 if (Propertyallotedthroughoffer.equals("false") && alloted.equals("false")  && salesUnitStatus == false ) {
 									 return successMsg2;
 								 } else {
 									 return errorMsg1;

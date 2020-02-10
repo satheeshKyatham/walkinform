@@ -14,8 +14,8 @@ public class SalesUnitHoldStatusServiceImpl implements SalesUnitHoldStatusServic
 	SalesUnitHoldStatusDao salesUnitHoldStatusDao;
 	
 	@Override
-	public Boolean getSalesUnitHold(String unitSFID) {
-		return salesUnitHoldStatusDao.getSalesUnitHold(unitSFID);
+	public Boolean getSalesUnitHold(String unitSFID, String userid) {
+		return salesUnitHoldStatusDao.getSalesUnitHold(unitSFID, userid);
 	}
 	
 }

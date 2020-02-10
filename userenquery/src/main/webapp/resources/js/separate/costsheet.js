@@ -61,7 +61,7 @@ $("#getCSData").click(function (){
        $('#paymentPlanChangeID').val($('#ppDropdown').val());
        if ( $('#unitSfid').val() != '') {             
              	
-         	 $.post(pageContext+"getInventoryStatus",{"projectsfid":$('#projectsfid').val(),"propid":$('#unitSfid').val()},function(data){                       
+         	 $.post(pageContext+"getInventoryStatus",{"userid":$('#userid').val(),  "projectsfid":$('#projectsfid').val(),"propid":$('#unitSfid').val()},function(data){                       
          	       
              }).done(function(data){
               	   if (data == "errorNoUnit101") {
@@ -911,14 +911,27 @@ function paymentPlanOtherCharges (firstRowObj){
                            firstPPText = ' - Less '+$('#firstPPTextRow').text();
                     }
                     
+                    var ppFirstRowFR = '';
+                    var firstPPTextRowFR = '';
+                    var tokenBaseAmountFR = '';
+                    var tokenGSTFR = '';
+                    var tokenAmountFR = '';
+                    
+                    if (j == 0){
+                    	ppFirstRowFR = 'ppFirstRow';
+                        firstPPTextRowFR = 'firstPPTextRow';
+                        tokenBaseAmountFR = 'tokenBaseAmount';
+                        tokenGSTFR = 'tokenGST';
+                        tokenAmountFR = 'tokenAmount';
+                    }
                     
                     console.log ("PP Name ::: " + uniqueNames[j] +"--------"+ "PP % ::: " + uniqePPpercent[j]);
                     
                     
-                    html += "<tr>" +
-                                        "<td>"+ uniqueNames[j] + firstPPText+" </td>" +
+                    html += "<tr id= '"+ppFirstRowFR+"'>" +
+                                        "<td id= '"+firstPPTextRowFR+"'  >"+ uniqueNames[j] + firstPPText+" </td>" +
                                         "<td class='txtRight' style='text-align:right;'>"+ uniqePPpercent[j] +" % </td>" +
-                                        "<td class='txtRight' style='text-align:right;'>" + parseFloat(finalCA+ocPlsBsp-tokenBaseAmountPP).toFixed(2) +  "</td>  " +
+                                        "<td id= '"+tokenBaseAmountFR+"' class='txtRight' style='text-align:right;'>" + parseFloat(finalCA+ocPlsBsp-tokenBaseAmountPP).toFixed(2) +  "</td>  " +
                                         
                                         //Remove after test
                                         //"<td class='txtRight'>" + parseFloat((ocPlsBsp)*($('#bspGSTTax').val())/100) +  "</td>  " +
@@ -927,8 +940,8 @@ function paymentPlanOtherCharges (firstRowObj){
                                         
                                         
                                         
-                                        "<td class='txtRight' style='text-align:right;'>" +parseFloat(gstPymtOcTotal-tokenGSTPP).toFixed(2)+  "</td> " +
-                                        "<td class='txtRight' id='payableToTotal"+i+"' style='text-align:right;'> "+parseFloat(finalCA+ocPlsBsp+parseFloat(gstPymtOcTotal)-tokenAmountPP).toFixed(2)+" </td> " +
+                                        "<td id= '"+tokenGSTFR+"' class='txtRight' style='text-align:right;'>" +parseFloat(gstPymtOcTotal-tokenGSTPP).toFixed(2)+  "</td> " +
+                                        "<td id= '"+tokenAmountFR+"' class='txtRight' id='payableToTotal"+i+"' style='text-align:right;'> "+parseFloat(finalCA+ocPlsBsp+parseFloat(gstPymtOcTotal)-tokenAmountPP).toFixed(2)+" </td> " +
                                  "</tr>";
                     
                     amountPPTotal = parseFloat(finalCA+ocPlsBsp)+parseFloat(amountPPTotal);

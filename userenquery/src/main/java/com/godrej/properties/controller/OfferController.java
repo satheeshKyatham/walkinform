@@ -167,8 +167,8 @@ public class OfferController {
 				 
 				Boolean inventoryStatusCondition = false;
 				
-				Boolean adminUnitStatus = adminUnitHoldStatusService.getAdminUnitHold(propid);
-				Boolean salesUnitStatus = salesUnitHoldStatusService.getSalesUnitHold(propid);
+				//Boolean adminUnitStatus = adminUnitHoldStatusService.getAdminUnitHold(propid);
+				Boolean salesUnitStatus = salesUnitHoldStatusService.getSalesUnitHold(propid, userid);
 				
 				if (jsonArray.size() > 0) {
 					 JsonObject  jsonObject1 = jsonArray.get(0).getAsJsonObject();
@@ -182,7 +182,7 @@ public class OfferController {
 					 
 					 if (propertyoholdforreallocation != null && PropertyForWebsite != null && PropertyForSales != null && PropertyForCP != null && Propertyallotedthroughoffer != null && alloted != null && active != null) {
 						 if (active.equals("true")) {
-							 if (Propertyallotedthroughoffer.equals("false") && alloted.equals("false") && adminUnitStatus == false && salesUnitStatus == false) {
+							 if (Propertyallotedthroughoffer.equals("false") && alloted.equals("false")  && salesUnitStatus == false) {
 								 inventoryStatusCondition = true;
 							 } else {
 								 action.setOffer_successMsg(errorMsg1);
