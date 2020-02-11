@@ -1277,7 +1277,7 @@ function updateBSP (timeid) {
     		   
     		   swal({
 	   				title: "This unit is no longer available please select another unit.",
-	   				text: "",
+	   				text: ""+offerJson.apiError,
 	   				type: "warning",
 	   				allowOutsideClick: true,
 	   				showConfirmButton: true
@@ -1288,7 +1288,7 @@ function updateBSP (timeid) {
     		   
     		   swal({
 	   				title: "Inventory is not activated.",
-	   				text: "",
+	   				text: ""+offerJson.apiError,
 	   				type: "warning",
 	   				allowOutsideClick: true,
 	   				showConfirmButton: true
@@ -1302,7 +1302,7 @@ function updateBSP (timeid) {
 	   				//title: "There is some technical problem, please try again.",
     			   	title: "There was problem in creating offer at this time. Please try again by clicking create offer.",
 
-	   				text: "",
+	   				text: ""+offerJson.apiError,
 	   				type: "warning",
 	   				allowOutsideClick: true,
 	   				showConfirmButton: true

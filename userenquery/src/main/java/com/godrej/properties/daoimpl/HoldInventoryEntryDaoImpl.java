@@ -110,7 +110,7 @@ public class HoldInventoryEntryDaoImpl extends AbstractDao<Integer, HoldInventor
 			//Transaction trx = session.beginTransaction();
 //			Query query = session.createNativeQuery("UPDATE salesforce.gpl_cs_hold_unit_uat SET holdstatusyn = '"+action.getHoldstatusyn()+"',  statusai = '"+action.getStatusai()+"'   WHERE  created_at + (interval '5 minute') < now() + (interval '330 minute')");
 			
-			Query query = session.createNativeQuery("UPDATE salesforce.gpl_cs_hold_unit_uat A SET holdstatusyn = '"+action.getHoldstatusyn()+"', statusai = '"+action.getStatusai()+"', version =(SELECT coalesce(MAX(VERSION),0) +1 FROM salesforce.gpl_cs_hold_unit_uat B WHERE A.sfid=B.sfid) WHERE A.created_at + (coalesce(hold_for_time/60000, 5) || ' minute') :: interval < now() + (interval '330 minute') AND A.holdstatusyn = 'Y' AND A.statusai = 'A' ");
+			Query query = session.createNativeQuery("UPDATE salesforce.gpl_cs_hold_unit_uat A SET holdstatusyn = '"+action.getHoldstatusyn()+"', statusai = '"+action.getStatusai()+"', version =(SELECT coalesce(MAX(VERSION),0) +1 FROM salesforce.gpl_cs_hold_unit_uat B WHERE A.sfid=B.sfid) WHERE A.created_at + (coalesce(hold_for_time/60000, 5) || ' minute') \\:\\: interval < now() + (interval '330 minute') AND A.holdstatusyn = 'Y' AND A.statusai = 'A' ");
 			
 			/*
 			 * Query query = session.
