@@ -55,7 +55,7 @@ public class CreateOffer {
 	static String CLIENTSECRET = KeyConstants.SFDC_CLIENTSECRET;
 	
 	//public static void main(String[] args) {
-	public String PropOffer (String bspDis, String token, String projectsfid, String enquirysfid, String primarycontactsfid,String propid,String ppid,String offerthrough,String brokersfid,double discount_Value,String enquiry_name,String prepaymentamt,String bankname,String trxdate,String trxno,String paymentmode, String tdsPaidBy,boolean isothers,String bankGL) throws JRException, IOException{
+	public String PropOffer (String bspDis, String token, String projectsfid, String enquirysfid, String primarycontactsfid,String propid,String ppid,String offerthrough,String brokersfid,double discount_Value,String enquiry_name,String prepaymentamt,String bankname,String trxdate,String trxno,String paymentmode, String tdsPaidBy,boolean isothers,String bankGL) throws Exception{
 		
 		DefaultHttpClient httpclient = new DefaultHttpClient();
 		// Assemble the login request URL
@@ -69,14 +69,8 @@ public class CreateOffer {
 		HttpPost httpPost = new HttpPost(loginURL);
 		HttpResponse response = null;
 		
-		try {
-			//Execute the login POST request
-			response = httpclient.execute(httpPost);
-		} catch (ClientProtocolException cpException) {
-			//Handle protocol exception
-		} catch (IOException ioException) {
-			//Handle system IO exception
-		}
+		response = httpclient.execute(httpPost);
+		
 		//verify response is HTTP OK
 		final int statusCode =
 		response.getStatusLine().getStatusCode();
@@ -98,14 +92,11 @@ public class CreateOffer {
 		String loginAccessToken = null;
 		String loginInstanceUrl = null;
 		
-		try {
-			jsonObject = (JSONObject) new
-			JSONTokener(getResult).nextValue();
+		
+			jsonObject = (JSONObject) new JSONTokener(getResult).nextValue();
 			loginAccessToken = jsonObject.getString("access_token");
 			loginInstanceUrl = jsonObject.getString("instance_url");
-		} catch (JSONException jsonException) {
-			logger.error("Error :",jsonException);
-		}
+		
 		
 		
 		logger.info(response.getStatusLine());
