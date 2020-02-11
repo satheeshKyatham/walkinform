@@ -52,8 +52,11 @@ public class KYCApplicantDtl implements Serializable{
 	@Column(name="address_proof_type") private String address_proof_type;
 	@Column(name="address_proof_no") private String address_proof_no;
 	
-	@Column(name = "last_name")
-	private String lastName;
+	@Column(name = "last_name") private String lastName;
+	
+	@Column(name = "relationship__c") private String relationship__c;
+	@Column(name = "relationship_name__c") private String relationship_name__c;
+	
 	
 	public int getId() {
 		return id;
@@ -204,5 +207,17 @@ public class KYCApplicantDtl implements Serializable{
 	}
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+	public String getRelationship__c() {
+		return relationship__c;
+	}
+	public void setRelationship__c(String relationship__c) {
+		this.relationship__c = relationship__c;
+	}
+	public String getRelationship_name__c() {
+		return relationship_name__c;
+	}
+	public void setRelationship_name__c(String relationship_name__c) {
+		this.relationship_name__c = relationship_name__c;
 	}
 }

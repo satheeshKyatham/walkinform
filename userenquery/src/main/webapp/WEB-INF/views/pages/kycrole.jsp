@@ -110,7 +110,7 @@ if(ses!=null){
 								<th>View/Fill KYC</th>
 								<th>Cost sheet</th>
 								<th>Application Form</th>
-	<!-- 							<th>Total Amount</th> -->
+								<th>Total Amount</th>
 							</tr>
 						</thead>
 						<tbody>
