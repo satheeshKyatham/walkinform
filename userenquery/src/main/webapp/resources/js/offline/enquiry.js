@@ -462,7 +462,7 @@ function savebasicInfoResp(data){
         	var code=countryCode+mobileNo;
         	code = contact.mobileNo;
         	code=code.replace("+", "%2B");
-			$.get(url+"/generateWalkinTokenOffline",{"enquiryid":enq.enquiryId,"mobileno":contact.mobileNo,"projectSFID":$("#projectSfid").val(),"projectName":$("#projectName").val()
+			$.get(url+"/generateWalkinTokenOffline",{"enquiryid":enq.enquiryId,"mobileno":contact.mobile,"projectSFID":$("#projectSfid").val(),"projectName":$("#projectName").val()
         		,"countryCode":contact.countryCode},function(data){//,"cpflag":enq.isReferredByChannelPartnerFlag,"cpname":cpname				 
         	}).done(function(data){
         		console.log(data);

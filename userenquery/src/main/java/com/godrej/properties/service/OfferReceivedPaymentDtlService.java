@@ -2,8 +2,8 @@ package com.godrej.properties.service;
 
 import java.util.List;
 
-import com.godrej.properties.model.OfferReceivedPaymentDtl;
+import com.godrej.properties.model.PropPrepaymentReceived;
 
 public interface OfferReceivedPaymentDtlService {
-	List<OfferReceivedPaymentDtl> getOfferReceivedPaymentDtl(String offerSFID);
+	List<PropPrepaymentReceived> getOfferReceivedPaymentDtl(String offerSFID);
 }

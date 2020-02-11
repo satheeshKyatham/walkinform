@@ -711,6 +711,7 @@
 					<th>Ticket Size</th>
 					<th>Floor Band</th>
 					<th>Tower</th>
+					<th>Unit No.</th>
 					<th>Car Park Type</th>
 					<th>Description</th>
 		      	</tr>

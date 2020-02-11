@@ -61,7 +61,7 @@ function startsession( value,mobileno,token,submitedSates,countryCode){
 	
 	
 	//window.location.href=url+"/"+"inventory"+"/"+"48"+"/"+"123123"+"/"+"ABCDEFG"+"/"+"8898821453"+"/"+"E90";
-	window.location.href=url+"/"+'salesDetails?tokenid='+value+'&countrycode='+countryCode+'&mobileno='+finalMobile+'&projectSfid='+$('#projectid').val()+'&projectName='+$('#projectname').val()+'&token='+token+'&isView=N&salesViewType='+submitedSates;
+	window.location.href=url+"/"+'salesDetails?tokenid='+value+'&countrycode='+countryCode+'&mobileno='+finalMobile+'&projectSfid='+$('#projectid').val()+'&projectName='+$('#projectname').val()+'&token='+token+'&isView=N&salesViewType='+submitedSates+"&roleid=0";
 	/*window.location.href=url+"/"+'salesDetails?token='+token+'&countrycode='+code+'&mobileno='+mobileNo+'&projectSfid='+$('#projectid').val()+'&projectName='+$('#projectname').val();*/
 } 
  

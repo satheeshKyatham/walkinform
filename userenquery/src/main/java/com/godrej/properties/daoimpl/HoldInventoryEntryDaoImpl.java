@@ -81,17 +81,13 @@ public class HoldInventoryEntryDaoImpl extends AbstractDao<Integer, HoldInventor
 	public void updateForelease(HoldInventoryEntry action) {
 		logger.info(" updateForelease Method :-");
 		Session session = this.sessionFactory.getCurrentSession();
-		//System.out.println("Realse ::: " + "UPDATE HoldInventoryEntry SET holdstatusyn = '"+action.getHoldstatusyn()+"',  statusai = '"+action.getStatusai()+"'   WHERE sfid = '"+action.getUnitSfid()+"' and customer_id = '"+action.getCustomer_id()+"' and project_id = '"+action.getProject_id()+"' ");
-		try /*(Session session = getNewSession())*/ {
-			//Transaction trx = session.beginTransaction();
-		Query query = session.createQuery("UPDATE HoldInventoryEntry SET holdstatusyn = '"+action.getHoldstatusyn()+"',  statusai = '"+action.getStatusai()+"',version='"+action.getVersion()+"'   WHERE sfid = '"+action.getUnitSfid()+"' and version=0 and holdstatusyn='Y' ");
-		query.executeUpdate();
-		//trx.commit();
+		try {
+			Query query = session.createQuery("UPDATE HoldInventoryEntry SET holdstatusyn = '"+action.getHoldstatusyn()+"',  statusai = '"+action.getStatusai()+"',version='"+action.getVersion()+"'   WHERE sfid = '"+action.getUnitSfid()+"' and version=0 and holdstatusyn='Y' ");
+			query.executeUpdate();
 		}
 		catch (Exception e) {
 			logger.info(" updateForelease Error :-",e);
 		}
-		//System.out.println("testVal ::: " + testVal);
 	}
 	
 	
@@ -99,16 +95,8 @@ public class HoldInventoryEntryDaoImpl extends AbstractDao<Integer, HoldInventor
 	@Override
 	public void updatePreviousHold(HoldInventoryEntry action) {
 		
-		//System.out.println("UPDATE HoldInventoryEntry SET holdstatusyn = '"+action.getHoldstatusyn()+"',  statusai = '"+action.getStatusai()+"'   WHERE  created_at + (interval '5 minute') < now() + (interval '330 minute') and sfid = '"+action.getUnitSfid()+"' and customer_id = '"+action.getCustomer_id()+"' and project_id = '"+action.getProject_id()+"' ");
-		
-		
-		//System.out.println("UPDATE salesforce.gpl_cs_hold_unit SET holdstatusyn = '"+action.getHoldstatusyn()+"',  statusai = '"+action.getStatusai()+"'   WHERE  created_at + (interval '5 minute') < now() + (interval '330 minute')  and customer_id = '"+action.getCustomer_id()+"' and project_id = '"+action.getProject_id()+"' ");
-		//and sfid = '"+action.getUnitSfid()+"'
 		Session session = this.sessionFactory.getCurrentSession();
-		//Query query = session.createSQLQuery("UPDATE salesforce.gpl_cs_hold_unit SET holdstatusyn = '"+action.getHoldstatusyn()+"',  statusai = '"+action.getStatusai()+"'   WHERE  created_at + (interval '5 minute') < now() + (interval '330 minute')  and customer_id = '"+action.getCustomer_id()+"' and project_id = '"+action.getProject_id()+"' "); 
-		try /*(Session session = getNewSession())*/ {
-			//Transaction trx = session.beginTransaction();
-//			Query query = session.createNativeQuery("UPDATE salesforce.gpl_cs_hold_unit_uat SET holdstatusyn = '"+action.getHoldstatusyn()+"',  statusai = '"+action.getStatusai()+"'   WHERE  created_at + (interval '5 minute') < now() + (interval '330 minute')");
+		try  {
 			
 			Query query = session.createNativeQuery("UPDATE salesforce.gpl_cs_hold_unit_uat A SET holdstatusyn = '"+action.getHoldstatusyn()+"', statusai = '"+action.getStatusai()+"', version =(SELECT coalesce(MAX(VERSION),0) +1 FROM salesforce.gpl_cs_hold_unit_uat B WHERE A.sfid=B.sfid) WHERE A.created_at + (coalesce(hold_for_time/60000, 5) || ' minute') \\:\\: interval < now() + (interval '330 minute') AND A.holdstatusyn = 'Y' AND A.statusai = 'A' ");
 			

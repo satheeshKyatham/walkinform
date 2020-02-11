@@ -194,26 +194,12 @@ public class InventoryController {
 	/* Manual release From Hold Unit */
 	@PostMapping(value = { "/releaseFromHold" })
 	public @ResponseBody  String releaseFromHold(@RequestParam("customerId") String customerId,
-			@RequestParam("unitSfid") String unitSfid, @RequestParam("projectNameId") String projectNameId) {
+			@RequestParam("unitSfid") String unitSfid, @RequestParam("projectNameId") String projectSfid) {
 
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		Gson gson = gsonBuilder.create();
-		try
-		{
-				HoldInventoryEntry action = new HoldInventoryEntry();
 		
-				Integer version = holdInventoryEntryService.getCurrentVersion(projectNameId, unitSfid, customerId)+1;
-				action.setUnitSfid(unitSfid);
-				action.setCustomer_id(customerId);
-				action.setProject_id(projectNameId);
-				action.setStatusai("I");
-				action.setHoldstatusyn("N");
-				action.setVersion(version);	
-				holdInventoryEntryService.updateForelease(action);
-		}
-		catch (Exception e) {
-			log.info("Error :- ",e);
-		}
+		holdInventoryEntryService.releaseInventory(projectSfid, unitSfid, customerId);
 		return gson.toJson("");
 	}
 	
