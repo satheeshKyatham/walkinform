@@ -26,7 +26,7 @@ public interface InventoryService {
 	
 	void holdInventoryAdmin(String projectId, String userId, String unitsfid, String holdmsg, String reasonInput, String holdBlockBehalfOfName, int holdBlockBehalfOfID, String  enqSFID);
 
-	 
+	public void releaseInventory(String projectSfid, String unitSfid, String userId, String unitName);	 
 	
  
 	

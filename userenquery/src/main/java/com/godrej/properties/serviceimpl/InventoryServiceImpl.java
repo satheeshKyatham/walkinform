@@ -66,6 +66,35 @@ public class InventoryServiceImpl implements InventoryService {
 	
 	
 	@Override
+	public void releaseInventory(String projectSfid, String unitSfid, String userId, String unitName) {
+	
+		HoldInventoryAdmin inventoryAdmin = new HoldInventoryAdmin();
+		inventoryAdmin.setUnitSfid(unitSfid);
+		inventoryAdmin.setProject_id(projectSfid);
+		inventoryAdmin.setCreated_at(new Timestamp(new Date().getTime()));
+		inventoryAdmin.setCustomer_id(userId);
+		inventoryAdmin.setHold_reason("Release Admin");
+		inventoryAdmin.setHold_status(false);
+		inventoryAdmin.setEoi_unit_locked(false);
+
+		updateHoldInventoryAdmin(inventoryAdmin);
+
+		// -------------------------------------
+		HoldInventoryAdminLog inventoryAdminLog = new HoldInventoryAdminLog();
+		inventoryAdminLog.setUnitSfid(unitSfid);
+		inventoryAdminLog.setProject_id(projectSfid);
+		inventoryAdminLog.setCreated_at(new Timestamp(new Date().getTime()));
+		inventoryAdminLog.setCustomer_id(userId);
+		inventoryAdminLog.setHold_reason("Release Admin");
+		inventoryAdminLog.setHold_status(false);
+		inventoryAdminLog.setEoi_unit_locked(false);
+
+		saveHoldInventoryAdminLog(inventoryAdminLog);
+
+	}
+	
+	
+	@Override
 	public void holdInventoryAdmin(String projectId, String userId, String unitsfid, String holdmsg, String reasonInput, String holdBlockBehalfOfName, int holdBlockBehalfOfID, String  enqSFID)
 	{
 		boolean eoiHoldStatus = false;	
