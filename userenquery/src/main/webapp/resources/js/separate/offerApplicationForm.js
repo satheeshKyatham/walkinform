@@ -37,6 +37,8 @@ function getofferApplicantDetails (e, offerSFID, enqSFID, contactSFID, offerName
 		var mobile_number__c = '';
 		var mobile_number__c = '';
 		var propstrength__sharing_ratio__c = '';
+		var tdsSharingPer = '';
+		var relationshipDtl = '';
 		var passport_no__c = '';
 		var nationality_a__c = '';
 		var propstrength__resident_status__c = '';
@@ -175,6 +177,8 @@ function getofferApplicantDetails (e, offerSFID, enqSFID, contactSFID, offerName
 				mobile_number__c +="<td>"+obj[i].mobile_number__c+"</td>";
 /*				propstrength__sharing_ratio__c +="<td>"+sharingRatio+"</td>";*/
 				propstrength__sharing_ratio__c +="<td> As per <b> Annexure G </b> </td>";
+				tdsSharingPer +="<td></td>";
+				relationshipDtl +="<td>"+obj[i].relationship__c+" "+obj[i].relationship_name__c+"</td>";
 				//passport_no__c +="<td>"+obj[i].passport_no__c+"</td>";
 				passport_no__c +="<td>"+passportNo+"</td>";
 				nationality_a__c +="<td>"+obj[i].nationality_a__c+"</td>";
@@ -202,13 +206,15 @@ function getofferApplicantDetails (e, offerSFID, enqSFID, contactSFID, offerName
 								html +=	'<tr><td></td>'+appType+'</tr>' 
 										+ '<tr><td>Full Name</td>'+fullName+'</tr>'
 										+ '<tr><td>Date of Birth</td>'+birthdate+'</tr>'
+										+ '<tr><td>TDS Sharing Ratio</td>'+tdsSharingPer+'</tr>'
+										+ '<tr><td>S/o/W/o/D/o</td>'+relationshipDtl +'</tr>'
 										+ '<tr><td>PAN</td>'+pan+'</tr>'
 										//+ '<tr><td>Aadhar No.</td>'+aadhar_card_no__c+'</tr>'  
 /*										+ '<tr><td>Payment share for TDS</td>'+propstrength__sharing_ratio__c+'</tr>'*/
 										+ '<tr><td>TDS Status</td>'+propstrength__sharing_ratio__c+'</tr>'
 										+ '<tr><td>Nationality</td>'+nationality_a__c+'</tr>'
 										+ '<tr><td>Residential Status</td>'+propstrength__resident_status__c+'</tr>'
-										//+ '<tr><td>Passport No.</td>'+passport_no__c+'</tr>' 
+										+ '<tr><td>Passport No.(In case of *NRI/ Foreign Customers) </td>'+passport_no__c+'</tr>' 
 										+ '<tr><td>Permanent Address</td>'+permanentAddress+'</tr>'
 										+ '<tr><td>Mobile No.</td>'+mobile_number__c+'</tr>'
 										+ '<tr><td>Email</td>'+email+'</tr>'  
