@@ -108,7 +108,7 @@ $(document).ready(function() {
 						}
 					console.log("Country Code:-"+value.countrycode);
 					var url=$("#contextPath").val();
-					var rowurl=url+'/salesDetails?tokenid='+value.nv_token_id+'&countrycode='+countryCode+'&mobileno='+finalMobile+'&projectSfid='+$('#projectid').val()+'&projectName='+$('#projectname').val()+'&token='+(value.type+value.queue)+'&isView=Y&salesViewType=N';
+					var rowurl=url+'/salesDetails?tokenid='+value.nv_token_id+'&countrycode='+countryCode+'&mobileno='+finalMobile+'&projectSfid='+$('#projectid').val()+'&projectName='+$('#projectname').val()+'&token='+(value.type+value.queue)+'&isView=Y&salesViewType=N&roleid=0';
  
 					var prorityNo="";
 					if(value.priority_no__c==undefined)
@@ -201,7 +201,7 @@ $(document).ready(function() {
 					
 					//alert(userlist);
 					var url=$("#contextPath").val();
-					var rowurl=url+'/salesDetails?tokenid='+value.nv_token_id+'&countrycode='+countryCode+'&mobileno='+finalMobile+'&projectSfid='+$('#projectid').val()+'&projectName='+$('#projectname').val()+'&token='+(value.type+value.queue)+'&isView=Y&salesViewType=N';
+					var rowurl=url+'/salesDetails?tokenid='+value.nv_token_id+'&countrycode='+countryCode+'&mobileno='+finalMobile+'&projectSfid='+$('#projectid').val()+'&projectName='+$('#projectname').val()+'&token='+(value.type+value.queue)+'&isView=Y&salesViewType=N&roleid=0';
 
 					var editButtonShow ="";
 					var prorityNo ="";

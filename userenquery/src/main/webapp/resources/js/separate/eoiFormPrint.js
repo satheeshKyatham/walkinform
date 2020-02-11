@@ -18,12 +18,23 @@ function getEOIPreferencPrint () {
 		if(obj!=null){
 			for(i = 0; i< obj.length; i++){
 				eoiTokenType = obj[i].tokenTypeName;
+				var unitno = '';
+				if(obj[i].unit_name=='Select Unit')
+					{
+						unitno=''
+					}
+				else
+					{
+					unitno=obj[i].unit_name;
+					}
+						
 				html += 	'<tr>'
 								//+ '<td>'+obj[i].tokenTypeName+'</td>'
 								+ '<td>'+obj[i].typology_name+'</td>'
 								+ '<td></td>'
 								+ '<td>'+obj[i].floor_band+'</td>'
 								+ '<td>'+obj[i].tower_name+'</td>'
+								+ '<td>'+unitno+'</td>'
 								+ '<td>'+obj[i].eoi_carpark_name+'</td>'
 								+ '<td>'+obj[i].description+'</td>' 
 							"</tr>";
@@ -258,7 +269,7 @@ function printEOIForm(regionName, projectName, enqName, projectNameWithoutCity) 
             	 //Changes by Satheesh - for EOI form
             	 debugger;
             	 if (isConfirm) {
-            		 if($('#roleid').val()==='17')
+            		 if($('#roleid').val()=='17')
             			 {
             			 	window.location.href =pageContext+ "offlineEOI?userId="+$("#userid").val()+"&projectid="+$("#projectid").val()+"&projectname="+$("#projectname").val();
             			 }
