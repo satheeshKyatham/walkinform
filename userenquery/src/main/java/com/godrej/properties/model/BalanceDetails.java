@@ -72,6 +72,9 @@ public class BalanceDetails implements Serializable{
 	@Column(name = "gst_tax")
 	private double gst_tax;
 	
+	@Transient
+	private String apiError;
+	
 	public int getId() {
 		return id;
 	}
@@ -240,4 +243,13 @@ public class BalanceDetails implements Serializable{
 	public void setGst_tax(double gst_tax) {
 		this.gst_tax = gst_tax;
 	}
+
+	public String getApiError() {
+		return apiError;
+	}
+
+	public void setApiError(String apiError) {
+		this.apiError = apiError;
+	}
+	
 }

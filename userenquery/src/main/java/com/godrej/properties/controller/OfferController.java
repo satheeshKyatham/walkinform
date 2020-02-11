@@ -265,6 +265,7 @@ public class OfferController {
 		}
 		catch(Exception e){
 			log.info("Error :-",e);
+			action.setApiError(e.getMessage());
 		}
 		log.info(" Create Offer Controller - Yes, There is some technical problem (code:3) ");
 		action.setOffer_successMsg(errorMsg3);
