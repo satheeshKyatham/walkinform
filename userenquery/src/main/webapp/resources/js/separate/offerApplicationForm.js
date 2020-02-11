@@ -391,18 +391,36 @@ function getOfferReceivedPaymentDtl (offerSFID, rowId) {
 		
 		var html = '';
 		var obj =JSON.parse(data);
+		var txsNo = '';
 		
 		if(obj!=null){
 			for(i = 0; i< obj.length; i++){ 
 				
-				html += "<tr> " +
+				
+				if (obj[i].propstrength__payment_mode__c == 'Cheque') {
+					txsNo = obj[i].propstrength__cheque_demand_draft_no__c;
+				} else if (obj[i].propstrength__payment_mode__c == 'neft' || obj[i].propstrength__payment_mode__c == 'Swipe' || obj[i].propstrength__payment_mode__c == 'Wire Transfer' ) {
+					txsNo = obj[i].propstrength__ifsc_rtgs_code__c;
+				}
+				
+				
+				/*html += "<tr> " +
 							"<td>"+obj[i].propstrength__payment_type__c+"</td> " +
 							"<td>"+obj[i].propstrength__bank_name_auto__c+"</td>" +
 							"<td>"+obj[i].propstrength__amount__c+"</td>" +
 							"<td>"+obj[i].propstrength__crn_no__c+"</td>" +
 							"<td>"+obj[i].propstrength__cheque_demand_draft_number__c+"</td>" +
-							/*"<td>"+obj[i].propstrength__ifsc_rtgs_code__c+"</td>" +*/
-						"</tr>";
+						"</tr>";*/
+				
+				html += "<tr> " +
+				"<td>"+obj[i].propstrength__payment_mode__c+"</td> " +
+				"<td>"+obj[i].propstrength__bank_name__c+"</td>" +
+				"<td>"+obj[i].propstrength__amount__c+"</td>" +
+				"<td></td>" +
+				"<td>"+txsNo+"</td>" +
+			"</tr>";
+				
+				
 			}
 			
 			html = html.replace(/undefined/g, "");
@@ -425,18 +443,36 @@ function getOfferReceivedPaymentDtlWithEnquiry (enquirySFID, rowId) {
 		
 		var html = '';
 		var obj =JSON.parse(data);
+		var txsNo = '';
 		
 		if(obj!=null){
 			for(i = 0; i< obj.length; i++){ 
 				
-				html += "<tr> " +
+				
+				if (obj[i].propstrength__payment_mode__c == 'Cheque') {
+					txsNo = obj[i].propstrength__cheque_demand_draft_no__c;
+				} else if (obj[i].propstrength__payment_mode__c == 'neft' || obj[i].propstrength__payment_mode__c == 'Swipe' || obj[i].propstrength__payment_mode__c == 'Wire Transfer' ) {
+					txsNo = obj[i].propstrength__ifsc_rtgs_code__c;
+				}
+				
+				
+				/*html += "<tr> " +
 							"<td>"+obj[i].propstrength__payment_type__c+"</td> " +
 							"<td>"+obj[i].propstrength__bank_name_auto__c+"</td>" +
 							"<td>"+obj[i].propstrength__amount__c+"</td>" +
 							"<td>"+obj[i].propstrength__crn_no__c+"</td>" +
 							"<td>"+obj[i].propstrength__cheque_demand_draft_number__c+"</td>" +
-							/*"<td>"+obj[i].propstrength__ifsc_rtgs_code__c+"</td>" +*/
-						"</tr>";
+						"</tr>";*/
+				
+				html += "<tr> " +
+				"<td>"+obj[i].propstrength__payment_mode__c+"</td> " +
+				"<td>"+obj[i].propstrength__bank_name__c+"</td>" +
+				"<td>"+obj[i].propstrength__amount__c+"</td>" +
+				"<td></td>" +
+				"<td>"+txsNo+"</td>" +
+			"</tr>";
+				
+				
 			}
 			
 			html = html.replace(/undefined/g, "");

@@ -3,7 +3,6 @@ package com.godrej.properties.service;
 import java.util.List;
 
 import com.godrej.properties.model.HoldInventoryEntry;
-import com.godrej.properties.model.Inventory;
 
 public interface HoldInventoryEntryService {
 	void insertHoldRqst (HoldInventoryEntry action);
@@ -18,5 +17,5 @@ public interface HoldInventoryEntryService {
 	
 	public int getCurrentVersion(String projectId, String unitId, String customerId);
 	public HoldInventoryEntry getHolding(int userId) ;
-
+	public int releaseInventory(String projectSfid, String unitSfid, String customerId);
 }

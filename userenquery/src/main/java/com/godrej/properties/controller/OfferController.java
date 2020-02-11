@@ -22,6 +22,8 @@ import com.godrej.properties.model.UnitDtl;
 import com.godrej.properties.service.AdminUnitHoldStatusService;
 import com.godrej.properties.service.BSPUpdateService;
 import com.godrej.properties.service.BalanceDetailsService;
+import com.godrej.properties.service.HoldInventoryEntryService;
+import com.godrej.properties.service.InventoryService;
 import com.godrej.properties.service.PropOtherChargesService;
 import com.godrej.properties.service.SalesUnitHoldStatusService;
 import com.godrej.properties.validator.OfferValidator;
@@ -66,6 +68,11 @@ public class OfferController {
 	@Autowired
  	private SalesUnitHoldStatusService salesUnitHoldStatusService;
 
+	@Autowired
+	private HoldInventoryEntryService holdInventoryEntryService;
+	
+	@Autowired	
+	private InventoryService inventoryService;
 	
 	@PostMapping(value = { "/updateBSP" })
 	public @ResponseBody String updateBSP (@RequestParam("salesConsiderationTotal") double salesConsiderationTotal,  @RequestParam("bspTaxGST") double bspTaxGST,   @RequestParam("bspDis") String bspDis, @RequestParam("token") String token, @RequestParam("projectsfid") String projectsfid,   @RequestParam("enquirysfid") String enquirysfid,  @RequestParam("primarycontactsfid") String primarycontactsfid,   @RequestParam("sentToCrmYN") String sentToCrmYN
@@ -136,7 +143,6 @@ public class OfferController {
 
 		
 		UnitDtl bspRate = new UnitDtl ();
-		
 		// Condtion and validation added for post parameter
 		int scheme_rate = 0;
 		double discount_Value = 0;
@@ -254,6 +260,8 @@ public class OfferController {
 							action.setUserid(Integer.valueOf(userid));
 					}
 					action.setOffer_successMsg(successMsg1);
+					holdInventoryEntryService.releaseInventory(projectsfid, propid, null);
+					inventoryService.releaseInventory(projectsfid, propid, userid, null);
 					
 					return gson.toJson(balanceDetailsService.insertBalanceDetails(action));
 				} else {

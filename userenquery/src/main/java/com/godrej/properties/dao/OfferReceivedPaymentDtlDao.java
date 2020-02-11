@@ -2,8 +2,8 @@ package com.godrej.properties.dao;
 
 import java.util.List;
 
-import com.godrej.properties.model.OfferReceivedPaymentDtl;
+import com.godrej.properties.model.PropPrepaymentReceived;
 
 public interface OfferReceivedPaymentDtlDao {
-	List<OfferReceivedPaymentDtl> getOfferReceivedPaymentDtl(String offerSFID);
+	List<PropPrepaymentReceived> getOfferReceivedPaymentDtl(String offerSFID);
 }
