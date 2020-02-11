@@ -90,6 +90,7 @@ public class OfferController {
 			,@RequestParam("plannedPaymentWithTax") Double plannedPaymentWithTax
 			,@RequestParam("price") Double price
 			,@RequestParam("priceWithTax") Double priceWithTax
+			,@RequestParam("tokenTax") Double tokenTax
 			) throws JRException, IOException {
 		
 
@@ -112,6 +113,7 @@ public class OfferController {
 		paymentRequest.setPlannedPaymentWithTax(plannedPaymentWithTax);
 		paymentRequest.setPrice(price);
 		paymentRequest.setPriceWithTax(priceWithTax);
+		paymentRequest.setTokenTax(tokenTax);
 		
 		Errors errors=  new Errors();
 		offerValidator.validate(paymentRequest, errors);
@@ -263,6 +265,7 @@ public class OfferController {
 		}
 		catch(Exception e){
 			log.info("Error :-",e);
+			action.setApiError(e.getMessage());
 		}
 		log.info(" Create Offer Controller - Yes, There is some technical problem (code:3) ");
 		action.setOffer_successMsg(errorMsg3);

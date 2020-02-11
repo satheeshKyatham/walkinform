@@ -89,18 +89,34 @@ public class OfferValidator implements Validator{
 		}
 		String doIncludeGST =sysConfigService.getValue(SysConfigEnum.PREPAYMENT_INCLUDE_GST, projectSfid);
 		BigDecimal priceBD = new BigDecimal(price);
+		
+		BigDecimal amount  = priceBD.multiply(new BigDecimal(value)).divide(new BigDecimal(100), 0, RoundingMode.UP);
 		if("Y".equalsIgnoreCase(doIncludeGST)) {
-			priceBD = new BigDecimal(priceWithTax);
+			BigDecimal taxPercentage =  getTaxPercentage(paymentRequest);
+			BigDecimal taxAmount =  (amount.multiply(taxPercentage)).divide(BigDecimal.valueOf(100d),0,RoundingMode.UP);
+			amount = amount.add(taxAmount);
 		}
-		BigDecimal amount  = priceBD.divide(new BigDecimal(value), 0, RoundingMode.UP);
 		PaymentDto []payments =  paymentRequest.getPayments();
 		Double paymentAmount = validatePayments(payments, errors);
 		if(errors.getErrorCount()>0) {
 			return;
 		}
+		
+
 		if(paymentAmount.doubleValue() < amount.doubleValue()) {
 			validator.reject(errors, INVALID_PAYMENTS, "Payment amount is not valid - " + paymentAmount + " - It shouble be -" +amount);
 		}
+	}
+	
+	private BigDecimal getTaxPercentage(PaymentRequestDto paymentRequest) {
+		Double amount = paymentRequest.getPlannedPayment();
+	
+		Double taxAmount =  paymentRequest.getTokenTax();
+
+		if(taxAmount ==null || amount==null || amount.doubleValue() <=0) {
+			return new BigDecimal(0);
+		}
+		return BigDecimal.valueOf(taxAmount*100).divide(new BigDecimal(amount),4);
 	}
 	
 	private Double validatePayments(PaymentDto []payments, Errors errors) {
@@ -122,8 +138,8 @@ public class OfferValidator implements Validator{
 	}
 	
 	private void validateFromPlan(PaymentRequestDto paymentRequest, Errors errors, String projectSfid) {
-		Double price = paymentRequest.getPrice();
-		Double priceWithTax =  paymentRequest.getPriceWithTax();
+		Double price = paymentRequest.getPlannedPayment();
+		Double priceWithTax =  paymentRequest.getPlannedPaymentWithTax();
 		if(price == null || priceWithTax == null) {
 			validator.reject(errors, "invalid.data", "Price cannot be null");
 			return;	
@@ -139,7 +155,7 @@ public class OfferValidator implements Validator{
 			return;
 		}
 		if(paymentAmount.doubleValue() < price.doubleValue()) {
-			validator.reject(errors, INVALID_PAYMENTS, "Payment amount is not valid - " + paymentAmount + " - It shouble be -" +price);
+			validator.reject(errors, INVALID_PAYMENTS, "Payment amount is not matching with required amount - " + paymentAmount + " - It shouble be - " +price);
 		}
 	}
 	

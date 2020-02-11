@@ -115,6 +115,7 @@ if(ses!=null){
 								<th>Trx ID</th>
 								<th>Trx Date</th>
 								<th>Trx Amount</th>
+								<th>Description</th>
 								<th>PAN Attachment</th>
 								<th>Cheque/Receipt Attachment</th>
 							</tr>

@@ -177,12 +177,12 @@ if(ses!=null){
 	  </div>
 	</div>
 	</div>
-	<script src="<c:url value='/resources/js/salesdesk.js?v=18.05'/>"></script>
-	<script src="<c:url value='/resources/js/separate/offer.js?v=18.05'/>"></script>
+	<script src="<c:url value='/resources/js/salesdesk.js?v=18.08'/>"></script>
+	<script src="<c:url value='/resources/js/separate/offer.js?v=18.08'/>"></script>
 	
-	<script src="<c:url value='/resources/js/separate/applicationForm.js?v=18.05'/>"></script>
-	<script src="<c:url value='/resources/js/separate/offerApplicationForm.js?v=18.05'/>"></script>
-	<script src="<c:url value='/resources/js/demo/offerTemplate.js?v=18.05'/>"></script>	
+	<script src="<c:url value='/resources/js/separate/applicationForm.js?v=18.08'/>"></script>
+	<script src="<c:url value='/resources/js/separate/offerApplicationForm.js?v=18.08'/>"></script>
+	<script src="<c:url value='/resources/js/demo/offerTemplate.js?v=18.08'/>"></script>	
 </body>
 </html>
 
