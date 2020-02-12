@@ -25,7 +25,7 @@
 		<link rel="stylesheet" href="<c:url value="/resources/css/login.css" />" type="text/css" />		
 		<link rel="stylesheet" href="<c:url value="/resources/css/app.css" />" type="text/css" />		
 		
-		<script src="<c:url value='/resources/js/salesdesk.js?v=18.08'/>"></script>	
+		<script src="<c:url value='/resources/js/salesdesk.js?v=18.09'/>"></script>	
 		<script src="<c:url value='/resources/js/jquery-1.12.4.min.js'/>"></script>		
 		
 	</head>

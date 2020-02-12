@@ -982,9 +982,9 @@
 	
 	<script src="<c:url value='/resources/js/currencyFormatter.min.js'/>" type="text/javascript"></script>
 	
-	<script type="text/javascript" src="<c:url value='/resources/js/jquery.countdownTimer.js?v=18.08'/>"></script>
+	<script type="text/javascript" src="<c:url value='/resources/js/jquery.countdownTimer.js?v=18.09'/>"></script>
 	
-	<script src="<c:url value='/resources/js/separate/costsheet.js?v=18.08'/>"></script>
+	<script src="<c:url value='/resources/js/separate/costsheet.js?v=18.09'/>"></script>
 	
 	
 	
