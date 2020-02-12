@@ -19,13 +19,13 @@
 <link rel="stylesheet" href="<c:url value='/resources/css/bootstrap.min.css' />" type="text/css" />
      <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
      <link rel="stylesheet" href="<c:url value='/resources/css/sweetalert2.min.css' />">  
-	<link rel="stylesheet" href="<c:url value='/resources/css/inner.css' />">
-	<link rel="stylesheet" href="<c:url value='/resources/css/style.css' />">
+	<link rel="stylesheet" href="<c:url value='/resources/css/inner.css?v=1.0' />">
+	<link rel="stylesheet" href="<c:url value='/resources/css/style.css?v=1.0' />">
 <script src="<c:url value='/resources/js/jquery-1.12.4.min.js'/>"></script>
 <script src="<c:url value='/resources/js/bootstrap.min.js'/>"></script>
 
 
- <link rel="stylesheet" href="<c:url value='/resources/css/inventory.css' />">
+ <link rel="stylesheet" href="<c:url value='/resources/css/inventory.css?v=1.0' />">
 
 </head> 
 <%! String projectname,projectid ,projectrole,userid;%>
@@ -132,8 +132,8 @@ if(ses!=null){
 <script src="<c:url value='/resources/js/buttons.html5.min.js'/>"></script>
 
  <script src="<c:url value='/resources/js/sweetalert2.min.js' />"></script>
- <script src="<c:url value='/resources/js/separate/admininventory.js?v=18.08'/>"></script>
- <script src="<c:url value='/resources/js/separate/admininventoryReport.js?v=18.08'/>"></script>
- <script src="<c:url value='/resources/js/separate/salesHoldinventoryReport.js?v=18.08'/>"></script>
+ <script src="<c:url value='/resources/js/separate/admininventory.js?v=18.09'/>"></script>
+ <script src="<c:url value='/resources/js/separate/admininventoryReport.js?v=18.09'/>"></script>
+ <script src="<c:url value='/resources/js/separate/salesHoldinventoryReport.js?v=18.09'/>"></script>
  	
 <!-- </html> -->

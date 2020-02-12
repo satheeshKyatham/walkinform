@@ -638,16 +638,16 @@
     
     <script src="<c:url value='/resources/js/bootstrap-slider.min.js' />"></script>
     
-	<script src="<c:url value='/resources/js/springForm.js?v=18.08' />"></script>
-	<script src="<c:url value='/resources/js/commonValidation.js?v=18.08' />"></script>
-	<script src="<c:url value='/resources/js/utility.js?v=18.08' />"></script>
-	<script src="<c:url value='/resources/js/offline/enquiry.js?v=18.08' />"></script>	
+	<script src="<c:url value='/resources/js/springForm.js?v=18.09' />"></script>
+	<script src="<c:url value='/resources/js/commonValidation.js?v=18.09' />"></script>
+	<script src="<c:url value='/resources/js/utility.js?v=18.09' />"></script>
+	<script src="<c:url value='/resources/js/offline/enquiry.js?v=18.09' />"></script>	
     <script src="<c:url value='/resources/js/intlTelInput.js' />"></script>
     <script src="<c:url value='/resources/js/sweetalert2.min.js' />"></script>
 	
-	<script src="<c:url value='/resources/js/index.js?v=18.08' />"></script>
+	<script src="<c:url value='/resources/js/index.js?v=18.09' />"></script>
 	
-	<script src="<c:url value='/resources/js/offline/offlineEOI.js?v=18.08'/>"></script>
+	<script src="<c:url value='/resources/js/offline/offlineEOI.js?v=18.09'/>"></script>
 
 	
 	<script>

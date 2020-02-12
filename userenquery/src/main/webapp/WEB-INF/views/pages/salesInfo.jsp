@@ -24,8 +24,8 @@
     
     <!-- Bootstrap -->
     <link rel="stylesheet" href="<c:url value='/resources/css/bootstrap.min.css' />">
-	<link rel="stylesheet" href="<c:url value='/resources/css/inner.css' />">
-	<link rel="stylesheet" href="<c:url value='/resources/css/style.css' />">
+	<link rel="stylesheet" href="<c:url value='/resources/css/inner.css?v=1.0' />">
+	<link rel="stylesheet" href="<c:url value='/resources/css/style.css?v=1.0' />">
 	<link href="<c:url value='/resources/css/animate.min.css' />" rel="stylesheet">
 	<link rel="stylesheet" href="<c:url value='/resources/css/sweetalert2.min.css' />">  
  
@@ -52,7 +52,7 @@
    <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/bootstrap-slider.min.css' />  " />
     
     <!-- Inventory -->
-    <link rel="stylesheet" href="<c:url value='/resources/css/inventory.css' />">
+    <link rel="stylesheet" href="<c:url value='/resources/css/inventory.css?v=1.0' />">
     <!-- END Inventory -->
     
     <!-- Costsheet -->
@@ -1713,19 +1713,19 @@ if(ses!=null){
     <!-- For Webcam attachments -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.25/webcam.min.js"></script>
 
-	<script src="<c:url value='/resources/js/springForm.js?v=18.08' />"></script>
-	<script src="<c:url value='/resources/js/commonValidation.js?v=18.08' />"></script>
-	<script src="<c:url value='/resources/js/utility.js?v=18.08' />"></script>
+	<script src="<c:url value='/resources/js/springForm.js?v=18.09' />"></script>
+	<script src="<c:url value='/resources/js/commonValidation.js?v=18.09' />"></script>
+	<script src="<c:url value='/resources/js/utility.js?v=18.09' />"></script>
 	<%-- <script src="<c:url value='/resources/js/enquiryRequest/enquiryRequest.js' />"></script> --%>
-	<script src="<c:url value='/resources/js/enquiryRequest/salesRequest.js?v=18.08' />"></script>	
+	<script src="<c:url value='/resources/js/enquiryRequest/salesRequest.js?v=18.09' />"></script>	
     <script src="<c:url value='/resources/js/intlTelInput.js' />"></script>
    
     <script src="<c:url value='/resources/js/sweetalert2.min.js' />"></script>
    
    
   	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/8.4.7/js/intlTelInput.js"></script> -->
-	<script src="<c:url value='/resources/js/bankdetails.js?v=18.08' />"></script>
-	<script src="<c:url value='/resources/js/index.js?v=18.08' />"></script>
+	<script src="<c:url value='/resources/js/bankdetails.js?v=18.09' />"></script>
+	<script src="<c:url value='/resources/js/index.js?v=18.09' />"></script>
 	
 	<script>
 	
@@ -1782,18 +1782,18 @@ if(ses!=null){
  <script src="<c:url value='/resources/js/moment.js' />"></script>
  <script src="<c:url value='/resources/js/bootstrap-datetimepicker.min.js' />"></script> 
  
- <script src="<c:url value='/resources/js/separate/inventory.js?v=18.08'/>"></script>
+ <script src="<c:url value='/resources/js/separate/inventory.js?v=18.09'/>"></script>
  
 <!-- Costsheet --> 
 <script src="<c:url value='/resources/js/jquery.tabletojson.min.js'/>"></script>
 <%-- <script type="text/javascript" src="<c:url value='/resources/js/jquery.countdownTimer.js'/>"></script> --%>
-<script src="<c:url value='/resources/js/enquiryRequest/common.js?v=18.08'/>"></script>
-<script src="<c:url value='/resources/js/separate/costsheet.js?v=18.08'/>"></script>
-<script src="<c:url value='/resources/js/separate/webcamAttachmentCS.js?v=18.08'/>"></script>
+<script src="<c:url value='/resources/js/enquiryRequest/common.js?v=18.09'/>"></script>
+<script src="<c:url value='/resources/js/separate/costsheet.js?v=18.09'/>"></script>
+<script src="<c:url value='/resources/js/separate/webcamAttachmentCS.js?v=18.09'/>"></script>
 
 
-<script src="<c:url value='/resources/js/separate/storeEOIPaymentDtl.js?v=18.08'/>"></script>
-<script src="<c:url value='/resources/js/separate/eoiFormPrint.js?v=18.08'/>"></script>
+<script src="<c:url value='/resources/js/separate/storeEOIPaymentDtl.js?v=18.09'/>"></script>
+<script src="<c:url value='/resources/js/separate/eoiFormPrint.js?v=18.09'/>"></script>
 
 
 <%-- <script src="<c:url value='/resources/js/separate/storeEOIPaymentDtl.js?v=15'/>"></script> --%>
