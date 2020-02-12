@@ -211,7 +211,7 @@ public class OfferController {
 				if(inventoryStatusCondition) {
 					//Create Offer through SFDC API
 					String offerId = creatOffer.PropOffer(bspDis,token,projectsfid,enquirysfid,primarycontactsfid,propid,ppid,offerthrough,brokersfid,discount_Value,enquiry_name,prepaymentamt,bankname,trxdate,trxno,paymentmode,tdsPaidBy,isOthers,bankGL);
-					
+					action.setApiError(offerId);		
 					JsonObject jobj = new Gson().fromJson(offerId, JsonObject.class);
 					String offerid = jobj.get("offerid").getAsString();
 					String message = jobj.get("message").getAsString();
@@ -253,6 +253,7 @@ public class OfferController {
 					action.setCostsheet_path(costsheet_path);
 					action.setCs_final_amount(cs_final_amount);
 					action.setGst_tax(bspTaxGST);
+			
 					
 					if(userid!=null && userid.length()>0)
 					{
@@ -273,7 +274,6 @@ public class OfferController {
 		}
 		catch(Exception e){
 			log.info("Error :-",e);
-			action.setApiError(e.getMessage());
 		}
 		log.info(" Create Offer Controller - Yes, There is some technical problem (code:3) ");
 		action.setOffer_successMsg(errorMsg3);

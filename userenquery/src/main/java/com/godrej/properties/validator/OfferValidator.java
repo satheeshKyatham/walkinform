@@ -124,15 +124,20 @@ public class OfferValidator implements Validator{
 			validator.reject(errors, INVALID_PAYMENTS, "Invalid Payment Details");
 			return 0d;
 		}
-		String paymentAmount =payments[0].getTotalAmount();
-		if(paymentAmount == null) {
-			validator.reject(errors, INVALID_PAYMENTS, "Payment amount is not valid");
-		}
+		Double totalPayment = 0d;
 		try {
-			return Double.valueOf(paymentAmount);
+			for(PaymentDto payment : payments) {
+				String trxAmount = payment.getTransactionAmount();
+				if(trxAmount == null) {
+					continue;
+				}
+				
+				totalPayment = totalPayment + Double.valueOf(trxAmount);
+			}
+			return totalPayment;
 		}catch (Exception e) {
 			log.error("Error", e);
-			validator.reject(errors, INVALID_PAYMENTS, "Payment amount is not valid - " + paymentAmount);
+			validator.reject(errors, INVALID_PAYMENTS, "Payment amount is not valid - " + totalPayment);
 		}
 		return 0d;
 	}
