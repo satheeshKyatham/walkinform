@@ -288,7 +288,13 @@ function getEnqAndOfferDtl (enqSFID, offerSFID, rowId) {
 			} else {
 				
 				if(obj[0].broker_name != undefined) {
-					broker_name = obj[0].broker_name;
+					if (obj[0].broker_name != 'CP - GPL') {
+						broker_name = obj[0].broker_name;
+					} else {
+						broker_name = "";
+					}
+						
+						
 				} else if ( obj[0].broker_mobile != undefined) {
 					broker_mobile = obj[0].broker_mobile;
 				}
@@ -416,7 +422,7 @@ function getOfferReceivedPaymentDtl (offerSFID, rowId) {
 				"<td>"+obj[i].propstrength__payment_mode__c+"</td> " +
 				"<td>"+obj[i].propstrength__bank_name__c+"</td>" +
 				"<td>"+obj[i].propstrength__amount__c+"</td>" +
-				"<td></td>" +
+				//"<td></td>" +
 				"<td>"+txsNo+"</td>" +
 			"</tr>";
 				
@@ -468,7 +474,7 @@ function getOfferReceivedPaymentDtlWithEnquiry (enquirySFID, rowId) {
 				"<td>"+obj[i].propstrength__payment_mode__c+"</td> " +
 				"<td>"+obj[i].propstrength__bank_name__c+"</td>" +
 				"<td>"+obj[i].propstrength__amount__c+"</td>" +
-				"<td></td>" +
+				//"<td></td>" +
 				"<td>"+txsNo+"</td>" +
 			"</tr>";
 				
