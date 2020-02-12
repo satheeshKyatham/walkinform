@@ -79,7 +79,7 @@ public class SchemeChargeDaoImpl extends AbstractDao<Integer, Scheme> implements
 				
 				+ " FROM salesforce.gpl_cs_scheme a "
 				+ " INNER JOIN salesforce.gpl_cs_scheme_mapping b ON a.id = b.scheme_id "
-				+ " where a.isactive = 'A' and scheme_site_id = '"+schemeSite+"' and scheme_promotional_id = '"+schemePromotional+"' and scheme_source_id = '"+schemeSource+"' " , Scheme.class); 
+				+ " where a.isactive = 'A' and scheme_site_id = '"+schemeSite+"' and scheme_promotional_id = '"+schemePromotional+"' and scheme_source_id = '"+schemeSource+"'  and a.project_id = '"+projectId+"' " , Scheme.class); 
 				
 				  
 				
