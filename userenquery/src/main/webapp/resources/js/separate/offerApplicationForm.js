@@ -68,6 +68,14 @@ function getofferApplicantDetails (e, offerSFID, enqSFID, contactSFID, offerName
 			var objLength = obj.length;
 			var sharingRatio = '0';
 			
+			var annexureName = '';
+			
+			if ($("#projectid").val() != "a1l2s00000000pEAAQ") {
+				annexureName = "Annexure G";
+			} else {
+				annexureName = "Annexure F";
+			}
+			
 			
 			for(i = 0; i< obj.length; i++){    
 				
@@ -176,7 +184,7 @@ function getofferApplicantDetails (e, offerSFID, enqSFID, contactSFID, offerName
 				aadhar_card_no__c +="<td>"+aadhaarNo+"</td>";
 				mobile_number__c +="<td>"+obj[i].mobile_number__c+"</td>";
 /*				propstrength__sharing_ratio__c +="<td>"+sharingRatio+"</td>";*/
-				propstrength__sharing_ratio__c +="<td> As per <b> Annexure G </b> </td>";
+				propstrength__sharing_ratio__c +="<td> As per <b> "+annexureName+" </b> </td>";
 				tdsSharingPer +="<td></td>";
 				relationshipDtl +="<td>"+obj[i].relationship__c+" "+obj[i].relationship_name__c+"</td>";
 				//passport_no__c +="<td>"+obj[i].passport_no__c+"</td>";

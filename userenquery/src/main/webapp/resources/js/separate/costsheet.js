@@ -2227,19 +2227,19 @@ function newOtherCharges2 () {
              
              
              //Old
-             $('#salesConsideration tbody').append('<tr> <th class="subHead"> Consideration/Price (A) </th> <th class="txtRight salesConsiderationTotalNew" id="salesConsiderationTotal" style="text-align:right;">'+ parseFloat(parseFloat(salesConsiderationV2)+parseFloat($('#scOtherChrgAmount0').text())).toFixed(2) +'</th>    </tr>');
+             $('#salesConsideration tbody').append('<tr> <th class="subHead"> Sale Consideration (A) </th> <th class="txtRight salesConsiderationTotalNew" id="salesConsiderationTotal" style="text-align:right;">'+ parseFloat(parseFloat(salesConsiderationV2)+parseFloat($('#scOtherChrgAmount0').text())).toFixed(2) +'</th>    </tr>');
              
              
              
              //-----------------
              
-             $('#printSalesConsideration tbody').append('<tr> <th class="subHead"> Consideration/Price (A) </th> <th class="txtRight" id="salesConsiderationTotal" style="text-align:right;">'+ parseFloat(parseFloat(salesConsiderationV2)+parseFloat($('#scOtherChrgAmount0').text())).toFixed(2) +'</th>    </tr>');
+             $('#printSalesConsideration tbody').append('<tr> <th class="subHead"> Sale Consideration (A) </th> <th class="txtRight" id="salesConsiderationTotal" style="text-align:right;">'+ parseFloat(parseFloat(salesConsiderationV2)+parseFloat($('#scOtherChrgAmount0').text())).toFixed(2) +'</th>    </tr>');
              
              
              
              
-             $('#tentativeCharges tbody').append('<tr> <th class="subHead"> Total Estimated and Tentative other charges (B) </th> <th class="txtRight" id="tentativeChargesTotal" style="text-align:right;">'+tentativeChargesV2+'</th>    </tr>');
-             $('#printTentativeCharges tbody').append('<tr> <th class="subHead"> Total Estimated and Tentative other charges (B) </th> <th class="txtRight" id="tentativeChargesTotal" style="text-align:right;">'+tentativeChargesV2+'</th>    </tr>');
+             $('#tentativeCharges tbody').append('<tr> <th class="subHead"> Estimated other charges (B) </th> <th class="txtRight" id="tentativeChargesTotal" style="text-align:right;">'+tentativeChargesV2+'</th>    </tr>');
+             $('#printTentativeCharges tbody').append('<tr> <th class="subHead"> Estimated other charges (B) </th> <th class="txtRight" id="tentativeChargesTotal" style="text-align:right;">'+tentativeChargesV2+'</th>    </tr>');
              
              //$('#stamp_duty').text(parseInt((otherChrgAmountTotal*7)/100));
              
