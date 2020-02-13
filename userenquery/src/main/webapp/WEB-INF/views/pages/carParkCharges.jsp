@@ -121,7 +121,7 @@
 	<script src="<c:url value='/resources/js/sweetalert.min.js'/>"></script>
 	
 	
-	<script src="<c:url value='/resources/js/separate/carParkCharges.js?v=18.09'/>"></script>
+	<script src="<c:url value='/resources/js/separate/carParkCharges.js?v=18.10'/>"></script>
 	
 	
 	
