@@ -649,7 +649,7 @@
 							<div class="clearfix"></div>
 						</div>
 						<div id="printColRight" style="width:275px; float:left; padding-left:10px;">
-							<h5 class="">Sales Consideration</h5>
+							<h5 class="">Sale Consideration</h5>
 							<table class="table table-bordered  bgWhite" id="printSalesConsideration" style="width:100%; font-size:8px !important;">
 								<tbody>
 									<tr class="subHead" >
@@ -662,7 +662,7 @@
 									</tr>
 								</tbody>
 							</table>
-							<h5 class="">Estimated and Tentative Other Charges</h5>
+							<h5 class="">Estimated Other Charges</h5>
 							<table class="table table-bordered  bgWhite" id="printTentativeCharges" style="width:100%; font-size:8px !important;">
 								<tbody>
 									<tr class="subHead" >
@@ -699,7 +699,7 @@
 								<tbody>
 									<tr>
 										<th class="subHead" style="text-align:left; font-size: 10px; font-weight: normal;">
-											Total Consideration/ Total Price including Government Levies (A+B+C)
+											Total Sale Price including Government Levies (A+B+C)
 										</th>
 										<th class="totalABC" width="80" align="right" style="text-align:right !important; font-size: 10px;"> 
 											
@@ -945,7 +945,7 @@
 				  	
 			<!-- Dynamic Other Charges part 2 20190522 -->
 			<div class="scrollYauto csV2">
-				<h4 class="">Sales Consideration</h4>
+				<h4 class="">Sale Consideration</h4>
 				<table class="table table-bordered  bgWhite" id="salesConsideration">
 					<tbody>
 						<tr class="subHead" >
@@ -968,7 +968,7 @@
 				 
 			<!-- Other Charges No COP -->	 
 			<div class="scrollYauto csV2">
-				<h4 class="">Estimated and Tentative Other Charges</h4>
+				<h4 class="">Estimated Other Charges</h4>
 				<table class="table table-bordered  bgWhite" id="tentativeCharges">
 					<tbody>
 						<tr class="subHead" >
@@ -1052,7 +1052,7 @@
 					<tbody>
 						<tr>
 							<th class="subHead">
-								<h5 class="txtLeft">Total Consideration/ Total Price including Government Levies (A+B+C)</h5>
+								<h5 class="txtLeft">Total Sale Price including Government Levies (A+B+C)</h5>
 							</th>
 							<th style="width: 135px; vertical-align: middle;" >
 								<h5 id="totalABC" style="font-weight:700" class="txtRight"></h5>

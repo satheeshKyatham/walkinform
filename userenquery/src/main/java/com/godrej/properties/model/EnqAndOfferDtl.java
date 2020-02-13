@@ -2,6 +2,7 @@ package com.godrej.properties.model;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.Map;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name="salesforce.propstrength__offer__c")
@@ -53,6 +55,14 @@ public class EnqAndOfferDtl implements Serializable{
 	@Column(name="propstrength__primary_contact__c") private String propstrength__primary_contact__c;
 	@Column(name="rera_registration_number__c") private String rera_registration_number__c;
 	
+	@Column(name="prop_sfid") private String prop_sfid;
+	
+	@Column(name="open_balc_sq_mt__c") private Double open_balc_sq_mt__c;
+	@Column(name="saleable_area__c") private Double saleable_area__c;
+	
+	
+	@Transient
+	private Map<String, InventoryOtherCharges> mappedCharges;
 	
 	public int getId() {
 		return id;
@@ -227,5 +237,29 @@ public class EnqAndOfferDtl implements Serializable{
 	}
 	public void setRera_registration_number__c(String rera_registration_number__c) {
 		this.rera_registration_number__c = rera_registration_number__c;
+	}
+	public Map<String, InventoryOtherCharges> getMappedCharges() {
+		return mappedCharges;
+	}
+	public void setMappedCharges(Map<String, InventoryOtherCharges> mappedCharges) {
+		this.mappedCharges = mappedCharges;
+	}
+	public String getProp_sfid() {
+		return prop_sfid;
+	}
+	public void setProp_sfid(String prop_sfid) {
+		this.prop_sfid = prop_sfid;
+	}
+	public Double getOpen_balc_sq_mt__c() {
+		return open_balc_sq_mt__c;
+	}
+	public void setOpen_balc_sq_mt__c(Double open_balc_sq_mt__c) {
+		this.open_balc_sq_mt__c = open_balc_sq_mt__c;
+	}
+	public Double getSaleable_area__c() {
+		return saleable_area__c;
+	}
+	public void setSaleable_area__c(Double saleable_area__c) {
+		this.saleable_area__c = saleable_area__c;
 	}
 }
