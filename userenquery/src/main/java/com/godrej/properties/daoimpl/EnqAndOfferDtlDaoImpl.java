@@ -67,7 +67,10 @@ public class EnqAndOfferDtlDaoImpl extends AbstractDao<Integer, EnqAndOfferDtl> 
 				+ " c.mobile_no__c as broker_mobile, "
 				+ " b.propstrength__enquiry_type__c, "
 				+ " b.propstrength__primary_contact__c, "
-				+ " g.rera_registration_number__c "
+				+ " g.rera_registration_number__c, "
+				+ " d.sfid as prop_sfid, "
+				+ " d.open_balc_sq_mt__c, "
+				+ " d.saleable_area__c "
 				
 				
 				
