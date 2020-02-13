@@ -129,9 +129,9 @@ public class KYCApplicantDtlDaoImpl extends AbstractDao<Integer, KYCApplicantDtl
 		
 		String whereCondintion=" ";
 		if(userid!=null && userid.length()>0)
-			whereCondintion=" where userid ="+userid+"";
-		if(userid!=null && userid.length()>0 && projectid!=null)
-			whereCondintion=" where userid ="+userid+" and project_sfid='"+projectid+"'";
+			whereCondintion=" where (userid ="+userid+" or createdoffer_userid="+userid+")";
+		if(userid!=null && userid.length()>0 && projectid!=null)//(a.userid=594 or balnce.userid=594)
+			whereCondintion=" where (userid ="+userid+" or createdoffer_userid="+userid+") and project_sfid='"+projectid+"'";
 		else
 			whereCondintion=" where project_sfid='"+projectid+"'";
 		/* Changed by Vivek Birdi

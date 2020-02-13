@@ -994,9 +994,12 @@ function paymentPlanOtherCharges (firstRowObj){
              
              
              if ( $('#projectId').val() == 'a1l6F0000047Q1xQAE' && $('#stamp_duty').text() == 0 && $('#registrationCharges').text() == 0) {
-                    $('.payableStampAndReg').remove();
+                   $('.payableStampAndReg').remove();
              }
              
+             if ($('#projectId').val() == 'a1l2s00000000pEAAQ') {
+            	 $('.payableStampAndReg').remove();
+             } 
              
              $('#getCSData span').html('');   
        });    

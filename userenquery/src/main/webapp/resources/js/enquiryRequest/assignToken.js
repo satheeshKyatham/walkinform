@@ -75,7 +75,12 @@ $(document).ready(function() {
 					if(value.contact_name==undefined)
 						name='';
 					else
+						
 						name=value.contact_name;
+					 /*if(name.includes("'"))
+					  {
+						 name = name.replace("'","");
+					  }*/
 					
 					var userlist ="";
 					if(option.indexOf("userSelected") != -1){

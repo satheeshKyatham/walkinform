@@ -58,6 +58,14 @@ public class KYCApplicantDtl implements Serializable{
 	@Column(name = "relationship_name__c") private String relationship_name__c;
 	
 	
+	@Column(name = "pstreetaddress2") private String pstreetaddress2;
+	@Column(name = "pstreetaddress3") private String pstreetaddress3;
+	
+	@Column(name = "cstreetaddress2") private String cstreetaddress2;
+	@Column(name = "cstreetaddress3") private String cstreetaddress3;
+	
+	@Column(name="salutation") private String salutation;
+	
 	public int getId() {
 		return id;
 	}
@@ -219,5 +227,35 @@ public class KYCApplicantDtl implements Serializable{
 	}
 	public void setRelationship_name__c(String relationship_name__c) {
 		this.relationship_name__c = relationship_name__c;
+	}
+	public String getPstreetaddress2() {
+		return pstreetaddress2;
+	}
+	public void setPstreetaddress2(String pstreetaddress2) {
+		this.pstreetaddress2 = pstreetaddress2;
+	}
+	public String getPstreetaddress3() {
+		return pstreetaddress3;
+	}
+	public void setPstreetaddress3(String pstreetaddress3) {
+		this.pstreetaddress3 = pstreetaddress3;
+	}
+	public String getCstreetaddress2() {
+		return cstreetaddress2;
+	}
+	public void setCstreetaddress2(String cstreetaddress2) {
+		this.cstreetaddress2 = cstreetaddress2;
+	}
+	public String getCstreetaddress3() {
+		return cstreetaddress3;
+	}
+	public void setCstreetaddress3(String cstreetaddress3) {
+		this.cstreetaddress3 = cstreetaddress3;
+	}
+	public String getSalutation() {
+		return salutation;
+	}
+	public void setSalutation(String salutation) {
+		this.salutation = salutation;
 	}
 }
