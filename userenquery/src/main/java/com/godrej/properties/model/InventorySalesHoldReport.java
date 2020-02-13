@@ -59,6 +59,9 @@ public class InventorySalesHoldReport implements Serializable{
 	
 	@Transient
 	private int holdSec;
+	
+	@Column(name = "hold_for_time")
+	private int holdForTime;
 
 	public int getId() {
 		return id;
@@ -175,4 +178,14 @@ public class InventorySalesHoldReport implements Serializable{
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+
+	public int getHoldForTime() {
+		return holdForTime;
+	}
+
+	public void setHoldForTime(int holdForTime) {
+		this.holdForTime = holdForTime;
+	}
+	
+	
 }
