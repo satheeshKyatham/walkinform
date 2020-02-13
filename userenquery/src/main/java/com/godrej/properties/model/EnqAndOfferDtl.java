@@ -1,6 +1,7 @@
 package com.godrej.properties.model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.sql.Date;
 import java.util.Map;
 
@@ -11,6 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+
+import org.hibernate.annotations.Type;
 
 @Entity
 @Table(name="salesforce.propstrength__offer__c")
@@ -57,8 +60,10 @@ public class EnqAndOfferDtl implements Serializable{
 	
 	@Column(name="prop_sfid") private String prop_sfid;
 	
-	@Column(name="open_balc_sq_mt__c") private Double open_balc_sq_mt__c;
-	@Column(name="saleable_area__c") private Double saleable_area__c;
+	@Column(name="open_balc_sq_mt__c", precision = 10, scale = 2) private BigDecimal open_balc_sq_mt__c;
+	@Column(name="saleable_area__c", precision = 10, scale = 2)  private BigDecimal saleable_area__c;
+	
+	
 	
 	
 	@Transient
@@ -250,16 +255,17 @@ public class EnqAndOfferDtl implements Serializable{
 	public void setProp_sfid(String prop_sfid) {
 		this.prop_sfid = prop_sfid;
 	}
-	public Double getOpen_balc_sq_mt__c() {
+	public BigDecimal getOpen_balc_sq_mt__c() {
 		return open_balc_sq_mt__c;
 	}
-	public void setOpen_balc_sq_mt__c(Double open_balc_sq_mt__c) {
+	public void setOpen_balc_sq_mt__c(BigDecimal open_balc_sq_mt__c) {
 		this.open_balc_sq_mt__c = open_balc_sq_mt__c;
 	}
-	public Double getSaleable_area__c() {
+	public BigDecimal getSaleable_area__c() {
 		return saleable_area__c;
 	}
-	public void setSaleable_area__c(Double saleable_area__c) {
+	public void setSaleable_area__c(BigDecimal saleable_area__c) {
 		this.saleable_area__c = saleable_area__c;
 	}
+
 }

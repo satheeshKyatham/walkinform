@@ -43,7 +43,7 @@ public class InventorySalesHoldReportDaoImpl implements InventorySalesHoldReport
 					+ " c.user_name as held_by_name, " 
 					+ " c.emailid as held_by_email, "
 					+ " a.created_at " 
-					 
+					+", coalesce(a.hold_for_time,0) as hold_for_time" 
 					+ " FROM salesforce.gpl_cs_hold_unit_uat a "
 					+ " INNER JOIN salesforce.propstrength__property__c b ON   b.sfid = a.sfid AND b.propstrength__active__c = true   "
 					+ " LEFT JOIN salesforce.mst_user c ON  a.user_id = c.user_id   "

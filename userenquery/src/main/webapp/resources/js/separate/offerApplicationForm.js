@@ -121,8 +121,13 @@ function getofferApplicantDetails (e, offerSFID, enqSFID, contactSFID, offerName
 				}*/
 				
 			
-				if (obj[i].propstrength__type__c == "1st Applicant" && obj[i].salutation == 'Company' || obj[i].salutation == 'HUF' || obj[i].salutation == 'M/s.') {
-					//$('#inIndividualCaseOffer').empty();
+				if (obj[i].propstrength__type__c == "1" && obj[i].salutation == 'Company' || obj[i].salutation == 'HUF' || obj[i].salutation == 'M/s.') {
+					$('#inIndividualCaseOffer').empty();
+					
+					var officeAddress = obj[i].residential_street1__c+", "+ obj[i].residential_street2__c+","+obj[i].pstreetaddress2+","+obj[i].pstreetaddress3+","+ obj[i].residential_street3__c+" "+ obj[i].residential_city__c+","+ obj[i].residential_post_code__c+","+ obj[i].residential_state__c+","+ obj[i].residential_country__c;
+					
+					officeAddress = officeAddress.replace(/undefined/g, "");
+					
 					
 					/*$('#niNameOffer').text(obj[i].name);
 					$('#niDOBOffer').text(obj[i].birthdate);
@@ -130,11 +135,14 @@ function getofferApplicantDetails (e, offerSFID, enqSFID, contactSFID, offerName
 					
 					appTypeCompOrIndv = 'company';
 					
+					
+					companyHtml += '<div  style="padding-bottom:10px;"><b>1. In case of Company/ LLP/ HUF/ Partnership Firm</b></div>';
+					
 					companyHtml += '<table class="table table-bordered" style="margin-bottom:15px;">'
 							+ '<tbody>'
-								+ '<tr>'
+								/*+ '<tr>'
 									+ '<th colspan="2"  style="text-align:center;"><b>In case of Company/ LLP/ HUF/ Partnership Firm</b></th>'
-								+ '</tr>'
+								+ '</tr>'*/
 								+ '<tr>'
 									+ '<td>Name</td>'
 									+ '<td id="niNameOffer">'+obj[i].name+'</td>'
@@ -149,11 +157,11 @@ function getofferApplicantDetails (e, offerSFID, enqSFID, contactSFID, offerName
 								+ '</tr>'
 								+ '<tr>'
 									+ '<td>Registered Office Address</td>'
-									+ '<td></td>'
+									+ '<td>'+officeAddress+'</td>'
 								+ '</tr>'
 								+ '<tr>'
 									+ '<td>Name of Authorized Representative/ Partner /Karta</td>'
-									+ '<td></td>'
+									+ '<td>'+obj[i].relationship__c+' '+obj[i].relationship_name__c+'</td>'
 								+ '</tr>'
 								+ '<tr>'
 									+ "<td colspan='2' style='font-size:10px;'>Note: If Applicant/s is company, partnership firm, limited liability partnership, the following incorporation documents are required to be submitted along with this Application Form: (a) Certificate of Incorporation/Registration Certificate for the applicable entity (b) Memorandum of Association (c) Articles of Association (d) Partnership Deed (e) Limited Liability Partnership Agreement (f) Board/Partner's Resolution authorizing this purchase. Please affix the official stamp of the respective Company/LLP/Trust/Partnership firm/HUF/Society as may be applicable.</td>"											
@@ -161,12 +169,15 @@ function getofferApplicantDetails (e, offerSFID, enqSFID, contactSFID, offerName
 							+ '</tbody>'
 						+ '</table>';
 					
+				
+						
+					
 					
 					
 				} else {
-					/*appTypeCompOrIndv = 'individual';
+					appTypeCompOrIndv = 'individual';
 					
-					$('#inComapnyCaseOffer').empty();*/
+					$('#inComapnyCaseOffer').empty();
 				}
 				
 				
@@ -191,8 +202,8 @@ function getofferApplicantDetails (e, offerSFID, enqSFID, contactSFID, offerName
 				passport_no__c +="<td>"+passportNo+"</td>";
 				nationality_a__c +="<td>"+obj[i].nationality_a__c+"</td>";
 				propstrength__resident_status__c +="<td>"+obj[i].propstrength__resident_status__c+"</td>";
-				permanentAddress +="<td>"+ obj[i].residential_street1__c+", "+ obj[i].residential_street2__c+" "+ obj[i].residential_street3__c+" "+ obj[i].residential_city__c+", "+ obj[i].residential_post_code__c+", "+ obj[i].residential_state__c+", "+ obj[i].residential_country__c +"</td>";
-				communicationAddress +="<td>"+obj[i].mailing_street1__c+", "+obj[i].mailing_street2__c+" "+obj[i].mailing_street3__c+" "+obj[i].mailing_city__c+", "+obj[i].mailing_state__c+", "+obj[i].country__c+", "+obj[i].postal_code__c+"</td>";
+				permanentAddress +="<td>"+ obj[i].residential_street1__c+", "+ obj[i].residential_street2__c+","+obj[i].pstreetaddress2+","+obj[i].pstreetaddress3+","+ obj[i].residential_street3__c+" "+ obj[i].residential_city__c+", "+ obj[i].residential_post_code__c+", "+ obj[i].residential_state__c+", "+ obj[i].residential_country__c +"</td>";
+				communicationAddress +="<td>"+obj[i].mailing_street1__c+", "+obj[i].mailing_street2__c+","+obj[i].cstreetaddress2+","+obj[i].cstreetaddress3+","+obj[i].mailing_street3__c+","+obj[i].mailing_city__c+", "+obj[i].mailing_state__c+", "+obj[i].country__c+", "+obj[i].postal_code__c+"</td>";
 				birthdate +="<td>"+obj[i].birthdate+"</td>";
 			}
 			
@@ -333,7 +344,12 @@ function getEnqAndOfferDtl (enqSFID, offerSFID, rowId) {
 			
 			$('#projectNameLocationOffer').text(obj[0].propstrength__description__c);
 			
-			jvCityStateCountry = obj[0].jv_city__c + ", "+ obj[0].jv_state__c +", "+ obj[0].jv_country__c
+			if ($("#projectid").val() == "a1l2s00000000pEAAQ") {
+				jvCityStateCountry = obj[0].jv_city__c 	
+			} else {
+				jvCityStateCountry = obj[0].jv_city__c + ", "+ obj[0].jv_state__c +", "+ obj[0].jv_country__c
+			}
+			
 			jvCityStateCountry = jvCityStateCountry.replace(/undefined/g, "");
 			
 			$("#jvNameOffer").text(obj[0].jv_name__c);
@@ -369,10 +385,10 @@ function getEnqAndOfferDtl (enqSFID, offerSFID, rowId) {
 			
 			var netMinTotalOther = obj[0].propstrength__net_revenue__c-obj[0].propstrength__total_other_charges__c;
 			
-			$('#carpetAreaCostOffer').text(parseFloat(netMinTotalOther/parseFloat(parseFloat(obj[0].carpet_area_converted__c)+parseFloat(obj[0].appurtenant_area_sq_mt__c))*obj[0].carpet_area_converted__c).toFixed(2));
+			$('#carpetAreaCostOffer').text(parseFloat(netMinTotalOther/parseFloat(parseFloat(obj[0].open_balc_sq_mt__c)+parseFloat(obj[0].appurtenant_area_sq_mt__c))*obj[0].open_balc_sq_mt__c).toFixed(2));
 			//$('#exclusiveAreasCostOffer').text(parseFloat(netMinTotalOther/parseFloat(parseFloat(obj[0].carpet_area_converted__c)+parseFloat(obj[0].appurtenant_area_sq_mt__c))*obj[0].appurtenant_area_sq_mt__c).toFixed(2));
 			
-			$('#exclusiveAreasCostOffer').text(Math.round(netMinTotalOther/parseFloat(parseFloat(obj[0].carpet_area_converted__c)+parseFloat(obj[0].appurtenant_area_sq_mt__c))*obj[0].appurtenant_area_sq_mt__c));
+			$('#exclusiveAreasCostOffer').text(parseFloat(netMinTotalOther/parseFloat(parseFloat(obj[0].open_balc_sq_mt__c)+parseFloat(obj[0].appurtenant_area_sq_mt__c))*obj[0].appurtenant_area_sq_mt__c).toFixed(2));
 			
 			$('#totalSaleConsiderationOffer').text(Math.round(parseFloat(parseFloat($('#carpetAreaCostOffer').text())+parseFloat($('#exclusiveAreasCostOffer').text())+parseFloat(obj[0].propstrength__total_other_charges__c) ).toFixed(2)));
 	
@@ -669,13 +685,20 @@ function processCarParkCharges (CAR_PARKING_CHARGES) {
 	if (CAR_PARKING_CHARGES.propstrength__fixed_charge__c == null ){
 		return
 	} else {
-		$("#carParkCharges").text("");
-		$("#carParkCharges").text("Rs. " + CAR_PARKING_CHARGES.propstrength__fixed_charge__c + "/-");
+		if (CAR_PARKING_CHARGES.propstrength__fixed_charge__c > 0) {
+			$("#carParkCharges").text("");
+			$("#carParkCharges").text("Rs. " + CAR_PARKING_CHARGES.propstrength__fixed_charge__c + "/-");
+		} else {
+			$("#carParkCharges").text("");
+			$("#carParkCharges").text("NA");
+		}	
 	}
 	
 	if (CAR_PARKING_CHARGES.propstrength__fixed_charge__c > 0) {
 		$("#carParkSpaceCount").text("");
 		$("#carParkSpaceCount").text("1");
+	} else {
+		$("#carParkSpaceCount").text("0");
 	}
 }
 

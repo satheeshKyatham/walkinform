@@ -160,7 +160,16 @@ public class OfferValidator implements Validator{
 			return;
 		}
 		if(paymentAmount.doubleValue() < price.doubleValue()) {
-			validator.reject(errors, INVALID_PAYMENTS, "Payment amount is not matching with required amount - " + paymentAmount + " - It shouble be - " +price);
+			double difference = price.doubleValue() - paymentAmount.doubleValue();
+			StringBuilder message = new StringBuilder();
+			message.append("Payment entered (Rs. ")
+			.append(paymentAmount)
+			.append("/-) is less than the booking amount (Rs. ")
+			.append(price)
+			.append("/-). Please add remaining amount difference (Rs. ")
+			.append(difference)
+			.append("/-)");
+			validator.reject(errors, INVALID_PAYMENTS, message.toString());
 		}
 	}
 	

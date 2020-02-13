@@ -86,7 +86,7 @@ public class EnqAndOfferDtlDaoImpl extends AbstractDao<Integer, EnqAndOfferDtl> 
 		//order by b.id
 		authors = q.getResultList();
 		
-		System.out.println("Final Size::"+authors.size());
+		//System.out.println("Final Size::"+authors.size());
 		
 		
 		

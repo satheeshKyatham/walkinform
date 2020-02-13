@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.godrej.properties.master.service.SysConfigService;
 import com.godrej.properties.model.InventorySalesHoldReport;
 import com.godrej.properties.service.InventorySalesHoldReportService;
 import com.google.gson.Gson;
@@ -31,6 +32,9 @@ public class InventorySalesHoldReportController {
 	@Autowired
 	private InventorySalesHoldReportService inventorySalesHoldReportService;
 	
+	@Autowired
+	private SysConfigService sysConfigService;
+	
 	@RequestMapping(value = { "/holdSalesExistReport" }, method = RequestMethod.POST)
 	public String holdExistData (@RequestParam("projectSFID") String projectSFID, @RequestParam("towerCode") String towerCode) {
 		GsonBuilder gsonBuilder = new GsonBuilder();
@@ -43,6 +47,7 @@ public class InventorySalesHoldReportController {
 		} else if (projectSFID!=null && projectSFID.length()>0  && towerCode != null && towerCode.length()>0 && towerCode.equals("All") ) {
 			whereCondition = " a.project_id= '"+projectSFID+"' AND a.holdstatusyn = 'Y' AND a.statusai = 'A' ";
 		}
+		
 		
 		try {
 			List<InventorySalesHoldReport> plans = inventorySalesHoldReportService.holdDataExist(whereCondition);
@@ -62,8 +67,9 @@ public class InventorySalesHoldReportController {
 		    		// add a bunch of seconds to the calendar
 		    		cal.add(Calendar.SECOND, 98765);
 
+     	    		int holdTime = plans.get(k).getHoldForTime();
 		    		// create a second time stamp
-		    		Timestamp timestampValue = new Timestamp(plans.get(k).getCreated_at().getTime()+ 5*60*1000);
+		    		Timestamp timestampValue = new Timestamp(plans.get(k).getCreated_at().getTime()+ holdTime);
 
 		    		long milliseconds = timestampValue.getTime() - currentTpm.getTime();
 		    		int seconds = (int) milliseconds / 1000;
