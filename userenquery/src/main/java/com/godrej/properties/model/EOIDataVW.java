@@ -44,6 +44,9 @@ public class EOIDataVW implements Serializable{
 	@Column(name="property_name1__c") private String property_name1__c;
 	@Column(name="totalamount")	
 	private String totalamount;
+	@Column(name="createdoffer_userid")	
+	private String createdoffer_userid;
+	
 	public String getUserdocid() {
 		return userdocid;
 	}
@@ -146,6 +149,12 @@ public class EOIDataVW implements Serializable{
 	}
 	public void setTotalamount(String totalamount) {
 		this.totalamount = totalamount;
+	}
+	public String getCreatedoffer_userid() {
+		return createdoffer_userid;
+	}
+	public void setCreatedoffer_userid(String createdoffer_userid) {
+		this.createdoffer_userid = createdoffer_userid;
 	}
 	
 }

@@ -3372,7 +3372,7 @@ public class WebServiceController<MultipartFormDataInput> {
 			if(userid!=null && userid.length()>0)
 				whereCondition = " and userid="+userid+" ";
 			if(projectid!=null && projectid.length()>0)
-				whereCondition = " and projectsfid='"+projectid+"' ";
+				whereCondition = whereCondition+" and projectsfid='"+projectid+"' ";
 
 			return gson.toJson(vW_OfferWithBalanceService.getOfferList(whereCondition));
 	 }

@@ -14,7 +14,7 @@ function getCreatedOfferList () {
 	 var contextPath = $("#pageContext").val();
 	 var csPath = '';
 	 
-	$.get("getOfferList",{"userid":$('#userid').val(),"projectid":""},function(data){				 
+	$.get("getOfferList",{"userid":$('#userid').val(),"projectid":$('#projectid').val()},function(data){				 
 		
 	}).done(function(data){
 		//alert("Data:-"+data);

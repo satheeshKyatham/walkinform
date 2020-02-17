@@ -2098,7 +2098,7 @@ function newOtherCharges2 () {
              var carpetAreaAmount = 0;
              var exclusiveAreaAmount = 0;
              
-             if ($('#projectId').val() == 'a1l2s00000000X5AAI') {
+             if ($('#projectId').val() == 'a1l2s00000000X5AAI' || $('#projectId').val() == 'a1l6F000009D6IMQA0') {
             	 $('#tentativeCharges tbody').append("<tr> " +
             	 			"<th> Electricity Charges </th> <td class='txtRight' style='text-align:right;'> 0 </td>  </tr>" +
             	 			"<tr> <th> Legal Charges </th> <td class='txtRight' style='text-align:right;'> 0 </td>  </tr>" +
@@ -2822,10 +2822,18 @@ function csPymtData (balance_details_primeryId) {
 
 
 $("#carParkType").change(function () {
-    $('#carParkCountDD').empty();
+    
+	
+	
+	
+	$('#carParkCountDD').empty();
     if ($('#carParkType option:selected').val() != -1) {
 		$('#carParkCountDD').append('<select class="full form-control"><option value="1">1</option> <option value="2">2</option> <option value="3">3</option>  <option value="4">4</option> </select>');
-		$('#carParkCount').show();
+		if ($('#projectId').val() == 'a1l6F000009D6IMQA0') {
+			$('#carParkCount').hide();
+		} else {
+			$('#carParkCount').show();
+		}
     } else {
         $('#carParkCountDD').append('<select class="full form-control"><option value="0">0</option></select>');
         $('#carParkCount').hide();
