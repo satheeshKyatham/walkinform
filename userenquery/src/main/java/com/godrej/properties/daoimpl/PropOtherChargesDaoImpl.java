@@ -68,7 +68,7 @@ public class PropOtherChargesDaoImpl extends AbstractDao<Integer, PropOtherCharg
 		*/
 		String conditionString = "";
 		
-		if (projectId.equals("a1l2s00000000X5AAI")) {
+		if (projectId.equals("a1l2s00000000X5AAI") || projectId.equals("a1l6F000009D6IMQA0")) {
 			conditionString = " AND  propstrength__other_charges__c.propstrength__part_of_cop__c ='t' ";
 		} else {
 			conditionString = " ";

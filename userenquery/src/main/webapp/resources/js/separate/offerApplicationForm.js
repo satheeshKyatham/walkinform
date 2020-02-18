@@ -388,7 +388,6 @@ function getEnqAndOfferDtl (enqSFID, offerSFID, rowId) {
 			$('#carpetAreaCostOffer').text(parseFloat(netMinTotalOther/parseFloat(parseFloat(obj[0].open_balc_sq_mt__c)+parseFloat(obj[0].appurtenant_area_sq_mt__c))*obj[0].open_balc_sq_mt__c).toFixed(2));
 			//$('#exclusiveAreasCostOffer').text(parseFloat(netMinTotalOther/parseFloat(parseFloat(obj[0].carpet_area_converted__c)+parseFloat(obj[0].appurtenant_area_sq_mt__c))*obj[0].appurtenant_area_sq_mt__c).toFixed(2));
 			
-			$('#exclusiveAreasCostOffer').text(parseFloat(netMinTotalOther/parseFloat(parseFloat(obj[0].open_balc_sq_mt__c)+parseFloat(obj[0].appurtenant_area_sq_mt__c))*obj[0].appurtenant_area_sq_mt__c).toFixed(2));
 			
 			$('#totalSaleConsiderationOffer').text(Math.round(parseFloat(parseFloat($('#carpetAreaCostOffer').text())+parseFloat($('#exclusiveAreasCostOffer').text())+parseFloat(obj[0].propstrength__total_other_charges__c) ).toFixed(2)));
 	
