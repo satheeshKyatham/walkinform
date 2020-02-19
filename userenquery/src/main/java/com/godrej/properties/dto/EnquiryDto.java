@@ -92,6 +92,11 @@ public class EnquiryDto extends CommonDto {
    	private String sourcing_Managers__c;
    	private String referredbyDto;
    	private String closingManagerDto;
+   	
+   	private String contact_referral__c;
+   	private String contact_Loyalty__c;
+   	private String employee_Referral__c;
+   	
 	public String getClosing_manager_name__c() {
 		return closing_manager_name__c;
 	}
@@ -556,6 +561,30 @@ public class EnquiryDto extends CommonDto {
 
 	public void setClosingManagerDto(String closingManagerDto) {
 		this.closingManagerDto = closingManagerDto;
+	}
+
+	public String getContact_referral__c() {
+		return contact_referral__c;
+	}
+
+	public void setContact_referral__c(String contact_referral__c) {
+		this.contact_referral__c = contact_referral__c;
+	}
+
+	public String getContact_Loyalty__c() {
+		return contact_Loyalty__c;
+	}
+
+	public void setContact_Loyalty__c(String contact_Loyalty__c) {
+		this.contact_Loyalty__c = contact_Loyalty__c;
+	}
+
+	public String getEmployee_Referral__c() {
+		return employee_Referral__c;
+	}
+
+	public void setEmployee_Referral__c(String employee_Referral__c) {
+		this.employee_Referral__c = employee_Referral__c;
 	}
 	
 }

@@ -97,6 +97,7 @@
 					<th>Carpet Area</th>
 					<th>Unit Type</th>
 					<th>Car Park Type</th>
+					<th>Scheme Name</th>
 					<th>Total Basic Price</th>
 					<th>Sales Consideration</th>
 					<th>Created By</th>
