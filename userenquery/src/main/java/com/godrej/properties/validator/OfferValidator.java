@@ -104,7 +104,17 @@ public class OfferValidator implements Validator{
 		
 
 		if(paymentAmount.doubleValue() < amount.doubleValue()) {
-			validator.reject(errors, INVALID_PAYMENTS, "Payment amount is not valid - " + paymentAmount + " - It shouble be -" +amount);
+			double difference = price.doubleValue() - paymentAmount.doubleValue();
+			StringBuilder message = new StringBuilder();
+			message.append("Payment entered (Rs. ")
+			.append(paymentAmount)
+			.append("/-) is less than the booking amount (Rs. ")
+			.append(price)
+			.append("/-). Please add remaining amount difference (Rs. ")
+			.append(difference)
+			.append("/-)");
+
+			validator.reject(errors, INVALID_PAYMENTS, message.toString());
 		}
 	}
 	
