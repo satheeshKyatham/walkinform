@@ -13,6 +13,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
@@ -52,6 +53,8 @@ import com.godrej.properties.constants.KeyConstants;
 import com.godrej.properties.dto.AuditLogDto;
 import com.godrej.properties.dto.EnquiryDto;
 import com.godrej.properties.dto.LdapUserDetailsDto;
+import com.godrej.properties.dto.SysConfigEnum;
+import com.godrej.properties.master.service.SysConfigService;
 import com.godrej.properties.model.ADLoginPass;
 import com.godrej.properties.model.AssignedUser;
 import com.godrej.properties.model.BSPAgainstPymtPlan;
@@ -430,6 +433,10 @@ public class WebServiceController<MultipartFormDataInput> {
 	
 	@Autowired
 	private SalesUnitHoldStatusService salesUnitHoldStatusService;
+	
+	
+	@Autowired
+	private SysConfigService sysConfigService;
 	
 	
 	@RequestMapping(value = "/activeproject", method = RequestMethod.GET, produces = "application/json")
@@ -1695,6 +1702,24 @@ public class WebServiceController<MultipartFormDataInput> {
 	 * String projectId) throws JRException, IOException {
 	 */
 	 
+	 public String getPaymentTrxValidationDate(String paymentTrxDaysAllow) {
+		int days = 3;
+		 
+		 try {
+			 days = Integer.parseInt(paymentTrxDaysAllow);
+		} catch (Exception e) {
+			log.error("error", e);
+		}
+		 
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.DAY_OF_MONTH, days);  
+		String newDate = sdf.format(cal.getTime());  
+		 
+		return newDate;
+		 
+	 } 
+	 
 	 
 	 @RequestMapping(value = "/getProjectPlan", method = RequestMethod.GET, produces = "application/json")
 		public String getProjectPlan(@RequestParam("herokuEnqId") String herokuEnqId,  @RequestParam("pymtPlanSfid") String pymtPlanSfid, @RequestParam("project_code") String project_code ,@RequestParam("unit") String unit,  @RequestParam("towerCode") String towerCode,  @RequestParam("typology") String typology) throws JRException, IOException{
@@ -1728,6 +1753,21 @@ public class WebServiceController<MultipartFormDataInput> {
 			bspPerVal =bSPAgainstPymtPlanService.getPaymentPlanPerBSP(project_code,unit,towerCode,pymtPlanSfid,plans.get(0).getPropstrength__unit_type__c()); 
 		
 		 if(plans.size()>0)	{
+			 
+			 
+			// DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+			// String nowData = df.format(new Date());
+			 
+			 
+			 String paymentTrxDaysAllow = sysConfigService.getValue(SysConfigEnum.PAYMENT_TRX_ALLOWED_DAYS, project_code);
+			 
+			 String allowedUptoDate = null;
+			 
+			 if (paymentTrxDaysAllow != null) {
+				 allowedUptoDate = getPaymentTrxValidationDate(paymentTrxDaysAllow);
+			 }
+			  
+			 
 			 PaymentPlan paym =plans.get(0);
 			 PaymentPlanJson paymentPlanJson= new PaymentPlanJson();
 			 paymentPlanJson.setID(paym.getPropstrength__house_unit_no__c());
@@ -1770,6 +1810,9 @@ public class WebServiceController<MultipartFormDataInput> {
 			 paymentPlanJson.setPropstrength__pmay_abatement__c(paym.isPropstrength__pmay_abatement__c());
 			 paymentPlanJson.setBank__c(paym.getBank__c());
 			 paymentPlanJson.setProperty_facing__c(paym.getProperty_facing__c());
+			 paymentPlanJson.setPaymentTrxdaysVal(paymentTrxDaysAllow);
+			 
+			 paymentPlanJson.setNowData(allowedUptoDate);
 			 //paymentPlanJson.set (paym.getSfid());
 			 
 			 
@@ -4117,6 +4160,8 @@ public class WebServiceController<MultipartFormDataInput> {
 		// @RequestParam("customerContact") long contact,
 		@RequestMapping(value = { "/getInventoryStatus" }, method = RequestMethod.POST)
 		public String getInventoryStatus (@RequestParam("userid") String userid, @RequestParam("projectsfid") String projectsfid,  @RequestParam("propid") String propid ) throws JRException, IOException {
+			
+			
 			
 			log.info(" Check inventory status Parameters - projectsfid : "+projectsfid+" propid :"+propid);
 			
