@@ -92,9 +92,11 @@
 					<th>Request Source</th>
 					<th>Enquiry Type</th>
 					<th>Offer No.</th>
+					<th>Offer Created By</th>
 					<th>Super Area</th>
 					<th>Carpet Area</th>
 					<th>Unit Type</th>
+					<th>Car Park Type</th>
 					<th>Total Basic Price</th>
 					<th>Sales Consideration</th>
 					<th>Created By</th>

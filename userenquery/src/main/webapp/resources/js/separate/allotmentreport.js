@@ -63,9 +63,11 @@ function getAllotmentDashboardReport () {
 							" <td>"+obj1[i].propstrength__request_source__c+"</td>" +
 							" <td>"+obj1[i].propstrength__enquiry_type__c+"</td>" +
 							" <td>"+obj1[i].offername+"</td>" +
+							" <td>"+obj1[i].user_name+"</td>" +
 							" <td>"+obj1[i].propstrength__super_area__c+"</td>" +
 							" <td>"+obj1[i].propstrength__carpet_area__c+"</td>" +
 							" <td>"+obj1[i].propstrength__unit_type__c+"</td>" +
+							" <td>"+obj1[i].car_park_type+"</td>" +
 							" <td>"+obj1[i].propstrength__total_basic_sale_price__c+"</td>" +
 							" <td>"+obj1[i].propstrength__total_sales_consideration__c+"</td>" +
 							" <td>"+obj1[i].user_name+"</td>" +

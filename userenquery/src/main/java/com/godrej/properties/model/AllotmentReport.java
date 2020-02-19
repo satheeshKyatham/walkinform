@@ -47,6 +47,8 @@ public class AllotmentReport {
 	@Column(name="PropStrength__House_Unit_No__c") private String	propStrength__House_Unit_No__c;
 	@Column(name="actula_5_per") private Double	actula_5_per;
 	@Column(name="diffamount") private String diffamount;
+	@Column(name="car_park_type") private String car_park_type;
+	
 	public int getId() {
 		return id;
 	}
@@ -220,6 +222,12 @@ public class AllotmentReport {
 	}
 	public void setActula_5_per(Double actula_5_per) {
 		this.actula_5_per = actula_5_per;
+	}
+	public String getCar_park_type() {
+		return car_park_type;
+	}
+	public void setCar_park_type(String car_park_type) {
+		this.car_park_type = car_park_type;
 	}
 	
 	
