@@ -154,6 +154,14 @@ public class EnquiryConverter implements CommonConverter<Enquiry, EnquiryDto>{
 		if(entity.getSourcing_Managers__c()!=null)
 			dto.setSourcing_Managers__c(entity.getSourcing_Managers__c());
 		/*=========End========*/
+		
+		if(entity.getContact_Loyalty__c()!=null)
+			dto.setContact_Loyalty__c(entity.getContact_Loyalty__c());
+		if(entity.getContact_referral__c()!=null)
+			dto.setContact_referral__c(entity.getContact_referral__c());
+		if(entity.getEmployee_Referral__c()!=null)
+			dto.setEmployee_Referral__c(entity.getEmployee_Referral__c());
+		
 		return dto;
 	}
 
@@ -287,7 +295,12 @@ public class EnquiryConverter implements CommonConverter<Enquiry, EnquiryDto>{
 			entity.setPriority_no__c(dto.getPriority_no__c());
 		entity.setEoi_enquiry__c(dto.getEoi_enquiry__c());
 		
-		
+		if(dto.getContact_Loyalty__c()!=null)
+			entity.setContact_Loyalty__c(dto.getContact_Loyalty__c());
+		if(dto.getContact_referral__c()!=null)
+			entity.setContact_referral__c(dto.getContact_referral__c());
+		if(dto.getEmployee_Referral__c()!=null)
+			entity.setEmployee_Referral__c(dto.getEmployee_Referral__c());
 		return entity;
 	}
 

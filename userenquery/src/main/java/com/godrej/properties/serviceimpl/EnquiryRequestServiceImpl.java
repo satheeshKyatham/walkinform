@@ -128,6 +128,30 @@ public class EnquiryRequestServiceImpl implements EnquiryRequestService {
 		
 		
 		//dto.setClosingmanagers(closingmanagers);
+		//Changed by Satheesh K - 19-02-2020 - Request by Satheesh K
+		if(dto.getWalkInSource()!=null)
+		{
+			if(dto.getWalkInSource().equals("Referral"))
+			{
+				dto.setIsReferredByChannelPartner("Referral");
+				dto.setContact_referral__c(KeyConstants.ENQUIRY_REFERRAL_SFID);
+			}
+			if(dto.getWalkInSource().equals("Godrej Employee"))
+			{
+				dto.setIsReferredByChannelPartner("Employee");
+				dto.setEmployee_Referral__c(KeyConstants.ENQUIRY_EMPLOYEE_SFID);
+			}
+			if(dto.getWalkInSource().equals("Corporate"))
+			{
+				dto.setIsReferredByChannelPartner("Corporate");
+			}
+			if(dto.getWalkInSource().equals("Existing Customer"))
+			{
+				dto.setIsReferredByChannelPartner("Loyalty");
+				dto.setContact_Loyalty__c(KeyConstants.ENQUIRY_EXISTINGCUSTOMER_SFID);
+			}
+			
+		}
 		if(dto.getWalkInSource()!=null && !dto.getWalkInSource().equals("")){
 			//dto.setWalkInSourceDetail(dto.getWalkInSource().replace(",", ""));
 			dto.setWalkInSource(dto.getWalkInSource().replace(",", ""));
