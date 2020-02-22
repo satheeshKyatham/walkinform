@@ -104,7 +104,7 @@ public class OfferValidator implements Validator{
 		
 
 		if(paymentAmount.doubleValue() < amount.doubleValue()) {
-			double difference = price.doubleValue() - paymentAmount.doubleValue();
+			double difference = amount.doubleValue() - paymentAmount.doubleValue();
 			StringBuilder message = new StringBuilder();
 			message.append("Payment entered (Rs. ")
 			.append(paymentAmount)
