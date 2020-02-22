@@ -48,6 +48,7 @@ public class AllotmentReport {
 	@Column(name="actula_5_per") private Double	actula_5_per;
 	@Column(name="diffamount") private String diffamount;
 	@Column(name="car_park_type") private String car_park_type;
+	@Column(name="scheme_name") private String scheme_name;
 	
 	public int getId() {
 		return id;
@@ -228,6 +229,12 @@ public class AllotmentReport {
 	}
 	public void setCar_park_type(String car_park_type) {
 		this.car_park_type = car_park_type;
+	}
+	public String getScheme_name() {
+		return scheme_name;
+	}
+	public void setScheme_name(String scheme_name) {
+		this.scheme_name = scheme_name;
 	}
 	
 	
