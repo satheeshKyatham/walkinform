@@ -2611,9 +2611,13 @@ function printPdfData(generateFrom) {
              
        }).done(function(data){
              
-    	   var win = window.open(pageContext+'Costsheet?name='+enqSfid+'-'+$('#unitSfid').val()+'-'+$('#projectId').val() +'&region='+$('#region__c').val() + '&project='+$('#marketingProjectName').val()+'&tower='+$('#towerTval').text()+'&floor=' + $('#floorTval').text() + '&unit=' + $('#unitTval').text() + '&from=costsheet', '_blank');
+    	   
+    	  var uriPath = pageContext+'Costsheet?name='+enqSfid+'-'+$('#unitSfid').val()+'-'+$('#projectId').val() +'&region='+$('#region__c').val() + '&project='+$('#marketingProjectName').val()+'&tower='+encodeURIComponent($('#towerTval').text())+'&floor=' + $('#floorTval').text() + '&unit=' + $('#unitTval').text() + '&from=costsheet';
+    	  var win = window.open(uriPath,'_blank');
            
-             
+//    	   var win = window.open(pageContext+'Costsheet?name='+enqSfid+'-'+$('#unitSfid').val()+'-'+$('#projectId').val() +'&region='+$('#region__c').val() + '&project='+$('#marketingProjectName').val()+'&tower='+$('#towerTval').text()+'&floor=' + $('#floorTval').text() + '&unit=' + $('#unitTval').text() + '&from=costsheet', '_blank');  
+    	   
+    	   
              //var win = window.open(pageContext+'Costsheet?name='+enqSfid, '_blank');
              if (win) {
                  //Browser has allowed it to be opened

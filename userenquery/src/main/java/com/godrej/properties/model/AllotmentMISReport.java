@@ -2,12 +2,20 @@ package com.godrej.properties.model;
 
 public class AllotmentMISReport {
 	
-	public String totalArealSold;
-	public String totalBSP;
-	public String unitcount;
-	public String kycApprovedCount;
-	public String bookingcount;
-	public String totalEtoken;
+	private String totalArealSold;
+	private String totalBSP;
+	private String unitcount;
+	private String kycApprovedCount;
+	private String bookingcount;
+	private String totalEtoken;
+	
+	private String holdInventoryCount;
+	private String blockedInventoryCount;
+	
+	private String coverd1bhk;
+	private String coverd2bhk;
+	private String coverd3bhk;
+	
 	public String getTotalArealSold() {
 		return totalArealSold;
 	}
@@ -44,6 +52,36 @@ public class AllotmentMISReport {
 	}
 	public void setBookingcount(String bookingcount) {
 		this.bookingcount = bookingcount;
+	}
+	public String getHoldInventoryCount() {
+		return holdInventoryCount;
+	}
+	public void setHoldInventoryCount(String holdInventoryCount) {
+		this.holdInventoryCount = holdInventoryCount;
+	}
+	public String getBlockedInventoryCount() {
+		return blockedInventoryCount;
+	}
+	public void setBlockedInventoryCount(String blockedInventoryCount) {
+		this.blockedInventoryCount = blockedInventoryCount;
+	}
+	public String getCoverd1bhk() {
+		return coverd1bhk;
+	}
+	public void setCoverd1bhk(String coverd1bhk) {
+		this.coverd1bhk = coverd1bhk;
+	}
+	public String getCoverd2bhk() {
+		return coverd2bhk;
+	}
+	public void setCoverd2bhk(String coverd2bhk) {
+		this.coverd2bhk = coverd2bhk;
+	}
+	public String getCoverd3bhk() {
+		return coverd3bhk;
+	}
+	public void setCoverd3bhk(String coverd3bhk) {
+		this.coverd3bhk = coverd3bhk;
 	}
 	
 	

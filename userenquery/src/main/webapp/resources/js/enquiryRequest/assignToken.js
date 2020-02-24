@@ -77,10 +77,10 @@ $(document).ready(function() {
 					else
 						
 						name=value.contact_name;
-					 /*if(name.includes("'"))
+					 if(name.includes("'"))
 					  {
 						 name = name.replace("'","");
-					  }*/
+					  }
 					
 					var userlist ="";
 					if(option.indexOf("userSelected") != -1){

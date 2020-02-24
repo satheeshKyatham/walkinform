@@ -26,6 +26,13 @@ function getAllotmentDashboardReport () {
 	$('#allotmentReportID i').show();
 	
 	$("#allotmentReportTable tbody").empty();
+	$("#covered1bhkid").empty();
+	$("#covered2bhkid").empty();
+	$("#covered3bhkid").empty();
+	$("#blockInvId").empty();
+	$("#holdInvId").empty();
+	
+	
 	$.get("getAllotmentDayReport",{"projectSfid":$('#projectid').val(), "fromDate":$('#txtAllotFromDate').val(), "toDate":$('#txtAllotToDate').val()},function(data){				 
 		var obj =JSON.stringify(data);
 		var obj1 =JSON.parse(obj);
@@ -129,5 +136,21 @@ function getAllotmentDashboardReport () {
 					" </tr>";
 	
 	$("#allotmentmisReport tbody").append(html);
+	if($("#projectid").val()=="a1l6F000009D6IMQA0")
+		{
+			$("#coveredcarpark_id").show();
+			var coverd1bhk=data.coverd1bhk;
+			$("#covered1bhkid").append(coverd1bhk.toString()+"/69");
+			$("#covered2bhkid").append(data.coverd2bhk+"/96");
+			$("#covered3bhkid").append(data.coverd3bhk+"/147");
+		}
+	else
+		$("#coveredcarpark_id").hide();
+	
+	
+	
+	$("#blockInvId").append(data.blockedInventoryCount);
+	$("#holdInvId").append(data.holdInventoryCount);
+	
 		});
 }
