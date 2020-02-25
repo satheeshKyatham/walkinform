@@ -27,7 +27,7 @@
 
 
      
-<link rel="stylesheet" href="<c:url value='/resources/css/inner.css' />">
+<link rel="stylesheet" href="<c:url value='/resources/css/inner.css?v=1.0' />">
 <link rel="stylesheet" href="<c:url value='/resources/css/style.css' />">
 <link rel="stylesheet" href="<c:url value='/resources/css/enqMap.css' />">
 <%-- 
@@ -245,7 +245,7 @@ projectid=request.getParameter("projectid");
 
 <script src="<c:url value='/resources/js/enquiryRequest/misreport.js?v=18.10'/>"></script>
 <script src="<c:url value='/resources/js/separate/eoiReport.js?v=18.10'/>"></script>
-<script src="<c:url value='/resources/js/separate/allotmentreport.js?v=18.11'/>"></script>
+<script src="<c:url value='/resources/js/separate/allotmentreport.js?v=18.12'/>"></script>
 <%-- <script src="<c:url value='/resources/js/separate/offer.js?v=18.10'/>"></script> --%>
 
 </body>
