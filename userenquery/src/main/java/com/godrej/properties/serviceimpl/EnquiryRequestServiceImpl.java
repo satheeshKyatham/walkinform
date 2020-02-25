@@ -323,27 +323,6 @@ public class EnquiryRequestServiceImpl implements EnquiryRequestService {
 		else
 		{
 			dest.setWalkInSource(src.getWalkInSource());
-			
-			if(src.getWalkInSource().equals("Referral"))
-			{
-				dest.setIsReferredByChannelPartner("Referral");
-				dest.setContact_referral__c(KeyConstants.ENQUIRY_REFERRAL_SFID);
-			}
-			if(src.getWalkInSource().equals("Godrej Employee"))
-			{
-				dest.setIsReferredByChannelPartner("Employee");
-				dest.setEmployee_Referral__c(KeyConstants.ENQUIRY_EMPLOYEE_SFID);
-			}
-			if(src.getWalkInSource().equals("Corporate"))
-			{
-				dest.setIsReferredByChannelPartner("Corporate");
-			}
-			if(src.getWalkInSource().equals("Existing Customer"))
-			{
-				dest.setIsReferredByChannelPartner("Loyalty");
-				dest.setContact_Loyalty__c(KeyConstants.ENQUIRY_EXISTINGCUSTOMER_SFID);
-			}
-			
 			if(src.getWalkInSource().equals("Referral") && src.getEnquiryReport().getReferredby()!=null)
 			{
 				dest.getEnquiryReport().setReferredby(src.getEnquiryReport().getReferredby());
@@ -501,6 +480,28 @@ public class EnquiryRequestServiceImpl implements EnquiryRequestService {
 				dest.setSourcing_Managers__c(sourcingManager);
 		}
 		
+		if(dest.getWalkInSource().equals("Referral"))
+		{
+			dest.setIsReferredByChannelPartner("Referral");
+			if(dest.getContact_referral__c()==null)
+				dest.setContact_referral__c(KeyConstants.ENQUIRY_REFERRAL_SFID);
+		}
+		if(dest.getWalkInSource().equals("Godrej Employee"))
+		{
+			dest.setIsReferredByChannelPartner("Employee");
+			if(dest.getEmployee_Referral__c()==null)
+				dest.setEmployee_Referral__c(KeyConstants.ENQUIRY_EMPLOYEE_SFID);
+		}
+		if(dest.getWalkInSource().equals("Corporate"))
+		{
+			dest.setIsReferredByChannelPartner("Corporate");
+		}
+		if(dest.getWalkInSource().equals("Existing Customer"))
+		{
+			dest.setIsReferredByChannelPartner("Loyalty");
+			if(dest.getContact_Loyalty__c()==null)
+				dest.setContact_Loyalty__c(KeyConstants.ENQUIRY_EXISTINGCUSTOMER_SFID);
+		}
 		/*=========End========*/
 		return dest;
 	}
