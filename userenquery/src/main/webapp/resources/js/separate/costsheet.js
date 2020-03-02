@@ -2670,7 +2670,7 @@ function printPdfData(generateFrom) {
 
 //Add more payment type - costsheet
 var amI = 0;
-var amNum = 4; 
+var amNum = 9; 
 
 var amNumRowID = 0;
 

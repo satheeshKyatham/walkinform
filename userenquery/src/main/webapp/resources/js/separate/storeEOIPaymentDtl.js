@@ -6,7 +6,7 @@ $.ajaxSetup({
     }
 });
 var amIEoi = 0;
-var amNumEoi = 4; 
+var amNumEoi = 9; 
 
 
 var EOIDtl = 0;
