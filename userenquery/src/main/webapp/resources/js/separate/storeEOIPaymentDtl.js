@@ -251,7 +251,7 @@ function getEOITabPaymentRecord () {
 								+ '<td style="text-align:center;">'+trans_date+'</td>' 
 								+ '<td style="text-align:center;">'+obj[i].transaction_amount+'</td>' 
 								+ '<td> <a target="_blank" href="'+panTarget+'">'+obj[i].pan_attach+'</a></td>' 
-								+ '<td> <a target="_blank" href="'+reciptTarget+'">'+obj[i].cheque_attach+'</a></td>'
+								+ '<td style="word-break: break-word;"> <a target="_blank" href="'+reciptTarget+'">'+obj[i].cheque_attach+'</a></td>'
 								+ '<td style="text-align:center;">'+obj[i].description+'</td>'
 								+ '<td></td>'
 							"</tr>";
