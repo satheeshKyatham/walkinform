@@ -181,7 +181,7 @@ if(ses!=null){
 	<script src="<c:url value='/resources/js/separate/offer.js?v=18.10'/>"></script>
 	
 	<script src="<c:url value='/resources/js/separate/applicationForm.js?v=18.10'/>"></script>
-	<script src="<c:url value='/resources/js/separate/offerApplicationForm.js?v=18.12'/>"></script>
+	<script src="<c:url value='/resources/js/separate/offerApplicationForm.js?v=18.13'/>"></script>
 	<script src="<c:url value='/resources/js/demo/offerTemplate.js?v=18.10'/>"></script>	
 </body>
 </html>
