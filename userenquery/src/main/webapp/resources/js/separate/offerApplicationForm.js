@@ -409,7 +409,7 @@ function getEnqAndOfferDtl (enqSFID, offerSFID, rowId) {
 			
 			//Godrej Meridien 2
 			if ($("#projectid").val() == "a1l6F000004LVk8QAG") {
-				otherChargesUnit (obj[0].mappedCharges, obj[0].saleable_area__c);
+				otherChargesUnit (obj[0].mappedCharges, obj[0].saleable_area__c, totalSaleConsideration);
 			}
 			
 			
@@ -672,11 +672,11 @@ function otherCharges(otherCharges, saleable_area__c, offerOtherCharges) {
 	}
 }
 
-function otherChargesUnit(otherCharges, saleable_area__c) {
+function otherChargesUnit(otherCharges, saleable_area__c, totalSaleConsideration) {
 	if(otherCharges != null){
 		var Other_Charges = otherCharges.Other_Charges;
 		
-		processTotalOtherCharges (Other_Charges, saleable_area__c);
+		processTotalOtherCharges (Other_Charges, saleable_area__c, totalSaleConsideration);
 	}
 }
 
@@ -702,7 +702,7 @@ function processCnICharges (Club_Development_Charges, INFRA_CHARGES, saleable_ar
 }
 
 
-function processTotalOtherCharges (Other_Charges, saleable_area__c) {
+function processTotalOtherCharges (Other_Charges, saleable_area__c, totalSaleConsideration) {
 	if(Other_Charges == null){
 		return;
 	}
@@ -712,6 +712,11 @@ function processTotalOtherCharges (Other_Charges, saleable_area__c) {
 	} else {
 		$("#commonAreaChargesTotal").text("");
 		$("#commonAreaChargesTotal").text("Rs. " + parseInt(Other_Charges.propstrength__rate_per_unit_area__c*saleable_area__c).toFixed(2) + "/-");
+		
+		$("#totalSaleConsiderationOffer").text("");
+		$("#totalSaleConsiderationOffer").text(parseInt(parseInt(Other_Charges.propstrength__rate_per_unit_area__c*saleable_area__c)+parseInt(totalSaleConsideration)).toFixed(2));
+		
+		convertNumberToWords ();
 	}
 }
 

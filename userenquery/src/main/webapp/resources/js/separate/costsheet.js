@@ -211,6 +211,11 @@ function loadData () {
        var unitVal = $('#unitSfid').val();
        
        
+       if ($('#projectId').val() == 'a1l6F000004LVk8QAG') {
+      	 $('.facingCSCol').remove();
+       } 
+       
+       
        var url = urlDomin+"getProjectPlan?herokuEnqId="+$('.enquiryId').val()+"&project_code="+projectNameVal+"&unit="+$('#unitSfid').val()+"&towerCode="+$('#towerSfid').val()+"&pymtPlanSfid="+$('#ppDropdown').val()+"&typology="+$('#typoMst').val()  ;
        $.getJSON(url, function (data) {
              
@@ -1029,7 +1034,7 @@ function paymentPlanOtherCharges (firstRowObj){
                    $('.payableStampAndReg').remove();
              }
              
-             if ($('#projectId').val() == 'a1l2s00000000pEAAQ') {
+             if ($('#projectId').val() == 'a1l2s00000000pEAAQ' || $('#projectId').val() == 'a1l6F000004LVk8QAG') {
             	 $('.payableStampAndReg').remove();
              } 
              
