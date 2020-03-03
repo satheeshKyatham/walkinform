@@ -409,7 +409,8 @@ function getEnqAndOfferDtl (enqSFID, offerSFID, rowId) {
 			
 			//Godrej Meridien 2
 			if ($("#projectid").val() == "a1l6F000004LVk8QAG") {
-				otherChargesUnit (obj[0].mappedCharges, obj[0].saleable_area__c, totalSaleConsideration);
+				var totalCarpetNExclusiveArea = parseFloat($('#carpetAreaCostOffer').text())+parseFloat($('#exclusiveAreasCostOffer').text());
+				otherChargesUnit (obj[0].mappedCharges, obj[0].saleable_area__c, totalCarpetNExclusiveArea);
 			}
 			
 			
