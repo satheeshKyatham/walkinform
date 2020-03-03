@@ -145,7 +145,7 @@ public class PaymentPlanDaoImpl extends AbstractDao<Integer, PaymentPlan> implem
 		Session session = this.sessionFactory.getCurrentSession();
 		 StringBuffer str= new StringBuffer();
 		 str.append(" Select Distinct propstrength__unit_type__c  FROM  PaymentPlan  ");
-		 str.append("where propstrength__project_name__c='"+project_code+"' ");
+		 str.append("where propstrength__project_name__c='"+project_code+"' and d4u_active__c = true ");
 		 
 		 if(tower_code.equals("All")) {
 			 //str.append(" and propstrength__floor_number__c='"+floor_code+"'" );

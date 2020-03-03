@@ -620,7 +620,7 @@
 												<td></td>
 											</tr>
 											
-											<tr>
+											<tr class="facingCSCol">
 												<th class="subHead">Facing</th>
 												<td id="propFacingType" style="text-align:left;" ></td>
 												<th class="subHead"></th>
@@ -892,7 +892,7 @@
 							<td></td>
 						</tr>
 						
-						<tr>
+						<tr class="facingCSCol">
 							<th class="subHead">Facing</th>
 							<td class="propFacingType" style="text-align:left;" ></td>
 							<th class="subHead"></th>

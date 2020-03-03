@@ -211,6 +211,11 @@ function loadData () {
        var unitVal = $('#unitSfid').val();
        
        
+       if ($('#projectId').val() == 'a1l6F000004LVk8QAG') {
+      	 $('.facingCSCol').remove();
+       } 
+       
+       
        var url = urlDomin+"getProjectPlan?herokuEnqId="+$('.enquiryId').val()+"&project_code="+projectNameVal+"&unit="+$('#unitSfid').val()+"&towerCode="+$('#towerSfid').val()+"&pymtPlanSfid="+$('#ppDropdown').val()+"&typology="+$('#typoMst').val()  ;
        $.getJSON(url, function (data) {
              
@@ -1029,7 +1034,7 @@ function paymentPlanOtherCharges (firstRowObj){
                    $('.payableStampAndReg').remove();
              }
              
-             if ($('#projectId').val() == 'a1l2s00000000pEAAQ') {
+             if ($('#projectId').val() == 'a1l2s00000000pEAAQ' || $('#projectId').val() == 'a1l6F000004LVk8QAG') {
             	 $('.payableStampAndReg').remove();
              } 
              
@@ -2670,7 +2675,7 @@ function printPdfData(generateFrom) {
 
 //Add more payment type - costsheet
 var amI = 0;
-var amNum = 4; 
+var amNum = 9; 
 
 var amNumRowID = 0;
 
@@ -2978,7 +2983,7 @@ function getEOIPaymentRecord () {
                                                      + '<td class="txtCenter"><input class="full form-control input-sm csPtTransactionDate" value="'+obj[i].transaction_date+'" style="display:none; "  disabled>'+trans_date+'</td>' 
                                                      + '<td class="txtCenter"><input class="full form-control input-sm csPtTransactionAmount"  value="'+obj[i].transaction_amount+'" name="amount" style="display:none; " disabled>'+obj[i].transaction_amount+'</td>' 
                                                      + '<td class="txtCenter"><input style="display:none;" class="full form-control input-sm panAttach" type="file" data-fileName="'+obj[i].pan_attach+'"  name="panAttach"> <a target="_blank" href="'+panTarget+'">'+obj[i].pan_attach+'</a></td>' 
-                                                     + '<td class="txtCenter"><input style="display:none;" class="full form-control input-sm receiptAttach" type="file" data-fileName="'+obj[i].cheque_attach+'" name="receiptAttach"> <a target="_blank" href="'+reciptTarget+'">'+obj[i].cheque_attach+'</a></td>'
+                                                     + '<td class="txtCenter" style="word-break: break-word;"><input style="display:none;" class="full form-control input-sm receiptAttach" type="file" data-fileName="'+obj[i].cheque_attach+'" name="receiptAttach"> <a target="_blank" href="'+reciptTarget+'">'+obj[i].cheque_attach+'</a></td>'
                                                      + '<td class="txtCenter"><input class="full form-control input-sm csPtDescription" value="'+obj[i].description+'" style="display:none;" disabled>'+obj[i].description+'</td>'
                                                      + '<td > </td>'
                                                "</tr>";

@@ -6,7 +6,7 @@ $.ajaxSetup({
     }
 });
 var amIEoi = 0;
-var amNumEoi = 4; 
+var amNumEoi = 9; 
 
 
 var EOIDtl = 0;
@@ -251,7 +251,7 @@ function getEOITabPaymentRecord () {
 								+ '<td style="text-align:center;">'+trans_date+'</td>' 
 								+ '<td style="text-align:center;">'+obj[i].transaction_amount+'</td>' 
 								+ '<td> <a target="_blank" href="'+panTarget+'">'+obj[i].pan_attach+'</a></td>' 
-								+ '<td> <a target="_blank" href="'+reciptTarget+'">'+obj[i].cheque_attach+'</a></td>'
+								+ '<td style="word-break: break-word;"> <a target="_blank" href="'+reciptTarget+'">'+obj[i].cheque_attach+'</a></td>'
 								+ '<td style="text-align:center;">'+obj[i].description+'</td>'
 								+ '<td></td>'
 							"</tr>";
@@ -319,10 +319,16 @@ function getTokenTypeEOI (){
 		{
 			html='<option value="F">GOLD</option><option value="F">PLATINUM</option><option value="T">EXPRESS</option>';
 		}
-	else if($("#projectsfid").val()=='a1l6F000008DnniQAC' || $("#projectsfid").val()=='a1l2s00000000pEAAQ' || $("#projectsfid").val()=='a1l6F000008iZJMQA2' || $("#projectsfid").val()=='a1l2s00000003BMAAY')
+	else if($("#projectsfid").val()=='a1l6F000004LVk8QAG' || $("#projectsfid").val()=='a1l6F000008DnniQAC' || $("#projectsfid").val()=='a1l2s00000000pEAAQ' || $("#projectsfid").val()=='a1l6F000008iZJMQA2' || $("#projectsfid").val()=='a1l2s00000003BMAAY')
 		{
 			html='<option value="F">REFUNDABLE</option><option value="T">NON-REFUNDABLE</option>';
 		}
+	else if($("#projectsfid").val()=='a1l2s00000003lPAAQ')
+	{
+		html='<option value="F">PLATINUM</option><option value="T">EXPRESS</option>';
+	}
+	
+	
 	
 	//a1l2s00000003BMAAY
 	$(".tokenTypeEOI").append(html);

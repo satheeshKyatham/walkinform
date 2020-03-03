@@ -407,6 +407,12 @@ function getEnqAndOfferDtl (enqSFID, offerSFID, rowId) {
 				otherCharges (obj[0].mappedCharges, obj[0].saleable_area__c, totalSaleConsideration);
 			}
 			
+			//Godrej Meridien 2
+			if ($("#projectid").val() == "a1l6F000004LVk8QAG") {
+				otherChargesUnit (obj[0].mappedCharges, obj[0].saleable_area__c, totalSaleConsideration);
+			}
+			
+			
 		} else {
 			$('#modeOfBookingOffer').remove();
 		}
@@ -664,9 +670,15 @@ function otherCharges(otherCharges, saleable_area__c, offerOtherCharges) {
 		//processSinkingFund (Sinking_Fund);
 		
 	}
-	
 }
 
+function otherChargesUnit(otherCharges, saleable_area__c, totalSaleConsideration) {
+	if(otherCharges != null){
+		var Other_Charges = otherCharges.Other_Charges;
+		
+		processTotalOtherCharges (Other_Charges, saleable_area__c, totalSaleConsideration);
+	}
+}
 
 function processSinkingFund (Sinking_Fund) {
 	if(Sinking_Fund == null ){
@@ -688,6 +700,26 @@ function processCnICharges (Club_Development_Charges, INFRA_CHARGES, saleable_ar
 		$("#cniCharges").text("Rs. " + parseInt(parseInt(INFRA_CHARGES.propstrength__rate_per_unit_area__c*saleable_area__c)+parseInt(Club_Development_Charges.propstrength__fixed_charge__c)).toFixed(2) + "/-");
 	}
 }
+
+
+function processTotalOtherCharges (Other_Charges, saleable_area__c, totalSaleConsideration) {
+	if(Other_Charges == null){
+		return;
+	}
+	
+	if (Other_Charges.propstrength__rate_per_unit_area__c == null || saleable_area__c == null) {
+		return;
+	} else {
+		$("#commonAreaChargesTotal").text("");
+		$("#commonAreaChargesTotal").text("Rs. " + parseInt(Other_Charges.propstrength__rate_per_unit_area__c*saleable_area__c).toFixed(2) + "/-");
+		
+		$("#totalSaleConsiderationOffer").text("");
+		$("#totalSaleConsiderationOffer").text(parseInt(parseInt(Other_Charges.propstrength__rate_per_unit_area__c*saleable_area__c)+parseInt(totalSaleConsideration)).toFixed(2));
+		
+		convertNumberToWords ();
+	}
+}
+
 
 
 function processCarParkCharges (CAR_PARKING_CHARGES) {

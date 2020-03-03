@@ -64,6 +64,7 @@ public class PaymentPlan implements Serializable{
 	
 	@Column(name="property_facing__c") private String  property_facing__c;
 
+	@Column(name="d4u_active__c") private boolean  d4u_active__c;
 	
 	
 	/* @Column(name="tower_sfid") private String tower_sfid; */
@@ -286,5 +287,11 @@ public class PaymentPlan implements Serializable{
 	}
 	public void setProperty_facing__c(String property_facing__c) {
 		this.property_facing__c = property_facing__c;
+	}
+	public boolean isD4u_active__c() {
+		return d4u_active__c;
+	}
+	public void setD4u_active__c(boolean d4u_active__c) {
+		this.d4u_active__c = d4u_active__c;
 	}
 }
