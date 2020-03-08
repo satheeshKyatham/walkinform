@@ -234,7 +234,7 @@ projectid=request.getParameter("projectid");
 
 <script src="<c:url value='/resources/js/separate/applicationForm.js?v=18.10'/>"></script>
 
-<script src="<c:url value='/resources/js/separate/offerApplicationForm.js?v=18.12'/>"></script>
+<script src="<c:url value='/resources/js/separate/offerApplicationForm.js?v=18.13'/>"></script>
 
 
 <script type="text/javascript" charset="utf8" src="<c:url value='/resources/js/jquery.dataTables.js'/>"></script>
