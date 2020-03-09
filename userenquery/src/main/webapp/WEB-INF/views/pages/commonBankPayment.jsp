@@ -209,7 +209,7 @@
 							<th style="width:100px;">
 								Bank Name
 							</th>
-							<th style="width:100px;">
+							<th style="width:100px; display:none;">
 								Branch
 							</th>
 							<th>
@@ -251,9 +251,9 @@
 							<td>
 								<input class="full form-control input-sm csPtBankNameEoi requiredField" placeholder="Bank Name"/>
 							</td>
-							<td>
-								<input class="full form-control input-sm csPtBranchEoi requiredField" placeholder="Branch Name"/>
-							</td>
+							<td style="display:none;">
+								<input class="full form-control input-sm csPtBranchEoi" placeholder="Branch Name"/>
+							</td> 
 							<td>
 								<input class="full form-control input-sm csPtTransactionIdEoi requiredField" placeholder="Transaction ID"/>
 							</td>
