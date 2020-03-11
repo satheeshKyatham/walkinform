@@ -1172,12 +1172,12 @@
 									<th style="width:130px;">
 										Payment Type <strong class="mndt">*</strong>
 									</th>
-									<th style="width:100px;">
+									<th style="width:120px;">
 										Bank Name <strong class="mndt">*</strong>
 									</th>
-									<th style="width:100px;">
+									<!-- <th style="width:100px;">
 										Branch <strong class="mndt">*</strong>
-									</th>
+									</th> -->
 									<th style="width:150px;">
 										Transaction ID <strong class="mndt">*</strong>
 									</th>
@@ -1188,14 +1188,14 @@
 										Transaction Amount <strong class="mndt">*</strong>
 									</th>
 									
-									<th style="width:250px;">
+									<!-- <th style="width:250px;">
 										PAN Attachment
-									</th>
-									<th style="width:250px;">
+									</th> -->
+									<th style="width:200px;">
 										Receipt/</br>Cheque Attachment
 									</th>
 									
-									<th style="width:200px;">
+									<th style="width:150px;">
 										Description
 									</th>
 									<th style="width:32px;"></th>

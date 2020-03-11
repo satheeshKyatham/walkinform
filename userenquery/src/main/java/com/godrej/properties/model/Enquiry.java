@@ -158,6 +158,11 @@ public class Enquiry extends CommonModel{
    	private String contact_Loyalty__c;
     @Column(name="Employee_Referral__c")
    	private String employee_Referral__c;
+    /*@Column(name="Closing_Team_Lead__c")
+   	private String closing_Team_Lead__c;
+    @Column(name="Sourcing_Team_Lead__c")
+   	private String sourcing_Team_Lead__c;*/
+    
 //branch__c
 //EOI_Bank_Name__c
 //MICR_Cheque_No_NEFT_RTGS__c
@@ -618,6 +623,22 @@ public class Enquiry extends CommonModel{
 	public void setEmployee_Referral__c(String employee_Referral__c) {
 		this.employee_Referral__c = employee_Referral__c;
 	}
+
+	/*public String getClosing_Team_Lead__c() {
+		return closing_Team_Lead__c;
+	}
+
+	public void setClosing_Team_Lead__c(String closing_Team_Lead__c) {
+		this.closing_Team_Lead__c = closing_Team_Lead__c;
+	}
+
+	public String getSourcing_Team_Lead__c() {
+		return sourcing_Team_Lead__c;
+	}
+
+	public void setSourcing_Team_Lead__c(String sourcing_Team_Lead__c) {
+		this.sourcing_Team_Lead__c = sourcing_Team_Lead__c;
+	}*/
 	
 	
 }

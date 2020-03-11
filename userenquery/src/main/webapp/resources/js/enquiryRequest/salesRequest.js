@@ -50,7 +50,7 @@ $(document).ready(function(){
 	 
 	 $(this).scrollTop(0);
 	
-	 getClosingManagersList();
+	// getClosingManagersList();
 });
 function generatePaymentLink(){
 	$.get("quickInvoiceGenerator", {
@@ -652,8 +652,14 @@ function loadEnquiryReport(enq){
 		//alert(enq.verticle__c);
 		
 		$("#verticalId").val(enq.verticle__c);
+		//alert(enq.verticle__c);
 		//alert("53435"+enq.sourcing_Managers__c);
+//		$("#sourcingManagerId").val(enq.sourcing_Managers__c);
+		//var sourcingVal ="gshetty@godrejproperties.com";
 		$("#sourcingManagerId").val(enq.sourcing_Managers__c);
+		getClosingManagersList(enq.sourcingmanger_email);
+		//getClosingTeamLeadManagersList(enq.sourcing_Managers__c)
+		//getSourcingTeamLeadManagersList(enq.sourcing_Managers__c)
 		$("#LostReasonID").val(enq.lost_reason_c__c);
 		
 		//$( "#followDate" ).datepicker({ defaultDate: new Date(enq.enquiryReport.followDate) });
@@ -1420,13 +1426,14 @@ function getEnqDtlFromSFDCAPI () {
 
 }
 
-function getClosingManagersList()
+function getClosingManagersList(inputVal)
 {
-	 //sourcingManagerIdDiv
-	//alert($('#walkInSource').val());
 	if(($('#isReferredByChannelPartnerInput').val()==='Direct') && ($('#walkInSource').val()==='Digital' || $('#walkInSource').val()==='Newspaper'
-			|| $('#walkInSource').val()==='Hoarding' || $('#walkInSource').val()==='Radio' || $('#walkInSource').val()==='Word of mouth' || $('#walkInSource').val()==='Exhibition'))
+			|| $('#walkInSource').val()==='Hoarding' || $('#walkInSource').val()==='Radio' || $('#walkInSource').val()==='Word of mouth' ))//|| $('#walkInSource').val()==='Exhibition'
+		{
 		$('#sourcingManagerIdDiv').hide();
+		$("#sourcingManagerId").removeClass('requiredField');
+		}
 	else
 		$('#sourcingManagerIdDiv').show();
 	//
@@ -1435,12 +1442,70 @@ function getClosingManagersList()
 	       var option="";
 	    	$.getJSON(urlGetUsers, function (data) {
 	    		option = "<option value=''>Select User</option>";
+	    		if(inputVal=="nosourcingcip@godrejproperties.com")
+	    			option = option+"<option value='nosourcingcip@godrejproperties.com' selected>No Sourcing Manager</option>";
+	    		else
+	    			option = option+"<option value='nosourcingcip@godrejproperties.com'>No Sourcing Manager</option>";
 	    		$.each(data, function (index, value) {
-	    			option = option+"<option value="+value.emailid+">"+value.user_name+"</option>";
+	    			if(inputVal==value.emailid)
+	    				{
+	    					option = option+"<option value="+value.emailid+" selected>"+value.user_name+"</option>";
+	    				}
+	    			else
+	    				option = option+"<option value="+value.emailid+">"+value.user_name+"</option>";
 	    			j = j+1
 	    		});		
-	    		//option=option+"</select>";
 	    	}).done(function() {
 	    		$("#sourcingManagerId").append(option);
 	    	});
-	    }
+}
+
+function getClosingTeamLeadManagersList(inputVal)
+{
+	   var urlGetUsers = "getUserProjectMapping?projectid="+$('#projectid').val();
+	   var j = 0
+	   var option="";
+		$.getJSON(urlGetUsers, function (data) {
+			option = "<option value=''>Select User</option>";
+			if(inputVal=="nosourcingcip@godrejproperties.com")
+				option = option+"<option value='nosourcingcip@godrejproperties.com' selected>No Sourcing Manager</option>";
+			else
+				option = option+"<option value='nosourcingcip@godrejproperties.com'>No Sourcing Manager</option>";
+			$.each(data, function (index, value) {
+				if(inputVal==value.emailid)
+					{
+						option = option+"<option value="+value.emailid+" selected>"+value.user_name+"</option>";
+					}
+				else
+					option = option+"<option value="+value.emailid+">"+value.user_name+"</option>";
+				j = j+1
+			});		
+		}).done(function() {
+			$("#closingTeamLeadId").append(option);
+		});
+}
+
+function getSourcingTeamLeadManagersList(inputVal)
+{
+	   var urlGetUsers = "getUserProjectMapping?projectid="+$('#projectid').val();
+	   var j = 0
+	   var option="";
+		$.getJSON(urlGetUsers, function (data) {
+			option = "<option value=''>Select User</option>";
+			if(inputVal=="nosourcingcip@godrejproperties.com")
+				option = option+"<option value='nosourcingcip@godrejproperties.com' selected>No Sourcing Manager</option>";
+			else
+				option = option+"<option value='nosourcingcip@godrejproperties.com'>No Sourcing Manager</option>";
+			$.each(data, function (index, value) {
+				if(inputVal==value.emailid)
+					{
+						option = option+"<option value="+value.emailid+" selected>"+value.user_name+"</option>";
+					}
+				else
+					option = option+"<option value="+value.emailid+">"+value.user_name+"</option>";
+				j = j+1
+			});		
+		}).done(function() {
+			$("#sourcingTeamLeadId").append(option);
+		});
+}

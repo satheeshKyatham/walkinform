@@ -119,7 +119,7 @@ if(ses!=null){
 					<div class="clearfix"></div>
 				</div>
 				<div class="clearfix"></div>
-				<div id= "applicationFormKyc">
+				<div id= "applicationFormKyc" style="display:none;">
 					<%-- <%@ include file="/WEB-INF/views/pages/createdOfferKyc.jsp" %> --%>
 					<%@ include file="/WEB-INF/views/pages/createOfferKYCTemplate.jsp" %>
 				</div>
