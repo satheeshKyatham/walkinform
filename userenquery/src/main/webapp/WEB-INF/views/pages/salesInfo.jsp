@@ -1541,13 +1541,34 @@ if(ses!=null){
 						<div class="col-md-3 col-sm-6 col-xs-12" id="sourcingManagerIdDiv">
 							<div class="group">
 							<!-- <div id="sourcingManagerId"></div> -->
-							<select class="sales_submitted" id="sourcingManagerId" name="closingManagerDto">
+							<select class="requiredField autocomplete-off" id="sourcingManagerId" name="closingManagerDto">
 							</select>
 								<span class="highlight"></span><span class="bar"></span>
-								<label class="select-label">Sourcing Manager</label>
+								<label class="select-label">Sourcing Manager<strong class="mndt">*</strong></label>
 							</div>
 							<div class="clearfix"></div>
 						</div>
+						<!-- <div class="col-md-3 col-sm-6 col-xs-12" id="sourcingManagerIdDiv">
+							<div class="group">
+							<div id="sourcingManagerId"></div>
+							<select class="sales_submitted" id="closingTeamLeadId" name="closingTeamLeadDto">
+							</select>
+								<span class="highlight"></span><span class="bar"></span>
+								<label class="select-label">Closing Team lead</label>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+						<div class="col-md-3 col-sm-6 col-xs-12" id="sourcingManagerIdDiv">
+							<div class="group">
+							<div id="sourcingManagerId"></div>
+							<select class="sales_submitted" id="sourcingTeamLeadId" name="sourcingTeamLeadDto">
+							</select>
+								<span class="highlight"></span><span class="bar"></span>
+								<label class="select-label">Sourcing Team Lead</label>
+							</div>
+							<div class="clearfix"></div>
+						</div> -->
+						
 						<div class="col-md-3 col-sm-6 col-xs-12">
 							<div class="group">
 								<select class="sales_submitted disableInputs" id="verticalId" name="verticle__c">
@@ -1717,7 +1738,7 @@ if(ses!=null){
 	<script src="<c:url value='/resources/js/commonValidation.js?v=18.10' />"></script>
 	<script src="<c:url value='/resources/js/utility.js?v=18.10' />"></script>
 	<%-- <script src="<c:url value='/resources/js/enquiryRequest/enquiryRequest.js' />"></script> --%>
-	<script src="<c:url value='/resources/js/enquiryRequest/salesRequest.js?v=18.10' />"></script>	
+	<script src="<c:url value='/resources/js/enquiryRequest/salesRequest.js?v=18.13' />"></script>	
     <script src="<c:url value='/resources/js/intlTelInput.js' />"></script>
    
     <script src="<c:url value='/resources/js/sweetalert2.min.js' />"></script>
