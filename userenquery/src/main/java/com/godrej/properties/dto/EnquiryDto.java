@@ -96,6 +96,7 @@ public class EnquiryDto extends CommonDto {
    	private String contact_referral__c;
    	private String contact_Loyalty__c;
    	private String employee_Referral__c;
+	private String sourcingmanger_email;
    	
 	public String getClosing_manager_name__c() {
 		return closing_manager_name__c;
@@ -137,6 +138,9 @@ public class EnquiryDto extends CommonDto {
     private String Preferred_Unit__c;
     private Date date_of_eoi__c;
 
+    private String closing_Team_Lead__c;
+    private String sourcing_Team_Lead__c;
+    
     private String name;
 	 
 	public String getName() {
@@ -585,6 +589,30 @@ public class EnquiryDto extends CommonDto {
 
 	public void setEmployee_Referral__c(String employee_Referral__c) {
 		this.employee_Referral__c = employee_Referral__c;
+	}
+
+	public String getClosing_Team_Lead__c() {
+		return closing_Team_Lead__c;
+	}
+
+	public void setClosing_Team_Lead__c(String closing_Team_Lead__c) {
+		this.closing_Team_Lead__c = closing_Team_Lead__c;
+	}
+
+	public String getSourcing_Team_Lead__c() {
+		return sourcing_Team_Lead__c;
+	}
+
+	public void setSourcing_Team_Lead__c(String sourcing_Team_Lead__c) {
+		this.sourcing_Team_Lead__c = sourcing_Team_Lead__c;
+	}
+
+	public String getSourcingmanger_email() {
+		return sourcingmanger_email;
+	}
+
+	public void setSourcingmanger_email(String sourcingmanger_email) {
+		this.sourcingmanger_email = sourcingmanger_email;
 	}
 	
 }

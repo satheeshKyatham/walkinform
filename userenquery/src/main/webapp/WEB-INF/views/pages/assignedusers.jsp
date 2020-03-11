@@ -161,30 +161,34 @@ if(ses!=null){
 						</div>
 						<div class="clearfix"></div>
 					</div>
-			      
-				  	<div class="col-md-12">
-					 
-						<div class="clearfix"></div>
-						<table class="table table-striped"   id="dtOrderExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
-							<thead>
-								<tr>
-									<th>ID</th>
-									<th>Token No.</th>
-									<th>Name</th>
-									<th>Mobile</th>									
-									<th>Priority No</th>									
-									<th>Closing Mgr</th>									
-									<th>Date</th>
-									<th>Offer</th>
-									<th>Status</th>
-									<th>Action</th>
-								</tr>
-							</thead>
-							<tbody>
-							</tbody>
-						</table>
-						<div class="clearfix"></div>
-					</div>
+			      	
+			      	<div class="row">
+			      		<div class="col-md-12">
+							<div class="clearfix"></div>
+							<table class="table table-striped table-bordered" id="dtOrderExample" cellspacing="0" width="100%">
+								<thead>
+									<tr>
+										<th>ID</th>
+										<th>Token No.</th>
+										<th>Name</th>
+										<th>Mobile</th>									
+										<th>Priority No</th>									
+										<th>Closing Mgr</th>									
+										<th>Date</th>
+										<th>Offer</th>
+										<th>Status</th>
+										<th>Action</th>
+									</tr>
+								</thead>
+								<tbody>
+								</tbody>
+							</table>
+							<div class="clearfix"></div>
+						</div>
+			      		<div class="clearfix"></div>
+			      	</div>
+			      	
+				  	
 				</div>
 				<div class="tab-pane" id="tab2">
 					<%-- <%@ include file="/WEB-INF/views/pages/createdoffers.jsp" %> --%>

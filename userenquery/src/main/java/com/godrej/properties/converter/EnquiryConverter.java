@@ -15,6 +15,7 @@ import com.godrej.properties.common.converter.CommonConverter;
 import com.godrej.properties.dto.EnquiryDto;
 import com.godrej.properties.model.Enquiry;
 import com.godrej.properties.model.EnquiryReport;
+import com.godrej.properties.service.TokenService;
 
 @Component
 public class EnquiryConverter implements CommonConverter<Enquiry, EnquiryDto>{
@@ -30,6 +31,9 @@ public class EnquiryConverter implements CommonConverter<Enquiry, EnquiryDto>{
 	
 	@Autowired
 	private EnquiryReportConverter enquiryReportConverter;
+	
+	@Autowired
+	private TokenService tokenService;
 	
 	@Override
 	public EnquiryDto entityToDto(Enquiry entity) {
@@ -152,7 +156,11 @@ public class EnquiryConverter implements CommonConverter<Enquiry, EnquiryDto>{
 		if(entity.getVerticle__c()!=null)
 			dto.setVerticle__c(entity.getVerticle__c());
 		if(entity.getSourcing_Managers__c()!=null)
+		{
 			dto.setSourcing_Managers__c(entity.getSourcing_Managers__c());
+			dto.setSourcingmanger_email(tokenService.getSalesUserEmailID(entity.getEnquiryId(), entity.getSourcing_Managers__c()));
+//			dto.setSourcing_Managers__c(tokenService.getSalesUserEmailID(entity.getEnquiryId(), entity.getSourcing_Managers__c()));
+		}
 		/*=========End========*/
 		
 		if(entity.getContact_Loyalty__c()!=null)
@@ -286,7 +294,9 @@ public class EnquiryConverter implements CommonConverter<Enquiry, EnquiryDto>{
 		if(dto.getVerticle__c()!=null)
 			entity.setVerticle__c(dto.getVerticle__c());
 		if(dto.getSourcing_Managers__c()!=null)
+		{
 			entity.setSourcing_Managers__c(dto.getSourcing_Managers__c());
+		}
 		/*=========End========*/
 		
 		if(dto.getEnquiryReport().getReferredby()!=null)
