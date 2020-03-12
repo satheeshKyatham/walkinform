@@ -2692,7 +2692,7 @@ function addMorePtBtn () {
 	
 	
        if(amI < amNum) { 
-             $('#csPtCol tr:last-child').after('<tr id="csPayRowID'+amNumRowID+'" class="csPtDataRow csPtFileSize"><td class="txtCenter"><input style="display:none;" class="gpl_cs_payment_details_id" value="-1"><input type="checkbox" class="paymentCScheck" checked></td><td><select onchange="csPtDd(this)" class="full form-control input-sm csPtDropDown requiredField"><option value="">Select</option><option value="Cheque">Cheque</option><option value="NEFT">NEFT/Credit</option><option value="Swipe">Swipe</option><option value="Wire Transfer">Wire Transfer (PayZap, Google Pay)</option></select></td><td><input class="full form-control input-sm csPtBankName requiredField" placeholder="Bank Name"/></td><td style="display:none;"><input class="full form-control input-sm csPtBranch" placeholder="Branch Name"/></td><td><input class="full form-control input-sm csPtTransactionId requiredField" placeholder="Transaction ID" /></td><td><input onkeydown="return false" type="date" class="full form-control input-sm csPtTransactionDate requiredField" placeholder="Transaction Date"/></td><td><input  class="numericField numericWithoutDecimal full form-control input-sm csPtTransactionAmount requiredField" maxlength="10" onkeyup="csPtcalculateGrandTotal()" placeholder="Transaction Amount" name="amount"/></td> <td style="display:none;"> <input type="file" class="full form-control input-sm panAttach"/> <input class="panAttachWebcam"/> <a  class="webcamBtn" data-toggle="modal" data-target="#webcamBox" onclick="webcamAttachment(this, '+id+', '+attachPAN+')">or <span>Capture Image</span></a> </td> <td> <input type="file" class="full form-control input-sm receiptAttach"/> <input class="receiptAttachWebcam"/> <a  class="webcamBtn" data-toggle="modal" data-target="#webcamBox" onclick="webcamAttachment(this, '+id+', '+attachRec+')">or <span>Capture Image</span></a> <td><textarea class="full form-control input-sm csPtDescription" placeholder="Description"></textarea></td><td class="removeCsPtCol txtCenter"><i onclick="removeCsPtCol(this)" class="fa fa-times-circle"></i></td></tr>');
+             $('#csPtCol tr:last-child').after('<tr id="csPayRowID'+amNumRowID+'" class="csPtDataRow csPtFileSize"><td class="txtCenter"><input style="display:none;" class="gpl_cs_payment_details_id" value="-1"><input onchange="csPtcalculateGrandTotal()" type="checkbox" class="paymentCScheck" checked></td><td><select onchange="csPtDd(this)" class="full form-control input-sm csPtDropDown requiredField"><option value="">Select</option><option value="Cheque">Cheque</option><option value="NEFT">NEFT/Credit</option><option value="Swipe">Swipe</option><option value="Wire Transfer">Wire Transfer (PayZap, Google Pay)</option></select></td><td><input class="full form-control input-sm csPtBankName requiredField" placeholder="Bank Name"/></td><td style="display:none;"><input class="full form-control input-sm csPtBranch" placeholder="Branch Name"/></td><td><input class="full form-control input-sm csPtTransactionId requiredField" placeholder="Transaction ID" /></td><td><input onkeydown="return false" type="date" class="full form-control input-sm csPtTransactionDate requiredField" placeholder="Transaction Date"/></td><td><input  class="numericField numericWithoutDecimal full form-control input-sm csPtTransactionAmount requiredField" maxlength="10" onkeyup="csPtcalculateGrandTotal()" placeholder="Transaction Amount" name="amount"/></td> <td style="display:none;"> <input type="file" class="full form-control input-sm panAttach"/> <input class="panAttachWebcam"/> <a  class="webcamBtn" data-toggle="modal" data-target="#webcamBox" onclick="webcamAttachment(this, '+id+', '+attachPAN+')">or <span>Capture Image</span></a> </td> <td> <input type="file" class="full form-control input-sm receiptAttach"/> <input class="receiptAttachWebcam"/> <a  class="webcamBtn" data-toggle="modal" data-target="#webcamBox" onclick="webcamAttachment(this, '+id+', '+attachRec+')">or <span>Capture Image</span></a> <td><textarea class="full form-control input-sm csPtDescription" placeholder="Description"></textarea></td><td class="removeCsPtCol txtCenter"><i onclick="removeCsPtCol(this)" class="fa fa-times-circle"></i></td></tr>');
              amI++;
        }else {
              swal({
@@ -2712,6 +2712,28 @@ function removeCsPtCol (e) {
        
        csPtcalculateGrandTotal ();
 }
+
+//function paymentCheck (e) {
+	 //if ($(e).is(':checked')) {
+		// alert('You have Checked it');
+	 //} else {
+		// alert('You Un-Checked it');
+		// csPtcalculateGrandTotal ();
+	 //}
+//}
+
+/*$(document).ready(function () {
+	var ckbox = $('.paymentCScheck');
+	
+	$('input').click(function () {
+	   
+	});
+});*/
+
+
+
+
+
 
 function csPtDd (e) {
        $(e).closest("tr").find('.csPtReachMexLength').remove();  
@@ -2755,8 +2777,8 @@ $(document).on("keypress keyup blur", ".csPtTransactionId", function (event) {
 
 function csPtcalculateGrandTotal() {
     var grandTotal = 0;
-    $("#csPtCol").find('input[name="amount"]').each(function () {
-        grandTotal += +$(this).val();
+    $("#csPtCol").find('.paymentCScheck:checked').each(function () {
+        grandTotal += +$(this).closest('tr').find('input[name="amount"]').val();
     });
     $("#csPtGrandtotal").text(grandTotal.toFixed(2));
 }
@@ -2931,7 +2953,7 @@ function getEOIPaymentRecord () {
              var panTarget = '';
              var reciptTarget = '';
              
-             var eoiTransactionTotalAmount = 0;
+            // var eoiTransactionTotalAmount = 0;
              
              var checkBox = '';
              var disableRow = '';
@@ -2961,7 +2983,7 @@ function getEOIPaymentRecord () {
                                  trans_date = '';
                            }
                            
-                           eoiTransactionTotalAmount = parseFloat(parseFloat(obj[i].transaction_amount)+parseFloat(eoiTransactionTotalAmount)).toFixed(2);
+                           //eoiTransactionTotalAmount = parseFloat(parseFloat(obj[i].transaction_amount)+parseFloat(eoiTransactionTotalAmount)).toFixed(2);
                            
                            if (obj[i].isactive != 'Y') {
                                  checkBox = 'disabled';
@@ -2975,7 +2997,7 @@ function getEOIPaymentRecord () {
                            
                            
                            html +=      '<tr class="csPtDataRow moveToOffer" '+disableRow+'>'
-                                                     + '<td class="txtCenter"><input style="display:none;" class="gpl_cs_payment_details_id" value="'+obj[i].id+'">  <input type="checkbox" class="paymentCScheck" '+checkBox+'> </td>'
+                                                     + '<td class="txtCenter"><input style="display:none;" class="gpl_cs_payment_details_id" value="'+obj[i].id+'">  <input onchange="csPtcalculateGrandTotal()" type="checkbox" class="paymentCScheck" '+checkBox+'> </td>'
                                                      + '<td class="txtCenter"><input class="full form-control input-sm csPtEnqSfid csPtDropDown" value="'+obj[i].payment_type+'" style="display:none;" disabled >'+obj[i].payment_type+'</td>' 
                                                      + '<td class="txtCenter"><input class="full form-control input-sm csPtBankName" value="'+obj[i].bank_name+'" style="display:none; " disabled>'+obj[i].bank_name+'</td>' 
                                                      + '<td class="txtCenter" style="display:none;"><input class="full form-control input-sm csPtBranch" value="'+obj[i].branch+'" style="display:none; " disabled>'+obj[i].branch+'</td>' 
@@ -2989,7 +3011,7 @@ function getEOIPaymentRecord () {
                                                "</tr>";
                     }
                     
-                    $('#csPtGrandtotal').text(eoiTransactionTotalAmount);
+                    //$('#csPtGrandtotal').text(eoiTransactionTotalAmount);
                     
                     html = html.replace(/undefined/g, "");
                     
@@ -2998,7 +3020,7 @@ function getEOIPaymentRecord () {
                            
                            +' <tr id="csPayRowID0" class="csPtDataRow csPtFileSize" ><td class="txtCenter">'
                                  +'<input style="display:none;" class="gpl_cs_payment_details_id" value="-1">'
-                                 + '<input type="checkbox" class="paymentCScheck" checked>'
+                                 + '<input type="checkbox" class="paymentCScheck" onchange="csPtcalculateGrandTotal()" checked>'
                            + '</td>'
                            + '<td>'
                                  + '<input class="csPtEnqSfid" style="display:none;" />'
@@ -3049,7 +3071,7 @@ function getEOIPaymentRecord () {
                            
                            +' <tr id="csPayRowID0" class="csPtDataRow csPtFileSize"><td class="txtCenter">'
                                         +'<input style="display:none;" class="gpl_cs_payment_details_id" value="-1">'
-                                        + '<input type="checkbox" class="paymentCScheck" checked>'
+                                        + '<input type="checkbox" onchange="csPtcalculateGrandTotal()" class="paymentCScheck" checked>'
                                  + '</td>'
                                  + '<td>'
                                         + '<input class="csPtEnqSfid" style="display:none;" />'

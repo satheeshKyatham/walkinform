@@ -1246,9 +1246,9 @@
 							</tbody>
 						</table>
 						
-						<div style="display:none;">
+						<!-- <div>
 							<span>Total transaction amount: </span><span id="csPtGrandtotal"></span>
-						</div>
+						</div> -->
 						
 						<!--  <button onclick="csPymtData ('123')">Test Btn</button> -->
 						
@@ -1325,6 +1325,10 @@
 					<div class="clearfix"></div>
 					
 					<div class="bottomBar" id="updateBtnCol" style="margin-top: 30px; position: inherit; box-shadow: none;">
+						<div style="margin-bottom:10px;">
+							<span>Total transaction amount: </span><strong id="csPtGrandtotal"></strong>
+						</div>
+						
 						<button class="btn btn-primary btnCommon creatOfferBtnCommon" id="updateCRM" ><span class="spanLoad"></span> Create Offer for : <span class="customerNameBtn"></span></button>
 						<!-- <a id="btnkyclink" class="btn btn-primary btnCommon" onclick="generateKYCLink(event,this,'N');"> <span>Generate
 							KYC Link</span>
