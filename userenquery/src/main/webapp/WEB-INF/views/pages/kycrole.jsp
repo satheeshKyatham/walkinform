@@ -111,6 +111,10 @@ if(ses!=null){
 								<th>Cost sheet</th>
 								<th>Application Form</th>
 								<th>Total Amount</th>
+								<th>Offer CreatedBy</th>
+								<th>kyc Approved/Reject By</th>
+								<th>Booking Name</th>
+								<th>Booking Status</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -119,7 +123,7 @@ if(ses!=null){
 					<div class="clearfix"></div>
 				</div>
 				<div class="clearfix"></div>
-				<div id= "applicationFormKyc">
+				<div id= "applicationFormKyc" style="display:none;">
 					<%-- <%@ include file="/WEB-INF/views/pages/createdOfferKyc.jsp" %> --%>
 					<%@ include file="/WEB-INF/views/pages/createOfferKYCTemplate.jsp" %>
 				</div>
@@ -181,7 +185,7 @@ if(ses!=null){
 	<script src="<c:url value='/resources/js/separate/offer.js?v=18.10'/>"></script>
 	
 	<script src="<c:url value='/resources/js/separate/applicationForm.js?v=18.10'/>"></script>
-	<script src="<c:url value='/resources/js/separate/offerApplicationForm.js?v=18.10'/>"></script>
+	<script src="<c:url value='/resources/js/separate/offerApplicationForm.js?v=18.13'/>"></script>
 	<script src="<c:url value='/resources/js/demo/offerTemplate.js?v=18.10'/>"></script>	
 </body>
 </html>

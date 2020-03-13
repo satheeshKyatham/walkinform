@@ -25,6 +25,7 @@ function getCMKYCDetails()
 				{
 					console.log("value.kycapproval_status:"+value.kycapproval_status);
 				}*/
+			console.log("booking name in kyc ", value);
 			var kycStatus ="";
 			if(value.kycapproval_status=="Y")
 					kycStatus="KYC Approved";
@@ -38,6 +39,11 @@ function getCMKYCDetails()
 			var offerName = value.offerName==null?'':value.offerName;
 			var enquiryid = value.enquiryid==null?'':value.enquiryid;
 			var costsheetPath = value.costsheetPath==null?'':value.costsheetPath;
+			
+			var offerCreatedName = value.offercreatedname==null?'':value.offercreatedname;
+			var kycApprovalName = value.kycapproval_name==null?'':value.kycapproval_name;
+			var bookingName = value.booking_name==null?'':value.booking_name;
+			var bookingStatus = value.booking_status==null?'':value.booking_status;
 			var appFormHtml="<td>";
 			var totalAmt='';
 			var propertName ='';
@@ -73,6 +79,10 @@ function getCMKYCDetails()
 					+"&amp;from=ofrList\"><i class=\"fa fa-file\"></i></a></td>"
 					+appFormHtml
 					+"<td><a type='button' data-toggle='modal' data-target='#paymentDetails_KYC' onclick='getKYCPaymentDetails(this,\""+value.offerSfid+"\")'>"+totalAmt+"</a></td>"+//<a href='#' onclick='getKYCPaymentDetails(this)' target='_blank'>Amount</a>
+					"<td>"+offerCreatedName+"</td>"
+					+"<td>"+kycApprovalName+"</td>"
+					+"<td>"+bookingName+"</td>"
+					+"<td>"+bookingStatus+"</td>"
 					+"</tr>");
 			$("#KYC_Admin_Details tbody").append(val);
 			i = i+1
