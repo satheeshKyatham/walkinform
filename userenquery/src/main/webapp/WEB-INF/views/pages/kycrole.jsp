@@ -112,7 +112,7 @@ if(ses!=null){
 								<th>Application Form</th>
 								<th>Total Amount</th>
 								<th>Offer CreatedBy</th>
-								<th>kyc Approved/Reject By</th>
+								<th>Kyc Approved/Rejected By</th>
 								<th>Booking Name</th>
 								<th>Booking Status</th>
 							</tr>
