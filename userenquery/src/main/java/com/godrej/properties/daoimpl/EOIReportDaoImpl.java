@@ -118,6 +118,18 @@ public class EOIReportDaoImpl implements EOIReportDao{
 		Query approvedCount = session.createNativeQuery("select count(id) as ApprovedCount from salesforce.nv_eoi_form where kycapproval_status='Y' and project_sfid='"+whereCondition+"'");
 		//Object[] resultApproved = (Object[])approvedCount.getSingleResult();
 		
+		Query coverd1bhk = session.createNativeQuery("select count(car_park_type) from salesforce.gpl_cs_balance_details where project_sfid='"+whereCondition+"' and isactive='A' and car_park_type='Covered (1 BHK)' group by car_park_type ");
+		
+		Query coverd2bhk = session.createNativeQuery("select count(car_park_type) from salesforce.gpl_cs_balance_details where project_sfid='"+whereCondition+"' and isactive='A' and car_park_type='Covered (2 BHK)' group by car_park_type ");
+		
+		Query coverd3bhk = session.createNativeQuery("select count(car_park_type) from salesforce.gpl_cs_balance_details where project_sfid='"+whereCondition+"' and isactive='A' and car_park_type='Covered (3 BHK)' group by car_park_type ");
+		
+		Query eOIHold = session.createNativeQuery("select count(hold_reason) as EOIHold from salesforce.gpl_cs_hold_admin_unit where project_id='"+whereCondition+"' and  eoi_unit_locked=true and hold_reason='temp' and hold_status=true and version=0");
+		Query blockInv = session.createNativeQuery("select count(hold_reason) as block from salesforce.gpl_cs_hold_admin_unit where project_id='"+whereCondition+"' and hold_reason='block' and hold_status=true and version=0");
+		
+
+				
+
 		System.out.println("***********"+result[1].toString());
 		
 		alotMIS.setTotalArealSold(result[0].toString());
@@ -126,7 +138,20 @@ public class EOIReportDaoImpl implements EOIReportDao{
 		alotMIS.setKycApprovedCount(approvedCount.getSingleResult().toString());
 		alotMIS.setBookingcount(bookingcount.getSingleResult().toString());
 		alotMIS.setTotalEtoken(totalEToken.getSingleResult().toString());
-		
+		if(coverd1bhk.getResultList().size()>0)
+			alotMIS.setCoverd1bhk(coverd1bhk.getResultList().get(0).toString());
+		else
+			alotMIS.setCoverd1bhk("");
+		if(coverd2bhk.getResultList().size()>0)
+			alotMIS.setCoverd2bhk(coverd2bhk.getResultList().get(0).toString());
+		else
+			alotMIS.setCoverd2bhk("");
+		if(coverd3bhk.getResultList().size()>0)
+			alotMIS.setCoverd3bhk(coverd3bhk.getResultList().get(0).toString());
+		else
+			alotMIS.setCoverd3bhk("");
+		alotMIS.setHoldInventoryCount(eOIHold.getSingleResult().toString());
+		alotMIS.setBlockedInventoryCount(blockInv.getSingleResult().toString());
 		return alotMIS;
 	}
 }	

@@ -151,6 +151,17 @@ public class Enquiry extends CommonModel{
    	private String verticle__c;
     @Column(name="Sourcing_Managers__c")
    	private String sourcing_Managers__c;
+    @Column(name="Contact_referral__c")
+   	private String contact_referral__c;
+    
+    @Column(name="Contact_Loyalty__c")
+   	private String contact_Loyalty__c;
+    @Column(name="Employee_Referral__c")
+   	private String employee_Referral__c;
+    @Column(name="Closing_Team_Lead__c")
+   	private String closing_Team_Lead__c;
+    @Column(name="Sourcing_Team_Lead__c")
+   	private String sourcing_Team_Lead__c;
     
 //branch__c
 //EOI_Bank_Name__c
@@ -587,6 +598,46 @@ public class Enquiry extends CommonModel{
 
 	public void setSourcing_Managers__c(String sourcing_Managers__c) {
 		this.sourcing_Managers__c = sourcing_Managers__c;
+	}
+
+	public String getContact_referral__c() {
+		return contact_referral__c;
+	}
+
+	public void setContact_referral__c(String contact_referral__c) {
+		this.contact_referral__c = contact_referral__c;
+	}
+
+	public String getContact_Loyalty__c() {
+		return contact_Loyalty__c;
+	}
+
+	public void setContact_Loyalty__c(String contact_Loyalty__c) {
+		this.contact_Loyalty__c = contact_Loyalty__c;
+	}
+
+	public String getEmployee_Referral__c() {
+		return employee_Referral__c;
+	}
+
+	public void setEmployee_Referral__c(String employee_Referral__c) {
+		this.employee_Referral__c = employee_Referral__c;
+	}
+
+	public String getClosing_Team_Lead__c() {
+		return closing_Team_Lead__c;
+	}
+
+	public void setClosing_Team_Lead__c(String closing_Team_Lead__c) {
+		this.closing_Team_Lead__c = closing_Team_Lead__c;
+	}
+
+	public String getSourcing_Team_Lead__c() {
+		return sourcing_Team_Lead__c;
+	}
+
+	public void setSourcing_Team_Lead__c(String sourcing_Team_Lead__c) {
+		this.sourcing_Team_Lead__c = sourcing_Team_Lead__c;
 	}
 	
 	

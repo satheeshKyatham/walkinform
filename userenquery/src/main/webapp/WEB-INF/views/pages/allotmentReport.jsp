@@ -13,7 +13,7 @@
 	 %>
 <input id="pageContext" value="${pageContext.request.contextPath}" style="display:none;"/>
 <label style="font-size: 22px">Allotment Journey So Far</label>
-<table class="table table-bordered" id="allotmentmisReport" style="font-size: 16px;">
+		<table class="table table-bordered" id="allotmentmisReport" style="font-size: 16px;">
 			<thead>
 				<tr>
 					<th>Total Saleable Area Sold : </th>
@@ -28,6 +28,96 @@
 			<tbody>
 			</tbody>
 		</table>
+		<div class="clearfix"></div>            
+             
+<!-- info box -->
+<div id="reportInfocontainer">
+       
+       <div class="col-md-4" style="float:left; padding-right: 0;">
+             <div class="col-lg-6 col-xs-6">
+               <div class="small-box bg-aqua" style="background-color: #929eaa !important;">
+                           <div class="inner">
+                                 <h3 id="holdInvId"></h3>
+                                 <p>Hold Inventory</p>
+                   </div>
+                   <div class="icon">
+                                 <i class="fa fa-lock"></i>
+                   </div>
+                    </div>
+                    <div class="clearfix"></div>
+             </div>
+             
+             <div class="col-lg-6 col-xs-6">
+               <div class="small-box bg-aqua" style="background-color: #00e0ec !important;">
+                           <div class="inner">
+                                 <h3 id="blockInvId"></h3>
+                                 <p>Block Inventory</p>
+                   </div>
+                   <div class="icon">
+                                 <i class="fa fa-ban"></i>
+                   </div>
+                    </div>
+                    <div class="clearfix"></div>
+             </div>
+       </div>
+       
+       
+       <div class="col-md-8" style="float:left; padding-left: 0;" id="coveredcarpark_id">
+             <div class="col-lg-3 col-xs-6">
+               <div class="small-box bg-aqua">
+                           <div class="inner">
+                                 <h3 id="covered1bhkid"></h3>
+                                 <p>Sold Car Park Covered (1 bhk)</p>
+                   </div>
+                   <div class="icon">
+                                 <i class="fa fa-car"></i>
+                   </div>
+                    </div>
+                    <div class="clearfix"></div>
+             </div>
+             
+             <div class="col-lg-3 col-xs-6">
+               <div class="small-box bg-aqua">
+                           <div class="inner">
+                                 <h3 id="covered2bhkid"></h3>
+                                 <p>Sold Car Park Covered (2 bhk)</p>
+                   </div>
+                   <div class="icon">
+                                 <i class="fa fa-car"></i>
+                   </div>
+                    </div>
+                    <div class="clearfix"></div>
+             </div>
+             
+             <div class="col-lg-3 col-xs-6">
+               <div class="small-box bg-aqua">
+                           <div class="inner">
+                                 <h3 id="covered3bhkid"></h3>
+                                 <p>Sold Car Park Covered (3 bhk)</p>
+                   </div>
+                   <div class="icon">
+                                 <i class="fa fa-car"></i>
+                   </div>
+                    </div>
+                    <div class="clearfix"></div>
+             </div>
+       </div>
+       
+       
+       
+       
+       <div class="clearfix"></div>
+</div>
+<!-- END info box -->
+<div class="clearfix"></div>            
+		
+		<!-- <div>
+			<label>HOLD Inventory (Count):</label><label id="holdInvId"></label><br/>
+			<label>Block Inventory (Count):</label><label id="blockInvId"></label><br/>
+			<label>Covered (1 bhk):</label><label id="covered1bhkid"></label><br/>
+			<label>Covered (2 bhk):</label><label id="covered2bhkid"></label><br/>
+			<label>Covered (3 bhk):</label><label id="covered3bhkid"></label><br/>
+		</div> -->
 <div class="well center-block">
 
 	<div class="form-inline">
@@ -92,14 +182,20 @@
 					<th>Request Source</th>
 					<th>Enquiry Type</th>
 					<th>Offer No.</th>
+					<th>Offer Created By</th>
+					<th>Offer Creation Date</th>
 					<th>Super Area</th>
 					<th>Carpet Area</th>
 					<th>Unit Type</th>
+					<th>Car Park Type</th>
+					<th>Scheme Name</th>
 					<th>Total Basic Price</th>
 					<th>Sales Consideration</th>
-					<th>Created By</th>
+					<!-- <th>Created By</th> -->
+					<th>Booking Name</th>
+					<th>Booking Status</th>
+					<th>KYC Approved By</th>
 					<th>Booking Amount</th>
-					
 					<th>Property Name</th>
 					<th>Unit No</th>
 					<th>5% Amount</th>

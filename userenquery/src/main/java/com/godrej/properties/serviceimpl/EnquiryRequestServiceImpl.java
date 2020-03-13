@@ -128,6 +128,30 @@ public class EnquiryRequestServiceImpl implements EnquiryRequestService {
 		
 		
 		//dto.setClosingmanagers(closingmanagers);
+		//Changed by Satheesh K - 19-02-2020 - Request by Satheesh K
+		if(dto.getWalkInSource()!=null)
+		{
+			if(dto.getWalkInSource().equals("Referral"))
+			{
+				dto.setIsReferredByChannelPartner("Referral");
+				dto.setContact_referral__c(KeyConstants.ENQUIRY_REFERRAL_SFID);
+			}
+			if(dto.getWalkInSource().equals("Godrej Employee"))
+			{
+				dto.setIsReferredByChannelPartner("Employee");
+				dto.setEmployee_Referral__c(KeyConstants.ENQUIRY_EMPLOYEE_SFID);
+			}
+			if(dto.getWalkInSource().equals("Corporate"))
+			{
+				dto.setIsReferredByChannelPartner("Corporate");
+			}
+			if(dto.getWalkInSource().equals("Existing Customer"))
+			{
+				dto.setIsReferredByChannelPartner("Loyalty");
+				dto.setContact_Loyalty__c(KeyConstants.ENQUIRY_EXISTINGCUSTOMER_SFID);
+			}
+			
+		}
 		if(dto.getWalkInSource()!=null && !dto.getWalkInSource().equals("")){
 			//dto.setWalkInSourceDetail(dto.getWalkInSource().replace(",", ""));
 			dto.setWalkInSource(dto.getWalkInSource().replace(",", ""));
@@ -456,7 +480,44 @@ public class EnquiryRequestServiceImpl implements EnquiryRequestService {
 				dest.setSourcing_Managers__c(sourcingManager);
 		}
 		
+		if(dest.getWalkInSource().equals("Referral"))
+		{
+			dest.setIsReferredByChannelPartner("Referral");
+			if(dest.getContact_referral__c()==null)
+				dest.setContact_referral__c(KeyConstants.ENQUIRY_REFERRAL_SFID);
+		}
+		if(dest.getWalkInSource().equals("Godrej Employee"))
+		{
+			dest.setIsReferredByChannelPartner("Employee");
+			if(dest.getEmployee_Referral__c()==null)
+				dest.setEmployee_Referral__c(KeyConstants.ENQUIRY_EMPLOYEE_SFID);
+		}
+		if(dest.getWalkInSource().equals("Corporate"))
+		{
+			dest.setIsReferredByChannelPartner("Corporate");
+		}
+		if(dest.getWalkInSource().equals("Existing Customer"))
+		{
+			dest.setIsReferredByChannelPartner("Loyalty");
+			if(dest.getContact_Loyalty__c()==null)
+				dest.setContact_Loyalty__c(KeyConstants.ENQUIRY_EXISTINGCUSTOMER_SFID);
+		}
 		/*=========End========*/
+		/* Added By Satheesh K - 13-03-2020
+		 * Requested by Prakash - Closing Team Lead and Sorcing Team Lead adding on Sales Tab*/
+		if(src.getClosingTeamLeadDto()!=null && src.getClosingTeamLeadDto().length()>0)
+		{
+			String closingTeamLead = tokenService.getSalesUserSFID(src.getEnquiryId(), src.getClosingTeamLeadDto());
+			if(closingTeamLead!=null && closingTeamLead.length()>0)
+				dest.setClosing_Team_Lead__c(closingTeamLead);
+		}
+		if(src.getSourcingTeamLeadDto()!=null && src.getSourcingTeamLeadDto().length()>0)
+		{
+			String sourcingTeamLead = tokenService.getSalesUserSFID(src.getEnquiryId(), src.getSourcingTeamLeadDto());
+			if(sourcingTeamLead!=null && sourcingTeamLead.length()>0)
+				dest.setSourcing_Team_Lead__c(sourcingTeamLead);
+		}
+		
 		return dest;
 	}
 	

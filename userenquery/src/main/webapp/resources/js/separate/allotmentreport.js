@@ -26,6 +26,13 @@ function getAllotmentDashboardReport () {
 	$('#allotmentReportID i').show();
 	
 	$("#allotmentReportTable tbody").empty();
+	$("#covered1bhkid").empty();
+	$("#covered2bhkid").empty();
+	$("#covered3bhkid").empty();
+	$("#blockInvId").empty();
+	$("#holdInvId").empty();
+	
+	
 	$.get("getAllotmentDayReport",{"projectSfid":$('#projectid').val(), "fromDate":$('#txtAllotFromDate').val(), "toDate":$('#txtAllotToDate').val()},function(data){				 
 		var obj =JSON.stringify(data);
 		var obj1 =JSON.parse(obj);
@@ -63,12 +70,21 @@ function getAllotmentDashboardReport () {
 							" <td>"+obj1[i].propstrength__request_source__c+"</td>" +
 							" <td>"+obj1[i].propstrength__enquiry_type__c+"</td>" +
 							" <td>"+obj1[i].offername+"</td>" +
+							" <td>"+obj1[i].user_name+"</td>" +
+							" <td>"+obj1[i].offer_date+"</td>" +
 							" <td>"+obj1[i].propstrength__super_area__c+"</td>" +
 							" <td>"+obj1[i].propstrength__carpet_area__c+"</td>" +
 							" <td>"+obj1[i].propstrength__unit_type__c+"</td>" +
+							" <td>"+obj1[i].car_park_type+"</td>" +
+							" <td>"+obj1[i].scheme_name+"</td>" +
 							" <td>"+obj1[i].propstrength__total_basic_sale_price__c+"</td>" +
 							" <td>"+obj1[i].propstrength__total_sales_consideration__c+"</td>" +
-							" <td>"+obj1[i].user_name+"</td>" +
+							/*" <td>"+obj1[i].user_name+"</td>" +*/
+							
+							" <td>"+obj1[i].booking_name+"</td>" +
+							" <td>"+obj1[i].booking_status+"</td>" +
+							" <td>"+obj1[i].kyc_approvedby+"</td>" +
+							
 							" <td>"+obj1[i].offeramount+"</td>" +
 							" <td>"+obj1[i].propStrength__Property_Name__c+"</td>" +
 							" <td>"+obj1[i].propStrength__House_Unit_No__c+"</td>" +
@@ -126,5 +142,21 @@ function getAllotmentDashboardReport () {
 					" </tr>";
 	
 	$("#allotmentmisReport tbody").append(html);
+	if($("#projectid").val()=="a1l6F000009D6IMQA0")
+		{
+			$("#coveredcarpark_id").show();
+			var coverd1bhk=data.coverd1bhk;
+			$("#covered1bhkid").append(coverd1bhk.toString()+"/69");
+			$("#covered2bhkid").append(data.coverd2bhk+"/96");
+			$("#covered3bhkid").append(data.coverd3bhk+"/147");
+		}
+	else
+		$("#coveredcarpark_id").hide();
+	
+	
+	
+	$("#blockInvId").append(data.blockedInventoryCount);
+	$("#holdInvId").append(data.holdInventoryCount);
+	
 		});
 }

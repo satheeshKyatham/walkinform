@@ -26,7 +26,9 @@ function loadData () {
 		}
 function getPendingAssignList()
 		{
+			
 	
+			$("#dtOrderExample").dataTable().fnDestroy();
 			$("#dtOrderExample tbody").empty();
 			 $("#mainPageLoad").show();
 			var urlPP = "getAssignedUserToken?projectid="+$('#projectid').val()+"&user_id="+$('#userid').val()+"&fromdate="+$('#txtFromDateAssigned').val()+"&todate="+$('#txtToDateAssigned').val();
@@ -53,6 +55,15 @@ function getPendingAssignList()
 					$("#dtOrderExample tbody").append(val);
 					i = i+1
 				});
+				
+				$('#dtOrderExample').DataTable({
+					destroy: true,
+					language: {
+						searchPlaceholder: "Search"
+					},
+					order: [[ 0, "desc" ]]
+				});
+				
 			}).done(function() {
 				$("#amsearch").prop("disabled", false);
 				

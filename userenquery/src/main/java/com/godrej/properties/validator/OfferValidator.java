@@ -72,6 +72,8 @@ public class OfferValidator implements Validator{
 			 validateFromConfig(paymentRequest, errors, paymentRequest.getProjectSfid());
 		}else if ("PAYPLAN".equalsIgnoreCase(validationSource)) {
 			validateFromPlan(paymentRequest, errors, paymentRequest.getProjectSfid());
+		}else if("CONFIGAMT".equalsIgnoreCase(validationSource)) {
+			validateFromConfigAmount(paymentRequest, errors, paymentRequest.getProjectSfid());
 		}
 		
 	}
@@ -104,7 +106,17 @@ public class OfferValidator implements Validator{
 		
 
 		if(paymentAmount.doubleValue() < amount.doubleValue()) {
-			validator.reject(errors, INVALID_PAYMENTS, "Payment amount is not valid - " + paymentAmount + " - It shouble be -" +amount);
+			double difference = amount.doubleValue() - paymentAmount.doubleValue();
+			StringBuilder message = new StringBuilder();
+			message.append("Payment entered (Rs. ")
+			.append(paymentAmount)
+			.append("/-) is less than the booking amount (Rs. ")
+			.append(price)
+			.append("/-). Please add remaining amount difference (Rs. ")
+			.append(difference)
+			.append("/-)");
+
+			validator.reject(errors, INVALID_PAYMENTS, message.toString());
 		}
 	}
 	
@@ -172,6 +184,28 @@ public class OfferValidator implements Validator{
 			validator.reject(errors, INVALID_PAYMENTS, message.toString());
 		}
 	}
-	
+
+	private void validateFromConfigAmount(PaymentRequestDto paymentRequest, Errors errors, String projectSfid) {
+		
+		Double configAmount =sysConfigService.getValueAsDouble(SysConfigEnum.OFFER_CREATION_CONFIG_AMOUNT, projectSfid);
+		PaymentDto []payments =  paymentRequest.getPayments();
+		Double paymentAmount = validatePayments(payments, errors);
+		if(errors.getErrorCount()>0) {
+			return;
+		}
+		if(paymentAmount.doubleValue() < configAmount) {
+			double difference = configAmount - paymentAmount.doubleValue();
+			StringBuilder message = new StringBuilder();
+			message.append("Payment entered (Rs. ")
+			.append(paymentAmount)
+			.append("/-) is less than the booking amount (Rs. ")
+			.append(configAmount)
+			.append("/-). Please add remaining amount difference (Rs. ")
+			.append(difference)
+			.append("/-)");
+			validator.reject(errors, INVALID_PAYMENTS, message.toString());
+		}
+	}
+
 	
 }

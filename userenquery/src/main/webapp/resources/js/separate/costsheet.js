@@ -10,6 +10,13 @@ var urlDomin = pageContext;
 var pdfSrc = pageContext+"Costsheet?name="     
 var projectNameVal = $("#projectId").val();
 
+
+var paymentTrxDaysAllow = 0;
+var sysNowDate = "1999-09-09";
+var paymentTrxMaxEndDate = "1999-09-09";
+var paymentValidCondition = false;
+
+
 $( document ).ready(function() {
 //if ($('#projectId').val() == 'a1l6F000008iEJiQAM') {
 if ($('#projectId').val() == 'a1l6F0000047Q1xQAE' || $('#projectId').val() == 'a1l6F000008iEJiQAM') {
@@ -202,7 +209,13 @@ function loadData () {
        // END Not in use 20191025
        
        var unitVal = $('#unitSfid').val();
-                           
+       
+       
+       if ($('#projectId').val() == 'a1l6F000004LVk8QAG') {
+      	 $('.facingCSCol').remove();
+       } 
+       
+       
        var url = urlDomin+"getProjectPlan?herokuEnqId="+$('.enquiryId').val()+"&project_code="+projectNameVal+"&unit="+$('#unitSfid').val()+"&towerCode="+$('#towerSfid').val()+"&pymtPlanSfid="+$('#ppDropdown').val()+"&typology="+$('#typoMst').val()  ;
        $.getJSON(url, function (data) {
              
@@ -211,6 +224,24 @@ function loadData () {
                     
                     if (unitVal == value.unitsfid) {
                            
+                    	sysNowDate = value.nowData;
+                    	
+                    	if (sysNowDate == undefined || sysNowDate == "" || sysNowDate == null) {
+                    		
+                    		paymentValidCondition = false;
+                    		
+                    		//paymentTrxDaysAllow = 0;
+                    	} else {
+                    		paymentValidCondition = true;
+                    		sysNowDate = value.nowData;
+                    	}
+                    	
+                    	
+                    	
+                    	
+                    	//alert ("Days :::" + value.paymentTrxdaysVal + " " + "Now Date	" + sysNowDate);
+                    	
+                    	
                            /*if (value.propstrength__completion_certificate_received__c == true || value.propstrength__category__c == 'Plot') { 
                                  bspTaxRecord ('noGst');
                                  
@@ -386,6 +417,9 @@ function loadData () {
                            
                     }                                
              });
+             
+             paymentTrxValidatore();
+             
        }).done(function() {
              var costofCarpet = ($('.b1').text())*($('.a4').text());
              $('#costofCarpet').val(costofCarpet); 
@@ -461,6 +495,9 @@ function loadData () {
        
        
        getEOIPaymentRecord ();
+       
+       //$(".csPtDataRow .csPtTransactionDate").attr("max", sysNowDate);
+      // maxPaymentDate ();
 }
 
 
@@ -997,7 +1034,7 @@ function paymentPlanOtherCharges (firstRowObj){
                    $('.payableStampAndReg').remove();
              }
              
-             if ($('#projectId').val() == 'a1l2s00000000pEAAQ') {
+             if ($('#projectId').val() == 'a1l2s00000000pEAAQ' || $('#projectId').val() == 'a1l6F000004LVk8QAG') {
             	 $('.payableStampAndReg').remove();
              } 
              
@@ -2098,7 +2135,7 @@ function newOtherCharges2 () {
              var carpetAreaAmount = 0;
              var exclusiveAreaAmount = 0;
              
-             if ($('#projectId').val() == 'a1l2s00000000X5AAI') {
+             if ($('#projectId').val() == 'a1l2s00000000X5AAI' || $('#projectId').val() == 'a1l6F000009D6IMQA0') {
             	 $('#tentativeCharges tbody').append("<tr> " +
             	 			"<th> Electricity Charges </th> <td class='txtRight' style='text-align:right;'> 0 </td>  </tr>" +
             	 			"<tr> <th> Legal Charges </th> <td class='txtRight' style='text-align:right;'> 0 </td>  </tr>" +
@@ -2579,9 +2616,13 @@ function printPdfData(generateFrom) {
              
        }).done(function(data){
              
-    	   var win = window.open(pageContext+'Costsheet?name='+enqSfid+'-'+$('#unitSfid').val()+'-'+$('#projectId').val() +'&region='+$('#region__c').val() + '&project='+$('#marketingProjectName').val()+'&tower='+$('#towerTval').text()+'&floor=' + $('#floorTval').text() + '&unit=' + $('#unitTval').text() + '&from=costsheet', '_blank');
+    	   
+    	  var uriPath = pageContext+'Costsheet?name='+enqSfid+'-'+$('#unitSfid').val()+'-'+$('#projectId').val() +'&region='+$('#region__c').val() + '&project='+$('#marketingProjectName').val()+'&tower='+encodeURIComponent($('#towerTval').text())+'&floor=' + $('#floorTval').text() + '&unit=' + $('#unitTval').text() + '&from=costsheet';
+    	  var win = window.open(uriPath,'_blank');
            
-             
+//    	   var win = window.open(pageContext+'Costsheet?name='+enqSfid+'-'+$('#unitSfid').val()+'-'+$('#projectId').val() +'&region='+$('#region__c').val() + '&project='+$('#marketingProjectName').val()+'&tower='+$('#towerTval').text()+'&floor=' + $('#floorTval').text() + '&unit=' + $('#unitTval').text() + '&from=costsheet', '_blank');  
+    	   
+    	   
              //var win = window.open(pageContext+'Costsheet?name='+enqSfid, '_blank');
              if (win) {
                  //Browser has allowed it to be opened
@@ -2634,7 +2675,7 @@ function printPdfData(generateFrom) {
 
 //Add more payment type - costsheet
 var amI = 0;
-var amNum = 4; 
+var amNum = 9; 
 
 var amNumRowID = 0;
 
@@ -2651,7 +2692,7 @@ function addMorePtBtn () {
 	
 	
        if(amI < amNum) { 
-             $('#csPtCol tr:last-child').after('<tr id="csPayRowID'+amNumRowID+'" class="csPtDataRow csPtFileSize"><td class="txtCenter"><input style="display:none;" class="gpl_cs_payment_details_id" value="-1"><input type="checkbox" class="paymentCScheck" checked></td><td><select onchange="csPtDd(this)" class="full form-control input-sm csPtDropDown requiredField"><option value="">Select</option><option value="Cheque">Cheque</option><option value="NEFT">NEFT/Credit</option><option value="Swipe">Swipe</option><option value="Wire Transfer">Wire Transfer (PayZap, Google Pay)</option></select></td><td><input class="full form-control input-sm csPtBankName requiredField" placeholder="Bank Name"/></td><td><input class="full form-control input-sm csPtBranch requiredField" placeholder="Branch Name"/></td><td><input class="full form-control input-sm csPtTransactionId requiredField" placeholder="Transaction ID" /></td><td><input type="date" class="full form-control input-sm csPtTransactionDate requiredField" placeholder="Transaction Date"/></td><td><input  class="numericField numericWithoutDecimal full form-control input-sm csPtTransactionAmount requiredField" maxlength="10" onkeyup="csPtcalculateGrandTotal()" placeholder="Transaction Amount" name="amount"/></td> <td> <input type="file" class="full form-control input-sm panAttach"/> <input class="panAttachWebcam"/> <a  class="webcamBtn" data-toggle="modal" data-target="#webcamBox" onclick="webcamAttachment(this, '+id+', '+attachPAN+')">or <span>Capture Image</span></a> </td> <td> <input type="file" class="full form-control input-sm receiptAttach"/> <input class="receiptAttachWebcam"/> <a  class="webcamBtn" data-toggle="modal" data-target="#webcamBox" onclick="webcamAttachment(this, '+id+', '+attachRec+')">or <span>Capture Image</span></a> <td><textarea class="full form-control input-sm csPtDescription" placeholder="Description"></textarea></td><td class="removeCsPtCol txtCenter"><i onclick="removeCsPtCol(this)" class="fa fa-times-circle"></i></td></tr>');
+             $('#csPtCol tr:last-child').after('<tr id="csPayRowID'+amNumRowID+'" class="csPtDataRow csPtFileSize"><td class="txtCenter"><input style="display:none;" class="gpl_cs_payment_details_id" value="-1"><input onchange="csPtcalculateGrandTotal()" type="checkbox" class="paymentCScheck" checked></td><td><select onchange="csPtDd(this)" class="full form-control input-sm csPtDropDown requiredField"><option value="">Select</option><option value="Cheque">Cheque</option><option value="NEFT">NEFT/Credit</option><option value="Swipe">Swipe</option><option value="Wire Transfer">Wire Transfer (PayZap, Google Pay)</option></select></td><td><input class="full form-control input-sm csPtBankName requiredField" placeholder="Bank Name"/></td><td style="display:none;"><input class="full form-control input-sm csPtBranch" placeholder="Branch Name"/></td><td><input class="full form-control input-sm csPtTransactionId requiredField" placeholder="Transaction ID" /></td><td><input onkeydown="return false" type="date" class="full form-control input-sm csPtTransactionDate requiredField" placeholder="Transaction Date"/></td><td><input  class="numericField numericWithoutDecimal full form-control input-sm csPtTransactionAmount requiredField" maxlength="10" onkeyup="csPtcalculateGrandTotal()" placeholder="Transaction Amount" name="amount"/></td> <td style="display:none;"> <input type="file" class="full form-control input-sm panAttach"/> <input class="panAttachWebcam"/> <a  class="webcamBtn" data-toggle="modal" data-target="#webcamBox" onclick="webcamAttachment(this, '+id+', '+attachPAN+')">or <span>Capture Image</span></a> </td> <td> <input type="file" class="full form-control input-sm receiptAttach"/> <input class="receiptAttachWebcam"/> <a  class="webcamBtn" data-toggle="modal" data-target="#webcamBox" onclick="webcamAttachment(this, '+id+', '+attachRec+')">or <span>Capture Image</span></a> <td><textarea class="full form-control input-sm csPtDescription" placeholder="Description"></textarea></td><td class="removeCsPtCol txtCenter"><i onclick="removeCsPtCol(this)" class="fa fa-times-circle"></i></td></tr>');
              amI++;
        }else {
              swal({
@@ -2661,6 +2702,8 @@ function addMorePtBtn () {
                  type: "error",
              });
        }
+       
+       paymentTrxValidatore();
 }
 
 function removeCsPtCol (e) {
@@ -2669,6 +2712,28 @@ function removeCsPtCol (e) {
        
        csPtcalculateGrandTotal ();
 }
+
+//function paymentCheck (e) {
+	 //if ($(e).is(':checked')) {
+		// alert('You have Checked it');
+	 //} else {
+		// alert('You Un-Checked it');
+		// csPtcalculateGrandTotal ();
+	 //}
+//}
+
+/*$(document).ready(function () {
+	var ckbox = $('.paymentCScheck');
+	
+	$('input').click(function () {
+	   
+	});
+});*/
+
+
+
+
+
 
 function csPtDd (e) {
        $(e).closest("tr").find('.csPtReachMexLength').remove();  
@@ -2712,8 +2777,8 @@ $(document).on("keypress keyup blur", ".csPtTransactionId", function (event) {
 
 function csPtcalculateGrandTotal() {
     var grandTotal = 0;
-    $("#csPtCol").find('input[name="amount"]').each(function () {
-        grandTotal += +$(this).val();
+    $("#csPtCol").find('.paymentCScheck:checked').each(function () {
+        grandTotal += +$(this).closest('tr').find('input[name="amount"]').val();
     });
     $("#csPtGrandtotal").text(grandTotal.toFixed(2));
 }
@@ -2822,10 +2887,18 @@ function csPymtData (balance_details_primeryId) {
 
 
 $("#carParkType").change(function () {
-    $('#carParkCountDD').empty();
+    
+	
+	
+	
+	$('#carParkCountDD').empty();
     if ($('#carParkType option:selected').val() != -1) {
 		$('#carParkCountDD').append('<select class="full form-control"><option value="1">1</option> <option value="2">2</option> <option value="3">3</option>  <option value="4">4</option> </select>');
-		$('#carParkCount').show();
+		if ($('#projectId').val() == 'a1l6F000009D6IMQA0') {
+			$('#carParkCount').hide();
+		} else {
+			$('#carParkCount').show();
+		}
     } else {
         $('#carParkCountDD').append('<select class="full form-control"><option value="0">0</option></select>');
         $('#carParkCount').hide();
@@ -2910,7 +2983,7 @@ function getEOIPaymentRecord () {
                                  trans_date = '';
                            }
                            
-                           eoiTransactionTotalAmount = parseFloat(parseFloat(obj[i].transaction_amount)+parseFloat(eoiTransactionTotalAmount)).toFixed(2);
+                           //eoiTransactionTotalAmount = parseFloat(parseFloat(obj[i].transaction_amount)+parseFloat(eoiTransactionTotalAmount)).toFixed(2);
                            
                            if (obj[i].isactive != 'Y') {
                                  checkBox = 'disabled';
@@ -2920,19 +2993,21 @@ function getEOIPaymentRecord () {
                                  checkBox = 'checked';
                                  disableRow = '';
                                  status = '<br> Approved';
+                                 
+                                 eoiTransactionTotalAmount = parseFloat(parseFloat(obj[i].transaction_amount)+parseFloat(eoiTransactionTotalAmount)).toFixed(2);
                            }
                            
                            
                            html +=      '<tr class="csPtDataRow moveToOffer" '+disableRow+'>'
-                                                     + '<td class="txtCenter"><input style="display:none;" class="gpl_cs_payment_details_id" value="'+obj[i].id+'">  <input type="checkbox" class="paymentCScheck" '+checkBox+'> </td>'
+                                                     + '<td class="txtCenter"><input style="display:none;" class="gpl_cs_payment_details_id" value="'+obj[i].id+'">  <input onchange="csPtcalculateGrandTotal()" type="checkbox" class="paymentCScheck" '+checkBox+'> </td>'
                                                      + '<td class="txtCenter"><input class="full form-control input-sm csPtEnqSfid csPtDropDown" value="'+obj[i].payment_type+'" style="display:none;" disabled >'+obj[i].payment_type+'</td>' 
                                                      + '<td class="txtCenter"><input class="full form-control input-sm csPtBankName" value="'+obj[i].bank_name+'" style="display:none; " disabled>'+obj[i].bank_name+'</td>' 
-                                                     + '<td class="txtCenter"><input class="full form-control input-sm csPtBranch" value="'+obj[i].branch+'" style="display:none; " disabled>'+obj[i].branch+'</td>' 
+                                                     + '<td class="txtCenter" style="display:none;"><input class="full form-control input-sm csPtBranch" value="'+obj[i].branch+'" style="display:none; " disabled>'+obj[i].branch+'</td>' 
                                                      + '<td class="txtCenter"><input class="full form-control input-sm csPtTransactionId" value="'+obj[i].transaction_id+'" style="display:none; " disabled>'+obj[i].transaction_id+'</td>' 
                                                      + '<td class="txtCenter"><input class="full form-control input-sm csPtTransactionDate" value="'+obj[i].transaction_date+'" style="display:none; "  disabled>'+trans_date+'</td>' 
                                                      + '<td class="txtCenter"><input class="full form-control input-sm csPtTransactionAmount"  value="'+obj[i].transaction_amount+'" name="amount" style="display:none; " disabled>'+obj[i].transaction_amount+'</td>' 
-                                                     + '<td class="txtCenter"><input style="display:none;" class="full form-control input-sm panAttach" type="file" data-fileName="'+obj[i].pan_attach+'"  name="panAttach"> <a target="_blank" href="'+panTarget+'">'+obj[i].pan_attach+'</a></td>' 
-                                                     + '<td class="txtCenter"><input style="display:none;" class="full form-control input-sm receiptAttach" type="file" data-fileName="'+obj[i].cheque_attach+'" name="receiptAttach"> <a target="_blank" href="'+reciptTarget+'">'+obj[i].cheque_attach+'</a></td>'
+                                                     + '<td class="txtCenter" style="display:none;"><input style="display:none;" class="full form-control input-sm panAttach" type="file" data-fileName="'+obj[i].pan_attach+'"  name="panAttach"> <a target="_blank" href="'+panTarget+'">'+obj[i].pan_attach+'</a></td>' 
+                                                     + '<td class="txtCenter" style="word-break: break-word;"><input style="display:none;" class="full form-control input-sm receiptAttach" type="file" data-fileName="'+obj[i].cheque_attach+'" name="receiptAttach"> <a target="_blank" href="'+reciptTarget+'">'+obj[i].cheque_attach+'</a></td>'
                                                      + '<td class="txtCenter"><input class="full form-control input-sm csPtDescription" value="'+obj[i].description+'" style="display:none;" disabled>'+obj[i].description+'</td>'
                                                      + '<td > </td>'
                                                "</tr>";
@@ -2947,7 +3022,7 @@ function getEOIPaymentRecord () {
                            
                            +' <tr id="csPayRowID0" class="csPtDataRow csPtFileSize" ><td class="txtCenter">'
                                  +'<input style="display:none;" class="gpl_cs_payment_details_id" value="-1">'
-                                 + '<input type="checkbox" class="paymentCScheck" checked>'
+                                 + '<input type="checkbox" class="paymentCScheck" onchange="csPtcalculateGrandTotal()" checked>'
                            + '</td>'
                            + '<td>'
                                  + '<input class="csPtEnqSfid" style="display:none;" />'
@@ -2962,20 +3037,20 @@ function getEOIPaymentRecord () {
                            + '<td>'
                                  + '<input class="full form-control input-sm csPtBankName requiredField" placeholder="Bank Name"/>'
                            + '</td>'
-                           + '<td>'
-                                 + '<input class="full form-control input-sm csPtBranch requiredField" placeholder="Branch Name"/>'
+                           + '<td style="display:none;">'
+                                 + '<input class="full form-control input-sm csPtBranch" placeholder="Branch Name"/>'
                            + '</td>'
                            + '<td>'
                                  + '<input class="full form-control input-sm csPtTransactionId requiredField" placeholder="Transaction ID"/>'
                            + '</td>'
                            + '<td>'
-                                 + '<input type="date" class="full form-control input-sm csPtTransactionDate requiredField" placeholder="Transaction Date"/>'
+                                 + '<input onkeydown="return false" type="date" class="full form-control input-sm csPtTransactionDate requiredField" placeholder="Transaction Date"/>'
                            + '</td>'
                            + '<td>'
                                  + '<input class="numericField numericWithoutDecimal full form-control input-sm csPtTransactionAmount requiredField" maxlength="10" onkeyup="csPtcalculateGrandTotal()" name="amount" placeholder="Transaction Amount"/>'
                            + '</td>'
              
-                           + '<td>'
+                           + '<td style="display:none;">'
                                  + '<input type="file" class="full form-control input-sm panAttach"/>'
                                  + '<input class="panAttachWebcam"/>'
                                  + '<a  class="webcamBtn" data-toggle="modal" data-target="#webcamBox" onclick="webcamAttachment(this, '+csPayRowID0+', '+attachPAN+')">or <span>Capture Image</span></a>'
@@ -2998,7 +3073,7 @@ function getEOIPaymentRecord () {
                            
                            +' <tr id="csPayRowID0" class="csPtDataRow csPtFileSize"><td class="txtCenter">'
                                         +'<input style="display:none;" class="gpl_cs_payment_details_id" value="-1">'
-                                        + '<input type="checkbox" class="paymentCScheck" checked>'
+                                        + '<input type="checkbox" onchange="csPtcalculateGrandTotal()" class="paymentCScheck" checked>'
                                  + '</td>'
                                  + '<td>'
                                         + '<input class="csPtEnqSfid" style="display:none;" />'
@@ -3013,20 +3088,20 @@ function getEOIPaymentRecord () {
                                  + '<td>'
                                         + '<input class="full form-control input-sm csPtBankName requiredField" placeholder="Bank Name"/>'
                                  + '</td>'
-                                 + '<td>'
-                                        + '<input class="full form-control input-sm csPtBranch requiredField" placeholder="Branch Name"/>'
+                                 + '<td style="display:none">'
+                                        + '<input class="full form-control input-sm csPtBranch" placeholder="Branch Name"/>'
                                  + '</td>'
                                  + '<td>'
                                         + '<input class="full form-control input-sm csPtTransactionId requiredField" placeholder="Transaction ID"/>'
                                  + '</td>'
                                  + '<td>'
-                                        + '<input type="date" class="full form-control input-sm csPtTransactionDate requiredField" placeholder="Transaction Date"/>'
+                                        + '<input onkeydown="return false" type="date" class="full form-control input-sm csPtTransactionDate requiredField" placeholder="Transaction Date"/>'
                                  + '</td>'
                                  + '<td>'
                                         + '<input class="numericWithoutDecimal numericField full form-control input-sm csPtTransactionAmount requiredField" maxlength="10" onkeyup="csPtcalculateGrandTotal()" name="amount" placeholder="Transaction Amount"/>'
                                  + '</td>'
                     
-                                 + '<td class="txtCenter">'
+                                 + '<td style="display:none" class="txtCenter">'
                                         + '<input type="file" class="full form-control input-sm panAttach"/>'
                                         + '<input class="panAttachWebcam"/>'
                                         + '<a  class="webcamBtn" data-toggle="modal" data-target="#webcamBox" onclick="webcamAttachment(this, '+csPayRowID0+', '+attachPAN+')">or <span>Capture Image</span></a>'
@@ -3042,13 +3117,13 @@ function getEOIPaymentRecord () {
                                  + '</td>'
                                  + '<td> </td>'
                            + '</tr>';
-                    
-                    
-                    
                     $("#csPtCol tbody tr:first-child").after(html);
              }
-       }).done(function(obj){
              
+           //  paymentTrxValidatore ();
+             
+       }).done(function(obj){
+    	   
        });    
 }
 
@@ -3173,3 +3248,11 @@ function carparkTypeMstList (){
 	});
 }
 // END Carpark Dropdown List
+
+
+
+function paymentTrxValidatore () {
+	if (paymentValidCondition) {
+		$(".csPtDataRow .csPtTransactionDate").attr("max", sysNowDate);
+	}
+}

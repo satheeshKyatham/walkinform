@@ -143,6 +143,11 @@ public class TokenServiceImpl implements TokenService {
 		// TODO Auto-generated method stub
 		return tokenDao.getSalesUserSFID(enqid,email);
 	}
+	@Override
+	public String getSalesUserEmailID(int enqid, String sfid) {
+		// TODO Auto-generated method stub
+		return tokenDao.getSalesUserEmailID(enqid,sfid);
+	}
 	public Token getTokenByEnquiry(String enquirySfid) {
 		try {
 			return tokenDao.getTokenByEnquiry(enquirySfid);

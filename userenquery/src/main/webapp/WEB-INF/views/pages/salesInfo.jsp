@@ -1541,13 +1541,34 @@ if(ses!=null){
 						<div class="col-md-3 col-sm-6 col-xs-12" id="sourcingManagerIdDiv">
 							<div class="group">
 							<!-- <div id="sourcingManagerId"></div> -->
-							<select class="sales_submitted" id="sourcingManagerId" name="closingManagerDto">
+							<select class="requiredField autocomplete-off" id="sourcingManagerId" name="closingManagerDto">
 							</select>
 								<span class="highlight"></span><span class="bar"></span>
-								<label class="select-label">Sourcing Manager</label>
+								<label class="select-label">Sourcing Manager<strong class="mndt">*</strong></label>
 							</div>
 							<div class="clearfix"></div>
 						</div>
+						<div class="col-md-3 col-sm-6 col-xs-12" id="closingTeamLeadIdDiv">
+							<div class="group">
+							<div id="sourcingManagerId"></div>
+							<select class="requiredField autocomplete-off" id="closingTeamLeadId" name="closingTeamLeadDto">
+							</select>
+								<span class="highlight"></span><span class="bar"></span>
+								<label class="select-label">Closing Team lead<strong class="mndt">*</strong></label>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+						<div class="col-md-3 col-sm-6 col-xs-12" id="sourcingTeamLeadIdDiv">
+							<div class="group">
+							<div id="sourcingManagerId"></div>
+							<select class="requiredField autocomplete-off" id="sourcingTeamLeadId" name="sourcingTeamLeadDto">
+							</select>
+								<span class="highlight"></span><span class="bar"></span>
+								<label class="select-label">Sourcing Team Lead<strong class="mndt">*</strong></label>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+						
 						<div class="col-md-3 col-sm-6 col-xs-12">
 							<div class="group">
 								<select class="sales_submitted disableInputs" id="verticalId" name="verticle__c">
@@ -1615,19 +1636,23 @@ if(ses!=null){
 							<span>Save & Clossse</span>
 						</a>
 </c:if> --%>
-
-						<%if(request.getParameter("salesViewType").toString().equals("Y")){%>
-						<a class="btn btn-primary  blue_btn mrgR15" id="salsbtnsave" onclick="saveAddressInfo(event,this);"> <!-- class="disableInputs" -->
-							<span>Save & Close</span>
-						</a>
-						<%}else{%>
-						 <a class="btn btn-primary blue_btn  mrgR15" id="salsbtnsave" onclick="saveAddressInfo(event,this);">
-							<span>Save & Close</span>
-						</a>
+						<span id="salsbtnsaveDiv">
+							<%if(request.getParameter("salesViewType").toString().equals("Y")){%>
+							<a class="btn btn-primary  blue_btn mrgR15" id="salsbtnsave" onclick="saveAddressInfo(event,this);"> <!-- class="disableInputs" -->
+								<span>Save & Close</span>
+							</a>
+							<%}else{%>
+							 <a class="btn btn-primary blue_btn  mrgR15" id="salsbtnsave" onclick="saveAddressInfo(event,this);">
+								<span>Save & Close</span>
+							</a>
 						<%} %>
+						</span>
 						<a class="btn btn-primary blue_btn  mrgR15" id="btneoi" style="display:none;" onclick="generateEOI(event,this);">
 							<span>Save & Generate EOI</span>
-						</a>				
+						</a>
+						<div class="mrgR15" id="syncIdDivSales" style="color:red;font-weight: bold;font-size: 18px;">
+						  Enquiry Sync In-Progress, Please Wait OR Refresh the page.
+						</div>				
 						<div class="clearfix"></div>
 					</div>
 					<div class="clearfix"></div>
@@ -1717,7 +1742,7 @@ if(ses!=null){
 	<script src="<c:url value='/resources/js/commonValidation.js?v=18.10' />"></script>
 	<script src="<c:url value='/resources/js/utility.js?v=18.10' />"></script>
 	<%-- <script src="<c:url value='/resources/js/enquiryRequest/enquiryRequest.js' />"></script> --%>
-	<script src="<c:url value='/resources/js/enquiryRequest/salesRequest.js?v=18.10' />"></script>	
+	<script src="<c:url value='/resources/js/enquiryRequest/salesRequest.js?v=18.13' />"></script>	
     <script src="<c:url value='/resources/js/intlTelInput.js' />"></script>
    
     <script src="<c:url value='/resources/js/sweetalert2.min.js' />"></script>
@@ -1775,7 +1800,7 @@ if(ses!=null){
 	</script>
 	
 	<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB1YQeqmJoubsXBr0BLkIqOtwWyYk2mKJQ&libraries=places&callback=initAutocomplete" async defer></script> -->
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCGiIJnQmPDp3qoLF0j6xt8msWAD-7FC2I&libraries=places&callback=initAutocomplete" async defer></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDM5bKqtFEgJ0D1jXEHx-nsZUPyBLNW7B4&libraries=places&callback=initAutocomplete" async defer></script>
 	
 		
 		
@@ -1788,11 +1813,11 @@ if(ses!=null){
 <script src="<c:url value='/resources/js/jquery.tabletojson.min.js'/>"></script>
 <%-- <script type="text/javascript" src="<c:url value='/resources/js/jquery.countdownTimer.js'/>"></script> --%>
 <script src="<c:url value='/resources/js/enquiryRequest/common.js?v=18.10'/>"></script>
-<script src="<c:url value='/resources/js/separate/costsheet.js?v=18.10'/>"></script>
+<script src="<c:url value='/resources/js/separate/costsheet.js?v=18.11'/>"></script>
 <script src="<c:url value='/resources/js/separate/webcamAttachmentCS.js?v=18.10'/>"></script>
 
 
-<script src="<c:url value='/resources/js/separate/storeEOIPaymentDtl.js?v=18.10'/>"></script>
+<script src="<c:url value='/resources/js/separate/storeEOIPaymentDtl.js?v=18.13'/>"></script>
 <script src="<c:url value='/resources/js/separate/eoiFormPrint.js?v=18.10'/>"></script>
 
 

@@ -206,30 +206,30 @@
 							<th style="width:130px;">
 								Payment Type
 							</th>
-							<th style="width:100px;">
+							<th style="width:120px;">
 								Bank Name
 							</th>
-							<th style="width:100px;">
+							<th style="width:100px; display:none;">
 								Branch
 							</th>
 							<th>
 								Transaction ID
 							</th>
-							<th style="width:100px;">
+							<th>
 								Transaction</br>Date
 							</th>
 							<th>
 								Transaction Amount
 							</th>
 							
-							<th style="width:250px;">
+							<th style="width:250px; display:none;">
 								PAN Attachment 
 							</th>
-							<th style="width:250px;">
+							<th style="width:200px;">
 								Receipt/</br>Cheque Attachment
 							</th>
 							
-							<th style="width:200px;">
+							<th style="width:150px;">
 								Description
 							</th>
 							<th style="width:32px;"></th>
@@ -251,20 +251,20 @@
 							<td>
 								<input class="full form-control input-sm csPtBankNameEoi requiredField" placeholder="Bank Name"/>
 							</td>
-							<td>
-								<input class="full form-control input-sm csPtBranchEoi requiredField" placeholder="Branch Name"/>
-							</td>
+							<td style="display:none;">
+								<input class="full form-control input-sm csPtBranchEoi" placeholder="Branch Name"/>
+							</td> 
 							<td>
 								<input class="full form-control input-sm csPtTransactionIdEoi requiredField" placeholder="Transaction ID"/>
 							</td>
 							<td>
-								<input type="date" class="full form-control input-sm csPtTransactionDateEoi requiredField" placeholder="Transaction Date"/>
+								<input type="date" class="form-control input-sm csPtTransactionDateEoi requiredField" placeholder="Transaction Date"/>
 							</td>
 							<td>
 								<input maxlength="10" class="numericWithoutDecimal numericField full form-control input-sm csPtTransactionAmountEoi requiredField" onkeyup="csPtcalculateGrandTotalEoi()" name="amount" placeholder="Transaction Amount"/>
 							</td>
 							
-							<td>
+							<td style="display:none;">
 								<input type="file" class="full form-control input-sm panAttachEoi" accept="application/pdf,image/*"/>
 							</td>
 							<td>
@@ -642,7 +642,7 @@
 
 <!-- EOI Print Form -->
 
-<div id="printEOIForm" class="col-md-8" style="border: 1px dotted #ccc; margin: 0 auto; float: none; margin-top: 40px; padding-top: 15px;">
+<div id="printEOIForm" class="col-md-8" style="display:none; border: 1px dotted #ccc; margin: 0 auto; float: none; margin-top: 40px; padding-top: 15px;">
 		<!-- <div style="padding-bottom:10px;"><b style="font-size:18px; text-align:center;">EOI Form: <span id="projectNameEOIPrint"></span></b></div> -->
 		
 		<table class="table table-bordered" style="margin-bottom:20px; border-color: #ffffff; padding:0px;">

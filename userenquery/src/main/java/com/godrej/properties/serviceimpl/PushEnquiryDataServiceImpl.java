@@ -117,6 +117,26 @@ public class PushEnquiryDataServiceImpl  implements PushEnquiryDataService{
 			mediaType="Walkin";
 			mediaSubType="Walkin";
 		}
+		else if("Employee".equals(dto.getIsReferredByChannelPartner()) && null!=dto.getWalkInSource())
+		{
+			mediaType="Employee";
+			mediaSubType="Employee Referral";
+		}
+		else if("Referral".equals(dto.getIsReferredByChannelPartner()) && null!=dto.getWalkInSource())
+		{
+			mediaType="Referral";
+			mediaSubType="Customer Referral";
+		}
+		else if("Loyalty".equals(dto.getIsReferredByChannelPartner()) && null!=dto.getWalkInSource())
+		{
+			mediaType="Referral";
+			mediaSubType="Loyalty customers";
+		}
+		else
+		{
+			mediaType="Walkin";
+			mediaSubType="Walkin";
+		}
 		return pushEnquiryDataDao.getAdvertisementForEnquiry(projectSfid, mediaType, mediaSubType);
 	}
 

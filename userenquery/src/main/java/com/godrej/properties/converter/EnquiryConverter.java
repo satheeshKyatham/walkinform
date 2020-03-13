@@ -15,6 +15,7 @@ import com.godrej.properties.common.converter.CommonConverter;
 import com.godrej.properties.dto.EnquiryDto;
 import com.godrej.properties.model.Enquiry;
 import com.godrej.properties.model.EnquiryReport;
+import com.godrej.properties.service.TokenService;
 
 @Component
 public class EnquiryConverter implements CommonConverter<Enquiry, EnquiryDto>{
@@ -30,6 +31,9 @@ public class EnquiryConverter implements CommonConverter<Enquiry, EnquiryDto>{
 	
 	@Autowired
 	private EnquiryReportConverter enquiryReportConverter;
+	
+	@Autowired
+	private TokenService tokenService;
 	
 	@Override
 	public EnquiryDto entityToDto(Enquiry entity) {
@@ -152,8 +156,33 @@ public class EnquiryConverter implements CommonConverter<Enquiry, EnquiryDto>{
 		if(entity.getVerticle__c()!=null)
 			dto.setVerticle__c(entity.getVerticle__c());
 		if(entity.getSourcing_Managers__c()!=null)
+		{
 			dto.setSourcing_Managers__c(entity.getSourcing_Managers__c());
+			dto.setSourcingmanger_email(tokenService.getSalesUserEmailID(entity.getEnquiryId(), entity.getSourcing_Managers__c()));
+//			dto.setSourcing_Managers__c(tokenService.getSalesUserEmailID(entity.getEnquiryId(), entity.getSourcing_Managers__c()));
+		}
 		/*=========End========*/
+		
+		if(entity.getContact_Loyalty__c()!=null)
+			dto.setContact_Loyalty__c(entity.getContact_Loyalty__c());
+		if(entity.getContact_referral__c()!=null)
+			dto.setContact_referral__c(entity.getContact_referral__c());
+		if(entity.getEmployee_Referral__c()!=null)
+			dto.setEmployee_Referral__c(entity.getEmployee_Referral__c());
+		
+		/* Added By Satheesh K - 13-03-2020
+		 * Requested by Prakash - Closing Team Lead and Sourcing Team Lead adding on Sales Tab*/
+		if(entity.getClosing_Team_Lead__c()!=null)
+		{
+			dto.setClosing_Team_Lead__c(entity.getClosing_Team_Lead__c());
+			dto.setClosing_Team_Lead_email(tokenService.getSalesUserEmailID(entity.getEnquiryId(), entity.getClosing_Team_Lead__c()));
+		}
+		if(entity.getSourcing_Team_Lead__c()!=null)
+		{
+			dto.setSourcing_Team_Lead__c(entity.getSourcing_Team_Lead__c());
+			dto.setSourcing_Team_Lead_email(tokenService.getSalesUserEmailID(entity.getEnquiryId(), entity.getSourcing_Team_Lead__c()));
+		}
+		
 		return dto;
 	}
 
@@ -278,7 +307,9 @@ public class EnquiryConverter implements CommonConverter<Enquiry, EnquiryDto>{
 		if(dto.getVerticle__c()!=null)
 			entity.setVerticle__c(dto.getVerticle__c());
 		if(dto.getSourcing_Managers__c()!=null)
+		{
 			entity.setSourcing_Managers__c(dto.getSourcing_Managers__c());
+		}
 		/*=========End========*/
 		
 		if(dto.getEnquiryReport().getReferredby()!=null)
@@ -287,6 +318,19 @@ public class EnquiryConverter implements CommonConverter<Enquiry, EnquiryDto>{
 			entity.setPriority_no__c(dto.getPriority_no__c());
 		entity.setEoi_enquiry__c(dto.getEoi_enquiry__c());
 		
+		if(dto.getContact_Loyalty__c()!=null)
+			entity.setContact_Loyalty__c(dto.getContact_Loyalty__c());
+		if(dto.getContact_referral__c()!=null)
+			entity.setContact_referral__c(dto.getContact_referral__c());
+		if(dto.getEmployee_Referral__c()!=null)
+			entity.setEmployee_Referral__c(dto.getEmployee_Referral__c());
+		
+		/* Added By Satheesh K - 13-03-2020
+		 * Requested by Prakash - Closing Team Lead and Sourcing Team Lead adding on Sales Tab*/
+		if(dto.getClosing_Team_Lead__c()!=null)
+			entity.setClosing_Team_Lead__c(dto.getClosing_Team_Lead__c());
+		if(dto.getSourcing_Team_Lead__c()!=null)
+			entity.setSourcing_Team_Lead__c(dto.getSourcing_Team_Lead__c());
 		
 		return entity;
 	}

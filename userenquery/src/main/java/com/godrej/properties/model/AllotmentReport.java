@@ -47,6 +47,14 @@ public class AllotmentReport {
 	@Column(name="PropStrength__House_Unit_No__c") private String	propStrength__House_Unit_No__c;
 	@Column(name="actula_5_per") private Double	actula_5_per;
 	@Column(name="diffamount") private String diffamount;
+	@Column(name="car_park_type") private String car_park_type;
+	@Column(name="scheme_name") private String scheme_name;
+	
+	@Column(name="offer_date") private Date offer_date;
+	@Column(name="booking_name") private String booking_name;
+	@Column(name="booking_status") private String booking_status;
+	@Column(name="kyc_approvedby") private String kyc_approvedby;
+	
 	public int getId() {
 		return id;
 	}
@@ -220,6 +228,42 @@ public class AllotmentReport {
 	}
 	public void setActula_5_per(Double actula_5_per) {
 		this.actula_5_per = actula_5_per;
+	}
+	public String getCar_park_type() {
+		return car_park_type;
+	}
+	public void setCar_park_type(String car_park_type) {
+		this.car_park_type = car_park_type;
+	}
+	public String getScheme_name() {
+		return scheme_name;
+	}
+	public void setScheme_name(String scheme_name) {
+		this.scheme_name = scheme_name;
+	}
+	public Date getOffer_date() {
+		return offer_date;
+	}
+	public void setOffer_date(Date offer_date) {
+		this.offer_date = offer_date;
+	}
+	public String getBooking_name() {
+		return booking_name;
+	}
+	public void setBooking_name(String booking_name) {
+		this.booking_name = booking_name;
+	}
+	public String getBooking_status() {
+		return booking_status;
+	}
+	public void setBooking_status(String booking_status) {
+		this.booking_status = booking_status;
+	}
+	public String getKyc_approvedby() {
+		return kyc_approvedby;
+	}
+	public void setKyc_approvedby(String kyc_approvedby) {
+		this.kyc_approvedby = kyc_approvedby;
 	}
 	
 	

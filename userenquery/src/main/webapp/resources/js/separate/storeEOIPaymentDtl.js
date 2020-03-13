@@ -6,7 +6,7 @@ $.ajaxSetup({
     }
 });
 var amIEoi = 0;
-var amNumEoi = 4; 
+var amNumEoi = 9; 
 
 
 var EOIDtl = 0;
@@ -16,7 +16,7 @@ var NumEoiDtl = 4;
 
 function addMorePtBtnEoi () {
 	if(amIEoi < amNumEoi) {
-		$('#csPtColEoi tr:last-child').after('<tr class="csPtDataRowEoi"> <td></td> <td><input class="csPtEnqSfidEoi" style="display:none;" value="'+$('#enquirysfid').val()+'"/>  <select onchange="csPtDdEoi(this)" class="full form-control input-sm csPtDropDownEoi requiredField"><option value="">Select</option><option value="Cheque">Cheque</option><option value="NEFT">NEFT/Credit</option><option value="Swipe">Swipe</option><option value="Wire Transfer">Wire Transfer (PayZap, Google Pay)</option> </select></td><td><input class="full form-control input-sm csPtBankNameEoi requiredField" placeholder="Bank Name"/></td><td><input class="full form-control input-sm csPtBranchEoi requiredField" placeholder="Branch Name"/></td><td><input class="full form-control input-sm csPtTransactionIdEoi requiredField" placeholder="Transaction ID" /></td><td><input type="date" class="full form-control input-sm csPtTransactionDateEoi requiredField" placeholder="Transaction Date"/></td><td><input maxlength="10" class="numericWithoutDecimal  numericField full form-control input-sm csPtTransactionAmountEoi requiredField" onkeyup="csPtcalculateGrandTotalEoi()" placeholder="Transaction Amount" name="amount"/></td> <td> <input type="file" class="full form-control input-sm panAttachEoi"  accept="application/pdf,image/*"> </td> <td> <input type="file" class="full form-control input-sm receiptAttachEoi" accept="application/pdf,image/*"/>  <td><textarea class="full form-control input-sm csPtDescriptionEoi" placeholder="Description"></textarea></td><td class="removeCsPtColEoi txtCenter"><i onclick="removeCsPtColEoi(this)" class="fa fa-times-circle redColr cursorPoint"></i></td></tr>');
+		$('#csPtColEoi tr:last-child').after('<tr class="csPtDataRowEoi"> <td></td> <td><input class="csPtEnqSfidEoi" style="display:none;" value="'+$('#enquirysfid').val()+'"/>  <select onchange="csPtDdEoi(this)" class="full form-control input-sm csPtDropDownEoi requiredField"><option value="">Select</option><option value="Cheque">Cheque</option><option value="NEFT">NEFT/Credit</option><option value="Swipe">Swipe</option><option value="Wire Transfer">Wire Transfer (PayZap, Google Pay)</option> </select></td><td><input class="full form-control input-sm csPtBankNameEoi requiredField" placeholder="Bank Name"/></td><td style="display:none;"><input class="full form-control input-sm csPtBranchEoi" placeholder="Branch Name"/></td><td><input class="full form-control input-sm csPtTransactionIdEoi requiredField" placeholder="Transaction ID" /></td><td><input type="date" class="form-control input-sm csPtTransactionDateEoi requiredField" placeholder="Transaction Date"/></td><td><input maxlength="10" class="numericWithoutDecimal  numericField full form-control input-sm csPtTransactionAmountEoi requiredField" onkeyup="csPtcalculateGrandTotalEoi()" placeholder="Transaction Amount" name="amount"/></td> <td style="display:none;"> <input type="file" class="full form-control input-sm panAttachEoi"  accept="application/pdf,image/*"> </td> <td> <input type="file" class="full form-control input-sm receiptAttachEoi" accept="application/pdf,image/*"/>  <td><textarea class="full form-control input-sm csPtDescriptionEoi" placeholder="Description"></textarea></td><td class="removeCsPtColEoi txtCenter"><i onclick="removeCsPtColEoi(this)" class="fa fa-times-circle redColr cursorPoint"></i></td></tr>');
 		amIEoi++;
 	}else {
 		swal({
@@ -243,15 +243,15 @@ function getEOITabPaymentRecord () {
 				
 				
 				html += 	'<tr class="paymentDataPlotRow" '+rowStatusColr+'>'
-								+ '<td style="text-align:center;">'+status+'</td>' 
+								+ '<td style="text-align:center; font-size:11px;">'+status+'</td>' 
 								+ '<td style="text-align:center;">'+obj[i].payment_type+'</td>' 
 								+ '<td style="text-align:center;">'+obj[i].bank_name+'</td>' 
-								+ '<td style="text-align:center;">'+obj[i].branch+'</td>' 
+								/*+ '<td style="text-align:center;">'+obj[i].branch+'</td>' */
 								+ '<td style="text-align:center;">'+obj[i].transaction_id+'</td>' 
 								+ '<td style="text-align:center;">'+trans_date+'</td>' 
 								+ '<td style="text-align:center;">'+obj[i].transaction_amount+'</td>' 
-								+ '<td> <a target="_blank" href="'+panTarget+'">'+obj[i].pan_attach+'</a></td>' 
-								+ '<td> <a target="_blank" href="'+reciptTarget+'">'+obj[i].cheque_attach+'</a></td>'
+								+ '<td style="display:none;"> <a target="_blank" href="'+panTarget+'">'+obj[i].pan_attach+'</a></td>' 
+								+ '<td style="word-break: break-word;"> <a target="_blank" href="'+reciptTarget+'">'+obj[i].cheque_attach+'</a></td>'
 								+ '<td style="text-align:center;">'+obj[i].description+'</td>'
 								+ '<td></td>'
 							"</tr>";
@@ -319,12 +319,18 @@ function getTokenTypeEOI (){
 		{
 			html='<option value="F">GOLD</option><option value="F">PLATINUM</option><option value="T">EXPRESS</option>';
 		}
-	else if($("#projectsfid").val()=='a1l6F000008DnniQAC' || $("#projectsfid").val()=='a1l2s00000000pEAAQ' || $("#projectsfid").val()=='a1l6F000008iZJMQA2')
+	else if($("#projectsfid").val()=='a1l6F000004LVk8QAG' || $("#projectsfid").val()=='a1l6F000008DnniQAC' || $("#projectsfid").val()=='a1l2s00000000pEAAQ' || $("#projectsfid").val()=='a1l6F000008iZJMQA2' || $("#projectsfid").val()=='a1l2s00000003BMAAY')
 		{
 			html='<option value="F">REFUNDABLE</option><option value="T">NON-REFUNDABLE</option>';
 		}
-		
+	else if($("#projectsfid").val()=='a1l2s00000003lPAAQ')
+	{
+		html='<option value="F">PLATINUM</option><option value="T">EXPRESS</option>';
+	}
 	
+	
+	
+	//a1l2s00000003BMAAY
 	$(".tokenTypeEOI").append(html);
 }
 /* Added By Satheesh K - 30-01-2020*/

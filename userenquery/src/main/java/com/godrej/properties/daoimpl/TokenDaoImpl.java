@@ -306,6 +306,18 @@ public class TokenDaoImpl extends AbstractDao<Integer, Token> implements TokenDa
 		else
 			return "No Entry Found";*/
 	}
+	@Override
+	public String getSalesUserEmailID(int enqid, String sfid) {
+		Session session = this.sessionFactory.getCurrentSession();
+		Query q = session.createNativeQuery("select email__c from  salesforce.case_escalation_users_detail__c where sfid ='"+sfid+"' ");
+		int i = q.getResultList().size();
+		if(i>0)
+		{
+			return q.getResultList().get(0).toString();
+		}
+		else
+			return null;
+	}
 	
 	public Token getTokenByEnquiry(String enquirySfid) {
 		Session session = this.sessionFactory.getCurrentSession();	

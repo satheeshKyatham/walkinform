@@ -72,6 +72,10 @@ public class PaymentPlanJson {
 	private String  property_facing__c;
 	private double bsp_per;
 	
+	private String  paymentTrxdaysVal;
+	
+	private String nowData;
+	
 	
 	public String getBalcony_area_sq_ft__c() {
 		return balcony_area_sq_ft__c;
@@ -445,5 +449,17 @@ public class PaymentPlanJson {
 	}
 	public void setBsp_per(double bsp_per) {
 		this.bsp_per = bsp_per;
+	}
+	public String getPaymentTrxdaysVal() {
+		return paymentTrxdaysVal;
+	}
+	public void setPaymentTrxdaysVal(String paymentTrxdaysVal) {
+		this.paymentTrxdaysVal = paymentTrxdaysVal;
+	}
+	public String getNowData() {
+		return nowData;
+	}
+	public void setNowData(String nowData) {
+		this.nowData = nowData;
 	}
 }
