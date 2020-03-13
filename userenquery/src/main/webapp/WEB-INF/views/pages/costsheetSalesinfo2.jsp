@@ -1172,12 +1172,12 @@
 									<th style="width:130px;">
 										Payment Type <strong class="mndt">*</strong>
 									</th>
-									<th style="width:100px;">
+									<th style="width:120px;">
 										Bank Name <strong class="mndt">*</strong>
 									</th>
-									<th style="width:100px;">
+									<!-- <th style="width:100px;">
 										Branch <strong class="mndt">*</strong>
-									</th>
+									</th> -->
 									<th style="width:150px;">
 										Transaction ID <strong class="mndt">*</strong>
 									</th>
@@ -1188,14 +1188,14 @@
 										Transaction Amount <strong class="mndt">*</strong>
 									</th>
 									
-									<th style="width:250px;">
+									<!-- <th style="width:250px;">
 										PAN Attachment
-									</th>
-									<th style="width:250px;">
+									</th> -->
+									<th style="width:200px;">
 										Receipt/</br>Cheque Attachment
 									</th>
 									
-									<th style="width:200px;">
+									<th style="width:150px;">
 										Description
 									</th>
 									<th style="width:32px;"></th>
@@ -1246,9 +1246,9 @@
 							</tbody>
 						</table>
 						
-						<div style="display:none;">
+						<!-- <div>
 							<span>Total transaction amount: </span><span id="csPtGrandtotal"></span>
-						</div>
+						</div> -->
 						
 						<!--  <button onclick="csPymtData ('123')">Test Btn</button> -->
 						
@@ -1325,6 +1325,10 @@
 					<div class="clearfix"></div>
 					
 					<div class="bottomBar" id="updateBtnCol" style="margin-top: 30px; position: inherit; box-shadow: none;">
+						<div style="margin-bottom:10px;">
+							<span>Total transaction amount: </span><strong id="csPtGrandtotal"></strong>
+						</div>
+						
 						<button class="btn btn-primary btnCommon creatOfferBtnCommon" id="updateCRM" ><span class="spanLoad"></span> Create Offer for : <span class="customerNameBtn"></span></button>
 						<!-- <a id="btnkyclink" class="btn btn-primary btnCommon" onclick="generateKYCLink(event,this,'N');"> <span>Generate
 							KYC Link</span>

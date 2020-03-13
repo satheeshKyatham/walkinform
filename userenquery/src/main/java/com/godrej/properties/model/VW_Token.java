@@ -40,6 +40,7 @@ public class VW_Token {
 	@Column(name="closing_manager_name__c") private String   closing_manager_name__c;
 	@Column(name="countrycode") private String   countrycode;
 	
+	@Column(name="enq_name") private String   enq_name;
 	
 	@Transient private String msg;
 	@Transient private String name;
@@ -242,6 +243,12 @@ public class VW_Token {
 	}
 	public void setCountrycode(String countrycode) {
 		this.countrycode = countrycode;
+	}
+	public String getEnq_name() {
+		return enq_name;
+	}
+	public void setEnq_name(String enq_name) {
+		this.enq_name = enq_name;
 	}
 	
 }

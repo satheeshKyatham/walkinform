@@ -4,6 +4,7 @@ import javax.servlet.ServletContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,7 +29,7 @@ public class PaymentEOIReportController {
  	private EOIReportService eOIReportService;
 	
 	
-	@RequestMapping(value = "/getPaymentEOIReport", method = RequestMethod.GET, produces = "application/json")
+	@GetMapping(value = "/getPaymentEOIReport", produces = "application/json")
 	public String getEOIReportDtl(@RequestParam("projectSfid") String projectSfid, @RequestParam("fromDate") String fromDate, @RequestParam("toDate") String toDate) {
 		Gson gson = new GsonBuilder().disableHtmlEscaping().serializeNulls().create();
 		String whereCondition = "";
@@ -43,7 +44,7 @@ public class PaymentEOIReportController {
 	}
 	
 	
-	@RequestMapping(value = "/getPaymentEOIReportSales", method = RequestMethod.GET, produces = "application/json")
+	@GetMapping(value = "/getPaymentEOIReportSales", produces = "application/json")
 	public String getEOIReportDtlSales(@RequestParam("userid") String userid, @RequestParam("projectSfid") String projectSfid, @RequestParam("fromDate") String fromDate, @RequestParam("toDate") String toDate) {
 		Gson gson = new GsonBuilder().disableHtmlEscaping().serializeNulls().create();
 		String whereCondition = "";
@@ -57,7 +58,7 @@ public class PaymentEOIReportController {
 		return gson.toJson(paymentEOIReportService.getPaymentEOIReportDtl(whereCondition));
 	}
 	
-	@RequestMapping(value = "/getAllotmentDayReport", method = RequestMethod.GET, produces = "application/json")
+	@GetMapping(value = "/getAllotmentDayReport", produces = "application/json")
 	public String getAllotmentDayReport(@RequestParam("projectSfid") String projectSfid, @RequestParam("fromDate") String fromDate, @RequestParam("toDate") String toDate) {
 		Gson gson = new GsonBuilder().disableHtmlEscaping().serializeNulls().create();
 		String whereCondition = " project_sfid= '"+projectSfid+"' and Date(offer_date__c) between '"+fromDate+"' and '"+toDate+"' order by offer_date__c desc  ";
@@ -65,7 +66,7 @@ public class PaymentEOIReportController {
 		return gson.toJson(eOIReportService.getAllotmentReport(whereCondition));
 	}
 	
-	@RequestMapping(value = "/getAllotmentDayMISReport", method = RequestMethod.GET, produces = "application/json")
+	@GetMapping(value = "/getAllotmentDayMISReport", produces = "application/json")
 	public String getAllotmentDayMISReport(@RequestParam("projectSfid") String projectSfid) {
 		Gson gson = new GsonBuilder().disableHtmlEscaping().serializeNulls().create();
 		//String whereCondition = " propstrength__project__c= '"+projectSfid+"'  ";

@@ -642,7 +642,7 @@
 
 <!-- EOI Print Form -->
 
-<div id="printEOIForm" class="col-md-8" style="border: 1px dotted #ccc; margin: 0 auto; float: none; margin-top: 40px; padding-top: 15px;">
+<div id="printEOIForm" class="col-md-8" style="display:none; border: 1px dotted #ccc; margin: 0 auto; float: none; margin-top: 40px; padding-top: 15px;">
 		<!-- <div style="padding-bottom:10px;"><b style="font-size:18px; text-align:center;">EOI Form: <span id="projectNameEOIPrint"></span></b></div> -->
 		
 		<table class="table table-bordered" style="margin-bottom:20px; border-color: #ffffff; padding:0px;">

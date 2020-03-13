@@ -2,6 +2,8 @@ package com.godrej.properties.dto;
 
 import java.util.Date;
 
+import javax.persistence.Column;
+
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.godrej.properties.common.dto.CommonDto;
@@ -97,6 +99,22 @@ public class EnquiryDto extends CommonDto {
    	private String contact_Loyalty__c;
    	private String employee_Referral__c;
 	private String sourcingmanger_email;
+	
+	private String EOI_Tower_Series__c;
+    private String EOI_Preferred_Floor_Band__c;
+    private String Transaction_Status__c;
+    private String EOI_Remarks__c;
+    private String Preferred_Unit__c;
+    private Date date_of_eoi__c;
+
+    private String closing_Team_Lead__c;
+    private String sourcing_Team_Lead__c;
+    private String closing_Team_Lead_email;
+    private String sourcing_Team_Lead_email;
+    private String closingTeamLeadDto;
+    private String sourcingTeamLeadDto;
+    
+    private String name;
    	
 	public String getClosing_manager_name__c() {
 		return closing_manager_name__c;
@@ -131,17 +149,7 @@ public class EnquiryDto extends CommonDto {
 	public void setNefttransactionID(String nefttransactionID) {
 		this.nefttransactionID = nefttransactionID;
 	}
-	private String EOI_Tower_Series__c;
-    private String EOI_Preferred_Floor_Band__c;
-    private String Transaction_Status__c;
-    private String EOI_Remarks__c;
-    private String Preferred_Unit__c;
-    private Date date_of_eoi__c;
-
-    private String closing_Team_Lead__c;
-    private String sourcing_Team_Lead__c;
-    
-    private String name;
+	
 	 
 	public String getName() {
 		return name;
@@ -613,6 +621,38 @@ public class EnquiryDto extends CommonDto {
 
 	public void setSourcingmanger_email(String sourcingmanger_email) {
 		this.sourcingmanger_email = sourcingmanger_email;
+	}
+
+	public String getClosing_Team_Lead_email() {
+		return closing_Team_Lead_email;
+	}
+
+	public void setClosing_Team_Lead_email(String closing_Team_Lead_email) {
+		this.closing_Team_Lead_email = closing_Team_Lead_email;
+	}
+
+	public String getSourcing_Team_Lead_email() {
+		return sourcing_Team_Lead_email;
+	}
+
+	public void setSourcing_Team_Lead_email(String sourcing_Team_Lead_email) {
+		this.sourcing_Team_Lead_email = sourcing_Team_Lead_email;
+	}
+
+	public String getClosingTeamLeadDto() {
+		return closingTeamLeadDto;
+	}
+
+	public void setClosingTeamLeadDto(String closingTeamLeadDto) {
+		this.closingTeamLeadDto = closingTeamLeadDto;
+	}
+
+	public String getSourcingTeamLeadDto() {
+		return sourcingTeamLeadDto;
+	}
+
+	public void setSourcingTeamLeadDto(String sourcingTeamLeadDto) {
+		this.sourcingTeamLeadDto = sourcingTeamLeadDto;
 	}
 	
 }

@@ -183,6 +183,7 @@
 					<th>Enquiry Type</th>
 					<th>Offer No.</th>
 					<th>Offer Created By</th>
+					<th>Offer Creation Date</th>
 					<th>Super Area</th>
 					<th>Carpet Area</th>
 					<th>Unit Type</th>
@@ -190,9 +191,11 @@
 					<th>Scheme Name</th>
 					<th>Total Basic Price</th>
 					<th>Sales Consideration</th>
-					<th>Created By</th>
+					<!-- <th>Created By</th> -->
+					<th>Booking Name</th>
+					<th>Booking Status</th>
+					<th>KYC Approved By</th>
 					<th>Booking Amount</th>
-					
 					<th>Property Name</th>
 					<th>Unit No</th>
 					<th>5% Amount</th>
