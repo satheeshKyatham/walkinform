@@ -69,4 +69,4 @@
 				</div>
 				<div class="clearfix"></div>
 			</div>
-<script src="<c:url value='/resources/js/separate/inventoryholded.js?v=18.10'/>"></script>	
+<script src="<c:url value='/resources/js/separate/inventoryholded.js?v=18.15'/>"></script>	

@@ -188,10 +188,10 @@
 	<script src="<c:url value='/resources/js/sweetalert.min.js'/>"></script>
 	
 	
-	<script src="<c:url value='/resources/js/separate/scheme.js?v=18.10'/>"></script>
+	<script src="<c:url value='/resources/js/separate/scheme.js?v=18.15'/>"></script>
 	
-	<script src="<c:url value='/resources/js/separate/schemeMapping.js?v=18.10'/>"></script>
-	<script src="<c:url value='/resources/js/separate/schemeMaster.js?v=18.10'/>"></script>
+	<script src="<c:url value='/resources/js/separate/schemeMapping.js?v=18.15'/>"></script>
+	<script src="<c:url value='/resources/js/separate/schemeMaster.js?v=18.15'/>"></script>
 	
 	
 	
