@@ -111,6 +111,10 @@ if(ses!=null){
 								<th>Cost sheet</th>
 								<th>Application Form</th>
 								<th>Total Amount</th>
+								<th>Offer CreatedBy</th>
+								<th>Kyc Approved/Rejected By</th>
+								<th>Booking Name</th>
+								<th>Booking Status</th>
 							</tr>
 						</thead>
 						<tbody>

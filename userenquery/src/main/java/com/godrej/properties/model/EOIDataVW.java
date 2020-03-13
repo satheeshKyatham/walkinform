@@ -46,6 +46,14 @@ public class EOIDataVW implements Serializable{
 	private String totalamount;
 	@Column(name="createdoffer_userid")	
 	private String createdoffer_userid;
+	@Column(name="offercreatedname")
+	private String offercreatedname;
+	@Column(name="kycapproval_name")
+	private String kycapproval_name;
+	@Column(name="booking_name")
+	private String booking_name;
+	@Column(name="booking_status")
+	private String booking_status;
 	
 	public String getUserdocid() {
 		return userdocid;
@@ -155,6 +163,30 @@ public class EOIDataVW implements Serializable{
 	}
 	public void setCreatedoffer_userid(String createdoffer_userid) {
 		this.createdoffer_userid = createdoffer_userid;
+	}
+	public String getOffercreatedname() {
+		return offercreatedname;
+	}
+	public void setOffercreatedname(String offercreatedname) {
+		this.offercreatedname = offercreatedname;
+	}
+	public String getKycapproval_name() {
+		return kycapproval_name;
+	}
+	public void setKycapproval_name(String kycapproval_name) {
+		this.kycapproval_name = kycapproval_name;
+	}
+	public String getBooking_name() {
+		return booking_name;
+	}
+	public void setBooking_name(String booking_name) {
+		this.booking_name = booking_name;
+	}
+	public String getBooking_status() {
+		return booking_status;
+	}
+	public void setBooking_status(String booking_status) {
+		this.booking_status = booking_status;
 	}
 	
 }

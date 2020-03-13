@@ -2443,7 +2443,7 @@ function newOtherCharges2 () {
                                                      +'</div>'; 
                     
                     //Forest Grove at Godrej Park Greens / Godrej Hillside 2 / Godrej Nurture, Bengaluru
-                    if ($('#projectid').val() != "a1l2s00000000X5AAI"  && $('#projectid').val() != "a1l6F000009D6IMQA0" && $('#projectid').val() != "a1l2s00000000pEAAQ") {
+                    if ($('#projectid').val() != "a1l2s00000003lPAAQ"  &&  $('#projectid').val() != "a1l2s00000000X5AAI"  && $('#projectid').val() != "a1l6F000009D6IMQA0" && $('#projectid').val() != "a1l2s00000000pEAAQ") {
                     	$('#totalDiscountCol').append(printDiscountHtml);
                     	$('#totalDicountView').show();
                     } else {
@@ -2953,7 +2953,7 @@ function getEOIPaymentRecord () {
              var panTarget = '';
              var reciptTarget = '';
              
-             var eoiTransactionTotalAmount = 0;
+            var eoiTransactionTotalAmount = 0;
              
              var checkBox = '';
              var disableRow = '';
