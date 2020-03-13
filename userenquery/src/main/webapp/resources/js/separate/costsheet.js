@@ -2953,7 +2953,7 @@ function getEOIPaymentRecord () {
              var panTarget = '';
              var reciptTarget = '';
              
-            // var eoiTransactionTotalAmount = 0;
+             var eoiTransactionTotalAmount = 0;
              
              var checkBox = '';
              var disableRow = '';
@@ -2993,6 +2993,8 @@ function getEOIPaymentRecord () {
                                  checkBox = 'checked';
                                  disableRow = '';
                                  status = '<br> Approved';
+                                 
+                                 eoiTransactionTotalAmount = parseFloat(parseFloat(obj[i].transaction_amount)+parseFloat(eoiTransactionTotalAmount)).toFixed(2);
                            }
                            
                            
@@ -3011,7 +3013,7 @@ function getEOIPaymentRecord () {
                                                "</tr>";
                     }
                     
-                    //$('#csPtGrandtotal').text(eoiTransactionTotalAmount);
+                    $('#csPtGrandtotal').text(eoiTransactionTotalAmount);
                     
                     html = html.replace(/undefined/g, "");
                     
