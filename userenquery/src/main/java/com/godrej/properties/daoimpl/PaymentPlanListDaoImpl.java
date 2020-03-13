@@ -22,7 +22,7 @@ public class PaymentPlanListDaoImpl extends AbstractDao<Integer, PaymentPlanList
 	public List<PaymentPlanList> getPaymentPlanList(String projectCode) {
 		Session session = this.sessionFactory.getCurrentSession();	
 		@SuppressWarnings("unchecked")
-		List<PaymentPlanList> list =session.createQuery(" from PaymentPlanList where PropStrength__Active__c='t' and propstrength__project__c='"+projectCode+"' and d4u_active__c='t'").list();
+		List<PaymentPlanList> list =session.createQuery(" from PaymentPlanList where PropStrength__Active__c='t' and propstrength__project__c='"+projectCode+"' and d4u_active__c='t' order by name").list();
 		
 		if(list.size()>0)
 			return list;

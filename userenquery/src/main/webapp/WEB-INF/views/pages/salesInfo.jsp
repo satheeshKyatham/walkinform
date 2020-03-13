@@ -1564,7 +1564,7 @@ if(ses!=null){
 							<select class="autocomplete-off" id="sourcingTeamLeadId" name="sourcingTeamLeadDto">
 							</select>
 								<span class="highlight"></span><span class="bar"></span>
-								<label class="select-label">Sourcing Team Lead<strong class="mndt">*</strong></label>
+								<label class="select-label">Sourcing Team Lead</label>
 							</div>
 							<div class="clearfix"></div>
 						</div>
