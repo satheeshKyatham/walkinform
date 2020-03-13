@@ -153,6 +153,7 @@ projectid=request.getParameter("projectid");
 							<tr>
 								<!-- <th>ID</th> -->
 								<th>Token No.</th>
+								<th>Enquiry No.</th>
 								<th>Name</th>
 								<!-- <th>Mobile</th> -->
 								<th>Priority No</th>
@@ -178,6 +179,7 @@ projectid=request.getParameter("projectid");
 						<thead>
 							<tr>
 								<th>Token No.</th>
+								<th>Enquiry No.</th>
 								<th>Name</th>
 								<!-- <th>Mobile</th> -->
 								<th>Priority No</th>

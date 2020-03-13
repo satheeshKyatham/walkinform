@@ -71,6 +71,7 @@ function getAllotmentDashboardReport () {
 							" <td>"+obj1[i].propstrength__enquiry_type__c+"</td>" +
 							" <td>"+obj1[i].offername+"</td>" +
 							" <td>"+obj1[i].user_name+"</td>" +
+							" <td>"+obj1[i].offer_date+"</td>" +
 							" <td>"+obj1[i].propstrength__super_area__c+"</td>" +
 							" <td>"+obj1[i].propstrength__carpet_area__c+"</td>" +
 							" <td>"+obj1[i].propstrength__unit_type__c+"</td>" +
@@ -78,7 +79,12 @@ function getAllotmentDashboardReport () {
 							" <td>"+obj1[i].scheme_name+"</td>" +
 							" <td>"+obj1[i].propstrength__total_basic_sale_price__c+"</td>" +
 							" <td>"+obj1[i].propstrength__total_sales_consideration__c+"</td>" +
-							" <td>"+obj1[i].user_name+"</td>" +
+							/*" <td>"+obj1[i].user_name+"</td>" +*/
+							
+							" <td>"+obj1[i].booking_name+"</td>" +
+							" <td>"+obj1[i].booking_status+"</td>" +
+							" <td>"+obj1[i].kyc_approvedby+"</td>" +
+							
 							" <td>"+obj1[i].offeramount+"</td>" +
 							" <td>"+obj1[i].propStrength__Property_Name__c+"</td>" +
 							" <td>"+obj1[i].propStrength__House_Unit_No__c+"</td>" +

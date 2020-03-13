@@ -1548,26 +1548,26 @@ if(ses!=null){
 							</div>
 							<div class="clearfix"></div>
 						</div>
-						<!-- <div class="col-md-3 col-sm-6 col-xs-12" id="sourcingManagerIdDiv">
+						<div class="col-md-3 col-sm-6 col-xs-12" id="closingTeamLeadIdDiv">
 							<div class="group">
 							<div id="sourcingManagerId"></div>
-							<select class="sales_submitted" id="closingTeamLeadId" name="closingTeamLeadDto">
+							<select class="requiredField autocomplete-off" id="closingTeamLeadId" name="closingTeamLeadDto">
 							</select>
 								<span class="highlight"></span><span class="bar"></span>
-								<label class="select-label">Closing Team lead</label>
+								<label class="select-label">Closing Team lead<strong class="mndt">*</strong></label>
 							</div>
 							<div class="clearfix"></div>
 						</div>
-						<div class="col-md-3 col-sm-6 col-xs-12" id="sourcingManagerIdDiv">
+						<div class="col-md-3 col-sm-6 col-xs-12" id="sourcingTeamLeadIdDiv">
 							<div class="group">
 							<div id="sourcingManagerId"></div>
-							<select class="sales_submitted" id="sourcingTeamLeadId" name="sourcingTeamLeadDto">
+							<select class="requiredField autocomplete-off" id="sourcingTeamLeadId" name="sourcingTeamLeadDto">
 							</select>
 								<span class="highlight"></span><span class="bar"></span>
-								<label class="select-label">Sourcing Team Lead</label>
+								<label class="select-label">Sourcing Team Lead<strong class="mndt">*</strong></label>
 							</div>
 							<div class="clearfix"></div>
-						</div> -->
+						</div>
 						
 						<div class="col-md-3 col-sm-6 col-xs-12">
 							<div class="group">
@@ -1636,19 +1636,23 @@ if(ses!=null){
 							<span>Save & Clossse</span>
 						</a>
 </c:if> --%>
-
-						<%if(request.getParameter("salesViewType").toString().equals("Y")){%>
-						<a class="btn btn-primary  blue_btn mrgR15" id="salsbtnsave" onclick="saveAddressInfo(event,this);"> <!-- class="disableInputs" -->
-							<span>Save & Close</span>
-						</a>
-						<%}else{%>
-						 <a class="btn btn-primary blue_btn  mrgR15" id="salsbtnsave" onclick="saveAddressInfo(event,this);">
-							<span>Save & Close</span>
-						</a>
+						<span id="salsbtnsaveDiv">
+							<%if(request.getParameter("salesViewType").toString().equals("Y")){%>
+							<a class="btn btn-primary  blue_btn mrgR15" id="salsbtnsave" onclick="saveAddressInfo(event,this);"> <!-- class="disableInputs" -->
+								<span>Save & Close</span>
+							</a>
+							<%}else{%>
+							 <a class="btn btn-primary blue_btn  mrgR15" id="salsbtnsave" onclick="saveAddressInfo(event,this);">
+								<span>Save & Close</span>
+							</a>
 						<%} %>
+						</span>
 						<a class="btn btn-primary blue_btn  mrgR15" id="btneoi" style="display:none;" onclick="generateEOI(event,this);">
 							<span>Save & Generate EOI</span>
-						</a>				
+						</a>
+						<div class="mrgR15" id="syncIdDivSales" style="color:red;font-weight: bold;font-size: 18px;">
+						  Enquiry Sync In-Progress, Please Wait OR Refresh the page.
+						</div>				
 						<div class="clearfix"></div>
 					</div>
 					<div class="clearfix"></div>

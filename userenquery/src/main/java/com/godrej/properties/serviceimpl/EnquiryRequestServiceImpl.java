@@ -503,6 +503,21 @@ public class EnquiryRequestServiceImpl implements EnquiryRequestService {
 				dest.setContact_Loyalty__c(KeyConstants.ENQUIRY_EXISTINGCUSTOMER_SFID);
 		}
 		/*=========End========*/
+		/* Added By Satheesh K - 13-03-2020
+		 * Requested by Prakash - Closing Team Lead and Sorcing Team Lead adding on Sales Tab*/
+		if(src.getClosingTeamLeadDto()!=null && src.getClosingTeamLeadDto().length()>0)
+		{
+			String closingTeamLead = tokenService.getSalesUserSFID(src.getEnquiryId(), src.getClosingTeamLeadDto());
+			if(closingTeamLead!=null && closingTeamLead.length()>0)
+				dest.setClosing_Team_Lead__c(closingTeamLead);
+		}
+		if(src.getSourcingTeamLeadDto()!=null && src.getSourcingTeamLeadDto().length()>0)
+		{
+			String sourcingTeamLead = tokenService.getSalesUserSFID(src.getEnquiryId(), src.getSourcingTeamLeadDto());
+			if(sourcingTeamLead!=null && sourcingTeamLead.length()>0)
+				dest.setSourcing_Team_Lead__c(sourcingTeamLead);
+		}
+		
 		return dest;
 	}
 	

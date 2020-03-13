@@ -17,7 +17,10 @@ $(document).ready(function(){
 	$("#mainPageLoad").fadeOut("slow"); 
 	$("#sourceFundingValue").hide();
 	//if($("#projectid").val()==='a1l6F0000080iilQAA'||$("#projectid").val()==='a1l6F000004QtUZQA0'||$("#projectid").val()==='a1l6F000004Q3l6QAC'||$("#projectid").val()==='a1l6F0000080irTQAQ')
-		$("#btneoi").show();
+		
+	//if($("#hdrEnqName").val())
+	
+//	$("#btneoi").show();
 	//$("#desiredUnitType1").hide();
 	
 	$(document).on('focus', '.autocomplete-off:input', function(){
@@ -477,7 +480,32 @@ function populateBasicInfo(enq,contact){
 			$('#enquiry_name').val(enq.name);
 			
 			$('#hdrEnqName').text(enq.name);
+			/* If Enquiry sync failed or equiry getting blank then we hide the sales tab buttons */
 			
+			if(enq.contactId!=null)
+			{
+				$("#btneoi").show();
+				$("#salsbtnsaveDiv").show();
+				$("#syncIdDivSales").hide();
+			}
+		else
+			{
+				$("#btneoi").hide();
+				$("#salsbtnsaveDiv").hide();
+				$("#syncIdDivSales").show();
+			}
+			/*if(enq.name!="null" || enq.name!="")
+				{
+					$("#btneoi").show();
+					$("#salsbtnsaveDiv").show();
+					$("#syncIdDivSales").hide();
+				}
+			else
+				{
+					$("#btneoi").hide();
+					$("#salsbtnsaveDiv").hide();
+					$("#syncIdDivSales").show();
+				}*/
 			$('#primarycontactsfid').val(enq.contact.sfid);
 			$('#projectsfid').val(enq.project.sfid);
 			/*$('.enquirysfid').val(enq.sfid);*/
@@ -658,8 +686,8 @@ function loadEnquiryReport(enq){
 		//var sourcingVal ="gshetty@godrejproperties.com";
 		$("#sourcingManagerId").val(enq.sourcing_Managers__c);
 		getClosingManagersList(enq.sourcingmanger_email);
-		//getClosingTeamLeadManagersList(enq.sourcing_Managers__c)
-		//getSourcingTeamLeadManagersList(enq.sourcing_Managers__c)
+		getClosingTeamLeadManagersList(enq.closing_Team_Lead_email)
+		getSourcingTeamLeadManagersList(enq.sourcing_Team_Lead_email)
 		$("#LostReasonID").val(enq.lost_reason_c__c);
 		
 		//$( "#followDate" ).datepicker({ defaultDate: new Date(enq.enquiryReport.followDate) });
