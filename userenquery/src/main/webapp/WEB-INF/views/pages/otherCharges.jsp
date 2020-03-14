@@ -144,7 +144,7 @@
 	<script src="<c:url value='/resources/js/sweetalert.min.js'/>"></script>
 	
 	
-	<script src="<c:url value='/resources/js/separate/otherCharges.js?v=18.10'/>"></script>
+	<script src="<c:url value='/resources/js/separate/otherCharges.js?v=18.15'/>"></script>
 	
 	
 	

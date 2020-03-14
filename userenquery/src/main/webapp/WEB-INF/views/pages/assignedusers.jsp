@@ -369,16 +369,16 @@ if(ses!=null){
 	<script src="<c:url value='/resources/js/jszip.min.js'/>"></script>
 	<script src="<c:url value='/resources/js/buttons.html5.min.js'/>"></script>
 	
-	<script src="<c:url value='/resources/js/salesdesk.js?v=18.10'/>"></script>
-	<script src="<c:url value='/resources/js/enquiryRequest/assignedUser.js?v=18.10'/>"></script>
-	<script src="<c:url value='/resources/js/separate/offer.js?v=18.10'/>"></script>
-	<script src="<c:url value='/resources/js/enquiryRequest/misreportforClosing.js?v=18.10'/>"></script>
+	<script src="<c:url value='/resources/js/salesdesk.js?v=18.15'/>"></script>
+	<script src="<c:url value='/resources/js/enquiryRequest/assignedUser.js?v=18.15'/>"></script>
+	<script src="<c:url value='/resources/js/separate/offer.js?v=18.15'/>"></script>
+	<script src="<c:url value='/resources/js/enquiryRequest/misreportforClosing.js?v=18.15'/>"></script>
 	
-	<script src="<c:url value='/resources/js/separate/applicationForm.js?v=18.10'/>"></script>
-	<script src="<c:url value='/resources/js/separate/offerApplicationForm.js?v=18.13'/>"></script>
+	<script src="<c:url value='/resources/js/separate/applicationForm.js?v=18.15'/>"></script>
+	<script src="<c:url value='/resources/js/separate/offerApplicationForm.js?v=18.15'/>"></script>
 	
-	<script src="<c:url value='/resources/js/separate/eoiReportSales.js?v=18.10'/>"></script>
-	<script src="<c:url value='/resources/js/demo/offerTemplate.js?v=18.10'/>"></script>
+	<script src="<c:url value='/resources/js/separate/eoiReportSales.js?v=18.15'/>"></script>
+	<script src="<c:url value='/resources/js/demo/offerTemplate.js?v=18.15'/>"></script>
 	
 </body>
 </html>
