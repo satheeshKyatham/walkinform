@@ -2135,7 +2135,7 @@ function newOtherCharges2 () {
              var carpetAreaAmount = 0;
              var exclusiveAreaAmount = 0;
              
-             if ($('#projectId').val() == 'a1l2s00000000X5AAI' || $('#projectId').val() == 'a1l6F000009D6IMQA0') {
+             if ($('#projectId').val() == 'a1l2s00000000X5AAI' || $('#projectId').val() == 'a1l6F000009D6IMQA0'  || $('#projectId').val() == 'a1l2s00000003lPAAQ' ) {
             	 $('#tentativeCharges tbody').append("<tr> " +
             	 			"<th> Electricity Charges </th> <td class='txtRight' style='text-align:right;'> 0 </td>  </tr>" +
             	 			"<tr> <th> Legal Charges </th> <td class='txtRight' style='text-align:right;'> 0 </td>  </tr>" +

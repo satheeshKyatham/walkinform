@@ -31,7 +31,7 @@ public class PaymentPlanWithOtherChargeDaoImpl extends AbstractDao<Integer, Paym
 		
 		String conditionString = "";
 		
-		if (projectid.equals("a1l2s00000000X5AAI") || projectid.equals("a1l6F000009D6IMQA0")) {
+		if (projectid.equals("a1l2s00000000X5AAI") || projectid.equals("a1l6F000009D6IMQA0")  || projectid.equals("a1l2s00000003lPAAQ") ) {
 			conditionString = " and b1.propstrength__part_of_cop__c = 't' ";
 		} else {
 			conditionString = " ";
