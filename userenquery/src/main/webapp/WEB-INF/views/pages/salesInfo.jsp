@@ -24,8 +24,8 @@
     
     <!-- Bootstrap -->
     <link rel="stylesheet" href="<c:url value='/resources/css/bootstrap.min.css' />">
-	<link rel="stylesheet" href="<c:url value='/resources/css/inner.css?v=1.0' />">
-	<link rel="stylesheet" href="<c:url value='/resources/css/style.css?v=1.0' />">
+	<link rel="stylesheet" href="<c:url value='/resources/css/inner.css?v=2.0' />">
+	<link rel="stylesheet" href="<c:url value='/resources/css/style.css?v=2.0' />">
 	<link href="<c:url value='/resources/css/animate.min.css' />" rel="stylesheet">
 	<link rel="stylesheet" href="<c:url value='/resources/css/sweetalert2.min.css' />">  
  
@@ -52,7 +52,7 @@
    <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/bootstrap-slider.min.css' />  " />
     
     <!-- Inventory -->
-    <link rel="stylesheet" href="<c:url value='/resources/css/inventory.css?v=1.0' />">
+    <link rel="stylesheet" href="<c:url value='/resources/css/inventory.css?v=2.0' />">
     <!-- END Inventory -->
     
     <!-- Costsheet -->
@@ -1813,7 +1813,7 @@ if(ses!=null){
 <script src="<c:url value='/resources/js/jquery.tabletojson.min.js'/>"></script>
 <%-- <script type="text/javascript" src="<c:url value='/resources/js/jquery.countdownTimer.js'/>"></script> --%>
 <script src="<c:url value='/resources/js/enquiryRequest/common.js?v=18.15'/>"></script>
-<script src="<c:url value='/resources/js/separate/costsheet.js?v=18.15'/>"></script>
+<script src="<c:url value='/resources/js/separate/costsheet.js?v=18.16'/>"></script>
 <script src="<c:url value='/resources/js/separate/webcamAttachmentCS.js?v=18.15'/>"></script>
 
 
