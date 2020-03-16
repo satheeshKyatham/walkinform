@@ -14,6 +14,7 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
 
 <link rel="stylesheet" href="<c:url value='/resources/css/font-awesome.css' />" type="text/css" />
+
 <link rel="stylesheet" href="<c:url value='/resources/css/inner.css?v=2.0' />">
 <link rel="stylesheet" href="<c:url value='/resources/css/style.css' />">
 <link rel="stylesheet" href="<c:url value='/resources/css/enqMap.css' />">

@@ -70,10 +70,10 @@ function getofferApplicantDetails (e, offerSFID, enqSFID, contactSFID, offerName
 			
 			var annexureName = '';
 			
-			if ($("#projectid").val() != "a1l2s00000000pEAAQ") {
-				annexureName = "Annexure G";
-			} else {
+			if ($("#projectid").val() == "a1l2s00000000pEAAQ"  || $("#projectid").val() == "a1l2s00000003lPAAQ" ) {
 				annexureName = "Annexure F";
+			} else {
+				annexureName = "Annexure G";
 			}
 			
 			

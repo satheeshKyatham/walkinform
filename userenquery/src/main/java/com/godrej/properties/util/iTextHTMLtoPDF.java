@@ -77,7 +77,7 @@ public class iTextHTMLtoPDF {
 
 	      String annexureName = "";
 	      
-	      if (projectSfid.equals("a1l2s00000000pEAAQ") || projectSfid.equals("a1l6F000004LVk8QAG")) {
+	      if (projectSfid.equals("a1l2s00000000pEAAQ") || projectSfid.equals("a1l6F000004LVk8QAG")  || projectSfid.equals("a1l2s00000003lPAAQ")) {
 	    	  annexureName = "Annexure E";
 	      } else {
 	    	  annexureName = "Annexure F";

@@ -24,7 +24,7 @@
         <link rel="stylesheet" href="<c:url value='/resources/css/sweetalert2.min.css' />">
 		<!-- By a -->
 		<link rel="stylesheet" href="<c:url value='/resources/css/style.css' />">
-		<link rel="stylesheet" href="<c:url value='/resources/css/inner.css' />" type="text/css" />
+		<link rel="stylesheet" href="<c:url value='/resources/css/inner.css?v=2.0' />" type="text/css" />
 		<!--<link rel="stylesheet" href="css/common.css" type="text/css" /> -->
 		<script src="<c:url value='/resources/js/jquery-1.12.4.min.js'/>"></script>
 		<script src="<c:url value='/resources/js/enquiryRequest/salesLoginNew.js' />"></script>
