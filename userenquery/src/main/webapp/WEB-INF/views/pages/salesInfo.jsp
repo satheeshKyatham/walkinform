@@ -6,12 +6,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
   <html lang="en">
-  <%
-	 response.addHeader("Expires","0");
-	 response.addHeader("Pragma","no-cache");
-	 response.setHeader("Cache-Control","no-cache,no-store, must-revalidate, pre-check=0, post-check=0, max-age=0, s-maxage=0");
-	 response.addHeader("X-Frame-Options", "DENY");
-	 %>
+ 
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -24,8 +19,8 @@
     
     <!-- Bootstrap -->
     <link rel="stylesheet" href="<c:url value='/resources/css/bootstrap.min.css' />">
-	<link rel="stylesheet" href="<c:url value='/resources/css/inner.css?v=1.0' />">
-	<link rel="stylesheet" href="<c:url value='/resources/css/style.css?v=1.0' />">
+	<link rel="stylesheet" href="<c:url value='/resources/css/inner.css?v=2.0' />">
+	<link rel="stylesheet" href="<c:url value='/resources/css/style.css?v=2.0' />">
 	<link href="<c:url value='/resources/css/animate.min.css' />" rel="stylesheet">
 	<link rel="stylesheet" href="<c:url value='/resources/css/sweetalert2.min.css' />">  
  
@@ -52,7 +47,7 @@
    <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/bootstrap-slider.min.css' />  " />
     
     <!-- Inventory -->
-    <link rel="stylesheet" href="<c:url value='/resources/css/inventory.css?v=1.0' />">
+    <link rel="stylesheet" href="<c:url value='/resources/css/inventory.css?v=2.0' />">
     <!-- END Inventory -->
     
     <!-- Costsheet -->
@@ -80,24 +75,16 @@ if(ses!=null){
 	 userid=(String)ses.getAttribute("USERID");
 	 email=(String)ses.getAttribute("USEREMAIL");
 	 userName=(String)ses.getAttribute("USERNAME");
-	 
-	
-	
 }else{
 	 // Todo Login page
 }
 %> 
-
-  <body onload="initialize()" >
-   
-
+<body onload="initialize()" >
 <!-- Inventory -->   
 <div style="display:none;"> 
 	<input type="text" id="projectname" value="<%= projectname %>">
-	
 	<input type="text" id="projectId" value="<%= projectid%>">
 	<input type="text" id="useremailID" value="<%= email%>">
-	
 	<input id="pageContext" value="${pageContext.request.contextPath}"/>
 	<input id="token" value="${token}"/>
 	<input id="tokentype" value="${tokentype}"/>
@@ -105,25 +92,18 @@ if(ses!=null){
 	<input id="primarycontactsfid" value="${primarycontactsfid} "/>
 	<input id="enquiry_name" value="${name} "/>
 	<input id="enquirysfid" value="${enquirysfid}"/>
-	
 	<%-- <input id="enquirysfid123" value="${sfid}"/> --%>
 	<input id="customerId" value="123">
-	
 	<input id="channelPartnerSfidCS">
-	
-	
 	<input  id="userid" value="<%= userid %>">
 	<input  id="roleid" value="<%= roleid %>">
 	
 </div>
 <!-- END Inventory -->   
-   
-
-   
-   <nav class="navbar topMainBar">
+	<nav class="navbar topMainBar">
 	  <div class="container">
 	    <!-- Brand and toggle get grouped for better mobile display -->
-	    <div class="navbar-header" style="width:100%;">
+	    <%-- <div class="navbar-header" style="width:100%;">
 	      <!-- <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
 	        <span class="sr-only">Toggle navigation</span>
 	        <span class="icon-bar"></span>
@@ -133,35 +113,23 @@ if(ses!=null){
       	<a class="navbar-brand" href="#" style="margin-left: 0px;">
 			<img class="topLogo" src="<c:url value='/resources/images/gplLogo.jpg' />"/>
 		</a>
-		
 		<!--  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"> -->
-	      
-			<ul class="nav navbar-nav navbar-right pull-right">
+	    <ul class="nav navbar-nav navbar-right pull-right">
 				<!-- <li><a href="#"><i class="glyphicon glyphicon-log-out"></i> LOGIN</a></li> -->
-				
-				 <li><a href="${pageContext.request.contextPath}/saleslogin">Logout</a></li>
-				<%-- <li class="dropdown">
+			 <li><a href="${pageContext.request.contextPath}/saleslogin">Logout</a></li>
+				<li class="dropdown">
 				  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">${userName}<span class="caret"></span></a> 
 				  <ul class="dropdown-menu">
 				    <li><a href="${pageContext.request.contextPath}/saleslogin">Logout</a></li>
 				  </ul>
-				</li> --%>
+				</li>
 			</ul> 
 	    <!-- </div> -->
-		
-		
-		
-	    </div>
-		
+		</div> --%>
 		<!-- <div class="proTopTitle" id="projectTitle">
-		  
 		</div> -->
-		
-	    <!-- Collect the nav links, forms, and other content for toggling -->
-	   
-	
-	   
-	   
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<%@ include file="/WEB-INF/views/pages/header.jsp" %>
 	  </div>
 	</nav>
    
@@ -203,10 +171,7 @@ if(ses!=null){
 		</div>
 		<div class="clearfix"></div>
 	</div>
-   
-   
-	
-	<div class="container formCol swipeCard posRelative">
+   	<div class="container formCol swipeCard posRelative">
 			
 		<div class="commonLoad" id="mainPageLoad" style="display:none;"></div>	
 			
@@ -1561,10 +1526,10 @@ if(ses!=null){
 						<div class="col-md-3 col-sm-6 col-xs-12" id="sourcingTeamLeadIdDiv">
 							<div class="group">
 							<div id="sourcingManagerId"></div>
-							<select class="requiredField autocomplete-off" id="sourcingTeamLeadId" name="sourcingTeamLeadDto">
+							<select class="autocomplete-off" id="sourcingTeamLeadId" name="sourcingTeamLeadDto">
 							</select>
 								<span class="highlight"></span><span class="bar"></span>
-								<label class="select-label">Sourcing Team Lead<strong class="mndt">*</strong></label>
+								<label class="select-label">Sourcing Team Lead</label>
 							</div>
 							<div class="clearfix"></div>
 						</div>
@@ -1738,19 +1703,19 @@ if(ses!=null){
     <!-- For Webcam attachments -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.25/webcam.min.js"></script>
 
-	<script src="<c:url value='/resources/js/springForm.js?v=18.10' />"></script>
-	<script src="<c:url value='/resources/js/commonValidation.js?v=18.10' />"></script>
-	<script src="<c:url value='/resources/js/utility.js?v=18.10' />"></script>
+	<script src="<c:url value='/resources/js/springForm.js?v=18.15' />"></script>
+	<script src="<c:url value='/resources/js/commonValidation.js?v=18.15' />"></script>
+	<script src="<c:url value='/resources/js/utility.js?v=18.15' />"></script>
 	<%-- <script src="<c:url value='/resources/js/enquiryRequest/enquiryRequest.js' />"></script> --%>
-	<script src="<c:url value='/resources/js/enquiryRequest/salesRequest.js?v=18.13' />"></script>	
+	<script src="<c:url value='/resources/js/enquiryRequest/salesRequest.js?v=18.15' />"></script>	
     <script src="<c:url value='/resources/js/intlTelInput.js' />"></script>
    
     <script src="<c:url value='/resources/js/sweetalert2.min.js' />"></script>
    
    
   	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/8.4.7/js/intlTelInput.js"></script> -->
-	<script src="<c:url value='/resources/js/bankdetails.js?v=18.10' />"></script>
-	<script src="<c:url value='/resources/js/index.js?v=18.10' />"></script>
+	<script src="<c:url value='/resources/js/bankdetails.js?v=18.15' />"></script>
+	<script src="<c:url value='/resources/js/index.js?v=18.15' />"></script>
 	
 	<script>
 	
@@ -1807,18 +1772,18 @@ if(ses!=null){
  <script src="<c:url value='/resources/js/moment.js' />"></script>
  <script src="<c:url value='/resources/js/bootstrap-datetimepicker.min.js' />"></script> 
  
- <script src="<c:url value='/resources/js/separate/inventory.js?v=18.10'/>"></script>
+ <script src="<c:url value='/resources/js/separate/inventory.js?v=18.15'/>"></script>
  
 <!-- Costsheet --> 
 <script src="<c:url value='/resources/js/jquery.tabletojson.min.js'/>"></script>
 <%-- <script type="text/javascript" src="<c:url value='/resources/js/jquery.countdownTimer.js'/>"></script> --%>
-<script src="<c:url value='/resources/js/enquiryRequest/common.js?v=18.10'/>"></script>
-<script src="<c:url value='/resources/js/separate/costsheet.js?v=18.11'/>"></script>
-<script src="<c:url value='/resources/js/separate/webcamAttachmentCS.js?v=18.10'/>"></script>
+<script src="<c:url value='/resources/js/enquiryRequest/common.js?v=18.15'/>"></script>
+<script src="<c:url value='/resources/js/separate/costsheet.js?v=18.16'/>"></script>
+<script src="<c:url value='/resources/js/separate/webcamAttachmentCS.js?v=18.15'/>"></script>
 
 
-<script src="<c:url value='/resources/js/separate/storeEOIPaymentDtl.js?v=18.13'/>"></script>
-<script src="<c:url value='/resources/js/separate/eoiFormPrint.js?v=18.10'/>"></script>
+<script src="<c:url value='/resources/js/separate/storeEOIPaymentDtl.js?v=18.15'/>"></script>
+<script src="<c:url value='/resources/js/separate/eoiFormPrint.js?v=18.15'/>"></script>
 
 
 <%-- <script src="<c:url value='/resources/js/separate/storeEOIPaymentDtl.js?v=15'/>"></script> --%>

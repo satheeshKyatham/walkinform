@@ -26,7 +26,7 @@
 	    <%-- <link rel="stylesheet" type="text/css"  href="<c:url value='/resources/css/intlTelInput.css' />" /> --%>
 		<link href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/8.4.6/css/intlTelInput.css" rel="stylesheet">
 		<!-- By a -->
-		<link rel="stylesheet" href="<c:url value='/resources/css/inner.css' />" type="text/css" />
+		<link rel="stylesheet" href="<c:url value='/resources/css/inner.css?v=2.0' />" type="text/css" />
 		<!--<link rel="stylesheet" href="css/common.css" type="text/css" /> -->
 		<script src="<c:url value='/resources/js/jquery-1.12.4.min.js'/>"></script>
 		<script src="<c:url value='/resources/js/enquiryRequest/salesSearch.js' />"></script>
@@ -178,6 +178,7 @@
 			</div>
 		</div> --%>
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/8.4.7/js/intlTelInput.js"></script>
+			<script src="<c:url value='/resources/js/enquiryRequest/commonIndex.js?v=18'/>"></script>
 	<script>
 			$(".form-control").intlTelInput({
 				separateDialCode: true ,

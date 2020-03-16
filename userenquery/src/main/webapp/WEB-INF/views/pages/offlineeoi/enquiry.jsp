@@ -5,12 +5,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
   <html lang="en">
-  <%
-	 response.addHeader("Expires","0");
-	 response.addHeader("Pragma","no-cache");
-	 response.setHeader("Cache-Control","no-cache,no-store, must-revalidate, pre-check=0, post-check=0, max-age=0, s-maxage=0");
-	 response.addHeader("X-Frame-Options", "DENY");
-	 %>
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,8 +13,8 @@
     <title>Godrej</title>
     <!-- Bootstrap -->
     <link rel="stylesheet" href="<c:url value='/resources/css/bootstrap.min.css' />">
-	<link rel="stylesheet" href="<c:url value='/resources/css/inner.css' />">
-	<link rel="stylesheet" href="<c:url value='/resources/css/style.css' />">
+	<link rel="stylesheet" href="<c:url value='/resources/css/inner.css?v=2.0' />">
+	<link rel="stylesheet" href="<c:url value='/resources/css/style.css?v=2.0' />">
 	<link href="<c:url value='/resources/css/animate.min.css' />" rel="stylesheet">
 	<link rel="stylesheet" href="<c:url value='/resources/css/sweetalert2.min.css' />">  
  
@@ -53,7 +47,7 @@
    <nav class="navbar topMainBar">
 	  <div class="container">
 	    <!-- Brand and toggle get grouped for better mobile display -->
-	    <div class="navbar-header">
+	    <%-- <div class="navbar-header">
       	<a class="navbar-brand" href="#">
 			<img class="topLogo" src="<c:url value='/resources/images/gplLogo.jpg' />"/>
 		</a>
@@ -68,7 +62,8 @@
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="${pageContext.request.contextPath}/saleslogin">Logout</a></li>
 			</ul>
-		</div>
+		</div> --%>
+		 <%@ include file="/WEB-INF/views/pages/header.jsp" %>
 	</div>
 	</nav>
    
@@ -638,16 +633,16 @@
     
     <script src="<c:url value='/resources/js/bootstrap-slider.min.js' />"></script>
     
-	<script src="<c:url value='/resources/js/springForm.js?v=18.10' />"></script>
-	<script src="<c:url value='/resources/js/commonValidation.js?v=18.10' />"></script>
-	<script src="<c:url value='/resources/js/utility.js?v=18.10' />"></script>
-	<script src="<c:url value='/resources/js/offline/enquiry.js?v=18.10' />"></script>	
+	<script src="<c:url value='/resources/js/springForm.js?v=18.15' />"></script>
+	<script src="<c:url value='/resources/js/commonValidation.js?v=18.15' />"></script>
+	<script src="<c:url value='/resources/js/utility.js?v=18.15' />"></script>
+	<script src="<c:url value='/resources/js/offline/enquiry.js?v=18.15' />"></script>	
     <script src="<c:url value='/resources/js/intlTelInput.js' />"></script>
     <script src="<c:url value='/resources/js/sweetalert2.min.js' />"></script>
 	
-	<script src="<c:url value='/resources/js/index.js?v=18.10' />"></script>
+	<script src="<c:url value='/resources/js/index.js?v=18.15' />"></script>
 	
-	<script src="<c:url value='/resources/js/offline/offlineEOI.js?v=18.10'/>"></script>
+	<script src="<c:url value='/resources/js/offline/offlineEOI.js?v=18.15'/>"></script>
 
 	
 	<script>

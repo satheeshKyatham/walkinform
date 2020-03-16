@@ -15,8 +15,8 @@
 <link rel="icon" href="<c:url value='/resources/images/favicon.ico' />" type="image/x-icon">
 <link rel="stylesheet" href="<c:url value='/resources/css/bootstrap.min.css' />" type="text/css" />
      
-	<link rel="stylesheet" href="<c:url value='/resources/css/inner.css' />">
-	<link rel="stylesheet" href="<c:url value='/resources/css/style.css' />">
+	<link rel="stylesheet" href="<c:url value='/resources/css/inner.css?v=2.0' />">
+	<link rel="stylesheet" href="<c:url value='/resources/css/style.css?v=2.0' />">
 	
 	<link rel="stylesheet" href="<c:url value='/resources/css/font-awesome.css' />">
 	
@@ -58,16 +58,16 @@ if(ses!=null){
   </script>
   <nav class="navbar topMainBar">
 	  <div class="container">
-	    <div class="navbar-header" style="width:100%;">
+	    <%-- <div class="navbar-header" style="width:100%;">
       	<a class="navbar-brand" href="#">
 			<img class="topLogo" src="<c:url value='/resources/images/gplLogo.jpg' />"/>
 		</a>
 		<ul class="nav navbar-nav navbar-right pull-right">
 			 <li><a href="${pageContext.request.contextPath}/saleslogin">Logout</a></li>
 		</ul> 
-	    </div>
+	    </div> --%>
 		
-		 
+		 <%@ include file="/WEB-INF/views/pages/header.jsp" %>
 	  </div>
 	</nav>
 		<div class="titleCol">
@@ -181,12 +181,12 @@ if(ses!=null){
 	  </div>
 	</div>
 	</div>
-	<script src="<c:url value='/resources/js/salesdesk.js?v=18.10'/>"></script>
-	<script src="<c:url value='/resources/js/separate/offer.js?v=18.10'/>"></script>
+	<script src="<c:url value='/resources/js/salesdesk.js?v=18.15'/>"></script>
+	<script src="<c:url value='/resources/js/separate/offer.js?v=18.15'/>"></script>
 	
-	<script src="<c:url value='/resources/js/separate/applicationForm.js?v=18.10'/>"></script>
-	<script src="<c:url value='/resources/js/separate/offerApplicationForm.js?v=18.13'/>"></script>
-	<script src="<c:url value='/resources/js/demo/offerTemplate.js?v=18.10'/>"></script>	
+	<script src="<c:url value='/resources/js/separate/applicationForm.js?v=18.15'/>"></script>
+	<script src="<c:url value='/resources/js/separate/offerApplicationForm.js?v=18.16'/>"></script>
+	<script src="<c:url value='/resources/js/demo/offerTemplate.js?v=18.15'/>"></script>	
 </body>
 </html>
 
