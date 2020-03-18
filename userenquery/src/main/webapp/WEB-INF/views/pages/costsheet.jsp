@@ -24,16 +24,7 @@
 		e.printStackTrace();
 	}
 %> --%>
-
-
-
 <html lang="en">
-<%
-	 response.addHeader("Expires","0");
-	 response.addHeader("Pragma","no-cache");
-	 response.setHeader("Cache-Control","no-cache,no-store, must-revalidate, pre-check=0, post-check=0, max-age=0, s-maxage=0");
-	 response.addHeader("X-Frame-Options", "DENY");
-	 %>
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -84,7 +75,7 @@
 	
 	<nav class="navbar navbar-default topMenuBar">
 	  <div class="container-fluid">
-	    <div class="navbar-header">
+	    <%-- <div class="navbar-header">
 	      <a class="navbar-brand" href="#">
 	        <img src="<c:url value="/resources/images/gplLogo.jpg"/>">
 	      </a>
@@ -97,8 +88,9 @@
 		
 	    
 	    <div class="pull-right">	
-	    	<a class="" style="margin-top: 13px; display: inline-block; margin-right: 10px;"><%-- <%=UserData.get("usrName") %> --%></a> <a href="logout" class="pull-right btn btn-default navbar-btn">Logout</a>
-	    </div>
+	    	<a class="" style="margin-top: 13px; display: inline-block; margin-right: 10px;"><%=UserData.get("usrName") %></a> <a href="logout" class="pull-right btn btn-default navbar-btn">Logout</a>
+	    </div> --%>
+	     <%@ include file="/WEB-INF/views/pages/header.jsp" %>
 	    
 	  </div>
 	</nav>
@@ -984,7 +976,7 @@
 	
 	<script type="text/javascript" src="<c:url value='/resources/js/jquery.countdownTimer.js?v=18.15'/>"></script>
 	
-	<script src="<c:url value='/resources/js/separate/costsheet.js?v=18.15'/>"></script>
+	<script src="<c:url value='/resources/js/separate/costsheet.js?v=18.16'/>"></script>
 	
 	
 	

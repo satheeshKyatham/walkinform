@@ -288,7 +288,8 @@ function getEnqAndOfferDtl (enqSFID, offerSFID, rowId) {
 		
 		$('#modeOfBookingOffer tbody').empty();
 		
-		if(obj!=null){
+		if(obj.length > 0){
+		//if(obj!=null){
 			
 			if (obj[0].rera_registration_number__c != undefined){
 				reraRegistrationNo = obj[0].rera_registration_number__c;

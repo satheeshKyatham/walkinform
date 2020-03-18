@@ -6,37 +6,20 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
   <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<%
-	 response.addHeader("Expires","0");
-	 response.addHeader("Pragma","no-cache");
-	 response.setHeader("Cache-Control","no-cache,no-store, must-revalidate, pre-check=0, post-check=0, max-age=0, s-maxage=0");
-	 response.addHeader("X-Frame-Options", "DENY");
-	 %>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>My Token List</title>
- 
- 
-
-
 <link rel="stylesheet" href="<c:url value='/resources/css/bootstrap.min.css' />" type="text/css" />
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
-     
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">    
 <link rel="stylesheet" href="<c:url value='/resources/css/inner.css' />">
 <link rel="stylesheet" href="<c:url value='/resources/css/style.css' />">
-
 <link rel="stylesheet" href="<c:url value='/resources/css/sweetalert.min.css' />">
-
-
 <%-- 
 <script src="<c:url value='/resources/js/bootstrap.min.js'/>"></script>
-
 <script src="<c:url value='/resources/js/salesdesk.js'/>"></script>
 <script src="<c:url value='/resources/js/jquery-1.12.4.min.js'/>"></script> --%>
-
 </head>
-
 
 <%! String projectid,projectname,projectnameReq;%>
 <%HttpSession ses=request.getSession(); 
@@ -59,7 +42,7 @@ projectid=request.getParameter("projectid");
 	<nav class="navbar topMainBar">
 	<div class="container">
 		<!-- Brand and toggle get grouped for better mobile display -->
-		<div class="navbar-header" style="width:100%;">
+		<%-- <div class="navbar-header" style="width:100%;">
 			<!-- <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
 	        <span class="sr-only">Toggle navigation</span>
 	        <span class="icon-bar"></span>
@@ -69,31 +52,23 @@ projectid=request.getParameter("projectid");
 			<a class="navbar-brand" href="#"> <img class="topLogo"
 				src="<c:url value='/resources/images/gplLogo.jpg' />" />
 			</a>
-			
 			<!-- Collect the nav links, forms, and other content for toggling -->
 		<!-- <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"> -->
-
-			<ul class="nav navbar-nav navbar-right pull-right">
+		<ul class="nav navbar-nav navbar-right pull-right">
 				<!-- <ul class="dropdown-menu"> -->
 				<li><a href="${pageContext.request.contextPath}/saleslogin">Logout</a></li>
 				<!-- </ul> -->
 				<!-- <li><a href="#"><i class="glyphicon glyphicon-log-out"></i> LOGIN</a></li> -->
-				<%-- <li class="dropdown">
-			  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">${userName}<span class="caret"></span></a>
-			  
-			</li> --%>
+				<li class="dropdown">
+			  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">${userName}<span class="caret"></span></a>  
+			</li>
 			</ul>
 		<!-- </div> -->
 			
-		</div>
-
-
-
-		
+		</div> --%>
+		 <%@ include file="/WEB-INF/views/pages/header.jsp" %>
 	</div>
 	</nav>
-
-
 	<div class="container" style="margin-bottom:30px;">
 		<div class="titleCol">
 			<h4 class="">
