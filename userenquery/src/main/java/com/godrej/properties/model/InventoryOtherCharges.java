@@ -1,6 +1,7 @@
 package com.godrej.properties.model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,9 +21,14 @@ public class InventoryOtherCharges implements Serializable{
 	@GeneratedValue(strategy=GenerationType.AUTO) 
 	@Column(name="id") private  int id ;
 	
-	@Column(name="propstrength__fixed_charge__c") private Double propstrength__fixed_charge__c;
+	//@Column(name="propstrength__fixed_charge__c") private Double propstrength__fixed_charge__c;
+	@Column(name="propstrength__fixed_charge__c", precision = 10, scale = 2) private BigDecimal propstrength__fixed_charge__c;
+	
 	@Column(name="propstrength__type__c") private String propstrength__type__c;
-	@Column(name="propstrength__rate_per_unit_area__c") private Double propstrength__rate_per_unit_area__c;
+	
+	//@Column(name="propstrength__rate_per_unit_area__c") private Double propstrength__rate_per_unit_area__c;
+	@Column(name="propstrength__rate_per_unit_area__c", precision = 10, scale = 2) private BigDecimal propstrength__rate_per_unit_area__c;
+	
 	@Column(name="name") private String name;
 	@Column(name="propstrength__part_of_cop__c") private boolean propstrength__part_of_cop__c;
 	@Column(name="propstrength__property__c") private String propstrength__property__c;
@@ -36,23 +42,11 @@ public class InventoryOtherCharges implements Serializable{
 	public void setId(int id) {
 		this.id = id;
 	}
-	public Double getPropstrength__fixed_charge__c() {
-		return propstrength__fixed_charge__c;
-	}
-	public void setPropstrength__fixed_charge__c(Double propstrength__fixed_charge__c) {
-		this.propstrength__fixed_charge__c = propstrength__fixed_charge__c;
-	}
 	public String getPropstrength__type__c() {
 		return propstrength__type__c;
 	}
 	public void setPropstrength__type__c(String propstrength__type__c) {
 		this.propstrength__type__c = propstrength__type__c;
-	}
-	public Double getPropstrength__rate_per_unit_area__c() {
-		return propstrength__rate_per_unit_area__c;
-	}
-	public void setPropstrength__rate_per_unit_area__c(Double propstrength__rate_per_unit_area__c) {
-		this.propstrength__rate_per_unit_area__c = propstrength__rate_per_unit_area__c;
 	}
 	public String getName() {
 		return name;
@@ -86,5 +80,17 @@ public class InventoryOtherCharges implements Serializable{
 	}
 	public void setPropstrength__active__c(boolean propstrength__active__c) {
 		this.propstrength__active__c = propstrength__active__c;
+	}
+	public BigDecimal getPropstrength__fixed_charge__c() {
+		return propstrength__fixed_charge__c;
+	}
+	public void setPropstrength__fixed_charge__c(BigDecimal propstrength__fixed_charge__c) {
+		this.propstrength__fixed_charge__c = propstrength__fixed_charge__c;
+	}
+	public BigDecimal getPropstrength__rate_per_unit_area__c() {
+		return propstrength__rate_per_unit_area__c;
+	}
+	public void setPropstrength__rate_per_unit_area__c(BigDecimal propstrength__rate_per_unit_area__c) {
+		this.propstrength__rate_per_unit_area__c = propstrength__rate_per_unit_area__c;
 	}
 }
