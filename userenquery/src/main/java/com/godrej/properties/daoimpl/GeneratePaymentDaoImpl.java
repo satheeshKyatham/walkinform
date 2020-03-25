@@ -1,5 +1,6 @@
 package com.godrej.properties.daoimpl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Query;
@@ -29,18 +30,19 @@ public class GeneratePaymentDaoImpl extends AbstractDao<Integer, GeneratePayment
 	}	
 	
 	@Override
-	public List<GeneratePayment> getPaymentRecord(String enqSfid) {
+	public List<GeneratePayment> getPaymentRecord(String enqSfid,String projectid) {
 		Session session = this.sessionFactory.getCurrentSession();	
 		
-		List<GeneratePayment> authors=null;
+		List<GeneratePayment> authors=new ArrayList<GeneratePayment>();
 		
-		Query q = session.createNativeQuery("SELECT * FROM salesforce.gpl_cc_payment_request "
-				+ " where enquiry_sfid = '"+enqSfid+"' AND isactive = 'Y' order by id ", GeneratePayment.class);
-		authors = q.getResultList();
-		
-		if (authors.size() > 0)
-			return authors;
+		/*Query q = session.createNativeQuery("SELECT * FROM salesforce.gpl_cc_payment_request "
+				+ " where enquiry_sfid = '"+enqSfid+"'and project_sfid='"+projectid+"' AND isactive = 'Y' order by id ", GeneratePayment.class);
+		authors = q.getResultList();*/
+		List<GeneratePayment> list = session.createQuery(" from GeneratePayment where "
+				+ "enquiry_sfid = '"+enqSfid+"'and project_sfid='"+projectid+"' and isactive='Y'").list();
+		if (list.size() > 0)
+			return list;
 
-		return null;
+		return authors;
 	}
 }

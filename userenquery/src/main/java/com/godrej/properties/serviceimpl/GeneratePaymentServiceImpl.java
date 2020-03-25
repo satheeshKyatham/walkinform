@@ -25,7 +25,7 @@ public class GeneratePaymentServiceImpl implements GeneratePaymentService{
 	}
 	
 	@Override
-	public List<GeneratePayment> getPaymentRecord(String enqSfid) {
-		return dao.getPaymentRecord(enqSfid);
+	public List<GeneratePayment> getPaymentRecord(String enqSfid,String projectid) {
+		return dao.getPaymentRecord(enqSfid,projectid);
 	}
 }

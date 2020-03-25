@@ -6,6 +6,7 @@ import com.godrej.properties.model.CoApplicant;
 import com.godrej.properties.model.EOIData;
 import com.godrej.properties.model.Token;
 import com.godrej.properties.model.VWEOILimitAmount;
+import com.google.gson.JsonElement;
 
 
 public interface EOIEnquiryDao {
@@ -22,4 +23,8 @@ public interface EOIEnquiryDao {
 	public List<CoApplicant> getCoapplicantData(String enqid);
 	public VWEOILimitAmount getEOITokenType(String enqsfid);
 	//void save(EOIData s);
+
+	List<EOIData> findMobileNoExistEOIForm(String mobileno, String projectid);
+
+	List<EOIData>  findMobileNoExist(String mobileno, String project_sfid);
 }
