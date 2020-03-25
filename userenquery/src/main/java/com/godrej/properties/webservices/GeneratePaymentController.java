@@ -106,4 +106,14 @@ public class GeneratePaymentController {
 		}
 		 
 	}	
+	
+	
+	@RequestMapping(value = "/getPaymentReqRecord", method = RequestMethod.POST)
+	public String getPaymentReqRecord(@RequestParam("enqSfid") String enqSfid) {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		Gson gson = gsonBuilder.create();
+		
+		return gson.toJson(generatePaymentService.getPaymentRecord(enqSfid));
+	}
+	
 }

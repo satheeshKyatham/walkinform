@@ -236,7 +236,7 @@ if(ses!=null){
 					<a href="#costsheetTabCont" data-toggle="tab">Costsheet</a>
 				</li>
 				
-				<li>
+				<li onclick="getPaymentReqRecord()">
 					<a href="#onlinePaymentTab" data-toggle="tab">Generate payment links</a>
 				</li>
 				

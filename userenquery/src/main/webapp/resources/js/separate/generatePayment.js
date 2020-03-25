@@ -119,3 +119,51 @@ function csPymtDataOP () {
 		
 	});
 }
+
+
+
+
+
+
+//function call in salesRequest.js in "populateBasicInfo" function end 
+function getPaymentReqRecord () {
+	
+	$('#csPtColOP tbody tr.paymentDataPlotRow').remove();
+	
+	$.post(pageContext+"getPaymentReqRecord",{"enqSfid":$('#enquirysfid').val()},function(data){
+		
+		var html = '';
+		var obj =JSON.parse(data);
+		var trans_date = '';
+		
+		if(obj!=null){
+			
+			for(i = 0; i< obj.length; i++){    
+				
+				if (obj[i].transaction_date != '') {
+					var date = new Date(obj[i].transaction_date);
+					var curr_date = date.getDate();
+					var curr_month = date.getMonth() + 1; 
+					var curr_year = date.getFullYear();
+					
+					trans_date = curr_date + "-" + curr_month + "-" + curr_year;
+				}else {
+					trans_date = '';
+				}
+				
+				html += 	'<tr class="paymentDataPlotRow">'
+								+ '<td style="text-align:center;">'+trans_date+'</td>' 
+								+ '<td style="text-align:center;"> <input style="display:none;" name="amount"  value="'+obj[i].amount+'">'+obj[i].amount+'</td>' 
+								+ '<td style="text-align:center;">'+obj[i].description+'</td>' 
+								+ '<td> </td>' 
+							"</tr>";
+			}
+			
+			html = html.replace(/undefined/g, "");
+			
+			$("#csPtColOP tbody tr:first-child").after(html);
+		}
+	}).done(function(obj){
+		csPtcalculateGrandTotalOP();
+	});	
+}

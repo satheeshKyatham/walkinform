@@ -23,4 +23,9 @@ public class GeneratePaymentServiceImpl implements GeneratePaymentService{
 	public void insertPaymentDtl(List<GeneratePayment> pymtDtl) {
 		dao.insertPaymentDtl(pymtDtl);
 	}
+	
+	@Override
+	public List<GeneratePayment> getPaymentRecord(String enqSfid) {
+		return dao.getPaymentRecord(enqSfid);
+	}
 }
