@@ -236,7 +236,9 @@ if(ses!=null){
 					<a href="#costsheetTabCont" data-toggle="tab">Costsheet</a>
 				</li>
 				
-				
+				<li>
+					<a href="#onlinePaymentTab" data-toggle="tab">Generate payment links</a>
+				</li>
 				
 				
 				
@@ -1641,6 +1643,9 @@ if(ses!=null){
 			</div>	
 				
 				
+			<div class="tab-pane" id="onlinePaymentTab">
+			  <jsp:include page="generatePayment.jsp"></jsp:include>
+			</div>	
 				
 		</div>
 	<div class="clearfix"></div>
@@ -1785,6 +1790,7 @@ if(ses!=null){
 <script src="<c:url value='/resources/js/separate/storeEOIPaymentDtl.js?v=18.15'/>"></script>
 <script src="<c:url value='/resources/js/separate/eoiFormPrint.js?v=18.15'/>"></script>
 
+<script src="<c:url value='/resources/js/separate/generatePayment.js?v=18.15'/>"></script>
 
 <%-- <script src="<c:url value='/resources/js/separate/storeEOIPaymentDtl.js?v=15'/>"></script> --%>
 <!-- END Costsheet --> 
