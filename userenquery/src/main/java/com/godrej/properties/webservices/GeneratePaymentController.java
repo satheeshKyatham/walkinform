@@ -135,9 +135,12 @@ public class GeneratePaymentController {
 	@PostMapping(value = "/requestToCCgateway")
 	public @ResponseBody String requestCCgateway(@RequestParam("id") int id) {
 		//call payment table and get the data
-		generatePaymentService.getCCPayment(id);
+		GeneratePayment payment = generatePaymentService.getCCPaymentData(id);
+		generatePaymentService.createCCGatewayRequest(payment);
 		//and create format for gateway integration
-		//
+		//generate the request doc number
+		//and format store in table
+		//and response capture and update in table
 //		return gson.toJson(generatePaymentService.getPaymentRecord(enqSfid,projectid));
 		return "";
 	}

@@ -88,5 +88,8 @@ public class KeyConstants {
 	public static final String ENQUIRY_REFERRAL_SFID="0032s000001eGTbAAM";
 	public static final String ENQUIRY_EMPLOYEE_SFID="0032s000001eGUPAA2";
 	public static final String ENQUIRY_EXISTINGCUSTOMER_SFID="0032s000001eGU5AAM";
+	
+	//CC Avenue Payment Gateway Configurations 
+	public static final String CCAVENUE_GATEWAT_URL="https://secure.ccavenue.com/transaction/transaction.do?command=initiateTransaction";
 }
 

@@ -47,7 +47,7 @@ public class GeneratePaymentDaoImpl extends AbstractDao<Integer, GeneratePayment
 	}
 
 	@Override
-	public GeneratePayment getCCPayment(int id) {
+	public GeneratePayment getCCPaymentData(int id) {
 		Session session = this.sessionFactory.getCurrentSession();
 		List<GeneratePayment> payment = session.createQuery(" from GeneratePayment where "
 				+ "id = "+id+" and isactive='Y'").list();
