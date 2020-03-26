@@ -174,7 +174,7 @@ function getCCAvenuePaymentDetails()
 							$.each(data, function (index, value) {
 								debugger;
 								console.log("test",value)
-								if(value.ispayment_status=='Y'){
+								if(value.ispayment_status=='N'){
 									paymentButton="<button class='btn btn-primary btnNext' onclick='requestCCPaymentGateway(this);'>Pay Now</button>";
 								}else{
 									paymentButton="";

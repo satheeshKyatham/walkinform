@@ -9,6 +9,9 @@ $.ajaxSetup({
 
 var isEoiAllow=false;
 var enqSFDCName = "";
+var customerMobileNo1 = "";
+var customerFullname1 = "";
+var customerEmail1 = ""
 
 var channelPartnerArray=[];
 var enqArray=[];
@@ -252,6 +255,9 @@ function onPageLoad(){
     	$('#countryCode').val("+91");
     }
     var mobileNo=$('#hiddenMobileNo').val();
+    
+    customerMobileNo1 = $('#hiddenMobileNo').val();
+    
     if(mobileNo!=""){
       
     	$('#hdrCustomerMobileNo').text($('.selected-dial-code').text()+" "+mobileNo);
@@ -577,6 +583,8 @@ function populateBasicInfo(enq,contact){
 			
 			//Added By A
 			$('#hdrCustomerName').text(contact.firstName+" "+contact.lastName);
+			customerFullname1 = contact.firstName+" "+contact.lastName;
+			customerEmail1 = contact.otherEmail;
 			$('.customerNameBtn').text('"'+contact.firstName+' '+contact.lastName+'"')
 			//END Added By A
 			

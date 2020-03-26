@@ -243,7 +243,10 @@
     <definition name="ccAvenue"  template="/WEB-INF/views/pages/ccAvenue.jsp"> 
        <put-attribute name="title" value="CCAvenue Payment" /> 
      </definition>
-      <definition name="ccAvenueLogin"  template="/WEB-INF/views/pages/ccAvenueLogin.jsp"> 
-       <put-attribute name="title" value="CCAvenue Login" />  
+    <definition name="ccAvenueLogin"  template="/WEB-INF/views/pages/ccAvenueLogin.jsp"> 
+      	 <put-attribute name="title" value="CCAvenue Login" />  
+    </definition>
+    <definition name="ccavRequestHandler"  template="/WEB-INF/views/pages/ccavenue/ccavRequestHandler.jsp"> 
+      	 <put-attribute name="title" value="CCAvenue Create Request" />  
     </definition>
 </tiles-definitions>
