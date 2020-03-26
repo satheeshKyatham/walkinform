@@ -27,13 +27,13 @@ public class GeneratePaymentServiceImpl implements GeneratePaymentService{
 	CCGatewayRequestController ccGatewayRequestController;
 	
 	@Override
-	public void insertPaymentDtl(List<GeneratePayment> pymtDtl) {
-		dao.insertPaymentDtl(pymtDtl);
+	public Boolean insertPaymentDtl(List<GeneratePayment> pymtDtl) {
+		return dao.insertPaymentDtl(pymtDtl);
 	}
 	
 	@Override
-	public List<GeneratePayment> getPaymentRecord(String enqSfid,String projectid) {
-		return dao.getPaymentRecord(enqSfid,projectid);
+	public List<GeneratePayment> getPaymentRecord(String enqSfid, String projectSFID) {
+		return dao.getPaymentRecord(enqSfid, projectSFID);
 	}
 
 	@Override

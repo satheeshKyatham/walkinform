@@ -37,8 +37,8 @@ public class SendMailThreadUtil implements Runnable{
 	public void run() {
 		
 		Properties properties = new Properties();
-		String host = "Smtp.office365.com";
-		//String host = "10.21.24.31"; 
+		//String host = "Smtp.office365.com";
+		String host = "10.21.24.32"; 
 		
 		//final String from = "gc.atulbhanushali@godrejproperties.com";
        // final String password = "PASS@123";
@@ -53,7 +53,7 @@ public class SendMailThreadUtil implements Runnable{
 	      properties.put("mail.smtp.host", host);
 	      properties.put("mail.smtp.port", "25");
 	      properties.put("mail.transport.protocol", "smtps");
-	      //properties.put("mail.smtp.ssl.trust", host);   
+	      properties.put("mail.smtp.ssl.trust", host);   
 	      
 	      Session session = Session.getInstance(properties,
 	    		  new javax.mail.Authenticator() {

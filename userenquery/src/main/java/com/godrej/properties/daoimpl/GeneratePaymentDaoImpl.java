@@ -25,26 +25,37 @@ public class GeneratePaymentDaoImpl extends AbstractDao<Integer, GeneratePayment
 	private SessionFactory sessionFactory;
 	
 	@Override
-	public void insertPaymentDtl(List<GeneratePayment> pymtDtl) {
-		batchPersist(pymtDtl);
+	public Boolean insertPaymentDtl(List<GeneratePayment> pymtDtl) {
+	try {
+			batchPersist(pymtDtl);
+			return true;
+		} catch (Exception e) {
+			Log.info("Inset Payment Request Error:- ",e);
+			return false;
+		}
 	}	
 	
 	@Override
-	public List<GeneratePayment> getPaymentRecord(String enqSfid,String projectid) {
+	public List<GeneratePayment> getPaymentRecord(String enqSfid, String projectSFID) {
 		Session session = this.sessionFactory.getCurrentSession();	
 		
-		List<GeneratePayment> authors=new ArrayList<GeneratePayment>();
-		
-		/*Query q = session.createNativeQuery("SELECT * FROM salesforce.gpl_cc_payment_request "
-				+ " where enquiry_sfid = '"+enqSfid+"'and project_sfid='"+projectid+"' AND isactive = 'Y' order by id ", GeneratePayment.class);
-		authors = q.getResultList();*/
-		List<GeneratePayment> list = session.createQuery(" from GeneratePayment where "
-				+ "enquiry_sfid = '"+enqSfid+"'and project_sfid='"+projectid+"' and isactive='Y'").list();
-		if (list.size() > 0)
-			return list;
-
-		return authors;
-	}
+		try {
+			List<GeneratePayment> authors=null;
+			
+			Query q = session.createNativeQuery("SELECT * FROM salesforce.gpl_cc_payment_request "
+					+ " where enquiry_sfid = '"+enqSfid+"' AND  project_sfid = '"+projectSFID+"' AND isactive = 'Y' order by id ", GeneratePayment.class);
+			authors = q.getResultList();
+			
+			if(authors!=null) {
+				if (authors.size() > 0) {
+					return authors;
+				}	
+			}
+		} catch (Exception e) {
+			Log.info("Get Payment Request Error:- ",e);
+		}
+		return null;
+	} 
 
 	@Override
 	public GeneratePayment getCCPaymentData(int id) {
