@@ -6,12 +6,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
   <html lang="en">
-  <%
-	 response.addHeader("Expires","0");
-	 response.addHeader("Pragma","no-cache");
-	 response.setHeader("Cache-Control","no-cache,no-store, must-revalidate, pre-check=0, post-check=0, max-age=0, s-maxage=0");
-	 response.addHeader("X-Frame-Options", "DENY");
-	 %>
+ 
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -80,24 +75,16 @@ if(ses!=null){
 	 userid=(String)ses.getAttribute("USERID");
 	 email=(String)ses.getAttribute("USEREMAIL");
 	 userName=(String)ses.getAttribute("USERNAME");
-	 
-	
-	
 }else{
 	 // Todo Login page
 }
 %> 
-
-  <body onload="initialize()" >
-   
-
+<body onload="initialize()" >
 <!-- Inventory -->   
 <div style="display:none;"> 
 	<input type="text" id="projectname" value="<%= projectname %>">
-	
 	<input type="text" id="projectId" value="<%= projectid%>">
 	<input type="text" id="useremailID" value="<%= email%>">
-	
 	<input id="pageContext" value="${pageContext.request.contextPath}"/>
 	<input id="token" value="${token}"/>
 	<input id="tokentype" value="${tokentype}"/>
@@ -105,25 +92,18 @@ if(ses!=null){
 	<input id="primarycontactsfid" value="${primarycontactsfid} "/>
 	<input id="enquiry_name" value="${name} "/>
 	<input id="enquirysfid" value="${enquirysfid}"/>
-	
 	<%-- <input id="enquirysfid123" value="${sfid}"/> --%>
 	<input id="customerId" value="123">
-	
 	<input id="channelPartnerSfidCS">
-	
-	
 	<input  id="userid" value="<%= userid %>">
 	<input  id="roleid" value="<%= roleid %>">
 	
 </div>
 <!-- END Inventory -->   
-   
-
-   
-   <nav class="navbar topMainBar">
+	<nav class="navbar topMainBar">
 	  <div class="container">
 	    <!-- Brand and toggle get grouped for better mobile display -->
-	    <div class="navbar-header" style="width:100%;">
+	    <%-- <div class="navbar-header" style="width:100%;">
 	      <!-- <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
 	        <span class="sr-only">Toggle navigation</span>
 	        <span class="icon-bar"></span>
@@ -133,35 +113,23 @@ if(ses!=null){
       	<a class="navbar-brand" href="#" style="margin-left: 0px;">
 			<img class="topLogo" src="<c:url value='/resources/images/gplLogo.jpg' />"/>
 		</a>
-		
 		<!--  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"> -->
-	      
-			<ul class="nav navbar-nav navbar-right pull-right">
+	    <ul class="nav navbar-nav navbar-right pull-right">
 				<!-- <li><a href="#"><i class="glyphicon glyphicon-log-out"></i> LOGIN</a></li> -->
-				
-				 <li><a href="${pageContext.request.contextPath}/saleslogin">Logout</a></li>
-				<%-- <li class="dropdown">
+			 <li><a href="${pageContext.request.contextPath}/saleslogin">Logout</a></li>
+				<li class="dropdown">
 				  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">${userName}<span class="caret"></span></a> 
 				  <ul class="dropdown-menu">
 				    <li><a href="${pageContext.request.contextPath}/saleslogin">Logout</a></li>
 				  </ul>
-				</li> --%>
+				</li>
 			</ul> 
 	    <!-- </div> -->
-		
-		
-		
-	    </div>
-		
+		</div> --%>
 		<!-- <div class="proTopTitle" id="projectTitle">
-		  
 		</div> -->
-		
-	    <!-- Collect the nav links, forms, and other content for toggling -->
-	   
-	
-	   
-	   
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<%@ include file="/WEB-INF/views/pages/header.jsp" %>
 	  </div>
 	</nav>
    
@@ -203,10 +171,7 @@ if(ses!=null){
 		</div>
 		<div class="clearfix"></div>
 	</div>
-   
-   
-	
-	<div class="container formCol swipeCard posRelative">
+   	<div class="container formCol swipeCard posRelative">
 			
 		<div class="commonLoad" id="mainPageLoad" style="display:none;"></div>	
 			
@@ -271,7 +236,9 @@ if(ses!=null){
 					<a href="#costsheetTabCont" data-toggle="tab">Costsheet</a>
 				</li>
 				
-				
+				<li onclick="getPaymentReqRecord()">
+					<a href="#onlinePaymentTab" data-toggle="tab">Generate payment links</a>
+				</li>
 				
 				
 				
@@ -1676,6 +1643,9 @@ if(ses!=null){
 			</div>	
 				
 				
+			<div class="tab-pane" id="onlinePaymentTab">
+			  <jsp:include page="generatePayment.jsp"></jsp:include>
+			</div>	
 				
 		</div>
 	<div class="clearfix"></div>
@@ -1820,6 +1790,7 @@ if(ses!=null){
 <script src="<c:url value='/resources/js/separate/storeEOIPaymentDtl.js?v=18.15'/>"></script>
 <script src="<c:url value='/resources/js/separate/eoiFormPrint.js?v=18.15'/>"></script>
 
+<script src="<c:url value='/resources/js/separate/generatePayment.js?v=18.15'/>"></script>
 
 <%-- <script src="<c:url value='/resources/js/separate/storeEOIPaymentDtl.js?v=15'/>"></script> --%>
 <!-- END Costsheet --> 

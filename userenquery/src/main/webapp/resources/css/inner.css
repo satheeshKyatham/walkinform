@@ -75,7 +75,9 @@ input:-webkit-autofill:active {
 .btn.btn-cancel:hover { background: #e1e1e1; color: #8b8b8b; }
 .btn-box {text-align: center; margin: 50px 0;}
 
-.btnCol {text-align: center; /* margin-top:35px; */     padding: 15px; border-top: 1px dotted #ccc;}
+ .btnCol {text-align: center; margin-top:35px;     padding: 15px; border-top: 1px dotted #ccc;} 
+
+.btnColLogin {padding-bottom: 0; text-align: center; margin-top:10px;  padding: 15px 15px 0 15px;}
 
 .btnNext {color: #fff; background-color: #0077b9;}
 .btnNext:hover {color: #fff !important; background-color: #0077b9 !important;}
@@ -537,3 +539,32 @@ background-position: center; background-repeat: no-repeat; background-size: 40px
 .dataTables_filter input[type=search] {min-height: 32px; background: none; color: rgba(0,0,0,.9); font-size: 16px; padding: 4px; border: none; border: 1px solid rgba(0,0,0,.2);}
 
 .csPtTransactionDateEoi  {width: 140px !important;}
+
+.overflow_auto {overflow: auto !important;}
+.login_cont .inputLabel {margin-bottom: 25px;}
+.login_bg {/* background: rgba(255, 255, 255, 0.60 ); */ display: table; background: rgba(255, 255, 255, 0.9);/* background: #fff; */ border-radius: 10px; box-shadow: 0 1px 5px rgba(0, 0, 0, 0.95);
+border: 1px Solid #ccc; top: 10px;     margin: 70px auto 20px !important; float:none !important; /* position: fixed; */ padding:25px !important; z-index: 2;}    
+.login_bg select option {color:#333 !important;}
+.login_bg input[type="text"], .login_bg input[type="password"], .login_bg select {background: initial !important; border-color:#fff; outline-color:#fff;}
+.login_bg .input-group{margin-top: 25px;}
+.login_bg select:focus, .login_bg input[type="text"] :focus, .login_bg input[type="password"] :focus, .login_bg textarea:focus{ border:1px solid #fff !important;}
+.login_bg input[type="text"]::-webkit-input-placeholder, .login_bg input[type="password"]::-webkit-input-placeholder { color: #828282 !important;}
+.login_bg input[type="text"]:-moz-placeholder, .login_bg input[type="password"]:-moz-placeholder {color: #fff !important;}
+.login_bg input[type="text"]::-moz-placeholder, .login_bg input[type="password"]::-moz-placeholder {color: #fff !important;}
+.login_bg input[type="text"]:-ms-input-placeholder, .login_bg input[type="password"]:-ms-input-placeholder {color: #fff !important;}
+.login_bg .input-group-addon {background: #8e8e8e !important; border:1px solid #fff; color:#fff !important;}
+.login_bg .input-group .form-control {border-radius:0 4px 4px  0px !important;}
+.login_bg .md-check > i:before {border: 2px solid rgb(255, 255, 255);}
+.login_bg .md-check {color:#fff !important;}
+.login_bg  {border: 0 !important; box-shadow: none !important; }
+.lLoginCol {text-align: center; margin-bottom: 25px;}
+.lLoginCol img {height:45px;}
+.loginProjTitle {margin-bottom:50px !important;}
+.loginProjTitle {text-transform: uppercase;}
+.loginProjTitle {border: 1px dotted #000; display: inline-table; margin-bottom: 30px;
+ padding: 5px 15px; font-size: 22px; margin-top: 0; 
+    border-left: 0; border-right: 0;}
+.inputLabel {font-size:18px; font-weight:500 !important;     text-transform: uppercase;}
+
+.btnNextLogin {color: #fff; background-color: #9b034a;}
+.btnColLogin {padding-bottom: 0; text-align: center; margin-top:10px;  padding: 15px 15px 0 15px;}

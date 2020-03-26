@@ -8,6 +8,7 @@ $.ajaxSetup({
 });
 
 var isEoiAllow=false;
+var enqSFDCName = "";
 
 var channelPartnerArray=[];
 var enqArray=[];
@@ -481,6 +482,8 @@ function populateBasicInfo(enq,contact){
 			
 			$('#hdrEnqName').text(enq.name);
 			/* If Enquiry sync failed or equiry getting blank then we hide the sales tab buttons */
+			
+			enqSFDCName = enq.name;
 			
 			if(enq.contactId!=null)
 			{

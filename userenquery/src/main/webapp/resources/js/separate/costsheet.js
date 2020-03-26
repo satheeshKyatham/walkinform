@@ -2579,14 +2579,23 @@ function tncData () {
                     for (i = 0; i< obj.length; i++) {
                            if($('#ppDropdown').val() == obj[i].pymt_plan_id) {
                                  $('.tncData').prepend(obj[i].tnc_text);
-                                 return false;
+                                 //return false;
                            }else {
                                  if (obj[i].pymt_plan_id == '') {
                                         $('.tncData').prepend(obj[i].tnc_text);
-                                        return false;
+                                  //      return false;
                                  }
                            }
                     }
+                    
+                    if($('#ppDropdown').val() == "a1i2s000000Gn5iAAC" && $('#projectid').val() == "a1l2s00000003BMAAY") {
+                    	$('.tncData').append("" +
+                    			" <div>* Presently for the Subvention Scheme we have tie up with Axis Bank only .The subvention period is upto 15th March 2022.The said scheme is Subject to Purchaser's loan eligibility. All Loans subject to norms and discretion of Lending authority. </div>" +
+                    			" <div>* Pursuant to execution of the TPA between Applicant(s), Bank and Developer, in case the interest rate applicable to the Applicant(s)  increases for any reason whatsoever, the Applicant(s) shall be liable to bear the additional subvention interest cost and not the Developer. GST Not Covered under this Subvention scheme. </div>" +
+                    			" <div>* This is a subvention cost sheet </div> ");
+                    } 
+                    
+                    
              } else {
                     $(".tncData").closest('table').next('.tableNoRec').show();
              }

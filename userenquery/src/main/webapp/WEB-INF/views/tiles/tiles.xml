@@ -237,6 +237,13 @@
        <put-attribute name="title" value="Payment Approval Role" /> 
      </definition>
      <definition name="chromeerror"  template="/WEB-INF/views/pages/defaultpages/chromeerror.jsp"> 
-       <put-attribute name="title" value="Default Browser" />  
+       <put-attribute name="title" value="Default Browser" /> 
+        
+    </definition>
+    <definition name="ccAvenue"  template="/WEB-INF/views/pages/ccAvenue.jsp"> 
+       <put-attribute name="title" value="CCAvenue Payment" /> 
+     </definition>
+      <definition name="ccAvenueLogin"  template="/WEB-INF/views/pages/ccAvenueLogin.jsp"> 
+       <put-attribute name="title" value="CCAvenue Login" />  
     </definition>
 </tiles-definitions>

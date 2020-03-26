@@ -53,19 +53,16 @@ if(ses!=null){
   
   <nav class="navbar topMainBar">
 	  <div class="container">
-	    <div class="navbar-header" style="width:100%;">
+	  <%--   <div class="navbar-header" style="width:100%;">
       	<a class="navbar-brand" href="#">
 			<img class="topLogo" src="<c:url value='/resources/images/gplLogo.jpg' />"/>
 		</a>
 		<ul class="nav navbar-nav navbar-right pull-right">
 			 <li><a href="${pageContext.request.contextPath}/saleslogin">Logout</a></li>
 		</ul> 
-	    </div>
-		
-		 
-		
-	    
-	  </div>
+	    </div> --%>
+		<%@ include file="/WEB-INF/views/pages/header.jsp" %>
+	</div>
 	</nav>
 		<div class="titleCol">
 			<h4 class="">

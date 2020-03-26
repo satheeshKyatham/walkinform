@@ -288,7 +288,8 @@ function getEnqAndOfferDtl (enqSFID, offerSFID, rowId) {
 		
 		$('#modeOfBookingOffer tbody').empty();
 		
-		if(obj!=null){
+		if(obj.length > 0){
+		//if(obj!=null){
 			
 			if (obj[0].rera_registration_number__c != undefined){
 				reraRegistrationNo = obj[0].rera_registration_number__c;
@@ -407,11 +408,19 @@ function getEnqAndOfferDtl (enqSFID, offerSFID, rowId) {
 				otherCharges (obj[0].mappedCharges, obj[0].saleable_area__c, totalSaleConsideration);
 			}
 			
-			// Godrej Meridien 2
-			if ($("#projectid").val() == "a1l6F000004LVk8QAG") {
+			// Godrej Meridien 2 AND Godrej Exquisite, Mumbai (Thane)
+			if ($("#projectid").val() == "a1l6F000004LVk8QAG" || $("#projectid").val() == "a1l2s00000003BMAAY") {
 				var totalCarpetNExclusiveArea = parseFloat($('#carpetAreaCostOffer').text())+parseFloat($('#exclusiveAreasCostOffer').text());
 				otherChargesUnit (obj[0].mappedCharges, obj[0].saleable_area__c, totalCarpetNExclusiveArea);
 			}
+			
+			//Godrej Exquisite, Mumbai (Thane)
+			//if ($("#projectid").val() == "a1l2s00000003BMAAY") {
+			//	var totalCarpetNExclusiveArea = parseFloat($('#carpetAreaCostOffer').text())+parseFloat($('#exclusiveAreasCostOffer').text());
+			//	otherChargesUnit (obj[0].mappedCharges, obj[0].saleable_area__c, totalCarpetNExclusiveArea);
+			//}
+			
+			
 			
 			
 		} else {
@@ -675,9 +684,21 @@ function otherCharges(otherCharges, saleable_area__c, offerOtherCharges) {
 
 function otherChargesUnit(otherCharges, saleable_area__c, totalSaleConsideration) {
 	if(otherCharges != null){
-		var Other_Charges = otherCharges.Other_Charges;
 		
-		processTotalOtherCharges (Other_Charges, saleable_area__c, totalSaleConsideration);
+		
+		
+		
+		//Godrej Exquisite, Mumbai (Thane)
+		if ($("#projectid").val() == "a1l2s00000003BMAAY") {
+			var Common_Area_Charges = otherCharges.Common_Area_Charges;
+			processOtherChargesExqMum (Common_Area_Charges, saleable_area__c, totalSaleConsideration);
+		} else if ($("#projectid").val() == "a1l6F000004LVk8QAG") {
+			// Godrej Meridien 2
+			var Other_Charges = otherCharges.Other_Charges;
+			processTotalOtherCharges (Other_Charges, saleable_area__c, totalSaleConsideration);
+		}
+		
+		
 	}
 }
 
@@ -721,6 +742,25 @@ function processTotalOtherCharges (Other_Charges, saleable_area__c, totalSaleCon
 	}
 }
 
+//Total Other Charges for Godrej Exquisite, Mumbai
+function processOtherChargesExqMum (Common_Area_Charges, saleable_area__c, totalSaleConsideration) {
+	if(Common_Area_Charges == null){
+		return;
+	}
+	
+	if (Common_Area_Charges.propstrength__rate_per_unit_area__c == null || saleable_area__c == null) {
+		return;
+	} else {
+		$("#commonAreaChargesTotal").text("");
+		$("#commonAreaChargesTotal").text("Rs. " + parseInt(Common_Area_Charges.propstrength__rate_per_unit_area__c*saleable_area__c).toFixed(2) + "/-");
+		
+		$("#totalSaleConsiderationOffer").text("");
+		$("#totalSaleConsiderationOffer").text(parseInt(parseInt(Common_Area_Charges.propstrength__rate_per_unit_area__c*saleable_area__c)+parseInt(totalSaleConsideration)).toFixed(2));
+		
+		convertNumberToWords ();
+	}
+}
+// END Total Other Charges for Godrej Exquisite, Mumbai
 
 
 function processCarParkCharges (CAR_PARKING_CHARGES) {

@@ -178,6 +178,7 @@
 			</div>
 		</div> --%>
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/8.4.7/js/intlTelInput.js"></script>
+			<script src="<c:url value='/resources/js/enquiryRequest/commonIndex.js?v=18'/>"></script>
 	<script>
 			$(".form-control").intlTelInput({
 				separateDialCode: true ,

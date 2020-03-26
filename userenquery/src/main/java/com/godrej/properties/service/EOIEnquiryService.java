@@ -5,6 +5,7 @@ import java.util.List;
 import com.godrej.properties.model.CoApplicant;
 import com.godrej.properties.model.EOIData;
 import com.godrej.properties.model.Token;
+import com.google.gson.JsonElement;
 
 
 
@@ -23,5 +24,9 @@ public interface EOIEnquiryService {
 	void UpdateToken(Token token);
 	public List<CoApplicant> getCoapplicantData(String enqid);
 	public String getEOITokenType(String enqsfid);
+
+	List<EOIData> findMobileNoExistEOIForm(String decStr, String projectid);
+
+	List<EOIData> findMobileNoExist(String decStr, String projectid);
 
 }

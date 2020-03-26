@@ -9,13 +9,18 @@
 	 response.addHeader("X-Frame-Options", "DENY");
 	 %>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title></title>
+<!-- <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title></title> -->
 </head>
 <body>
-  <div>
-  <a>
-  </a>
-  </div>
+  <div class="navbar-header" style="width:100%;">
+      	<a class="navbar-brand" href="#">
+			<img class="topLogo" src="<c:url value='/resources/images/gplLogo.jpg' />"/>
+		</a>
+		
+		<ul class="nav navbar-nav navbar-right pull-right">
+			 <li><a href="${pageContext.request.contextPath}/saleslogin">Logout</a></li>
+		</ul> 
+	    </div>
 </body>
 </html>
