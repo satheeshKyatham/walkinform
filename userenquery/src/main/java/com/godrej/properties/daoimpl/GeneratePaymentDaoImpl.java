@@ -1,6 +1,5 @@
 package com.godrej.properties.daoimpl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Query;
@@ -14,7 +13,6 @@ import org.springframework.stereotype.Repository;
 
 import com.godrej.properties.dao.AbstractDao;
 import com.godrej.properties.dao.GeneratePaymentDao;
-import com.godrej.properties.model.EOIPaymentDtl;
 import com.godrej.properties.model.GeneratePayment;
 
 @SuppressWarnings("unchecked")

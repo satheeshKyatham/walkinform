@@ -6,7 +6,8 @@ import com.godrej.properties.model.GeneratePayment;
 
 public interface GeneratePaymentService {
 	Boolean insertPaymentDtl(List<GeneratePayment> pymtDtl);
-	public List<GeneratePayment> getPaymentRecord(String enqSfid, String projectSFID);
+	public List<GeneratePayment> getPaymentRecord(String enqSfid, String projectid);
 	public GeneratePayment getCCPaymentData(int id);
 	public String createCCGatewayRequest(GeneratePayment payment);
+	//public CCAvenueGatewayRequest insertCCAvenueGatewayRequest(CCAvenueGatewayRequest gatewayRequest);
 }
