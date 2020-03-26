@@ -274,7 +274,8 @@ public class GeneratePaymentController {
 							String str = encriptString(eoi.getPhone_number());
 							String resultPath = request.getHeader("Host") + request.getContextPath();
 							String kyclink= "https://"+resultPath+"/ccAvenueLogin?num="+str.replaceAll("\"", "")+"&projectid="+URLEncoder.encode(eoi.getProjectsfid(), "UTF-8")+"&projectname="+URLEncoder.encode(eoi.getProjectname(), "UTF-8");
-							String text = readContentFromFile("D://atul_data//apache-tomcat-9.0.22//QR//kyclinkmailer_pune.htm");
+							//String text = readContentFromFile("D://atul_data//apache-tomcat-9.0.22//QR//payment_request.htm");
+							String text = readContentFromFile("D://SW//apache-tomcat-9.0.0.M22//apache-tomcat-9.0.0.M22//QR//payment_request.htm");
 							
 							text = text.replaceAll("@CustomerName@", eoi.getApplication_name());
 							text = text.replaceAll("@ProjectName@", eoi.getProjectname());
