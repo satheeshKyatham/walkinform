@@ -4255,10 +4255,11 @@ public class WebServiceController<MultipartFormDataInput> {
 			return "";
 		}
 		//END Get enquiry Details
+		
 		@RequestMapping(value = "/validateStr", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
 		public String validateMobileStr(@ModelAttribute("coapplicantdata") CoApplicant coapp,
 				@RequestParam("dncstr") String encstr, @RequestParam("user_entr_no") String userNo,
-				@RequestParam("projectid") String projectid) {
+				@RequestParam("projectid") String projectid,@RequestParam("enqsfid") String enqsfid) {
 			// ModelAndView model = new ModelAndView();
 			Gson gson = new GsonBuilder().disableHtmlEscaping().create();
 
@@ -4272,12 +4273,13 @@ public class WebServiceController<MultipartFormDataInput> {
 				log.info("userNo:-" + userNo);
 				// userEOIService.findMobileNoExist(decStr);
 				// model.setViewName("index");
-				List<EOIData> eList = userEOIService.findMobileNoExistEOIForm(decStr, projectid);
+				List<EOIData> eList = userEOIService.findMobileNoExistEOIForm(decStr, projectid,enqsfid);
 
 				if (eList != null && eList.size() > 0) {
 					return gson.toJson(eList);
 				} else {
-					return gson.toJson(userEOIService.findMobileNoExist(decStr, projectid));
+					return "not list";
+					/*return gson.toJson(userEOIService.findMobileNoExist(decStr, projectid));*/
 				}
 			} else {
 				return gson.toJson("Invalid input or No Entry Found");
@@ -4286,7 +4288,7 @@ public class WebServiceController<MultipartFormDataInput> {
 		}
 		
 		@RequestMapping(value = "/getccAvenueList", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
-		public String validateMobileStr(@RequestParam("dncstr") String encstr,@RequestParam("projectid") String projectid) {
+		public String validateMobileStr(@RequestParam("dncstr") String encstr,@RequestParam("projectid") String projectid,@RequestParam("enqsfid") String enqsfid) {
 			
 			Gson gson = new GsonBuilder().disableHtmlEscaping().create();
 
@@ -4296,7 +4298,7 @@ public class WebServiceController<MultipartFormDataInput> {
 			log.info("EncriptString =" + decStr);
 				log.info("Input Validate");
 				log.info("decStr:-" + decStr);
-				List<EOIData> eList = userEOIService.findMobileNoExistEOIForm(decStr, projectid);
+				List<EOIData> eList = userEOIService.findMobileNoExistEOIForm(decStr, projectid,enqsfid);
 				return gson.toJson(eList);
 		}
 }

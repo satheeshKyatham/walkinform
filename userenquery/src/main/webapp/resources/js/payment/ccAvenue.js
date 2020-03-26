@@ -22,13 +22,24 @@ function getProjectId(){
 	var proId=projectId[0];
 	return proId;
 }
+function getenqsfId(){
+	debugger
+	var urlString = window.location.href;
+	var url = urlString.split("=");/*'3333888379'*/;
+	var id=url[3];
+	var enqId = id.split("&");
+	var enqsfidId=enqId[0];
+	return enqsfidId;
+}
 function getCustomerDetails(phone,id){
 	var encStr=encryptStr();
+	var enqsfid=getenqsfId();
 	$.get(
 			"getccAvenueList",
 			{
 				"dncstr" : encStr,
-				"projectid" : id
+				"projectid" : id,
+				"enqsfid":enqsfid
 			},function (data){
 				console.log(data)
 				var myJSON = JSON.stringify(data);
@@ -92,6 +103,7 @@ function _search_data(inpuNum, project_sfid) {
 	var formData = new FormData();
 	var encStr=encryptStr();/*'3333888379'*/;
 	var project_sfid=getProjectId();
+	var enqsfid=getenqsfId();
 	/*formData.append('dncstr', encStr);
 	formData.append('user_entr_no', inpuNum);*/
 			$.get(
@@ -99,7 +111,8 @@ function _search_data(inpuNum, project_sfid) {
 					{
 						"dncstr" : encStr,
 						"user_entr_no":inpuNum,
-						"projectid" : project_sfid
+						"projectid" : project_sfid,
+						"enqsfid":enqsfid
 					},
 					function(data) {
 						debugger;
@@ -133,8 +146,8 @@ function _search_data(inpuNum, project_sfid) {
 							}
 							var iseoi = $('#iseoi').val();
 							debugger
-							if (issubmitted == "Y") {
-								window.location.assign("ccAvenue?num="+ encStr+ "&projectid="+ project_sfid);
+							if (data != null) {
+								window.location.assign("ccAvenue?num="+ encStr+ "&projectid="+ project_sfid+"&enqsfid="+enqsfid);
 						} else {
 							$("#invalidEntry").text("Invalid number or No Entry Found");
 							$("#email").val('');

@@ -25,7 +25,7 @@ public interface EOIEnquiryService {
 	public List<CoApplicant> getCoapplicantData(String enqid);
 	public String getEOITokenType(String enqsfid);
 
-	List<EOIData> findMobileNoExistEOIForm(String decStr, String projectid);
+	List<EOIData> findMobileNoExistEOIForm(String decStr, String projectid, String enqsfid);
 
 	List<EOIData> findMobileNoExist(String decStr, String projectid);
 

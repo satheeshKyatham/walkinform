@@ -101,8 +101,8 @@ public class EOIEnquiryServiceImpl implements EOIEnquiryService {
 	}
 
 	@Override
-	public List<EOIData> findMobileNoExistEOIForm(String mobileno, String projectid) {
-			return userEOIDao.findMobileNoExistEOIForm(mobileno,projectid);
+	public List<EOIData> findMobileNoExistEOIForm(String mobileno, String projectid,String enqsfid) {
+			return userEOIDao.findMobileNoExistEOIForm(mobileno,projectid,enqsfid);
 		}
 		
 

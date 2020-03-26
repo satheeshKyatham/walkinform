@@ -24,7 +24,7 @@ public interface EOIEnquiryDao {
 	public VWEOILimitAmount getEOITokenType(String enqsfid);
 	//void save(EOIData s);
 
-	List<EOIData> findMobileNoExistEOIForm(String mobileno, String projectid);
+	List<EOIData> findMobileNoExistEOIForm(String mobileno, String projectid, String enqsfid);
 
 	List<EOIData>  findMobileNoExist(String mobileno, String project_sfid);
 }

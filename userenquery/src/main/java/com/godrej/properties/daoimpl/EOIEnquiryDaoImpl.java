@@ -103,11 +103,11 @@ public class EOIEnquiryDaoImpl extends AbstractDao<Integer, EOIData> implements 
 	}
 
 	@Override
-	public List<EOIData> findMobileNoExistEOIForm(String mobileno,String project_sfid) {
+	public List<EOIData> findMobileNoExistEOIForm(String mobileno,String project_sfid,String enqsfid) {
 		 
 		Session session = this.sessionFactory.getCurrentSession();	
 		@SuppressWarnings("unchecked")
-		List<EOIData> list =session.createQuery(" from EOIData where phone_number like '%"+mobileno+"' and project_sfid ='"+project_sfid+"'").list();
+		List<EOIData> list =session.createQuery(" from EOIData where phone_number like '%"+mobileno+"' and project_sfid ='"+project_sfid+"' and enquiry18='"+enqsfid+"'").list();
 		if(list.size()>0)
 		{
 			return list;
