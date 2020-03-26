@@ -17,6 +17,7 @@ import com.godrej.properties.model.Token;
 import com.godrej.properties.model.VWEOILimitAmount;
 import com.godrej.properties.service.EOIEnquiryService;
 import com.godrej.properties.util.UniqeGenerator;
+import com.google.gson.JsonElement;
 import com.google.zxing.WriterException;
 
 
@@ -97,6 +98,18 @@ public class EOIEnquiryServiceImpl implements EOIEnquiryService {
 		else
 			tokenType="W";
 		return tokenType;
+	}
+
+	@Override
+	public List<EOIData> findMobileNoExistEOIForm(String mobileno, String projectid,String enqsfid) {
+			return userEOIDao.findMobileNoExistEOIForm(mobileno,projectid,enqsfid);
+		}
+		
+
+	@Override
+	public List<EOIData> findMobileNoExist(String mobileno, String project_sfid) {
+		return userEOIDao.findMobileNoExist(mobileno,project_sfid);
+		
 	}
 
 //	@Override

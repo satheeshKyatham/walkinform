@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -17,9 +18,10 @@ import com.godrej.properties.service.EnquiryReportService;
 import com.godrej.properties.service.HoldInventoryEntryService;
 import com.godrej.properties.service.PushEnquiryDataService;
 
-//@Configuration
-//@EnableScheduling
+/*@Configuration
+@EnableScheduling*/
 @Controller
+@Transactional 
 public class SyncSchedular {
 	private Logger LOG=LoggerFactory.getLogger(getClass());
 	@Autowired
@@ -42,15 +44,25 @@ public class SyncSchedular {
 	@Scheduled(cron="0 0/2 * * * ?")
 	public void hourlySchedular(){
 		LOG.info("hourlySchedular ::*************");
-		pushEnqDataService.syncContactSfidToEnquiry();
+		try {
+			pushEnqDataService.syncContactSfidToEnquiry();
+		}
+		catch (Exception e) {
+			LOG.error("hourlySchedular ::*************",e);
+		}
 	}
 	@ResponseBody
 	@Scheduled(cron="0 0/2 * * * ?")/* 2 min schedular time*/
 	@RequestMapping("/updateCustomContactAndEnquiry")
 	public void customUpdateSchedular(){
 		LOG.info("customUpdateSchedular ::*************");
-		contactReportService.updateContactSfidToCustomContact();
-		enquiryReportService.updateEnquirySfidToCustomEnquiry();
+		try {
+			contactReportService.updateContactSfidToCustomContact();
+			enquiryReportService.updateEnquirySfidToCustomEnquiry();
+		}
+		catch (Exception e) {
+			LOG.error("customUpdateSchedular ::*************",e);
+		}
 	}
 	
 	
@@ -59,10 +71,15 @@ public class SyncSchedular {
 	@RequestMapping("/updateBulkInventoryStatus")
 	public void updateBulkInventoryStatus(){
 		LOG.info("updateBulkInventoryStatus ::*************");
-		HoldInventoryEntry updateHold = new HoldInventoryEntry ();
-		updateHold.setStatusai("I");
-		updateHold.setHoldstatusyn("N");
-		holdInventoryEntryService.updatePreviousHold(updateHold);//20
+		try {
+			HoldInventoryEntry updateHold = new HoldInventoryEntry ();
+			updateHold.setStatusai("I");
+			updateHold.setHoldstatusyn("N");
+			holdInventoryEntryService.updatePreviousHold(updateHold);//20
+		}
+		catch (Exception e) {
+			LOG.error("updateBulkInventoryStatus ::*************",e);
+		}
 	}
 	/*For SFDC Cancelled offer inactive in D4U*/
 	@ResponseBody
@@ -70,6 +87,12 @@ public class SyncSchedular {
 	@RequestMapping("/cancelledOfferInactive")
 	public void cancelledOfferInactive(){
 		LOG.info("cancelledOfferInactive ::*************");
-		balanceDetailsService.eCRMCancelledOfferInactive();
+		try
+		{
+			balanceDetailsService.eCRMCancelledOfferInactive();
+		}
+		catch (Exception e) {
+			LOG.info("cancelledOfferInactive ::*************",e);
+		}
 	}
 }

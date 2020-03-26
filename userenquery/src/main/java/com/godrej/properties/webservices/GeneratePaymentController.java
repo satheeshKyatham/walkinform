@@ -8,12 +8,18 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.godrej.properties.model.GeneratePayment;
@@ -24,12 +30,22 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-@RestController
+@Controller
 public class GeneratePaymentController {
 	private Logger Log = LoggerFactory.getLogger(getClass());
 	
 	@Autowired
 	private GeneratePaymentService generatePaymentService;
+	
+	@RequestMapping(value = { "/ccAvenue"}, method = RequestMethod.GET)
+	public String ccAvenue(ModelMap model,HttpServletRequest request) {
+		 return "ccAvenue";
+	}
+	
+	@RequestMapping(value = { "/ccAvenueLogin"}, method = RequestMethod.GET)
+	public String ccAvenueLogin(ModelMap model,HttpServletRequest request) {
+		 return "ccAvenueLogin";
+	}
 	
 	@RequestMapping(value = "/insertPaymentRequest", method = RequestMethod.POST)
 	public String insertPaymentRequest(@RequestParam("paymentDtlJson") String paymentDtlJson) {	
@@ -108,12 +124,25 @@ public class GeneratePaymentController {
 	}	
 	
 	
-	@RequestMapping(value = "/getPaymentReqRecord", method = RequestMethod.POST)
-	public String getPaymentReqRecord(@RequestParam("enqSfid") String enqSfid) {
+	@RequestMapping(value = "/getPaymentReqRecord", method = RequestMethod.GET)
+	public @ResponseBody String getPaymentReqRecord(@RequestParam("enqSfid") String enqSfid, @RequestParam("projectid") String projectid) {
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		Gson gson = gsonBuilder.create();
 		
-		return gson.toJson(generatePaymentService.getPaymentRecord(enqSfid));
+		return gson.toJson(generatePaymentService.getPaymentRecord(enqSfid,projectid));
+	}
+	
+	@PostMapping(value = "/requestToCCgateway")
+	public @ResponseBody String requestCCgateway(@RequestParam("id") int id) {
+		//call payment table and get the data
+		GeneratePayment payment = generatePaymentService.getCCPaymentData(id);
+		generatePaymentService.createCCGatewayRequest(payment);
+		//and create format for gateway integration
+		//generate the request doc number
+		//and format store in table
+		//and response capture and update in table
+//		return gson.toJson(generatePaymentService.getPaymentRecord(enqSfid,projectid));
+		return "";
 	}
 	
 }

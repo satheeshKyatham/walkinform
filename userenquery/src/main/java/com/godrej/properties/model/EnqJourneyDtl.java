@@ -13,8 +13,9 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 @Entity
-@Table(name="salesforce.nv_eoi_form")
-public class EOIData implements Serializable{
+//@Table(name="salesforce.vw_eoi_data_uat")
+@Table(name="salesforce.vw_eoi_data")
+public class EnqJourneyDtl implements Serializable{
 
 	/**
 	 * 
@@ -24,8 +25,11 @@ public class EOIData implements Serializable{
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id") private int id;
 	@Column(name="enquiryid") private String enquiryid;
-	@Column(name="date_eoi") private Date date_eoi;
+	@Column(name="enquiry_sfid") private String enquiry_sfid;
+	@Column(name="Date_Of_EOI__c") private Date date_eoi;
 	@Column(name="application_name") private String application_name;
+	@Column(name="firstname") private String firstname;
+	@Column(name="lastname") private String lastname;
 	@Column(name="email_id") private String email_id;
 	@Column(name="phone_number") private String phone_number;
 	@Column(name="telephone") private String telephone;
@@ -44,15 +48,24 @@ public class EOIData implements Serializable{
 	@Column(name="pan_no") private String pan_no;
 	@Column(name="aadhar_no") private String aadhar_no;
 	@Column(name="passport_no") private String passport_no;
-	@Column(name="other_address_proof") private String other_address_proof;
-	@Column(name="photograph_attached") private String photograph_attached;
-	@Column(name="kyc_attached") private String kyc_attached;
+	//transit
+//	@Column(name="other_address_proof") private String other_address_proof;
+	@Transient private String other_address_proof;
+	//transit
+//	@Column(name="photograph_attached") private String photograph_attached;
+	@Transient private String photograph_attached;
+	//transit
+//	@Column(name="kyc_attached") private String kyc_attached;
+	@Transient private String kyc_attached;
+	
 	@Column(name="tower_and_series") private String tower_and_series;
 	@Column(name="typology") private String typology;
 	@Column(name="floor_band") private String floor_band;
 	@Column(name="source") private String source;
 	@Column(name="cp_name") private String cp_name;
-	@Column(name="direct_sub_source") private String direct_sub_source;
+	//transit@Transient
+//	@Column(name="direct_sub_source") private String direct_sub_source;
+	@Transient private String direct_sub_source;
 	@Column(name="payment_mode") private String payment_mode;
 	@Column(name="eoi_amount") private String eoi_amount;
 	@Column(name="date_swipe_cheque") private Date date_swipe_cheque;
@@ -65,26 +78,36 @@ public class EOIData implements Serializable{
 	@Column(name="unit_number") private String unit_number;
 	@Column(name="isupdated_prime") private String isupdated_prime;
 	@Column(name="issubmitted") private String issubmitted;
+	
+	@Column(name="projectname") private String projectname;
+	@Column(name="projectsfid") private String projectsfid;
+	@Column(name="contactsfid") private String contactsfid;
+	@Column(name="enquirysfid") private String enquirysfid;
+	@Column(name="unit_facing") private String unit_facing;
+	@Column(name="PropStrength__Request_Status__c") private String PropStrength__Request_Status__c;
+	@Column(name="propstrength__project__c") private String propstrength__project__c;
+	
 	@Transient private File panupload;
 	@Transient private File addressUpload;
 	
-	@Column(name="barcode_str") private String barcode_str;
+	/*@Column(name="barcode_str") private String barcode_str;
 	@Column(name="barcode_numeric") private String barcode_numeric;
 	@Column(name="barcode_location") private String barcode_location;
 	@Column(name="token_no", nullable = false) private Integer token_no;
-	@Column(name="userdocid", nullable = false) private String userdocid;
-	@Column(name="userid") private String userid;
-	@Column(name="user_email") private String user_email;
-	@Column(name="kyclink") private String kyclink;
-	@Column(name="kycapproval_status") private String kycapproval_status;
-	@Column(name="kycreject_comment") private String kycreject_comment;
-	@Column(name="enquiry18") private String enquirysfid;
+	@Column(name="userdocid", nullable = false) private String userdocid;*/
+	@Transient private String barcode_str;
+	@Transient private String barcode_numeric;
+	@Transient private String barcode_location;
+	@Transient private Integer token_no;
+	@Transient private String userdocid;
+	
+	
 	
 	public String getUserdocid() {
 		return userdocid;
 	}
 	public void setUserdocid(String userdocid) {
-	this.userdocid = userdocid;
+		this.userdocid = userdocid;
 	}
 	public void setAuth_id(String auth_id) {
 		this.auth_id = auth_id;
@@ -388,35 +411,23 @@ public class EOIData implements Serializable{
 	public String getAuth_id() {
 		return auth_id;
 	}
-	public String getUserid() {
-		return userid;
+	public String getProjectname() {
+		return projectname;
 	}
-	public void setUserid(String userid) {
-		this.userid = userid;
+	public void setProjectname(String projectname) {
+		this.projectname = projectname;
 	}
-	public String getUser_email() {
-		return user_email;
+	public String getProjectsfid() {
+		return projectsfid;
 	}
-	public void setUser_email(String user_email) {
-		this.user_email = user_email;
+	public void setProjectsfid(String projectsfid) {
+		this.projectsfid = projectsfid;
 	}
-	public String getKyclink() {
-		return kyclink;
+	public String getContactsfid() {
+		return contactsfid;
 	}
-	public void setKyclink(String kyclink) {
-		this.kyclink = kyclink;
-	}
-	public String getKycapproval_status() {
-		return kycapproval_status;
-	}
-	public void setKycapproval_status(String kycapproval_status) {
-		this.kycapproval_status = kycapproval_status;
-	}
-	public String getKycreject_comment() {
-		return kycreject_comment;
-	}
-	public void setKycreject_comment(String kycreject_comment) {
-		this.kycreject_comment = kycreject_comment;
+	public void setContactsfid(String contactsfid) {
+		this.contactsfid = contactsfid;
 	}
 	public String getEnquirysfid() {
 		return enquirysfid;
@@ -424,5 +435,42 @@ public class EOIData implements Serializable{
 	public void setEnquirysfid(String enquirysfid) {
 		this.enquirysfid = enquirysfid;
 	}
+	public String getUnit_facing() {
+		return unit_facing;
+	}
+	public void setUnit_facing(String unit_facing) {
+		this.unit_facing = unit_facing;
+	}
+	public String getPropStrength__Request_Status__c() {
+		return PropStrength__Request_Status__c;
+	}
+	public void setPropStrength__Request_Status__c(String propStrength__Request_Status__c) {
+		PropStrength__Request_Status__c = propStrength__Request_Status__c;
+	}
+	public String getPropstrength__project__c() {
+		return propstrength__project__c;
+	}
+	public void setPropstrength__project__c(String propstrength__project__c) {
+		this.propstrength__project__c = propstrength__project__c;
+	}
+	public String getEnquiry_sfid() {
+		return enquiry_sfid;
+	}
+	public void setEnquiry_sfid(String enquiry_sfid) {
+		this.enquiry_sfid = enquiry_sfid;
+	}
+	public String getFirstname() {
+		return firstname;
+	}
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
+	public String getLastname() {
+		return lastname;
+	}
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
 
+	
 }

@@ -33,7 +33,9 @@ import org.ksoap2.serialization.SoapObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -61,6 +63,7 @@ import com.godrej.properties.model.BSPAgainstPymtPlan;
 import com.godrej.properties.model.BSPTaxRecord;
 import com.godrej.properties.model.BillingData;
 import com.godrej.properties.model.CarParkCharges;
+import com.godrej.properties.model.CoApplicant;
 import com.godrej.properties.model.Contact;
 import com.godrej.properties.model.CostSheet;
 import com.godrej.properties.model.CostSheetHis;
@@ -4253,5 +4256,49 @@ public class WebServiceController<MultipartFormDataInput> {
 		}
 		//END Get enquiry Details
 		
+		@RequestMapping(value = "/validateStr", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
+		public String validateMobileStr(@ModelAttribute("coapplicantdata") CoApplicant coapp,
+				@RequestParam("dncstr") String encstr, @RequestParam("user_entr_no") String userNo,
+				@RequestParam("projectid") String projectid,@RequestParam("enqsfid") String enqsfid) {
+			// ModelAndView model = new ModelAndView();
+			Gson gson = new GsonBuilder().disableHtmlEscaping().create();
+
+			StringEncDec enc = new StringEncDec();
+			@SuppressWarnings("static-access")
+			String decStr = enc.decrypt(encstr);
+			log.info("EncriptString =" + decStr);
+			if (decStr.equals(userNo)) {
+				log.info("Input Validate");
+				log.info("decStr:-" + decStr);
+				log.info("userNo:-" + userNo);
+				// userEOIService.findMobileNoExist(decStr);
+				// model.setViewName("index");
+				List<EOIData> eList = userEOIService.findMobileNoExistEOIForm(decStr, projectid,enqsfid);
+
+				if (eList != null && eList.size() > 0) {
+					return gson.toJson(eList);
+				} else {
+					return "not list";
+					/*return gson.toJson(userEOIService.findMobileNoExist(decStr, projectid));*/
+				}
+			} else {
+				return gson.toJson("Invalid input or No Entry Found");
+			}
+
+		}
 		
+		@RequestMapping(value = "/getccAvenueList", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
+		public String validateMobileStr(@RequestParam("dncstr") String encstr,@RequestParam("projectid") String projectid,@RequestParam("enqsfid") String enqsfid) {
+			
+			Gson gson = new GsonBuilder().disableHtmlEscaping().create();
+
+			StringEncDec enc = new StringEncDec();
+			@SuppressWarnings("static-access")
+			String decStr = enc.decrypt(encstr);
+			log.info("EncriptString =" + decStr);
+				log.info("Input Validate");
+				log.info("decStr:-" + decStr);
+				List<EOIData> eList = userEOIService.findMobileNoExistEOIForm(decStr, projectid,enqsfid);
+				return gson.toJson(eList);
+		}
 }

@@ -6,5 +6,6 @@ import com.godrej.properties.model.GeneratePayment;
 
 public interface GeneratePaymentDao {
 	void insertPaymentDtl (List<GeneratePayment> pymtDtl);
-	List<GeneratePayment> getPaymentRecord(String enqSfid);
+	List<GeneratePayment> getPaymentRecord(String enqSfid, String projectid);
+	public GeneratePayment getCCPaymentData(int id);
 }
