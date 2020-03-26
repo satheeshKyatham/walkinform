@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -129,6 +130,16 @@ public class GeneratePaymentController {
 		Gson gson = gsonBuilder.create();
 		
 		return gson.toJson(generatePaymentService.getPaymentRecord(enqSfid,projectid));
+	}
+	
+	@PostMapping(value = "/requestToCCgateway")
+	public @ResponseBody String requestCCgateway(@RequestParam("id") int id) {
+		//call payment table and get the data
+		generatePaymentService.getCCPayment(id);
+		//and create format for gateway integration
+		//
+//		return gson.toJson(generatePaymentService.getPaymentRecord(enqSfid,projectid));
+		return "";
 	}
 	
 }
