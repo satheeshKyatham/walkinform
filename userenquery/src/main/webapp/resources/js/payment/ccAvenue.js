@@ -7,14 +7,12 @@ $.ajaxSetup({
 });
 var statusLogin="N";
 $(document).ready(function() {
-	debugger
 	var id=getProjectId();
 	var phone=encryptStr();
 	
 	getCustomerDetails(phone,id);
 });
 function getProjectId(){
-	debugger
 	var urlString = window.location.href;
 	var url = urlString.split("=");/*'3333888379'*/;
 	var id=url[2];
@@ -23,7 +21,6 @@ function getProjectId(){
 	return proId;
 }
 function getenqsfId(){
-	debugger
 	var urlString = window.location.href;
 	var url = urlString.split("=");/*'3333888379'*/;
 	var id=url[3];
@@ -87,7 +84,6 @@ function encryptStr() {
 	return params.num;
 }
 function validatePhNo() {
-	debugger
 	var inpuNum = $('#inputNumber').val();
 	_search_data(inpuNum, encryptStr);
 }
@@ -179,10 +175,11 @@ function getCCAvenuePaymentDetails()
 								debugger;
 								console.log("test",value)
 								if(value.ispayment_status=='Y'){
-									paymentButton="<button class='btn btn-primary btnNext' onclick='test();'>Pay Now</button>";
+									paymentButton="<button class='btn btn-primary btnNext' onclick='requestCCPaymentGateway(this);'>Pay Now</button>";
 								}else{
 									paymentButton="";
 								}
+								$('#enquiry_Id').val(value.id);
 								var val = "<tr><td><label>"+value.enquiry_name+"</label></td><td>"+value.project_name+"</td><td>"+value.amount+"</td><td>"+transactionId+"</td><td>"+transactionStatus+"</td><td>"+paymentButton+"</td>";
 								val=val+"</tr>";
 								$("#dtOrderExample tbody").append(val);
@@ -213,3 +210,19 @@ function getCCAvenuePaymentDetails()
 						});
 						
 					}
+
+function requestCCPaymentGateway(e){
+	debugger;
+	var primaryId=$("#enquiry_Id").val();
+	var formData = new FormData();
+	formData.append("id",primaryId)
+	$.ajax({
+		url : "requestToCCgateway",
+		type : 'POST',
+		data : formData,
+		processData : false,
+		contentType : false,
+		success : function(data) {
+		}
+	});
+}

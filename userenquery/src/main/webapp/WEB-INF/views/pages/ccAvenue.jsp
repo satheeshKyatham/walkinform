@@ -70,7 +70,7 @@ if(ses!=null){
 							<table class="table table-striped table-bordered" id="dtOrderExample" cellspacing="0" width="100%">
 								<thead>
 									<tr>
-										<th>Enquiry</th>
+										<th id="enquiry_Id">Enquiry</th>
 										<th>Project Name</th>
 										<th>Amount</th>	
 										<th>Transaction Id</th>	
