@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.godrej.kyc.util.StringEncDec;
 import com.godrej.properties.model.EnqJourneyDtl;
@@ -38,7 +39,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-@Controller
+@RestController
 public class GeneratePaymentController {
 	private Logger Log = LoggerFactory.getLogger(getClass());
 	
