@@ -23,14 +23,14 @@ import com.godrej.properties.constants.KeyConstants;
 public class CCGatewayRequestController {
 
 	static Logger logger = Logger.getLogger(CCGatewayRequestController.class);
-	public void CCGatewayRequestPost(String ccaRequest) throws ClientProtocolException, IOException
+	public String CCGatewayRequestPost(String ccaRequest) throws ClientProtocolException, IOException
 	{
 		String accessCode= "AVHJ91HC26CC78JHCC";		
 		String workingKey = "AC52E9A706E2D7938203D4D554B61E2E";
 		AesCryptUtil aesUtil=new AesCryptUtil(workingKey);
 		System.out.println(aesUtil);
 		String encRequest = aesUtil.encrypt(ccaRequest);
-		CloseableHttpClient  httpclient = HttpClients.createDefault();
+		/*CloseableHttpClient  httpclient = HttpClients.createDefault();
 		
 		HttpPost httpost = new HttpPost(KeyConstants.CCAVENUE_GATEWAT_URL);
 		ArrayList<NameValuePair> postParameters = new ArrayList<NameValuePair>();
@@ -63,8 +63,9 @@ public class CCGatewayRequestController {
 			httpclient.close();
 		}
 		logger.info("getResult ::: " + getResult);
+		return getResult;*/
 		
-		//return getResult;
+		return encRequest;
 		
 	}
 }

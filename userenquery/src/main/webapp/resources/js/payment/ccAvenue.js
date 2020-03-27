@@ -10,7 +10,7 @@ $(document).ready(function() {
 	var id=getProjectId();
 	var phone=encryptStr();
 	
-	getCustomerDetails(phone,id);
+	/*getCustomerDetails(phone,id);*/
 });
 function getProjectId(){
 	var urlString = window.location.href;
@@ -144,14 +144,14 @@ function _search_data(inpuNum, project_sfid) {
 							debugger
 							if (data != null) {
 								window.location.assign("ccAvenue?num="+ encStr+ "&projectid="+ project_sfid+"&enqsfid="+enqsfid);
-						} else {
+						}} else {
 							$("#invalidEntry").text("Invalid number or No Entry Found");
 							$("#email").val('');
 							$("#birthdate").val('');
 							$("#lastname").val('');
 							$("#loginColLoad").hide();
 						}
-							}
+							
 					});
 }
 function getCCAvenuePaymentDetails()
@@ -163,7 +163,7 @@ function getCCAvenuePaymentDetails()
 						$("#dtOrderExample tbody").empty();
 						 $("#mainPageLoad").show();
 						 var projectId=getProjectId();
-						 var enqId=$('#enqsfid').val();
+						 var enqId=getenqsfId();
 						var urlPP = "getPaymentReqRecord?projectid="+projectId+"&enqSfid="+enqId;
 						var i = 0
 						var paymentButton="";
@@ -223,6 +223,7 @@ function requestCCPaymentGateway(e){
 		processData : false,
 		contentType : false,
 		success : function(data) {
+			 window.location.href = "ccavRequestHandler?ccencrqst="+data;
 		}
 	});
 }

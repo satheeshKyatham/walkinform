@@ -20,6 +20,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -82,14 +83,10 @@ public class GeneratePaymentController {
 	}
 	
 	
-	@RequestMapping(value = { "/ccAvenue"}, method = RequestMethod.GET)
-	public String ccAvenue(ModelMap model,HttpServletRequest request) {
-		 return "ccAvenue";
-	}
 	
-	@RequestMapping(value = { "/ccAvenueLogin"}, method = RequestMethod.GET)
-	public String ccAvenueLogin(ModelMap model,HttpServletRequest request) {
-		 return "ccAvenueLogin";
+	@GetMapping(value = { "/ccavRequestHandler"})
+	public String test(ModelMap model,HttpServletRequest request) {
+		 return "ccavRequestHandler";
 	}
 	
 	@RequestMapping(value = "/insertPaymentRequest", method = RequestMethod.POST)
@@ -126,9 +123,9 @@ public class GeneratePaymentController {
 				//int customerMobileInt = Integer.parseInt(customer_mobile);
 				
 				String strMobile = encriptString(customer_mobile);
-				String strEnq_sfid = encriptString(enq_sfid);
+				/*String strEnq_sfid = encriptString(enq_sfid);*/
 				String resultPath = request.getHeader("Host") + request.getContextPath();
-				String paymentRequest= "https://"+resultPath+"/ccAvenueLogin?num="+strMobile.replaceAll("\"", "")+"&projectid="+URLEncoder.encode(project_sfid, "UTF-8")+"&enqsfid="+strEnq_sfid.replaceAll("\"", "")+"&projectname="+URLEncoder.encode(project_name, "UTF-8");
+				String paymentRequest= "https://"+resultPath+"/ccAvenueLogin?num="+strMobile.replaceAll("\"", "")+"&projectid="+URLEncoder.encode(project_sfid, "UTF-8")+"&enqsfid="+URLEncoder.encode(enq_sfid, "UTF-8")+"&projectname="+URLEncoder.encode(project_name, "UTF-8");
 				
 				String str=paymentDtlJson;
 				  
@@ -306,18 +303,17 @@ public class GeneratePaymentController {
 		}
 	}
 	
-	
 	@PostMapping(value = "/requestToCCgateway")
 	public @ResponseBody String requestCCgateway(@RequestParam("id") int id) {
 		//call payment table and get the data
 		GeneratePayment payment = generatePaymentService.getCCPaymentData(id);
-		generatePaymentService.createCCGatewayRequest(payment);
 		//and create format for gateway integration
 		//generate the request doc number
 		//and format store in table
 		//and response capture and update in table
 //		return gson.toJson(generatePaymentService.getPaymentRecord(enqSfid,projectid));
-		return "";
+		//insert data to CCpayment Table
+		return generatePaymentService.createCCGatewayRequest(payment);
 	}
 	
 }
