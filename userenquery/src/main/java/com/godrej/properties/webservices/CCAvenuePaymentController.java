@@ -59,13 +59,7 @@ public class CCAvenuePaymentController {
 		}
 	}
 
-	@RequestMapping(value = { "/getProjectNameForPaymentLogin"}, method = RequestMethod.GET)
-	public @ResponseBody String getProjectNameForPaymentLogin(@RequestParam("projectsfid") String id) {
-		GsonBuilder gsonBuilder = new GsonBuilder();
-		Gson gson = gsonBuilder.create();
-		return gson.toJson(projectLaunchService.getProjectNameforLogin(id));
-		
-	}
+
 
 	@GetMapping(value = { "/ccavRequestHandler"})
 	public String test(ModelMap model,HttpServletRequest request) {

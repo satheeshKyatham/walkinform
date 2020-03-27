@@ -4,9 +4,9 @@ $(document).ready(function() {
 	var id=getProjectId();
 	var phone=encryptStr();
 	
-	/*getCustomerDetails(phone,id);*/
 });
 function getProjectId(){
+	debugger
 	var urlString = window.location.href;
 	var url = urlString.split("=");/*'3333888379'*/;
 	var id=url[2];
@@ -22,48 +22,7 @@ function getenqsfId(){
 	var enqsfidId=enqId[0];
 	return enqsfidId;
 }
-/*function getCustomerDetails(phone,id){
-	var encStr=encryptStr();
-	var enqsfid=getenqsfId();
-	$.get(
-			"getccAvenueList",
-			{
-				"dncstr" : encStr,
-				"projectid" : id,
-				"enqsfid":enqsfid
-			},function (data){
-				console.log(data)
-				var myJSON = JSON.stringify(data);
-				var data1 = JSON.parse(myJSON);
-				if (data != null && data[0].phone_number != undefined) {
-					var issubmitted = 'N';
-					var j = 1;
-					console.log("index" ,data)
-					for (var i = 0; i < data.length; i++) {
-						
-						var kycapproval_status = data[i].kycapproval_status;
-						if (data[i].phone_number == undefined) {
-							$("#invalidEntry").text(
-									"Invalid number or No Entry Found");
-						} else {
-							$("#invalidEntry").text("");
-							if (i == 0) {
-								$("#mainTopNav").append("<li class='active'><a href='#eoi"+ j+ "' data-toggle='tab' id='eoitab"	+ j	+ "'>"+ data[i].enquiryid+ "</a></li>")
-							} else {
-								$("#mainTopNav")
-										.append("<li><a href='#eoi"+ j	+ "' data-toggle='tab' id='eoitab"+ j+ "'>"	+ data[i].enquiryid	+ "</a></li>")
-							}
-						}
-						$("#enqsfid").val(data[i].enquirysfid);
-						$("#enqid").val(data[i].enquiryid);
-						issubmitted = data[i].issubmitted;
-						j++;
-					}
-					getCCAvenuePaymentDetails();
-				}
-			}
-			)
-}*/
+
 function encryptStr() {
 	
 	var prmstr = window.location.search.substr(1);
