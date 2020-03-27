@@ -42,7 +42,7 @@
 							<img src="<c:url value='/resources/images/logo.png' />">
 						</div>
 						
-						<h3 class="loginProjTitle">Godrej Exquisite</h3>
+						<h3 class="loginProjTitle">"${projectName }"</h3>
 						<div class="clearfix"></div>
 						<label class="inputLabel">Enter your registered mobile no.</label>
 						<div class="txtCenter">	
@@ -66,6 +66,7 @@
 	<script src="<c:url value='/resources/js/dataTables.buttons.min.js'/>"></script>
 	<script src="<c:url value='/resources/js/jszip.min.js'/>"></script>
 	<script src="<c:url value='/resources/js/buttons.html5.min.js'/>"></script>
-	<script src="<c:url value='/resources/js/payment/ccAvenue.js?v=18.15'/>"></script>	
+	<script src="<c:url value='/resources/js/payment/ccAvenue.js?v=18.15'/>"></script>
+	<script src="<c:url value='/resources/js/payment/ccAvenueLogin.js?v=18.15'/>"></script>	
 	</body>
 </html>
