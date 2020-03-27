@@ -16,6 +16,7 @@ import com.godrej.properties.controller.CCGatewayRequestController;
 import com.godrej.properties.dao.CCAvenueGatewayRequestDao;
 import com.godrej.properties.dao.GeneratePaymentDao;
 import com.godrej.properties.model.CCAvenueGatewayRequest;
+import com.godrej.properties.model.EOIPaymentDtl;
 import com.godrej.properties.model.GeneratePayment;
 import com.godrej.properties.service.GeneratePaymentService;
 
@@ -31,6 +32,11 @@ public class GeneratePaymentServiceImpl implements GeneratePaymentService{
 	
 	@Autowired
 	CCAvenueGatewayRequestDao ccAvenueGatewayRequestDao;
+	
+	@Override
+	public void updatePaymentReq(List<GeneratePayment> payReq) {
+		  dao.updatePaymentReq(payReq);
+	}
 	
 	@Override
 	public Boolean insertPaymentDtl(List<GeneratePayment> pymtDtl) {

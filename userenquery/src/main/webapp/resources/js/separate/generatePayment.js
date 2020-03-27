@@ -161,11 +161,22 @@ function getPaymentReqRecord () {
 						trans_date = '';
 					}
 					
-					html += 	'<tr class="paymentDataPlotRow">'
+					html += 	'<tr class="paymentDataPlotRow" data-rowid = "'+obj[i].id+'">'
 									+ '<td style="text-align:center;">'+trans_date+'</td>' 
-									+ '<td style="text-align:center;"> <input style="display:none;" name="amount"  value="'+obj[i].amount+'">'+obj[i].amount+'</td>' 
-									+ '<td style="text-align:center;">'+obj[i].description+'</td>' 
-									+ '<td> </td>' 
+									+ '<td style="text-align:center;"> ' 
+											+ ' <input onkeyup="csPtcalculateGrandTotalOP()" style="display:none;" name="amount"  class="submittedAmount numericWithoutDecimal numericField full form-control input-sm" value="'+obj[i].amount+'">'
+											+ '<span class="oldReqAmount">'+obj[i].amount+'</span>' 
+										+'</td>' 
+									+ '<td style="text-align:center;">'
+											+ '<textarea class="editDesPR full form-control input-sm" style="display:none;">'+obj[i].description+'</textarea>'
+											+ '<span class="existingDes">'+obj[i].description+'</span>' 
+									+ '</td>' 
+									+ '<td class="crudRPBtn"> '
+										+ '<button class="btn btn-primary blue_btn editPayReqBtn" onclick="editPaymentRequest(this)">Edit</button>'
+										+ '<button class="btn btn-primary blue_btn updatePaymentBtn" style="display:none" onclick="">Update</button>'
+										+ '<button class="btn btn-primary blue_btn deletePayReqBtn" >Delete</button>'
+										+ '<button class="btn btn-primary blue_btn cancelPayReqBtn" style="display:none" onclick="cancelPayReq(this)">Cancel</button>'
+									+ '</td>' 
 								"</tr>";
 				}
 				
@@ -184,3 +195,37 @@ function getPaymentReqRecord () {
 		csPtcalculateGrandTotalOP();
 	});	
 }
+
+
+
+function editPaymentRequest (e) {
+	var existingDes = $(e).closest("td").closest("tr").find(".existingDes").text();
+	
+	$(e).hide();
+	$(e).closest("td").find(".deletePayReqBtn").hide();
+	$(e).closest("td").find(".updatePaymentBtn").show();
+	$(e).closest("td").find(".cancelPayReqBtn").show();
+	$(e).closest("td").closest("tr").find(".submittedAmount").show();
+	$(e).closest("td").closest("tr").find(".oldReqAmount").hide();
+	$(e).closest("td").closest("tr").find(".editDesPR").val(existingDes);
+	$(e).closest("td").closest("tr").find(".existingDes").hide();
+	$(e).closest("td").closest("tr").find(".editDesPR").show();
+} 
+
+function cancelPayReq (e) {
+	var existingAmount = $(e).closest("td").closest("tr").find(".oldReqAmount").text();
+	
+	$(e).hide();
+	$(e).closest("td").find(".deletePayReqBtn").show();
+	$(e).closest("td").find(".updatePaymentBtn").hide();
+	$(e).closest("td").find(".editPayReqBtn").show();
+	$(e).closest("td").closest("tr").find(".submittedAmount").val("");
+	$(e).closest("td").closest("tr").find(".submittedAmount").val(existingAmount);
+	$(e).closest("td").closest("tr").find(".submittedAmount").hide();
+	$(e).closest("td").closest("tr").find(".oldReqAmount").show();
+	$(e).closest("td").closest("tr").find(".existingDes").show();
+	$(e).closest("td").closest("tr").find(".editDesPR").hide();
+	csPtcalculateGrandTotalOP();
+}
+
+//$('#getPln').find('option:selected').attr("data-valuepercentage")

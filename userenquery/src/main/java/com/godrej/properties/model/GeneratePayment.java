@@ -43,6 +43,9 @@ public class GeneratePayment implements Serializable{
 	@Column(name = "customer_name") private String customer_name;
 	@Column(name = "customer_email") private String customer_email;
 	
+	@Column(name = "bank_ref_no") private String bank_ref_no;
+	@Column(name = "payment_status") private String payment_status;
+	
 	@Transient private String transaction_date_string;
 	
 	public int getId() {
@@ -174,4 +177,18 @@ public class GeneratePayment implements Serializable{
 	public void setCustomer_email(String customer_email) {
 		this.customer_email = customer_email;
 	}
+	public String getBank_ref_no() {
+		return bank_ref_no;
+	}
+	public void setBank_ref_no(String bank_ref_no) {
+		this.bank_ref_no = bank_ref_no;
+	}
+	public String getPayment_status() {
+		return payment_status;
+	}
+	public void setPayment_status(String payment_status) {
+		this.payment_status = payment_status;
+	}
+	
+	
 }

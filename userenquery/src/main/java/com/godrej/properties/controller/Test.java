@@ -1,6 +1,7 @@
 package com.godrej.properties.controller;
 
 import java.util.List;
+import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -8,6 +9,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.simple.JSONArray;
 
+import com.ccavenue.security.AesCryptUtil;
+import com.godrej.properties.model.CCAvenueResponseModel;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -84,12 +87,117 @@ public class Test {
 				  System.out.println(o); 
 				  System.out.println(o.get("offerId")); 
 				}*/
-		 String str = "4434";
+		 /*String str = "4434";
 	      if(str.matches("[0-9]+")) {
 	         System.out.println("String contains only digits!");
 	      }
 	      else
-	    	  System.out.println("String contains Alpha Numeric!");
+	    	  System.out.println("String contains Alpha Numeric!");*/
+		
+		String str ="f9099318246ff300e6c53fea0272e6c3237481fb3d7989b10e62b4a1c3ee6f047fc4eb8eda9c06c81c6fe20cb1179dbd5defe5150b9745f549e6205eab79c69784758222724f4f8c061fff5075997b87df7f3f2a023c2a23e7153067d07aefd8f32ba25c517d0092e1e774cf5b520b8785cb58b05b6efb2d5714b45bb9fde9b67c666b7907977937266c996e38d129295ad33da677b9118fff299bba7fce70a807d7e001dae24ec00b82b6d4cfb836d6ebe441b65dffeb61496478a321c7fb5038b664485229b5c8790e8042850910929c86a0954610b03b20df6f40790f1e08721ae9686a70e9b4537c28ddf85a482de1e0d7bfc3d9aacc44e598e2bf4a3eba54a7a3e015ae9364820b1bc9cca35b94662c3a0cefbe22bca2108d6d9c4501079ed03c5995c4855004c387574a4d2b395b5109b6f1dc8e8d4e17d8e6c862200eeade820cbfb608454f264e7a185f114459fa0f0c0f9c4eae308e8649f3b736d38ed1f9b14a578d388fe50b902e3c19adac1bf7ec64eb55187a0eb8f35b0211aace76adb5fc1023fb4e52aa1722ba095fcc9826c543e7ea824735464050fb9688173cdc45c4ffdc847164d9b29af3b524eb9f3c9cdf4f68bf3860ea25a4b742b6df718f2018b30436207a8c8f40250bab5ba7a0c656162e6ef6533b426e98e86ede3727689389a7254301458f0ba7484e037a8a30e77acd69d8c37e2def2119bba6a1cba499ecf534109f391a4617317b553de4a6d8e94afdf075c51fe27646e1ebb65807815e6f697336efb1a65eb1d98657352a71de06188386c64f436378945d7499c289ba7ae44d2755d995c1f97f13a69876a7186fca4fdaac292f47343c753a6f49003acb9e0e5f79f8f113b028a8468ff32737734d4c80ea6be4afa64ffbbf6d0de784c68f80349ab6389af42b992686e6458e1d174529553ca05b93eed982afe709dd88d373c96026212fa32d74e7ae1ce18c0c960c03393fcc4b904cc676913a822fc0403cbfa077fa9a7fe93264d95aacf39b153b5095a2d9adf51af2556687b3532578152731636f6a17119da8e2e1f58ac46ccced3ea23d7bef88274ae925f8832ce91a4444b2b52a3c9ae57baefdd77b5e3e99ed5f04bffb6a8f";
+		CCAvenueResponseModel respModel = new CCAvenueResponseModel();
+		String workingKey = "AC52E9A706E2D7938203D4D554B61E2E";
+		AesCryptUtil aesUtil=new AesCryptUtil(workingKey);
+		String decResp = aesUtil.decrypt(str);
+		System.out.println(decResp);
+		respModel.setGateway_response(decResp);
+		StringTokenizer tokenizer = new StringTokenizer(decResp, "&");
+		String pair=null, pname=null, pvalue=null;
+		while (tokenizer.hasMoreTokens()) {
+			pair = (String)tokenizer.nextToken();
+			if(pair!=null) {
+				StringTokenizer strTok=new StringTokenizer(pair, "=");
+				pname=""; pvalue="";
+				if(strTok.hasMoreTokens()) {
+					pname=(String)strTok.nextToken();
+					if(pname.contains("order_id"))
+					{
+						if(strTok.hasMoreTokens())
+							respModel.setOrder_id((String)strTok.nextToken());
+					}
+					if(pname.contains("tracking_id"))
+					{
+						if(strTok.hasMoreTokens())
+							respModel.setTracking_id(Long.parseLong(strTok.nextToken()));
+					}
+					if(pname.contains("bank_ref_no"))
+					{
+						if(strTok.hasMoreTokens())
+							respModel.setBank_ref_no((String)strTok.nextToken());
+					}
+					
+					if(pname.contains("order_status"))
+					{
+						if(strTok.hasMoreTokens())
+							respModel.setOrder_status((String)strTok.nextToken());
+					}
+					if(pname.contains("failure_message"))
+					{
+						if(strTok.hasMoreTokens())
+							respModel.setFailure_message((String)strTok.nextToken());
+					}
+					if(pname.contains("payment_mode"))
+					{
+						if(strTok.hasMoreTokens())
+							respModel.setPayment_mode((String)strTok.nextToken());
+					}
+					if(pname.contains("card_name"))
+					{
+						if(strTok.hasMoreTokens())
+							respModel.setCard_name((String)strTok.nextToken());
+					}
+					/*if(pname.contains("status_code"))
+					{
+						if(strTok.hasMoreTokens() && strTok.nextToken()!=null)
+							respModel.setStatus_code(Integer.parseInt(strTok.nextToken()));
+					}*/
+					if(pname.contains("status_message"))
+					{
+						if(strTok.hasMoreTokens())
+							respModel.setStatus_message((String)strTok.nextToken());
+					}
+					if(pname.contains("response_currency"))
+					{
+						if(strTok.hasMoreTokens())
+							respModel.setResponse_currency((String)strTok.nextToken());
+					}
+					if(pname.contains("response_amount"))
+					{
+						if(strTok.hasMoreTokens())
+							respModel.setResponse_amount(new Double(strTok.nextToken()));
+					}
+					if(pname.contains("vault"))
+					{
+						if(strTok.hasMoreTokens())
+							respModel.setVault((String)strTok.nextToken());
+					}
+					if(pname.contains("response_code"))
+					{
+						if(strTok.hasMoreTokens())
+							respModel.setResponse_code(Integer.parseInt(strTok.nextToken()));
+					}
+					if(pname.contains("trans_date"))
+					{
+						//if(strTok.hasMoreTokens())
+							//respModel.setTrans_date(strTok.nextToken());
+					}
+					if(pname.contains("merchant_param2"))
+					{
+						if(strTok.hasMoreTokens())
+							respModel.setMerchant_param2((String)strTok.nextToken());
+					}
+					if(pname.contains("merchant_param3"))
+					{
+						if(strTok.hasMoreTokens())
+							respModel.setMerchant_param3((String)strTok.nextToken());
+					}
+				}
+			}
+		}
+		System.out.println("respModel:-"+respModel);
+		System.out.println("respModel:-"+respModel.getTracking_id());
+		System.out.println("respModel:-"+respModel.getResponse_amount());
+		
 	}
 
 }

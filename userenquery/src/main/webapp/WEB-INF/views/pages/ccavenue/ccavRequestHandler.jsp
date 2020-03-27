@@ -12,7 +12,7 @@
 <body>
 
 	<%
-	String accessCode= "AVHJ91HC26CC78JHCC";
+	/* String accessCode= "AVHJ91HC26CC78JHCC"; */
 	 /* String accessCode= "AVMB75FA72BU32BMUB";		//Put in the Access Code in quotes provided by CCAVENUES.
 	 String workingKey = "2E669830C50D062CA89B2ED44260814C";    //Put in the 32 Bit Working Key provided by CCAVENUES.  */
 	 
@@ -37,7 +37,8 @@
 	
 	<form id="nonseamless" method="post" name="redirect" action="https://secure.ccavenue.com/transaction/transaction.do?command=initiateTransaction"/> 
 		<input type="hidden" id="encRequest" name="encRequest" value="<%= request.getParameter("ccencrqst") %>">
-		<input type="hidden" name="access_code" id="access_code" value="<%= accessCode %>">
+		<%-- <input type="hidden" name="access_code" id="access_code" value="<%= accessCode %>"> --%>
+		<input type="hidden" name="access_code" id="access_code" value="<%= request.getParameter("accesscode") %>">
 		<script language='javascript'>document.redirect.submit();</script>
 	</form>
 	

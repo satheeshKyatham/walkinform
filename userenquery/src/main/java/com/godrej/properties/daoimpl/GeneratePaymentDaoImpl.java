@@ -24,6 +24,17 @@ public class GeneratePaymentDaoImpl extends AbstractDao<Integer, GeneratePayment
 	private SessionFactory sessionFactory;
 	
 	@Override
+	public void updatePaymentReq(List<GeneratePayment> payReq) {
+		for (int i = 0; i <payReq.size(); i++) {
+			Session session = this.sessionFactory.getCurrentSession();
+			
+			Query query = session.createQuery("UPDATE GeneratePayment SET isactive = 'O' WHERE id = '"+payReq.get(i).getId()+"' ");
+			
+			query.executeUpdate();
+		}
+	}
+	
+	@Override
 	public Boolean insertPaymentDtl(List<GeneratePayment> pymtDtl) {
 	try {
 			batchPersist(pymtDtl);

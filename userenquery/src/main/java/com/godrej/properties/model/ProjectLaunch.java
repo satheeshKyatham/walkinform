@@ -26,9 +26,11 @@ public class ProjectLaunch implements Serializable{
 	@Column(name="region__c") private String  regionname;
 	@Column(name="salesmanager_sfid") private String  salesmanager_sfid;
 	
-	@Column(name="mid") private String  mid;
-	@Column(name="access_key") private String  access_key;
-	@Column(name="working_key") private String  working_key;
+	@Column(name="ccavenue_merchant_id") private Integer  ccavenue_merchant_id;
+	@Column(name="ccavenue_workingkey") private String  ccavenue_workingkey;
+	@Column(name="ccavenue_accesscode") private String  ccavenue_accesscode;
+	@Column(name="isallow_ccpayment_gateway") private String  isallow_payment;
+	
 	
 	public String getSalesmanager_sfid() {
 		return salesmanager_sfid;
@@ -75,24 +77,29 @@ public class ProjectLaunch implements Serializable{
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	public String getMid() {
-		return mid;
+	public Integer getCcavenue_merchant_id() {
+		return ccavenue_merchant_id;
 	}
-	public void setMid(String mid) {
-		this.mid = mid;
+	public void setCcavenue_merchant_id(Integer ccavenue_merchant_id) {
+		this.ccavenue_merchant_id = ccavenue_merchant_id;
 	}
-	public String getAccess_key() {
-		return access_key;
+	public String getCcavenue_workingkey() {
+		return ccavenue_workingkey;
 	}
-	public void setAccess_key(String access_key) {
-		this.access_key = access_key;
+	public void setCcavenue_workingkey(String ccavenue_workingkey) {
+		this.ccavenue_workingkey = ccavenue_workingkey;
 	}
-	public String getWorking_key() {
-		return working_key;
+	public String getCcavenue_accesscode() {
+		return ccavenue_accesscode;
 	}
-	public void setWorking_key(String working_key) {
-		this.working_key = working_key;
+	public void setCcavenue_accesscode(String ccavenue_accesscode) {
+		this.ccavenue_accesscode = ccavenue_accesscode;
 	}
-	 
+	public String getIsallow_payment() {
+		return isallow_payment;
+	}
+	public void setIsallow_payment(String isallow_payment) {
+		this.isallow_payment = isallow_payment;
+	}
 
 }

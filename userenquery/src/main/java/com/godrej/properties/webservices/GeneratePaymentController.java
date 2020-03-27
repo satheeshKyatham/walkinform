@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.godrej.kyc.util.StringEncDec;
+import com.godrej.properties.model.EOIPaymentDtl;
 import com.godrej.properties.model.EnqJourneyDtl;
 import com.godrej.properties.model.GeneratePayment;
 import com.godrej.properties.service.EnqJourneyDtlService;
@@ -49,6 +50,32 @@ public class GeneratePaymentController {
 	
 	@Autowired
 	private EnqJourneyDtlService enqJourneyDtlService;
+	
+	@RequestMapping(value = "/updatePaymentRequest", method = RequestMethod.POST)
+	public String insertPaymentRequest(@RequestParam("paymentDtlJson") String paymentData) {	
+		
+			GsonBuilder gsonBuilder = new GsonBuilder();
+			Gson gson = gsonBuilder.create();
+			
+			String str=paymentData;
+			  
+			Object object=null;
+			JsonArray arrayObj=null;
+			JsonParser jsonParser=new JsonParser();
+			object=jsonParser.parse(str);
+			arrayObj=(JsonArray) object;
+			
+			List<GeneratePayment> charges1=new ArrayList<>();
+			for(int i=0;i<arrayObj.size();i++) {
+				GeneratePayment ecData1= new GeneratePayment();
+				ecData1= gson.fromJson(arrayObj.get(i), GeneratePayment.class);
+				charges1.add(ecData1);
+			}
+		
+			generatePaymentService.updatePaymentReq(charges1);
+			
+			return gson.toJson("");
+	}
 	
 	@RequestMapping(value = "/encriptStr", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
 	public String encriptString(@RequestParam("mobileno") String mobileno) {

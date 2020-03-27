@@ -568,3 +568,9 @@ border: 1px Solid #ccc; top: 10px;     margin: 70px auto 20px !important; float:
 
 .btnNextLogin {color: #fff; background-color: #9b034a;}
 .btnColLogin {padding-bottom: 0; text-align: center; margin-top:10px;  padding: 15px 15px 0 15px;}
+
+.crudRPBtn {text-align:center;}
+.crudRPBtn .btn {margin: 0px 10px !important; text-transform: capitalize !important; font-size: 12px !important; padding: 5px !important;}
+.crudRPBtn .deletePayReqBtn {background-color: #ce1818 !important;}
+.crudRPBtn .updatePaymentBtn {background-color: #3b9100 !important;}
+.crudRPBtn .cancelPayReqBtn {background-color: #8b8b8b !important;}
