@@ -42,7 +42,7 @@
 							<img src="<c:url value='/resources/images/logo.png' />">
 						</div>
 						
-						<h3 class="loginProjTitle">"${projectName }"</h3>
+						<h3 class="loginProjTitle"></h3>
 						<div class="clearfix"></div>
 						<label class="inputLabel">Enter your registered mobile no.</label>
 						<div class="txtCenter">	

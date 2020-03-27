@@ -105,6 +105,14 @@ function getCCAvenuePaymentDetails()
 								}else{
 									paymentButton="";
 								}
+								
+								if(value.bank_ref_no.trim()=="null"){
+									transactionId="";
+								}
+								if(value.payment_status.trim()=="null"){
+									transactionStatus="";
+								}
+								/*var transactionStatus=value==null?'':value.payment_status==null?'':value.payment_status;*/
 								$('#enquiry_Id').val(value.id);
 								var val = "<tr><td><label>"+value.enquiry_name+"</label></td><td>"+value.project_name+"</td><td>"+value.amount+"</td><td>"+transactionId+"</td><td>"+transactionStatus+"</td><td>"+paymentButton+"</td>";
 								val=val+"</tr>";
