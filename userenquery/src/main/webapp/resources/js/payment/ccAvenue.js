@@ -106,11 +106,12 @@ function getCCAvenuePaymentDetails()
 								}else{
 									paymentButton="";
 								}
-								
-								if(value.bank_ref_no.trim()=="null"){
+								var transactionId=value.bank_ref_no.trim();
+								if(transactionId=="null"){
 									transactionId="";
 								}
-								if(value.payment_status.trim()=="null"){
+								transactionStatus=value.payment_status.trim();
+								if(transactionStatus=="null"){
 									transactionStatus="";
 								}
 								/*var transactionStatus=value==null?'':value.payment_status==null?'':value.payment_status;*/
