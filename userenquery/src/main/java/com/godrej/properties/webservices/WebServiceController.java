@@ -4257,7 +4257,7 @@ public class WebServiceController<MultipartFormDataInput> {
 		//END Get enquiry Details
 		
 		@RequestMapping(value = "/validateStr", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
-		public String validateMobileStr(@ModelAttribute("coapplicantdata") CoApplicant coapp,
+		public @ResponseBody String validateMobileStr(@ModelAttribute("coapplicantdata") CoApplicant coapp,
 				@RequestParam("dncstr") String encstr, @RequestParam("user_entr_no") String userNo,
 				@RequestParam("projectid") String projectid,@RequestParam("enqsfid") String enqsfid) {
 			// ModelAndView model = new ModelAndView();
@@ -4273,14 +4273,9 @@ public class WebServiceController<MultipartFormDataInput> {
 				log.info("userNo:-" + userNo);
 				// userEOIService.findMobileNoExist(decStr);
 				// model.setViewName("index");
-				List<EOIData> eList = userEOIService.findMobileNoExistEOIForm(decStr, projectid,enqsfid);
+				/*List<EOIData> eList = userEOIService.findMobileNoExistEOIForm(decStr, projectid,enqsfid);*/
 
-				if (eList != null && eList.size() > 0) {
-					return gson.toJson(eList);
-				} else {
-					return "not list";
-					/*return gson.toJson(userEOIService.findMobileNoExist(decStr, projectid));*/
-				}
+				return gson.toJson("Valid");
 			} else {
 				return gson.toJson("Invalid input or No Entry Found");
 			}

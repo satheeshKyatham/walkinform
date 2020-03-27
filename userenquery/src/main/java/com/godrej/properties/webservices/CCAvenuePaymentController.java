@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.godrej.properties.service.GeneratePaymentService;
+import com.godrej.properties.service.ProjectLaunchService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -26,6 +27,9 @@ public class CCAvenuePaymentController {
 	@Autowired
 	private GeneratePaymentService generatePaymentService;
 	
+	@Autowired
+	private ProjectLaunchService projectLaunchService;
+	
 	@RequestMapping(value = { "/ccAvenue"}, method = RequestMethod.GET)
 	public String ccAvenue(ModelMap model,HttpServletRequest request) {
 		 return "ccAvenue";
@@ -33,6 +37,7 @@ public class CCAvenuePaymentController {
 	
 	@RequestMapping(value = { "/ccAvenueLogin"}, method = RequestMethod.GET)
 	public String ccAvenueLogin(ModelMap model,HttpServletRequest request) {
+		
 		 return "ccAvenueLogin";
 	}
 	
@@ -53,6 +58,9 @@ public class CCAvenuePaymentController {
 			return response;
 		}
 	}
+
+
+
 	@GetMapping(value = { "/ccavRequestHandler"})
 	public String test(ModelMap model,HttpServletRequest request) {
 		 return "ccavRequestHandler";
