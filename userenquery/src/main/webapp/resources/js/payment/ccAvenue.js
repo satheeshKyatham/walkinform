@@ -68,14 +68,15 @@ function _search_data(inpuNum, project_sfid) {
 						var data1 = JSON.parse(myJSON);
 						var en="";
 						debugger
-						if (data != null) {
-								window.location.assign("ccAvenue?num="+ encStr+ "&projectid="+ project_sfid+"&enqsfid="+enqsfid);
-						} else {
+						if (data=="Invalid input or No Entry Found") {
 							$("#invalidEntry").text("Invalid number or No Entry Found");
 							$("#email").val('');
 							$("#birthdate").val('');
 							$("#lastname").val('');
 							$("#loginColLoad").hide();
+								
+						} else {
+							window.location.assign("ccAvenue?num="+ encStr+ "&projectid="+ project_sfid+"&enqsfid="+enqsfid);
 						}
 							
 					});
