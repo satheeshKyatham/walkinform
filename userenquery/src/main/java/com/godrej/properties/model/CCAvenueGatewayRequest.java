@@ -40,7 +40,7 @@ public class CCAvenueGatewayRequest implements Serializable{
 	@Column(name = "customer_identifier") private String customer_identifier;
 	@Column(name = "gateway_request") private String gateway_request;
 	@Column(name = "gateway_response") private String gateway_response;
-	@Column(name = "tracking_id") private Integer tracking_id;
+	@Column(name = "tracking_id") private long tracking_id;
 	@Column(name = "bank_ref_no") private String bank_ref_no;
 	@Column(name = "order_status") private String order_status;
 	@Column(name = "failure_message") private String failure_message;
@@ -183,12 +183,6 @@ public class CCAvenueGatewayRequest implements Serializable{
 	public void setGateway_response(String gateway_response) {
 		this.gateway_response = gateway_response;
 	}
-	public Integer getTracking_id() {
-		return tracking_id;
-	}
-	public void setTracking_id(Integer tracking_id) {
-		this.tracking_id = tracking_id;
-	}
 	public String getBank_ref_no() {
 		return bank_ref_no;
 	}
@@ -278,6 +272,12 @@ public class CCAvenueGatewayRequest implements Serializable{
 	}
 	public void setIsactive(String isactive) {
 		this.isactive = isactive;
+	}
+	public long getTracking_id() {
+		return tracking_id;
+	}
+	public void setTracking_id(long tracking_id) {
+		this.tracking_id = tracking_id;
 	}
 
 	

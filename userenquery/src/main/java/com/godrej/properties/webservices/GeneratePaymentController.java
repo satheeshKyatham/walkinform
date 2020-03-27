@@ -83,15 +83,7 @@ public class GeneratePaymentController {
 	}
 	
 	
-	@RequestMapping(value = { "/ccAvenue"}, method = RequestMethod.GET)
-	public String ccAvenue(ModelMap model,HttpServletRequest request) {
-		 return "ccAvenue";
-	}
 	
-	@RequestMapping(value = { "/ccAvenueLogin"}, method = RequestMethod.GET)
-	public String ccAvenueLogin(ModelMap model,HttpServletRequest request) {
-		 return "ccAvenueLogin";
-	}
 	@GetMapping(value = { "/ccavRequestHandler"})
 	public String test(ModelMap model,HttpServletRequest request) {
 		 return "ccavRequestHandler";
@@ -131,9 +123,9 @@ public class GeneratePaymentController {
 				//int customerMobileInt = Integer.parseInt(customer_mobile);
 				
 				String strMobile = encriptString(customer_mobile);
-				String strEnq_sfid = encriptString(enq_sfid);
+				/*String strEnq_sfid = encriptString(enq_sfid);*/
 				String resultPath = request.getHeader("Host") + request.getContextPath();
-				String paymentRequest= "https://"+resultPath+"/ccAvenueLogin?num="+strMobile.replaceAll("\"", "")+"&projectid="+URLEncoder.encode(project_sfid, "UTF-8")+"&enqsfid="+strEnq_sfid.replaceAll("\"", "")+"&projectname="+URLEncoder.encode(project_name, "UTF-8");
+				String paymentRequest= "https://"+resultPath+"/ccAvenueLogin?num="+strMobile.replaceAll("\"", "")+"&projectid="+URLEncoder.encode(project_sfid, "UTF-8")+"&enqsfid="+URLEncoder.encode(enq_sfid, "UTF-8")+"&projectname="+URLEncoder.encode(project_name, "UTF-8");
 				
 				String str=paymentDtlJson;
 				  

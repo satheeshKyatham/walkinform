@@ -101,4 +101,10 @@ public class GeneratePaymentServiceImpl implements GeneratePaymentService{
 		ccAvenueGatewayRequestDao.insertCCAvenueGatewayRequest(data);
 		return format;
 	}
+
+	@Override
+	public List<GeneratePayment> getPaymentDetails(String enqSfid, String projectSFID) {
+		return dao.getPaymentDetailQuery(enqSfid, projectSFID);
+		
+	}
 }

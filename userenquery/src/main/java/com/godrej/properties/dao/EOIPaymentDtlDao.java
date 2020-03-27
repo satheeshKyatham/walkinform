@@ -12,4 +12,5 @@ public interface EOIPaymentDtlDao {
 	void updateEOIForOffer(List<EOIPaymentDtl> charges);
 	public List<EOIPaymentDtl> getCommonEOIPaymentEntrys(String whereCondition);
 	void paymentEOIApproveReject(String whereCondition);
+	void insertOnePaymentDtl(EOIPaymentDtl pymtDtl);
 }
