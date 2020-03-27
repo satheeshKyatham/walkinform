@@ -1,34 +1,24 @@
 package com.godrej.properties.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
-import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.util.EntityUtils;
 import org.apache.log4j.Logger;
-import org.json.JSONObject;
 import org.springframework.stereotype.Component;
 
 import com.ccavenue.security.AesCryptUtil;
-import com.godrej.properties.constants.KeyConstants;
+import com.godrej.properties.model.ProjectLaunch;
 
 @Component
 public class CCGatewayRequestController {
 
 	static Logger logger = Logger.getLogger(CCGatewayRequestController.class);
-	public String CCGatewayRequestPost(String ccaRequest) throws ClientProtocolException, IOException
+	public String CCGatewayRequestPost(String ccaRequest,ProjectLaunch project) throws ClientProtocolException, IOException
 	{
-		String accessCode= "AVHJ91HC26CC78JHCC";		
-		String workingKey = "AC52E9A706E2D7938203D4D554B61E2E";
-		AesCryptUtil aesUtil=new AesCryptUtil(workingKey);
-		System.out.println(aesUtil);
+		//String accessCode= "AVHJ91HC26CC78JHCC";		
+		//String workingKey = "AC52E9A706E2D7938203D4D554B61E2E";
+		AesCryptUtil aesUtil=new AesCryptUtil(project.getCcavenue_workingkey());
+		//System.out.println(aesUtil);
 		String encRequest = aesUtil.encrypt(ccaRequest);
 		/*CloseableHttpClient  httpclient = HttpClients.createDefault();
 		

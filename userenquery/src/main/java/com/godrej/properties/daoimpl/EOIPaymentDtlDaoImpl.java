@@ -171,5 +171,14 @@ public class EOIPaymentDtlDaoImpl extends AbstractDao<Integer, EOIPaymentDtl> im
 			Query query = session.createQuery("UPDATE EOIPaymentDtl SET  "+whereCondition+"");
 			query.executeUpdate();
 		}
+
+
+
+
+	@Override
+	public void insertOnePaymentDtl(EOIPaymentDtl pymtDtl) {
+		persist(pymtDtl);
+		
+	}
 	
 }
