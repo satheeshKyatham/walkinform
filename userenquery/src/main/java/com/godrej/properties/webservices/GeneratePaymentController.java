@@ -87,19 +87,6 @@ public class GeneratePaymentController {
 	
 	
 	
-
-	
-	@PostMapping(value = { "/ccavResponseHandler"})
-	public String ccavResponseHandlerPost(ModelMap model,HttpServletRequest request) {
-		System.out.println("Enter the Response Handler**********");
-		System.out.println("EncResp:-"+request.getParameter("encResp"));
-		
-		
-//		return "ccAvenueLogin";
-		String resp = generatePaymentService.getwayResponseHandler(request.getParameter("encResp"));
-		return "ccAvenue?"+resp;
-	}
-	
 	@RequestMapping(value = "/insertPaymentRequest", method = RequestMethod.POST)
 	public String insertPaymentRequest(@RequestParam("paymentDtlJson") String paymentDtlJson, 
 			@RequestParam("userid") String userid,
