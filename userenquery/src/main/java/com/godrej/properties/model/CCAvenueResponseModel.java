@@ -23,6 +23,7 @@ public class CCAvenueResponseModel {
 	public String isactive;
 	public String merchant_param2;
 	public String merchant_param3;
+	public String billing_tel;
 	
 	public String getOrder_id() {
 		return order_id;
@@ -139,6 +140,12 @@ public class CCAvenueResponseModel {
 	}
 	public void setMerchant_param3(String merchant_param3) {
 		this.merchant_param3 = merchant_param3;
+	}
+	public String getBilling_tel() {
+		return billing_tel;
+	}
+	public void setBilling_tel(String billing_tel) {
+		this.billing_tel = billing_tel;
 	}
 	
 }

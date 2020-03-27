@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ccavenue.security.AesCryptUtil;
+import com.godrej.kyc.util.StringEncDec;
 import com.godrej.properties.constants.KeyConstants;
 import com.godrej.properties.controller.CCGatewayRequestController;
 import com.godrej.properties.dao.CCAvenueGatewayRequestDao;
@@ -222,6 +223,11 @@ public class GeneratePaymentServiceImpl implements GeneratePaymentService{
 						if(strTok.hasMoreTokens())
 							respModel.setMerchant_param3((String)strTok.nextToken());
 					}
+					if(pname.contains("billing_tel"))
+					{
+						if(strTok.hasMoreTokens())
+							respModel.setBilling_tel((String)strTok.nextToken());
+					}
 				}
 			}
 		}
@@ -250,15 +256,12 @@ public class GeneratePaymentServiceImpl implements GeneratePaymentService{
 			pymtDtl.setPayment_mode("Online Payment");
 			eOIPaymentDtlDao.insertOnePaymentDtl(pymtDtl);
 		}
-		else
+		/*else
 		{
 			//Update status in atul payment table
 			
-		}
+		}*/
 		ccAvenueGatewayRequestDao.updateCCAvenueResponse(respModel);
-		//update status and tracker id in payment table
-				//update response in ccavanue request table
-				//insert success data in eOI table
-		return "num=mdC%2FHkDN2P0RMiC2Er51VQ%3D%3D&projectSFID=a1l6F000008DnniQAC&enqSfid=a1u2s000000YeFvAAK";
+		return "num="+StringEncDec.encrypt(respModel.getBilling_tel())+"&projectSFID="+respModel.getMerchant_param3()+"&enqSfid="+respModel.getMerchant_param2()+"";
 	}
 }
