@@ -11,7 +11,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Hashtable;
 import java.util.List;
+import java.util.StringTokenizer;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -28,6 +30,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ccavenue.security.AesCryptUtil;
 import com.godrej.kyc.util.StringEncDec;
 import com.godrej.properties.model.EnqJourneyDtl;
 import com.godrej.properties.model.GeneratePayment;
@@ -84,9 +87,17 @@ public class GeneratePaymentController {
 	
 	
 	
-	@GetMapping(value = { "/ccavRequestHandler"})
-	public String test(ModelMap model,HttpServletRequest request) {
-		 return "ccavRequestHandler";
+
+	
+	@PostMapping(value = { "/ccavResponseHandler"})
+	public String ccavResponseHandlerPost(ModelMap model,HttpServletRequest request) {
+		System.out.println("Enter the Response Handler**********");
+		System.out.println("EncResp:-"+request.getParameter("encResp"));
+		
+		
+//		return "ccAvenueLogin";
+		String resp = generatePaymentService.getwayResponseHandler(request.getParameter("encResp"));
+		return "ccAvenue?"+resp;
 	}
 	
 	@RequestMapping(value = "/insertPaymentRequest", method = RequestMethod.POST)

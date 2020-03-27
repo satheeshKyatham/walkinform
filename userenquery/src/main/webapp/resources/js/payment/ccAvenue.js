@@ -175,7 +175,7 @@ function getCCAvenuePaymentDetails()
 								debugger;
 								console.log("test",value)
 								if(value.ispayment_status=='N'){
-									paymentButton="<button class='btn btn-primary btnNext' onclick='requestCCPaymentGateway(this);'>Pay Now</button>";
+									paymentButton="<button class='btn btn-primary btnNext' onclick='requestCCPaymentGateway("+value.id+");'>Pay Now</button>";
 								}else{
 									paymentButton="";
 								}
@@ -215,7 +215,7 @@ function requestCCPaymentGateway(e){
 	debugger;
 	var primaryId=$("#enquiry_Id").val();
 	var formData = new FormData();
-	formData.append("id",primaryId)
+	formData.append("id",e)
 	$.ajax({
 		url : "requestToCCgateway",
 		type : 'POST',
@@ -223,7 +223,10 @@ function requestCCPaymentGateway(e){
 		processData : false,
 		contentType : false,
 		success : function(data) {
-			 window.location.href = "ccavRequestHandler?ccencrqst="+data;
+//			 window.location.href = "ccavRequestHandler?ccencrqst="+data;
+			alert(data);
+			window.location.href = "ccavRequestHandler?"+data;
+			
 		}
 	});
 }
