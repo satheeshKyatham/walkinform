@@ -98,7 +98,9 @@ public class GeneratePaymentServiceImpl implements GeneratePaymentService{
 		data.setRedirect_url(KeyConstants.REDIRECT_URL);
 		data.setCancel_url(KeyConstants.CANCEL_URL);
 		data.setLanguage("EN");
-		//billing_name
+		data.setBilling_name(payment.getCustomer_name());
+		data.setBilling_email(payment.getCustomer_email());
+		data.setBilling_tel(Integer.parseInt(payment.getCustomer_mobile()));
 		//billing_tel
 		//billing_email
 		data.setMerchant_param1(payment.getEnquiry_name());
@@ -112,8 +114,8 @@ public class GeneratePaymentServiceImpl implements GeneratePaymentService{
 		
 		String format = "tid="+tiddate+"&merchant_id="+project.getCcavenue_merchant_id()+"&order_id="+payment.getId()+"&currency=INR&amount="+payment.getAmount()+"&redirect_url="+KeyConstants.REDIRECT_URL+""
 				+ "&cancel_url="+KeyConstants.CANCEL_URL+""
-				+ "&language=EN&billing_name=Satheesh&billing_address=&billing_city=&billing_state=&billing_zip=&billing_country=&billing_tel=9987677726"
-				+ "&billing_email=sathish.kyatham@godrejproperties.com&delivery_name=&delivery_address=&delivery_city=&delivery_state=&delivery_zip=&delivery_country=&delivery_tel="
+				+ "&language=EN&billing_name="+payment.getCustomer_name()+"&billing_address=&billing_city=&billing_state=&billing_zip=&billing_country=&billing_tel="+payment.getCustomer_mobile()+""
+				+ "&billing_email="+payment.getCustomer_email()+"&delivery_name=&delivery_address=&delivery_city=&delivery_state=&delivery_zip=&delivery_country=&delivery_tel="
 				+ "&merchant_param1="+payment.getEnquiry_name()+"&merchant_param2="+payment.getEnquiry_sfid()+"&merchant_param3="+payment.getProject_sfid()+"&merchant_param4=&merchant_param5=&promo_code=&";
 		
 		data.setGateway_request(format);
