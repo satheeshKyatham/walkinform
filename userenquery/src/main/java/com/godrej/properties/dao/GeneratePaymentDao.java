@@ -8,4 +8,5 @@ public interface GeneratePaymentDao {
 	Boolean insertPaymentDtl (List<GeneratePayment> pymtDtl);
 	List<GeneratePayment> getPaymentRecord(String enqSfid, String projectSFID);
 	public GeneratePayment getCCPaymentData(int id);
+	List<GeneratePayment> getPaymentDetailQuery(String enqSfid, String projectSFID);
 }
