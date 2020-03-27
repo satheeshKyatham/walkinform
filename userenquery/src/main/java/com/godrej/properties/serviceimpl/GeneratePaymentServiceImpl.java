@@ -100,7 +100,7 @@ public class GeneratePaymentServiceImpl implements GeneratePaymentService{
 		data.setLanguage("EN");
 		data.setBilling_name(payment.getCustomer_name());
 		data.setBilling_email(payment.getCustomer_email());
-		data.setBilling_tel(Integer.parseInt(payment.getCustomer_mobile()));
+		data.setBilling_tel(Long.parseLong(payment.getCustomer_mobile()));
 		//billing_tel
 		//billing_email
 		data.setMerchant_param1(payment.getEnquiry_name());
