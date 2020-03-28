@@ -135,6 +135,7 @@ if(ses!=null){
    
 	<div class="container">
 		<div class="enquiryDtlCol">
+		<input type="hidden" id="isAllowPaymentStatus" value=""/>
 			<div class="col-md-3">
 				<div>
 					<strong>Project</strong>

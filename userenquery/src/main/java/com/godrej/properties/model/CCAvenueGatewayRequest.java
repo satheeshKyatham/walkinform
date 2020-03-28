@@ -29,7 +29,7 @@ public class CCAvenueGatewayRequest implements Serializable{
 	@Column(name = "cancel_url") private String cancel_url;
 	@Column(name = "language") private String language;
 	@Column(name = "billing_name") private String billing_name;
-	@Column(name = "billing_tel") private Integer billing_tel;
+	@Column(name = "billing_tel") private long billing_tel;
 	@Column(name = "billing_email") private String billing_email;
 	@Column(name = "merchant_param1") private String merchant_param1;
 	@Column(name = "merchant_param2") private String merchant_param2;
@@ -117,10 +117,10 @@ public class CCAvenueGatewayRequest implements Serializable{
 	public void setBilling_name(String billing_name) {
 		this.billing_name = billing_name;
 	}
-	public Integer getBilling_tel() {
+	public long getBilling_tel() {
 		return billing_tel;
 	}
-	public void setBilling_tel(Integer billing_tel) {
+	public void setBilling_tel(long billing_tel) {
 		this.billing_tel = billing_tel;
 	}
 	public String getBilling_email() {

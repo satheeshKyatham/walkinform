@@ -39,6 +39,12 @@ public class ProjectLaunchServiceImpl implements ProjectLaunchService {
 	public ProjectLaunch getProjectSaleMgrID(String projectid) {
 		return projectLaunchDao.getProjectSaleMgrID(projectid);
 	}
+
+	@Override
+	public ProjectLaunch getprojectDetailsForCCPayment(String projectSfid) {
+		// TODO Auto-generated method stub
+		return projectLaunchDao.getprojectDetailsForCCPaymentQuery(projectSfid);
+	}
 	
 	 
 

@@ -53,9 +53,11 @@ public class CCAvenueGatewayRequestDaoImpl extends AbstractDao<Integer, CCAvenue
 			query.setParameter("updateddate", responseModel.getUpdateddate());
 			query.executeUpdate();*/
 			
-			Query q = session.createNativeQuery("Update salesforce.gpl_cc_gateway_req_resp  SET "//SET tracking_id='"+String.valueOf(responseModel.getTracking_id())+"',
-					+ "bank_ref_no='"+responseModel.getBank_ref_no()+"',order_status='"+responseModel.getOrder_status()+"',failure_message='"+responseModel.getFailure_message()+"'"
-					//+ ""
+			Query q = session.createNativeQuery("Update salesforce.gpl_cc_gateway_req_resp  SET tracking_id='"+String.valueOf(responseModel.getTracking_id())+"',"//SET tracking_id='"+String.valueOf(responseModel.getTracking_id())+"',
+					+ "bank_ref_no='"+responseModel.getBank_ref_no()+"',order_status='"+responseModel.getOrder_status()+"',failure_message='"+responseModel.getFailure_message()+"',"
+					+ "payment_mode='"+responseModel.getPayment_mode()+"',card_name='"+responseModel.getCard_name()+"',status_message='"+responseModel.getStatus_message()+"',"
+					+ "response_currency='"+responseModel.getResponse_currency()+"',response_amount='"+responseModel.getResponse_amount()+"',vault='"+responseModel.getVault()+"',"
+					+ "trans_date=now(),updateddate=now() "
 					+ "WHERE order_id='"+responseModel.getOrder_id()+"'");
 			q.executeUpdate();
 			
@@ -68,9 +70,9 @@ public class CCAvenueGatewayRequestDaoImpl extends AbstractDao<Integer, CCAvenue
 		{
 			ispayment="Y";
 		}
-		Query q1 = session.createNativeQuery("Update salesforce.gpl_cc_payment_request SET payment_status='"+responseModel.getOrder_status()+"',bank_ref_no='"+responseModel.getBank_ref_no()+"',ispayment_status='"+ispayment+"',update_date=now() where id ="+responseModel.getOrder_id());
-		q1.executeUpdate();
-		
+
+		Query q = session.createNativeQuery("Update salesforce.gpl_cc_payment_request SET payment_status='"+responseModel.getOrder_status()+"',bank_ref_no='"+responseModel.getBank_ref_no()+"',ispayment_status='"+ispayment+"',update_date=now() where id ="+responseModel.getOrder_id());
+		q.executeUpdate();		
 		return null;
 	}
 

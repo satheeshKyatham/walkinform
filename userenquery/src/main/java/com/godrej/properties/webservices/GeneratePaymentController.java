@@ -11,7 +11,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Hashtable;
 import java.util.List;
+import java.util.StringTokenizer;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -28,8 +30,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ccavenue.security.AesCryptUtil;
 import com.godrej.kyc.util.StringEncDec;
-import com.godrej.properties.model.EOIPaymentDtl;
 import com.godrej.properties.model.EnqJourneyDtl;
 import com.godrej.properties.model.GeneratePayment;
 import com.godrej.properties.service.EnqJourneyDtlService;
@@ -50,32 +52,6 @@ public class GeneratePaymentController {
 	
 	@Autowired
 	private EnqJourneyDtlService enqJourneyDtlService;
-	
-	@RequestMapping(value = "/updatePaymentRequest", method = RequestMethod.POST)
-	public String insertPaymentRequest(@RequestParam("paymentDtlJson") String paymentData) {	
-		
-			GsonBuilder gsonBuilder = new GsonBuilder();
-			Gson gson = gsonBuilder.create();
-			
-			String str=paymentData;
-			  
-			Object object=null;
-			JsonArray arrayObj=null;
-			JsonParser jsonParser=new JsonParser();
-			object=jsonParser.parse(str);
-			arrayObj=(JsonArray) object;
-			
-			List<GeneratePayment> charges1=new ArrayList<>();
-			for(int i=0;i<arrayObj.size();i++) {
-				GeneratePayment ecData1= new GeneratePayment();
-				ecData1= gson.fromJson(arrayObj.get(i), GeneratePayment.class);
-				charges1.add(ecData1);
-			}
-		
-			generatePaymentService.updatePaymentReq(charges1);
-			
-			return gson.toJson("");
-	}
 	
 	@RequestMapping(value = "/encriptStr", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
 	public String encriptString(@RequestParam("mobileno") String mobileno) {
@@ -110,11 +86,6 @@ public class GeneratePaymentController {
 	}
 	
 	
-	
-	@GetMapping(value = { "/ccavRequestHandler"})
-	public String test(ModelMap model,HttpServletRequest request) {
-		 return "ccavRequestHandler";
-	}
 	
 	@RequestMapping(value = "/insertPaymentRequest", method = RequestMethod.POST)
 	public String insertPaymentRequest(@RequestParam("paymentDtlJson") String paymentDtlJson, 

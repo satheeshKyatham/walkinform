@@ -33,7 +33,7 @@ import org.ksoap2.serialization.SoapObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.ModelMap;
+
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -4273,14 +4273,11 @@ public class WebServiceController<MultipartFormDataInput> {
 				log.info("userNo:-" + userNo);
 				// userEOIService.findMobileNoExist(decStr);
 				// model.setViewName("index");
-				List<EOIData> eList = userEOIService.findMobileNoExistEOIForm(decStr, projectid,enqsfid);
-
-				if (eList != null && eList.size() > 0) {
-					return gson.toJson(eList);
-				} else {
-					return "not list";
-					/*return gson.toJson(userEOIService.findMobileNoExist(decStr, projectid));*/
-				}
+				/*List<EOIData> eList = userEOIService.findMobileNoExistEOIForm(decStr, projectid,enqsfid);*/
+				EOIData eoiData=new EOIData();
+				eoiData.setPhone_number("ok");
+				
+				return gson.toJson(eoiData);
 			} else {
 				return gson.toJson("Invalid input or No Entry Found");
 			}

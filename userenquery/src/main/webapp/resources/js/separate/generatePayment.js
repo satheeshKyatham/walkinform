@@ -162,7 +162,10 @@ function getPaymentReqRecord () {
 					}
 					
 					html += 	'<tr class="paymentDataPlotRow" data-rowid = "'+obj[i].id+'">'
-									+ '<td style="text-align:center;">'+trans_date+'</td>' 
+									+ '<td style="text-align:center;">'
+										+trans_date
+										+ '<input class="exisitingPayReqdate" style="display:none;" value="'+trans_date+'">' 
+									+'</td>'	
 									+ '<td style="text-align:center;"> ' 
 											+ ' <input onkeyup="csPtcalculateGrandTotalOP()" style="display:none;" name="amount"  class="submittedAmount numericWithoutDecimal numericField full form-control input-sm" value="'+obj[i].amount+'">'
 											+ '<span class="oldReqAmount">'+obj[i].amount+'</span>' 
@@ -173,7 +176,7 @@ function getPaymentReqRecord () {
 									+ '</td>' 
 									+ '<td class="crudRPBtn"> '
 										+ '<button class="btn btn-primary blue_btn editPayReqBtn" onclick="editPaymentRequest(this)">Edit</button>'
-										+ '<button class="btn btn-primary blue_btn updatePaymentBtn" style="display:none" onclick="">Update</button>'
+										+ '<button class="btn btn-primary blue_btn updatePaymentBtn" style="display:none" onclick="updatePaymentRequest(this)">Update</button>'
 										+ '<button class="btn btn-primary blue_btn deletePayReqBtn" >Delete</button>'
 										+ '<button class="btn btn-primary blue_btn cancelPayReqBtn" style="display:none" onclick="cancelPayReq(this)">Cancel</button>'
 									+ '</td>' 
@@ -199,6 +202,11 @@ function getPaymentReqRecord () {
 
 
 function editPaymentRequest (e) {
+	alert ($(e).closest("td").closest("tr.paymentDataPlotRow").attr("data-rowid"));
+	
+	$(e).closest("td").closest("tr.paymentDataPlotRow").addClass("eidtPayRow");
+	$("p:first").addClass("intro");
+	
 	var existingDes = $(e).closest("td").closest("tr").find(".existingDes").text();
 	
 	$(e).hide();
@@ -210,10 +218,13 @@ function editPaymentRequest (e) {
 	$(e).closest("td").closest("tr").find(".editDesPR").val(existingDes);
 	$(e).closest("td").closest("tr").find(".existingDes").hide();
 	$(e).closest("td").closest("tr").find(".editDesPR").show();
+	
 } 
 
 function cancelPayReq (e) {
 	var existingAmount = $(e).closest("td").closest("tr").find(".oldReqAmount").text();
+	
+	$(e).closest("td").closest("tr.paymentDataPlotRow").removeClass("eidtPayRow");
 	
 	$(e).hide();
 	$(e).closest("td").find(".deletePayReqBtn").show();
@@ -229,3 +240,43 @@ function cancelPayReq (e) {
 }
 
 //$('#getPln').find('option:selected').attr("data-valuepercentage")
+
+
+function updatePaymentRequest (e) {
+
+	var pageContext = $("#pageContext").val()+"/";
+	var i = 0;
+	var k = 0;
+	
+	var arrayData = [];
+	$("#csPtColOP .paymentDataPlotRow.eidtPayRow").each(function () {
+	    var csPtData = {};
+	    
+	    csPtData.id = $(e).closest("td").closest("tr.paymentDataPlotRow").attr("data-rowid");
+	    csPtData.amount = $(this).find('.submittedAmount').val();
+	    csPtData.transaction_date_string = $(this).find('.exisitingPayReqdate').val();
+	    csPtData.description = $(this).find('.editDesPR').val();  
+	   
+	    arrayData.push(csPtData);
+	    k++
+	});
+	
+	$.post(pageContext+"updatePaymentRequest",{"paymentDtlJson" : JSON.stringify(arrayData), 
+		"userid" : $('#userid').val(),
+		"enq_sfid" : $('#enquirysfid').val(),
+		"project_sfid" : $('#projectId').val()
+	},function(data){				 
+	
+	}).done(function(data){
+		/*var obj =JSON.parse(data);
+		
+		if(obj!=null){
+			alert (obj.error_msg);
+			
+			if (obj.status == "STATUS_OK") {
+				getPaymentReqRecord ();
+			} 
+		}*/
+		getPaymentReqRecord ();
+	});
+}

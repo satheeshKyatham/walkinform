@@ -28,7 +28,17 @@ public class GeneratePaymentDaoImpl extends AbstractDao<Integer, GeneratePayment
 		for (int i = 0; i <payReq.size(); i++) {
 			Session session = this.sessionFactory.getCurrentSession();
 			
-			Query query = session.createQuery("UPDATE GeneratePayment SET isactive = 'O' WHERE id = '"+payReq.get(i).getId()+"' ");
+			Query query = session.createQuery("UPDATE GeneratePayment "
+					+ " SET "
+							+ "amount = '"+payReq.get(i).getAmount()+"' "
+							+ " , description =  '"+payReq.get(i).getDescription()+"' "
+							+ " , updatedby = '"+payReq.get(i).getUpdatedby() +"' "
+							+ " , update_date = now() "
+					+ " WHERE id = '"+payReq.get(i).getId()+"' "
+					+ " AND enquiry_sfid = '"+payReq.get(i).getEnquiry_sfid()+"' "
+					+ " AND project_sfid = '"+payReq.get(i).getProject_sfid()+"' "
+					+ " AND isactive = '"+payReq.get(i).getIsactive()+"' "
+					+ " AND ispayment_status = '"+payReq.get(i).getIspayment_status()+"' ");
 			
 			query.executeUpdate();
 		}
