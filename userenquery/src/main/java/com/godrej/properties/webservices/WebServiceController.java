@@ -33,7 +33,7 @@ import org.ksoap2.serialization.SoapObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.ModelMap;
+
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -4257,7 +4257,7 @@ public class WebServiceController<MultipartFormDataInput> {
 		//END Get enquiry Details
 		
 		@RequestMapping(value = "/validateStr", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
-		public @ResponseBody String validateMobileStr(@ModelAttribute("coapplicantdata") CoApplicant coapp,
+		public String validateMobileStr(@ModelAttribute("coapplicantdata") CoApplicant coapp,
 				@RequestParam("dncstr") String encstr, @RequestParam("user_entr_no") String userNo,
 				@RequestParam("projectid") String projectid,@RequestParam("enqsfid") String enqsfid) {
 			// ModelAndView model = new ModelAndView();
@@ -4274,8 +4274,10 @@ public class WebServiceController<MultipartFormDataInput> {
 				// userEOIService.findMobileNoExist(decStr);
 				// model.setViewName("index");
 				/*List<EOIData> eList = userEOIService.findMobileNoExistEOIForm(decStr, projectid,enqsfid);*/
-
-				return gson.toJson("Valid");
+				EOIData eoiData=new EOIData();
+				eoiData.setPhone_number("ok");
+				
+				return gson.toJson(eoiData);
 			} else {
 				return gson.toJson("Invalid input or No Entry Found");
 			}

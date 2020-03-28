@@ -288,7 +288,7 @@ function getEnquiryForSales(){
 	var token=$('#token').val();
 	var resp=fetchData("getEnquiryForSales/"+countryCode+"/"+mobileNo+"/"+projectSfid+"/"+token,null,"GET");
 	populateSearchEnquiry(resp,true);
-	
+	debugger
 	if(token.includes("G")||token.includes("E")){
 //		$("#salesTabId").remove();
 		$("#salesTabId").show();
@@ -908,12 +908,19 @@ function getExistingInfo(){
 	populateOtherInfo(resp);*/
 }
 function populateSearchEnquiry(resp,isSaleView){
-	
+	debugger
 	var enquiryList=resp.objectMap.enquiryList;
 	var contact=resp.objectMap.contact;
 	if(!isEmpty(enquiryList)){
 		/*$('#mainPageLoad').hide();*/	
 		if(isSaleView){
+			var allowPaymentStatus=enquiryList[0].isAllowCCPaymentGateway;
+			if(allowPaymentStatus!=undefined && allowPaymentStatus!=null ){
+				$("#isAllowPaymentStatus").val(allowPaymentStatus);
+			}else{
+				$("#isAllowPaymentStatus").val("");
+			}
+			
 			var enq=enquiryList[0];
 			var contact=enq.contact;
 			populateBasicInfo(enq,contact);

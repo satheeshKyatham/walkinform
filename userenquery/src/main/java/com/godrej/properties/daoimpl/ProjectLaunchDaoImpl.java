@@ -89,6 +89,23 @@ public class ProjectLaunchDaoImpl extends AbstractDao<Integer, ProjectLaunch> im
 		}
 		return null;
 	}
+
+
+
+
+
+	@Override
+	public ProjectLaunch getprojectDetailsForCCPaymentQuery(String projectSfid) {
+		Session session = this.sessionFactory.getCurrentSession();
+		
+		List<ProjectLaunch> list = session .createQuery( "  FROM ProjectLaunch where project_18_digit__c='"+projectSfid+"'and isActive ='A' order by name asc ") .list();//where  isactive='A'
+
+		if (list.size() > 0) {
+
+			return list.get(0);
+		}
+		return null;
+	}
 	
 	
  
