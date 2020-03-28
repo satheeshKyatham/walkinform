@@ -63,7 +63,8 @@ if(ses!=null){
 			</div>
 		
 	   		<div class="tab-content formTabCont">
-				<div class="tab-pane active" id="tab1"> 			      	
+				<div class="tab-pane active" id="tab1"> 	
+				<h4 id="payment_resp" style="text-align: center;color: #0077b9;"></h4>		      	
 			      	<div class="row">
 			      		<div class="col-md-12">
 							<div class="clearfix"></div>

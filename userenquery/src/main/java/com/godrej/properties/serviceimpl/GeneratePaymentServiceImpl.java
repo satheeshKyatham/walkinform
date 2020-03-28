@@ -268,6 +268,17 @@ public class GeneratePaymentServiceImpl implements GeneratePaymentService{
 			
 		}*/
 		ccAvenueGatewayRequestDao.updateCCAvenueResponse(respModel);
-		return "num="+StringEncDec.encrypt(respModel.getBilling_tel())+"&projectSFID="+respModel.getMerchant_param3()+"&enqSfid="+respModel.getMerchant_param2()+"";
+		String respStatus ="";
+		if(respModel.getOrder_status().equals("Success"))
+			respStatus="1";
+		else if(respModel.getOrder_status().equals("Failure"))
+			respStatus="2";
+		else if(respModel.getOrder_status().equals("Aborted"))
+			respStatus="3";
+		else if(respModel.getOrder_status().equals("Invalid"))
+			respStatus="4";
+		else
+			respStatus="4";
+		return "num="+StringEncDec.encrypt(respModel.getBilling_tel())+"&projectSFID="+respModel.getMerchant_param3()+"&enqSfid="+respModel.getMerchant_param2()+"&respid="+respStatus+"&amt="+respModel.getResponse_amount();
 	}
 }
