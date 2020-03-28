@@ -916,9 +916,15 @@ function populateSearchEnquiry(resp,isSaleView){
 		if(isSaleView){
 			var allowPaymentStatus=enquiryList[0].isAllowCCPaymentGateway;
 			if(allowPaymentStatus!=undefined && allowPaymentStatus!=null ){
-				$("#isAllowPaymentStatus").val(allowPaymentStatus);
+				if (allowPaymentStatus == "Y"){
+					$("#paymentReqRecordLi").show();
+				} else {
+					$("#paymentReqRecordLi").hide();
+				}
+				//$("#isAllowPaymentStatus").val(allowPaymentStatus);
 			}else{
-				$("#isAllowPaymentStatus").val("");
+				$("#paymentReqRecordLi").hide();
+				//$("#isAllowPaymentStatus").val("");
 			}
 			
 			var enq=enquiryList[0];

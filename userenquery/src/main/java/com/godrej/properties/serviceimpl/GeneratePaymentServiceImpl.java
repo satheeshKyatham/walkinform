@@ -2,6 +2,7 @@ package com.godrej.properties.serviceimpl;
 
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Hashtable;
@@ -48,6 +49,11 @@ public class GeneratePaymentServiceImpl implements GeneratePaymentService{
 	
 	@Autowired
  	private ProjectLaunchService projectLaunchService;
+	
+	@Override
+	public void updatePaymentReq(List<GeneratePayment> payReq) {
+		  dao.updatePaymentReq(payReq);
+	}
 	
 	@Override
 	public Boolean insertPaymentDtl(List<GeneratePayment> pymtDtl) {
@@ -112,8 +118,8 @@ public class GeneratePaymentServiceImpl implements GeneratePaymentService{
 		
 		//tid=1585208745371&merchant_id=218829&order_id=123845&currency=INR&amount=1.00&redirect_url=http://kyc.gplapps.com:8084/CCAvenue/jsp/ccavResponseHandler.jsp&cancel_url=http://kyc.gplapps.com:8084/CCAvenue/jsp/ccavResponseHandler.jsp&language=EN&billing_name=Satheesh&billing_address=Worli &billing_city=Mumbai&billing_state=MH&billing_zip=400018&billing_country=India&billing_tel=9987677726&billing_email=sathish.kyatham@godrejproperties.com&delivery_name=Satheesh&delivery_address=Worli&delivery_city=Mumbai&delivery_state=Maharashtra&delivery_zip=400018&delivery_country=India&delivery_tel=9987677726&merchant_param1=0010002345&merchant_param2=GCVRND1208&merchant_param3=1123455&merchant_param4=9987677726&merchant_param5=sathish.kyatham@godrejproperties.com&promo_code=&
 		
-		String format = "tid="+tiddate+"&merchant_id="+project.getCcavenue_merchant_id()+"&order_id="+payment.getId()+"&currency=INR&amount="+payment.getAmount()+"&redirect_url="+KeyConstants.REDIRECT_URL+""
-				+ "&cancel_url="+KeyConstants.CANCEL_URL+""
+		String format = "tid="+tiddate+"&merchant_id="+project.getCcavenue_merchant_id()+"&order_id="+payment.getId()+"&currency=INR&amount="+payment.getAmount()+"&redirect_url="+KeyConstants.REDIRECT_URL+"?projectsfid="+payment.getProject_sfid()+""
+				+ "&cancel_url="+KeyConstants.CANCEL_URL+"?projectsfid="+payment.getProject_sfid()+""
 				+ "&language=EN&billing_name="+payment.getCustomer_name()+"&billing_address=&billing_city=&billing_state=&billing_zip=&billing_country=&billing_tel="+payment.getCustomer_mobile()+""
 				+ "&billing_email="+payment.getCustomer_email()+"&delivery_name=&delivery_address=&delivery_city=&delivery_state=&delivery_zip=&delivery_country=&delivery_tel="
 				+ "&merchant_param1="+payment.getEnquiry_name()+"&merchant_param2="+payment.getEnquiry_sfid()+"&merchant_param3="+payment.getProject_sfid()+"&merchant_param4=&merchant_param5=&promo_code=&";
@@ -129,10 +135,11 @@ public class GeneratePaymentServiceImpl implements GeneratePaymentService{
 		
 	}
 	@Override
-	public String getwayResponseHandler(String response) {
+	public String getwayResponseHandler(String response,String projectsfid) {
 		CCAvenueResponseModel respModel = new CCAvenueResponseModel();
-		String workingKey = "AC52E9A706E2D7938203D4D554B61E2E";
-		AesCryptUtil aesUtil=new AesCryptUtil(workingKey);
+		ProjectLaunch project = projectLaunchService.getProjectSaleMgrID(projectsfid);
+		//String workingKey = "AC52E9A706E2D7938203D4D554B61E2E";
+		AesCryptUtil aesUtil=new AesCryptUtil(project.getCcavenue_workingkey());
 		String decResp = aesUtil.decrypt(response);
 		respModel.setGateway_response(decResp);
 		StringTokenizer tokenizer = new StringTokenizer(decResp, "&");
@@ -248,8 +255,10 @@ public class GeneratePaymentServiceImpl implements GeneratePaymentService{
 			else
 				respAmount="0.00";
 			pymtDtl.setTransaction_amount(respAmount);
-			if(respModel.getTrans_date()!=null)
-				pymtDtl.setTransaction_date(respModel.getTrans_date().toString());
+			/*if(respModel.getTrans_date()!=null)
+				pymtDtl.setTransaction_date(respModel.getTrans_date().toString());*/
+			String timeStamp = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+			pymtDtl.setTransaction_date(timeStamp);
 			pymtDtl.setTransaction_id(String.valueOf(respModel.getTracking_id()));
 			pymtDtl.setDescription(respModel.getPayment_mode());
 			pymtDtl.setProject_sfid(respModel.getMerchant_param3());

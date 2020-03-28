@@ -175,10 +175,12 @@ function getPaymentReqRecord () {
 											+ '<span class="existingDes">'+obj[i].description+'</span>' 
 									+ '</td>' 
 									+ '<td class="crudRPBtn"> '
-										+ '<button class="btn btn-primary blue_btn editPayReqBtn" onclick="editPaymentRequest(this)">Edit</button>'
-										+ '<button class="btn btn-primary blue_btn updatePaymentBtn" style="display:none" onclick="updatePaymentRequest(this)">Update</button>'
-										+ '<button class="btn btn-primary blue_btn deletePayReqBtn" >Delete</button>'
-										+ '<button class="btn btn-primary blue_btn cancelPayReqBtn" style="display:none" onclick="cancelPayReq(this)">Cancel</button>'
+										+ '<div style="display:none">'
+											+ '<button class="btn btn-primary blue_btn editPayReqBtn" onclick="editPaymentRequest(this)">Edit</button>'
+											+ '<button class="btn btn-primary blue_btn updatePaymentBtn" style="display:none" onclick="updatePaymentRequest(this)">Update</button>'
+											+ '<button class="btn btn-primary blue_btn deletePayReqBtn" >Delete</button>'
+											+ '<button class="btn btn-primary blue_btn cancelPayReqBtn" style="display:none" onclick="cancelPayReq(this)">Cancel</button>'
+										+ '</div>'	
 									+ '</td>' 
 								"</tr>";
 				}

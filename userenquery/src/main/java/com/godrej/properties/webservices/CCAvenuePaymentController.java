@@ -68,7 +68,7 @@ public class CCAvenuePaymentController {
 	@PostMapping(value = { "/ccavResponseHandler"})
 	public String ccavResponseHandlerPost(ModelMap model,HttpServletRequest request) {
 //		return "ccAvenueLogin";
-		String resp = generatePaymentService.getwayResponseHandler(request.getParameter("encResp"));
+		String resp = generatePaymentService.getwayResponseHandler(request.getParameter("encResp"),request.getParameter("projectsfid"));
 		return "redirect:/ccAvenue?"+resp;
 	}
 	

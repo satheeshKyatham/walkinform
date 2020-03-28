@@ -53,6 +53,60 @@ public class GeneratePaymentController {
 	@Autowired
 	private EnqJourneyDtlService enqJourneyDtlService;
 	
+	@RequestMapping(value = "/updatePaymentRequest", method = RequestMethod.POST)
+	public String insertPaymentRequest(
+			@RequestParam("paymentDtlJson") String paymentData,
+			@RequestParam("userid") String userid,
+			@RequestParam("enq_sfid") String enq_sfid,
+			@RequestParam("project_sfid") String project_sfid) throws ParseException {	
+		
+			GsonBuilder gsonBuilder = new GsonBuilder();
+			Gson gson = gsonBuilder.create();
+			
+			int useridInt = Integer.parseInt(userid);
+			
+			String str=paymentData;
+			  
+			Object object=null;
+			JsonArray arrayObj=null;
+			JsonParser jsonParser=new JsonParser();
+			object=jsonParser.parse(str);
+			arrayObj=(JsonArray) object;
+			
+			Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
+			DateFormat df = new SimpleDateFormat("yyyy-MM-dd"); 
+			
+			List<GeneratePayment> charges1=new ArrayList<>();
+			for(int i=0;i<arrayObj.size();i++) {
+				
+				JsonObject jobj = new Gson().fromJson(arrayObj.get(i), JsonObject.class);
+				
+				GeneratePayment ecData1= new GeneratePayment();
+				ecData1= gson.fromJson(arrayObj.get(i), GeneratePayment.class);
+				
+				if (!(jobj.get("transaction_date_string").getAsString()).isEmpty()) {
+					Date date  =  df.parse(jobj.get("transaction_date_string").getAsString());
+					ecData1.setTransaction_date(date); 
+				} else {
+					Date date  =  df.parse("1999-09-09");
+					ecData1.setTransaction_date(date);
+				}
+				
+				ecData1.setEnquiry_sfid(enq_sfid);
+				ecData1.setProject_sfid(project_sfid);
+				ecData1.setUpdatedby(useridInt);
+				ecData1.setIspayment_status("N");
+				ecData1.setIsactive("Y");
+				ecData1.setUpdate_date(currentTimestamp);
+				
+				charges1.add(ecData1);
+			}
+		
+			generatePaymentService.updatePaymentReq(charges1);
+			
+			return gson.toJson("");
+	}
+	
 	@RequestMapping(value = "/encriptStr", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
 	public String encriptString(@RequestParam("mobileno") String mobileno) {
 		//GsonBuilder gsonBuilder = new GsonBuilder();
