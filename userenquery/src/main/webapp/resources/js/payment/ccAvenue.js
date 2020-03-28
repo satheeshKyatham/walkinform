@@ -167,6 +167,8 @@ function requestCCPaymentGateway(e){
 		processData : false,
 		contentType : false,
 		success : function(data) {
+//			 window.location.href = "ccavRequestHandler?ccencrqst="+data;
+			//alert(data);
 			window.location.href = "ccavRequestHandler?"+data;
 			
 		}
