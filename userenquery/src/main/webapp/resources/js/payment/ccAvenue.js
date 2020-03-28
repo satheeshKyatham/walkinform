@@ -106,12 +106,20 @@ function getCCAvenuePaymentDetails()
 								}else{
 									paymentButton="";
 								}
-								var transactionId=value.bank_ref_no.trim();
-								if(transactionId=="null"){
+								if(value.bank_ref_no!=undefined && value.bank_ref_no!="" && value.bank_ref_no!=null){
+									var transactionId=value.bank_ref_no.trim();
+									if(transactionId=="null" ){
+										transactionId="";
+									}	
+								}else{
 									transactionId="";
 								}
+								if(value.payment_status!=undefined && value.payment_status!="" && value.payment_status!=null){
 								transactionStatus=value.payment_status.trim();
 								if(transactionStatus=="null"){
+									transactionStatus="";
+								}
+								}else{
 									transactionStatus="";
 								}
 								/*var transactionStatus=value==null?'':value.payment_status==null?'':value.payment_status;*/
@@ -159,8 +167,6 @@ function requestCCPaymentGateway(e){
 		processData : false,
 		contentType : false,
 		success : function(data) {
-//			 window.location.href = "ccavRequestHandler?ccencrqst="+data;
-			alert(data);
 			window.location.href = "ccavRequestHandler?"+data;
 			
 		}
