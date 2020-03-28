@@ -12,4 +12,6 @@ public interface ProjectLaunchService {
 	String UpdateProjectStatus(String id,String status);
 	ProjectLaunch getProjectSaleMgrID(String projectid);
 
+	ProjectLaunch getprojectDetailsForCCPayment(String projectSfid);
+
 }

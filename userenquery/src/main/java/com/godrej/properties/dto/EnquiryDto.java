@@ -9,6 +9,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.godrej.properties.common.dto.CommonDto;
 import com.godrej.properties.common.utilities.CommonValidations;
 import com.godrej.properties.constants.KeyConstants;
+import com.godrej.properties.model.ProjectLaunch;
 
 public class EnquiryDto extends CommonDto {
 
@@ -115,6 +116,7 @@ public class EnquiryDto extends CommonDto {
     private String sourcingTeamLeadDto;
     
     private String name;
+    private String isAllowCCPaymentGateway;
    	
 	public String getClosing_manager_name__c() {
 		return closing_manager_name__c;
@@ -654,5 +656,16 @@ public class EnquiryDto extends CommonDto {
 	public void setSourcingTeamLeadDto(String sourcingTeamLeadDto) {
 		this.sourcingTeamLeadDto = sourcingTeamLeadDto;
 	}
+
+	public String getIsAllowCCPaymentGateway() {
+		return isAllowCCPaymentGateway;
+	}
+
+	public void setIsAllowCCPaymentGateway(String isAllowCCPaymentGateway) {
+		this.isAllowCCPaymentGateway = isAllowCCPaymentGateway;
+	}
+
+	
+	
 	
 }

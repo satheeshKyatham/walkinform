@@ -2,6 +2,7 @@ package com.godrej.properties.controller;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -29,7 +30,9 @@ import com.godrej.properties.dto.EnquiryDto;
 import com.godrej.properties.dto.UserSessionDto;
 import com.godrej.properties.master.dto.ReferenceListDto;
 import com.godrej.properties.master.service.ReferenceListService;
+import com.godrej.properties.model.ProjectLaunch;
 import com.godrej.properties.service.EnquiryRequestService;
+import com.godrej.properties.service.ProjectLaunchService;
 import com.godrej.properties.service.TokenService;
 import com.godrej.properties.service.UserContactService;
 import com.godrej.properties.util.CommonUtil;
@@ -51,6 +54,9 @@ public class SalesRequestController {
 	private EnquiryRequestService enquiryRequestService;
 	@Autowired
 	private UserContactService userContactService;
+	
+	@Autowired
+	private ProjectLaunchService projectLaunchService;
 	
 	@Autowired
 	private TokenService tokenService;
@@ -251,12 +257,18 @@ public class SalesRequestController {
 		CustomResponseDto resp=new CustomResponseDto();
 		try{
 			/*EnquiryDto enquiry=enquiryRequestService.getEnquiryByMobileNo(mobileNo);*/
+			List< EnquiryDto> enqList=new ArrayList<EnquiryDto>();
 			List<EnquiryDto> enquiryList=enquiryRequestService.getEnquiriesByMobileNo(countryCode,mobileNo,projectSfid,token,"");
+			ProjectLaunch projectCCPaymentStatus=projectLaunchService.getprojectDetailsForCCPayment(projectSfid);
 			ContactDto contact=null;
 			if(CommonUtil.isCollectionEmpty(enquiryList)){
 			  contact=userContactService.findMobileNoExist(countryCode,mobileNo);
 			}
-			resp.addObject("enquiryList", enquiryList);
+			for(EnquiryDto en:enquiryList){
+				en.setIsAllowCCPaymentGateway(projectCCPaymentStatus.getIsallow_payment());
+				enqList.add(en);
+			}
+			resp.addObject("enquiryList", enqList);
 			resp.addObject("contact", contact);
 			resp.setSuccess(true);
 			resp.setMessage(MessageConstants.ENQUIRY_GET_SUCCESS);

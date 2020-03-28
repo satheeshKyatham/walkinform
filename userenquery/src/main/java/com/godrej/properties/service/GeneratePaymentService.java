@@ -12,5 +12,5 @@ public interface GeneratePaymentService {
 	public String createCCGatewayRequest(GeneratePayment payment);
 	//public CCAvenueGatewayRequest insertCCAvenueGatewayRequest(CCAvenueGatewayRequest gatewayRequest);
 	public List<GeneratePayment> getPaymentDetails(String enqSfid, String projectSFID);
-	public String getwayResponseHandler(String response);
+	public String getwayResponseHandler(String response,String projectsfid);
 }

@@ -68,14 +68,15 @@ function _search_data(inpuNum, project_sfid) {
 						var data1 = JSON.parse(myJSON);
 						var en="";
 						debugger
-						if (data != null) {
-								window.location.assign("ccAvenue?num="+ encStr+ "&projectid="+ project_sfid+"&enqsfid="+enqsfid);
-						} else {
+						if (data=="Invalid input or No Entry Found") {
 							$("#invalidEntry").text("Invalid number or No Entry Found");
 							$("#email").val('');
 							$("#birthdate").val('');
 							$("#lastname").val('');
 							$("#loginColLoad").hide();
+								
+						} else {
+							window.location.assign("ccAvenue?num="+ encStr+ "&projectid="+ project_sfid+"&enqsfid="+enqsfid);
 						}
 							
 					});
@@ -105,11 +106,20 @@ function getCCAvenuePaymentDetails()
 								}else{
 									paymentButton="";
 								}
-								
-								if(value.bank_ref_no.trim()=="null"){
+								if(value.bank_ref_no!=undefined && value.bank_ref_no!="" && value.bank_ref_no!=null){
+									var transactionId=value.bank_ref_no.trim();
+									if(transactionId=="null" ){
+										transactionId="";
+									}	
+								}else{
 									transactionId="";
 								}
-								if(value.payment_status.trim()=="null"){
+								if(value.payment_status!=undefined && value.payment_status!="" && value.payment_status!=null){
+								transactionStatus=value.payment_status.trim();
+								if(transactionStatus=="null"){
+									transactionStatus="";
+								}
+								}else{
 									transactionStatus="";
 								}
 								/*var transactionStatus=value==null?'':value.payment_status==null?'':value.payment_status;*/
@@ -157,8 +167,6 @@ function requestCCPaymentGateway(e){
 		processData : false,
 		contentType : false,
 		success : function(data) {
-//			 window.location.href = "ccavRequestHandler?ccencrqst="+data;
-			alert(data);
 			window.location.href = "ccavRequestHandler?"+data;
 			
 		}
