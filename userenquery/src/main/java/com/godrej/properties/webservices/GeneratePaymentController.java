@@ -338,7 +338,7 @@ public class GeneratePaymentController {
 							
 							if(eoi.getEmail_id()!=null && eoi.getEmail_id().length()>0) {
 								String projectName = "Godrej Properties : Payment Requested for "+ eoi.getProjectname();
-								SendMailThreadUtil mail =new SendMailThreadUtil(eoi.getEmail_id(),	"mail@atulbhanushali.com", projectName, text);
+								SendMailThreadUtil mail =new SendMailThreadUtil(eoi.getEmail_id(),	emailid, projectName, text);
 							} 
 						}
 					}
