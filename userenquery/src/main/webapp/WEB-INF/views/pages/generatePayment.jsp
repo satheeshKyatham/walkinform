@@ -43,6 +43,14 @@
 		<div>
 			<span>Total transaction amount: </span><span id="csPtGrandtotalOP"></span>
 		</div>
+		
+		<div style="margin-top: 10px; border-top: 1px dashed #959595; padding-top: 10px;">
+			<button onclick="copyToClipboard('PaymentLinkForSales')" class="btn blue_btn" style="float: left; margin-right: 20px; margin-top: 6px; font-size: 12px; padding: 5px;">
+				Copy Payment Link
+			</button>
+			<span id="PaymentLinkForSales"></span>
+		</div>
+		
 		<div class="clearfix"></div>
 	</div>
 	<!-- END New EOI Payment Dtl -->

@@ -29,7 +29,7 @@ public class SendMailThreadUtil implements Runnable{
 		this.message = message;
 		this.cc = cc;
 		this.subject = subject;
-		//this.message = message;
+		this.message = message;
 		mailSent(true);
 	}
 	
@@ -40,8 +40,7 @@ public class SendMailThreadUtil implements Runnable{
 		//String host = "Smtp.office365.com";
 		String host = "10.21.24.32"; 
 		
-		//final String from = "gc.atulbhanushali@godrejproperties.com";
-       // final String password = "PASS@123";
+	
         
         final String from = "customercare.gpl@godrejproperties.com";
         final String password = "ARTM@4444";
