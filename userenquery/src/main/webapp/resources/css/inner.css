@@ -574,3 +574,5 @@ border: 1px Solid #ccc; top: 10px;     margin: 70px auto 20px !important; float:
 .crudRPBtn .deletePayReqBtn {background-color: #ce1818 !important;}
 .crudRPBtn .updatePaymentBtn {background-color: #3b9100 !important;}
 .crudRPBtn .cancelPayReqBtn {background-color: #8b8b8b !important;}
+
+.trxSuccess {background-color: #bfffe0;}

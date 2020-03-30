@@ -18,7 +18,13 @@
 					<th>
 						Description
 					</th>
-					<th></th>
+					<th style="width: 140px;">
+						Transaction ID
+					</th>
+					<th style="width: 140px;">
+						Transaction Status
+					</th>
+					<th style="width: 165px;"></th>
 				</tr>
 				
 				<tr class="csPtDataRowOP">
@@ -31,6 +37,8 @@
 					<td>
 						<textarea class="full form-control input-sm csPtDescriptionOP" placeholder="Description"></textarea>
 					</td>
+					<td> </td>
+					<td> </td>
 					<td> </td>
 				</tr>
 				
@@ -45,10 +53,12 @@
 		</div>
 		
 		<div style="margin-top: 10px; border-top: 1px dashed #959595; padding-top: 10px;">
-			<button onclick="copyToClipboard('PaymentLinkForSales')" class="btn blue_btn" style="float: left; margin-right: 20px; margin-top: 6px; font-size: 12px; padding: 5px;">
-				Copy Payment Link
-			</button>
-			<span id="PaymentLinkForSales"></span>
+			<div class="col-md-2">	
+				<button onclick="copyToClipboard('PaymentLinkForSales')" class="btn blue_btn" style="float: left; margin-right: 20px; margin-top: 6px; font-size: 12px; padding: 5px;">
+					Copy Payment Link
+				</button>
+			</div>	
+			<div class="col-md-10" id="PaymentLinkForSales" style="word-break: break-all;"></div>
 		</div>
 		
 		<div class="clearfix"></div>
