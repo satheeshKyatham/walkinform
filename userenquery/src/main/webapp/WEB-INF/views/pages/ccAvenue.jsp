@@ -14,8 +14,8 @@
 	<link rel="icon" href="<c:url value='/resources/images/favicon.ico' />" type="image/x-icon">
 <link rel="stylesheet" href="<c:url value='/resources/css/bootstrap.min.css' />" type="text/css" />
      
-	<link rel="stylesheet" href="<c:url value='/resources/css/inner.css?v=2.0' />">
-	<link rel="stylesheet" href="<c:url value='/resources/css/style.css?v=2.0' />">
+	<link rel="stylesheet" href="<c:url value='/resources/css/inner.css?v=3.0' />">
+	<link rel="stylesheet" href="<c:url value='/resources/css/style.css?v=3.0' />">
 	<link rel="stylesheet" href="<c:url value='/resources/css/font-awesome.css' />">
 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
 </head>
@@ -101,7 +101,7 @@ if(ses!=null){
 	<script src="<c:url value='/resources/js/dataTables.buttons.min.js'/>"></script>
 	<script src="<c:url value='/resources/js/jszip.min.js'/>"></script>
 	<script src="<c:url value='/resources/js/buttons.html5.min.js'/>"></script>
-	<script src="<c:url value='/resources/js/payment/ccAvenue.js?v=18.15'/>"></script>
+	<script src="<c:url value='/resources/js/payment/ccAvenue.js?v=18.18'/>"></script>
 	 <script type="text/javascript">	getCCAvenuePaymentDetails();</script> 
 	
 </body>

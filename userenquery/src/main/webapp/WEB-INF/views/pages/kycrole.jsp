@@ -15,8 +15,8 @@
 <link rel="icon" href="<c:url value='/resources/images/favicon.ico' />" type="image/x-icon">
 <link rel="stylesheet" href="<c:url value='/resources/css/bootstrap.min.css' />" type="text/css" />
      
-	<link rel="stylesheet" href="<c:url value='/resources/css/inner.css?v=2.0' />">
-	<link rel="stylesheet" href="<c:url value='/resources/css/style.css?v=2.0' />">
+	<link rel="stylesheet" href="<c:url value='/resources/css/inner.css?v=3.0' />">
+	<link rel="stylesheet" href="<c:url value='/resources/css/style.css?v=3.0' />">
 	
 	<link rel="stylesheet" href="<c:url value='/resources/css/font-awesome.css' />">
 	
@@ -181,12 +181,12 @@ if(ses!=null){
 	  </div>
 	</div>
 	</div>
-	<script src="<c:url value='/resources/js/salesdesk.js?v=18.15'/>"></script>
-	<script src="<c:url value='/resources/js/separate/offer.js?v=18.15'/>"></script>
+	<script src="<c:url value='/resources/js/salesdesk.js?v=18.18'/>"></script>
+	<script src="<c:url value='/resources/js/separate/offer.js?v=18.18'/>"></script>
 	
-	<script src="<c:url value='/resources/js/separate/applicationForm.js?v=18.15'/>"></script>
-	<script src="<c:url value='/resources/js/separate/offerApplicationForm.js?v=18.16'/>"></script>
-	<script src="<c:url value='/resources/js/demo/offerTemplate.js?v=18.15'/>"></script>	
+	<script src="<c:url value='/resources/js/separate/applicationForm.js?v=18.18'/>"></script>
+	<script src="<c:url value='/resources/js/separate/offerApplicationForm.js?v=18.18'/>"></script>
+	<script src="<c:url value='/resources/js/demo/offerTemplate.js?v=18.18'/>"></script>	
 </body>
 </html>
 

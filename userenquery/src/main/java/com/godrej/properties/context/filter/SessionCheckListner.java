@@ -31,6 +31,8 @@ public class SessionCheckListner extends HandlerInterceptorAdapter {
 		filterUrlList.add("/error");
 		filterUrlList.add("/ccAvenue");
 		filterUrlList.add("/ccAvenueLogin");
+		filterUrlList.add("/ccavResponseHandler");
+		filterUrlList.add("/ccavRequestHandler");
 		
 	}
 
