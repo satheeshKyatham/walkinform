@@ -148,6 +148,7 @@ function getPaymentReqRecord () {
 		
 		if(obj!=null){
 			if (obj.status != "STATUS_NOTOK") {
+				$("#PaymentLinkForSales").empty();
 				$("#PaymentLinkForSales").append (obj[0].request_url);
 				for(i = 0; i< obj.length; i++){    
 					
