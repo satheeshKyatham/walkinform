@@ -24,7 +24,7 @@
 					<th style="width: 140px;">
 						Transaction Status
 					</th>
-					<th></th>
+					<th style="width: 165px;"></th>
 				</tr>
 				
 				<tr class="csPtDataRowOP">
@@ -58,7 +58,7 @@
 					Copy Payment Link
 				</button>
 			</div>	
-			<div class="col-md-10" id="PaymentLinkForSales"></div>
+			<div class="col-md-10" id="PaymentLinkForSales" style="word-break: break-all;"></div>
 		</div>
 		
 		<div class="clearfix"></div>

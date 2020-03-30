@@ -112,15 +112,27 @@ function csPymtDataOP () {
 		var obj =JSON.parse(data);
 		
 		if(obj!=null){
-			alert (obj.error_msg);
-			
 			if (obj.status == "STATUS_OK") {
+				swal({
+		              title: obj.error_msg,
+		              text: "",
+		              timer: 3000,
+		              type: "success",
+		        });
+				
 				$(".csPtDataRowOP .csPtTransactionAmountOP").val("")
 				$(".csPtDataRowOP .csPtDescriptionOP").val("")
 				getPaymentReqRecord ();
 				
 				$(".addedRow").remove();
 				amIEoi = 0;
+			} else if (obj.status == "STATUS_NOTOK") {
+				swal({
+		              title: obj.error_msg,
+		              text: "",
+		              timer: 3000,
+		              type: "warning",
+		         });
 			}
 			
 			/*if (obj.status == "STATUS_NOTOK" && obj.error_id == "ER1001") {
@@ -145,10 +157,13 @@ function getPaymentReqRecord () {
 	$.post(pageContext+"getPaymentReqRecord",{"enqSfid":$('#enquirysfid').val(), "projectSFID":$("#projectsfid").val()},function(data){
 		
 		var html = '';
+		var htmlActionBtn = '';
+		
 		var obj =JSON.parse(data);
 		var trans_date = '';
 		var trxSuccess = "";
 		var trxStatus = "";
+		var actionBtn = "";
 		
 		if(obj!=null){
 			if (obj.status != "STATUS_NOTOK") {
@@ -177,6 +192,19 @@ function getPaymentReqRecord () {
 					}
 					
 					
+					if (obj[i].ispayment_status == "N" && obj[i].isactive == "Y") {
+						htmlActionBtn = "";
+						htmlActionBtn +=  '<div>'
+										+ '<button class="btn btn-primary blue_btn editPayReqBtn" onclick="editPaymentRequest(this)">Edit</button>'
+										+ '<button class="btn btn-primary blue_btn updatePaymentBtn" style="display:none" onclick="updatePaymentRequest(this)">Update</button>'
+										+ '<button class="btn btn-primary blue_btn cancelPayReqBtn" style="display:none" onclick="cancelPayReq(this)">Cancel</button>'
+									+ '</div>';
+					} else {
+						htmlActionBtn = "";
+					}
+					
+					
+					
 					html += 	'<tr class="paymentDataPlotRow '+trxSuccess+'" data-rowid = "'+obj[i].id+'">'
 									+ '<td style="text-align:center;">'
 										+trans_date
@@ -197,12 +225,13 @@ function getPaymentReqRecord () {
 											+ '<span>'+obj[i].payment_status+'</span>' 
 									+ '</td>'
 									+ '<td class="crudRPBtn"> '
-										+ '<div style="display:none">'
+										+ htmlActionBtn
+										/*+ '<div style="display:none">'
 											+ '<button class="btn btn-primary blue_btn editPayReqBtn" onclick="editPaymentRequest(this)">Edit</button>'
 											+ '<button class="btn btn-primary blue_btn updatePaymentBtn" style="display:none" onclick="updatePaymentRequest(this)">Update</button>'
-											+ '<button class="btn btn-primary blue_btn deletePayReqBtn" >Delete</button>'
+											//+ '<button class="btn btn-primary blue_btn deletePayReqBtn" >Delete</button>'
 											+ '<button class="btn btn-primary blue_btn cancelPayReqBtn" style="display:none" onclick="cancelPayReq(this)">Cancel</button>'
-										+ '</div>'	
+										+ '</div>'	*/
 									+ '</td>' 
 								"</tr>";
 				}
@@ -226,7 +255,7 @@ function getPaymentReqRecord () {
 
 
 function editPaymentRequest (e) {
-	alert ($(e).closest("td").closest("tr.paymentDataPlotRow").attr("data-rowid"));
+	//alert ($(e).closest("td").closest("tr.paymentDataPlotRow").attr("data-rowid"));
 	
 	$(e).closest("td").closest("tr.paymentDataPlotRow").addClass("eidtPayRow");
 	$("p:first").addClass("intro");
@@ -292,38 +321,40 @@ function updatePaymentRequest (e) {
 	},function(data){				 
 	
 	}).done(function(data){
-		/*var obj =JSON.parse(data);
-		
+		var obj =JSON.parse(data);
 		if(obj!=null){
-			alert (obj.error_msg);
-			
-			if (obj.status == "STATUS_OK") {
-				getPaymentReqRecord ();
-			} 
-		}*/
-		getPaymentReqRecord ();
+			 if (obj.status == "STATUS_OK") {
+				 swal({
+		             title: obj.error_msg,
+		              text: "",
+		              timer: 3000,
+		              type: "success",
+		         });
+				 getPaymentReqRecord ();
+			 } else if (obj.status == "STATUS_NOTOK") {
+				 swal({
+		             title: obj.error_msg,
+		              text: "",
+		              timer: 3000,
+		              type: "warning",
+		         });
+			 }
+		}
 	});
 }
 
 
 function copyToClipboard(elementId) {
-
   // Create a "hidden" input
   var aux = document.createElement("input");
-
   // Assign it the value of the specified element
   aux.setAttribute("value", document.getElementById(elementId).innerHTML);
-
   // Append it to the body
   document.body.appendChild(aux);
-
   // Highlight its content
   aux.select();
-
   // Copy the highlighted text
   document.execCommand("copy");
-
   // Remove it from the body
   document.body.removeChild(aux);
-
 }

@@ -51,8 +51,8 @@ public class GeneratePaymentServiceImpl implements GeneratePaymentService{
  	private ProjectLaunchService projectLaunchService;
 	
 	@Override
-	public void updatePaymentReq(List<GeneratePayment> payReq) {
-		  dao.updatePaymentReq(payReq);
+	public Boolean updatePaymentReq(List<GeneratePayment> payReq) {
+		  return dao.updatePaymentReq(payReq);
 	}
 	
 	@Override
