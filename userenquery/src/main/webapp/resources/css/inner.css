@@ -75,7 +75,7 @@ input:-webkit-autofill:active {
 .btn.btn-cancel:hover { background: #e1e1e1; color: #8b8b8b; }
 .btn-box {text-align: center; margin: 50px 0;}
 
- .btnCol {text-align: center; margin-top:35px;     padding: 15px; border-top: 1px dotted #ccc;} 
+ .btnCol {text-align: center; padding: 15px; border-top: 1px dotted #ccc;}  /* margin-top:35px; */     
 
 .btnColLogin {padding-bottom: 0; text-align: center; margin-top:10px;  padding: 15px 15px 0 15px;}
 

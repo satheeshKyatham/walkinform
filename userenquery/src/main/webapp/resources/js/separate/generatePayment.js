@@ -148,6 +148,7 @@ function getPaymentReqRecord () {
 		
 		if(obj!=null){
 			if (obj.status != "STATUS_NOTOK") {
+				$("#PaymentLinkForSales").append (obj[0].request_url);
 				for(i = 0; i< obj.length; i++){    
 					
 					if (obj[i].transaction_date != '') {
@@ -160,6 +161,8 @@ function getPaymentReqRecord () {
 					}else {
 						trans_date = '';
 					}
+					
+					
 					
 					html += 	'<tr class="paymentDataPlotRow" data-rowid = "'+obj[i].id+'">'
 									+ '<td style="text-align:center;">'
@@ -281,4 +284,27 @@ function updatePaymentRequest (e) {
 		}*/
 		getPaymentReqRecord ();
 	});
+}
+
+
+function copyToClipboard(elementId) {
+
+  // Create a "hidden" input
+  var aux = document.createElement("input");
+
+  // Assign it the value of the specified element
+  aux.setAttribute("value", document.getElementById(elementId).innerHTML);
+
+  // Append it to the body
+  document.body.appendChild(aux);
+
+  // Highlight its content
+  aux.select();
+
+  // Copy the highlighted text
+  document.execCommand("copy");
+
+  // Remove it from the body
+  document.body.removeChild(aux);
+
 }
