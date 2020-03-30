@@ -35,6 +35,8 @@ function addMorePtBtnOP () {
 				" <td><input type='date' value='"+todayDate+"' class='form-control input-sm csPtTransactionDateOP requiredField' placeholder='Transaction Date' readonly/></td>" +
 				" <td><input maxlength='10' class='numericWithoutDecimal  numericField full form-control input-sm csPtTransactionAmountOP requiredField' onkeyup='csPtcalculateGrandTotalOP()' placeholder='Transaction Amount' name='amount'/></td>" +
 				" <td><textarea class='full form-control input-sm csPtDescriptionOP' placeholder='Description'></textarea></td> " +
+				" <td></td> " +
+				" <td></td> " +
 				" <td class='removeCsPtColOP txtCenter'><i onclick='removeCsPtColOP(this)' class='fa fa-times-circle redColr cursorPoint'></i></td></tr> ");
 		amIEoi++;
 	}else {
@@ -145,6 +147,8 @@ function getPaymentReqRecord () {
 		var html = '';
 		var obj =JSON.parse(data);
 		var trans_date = '';
+		var trxSuccess = "";
+		var trxStatus = "";
 		
 		if(obj!=null){
 			if (obj.status != "STATUS_NOTOK") {
@@ -163,9 +167,17 @@ function getPaymentReqRecord () {
 						trans_date = '';
 					}
 					
+					trxStatus = obj[i].payment_status == undefined ? '' : obj[i].payment_status.trim();
+					trxStatus = trxStatus.replace(/ /g, '%20');
+					
+					if (trxStatus == "Success") {
+						trxSuccess = "trxSuccess";
+					} else {
+						trxSuccess = "";
+					}
 					
 					
-					html += 	'<tr class="paymentDataPlotRow" data-rowid = "'+obj[i].id+'">'
+					html += 	'<tr class="paymentDataPlotRow '+trxSuccess+'" data-rowid = "'+obj[i].id+'">'
 									+ '<td style="text-align:center;">'
 										+trans_date
 										+ '<input class="exisitingPayReqdate" style="display:none;" value="'+trans_date+'">' 
@@ -177,7 +189,13 @@ function getPaymentReqRecord () {
 									+ '<td style="text-align:center;">'
 											+ '<textarea class="editDesPR full form-control input-sm" style="display:none;">'+obj[i].description+'</textarea>'
 											+ '<span class="existingDes">'+obj[i].description+'</span>' 
-									+ '</td>' 
+									+ '</td>'
+									+ '<td style="text-align:center;">'
+											+ '<span>'+obj[i].bank_ref_no+'</span>' 
+									+ '</td>'
+									+ '<td style="text-align:center;">'
+											+ '<span>'+obj[i].payment_status+'</span>' 
+									+ '</td>'
 									+ '<td class="crudRPBtn"> '
 										+ '<div style="display:none">'
 											+ '<button class="btn btn-primary blue_btn editPayReqBtn" onclick="editPaymentRequest(this)">Edit</button>'
