@@ -12,8 +12,8 @@
 <title>My Token List</title>
 <link rel="stylesheet" href="<c:url value='/resources/css/bootstrap.min.css' />" type="text/css" />
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">    
-<link rel="stylesheet" href="<c:url value='/resources/css/inner.css' />">
-<link rel="stylesheet" href="<c:url value='/resources/css/style.css' />">
+<link rel="stylesheet" href="<c:url value='/resources/css/inner.css?v=3.0' />">
+<link rel="stylesheet" href="<c:url value='/resources/css/style.css?v=3.0' />">
 <link rel="stylesheet" href="<c:url value='/resources/css/sweetalert.min.css' />">
 <%-- 
 <script src="<c:url value='/resources/js/bootstrap.min.js'/>"></script>
@@ -188,11 +188,11 @@ projectid=request.getParameter("projectid");
 <script src="<c:url value='/resources/js/jquery-1.12.4.min.js'/>"></script>
 <script src="<c:url value='/resources/js/bootstrap.min.js'/>"></script>  
 <script type="text/javascript" charset="utf8" src="<c:url value='/resources/js/jquery.dataTables.js'/>"></script>
-<script src="<c:url value='/resources/js/enquiryRequest/assignToken.js?v=18.15'/>"></script>
-<script src="<c:url value='/resources/js/salesdesk.js?v=18.15'/>"></script>
+<script src="<c:url value='/resources/js/enquiryRequest/assignToken.js?v=18.18'/>"></script>
+<script src="<c:url value='/resources/js/salesdesk.js?v=18.18'/>"></script>
 <script src="<c:url value='/resources/js/sweetalert.min.js'/>"></script>
 
-<script src="<c:url value='/resources/js/separate/eoiData.js?v=18.15'/>"></script>
+<script src="<c:url value='/resources/js/separate/eoiData.js?v=18.18'/>"></script>
 
 </body>
 </html>  
