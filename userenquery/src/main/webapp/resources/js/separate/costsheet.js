@@ -2577,7 +2577,7 @@ function tncData () {
              if (obj != null) {
                     $(".tncData").closest('table').next('.tableNoRec').hide();
                     for (i = 0; i< obj.length; i++) {
-                           if($('#ppDropdown').val() == obj[i].pymt_plan_id) {
+                           /*if($('#ppDropdown').val() == obj[i].pymt_plan_id) {
                                  $('.tncData').prepend(obj[i].tnc_text);
                                  //return false;
                            }else {
@@ -2585,15 +2585,17 @@ function tncData () {
                                         $('.tncData').prepend(obj[i].tnc_text);
                                   //      return false;
                                  }
-                           }
+                           }*/
+                    	 $('.tncData').prepend(obj[i].tnc_text);
+                    	 return false;
                     }
                     
-                    if($('#ppDropdown').val() == "a1i2s000000Gn5iAAC" && $('#projectid').val() == "a1l2s00000003BMAAY") {
+                    /*if($('#ppDropdown').val() == "a1i2s000000Gn5iAAC" && $('#projectid').val() == "a1l2s00000003BMAAY") {
                     	$('.tncData').append("" +
                     			" <div>* Presently for the Subvention Scheme we have tie up with Axis Bank only .The subvention period is upto 15th March 2022.The said scheme is Subject to Purchaser's loan eligibility. All Loans subject to norms and discretion of Lending authority. </div>" +
                     			" <div>* Pursuant to execution of the TPA between Applicant(s), Bank and Developer, in case the interest rate applicable to the Applicant(s)  increases for any reason whatsoever, the Applicant(s) shall be liable to bear the additional subvention interest cost and not the Developer. GST Not Covered under this Subvention scheme. </div>" +
                     			" <div>* This is a subvention cost sheet </div> ");
-                    } 
+                    } */
                     
                     
              } else {
@@ -2976,9 +2978,10 @@ function getEOIPaymentRecord () {
              if(obj!=null){
                     
                     for(i = 0; i< obj.length; i++){    
-                           
-                           panTarget = pageContext+"file?name="+obj[i].pan_attach+"&from=EOIbookingReference&eid="+obj[i].enq_sfid+"&fid="+obj[i].pan_attach.charAt(0);
-                           reciptTarget = pageContext+"file?name="+obj[i].cheque_attach+"&from=EOIbookingReference&eid="+obj[i].enq_sfid+"&fid="+obj[i].cheque_attach.charAt(0);
+                           if(obj[i].pan_attach!=null)
+                        	   panTarget = pageContext+"file?name="+obj[i].pan_attach+"&from=EOIbookingReference&eid="+obj[i].enq_sfid+"&fid="+obj[i].pan_attach.charAt(0);
+                          if(obj[i].cheque_attach!=null)
+                        	  reciptTarget = pageContext+"file?name="+obj[i].cheque_attach+"&from=EOIbookingReference&eid="+obj[i].enq_sfid+"&fid="+obj[i].cheque_attach.charAt(0);
                            
                            if (obj[i].transaction_date != '') {
                                  var date = new Date(obj[i].transaction_date);

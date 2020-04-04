@@ -53,6 +53,92 @@ public class GeneratePaymentController {
 	@Autowired
 	private EnqJourneyDtlService enqJourneyDtlService;
 	
+	@RequestMapping(value = "/updatePaymentRequest", method = RequestMethod.POST)
+	public String insertPaymentRequest(
+			@RequestParam("paymentDtlJson") String paymentData,
+			@RequestParam("userid") String userid,
+			@RequestParam("enq_sfid") String enq_sfid,
+			@RequestParam("project_sfid") String project_sfid) throws ParseException {	
+		
+		
+		if(    !userid.equals("")  
+				&& !enq_sfid.equals("")  
+				&& !project_sfid.equals(""))  {
+				
+				try {
+					GsonBuilder gsonBuilder = new GsonBuilder();
+					Gson gson = gsonBuilder.create();
+					
+					int useridInt = Integer.parseInt(userid);
+					
+					String str=paymentData;
+					  
+					Object object=null;
+					JsonArray arrayObj=null;
+					JsonParser jsonParser=new JsonParser();
+					object=jsonParser.parse(str);
+					arrayObj=(JsonArray) object;
+					
+					List<GeneratePayment> charges1=new ArrayList<>();
+					
+					if(arrayObj!=null && arrayObj.size()>0) {
+						Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
+						DateFormat df = new SimpleDateFormat("yyyy-MM-dd"); 
+						
+						for(int i=0;i<arrayObj.size();i++) {
+							
+							JsonObject jobj = new Gson().fromJson(arrayObj.get(i), JsonObject.class);
+							
+							GeneratePayment ecData1= new GeneratePayment();
+							ecData1= gson.fromJson(arrayObj.get(i), GeneratePayment.class);
+							
+							if (!jobj.get("amount").getAsString().equals("") && jobj.get("amount") != null
+									&& !jobj.get("transaction_date_string").getAsString().equals("") && jobj.get("transaction_date_string") != null) 
+							{
+								if (!(jobj.get("transaction_date_string").getAsString()).isEmpty()) {
+									Date date  =  df.parse(jobj.get("transaction_date_string").getAsString());
+									ecData1.setTransaction_date(date); 
+								} else {
+									Date date  =  df.parse("1999-09-09");
+									ecData1.setTransaction_date(date);
+								}
+								
+								ecData1.setEnquiry_sfid(enq_sfid);
+								ecData1.setProject_sfid(project_sfid);
+								ecData1.setUpdatedby(useridInt);
+								ecData1.setIspayment_status("N");
+								ecData1.setIsactive("Y");
+								ecData1.setUpdate_date(currentTimestamp);
+								charges1.add(ecData1);
+							} else {
+								String response = "{\"status\":\"STATUS_NOTOK\",\"error_msg\":\"Invalid Data Provide\",\"error_id\":\"ER1001\"}";
+								return response;
+							}
+						}
+						boolean isUpdated = generatePaymentService.updatePaymentReq(charges1);
+						
+						if (isUpdated) {
+							String response = "{\"status\":\"STATUS_OK\",\"error_msg\":\"Successfully submitted\",\"error_id\":null}";
+							return response;
+						} else {
+							String response = "{\"status\":\"STATUS_NOTOK\",\"error_msg\":\"Details is not updated on portal\",\"error_id\":\"ER1002\"}";
+							return response;
+						}
+					} else {
+						String response = "{\"status\":\"STATUS_NOTOK\",\"error_msg\":\"Data Not Found\",\"error_id\":\"ER1003\"}";
+						return response;
+					}
+				}  catch(Exception e) {
+					Log.info("Payment Request is not updating Error:- ",e);				
+					String response = "{\"status\":\"STATUS_NOTOK\",\"error_msg\":\"Details is not updated on portal, please try again later\",\"error_id\":\"ER1004\"}";
+					return response;
+				}
+			} else {
+				String response = "{\"status\":\"STATUS_NOTOK\",\"error_msg\":\"Invalid Data Provide\",\"error_id\":\"ER1005\"}";
+				return response;
+			}
+	}
+	
 	@RequestMapping(value = "/encriptStr", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
 	public String encriptString(@RequestParam("mobileno") String mobileno) {
 		//GsonBuilder gsonBuilder = new GsonBuilder();
@@ -269,7 +355,7 @@ public class GeneratePaymentController {
 						{
 							String str = encriptString(eoi.getPhone_number());
 							String resultPath = request.getHeader("Host") + request.getContextPath();
-							String kyclink= "https://"+resultPath+"/ccAvenueLogin?num="+str.replaceAll("\"", "")+"&projectid="+URLEncoder.encode(eoi.getProjectsfid(), "UTF-8")+"&projectname="+URLEncoder.encode(eoi.getProjectname(), "UTF-8");
+							String kyclink= "https://"+resultPath+"/ccAvenueLogin?num="+str.replaceAll("\"", "")+"&projectid="+URLEncoder.encode(eoi.getProjectsfid(), "UTF-8")+"&enqsfid="+URLEncoder.encode(enqid, "UTF-8")+"&projectname="+URLEncoder.encode(eoi.getProjectname(), "UTF-8");
 							//String text = readContentFromFile("D://atul_data//apache-tomcat-9.0.22//QR//payment_request.htm");
 							String text = readContentFromFile("D://SW//apache-tomcat-9.0.0.M22//apache-tomcat-9.0.0.M22//QR//payment_request.htm");
 							
@@ -284,7 +370,7 @@ public class GeneratePaymentController {
 							
 							if(eoi.getEmail_id()!=null && eoi.getEmail_id().length()>0) {
 								String projectName = "Godrej Properties : Payment Requested for "+ eoi.getProjectname();
-								SendMailThreadUtil mail =new SendMailThreadUtil(eoi.getEmail_id(),	"mail@atulbhanushali.com", projectName, text);
+								SendMailThreadUtil mail =new SendMailThreadUtil(eoi.getEmail_id(),	emailid, projectName, text);
 							} 
 						}
 					}

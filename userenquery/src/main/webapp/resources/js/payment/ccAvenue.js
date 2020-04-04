@@ -97,7 +97,32 @@ function getCCAvenuePaymentDetails()
 						var transactionId="";
 						var transactionStatus="";
 						//alert("Alert");
+						 var url_string = window.location.href; //window.location.href
+						 var url = new URL(url_string);
+						 var respid = url.searchParams.get("respid");
+						 var amt = url.searchParams.get("amt");
+						 
+						 var msgShow = "";
+						
+						
 						$.getJSON(urlPP, function (data) {
+							if(respid=="1")//Success
+							{
+								msgShow="Dear "+data[0].customer_name+", payment has been initiated for "+amt+""
+							}
+							else if(respid=="2")//Failed
+								{
+									msgShow="There was error in processing your payment at this time"
+								}
+							else if(respid=="3")//Cancelled
+								{
+									msgShow="Dear "+data[0].customer_name+", payment has been cancelled"
+								}
+							else if(respid=="4")//Cancelled
+							{
+								msgShow="Oops! somthing went wrong, please check with IT team"
+							}
+							$('#payment_resp').text(msgShow);
 							$.each(data, function (index, value) {
 								debugger;
 								console.log("test",value)
@@ -167,6 +192,8 @@ function requestCCPaymentGateway(e){
 		processData : false,
 		contentType : false,
 		success : function(data) {
+//			 window.location.href = "ccavRequestHandler?ccencrqst="+data;
+			//alert(data);
 			window.location.href = "ccavRequestHandler?"+data;
 			
 		}

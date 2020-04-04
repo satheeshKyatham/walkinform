@@ -91,9 +91,13 @@ public class KeyConstants {
 	
 	//CC Avenue Payment Gateway Configurations 
 	public static final String CCAVENUE_GATEWAT_URL="https://secure.ccavenue.com/transaction/transaction.do?command=initiateTransaction";
-	/*public static final String REDIRECT_URL="http://kyc.gplapps.com:8084/CCAvenue/jsp/ccavResponseHandler.jsp";
-	public static final String CANCEL_URL="http://kyc.gplapps.com:8084/CCAvenue/jsp/ccavResponseHandler.jsp";*/
-	public static final String REDIRECT_URL="http://kyc.gplapps.com:8084/walkinform/ccavResponseHandler";
+	/*public static final String REDIRECT_URL="http://kyc.gplapps.com:8084/walkinform/ccavResponseHandler";
 	public static final String CANCEL_URL="http://kyc.gplapps.com:8084/walkinform/ccavResponseHandler";
+	*/
+	/*public static final String REDIRECT_URL="https://d4u.gplapps.com:8085/walkinformuat/ccavResponseHandler";
+	public static final String CANCEL_URL="https://d4u.gplapps.com:8085/walkinformuat/ccavResponseHandler";*/
+	
+	public static final String REDIRECT_URL="https://d4u.gplapps.com:8085/walkinform/ccavResponseHandler";
+	public static final String CANCEL_URL="https://d4u.gplapps.com:8085/walkinform/ccavResponseHandler";
 }
 
