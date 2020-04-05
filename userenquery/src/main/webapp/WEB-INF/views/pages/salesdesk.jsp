@@ -38,6 +38,7 @@
   
   <!-- <input type="text" > -->
   <div class="col-md-8" style="margin-top:10px; margin-bottom:10px;">
+  <input type="hidden" id="userNameLoggedIn" value="<%= session.getAttribute("USERNAME")%>" />
   <input type="hidden" id="userid" value="<%= session.getAttribute("USERID")%>" />
   <input type="hidden" id="proid" value="<%= session.getAttribute("PROID")%> "/>
   <input type="hidden" id="role" value="<%= session.getAttribute("ROLE")%> "/>
