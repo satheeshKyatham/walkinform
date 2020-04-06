@@ -338,7 +338,7 @@ function loadData () {
                            
                            
                            if (value.wing_block__c != undefined) {
-                        	   wing = value.wing_block__c + " - ";
+                        	   wing = value.wing_block__c;
                            } else {
                         	   wing = "";
                            }

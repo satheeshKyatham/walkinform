@@ -578,14 +578,13 @@
 										<tbody>
 											<tr>
 												<th class="subHead">Tower</th>
-												<td class="towerTval"></td>
+												<td><span class="towerTval"></span><span class="wingVal"></span></td>
 												<th class="subHead">Carpet Area Rera (in Sq.mtr.)</th>
 												<td class="carpetSqm"></td>
 											</tr>
 											<tr>
 												<th class="subHead">Unit Number</th>
 												<td>
-													<span class="wingVal"></span>
 													<span class="unitTval"></span>
 												</td>
 												<th class="subHead">Exclusive Area (in Sq.mtr.)</th>
@@ -846,7 +845,7 @@
 						<tbody>
 							<tr>
 								<th class="subHead">Tower</th>
-								<td class="animated" id="towerTval"></td>
+								<td class="animated"><span id="towerTval"></span><span id="wingVal"></span></td>
 								
 								<th class="subHead">Carpet Area Rera (in Sq.mtr.)</th>
 								<td id="carpetSqm" class="animated"></td>
@@ -856,7 +855,6 @@
 						<tr>
 							<th class="subHead">Unit Number</th>
 							<td class="animated">
-								<span id="wingVal"></span>
 								<span id="unitTval"></span>
 							</td>
 							<th class="subHead">Exclusive Area (in Sq.mtr.)</th>
