@@ -24,7 +24,7 @@
  
  <!-- Costsheet -->
     <link rel="stylesheet" href="<c:url value='/resources/css/costsheet.css' />">
-
+	<link rel="stylesheet" href="<c:url value='/resources/css/font-awesome.css' />">
 </head> 
 <%! String projectname,projectid ,projectrole,userid;%>
 <%
@@ -46,6 +46,9 @@ if(ses!=null){
 <input type="hidden" id="contextPath" value="${pageContext.request.contextPath}">
 <input type="hidden" id="projectname" value="${projectName}">
 <input type="hidden" id="projectid" value="${projectSfid}">
+<!-- Added for Costsheet -->
+<input type="hidden" id="projectId" value="${projectSfid}">
+<!-- END Added for Costsheet -->
 <input type="hidden" id="userid" value="${userId}">
   <nav class="navbar topMainBar">
 	  <div class="container">
@@ -68,14 +71,9 @@ if(ses!=null){
 				<li class="active" id="basicInfoTabId">
 					<a href="#tab1" data-toggle="tab">Admin Inventory</a>
 				</li>
-				 <!-- <li id="salesTabId" onclick="">
-					<a href="#tab2" data-toggle="tab">Hold Inventory</a>
-				</li> -->
-				
-				<!-- <li id="costsheetTab">
+				<li id="costsheetTab">
 					<a href="#costsheetTabCont" data-toggle="tab">Costsheet</a>
-				</li> -->
-				
+				</li>
 				<li>
 					<a href="#inventoryReport" data-toggle="tab">Hold/ Block Inventory Report</a>
 				</li>
@@ -100,9 +98,9 @@ if(ses!=null){
 					<div class="clearfix"></div>
 			 	<!-- </div> -->
 		 	</div>
-		 	<%-- <div class="tab-pane" id="costsheetTabCont">
-			  <jsp:include page="costsheetSalesinfo2.jsp"></jsp:include>
-			</div>	 --%>
+		 	<div class="tab-pane" id="costsheetTabCont">
+				<jsp:include page="costsheetSalesinfo2.jsp"></jsp:include>
+			</div>
 		 	<div class="tab-pane" id="tab2" >
 		 		<%-- <jsp:include page="inventoryhold.jsp"></jsp:include> --%>
 				<%@ include file="/WEB-INF/views/pages/inventoryhold.jsp" %>
@@ -119,7 +117,7 @@ if(ses!=null){
 	 	</div>
 	</div>
 </body>
-
+ <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>  
 	<script type="text/javascript" charset="utf8" src="<c:url value='/resources/js/jquery.dataTables.js'/>"></script>
 	<script src="<c:url value='/resources/js/dataTables.buttons.min.js'/>"></script>
 <script src="<c:url value='/resources/js/jszip.min.js'/>"></script>
@@ -129,6 +127,6 @@ if(ses!=null){
  <script src="<c:url value='/resources/js/separate/admininventory.js?v=18.18'/>"></script>
  <script src="<c:url value='/resources/js/separate/admininventoryReport.js?v=18.18'/>"></script>
  <script src="<c:url value='/resources/js/separate/salesHoldinventoryReport.js?v=18.18'/>"></script>
- <%-- <script src="<c:url value='/resources/js/separate/costsheet.js?v=18.18'/>"></script> --%>	
+ <script src="<c:url value='/resources/js/separate/costsheet.js?v=18.18'/>"></script>	
  	
 <!-- </html> -->

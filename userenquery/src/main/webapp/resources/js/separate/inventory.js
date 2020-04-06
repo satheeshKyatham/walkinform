@@ -306,6 +306,7 @@ function holdInterval (e, sfid, unitNo, floor, towerCode) {
 	
 }
 
+/*
 function viewCostsheet (e, sfid, unitNo, floor, towerCode) {
 	var urlProject = pageContext+"getPropertyTypeStatus?propertyid="+sfid
 	var propertyTypeChargeStatus="";
@@ -336,7 +337,7 @@ function viewCostsheet (e, sfid, unitNo, floor, towerCode) {
 	});
 	
 	
-}
+}*/
 
 function releaseFromHold (e, sfid, holdedBy) {
 	

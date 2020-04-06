@@ -15,7 +15,15 @@ var pageContext = $("#contextPath").val()+"/";
 var enqSFIDforHoldUnit = '';
 
 $(document).ready(function(){
-    $('[data-toggle="popover"]').popover({
+	$('#csPtContainer').remove();
+	$('#updateBtnCol').remove();
+	$('#csHoldCountCol').hide();
+	$('#csDescriptionCol').remove();
+	$('#tdsPaidByDDCol').remove();
+	
+	$('#getCSData').data('source','ADMIN');
+	
+	$('[data-toggle="popover"]').popover({
     	trigger : 'hover'
     });
     
@@ -414,6 +422,7 @@ function inventoryLoad (){
 				
 				var houseNo = '"'+obj1[j].propstrength__house_unit_no__c+'"';
 				var floorNo = '"'+obj1[0].floor_number__c+'"';
+				var towerCode = '"'+obj1[0].propstrength__tower__c+'"';
 				
 				if (obj1[j].propstrength__property_on_hold_for_reallocation__c == 't' || obj1[j].PropStrength__Property_Alloted_Through_Offer__c == 't' ) {
 					/*dropdown = "";
@@ -421,8 +430,8 @@ function inventoryLoad (){
 					
 					unitStatus = "";
 					unitStatus = "unitHold";*/
-					dropdown = "";
-					caret = "";
+					//dropdown = "";
+					//caret = "";
 					unitStatus = "";
 					if(obj1[j].hold_reason==='block')
 						unitStatus="unitBlock";
@@ -432,8 +441,8 @@ function inventoryLoad (){
 					else
 						unitStatus = "unitSold";
 				} else if (obj1[j].propstrength__allotted__c == 't'){
-					dropdown = "";
-					caret = "";
+					//dropdown = "";
+					//caret = "";
 					unitStatus = "";
 					if(obj1[j].hold_reason==='block'){
 						unitStatus="unitBlock";
@@ -465,7 +474,7 @@ function inventoryLoad (){
 					caret = "caret";*/
 					
 				//	dropdown = "<ul class='dropdown-menu'> <li><a onclick='releaseFromHold(this, "+unitSfid+",  "+holdByUserId+")'>Release from hold</a></li> </ul>";
-					caret = "caret";
+					//caret = "caret";
 					
 					unitStatus = "";
 					unitStatus = "intervalHold   HOLD123";
@@ -479,7 +488,7 @@ function inventoryLoad (){
 					unitStatus = "unitAvailable";
 					
 					//dropdown = "<ul class='dropdown-menu'> <li><a onclick='holdInterval(this, "+unitSfid+", "+houseNo+", "+floorNo+")'>Hold</a></li>  <li><a onclick='viewCostsheet(this, "+unitSfid+", "+houseNo+", "+floorNo+")'>View Costsheet</a></li>  </ul>";
-					caret = "caret";
+					//caret = "caret";
 				}
 				
 				else {
@@ -489,10 +498,15 @@ function inventoryLoad (){
 						} 
 					unitStatus = "unitAvailable";
 					//dropdown = "<ul class='dropdown-menu'> <li><a onclick='holdInterval(this, "+unitSfid+", "+houseNo+", "+floorNo+")'>Hold</a></li> <li><a onclick='viewCostsheet(this, "+unitSfid+", "+houseNo+", "+floorNo+")'>View Costsheet</a></li> </ul>";
-					caret = "caret";
+					//caret = "caret";
 				}
 				
-				dropdown = "";
+				dropdown = "<ul class='dropdown-menu'> " +
+							"	<li><a onclick='viewCostsheet(this, "+unitSfid+", "+houseNo+", "+floorNo+", "+towerCode+")'>View Costsheet</a></li> " +
+						" </ul>";
+				caret = "caret";
+				
+				//dropdown = "";
 				//html += "<div class='unitCel dropdown'> "+unitcheckbox+" <div type='button' data-toggle='dropdown' class='fcData dropdown-toggle "+ unitStatus +"'>"+obj1[j].propstrength__house_unit_no__c+"<span class='"+caret+"'></span></div>   "+dropdown+" </div>";
 				
 				if (obj1[j].wing_block__c != undefined) {
@@ -501,8 +515,8 @@ function inventoryLoad (){
 					wing = "";
 				}
 				
-				
-				html += "<div class='unitCel dropdown'> "+unitcheckbox+" <div type='button' data-toggle='dropdown' class='fcData dropdown-toggle "+ unitStatus +"'>" +wing+obj1[j].propstrength__house_unit_no__c+"</div> </div>";
+				html += "<div class='unitCel dropdown'> "+unitcheckbox+" <div type='button' data-toggle='dropdown' class='fcData dropdown-toggle "+ unitStatus +"'>" +wing+obj1[j].propstrength__house_unit_no__c+"<span class='"+caret+"'></span></div>   "+dropdown+" </div>";
+				//html += "<div class='unitCel dropdown'> "+unitcheckbox+" <div type='button' data-toggle='dropdown' class='fcData dropdown-toggle "+ unitStatus +"'>" +wing+obj1[j].propstrength__house_unit_no__c+"</div> </div>";
 				
 			}
 			

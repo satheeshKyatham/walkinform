@@ -9,7 +9,7 @@ var pageContext = $("#pageContext").val()+'/';
 var urlDomin = pageContext;
 var pdfSrc = pageContext+"Costsheet?name="     
 var projectNameVal = $("#projectId").val();
-
+var SALESCOSTSHEET = "SALESCOSTSHEET";
 
 var paymentTrxDaysAllow = 0;
 var sysNowDate = "1999-09-09";
@@ -58,7 +58,11 @@ function schemeType (e) {
 }
 
 $("#getCSData").click(function (){
-       //alert("Get CS Data");
+	
+	
+	
+	if ($(this).data('source') == "SALES"){
+		//alert("Get CS Data");
 		$('#getCSData span').html('<i class="fa fa-spinner fa-spin" style="color:#fff !important"></i>'); 
 		insertAuditLogCostsheet();
        $('#updateBtnCol button').prop("disabled", false);
@@ -73,7 +77,7 @@ $("#getCSData").click(function (){
              }).done(function(data){
               	   if (data == "errorNoUnit101") {
 	              	   //$('#getCSData span').html('<i class="fa fa-spinner fa-spin" style="color:#fff !important"></i>');          
-	              	   loadData ();
+	              	   loadData (SALESCOSTSHEET);
               		   swal({
           	   				title: "This unit is no longer available please select another unit.",
           	   				text: "",
@@ -83,7 +87,7 @@ $("#getCSData").click(function (){
           	   			});
               	   } else if (data == "errorUnitInactive102") {
               		   //$('#getCSData span').html('<i class="fa fa-spinner fa-spin" style="color:#fff !important"></i>');          
-	              	   loadData ();
+	              	   loadData (SALESCOSTSHEET);
               		   swal({
           	   				title: "Inventory is not activated.",
           	   				text: "",
@@ -105,7 +109,7 @@ $("#getCSData").click(function (){
           	   			});
               	   } else if (data == "successUnitAvailable102") {
               		  // $('#getCSData span').html('<i class="fa fa-spinner fa-spin" style="color:#fff !important"></i>');          
-	              	   loadData ();
+	              	   loadData (SALESCOSTSHEET);
              	   }
               }).fail(function(xhr, status, error) {
             	  $('#getCSData span').html(''); 
@@ -127,13 +131,19 @@ $("#getCSData").click(function (){
                  type: "warning",
              });
        }
+	} else if ($(this).data('source') == "ADMIN") {
+		$('#getCSData span').html('<i class="fa fa-spinner fa-spin" style="color:#fff !important"></i>'); 
+		loadData ('ADMINCOSTSHEET');
+	}
+	
+       
 });
 
 
 
 
 
-function loadData () {     
+function loadData (csSource) {     
 	$('#schemeInput').val("");
 	
 		tncData ();
@@ -505,8 +515,10 @@ function loadData () {
 	        $('.noOfCarParkLabel').text('No. of Car Park');
        }
        
-       
-       getEOIPaymentRecord ();
+      if (csSource == "SALESCOSTSHEET") {
+    	  getEOIPaymentRecord ();
+      }
+      
        
        //$(".csPtDataRow .csPtTransactionDate").attr("max", sysNowDate);
       // maxPaymentDate ();
@@ -3280,3 +3292,33 @@ function paymentTrxValidatore () {
 		$(".csPtDataRow .csPtTransactionDate").attr("max", sysNowDate);
 	}
 }
+
+
+/*This function "viewCostsheet" moved from inventory.js to costsheet .js, because of commonly used for Admin Cost sheet and Sales Cost sheet*/
+function viewCostsheet (e, sfid, unitNo, floor, towerCode) {
+	var urlProject = pageContext+"getPropertyTypeStatus?propertyid="+sfid
+	var propertyTypeChargeStatus="";
+	$.getJSON(urlProject, function (data) {
+		propertyTypeChargeStatus=data;		
+	}).done(function() {
+		if(propertyTypeChargeStatus=="Y")
+		{
+			swal({
+				title: "Property Type Charges",
+			    text: "Validation Message - Please contact ECRM Administrator to move the property type charges from Property Type to Property.",
+			    timer: 2000,
+			    type: "error",
+			});
+		}
+	else
+		{	
+			$('#unitSfid').val('');
+			$('#printableArea').hide();
+			$('#printBtnFloat').hide();
+			$('#unitSfid').val(sfid);
+			$('#towerSfid').val(towerCode);
+			$('#costsheetTab a').trigger('click');	
+		}
+	});
+}
+/* END This function "viewCostsheet" moved from inventory.js to costsheet .js, because of commonly used for Admin Cost sheet and Sales Cost sheet*/

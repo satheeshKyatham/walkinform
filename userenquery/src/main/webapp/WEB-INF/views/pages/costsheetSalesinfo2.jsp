@@ -218,9 +218,19 @@
 								<div class="col-md-4 col-sm-12 col-xs-12">
 									<!-- <button class="btn btn-primary" onclick="location.reload()"><i class="glyphicon glyphicon-repeat"></i></button> -->
 									<div style="height: 20px; margin-bottom: 4px;">&nbsp;</div>
-									<button class="btn btn-primary btnCommon" id="getCSData">
+									<button class="btn btn-primary btnCommon" data-source="SALES" id="getCSData">
 										<span></span> Get Details
 									</button> 
+									
+									<!-- <div id="getCSForAdminBtnCol">
+										<button class="btn btn-primary btnCommon" id="getCSForAdminBtn" onclick="loadData ('ADMINCOSTSHEET')">
+											<span></span> Admin - Get Details
+										</button> 
+									</div> -->
+									
+									
+									
+									
 									<!-- <button class="btn btn-primary btnCommon" id="zzzzTestCharges">Dynamic Other Charges</button> -->
 								</div>
 								<div class="clearfix"></div>
@@ -1291,7 +1301,7 @@
 								<input type="number" id="balance_amnt" class="form-control">
 								<div class="clearfix"></div>
 							</div>
-							<div class="col-md-9">
+							<div class="col-md-9" id="csDescriptionCol">
 								<h4>Description : </h4>
 								<textarea class="form-control" id="balance_amnt_description" rows="" style="background-color:#fff;"></textarea>
 								<div class="clearfix"></div>
@@ -1300,7 +1310,7 @@
 							
 							
 							<!-- Do not remove -->
-							<div class="form-group col-md-3 col-sm-6">
+							<div class="form-group col-md-3 col-sm-6" id="tdsPaidByDDCol">
 								<h4 >TDS paid by <strong class="mndt">*</strong> </h4> 
 								<select class="full form-control requiredField" id="tdsPaidByDD">
 									<!-- <option value="">Select</option> -->
