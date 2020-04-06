@@ -119,6 +119,9 @@ public class Inventory implements Serializable{
 	@Column(name = "sfdc_propstrength__allotted__c")
 	private boolean sfdc_propstrength__allotted__c;
 	
+	@Column(name = "wing_block__c")
+	private String wing_block__c;
+	
 	
 	public String isHold_status() {
 		return hold_status;
@@ -387,5 +390,12 @@ public class Inventory implements Serializable{
 	public String getHold_status() {
 		return hold_status;
 	}
-	
+
+	public String getWing_block__c() {
+		return wing_block__c;
+	}
+
+	public void setWing_block__c(String wing_block__c) {
+		this.wing_block__c = wing_block__c;
+	}
 }

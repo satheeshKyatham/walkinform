@@ -21,6 +21,9 @@
 
 
  <link rel="stylesheet" href="<c:url value='/resources/css/inventory.css?v=2.0' />">
+ 
+ <!-- Costsheet -->
+    <link rel="stylesheet" href="<c:url value='/resources/css/costsheet.css' />">
 
 </head> 
 <%! String projectname,projectid ,projectrole,userid;%>
@@ -68,6 +71,11 @@ if(ses!=null){
 				 <!-- <li id="salesTabId" onclick="">
 					<a href="#tab2" data-toggle="tab">Hold Inventory</a>
 				</li> -->
+				
+				<!-- <li id="costsheetTab">
+					<a href="#costsheetTabCont" data-toggle="tab">Costsheet</a>
+				</li> -->
+				
 				<li>
 					<a href="#inventoryReport" data-toggle="tab">Hold/ Block Inventory Report</a>
 				</li>
@@ -92,6 +100,9 @@ if(ses!=null){
 					<div class="clearfix"></div>
 			 	<!-- </div> -->
 		 	</div>
+		 	<%-- <div class="tab-pane" id="costsheetTabCont">
+			  <jsp:include page="costsheetSalesinfo2.jsp"></jsp:include>
+			</div>	 --%>
 		 	<div class="tab-pane" id="tab2" >
 		 		<%-- <jsp:include page="inventoryhold.jsp"></jsp:include> --%>
 				<%@ include file="/WEB-INF/views/pages/inventoryhold.jsp" %>
@@ -118,5 +129,6 @@ if(ses!=null){
  <script src="<c:url value='/resources/js/separate/admininventory.js?v=18.18'/>"></script>
  <script src="<c:url value='/resources/js/separate/admininventoryReport.js?v=18.18'/>"></script>
  <script src="<c:url value='/resources/js/separate/salesHoldinventoryReport.js?v=18.18'/>"></script>
+ <%-- <script src="<c:url value='/resources/js/separate/costsheet.js?v=18.18'/>"></script> --%>	
  	
 <!-- </html> -->

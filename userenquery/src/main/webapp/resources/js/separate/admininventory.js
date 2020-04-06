@@ -386,6 +386,7 @@ function inventoryLoad (){
 		
 		var obj =JSON.parse(data);
 		var html = '';
+		var wing = "";
 		
 		html += "<div class='commonLoad' id='inventoryLoader'></div>";
 		
@@ -493,7 +494,15 @@ function inventoryLoad (){
 				
 				dropdown = "";
 				//html += "<div class='unitCel dropdown'> "+unitcheckbox+" <div type='button' data-toggle='dropdown' class='fcData dropdown-toggle "+ unitStatus +"'>"+obj1[j].propstrength__house_unit_no__c+"<span class='"+caret+"'></span></div>   "+dropdown+" </div>";
-				html += "<div class='unitCel dropdown'> "+unitcheckbox+" <div type='button' data-toggle='dropdown' class='fcData dropdown-toggle "+ unitStatus +"'>"+obj1[j].propstrength__house_unit_no__c+"</div> </div>";
+				
+				if (obj1[j].wing_block__c != undefined) {
+					wing = obj1[j].wing_block__c + " - ";
+				} else {
+					wing = "";
+				}
+				
+				
+				html += "<div class='unitCel dropdown'> "+unitcheckbox+" <div type='button' data-toggle='dropdown' class='fcData dropdown-toggle "+ unitStatus +"'>" +wing+obj1[j].propstrength__house_unit_no__c+"</div> </div>";
 				
 			}
 			

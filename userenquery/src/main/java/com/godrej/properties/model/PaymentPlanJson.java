@@ -76,6 +76,8 @@ public class PaymentPlanJson {
 	
 	private String nowData;
 	
+	private String wing_block__c;
+	
 	
 	public String getBalcony_area_sq_ft__c() {
 		return balcony_area_sq_ft__c;
@@ -461,5 +463,11 @@ public class PaymentPlanJson {
 	}
 	public void setNowData(String nowData) {
 		this.nowData = nowData;
+	}
+	public String getWing_block__c() {
+		return wing_block__c;
+	}
+	public void setWing_block__c(String wing_block__c) {
+		this.wing_block__c = wing_block__c;
 	}
 }

@@ -133,6 +133,7 @@ function inventoryLoad (callFrom){
 		var html = '';
 		var min = '';
 		var sec = '';
+		var wing = "";
 		
 		html += "<div class='commonLoad' id='inventoryLoader' ></div>";
 		
@@ -223,7 +224,13 @@ function inventoryLoad (callFrom){
 					caret = "caret";
 				}
 				
-				html += "<div class='unitCel dropdown' style='cursor: pointer;'> <div type='button' data-toggle='dropdown' class='fcData dropdown-toggle "+ unitStatus +"'>"+obj1[j].propstrength__house_unit_no__c+"<span class='"+caret+"'></span></div>   "+dropdown+" </div>";
+				if (obj1[j].wing_block__c != undefined) {
+					wing = obj1[j].wing_block__c + " - ";
+				} else {
+					wing = "";
+				}
+				
+				html += "<div class='unitCel dropdown' style='cursor: pointer;'> <div type='button' data-toggle='dropdown' class='fcData dropdown-toggle "+ unitStatus +"'>" +wing +obj1[j].propstrength__house_unit_no__c+"<span class='"+caret+"'></span></div>   "+dropdown+" </div>";
 			}
 			html += "<div class='clearfix'></div></div>";
 		}

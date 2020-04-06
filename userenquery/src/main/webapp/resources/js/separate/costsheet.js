@@ -96,7 +96,7 @@ $("#getCSData").click(function (){
               		   swal({
 
           	   				//title: "There is some technical problem, please try again.",
-              			   	title: "111 There was problem in fetching cost sheet data at this time. Please try again by clicking get details.", 
+              			   	title: "There was problem in fetching cost sheet data at this time. Please try again by clicking get details. - 103", 
 
           	   				text: "",
           	   				type: "warning",
@@ -112,7 +112,7 @@ $("#getCSData").click(function (){
 	              	swal({
 
 	          			//title: "There is some technical problem, please try again.",
-	              		title: "222 There was problem in fetching cost sheet data at this time. Please try again by clicking get details.",
+	              		title: "There was problem in fetching cost sheet data at this time. Please try again by clicking get details.",
 
 	          			text: "",
 	          			timer: 8000,
@@ -209,7 +209,7 @@ function loadData () {
        // END Not in use 20191025
        
        var unitVal = $('#unitSfid').val();
-       
+       var wing = "";
        
        if ($('#projectId').val() == 'a1l6F000004LVk8QAG') {
       	 $('.facingCSCol').remove();
@@ -334,6 +334,18 @@ function loadData () {
                            $('.balTerSqm').text(value.appurtenant_area_sq_mt__c);
                            $('#unitTval').text(value.ID);
                            $('.unitTval').text(value.ID);
+                           
+                           
+                           
+                           if (value.wing_block__c != undefined) {
+                        	   wing = value.wing_block__c + " - ";
+                           } else {
+                        	   wing = "";
+                           }
+                           
+                           $('#wingVal').text(wing);
+                           $('.wingVal').text(wing);
+                           
                            $('#typologyTval').text(value.Typology);
                            $('.typologyTval').text(value.Typology);
                            $('#floorTval').text(value.floorName);

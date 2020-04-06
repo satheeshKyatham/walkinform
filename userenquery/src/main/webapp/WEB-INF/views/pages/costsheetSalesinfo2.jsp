@@ -584,7 +584,10 @@
 											</tr>
 											<tr>
 												<th class="subHead">Unit Number</th>
-												<td class="unitTval"></td>
+												<td>
+													<span class="wingVal"></span>
+													<span class="unitTval"></span>
+												</td>
 												<th class="subHead">Exclusive Area (in Sq.mtr.)</th>
 												<td class="balTerSqm"></td>
 											</tr>
@@ -852,7 +855,10 @@
 						</tr>
 						<tr>
 							<th class="subHead">Unit Number</th>
-							<td class="animated" id="unitTval"></td>
+							<td class="animated">
+								<span id="wingVal"></span>
+								<span id="unitTval"></span>
+							</td>
 							<th class="subHead">Exclusive Area (in Sq.mtr.)</th>
 							<td id="balTerSqm" class="animated"></td>
 							<!-- <th>Cost of Exclusive Balcony Area/Terrace Area (B.) (In INR)</th>

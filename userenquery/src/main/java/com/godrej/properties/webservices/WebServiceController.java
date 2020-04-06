@@ -1816,6 +1816,7 @@ public class WebServiceController<MultipartFormDataInput> {
 			 paymentPlanJson.setPaymentTrxdaysVal(paymentTrxDaysAllow);
 			 
 			 paymentPlanJson.setNowData(allowedUptoDate);
+			 paymentPlanJson.setWing_block__c(paym.getWing_block__c()); 
 			 //paymentPlanJson.set (paym.getSfid());
 			 
 			 
