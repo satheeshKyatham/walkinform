@@ -124,9 +124,9 @@ if(ses!=null){
 <script src="<c:url value='/resources/js/buttons.html5.min.js'/>"></script>
 
  <script src="<c:url value='/resources/js/sweetalert2.min.js' />"></script>
- <script src="<c:url value='/resources/js/separate/admininventory.js?v=18.18'/>"></script>
+ <script src="<c:url value='/resources/js/separate/admininventory.js?v=18.19'/>"></script>
  <script src="<c:url value='/resources/js/separate/admininventoryReport.js?v=18.18'/>"></script>
  <script src="<c:url value='/resources/js/separate/salesHoldinventoryReport.js?v=18.18'/>"></script>
- <script src="<c:url value='/resources/js/separate/costsheet.js?v=18.18'/>"></script>	
+ <script src="<c:url value='/resources/js/separate/costsheet.js?v=18.19'/>"></script>	
  	
 <!-- </html> -->

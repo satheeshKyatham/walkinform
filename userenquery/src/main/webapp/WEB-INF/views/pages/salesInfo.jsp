@@ -1778,13 +1778,13 @@ if(ses!=null){
  <script src="<c:url value='/resources/js/moment.js' />"></script>
  <script src="<c:url value='/resources/js/bootstrap-datetimepicker.min.js' />"></script> 
  
- <script src="<c:url value='/resources/js/separate/inventory.js?v=18.18'/>"></script>
+ <script src="<c:url value='/resources/js/separate/inventory.js?v=18.19'/>"></script>
  
 <!-- Costsheet --> 
 <script src="<c:url value='/resources/js/jquery.tabletojson.min.js'/>"></script>
 <%-- <script type="text/javascript" src="<c:url value='/resources/js/jquery.countdownTimer.js'/>"></script> --%>
 <script src="<c:url value='/resources/js/enquiryRequest/common.js?v=18.18'/>"></script>
-<script src="<c:url value='/resources/js/separate/costsheet.js?v=18.18'/>"></script>
+<script src="<c:url value='/resources/js/separate/costsheet.js?v=18.19'/>"></script>
 <script src="<c:url value='/resources/js/separate/webcamAttachmentCS.js?v=18.18'/>"></script>
 
 
