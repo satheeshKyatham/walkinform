@@ -2634,9 +2634,13 @@ function printPdfData(generateFrom) {
        
        
        
+       var enq18sfid = "";
        
+       if ($('#enquirysfid').val() != undefined) {
+    	   enq18sfid =  "-"+$('#enquirysfid').val();
+       }
        
-       var enqSfid = generateFrom+"-"+$('#enquirysfid').val();
+       var enqSfid = generateFrom+enq18sfid;
        
        $('#printBtnFloat').empty();
        $('#printBtnFloat').html('<i style="color:#fff !important; " class="fa fa-spinner fa-spin printficon"></i>');

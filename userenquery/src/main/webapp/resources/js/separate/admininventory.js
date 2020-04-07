@@ -20,6 +20,7 @@ $(document).ready(function(){
 	$('#csHoldCountCol').hide();
 	$('#csDescriptionCol').remove();
 	$('#tdsPaidByDDCol').remove();
+	$("#printableArea").css({"padding-bottom": "20px"});
 	
 	$('#getCSData').data('source','ADMIN');
 	
