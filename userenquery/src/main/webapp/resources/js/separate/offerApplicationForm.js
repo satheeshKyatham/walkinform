@@ -285,6 +285,7 @@ function getEnqAndOfferDtl (enqSFID, offerSFID, rowId) {
 		var broker_name = '';
 		var broker_mobile = '';
 		var walkinSource = '';
+		var wing = ''; 
 		
 		$('#modeOfBookingOffer tbody').empty();
 		
@@ -362,7 +363,13 @@ function getEnqAndOfferDtl (enqSFID, offerSFID, rowId) {
 			$('#selfUseInvestmentOffer').text(obj[0].is_purchase_for_self_use_or_investment__c);
 			
 			
-			$('#towerNameOffer').text(obj[0].propstrength__tower_name__c);
+			if (obj[0].wing_block__c != undefined) {
+         	   wing = obj[0].wing_block__c;
+            } else {
+         	   wing = "";
+            }
+			
+			$('#towerNameOffer').text(obj[0].propstrength__tower_name__c+wing);
 			$('#floorNameOffer').text(obj[0].propstrength__floor_name__c);
 			
 			$('#flatNoOffer').text(obj[0].propstrength__property_name__c);
