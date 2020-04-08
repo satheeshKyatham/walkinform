@@ -1,7 +1,9 @@
 package com.godrej.properties.daoimpl;
 
+import java.math.BigDecimal;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Query;
 
 import org.hibernate.Session;
@@ -48,6 +50,11 @@ public class InventoryReportDaoImpl implements InventoryReportDao{
 				+ " c.emailid as admin_emailid, "
 				+ " b.propstrength__active__c, "
 				+ " b.tower_name__c, "
+
+				+ " b.wing_block__c, "
+				+ " b.saleable_area__c, "
+				+ " b.propstrength__rate_per_unit_area__c, "
+				
 				+ " d.user_name as hold_behalf_username, "
 				+ " d.emailid as hold_behalf_email "
 				+ " FROM salesforce.gpl_cs_hold_admin_unit a "

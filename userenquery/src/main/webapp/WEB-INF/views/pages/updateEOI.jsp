@@ -21,44 +21,8 @@
 		<div class="mainCont " style="padding-top: 10px;">
 			
 			<div class="">
-				<div class="form-group col-md-3">
-					<label>Tower</label>
-					<select id="towerMstSalesHoldReport" class="form-control">
-						<option value="All">All</option>
-					</select>
-				</div>
 				 
-				<div class="form-group col-md-2">
-					<label> &nbsp; </label>
-					<button onclick="getInventorySalesHoldReportDtl()" style="line-height:0; color: #fff; background-color: #0077b9;" class="form-control btn btn-primary">
-						Get Details
-					</button>
-				</div>
-				
-				<div class="clearfix"></div>
-			</div>
-			
-			<div class="clearfix"></div>
-
-			<div class="col-md-12">
-				<table class="table table-bordered" id="salesHoldReport">
-					<thead>
-						<tr>
-							<th>Tower</th>
-							<th>Floor No.</th>
-							<th>Unit Type</th>
-							<th>Unit</th>
-							<th>Wing/ Block</th>
-							<th>Saleable Area</th>
-							<th>BSP</th>
-							<th>Hold by (name)</th>
-							<th>Hold by (email)</th>
-							<th>Hold Time(Min:Sec)</th>
-						</tr>
-					</thead>
-					<tbody>
-					</tbody>
-				</table>
+				Test
 				<div class="clearfix"></div>
 			</div>
 			

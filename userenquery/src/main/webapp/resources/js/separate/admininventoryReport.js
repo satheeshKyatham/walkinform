@@ -61,19 +61,24 @@ function getInventoryReportDtl () {
 							" <td>"+obj1[i].tower_name__c+"</td>" +
 							" <td>"+obj1[i].floor_number__c+"</td>" +
 							" <td>"+obj1[i].propstrength__house_unit_no__c+"</td>" +
-							
-							
 							" <td>"+obj1[i].propstrength__unit_type__c+"</td>" +
+							
+							" <td>"+obj1[i].wing_block__c+"</td>" +
+							" <td>"+obj1[i].saleable_area__c+"</td>" +
+							" <td>"+obj1[i].propstrength__rate_per_unit_area__c+"</td>" +
+							
+							
 							" <td>"+obj1[i].admin_name+"</td>" +
 							" <td>"+obj1[i].hold_description+"</td>" +
 							
 							" <td>"+obj1[i].hold_behalf_username+"</td>" +
-							" <td>"+obj1[i].hold_behalf_email+"</td>" +
+							" <td style='word-break: break-all;'>"+obj1[i].hold_behalf_email+"</td>" +
 							
 							
 						" </tr>";
 			}
 			
+			html = html.replace(/undefined/g, " - ");
 			html = html.replace(/null/g, " - ");
 			
 			
