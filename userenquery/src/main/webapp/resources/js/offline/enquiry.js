@@ -12,7 +12,6 @@ var channelPartnerArray=[];
 var channelPartners = [];
 var enqArray=[];
 $(document).ready(function(){
-	//debugger
 	$(document).on('focus', '.autocomplete-off:input', function(){
 	        $( this ).attr( 'autocomplete', 'nope' );
 	});
@@ -146,7 +145,6 @@ function populateEnquiryAndContact(resp){
 	}else{			
 	    $("#budget").val("");
 		enqSlider();
-	 
 			    $('.enquiryId').val("");
 			    $('.enquiryReportId').val("");
 			    $('.contactReportId').val("");
@@ -160,7 +158,11 @@ function populateEnquiryAndContact(resp){
 				$("#channelPartnerNameSearch").attr('readonly', false);
 				var hasParam=$('#hasParam').val();
 				if(hasParam==="true"){
-				   var enquiryType=$("#hiddenEnquiryType").val();
+				   var enquiryType="";
+				   if($("#hiddenEnquiryType").val()!=null)
+					   enquiryType="CP";
+				   else
+					   enquiryType=$("#hiddenEnquiryType").val();
 				   $("#isReferredByChannelPartnerRadio"+enquiryType).trigger("click");
 				   hideEnquirySourceByEnquiryType(enquiryType,null);
 				}else{
@@ -573,7 +575,8 @@ function hideEnquirySourceByEnquiryType(enquiryTypeCode,enq){
 	
    if(!isEmpty(enquiryTypeCode)){
 	if(enquiryTypeCode=='CP'){
-		$(".hideDirectType").hide();
+		//$(".hideDirectType").hide();
+		$(".hideDirectType").show();
 		$(".hideChannelPartnerType").show();
 		$("#enquirySourceTextDiv").show();
 	}else if(enquiryTypeCode=='D'){

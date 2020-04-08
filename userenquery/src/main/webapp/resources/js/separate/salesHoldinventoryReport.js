@@ -45,11 +45,19 @@ function getInventorySalesHoldReportDtl () {
 							" <td>"+obj[i].floor_number__c+"</td>" +
 							" <td>"+obj[i].propstrength__unit_type__c+"</td>" +
 							" <td>"+obj[i].propstrength__house_unit_no__c+"</td>" +
+							
+							" <td>"+obj[i].wing_block__c+"</td>" +
+							" <td>"+obj[i].saleable_area__c+"</td>" +
+							" <td>"+obj[i].propstrength__rate_per_unit_area__c+"</td>" +
+							
 							" <td>"+obj[i].held_by_name+"</td>" +
 							" <td>"+obj[i].held_by_email+"</td>" +
 							" <td><b>Min:</b>"+holdMinVar +" | <b>Sec:</b>"+holdSecVar+"</td>" +
 						" </tr>";
 			}
+			
+			html = html.replace(/undefined/g, " - ");
+			html = html.replace(/null/g, " - ");
 			
 			$("#salesHoldReport tbody").append(html);
 			

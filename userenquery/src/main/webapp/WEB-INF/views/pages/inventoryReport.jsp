@@ -67,6 +67,11 @@
 							<th>Floor No.</th>
 							<th>Unit</th>
 							<th>Unit Type</th>
+							
+							<th>Wing/ Block</th>
+							<th>Saleable Area</th>
+							<th>BSP</th>
+							
 							<th>Admin</th>
 							<th>Hold/ Block Reason</th>
 							<th>Hold/ Block Behalf (name)</th>

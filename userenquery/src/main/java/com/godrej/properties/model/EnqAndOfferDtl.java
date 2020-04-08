@@ -63,7 +63,7 @@ public class EnqAndOfferDtl implements Serializable{
 	@Column(name="open_balc_sq_mt__c", precision = 10, scale = 2) private BigDecimal open_balc_sq_mt__c;
 	@Column(name="saleable_area__c", precision = 10, scale = 2)  private BigDecimal saleable_area__c;
 	
-	
+	@Column(name="wing_block__c") private String wing_block__c;
 	
 	
 	@Transient

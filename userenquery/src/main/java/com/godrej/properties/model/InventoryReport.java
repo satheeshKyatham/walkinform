@@ -1,6 +1,7 @@
 package com.godrej.properties.model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.sql.Date;
 
 import javax.persistence.Column;
@@ -43,8 +44,10 @@ public class InventoryReport implements Serializable{
 	@Column(name="enq_sfid") private String enq_sfid;
 	
 	@Column(name="eoi_unit_locked") private boolean	eoi_unit_locked;
-	
-	
+	@Column(name="wing_block__c") private String wing_block__c;
+	@Column(name="saleable_area__c", precision = 10, scale = 2)  private BigDecimal saleable_area__c;
+	@Column(name="propstrength__rate_per_unit_area__c", precision = 10, scale = 2)  private BigDecimal propstrength__rate_per_unit_area__c;
+	//Saleable_area__c
 	
 	public int getId() {
 		return id;
@@ -186,5 +189,23 @@ public class InventoryReport implements Serializable{
 	}
 	public void setEoi_unit_locked(boolean eoi_unit_locked) {
 		this.eoi_unit_locked = eoi_unit_locked;
+	}
+	public String getWing_block__c() {
+		return wing_block__c;
+	}
+	public void setWing_block__c(String wing_block__c) {
+		this.wing_block__c = wing_block__c;
+	}
+	public BigDecimal getSaleable_area__c() {
+		return saleable_area__c;
+	}
+	public void setSaleable_area__c(BigDecimal saleable_area__c) {
+		this.saleable_area__c = saleable_area__c;
+	}
+	public BigDecimal getPropstrength__rate_per_unit_area__c() {
+		return propstrength__rate_per_unit_area__c;
+	}
+	public void setPropstrength__rate_per_unit_area__c(BigDecimal propstrength__rate_per_unit_area__c) {
+		this.propstrength__rate_per_unit_area__c = propstrength__rate_per_unit_area__c;
 	}
 }
