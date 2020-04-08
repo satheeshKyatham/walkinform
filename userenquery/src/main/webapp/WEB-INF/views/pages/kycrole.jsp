@@ -15,8 +15,8 @@
 <link rel="icon" href="<c:url value='/resources/images/favicon.ico' />" type="image/x-icon">
 <link rel="stylesheet" href="<c:url value='/resources/css/bootstrap.min.css' />" type="text/css" />
      
-	<link rel="stylesheet" href="<c:url value='/resources/css/inner.css?v=3.0' />">
-	<link rel="stylesheet" href="<c:url value='/resources/css/style.css?v=3.0' />">
+	<link rel="stylesheet" href="<c:url value='/resources/css/inner.css?v=${sessionScope.version}' />">
+	<link rel="stylesheet" href="<c:url value='/resources/css/style.css?v=${sessionScope.version}' />">
 	
 	<link rel="stylesheet" href="<c:url value='/resources/css/font-awesome.css' />">
 	
@@ -27,7 +27,7 @@
 <script src="<c:url value='/resources/js/jquery-1.12.4.min.js'/>"></script>
 <script src="<c:url value='/resources/js/bootstrap.min.js'/>"></script>
 <script type="text/javascript" charset="utf8" src="<c:url value='/resources/js/jquery.dataTables.js'/>"></script>
-<script type="text/javascript" charset="utf8" src="<c:url value='/resources/js/separate/kycdetails.js'/>"></script>
+<script type="text/javascript" charset="utf8" src="<c:url value='/resources/js/separate/kycdetails.js?v=${sessionScope.version}'/>"></script>
 </head> 
 <%! String projectname,projectid ,projectrole,userid;%>
 <%
@@ -181,12 +181,12 @@ if(ses!=null){
 	  </div>
 	</div>
 	</div>
-	<script src="<c:url value='/resources/js/salesdesk.js?v=18.18'/>"></script>
-	<script src="<c:url value='/resources/js/separate/offer.js?v=18.18'/>"></script>
+	<script src="<c:url value='/resources/js/salesdesk.js?v=${sessionScope.version}'/>"></script>
+	<script src="<c:url value='/resources/js/separate/offer.js?v=${sessionScope.version}'/>"></script>
 	
-	<script src="<c:url value='/resources/js/separate/applicationForm.js?v=18.18'/>"></script>
-	<script src="<c:url value='/resources/js/separate/offerApplicationForm.js?v=18.18'/>"></script>
-	<script src="<c:url value='/resources/js/demo/offerTemplate.js?v=18.18'/>"></script>	
+	<script src="<c:url value='/resources/js/separate/applicationForm.js?v=${sessionScope.version}'/>"></script>
+	<script src="<c:url value='/resources/js/separate/offerApplicationForm.js?v=${sessionScope.version}'/>"></script>
+	<script src="<c:url value='/resources/js/demo/offerTemplate.js?v=${sessionScope.version}'/>"></script>	
 </body>
 </html>
 
