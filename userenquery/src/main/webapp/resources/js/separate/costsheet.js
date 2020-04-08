@@ -1270,7 +1270,7 @@ function updateBSP (timeid) {
       
        if ($('#channelPartnerSfidCS').val() === "") {
     	   
-    	   if($('#walkInSource').val()==="Referral")
+    	   if($('#walkInSource').val()==="Referral" || $('#walkInSource').val()==="Existing Customer")
     		   offerthrough = "Referral";
     	   else if($('#walkInSource').val()==="Corporate")
     		   offerthrough = "Corporate";

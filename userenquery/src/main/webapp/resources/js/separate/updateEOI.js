@@ -6,8 +6,39 @@ $.ajaxSetup({
     }
 });
 
+var enqSFIDforEOI = '';
 
+function enqDtlForAdminEOI () {
+	var enqName = "ENQ - " + $('#enqNameInputEOI').val().trim();
+	
+	$.post(pageContext+"getEnqForAdminInventoryHold",{"enqName":enqName, "projectSFID":$('#projectid').val()},function(data){                      
+		$("#enqDtlTableEOI tbody").empty();
+		var obj =JSON.parse(data);
+		 var html = '';
+         if (obj != null) {
+        	 for(var i=0;i<obj.length;i++){
+        		 html += "<tr>" +
+        		 	" <td>"+obj[i].enq_name+"</td>" +
+					" <td>"+obj[i].mobile__c+"</td>" +
+					" <td>"+obj[i].name+"</td>" +
+				" </tr>";
+        		 enqSFIDforEOI = obj[i].enq_sfid;
+        	 }
+        	 $("#enqDtlTableEOI tbody").append(html);
+         } else {
+        	 enqSFIDforEOI = '';
+        	 $("#enqDtlTableEOI tbody").append("<tr><td colspan='3'>No records found</td></tr>");
+         }
+	}).done(function(data){
+		if (enqSFIDforEOI != ''){
+			getEOITabPaymentRecord (); getEOITabPreferencRecord();
+		}
+	}).fail(function(xhr, status, error) {
+		alert (error);
+    });
+}
 
+//---------------------------------------------------------------//
 
 function csPtDdEoi (e) {
 	$(e).closest("tr").find('.csPtReachMexLengthEOI').remove();
@@ -46,159 +77,34 @@ function csPtDdEoi (e) {
 	}	
 }
 
-function csPtcalculateGrandTotalEoi() {
-	var grandTotal = 0;
-    $("#csPtColEoi").find('input[name="amount"]').each(function () {
-        grandTotal += +$(this).val();
-    });
-    $("#csPtGrandtotalEoi").text(grandTotal.toFixed(2));
-}
-
-function csPymtDataEoi () {
-	
-	var pageContext = $("#pageContext").val()+"/";
-	
-	var i = 0;
-	var k = 0;
-	
-	
-	
-	$("#csPtColEoi .csPtDataRowEoi").each(function () {
-		
-		var formData = new FormData();
-	 	formData.append('panAttachEoi', $(this).find('.panAttachEoi')[0].files[0]);
-	 	formData.append('receiptAttachEoi', $(this).find('.receiptAttachEoi')[0].files[0]);
-	 	formData.append('rowCount', i);
-	 	
-	 	formData.append('enqID', $('#enquirysfid').val());
-	 	
-		$.ajax({
-			url : 'EOIPaymentFileUploadServlet',
-			type : 'POST',
-			data : formData,
-			processData : false,
-			contentType : false,
-			success : function(data) {
-			
-			}
-		});
-		
-		i++
-	});
-	
-	var eoiFormPath =   'costSheetPDF/'+$('#region__c').val()+'/'+$('#marketingProjectName').val()+'/'+'EOI Details'+'/'+$('#enquiry_name').val()+'/eoi_form_'+$('#enquiry_name').val()+'.pdf';
-    
-	var arrayData = [];
-	$("#csPtColEoi .csPtDataRowEoi").each(function () {
-	    var csPtData = {};
-	    csPtData.enq_sfid = $(this).find('.csPtEnqSfidEoi').val();
-	    csPtData.payment_type = $(this).find('.csPtDropDownEoi').val();
-	    csPtData.bank_name = $(this).find('.csPtBankNameEoi').val();
-	    csPtData.branch = $(this).find('.csPtBranchEoi').val();
-	    csPtData.transaction_id = $(this).find('.csPtTransactionIdEoi').val();
-	    csPtData.transaction_date = $(this).find('.csPtTransactionDateEoi').val();
-	    csPtData.transaction_amount = $(this).find('.csPtTransactionAmountEoi').val();
-	    csPtData.description = $(this).find('.csPtDescriptionEoi').val();
-	    csPtData.total_amount = $('#csPtGrandtotalEoi').text().trim();
-	    csPtData.enq_sfid = $('#enquirysfid').val();
-	    csPtData.project_sfid = $('#projectId').val();
-	    
-	    csPtData.project_name = $('#projectname').val();
-	    csPtData.user_email = $('#useremailID').val();
-	    csPtData.user_name = $('#username').val();
-	    
-	    csPtData.userid = $('#userid').val();
-	    csPtData.eoi_form_path = eoiFormPath;
-	    		
-	    		//"Noida\Godrej North Estate, Delhi"
-	    
-	    csPtData.isactive = 'N';
-	    
-	    // csPtData.gpl_cs_balance_details_id = balance_details_primeryId.id;
-	    //csPtData.offerid = balance_details_primeryId.offer_sfid;
-	    
-	    if($(this).find('.panAttachEoi').val() != "") {
-	    	csPtData.pan_attach = k+"PAN_"+$(this).find('.panAttachEoi')[0].files[0].name;
-	    }else {
-	    	csPtData.pan_attach ="";
-	    }
-	    
-	    if ($(this).find('.receiptAttachEoi').val() != "") {
-	    	csPtData.cheque_attach = k+"Receipt_"+$(this).find('.receiptAttachEoi')[0].files[0].name;
-	    }else {
-	    	csPtData.cheque_attach ="";
-	    }
-	    
-	    arrayData.push(csPtData);
-	    k++
-	});
-	
-	$.post(pageContext+"insertEOIPaymentDtl",{"paymentDtlJson" : JSON.stringify(arrayData)},function(data){				 
-	}).done(function(data){
-		//holdUnitForEOI('eoi_block');
-		getEOIPreferencPrint();
-	});
-}
-
-
 // function call in salesRequest.js in "populateBasicInfo" function end 
 function getEOITabPaymentRecord () {
-	
-	//$('#csPtCol tbody').empty();
-	
 	$('#csPtColEoi tbody tr.paymentDataPlotRow').remove();
-	
 	$('#csPtGrandtotalEoi').text("");
-	
-	$.post(pageContext+"getEOIPaymentRecord",{"enqSfid":$('#enquirysfid').val()},function(data){
-		
+	$.post(pageContext+"getEOIPaymentRecord",{"enqSfid":enqSFIDforEOI},function(data){
 		var html = '';
 		var obj =JSON.parse(data);
-		
-		
 		var trans_date = '';
-		
-		
 		var panTarget = '';
 		var reciptTarget = '';
-		
 		var eoiTransactionTotalAmount = 0;
-		
 		var status = '';
 		var rowStatusColr = '';
 		
 		if(obj!=null){
-			
 			for(i = 0; i< obj.length; i++){    
-				
 				panTarget = pageContext+"file?name="+obj[i].pan_attach+"&from=EOIbookingReference&eid="+obj[i].enq_sfid+"&fid="+obj[i].pan_attach.charAt(0);
 				reciptTarget = pageContext+"file?name="+obj[i].cheque_attach+"&from=EOIbookingReference&eid="+obj[i].enq_sfid+"&fid="+obj[i].cheque_attach.charAt(0);
-				
 				if (obj[i].transaction_date != '') {
 					var date = new Date(obj[i].transaction_date);
-
 					var curr_date = date.getDate();
 					var curr_month = date.getMonth() + 1; //Months are zero based
 					var curr_year = date.getFullYear();
-					
 					trans_date = curr_date + "-" + curr_month + "-" + curr_year;
 				}else {
 					trans_date = '';
 				}
-				
-				
-				
-				
 				eoiTransactionTotalAmount = parseFloat(parseFloat(obj[i].transaction_amount)+parseFloat(eoiTransactionTotalAmount)).toFixed(2);
-				
-				/*if (obj[i].isactive == 'N') {
-					status = 'Not Approved';
-					rowStatusColr = 'style="background-color: #ffd4d8;"';
-				} else {
-					status = 'Approved';
-					rowStatusColr = '';
-				}*/
-				
 				
 				if (obj[i].isactive == 'N') {
 					status = 'Not Approved';
@@ -213,14 +119,10 @@ function getEOITabPaymentRecord () {
 					status = 'NA';
 					rowStatusColr = '';
 				}
-				
-				
-				
 				html += 	'<tr class="paymentDataPlotRow" '+rowStatusColr+'>'
 								+ '<td style="text-align:center; font-size:11px;">'+status+'</td>' 
 								+ '<td style="text-align:center;">'+obj[i].payment_type+'</td>' 
 								+ '<td style="text-align:center;">'+obj[i].bank_name+'</td>' 
-								/*+ '<td style="text-align:center;">'+obj[i].branch+'</td>' */
 								+ '<td style="text-align:center;">'+obj[i].transaction_id+'</td>' 
 								+ '<td style="text-align:center;">'+trans_date+'</td>' 
 								+ '<td style="text-align:center;">'+obj[i].transaction_amount+'</td>' 
@@ -241,9 +143,6 @@ function getEOITabPaymentRecord () {
 		
 	});	
 }
-
-
-
 
 $("#paymentDetailsTab").click(function(){
 	getTowerEOI ();
@@ -271,22 +170,6 @@ function getTowerEOI (){
 
 /* Added By Satheesh K - 30-01-2020*/
 function getTokenTypeEOI (){
-	/*$.get("getTowerMaster", { "project_code" : $('.projectSfid').val() 
-	
-	}, function(data) {
-		
-		$('.towerListEOI').find("option:gt(0)").remove();	
-		
-		var html="";
-		
-		html=html+'<option value="All">All11</option>';
-		
-		for(var i=0;i<data.length;i++) {
-			html=html+'<option value="'+data[i].tower_code__c+'">'+data[i].tower_name__c+'</option>';
-		}
-		
-		$(".towerListEOI").append(html);
-	});*/
 	$('.tokenTypeEOI').find("option:gt(0)").remove();
 	var html="";
 	if($("#projectsfid").val()=='a1l6F000009D6IMQA0')
@@ -301,10 +184,6 @@ function getTokenTypeEOI (){
 	{
 		html='<option value="F">PLATINUM</option><option value="T">EXPRESS</option>';
 	}
-	
-	
-	
-	//a1l2s00000003BMAAY
 	$(".tokenTypeEOI").append(html);
 }
 /* Added By Satheesh K - 30-01-2020*/
@@ -328,7 +207,6 @@ function tokenTypeChangeEOI(e)
 		}
 	
 }
-//$('#tower').val(),""
 
 function getTypologyEOI (e){
 	 
@@ -354,29 +232,6 @@ function getTypologyEOI (e){
 		$(e).closest('.EOIDtlRow').find('.typologyListEOI').append(html);
 	});
 }
-/*
-function getUnitEOI (e) {
-	 
-	$.post(pageContext+"getInventoryRecords",{"project_code" : $('.projectSfid').val(),"tower_code":$(e).val(),"floor_code":"","unit":""},function(data){				 
-		
-	}).done(function(data){
-		alert (data);
-		
-		var obj =JSON.parse(data);
-		var html="";
-		
-		alert ("obj ::: " + obj)
-		$(e).closest('.EOIDtlRow').find(".unitListEOI").find("option:gt(0)").remove();
-		if(obj!=null){
-			for(var i=0;i<obj.length;i++){
-				html=html+'<option value="'+obj[i].sfid+'">'+obj[i].propstrength__house_unit_no__c+'</option>';
-			}
-		}
-		$(e).closest('.EOIDtlRow').find(".unitListEOI").append(html);
-	});	
-}*/
-
-
 
 function getUnitEOI (e) {
 	$(e).closest('.EOIDtlRow').find(".unitListEOI").find("option:gt(0)").remove();
@@ -386,8 +241,6 @@ function getUnitEOI (e) {
 	if ($(e).closest('.EOIDtlRow').find(".typologyListEOI").val().trim() != "") {
 		typologyListEOI = $(e).closest('.EOIDtlRow').find(".typologyListEOI").val();
 	}
-	
-	
 	
 	$.get("getInventoryRecords",{"project_code" : $('.projectSfid').val(),  "tower_code":$(e).closest('.EOIDtlRow').find(".towerListEOI").val(),  "unitType":typologyListEOI},function(data){				 
 		var obj =JSON.stringify(data);
@@ -413,37 +266,6 @@ function getUnitEOI (e) {
 	});	
 }
 
-
-
-
-
-
-
-
-/*
-function getUnitEOI (e){
-	$.get("getInventoryRecords", {
-	
-		"project_code" : $('.projectSfid').val(),
-		"tower_code":$(e).val(),"floor_code":"","unit":""
-	}, function(data) {
-		var obj =JSON.parse(data);
-		$(e).closest('.EOIDtlRow').find(".unitListEOI").find("option:gt(0)").remove();
-		
-		var html="";
-		
-		if(obj!=null){
-			for(var i=0;i<obj.length;i++) {
-					
-					html=html+'<option value="'+obj[i].sfid+'">'+obj[i].propstrength__house_unit_no__c+'</option>';
-			}
-		}
-		
-		$(e).closest('.EOIDtlRow').find(".unitListEOI").append(html);
-	});
-}*/
-
-
 function getfbandEOI(e) {
 	 
 	$.get("getTowerBand", {
@@ -465,8 +287,6 @@ function getfbandEOI(e) {
 		
 	});
 }
-
-
 
 function unitChangeConditionEOI (e){
 	if ($(e).val() != 0) {
@@ -499,51 +319,19 @@ function unitChangeConditionEOI (e){
 	}
 }
 
-
-function removeEOIRow (e) {
-	$(e).closest("tr").remove();
-	EOIDtl -= 1;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 function getEOITabPreferencRecord () {
-	
 	$('#EOIMultipleTable tbody tr.prefrenceDataPlotRow').remove();
-	
-	$.post(pageContext+"getEOITabPreferencRecord",{"enqSfid":$('#enquirysfid').val()},function(data){
+	$.post(pageContext+"getEOITabPreferencRecord",{"enqSfid":enqSFIDforEOI},function(data){
 		
 		var html = '';
 		var obj =JSON.parse(data);
-		
-		
 		var trans_date = '';
-		
-		
 		var panTarget = '';
 		var reciptTarget = '';
-		
 		var eoiTransactionTotalAmount = 0;
 		
 		if(obj!=null){
-			
 			for(i = 0; i< obj.length; i++){    
-				
 				html += 	'<tr class="prefrenceDataPlotRow">'
 								+ '<td style="text-align:center;">'+obj[i].tower_name+'</td>' 
 								+ '<td style="text-align:center;">'+obj[i].typology_name+'</td>' 
@@ -554,10 +342,7 @@ function getEOITabPreferencRecord () {
 								+ '<td></td>' 
 							"</tr>";
 			}
-			
-			
 			html = html.replace(/undefined/g, "");
-		
 			$("#EOIMultipleTable tbody tr:first-child").after(html);
 		}
 	}).done(function(obj){

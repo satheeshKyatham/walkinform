@@ -134,6 +134,7 @@ if(ses!=null){
  <script src="<c:url value='/resources/js/separate/admininventory.js?v=${sessionScope.version}'/>"></script>
  <script src="<c:url value='/resources/js/separate/admininventoryReport.js?v=${sessionScope.version}'/>"></script>
  <script src="<c:url value='/resources/js/separate/salesHoldinventoryReport.js?v=${sessionScope.version}'/>"></script>
- <script src="<c:url value='/resources/js/separate/costsheet.js?v=${sessionScope.version}'/>"></script>	
+ <script src="<c:url value='/resources/js/separate/costsheet.js?v=${sessionScope.version}'/>"></script>
+ <script src="<c:url value='/resources/js/separate/updateEOI.js?v=${sessionScope.version}'/>"></script>	
  	
 <!-- </html> -->
