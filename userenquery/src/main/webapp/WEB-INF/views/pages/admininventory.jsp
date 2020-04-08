@@ -14,16 +14,16 @@
 <link rel="stylesheet" href="<c:url value='/resources/css/bootstrap.min.css' />" type="text/css" />
      <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
      <link rel="stylesheet" href="<c:url value='/resources/css/sweetalert2.min.css' />">  
-	<link rel="stylesheet" href="<c:url value='/resources/css/inner.css?v=3.0' />">
-	<link rel="stylesheet" href="<c:url value='/resources/css/style.css?v=3.0' />">
+	<link rel="stylesheet" href="<c:url value='/resources/css/inner.css?v=${sessionScope.version}' />">
+	<link rel="stylesheet" href="<c:url value='/resources/css/style.css?v=${sessionScope.version}' />">
 <script src="<c:url value='/resources/js/jquery-1.12.4.min.js'/>"></script>
 <script src="<c:url value='/resources/js/bootstrap.min.js'/>"></script>
 
 
- <link rel="stylesheet" href="<c:url value='/resources/css/inventory.css?v=2.0' />">
+ <link rel="stylesheet" href="<c:url value='/resources/css/inventory.css?v=${sessionScope.version}' />">
  
  <!-- Costsheet -->
-    <link rel="stylesheet" href="<c:url value='/resources/css/costsheet.css' />">
+    <link rel="stylesheet" href="<c:url value='/resources/css/costsheet.css?v=${sessionScope.version}' />">
 	<link rel="stylesheet" href="<c:url value='/resources/css/font-awesome.css' />">
 </head> 
 <%! String projectname,projectid ,projectrole,userid;%>
@@ -131,9 +131,9 @@ if(ses!=null){
 <script src="<c:url value='/resources/js/buttons.html5.min.js'/>"></script>
 
  <script src="<c:url value='/resources/js/sweetalert2.min.js' />"></script>
- <script src="<c:url value='/resources/js/separate/admininventory.js?v=18.19'/>"></script>
- <script src="<c:url value='/resources/js/separate/admininventoryReport.js?v=18.18'/>"></script>
- <script src="<c:url value='/resources/js/separate/salesHoldinventoryReport.js?v=18.18'/>"></script>
- <script src="<c:url value='/resources/js/separate/costsheet.js?v=18.19'/>"></script>	
+ <script src="<c:url value='/resources/js/separate/admininventory.js?v=${sessionScope.version}'/>"></script>
+ <script src="<c:url value='/resources/js/separate/admininventoryReport.js?v=${sessionScope.version}'/>"></script>
+ <script src="<c:url value='/resources/js/separate/salesHoldinventoryReport.js?v=${sessionScope.version}'/>"></script>
+ <script src="<c:url value='/resources/js/separate/costsheet.js?v=${sessionScope.version}'/>"></script>	
  	
 <!-- </html> -->
