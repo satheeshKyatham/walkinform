@@ -71,6 +71,7 @@
 							<th>Wing/ Block</th>
 							<th>Saleable Area</th>
 							<th>BSP</th>
+							<th>BV</th>
 							
 							<th>Admin</th>
 							<th>Hold/ Block Reason</th>
