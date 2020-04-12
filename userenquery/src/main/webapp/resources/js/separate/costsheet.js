@@ -2172,6 +2172,14 @@ function newOtherCharges2 () {
          	 			"<th> Electricity Charges </th> <td class='txtRight' style='text-align:right;'> 0 </td>  </tr>" +
          	 			"<tr> <th> Legal Charges </th> <td class='txtRight' style='text-align:right;'> 0 </td>  </tr>" +
          	 			"<tr> <th> Club Development Charges </th> <td class='txtRight' style='text-align:right;'> 0 </td>  </tr>");
+             }else if ($('#projectId').val() == 'a1l6F000005hPm5QAE'  ) {
+            	 $('#tentativeCharges tbody').append("<tr> " +
+            	 			"<th> Electricity Charges </th> <td class='txtRight' style='text-align:right;'> 0 </td>  </tr>" +
+            	 			"<tr> <th> Club Development Charges </th> <td class='txtRight' style='text-align:right;'> 0 </td>  </tr>");
+            	 
+            	 $('#printTentativeCharges tbody').append("<tr> " +
+         	 			"<th> Electricity Charges </th> <td class='txtRight' style='text-align:right;'> 0 </td>  </tr>" +
+         	 			"<tr> <th> Club Development Charges </th> <td class='txtRight' style='text-align:right;'> 0 </td>  </tr>");
              }
              
              
@@ -2468,8 +2476,8 @@ function newOtherCharges2 () {
                                                             +'<label style="display: block;">'+yres+'</label>'
                                                      +'</div>'; 
                     
-                    //Forest Grove at Godrej Park Greens / Godrej Hillside 2 / Godrej Nurture, Bengaluru / Godrej Seven, Kolkata
-                    if ($('#projectid').val() != "a1l2s00000003lPAAQ"  &&  $('#projectid').val() != "a1l2s00000000X5AAI"  && $('#projectid').val() != "a1l6F000009D6IMQA0" && $('#projectid').val() != "a1l2s00000000pEAAQ" && $('#projectid').val() != "a1l6F000003TXloQAG") {
+                    //Forest Grove at Godrej Park Greens / Godrej Hillside 2 / Godrej Nurture, Bengaluru / Godrej Seven, Kolkata / Godrej Park Greens, Pune
+                    if ($('#projectid').val() != "a1l2s00000003lPAAQ"  &&  $('#projectid').val() != "a1l2s00000000X5AAI"  && $('#projectid').val() != "a1l6F000009D6IMQA0" && $('#projectid').val() != "a1l2s00000000pEAAQ" && $('#projectid').val() != "a1l6F000003TXloQAG" && $('#projectid').val() != "a1l6F000005hPm5QAE" ) {
                     	$('#totalDiscountCol').append(printDiscountHtml);
                     	$('#totalDicountView').show();
                     } else {

@@ -69,7 +69,7 @@ public class PropOtherChargesDaoImpl extends AbstractDao<Integer, PropOtherCharg
 		String conditionString = "";
 		
 		//Forest Grove, Hillside 2 and Boulevard
-		if (projectId.equals("a1l2s00000000X5AAI") || projectId.equals("a1l6F000009D6IMQA0") || projectId.equals("a1l2s00000003lPAAQ")) {
+		if (projectId.equals("a1l2s00000000X5AAI") || projectId.equals("a1l6F000009D6IMQA0") || projectId.equals("a1l2s00000003lPAAQ") || projectId.equals("a1l6F000005hPm5QAE") ) {
 			conditionString = " AND  propstrength__other_charges__c.propstrength__part_of_cop__c ='t' ";
 		} else {
 			conditionString = " ";
