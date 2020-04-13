@@ -16,6 +16,7 @@ public interface VW_UserMasterService {
 
 	Vw_UserMaster getUserDetails(int user_id, String projectId);
 	List<Vw_UserProjectMapping> getUserProjectMapping(String projectID);
+	List<Vw_UserProjectMapping> getUserProjectMappingTeamLead(String projectID,String condition);
 	List<Vw_UserProjectMapping> getProjectListUserWise(String userid);
 
 	List<Vw_UserProjectMapping> getOfferApprovalUser(String projectid);

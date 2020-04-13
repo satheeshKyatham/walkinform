@@ -26,44 +26,45 @@ public class VW_UserMasterServiceImpl implements VW_UserMasterService {
 
 	@Override
 	public List<Vw_UserMaster> getUserProjectList(String userid) {
-		// TODO Auto-generated method stub
 		return vw_UserMasterDao.getUserProjectList(userid);
 	}
 
 	@Override
 	public Vw_UserMaster getUserDetails(int user_id) {
-		// TODO Auto-generated method stub
 		return vw_UserMasterDao.getUserDetails(user_id);
 	}
 
 	@Override
 	public List<Vw_UserMaster> getUserListProjectWise(String projectID) {
-		// TODO Auto-generated method stub
 		return vw_UserMasterDao.getUserListProjectWise(projectID);
 	}
 
 	@Override
 	public Vw_UserMaster getUserDetails(int user_id, String projectId) {
-		// TODO Auto-generated method stub
 		return vw_UserMasterDao.getUserDetails(user_id,projectId);
 	}
 
 	@Override
 	public List<Vw_UserProjectMapping> getUserProjectMapping(String projectID) {
-		// TODO Auto-generated method stub
 		return vw_UserMasterDao.getUserProjectMapping(projectID);
 	}
 
 	@Override
 	public List<Vw_UserProjectMapping> getProjectListUserWise(String userid) {
-		// TODO Auto-generated method stub
 		return vw_UserMasterDao.getProjectListUserWise(userid);
 	}
 
 	@Override
 	public List<Vw_UserProjectMapping> getOfferApprovalUser(String projectid) {
-		// TODO Auto-generated method stub
 		return vw_UserMasterDao.getOfferApprovalUser(projectid);
+	}
+
+	@Override
+	public List<Vw_UserProjectMapping> getUserProjectMappingTeamLead(String projectID, String condition) {
+		List<Vw_UserProjectMapping> teamLeadList = vw_UserMasterDao.getUserProjectMappingTeamLead(projectID,condition);
+		if(teamLeadList==null)
+			teamLeadList=vw_UserMasterDao.getUserProjectMapping(projectID);
+		return teamLeadList;
 	}
 
 	 
