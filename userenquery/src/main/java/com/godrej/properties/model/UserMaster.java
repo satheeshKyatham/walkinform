@@ -51,6 +51,7 @@ public class UserMaster {
 	private String launchtype;
 	@Column(name = "mst_user_rolemaster_id")
 	private int mst_user_rolemaster_id;
+	
 	@Transient
 	private String msg;
 

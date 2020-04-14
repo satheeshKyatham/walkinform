@@ -144,4 +144,38 @@ public class InventoryServiceImpl implements InventoryService {
 	}
 	
 	
+	/* New Method for release EOI Unit Hold */
+	@Override
+	public void releaseEOIHoldInventory(String projectSfid, String unitSfid, String userId, String unitName) {
+		
+		 String [] data= unitSfid.split(",");
+		// String [] units= unitName.split(",");
+		 
+		 for (int i=0;i<data.length;i++){
+			 	HoldInventoryAdmin inventoryAdmin = new HoldInventoryAdmin();
+				inventoryAdmin.setUnitSfid(data[i]);
+				inventoryAdmin.setProject_id(projectSfid);
+				inventoryAdmin.setCreated_at(new Timestamp(new Date().getTime()));
+				inventoryAdmin.setCustomer_id(userId);
+				inventoryAdmin.setHold_reason("Release Admin");
+				inventoryAdmin.setHold_status(false);
+				inventoryAdmin.setEoi_unit_locked(false);
+
+				updateHoldInventoryAdmin(inventoryAdmin);
+
+				// -------------------------------------
+				HoldInventoryAdminLog inventoryAdminLog = new HoldInventoryAdminLog();
+				inventoryAdminLog.setUnitSfid(data[i]);
+				inventoryAdminLog.setProject_id(projectSfid);
+				inventoryAdminLog.setCreated_at(new Timestamp(new Date().getTime()));
+				inventoryAdminLog.setCustomer_id(userId);
+				inventoryAdminLog.setHold_reason("Release Admin");
+				inventoryAdminLog.setHold_status(false);
+				inventoryAdminLog.setEoi_unit_locked(false);
+
+				saveHoldInventoryAdminLog(inventoryAdminLog);
+		}
+	}
+	/* END New Method for release EOI Unit Hold */
+	
 }

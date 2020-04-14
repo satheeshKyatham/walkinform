@@ -244,7 +244,8 @@ public class WebServiceController<MultipartFormDataInput> {
  	@Autowired
  	private CostSheetExistsService  costSheetExistsService;
  	
- 	
+ 	@Autowired
+ 	private VW_UserMasterService vW_UserMasterService;
  	
  	@Autowired
  	private UnitExistsService unitExistsService;
@@ -275,8 +276,6 @@ public class WebServiceController<MultipartFormDataInput> {
 	@Autowired
  	private ProjectLaunchService projectLaunchService;
 	
-	@Autowired
- 	private VW_UserMasterService vW_UserMasterService;
 	
 	@Autowired
 	private EOIEnquiryService userEOIService;
@@ -465,37 +464,7 @@ public class WebServiceController<MultipartFormDataInput> {
 		Gson gson = new GsonBuilder().disableHtmlEscaping().create();
 		return gson.toJson(projectLaunchService.UpdateProjectStatus(id, status));
 	}
-	
-	@RequestMapping(value = "/getUserProjectList", method = RequestMethod.GET, produces = "application/json")
-	public String getUserProjectList(@RequestParam("userId") String userid) {
-		GsonBuilder gsonBuilder = new GsonBuilder();
-		Gson gson = new GsonBuilder().disableHtmlEscaping().create();
-	 
-		 List<Vw_UserMaster> adt=vW_UserMasterService.getUserProjectList(userid);
-	 
-		return gson.toJson(adt);
-	}
-	
-	@RequestMapping(value = "/getUserListProjectWise", method = RequestMethod.GET, produces = "application/json")
-	public String getUserListProjectWise(@RequestParam("projectid") String projectid) {
-		Gson gson = new GsonBuilder().disableHtmlEscaping().create();
-		List<Vw_UserMaster> adt=vW_UserMasterService.getUserListProjectWise(projectid);
-		return gson.toJson(adt);
-	} 
-	@RequestMapping(value = "/getUserProjectMapping", method = RequestMethod.GET, produces = "application/json")
-	public String getUserProjectMapping(@RequestParam("projectid") String projectid) {
-		Gson gson = new GsonBuilder().disableHtmlEscaping().create();
-		List<Vw_UserProjectMapping> adt=vW_UserMasterService.getUserProjectMapping(projectid);
-		return gson.toJson(adt);
-	} 
-	
-	@RequestMapping(value = "/getProjectListUserWise", method = RequestMethod.GET, produces = "application/json")
-	public String getProjectListUserWise(@RequestParam("userid") String userid) {
-		Gson gson = new GsonBuilder().disableHtmlEscaping().create();
-		List<Vw_UserProjectMapping> adt=vW_UserMasterService.getProjectListUserWise(userid);
-		return gson.toJson(adt);
-	} 
-	
+		
 	
 	  @RequestMapping(value = { "/inventory" }, method = RequestMethod.GET) public
 	  ModelAndView claimForm() { ModelAndView model = new ModelAndView();

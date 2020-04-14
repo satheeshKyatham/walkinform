@@ -37,7 +37,8 @@ public class Vw_UserProjectMapping {
 	@Column(name="email") private String email  ;
 	@Column(name="user_type__c") private String user_type__c  ;
 	@Column(name="roleid") private String roleid  ;
-	 
+	@Column(name = "isstlead") private String isstlead;
+	@Column(name = "isctlead") private String isctlead; 
 	@Transient private String	msg  ;
 	
 	public String getAssignto() {
@@ -166,6 +167,19 @@ public class Vw_UserProjectMapping {
 	public void setRoleid(String roleid) {
 		this.roleid = roleid;
 	}
+	public String getIsstlead() {
+		return isstlead;
+	}
+	public void setIsstlead(String isstlead) {
+		this.isstlead = isstlead;
+	}
+	public String getIsctlead() {
+		return isctlead;
+	}
+	public void setIsctlead(String isctlead) {
+		this.isctlead = isctlead;
+	}
+	
 	
 	/*@Override
 	public String toString() {
