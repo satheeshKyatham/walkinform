@@ -72,4 +72,9 @@ public class CCAvenuePaymentController {
 		return "redirect:/ccAvenue?"+resp;
 	}
 	
+	@RequestMapping(value = { "/paymentPlanDue"}, method = RequestMethod.GET)
+	public String paymentPlanDue(ModelMap model,HttpServletRequest request) {
+		 return "paymentPlanDue";
+	}
+	
 }

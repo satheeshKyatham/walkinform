@@ -35,6 +35,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -75,6 +76,7 @@ import com.godrej.properties.model.EOIPreferenceDtl;
 import com.godrej.properties.model.Enquiry;
 import com.godrej.properties.model.ExtraCharges;
 import com.godrej.properties.model.ExtraChargesHis;
+import com.godrej.properties.model.GeneratePayment;
 import com.godrej.properties.model.HoldInventoryAdmin;
 import com.godrej.properties.model.HoldInventoryAdminLog;
 import com.godrej.properties.model.InventoryAdmin;
@@ -83,6 +85,7 @@ import com.godrej.properties.model.OrderDataMapping;
 import com.godrej.properties.model.OtherCharges;
 import com.godrej.properties.model.PaymentDtl;
 import com.godrej.properties.model.PaymentPlan;
+import com.godrej.properties.model.PaymentPlanDue;
 import com.godrej.properties.model.PaymentPlanJson;
 import com.godrej.properties.model.PaymentPlanLineItem;
 import com.godrej.properties.model.PaymentPlanWithOtherCharge;
@@ -146,6 +149,7 @@ import com.godrej.properties.service.OrderDataMapppingService;
 import com.godrej.properties.service.OtherChargesService;
 import com.godrej.properties.service.OtpService;
 import com.godrej.properties.service.PaymentDtlService;
+import com.godrej.properties.service.PaymentPlanDueService;
 import com.godrej.properties.service.PaymentPlanLineItemService;
 import com.godrej.properties.service.PaymentPlanListService;
 import com.godrej.properties.service.PaymentPlanService;
@@ -244,7 +248,8 @@ public class WebServiceController<MultipartFormDataInput> {
  	@Autowired
  	private CostSheetExistsService  costSheetExistsService;
  	
- 	
+ 	@Autowired
+ 	private VW_UserMasterService vW_UserMasterService;
  	
  	@Autowired
  	private UnitExistsService unitExistsService;
@@ -275,8 +280,6 @@ public class WebServiceController<MultipartFormDataInput> {
 	@Autowired
  	private ProjectLaunchService projectLaunchService;
 	
-	@Autowired
- 	private VW_UserMasterService vW_UserMasterService;
 	
 	@Autowired
 	private EOIEnquiryService userEOIService;
@@ -441,6 +444,8 @@ public class WebServiceController<MultipartFormDataInput> {
 	@Autowired
 	private SysConfigService sysConfigService;
 	
+	@Autowired
+	private PaymentPlanDueService paymentPlanDueService;
 	
 	@RequestMapping(value = "/activeproject", method = RequestMethod.GET, produces = "application/json")
 	public String project() {
@@ -465,37 +470,7 @@ public class WebServiceController<MultipartFormDataInput> {
 		Gson gson = new GsonBuilder().disableHtmlEscaping().create();
 		return gson.toJson(projectLaunchService.UpdateProjectStatus(id, status));
 	}
-	
-	@RequestMapping(value = "/getUserProjectList", method = RequestMethod.GET, produces = "application/json")
-	public String getUserProjectList(@RequestParam("userId") String userid) {
-		GsonBuilder gsonBuilder = new GsonBuilder();
-		Gson gson = new GsonBuilder().disableHtmlEscaping().create();
-	 
-		 List<Vw_UserMaster> adt=vW_UserMasterService.getUserProjectList(userid);
-	 
-		return gson.toJson(adt);
-	}
-	
-	@RequestMapping(value = "/getUserListProjectWise", method = RequestMethod.GET, produces = "application/json")
-	public String getUserListProjectWise(@RequestParam("projectid") String projectid) {
-		Gson gson = new GsonBuilder().disableHtmlEscaping().create();
-		List<Vw_UserMaster> adt=vW_UserMasterService.getUserListProjectWise(projectid);
-		return gson.toJson(adt);
-	} 
-	@RequestMapping(value = "/getUserProjectMapping", method = RequestMethod.GET, produces = "application/json")
-	public String getUserProjectMapping(@RequestParam("projectid") String projectid) {
-		Gson gson = new GsonBuilder().disableHtmlEscaping().create();
-		List<Vw_UserProjectMapping> adt=vW_UserMasterService.getUserProjectMapping(projectid);
-		return gson.toJson(adt);
-	} 
-	
-	@RequestMapping(value = "/getProjectListUserWise", method = RequestMethod.GET, produces = "application/json")
-	public String getProjectListUserWise(@RequestParam("userid") String userid) {
-		Gson gson = new GsonBuilder().disableHtmlEscaping().create();
-		List<Vw_UserProjectMapping> adt=vW_UserMasterService.getProjectListUserWise(userid);
-		return gson.toJson(adt);
-	} 
-	
+		
 	
 	  @RequestMapping(value = { "/inventory" }, method = RequestMethod.GET) public
 	  ModelAndView claimForm() { ModelAndView model = new ModelAndView();
@@ -1816,6 +1791,7 @@ public class WebServiceController<MultipartFormDataInput> {
 			 paymentPlanJson.setPaymentTrxdaysVal(paymentTrxDaysAllow);
 			 
 			 paymentPlanJson.setNowData(allowedUptoDate);
+			 paymentPlanJson.setWing_block__c(paym.getWing_block__c()); 
 			 //paymentPlanJson.set (paym.getSfid());
 			 
 			 
@@ -4298,4 +4274,50 @@ public class WebServiceController<MultipartFormDataInput> {
 				List<EOIData> eList = userEOIService.findMobileNoExistEOIForm(decStr, projectid,enqsfid);
 				return gson.toJson(eList);
 		}
+		
+		
+		
+		/* Start insert against Payment Plan with Due*/
+		@RequestMapping(value = "/savePaymentPlanWithDue", method = RequestMethod.POST,produces = "application/json")
+		public @ResponseBody PaymentPlanDue savePaymentPlanWithDues(@RequestBody PaymentPlanDue data) 
+		{	
+			PaymentPlanDue duePaymentPlan=new PaymentPlanDue();
+			if(data != null && data.getTowerid() != null && data.getProject_id() != null){
+			duePaymentPlan = paymentPlanDueService.addPaymentPlanDue(data);  /*add payment pLan with due*/
+			duePaymentPlan.setInsertStatus("Status_OK");
+			return duePaymentPlan;
+			}else{
+				duePaymentPlan.setInsertStatus("Status_NOTOK");
+				return duePaymentPlan;
+			}
+			
+		}
+		/* END insert against Payment Plan with Due */
+		
+		/* Start get Payment Plan with Due*/
+		@GetMapping(value = "/getPymentPlanDueList")
+		public @ResponseBody String getPymentPlanDueList() 
+		{
+			GsonBuilder gsonBuilder = new GsonBuilder();
+			Gson gson = gsonBuilder.create();
+			return  gson.toJson(paymentPlanDueService.getPaymentDueList()); /*return json data*/
+		}
+		/* END  */
+		
+		
+		@RequestMapping(value = "/updatePaymentPlanWithDue", method = RequestMethod.POST)
+		public @ResponseBody PaymentPlanDue updatePaymentPlanWithDue(@RequestBody PaymentPlanDue data)  {	
+			
+			
+			PaymentPlanDue duePaymentPlan=new PaymentPlanDue();
+			if(data != null && data.getId() != 0 && data.getTowerid() != null){
+			duePaymentPlan = paymentPlanDueService.updatePaymentDue(data);  /*add payment pLan with due*/
+			duePaymentPlan.setInsertStatus("Status_OK");
+			return duePaymentPlan;
+			}else{
+				duePaymentPlan.setInsertStatus("Status_NOTOK");
+				return duePaymentPlan;
+			}
+		}
+		
 }

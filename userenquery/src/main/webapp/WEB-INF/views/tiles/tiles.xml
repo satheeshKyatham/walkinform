@@ -249,4 +249,9 @@
     <definition name="ccavRequestHandler"  template="/WEB-INF/views/pages/ccavenue/ccavRequestHandler.jsp"> 
       	 <put-attribute name="title" value="CCAvenue Create Request" />  
     </definition>
+    
+      <definition name="paymentPlanDue" extends="base-definition"> 
+       <put-attribute name="title" value="Payment Plan with Due" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/paymentPlanDue.jsp" /> 
+     </definition>
 </tiles-definitions>

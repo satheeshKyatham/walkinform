@@ -36,6 +36,7 @@ if(ses!=null){
 	<li><a href="${pageContext.request.contextPath}/admininventory/a1l6F0000080iilQAA/Godrej%20Lake%20Garden/80/">Inventory</a></li>
 	<li><a href="${pageContext.request.contextPath}/createdoffers?projectid=a1l6F0000080irTQAQ">Created Offers List</a></li>
 	<li><a href="${pageContext.request.contextPath}/triggerLog">Trigger Log</a></li>
+	<li><a href="${pageContext.request.contextPath}/paymentPlanDue">Payment Plan Due</a></li>
 	
 	<li><a href="${pageContext.request.contextPath}/saleslogin">Logout</a></li>
 	</ul> 
