@@ -976,7 +976,7 @@
 	
 	<script type="text/javascript" src="<c:url value='/resources/js/jquery.countdownTimer.js?v=18.18'/>"></script>
 	
-	<script src="<c:url value='/resources/js/separate/costsheet.js?v=18.18'/>"></script>
+	<script src="<c:url value='/resources/js/separate/costsheet.js?v=18.19'/>"></script>
 	
 	
 	

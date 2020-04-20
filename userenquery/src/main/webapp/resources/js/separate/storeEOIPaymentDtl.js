@@ -419,11 +419,17 @@ function getUnitEOI (e) {
 		var obj =JSON.stringify(data);
 		var obj1 =JSON.parse(obj);
 		var html = '';
+		var wing = "";
 		
 		if(obj1!=null) {
 			for(var i=0;i<obj1.length;i++){
 				if (obj1[i].eoi_unit_locked != true && obj1[i].hold_status != true) {
-					html += '<option value="'+obj1[i].sfid+'">'+obj1[i].propstrength__house_unit_no__c+'</option>';
+					if (obj1[i].wing_block__c != undefined) {
+						wing = obj1[i].wing_block__c + " - ";
+                    } else {
+                 	   	wing = "";
+                    }
+					html += '<option value="'+obj1[i].sfid+'">'+ wing + obj1[i].propstrength__house_unit_no__c+'</option>';
 				}
 				
 			}

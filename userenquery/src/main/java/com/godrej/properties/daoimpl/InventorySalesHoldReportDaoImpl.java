@@ -10,7 +10,6 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.godrej.properties.dao.AbstractDao;
 import com.godrej.properties.dao.InventorySalesHoldReportDao;
 import com.godrej.properties.model.InventorySalesHoldReport;
 
@@ -40,6 +39,11 @@ public class InventorySalesHoldReportDaoImpl implements InventorySalesHoldReport
 					+ " b.floor_number__c,  "
 					+ " b.propstrength__unit_type__c, " 
 					+ " b.propstrength__house_unit_no__c,  "
+					
+					+ " b.wing_block__c,  "
+					+ " b.saleable_area__c,  "
+					+ " b.propstrength__rate_per_unit_area__c,  "
+					
 					+ " c.user_name as held_by_name, " 
 					+ " c.emailid as held_by_email, "
 					+ " a.created_at " 

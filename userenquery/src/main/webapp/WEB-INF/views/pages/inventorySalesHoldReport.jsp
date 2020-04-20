@@ -48,6 +48,10 @@
 							<th>Floor No.</th>
 							<th>Unit Type</th>
 							<th>Unit</th>
+							<th>Wing/ Block</th>
+							<th>Saleable Area</th>
+							<th>BSP</th>
+							<th>BV</th>
 							<th>Hold by (name)</th>
 							<th>Hold by (email)</th>
 							<th>Hold Time(Min:Sec)</th>

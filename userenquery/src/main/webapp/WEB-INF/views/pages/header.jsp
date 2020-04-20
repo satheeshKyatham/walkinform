@@ -2,6 +2,12 @@
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+<%  
+/* Cookie ck=new Cookie("version","18.20");  
+response.addCookie(ck);   */
+session.setAttribute("version","18.26");  
+%>  
+
 <%
 	 response.addHeader("Expires","0");
 	 response.addHeader("Pragma","no-cache");
@@ -9,7 +15,7 @@
 	 response.addHeader("X-Frame-Options", "DENY");
 	 %>
 <head>
-<script src="<c:url value='/resources/js/salesdesk.js?v=18.15'/>"></script>
+<script src="<c:url value='/resources/js/salesdesk.js?v=${sessionScope.version}'/>"></script>
 </head>
 <body>
 <input type="hidden" id="userNameLoggedIn" value="<%= session.getAttribute("USERNAME")%>" />

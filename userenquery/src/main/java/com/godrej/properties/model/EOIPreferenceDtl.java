@@ -98,6 +98,10 @@ private static final long serialVersionUID = 1L;
 	private String tokenTypeName;
 	@Column(name = "tokentypeid")
 	private int tokenTypeId;
+	
+	@Transient
+	private String rowid;
+	
 	public int getId() {
 		return id;
 	}
@@ -316,6 +320,12 @@ private static final long serialVersionUID = 1L;
 	public void setTokenTypeId(int tokenTypeId) {
 		this.tokenTypeId = tokenTypeId;
 	}
-	
-	
+
+	public String getRowid() {
+		return rowid;
+	}
+
+	public void setRowid(String rowid) {
+		this.rowid = rowid;
+	}
 }

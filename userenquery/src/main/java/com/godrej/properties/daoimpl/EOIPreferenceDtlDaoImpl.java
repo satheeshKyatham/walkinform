@@ -6,6 +6,8 @@ import javax.persistence.Query;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -15,6 +17,7 @@ import com.godrej.properties.model.EOIPreferenceDtl;
 
 @Repository("eOIPreferenceDtlDao")
 public class EOIPreferenceDtlDaoImpl extends AbstractDao<Integer, EOIPreferenceDtl> implements EOIPreferenceDtlDao {
+	private Logger Log = LoggerFactory.getLogger(getClass());
 	
 	@Autowired
 	private SessionFactory sessionFactory;
@@ -23,8 +26,6 @@ public class EOIPreferenceDtlDaoImpl extends AbstractDao<Integer, EOIPreferenceD
 	public void insertEOI(List<EOIPreferenceDtl> eoiDtl) {
 		batchPersist(eoiDtl);
 	}	
-	
-	
 	
 	@Override
 	public List<EOIPreferenceDtl> getEOIPreferenceRecord(String enqSfid) {
@@ -43,5 +44,39 @@ public class EOIPreferenceDtlDaoImpl extends AbstractDao<Integer, EOIPreferenceD
 			return authors;
 
 		return null;
+	}
+	
+	@Override
+	public Boolean updateEOIPreference(List<EOIPreferenceDtl> eoiReq) {
+		try {
+			for (int i = 0; i <eoiReq.size(); i++) {
+				Session session = this.sessionFactory.getCurrentSession();
+				Query query = session.createQuery("UPDATE EOIPreferenceDtl  "
+						+ " SET "
+								+ "	  tower_id = '"+eoiReq.get(i).getTower_id()+"' "
+								+ " , tower_name =  '"+eoiReq.get(i).getTower_name()+"' "
+								+ " , typology_id = '"+eoiReq.get(i).getTypology_id() +"' "
+								+ " , typology_name = '"+eoiReq.get(i).getTypology_name() +"' "
+								+ " , unit_id = '"+eoiReq.get(i).getUnit_id() +"' "
+								+ " , unit_name = '"+eoiReq.get(i).getUnit_name() +"' "
+								+ " , floor_band = '"+eoiReq.get(i).getFloor_band() +"' "
+								+ " , eoi_carpark_mst_id = '"+eoiReq.get(i).getEoi_carpark_mst_id() +"' "
+								+ " , eoi_carpark_name = '"+eoiReq.get(i).getEoi_carpark_name() +"' "
+								+ " , description = '"+eoiReq.get(i).getDescription() +"' "
+								+ " , updatedby = '"+eoiReq.get(i).getUpdatedby() +"' "
+								+ " , updated = now() "
+
+						+ " WHERE id = '"+eoiReq.get(i).getRowid()+"' "
+						+ " AND enq_sfid = '"+eoiReq.get(i).getEnq_sfid()+"' "
+						+ " AND project_sfid = '"+eoiReq.get(i).getProject_sfid()+"' "
+						+ " AND isactive = '"+eoiReq.get(i).getIsactive()+"' ");
+				
+				query.executeUpdate();
+			}
+			return true;
+		} catch (Exception e) {
+			Log.info("Update EOI Preference Error:- ",e);
+			return false;
+		}
 	}
 }

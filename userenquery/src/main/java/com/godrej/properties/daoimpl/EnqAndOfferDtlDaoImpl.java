@@ -70,7 +70,8 @@ public class EnqAndOfferDtlDaoImpl extends AbstractDao<Integer, EnqAndOfferDtl> 
 				+ " g.rera_registration_number__c, "
 				+ " d.sfid as prop_sfid, "
 				+ " d.open_balc_sq_mt__c, "
-				+ " d.saleable_area__c "
+				+ " d.saleable_area__c, "
+				+ " d.wing_block__c "
 				
 				
 				

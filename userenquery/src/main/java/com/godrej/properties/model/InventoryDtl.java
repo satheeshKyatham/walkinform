@@ -31,7 +31,7 @@ public class InventoryDtl implements Serializable{
 	@Column(name="eoi_unit_locked") private boolean  eoi_unit_locked;
 	@Column(name="hold_status") private boolean  hold_status;
 	@Column(name="propstrength__unit_type__c") private String  propstrength__unit_type__c; 
-	
+	@Column(name="wing_block__c") private String  wing_block__c;
 	
 	public String getSfid() {
 		return sfid;
@@ -109,5 +109,11 @@ public class InventoryDtl implements Serializable{
 	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+	public String getWing_block__c() {
+		return wing_block__c;
+	}
+	public void setWing_block__c(String wing_block__c) {
+		this.wing_block__c = wing_block__c;
 	}
 }

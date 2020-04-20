@@ -576,3 +576,6 @@ border: 1px Solid #ccc; top: 10px;     margin: 70px auto 20px !important; float:
 .crudRPBtn .cancelPayReqBtn {background-color: #8b8b8b !important;}
 
 .trxSuccess {background-color: #bfffe0;}
+
+
+.eoieditOldRec {min-height: 50px; display: block;}

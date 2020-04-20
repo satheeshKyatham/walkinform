@@ -1514,7 +1514,7 @@ function getClosingManagersList(inputVal)
 
 function getClosingTeamLeadManagersList(inputVal)
 {
-	   var urlGetUsers = "getUserProjectMapping?projectid="+$('#projectid').val();
+	   var urlGetUsers = "getUserProjectMappingCT?projectid="+$('#projectid').val();
 	   var j = 0
 	   var option="";
 		$.getJSON(urlGetUsers, function (data) {
@@ -1539,7 +1539,7 @@ function getClosingTeamLeadManagersList(inputVal)
 
 function getSourcingTeamLeadManagersList(inputVal)
 {
-	   var urlGetUsers = "getUserProjectMapping?projectid="+$('#projectid').val();
+	   var urlGetUsers = "getUserProjectMappingST?projectid="+$('#projectid').val();
 	   var j = 0
 	   var option="";
 		$.getJSON(urlGetUsers, function (data) {

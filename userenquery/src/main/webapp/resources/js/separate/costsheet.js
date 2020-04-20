@@ -9,7 +9,7 @@ var pageContext = $("#pageContext").val()+'/';
 var urlDomin = pageContext;
 var pdfSrc = pageContext+"Costsheet?name="     
 var projectNameVal = $("#projectId").val();
-
+var SALESCOSTSHEET = "SALESCOSTSHEET";
 
 var paymentTrxDaysAllow = 0;
 var sysNowDate = "1999-09-09";
@@ -58,7 +58,11 @@ function schemeType (e) {
 }
 
 $("#getCSData").click(function (){
-       //alert("Get CS Data");
+	
+	
+	
+	if ($(this).data('source') == "SALES"){
+		//alert("Get CS Data");
 		$('#getCSData span').html('<i class="fa fa-spinner fa-spin" style="color:#fff !important"></i>'); 
 		insertAuditLogCostsheet();
        $('#updateBtnCol button').prop("disabled", false);
@@ -73,7 +77,7 @@ $("#getCSData").click(function (){
              }).done(function(data){
               	   if (data == "errorNoUnit101") {
 	              	   //$('#getCSData span').html('<i class="fa fa-spinner fa-spin" style="color:#fff !important"></i>');          
-	              	   loadData ();
+	              	   loadData (SALESCOSTSHEET);
               		   swal({
           	   				title: "This unit is no longer available please select another unit.",
           	   				text: "",
@@ -83,7 +87,7 @@ $("#getCSData").click(function (){
           	   			});
               	   } else if (data == "errorUnitInactive102") {
               		   //$('#getCSData span').html('<i class="fa fa-spinner fa-spin" style="color:#fff !important"></i>');          
-	              	   loadData ();
+	              	   loadData (SALESCOSTSHEET);
               		   swal({
           	   				title: "Inventory is not activated.",
           	   				text: "",
@@ -96,7 +100,7 @@ $("#getCSData").click(function (){
               		   swal({
 
           	   				//title: "There is some technical problem, please try again.",
-              			   	title: "111 There was problem in fetching cost sheet data at this time. Please try again by clicking get details.", 
+              			   	title: "There was problem in fetching cost sheet data at this time. Please try again by clicking get details. - 103", 
 
           	   				text: "",
           	   				type: "warning",
@@ -105,14 +109,14 @@ $("#getCSData").click(function (){
           	   			});
               	   } else if (data == "successUnitAvailable102") {
               		  // $('#getCSData span').html('<i class="fa fa-spinner fa-spin" style="color:#fff !important"></i>');          
-	              	   loadData ();
+	              	   loadData (SALESCOSTSHEET);
              	   }
               }).fail(function(xhr, status, error) {
             	  $('#getCSData span').html(''); 
 	              	swal({
 
 	          			//title: "There is some technical problem, please try again.",
-	              		title: "222 There was problem in fetching cost sheet data at this time. Please try again by clicking get details.",
+	              		title: "There was problem in fetching cost sheet data at this time. Please try again by clicking get details.",
 
 	          			text: "",
 	          			timer: 8000,
@@ -127,13 +131,19 @@ $("#getCSData").click(function (){
                  type: "warning",
              });
        }
+	} else if ($(this).data('source') == "ADMIN") {
+		$('#getCSData span').html('<i class="fa fa-spinner fa-spin" style="color:#fff !important"></i>'); 
+		loadData ('ADMINCOSTSHEET');
+	}
+	
+       
 });
 
 
 
 
 
-function loadData () {     
+function loadData (csSource) {     
 	$('#schemeInput').val("");
 	
 		tncData ();
@@ -209,12 +219,11 @@ function loadData () {
        // END Not in use 20191025
        
        var unitVal = $('#unitSfid').val();
+       var wing = "";
        
-       
-       if ($('#projectId').val() == 'a1l6F000004LVk8QAG') {
+       /*if ($('#projectId').val() == 'a1l6F000004LVk8QAG' || $('#projectId').val() == 'a1l6F000003TXloQAG') {
       	 $('.facingCSCol').remove();
-       } 
-       
+       } */
        
        var url = urlDomin+"getProjectPlan?herokuEnqId="+$('.enquiryId').val()+"&project_code="+projectNameVal+"&unit="+$('#unitSfid').val()+"&towerCode="+$('#towerSfid').val()+"&pymtPlanSfid="+$('#ppDropdown').val()+"&typology="+$('#typoMst').val()  ;
        $.getJSON(url, function (data) {
@@ -334,6 +343,18 @@ function loadData () {
                            $('.balTerSqm').text(value.appurtenant_area_sq_mt__c);
                            $('#unitTval').text(value.ID);
                            $('.unitTval').text(value.ID);
+                           
+                           
+                           
+                           if (value.wing_block__c != undefined) {
+                        	   wing = value.wing_block__c;
+                           } else {
+                        	   wing = "";
+                           }
+                           
+                           $('#wingVal').text(wing);
+                           $('.wingVal').text(wing);
+                           
                            $('#typologyTval').text(value.Typology);
                            $('.typologyTval').text(value.Typology);
                            $('#floorTval').text(value.floorName);
@@ -341,9 +362,12 @@ function loadData () {
                            $('#towerTval').text(value.towerName);
                            $('.towerTval').text(value.towerName);
                            
-                           $('.propFacingType').text(value.property_facing__c);
-                           $('#propFacingType').text(value.property_facing__c);
-                           
+                           if (value.property_facing__c != undefined) {
+                        	   $('.propFacingType').text(value.property_facing__c);
+                               $('#propFacingType').text(value.property_facing__c);
+                           } else {
+                        	   $('.facingCSCol').remove();
+                           }
                            
                            // Not in use - 20191025
                            if (plnVal == ''){
@@ -493,8 +517,10 @@ function loadData () {
 	        $('.noOfCarParkLabel').text('No. of Car Park');
        }
        
-       
-       getEOIPaymentRecord ();
+      if (csSource == "SALESCOSTSHEET") {
+    	  getEOIPaymentRecord ();
+      }
+      
        
        //$(".csPtDataRow .csPtTransactionDate").attr("max", sysNowDate);
       // maxPaymentDate ();
@@ -1244,7 +1270,7 @@ function updateBSP (timeid) {
       
        if ($('#channelPartnerSfidCS').val() === "") {
     	   
-    	   if($('#walkInSource').val()==="Referral")
+    	   if($('#walkInSource').val()==="Referral" || $('#walkInSource').val()==="Existing Customer")
     		   offerthrough = "Referral";
     	   else if($('#walkInSource').val()==="Corporate")
     		   offerthrough = "Corporate";
@@ -2146,6 +2172,14 @@ function newOtherCharges2 () {
          	 			"<th> Electricity Charges </th> <td class='txtRight' style='text-align:right;'> 0 </td>  </tr>" +
          	 			"<tr> <th> Legal Charges </th> <td class='txtRight' style='text-align:right;'> 0 </td>  </tr>" +
          	 			"<tr> <th> Club Development Charges </th> <td class='txtRight' style='text-align:right;'> 0 </td>  </tr>");
+             }else if ($('#projectId').val() == 'a1l6F000005hPm5QAE'  ) {
+            	 $('#tentativeCharges tbody').append("<tr> " +
+            	 			"<th> Electricity Charges </th> <td class='txtRight' style='text-align:right;'> 0 </td>  </tr>" +
+            	 			"<tr> <th> Club Development Charges </th> <td class='txtRight' style='text-align:right;'> 0 </td>  </tr>");
+            	 
+            	 $('#printTentativeCharges tbody').append("<tr> " +
+         	 			"<th> Electricity Charges </th> <td class='txtRight' style='text-align:right;'> 0 </td>  </tr>" +
+         	 			"<tr> <th> Club Development Charges </th> <td class='txtRight' style='text-align:right;'> 0 </td>  </tr>");
              }
              
              
@@ -2442,8 +2476,8 @@ function newOtherCharges2 () {
                                                             +'<label style="display: block;">'+yres+'</label>'
                                                      +'</div>'; 
                     
-                    //Forest Grove at Godrej Park Greens / Godrej Hillside 2 / Godrej Nurture, Bengaluru
-                    if ($('#projectid').val() != "a1l2s00000003lPAAQ"  &&  $('#projectid').val() != "a1l2s00000000X5AAI"  && $('#projectid').val() != "a1l6F000009D6IMQA0" && $('#projectid').val() != "a1l2s00000000pEAAQ") {
+                    //Forest Grove at Godrej Park Greens / Godrej Hillside 2 / Godrej Nurture, Bengaluru / Godrej Seven, Kolkata / Godrej Park Greens, Pune
+                    if ($('#projectid').val() != "a1l2s00000003lPAAQ"  &&  $('#projectid').val() != "a1l2s00000000X5AAI"  && $('#projectid').val() != "a1l6F000009D6IMQA0" && $('#projectid').val() != "a1l2s00000000pEAAQ" && $('#projectid').val() != "a1l6F000003TXloQAG" && $('#projectid').val() != "a1l6F000005hPm5QAE" ) {
                     	$('#totalDiscountCol').append(printDiscountHtml);
                     	$('#totalDicountView').show();
                     } else {
@@ -2610,9 +2644,13 @@ function printPdfData(generateFrom) {
        
        
        
+       var enq18sfid = "";
        
+       if ($('#enquirysfid').val() != undefined) {
+    	   enq18sfid =  "-"+$('#enquirysfid').val();
+       }
        
-       var enqSfid = generateFrom+"-"+$('#enquirysfid').val();
+       var enqSfid = generateFrom+enq18sfid;
        
        $('#printBtnFloat').empty();
        $('#printBtnFloat').html('<i style="color:#fff !important; " class="fa fa-spinner fa-spin printficon"></i>');
@@ -3268,3 +3306,33 @@ function paymentTrxValidatore () {
 		$(".csPtDataRow .csPtTransactionDate").attr("max", sysNowDate);
 	}
 }
+
+
+/*This function "viewCostsheet" moved from inventory.js to costsheet .js, because of commonly used for Admin Cost sheet and Sales Cost sheet*/
+function viewCostsheet (e, sfid, unitNo, floor, towerCode) {
+	var urlProject = pageContext+"getPropertyTypeStatus?propertyid="+sfid
+	var propertyTypeChargeStatus="";
+	$.getJSON(urlProject, function (data) {
+		propertyTypeChargeStatus=data;		
+	}).done(function() {
+		if(propertyTypeChargeStatus=="Y")
+		{
+			swal({
+				title: "Property Type Charges",
+			    text: "Validation Message - Please contact ECRM Administrator to move the property type charges from Property Type to Property.",
+			    timer: 2000,
+			    type: "error",
+			});
+		}
+	else
+		{	
+			$('#unitSfid').val('');
+			$('#printableArea').hide();
+			$('#printBtnFloat').hide();
+			$('#unitSfid').val(sfid);
+			$('#towerSfid').val(towerCode);
+			$('#costsheetTab a').trigger('click');	
+		}
+	});
+}
+/* END This function "viewCostsheet" moved from inventory.js to costsheet .js, because of commonly used for Admin Cost sheet and Sales Cost sheet*/

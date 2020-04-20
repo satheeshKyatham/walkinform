@@ -43,7 +43,7 @@ public class InventoryAdminDaoImpl extends AbstractDao<Integer, InventoryAdmin> 
 		}
 		
 		List<InventoryAdmin> list =session.createQuery(" FROM  InventoryAdmin  where propstrength__project_name__c='"+project_code+"' and  tower_code__c='"+towerMst+"' "
-				+unitAvailble + typology +" and propstrength__active__c='t' ORDER BY floor_number__c, propstrength__house_unit_no__c").list();
+				+unitAvailble + typology +" and propstrength__active__c='t' ORDER BY floor_number__c, propstrength__house_unit_no__c, wing_block__c").list();
 		
 		if(list.size()>0)
 			return list;
