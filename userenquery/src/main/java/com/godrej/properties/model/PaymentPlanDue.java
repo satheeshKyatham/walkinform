@@ -33,9 +33,7 @@ public class PaymentPlanDue extends PO{
 	@Column(name = "updatedby")private String updatedby;
 	@Column(name = "towerid")private String towerid;
 	@Column(name = "tower_name")private String tower_name;
-	
-	@Transient
-	private String insertStatus;
+	@Transient private String insertStatus;
 	public int getId() {
 		return id;
 	}

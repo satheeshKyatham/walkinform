@@ -114,29 +114,10 @@ function towerList (e, source) {
 			$('#towerMst').append("<option name='"+value.sfid+"' value='"+value.tower_code__c+"'>"+value.tower_name__c+"</option>");
 		});					
 	}).done(function() {
-		
+		$('#paymentDueSubmit').show();
 	});
 }
 
-/*Typology*/
-function inventoryUnitTypeMst () {
-	$('#typoMst').empty();
-	var towerCode = $('#towerMst').val();
-	var projectNameVal = $('#projectDataList').val();
-	
-	var urlProject = pageContext+"getunittype?project_code="+projectNameVal+"&tower_code="+towerCode+"&floor_code="
-	
-	$('#typoMst').append("<option value='0'>Select</option> ");
-	
-	$.getJSON(urlProject, function (data) {
-		$.each(data, function (index, value) {
-			$('#typoMst').append("<option value='"+value.propstrength__unit_type__c+"'>"+value.propstrength__unit_type__c+"</option>");
-		});					
-	}).done(function() {
-		$('#paymentDueSubmit').show();
-	});	
-}
-/*END Typology*/
 
 
 function addPaymentDue () {
@@ -289,8 +270,16 @@ function getPymentPlanDueData()
 				$("#paymentDueListId tbody tr:first-child").after(html);
 			
 		}
+		
 	}).done(function(obj){
 		var data =JSON.parse(obj);
+		$('#paymentDueListId').dataTable({
+			destroy: true,
+			language: {
+				searchPlaceholder: "Search"
+			},
+			order: [[ 0, "desc" ]]
+		});
 		if(data!=null){
 			if (data.status == "STATUS_NOTOK") {
 				alert (data.error_msg);

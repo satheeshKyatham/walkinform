@@ -15,13 +15,9 @@
 	<title>Godrej</title>
 	
 	<link rel="stylesheet" href="<c:url value='/resources/css/bootstrap.min.css' />">
+	<link rel="stylesheet" href="<c:url value='/resources/css/costsheet.css' />">
 	<link href="<c:url value='/resources/css/animate.min.css' />" rel="stylesheet">	
-	<link rel="stylesheet" href="<c:url value='/resources/css/sweetalert.min.css'/>"> 
-	<link rel="icon" href="<c:url value='/resources/images/favicon.ico' />" type="image/x-icon">     
-	<link rel="stylesheet" href="<c:url value='/resources/css/inner.css?v=3.0' />">
-	<link rel="stylesheet" href="<c:url value='/resources/css/style.css?v=3.0' />">
-	<link rel="stylesheet" href="<c:url value='/resources/css/font-awesome.css' />">
-	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">  
+	<link rel="stylesheet" href="<c:url value='/resources/css/sweetalert.min.css'/>">  
 </head>
 <body>
 <%-- <nav class="navbar topMainBar">
@@ -79,7 +75,7 @@
 	<h4 class="mrgT0">
 			Payment Due Details
 		</h4>
-	<table class="table table-bordered  bgWhite mrgB8" id="paymentDueListId">
+	<table class="table table-bordered" id="paymentDueListId">
 			<tbody>
 				<tr class="subHead">
 					<th style="width:150px;">
@@ -100,14 +96,7 @@
 					<th style="width: 165px;"></th>
 				</tr>
 				
-				<tr class="csPtDataRowOP">
-					<td></td>
-					<td></td> 
-					<td></td>
-					<td> </td>
-					<td> </td>
-					<td> </td>
-				</tr>
+				
 				
 			</tbody>
 		</table>
