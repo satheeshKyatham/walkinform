@@ -28,6 +28,6 @@ public interface InventoryService {
 
 	public void releaseInventory(String projectSfid, String unitSfid, String userId, String unitName);	 
 	
- 
+	void releaseEOIHoldInventory (String projectSfid, String unitSfid, String userId, String unitName);
 	
 }

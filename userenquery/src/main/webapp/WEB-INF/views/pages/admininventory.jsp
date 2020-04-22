@@ -80,9 +80,9 @@ if(ses!=null){
 				<li>
 					<a href="#inventorySalesHoldReport" data-toggle="tab">Closing Manager Hold Inventory Report</a>
 				</li>
-				<!-- <li>
+				<li>
 					<a href="#updateEOITab" data-toggle="tab">EOI</a>
-				</li> -->
+				</li>
 			</ul>
 			<div class=""></div>
 		</div>
@@ -117,9 +117,9 @@ if(ses!=null){
 				<%@ include file="/WEB-INF/views/pages/inventorySalesHoldReport.jsp" %>
 			</div>
 			
-			<%-- <div class="tab-pane" id="updateEOITab" >
+			<div class="tab-pane" id="updateEOITab" >
 				<%@ include file="/WEB-INF/views/pages/updateEOI.jsp" %>
-			</div> --%>
+			</div>
 			
 	 	</div>
 	</div>

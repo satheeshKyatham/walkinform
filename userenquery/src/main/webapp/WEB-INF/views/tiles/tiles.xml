@@ -249,4 +249,18 @@
     <definition name="ccavRequestHandler"  template="/WEB-INF/views/pages/ccavenue/ccavRequestHandler.jsp"> 
       	 <put-attribute name="title" value="CCAvenue Create Request" />  
     </definition>
+    
+      <definition name="paymentPlanDue" extends="base-definition"> 
+       <put-attribute name="title" value="Payment Plan with Due" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/paymentPlanDue.jsp" /> 
+     </definition>
+     <definition name="towerPPExclusion" extends="base-definition"> 
+       <put-attribute name="title" value="Tower PP Exclusion" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/towerPPExclusion.jsp" /> 
+     </definition>
+      <definition name="paymentPlanRanking" extends="base-definition"> 
+       <put-attribute name="title" value="Payment Plan Ranking" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/paymentPlanRanking.jsp" /> 
+     </definition>
+     
 </tiles-definitions>

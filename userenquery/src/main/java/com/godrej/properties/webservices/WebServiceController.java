@@ -35,6 +35,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -75,6 +76,7 @@ import com.godrej.properties.model.EOIPreferenceDtl;
 import com.godrej.properties.model.Enquiry;
 import com.godrej.properties.model.ExtraCharges;
 import com.godrej.properties.model.ExtraChargesHis;
+import com.godrej.properties.model.GeneratePayment;
 import com.godrej.properties.model.HoldInventoryAdmin;
 import com.godrej.properties.model.HoldInventoryAdminLog;
 import com.godrej.properties.model.InventoryAdmin;
@@ -83,6 +85,7 @@ import com.godrej.properties.model.OrderDataMapping;
 import com.godrej.properties.model.OtherCharges;
 import com.godrej.properties.model.PaymentDtl;
 import com.godrej.properties.model.PaymentPlan;
+import com.godrej.properties.model.PaymentPlanDue;
 import com.godrej.properties.model.PaymentPlanJson;
 import com.godrej.properties.model.PaymentPlanLineItem;
 import com.godrej.properties.model.PaymentPlanWithOtherCharge;
@@ -146,6 +149,7 @@ import com.godrej.properties.service.OrderDataMapppingService;
 import com.godrej.properties.service.OtherChargesService;
 import com.godrej.properties.service.OtpService;
 import com.godrej.properties.service.PaymentDtlService;
+import com.godrej.properties.service.PaymentPlanDueService;
 import com.godrej.properties.service.PaymentPlanLineItemService;
 import com.godrej.properties.service.PaymentPlanListService;
 import com.godrej.properties.service.PaymentPlanService;
@@ -440,6 +444,8 @@ public class WebServiceController<MultipartFormDataInput> {
 	@Autowired
 	private SysConfigService sysConfigService;
 	
+	@Autowired
+	private PaymentPlanDueService paymentPlanDueService;
 	
 	@RequestMapping(value = "/activeproject", method = RequestMethod.GET, produces = "application/json")
 	public String project() {
@@ -4267,5 +4273,6 @@ public class WebServiceController<MultipartFormDataInput> {
 				log.info("decStr:-" + decStr);
 				List<EOIData> eList = userEOIService.findMobileNoExistEOIForm(decStr, projectid,enqsfid);
 				return gson.toJson(eList);
-		}
+		}	
+		
 }
