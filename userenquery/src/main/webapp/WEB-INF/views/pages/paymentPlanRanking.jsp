@@ -8,12 +8,6 @@
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<%
-	 response.addHeader("Expires","0");
-	 response.addHeader("Pragma","no-cache");
-	 response.setHeader("Cache-Control","no-cache,no-store, must-revalidate, pre-check=0, post-check=0, max-age=0, s-maxage=0");
-	 response.addHeader("X-Frame-Options", "DENY");
-	 %>
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -23,7 +17,10 @@
 	<link rel="stylesheet" href="<c:url value='/resources/css/bootstrap.min.css' />">
 	<link rel="stylesheet" href="<c:url value='/resources/css/costsheet.css' />">
 	<link href="<c:url value='/resources/css/animate.min.css' />" rel="stylesheet">	
-	<link rel="stylesheet" href="<c:url value='/resources/css/sweetalert.min.css'/>">   
+	<link rel="stylesheet" href="<c:url value='/resources/css/sweetalert.min.css'/>">  
+	
+	<link rel="stylesheet" href="<c:url value='/resources/css/font-awesome.css' />">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css"> 
 </head>
 <body>
 
@@ -31,7 +28,7 @@
 
 	<div class="container">
 		<div class="row">
-			<h2>Add BSP against Payment Plan</h2>
+			<h2>Payment Plan Ranking</h2>
 		    
 		    <div class="row">
 				<div class="form-group col-md-3">
@@ -43,47 +40,51 @@
 					<label>Project</label>
 					<select class="form-control" id="projectDataList" onchange="paymentPlanDropdown()"> </select>
 				</div>
-		    	<div class="form-group col-md-3">
-					<label>Tower</label>
-					<select id="towerMst" onchange="inventoryUnitTypeMst()" class="form-control"> </select>
-				 </div>
-				 
-				 <div class="form-group col-md-3">
-					<label>Typology</label>
-					<select id="typoMst" class="form-control">
-						<option value='0'>Select</option> 
-					</select>
-				 </div>
-		    	<div class="form-group col-md-3">
+		    	
+		     <div class="form-group col-md-3">
 					<label>Payment Plan</label>
 					<select class="form-control" id="ppDropdown"> </select>
 				</div>
-		    	
+						    	
 		    	<div class="clearfix"></div>
 		    	
-		    	<div class="form-group col-md-2">
-					<label>Addl BSP psft</label>
-					<input id="bsp_amount" type="number" class="form-control" />
-				</div>
-				
-				<div class="form-group col-md-2">
-					<label>Addl BSP %</label>
-					<input id="bsp_amount_per" type="number" class="form-control" />
-				</div>
-				<div class="clearfix"></div>
-		    	
-		    	<div class="form-group col-md-3">
+		    	<!-- <div class="form-group col-md-3">
 		    		<label style="display: block;"> &nbsp; </label>
-		    		<button id="bspAgainestBtn" style="display:none;" type="submit" class="btn btn-default btn-primary" onclick="addBSPCharge()">Submit</button>
+		    		<button id="towerAgainstBtn" style="display:none;" type="submit" class="btn btn-default btn-primary" onclick="addPaymentPlanRank()">Submit</button>
 		    		<div class="clearfix"></div>
-		    	</div>
+		    	</div> -->
 		    	
 		    	 <div class="clearfix"></div>
 		    </div>
 		    
 		    <div class="clearfix"></div>
 		    
-		   
+		   <h4 class="mrgT0">
+			Payment Due Details
+		</h4>
+	<table class="table table-bordered" id="paymentRankListId">
+			<tbody>
+				<tr class="subHead">
+					<th style="width:200px;">
+						Payment Plan
+					</th>
+					<th style="width: 140px;">
+						Ranking
+					</th>
+					<th style="width: 165px;">
+						Action
+					</th>
+				</tr>
+				
+				
+				
+			</tbody>
+		</table>
+		<div class="form-group col-md-3">
+	<label style="display: block;"> &nbsp; </label>
+	<button type="submit" class="btn btn-default btn-primary" onclick="bulkSubmitPaymentRanking()">Bulk Submit</button>
+	<div class="clearfix"></div>
+</div> 
 	        </div>
 		</div>
 	
@@ -91,9 +92,9 @@
 	<script src="<c:url value='/resources/js/jquery-1.12.4.min.js' />"></script>
 	<script src="<c:url value='/resources/js/bootstrap.min.js'/>"></script>
 	<script src="<c:url value='/resources/js/sweetalert.min.js'/>"></script>
-	
-	
-	<script src="<c:url value='/resources/js/separate/paymentPlanBSP.js?v=18.15'/>"></script>
+	<script src="<c:url value='/resources/js/separate/paymentPlanRanking.js?v=18.15'/>"></script>
+	<script type="text/javascript" charset="utf8" src="<c:url value='/resources/js/jquery.dataTables.js'/>"></script>
+	<script src="<c:url value='/resources/js/dataTables.buttons.min.js'/>"></script>
 	
 	
 	

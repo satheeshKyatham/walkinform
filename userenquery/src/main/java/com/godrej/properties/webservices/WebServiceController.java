@@ -4273,51 +4273,6 @@ public class WebServiceController<MultipartFormDataInput> {
 				log.info("decStr:-" + decStr);
 				List<EOIData> eList = userEOIService.findMobileNoExistEOIForm(decStr, projectid,enqsfid);
 				return gson.toJson(eList);
-		}
-		
-		
-		
-		/* Start insert against Payment Plan with Due*/
-		@RequestMapping(value = "/savePaymentPlanWithDue", method = RequestMethod.POST,produces = "application/json")
-		public @ResponseBody PaymentPlanDue savePaymentPlanWithDues(@RequestBody PaymentPlanDue data) 
-		{	
-			PaymentPlanDue duePaymentPlan=new PaymentPlanDue();
-			if(data != null && data.getTowerid() != null && data.getProject_id() != null){
-			duePaymentPlan = paymentPlanDueService.addPaymentPlanDue(data);  /*add payment pLan with due*/
-			duePaymentPlan.setInsertStatus("Status_OK");
-			return duePaymentPlan;
-			}else{
-				duePaymentPlan.setInsertStatus("Status_NOTOK");
-				return duePaymentPlan;
-			}
-			
-		}
-		/* END insert against Payment Plan with Due */
-		
-		/* Start get Payment Plan with Due*/
-		@GetMapping(value = "/getPymentPlanDueList")
-		public @ResponseBody String getPymentPlanDueList() 
-		{
-			GsonBuilder gsonBuilder = new GsonBuilder();
-			Gson gson = gsonBuilder.create();
-			return  gson.toJson(paymentPlanDueService.getPaymentDueList()); /*return json data*/
-		}
-		/* END  */
-		
-		
-		@RequestMapping(value = "/updatePaymentPlanWithDue", method = RequestMethod.POST)
-		public @ResponseBody PaymentPlanDue updatePaymentPlanWithDue(@RequestBody PaymentPlanDue data)  {	
-			
-			
-			PaymentPlanDue duePaymentPlan=new PaymentPlanDue();
-			if(data != null && data.getId() != 0 && data.getTowerid() != null){
-			duePaymentPlan = paymentPlanDueService.updatePaymentDue(data);  /*add payment pLan with due*/
-			duePaymentPlan.setInsertStatus("Status_OK");
-			return duePaymentPlan;
-			}else{
-				duePaymentPlan.setInsertStatus("Status_NOTOK");
-				return duePaymentPlan;
-			}
-		}
+		}	
 		
 }

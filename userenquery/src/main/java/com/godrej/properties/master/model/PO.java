@@ -14,8 +14,8 @@ public class PO implements Persistable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	@Column(name="created", updatable=false)private Timestamp created;
-	@Column(name="updated")private Timestamp updated;
+	@Column(name="createddate", updatable=false)private Timestamp created;
+	@Column(name="updateddate")private Timestamp updated;
 	@Column(name="isactive")private String isactive;
 	public Timestamp getCreated() {
 		return created;
