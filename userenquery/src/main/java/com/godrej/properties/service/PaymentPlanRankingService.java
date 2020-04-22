@@ -9,6 +9,6 @@ public interface PaymentPlanRankingService {
 
 	public PaymentPlanRanking addPaymentPlanRanking(PaymentPlanRanking data);
 
-	public void insertBulkPaymentRanking(List<PaymentPlanRanking> charges1);
+	public String insertBulkPaymentRanking(List<PaymentPlanRanking> charges1);
 
 }

@@ -35,8 +35,9 @@ public class PaymentPlanRankingServiceImpl implements PaymentPlanRankingService{
 		
 	}
 	@Override
-	public void insertBulkPaymentRanking(List<PaymentPlanRanking> ranking) {
-		paymentPlanRankingDao.insertBulkPaymentRankingQuery(ranking);
+	public String insertBulkPaymentRanking(List<PaymentPlanRanking> ranking) {
+		String msg=paymentPlanRankingDao.insertBulkPaymentRankingQuery(ranking);
+		return msg;
 		
 	}
 

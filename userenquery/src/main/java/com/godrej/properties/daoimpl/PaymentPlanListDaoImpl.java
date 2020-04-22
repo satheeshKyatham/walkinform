@@ -29,4 +29,16 @@ public class PaymentPlanListDaoImpl extends AbstractDao<Integer, PaymentPlanList
 		return null;
 	}
 
+
+	@Override
+	public List<PaymentPlanList> getpaymentPlanWithCIPActiveQuery(String projectId) {
+		Session session = this.sessionFactory.getCurrentSession();	
+		@SuppressWarnings("unchecked")
+		List<PaymentPlanList> list =session.createQuery(" from PaymentPlanList where PropStrength__Active__c='t' and propstrength__project__c='"+projectId+"' and d4u_active__c='t' or cip_payment_plan__c='t' order by name").list();
+		
+		if(list.size()>0)
+			return list;
+		return null;
+	}
+
 }

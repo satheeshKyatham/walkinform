@@ -21,6 +21,7 @@ import com.godrej.properties.model.PaymentPlanDue;
 import com.godrej.properties.model.PaymentPlanRanking;
 import com.godrej.properties.model.TowerPPExclusion;
 import com.godrej.properties.service.PaymentPlanDueService;
+import com.godrej.properties.service.PaymentPlanListService;
 import com.godrej.properties.service.PaymentPlanRankingService;
 import com.godrej.properties.service.TowerPPExclusionService;
 import com.google.gson.Gson;
@@ -41,6 +42,9 @@ public class PaymentPlanController {
 	@Autowired
 	private PaymentPlanRankingService paymentPlanRankingService;
 	
+	@Autowired
+	private PaymentPlanListService paymentPlanListService;
+	
 	@RequestMapping(value = { "/paymentPlanDue"}, method = RequestMethod.GET)
 	public String paymentPlanDue(ModelMap model,HttpServletRequest request) {
 		 return "paymentPlanDue";
@@ -51,7 +55,7 @@ public class PaymentPlanController {
 	}
 	
 	@RequestMapping(value = { "/paymentPlanRanking"}, method = RequestMethod.GET)
-	public String paymentPlanRanking(ModelMap model,HttpServletRequest request) {
+	public String paymentPlanRank(ModelMap model,HttpServletRequest request) {
 		 return "paymentPlanRanking";
 	}
 	@RequestMapping(value = "/savePaymentPlanWithDue", method = RequestMethod.POST,produces = "application/json")
@@ -164,7 +168,7 @@ public class PaymentPlanController {
 	
 	//Bulk insert for Payment Plan Ranking
 			@RequestMapping(value = "/bulkInsertPaymentRanking", method = RequestMethod.POST, produces = "application/json")
-			public String bulkInsertSchemeMapping(@RequestParam("rankingJson") String rankingJson) // add parameter 
+			public @ResponseBody String bulkInsertSchemeMapping(@RequestParam("rankingJson") String rankingJson) // add parameter 
 			{		
 				GsonBuilder gsonBuilder = new GsonBuilder();
 				Gson gson = gsonBuilder.create();
@@ -187,14 +191,29 @@ public class PaymentPlanController {
 						charges1.add(ecData1);
 					}
 					
-					
+					String msg="";
 					//paymentDtlService.insertPaymentDtl(charges1);
+					try{
+						 msg=paymentPlanRankingService.insertBulkPaymentRanking(charges1);	
+					}catch(Exception e){
+						msg="STATUS_NOTOK";
+						return gson.toJson(msg);	
+					}
 					
-					paymentPlanRankingService.insertBulkPaymentRanking(charges1);
 					
 				}
+				
 			  	return gson.toJson("");
 			}
 			//END Bulk insert for Payment Plan Ranking
+			
+			/*start get payment plan list with D4U and CIP active*/
+			@RequestMapping(value = "/getpaymentPlanWithCIP", method = RequestMethod.GET, produces = "application/json")
+			public @ResponseBody String getpaymentPlanWithCIP(@RequestParam("projectcode") String projectcode) {
+				Gson gson = new GsonBuilder().disableHtmlEscaping().serializeNulls().create();
+				return gson.toJson(paymentPlanListService.getpaymentPlanWithCIPActive(projectcode));
+			}
+			
+			/*End get payment plan list with D4U and CIP active*/
 
 }

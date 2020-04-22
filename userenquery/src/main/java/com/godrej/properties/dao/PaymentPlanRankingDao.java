@@ -8,6 +8,6 @@ public interface PaymentPlanRankingDao {
 
 	public PaymentPlanRanking insertPaymentRanking(PaymentPlanRanking rankingData);
 
-	public void insertBulkPaymentRankingQuery(List<PaymentPlanRanking> ranking);
+	public String insertBulkPaymentRankingQuery(List<PaymentPlanRanking> ranking);
 
 }

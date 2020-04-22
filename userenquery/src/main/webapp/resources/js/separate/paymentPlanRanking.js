@@ -2,6 +2,7 @@
 var pageContext = $("#pageContext").val()+"/";	
 
 regionList();
+var totalPP='';
 $(document).ready(function(){
 	
 });
@@ -35,10 +36,12 @@ function projectDataList (){
 function paymentPlanDropdown (){
 	
 	$('#ppDropdown').empty();
+	$('#paymentRankListId tbody tr.paymentRankDataPlotRow').remove();
+	/*$('#ppDropdown tbody tr.towerPPDataPlotRow').remove();*/
 	var html = '';
 	var rankNumber='';
 	var htmlActionBtn = '';
-	var urlpayemntPlan = pageContext+"getpaymentPlanListData?projectcode="+$("#projectDataList").val();
+	var urlpayemntPlan = pageContext+"getpaymentPlanWithCIP?projectcode="+$("#projectDataList").val();
 	
 	$.getJSON(urlpayemntPlan, function (data) {
 		var no="";
@@ -47,18 +50,18 @@ function paymentPlanDropdown (){
 			$('#ppDropdown').append('<option value='+value.sfid+'>'+value.name+'</option>');
 		});	
 		/*console.log("arr",paymentRank)*/
+		totalPP=data.length
 		debugger
-		var len=data.length
 			console.log("ui")
 			for(i = 0; i< data.length; i++){    
 				debugger
 				console.log("get",data)
 				var planName=data[i].name==undefined?'':data[i].name;
 				var sfid=data[i].sfid==undefined?'':data[i].sfid;
-				for(j=0;j<len;j++){
+				for(j=0;j<totalPP;j++){
 					var d=j+1;
 					/*rankNumber += '<option name='+d+' value='+d+'>'+d+'</option>';*/ 
-					rankNumber+='<option value='+d+'  class="ddid">'+d+'</option>';
+					rankNumber+='<option value='+d+'  class="rankClass">'+d+'</option>';
 				}
 				html += 	'<tr class="paymentRankDataPlotRow data-rowid = "'+data[i].sfid+'">'
 				
@@ -69,7 +72,7 @@ function paymentPlanDropdown (){
 								+ '<span class="existPaymentPlan">'+planName+'</span>' 
 								+ '</td>'
 								+ '<td style="text-align:center;">'
-								+ '<select class="form-control" id="rank"> '
+								+ '<select class="form-control rankNo'+i+'" id="rank"> '
 								+ rankNumber	 
 								+ '</select></td>'
 								+ '<td class="crudRPBtn"> '
@@ -89,33 +92,68 @@ function paymentPlanDropdown (){
 }
 
 function bulkSubmitPaymentRanking () {
-	var arrayData = [];
-    $("#paymentRankListId .paymentRankDataPlotRow").each(function () {
-    		  var rankData = {};
-    			
-              /*rankData.payment_plan_sfid = $('.existPaymentPlan').val();*/
-              rankData.payment_plan_sfid= $(this).find('.oldPaymentPlan').val();
-              rankData.payment_plan_name = $('#oldPaymentPlanId2').val();
-              rankData.sequence = $('#rank').val();
-              rankData.isactive = 'A';
-              rankData.createdby = '999';
-              rankData.project_name = $('#projectDataList option:selected').text();
-              rankData.project_sfid = $('#projectDataList').val();
-              arrayData.push(rankData);    
-    });
-    
-    $.post(pageContext+"bulkInsertPaymentRanking",{"rankingJson" : JSON.stringify(arrayData)},function(data){                         
-    }).done(function(){
-    	swal({
-			title: "Successfully Submitted",
-		    text: "",
-		    //timer: 2000,
-		    type: "success",
-		});
-    });
+	var checkDupli=validateRank();
+	if(checkDupli){
+		alert("Payment plan has duplicate rank");
+	}else{
+		var arrayData = [];
+	    $("#paymentRankListId .paymentRankDataPlotRow").each(function () {
+	    		  var rankData = {};
+	    			
+	              /*rankData.payment_plan_sfid = $('.existPaymentPlan').val();*/
+	              rankData.payment_plan_sfid= $(this).find('.oldPaymentPlan').val();
+	              rankData.payment_plan_name = $('#oldPaymentPlanId2').val();
+	              rankData.sequence = $(this).find('#rank').val();
+	              rankData.isactive = 'A';
+	              rankData.createdby = '999';
+	              rankData.project_name = $('#projectDataList option:selected').text();
+	              rankData.project_sfid = $('#projectDataList').val();
+	              arrayData.push(rankData);    
+	    });
+	    
+	    $.post(pageContext+"bulkInsertPaymentRanking",{"rankingJson" : JSON.stringify(arrayData)},function(data){                         
+	    }).done(function(data){
+	    	debugger
+	    	console.log("data",data)
+	    	if(data!="" && data=="STATUS_NOTOK"){
+	    		swal({
+					title: "Already Submitted",
+				    text: "",
+				    //timer: 2000,
+				    type: "error",
+				});
+	    	}else{
+	    		swal({
+					title: "Successfully Submitted",
+				    text: "",
+				    //timer: 2000,
+				    type: "success",
+				});
+	    	}
+	    	
+	    });	
+	}
+	
 }
 
-
+	function validateRank(e){
+		debugger
+	     var arr = new Array();
+	     for(i=0;i<totalPP;i++){
+	    	 arr.push($('.rankNo'+i).val());
+	     }
+	  	console.log("array",arr);
+	      // create a Set with array elements
+	      const s = new Set(arr);
+	      // compare the size of array and Set
+	      if(arr.length !== s.size){
+	         return true;
+	      }
+	      
+	      return false
+	   
+	
+}
 function addPaymentPlanRank () {
 	debugger
 	var tower=$('#towerMst').find('option:selected').attr('name');

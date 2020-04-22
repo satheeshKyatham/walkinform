@@ -36,9 +36,16 @@ public class PaymentPlanRankingDaoImpl extends AbstractDao<Integer, PaymentPlanR
 
 
 	@Override
-	public void insertBulkPaymentRankingQuery(List<PaymentPlanRanking> ranking) {
+	public String insertBulkPaymentRankingQuery(List<PaymentPlanRanking> ranking) {
+		String msg="Not Submitted";
+		try{
 		batchPersist(ranking);
 		
+		}catch (Exception e) {
+			 msg="already submmitted";
+			 return msg;
+		}
+		return msg;
 	}
 
 

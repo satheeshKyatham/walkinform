@@ -22,5 +22,10 @@ public class PaymentPlanListServiceImpl implements PaymentPlanListService{
 		// TODO Auto-generated method stub
 		return paymentPlanListDao.getPaymentPlanList(projectCode);
 	}
+
+	@Override
+	public List<PaymentPlanList> getpaymentPlanWithCIPActive(String project) {
+		return paymentPlanListDao.getpaymentPlanWithCIPActiveQuery(project);
+	}
 	
 }
