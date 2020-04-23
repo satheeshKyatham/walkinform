@@ -38,13 +38,13 @@
 				
 				<div class="form-group col-md-3">
 					<label>Project</label>
-					<select class="form-control" id="projectDataList" onchange="paymentPlanDropdown()"> </select>
+					<select class="form-control" id="projectDataList" onchange="getPaymentPlanData()"> </select>
 				</div>
 		    	
-		     <div class="form-group col-md-3">
+		   <!--   <div class="form-group col-md-3">
 					<label>Payment Plan</label>
 					<select class="form-control" id="ppDropdown"> </select>
-				</div>
+				</div> -->
 						    	
 		    	<div class="clearfix"></div>
 		    	
@@ -58,22 +58,22 @@
 		    </div>
 		    
 		    <div class="clearfix"></div>
-		    
+		    <div class="commonLoad" id="mainPageLoad" style="display:none;"></div>
 		   <h4 class="mrgT0">
 			Payment Due Details
 		</h4>
 	<table class="table table-bordered" id="paymentRankListId">
 			<tbody>
 				<tr class="subHead">
-					<th style="width:200px;">
+					<th style="width:150px;">
 						Payment Plan
 					</th>
 					<th style="width: 140px;">
 						Ranking
 					</th>
-					<th style="width: 165px;">
+					<!-- <th style="width: 165px;">
 						Action
-					</th>
+					</th> -->
 				</tr>
 				
 				
@@ -83,6 +83,8 @@
 		<div class="form-group col-md-3">
 	<label style="display: block;"> &nbsp; </label>
 	<button type="submit" class="btn btn-default btn-primary" onclick="bulkSubmitPaymentRanking()">Bulk Submit</button>
+	<button type="submit" class="btn btn-default btn-primary editRanking" style="display:none" id="editRankingId" onclick="editPaymentRanking()">Edit</button>
+	<button class="btn btn-danger cancelRanking" style="display:none" onclick="cancelPaymentRanking(this)">Cancel</button>
 	<div class="clearfix"></div>
 </div> 
 	        </div>

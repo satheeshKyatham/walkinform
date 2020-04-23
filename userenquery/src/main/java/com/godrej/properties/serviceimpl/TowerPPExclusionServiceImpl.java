@@ -23,7 +23,7 @@ public class TowerPPExclusionServiceImpl implements TowerPPExclusionService{
 	public TowerPPExclusion addTowerPPExclusion(TowerPPExclusion data) {
 		TowerPPExclusion towerPPData=new TowerPPExclusion();
 		towerPPData.setIsactive("A");
-		towerPPData.setProject_sfid(data.getPayment_plan_sfid());;
+		towerPPData.setProject_sfid(data.getProject_sfid());;
 		towerPPData.setProject_name(data.getProject_name());
 		towerPPData.setPayment_plan_sfid(data.getPayment_plan_sfid());
 		towerPPData.setPayment_plan_name(data.getPayment_plan_name());
@@ -45,6 +45,10 @@ public class TowerPPExclusionServiceImpl implements TowerPPExclusionService{
 	public boolean deleteTowerPPExclusionRecord(int id) {
 		
 		return towerPPExclusionDao.deleteTowerPPExclusionRecordQuery(id);
+	}
+	@Override
+	public boolean getTowerPP(TowerPPExclusion data) {
+		return towerPPExclusionDao.getTowerPPQuery(data);
 	}
 
 }

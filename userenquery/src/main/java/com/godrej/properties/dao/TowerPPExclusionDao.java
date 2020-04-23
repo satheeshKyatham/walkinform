@@ -12,4 +12,6 @@ public interface TowerPPExclusionDao {
 
 	public boolean deleteTowerPPExclusionRecordQuery(int id);
 
+	public boolean getTowerPPQuery(TowerPPExclusion data);
+
 }

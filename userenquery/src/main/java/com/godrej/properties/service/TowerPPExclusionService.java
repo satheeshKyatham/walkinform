@@ -13,4 +13,6 @@ public interface TowerPPExclusionService {
 
 	public boolean deleteTowerPPExclusionRecord(int id);
 
+	public boolean getTowerPP(TowerPPExclusion data);
+
 }

@@ -10,4 +10,6 @@ public interface PaymentPlanRankingDao {
 
 	public String insertBulkPaymentRankingQuery(List<PaymentPlanRanking> ranking);
 
+	public List<PaymentPlanRanking> getPaymentPlanRankingQuery(String projectId);
+
 }
