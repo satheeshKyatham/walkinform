@@ -7,5 +7,7 @@ import com.godrej.properties.model.PaymentPlanList;
 public interface PaymentPlanListService {
 	
 	List<PaymentPlanList> getPaymentPlanList(String projectCode);
+
+	List<PaymentPlanList> getpaymentPlanWithCIPActive(String projectcode);
 	
 }

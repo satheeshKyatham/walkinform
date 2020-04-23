@@ -1,5 +1,6 @@
 package com.godrej.properties.daoimpl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -36,20 +37,30 @@ public class PaymentPlanRankingDaoImpl extends AbstractDao<Integer, PaymentPlanR
 
 
 	@Override
-	public void insertBulkPaymentRankingQuery(List<PaymentPlanRanking> ranking) {
+	public String insertBulkPaymentRankingQuery(List<PaymentPlanRanking> ranking) {
+		String msg="Not Submitted";
+		try{
 		batchPersist(ranking);
 		
+		}catch (Exception e) {
+			 msg="already submmitted";
+			 return msg;
+		}
+		return msg;
 	}
 
 
-	/*@Override
-	public List<PaymentPlanRanking> getTowerPPExclusionQuery() {
+	@Override
+	public List<PaymentPlanRanking> getPaymentPlanRankingQuery(String projectId) {
 		Session session = this.sessionFactory.getCurrentSession();
 		List<PaymentPlanRanking> data=new ArrayList<PaymentPlanRanking>();		
-		List<PaymentPlanRanking> list = session.createQuery(" from TowerPPExclusion where isactive='A'").list();
+		List<PaymentPlanRanking> list = session.createQuery(" from PaymentPlanRanking where isactive='A' and project_sfid='"+projectId+"' order By sequence").list();
 		if (list.size() > 0){
 			return list;
 		}
 		return data;
-	}*/
+	}
+
+
+	
 }

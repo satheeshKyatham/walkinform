@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
 
 import com.godrej.properties.dao.AbstractDao;
 import com.godrej.properties.dao.TowerPPExclusionDao;
+import com.godrej.properties.model.EOIData;
 import com.godrej.properties.model.TowerPPExclusion;
 
 @SuppressWarnings("unchecked")
@@ -60,5 +61,17 @@ public class TowerPPExclusionDaoImpl extends AbstractDao<Integer, TowerPPExclusi
 		}
 		return false;
 		
+	}
+
+
+	@Override
+	public boolean getTowerPPQuery(TowerPPExclusion data) {
+		Session session = sessionFactory.getCurrentSession();
+		List<EOIData> list = session.createQuery(" from TowerPPExclusion where payment_plan_sfid ='"+data.getPayment_plan_sfid()+"' and"
+				+ " tower_sfid='"+data.getTower_sfid()+"'").list();
+		if (list.size() > 0){
+			return true;
+		}
+		return false;
 	}
 }

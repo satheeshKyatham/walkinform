@@ -39,14 +39,13 @@ public class PaymentPlanDueDaoImpl extends AbstractDao<Integer, PaymentPlanDue> 
 
 
 	@Override
-	public List<PaymentPlanDue> getPaymentDueListQuery() {
+	public List<PaymentPlanDue> getPaymentDueListQuery(String project_sfid,String tower_sfid,String payment_plan_sfid) {
 		Session session = this.sessionFactory.getCurrentSession();
-		List<PaymentPlanDue> data=new ArrayList<PaymentPlanDue>();		
-		List<PaymentPlanDue> list = session.createQuery(" from PaymentPlanDue where isactive='A'").list();
+		List<PaymentPlanDue> list = session.createQuery(" from PaymentPlanDue where isactive='A' and project_id='"+project_sfid+"' and towerid='"+tower_sfid+"' and pymt_plan_id='"+payment_plan_sfid+"'").list();
 		if (list.size() > 0){
 			return list;
 		}
-		return data;
+		return list;
 	}
 
 

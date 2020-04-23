@@ -19,9 +19,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.godrej.properties.model.PaymentPlanDue;
 import com.godrej.properties.model.PaymentPlanRanking;
+import com.godrej.properties.model.ProjectPPRanking;
 import com.godrej.properties.model.TowerPPExclusion;
 import com.godrej.properties.service.PaymentPlanDueService;
+import com.godrej.properties.service.PaymentPlanListService;
 import com.godrej.properties.service.PaymentPlanRankingService;
+import com.godrej.properties.service.ProjectPPRankingService;
 import com.godrej.properties.service.TowerPPExclusionService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -39,6 +42,12 @@ public class PaymentPlanController {
 	private TowerPPExclusionService towerPPExclusionService;
 
 	@Autowired
+	private ProjectPPRankingService projectPPRankingService;
+	
+	@Autowired
+	private PaymentPlanListService paymentPlanListService;
+
+	@Autowired
 	private PaymentPlanRankingService paymentPlanRankingService;
 	
 	@RequestMapping(value = { "/paymentPlanDue"}, method = RequestMethod.GET)
@@ -51,9 +60,19 @@ public class PaymentPlanController {
 	}
 	
 	@RequestMapping(value = { "/paymentPlanRanking"}, method = RequestMethod.GET)
-	public String paymentPlanRanking(ModelMap model,HttpServletRequest request) {
+	public String paymentPlanRank(ModelMap model,HttpServletRequest request) {
 		 return "paymentPlanRanking";
 	}
+	
+	/*start get payment plan list with D4U and CIP active*/
+	@RequestMapping(value = "/getpaymentPlanWithCIP", method = RequestMethod.GET, produces = "application/json")
+	public @ResponseBody String getpaymentPlanWithCIP(@RequestParam("projectcode") String projectcode) {
+		Gson gson = new GsonBuilder().disableHtmlEscaping().serializeNulls().create();
+		return gson.toJson(paymentPlanListService.getpaymentPlanWithCIPActive(projectcode));
+	}
+	
+	/*End get payment plan list with D4U and CIP active*/
+	
 	@RequestMapping(value = "/savePaymentPlanWithDue", method = RequestMethod.POST,produces = "application/json")
 	public @ResponseBody PaymentPlanDue savePaymentPlanWithDues(@RequestBody PaymentPlanDue data) 
 	{	
@@ -102,10 +121,17 @@ public class PaymentPlanController {
 	{	
 		TowerPPExclusion towerPP=new TowerPPExclusion();
 		if(data != null && data.getTower_sfid() != null && data.getProject_sfid() != null){
-			towerPP = towerPPExclusionService.addTowerPPExclusion(data);  /*add payment pLan with due*/
-			towerPP.setInsertStatus("Status_OK");
-			String response = "{\"status\":\"STATUS_OK\",\"error_msg\":\"Successfully submitted\"}";
-			return response;
+			boolean towerExist=towerPPExclusionService.getTowerPP(data);
+			if(towerExist){
+				String response = "{\"status\":\"STATUS_NOTOK\",\"error_msg\":\"Already Exist\"}";
+				return response;
+			}else{
+				towerPP = towerPPExclusionService.addTowerPPExclusion(data);  /*add payment pLan with due*/
+				towerPP.setInsertStatus("Status_OK");
+				String response = "{\"status\":\"STATUS_OK\",\"error_msg\":\"Successfully submitted\"}";
+				return response;
+			}
+			
 		}else{
 			String response = "{\"status\":\"STATUS_NOTOK\",\"error_msg\":\"Invalid Data Provide\"}";
 			return response;
@@ -147,11 +173,11 @@ public class PaymentPlanController {
 	/* END  */
 	
 	@RequestMapping(value = "/savePaymentPlanRanking", method = RequestMethod.POST,produces = "application/json")
-	public @ResponseBody String savePaymentPlanRanking(@RequestBody PaymentPlanRanking data) 
+	public @ResponseBody String savePaymentPlanRanking(@RequestBody ProjectPPRanking data) 
 	{	
-		PaymentPlanRanking ppRanking=new PaymentPlanRanking();
+		ProjectPPRanking ppRanking=new ProjectPPRanking();
 		if(data != null  && data.getProject_sfid() != null){
-			ppRanking = paymentPlanRankingService.addPaymentPlanRanking(data);  /*add payment pLan with ranking*/
+			ppRanking = projectPPRankingService.addPaymentPlanRanking(data);  /*add payment pLan with ranking*/
 			
 			String response = "{\"status\":\"STATUS_OK\",\"error_msg\":\"Successfully submitted\"}";
 			return response;
@@ -164,7 +190,7 @@ public class PaymentPlanController {
 	
 	//Bulk insert for Payment Plan Ranking
 			@RequestMapping(value = "/bulkInsertPaymentRanking", method = RequestMethod.POST, produces = "application/json")
-			public String bulkInsertSchemeMapping(@RequestParam("rankingJson") String rankingJson) // add parameter 
+			public @ResponseBody String bulkInsertSchemeMapping(@RequestParam("rankingJson") String rankingJson) // add parameter 
 			{		
 				GsonBuilder gsonBuilder = new GsonBuilder();
 				Gson gson = gsonBuilder.create();
@@ -177,24 +203,50 @@ public class PaymentPlanController {
 				object=jsonParser.parse(str);
 				arrayObj=(JsonArray) object;
 				
-				List<PaymentPlanRanking> charges1=new ArrayList<>();
+				/*List<PaymentPlanRanking> charges1=new ArrayList<>();
 				if(arrayObj!=null && arrayObj.size()>0)
 				{
 					for(int i=0;i<arrayObj.size();i++) {
 						PaymentPlanRanking ecData1= new PaymentPlanRanking();
 						ecData1= gson.fromJson(arrayObj.get(i), PaymentPlanRanking.class);
-						
 						charges1.add(ecData1);
 					}
-					
-					
-					//paymentDtlService.insertPaymentDtl(charges1);
-					
-					paymentPlanRankingService.insertBulkPaymentRanking(charges1);
-					
+					String msg="";
+					try{
+						 msg=paymentPlanRankingService.insertBulkPaymentRanking(charges1);	
+					}catch(Exception e){
+						msg="STATUS_NOTOK";
+						return gson.toJson(msg);	
+					}
+				}*/
+				List<ProjectPPRanking> charges1=new ArrayList<>();
+				if(arrayObj!=null && arrayObj.size()>0)
+				{
+					for(int i=0;i<arrayObj.size();i++) {
+						ProjectPPRanking ecData1= new ProjectPPRanking();
+						ecData1= gson.fromJson(arrayObj.get(i), ProjectPPRanking.class);
+						charges1.add(ecData1);
+					}
+					String msg="";
+					try{
+						 msg=projectPPRankingService.insertBulkPaymentRanking(charges1);	
+					}catch(Exception e){
+						msg="STATUS_NOTOK";
+						return gson.toJson(msg);	
+					}
 				}
 			  	return gson.toJson("");
 			}
-			//END Bulk insert for Payment Plan Ranking
+			/*END Bulk insert for Payment Plan Ranking*/
+			
+			/* Start  */
+			@GetMapping(value = "/getProjectPPRanking", produces = "application/json")
+			public @ResponseBody String getProjectPPRankingList(@RequestParam("projectcode") String projectcode) {
+				Gson gson = new GsonBuilder().disableHtmlEscaping().serializeNulls().create();
+				return gson.toJson(paymentPlanRankingService.getPaymentPlanRankingList(projectcode));
+			}
+			/* END  */
+			
+			
 
 }

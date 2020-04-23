@@ -2,6 +2,7 @@
 var pageContext = $("#pageContext").val()+"/";	
 
 regionList();
+var totalPP='';
 $(document).ready(function(){
 	
 });
@@ -32,90 +33,156 @@ function projectDataList (){
 }
 
 
-function paymentPlanDropdown (){
-	
+function paymentPlanDropdown (data){
+	debugger
 	$('#ppDropdown').empty();
+	$('#paymentRankListId tbody tr.paymentRankDataPlotRow').remove();
+	/*$('#ppDropdown tbody tr.towerPPDataPlotRow').remove();*/
 	var html = '';
 	var rankNumber='';
 	var htmlActionBtn = '';
-	var urlpayemntPlan = pageContext+"getpaymentPlanListData?projectcode="+$("#projectDataList").val();
-	
-	$.getJSON(urlpayemntPlan, function (data) {
+	$(".cancelRanking").hide();
 		var no="";
-		var arr=[]
-		$.each(data, function (index, value) {
-			$('#ppDropdown').append('<option value='+value.sfid+'>'+value.name+'</option>');
-		});	
-		/*console.log("arr",paymentRank)*/
+		var arr=[];
+		totalPP=data.length;
+		var showStatus=false;
 		debugger
-		var len=data.length
 			console.log("ui")
 			for(i = 0; i< data.length; i++){    
 				debugger
-				console.log("get",data)
-				var planName=data[i].name==undefined?'':data[i].name;
-				var sfid=data[i].sfid==undefined?'':data[i].sfid;
-				for(j=0;j<len;j++){
-					var d=j+1;
-					/*rankNumber += '<option name='+d+' value='+d+'>'+d+'</option>';*/ 
-					rankNumber+='<option value='+d+'  class="ddid">'+d+'</option>';
+				console.log("get",data[i])
+				var planName='';
+				var sfid='';
+				sfid=data[i].payment_plan_sfid==undefined?'':data[i].payment_plan_sfid;
+				planName=data[i].payment_plan_name==undefined?'':data[i].payment_plan_name;
+				var existrankNumber=data[i].sequence==undefined?'':data[i].sequence;
+				for(j=0;j<totalPP;j++){
+					var d=j+1; 
+					rankNumber+='<option value='+d+'  class="rankClass">'+d+'</option>';
 				}
-				html += 	'<tr class="paymentRankDataPlotRow data-rowid = "'+data[i].sfid+'">'
+				if(planName==""){
+					planName=data[i].name==undefined?'':data[i].name;
+					sfid=data[i].sfid==undefined?'':data[i].sfid;
+					showStatus=true;
+					
+				}else{
+					$(".existNumber").show();
+					$(".showRank").hide();
+				}
 				
+				html += 	'<tr class="paymentRankDataPlotRow data-rowid = "'+data[i].sfid+'">'
 								+ '<td style="text-align:center;">'
-								
 								+ '<input style="display:none;" type="hidden" class="oldPaymentPlan" id="oldPaymentPlanId"  value="'+sfid+'"></input>'
 								+ '<input style="display:none;" type="hidden" class="oldPaymentPlan2" id="oldPaymentPlanId2"  value="'+planName+'"></input>'
 								+ '<span class="existPaymentPlan">'+planName+'</span>' 
 								+ '</td>'
 								+ '<td style="text-align:center;">'
-								+ '<select class="form-control" id="rank"> '
-								+ rankNumber	 
-								+ '</select></td>'
-								+ '<td class="crudRPBtn"> '
+								+ '<select style="display:none;" class="form-control showRank rankNo'+i+'" id="rank"> '
+								+ rankNumber	+ '</select>'
+								+ '<span  class="existNumber">'+existrankNumber+'</span>'
+								+'</td>'
+								/*+ '<td class="crudRPBtn"> '
 								+ htmlActionBtn
-								+ '</td>' 
+								+ '</td>'*/ 
 							"</tr>";
 				rankNumber="";
 			}
 			
 			html = html.replace(/undefined/g, "");
 			
-			$("#paymentRankListId tbody tr:first-child").after(html);	
+			$("#paymentRankListId tbody tr:first-child").after(html);
+			if(showStatus){
+				$(".showRank").show();
+				$(".existNumber").hide();
+				$(".editRanking").hide();
+			}else{
+				$(".editRanking").show();
+			}
+			$("#mainPageLoad").hide();
 		/*});	*/				
-	}).done(function() {
-		/*$('#towerAgainstBtn').show();*/
-	});
+/*	}).done(function() {
+		$('#towerAgainstBtn').show();
+	});*/
 }
 
+function editPaymentRanking(){
+	$(".showRank").show();
+	/*$(".existNumber").hide();*/
+	
+	$(".cancelRanking").show();
+}
+function cancelPaymentRanking(){
+	$(".showRank").hide();
+	$(".existNumber").show();
+	$(".cancelRanking").hide();
+}
 function bulkSubmitPaymentRanking () {
-	var arrayData = [];
-    $("#paymentRankListId .paymentRankDataPlotRow").each(function () {
-    		  var rankData = {};
-    			
-              /*rankData.payment_plan_sfid = $('.existPaymentPlan').val();*/
-              rankData.payment_plan_sfid= $(this).find('.oldPaymentPlan').val();
-              rankData.payment_plan_name = $('#oldPaymentPlanId2').val();
-              rankData.sequence = $('#rank').val();
-              rankData.isactive = 'A';
-              rankData.createdby = '999';
-              rankData.project_name = $('#projectDataList option:selected').text();
-              rankData.project_sfid = $('#projectDataList').val();
-              arrayData.push(rankData);    
-    });
-    
-    $.post(pageContext+"bulkInsertPaymentRanking",{"rankingJson" : JSON.stringify(arrayData)},function(data){                         
-    }).done(function(){
-    	swal({
-			title: "Successfully Submitted",
-		    text: "",
-		    //timer: 2000,
-		    type: "success",
-		});
-    });
+	var checkDupli=validateRank();
+	checkDupli=false;
+	if(checkDupli){
+		alert("Payment plan has duplicate rank");
+	}else{
+		$("#mainPageLoad").show();
+		var arrayData = [];
+	    $("#paymentRankListId .paymentRankDataPlotRow").each(function () {
+	    		  var rankData = {};
+	    			
+	              /*rankData.payment_plan_sfid = $('.existPaymentPlan').val();*/
+	              rankData.payment_plan_sfid= $(this).find('.oldPaymentPlan').val();
+	              rankData.payment_plan_name = $(this).find('.oldPaymentPlan2').val();
+	              rankData.sequence = $(this).find('#rank').val();
+	              rankData.isactive = 'A';
+	              rankData.createdby = '999';
+	              rankData.project_name = $('#projectDataList option:selected').text();
+	              rankData.project_sfid = $('#projectDataList').val();
+	              arrayData.push(rankData);    
+	    });
+	    debugger 
+	    $.post(pageContext+"bulkInsertPaymentRanking",{"rankingJson" : JSON.stringify(arrayData)},function(data){                         
+	    }).done(function(data){
+	    	debugger
+	    	console.log("data",data)
+	    	
+	    	if(data!="" && data=="STATUS_NOTOK"){
+	    		swal({
+					title: "Already Submitted",
+				    text: "",
+				    //timer: 2000,
+				    type: "error",
+				});
+	    	}else{
+	    		swal({
+					title: "Successfully Submitted",
+				    text: "",
+				    //timer: 2000,
+				    type: "success",
+				});
+	    		getPaymentPlanData();
+	    	}
+	    	$("#mainPageLoad").hide();
+	    });	
+	}
+	
 }
 
-
+	function validateRank(e){
+		debugger
+	     var arr = new Array();
+	     for(i=0;i<totalPP;i++){
+	    	 arr.push($('.rankNo'+i).val());
+	     }
+	  	console.log("array",arr);
+	      // create a Set with array elements
+	      const s = new Set(arr);
+	      // compare the size of array and Set
+	      if(arr.length !== s.size){
+	         return true;
+	      }
+	      
+	      return false
+	   
+	
+}
 function addPaymentPlanRank () {
 	debugger
 	var tower=$('#towerMst').find('option:selected').attr('name');
@@ -252,5 +319,27 @@ function getTowerPPList()
 		
 	});
 	
+}
+
+function getPaymentPlanData(){
+	$("#mainPageLoad").show();
+	 $.get(pageContext+"getProjectPPRanking?projectcode="+$("#projectDataList").val(),function(data){
+		}).done(function(obj){
+			debugger
+			if(obj.length==0){
+				getPaymentPlanWithCip();
+			}else{
+				paymentPlanDropdown(obj);
+			}
+			
+		});
+}
+function getPaymentPlanWithCip(){
+	 $.get(pageContext+"getpaymentPlanWithCIP?projectcode="+$("#projectDataList").val(),function(data){
+		}).done(function(obj){
+			debugger
+			paymentPlanDropdown(obj);
+			
+		});
 }
 

@@ -133,7 +133,7 @@ function addTowerPP () {
 	        		
 	        	}else{
 	        		swal({
-	        			title: "Something went wrong...!",
+	        			title: data.error_msg,
 	        		    text: "",
 	        		    timer: 2000,
 	        		    type: "error",

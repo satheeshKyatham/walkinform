@@ -6,4 +6,6 @@ import com.godrej.properties.model.PaymentPlanList;
 
 public interface PaymentPlanListDao {
 	List<PaymentPlanList> getPaymentPlanList(String projectCode);
+
+	public List<PaymentPlanList> getpaymentPlanWithCIPActiveQuery(String project);
 }

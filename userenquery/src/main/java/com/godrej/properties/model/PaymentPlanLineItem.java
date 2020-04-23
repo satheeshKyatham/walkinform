@@ -19,7 +19,10 @@ public class PaymentPlanLineItem {
 	@Column(name="id") private String  iduniqe;
 	@Column(name="propstrength__payment_plan_line_item_name__c") private String  Milestone;
 	@Column(name="fixed") private String  fixedYN;
+	@Column(name="sfid") private String  sfid;
+	@Column(name="PropStrength__Order__c") private Double  order;
 	@Transient private String lastRowYN="N";
+	@Transient private String iscompleted;
 	public int getId() {
 		return id;
 	}
@@ -62,6 +65,26 @@ public class PaymentPlanLineItem {
 	public void setLastRowYN(String lastRowYN) {
 		this.lastRowYN = lastRowYN;
 	}
+	public String getSfid() {
+		return sfid;
+	}
+	public void setSfid(String sfid) {
+		this.sfid = sfid;
+	}
+	public String getIscompleted() {
+		return iscompleted;
+	}
+	public void setIscompleted(String iscompleted) {
+		this.iscompleted = iscompleted;
+	}
+	public Double getOrder() {
+		return order;
+	}
+	public void setOrder(Double order) {
+		this.order = order;
+	}
+	
+
 
 
 	
