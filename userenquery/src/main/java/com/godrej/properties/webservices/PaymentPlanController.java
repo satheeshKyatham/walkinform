@@ -50,16 +50,17 @@ public class PaymentPlanController {
 	@Autowired
 	private PaymentPlanRankingService paymentPlanRankingService;
 	
-	@RequestMapping(value = { "/paymentPlanDue"}, method = RequestMethod.GET)
+	
+	@GetMapping(value = { "/paymentPlanDue"})
 	public String paymentPlanDue(ModelMap model,HttpServletRequest request) {
 		 return "paymentPlanDue";
 	}
-	@RequestMapping(value = { "/towerPPExclusion"}, method = RequestMethod.GET)
+	@GetMapping(value = { "/towerPPExclusion"})
 	public String towerPPExclusion(ModelMap model,HttpServletRequest request) {
 		 return "towerPPExclusion";
 	}
 	
-	@RequestMapping(value = { "/paymentPlanRanking"}, method = RequestMethod.GET)
+	@GetMapping(value = { "/paymentPlanRanking"})
 	public String paymentPlanRank(ModelMap model,HttpServletRequest request) {
 		 return "paymentPlanRanking";
 	}
@@ -73,7 +74,7 @@ public class PaymentPlanController {
 	
 	/*End get payment plan list with D4U and CIP active*/
 	
-	@RequestMapping(value = "/savePaymentPlanWithDue", method = RequestMethod.POST,produces = "application/json")
+	@PostMapping(value = "/savePaymentPlanWithDue",produces = "application/json")
 	public @ResponseBody PaymentPlanDue savePaymentPlanWithDues(@RequestBody PaymentPlanDue data) 
 	{	
 		PaymentPlanDue duePaymentPlan=new PaymentPlanDue();
@@ -95,12 +96,12 @@ public class PaymentPlanController {
 	{
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		Gson gson = gsonBuilder.create();
-		return  gson.toJson(paymentPlanDueService.getPaymentDueList()); /*return json data*/
+		return  gson.toJson(paymentPlanDueService.getPaymentDueList("","","")); /*return json data*/
 	}
 	/* END  */
 	
 	
-	@RequestMapping(value = "/updatePaymentPlanWithDue", method = RequestMethod.POST)
+	@PostMapping(value = "/updatePaymentPlanWithDue")
 	public @ResponseBody PaymentPlanDue updatePaymentPlanWithDue(@RequestBody PaymentPlanDue data)  {	
 		
 		
@@ -116,7 +117,7 @@ public class PaymentPlanController {
 	}
 	
 	
-	@RequestMapping(value = "/saveTowerPPExclusion", method = RequestMethod.POST,produces = "application/json")
+	@PostMapping(value = "/saveTowerPPExclusion",produces = "application/json")
 	public @ResponseBody String saveTowerPPExclusion(@RequestBody TowerPPExclusion data) 
 	{	
 		TowerPPExclusion towerPP=new TowerPPExclusion();
@@ -133,8 +134,7 @@ public class PaymentPlanController {
 			}
 			
 		}else{
-			String response = "{\"status\":\"STATUS_NOTOK\",\"error_msg\":\"Invalid Data Provide\"}";
-			return response;
+			return "{\"status\":\"STATUS_NOTOK\",\"error_msg\":\"Invalid Data Provide\"}";
 		}
 		
 	}
@@ -155,41 +155,36 @@ public class PaymentPlanController {
 	{
 		if(id!=0){
 			boolean deleteTowerPP=towerPPExclusionService.deleteTowerPPExclusionRecord(id);	
-			if(deleteTowerPP==true){
-				String response = "{\"status\":\"STATUS_OK\",\"error_msg\":\"Deleted\"}";
-				return response;
+			if(deleteTowerPP){
+				return "{\"status\":\"STATUS_OK\",\"error_msg\":\"Deleted\"}";
 			}else{
-				String response = "{\"status\":\"STATUS_NOTOK\",\"error_msg\":\"Invalid Data Provide\"}";
-				return response;
+				return "{\"status\":\"STATUS_NOTOK\",\"error_msg\":\"Invalid Data Provide\"}";
 			}
 			 
 		}else{
-			String response = "{\"status\":\"STATUS_NOTOK\",\"error_msg\":\"Invalid Data Provide\"}";
-			return response; 
+			return "{\"status\":\"STATUS_NOTOK\",\"error_msg\":\"Invalid Data Provide\"}";
 		}
 		
 		/*return json data*/
 	}
 	/* END  */
 	
-	@RequestMapping(value = "/savePaymentPlanRanking", method = RequestMethod.POST,produces = "application/json")
+	@PostMapping(value = "/savePaymentPlanRanking",produces = "application/json")
 	public @ResponseBody String savePaymentPlanRanking(@RequestBody ProjectPPRanking data) 
 	{	
 		ProjectPPRanking ppRanking=new ProjectPPRanking();
 		if(data != null  && data.getProject_sfid() != null){
 			ppRanking = projectPPRankingService.addPaymentPlanRanking(data);  /*add payment pLan with ranking*/
 			
-			String response = "{\"status\":\"STATUS_OK\",\"error_msg\":\"Successfully submitted\"}";
-			return response;
+			return "{\"status\":\"STATUS_OK\",\"error_msg\":\"Successfully submitted\"}";
 		}else{
-			String response = "{\"status\":\"STATUS_NOTOK\",\"error_msg\":\"Invalid Data Provide\"}";
-			return response;
+			return "{\"status\":\"STATUS_NOTOK\",\"error_msg\":\"Invalid Data Provide\"}";
 		}
 		
 	}
 	
 	//Bulk insert for Payment Plan Ranking
-			@RequestMapping(value = "/bulkInsertPaymentRanking", method = RequestMethod.POST, produces = "application/json")
+			@PostMapping(value = "/bulkInsertPaymentRanking", produces = "application/json")
 			public @ResponseBody String bulkInsertSchemeMapping(@RequestParam("rankingJson") String rankingJson) // add parameter 
 			{		
 				GsonBuilder gsonBuilder = new GsonBuilder();
