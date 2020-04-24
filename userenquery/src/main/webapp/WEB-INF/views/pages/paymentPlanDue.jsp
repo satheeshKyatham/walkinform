@@ -15,13 +15,9 @@
 	<title>Godrej</title>
 	
 	<link rel="stylesheet" href="<c:url value='/resources/css/bootstrap.min.css' />">
+	<link rel="stylesheet" href="<c:url value='/resources/css/costsheet.css' />">
 	<link href="<c:url value='/resources/css/animate.min.css' />" rel="stylesheet">	
-	<link rel="stylesheet" href="<c:url value='/resources/css/sweetalert.min.css'/>"> 
-	<link rel="icon" href="<c:url value='/resources/images/favicon.ico' />" type="image/x-icon">     
-	<link rel="stylesheet" href="<c:url value='/resources/css/inner.css?v=3.0' />">
-	<link rel="stylesheet" href="<c:url value='/resources/css/style.css?v=3.0' />">
-	<link rel="stylesheet" href="<c:url value='/resources/css/font-awesome.css' />">
-	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">  
+	<link rel="stylesheet" href="<c:url value='/resources/css/sweetalert.min.css'/>">  
 </head>
 <body>
 <%-- <nav class="navbar topMainBar">
@@ -52,14 +48,26 @@
 				 
 		    	<div class="form-group col-md-3">
 					<label>Payment Plan <strong class="mndt">*</strong></label>
-					<select class="form-control" id="ppDropdown"> </select>
+					<select class="form-control" id="ppDropdown" onchange="getPymentPlanLineItems()"> </select>
 				</div>
 		    	
 		    	<div class="clearfix"></div>
 				
 				<div class="form-group col-md-2">
 					<label>Dues %</label>
-					<input id="due_amount" type="number" class="form-control" required="required"/>
+					<input id="due_amount" type="text" disabled="disabled" class="form-control" required="required"/>
+				</div>	
+				<div class="form-group col-md-2" style="display: none;">
+					<label>Booking Amount</label>
+					<input id="booking_amount_id" type="number" class="form-control" />
+				</div>	
+				<div class="form-group col-md-2" style="display: none;">
+					<label>Days</label>
+					<input id="days_id" type="number" class="form-control" />
+				</div>
+				<div class="form-group col-md-2" style="display: none;">
+					<label>String %</label>
+					<input id="ppmilestone_json_id" type="text" class="form-control" />
 				</div>			
 		    	
 		    	<div class="clearfix"></div>
@@ -79,7 +87,7 @@
 	<h4 class="mrgT0">
 			Payment Due Details
 		</h4>
-	<table class="table table-bordered  bgWhite mrgB8" id="paymentDueListId">
+	<!-- <table class="table table-bordered" id="paymentDueListId">
 			<tbody>
 				<tr class="subHead">
 					<th style="width:150px;">
@@ -92,7 +100,7 @@
 						Tower
 					</th>
 					<th style="width: 140px;">
-						Payment Plan
+						Payment Plan Name
 					</th>
 					<th style="width: 140px;">
 						Due
@@ -100,14 +108,36 @@
 					<th style="width: 165px;"></th>
 				</tr>
 				
-				<tr class="csPtDataRowOP">
-					<td></td>
-					<td></td> 
-					<td></td>
-					<td> </td>
-					<td> </td>
-					<td> </td>
+				
+				
+			</tbody>
+		</table> -->
+		
+		<table class="table table-bordered" id="paymentListId">
+			<tbody>
+				<tr class="subHead">
+					<th style="width:300px;">
+						Milestone Name</br>
+					</th>
+					<th style="width:200px;">
+						Percentage
+					</th>
+					<th style="width:200px;">
+						Amount
+					</th>
+					<!-- <th>
+						Tower
+					</th> -->
+					<th>
+						Milestone Completed
+					</th>
+					<!-- <th style="width: 140px;">
+						Due
+					</th>
+					<th style="width: 165px;"></th> -->
 				</tr>
+				
+				
 				
 			</tbody>
 		</table>

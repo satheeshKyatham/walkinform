@@ -33,9 +33,10 @@ public class PaymentPlanDue extends PO{
 	@Column(name = "updatedby")private String updatedby;
 	@Column(name = "towerid")private String towerid;
 	@Column(name = "tower_name")private String tower_name;
-	
-	@Transient
-	private String insertStatus;
+	@Column(name = "payplan_milestones")private String payplan_milestones;
+	@Column(name = "bookingamount")private Double bookingamount;
+	@Column(name = "days")private Integer days;
+	@Transient private String insertStatus;
 	public int getId() {
 		return id;
 	}
@@ -104,17 +105,35 @@ public class PaymentPlanDue extends PO{
 	public void setInsertStatus(String insertStatus) {
 		this.insertStatus = insertStatus;
 	}
-	public Double getDues_amount() {
-		return dues_amount;
-	}
-	public void setDues_amount(Double dues_amount) {
-		this.dues_amount = dues_amount;
-	}
 	public String getTower_name() {
 		return tower_name;
 	}
 	public void setTower_name(String tower_name) {
 		this.tower_name = tower_name;
+	}
+	public String getPayplan_milestones() {
+		return payplan_milestones;
+	}
+	public void setPayplan_milestones(String payplan_milestones) {
+		this.payplan_milestones = payplan_milestones;
+	}
+	public double getDues_amount() {
+		return dues_amount;
+	}
+	public void setDues_amount(double dues_amount) {
+		this.dues_amount = dues_amount;
+	}
+	public Double getBookingamount() {
+		return bookingamount;
+	}
+	public void setBookingamount(Double bookingamount) {
+		this.bookingamount = bookingamount;
+	}
+	public Integer getDays() {
+		return days;
+	}
+	public void setDays(Integer days) {
+		this.days = days;
 	}
 	
 	

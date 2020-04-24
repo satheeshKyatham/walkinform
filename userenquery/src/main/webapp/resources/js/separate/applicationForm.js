@@ -395,7 +395,7 @@ function getEnqAndBookingDtl (enqId, applicationBookingId18, rowId) {
 function printApplicationForm(applicationBookingId18, rowId) {
 	var pageContext = $("#pageContext").val()+"/";
 	
-	$.post(pageContext+"printApplicationForm",{"enqSfid":applicationBookingId18,"appFormData":$('#printApplicationForm').html(),"projectName":$('#appProjectName').val(),"reraRegistrationNo":reraRegistrationNo},function(data){				 
+	$.post(pageContext+"printApplicationForm",{"projectid":$('#projectid').val(), "enqSfid":applicationBookingId18,"appFormData":$('#printApplicationForm').html(),"projectName":$('#appProjectName').val(),"reraRegistrationNo":reraRegistrationNo},function(data){				 
 		
 	}).done(function(data){
 		

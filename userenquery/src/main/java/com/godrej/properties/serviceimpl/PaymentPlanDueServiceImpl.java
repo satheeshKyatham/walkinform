@@ -1,17 +1,21 @@
 package com.godrej.properties.serviceimpl;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
 
-import org.apache.poi.ss.formula.functions.Now;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.godrej.properties.dao.PaymentPlanDueDao;
 import com.godrej.properties.model.PaymentPlanDue;
+import com.godrej.properties.model.PaymentPlanLineItem;
 import com.godrej.properties.service.PaymentPlanDueService;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 @Service("paymentPlanDueService")
 @Transactional
 public class PaymentPlanDueServiceImpl implements PaymentPlanDueService{
@@ -34,6 +38,7 @@ public class PaymentPlanDueServiceImpl implements PaymentPlanDueService{
 		setDto.setUpdatedby("9999");
 		setDto.setTowerid(data.getTowerid());
 		setDto.setTower_name(data.getTower_name());	
+		setDto.setPayplan_milestones(data.getPayplan_milestones());
 		Timestamp createdTimestamp = new Timestamp(System.currentTimeMillis());
 		Timestamp updatedTimestamp = new Timestamp(System.currentTimeMillis());
         System.out.println(createdTimestamp);
@@ -43,11 +48,48 @@ public class PaymentPlanDueServiceImpl implements PaymentPlanDueService{
 		return setDto;
 	}
 
-	@Override
-	public List<PaymentPlanDue> getPaymentDueList() {
+	/*@Override
+	public List<PaymentPlanDue> getPaymentDueList(String project_sfid,String tower_sfid,String payment_plan_sfid) {
 		
-		return paymentPlanDueDao.getPaymentDueListQuery();
+		return paymentPlanDueDao.getPaymentDueListQuery(project_sfid,tower_sfid,payment_plan_sfid);
+	}*/
+	@Override
+	public List<PaymentPlanLineItem> getPaymentDueList(String project_sfid,String tower_sfid,String payment_plan_sfid) {
+		List<PaymentPlanLineItem> pplineitem = new ArrayList<PaymentPlanLineItem>();
+		List<PaymentPlanDue> paymenPlanDue = paymentPlanDueDao.getPaymentDueListQuery(project_sfid,tower_sfid,payment_plan_sfid);
+		if(paymenPlanDue.size()>0)
+		{
+			Object object=null;
+			JsonArray arrayObj=null;
+			JsonParser jsonParser=new JsonParser();
+			object=jsonParser.parse(paymenPlanDue.get(0).getPayplan_milestones());
+			arrayObj=(JsonArray) object;
+			System.out.println("Array : "+arrayObj);
+			if(arrayObj.size()>0)
+			{
+				
+				for(int i=0;i<arrayObj.size();i++) {
+					PaymentPlanLineItem ppLine = new PaymentPlanLineItem();
+					JsonObject obj =  (JsonObject) arrayObj.get(i);
+					ppLine.setId(obj.get("id").getAsInt());
+					ppLine.setIscompleted("Y");
+					ppLine.setSfid(obj.get("sfid").getAsString());
+					ppLine.setMilestone(obj.get("name").getAsString());
+					ppLine.setPer(obj.get("per").getAsString());
+					ppLine.setIscompleted(obj.get("iscompleted").getAsString());
+					ppLine.setAmount(obj.get("amount").getAsString());
+					ppLine.setOrder(obj.get("order").getAsDouble());
+					System.out.println("ID : "+obj.get("id").getAsInt());
+					System.out.println("sfid : "+obj.get("sfid").getAsString());
+					pplineitem.add(ppLine);
+				}
+			}
+		}
+		
+		return pplineitem;
 	}
+	
+	
 
 	@Override
 	public PaymentPlanDue updatePaymentDue(PaymentPlanDue data) {
