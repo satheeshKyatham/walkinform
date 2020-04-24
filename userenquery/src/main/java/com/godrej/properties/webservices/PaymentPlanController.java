@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.godrej.properties.model.PaymentPlanDue;
-import com.godrej.properties.model.PaymentPlanRanking;
 import com.godrej.properties.model.ProjectPPRanking;
 import com.godrej.properties.model.TowerPPExclusion;
 import com.godrej.properties.service.PaymentPlanDueService;
@@ -49,20 +48,24 @@ public class PaymentPlanController {
 
 	@Autowired
 	private PaymentPlanRankingService paymentPlanRankingService;
+	
+	
+	@GetMapping(value = { "/paymentPlanDue"})
+	public String paymentPlanDue(ModelMap model,HttpServletRequest request) {
+		 return "paymentPlanDue";
 
-	@RequestMapping(value = { "/paymentPlanDue" }, method = RequestMethod.GET)
-	public String paymentPlanDue(ModelMap model, HttpServletRequest request) {
-		return "paymentPlanDue";
 	}
 
-	@RequestMapping(value = { "/towerPPExclusion" }, method = RequestMethod.GET)
-	public String towerPPExclusion(ModelMap model, HttpServletRequest request) {
-		return "towerPPExclusion";
-	}
+	@GetMapping(value = { "/towerPPExclusion"})
+	public String towerPPExclusion(ModelMap model,HttpServletRequest request) {
+		 return "towerPPExclusion";
 
-	@RequestMapping(value = { "/paymentPlanRanking" }, method = RequestMethod.GET)
-	public String paymentPlanRank(ModelMap model, HttpServletRequest request) {
-		return "paymentPlanRanking";
+	}
+	
+	@GetMapping(value = { "/paymentPlanRanking"})
+	public String paymentPlanRank(ModelMap model,HttpServletRequest request) {
+		 return "paymentPlanRanking";
+
 	}
 
 	/* start get payment plan list with D4U and CIP active */
@@ -72,16 +75,31 @@ public class PaymentPlanController {
 		return gson.toJson(paymentPlanListService.getpaymentPlanWithCIPActive(projectcode));
 	}
 
-	/* End get payment plan list with D4U and CIP active */
+
+/*	 End get payment plan list with D4U and CIP active 
 	@RequestMapping(value = "/savePaymentPlanWithDue", method = RequestMethod.POST, produces = "application/json")
 	public @ResponseBody PaymentPlanDue savePaymentPlanWithDues(@RequestBody PaymentPlanDue data) {
 		PaymentPlanDue duePaymentPlan = new PaymentPlanDue();
 		if (data != null && data.getTowerid() != null && data.getProject_id() != null) {
 			duePaymentPlan = paymentPlanDueService
-					.addPaymentPlanDue(data); /* add payment pLan with due */
+					.addPaymentPlanDue(data);  add payment pLan with due 
 			duePaymentPlan.setInsertStatus("Status_OK");
 			return duePaymentPlan;
-		} else {
+		} else {*/
+
+	
+	/*End get payment plan list with D4U and CIP active*/
+	
+	@PostMapping(value = "/savePaymentPlanWithDue",produces = "application/json")
+	public @ResponseBody PaymentPlanDue savePaymentPlanWithDues(@RequestBody PaymentPlanDue data) 
+	{	
+		PaymentPlanDue duePaymentPlan=new PaymentPlanDue();
+		if(data != null && data.getTowerid() != null && data.getProject_id() != null){
+		duePaymentPlan = paymentPlanDueService.addPaymentPlanDue(data);  /*add payment pLan with due*/
+		duePaymentPlan.setInsertStatus("Status_OK");
+		return duePaymentPlan;
+		}else{
+
 			duePaymentPlan.setInsertStatus("Status_NOTOK");
 			return duePaymentPlan;
 		}
@@ -94,32 +112,36 @@ public class PaymentPlanController {
 	public @ResponseBody String getPymentPlanDueList() {
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		Gson gson = gsonBuilder.create();
-		return gson.toJson(paymentPlanDueService
-				.getPaymentDueList()); /* return json data */
+		return  gson.toJson(paymentPlanDueService.getPaymentDueList("","","")); /*return json data*/
+
 	}
+
 	/* END */
+	
+	
+	@PostMapping(value = "/updatePaymentPlanWithDue")
+	public @ResponseBody PaymentPlanDue updatePaymentPlanWithDue(@RequestBody PaymentPlanDue data)  {	
+		PaymentPlanDue duePaymentPlan=new PaymentPlanDue();
+		if(data != null && data.getId() != 0 && data.getTowerid() != null){
+		duePaymentPlan = paymentPlanDueService.updatePaymentDue(data);  /*add payment pLan with due*/
+		duePaymentPlan.setInsertStatus("Status_OK");
+		return duePaymentPlan;
+		}else{
 
-	@RequestMapping(value = "/updatePaymentPlanWithDue", method = RequestMethod.POST)
-	public @ResponseBody PaymentPlanDue updatePaymentPlanWithDue(@RequestBody PaymentPlanDue data) {
-
-		PaymentPlanDue duePaymentPlan = new PaymentPlanDue();
-		if (data != null && data.getId() != 0 && data.getTowerid() != null) {
-			duePaymentPlan = paymentPlanDueService
-					.updatePaymentDue(data); /* add payment pLan with due */
-			duePaymentPlan.setInsertStatus("Status_OK");
-			return duePaymentPlan;
-		} else {
 			duePaymentPlan.setInsertStatus("Status_NOTOK");
 			return duePaymentPlan;
 		}
 	}
 
-	@RequestMapping(value = "/saveTowerPPExclusion", method = RequestMethod.POST, produces = "application/json")
-	public @ResponseBody String saveTowerPPExclusion(@RequestBody TowerPPExclusion data) {
-		TowerPPExclusion towerPP = new TowerPPExclusion();
-		if (data != null && data.getTower_sfid() != null && data.getProject_sfid() != null) {
-			boolean towerExist = towerPPExclusionService.getTowerPP(data);
-			if (towerExist) {
+	
+	
+	@PostMapping(value = "/saveTowerPPExclusion",produces = "application/json")
+	public @ResponseBody String saveTowerPPExclusion(@RequestBody TowerPPExclusion data) 
+	{	
+		TowerPPExclusion towerPP=new TowerPPExclusion();
+		if(data != null && data.getTower_sfid() != null && data.getProject_sfid() != null){
+			boolean towerExist=towerPPExclusionService.getTowerPP(data);
+			if(towerExist){
 				String response = "{\"status\":\"STATUS_NOTOK\",\"error_msg\":\"Already Exist\"}";
 				return response;
 			} else {
@@ -129,7 +151,6 @@ public class PaymentPlanController {
 				String response = "{\"status\":\"STATUS_OK\",\"error_msg\":\"Successfully submitted\"}";
 				return response;
 			}
-
 		} else {
 			String response = "{\"status\":\"STATUS_NOTOK\",\"error_msg\":\"Invalid Data Provide\"}";
 			return response;
@@ -147,85 +168,89 @@ public class PaymentPlanController {
 	}
 	/* END */
 
-	/* Start get Tower PP */
-	@PostMapping(value = "/deleteTowerPPExclusion")
-	public @ResponseBody String deleteTowerPPExclusion(@RequestParam("Id") int id) {
-		if (id != 0) {
-			boolean deleteTowerPP = towerPPExclusionService.deleteTowerPPExclusionRecord(id);
-			if (deleteTowerPP == true) {
-				String response = "{\"status\":\"STATUS_OK\",\"error_msg\":\"Deleted\"}";
-				return response;
-			} else {
-				String response = "{\"status\":\"STATUS_NOTOK\",\"error_msg\":\"Invalid Data Provide\"}";
-				return response;
+	public @ResponseBody String deleteTowerPPExclusion(@RequestParam("Id") int id) 
+	{
+		if(id!=0){
+			boolean deleteTowerPP=towerPPExclusionService.deleteTowerPPExclusionRecord(id);	
+			if(deleteTowerPP){
+				return "{\"status\":\"STATUS_OK\",\"error_msg\":\"Deleted\"}";
+			}else{
+				return "{\"status\":\"STATUS_NOTOK\",\"error_msg\":\"Invalid Data Provide\"}";
+
 			}
-
 		} else {
-			String response = "{\"status\":\"STATUS_NOTOK\",\"error_msg\":\"Invalid Data Provide\"}";
-			return response;
+			return "{\"status\":\"STATUS_NOTOK\",\"error_msg\":\"Invalid Data Provide\"}";
 		}
-
-		/* return json data */
 	}
 	/* END */
 
-	@RequestMapping(value = "/savePaymentPlanRanking", method = RequestMethod.POST, produces = "application/json")
-	public @ResponseBody String savePaymentPlanRanking(@RequestBody ProjectPPRanking data) {
-		if (data != null && data.getProject_sfid() != null) {
-			projectPPRankingService.addPaymentPlanRanking(
-					data); /* add payment pLan with ranking */
-			String response = "{\"status\":\"STATUS_OK\",\"error_msg\":\"Successfully submitted\"}";
-			return response;
-		} else {
-			String response = "{\"status\":\"STATUS_NOTOK\",\"error_msg\":\"Invalid Data Provide\"}";
-			return response;
+	
+	@PostMapping(value = "/savePaymentPlanRanking",produces = "application/json")
+	public @ResponseBody String savePaymentPlanRanking(@RequestBody ProjectPPRanking data) 
+	{	
+	
+		if(data != null  && data.getProject_sfid() != null){
+			 projectPPRankingService.addPaymentPlanRanking(data);  /*add payment pLan with ranking*/
+			return "{\"status\":\"STATUS_OK\",\"error_msg\":\"Successfully submitted\"}";
+		}else{
+			return "{\"status\":\"STATUS_NOTOK\",\"error_msg\":\"Invalid Data Provide\"}";
 		}
 
 	}
 
-	// Bulk insert for Payment Plan Ranking
-	@RequestMapping(value = "/bulkInsertPaymentRanking", method = RequestMethod.POST, produces = "application/json")
-	public @ResponseBody String bulkInsertSchemeMapping(@RequestParam("rankingJson") String rankingJson) // add
-																											// parameter
-	{
-		GsonBuilder gsonBuilder = new GsonBuilder();
-		Gson gson = gsonBuilder.create();
 
-		String str = rankingJson;
+	
+	//Bulk insert for Payment Plan Ranking
+			@PostMapping(value = "/bulkInsertPaymentRanking", produces = "application/json")
+			public @ResponseBody String bulkInsertSchemeMapping(@RequestParam("rankingJson") String rankingJson) // add parameter 
+			{		
+				GsonBuilder gsonBuilder = new GsonBuilder();
+				Gson gson = gsonBuilder.create();
+				
+				String str=rankingJson;
+				  
+				Object object=null;
+				JsonArray arrayObj=null;
+				JsonParser jsonParser=new JsonParser();
+				object=jsonParser.parse(str);
+				arrayObj=(JsonArray) object;
+				
+				/*List<PaymentPlanRanking> charges1=new ArrayList<>();
+				if(arrayObj!=null && arrayObj.size()>0)
+				{
+					for(int i=0;i<arrayObj.size();i++) {
+						PaymentPlanRanking ecData1= new PaymentPlanRanking();
+						ecData1= gson.fromJson(arrayObj.get(i), PaymentPlanRanking.class);
+						charges1.add(ecData1);
+					}
+					String msg="";
+					try{
+						 msg=paymentPlanRankingService.insertBulkPaymentRanking(charges1);	
+					}catch(Exception e){
+						msg="STATUS_NOTOK";
+						return gson.toJson(msg);	
+					}
+				}*/
+				List<ProjectPPRanking> charges1=new ArrayList<>();
+				if(arrayObj!=null && arrayObj.size()>0)
+				{
+					for(int i=0;i<arrayObj.size();i++) {
+						ProjectPPRanking ecData1= new ProjectPPRanking();
+						ecData1= gson.fromJson(arrayObj.get(i), ProjectPPRanking.class);
+						charges1.add(ecData1);
+					}
+					String msg="";
+					try{
+						 msg=projectPPRankingService.insertBulkPaymentRanking(charges1);	
+					}catch(Exception e){
+						msg="STATUS_NOTOK";
+						return gson.toJson(msg);	
+					}
+				}
+			  	return gson.toJson("");
 
-		Object object = null;
-		JsonArray arrayObj = null;
-		JsonParser jsonParser = new JsonParser();
-		object = jsonParser.parse(str);
-		arrayObj = (JsonArray) object;
-
-		/*
-		 * List<PaymentPlanRanking> charges1=new ArrayList<>();
-		 * if(arrayObj!=null && arrayObj.size()>0) { for(int
-		 * i=0;i<arrayObj.size();i++) { PaymentPlanRanking ecData1= new
-		 * PaymentPlanRanking(); ecData1= gson.fromJson(arrayObj.get(i),
-		 * PaymentPlanRanking.class); charges1.add(ecData1); } String msg="";
-		 * try{
-		 * msg=paymentPlanRankingService.insertBulkPaymentRanking(charges1);
-		 * }catch(Exception e){ msg="STATUS_NOTOK"; return gson.toJson(msg); } }
-		 */
-		List<ProjectPPRanking> charges1 = new ArrayList<>();
-		if (arrayObj != null && arrayObj.size() > 0) {
-			for (int i = 0; i < arrayObj.size(); i++) {
-				ProjectPPRanking ecData1 = new ProjectPPRanking();
-				ecData1 = gson.fromJson(arrayObj.get(i), ProjectPPRanking.class);
-				charges1.add(ecData1);
 			}
-			String msg = "";
-			try {
-				msg = projectPPRankingService.insertBulkPaymentRanking(charges1);
-			} catch (Exception e) {
-				msg = "STATUS_NOTOK";
-				return gson.toJson(msg);
-			}
-		}
-		return gson.toJson("");
-	}
+	
 	/* END Bulk insert for Payment Plan Ranking */
 
 	/* Start get payment plan with ranking */
