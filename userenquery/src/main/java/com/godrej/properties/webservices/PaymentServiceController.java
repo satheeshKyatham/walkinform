@@ -72,16 +72,18 @@ public class PaymentServiceController {
 	 *  Task : Get Payment plan Due Data for CIP App*/
 	@GetMapping(value = "/getpaymentplanlist_due", produces = "application/json")
 	public String getpaymentplanlist(@RequestParam("project_sfid") String project_sfid,@RequestParam("tower_sfid") String tower_sfid,@RequestParam("payment_plan_sfid") String payment_plan_sfid) { 
-		GsonBuilder gsonBuilder = new GsonBuilder();
-		Gson gson = gsonBuilder.create();
+		Gson gson = new GsonBuilder().serializeNulls().create();
 		//call payment table
-		List<PaymentPlanLineItem> paymentPlanLineItems = paymentPlanDueService.getPaymentDueList(project_sfid,tower_sfid,payment_plan_sfid);
-		if(paymentPlanLineItems.size()==0)
+		List<PaymentPlanLineItem> paymentPlanLineItems=null;
+		String paymentPlanLineItems_str = paymentPlanDueService.getPaymentDueList(project_sfid,tower_sfid,payment_plan_sfid);
+		if(paymentPlanLineItems_str==null)
 		{
 		  paymentPlanLineItems= paymentPlanLineItemService.getpaymentplanlist(payment_plan_sfid);
-		  return gson.toJson(paymentPlanLineItems);
+		  return "{\"bookingamount\":0,\"days\":0,\"msg\":\"\",\"paymentPlanList\":"+gson.toJson(paymentPlanLineItems)+"}";
 		}
 		else
-			return gson.toJson(paymentPlanLineItems);
+		{
+			return paymentPlanLineItems_str;
+		}
 	}
 }

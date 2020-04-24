@@ -13,6 +13,8 @@ import com.godrej.properties.dao.PaymentPlanDueDao;
 import com.godrej.properties.model.PaymentPlanDue;
 import com.godrej.properties.model.PaymentPlanLineItem;
 import com.godrej.properties.service.PaymentPlanDueService;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -39,6 +41,8 @@ public class PaymentPlanDueServiceImpl implements PaymentPlanDueService{
 		setDto.setTowerid(data.getTowerid());
 		setDto.setTower_name(data.getTower_name());	
 		setDto.setPayplan_milestones(data.getPayplan_milestones());
+		setDto.setBookingamount(data.getBookingamount());
+		setDto.setDays(data.getDays());
 		Timestamp createdTimestamp = new Timestamp(System.currentTimeMillis());
 		Timestamp updatedTimestamp = new Timestamp(System.currentTimeMillis());
         System.out.println(createdTimestamp);
@@ -54,9 +58,11 @@ public class PaymentPlanDueServiceImpl implements PaymentPlanDueService{
 		return paymentPlanDueDao.getPaymentDueListQuery(project_sfid,tower_sfid,payment_plan_sfid);
 	}*/
 	@Override
-	public List<PaymentPlanLineItem> getPaymentDueList(String project_sfid,String tower_sfid,String payment_plan_sfid) {
+	public String getPaymentDueList(String project_sfid,String tower_sfid,String payment_plan_sfid) {
 		List<PaymentPlanLineItem> pplineitem = new ArrayList<PaymentPlanLineItem>();
 		List<PaymentPlanDue> paymenPlanDue = paymentPlanDueDao.getPaymentDueListQuery(project_sfid,tower_sfid,payment_plan_sfid);
+		String returnStr=null;
+		Gson gson = new GsonBuilder().serializeNulls().create();
 		if(paymenPlanDue.size()>0)
 		{
 			Object object=null;
@@ -84,9 +90,10 @@ public class PaymentPlanDueServiceImpl implements PaymentPlanDueService{
 					pplineitem.add(ppLine);
 				}
 			}
+			String msg=" Under the Construnction Linked Plan amount due within "+paymenPlanDue.get(0).getDays()+" days of booking is";
+			returnStr = "{\"bookingamount\":"+paymenPlanDue.get(0).getBookingamount()+",\"days\":"+paymenPlanDue.get(0).getDays()+",\"msg\":\""+msg+"\",\"paymentPlanList\":"+gson.toJson(pplineitem)+"}";
 		}
-		
-		return pplineitem;
+		return returnStr;
 	}
 	
 	

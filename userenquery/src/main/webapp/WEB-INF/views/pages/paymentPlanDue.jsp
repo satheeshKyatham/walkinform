@@ -57,11 +57,11 @@
 					<label>Dues %</label>
 					<input id="due_amount" type="text" disabled="disabled" class="form-control" required="required"/>
 				</div>	
-				<div class="form-group col-md-2" style="display: none;">
+				<div class="form-group col-md-2">
 					<label>Booking Amount</label>
 					<input id="booking_amount_id" type="number" class="form-control" />
 				</div>	
-				<div class="form-group col-md-2" style="display: none;">
+				<div class="form-group col-md-2">
 					<label>Days</label>
 					<input id="days_id" type="number" class="form-control" />
 				</div>

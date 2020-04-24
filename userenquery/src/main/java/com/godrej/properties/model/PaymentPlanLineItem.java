@@ -84,8 +84,4 @@ public class PaymentPlanLineItem {
 		this.order = order;
 	}
 	
-
-
-
-	
 }
