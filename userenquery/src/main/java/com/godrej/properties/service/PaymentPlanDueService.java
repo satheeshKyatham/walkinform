@@ -11,7 +11,7 @@ public interface PaymentPlanDueService {
 	public PaymentPlanDue addPaymentPlanDue(PaymentPlanDue paymentDue);
 
 //	public List<PaymentPlanDue> getPaymentDueList(String project_sfid,String tower_sfid,String payment_plan_sfid);
-	public List<PaymentPlanLineItem> getPaymentDueList(String project_sfid,String tower_sfid,String payment_plan_sfid);
+	public String getPaymentDueList(String project_sfid,String tower_sfid,String payment_plan_sfid);
 	
 	public PaymentPlanDue updatePaymentDue(PaymentPlanDue data);
 

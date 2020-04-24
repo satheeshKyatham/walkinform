@@ -35,7 +35,7 @@ function projectDataList (){
 function paymentPlanDropdown (){
 	
 	$('#ppDropdown').empty();
-	var urlpayemntPlan = pageContext+"getpaymentPlanListData?projectcode="+$("#projectDataList").val();
+	var urlpayemntPlan = pageContext+"getpaymentPlanWithCIP?projectcode="+$("#projectDataList").val();
 	
 	$.getJSON(urlpayemntPlan, function (data) {
 		$.each(data, function (index, value) {
@@ -61,26 +61,6 @@ function towerList (e, source) {
 		
 	});
 }
-
-/*Typology*/
-function inventoryUnitTypeMst () {
-	$('#typoMst').empty();
-	var towerCode = $('#towerMst').val();
-	var projectNameVal = $('#projectDataList').val();
-	
-	var urlProject = pageContext+"getunittype?project_code="+projectNameVal+"&tower_code="+towerCode+"&floor_code="
-	
-	$('#typoMst').append("<option value='0'>Select</option> ");
-	
-	$.getJSON(urlProject, function (data) {
-		$.each(data, function (index, value) {
-			$('#typoMst').append("<option value='"+value.propstrength__unit_type__c+"'>"+value.propstrength__unit_type__c+"</option>");
-		});					
-	}).done(function() {
-		
-	});	
-}
-/*END Typology*/
 
 
 function addTowerPP () {
