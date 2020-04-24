@@ -167,7 +167,8 @@ public class PaymentPlanController {
 				.getTowerPPExclusiondData()); /* return json data */
 	}
 	/* END */
-
+	
+	@PostMapping(value="/deleteTowerPPExclusion")
 	public @ResponseBody String deleteTowerPPExclusion(@RequestParam("Id") int id) 
 	{
 		if(id!=0){
@@ -182,7 +183,7 @@ public class PaymentPlanController {
 			return "{\"status\":\"STATUS_NOTOK\",\"error_msg\":\"Invalid Data Provide\"}";
 		}
 	}
-	/* END */
+
 
 	
 	@PostMapping(value = "/savePaymentPlanRanking",produces = "application/json")
@@ -199,11 +200,9 @@ public class PaymentPlanController {
 	}
 
 
-	
-	//Bulk insert for Payment Plan Ranking
-			@PostMapping(value = "/bulkInsertPaymentRanking", produces = "application/json")
-			public @ResponseBody String bulkInsertSchemeMapping(@RequestParam("rankingJson") String rankingJson) // add parameter 
-			{		
+	@PostMapping(value = "/bulkInsertPaymentRanking", produces = "application/json")
+	public @ResponseBody String bulkInsertSchemeMapping(@RequestParam("rankingJson") String rankingJson) // add parameter 
+	{		
 				GsonBuilder gsonBuilder = new GsonBuilder();
 				Gson gson = gsonBuilder.create();
 				
