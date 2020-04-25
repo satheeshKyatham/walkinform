@@ -52,11 +52,15 @@ public class PaymentPlanDueDaoImpl extends AbstractDao<Integer, PaymentPlanDue> 
 	@Override
 	public boolean updatePaymentDueQuery(PaymentPlanDue setDto) {
 		Session session = this.sessionFactory.getCurrentSession();
-		Query query = session.createQuery("UPDATE PaymentPlanDue  set  dues_amount="+setDto.getDues_amount()+",pymt_plan_id='"+setDto.getPymt_plan_id()+"',"
+		/*Query query = session.createQuery("UPDATE PaymentPlanDue  set  dues_amount="+setDto.getDues_amount()+",pymt_plan_id='"+setDto.getPymt_plan_id()+"',"
 				+ "pymt_plan_name='"+setDto.getPymt_plan_name()+"' ,project_id='"+setDto.getProject_id()+"' ,project_name='"+setDto.getProject_name()+"',"
 						+ "region_id='"+setDto.getRegion_id()+"',region_name='"+setDto.getRegion_name()+"',towerid='"+setDto.getTowerid()+"',tower_name='"+setDto.getTower_name()+"'"
 				
-				+ " WHERE id = '"+setDto.getId()+"' ");
+				+ " WHERE id = '"+setDto.getId()+"' ");*/
+		//dues_amount='"+setDto.getDues_amount()+"',days='"+setDto.getDays()+"',
+		Query query = session.createNativeQuery("UPDATE salesforce.gpl_cs_due_against_pymtplan  set dues_amount='"+setDto.getDues_amount()+"',days='"+setDto.getDays()+"', bookingamount='"+setDto.getBookingamount()+"',payplan_milestones='"+setDto.getPayplan_milestones()+"' "
+				
+				+ " WHERE gpl_cs_due_against_pymtplan_id = "+setDto.getId()+" ");
 		query.executeUpdate();
 		return true;
 	}

@@ -85,13 +85,13 @@ public class PaymentPlanDueServiceImpl implements PaymentPlanDueService{
 					ppLine.setIscompleted(obj.get("iscompleted").getAsString());
 					ppLine.setAmount(obj.get("amount").getAsString());
 					ppLine.setOrder(obj.get("order").getAsDouble());
-					System.out.println("ID : "+obj.get("id").getAsInt());
-					System.out.println("sfid : "+obj.get("sfid").getAsString());
+					//System.out.println("ID : "+obj.get("id").getAsInt());
+					//System.out.println("sfid : "+obj.get("sfid").getAsString());
 					pplineitem.add(ppLine);
 				}
 			}
-			String msg=" Under the Construnction Linked Plan amount due within "+paymenPlanDue.get(0).getDays()+" days of booking is";
-			returnStr = "{\"bookingamount\":"+paymenPlanDue.get(0).getBookingamount()+",\"days\":"+paymenPlanDue.get(0).getDays()+",\"msg\":\""+msg+"\",\"paymentPlanList\":"+gson.toJson(pplineitem)+"}";
+			String msg=" Under the "+paymenPlanDue.get(0).getPymt_plan_name()+" amount due within "+paymenPlanDue.get(0).getDays()+" days of booking is";
+			returnStr = "{\"id\":"+paymenPlanDue.get(0).getId()+",\"dues_amount\":"+paymenPlanDue.get(0).getDues_amount()+",\"bookingamount\":"+paymenPlanDue.get(0).getBookingamount()+",\"days\":"+paymenPlanDue.get(0).getDays()+",\"msg\":\""+msg+"\",\"paymentPlanList\":"+gson.toJson(pplineitem)+"}";
 		}
 		return returnStr;
 	}
@@ -114,6 +114,9 @@ public class PaymentPlanDueServiceImpl implements PaymentPlanDueService{
 		setDto.setUpdatedby("9999");
 		setDto.setTowerid(data.getTowerid());
 		setDto.setTower_name(data.getTower_name());	
+		setDto.setPayplan_milestones(data.getPayplan_milestones());
+		setDto.setDays(data.getDays());
+		setDto.setBookingamount(data.getBookingamount());
 		Timestamp updatedTimestamp = new Timestamp(System.currentTimeMillis());
         setDto.setUpdated(updatedTimestamp);
 		boolean updateDto=paymentPlanDueDao.updatePaymentDueQuery(setDto);

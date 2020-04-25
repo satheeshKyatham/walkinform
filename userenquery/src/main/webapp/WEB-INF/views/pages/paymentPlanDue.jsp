@@ -46,7 +46,7 @@
 					<select id="towerMst" required="required" onchange="inventoryUnitTypeMst()" class="form-control"> </select>
 				 </div>
 				 
-		    	<div class="form-group col-md-3">
+		    	<div class="form-group col-md-3" id="ppDropdownDiv" style="display: none;">
 					<label>Payment Plan <strong class="mndt">*</strong></label>
 					<select class="form-control" id="ppDropdown" onchange="getPymentPlanLineItems()"> </select>
 				</div>
@@ -63,20 +63,24 @@
 				</div>	
 				<div class="form-group col-md-2">
 					<label>Days</label>
-					<input id="days_id" type="number" class="form-control" />
+					<input id="days_id" type="number" value="30" class="form-control" />
 				</div>
 				<div class="form-group col-md-2" style="display: none;">
 					<label>String %</label>
 					<input id="ppmilestone_json_id" type="text" class="form-control" />
-				</div>			
+				</div>	
+				<div class="form-group col-md-2" style="display: none;">
+					<label>ID</label>
+					<input id="ppmilestone_pk_id" type="text" class="form-control" />
+				</div>		
 		    	
 		    	<div class="clearfix"></div>
 		    	
-		    	<div class="form-group col-md-3">
+		    	<!-- <div class="form-group col-md-3">
 		    		<label style="display: block;"> &nbsp; </label>
 		    		<button id="paymentDueSubmit" style="display:none;" type="submit" class="btn btn-primary" onclick="addPaymentDue()">Submit</button>
 		    		<div class="clearfix"></div>
-		    	</div>
+		    	</div> -->
 		    	
 		    	 <div class="clearfix"></div>
 		    </div>		    
@@ -143,7 +147,11 @@
 		</table>
 	        </div>
 		</div>
-	
+	<div class="form-group col-md-3">
+		    		<label style="display: block;"> &nbsp; </label>
+		    		<button id="paymentDueSubmit" type="submit" class="btn btn-primary" onclick="addPaymentDue()">Submit</button>
+		    		<div class="clearfix"></div>
+		    	</div>
 	
 	<script src="<c:url value='/resources/js/jquery-1.12.4.min.js' />"></script>
 	<script src="<c:url value='/resources/js/bootstrap.min.js'/>"></script>

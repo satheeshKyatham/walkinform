@@ -22,7 +22,7 @@ public class PaymentPlanDue extends PO{
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "gpl_cs_due_against_pymtplan_id")
 	private int id;		
-	@Column(name = "dues_amount")private double dues_amount;
+	@Column(name = "dues_amount")private Double dues_amount;
 	@Column(name = "pymt_plan_id")private String pymt_plan_id;
 	@Column(name = "pymt_plan_name")private String pymt_plan_name;
 	@Column(name = "project_id")private String project_id;
@@ -35,7 +35,7 @@ public class PaymentPlanDue extends PO{
 	@Column(name = "tower_name")private String tower_name;
 	@Column(name = "payplan_milestones")private String payplan_milestones;
 	@Column(name = "bookingamount")private Double bookingamount;
-	@Column(name = "days")private Integer days;
+	@Column(name = "days")private Double days;
 	@Transient private String insertStatus;
 	public int getId() {
 		return id;
@@ -117,10 +117,10 @@ public class PaymentPlanDue extends PO{
 	public void setPayplan_milestones(String payplan_milestones) {
 		this.payplan_milestones = payplan_milestones;
 	}
-	public double getDues_amount() {
+	public Double getDues_amount() {
 		return dues_amount;
 	}
-	public void setDues_amount(double dues_amount) {
+	public void setDues_amount(Double dues_amount) {
 		this.dues_amount = dues_amount;
 	}
 	public Double getBookingamount() {
@@ -129,10 +129,10 @@ public class PaymentPlanDue extends PO{
 	public void setBookingamount(Double bookingamount) {
 		this.bookingamount = bookingamount;
 	}
-	public Integer getDays() {
+	public Double getDays() {
 		return days;
 	}
-	public void setDays(Integer days) {
+	public void setDays(Double days) {
 		this.days = days;
 	}
 	
