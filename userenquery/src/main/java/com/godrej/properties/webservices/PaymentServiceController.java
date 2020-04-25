@@ -79,7 +79,7 @@ public class PaymentServiceController {
 		if(paymentPlanLineItems_str==null)
 		{
 		  paymentPlanLineItems= paymentPlanLineItemService.getpaymentplanlist(payment_plan_sfid);
-		  return "{\"bookingamount\":0,\"days\":0,\"msg\":\"\",\"paymentPlanList\":"+gson.toJson(paymentPlanLineItems)+"}";
+		  return "{\"id\":0,\"bookingamount\":0,\"dues_amount\":0,\"days\":0,\"msg\":\"\",\"paymentPlanList\":"+gson.toJson(paymentPlanLineItems)+"}";
 		}
 		else
 		{

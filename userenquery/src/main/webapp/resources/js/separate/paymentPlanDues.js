@@ -116,10 +116,14 @@ function towerList (e, source) {
 		});					
 	}).done(function() {
 		$('#paymentDueSubmit').show();
+		
 	});
 }
 
-
+function inventoryUnitTypeMst()
+{
+	$('#ppDropdownDiv').show();	
+}
 
 function addPaymentDue () {
 	debugger
@@ -144,6 +148,8 @@ function addPaymentDue () {
 	formData.append("payplan_milestones",$('#ppmilestone_json_id').val());
 	formData.append("bookingamount",$('#booking_amount_id').val());
 	formData.append("days",$('#days_id').val());
+	if($('#ppmilestone_pk_id').val()!=null)
+		formData.append("id",$('#ppmilestone_pk_id').val());
 	var submitURL="savePaymentPlanWithDue";
 	var object = {};
 	formData.forEach(function(value, key){
@@ -171,7 +177,7 @@ function addPaymentDue () {
 	        		    timer: 2000,
 	        		    type: "success",
 	    			});
-	        		getPymentPlanDueData();
+	        		//getPymentPlanDueData();
 	        		$('#projectDataList').val("");
 	        		$('#projectDataList :selected').text("");
 	        		$('#due_amount').val("");
@@ -184,6 +190,10 @@ function addPaymentDue () {
 	        		$('#towerMst :selected').text("");
 	        		$('#towerMst').val("");
 	        		
+	        		$('#due_amount').val("");
+	        		$('#booking_amount_id').val("");
+	        		$('#days_id').val("30");
+	        		$('#paymentListId tbody tr.paymentPlanListRow').remove();
 	        		
 	        	}else{
 	        		swal({
@@ -437,8 +447,8 @@ debugger
 
 function getPymentPlanLineItems()
 {
-	alert($('#projectDataList').val());
-	$('#paymentListId tbody tr.paymentDataPlotRow').remove();
+	//alert($('#projectDataList').val());
+	$('#paymentListId tbody tr.paymentPlanListRow').remove();
 	//getpaymentplanlist
 	$.get(pageContext+"getpaymentplanlist_due?project_sfid="+$('#projectDataList').val()+"&tower_sfid="+$('#towerMst').find('option:selected').attr('name')+"&payment_plan_sfid="+$('#ppDropdown').val()+"",function(data){
 		
@@ -452,18 +462,24 @@ function getPymentPlanLineItems()
 		var actionBtn = "";
 		
 		if(data!=null){
-				$("#PaymentLinkForSales").empty();
+			$("#ppmilestone_pk_id").val(data.id);
+			$("#due_amount").val(data.dues_amount);
+			$("#booking_amount_id").val(data.bookingamount);
+				//$("#paymentListIdHead").empty();
+				//alert(data.paymentPlanList.length)
 				//$("#PaymentLinkForSales").append (obj[0].request_url);
-				for(i = 0; i< data.length; i++){    
-					console.log("get",data[i])
-					/*var regionname=obj[i].region_name==undefined?'':obj[i].region_name;
-					var projectname=obj[i].project_name==undefined?'':obj[i].project_name;
-					var towername=obj[i].tower_name==undefined?'':obj[i].tower_name;
+				for(i = 0; i< data.paymentPlanList.length; i++){    
+					console.log("get",data.paymentPlanList[i])
+					var percentage=data.paymentPlanList[i].Per==null?'':data.paymentPlanList[i].Per;
+					var amountplan=data.paymentPlanList[i].Amount==null?'':data.paymentPlanList[i].Amount;
+					/*var towername=obj[i].tower_name==undefined?'':obj[i].tower_name;
 					var pymtplanname=obj[i].pymt_plan_name==undefined?'':obj[i].pymt_plan_name;
 					var dueamount=obj[i].dues_amount==undefined?'':obj[i].dues_amount;*/
 					
-					
-					html += 	'<tr class="paymentDataPlotRow" data-rowid = '+data[i].id+'><td class="sfid_p">'+data[i].sfid+'</td><td class="id_p">'+data[i].id+'</td><td class="milestone_p">'+data[i].Milestone+'</td><td class="ptPKID">'+data[i].Per+'</td><td class="amount_p">'+data[i].Amount+'</td><td class="order_p">'+data[i].order+'</td><td><input type="checkbox" class="paymentRowEoicheck" onclick="milestoneChecked()"></td></tr>' ;
+					var ischecked="";
+					if(data.paymentPlanList[i].iscompleted=="Y")
+						ischecked="checked";
+					html += 	'<tr class="paymentPlanListRow" data-rowid = '+data.paymentPlanList[i].id+'><td class="sfid_p" style="display: none;">'+data.paymentPlanList[i].sfid+'</td><td class="id_p" style="display: none;">'+data.paymentPlanList[i].id+'</td><td class="milestone_p">'+data.paymentPlanList[i].Milestone+'</td><td class="ptPKID">'+percentage+'</td><td class="amount_p">'+amountplan+'</td><td class="order_p" style="display: none;">'+data.paymentPlanList[i].order+'</td><td><input type="checkbox" '+ischecked+' class="paymentPlanRowcheck" onchange="milestoneChecked()"></td></tr>' ;
 								
 				}
 				
@@ -496,14 +512,13 @@ var k = 0;
 var arrayData = [];
 var sumPer=0;
 
-$("#paymentListId .paymentDataPlotRow").each(function () {
-	/*if(!$(this).find('.paymentRowEoicheck').is(':not(:checked)'))
-		{*/
-	$(this).prevAll().find('input:checkbox').prop('checked', true);
-	 var csPtData = {};
-      if ($(this).find('.paymentRowEoicheck').is(':checked')) {
-    	  //var index = $(this).closest('td').index();
-    	  	//$(this).closest('tr').prev().find('input:checkbox').eq(index).prop('checked', true);
+$("#paymentListId .paymentPlanListRow").each(function () {
+	if ($(this).find('.paymentPlanRowcheck').is(':checked')) {
+		$(this).prevAll().find('input:checkbox').prop('checked', true);
+	}
+	//alert($(this).find(".milestone_p").text());
+	// var csPtData = {};
+     /* if ($(this).find('.paymentPlanRowcheck').is(':checked')) {
              sumPer=Number(sumPer)+Number($(this).find(".ptPKID").text());
              csPtData.id=$(this).find(".id_p").text();
              csPtData.isactive="Y";
@@ -518,8 +533,8 @@ $("#paymentListId .paymentDataPlotRow").each(function () {
              
              k++
              return false;
-      }
-      else 
+      }*/
+     /* else 
     	  {
     	  	sumPer=Number(sumPer)+Number($(this).find(".ptPKID").text());
     	  	csPtData.id=$(this).find(".id_p").text();
@@ -532,12 +547,45 @@ $("#paymentListId .paymentDataPlotRow").each(function () {
             csPtData.amount=$(this).find(".amount_p").text();
             csPtData.order=$(this).find(".order_p").text();
             arrayData.push(csPtData);
-    	  }
-		/*}*/
+    	  }*/
      
 });
 
-
+$("#paymentListId .paymentPlanListRow").each(function () {
+	//alert("saf");
+	var csPtData = {};
+     if ($(this).find('.paymentPlanRowcheck').is(':checked')) {
+            sumPer=Number(sumPer)+Number($(this).find(".ptPKID").text());
+            csPtData.id=$(this).find(".id_p").text();
+            csPtData.isactive="Y";
+            csPtData.iscompleted="Y";
+            csPtData.per=$(this).find(".ptPKID").text();
+            csPtData.totalper=sumPer;
+            csPtData.name=$(this).find(".milestone_p").text();
+            csPtData.sfid=$(this).find(".sfid_p").text();
+            csPtData.amount=$(this).find(".amount_p").text();
+            csPtData.order=$(this).find(".order_p").text();
+            arrayData.push(csPtData);
+            
+            k++
+           // return false;
+     }
+     else 
+   	  {
+   	  	//sumPer=Number(sumPer)+Number($(this).find(".ptPKID").text());
+   	  	csPtData.id=$(this).find(".id_p").text();
+           csPtData.isactive="Y";
+           csPtData.iscompleted="N";
+           csPtData.per=$(this).find(".ptPKID").text();
+//           csPtData.totalper=sumPer;
+           csPtData.totalper=0;
+           csPtData.name=$(this).find(".milestone_p").text();
+           csPtData.sfid=$(this).find(".sfid_p").text();
+           csPtData.amount=$(this).find(".amount_p").text();
+           csPtData.order=$(this).find(".order_p").text();
+           arrayData.push(csPtData);
+   	  }
+});
 $('#due_amount').val(sumPer);
 //alert(sumPer);
 //alert(arrayData);
