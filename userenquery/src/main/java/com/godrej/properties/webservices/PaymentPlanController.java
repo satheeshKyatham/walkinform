@@ -95,9 +95,18 @@ public class PaymentPlanController {
 	{	
 		PaymentPlanDue duePaymentPlan=new PaymentPlanDue();
 		if(data != null && data.getTowerid() != null && data.getProject_id() != null){
-		duePaymentPlan = paymentPlanDueService.addPaymentPlanDue(data);  /*add payment pLan with due*/
-		duePaymentPlan.setInsertStatus("Status_OK");
-		return duePaymentPlan;
+		String paymentPlanLineItems_str = paymentPlanDueService.getPaymentDueList(data.getProject_id(),data.getTowerid(),data.getPymt_plan_id());
+		
+			if(paymentPlanLineItems_str==null)
+			{
+				duePaymentPlan = paymentPlanDueService.addPaymentPlanDue(data);  /*add payment pLan with due*/
+				duePaymentPlan.setInsertStatus("Status_OK");
+				return duePaymentPlan;
+			}
+			else
+			{
+				return paymentPlanDueService.updatePaymentDue(data);
+			}
 		}else{
 
 			duePaymentPlan.setInsertStatus("Status_NOTOK");
