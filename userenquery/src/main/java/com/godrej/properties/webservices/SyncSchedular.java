@@ -17,8 +17,8 @@ import com.godrej.properties.service.ContactReportService;
 import com.godrej.properties.service.EnquiryReportService;
 import com.godrej.properties.service.HoldInventoryEntryService;
 import com.godrej.properties.service.PushEnquiryDataService;
-/*
-@Configuration
+
+/*@Configuration
 @EnableScheduling*/
 @Controller
 @Transactional 

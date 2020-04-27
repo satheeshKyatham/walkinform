@@ -28,6 +28,10 @@ public class PaymentPlanLineItemDaoImpl extends AbstractDao<Integer, PaymentPlan
 			PaymentPlanLineItem a=list.get(list.size()-1);
 			a.setLastRowYN("Y");
 			list.set(list.size()-1, a);
+			if(list.get(0).getMilestone().contains("DUMMY") || list.get(0).getMilestone().contains("Dummy"))
+			{
+				list.remove(list.get(0));
+			}
 			return list;
 		}
 		return list;
