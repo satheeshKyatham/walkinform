@@ -645,7 +645,7 @@ function convertNumberToWords() {
 function printApplicationOfferForm(offerSFID, rowId) {
 	var pageContext = $("#pageContext").val()+"/";
 	
-	$.post(pageContext+"printApplicationForm",{"enqSfid":offerSFID,"appFormData":$('#printApplicationFormOffer').html(),"projectName":$('#appProjectNameOffer').val(),"reraRegistrationNo":reraRegistrationNo},function(data){				 
+	$.post(pageContext+"printApplicationForm",{"projectid":$('#projectid').val(), "enqSfid":offerSFID,"appFormData":$('#printApplicationFormOffer').html(),"projectName":$('#appProjectNameOffer').val(),"reraRegistrationNo":reraRegistrationNo},function(data){				 
 		
 	}).done(function(data){
 		

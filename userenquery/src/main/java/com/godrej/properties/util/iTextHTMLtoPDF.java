@@ -101,7 +101,7 @@ public class iTextHTMLtoPDF {
 	
 	
 	
-public static void ApplicationFormPDF(String appFormData, String enqSfid, String projectName, String reraRegistrationNo) throws JRException, IOException {
+public static void ApplicationFormPDF(String appFormData, String enqSfid, String projectName, String reraRegistrationNo, String projectid) throws JRException, IOException {
 		
 		try {
 	      Document document = new Document(PageSize.A4);
@@ -123,10 +123,19 @@ public static void ApplicationFormPDF(String appFormData, String enqSfid, String
 			 * document.addTitle("Please read this");
 			 */
 			 
-			 
 	      XMLWorkerHelper worker = XMLWorkerHelper.getInstance();
 	      
-	      String str = "<html><head><style>body{font-size:12px;}.table-bordered {border: 0; border-color: #333333; border-right-width: 1px; border-right-style: solid;  border-bottom-width: 1px; border-bottom-style: solid;} table {font-size:12px; border-collapse: collapse; border-spacing: 1px; width:100%;} th,td {padding:8px;} th {border: 0; border-color: #333333; border-left-width: 1px; border-left-style: solid;  border-top-width: 1px; border-top-style: solid; border-collapse: collapse; border-spacing: 1px; } td {border: 0; border-color: #333333; border-left-width: 1px; border-left-style: solid;  border-top-width: 1px; border-top-style: solid; border-collapse: collapse; border-spacing: 1px; }</style></head><body><table class='' style='margin-top:0px; margin-bottom:15px; text-align:center; font-size:16px;'> <tbody> <tr> <th style='text-transform: uppercase !important; height:100px;  color:#000000;   vertical-align: top; font-size:20px !important; text-align:left; border: 0; border-color: #ffffff; border-left-width: 0px; border-left-style: solid;  border-top-width: 0px; border-top-style: solid; border-collapse: collapse; border-spacing: 1px; '> <img height='50' width='191' src='https://d4u.gplapps.com:8085/walkinform/resources/images/gplLogo.jpg' /> </th> <th id='appProjectName' style='text-transform: uppercase !important; height:100px;  color:#666666;   vertical-align: top; font-size:18px !important; text-align:right; border: 0; border-color: #ffffff; border-left-width: 0px; border-left-style: solid;  border-top-width: 0px; border-top-style: solid; border-collapse: collapse; border-spacing: 1px; '> "+projectName+" <div></div> <span style='font-size:10px !important;'>RERA registration no. "+reraRegistrationNo+"</span> </th> </tr> <tr> <th colspan='2' style='border: 0; border-color: #ffffff; border-left-width: 0px; border-left-style: solid;  border-top-width: 0px; border-top-style: solid; border-collapse: collapse; border-spacing: 1px; '> APPLICATION FORM</th> </tr> </tbody> </table>"+appFormData+"</body></html>";
+	      String reraLabel = "";
+	      
+	      if (projectid.equals("a1l6F000003TXloQAG") ) {
+	    	  reraLabel = "WBHIRA registration no.";
+	    	  reraRegistrationNo = "HIRA/P/SOU/2019/000456 / HIRA/P/SOU/2019/000455";
+	      } else {
+	    	  reraLabel = "RERA registration no.";
+	    	  reraRegistrationNo = reraRegistrationNo;
+	      }
+	      
+	      String str = "<html><head><style>body{font-size:12px;}.table-bordered {border: 0; border-color: #333333; border-right-width: 1px; border-right-style: solid;  border-bottom-width: 1px; border-bottom-style: solid;} table {font-size:12px; border-collapse: collapse; border-spacing: 1px; width:100%;} th,td {padding:8px;} th {border: 0; border-color: #333333; border-left-width: 1px; border-left-style: solid;  border-top-width: 1px; border-top-style: solid; border-collapse: collapse; border-spacing: 1px; } td {border: 0; border-color: #333333; border-left-width: 1px; border-left-style: solid;  border-top-width: 1px; border-top-style: solid; border-collapse: collapse; border-spacing: 1px; }</style></head><body><table class='' style='margin-top:0px; margin-bottom:15px; text-align:center; font-size:16px;'> <tbody> <tr> <th style='text-transform: uppercase !important; height:100px;  color:#000000;   vertical-align: top; font-size:20px !important; text-align:left; border: 0; border-color: #ffffff; border-left-width: 0px; border-left-style: solid;  border-top-width: 0px; border-top-style: solid; border-collapse: collapse; border-spacing: 1px; '> <img height='50' width='191' src='https://d4u.gplapps.com:8085/walkinform/resources/images/gplLogo.jpg' /> </th> <th id='appProjectName' style='text-transform: uppercase !important; height:100px;  color:#666666;   vertical-align: top; font-size:18px !important; text-align:right; border: 0; border-color: #ffffff; border-left-width: 0px; border-left-style: solid;  border-top-width: 0px; border-top-style: solid; border-collapse: collapse; border-spacing: 1px; '> "+projectName+" <div></div> <span style='font-size:10px !important;'>"+reraLabel+" "+reraRegistrationNo+"</span> </th> </tr> <tr> <th colspan='2' style='border: 0; border-color: #ffffff; border-left-width: 0px; border-left-style: solid;  border-top-width: 0px; border-top-style: solid; border-collapse: collapse; border-spacing: 1px; '> APPLICATION FORM</th> </tr> </tbody> </table>"+appFormData+"</body></html>";
 	      worker.parseXHtml(pdfWriter, document, new StringReader(str));
 	      document.close();
 	      }

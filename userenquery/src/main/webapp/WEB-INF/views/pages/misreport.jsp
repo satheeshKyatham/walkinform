@@ -18,6 +18,10 @@
 <link rel="stylesheet" href="<c:url value='/resources/css/inner.css?v=3.0' />">
 <link rel="stylesheet" href="<c:url value='/resources/css/style.css' />">
 <link rel="stylesheet" href="<c:url value='/resources/css/enqMap.css' />">
+
+<link rel="stylesheet" href="<c:url value='/resources/css/multiselectDD/prettify.min.css' />" type="text/css">
+<link rel="stylesheet" href="<c:url value='/resources/css/multiselectDD/bootstrap-multiselect.css' />" type="text/css">
+
 <%-- 
 <script src="<c:url value='/resources/js/bootstrap.min.js'/>"></script>
 <script src="<c:url value='/resources/js/salesdesk.js'/>"></script>
@@ -80,6 +84,20 @@ projectid=request.getParameter("projectid");
 			</h4>
 			<div class="clearfix"></div>
 		</div>
+		
+		<div style="display:none;">
+			<!-- Build your select: -->
+			<select id="example-getting-started" multiple="multiple" >
+			    <option value="cheese">Cheese</option>
+			    <option value="tomatoes">Tomatoes</option>
+			    <option value="mozarella">Mozzarella</option>
+			    <option value="mushrooms">Mushrooms</option>
+			    <option value="pepperoni">Pepperoni</option>
+			    <option value="onions">Onions</option>
+			</select>
+		</div>
+		
+		
 		<div>
 			<ul class="nav nav-tabs tabNav">
 				<li class="active" id="basicInfoTabId">
@@ -202,6 +220,7 @@ projectid=request.getParameter("projectid");
 			</div>
 	</div>
 
+
 <script src="<c:url value='/resources/js/jquery-1.12.4.min.js'/>"></script>
 <script src="<c:url value='/resources/js/bootstrap.min.js'/>"></script>  
 
@@ -221,5 +240,12 @@ projectid=request.getParameter("projectid");
 <script src="<c:url value='/resources/js/separate/allotmentreport.js?v=18.18'/>"></script>
 <%-- <script src="<c:url value='/resources/js/separate/offer.js?v=18.10'/>"></script> --%>
 
+<script src="<c:url value='/resources/js/multiselectDD/prettify.min.js'/>"></script>
+<script src="<c:url value='/resources/js/multiselectDD/bootstrap-multiselect.js'/>"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#example-getting-started').multiselect();
+    });
+</script>
 </body>
 </html>  
