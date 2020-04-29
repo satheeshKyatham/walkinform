@@ -64,7 +64,7 @@ public class EnqAndOfferDtl implements Serializable{
 	@Column(name="saleable_area__c", precision = 10, scale = 2)  private BigDecimal saleable_area__c;
 	
 	@Column(name="wing_block__c") private String wing_block__c;
-	
+	@Column(name="tower_rera_no") private String tower_rera_no;
 	
 	@Transient
 	private Map<String, InventoryOtherCharges> mappedCharges;
@@ -267,5 +267,10 @@ public class EnqAndOfferDtl implements Serializable{
 	public void setSaleable_area__c(BigDecimal saleable_area__c) {
 		this.saleable_area__c = saleable_area__c;
 	}
-
+	public String getTower_rera_no() {
+		return tower_rera_no;
+	}
+	public void setTower_rera_no(String tower_rera_no) {
+		this.tower_rera_no = tower_rera_no;
+	}
 }
