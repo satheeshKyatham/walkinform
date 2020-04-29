@@ -8,6 +8,7 @@ $.ajaxSetup({
 });
 
 var reraRegistrationNo = '';
+var towerReraRegistrationNo = '';
 
 function getofferApplicantDetails (e, offerSFID, enqSFID, contactSFID, offerName, enqName, propSFID, rowId, sourceCall) {	
 	
@@ -298,6 +299,12 @@ function getEnqAndOfferDtl (enqSFID, offerSFID, rowId) {
 				reraRegistrationNo = '';
 			}
 			
+			if (obj[0].tower_rera_no != undefined){
+				towerReraRegistrationNo = obj[0].tower_rera_no;
+			} else {
+				towerReraRegistrationNo = '';
+			}
+			
 			if (obj[0].propstrength__enquiry_type__c != "Partner") {
 				
 				if (obj[0].walk_in_source__c != undefined){
@@ -337,8 +344,10 @@ function getEnqAndOfferDtl (enqSFID, offerSFID, rowId) {
 			
 			if (obj[0].project_phases__c != undefined) {
 				$('#projectPhasOffer').html('in ' + obj[0].project_phases__c);
+				$('.towerPhasNameOffer').html(obj[0].project_phases__c);
 			} else {
 				$('#projectPhasOffer').html('');
+				$('.towerPhasNameOffer').html('');
 			}
 			
 			
@@ -644,6 +653,10 @@ function convertNumberToWords() {
 
 function printApplicationOfferForm(offerSFID, rowId) {
 	var pageContext = $("#pageContext").val()+"/";
+	
+	if ($('#projectid').val() == "a1l6F000003TXloQAG"){
+		reraRegistrationNo = towerReraRegistrationNo;
+	}
 	
 	$.post(pageContext+"printApplicationForm",{"projectid":$('#projectid').val(), "enqSfid":offerSFID,"appFormData":$('#printApplicationFormOffer').html(),"projectName":$('#appProjectNameOffer').val(),"reraRegistrationNo":reraRegistrationNo},function(data){				 
 		
