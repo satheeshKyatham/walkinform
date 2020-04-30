@@ -15,9 +15,9 @@
 
 <link rel="stylesheet" href="<c:url value='/resources/css/font-awesome.css' />" type="text/css" />
 
-<link rel="stylesheet" href="<c:url value='/resources/css/inner.css?v=3.0' />">
-<link rel="stylesheet" href="<c:url value='/resources/css/style.css' />">
-<link rel="stylesheet" href="<c:url value='/resources/css/enqMap.css' />">
+<link rel="stylesheet" href="<c:url value='/resources/css/inner.css?v=${sessionScope.version}' />">
+<link rel="stylesheet" href="<c:url value='/resources/css/style.css?v=${sessionScope.version}' />">
+<link rel="stylesheet" href="<c:url value='/resources/css/enqMap.css?v=${sessionScope.version}' />">
 
 <link rel="stylesheet" href="<c:url value='/resources/css/multiselectDD/prettify.min.css' />" type="text/css">
 <link rel="stylesheet" href="<c:url value='/resources/css/multiselectDD/bootstrap-multiselect.css' />" type="text/css">
@@ -224,9 +224,9 @@ projectid=request.getParameter("projectid");
 <script src="<c:url value='/resources/js/jquery-1.12.4.min.js'/>"></script>
 <script src="<c:url value='/resources/js/bootstrap.min.js'/>"></script>  
 
-<script src="<c:url value='/resources/js/separate/applicationForm.js?v=18.19'/>"></script>
+<script src="<c:url value='/resources/js/separate/applicationForm.js?v=${sessionScope.version}'/>"></script>
 
-<script src="<c:url value='/resources/js/separate/offerApplicationForm.js?v=18.20'/>"></script>
+<script src="<c:url value='/resources/js/separate/offerApplicationForm.js?v=${sessionScope.version}'/>"></script>
 
 
 <script type="text/javascript" charset="utf8" src="<c:url value='/resources/js/jquery.dataTables.js'/>"></script>
@@ -235,9 +235,9 @@ projectid=request.getParameter("projectid");
 <script src="<c:url value='/resources/js/jszip.min.js'/>"></script>
 <script src="<c:url value='/resources/js/buttons.html5.min.js'/>"></script>
 
-<script src="<c:url value='/resources/js/enquiryRequest/misreport.js?v=18.18'/>"></script>
-<script src="<c:url value='/resources/js/separate/eoiReport.js?v=18.18'/>"></script>
-<script src="<c:url value='/resources/js/separate/allotmentreport.js?v=18.18'/>"></script>
+<script src="<c:url value='/resources/js/enquiryRequest/misreport.js?v=${sessionScope.version}'/>"></script>
+<script src="<c:url value='/resources/js/separate/eoiReport.js?v=${sessionScope.version}'/>"></script>
+<script src="<c:url value='/resources/js/separate/allotmentreport.js?v=${sessionScope.version}'/>"></script>
 <%-- <script src="<c:url value='/resources/js/separate/offer.js?v=18.10'/>"></script> --%>
 
 <script src="<c:url value='/resources/js/multiselectDD/prettify.min.js'/>"></script>
