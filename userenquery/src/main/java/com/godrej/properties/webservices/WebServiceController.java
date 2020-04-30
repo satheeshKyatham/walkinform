@@ -33,9 +33,7 @@ import org.ksoap2.serialization.SoapObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -76,7 +74,6 @@ import com.godrej.properties.model.EOIPreferenceDtl;
 import com.godrej.properties.model.Enquiry;
 import com.godrej.properties.model.ExtraCharges;
 import com.godrej.properties.model.ExtraChargesHis;
-import com.godrej.properties.model.GeneratePayment;
 import com.godrej.properties.model.HoldInventoryAdmin;
 import com.godrej.properties.model.HoldInventoryAdminLog;
 import com.godrej.properties.model.InventoryAdmin;
@@ -85,7 +82,6 @@ import com.godrej.properties.model.OrderDataMapping;
 import com.godrej.properties.model.OtherCharges;
 import com.godrej.properties.model.PaymentDtl;
 import com.godrej.properties.model.PaymentPlan;
-import com.godrej.properties.model.PaymentPlanDue;
 import com.godrej.properties.model.PaymentPlanJson;
 import com.godrej.properties.model.PaymentPlanLineItem;
 import com.godrej.properties.model.PaymentPlanWithOtherCharge;
@@ -446,6 +442,10 @@ public class WebServiceController<MultipartFormDataInput> {
 	
 	@Autowired
 	private PaymentPlanDueService paymentPlanDueService;
+	
+	@Autowired
+	private DrupalInventoryStatusUpdate drupalInventoryStatusUpdate;
+	
 	
 	@RequestMapping(value = "/activeproject", method = RequestMethod.GET, produces = "application/json")
 	public String project() {
@@ -3090,10 +3090,14 @@ public class WebServiceController<MultipartFormDataInput> {
 				,@RequestParam("unitNames") String unitNames
 				) {
 		 
-			
+				
 				 String [] data= unitsfid.split(",");
 				 String [] units= unitNames.split(",");
 				 StringBuilder error = new StringBuilder();
+				 
+				 StringBuilder successUnitUpdate = new StringBuilder();
+				 String drupalUpdateUnit = "";
+				 
 				 for (int i=0;i<data.length;i++){
 					try {
 						HoldInventoryAdmin inventoryAdmin = new HoldInventoryAdmin();
@@ -3118,12 +3122,23 @@ public class WebServiceController<MultipartFormDataInput> {
 						inventoryAdminLog.setEoi_unit_locked(false);
 		
 						inventoryService.saveHoldInventoryAdminLog(inventoryAdminLog);
+						
+						successUnitUpdate.append(data[i]);
+						successUnitUpdate.append(",");
 					} catch (Exception e) {
 						log.error("error", e);
 						error.append("/n Problem in releasing Unit - ")
 						.append(units[i]);
 					}
 				}
+				 
+				drupalUpdateUnit = successUnitUpdate.toString();
+				if (drupalUpdateUnit != null && drupalUpdateUnit.length() > 0 && drupalUpdateUnit.charAt(drupalUpdateUnit.length() - 1) == ',') {
+					drupalUpdateUnit = drupalUpdateUnit.substring(0, drupalUpdateUnit.length() - 1);
+				}
+				 
+				drupalInventoryStatusUpdate.inventoryStatusUpdate(drupalUpdateUnit, "false");
+				 
 		String errorMessage = error.toString();
 		if(errorMessage!=null && !errorMessage.isEmpty()){
 			return errorMessage;
