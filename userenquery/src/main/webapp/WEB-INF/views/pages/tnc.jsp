@@ -50,6 +50,11 @@
 						<option value="">Select</option>
 					</select>
 				</div>
+				
+				<div class="form-group col-md-3">
+					<label>Tower</label>
+					<select id="towerMst" class="form-control"> </select>
+				</div>
 		    	
 		    	<div class="form-group col-md-3">
 					<label>Payment Plan</label>
@@ -57,7 +62,7 @@
 						<option value="">Select</option>
 					</select>
 				</div>
-		    	
+				
 		    	<div class="clearfix"></div>
 		    	
 				<div class="form-group col-md-7">

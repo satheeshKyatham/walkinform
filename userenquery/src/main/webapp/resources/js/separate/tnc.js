@@ -19,7 +19,7 @@ function addTnCCharge () {
 		}*/
 		
 		//	alert ("HTML ::: " + $('.Editor-editor').html() );
-		$.post(pageContext+"insertTnCForPP",{"tnc_text":$('.Editor-editor').html(),  "project_id":$('#projectDataList').val(), "project_name":$('#projectDataList :selected').text(), "pymt_plan_id":$('#ppDropdown').val(), "pymt_plan_name":$('#ppDropdown :selected').text(), "region_id":$('#regionList').val(), "region_name":$('#regionList :selected').text()},function(data){				 
+		$.post(pageContext+"insertTnCForPP",{"tnc_text":$('.Editor-editor').html(),  "project_id":$('#projectDataList').val(), "project_name":$('#projectDataList :selected').text(), "pymt_plan_id":$('#ppDropdown').val(), "pymt_plan_name":$('#ppDropdown :selected').text(), "region_id":$('#regionList').val(), "region_name":$('#regionList :selected').text(),"tower_sfid":$('#towerMst').find('option:selected').attr('name')   },function(data){				 
 			
 		}).done(function(data){
 			//alert(data.insertStatus);
@@ -68,6 +68,7 @@ function projectDataList (){
 			$('#projectDataList').append("<option value='"+value.sfid+"'>"+value.name+  " / " +value.propstrength__project_code__c+ "</option>");
 		});					
 	}).done(function() {
+		towerList ();
 	});
 }
 
@@ -82,11 +83,28 @@ function paymentPlanDropdown (){
 			$('#ppDropdown').append('<option value='+value.sfid+'>'+value.name+'</option>');
 		});					
 	}).done(function() {
-		
+		towerList ();
 	});
 }
-
 
 $(document).ready(function() {
 	$("#tnc_text").Editor();
 });
+
+
+
+
+function towerList () {
+	$('#towerMst').empty();	
+	var projectNameVal = $("#projectDataList").val();
+	var urlTower = pageContext+"getTowerMaster?project_code="+projectNameVal;
+	
+	$.getJSON(urlTower, function (data) {
+		$('#towerMst').append('<option name="" value="">Select</option>');
+		$.each(data, function (index, value) {
+			$('#towerMst').append("<option name='"+value.sfid+"' value='"+value.tower_code__c+"'>"+value.tower_name__c+"</option>");
+		});					
+	}).done(function() {
+		
+	});
+}

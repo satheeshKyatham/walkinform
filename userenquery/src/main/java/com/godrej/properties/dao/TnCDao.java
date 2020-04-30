@@ -8,7 +8,7 @@ import com.godrej.properties.model.TnC;
 public interface TnCDao {
 	void insertTNCForPP (TnC tnC);
 	
-	List<TnC> getTncData (String ppId, String projectid);
+	List<TnC> getTncData (String ppId, String projectid, String tower_sfid);
 	
 	
 }

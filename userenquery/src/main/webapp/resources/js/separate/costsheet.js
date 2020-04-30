@@ -2477,7 +2477,7 @@ function newOtherCharges2 () {
                                                      +'</div>'; 
                     
                     //Forest Grove at Godrej Park Greens / Godrej Hillside 2 / Godrej Nurture, Bengaluru / Godrej Seven, Kolkata / Godrej Park Greens, Pune
-                    if ($('#projectid').val() != "a1l2s00000003lPAAQ"  &&  $('#projectid').val() != "a1l2s00000000X5AAI"  && $('#projectid').val() != "a1l6F000009D6IMQA0" && $('#projectid').val() != "a1l2s00000000pEAAQ" && $('#projectid').val() != "a1l6F000003TXloQAG" && $('#projectid').val() != "a1l6F000005hPm5QAE" ) {
+                    if ($('#projectid').val() != "a1l6F000008gL4oQAE" && $('#projectid').val() != "a1l6F000001kj37QAA" &&  $('#projectid').val() != "a1l6F000001l2yqQAA" && $('#projectid').val() != "a1l6F0000080irTQAQ" &&  $('#projectid').val() != "a1l2s00000003lPAAQ"  &&  $('#projectid').val() != "a1l2s00000000X5AAI"  && $('#projectid').val() != "a1l6F000009D6IMQA0" && $('#projectid').val() != "a1l2s00000000pEAAQ" && $('#projectid').val() != "a1l6F000003TXloQAG" && $('#projectid').val() != "a1l6F000005hPm5QAE" ) {
                     	$('#totalDiscountCol').append(printDiscountHtml);
                     	$('#totalDicountView').show();
                     } else {
@@ -2603,7 +2603,7 @@ $('#csFormatType').on('change', function() {
 
 
 function tncData () {
-       $.post(pageContext+"getTncData",{"ppId":$('#ppDropdown').val(), "projectid":$('#projectid').val() },function(data){                      
+       $.post(pageContext+"getTncData",{"ppId":$('#ppDropdown').val(), "projectid":$('#projectid').val(), "tower_sfid":$('#towerSfid').val() },function(data){                      
        }).done(function(data){
              $('.tncData').empty();
              var obj =JSON.parse(data);

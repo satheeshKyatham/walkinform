@@ -710,8 +710,13 @@ public class WebServiceController<MultipartFormDataInput> {
 	
 	/* insert T&C against Payment Plan */
 	@RequestMapping(value = "/insertTnCForPP", method = RequestMethod.POST)
-	public TnC insertTnCForPP(@RequestParam("tnc_text") String tnc_text,  @RequestParam("project_id") String project_id,    @RequestParam("project_name") String project_name, @RequestParam("pymt_plan_id") String pymt_plan_id, @RequestParam("pymt_plan_name") String pymt_plan_name, @RequestParam("region_id") String region_id, @RequestParam("region_name") String region_name) // add parameter 
+	public TnC insertTnCForPP(@RequestParam("tnc_text") String tnc_text,  @RequestParam("project_id") String project_id,    @RequestParam("project_name") String project_name, @RequestParam("pymt_plan_id") String pymt_plan_id, @RequestParam("pymt_plan_name") String pymt_plan_name, @RequestParam("region_id") String region_id, @RequestParam("region_name") String region_name , @RequestParam("tower_sfid") String tower_sfid) // add parameter 
 	{	
+		
+		if (tower_sfid.equals("")) {
+			tower_sfid = null;
+		}
+		
 		TnC oc = new TnC();
 		
 		oc.setTnc_text(tnc_text);
@@ -724,6 +729,8 @@ public class WebServiceController<MultipartFormDataInput> {
 		oc.setRegion_name(region_name);
 		oc.setCreatedby("9999");
 		oc.setUpdatedby("9999");
+		oc.setTower_sfid(tower_sfid);
+		
 		
 		tnCService.insertTNCForPP(oc);
 		
@@ -744,14 +751,14 @@ public class WebServiceController<MultipartFormDataInput> {
 	
 	/* Get TNC Data */
 	@RequestMapping(value = "/getTncData", method = RequestMethod.POST)
-	public String insertTnCForPP(@RequestParam("ppId") String ppId, @RequestParam("projectid") String projectid) // add parameter 
+	public String insertTnCForPP(@RequestParam("ppId") String ppId, @RequestParam("projectid") String projectid, @RequestParam("tower_sfid") String tower_sfid) // add parameter 
 	{	
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		Gson gson = gsonBuilder.create();
 		
 		
 		
-		List<TnC> tnC = tnCService.getTncData (ppId, projectid);
+		List<TnC> tnC = tnCService.getTncData (ppId, projectid, tower_sfid);
 		
 		return gson.toJson(tnC);
 	}

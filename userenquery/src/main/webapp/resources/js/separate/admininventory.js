@@ -611,10 +611,11 @@ function holdInterval (e, sfid, unitNo, floor) {
 
 
 
-function viewCostsheet (e, sfid, unitNo, floor) {
+/*function viewCostsheet (e, sfid, unitNo, floor) {
 	$('#unitSfid').val(sfid);
+	$('#towerSfid').val()
 	$('#costsheetTab a').trigger('click');	
-}
+}*/
 
 
 
