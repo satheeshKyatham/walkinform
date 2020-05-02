@@ -1060,7 +1060,9 @@ function paymentPlanOtherCharges (firstRowObj){
                    $('.payableStampAndReg').remove();
              }
              
-             if ($('#projectId').val() == 'a1l2s00000000pEAAQ' || $('#projectId').val() == 'a1l6F000004LVk8QAG') {
+             
+             
+             if ($('#projectId').val() == 'a1l2s00000000pEAAQ' || $('#projectId').val() == 'a1l6F000004LVk8QAG' || $('#region__c').val() == "Noida" || $('#region__c').val() == "Gurgaon"  ||  $('#region__c').val() == "New Delhi" ) {
             	 $('.payableStampAndReg').remove();
              } 
              
@@ -2327,7 +2329,7 @@ function newOtherCharges2 () {
                     registrationCharges = 0;
                     
              //Remove below else if after South launch      
-             }else if ($('#region__c').val() == "Noida" || $('#region__c').val() == "Gurgaon"  ||  $('#region__c').val() == "Bangalore"){
+             }else if ($('#region__c').val() == "Noida" || $('#region__c').val() == "Gurgaon"  ||  $('#region__c').val() == "Bangalore" ||  $('#region__c').val() == "New Delhi"){
                     stampDuty = 0;
                     registrationCharges = 0;
                     
@@ -2477,15 +2479,16 @@ function newOtherCharges2 () {
                                                      +'</div>'; 
                     
                     //Forest Grove at Godrej Park Greens / Godrej Hillside 2 / Godrej Nurture, Bengaluru / Godrej Seven, Kolkata / Godrej Park Greens, Pune
-                    if ($('#projectid').val() != "a1l6F000008gL4oQAE" && $('#projectid').val() != "a1l6F000001kj37QAA" &&  $('#projectid').val() != "a1l6F000001l2yqQAA" && $('#projectid').val() != "a1l6F0000080irTQAQ" &&  $('#projectid').val() != "a1l2s00000003lPAAQ"  &&  $('#projectid').val() != "a1l2s00000000X5AAI"  && $('#projectid').val() != "a1l6F000009D6IMQA0" && $('#projectid').val() != "a1l2s00000000pEAAQ" && $('#projectid').val() != "a1l6F000003TXloQAG" && $('#projectid').val() != "a1l6F000005hPm5QAE" ) {
+                   /* if ($('#projectid').val() != "a1l6F000008gL4oQAE" && $('#projectid').val() != "a1l6F000001kj37QAA" &&  $('#projectid').val() != "a1l6F000001l2yqQAA" && $('#projectid').val() != "a1l6F0000080irTQAQ" &&  $('#projectid').val() != "a1l2s00000003lPAAQ"  &&  $('#projectid').val() != "a1l2s00000000X5AAI"  && $('#projectid').val() != "a1l6F000009D6IMQA0" && $('#projectid').val() != "a1l2s00000000pEAAQ" && $('#projectid').val() != "a1l6F000003TXloQAG" && $('#projectid').val() != "a1l6F000005hPm5QAE" ) {
                     	$('#totalDiscountCol').append(printDiscountHtml);
                     	$('#totalDicountView').show();
                     } else {
                     	$('#totalDiscountCol').append('');
                     	$('#totalDicountView').hide();
-                    }
+                    }*/
                     
-                    
+                    $('#totalDiscountCol').append('');
+                	$('#totalDicountView').hide();
                     
                     
                     
