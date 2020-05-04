@@ -40,12 +40,8 @@ public class EnqAndOfferDtlDaoImpl extends AbstractDao<Integer, EnqAndOfferDtl> 
 				+ " a.sfid, "
 				+ " a.propstrength__request__c, "
 				+ " a.propstrength__total_basic_sale_price__c, "
-				
 				+ " a.propstrength__net_revenue__c, "
 				+ " a.propstrength__total_other_charges__c, "
-				
-				
-				
 				+ " g.marketing_project_name__c, "
 				+ " f.propstrength__floor_name__c, "
 				+ " b.walk_in_source__c, "
@@ -56,10 +52,9 @@ public class EnqAndOfferDtlDaoImpl extends AbstractDao<Integer, EnqAndOfferDtl> 
 				+ " g.jv_country__c, "
 				+ " g.jv_city__c, "
 				+ " g.propstrength__description__c, "
-				
 				+ " e.project_phases__c, "
-				
 				+ " d.appurtenant_area_sq_mt__c, "
+				+ " CASE  WHEN d.appurtenant_area_sq_ft__c IS NULL THEN CAST(0 as double precision)  ELSE d.appurtenant_area_sq_ft__c  END AS appurtenant_area_sq_ft__c, "
 				+ " d.carpet_area_converted__c,"
 				+ " e.propstrength__tower_name__c, "
 				+ " d.propstrength__property_name__c, "
@@ -70,11 +65,10 @@ public class EnqAndOfferDtlDaoImpl extends AbstractDao<Integer, EnqAndOfferDtl> 
 				+ " g.rera_registration_number__c, "
 				+ " d.sfid as prop_sfid, "
 				+ " d.open_balc_sq_mt__c, "
+				+ " CASE  WHEN d.open_balc_sq_ft__c IS NULL THEN CAST(0 as double precision)  ELSE d.open_balc_sq_ft__c  END AS open_balc_sq_ft__c, "
 				+ " d.saleable_area__c, "
 				+ " d.wing_block__c, "
 				+ " e.rera_registration_number__c as tower_rera_no"
-				
-				
 				
 				+ " FROM salesforce.propstrength__offer__c a "
 				+ " INNER JOIN salesforce.propstrength__request__c b ON a.propstrength__request__c = b.sfid  "

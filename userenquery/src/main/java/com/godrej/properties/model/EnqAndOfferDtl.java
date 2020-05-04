@@ -69,6 +69,10 @@ public class EnqAndOfferDtl implements Serializable{
 	@Transient
 	private Map<String, InventoryOtherCharges> mappedCharges;
 	
+	@Column(name="appurtenant_area_sq_ft__c") private double appurtenant_area_sq_ft__c;
+	@Column(name="open_balc_sq_ft__c") private double open_balc_sq_ft__c;
+	
+	
 	public int getId() {
 		return id;
 	}
@@ -272,5 +276,17 @@ public class EnqAndOfferDtl implements Serializable{
 	}
 	public void setTower_rera_no(String tower_rera_no) {
 		this.tower_rera_no = tower_rera_no;
+	}
+	public double getAppurtenant_area_sq_ft__c() {
+		return appurtenant_area_sq_ft__c;
+	}
+	public void setAppurtenant_area_sq_ft__c(double appurtenant_area_sq_ft__c) {
+		this.appurtenant_area_sq_ft__c = appurtenant_area_sq_ft__c;
+	}
+	public double getOpen_balc_sq_ft__c() {
+		return open_balc_sq_ft__c;
+	}
+	public void setOpen_balc_sq_ft__c(double open_balc_sq_ft__c) {
+		this.open_balc_sq_ft__c = open_balc_sq_ft__c;
 	}
 }
