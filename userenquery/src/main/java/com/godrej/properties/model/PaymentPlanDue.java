@@ -35,7 +35,7 @@ public class PaymentPlanDue extends PO{
 	@Column(name = "tower_name")private String tower_name;
 	@Column(name = "payplan_milestones")private String payplan_milestones;
 	@Column(name = "bookingamount")private Double bookingamount;
-	@Column(name = "days")private Double days;
+	@Column(name = "days")private Integer days;
 	@Transient private String insertStatus;
 	public int getId() {
 		return id;
@@ -129,12 +129,10 @@ public class PaymentPlanDue extends PO{
 	public void setBookingamount(Double bookingamount) {
 		this.bookingamount = bookingamount;
 	}
-	public Double getDays() {
+	public Integer getDays() {
 		return days;
 	}
-	public void setDays(Double days) {
+	public void setDays(Integer days) {
 		this.days = days;
-	}
-	
-	
+	}	
 }
