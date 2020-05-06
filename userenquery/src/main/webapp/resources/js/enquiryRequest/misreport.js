@@ -9,6 +9,9 @@ $.ajaxSetup({
         }
     }
 });
+
+var selectedProject = [];
+
 $(document).ready(function() {
 	debugger;
 	var today = new Date();
@@ -18,11 +21,55 @@ $(document).ready(function() {
 	getAllEnquiryFormReport();
 	
 	
+
+	  
+	var urlGetUsers = "getProjectListUserWise?userid="+$('#userid').val();	
+  	$.getJSON(urlGetUsers, function (data) {
+  		
+  		var defaultSelected = "";
+  		//option = "<select class='inputLabel' onchange='onProjectSelect()' id='projectSelected' style='border-color: #000000 !important;   width: 100%;    min-height: 33px;    margin-bottom: 5px;'><option>Select Type</option>";
+  		option = "";
+  		//var option = '';
+  		
+  		$.each(data, function (index, value) {
+  			/*var name='';
+  			if(value.name==undefined)
+  				name='';
+  			else
+  				name=value.name;*/
+  			
+  			if (value.projectId == $('#projectid').val()) {
+  				defaultSelected = "selected";
+  			} else {
+  				defaultSelected = "";
+  			}
+  			
+  			option = option+"<option value="+value.projectId+" "+defaultSelected+">"+value.projectName+"</option>";
+  		});		
+  		//option=option+"</select>";
+  	}).done(function() {
+  		$("#multiselectProject").append(option);
+  		
+  		 $('#multiselectProject').multiselect({
+  			maxHeight: '200',
+  			allSelectedText: 'All',
+  			includeSelectAllOption: true
+  		 });
+  	});
+
+	
+	
 });
 
-function getDatewiseReport()
-{
+function getDatewiseReport() {
 	
+	var project = $('#multiselectProject option:selected');
+	selectedProject = [];
+	$(project).each(function(index, brand){
+		selectedProject.push($(this).val());
+	});
+
+	//console.log(selectedProject);
 	
 	getAllEnquiryFormReport();
 	$("#txtFromDate1").val($('#txtFromDate').val());
@@ -38,9 +85,22 @@ function getAllEnquiryFormReport()
 	//alert($('#txtToDate').val());
 	$("#misReportDetails").dataTable().fnDestroy();
 	$("#misReportDetails tbody").empty();
-	 $("#mainPageLoad").show();//$('#projectid').val() -- $('#txtFromDate').val()
-	var urlPP = "misReport?projectid="+$('#projectid').val()+"&userid=&fromdate="+$('#txtFromDate').val()+"&todate="+$('#txtToDate').val();
-	var i = 0
+	$("#mainPageLoad").show();//$('#projectid').val() -- $('#txtFromDate').val()
+	
+	$('#multiProjectid').val(""); 
+	 
+	 var urlPP = '';
+	 if(selectedProject=='' || selectedProject==null){
+		 $('#multiProjectid').val($('#projectid').val());
+		 urlPP = "misReport?projectid="+$('#projectid').val()+"&userid=&fromdate="+$('#txtFromDate').val()+"&todate="+$('#txtToDate').val();
+	 } else {
+		 $('#multiProjectid').val(selectedProject.join(","));
+		 urlPP = "misReport?projectid="+selectedProject.join(",")+"&userid=&fromdate="+$('#txtFromDate').val()+"&todate="+$('#txtToDate').val();
+	 } 
+	 
+	//var urlPP = "misReport?projectid="+$('#projectid').val()+"&userid=&fromdate="+$('#txtFromDate').val()+"&todate="+$('#txtToDate').val();
+	
+	 var i = 0
 	$.getJSON(urlPP, function (data) {
 		$.each(data, function (index, value) {
 

@@ -12,6 +12,9 @@ $.ajaxSetup({
 });
 var pageContext = $("#contextPath").val()+"/";	
 
+/*var visible = true;
+var tableContainer = '';
+var table = '';*/
 
 function getInventoryReportDtl () {
 	
@@ -158,11 +161,16 @@ function getInventoryReportDtl () {
 		
 		$('#inventoryReportDtl').DataTable( {
 			 dom: 'Bfrtip',
+			 //fixedHeader: true,
 			 "buttons": [
 				 { "extend": 'excel', "text":'Export To Excel',"className": 'btn btn-default btn-xs' }
 		      ],
 		      "order": []
 		 });
 		
+		//visible = true;
+		//tableContainer = $(table.table().container());
 	});	
 }
+
+

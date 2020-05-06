@@ -2479,7 +2479,6 @@ public class WebServiceController<MultipartFormDataInput> {
 	@RequestMapping(value = { "/misReport"}, method = RequestMethod.GET)
 	public String userMappingList(@RequestParam("projectid") String projectid,@RequestParam("userid") String userid,@RequestParam("fromdate") String fromdate,@RequestParam("todate") String todate) {
 		Gson gson = new GsonBuilder().serializeNulls().create();
-		//Vw_MISReport
 		return gson.toJson(vW_MISReportService.getUserProjectList(projectid,userid, fromdate, todate));
 	}
 	

@@ -22,9 +22,29 @@ public class VW_MISReportServiceImpl implements VW_MISReportService {
 	
 	@Override
 	public List<Vw_MISReport> getUserProjectList(String projectid,String userid, String fromDate, String toDate) {
-		// TODO Auto-generated method stub
+		 
+		
+		// For multiple project report
+		String [] multiProjectid= projectid.split(",");
+		
+		StringBuilder modifiedProid = new StringBuilder();
+		String finalProjectid = "";
+		
+		for (int i=0;i<multiProjectid.length;i++){
+			modifiedProid.append("'"+multiProjectid[i]+"'");
+			modifiedProid.append(",");
+		}
+		
+		finalProjectid = modifiedProid.toString();
+		
+		if (finalProjectid != null && finalProjectid.length() > 0 && finalProjectid.charAt(finalProjectid.length() - 1) == ',') {
+			finalProjectid = finalProjectid.substring(0, finalProjectid.length() - 1);
+		}
+		// END For multiple project report
+		
+		
 		List<Vw_MISReport> finalMislist = new ArrayList<Vw_MISReport>();
-		List<Vw_MISReport> mislist  = vW_MISReportDao.getUserProjectList(projectid,userid, fromDate, toDate);
+		List<Vw_MISReport> mislist  = vW_MISReportDao.getUserProjectList(finalProjectid,userid, fromDate, toDate);
 		if(mislist!=null && mislist.size()>0)
 		{
 			for (int i = 0; i < mislist.size(); i++) {

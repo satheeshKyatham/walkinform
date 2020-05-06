@@ -53,7 +53,7 @@
 			<div class="clearfix"></div>
 			
 			<div class="col-md-12">
-				<table class="table table-bordered" id="inventoryReportDtl">
+				<table class="table table-bordered display" id="inventoryReportDtl">
 					<thead>
 						<tr>
 							<th>Hold/ Block</th>

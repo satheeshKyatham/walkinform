@@ -27,11 +27,12 @@
 <script src="<c:url value='/resources/js/salesdesk.js'/>"></script>
 <script src="<c:url value='/resources/js/jquery-1.12.4.min.js'/>"></script> --%>
 </head>
-<%! String projectid,projectname,projectnameReq;%>
+<%! String projectid,projectname,projectnameReq,userid;%>
 <%HttpSession ses=request.getSession(); 
 projectname=(String)ses.getAttribute("PRONAME");
 projectnameReq =request.getParameter("projectname");
 projectid=request.getParameter("projectid");
+userid=(String)ses.getAttribute("USERID");
 %>
 <input type="hidden" id="projectid" value="<%= projectid%>">
 <script type="text/javascript">
@@ -44,6 +45,9 @@ projectid=request.getParameter("projectid");
 <body onLoad="noBack();" onpageshow="if (event.persisted) noBack();" onUnload="">  
   <input type="hidden" id="contextPath" value="${pageContext.request.contextPath}">
   <input type="hidden" id="projectname" value="<%= projectnameReq %>">
+  <input type="hidden" id="userid" value="<%=userid%>">
+  
+  
   <!-- <input type="text" > -->
 	<nav class="navbar topMainBar">
 	<div class="container">
@@ -85,19 +89,6 @@ projectid=request.getParameter("projectid");
 			<div class="clearfix"></div>
 		</div>
 		
-		<div style="display:none;">
-			<!-- Build your select: -->
-			<select id="example-getting-started" multiple="multiple" >
-			    <option value="cheese">Cheese</option>
-			    <option value="tomatoes">Tomatoes</option>
-			    <option value="mozarella">Mozzarella</option>
-			    <option value="mushrooms">Mushrooms</option>
-			    <option value="pepperoni">Pepperoni</option>
-			    <option value="onions">Onions</option>
-			</select>
-		</div>
-		
-		
 		<div>
 			<ul class="nav nav-tabs tabNav">
 				<li class="active" id="basicInfoTabId">
@@ -131,7 +122,22 @@ projectid=request.getParameter("projectid");
 				<div class="well center-block">
 					<div class="form-inline">
 						
-						<i class="glyphicon glyphicon-filter" style="border-right: 1px solid #333; margin-right: 10px; padding-right: 10px;"></i>
+						<div>
+							<div class="form-group">	
+							<label for="exampleInputNameDate">Project(s) </label>  
+							<!-- Build your select: -->
+							<select id="multiselectProject" multiple="multiple" >
+							   <!--  <option value="cheese">Proj 1</option>
+							    <option value="tomatoes">Proj 2</option>
+							    <option value="mozarella">Proj 3</option>
+							    <option value="mushrooms">Proj 4</option> -->
+							</select>
+						</div>
+						<div class="clearfix"></div>
+						<br>
+						
+						
+						
 						
 						<div class="form-group">
 							<label for="exampleInputNameDate">From Date</label> 
@@ -145,6 +151,9 @@ projectid=request.getParameter("projectid");
 							<label for="exampleInputNameDate">Search</label> 
 							<input class="form-control" type="button" value="Search" name="Search" id="amsearch" onclick="getDatewiseReport()"/>
 						</div>
+							<div class="clearfix"></div>
+						</div>
+						
 					</div>
 					<div class="clearfix"></div>
 				</div>
@@ -156,8 +165,12 @@ projectid=request.getParameter("projectid");
 					<div class="clearfix"></div>
 					<!-- <h4>Assign Token to user.</h4> -->
 					<form:form action="downloadCSV" method="post" id="downloadCSV">
-						<input type="hidden" id="projectid" value="<%=projectid%>" name="projectid"/>
-						<input type="hidden" id="userid" value="" name="userid"/>
+						<%-- <input type="hidden" id="projectid" value="<%=projectid%>" name="projectid"/> --%>
+						
+						<!-- Set multiple project sfid in input -->
+						<input type="hidden" id="multiProjectid" value="" name="projectid"/>
+						
+						<!-- <input type="hidden" id="userid" value="" name="userid"/> -->
 						<%-- <input type="hidden" value="<%=projectid%>" name="fromdate"/>
 						<input type="hidden" value="<%=projectid%>" name="todate"/> --%>
 						<fieldset style="width: 400px;">
@@ -242,10 +255,10 @@ projectid=request.getParameter("projectid");
 
 <script src="<c:url value='/resources/js/multiselectDD/prettify.min.js'/>"></script>
 <script src="<c:url value='/resources/js/multiselectDD/bootstrap-multiselect.js'/>"></script>
-<script type="text/javascript">
+<!-- <script type="text/javascript">
     $(document).ready(function() {
         $('#example-getting-started').multiselect();
     });
-</script>
+</script> -->
 </body>
 </html>  
