@@ -26,25 +26,38 @@ public class TnCDaoImpl extends AbstractDao<Integer, TnC> implements TnCDao {
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public  List<TnC> getTncData(String ppId, String projectid) {	 
+	public  List<TnC> getTncData(String ppId, String projectid, String tower_sfid) {	 
 		
 		Session session = this.sessionFactory.getCurrentSession();
 		
 		try {
 			List<TnC> list  =session.createQuery(" FROM  TnC where project_id = '"+projectid+"' "
-					+ " AND pymt_plan_id = '"+ppId+"'  and isactive = 'A'  order by id DESC ").list();
-			
+					+ " AND pymt_plan_id = '"+ppId+"' AND tower_sfid is NULL and isactive = 'A'  order by id DESC ").list();
 			if(list.size()>0) {
 				return list;
 			} else {
-				List<TnC> list1  =session.createQuery(" FROM  TnC where project_id = '"+projectid+"' "
-						+ " AND pymt_plan_id = '' AND isactive = 'A'  order by id DESC ").list();
-				if(list1.size()>0) {	
-					return list1;
+				List<TnC> listTowerAndPP  =session.createQuery(" FROM  TnC where project_id = '"+projectid+"' "
+						+ " AND pymt_plan_id = '"+ppId+"' AND tower_sfid='"+tower_sfid+"' AND isactive = 'A'  order by id DESC ").list();
+				if(listTowerAndPP.size()>0) {	
+					return listTowerAndPP;
 				} else {
-					return null;
+					List<TnC> listTower  =session.createQuery(" FROM  TnC where project_id = '"+projectid+"' "
+							+ " AND pymt_plan_id = '' AND tower_sfid='"+tower_sfid+"' AND isactive = 'A'  order by id DESC ").list();
+					
+					if(listTower.size()>0) {	
+						return listTower;
+					} else {
+						List<TnC> list1  =session.createQuery(" FROM  TnC where project_id = '"+projectid+"' "
+								+ " AND pymt_plan_id = '' AND tower_sfid is NULL AND isactive = 'A'  order by id DESC ").list();
+						if(list1.size()>0) {	
+							return list1;
+						} else {
+							return null;
+						}
+						
+					}
 				}
-			}
+			} 
 		} catch (Exception e) {
 			Log.info("Get TnC for Cost Sheet Error:- ",e);
 			return null;

@@ -33,9 +33,7 @@ import org.ksoap2.serialization.SoapObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -76,7 +74,6 @@ import com.godrej.properties.model.EOIPreferenceDtl;
 import com.godrej.properties.model.Enquiry;
 import com.godrej.properties.model.ExtraCharges;
 import com.godrej.properties.model.ExtraChargesHis;
-import com.godrej.properties.model.GeneratePayment;
 import com.godrej.properties.model.HoldInventoryAdmin;
 import com.godrej.properties.model.HoldInventoryAdminLog;
 import com.godrej.properties.model.InventoryAdmin;
@@ -85,7 +82,6 @@ import com.godrej.properties.model.OrderDataMapping;
 import com.godrej.properties.model.OtherCharges;
 import com.godrej.properties.model.PaymentDtl;
 import com.godrej.properties.model.PaymentPlan;
-import com.godrej.properties.model.PaymentPlanDue;
 import com.godrej.properties.model.PaymentPlanJson;
 import com.godrej.properties.model.PaymentPlanLineItem;
 import com.godrej.properties.model.PaymentPlanWithOtherCharge;
@@ -447,6 +443,10 @@ public class WebServiceController<MultipartFormDataInput> {
 	@Autowired
 	private PaymentPlanDueService paymentPlanDueService;
 	
+	@Autowired
+	private DrupalInventoryStatusUpdate drupalInventoryStatusUpdate;
+	
+	
 	@RequestMapping(value = "/activeproject", method = RequestMethod.GET, produces = "application/json")
 	public String project() {
 		GsonBuilder gsonBuilder = new GsonBuilder();
@@ -710,8 +710,13 @@ public class WebServiceController<MultipartFormDataInput> {
 	
 	/* insert T&C against Payment Plan */
 	@RequestMapping(value = "/insertTnCForPP", method = RequestMethod.POST)
-	public TnC insertTnCForPP(@RequestParam("tnc_text") String tnc_text,  @RequestParam("project_id") String project_id,    @RequestParam("project_name") String project_name, @RequestParam("pymt_plan_id") String pymt_plan_id, @RequestParam("pymt_plan_name") String pymt_plan_name, @RequestParam("region_id") String region_id, @RequestParam("region_name") String region_name) // add parameter 
+	public TnC insertTnCForPP(@RequestParam("tnc_text") String tnc_text,  @RequestParam("project_id") String project_id,    @RequestParam("project_name") String project_name, @RequestParam("pymt_plan_id") String pymt_plan_id, @RequestParam("pymt_plan_name") String pymt_plan_name, @RequestParam("region_id") String region_id, @RequestParam("region_name") String region_name , @RequestParam("tower_sfid") String tower_sfid) // add parameter 
 	{	
+		
+		if (tower_sfid.equals("")) {
+			tower_sfid = null;
+		}
+		
 		TnC oc = new TnC();
 		
 		oc.setTnc_text(tnc_text);
@@ -724,6 +729,8 @@ public class WebServiceController<MultipartFormDataInput> {
 		oc.setRegion_name(region_name);
 		oc.setCreatedby("9999");
 		oc.setUpdatedby("9999");
+		oc.setTower_sfid(tower_sfid);
+		
 		
 		tnCService.insertTNCForPP(oc);
 		
@@ -744,14 +751,14 @@ public class WebServiceController<MultipartFormDataInput> {
 	
 	/* Get TNC Data */
 	@RequestMapping(value = "/getTncData", method = RequestMethod.POST)
-	public String insertTnCForPP(@RequestParam("ppId") String ppId, @RequestParam("projectid") String projectid) // add parameter 
+	public String insertTnCForPP(@RequestParam("ppId") String ppId, @RequestParam("projectid") String projectid, @RequestParam("tower_sfid") String tower_sfid) // add parameter 
 	{	
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		Gson gson = gsonBuilder.create();
 		
 		
 		
-		List<TnC> tnC = tnCService.getTncData (ppId, projectid);
+		List<TnC> tnC = tnCService.getTncData (ppId, projectid, tower_sfid);
 		
 		return gson.toJson(tnC);
 	}
@@ -2472,7 +2479,6 @@ public class WebServiceController<MultipartFormDataInput> {
 	@RequestMapping(value = { "/misReport"}, method = RequestMethod.GET)
 	public String userMappingList(@RequestParam("projectid") String projectid,@RequestParam("userid") String userid,@RequestParam("fromdate") String fromdate,@RequestParam("todate") String todate) {
 		Gson gson = new GsonBuilder().serializeNulls().create();
-		//Vw_MISReport
 		return gson.toJson(vW_MISReportService.getUserProjectList(projectid,userid, fromdate, todate));
 	}
 	
@@ -3090,10 +3096,14 @@ public class WebServiceController<MultipartFormDataInput> {
 				,@RequestParam("unitNames") String unitNames
 				) {
 		 
-			
+				
 				 String [] data= unitsfid.split(",");
 				 String [] units= unitNames.split(",");
 				 StringBuilder error = new StringBuilder();
+				 
+				 StringBuilder successUnitUpdate = new StringBuilder();
+				 String drupalUpdateUnit = "";
+				 
 				 for (int i=0;i<data.length;i++){
 					try {
 						HoldInventoryAdmin inventoryAdmin = new HoldInventoryAdmin();
@@ -3118,12 +3128,23 @@ public class WebServiceController<MultipartFormDataInput> {
 						inventoryAdminLog.setEoi_unit_locked(false);
 		
 						inventoryService.saveHoldInventoryAdminLog(inventoryAdminLog);
+						
+						successUnitUpdate.append(data[i]);
+						successUnitUpdate.append(",");
 					} catch (Exception e) {
 						log.error("error", e);
 						error.append("/n Problem in releasing Unit - ")
 						.append(units[i]);
 					}
 				}
+				 
+				drupalUpdateUnit = successUnitUpdate.toString();
+				if (drupalUpdateUnit != null && drupalUpdateUnit.length() > 0 && drupalUpdateUnit.charAt(drupalUpdateUnit.length() - 1) == ',') {
+					drupalUpdateUnit = drupalUpdateUnit.substring(0, drupalUpdateUnit.length() - 1);
+				}
+				 
+				drupalInventoryStatusUpdate.inventoryStatusUpdate(drupalUpdateUnit, "false");
+				 
 		String errorMessage = error.toString();
 		if(errorMessage!=null && !errorMessage.isEmpty()){
 			return errorMessage;

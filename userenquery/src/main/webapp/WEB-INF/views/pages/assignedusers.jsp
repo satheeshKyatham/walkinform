@@ -16,8 +16,8 @@
 	<link rel="icon" href="<c:url value='/resources/images/favicon.ico' />" type="image/x-icon">
 <link rel="stylesheet" href="<c:url value='/resources/css/bootstrap.min.css' />" type="text/css" />
      
-	<link rel="stylesheet" href="<c:url value='/resources/css/inner.css?v=3.0' />">
-	<link rel="stylesheet" href="<c:url value='/resources/css/style.css?v=3.0' />">
+	<link rel="stylesheet" href="<c:url value='/resources/css/inner.css?v=${sessionScope.version}' />">
+	<link rel="stylesheet" href="<c:url value='/resources/css/style.css?v=${sessionScope.version}' />">
 	<link rel="stylesheet" href="<c:url value='/resources/css/font-awesome.css' />">
 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
 	
@@ -354,16 +354,16 @@ if(ses!=null){
 	<script src="<c:url value='/resources/js/jszip.min.js'/>"></script>
 	<script src="<c:url value='/resources/js/buttons.html5.min.js'/>"></script>
 	
-	<script src="<c:url value='/resources/js/salesdesk.js?v=18.18'/>"></script>
-	<script src="<c:url value='/resources/js/enquiryRequest/assignedUser.js?v=18.18'/>"></script>
-	<script src="<c:url value='/resources/js/separate/offer.js?v=18.18'/>"></script>
-	<script src="<c:url value='/resources/js/enquiryRequest/misreportforClosing.js?v=18.18'/>"></script>
+	<script src="<c:url value='/resources/js/salesdesk.js?v=${sessionScope.version}'/>"></script>
+	<script src="<c:url value='/resources/js/enquiryRequest/assignedUser.js?v=${sessionScope.version}'/>"></script>
+	<script src="<c:url value='/resources/js/separate/offer.js?v=${sessionScope.version}'/>"></script>
+	<script src="<c:url value='/resources/js/enquiryRequest/misreportforClosing.js?v=${sessionScope.version}'/>"></script>
 	
-	<script src="<c:url value='/resources/js/separate/applicationForm.js?v=18.19'/>"></script>
-	<script src="<c:url value='/resources/js/separate/offerApplicationForm.js?v=18.20'/>"></script>
+	<script src="<c:url value='/resources/js/separate/applicationForm.js?v=${sessionScope.version}'/>"></script>
+	<script src="<c:url value='/resources/js/separate/offerApplicationForm.js?v=${sessionScope.version}'/>"></script>
 	
-	<script src="<c:url value='/resources/js/separate/eoiReportSales.js?v=18.18'/>"></script>
-	<script src="<c:url value='/resources/js/demo/offerTemplate.js?v=18.18'/>"></script>
+	<script src="<c:url value='/resources/js/separate/eoiReportSales.js?v=${sessionScope.version}'/>"></script>
+	<script src="<c:url value='/resources/js/demo/offerTemplate.js?v=${sessionScope.version}'/>"></script>
 	
 </body>
 </html>

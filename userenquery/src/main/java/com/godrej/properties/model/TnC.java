@@ -54,6 +54,9 @@ public class TnC implements Serializable{
 	@Transient
 	private String insertStatus;
 	
+	@Column(name = "tower_sfid")
+	private String tower_sfid;
+	
 	public int getId() {
 		return id;
 	}
@@ -152,6 +155,13 @@ public class TnC implements Serializable{
 
 	public void setInsertStatus(String insertStatus) {
 		this.insertStatus = insertStatus;
+	}
+
+	public String getTower_sfid() {
+		return tower_sfid;
+	}
+
+	public void setTower_sfid(String tower_sfid) {
+		this.tower_sfid = tower_sfid;
 	}	
-	
 }

@@ -26,13 +26,12 @@ public class InventoryReportDaoImpl implements InventoryReportDao{
 		
 		List<InventoryReport> authors=null;
 		
-		Query q = session.createNativeQuery(" SELECT  "
+		Query q = session.createNativeQuery(" SELECT  row_number() OVER () AS row_no, "
 				+ " e.name as enq_name, "
 				+ " f.name as customer_name, "
 				+ " f.mobile__c as customer_mobile, "
 				+ " a.enq_sfid, "
 				+ " a.eoi_unit_locked, "
-				
 				+ " a.gpl_cs_hold_admin_unit_id, "
 				+ " a.created_at, "
 				+ " a.sfid as unit_sfid, "
@@ -41,7 +40,6 @@ public class InventoryReportDaoImpl implements InventoryReportDao{
 				+ " a.hold_reason,  "
 				+ " a.hold_status,  "
 				+ " a.hold_description, " 
-				//+ " a.hold_behalf_username, "
 				+ " b.floor_number__c,  "
 				+ " b.propstrength__house_unit_no__c, " 
 				+ " b.tower_code__c, "
@@ -50,20 +48,28 @@ public class InventoryReportDaoImpl implements InventoryReportDao{
 				+ " c.emailid as admin_emailid, "
 				+ " b.propstrength__active__c, "
 				+ " b.tower_name__c, "
-
 				+ " b.wing_block__c, "
 				+ " b.saleable_area__c, "
 				+ " b.propstrength__rate_per_unit_area__c, "
-				
 				+ " d.user_name as hold_behalf_username, "
-				+ " d.emailid as hold_behalf_email "
+				+ " d.emailid as hold_behalf_email, "
+				
+				
+				+ " CASE WHEN h.propstrength__part_of_cop__c IS NULL THEN cast(false as boolean) ELSE h.propstrength__part_of_cop__c END AS propstrength__part_of_cop__c, "
+				+ " g.propstrength__type__c, "
+				+ " CASE WHEN g.propstrength__rate_per_unit_area__c IS NULL THEN cast(0 as numeric (20,2))  ELSE cast(g.propstrength__rate_per_unit_area__c as numeric (20,2))  END AS othercharge__rate_per_unit_area__c, "
+				+ " CASE WHEN g.propstrength__fixed_charge__c IS NULL THEN cast(0 as numeric (20,2)) ELSE cast(g.propstrength__fixed_charge__c as numeric (20,2)) END AS propstrength__fixed_charge__c "
+				
+				
 				+ " FROM salesforce.gpl_cs_hold_admin_unit a "
 				+ " INNER JOIN salesforce.propstrength__property__c b ON   b.sfid = a.sfid AND b.propstrength__active__c = true "
 				+ " LEFT JOIN salesforce.mst_user c ON cast(a.customer_id as integer) = c.user_id "
 				+ " LEFT JOIN salesforce.mst_user d ON a.hold_behalf_userid = d.user_id  "
-				
 				+ " LEFT  JOIN salesforce.propstrength__request__c e ON e.sfid = a.enq_sfid " 
 				+ " LEFT JOIN salesforce.contact f ON f.sfid = e.propstrength__primary_contact__c "
+				
+				+ " LEFT JOIN salesforce.propstrength__property_charges__c g ON g.propstrength__property__c = a.sfid "
+				+ " LEFT JOIN salesforce.propstrength__other_charges__c h ON CAST(g.propstrength__other_charges__c as text)  = CAST(h.sfid as text) "
 				
 				+ " where "+whereCondition+"  and a.hold_reason in ('block', 'temp') and  a.hold_status = true  order by a.created_at desc  ", InventoryReport.class);
 		

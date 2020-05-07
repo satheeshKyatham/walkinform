@@ -11,16 +11,14 @@ import org.springframework.stereotype.Service;
 
 import com.godrej.properties.dao.InventoryAdminDao;
 import com.godrej.properties.dao.InventoryDao;
-import com.godrej.properties.dao.PaymentPlanDao;
 import com.godrej.properties.dto.HoldInventoryAdminDao;
 import com.godrej.properties.dto.HoldInventoryAdminLogDao;
 import com.godrej.properties.model.HoldInventoryAdmin;
 import com.godrej.properties.model.HoldInventoryAdminLog;
 import com.godrej.properties.model.Inventory;
 import com.godrej.properties.model.InventoryAdmin;
-import com.godrej.properties.model.PaymentPlan;
 import com.godrej.properties.service.InventoryService;
-import com.godrej.properties.service.PaymentPlanService;
+import com.godrej.properties.webservices.DrupalInventoryStatusUpdate;
 
 @Service("inventoryService")
 @Transactional
@@ -37,6 +35,10 @@ public class InventoryServiceImpl implements InventoryService {
 	
 	@Autowired
 	HoldInventoryAdminLogDao holdInventoryAdminLogDao;
+	
+	@Autowired
+	DrupalInventoryStatusUpdate drupalInventoryStatusUpdate;
+	
 	
 	@Override
 	public List<Inventory> getUnitDtl(String project_code, String towerMst, String typoMst, String holdMst, String soldMst,String facing, String unitAvailable) {
@@ -141,6 +143,12 @@ public class InventoryServiceImpl implements InventoryService {
 			 
 			 saveHoldInventoryAdminLog(inventoryAdminLog);
 		 } 
+		 
+		 if (holdmsg.equals("block")) {
+			 drupalInventoryStatusUpdate.inventoryStatusUpdate(unitsfid, "true");
+		 }
+		 
+		 
 	}
 	
 	

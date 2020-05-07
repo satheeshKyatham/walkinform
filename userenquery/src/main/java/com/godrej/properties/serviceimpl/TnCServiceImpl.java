@@ -23,8 +23,8 @@ public class TnCServiceImpl implements TnCService{
 	
 	
 	@Override
-	public List<TnC> getTncData(String ppId, String projectid) {
+	public List<TnC> getTncData(String ppId, String projectid, String tower_sfid) {
 		// TODO Auto-generated method stub
-		return dao.getTncData(ppId, projectid);
+		return dao.getTncData(ppId, projectid, tower_sfid);
 	}
 }

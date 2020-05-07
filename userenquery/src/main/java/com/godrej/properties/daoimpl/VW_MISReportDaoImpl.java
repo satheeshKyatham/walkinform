@@ -26,11 +26,11 @@ public class VW_MISReportDaoImpl extends AbstractDao<Integer, Vw_MISReport> impl
 		List<Vw_MISReport> list =null;
 		
 		if(((fromDate!=null && fromDate.length()>0) && (toDate!=null && toDate.length()>0)) && (userid !=null && userid.length()>0) )
-			list =session.createQuery(" from Vw_MISReport where projectid= '"+projectid+"' and user_id="+userid+" and Date(created) between '"+fromDate+"' and '"+toDate+"' order by created desc ").list();
+			list =session.createQuery(" from Vw_MISReport where projectid= "+projectid+" and user_id="+userid+" and Date(created) between '"+fromDate+"' and '"+toDate+"' order by created desc ").list();
 		else if((fromDate!=null && fromDate.length()>0) && (toDate!=null && toDate.length()>0))
-			list =session.createQuery(" from Vw_MISReport where projectid= '"+projectid+"' and Date(created) between '"+fromDate+"' and '"+toDate+"' order by created desc ").list();
+			list =session.createQuery(" from Vw_MISReport where projectid in ("+projectid+") and Date(created) between '"+fromDate+"' and '"+toDate+"' order by projectname,created desc ").list();
 		else if(projectid!=null && projectid.length()>0)
-			list =session.createQuery(" from Vw_MISReport where projectid= '"+projectid+"' order by created desc ").list();
+			list =session.createQuery(" from Vw_MISReport where projectid in ("+projectid+") order by projectname,created desc ").list();
 		else
 			list =session.createQuery(" from Vw_MISReport ").list();
 		if(list.size()>0)

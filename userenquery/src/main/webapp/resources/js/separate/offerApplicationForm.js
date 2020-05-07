@@ -9,6 +9,15 @@ $.ajaxSetup({
 
 var reraRegistrationNo = '';
 var towerReraRegistrationNo = '';
+var reraLabel = "";
+
+if ($('#projectid').val() == "a1l6F000003TXloQAG"){
+	reraLabel = "WBHIRA";
+} else {
+	reraLabel = "RERA";
+}
+
+
 
 function getofferApplicantDetails (e, offerSFID, enqSFID, contactSFID, offerName, enqName, propSFID, rowId, sourceCall) {	
 	
@@ -327,7 +336,7 @@ function getEnqAndOfferDtl (enqSFID, offerSFID, rowId) {
 					broker_mobile = obj[0].broker_mobile;
 				}
 				
-				$('#modeOfBookingOffer tbody').append('<tr> <td colspan="2"> Direct or Channel Partner : <span>Channel Partner</span> </td> </tr> <tr> <td colspan="2">Name: <span>'+broker_name+'</span></td>  </tr> <tr> <td>RERA Registration No.______________ </td> <td>Valid upto ______________</td></tr>');
+				$('#modeOfBookingOffer tbody').append('<tr> <td colspan="2"> Direct or Channel Partner : <span>Channel Partner</span> </td> </tr> <tr> <td colspan="2">Name: <span>'+broker_name+'</span></td>  </tr> <tr> <td>'+reraLabel+' Registration No.______________ </td> <td>Valid upto ______________</td></tr>');
 				
 			}
 			
@@ -384,11 +393,14 @@ function getEnqAndOfferDtl (enqSFID, offerSFID, rowId) {
 			$('#flatNoOffer').text(obj[0].propstrength__property_name__c);
 			//$('#carpetAreaOffer').text(obj[0].carpet_area_converted__c);
 			
+			if ($('#projectid').val() == "a1l6F000003TXloQAG") {
+				$('#carpetAreaOffer').text(obj[0].open_balc_sq_ft__c);
+				$('#exclusiveAreasOffer').text(obj[0].appurtenant_area_sq_ft__c);
+			} else {
+				$('#carpetAreaOffer').text(obj[0].open_balc_sq_mt__c);
+				$('#exclusiveAreasOffer').text(obj[0].appurtenant_area_sq_mt__c);
+			}
 			
-			$('#carpetAreaOffer').text(obj[0].open_balc_sq_mt__c);
-			
-			
-			$('#exclusiveAreasOffer').text(obj[0].appurtenant_area_sq_mt__c);
 			$('#totalAreaOffer').text(parseFloat(parseFloat($('#carpetAreaOffer').text())+parseFloat($('#exclusiveAreasOffer').text())).toFixed(2));
 			
 			console.log ('propstrength__total_basic_sales_price__c ::: ' + obj[0].propstrength__total_basic_sales_price__c);

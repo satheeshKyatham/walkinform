@@ -16,9 +16,9 @@ import javax.persistence.Table;
 public class InventoryReport implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
-
-	@Id 
-	@GeneratedValue(strategy=GenerationType.AUTO) 
+	
+	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="row_no") private int  row_number;
 	@Column(name="gpl_cs_hold_admin_unit_id") private  int id ;
 	@Column(name="unit_sfid") private String	unit_sfid;
 	@Column(name="admin_userid") private String	admin_userid;
@@ -47,7 +47,11 @@ public class InventoryReport implements Serializable{
 	@Column(name="wing_block__c") private String wing_block__c;
 	@Column(name="saleable_area__c", precision = 10, scale = 2)  private BigDecimal saleable_area__c;
 	@Column(name="propstrength__rate_per_unit_area__c", precision = 10, scale = 2)  private BigDecimal propstrength__rate_per_unit_area__c;
-	//Saleable_area__c
+
+	@Column(name="propstrength__part_of_cop__c") private Boolean propstrength__part_of_cop__c;
+	@Column(name="propstrength__type__c") private String propstrength__type__c;
+	@Column(name="othercharge__rate_per_unit_area__c", precision = 10, scale = 2)  private BigDecimal othercharge__rate_per_unit_area__c;
+	@Column(name="propstrength__fixed_charge__c", precision = 10, scale = 2)  private BigDecimal propstrength__fixed_charge__c;
 	
 	public int getId() {
 		return id;
@@ -207,5 +211,35 @@ public class InventoryReport implements Serializable{
 	}
 	public void setPropstrength__rate_per_unit_area__c(BigDecimal propstrength__rate_per_unit_area__c) {
 		this.propstrength__rate_per_unit_area__c = propstrength__rate_per_unit_area__c;
+	}
+	public Boolean getPropstrength__part_of_cop__c() {
+		return propstrength__part_of_cop__c;
+	}
+	public void setPropstrength__part_of_cop__c(Boolean propstrength__part_of_cop__c) {
+		this.propstrength__part_of_cop__c = propstrength__part_of_cop__c;
+	}
+	public String getPropstrength__type__c() {
+		return propstrength__type__c;
+	}
+	public void setPropstrength__type__c(String propstrength__type__c) {
+		this.propstrength__type__c = propstrength__type__c;
+	}
+	public BigDecimal getOthercharge__rate_per_unit_area__c() {
+		return othercharge__rate_per_unit_area__c;
+	}
+	public void setOthercharge__rate_per_unit_area__c(BigDecimal othercharge__rate_per_unit_area__c) {
+		this.othercharge__rate_per_unit_area__c = othercharge__rate_per_unit_area__c;
+	}
+	public BigDecimal getPropstrength__fixed_charge__c() {
+		return propstrength__fixed_charge__c;
+	}
+	public void setPropstrength__fixed_charge__c(BigDecimal propstrength__fixed_charge__c) {
+		this.propstrength__fixed_charge__c = propstrength__fixed_charge__c;
+	}
+	public int getRow_number() {
+		return row_number;
+	}
+	public void setRow_number(int row_number) {
+		this.row_number = row_number;
 	}
 }

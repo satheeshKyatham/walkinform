@@ -57,7 +57,7 @@ function paymentPlanDropdown (){
 	$.getJSON(urlpayemntPlan, function (data) {
 		$('#ppDropdown').append('<option value="">Select</option>');
 		$.each(data, function (index, value) {
-			$('#ppDropdown').append('<option value='+value.sfid+'>'+value.name+'</option>');
+			$('#ppDropdown').append('<option value='+value.sfid+' name='+value.cip_payment_plan__c+'>'+value.name+'</option>');
 		});					
 	}).done(function() {
 		towerList ();
