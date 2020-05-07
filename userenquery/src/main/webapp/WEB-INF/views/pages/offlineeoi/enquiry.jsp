@@ -106,7 +106,7 @@
 				<div class="form-group col-md-2">
 					<div class="group" style="min-height: auto; margin-bottom: 0;">
 						<div class="input-group" id="contactInputDiv">
-							<button class="btn blue_btn" id="getEnquiry">Search</button>
+							<button class="btn blue_btn" id="getEnquiry">Search1</button>
 						</div>
 					</div>
 				</div>

@@ -76,8 +76,7 @@ function getDatewiseReport() {
 	$("#txtToDate1").val($('#txtToDate').val());
 	}
 
-function getAllEnquiryFormReport()
-{
+function getAllEnquiryFormReport() {
 
 	$("#downloadCSV").append("<input type='hidden' value='"+$('#txtFromDate').val()+"' name='fromdate' id='txtFromDate1'/>");
 	$("#downloadCSV").append("<input type='hidden' value='"+$('#txtToDate').val()+"' name='todate' id='txtToDate1'/>");
@@ -88,7 +87,6 @@ function getAllEnquiryFormReport()
 	$("#mainPageLoad").show();//$('#projectid').val() -- $('#txtFromDate').val()
 	
 	$('#multiProjectid').val(""); 
-	 
 	 var urlPP = '';
 	 if(selectedProject=='' || selectedProject==null){
 		 $('#multiProjectid').val($('#projectid').val());
@@ -100,13 +98,26 @@ function getAllEnquiryFormReport()
 	 
 	//var urlPP = "misReport?projectid="+$('#projectid').val()+"&userid=&fromdate="+$('#txtFromDate').val()+"&todate="+$('#txtToDate').val();
 	
-	 var i = 0
+	var i = 0
 	$.getJSON(urlPP, function (data) {
 		$.each(data, function (index, value) {
-
-			var val = $("<tr><td>"+value.projectname+"</td><td>"+value.enquiryname+"</td><td>"+value.mobilephone+"</td><td>"+value.tokenno+"</td><td>"+value.created+"</td><td>"+value.name+"</td><td>"+value.email+"</td><td>"+value.budget+"</td><td>"+value.carpet_area_requirement+"</td><td>"+value.walk_in_source__c+"</td><td>"+value.user_name+"</td><td>"+value.attended+"</td></tr>");
-			$("#misReportDetails tbody").append(val);
-			i = i+1
+			var val = "";
+			if (value.qry_msg != "MAX_LIMIT") {
+				var val = $("<tr><td>"+value.projectname+"</td><td>"+value.enquiryname+"</td><td>"+value.mobilephone+"</td><td>"+value.tokenno+"</td><td>"+value.created+"</td><td>"+value.name+"</td><td>"+value.email+"</td><td>"+value.budget+"</td><td>"+value.carpet_area_requirement+"</td><td>"+value.walk_in_source__c+"</td><td>"+value.user_name+"</td><td>"+value.attended+"</td></tr>");
+				$("#misReportDetails tbody").append(val);
+				i = i+1
+			} else {
+				
+				swal({
+                	title: "Records exceeding 5000. Please narrow down dates or select few projects",
+          			text: "Requested records count is: "+value.qry_count,
+          			//timer: 8000,
+          			type: "warning",
+                });
+				
+				$("#swal2-title").css({"font-size": "22px"});
+				//alert ("Can't fetch more than 5000 record (requested record count "+value.qry_count+")");
+			}
 		});
 		$('#misReportDetails').DataTable(
 				{
@@ -119,9 +130,7 @@ function getAllEnquiryFormReport()
 		//$('#misReportDetails').DataTable();	
 		
 	}).error(function() { $("#mainPageLoad").hide(); });
-
-	
-	}
+}
 
 function createdOfferProject()
 {

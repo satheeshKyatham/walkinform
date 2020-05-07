@@ -57,7 +57,9 @@ function paymentPlanDropdown (){
 	$.getJSON(urlpayemntPlan, function (data) {
 		$('#ppDropdown').append('<option value="">Select</option>');
 		$.each(data, function (index, value) {
-			$('#ppDropdown').append('<option value='+value.sfid+'>'+value.name+'</option>');
+			var name = value.cip_payment_plan_name__c;
+			
+			$('#ppDropdown').append("<option value="+value.sfid+" name='"+value.cip_payment_plan_name__c+"'>"+value.name+"</option>");
 		});					
 	}).done(function() {
 		towerList ();
@@ -140,7 +142,14 @@ function addPaymentDue () {
 	formData.append('project_id' ,$('#projectDataList').val());
 	formData.append("project_name",$('#projectDataList :selected').text());
 	formData.append("pymt_plan_id",$('#ppDropdown').val());
-	formData.append("pymt_plan_name",$('#ppDropdown :selected').text());
+	/*alert($('#ppDropdown :selected').text());
+	alert($('#ppDropdown :selected').val());
+	alert($('#ppDropdown :selected').attr('name'));*/
+	if($('#ppDropdown :selected').attr('name')=="null")
+		formData.append("pymt_plan_name",$('#ppDropdown :selected').text());
+	else
+		formData.append("pymt_plan_name",$('#ppDropdown :selected').attr('name'));
+	
 	formData.append("region_id",$('#regionList').val());
 	formData.append("region_name",$('#regionList :selected').text());
 	formData.append("towerid",tower);

@@ -1,7 +1,6 @@
 package com.godrej.properties.model;
 
 import java.sql.Date;
-import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "salesforce.vw_MISReport") 
@@ -78,6 +78,9 @@ public class Vw_MISReport {
 	
 	@Column(name="verticle__c") private String verticle__c;
 	@Column(name="designation__c") private String designation__c;
+	
+	@Transient private String qry_count;
+	@Transient private String qry_msg;
 	
 	public int getRow_number() {
 		return row_number;
@@ -421,5 +424,16 @@ public class Vw_MISReport {
 	public void setDesignation__c(String designation__c) {
 		this.designation__c = designation__c;
 	}
-	
+	public String getQry_count() {
+		return qry_count;
+	}
+	public void setQry_count(String qry_count) {
+		this.qry_count = qry_count;
+	}
+	public String getQry_msg() {
+		return qry_msg;
+	}
+	public void setQry_msg(String qry_msg) {
+		this.qry_msg = qry_msg;
+	}
 }
