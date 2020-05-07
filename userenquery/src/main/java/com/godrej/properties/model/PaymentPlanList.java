@@ -36,6 +36,8 @@ public class PaymentPlanList implements Serializable{
 	@Column(name="sfid") private String sfid;
 	@Column(name="d4u_active__c") private String d4u_active__c;
 	@Column(name="cip_payment_plan__c") private String cip_payment_plan__c;
+	@Column(name="cip_payment_plan_name__c") private String cip_payment_plan_name__c;
+	
 	public int getId() {
 		return id;
 	}
@@ -119,6 +121,12 @@ public class PaymentPlanList implements Serializable{
 	}
 	public void setCip_payment_plan__c(String cip_payment_plan__c) {
 		this.cip_payment_plan__c = cip_payment_plan__c;
+	}
+	public String getCip_payment_plan_name__c() {
+		return cip_payment_plan_name__c;
+	}
+	public void setCip_payment_plan_name__c(String cip_payment_plan_name__c) {
+		this.cip_payment_plan_name__c = cip_payment_plan_name__c;
 	}
 
 
