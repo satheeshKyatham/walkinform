@@ -97,6 +97,9 @@ public class VW_MISReportServiceImpl implements VW_MISReportService {
 				mis.setVerticle__c(checkNull(mislist.get(i).getVerticle__c()));
 				mis.setSourcingname(checkNull(mislist.get(i).getSourcingname()));
 				mis.setDesignation__c(checkNull(mislist.get(i).getDesignation__c()));
+				mis.setQry_count(checkNull(mislist.get(i).getQry_count()));
+				mis.setQry_msg(checkNull(mislist.get(i).getQry_msg()));
+				
 				finalMislist.add(mis);
 			}
 		}

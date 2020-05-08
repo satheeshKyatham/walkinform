@@ -2979,6 +2979,11 @@ public class WebServiceController<MultipartFormDataInput> {
 			
 			return gson.toJson(otpService.createOtpCountry(countryCode,mobileno));
 		}
+		@RequestMapping(value = "/getotpvalid", method = RequestMethod.GET, produces = "application/json")
+		public String getValidOtp(@RequestParam("mobileno") String mobileno, @RequestParam("OTP") String otp) {
+			Gson gson = new GsonBuilder().disableHtmlEscaping().create();
+			return gson.toJson(otpService.getValidOtp(mobileno, otp));
+		}
 		
 		@RequestMapping(value = "/getTowerMaster", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
 		public String getTowerMaster(@RequestParam("project_code") String project_code) {

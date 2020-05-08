@@ -75,7 +75,7 @@ function getCMKYCDetails()
 					+"&isrole=Y target='_blank'>Link</a></td>"
 					+"</td><td><a class='btn btnDefaultBlue btn-sm btn-default' target=\"_blank\" " +
 					"href=\"/walkinform/Costsheet?" +
-					"name="+costsheetPath
+					"name="+ encodeURIComponent(costsheetPath)
 					+"&amp;from=ofrList\"><i class=\"fa fa-file\"></i></a></td>"
 					+appFormHtml
 					+"<td><a type='button' data-toggle='modal' data-target='#paymentDetails_KYC' onclick='getKYCPaymentDetails(this,\""+value.offerSfid+"\")'>"+totalAmt+"</a></td>"+//<a href='#' onclick='getKYCPaymentDetails(this)' target='_blank'>Amount</a>
