@@ -599,7 +599,7 @@ function hideEnquirySourceByEnquiryType(enquiryTypeCode,enq){
 		    $(".hideDirectType").hide();
 			$(".hideChannelPartnerType").show();
 			$("#enquirySourceTextDiv").show();
-		}else if(enq.isReferredByChannelPartner==='Direct' && !isEmpty(enq.walkInSource)){
+		}else if((enq.isReferredByChannelPartner==='Direct' || enq.isReferredByChannelPartner==="Referral" || enq.isReferredByChannelPartner==="Employee" || enq.isReferredByChannelPartner==="Corporate" || enq.isReferredByChannelPartner==="Loyalty") && !isEmpty(enq.walkInSource)) {
 			$(".hideChannelPartnerType").hide();
 			if($("#isReferredByChannelPartnerInput").val()!="Direct"){
 				isReferredChanged("D");
