@@ -163,7 +163,7 @@ function inventoryLoad (callFrom){
 					dropdown = "";
 					caret = "";
 					unitStatus = "";
-					if(obj1[j].hold_reason==='block')
+					if(obj1[j].hold_reason==='block' && obj1[j].propstrength__property_on_hold_for_reallocation__c != 't' && obj1[j].sfdc_propstrength__allotted__c != true  && obj1[j].PropStrength__Property_Alloted_Through_Offer__c != 't')
 						unitStatus="unitBlock";
 					else if (obj1[j].hold_reason==='temp' && obj1[j].propstrength__property_on_hold_for_reallocation__c != 't' && obj1[j].sfdc_propstrength__allotted__c != true  && obj1[j].PropStrength__Property_Alloted_Through_Offer__c != 't') {
 						if (obj1[j].eoi_unit_locked == true && obj1[j].enq_sfid == $('#enquirysfid').val()) {

@@ -1117,6 +1117,9 @@ function getCustomCountryData(dataInput)
 		{
 			//alert("India");
 			$('#getEnquiry_search_btn').hide();
+			$('#otpInputColDiv').show();
+			$('#generateOTPColDiv').show();
+			$('#tab_offline_enq').hide();
 		}
 	else
 		{
