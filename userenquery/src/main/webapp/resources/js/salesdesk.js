@@ -96,11 +96,12 @@ function validateDesk() {
 			  /*$("#loged_userid_main").append('<input id="loged_role" type="text" value='+ data.role+ '>');*/
 			  $("#loged_userid_main").append('<input id="loged_role" type="text" value='+ data.mst_user_rolemaster_id+ '>');
 			  //$("#loged_userid_main").append('<input id="loged_projectName" type="text" value='+ data.projectId+ '>');
+			 var sourceType = '"LOGINFORM"';
 			 
 			  var urlGetUsers = "getProjectListUserWise?userid="+data.user_id;	
 		       var j = 0
 		    	$.getJSON(urlGetUsers, function (data) {
-		    		option = "<select class='inputLabel' onchange='onProjectSelect()' id='projectSelected' style='border-color: #000000 !important;   width: 100%;    min-height: 33px;    margin-bottom: 5px;'><option>Select Type</option>";
+		    		option = "<select class='inputLabel' onchange='onProjectSelect("+sourceType+")' id='projectSelected' style='border-color: #000000 !important;   width: 100%;    min-height: 33px;    margin-bottom: 5px;'><option>Select Project</option>";
 		    		$.each(data, function (index, value) {
 		    			var name='';
 		    			if(value.name==undefined)
@@ -133,21 +134,21 @@ function validateDesk() {
 	//authenticateUser("", "");
 } 
 
-function onProjectSelect()
-{
-	debugger;
-	//$("#mainPageLoad").show();
+
+/*START - This code comment here and moved in loginDropdown.js because of on 
+based of project selection role dropdown is commonly used for "CHANGE PROJECT AND ROLE WITHOUT LOGIN AGAIN" */ 
+/*
+function onProjectSelect() {
 	var optionText = $("#projectselection option:selected").text();
 	
-	if($('#loged_role').val()=='5')//AM
-	  {
+	if($('#loged_role').val()=='5'){
 		$("#role_page").empty();
 		var option = "<select class='inputLabel' onchange='onChangeRole()' id='roleSelected' style='border-color: #000000 !important;   width: 100%;    min-height: 33px;    margin-bottom: 5px;'><option>Select Type</option>";
  		option = option+"<option value='AM'>Allocation Manager</option>";
 		option = option+"<option value='MIS'>MIS Report</option></select>";
 		
 		$("#role_page").append(option);
-	  }	
+	}	
 	else if($('#loged_role').val()=='4')
 		{
 			window.location.href = "assigntoken?userId=" + $('#loged_userid').val()+"&projectid="+$('#projectSelected').val()+"&projectname="+$('#projectSelected option:selected').text() ;
@@ -160,7 +161,7 @@ function onProjectSelect()
 	  {
 		window.location.href = "misreportview?projectid="+$('#projectSelected').val()+"&projectname="+$('#projectSelected option:selected').text() ;
 	  }	
-	else if($('#loged_role').val()=='6')//AM
+	else if($('#loged_role').val()=='6') 
 	  {
 		$("#role_page").empty();
 		var option = "<select class='inputLabel' onchange='onChangeRole()' id='roleSelected' style='border-color: #000000 !important;   width: 100%;    min-height: 33px;    margin-bottom: 5px;'><option>Select Type</option>";
@@ -170,7 +171,7 @@ function onProjectSelect()
 		
 		$("#role_page").append(option);
 	  }
-	else if($('#loged_role').val()=='7')//AM
+	else if($('#loged_role').val()=='7') 
 	  {
 		$("#role_page").empty();
 		var option = "<select class='inputLabel' onchange='onChangeRole()' id='roleSelected' style='border-color: #000000 !important;   width: 100%;    min-height: 33px;    margin-bottom: 5px;'><option>Select Type</option>";
@@ -178,7 +179,7 @@ function onProjectSelect()
 		option = option+"<option value='CM'>Closing Manager</option></select>";
 		$("#role_page").append(option);
  
-	  }else if($('#loged_role').val()=='11')//AM
+	  }else if($('#loged_role').val()=='11') 
 	  {
 			$("#role_page").empty();
 			var option = "<select class='inputLabel' onchange='onChangeRole()' id='roleSelected' style='border-color: #000000 !important;   width: 100%;    min-height: 33px;    margin-bottom: 5px;'><option>Select Type</option>";
@@ -188,17 +189,16 @@ function onProjectSelect()
 			option = option+"<option value='MIS'>MIS Report</option></select>";
 				$("#role_page").append(option);
 		  }
-	else if($('#loged_role').val()=='10')//AM
+	else if($('#loged_role').val()=='10') 
 	  {
 		$("#role_page").empty();
 		var option = "<select class='inputLabel' onchange='onChangeRole()' id='roleSelected' style='border-color: #000000 !important;   width: 100%;    min-height: 33px;    margin-bottom: 5px;'><option>Select Type</option>";
-			option = option+"<option value='IM'>Inventory Manager</option>";
-			option = option+"<option value='AM'>Allocation Manager</option>";
-			option = option+"<option value='CM'>Closing Manager</option>";
-			option = option+"<option value='MIS'>MIS Report</option>";
-			option = option+"<option value='OFFLINEADM'>OFFLINE</option></select>";
+		option = option+"<option value='IM'>Inventory Manager</option>";
+		option = option+"<option value='AM'>Allocation Manager</option>";
+		option = option+"<option value='CM'>Closing Manager</option>";
+		option = option+"<option value='MIS'>MIS Report</option></select>";
 			$("#role_page").append(option);
-	  }else if($('#loged_role').val()=='12')//AM
+	  }else if($('#loged_role').val()=='12') 
 		  {
 			var option = "<select class='inputLabel' onchange='onChangeRole()' id='roleSelected' style='border-color: #000000 !important;   width: 100%;    min-height: 33px;    margin-bottom: 5px;'><option>Select Type</option>";
 			$("#role_page").empty();
@@ -207,7 +207,7 @@ function onProjectSelect()
 			option = option+"<option value='CM'>Closing Manager</option>";
 			option = option+"<option value='MIS'>MIS Report</option></select>";
 			$("#role_page").append(option);
-		  }else if($('#loged_role').val()=='13')//AM
+		  }else if($('#loged_role').val()=='13') 
 		  {
 				var option = "<select class='inputLabel' onchange='onChangeRole()' id='roleSelected' style='border-color: #000000 !important;   width: 100%;    min-height: 33px;    margin-bottom: 5px;'><option>Select Type</option>";
 				$("#role_page").empty();
@@ -218,13 +218,11 @@ function onProjectSelect()
 				option = option+"<option value='PADMIN'>Admin Panel</option></select>";
 				$("#role_page").append(option);
 			  }
-		  else if($('#loged_role').val()=='14')//KYC Role
+		  else if($('#loged_role').val()=='14') 
 		  {
-			  //alert("KYC Role");
 			  window.location.href = "kycrole?projectid="+$('#projectSelected').val()+"&projectname="+$('#projectSelected option:selected').text();
-			 // window.location.href = "assignedusers?userId=" + $('#loged_userid').val()+"&projectid="+$('#projectSelected').val()+"&projectname="+$('#projectSelected option:selected').text() ;
 		  }
-		  else if($('#loged_role').val()=='15')//KYC Role
+		  else if($('#loged_role').val()=='15') 
 		  {
 			  window.location.href = "paymentapproval?projectid="+$('#projectSelected').val()+"&projectname="+$('#projectSelected option:selected').text();;
 		  }
@@ -236,10 +234,8 @@ function onProjectSelect()
 				option = option+"<option value='AM'>Allocation Manager</option>";
 				option = option+"<option value='CM'>Closing Manager</option>";
 				option = option+"<option value='MIS'>MIS Report</option>";
-				//option = option+"<option value='PADMIN'>Admin Panel</option>";
 				option = option+"<option value='EOIPA'>EOI Payment Approval</option>";
-				option = option+"<option value='KYCA'>KYC Approval</option>";
-				option = option+"<option value='OFFLINEADM'>OFFLINE</option></select>";
+				option = option+"<option value='KYCA'>KYC Approval</option></select>";
 				$("#role_page").append(option);
 		  }
 		  else if($('#loged_role').val()=='17')
@@ -247,15 +243,14 @@ function onProjectSelect()
 			  $("#role_page").empty();
 			  var option = "<select class='inputLabel' onchange='onChangeRole()' id='roleSelected' style='border-color: #000000 !important;   width: 100%;    min-height: 33px;    margin-bottom: 5px;'><option>Select Type</option>";
 				option = option+"<option value='CM'>Closing Manager</option>";
-				option = option+"<option value='OFFLINEADM'>OFFLINE</option></select>";
+				option = option+"<option value='OFFLINEADM'>OFFLINE EOI</option></select>";
 				$("#role_page").append(option);
 		  }
 	 
 		$("#loginMsg").html('');
 	}
 
-function onChangeRole()
-{
+function onChangeRole() {
 	if($("#roleSelected").val()=='AM')
 		window.location.href = "assigntoken?userId=" + $('#loged_userid').val()+"&projectid="+$('#projectSelected').val()+"&projectname="+$('#projectSelected option:selected').text() ;
 	else if($("#roleSelected").val()=='MIS')
@@ -275,12 +270,9 @@ function onChangeRole()
 	else if($("#roleSelected").val()=='OFFLINEADM'){
 		window.location.href = "offlineEOI?projectid="+$('#projectSelected').val()+"&projectname="+$('#projectSelected option:selected').text();
 	}
-
-		//window.location.href = "assignedusers?userId=" + $('#loged_userid').val()+"&projectid="+$('#projectSelected').val()+"&projectname="+$('#projectSelected option:selected').text() ;
- //window.location.href = "assignedusers?userId=" + $('#loged_userid').val()+"&projectid="+$('#projectSelected').val()+"&projectname="+$('#projectSelected option:selected').text() ;
-
- 
-}
+}*/
+/*END - This code comment here and moved in loginDropdown.js because of on 
+based of project selection role dropdown is commonly used for "CHANGE PROJECT AND ROLE WITHOUT LOGIN AGAIN" */
 
 function validateNext() {
 	 
