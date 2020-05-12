@@ -68,10 +68,10 @@
 	</nav>
    
 	
-	
+	<div class="commonLoad" id="mainPageLoad" style="display:none;"></div>
 	<div class="container formCol swipeCard posRelative">
 			
-		<div class="commonLoad" id="mainPageLoad" style="display:none;"></div>	
+			
 			
 		<div class="titleCol">
 			<h4 class="">
@@ -103,10 +103,39 @@
 				</div>
 				<div class="clearfix"></div>
 			</div>
-				<div class="form-group col-md-2">
+			
+				<div class="form-group col-md-2" id="otpInputColDiv">
+					<div class="group" style="min-height: auto; margin-bottom: 0;">
+						<div class="input-group" id="otpInputDiv">
+							<button class="btn blue_btn square_btn" onclick="generateOTP(1);">
+								<span>SEND OTP</span>
+							</button>
+						</div>
+						
+					</div>
+				</div>
+				<div class="form-group col-md-2" id="generateOTPColDiv">
+					<div class="group" style="min-height: auto; margin-bottom: 0;">
+						<div class="input-group" id="generateOTPDiv">
+							<span class="validBox">	
+								<input name="otp1" class="otpInput form-control" autocomplete="off" placeholder="OTP no."  onkeyup="otpvalidate(this)">
+							</span>
+						<label class="errorOTP"></label>
+						</div>
+					</div>
+				</div>
+				
+				<!-- <div class="form-group col-md-2">
+					<div class="group" style="min-height: auto; margin-bottom: 0;">
+						<div class="input-group" id="generateOTPDiv">
+							<button class="btn blue_btn" id="getGenerateOTP">Generate OTP</button>
+						</div>
+					</div>
+				</div> -->
+				<div class="form-group col-md-2" id="getEnquiry_search_btn" style="display: none">
 					<div class="group" style="min-height: auto; margin-bottom: 0;">
 						<div class="input-group" id="contactInputDiv">
-							<button class="btn blue_btn" id="getEnquiry">Search1</button>
+							<button class="btn blue_btn" id="getEnquiry">Search</button>
 						</div>
 					</div>
 				</div>
@@ -118,13 +147,13 @@
 		</div>
 		
 		<div class="clearfix"></div>
-		
+		<div id="tab_offline_enq" style="display: none">
 		<div>
 		
 			<div class="clearfix"></div>
 			<ul class="nav nav-tabs tabNav">
 
-				<li id="" class="active">
+				<li id="" class="active"><!-- tab1_offline_enq -->
 						<a href="#tab1" data-toggle="tab">Enquiry</a>
 			</li>
 			
@@ -582,6 +611,7 @@
 			</div>
 						
 		</div>
+	</div>
 	<div class="clearfix"></div>
 	</div>
 
@@ -633,16 +663,16 @@
     
     <script src="<c:url value='/resources/js/bootstrap-slider.min.js' />"></script>
     
-	<script src="<c:url value='/resources/js/springForm.js?v=18.20' />"></script>
-	<script src="<c:url value='/resources/js/commonValidation.js?v=18.20' />"></script>
-	<script src="<c:url value='/resources/js/utility.js?v=18.20' />"></script>
-	<script src="<c:url value='/resources/js/offline/enquiry.js?v=18.20' />"></script>	
-    <script src="<c:url value='/resources/js/intlTelInput.js' />"></script>
+	<script src="<c:url value='/resources/js/springForm.js?v=18.21' />"></script>
+	<script src="<c:url value='/resources/js/commonValidation.js?v=18.21' />"></script>
+	<script src="<c:url value='/resources/js/utility.js?v=18.21' />"></script>
+	<script src="<c:url value='/resources/js/offline/enquiry.js?v=18.21' />"></script>	
+    <script src="<c:url value='/resources/js/intlTelInputCustom.js?v=18.21' />"></script>
     <script src="<c:url value='/resources/js/sweetalert2.min.js' />"></script>
 	
-	<script src="<c:url value='/resources/js/index.js?v=18.20' />"></script>
+	<script src="<c:url value='/resources/js/index.js?v=18.21' />"></script>
 	
-	<script src="<c:url value='/resources/js/offline/offlineEOI.js?v=18.20'/>"></script>
+	<script src="<c:url value='/resources/js/offline/offlineEOI.js?v=18.21'/>"></script>
 
 	
 	<script>

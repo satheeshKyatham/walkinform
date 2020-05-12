@@ -365,6 +365,8 @@ if(ses!=null){
 	<script src="<c:url value='/resources/js/separate/eoiReportSales.js?v=${sessionScope.version}'/>"></script>
 	<script src="<c:url value='/resources/js/demo/offerTemplate.js?v=${sessionScope.version}'/>"></script>
 	
+	<%@ include file="/WEB-INF/views/pages/footer.jsp" %>
+	
 </body>
 </html>
 

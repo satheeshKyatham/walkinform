@@ -579,3 +579,5 @@ border: 1px Solid #ccc; top: 10px;     margin: 70px auto 20px !important; float:
 
 
 .eoieditOldRec {min-height: 50px; display: block;}
+
+#changeProjectRole #role_page #roleSelected {text-transform: capitalize; background-color: #f6f6f6; border: 1px solid rgba(0,0,0,.2) !important;}

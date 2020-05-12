@@ -192,10 +192,11 @@ function onProjectSelect()
 	  {
 		$("#role_page").empty();
 		var option = "<select class='inputLabel' onchange='onChangeRole()' id='roleSelected' style='border-color: #000000 !important;   width: 100%;    min-height: 33px;    margin-bottom: 5px;'><option>Select Type</option>";
-		option = option+"<option value='IM'>Inventory Manager</option>";
-		option = option+"<option value='AM'>Allocation Manager</option>";
-		option = option+"<option value='CM'>Closing Manager</option>";
-		option = option+"<option value='MIS'>MIS Report</option></select>";
+			option = option+"<option value='IM'>Inventory Manager</option>";
+			option = option+"<option value='AM'>Allocation Manager</option>";
+			option = option+"<option value='CM'>Closing Manager</option>";
+			option = option+"<option value='MIS'>MIS Report</option>";
+			option = option+"<option value='OFFLINEADM'>OFFLINE</option></select>";
 			$("#role_page").append(option);
 	  }else if($('#loged_role').val()=='12')//AM
 		  {
@@ -237,7 +238,8 @@ function onProjectSelect()
 				option = option+"<option value='MIS'>MIS Report</option>";
 				//option = option+"<option value='PADMIN'>Admin Panel</option>";
 				option = option+"<option value='EOIPA'>EOI Payment Approval</option>";
-				option = option+"<option value='KYCA'>KYC Approval</option></select>";
+				option = option+"<option value='KYCA'>KYC Approval</option>";
+				option = option+"<option value='OFFLINEADM'>OFFLINE</option></select>";
 				$("#role_page").append(option);
 		  }
 		  else if($('#loged_role').val()=='17')
@@ -245,7 +247,7 @@ function onProjectSelect()
 			  $("#role_page").empty();
 			  var option = "<select class='inputLabel' onchange='onChangeRole()' id='roleSelected' style='border-color: #000000 !important;   width: 100%;    min-height: 33px;    margin-bottom: 5px;'><option>Select Type</option>";
 				option = option+"<option value='CM'>Closing Manager</option>";
-				option = option+"<option value='OFFLINEADM'>OFFLINE EOI</option></select>";
+				option = option+"<option value='OFFLINEADM'>OFFLINE</option></select>";
 				$("#role_page").append(option);
 		  }
 	 

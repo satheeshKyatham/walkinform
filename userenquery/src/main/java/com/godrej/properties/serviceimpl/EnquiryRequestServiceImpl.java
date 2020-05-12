@@ -683,6 +683,8 @@ public class EnquiryRequestServiceImpl implements EnquiryRequestService {
 							enquiry.setHasError(true);
 							enquiry.setNonEdit("ENQUIRY");						
 							enquiry.setMessage("Scenario 1: "+"Cannot edit "+name+" enquiry details");
+							/*Added by Satheesh K- 05-09-2020 Bug Fix*/
+							enquiries.clear();
 							enquiries.add(enquiry);						
 							System.out.println("Scenario 1: "+"Cannot edit "+name+" enquiry details");
 						}
@@ -695,6 +697,8 @@ public class EnquiryRequestServiceImpl implements EnquiryRequestService {
 								enquiry.setMessage("Scenario 5: "+"Cannot edit "+name+" details");
 								System.out.println("Scenario 5: "+"Cannot edit "+name+" details");
 							}
+							/*Added by Satheesh K- 05-09-2020 Bug Fix*/
+							enquiries.clear();
 							enquiries.add(enquiry);						
 							
 						}
@@ -734,6 +738,8 @@ public class EnquiryRequestServiceImpl implements EnquiryRequestService {
 							enquiry.setHasError(true);
 							enquiry.setNonEdit("ENQUIRY");						
 							enquiry.setMessage("Scenario 1: "+"Cannot edit "+name+" enquiry details");
+							/*Added by Satheesh K- 05-09-2020 Bug Fix*/
+							enquiries.clear();
 							enquiries.add(enquiry);						
 							System.out.println("Scenario 1: "+"Cannot edit "+name+" enquiry details");
 						}
@@ -746,6 +752,8 @@ public class EnquiryRequestServiceImpl implements EnquiryRequestService {
 								enquiry.setMessage("Scenario 5: "+"Cannot edit "+name+" details");
 								System.out.println("Scenario 5: "+"Cannot edit "+name+" details");
 							}
+							/*Added by Satheesh K- 05-09-2020 Bug Fix*/
+							enquiries.clear();
 							enquiries.add(enquiry);						
 							
 						}

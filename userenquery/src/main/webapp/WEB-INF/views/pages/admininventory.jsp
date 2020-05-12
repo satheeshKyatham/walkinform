@@ -53,6 +53,10 @@ if(ses!=null){
 <input type="hidden" id="projectId" value="${projectSfid}">
 <!-- END Added for Costsheet -->
 <input type="hidden" id="userid" value="${userId}">
+<input type="hidden" id="roleid" value="${projectrole}">
+
+
+
   <nav class="navbar topMainBar">
 	  <div class="container">
 	  <%@ include file="/WEB-INF/views/pages/header.jsp" %>
@@ -83,7 +87,7 @@ if(ses!=null){
 				<li>
 					<a href="#inventorySalesHoldReport" data-toggle="tab">Closing Manager Hold Inventory Report</a>
 				</li>
-				<li style="display:none;">
+				<li>
 					<a href="#updateEOITab" data-toggle="tab">EOI</a>
 				</li>
 			</ul>
@@ -126,19 +130,24 @@ if(ses!=null){
 			
 	 	</div>
 	</div>
-</body>
-<script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>  
-<script type="text/javascript" charset="utf8" src="<c:url value='/resources/js/jquery.dataTables.js'/>"></script>
-<script src="<c:url value='/resources/js/dataTables.buttons.min.js'/>"></script>
-<script src = "<c:url value='/resources/js/dataTables.fixedHeader.min.js'/> "></script>
 	
-<script src="<c:url value='/resources/js/jszip.min.js'/>"></script>
-<script src="<c:url value='/resources/js/buttons.html5.min.js'/>"></script>
+	<script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>  
+	<script type="text/javascript" charset="utf8" src="<c:url value='/resources/js/jquery.dataTables.js'/>"></script>
+	<script src="<c:url value='/resources/js/dataTables.buttons.min.js'/>"></script>
+	<script src = "<c:url value='/resources/js/dataTables.fixedHeader.min.js'/> "></script>
+		
+	<script src="<c:url value='/resources/js/jszip.min.js'/>"></script>
+	<script src="<c:url value='/resources/js/buttons.html5.min.js'/>"></script>
+	
+	<script src="<c:url value='/resources/js/sweetalert2.min.js' />"></script>
+	<script src="<c:url value='/resources/js/separate/admininventory.js?v=${sessionScope.version}'/>"></script>
+	<script src="<c:url value='/resources/js/separate/admininventoryReport.js?v=${sessionScope.version}'/>"></script>
+	<script src="<c:url value='/resources/js/separate/salesHoldinventoryReport.js?v=${sessionScope.version}'/>"></script>
+	<script src="<c:url value='/resources/js/separate/costsheet.js?v=${sessionScope.version}'/>"></script>
+	<script src="<c:url value='/resources/js/separate/updateEOI.js?v=${sessionScope.version}'/>"></script>	
+	<script src="<c:url value='/resources/js/separate/eoiFormPrint.js?v=${sessionScope.version}'/>"></script>
 
-<script src="<c:url value='/resources/js/sweetalert2.min.js' />"></script>
-<script src="<c:url value='/resources/js/separate/admininventory.js?v=${sessionScope.version}'/>"></script>
-<script src="<c:url value='/resources/js/separate/admininventoryReport.js?v=${sessionScope.version}'/>"></script>
-<script src="<c:url value='/resources/js/separate/salesHoldinventoryReport.js?v=${sessionScope.version}'/>"></script>
-<script src="<c:url value='/resources/js/separate/costsheet.js?v=${sessionScope.version}'/>"></script>
-<script src="<c:url value='/resources/js/separate/updateEOI.js?v=${sessionScope.version}'/>"></script>	
-<!-- </html> -->
+	<%@ include file="/WEB-INF/views/pages/footer.jsp" %>
+</body>
+
+</html>

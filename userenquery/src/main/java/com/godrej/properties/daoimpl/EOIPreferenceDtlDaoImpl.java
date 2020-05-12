@@ -79,4 +79,32 @@ public class EOIPreferenceDtlDaoImpl extends AbstractDao<Integer, EOIPreferenceD
 			return false;
 		}
 	}
+	
+	
+	
+	
+	
+	@Override
+	public Boolean inactiveEOIPreference(List<EOIPreferenceDtl> eoiReq) {
+		try {
+			for (int i = 0; i <eoiReq.size(); i++) {
+				Session session = this.sessionFactory.getCurrentSession();
+				Query q = session.createQuery("DELETE from EOIPreferenceDtl  "
+						+ " WHERE id = '"+eoiReq.get(i).getRowid()+"' AND "
+						+ " enq_sfid = '"+eoiReq.get(i).getEnq_sfid()+"' AND "
+						+ " project_sfid = '"+eoiReq.get(i).getProject_sfid()+"' AND "
+						+ " isactive = '"+eoiReq.get(i).getIsactive()+"' "
+						);
+				//q.setParameter ("id", eoiReq.get(i).getRowid());
+				//q.setParameter ("enq_sfid", eoiReq.get(i).getEnq_sfid());
+				//q.setParameter ("project_sfid", eoiReq.get(i).getProject_sfid());
+				//q.setParameter ("isactive", "Y");
+				q.executeUpdate();
+			}
+			return true;
+		} catch (Exception e) {
+			Log.info("Delete EOI Preference Error:- ",e);
+			return false;
+		}
+	}
 }

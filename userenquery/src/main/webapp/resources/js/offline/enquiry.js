@@ -26,6 +26,7 @@ $(document).ready(function(){
 
 function getEnquiry(){
 	$("#mainPageLoad").show();
+	$('#tab_offline_enq').show();
 	$("#getEnquiry").attr('disabled',true);
 	var inputMobile =  $('#enMobileNo').val();
 	var inputCountryCode =  $('.selected-dial-code').text();
@@ -598,7 +599,7 @@ function hideEnquirySourceByEnquiryType(enquiryTypeCode,enq){
 		    $(".hideDirectType").hide();
 			$(".hideChannelPartnerType").show();
 			$("#enquirySourceTextDiv").show();
-		}else if(enq.isReferredByChannelPartner==='Direct' && !isEmpty(enq.walkInSource)){
+		}else if((enq.isReferredByChannelPartner==='Direct' || enq.isReferredByChannelPartner==="Referral" || enq.isReferredByChannelPartner==="Employee" || enq.isReferredByChannelPartner==="Corporate" || enq.isReferredByChannelPartner==="Loyalty") && !isEmpty(enq.walkInSource)) {
 			$(".hideChannelPartnerType").hide();
 			if($("#isReferredByChannelPartnerInput").val()!="Direct"){
 				isReferredChanged("D");
@@ -949,3 +950,89 @@ function openClosingMDashboard()
 		+"&token="+ $("#tokenNo").val()
 		+"&isView=N&salesViewType=N&roleid="+ $("#roleid").val();
 	}
+
+/*added by Satheesh - For Add OTP option on offline EOI */
+function generateOTP(no) {
+	//alert("Mobile NO:"+$("#enMobileNo").val());
+	//alert("Country Code:"+$('.selected-dial-code').text());
+	
+	if($("#enMobileNo").val()!="")
+		{
+			$.get("getdetailsCountry", {
+				"countryCode" : $('.selected-dial-code').text(),
+				"mobileno" : $("#enMobileNo").val(),
+			}, function(data) {
+			});
+			/*$('.otpColCnt .square_btn span').text('Resend OTP');*/
+			$('.filterCol .square_btn span').text('Resend OTP');
+		}
+	else
+		{
+			alert("Enter Mobile No.");
+		}
+	/*encryptStr();
+	var appStatus = validateApplicantType(no);
+	var email = $("#emailID1").val();
+	if (appStatus == true) {
+		$.get("getdeatails", {
+			"mobileno" : encryptStr(),
+			"email" : email,
+		}, function(data) {
+		});
+		$('.otpColCnt .square_btn span').text('Resend OTP');
+	} else {
+
+	}*/
+
+}
+function otpvalidate(e) {
+
+	if ($(e).val().length == 6) {
+		//Validate OTP
+		validateOTP(e);
+		//$(".errorOTP").text("Valid");
+		//alert($('#otp_verify').val());
+		//_search_data($('#mobileno').val(),encStr);
+		
+		
+	} else {
+		//alert("Enter valid no");	
+		$(".errorOTP").text("Invalid OTP");
+		$("#respo").val("Invalid");
+		$('#getEnquiry_search_btn').hide();
+		$('#tab_offline_enq').hide();
+		//errorOTP
+
+	}
+}
+function validateOTP(e) {
+	var otp_verify = $(e).val();
+	if($("#enMobileNo").val()!="")
+			{
+		$.get("getotpvalid", {
+			"mobileno" : $("#enMobileNo").val(),
+			"OTP" : otp_verify
+		}, function(data) {
+			if (data.otp == undefined) {
+				$(".errorOTP").text("Invalid OTP");
+				$("#respo").val("Invalid");
+				
+			} else {
+				$(".errorOTP").text("Valid");
+				$("#respo").val("Valid");
+				$('#getEnquiry_search_btn').show();
+				//$('#tab_offline_enq').show();
+			}
+		});
+		}
+}
+
+ /*added by Satheesh - For restrict inspect element option on browser*/
+$(document).bind("contextmenu",function(e) {
+	 e.preventDefault();
+});
+/*$(document).keydown(function(e){
+    if(e.which === 123){
+       return false;
+    }
+});*/

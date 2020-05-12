@@ -97,6 +97,11 @@ public class EOIPaymentDtl implements Serializable{
 	@Transient
 	private String context= System.getProperty("catalina.home");
 	
+	@Column(name = "updatedby") private String updatedby;
+	
+	@Transient
+	private String rowid;
+	
 	public String getContext() {
 		return context;
 	}
@@ -327,6 +332,19 @@ public class EOIPaymentDtl implements Serializable{
 		this.payment_mode = payment_mode;
 	}
 
+	public String getUpdatedby() {
+		return updatedby;
+	}
 
-	
+	public void setUpdatedby(String updatedby) {
+		this.updatedby = updatedby;
+	}
+
+	public String getRowid() {
+		return rowid;
+	}
+
+	public void setRowid(String rowid) {
+		this.rowid = rowid;
+	}
 }

@@ -979,7 +979,7 @@
 	<script src="<c:url value='/resources/js/separate/costsheet.js?v=18.19'/>"></script>
 	
 	
-	
+	<%@ include file="/WEB-INF/views/pages/footer.jsp" %>
 	
 	
   </body>

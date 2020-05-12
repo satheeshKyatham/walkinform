@@ -51,7 +51,7 @@ function getEOIPreferencPrint () {
 	
 	}).fail(function(xhr, status, error) {
     	swal({
-    		title: "111 There was problem in generating PDF at this time. Please try again from EOI report.",
+    		title: "There was problem in generating PDF at this time. Please try again from EOI report.",
 			text: "",
 			timer: 8000,
 			type: "warning",
@@ -253,30 +253,33 @@ function printEOIForm(regionName, projectName, enqName, projectNameWithoutCity) 
          
 		
         var eoiFormPath =   'costSheetPDF/'+$('#region__c').val()+'/'+$('#marketingProjectName').val()+'/'+'EOI Details'+'/'+$('#enquiry_name').val()+'/eoi_form_'+$('#enquiry_name').val()+'.pdf';
-     	
-         
         var win = window.open(pageContext+'file?name='+eoiFormPath+"&from=eoiForm", '_blank');
 		if (win) {
 		    win.focus();
 		    
-             swal({
-            	 title: "EOI Successfully Generated & KYC Link Sent.",
-            	 text: "",
-            	 icon: "success",
-            	 type: "success",
-            	 dangerMode: true,
-             }).then(function(isConfirm) {
-            	 //Changes by Satheesh - for EOI form
-            	 debugger;
-            	 if (isConfirm) {
-            		 if($('#roleid').val()=='17')
-            			 {
+		    if(ROLE_GV != '16'){
+		    	swal({
+		    		title: "EOI Successfully Generated & KYC Link Sent.",
+		    		text: "",
+		    		icon: "success",
+		    		type: "success",
+		    		dangerMode: true,
+		    	}).then(function(isConfirm) {
+		    		if (isConfirm) {
+		    			if($('#roleid').val()=='17'){
             			 	window.location.href =pageContext+ "offlineEOI?userId="+$("#userid").val()+"&projectid="+$("#projectid").val()+"&projectname="+$("#projectname").val();
-            			 }
-            		 else
+		    			} else
             			 window.location.href =pageContext+ "assignedusers?userId="+$("#userid").val()+"&projectid="+$("#projectid").val()+"&projectname="+$("#projectname").val();
-            	 }
+		    		}
+		    	});
+		    } else {
+		    	swal({
+                    title: "EOI form Successfully Generated",
+                 text: "",
+                 //timer: 3000,
+                 type: "success",
              });
+		    }
              
 		} else {
 		   alert('Please allow popups for this website');

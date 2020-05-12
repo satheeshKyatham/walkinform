@@ -17,6 +17,7 @@ import com.godrej.properties.dao.AbstractDao;
 import com.godrej.properties.dao.EOIPaymentDtlDao;
 import com.godrej.properties.model.EOIPaymentDtl;
 import com.godrej.properties.model.EOIPaymentModel;
+import com.godrej.properties.model.EOIPreferenceDtl;
 
 @SuppressWarnings("unchecked")
 @Repository("eOIpaymentDtlDao")
@@ -179,6 +180,60 @@ public class EOIPaymentDtlDaoImpl extends AbstractDao<Integer, EOIPaymentDtl> im
 	public void insertOnePaymentDtl(EOIPaymentDtl pymtDtl) {
 		persist(pymtDtl);
 		
+	}
+	
+	
+	@Override
+	public Boolean updateEOIPayment(List<EOIPaymentDtl> eoiReq) {
+		try {
+			for (int i = 0; i <eoiReq.size(); i++) {
+				Session session = this.sessionFactory.getCurrentSession();
+				Query query = session.createQuery("UPDATE EOIPaymentDtl  "
+						+ " SET "
+								+ " payment_type = '"+eoiReq.get(i).getPayment_type()+"' "
+								+ " , bank_name = '"+eoiReq.get(i).getBank_name()+"' "
+								+ " , transaction_id = '"+eoiReq.get(i).getTransaction_id()+"' "
+								+ " , transaction_date = '"+eoiReq.get(i).getTransaction_date()+"' "
+								+ " , transaction_amount = '"+eoiReq.get(i).getTransaction_amount()+"' "
+								+ " , cheque_attach = '"+eoiReq.get(i).getCheque_attach()+"' "
+								+ " , description = '"+eoiReq.get(i).getDescription() +"' "
+								+ " , updatedby = '"+eoiReq.get(i).getUpdatedby() +"' "
+								+ " , updated = now() "
+
+						+ " WHERE id = '"+eoiReq.get(i).getRowid()+"' "
+						+ " AND enq_sfid = '"+eoiReq.get(i).getEnq_sfid()+"' "
+						+ " AND project_sfid = '"+eoiReq.get(i).getProject_sfid()+"' " );
+				
+				query.executeUpdate();
+			}
+			return true;
+		} catch (Exception e) {
+			Log.info("Update EOI Payment Error:- ",e);
+			return false;
+		}
+	}
+	
+	
+	@Override
+	public Boolean inactiveEOIPayment(List<EOIPaymentDtl> eoiReq) {
+		try {
+			for (int i = 0; i <eoiReq.size(); i++) {
+				Session session = this.sessionFactory.getCurrentSession();
+				Query q = session.createQuery("DELETE from EOIPaymentDtl  "
+						+ " WHERE id = '"+eoiReq.get(i).getRowid()+"' AND "
+						+ " enq_sfid = '"+eoiReq.get(i).getEnq_sfid()+"' AND "
+						+ " project_sfid = '"+eoiReq.get(i).getProject_sfid()+"' ");
+				//q.setParameter ("id", eoiReq.get(i).getRowid());
+				//q.setParameter ("enq_sfid", eoiReq.get(i).getEnq_sfid());
+				//q.setParameter ("project_sfid", eoiReq.get(i).getProject_sfid());
+				//q.setParameter ("isactive", "Y");
+				q.executeUpdate();
+			}
+			return true;
+		} catch (Exception e) {
+			Log.info("Delete EOI Payment Error:- ",e);
+			return false;
+		}
 	}
 	
 }
