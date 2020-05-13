@@ -107,7 +107,7 @@
 				<div class="form-group col-md-2" id="otpInputColDiv">
 					<div class="group" style="min-height: auto; margin-bottom: 0;">
 						<div class="input-group" id="otpInputDiv">
-							<button class="btn blue_btn square_btn" onclick="generateOTP(1);">
+							<button class="btn blue_btn square_btn otpInput_btn_Div" onclick="generateOTP(1);">
 								<span>SEND OTP</span>
 							</button>
 						</div>
@@ -135,8 +135,18 @@
 				<div class="form-group col-md-2" id="getEnquiry_search_btn" style="display: none">
 					<div class="group" style="min-height: auto; margin-bottom: 0;">
 						<div class="input-group" id="contactInputDiv">
-							<button class="btn blue_btn" id="getEnquiry">Search</button>
+							<button class="btn blue_btn getEnquiry_btn" id="getEnquiry">Search</button>
 						</div>
+					</div>
+				</div>
+				<div class="form-group col-md-2" id="reset_btn_ColDiv" style="display: none;">
+					<div class="group" style="min-height: auto; margin-bottom: 0;">
+						<div class="input-group" id="otpInputResetDiv">
+							<button class="btn blue_btn square_btn" onclick="resetOfflineEnq(this);">
+								<span>Reset</span>
+							</button>
+						</div>
+						
 					</div>
 				</div>
 
@@ -187,7 +197,7 @@
 				<input type="hidden" value="" name="tokenId" id="tokenId"/>
 				<input type="hidden" value="" name="tokenNo" id="tokenNo"/> 
 				<input type="hidden" value="${projectSfid}" name="contact.contactReport.projectId" id="contact_projectId"> 
-				<input type="hidden" value="Site Visit Done" name="enquiryStatus" id="enquiryStatus">
+				<input type="hidden" value="Virtual Meeting Done" name="enquiryStatus" id="enquiryStatus">
 				<input type="hidden" class="enquiryReportId" name="enquiryReport.enquiryReportId">
 				<input type="hidden" class="enquiryprojectidId" name="enquiryReport.projectId"  value="${projectSfid}">
 				<input type="hidden" class="contactReportId" name="contact.contactReport.contactReportId">
@@ -667,7 +677,7 @@
 	<script src="<c:url value='/resources/js/commonValidation.js?v=18.21' />"></script>
 	<script src="<c:url value='/resources/js/utility.js?v=18.21' />"></script>
 	<script src="<c:url value='/resources/js/offline/enquiry.js?v=18.21' />"></script>	
-    <script src="<c:url value='/resources/js/intlTelInputCustom.js' />"></script>
+    <script src="<c:url value='/resources/js/intlTelInputCustom.js?v=18.21' />"></script>
     <script src="<c:url value='/resources/js/sweetalert2.min.js' />"></script>
 	
 	<script src="<c:url value='/resources/js/index.js?v=18.21' />"></script>
