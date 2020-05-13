@@ -8,4 +8,5 @@ public interface EOIPreferenceDtlDao {
 	void insertEOI (List<EOIPreferenceDtl> eoiDtl);
 	List<EOIPreferenceDtl> getEOIPreferenceRecord(String enqSfid);
 	Boolean updateEOIPreference(List<EOIPreferenceDtl> eoiReq);
+	Boolean inactiveEOIPreference(List<EOIPreferenceDtl> eoiReq);
 }

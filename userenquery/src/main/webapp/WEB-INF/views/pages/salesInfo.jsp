@@ -1917,7 +1917,7 @@ $(function () {
 	</script>	
 		
 		
-		
+	<%@ include file="/WEB-INF/views/pages/footer.jsp" %>
 		
   </body>
 </html>

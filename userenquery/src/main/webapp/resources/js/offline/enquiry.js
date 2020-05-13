@@ -26,8 +26,18 @@ $(document).ready(function(){
 
 function getEnquiry(){
 	$("#mainPageLoad").show();
+	/*$("#enMobileNo").addClass('disableInputs');
+	$("#otpInputDiv").addClass('disableInputs');
+	$("#generateOTPDiv").addClass('disableInputs');*/
+	$("#enMobileNo").attr("disabled","disabled");
+	$(".otpInput").attr("disabled","disabled");
+	$(".otpInput_btn_Div").attr("disabled","disabled");
+	$(".getEnquiry_btn").attr("disabled","disabled");
+	
+	
 	$('#tab_offline_enq').show();
-	$("#getEnquiry").attr('disabled',true);
+	$('#reset_btn_ColDiv').show();
+	//$("#getEnquiry").attr('disabled',true);
 	var inputMobile =  $('#enMobileNo').val();
 	var inputCountryCode =  $('.selected-dial-code').text();
 	$('#inputMobileNo').val(inputMobile);
@@ -209,7 +219,7 @@ function populateEnquiryAndContact(resp){
 		    $("#officeCity").val("");
 		    $("#officePinCode").val("");
 	}
-	$("#getEnquiry").attr('disabled',false);
+	//$("#getEnquiry").attr('disabled',false);
 }
 function saveBaseInfo(event,el){
     event.preventDefault();
@@ -964,7 +974,7 @@ function generateOTP(no) {
 			}, function(data) {
 			});
 			/*$('.otpColCnt .square_btn span').text('Resend OTP');*/
-			$('.filterCol .square_btn span').text('Resend OTP');
+			$('.filterCol .otpInput_btn_Div span').text('Resend OTP');
 		}
 	else
 		{
@@ -1021,10 +1031,26 @@ function validateOTP(e) {
 				$(".errorOTP").text("Valid");
 				$("#respo").val("Valid");
 				$('#getEnquiry_search_btn').show();
+				$(".getEnquiry_btn").removeAttr("disabled");
+				
 				//$('#tab_offline_enq').show();
 			}
 		});
 		}
+}
+
+function resetOfflineEnq(e)
+{
+	$('#tab_offline_enq').hide();
+	$('#reset_btn_ColDiv').hide();
+	$('#getEnquiry_search_btn').hide();
+	$('.filterCol .otpInput_btn_Div span').text('Send OTP');
+	
+	$("#enMobileNo").removeAttr("disabled");
+	$(".otpInput").removeAttr("disabled");
+	$(".otpInput_btn_Div").removeAttr("disabled");
+	$(".otpInput").val('');
+	 
 }
 
  /*added by Satheesh - For restrict inspect element option on browser*/

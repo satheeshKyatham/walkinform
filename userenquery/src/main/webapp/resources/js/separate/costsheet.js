@@ -2487,8 +2487,17 @@ function newOtherCharges2 () {
                     	$('#totalDicountView').hide();
                     }*/
                     
-                    $('#totalDiscountCol').append('');
-                	$('#totalDicountView').hide();
+                    if ($('#region__c').val() == "Gurgaon" || $('#region__c').val() == "New Delhi" || $('#region__c').val() == "Noida") {
+	                	$('#totalDiscountCol').append(printDiscountHtml);
+	                	$('#totalDicountView').show();
+	                } else {
+	                	$('#totalDiscountCol').append('');
+	                	$('#totalDicountView').hide();
+	                }
+                    
+                    
+                    //$('#totalDiscountCol').append('');
+                	//$('#totalDicountView').hide();
                     
                     
                     

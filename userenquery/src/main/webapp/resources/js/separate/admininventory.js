@@ -434,12 +434,12 @@ function inventoryLoad (){
 					//dropdown = "";
 					//caret = "";
 					unitStatus = "";
-					if(obj1[j].hold_reason==='block')
+					/*if(obj1[j].hold_reason==='block')
 						unitStatus="unitBlock";
 					else if (obj1[j].hold_reason==='temp') {
 						unitStatus="unitTemp";
 					}
-					else
+					else*/
 						unitStatus = "unitSold";
 				} else if (obj1[j].propstrength__allotted__c == 't'){
 					//dropdown = "";

@@ -56,7 +56,38 @@ public class EOIPreferenceController {
 	}
 	 
 	 
-	
+	@RequestMapping(value = "/deleteEOIPreference", method = RequestMethod.POST)
+	public String deleteEOIPreference(
+			@RequestParam("preferenceJson") String preferenceJson,
+			@RequestParam("userid") String userid,
+			@RequestParam("username") String username,
+			@RequestParam("enq_sfid") String enq_sfid,
+			@RequestParam("project_sfid") String project_sfid
+			, @RequestParam("unitsfidOldArray") String unitsfidOldArray 
+			//, @RequestParam("newUnitsfidArray") String newUnitsfidArray
+			) throws ParseException {	
+		
+		
+		if(    !userid.equals("")  
+				&& !username.equals("")
+				&& !enq_sfid.equals("")  
+				&& !project_sfid.equals(""))  {
+				
+				try {
+					//GsonBuilder gsonBuilder = new GsonBuilder();
+					//Gson gson = gsonBuilder.create();
+					String responseVal = eOIPreferenceDtlService.deleteEOIPreference(preferenceJson, userid, enq_sfid, project_sfid, unitsfidOldArray, username);
+					return responseVal;
+				}  catch(Exception e) {
+					Log.info("EOI Details not updating UPDATE_EOI_ER1004 :- ",e);				
+					String response = "{\"status\":\"STATUS_NOTOK\",\"error_msg\":\"Details is not updated on portal, please try again later\",\"error_id\":\"UPDATE_EOI_ER1004\"}";
+					return response;
+				}
+		} else {
+			String response = "{\"status\":\"STATUS_NOTOK\",\"error_msg\":\"Invalid Data Provide\",\"error_id\":\"UPDATE_EOI_ER1005\"}";
+			return response;
+		}
+	}
 	
 	
 	

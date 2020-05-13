@@ -262,5 +262,7 @@ userid=(String)ses.getAttribute("USERID");
         $('#example-getting-started').multiselect();
     });
 </script> -->
+<%@ include file="/WEB-INF/views/pages/footer.jsp" %>
+
 </body>
 </html>  

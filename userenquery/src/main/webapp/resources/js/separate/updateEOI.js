@@ -7,6 +7,7 @@ $.ajaxSetup({
 });
 
 var enqSFIDforEOI = '';
+var enqName = '';
 
 function enqDtlForAdminEOI () {
 	var enqName = "ENQ - " + $('#enqNameInputEOI').val().trim();
@@ -23,6 +24,7 @@ function enqDtlForAdminEOI () {
 					" <td>"+obj[i].name+"</td>" +
 				" </tr>";
         		 enqSFIDforEOI = obj[i].enq_sfid;
+        		 enqName = obj[i].enq_name;
         	 }
         	 $("#enqDtlTableEOI tbody").append(html);
          } else {
@@ -31,7 +33,12 @@ function enqDtlForAdminEOI () {
          }
 	}).done(function(data){
 		if (enqSFIDforEOI != ''){
+			$('#enquirysfid').val(enqSFIDforEOI);
+			$('#enquiry_name').val(enqName);
+			
 			getEOITabPaymentRecord (); getEOITabPreferencRecord();
+		} else {
+			$('#enquirysfid').val("");
 		}
 	}).fail(function(xhr, status, error) {
 		alert (error);
@@ -115,9 +122,10 @@ function getEOITabPreferencRecord () {
 				
 					htmlActionBtn = "";
 					htmlActionBtn +=  '<div>'
-									+ '<button class="btn btn-primary blue_btn editPayReqBtn" onclick="editPaymentRequest(this)">Edit</button>'
+									+ '<button class="btn btn-primary blue_btn editPayReqBtn" onclick="editEOIPreference(this)" style="margin-bottom:5px !important;">Edit</button>'
+									+ '<button class="btn btn-primary blue_btn deletePayReqBtn" onclick="deleteEOIPreference(this)">Delete</button>'
 									+ '<button class="btn btn-primary blue_btn updatePaymentBtn" style="display:none; margin-bottom:10px !important;" onclick="updateEOIPreference(this)">Update</button>'
-									+ '<button class="btn btn-primary blue_btn cancelPayReqBtn" style="display:none" onclick="cancelPayReq(this)">Cancel</button>'
+									+ '<button class="btn btn-primary blue_btn cancelPayReqBtn" style="display:none" onclick="cancelEOIPreference(this)">Cancel</button>'
 								+ '</div>';
 				html += 	'<tr class="prefrenceDataPlotRow" data-rowid = "'+obj[i].id+'">'
 								+ '<td class="towerColtd"><span class="eoieditOldRec">'+obj[i].tower_name+'</span></td>' 
@@ -155,8 +163,8 @@ function getEOITabPaymentRecord () {
 		var rowStatusColr = '';
 		if(obj!=null){
 			for(i = 0; i< obj.length; i++){    
-				panTarget = pageContext+"file?name="+obj[i].pan_attach+"&from=EOIbookingReference&eid="+obj[i].enq_sfid+"&fid="+obj[i].pan_attach.charAt(0);
-				reciptTarget = pageContext+"file?name="+obj[i].cheque_attach+"&from=EOIbookingReference&eid="+obj[i].enq_sfid+"&fid="+obj[i].cheque_attach.charAt(0);
+				//panTarget = pageContext+"file?name="+obj[i].pan_attach+"&from=EOIbookingReference&eid="+obj[i].enq_sfid+"&fid="+obj[i].pan_attach.charAt(0);
+				reciptTarget = pageContext+"file?name="+obj[i].cheque_attach+"&from=EOIbookingReference&eid="+obj[i].enq_sfid+"&fid="+obj[i].cheque_attach.substring(0, obj[i].cheque_attach.indexOf("Receipt_"));
 				if (obj[i].transaction_date != '') {
 					var date = new Date(obj[i].transaction_date);
 					var curr_date = date.getDate();
@@ -181,17 +189,33 @@ function getEOITabPaymentRecord () {
 					status = 'NA';
 					rowStatusColr = '';
 				}
-				html += 	'<tr class="paymentDataPlotRow" '+rowStatusColr+'>'
-								+ '<td style="text-align:center; font-size:11px;">'+status+'</td>' 
-								+ '<td style="text-align:center;">'+obj[i].payment_type+'</td>' 
-								+ '<td style="text-align:center;">'+obj[i].bank_name+'</td>' 
-								+ '<td style="text-align:center;">'+obj[i].transaction_id+'</td>' 
-								+ '<td style="text-align:center;">'+trans_date+'</td>' 
-								+ '<td style="text-align:center;">'+obj[i].transaction_amount+'</td>' 
-								+ '<td style="display:none;"> <a target="_blank" href="'+panTarget+'">'+obj[i].pan_attach+'</a></td>' 
-								+ '<td style="word-break: break-word;"> <a target="_blank" href="'+reciptTarget+'">'+obj[i].cheque_attach+'</a></td>'
-								+ '<td style="text-align:center;">'+obj[i].description+'</td>'
-								+ '<td></td>'
+				
+				htmlActionBtn = "";
+				
+				if (obj[i].isactive == 'N' || obj[i].isactive == 'R'){
+					htmlActionBtn +=  '<div class="crudRPBtn">'
+						+ '<button class="btn btn-primary blue_btn editPayReqBtn" onclick="editEOIPayment(this)" style="margin-bottom:5px !important;">Edit</button>'
+						+ '<button class="btn btn-primary blue_btn deletePayReqBtn" onclick="deleteEOIPayment(this)">Delete</button>'
+						+ '<button class="btn btn-primary blue_btn updatePaymentBtn" style="display:none; margin-bottom:10px !important;" onclick="updateEOIPayment(this)">Update</button>'
+						+ '<button class="btn btn-primary blue_btn cancelPayReqBtn" style="display:none" onclick="cancelEOIPayment(this)">Cancel</button>'
+					+ '</div>';
+				} else {
+					htmlActionBtn = "";
+				}
+				
+				
+				
+				
+				html += 	'<tr class="paymentDataPlotRow" '+rowStatusColr+'  data-rowid= "'+obj[i].id+'">'
+								+ '<td style="text-align:center; font-size:11px;"><span class="eoieditOldRec">'+status+'</span></td>' 
+								+ '<td class="paymentTypeColtd" style="text-align:center;"><span class="eoieditOldRec">'+obj[i].payment_type+'</span></td>' 
+								+ '<td class="banknameColtd" style="text-align:center;"><span class="eoieditOldRec">'+obj[i].bank_name+'</span></td>' 
+								+ '<td class="trxidColtd" style="text-align:center;"><span class="eoieditOldRec">'+obj[i].transaction_id+'</span></td>' 
+								+ '<td class="trxdateColtd" style="text-align:center;"><span class="eoieditOldRec">'+trans_date+'</span></td>' 
+								+ '<td class="trxamountColtd" style="text-align:center;"><span class="eoieditOldRec">'+obj[i].transaction_amount+'</span></td>' 
+								+ '<td class="receiptColtd" style="word-break: break-word;"> <span class="eoieditOldRec"><a target="_blank" href="'+reciptTarget+'">'+obj[i].cheque_attach+'</a></span></td>'
+								+ '<td class="descriptionColtd" style="text-align:center;"><span class="eoieditOldRec">'+obj[i].description+'</span></td>'
+								+ '<td>'+htmlActionBtn+'</td>'
 							"</tr>";
 			}
 			
@@ -359,6 +383,81 @@ function getCarparkEOIMst(e) {
 	});
 }
 
+
+function updateEOIPayment (e) {
+	
+	var arrayData = [];
+	 
+    var csPtData = {};
+    csPtData.rowid =  $(e).closest("td").closest("tr").attr("data-rowid");
+    csPtData.payment_type = $(e).closest("td").closest("tr").find('.csPtDropDownEoi').val();
+    csPtData.bank_name = $(e).closest("td").closest("tr").find('.csPtBankNameEoi').val();
+    csPtData.transaction_id = $(e).closest("td").closest("tr").find('.csPtTransactionIdEoi').val();
+    csPtData.transaction_date = $(e).closest("td").closest("tr").find('.csPtTransactionDateEoi').val();
+    csPtData.transaction_amount = $(e).closest("td").closest("tr").find('.csPtTransactionAmountEoi').val();
+    csPtData.description = $(e).closest("td").closest("tr").find('.csPtDescriptionEoi').val();
+    
+    if ($(e).closest("td").closest("tr").find('.receiptAttachEoi').val() != "") {
+    	csPtData.cheque_attach = $(e).closest("td").closest("tr").attr("data-rowid")+"Receipt_"+$(e).closest("td").closest("tr").find('.receiptAttachEoi')[0].files[0].name;
+    }else {
+    	csPtData.cheque_attach ="";
+    }
+    
+    arrayData.push(csPtData);
+	
+    
+    //file attachment
+    var formData = new FormData();
+ 	formData.append('receiptAttachEoi', $(e).closest("td").closest("tr").find('.receiptAttachEoi')[0].files[0]);
+ 	formData.append('rowid', $(e).closest("td").closest("tr").attr("data-rowid"));
+ 	
+ 	formData.append('paymentDtlJson', JSON.stringify(arrayData));
+ 	formData.append('userid', $('#userid').val());
+ 	formData.append('username', $('#userNameLoggedIn').val());
+ 	formData.append('enq_sfid', enqSFIDforEOI);
+ 	formData.append('project_sfid', $('#projectid').val());
+    //END file attachment
+    
+ 	$.ajax({
+		url : pageContext+'updateEOIPayment',
+		type : 'POST',
+		data : formData,
+		processData : false,
+		contentType : false,
+		success : function(data) {
+			var obj =JSON.parse(data);
+			if(obj!=null){
+				 if (obj.status == "STATUS_OK") {
+					 swal({
+			             title: obj.error_msg,
+			              text: "",
+			              timer: 3000,
+			              type: "success",
+			         });
+					 getEOITabPaymentRecord ();
+				 } else if (obj.status == "STATUS_NOTOK") {
+					 swal({
+			             title: obj.error_msg,
+			              text: "",
+			              timer: 3000,
+			              type: "warning",
+			         });
+				 }
+			}
+		}
+	});
+ 	
+	/*$.post(pageContext+"updateEOIPayment",{"paymentDtlJson" : JSON.stringify(arrayData),
+		"userid" : $('#userid').val(),
+		"username" : $('#userNameLoggedIn').val(),
+		"enq_sfid" : enqSFIDforEOI,
+		"project_sfid" : $('#projectid').val()},function(data){				 
+	}).done(function(data){
+	});*/
+}
+/*END CRUD For Payment Details*/
+
+
 // --------------------- Update EOI Preference ----------------------
 function updateEOIPreference (e) {
 	
@@ -448,6 +547,115 @@ function updateEOIPreference (e) {
 //------------------ Update EOI Preference -----------------
 
 
+//--------------------- Delete EOI Preference ----------------------
+function deleteEOIPreference (e) {
+	
+	var unitsfidOldArray = [];
+	var unitNameOldArray = [];
+	
+	var unitsfidOldVal = $(e).closest("td").closest("tr").find('.oldUnitsfid').val();
+	var unitnameOldVal = $(e).closest("td").closest("tr").find('.oldUnitname').val();
+	
+    //$.each($("input[name='unit']:checked"), function(){ 
+    unitsfidOldArray.push(unitsfidOldVal);
+    unitNameOldArray.push(unitnameOldVal);
+    //});
+
+    /*if(unitsfidOldArray=='' || unitsfidOldArray==null){
+		swal({
+			title: "Please select the Unit",
+		    text: "",
+		    type: "warning",
+		});
+		return false;
+	}*/
+	
+	var arrayData = [];
+	//$("#EOIMultipleTable .EOIDtlRow").each(function () {
+    var csPtData = {};
+    
+    
+    //$(e).closest("td").closest("tr").find(".towerColtd").append(towerHtml);
+    
+    csPtData.rowid =  $(e).closest("td").closest("tr").attr("data-rowid");
+   
+    arrayData.push(csPtData);
+	//});
+	
+	$.post(pageContext+"deleteEOIPreference",{"preferenceJson" : JSON.stringify(arrayData),
+		"userid" : $('#userid').val(),
+		"username" : $('#userNameLoggedIn').val(),
+		"enq_sfid" : enqSFIDforEOI,
+		"project_sfid" : $('#projectid').val(),
+		"unitsfidOldArray" : unitsfidOldArray.join(",")
+	},function(data){
+		
+	}).done(function(data){
+		var obj =JSON.parse(data);
+		if(obj!=null){
+			 if (obj.status == "STATUS_OK") {
+				 swal({
+		             title: obj.error_msg,
+		              text: "",
+		              timer: 3000,
+		              type: "success",
+		         });
+				 getEOITabPreferencRecord ();
+			 } else if (obj.status == "STATUS_NOTOK") {
+				 swal({
+		             title: obj.error_msg,
+		              text: "",
+		              timer: 3000,
+		              type: "warning",
+		         });
+			 }
+		}
+	});
+}
+//------------------ Delete EOI Preference -----------------
+
+
+//--------------------- Delete EOI Payment ----------------------
+function deleteEOIPayment (e) {
+	
+	var arrayData = [];
+    var csPtData = {};
+    
+    csPtData.rowid =  $(e).closest("td").closest("tr").attr("data-rowid");
+    
+    arrayData.push(csPtData);
+	
+	$.post(pageContext+"deleteEOIPayment",{"paymentJson" : JSON.stringify(arrayData),
+		"userid" : $('#userid').val(),
+		"enq_sfid" : enqSFIDforEOI,
+		"project_sfid" : $('#projectid').val()
+	},function(data){
+		
+	}).done(function(data){
+		var obj =JSON.parse(data);
+		if(obj!=null){
+			 if (obj.status == "STATUS_OK") {
+				 swal({
+		             title: obj.error_msg,
+		              text: "",
+		              timer: 3000,
+		              type: "success",
+		         });
+				 getEOITabPaymentRecord ();
+			 } else if (obj.status == "STATUS_NOTOK") {
+				 swal({
+		             title: obj.error_msg,
+		              text: "",
+		              timer: 3000,
+		              type: "warning",
+		         });
+			 }
+		}
+	});
+}
+//------------------ Delete EOI Payment -----------------
+
+
 /*
 function holdUnitForEOI(msg) {
 	var favorite = [];
@@ -499,10 +707,11 @@ function holdUnitForEOI(msg) {
 
 // ------------------------------------ New -----------------------------------------
 
-function editPaymentRequest (e) {
+function editEOIPreference (e) {
 	$(e).hide();
 	$(e).closest("td").find(".updatePaymentBtn").show();
 	$(e).closest("td").find(".cancelPayReqBtn").show();
+	$(e).closest("td").find(".deletePayReqBtn").hide();
 	
 	$(e).closest("td").closest("tr").addClass("EOIDtlRow");
 	
@@ -563,8 +772,9 @@ function editPaymentRequest (e) {
 	});
 } 
 
-function cancelPayReq (e) {
+function cancelEOIPreference (e) {
 	$(e).hide();
+	$(e).closest("td").find(".deletePayReqBtn").show();
 	$(e).closest("td").find(".updatePaymentBtn").hide();
 	$(e).closest("td").find(".editPayReqBtn").show();
 	
@@ -577,3 +787,61 @@ function cancelPayReq (e) {
 	$(e).closest("td").closest("tr").find(".eoicarparkColtd .carparkListEOI").remove();
 	$(e).closest("td").closest("tr").find(".eoiUnitDesColtd .descriptionEOI").remove();
 }
+
+function cancelEOIPayment (e) {
+	$(e).hide();
+	$(e).closest("td").find(".deletePayReqBtn").show();
+	$(e).closest("td").find(".updatePaymentBtn").hide();
+	$(e).closest("td").find(".editPayReqBtn").show();
+	
+	$(e).closest("td").closest("tr").removeClass("EOIDtlRow");
+	
+	$(e).closest("td").closest("tr").find(".paymentTypeColtd .csPtDropDownEoi").remove();
+	$(e).closest("td").closest("tr").find(".banknameColtd .csPtBankNameEoi").remove();
+	$(e).closest("td").closest("tr").find(".trxidColtd .csPtTransactionIdEoi").remove();
+	$(e).closest("td").closest("tr").find(".trxdateColtd .csPtTransactionDateEoi").remove();
+	$(e).closest("td").closest("tr").find(".trxamountColtd .csPtTransactionAmountEoi").remove();
+	$(e).closest("td").closest("tr").find(".receiptColtd .receiptAttachEoi").remove();
+	$(e).closest("td").closest("tr").find(".descriptionColtd .csPtDescriptionEoi").remove();
+}
+
+/*CRUD For Payment Details*/
+function editEOIPayment (e) {
+	$(e).hide();
+	$(e).closest("td").find(".updatePaymentBtn").show();
+	$(e).closest("td").find(".cancelPayReqBtn").show();
+	$(e).closest("td").find(".deletePayReqBtn").hide();
+	
+	$(e).closest("td").closest("tr").addClass("EOIDtlRow");
+	
+	var paymentTypeHtml = '';
+	var banknameHtml = '';
+	var trxidHtml = '';
+	var trxdateHtml = '';
+	var trxamountHtml = '';
+	var receiptHtml = '';
+	var descriptionHtml = '';
+	
+	paymentTypeHtml += " <select onchange='csPtDdEoi(this)' class='full form-control input-sm csPtDropDownEoi requiredField'> " +
+						" <option value=''>Select</option> " +
+						" <option value='Cheque'>Cheque</option> " +
+						" <option value='NEFT'>NEFT/Credit</option> " +
+						" <option value='Swipe'>Swipe</option> " +
+						" <option value='Wire Transfer'>Wire Transfer (PayZap, Google Pay)</option> "
+				+"</select>"
+	banknameHtml += "<input class='full form-control input-sm csPtBankNameEoi requiredField' placeholder='Bank Name'/>"
+	trxidHtml += "<input class='full form-control input-sm csPtTransactionIdEoi requiredField' placeholder='Transaction ID' />"
+	trxdateHtml += "<input type='date' class='form-control input-sm csPtTransactionDateEoi requiredField' placeholder='Transaction Date'/>"
+	trxamountHtml += "<input maxlength='10' class='numericWithoutDecimal  numericField full form-control input-sm csPtTransactionAmountEoi requiredField'  placeholder='Transaction Amount' name='amount'/> "
+	receiptHtml += "<input type='file' class='full form-control input-sm receiptAttachEoi' accept='application/pdf,image/*'/>  "
+	descriptionHtml += "<textarea class='full form-control input-sm csPtDescriptionEoi' placeholder='Description'></textarea>  "
+	
+	
+	$(e).closest("td").closest("tr").find(".paymentTypeColtd").append(paymentTypeHtml);
+	$(e).closest("td").closest("tr").find(".banknameColtd").append(banknameHtml);
+	$(e).closest("td").closest("tr").find(".trxidColtd").append(trxidHtml);
+	$(e).closest("td").closest("tr").find(".trxdateColtd").append(trxdateHtml);
+	$(e).closest("td").closest("tr").find(".trxamountColtd").append(trxamountHtml);
+	$(e).closest("td").closest("tr").find(".receiptColtd").append(receiptHtml);
+	$(e).closest("td").closest("tr").find(".descriptionColtd").append(descriptionHtml);
+} 

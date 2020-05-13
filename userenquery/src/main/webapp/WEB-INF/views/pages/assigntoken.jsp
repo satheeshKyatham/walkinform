@@ -194,5 +194,7 @@ projectid=request.getParameter("projectid");
 
 <script src="<c:url value='/resources/js/separate/eoiData.js?v=${sessionScope.version}'/>"></script>
 
+<%@ include file="/WEB-INF/views/pages/footer.jsp" %>
+
 </body>
 </html>  

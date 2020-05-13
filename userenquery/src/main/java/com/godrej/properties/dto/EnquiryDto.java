@@ -117,6 +117,7 @@ public class EnquiryDto extends CommonDto {
     
     private String name;
     private String isAllowCCPaymentGateway;
+    private Double virtual_meeting_count__c;
    	
 	public String getClosing_manager_name__c() {
 		return closing_manager_name__c;
@@ -663,6 +664,14 @@ public class EnquiryDto extends CommonDto {
 
 	public void setIsAllowCCPaymentGateway(String isAllowCCPaymentGateway) {
 		this.isAllowCCPaymentGateway = isAllowCCPaymentGateway;
+	}
+
+	public Double getVirtual_meeting_count__c() {
+		return virtual_meeting_count__c;
+	}
+
+	public void setVirtual_meeting_count__c(Double virtual_meeting_count__c) {
+		this.virtual_meeting_count__c = virtual_meeting_count__c;
 	}
 
 	
