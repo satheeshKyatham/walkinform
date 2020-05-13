@@ -26,35 +26,53 @@
 			
 				 
 				<div id=""> <!-- enqsfidInputField -->
-					<div class="form-group col-md-3">
-					  <div class="form-group">
-					    <label>ENQ Name</label>
-					    <div class="input-group">
-					    	<div class="input-group-addon">ENQ -</div>
-					      	<input type="text" class="form-control" id="enqNameInputEOI">
-					      	<div class="input-group-addon" onclick="enqDtlForAdminEOI();">
-								<i class="glyphicon glyphicon-search"></i>
-							</div>
-					    </div>
-					  </div>
-					  
-					  <div class="form-group">
-					  	<button onclick="getEOIPreferencPrint();" class="btn btn-primary blue_btn">Generate EOI Form</button>
-					  </div>
-					  
+					<div class="form-group col-md-12">
+						<div class="row">
+							  <div class="form-group col-md-3">
+							    <label>ENQ Name</label>
+							    <div class="input-group">
+							    	<div class="input-group-addon">ENQ -</div>
+							      	<input type="text" class="form-control" id="enqNameInputEOI">
+							      	<div class="input-group-addon" onclick="enqDtlForAdminEOI();">
+										<i class="glyphicon glyphicon-search"></i>
+									</div>
+							    </div>
+							    <div class="clearfix"></div>
+							  </div>
+							  <div class="col-md-9" style="padding-top: 22px;">
+							  	 <div class="form-group" id="cancelEOICol" style="float: right; margin-left:20px; display:none;">
+								  	<button class="btn btn-primary blue_btn" onclick="deleteEOI();" style="background-color: #ce1818 !important; color: #fff; ">
+								  		Cancel EOI
+								  		<!-- <i class="fa fa-spinner fa-spin" style="display: none; color: #fff !important;"></i> -->
+								  	</button>
+								  </div>
+								  
+							  	 <div class="form-group" id="generateEOICol" style="display:none; float: right;">
+								  	<button onclick="generateEOIForm();" class="btn btn-primary blue_btn">
+								  		Generate EOI Form
+								  		<i class="fa fa-spinner fa-spin" style="display: none; color: #fff !important;"></i>
+								  	</button>
+								  </div>
+								  <div class="clearfix"></div>
+							  </div>
+							 
+							  <div class="clearfix"></div>
+					  	</div>
+					  	<div class="clearfix"></div>
 					</div>
 					<div class="clearfix"></div>
 					<div class="col-md-12">
 						<table class="table table-bordered" id="enqDtlTableEOI">
 							<thead>
 								<tr>
+									<th>ENQ ID</th>
 									<th>ENQ Name</th>
 									<th>Mobile</th>
 									<th>Name</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr><td colspan='3' style="text-align:center;">No records found</td></tr>
+								<tr><td colspan='4' style="text-align:center;">No records found</td></tr>
 							</tbody>
 						</table>
 						<div class="clearfix"></div>
@@ -69,63 +87,20 @@
 					</h4>
 					
 					<table class="table table-bordered  bgWhite mrgB8" id="EOIMultipleTable">
-						<tbody>
-							<tr class="subHead">
-								<th>
-									Tower
-								</th>
-								<th>
-									Typology 
-								</th>
-								<th>
-									Unit
-								</th>
-								<th>
-									Floor Band
-								</th>
-								<th>
-									Car Park Type
-								</th>
-								<th>
-									Description
-								</th>
-								<th style="width:32px;"></th>
-							</tr>
-							<!-- 
-							<tr class="EOIDtlRow">  
-								<td>
-									<input class="csPtEnqSfidEoi" style="display:none;" />
-									<select class="full form-control input-sm towerListEOI requiredField"  onchange="getTypologyEOI(this); getUnitEOI(this); getfbandEOI(this); getCarparkEOIMst(this);">
-										<option value="">Select Tower</option>
-									</select>
-								</td>
-								<td>
-									<select class="full form-control input-sm typologyListEOI requiredField" onchange="getUnitEOI(this)">
-										<option value="">Select Typology</option>
-									</select>
-								</td>
-								<td>
-									<select class="full form-control input-sm unitListEOI" onchange="unitChangeConditionEOI(this)">
-										<option value="0">Select Unit</option>
-									</select>
-								</td>
-								<td>
-									<select class="full form-control input-sm floorListEOI">
-										<option value="">Select Floor Band</option>
-									</select>
-								</td>
-								<td>
-									<select class="full form-control input-sm carparkListEOI">
-										<option data-carparkname="" value="-1">Select Car Park</option>
-									</select>
-								</td>
-								<td style="width:150px;">
-									<textarea class="full form-control input-sm descriptionEOI" placeholder="Description"></textarea>
-								</td>
-								<td> </td>
-							</tr>
-							-->
-						</tbody>
+							<thead>
+								<tr class="subHead">
+									<th> Tower </th>
+									<th> Typology </th>
+									<th> Unit </th>
+									<th> Floor Band </th>
+									<th> Car Park Type </th>
+									<th> Description </th>
+									<th style="width:32px;"></th>
+								</tr>
+							</thead>
+							<tbody>
+								
+							</tbody>
 					</table>
 				</div>
 				
@@ -136,76 +111,21 @@
 					</h4>
 					
 					<table class="table table-bordered  bgWhite mrgB8" id="csPtColEoi">
-						<tbody>
+						<thead>
 							<tr class="subHead">
 								<th>Status</th>
-								<th style="width:130px;">
-									Payment Type
-								</th>
-								<th style="width:120px;">
-									Bank Name
-								</th>
-								<th>
-									Transaction ID
-								</th>
-								<th>
-									Transaction</br>Date
-								</th>
-								<th>
-									Transaction Amount
-								</th>
-								<th style="width:200px;">
-									Receipt/</br>Cheque Attachment
-								</th>
-								
-								<th style="width:150px;">
-									Description
-								</th>
+								<th style="width:130px;"> Payment Type </th>
+								<th style="width:120px;"> Bank Name </th>
+								<th> Transaction ID </th>
+								<th> Transaction</br>Date </th>
+								<th> Transaction Amount </th>
+								<th style="width:200px;"> Receipt/</br>Cheque Attachment </th>
+								<th style="width:150px;"> Description </th>
 								<th style="width:32px;"></th>
 							</tr>
+						</thead>
+						<tbody>
 							
-							<!-- 
-							<tr class="csPtDataRowEoi">
-								<td></td>
-								<td>
-									<input class="csPtEnqSfidEoi" style="display:none;" />
-									<select onchange="csPtDdEoi(this)" class="full form-control input-sm csPtDropDownEoi requiredField">
-										<option value="">Select</option>
-										<option value="Cheque">Cheque</option>
-										<option value="NEFT">NEFT/Credit</option>
-										<option value="Swipe">Swipe</option>
-										<option value="Wire Transfer">Wire Transfer (PayZap, Google Pay)</option>
-									</select>
-								</td>
-								<td>
-									<input class="full form-control input-sm csPtBankNameEoi requiredField" placeholder="Bank Name"/>
-								</td>
-								<td style="display:none;">
-									<input class="full form-control input-sm csPtBranchEoi" placeholder="Branch Name"/>
-								</td> 
-								<td>
-									<input class="full form-control input-sm csPtTransactionIdEoi requiredField" placeholder="Transaction ID"/>
-								</td>
-								<td>
-									<input type="date" class="form-control input-sm csPtTransactionDateEoi requiredField" placeholder="Transaction Date"/>
-								</td>
-								<td>
-									<input maxlength="10" class="numericWithoutDecimal numericField full form-control input-sm csPtTransactionAmountEoi requiredField" onkeyup="csPtcalculateGrandTotalEoi()" name="amount" placeholder="Transaction Amount"/>
-								</td>
-								
-								<td style="display:none;">
-									<input type="file" class="full form-control input-sm panAttachEoi" accept="application/pdf,image/*"/>
-								</td>
-								<td>
-									<input type="file" class="numericField full form-control input-sm receiptAttachEoi requiredField" accept="application/pdf,image/*"/>
-								</td>
-								
-								<td>
-									<textarea class="full form-control input-sm csPtDescriptionEoi" placeholder="Description"></textarea>
-								</td>
-								<td> </td>
-							</tr>
-							-->
 						</tbody>
 					</table>
 					

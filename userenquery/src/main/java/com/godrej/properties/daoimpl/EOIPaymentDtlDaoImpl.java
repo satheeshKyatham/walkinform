@@ -216,7 +216,7 @@ public class EOIPaymentDtlDaoImpl extends AbstractDao<Integer, EOIPaymentDtl> im
 	
 	@Override
 	public Boolean inactiveEOIPayment(List<EOIPaymentDtl> eoiReq) {
-		try {
+		//try {
 			for (int i = 0; i <eoiReq.size(); i++) {
 				Session session = this.sessionFactory.getCurrentSession();
 				Query q = session.createQuery("DELETE from EOIPaymentDtl  "
@@ -230,10 +230,10 @@ public class EOIPaymentDtlDaoImpl extends AbstractDao<Integer, EOIPaymentDtl> im
 				q.executeUpdate();
 			}
 			return true;
-		} catch (Exception e) {
-			Log.info("Delete EOI Payment Error:- ",e);
-			return false;
-		}
+		/*
+		 * } catch (Exception e) { Log.info("Delete EOI Payment Error:- ",e); return
+		 * false; }
+		 */
 	}
 	
 }

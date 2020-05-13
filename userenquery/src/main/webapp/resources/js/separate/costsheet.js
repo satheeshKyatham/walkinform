@@ -2502,6 +2502,7 @@ function newOtherCharges2 () {
                     
                     
                     
+                    
              } else {
                     $('#totalDicountView').hide();
                     $('#totalDiscountCol').html('');
