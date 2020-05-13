@@ -576,8 +576,12 @@ public class EnquiryRequestServiceImpl implements EnquiryRequestService {
 				    {
 				    	enquiry.setAppointment_Done__c(0.0);
 				    }
+				    if(enquiry.getVirtual_meeting_count__c()==null)
+				    {
+				    	enquiry.setVirtual_meeting_count__c(0.0);
+				    }
 				    //
-					if((enquiry.getSite_Visit_Done__c()>0 || enquiry.getAppointment_Done__c()>0) 
+					if((enquiry.getSite_Visit_Done__c()>0 || enquiry.getAppointment_Done__c()>0 || enquiry.getVirtual_meeting_count__c()>0) 
 							&& siteVisitDays < KeyConstants.SITE_VISIT_DAYS_LIMIT && lastModifyDays < KeyConstants.LAST_MODIFY_DAYS_LIMIT)
 					{
 						enquiries.add(enquiry);

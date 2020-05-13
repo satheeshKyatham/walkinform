@@ -73,6 +73,8 @@ public class Enquiry extends CommonModel{
 	@Column(name="site_visit_requested__c") private Double site_visit_requested__c;
 	@Column(name="Lost_reason_c__c") private String lost_reason_c__c;
 	
+	@Column(name="virtual_meeting_count__c") private Double virtual_meeting_count__c;
+	
 
 	public String getClosing_manager_name__c() {
 		return closing_manager_name__c;
@@ -639,6 +641,16 @@ public class Enquiry extends CommonModel{
 	public void setSourcing_Team_Lead__c(String sourcing_Team_Lead__c) {
 		this.sourcing_Team_Lead__c = sourcing_Team_Lead__c;
 	}
+
+	public Double getVirtual_meeting_count__c() {
+		return virtual_meeting_count__c;
+	}
+
+	public void setVirtual_meeting_count__c(Double virtual_meeting_count__c) {
+		this.virtual_meeting_count__c = virtual_meeting_count__c;
+	}
+
+
 	
 	
 }

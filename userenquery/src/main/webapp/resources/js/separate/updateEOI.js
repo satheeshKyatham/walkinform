@@ -8,6 +8,24 @@ $.ajaxSetup({
 
 var enqSFIDforEOI = '';
 var enqName = '';
+var enqid = '';
+var paymentDataisNull = true;
+var preferencDataisNull = true;
+
+function generateEOIForm() {
+	if (enqSFIDforEOI != null && enqSFIDforEOI != '') {
+		$('#generateEOICol button i').show();
+		getEOIPreferencPrint("INVENTORYTAB");
+	} else {
+		$('#generateEOICol button i').hide();
+		swal({
+            title: "Invalid Enquiry ID",
+             text: "",
+             timer: 3000,
+             type: "warning",
+        });
+	}
+}
 
 function enqDtlForAdminEOI () {
 	var enqName = "ENQ - " + $('#enqNameInputEOI').val().trim();
@@ -19,25 +37,37 @@ function enqDtlForAdminEOI () {
          if (obj != null) {
         	 for(var i=0;i<obj.length;i++){
         		 html += "<tr>" +
+        		 	" <td>"+obj[i].id+"</td>" +
         		 	" <td>"+obj[i].enq_name+"</td>" +
 					" <td>"+obj[i].mobile__c+"</td>" +
 					" <td>"+obj[i].name+"</td>" +
 				" </tr>";
         		 enqSFIDforEOI = obj[i].enq_sfid;
         		 enqName = obj[i].enq_name;
+        		 enqid = obj[i].id;
         	 }
         	 $("#enqDtlTableEOI tbody").append(html);
          } else {
         	 enqSFIDforEOI = '';
-        	 $("#enqDtlTableEOI tbody").append("<tr><td colspan='3'>No records found</td></tr>");
+        	 $("#enqDtlTableEOI tbody").append("<tr><td colspan='4'>No records found</td></tr>");
          }
 	}).done(function(data){
 		if (enqSFIDforEOI != ''){
 			$('#enquirysfid').val(enqSFIDforEOI);
 			$('#enquiry_name').val(enqName);
-			
 			getEOITabPaymentRecord (); getEOITabPreferencRecord();
+			//$('#generateEOICol').show();
+			//$('#cancelEOICol').show();
 		} else {
+			
+			$("#EOIMultipleTable tbody").empty();
+			$("#EOIMultipleTable tbody").append("<tr><td colspan='7'>No records found</td></tr>");
+			
+			$("#csPtColEoi tbody").empty();
+			$("#csPtColEoi tbody").append("<tr><td colspan='9'>No records found</td></tr>");
+			
+			$('#generateEOICol').hide();
+			$('#cancelEOICol').hide();
 			$('#enquirysfid').val("");
 		}
 	}).fail(function(xhr, status, error) {
@@ -84,8 +114,9 @@ function csPtDdEoi (e) {
 	}	
 }
 function getEOITabPreferencRecord () {
-	$('#EOIMultipleTable tbody tr.prefrenceDataPlotRow').remove();
+	
 	$.post(pageContext+"getEOITabPreferencRecord",{"enqSfid":enqSFIDforEOI},function(data){
+		$('#EOIMultipleTable tbody').empty();
 		var html = '';
 		var obj =JSON.parse(data);
 		var trans_date = '';
@@ -141,7 +172,15 @@ function getEOITabPreferencRecord () {
 							"</tr>";
 			}
 			html = html.replace(/undefined/g, "");
-			$("#EOIMultipleTable tbody tr:first-child").after(html);
+			$("#EOIMultipleTable tbody").append(html);
+			
+			preferencDataisNull= false;
+			dataValidate(preferencDataisNull, paymentDataisNull);
+		} else {
+        	$("#EOIMultipleTable tbody").append("<tr><td colspan='7'>No records found</td></tr>");
+	         
+			preferencDataisNull= true;
+			dataValidate(preferencDataisNull, paymentDataisNull);
 		}
 	}).done(function(obj){
 		
@@ -150,9 +189,10 @@ function getEOITabPreferencRecord () {
 
 // function call in salesRequest.js in "populateBasicInfo" function end 
 function getEOITabPaymentRecord () {
-	$('#csPtColEoi tbody tr.paymentDataPlotRow').remove();
+	
 	$('#csPtGrandtotalEoi').text("");
 	$.post(pageContext+"getEOIPaymentRecord",{"enqSfid":enqSFIDforEOI},function(data){
+		$('#csPtColEoi tbody').empty();
 		var html = '';
 		var obj =JSON.parse(data);
 		var trans_date = '';
@@ -221,7 +261,15 @@ function getEOITabPaymentRecord () {
 			
 			$('#csPtGrandtotalEoi').text(eoiTransactionTotalAmount);
 			html = html.replace(/undefined/g, "");
-			$("#csPtColEoi tbody tr:first-child").after(html);
+			$("#csPtColEoi tbody").append(html);
+			
+			paymentDataisNull = false;
+			dataValidate(preferencDataisNull, paymentDataisNull);
+		} else {
+			$("#csPtColEoi tbody").append("<tr><td colspan='9'>No records found</td></tr>");
+			
+			paymentDataisNull = true;
+			dataValidate(preferencDataisNull, paymentDataisNull);
 		}
 	}).done(function(obj){
 		
@@ -844,4 +892,78 @@ function editEOIPayment (e) {
 	$(e).closest("td").closest("tr").find(".trxamountColtd").append(trxamountHtml);
 	$(e).closest("td").closest("tr").find(".receiptColtd").append(receiptHtml);
 	$(e).closest("td").closest("tr").find(".descriptionColtd").append(descriptionHtml);
-} 
+}
+
+function deleteEOI() {
+	
+	
+	//var unitsfidOldVal = $(e).closest("td").closest("tr").find('.oldUnitsfid').val();
+	//var unitnameOldVal = $(e).closest("td").closest("tr").find('.oldUnitname').val();
+	
+    /*$.each("#EOIMultipleTable .prefrenceDataPlotRow "), function(){ 
+	    unitsfidOldArray.push(unitsfidOldVal);
+	    unitNameOldArray.push(unitnameOldVal);
+    });*/
+
+	var unitsfidOldArray = [];
+	//var unitNameOldArray = [];
+	
+	var arrayPrefrence = [];
+	var arrayPayment = [];
+	
+	$("#EOIMultipleTable .prefrenceDataPlotRow").each(function () {
+	    var csPtData = {};
+	    csPtData.rowid =  $(this).attr("data-rowid");
+	    arrayPrefrence.push(csPtData);
+	    unitsfidOldArray.push($(this).find(".oldUnitsfid").val());
+	   // unitNameOldArray.push($(this).find(".eoieditOldRec").text());
+	});
+	
+	$("#csPtColEoi .paymentDataPlotRow").each(function () {
+	    var csPaymentData = {};
+	    csPaymentData.rowid =  $(this).attr("data-rowid");
+	    arrayPayment.push(csPaymentData);
+	});
+	
+	$.post(pageContext+"deleteEOI",{"preferenceJson" : JSON.stringify(arrayPrefrence),
+		"paymentJson" : JSON.stringify(arrayPayment),
+		"userid" : $('#userid').val(),
+		"username" : $('#userNameLoggedIn').val(),
+		"enq_sfid" : enqSFIDforEOI,
+		"project_sfid" : $('#projectid').val(),
+		"unitsfidOldArray" : unitsfidOldArray.join(","),
+		"enqid" : enqid
+	},function(data){
+		
+	}).done(function(data){
+		var obj =JSON.parse(data);
+		if(obj!=null){
+			 if (obj.status == "STATUS_OK") {
+				 swal({
+		             title: obj.error_msg,
+		              text: "",
+		              timer: 3000,
+		              type: "success",
+		         });
+				 getEOITabPaymentRecord (); getEOITabPreferencRecord();
+			 } else if (obj.status == "STATUS_NOTOK") {
+				 swal({
+		             title: obj.error_msg,
+		              text: "",
+		              timer: 3000,
+		              type: "warning",
+		         });
+			 }
+		}
+	});
+}
+
+function dataValidate(preferencDataisNull, paymentDataisNull){
+	if (preferencDataisNull == false || paymentDataisNull == false) {
+		$('#generateEOICol').show();
+		$('#cancelEOICol').show();
+	} else {
+		$('#generateEOICol').hide();
+		$('#cancelEOICol').hide();
+	}
+};

@@ -8,7 +8,7 @@ $.ajaxSetup({
 
 //Get EOI Details
 //getEOIPreferencPrint function call in csPymtDataEoi () / file:storeEOIPaymentDtl.js
-function getEOIPreferencPrint () {
+function getEOIPreferencPrint (source) {
 	
 	$('#EOIMultipleTablePrint tbody').empty();
 	$.post(pageContext+"getEOITabPreferencRecord",{"enqSfid":$('#enquirysfid').val()},function(data){
@@ -47,7 +47,7 @@ function getEOIPreferencPrint () {
 		}
 	}).done(function(obj){
 		
-		getEOIPaymentPrint();
+		getEOIPaymentPrint(source);
 	
 	}).fail(function(xhr, status, error) {
     	swal({
@@ -59,7 +59,7 @@ function getEOIPreferencPrint () {
     });
 }
 
-function getEOIPaymentPrint () {
+function getEOIPaymentPrint (source) {
 	
 	$('#EOIMultiplePaymentPrint tbody').empty();
 	
@@ -84,11 +84,11 @@ function getEOIPaymentPrint () {
 		}
 	}).done(function(obj){
 		
-		tncEOIData ();
+		tncEOIData (source);
 		
 	}).fail(function(xhr, status, error) {
     	swal({
-    		title: "222 There was problem in generating PDF at this time. Please try again from EOI report.",
+    		title: "There was problem in generating PDF at this time. Please try again from EOI report.",
 			text: "",
 			timer: 8000,
 			type: "warning",
@@ -98,7 +98,7 @@ function getEOIPaymentPrint () {
 //END Get EOI Details
 
 /*Get TnC Record*/
-function tncEOIData () {
+function tncEOIData (source) {
 	$('#tncDataEOI').empty();
 	$.post(pageContext+"getTncEOIData",{"projectid":$('#projectid').val() },function(data){                      
          var obj =JSON.parse(data);
@@ -109,11 +109,11 @@ function tncEOIData () {
          } 
     }).done(function(data){
 
-    	enqAndProjectDtl();
+    	enqAndProjectDtl(source);
     	
     }).fail(function(xhr, status, error) {
     	swal({
-    		title: "333 There was problem in generating PDF at this time. Please try again from EOI report.",
+    		title: "There was problem in generating PDF at this time. Please try again from EOI report.",
 			text: "",
 			timer: 8000,
 			type: "warning",
@@ -122,7 +122,7 @@ function tncEOIData () {
 }
 /* END Get TnC Record*/
 
-function enqAndProjectDtl () {
+function enqAndProjectDtl (source) {
 	$('#closingMangrEOIPrint').text('');
 	$('#verticalEOIPrint').text('');
 	$('#projectNameEOIPrint').text('');
@@ -157,7 +157,7 @@ function enqAndProjectDtl () {
          } 
 	}).done(function(data){
 
-		eoiApplicantDetails(contactSFID, enqName, regionName, projectName, projectNameWithoutCity);
+		eoiApplicantDetails(contactSFID, enqName, regionName, projectName, projectNameWithoutCity, source);
           
 	}).fail(function(xhr, status, error) {
     	swal({
@@ -172,7 +172,7 @@ function enqAndProjectDtl () {
 
 
 // Get Applicant Details
-function eoiApplicantDetails (contactSFID, enqName, regionName, projectName, projectNameWithoutCity) {	
+function eoiApplicantDetails (contactSFID, enqName, regionName, projectName, projectNameWithoutCity, source) {	
 	$.post(pageContext+"getKYCApplicantData",{"enqName":enqName, "contactSFID":contactSFID},function(data){
 		$('#priAppNameEOIPrint').text('');
 		$('#priAppEmailEOIPrint').text('');
@@ -224,11 +224,11 @@ function eoiApplicantDetails (contactSFID, enqName, regionName, projectName, pro
 		}
 	}).done(function(obj){
 		
-		printEOIForm(regionName, projectName, enqName, projectNameWithoutCity);
+		printEOIForm(regionName, projectName, enqName, projectNameWithoutCity, source);
 		
 	}).fail(function(xhr, status, error) {
     	swal({
-    		title: "555 There was problem in generating PDF at this time. Please try again from EOI report.",
+    		title: "There was problem in generating PDF at this time. Please try again from EOI report.",
 			text: "",
 			timer: 8000,
 			type: "warning",
@@ -238,7 +238,7 @@ function eoiApplicantDetails (contactSFID, enqName, regionName, projectName, pro
 //END Get Applicant Details
 
 
-function printEOIForm(regionName, projectName, enqName, projectNameWithoutCity) {
+function printEOIForm(regionName, projectName, enqName, projectNameWithoutCity, source) {
 	console.log ("regionName ::: " + regionName);
 	console.log ("projectName ::: " + projectName);
 	
@@ -257,7 +257,7 @@ function printEOIForm(regionName, projectName, enqName, projectNameWithoutCity) 
 		if (win) {
 		    win.focus();
 		    
-		    if(ROLE_GV != '16'){
+		    if(source == 'SALESTAB'){
 		    	swal({
 		    		title: "EOI Successfully Generated & KYC Link Sent.",
 		    		text: "",
@@ -273,6 +273,7 @@ function printEOIForm(regionName, projectName, enqName, projectNameWithoutCity) 
 		    		}
 		    	});
 		    } else {
+		    	$('#generateEOICol button i').hide();
 		    	swal({
                     title: "EOI form Successfully Generated",
                  text: "",
@@ -287,7 +288,7 @@ function printEOIForm(regionName, projectName, enqName, projectNameWithoutCity) 
 		
 	}).fail(function(xhr, status, error) {
     	swal({
-    		title: "666 There was problem in generating PDF at this time. Please try again from EOI report.",
+    		title: "There was problem in generating PDF at this time. Please try again from EOI report.",
 			text: "",
 			timer: 8000,
 			type: "warning",

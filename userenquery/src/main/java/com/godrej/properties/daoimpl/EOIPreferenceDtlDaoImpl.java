@@ -86,7 +86,7 @@ public class EOIPreferenceDtlDaoImpl extends AbstractDao<Integer, EOIPreferenceD
 	
 	@Override
 	public Boolean inactiveEOIPreference(List<EOIPreferenceDtl> eoiReq) {
-		try {
+		//try {
 			for (int i = 0; i <eoiReq.size(); i++) {
 				Session session = this.sessionFactory.getCurrentSession();
 				Query q = session.createQuery("DELETE from EOIPreferenceDtl  "
@@ -102,9 +102,9 @@ public class EOIPreferenceDtlDaoImpl extends AbstractDao<Integer, EOIPreferenceD
 				q.executeUpdate();
 			}
 			return true;
-		} catch (Exception e) {
+		/*} catch (Exception e) {
 			Log.info("Delete EOI Preference Error:- ",e);
 			return false;
-		}
+		}*/
 	}
 }
