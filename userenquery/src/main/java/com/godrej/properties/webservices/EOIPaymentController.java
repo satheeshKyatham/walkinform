@@ -46,27 +46,30 @@ public class EOIPaymentController {
 			if(!userid.equals("")  
 				&& !username.equals("")
 				&& !enq_sfid.equals("")  
-				&& !project_sfid.equals(""))  {
+				&& !project_sfid.equals("")
+				&& receiptAttach!=null)  {
 				
 				try {
 					
 					String rootPath = System.getProperty("catalina.home");
 					
-					if(receiptAttach!=null) {
-						File ad_dir = new File(rootPath + File.separator + "EOIbookingReference" + File.separator + enq_sfid + File.separator + rowid);
-						String ad_path =ad_dir +File.separator+rowid+"Receipt"+"_"+receiptAttach.getOriginalFilename();
-						if (!ad_dir.exists()) {
-							ad_dir.mkdirs();	
-						}
-						byte[] abytes;
-						abytes = receiptAttach.getBytes();
-						File aserverFile = new File(ad_path);
-						BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(aserverFile));
-						stream.write(abytes);
-						stream.close();
-					}
-					
 					String responseVal = eOIPaymentDtlService.updateEOIPayment(paymentDtlJson, userid, enq_sfid, project_sfid, username);
+					
+					if(responseVal.equals("STATUS_OK")) {
+						if(receiptAttach!=null) {
+							File ad_dir = new File(rootPath + File.separator + "EOIbookingReference" + File.separator + enq_sfid + File.separator + rowid);
+							String ad_path =ad_dir +File.separator+rowid+"Receipt"+"_"+receiptAttach.getOriginalFilename();
+							if (!ad_dir.exists()) {
+								ad_dir.mkdirs();	
+							}
+							byte[] abytes;
+							abytes = receiptAttach.getBytes();
+							File aserverFile = new File(ad_path);
+							BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(aserverFile));
+							stream.write(abytes);
+							stream.close();
+						}
+					}
 					return responseVal;
 				}  catch(Exception e) {
 					Log.info("EOI Details not updating UPDATE_EOI_ER1004 :- ",e);				

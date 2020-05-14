@@ -204,7 +204,13 @@ function getEOITabPaymentRecord () {
 		if(obj!=null){
 			for(i = 0; i< obj.length; i++){    
 				//panTarget = pageContext+"file?name="+obj[i].pan_attach+"&from=EOIbookingReference&eid="+obj[i].enq_sfid+"&fid="+obj[i].pan_attach.charAt(0);
-				reciptTarget = pageContext+"file?name="+obj[i].cheque_attach+"&from=EOIbookingReference&eid="+obj[i].enq_sfid+"&fid="+obj[i].cheque_attach.substring(0, obj[i].cheque_attach.indexOf("Receipt_"));
+				
+				if (obj[i].cheque_attach != undefined){
+					reciptTarget = pageContext+"file?name="+obj[i].cheque_attach+"&from=EOIbookingReference&eid="+obj[i].enq_sfid+"&fid="+obj[i].cheque_attach.substring(0, obj[i].cheque_attach.indexOf("Receipt_"));
+				} else {
+					reciptTarget = "";
+				}
+				
 				if (obj[i].transaction_date != '') {
 					var date = new Date(obj[i].transaction_date);
 					var curr_date = date.getDate();

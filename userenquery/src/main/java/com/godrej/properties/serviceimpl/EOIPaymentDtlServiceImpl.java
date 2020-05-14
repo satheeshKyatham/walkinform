@@ -100,10 +100,17 @@ public class EOIPaymentDtlServiceImpl implements EOIPaymentDtlService{
 				
 				JsonObject jobj = new Gson().fromJson(arrayObj.get(i), JsonObject.class);
 				
-				EOIPaymentDtl ecData1= new EOIPaymentDtl();
-				ecData1= gson.fromJson(arrayObj.get(i), EOIPaymentDtl.class);
+				if (	jobj.get("rowid") != null && !jobj.get("rowid").getAsString().equals("")
+						&& jobj.get("payment_type") != null && !jobj.get("payment_type").getAsString().equals("")
+						&& jobj.get("bank_name") != null && !jobj.get("bank_name").getAsString().equals("") 
+						&& jobj.get("transaction_id") != null && !jobj.get("transaction_id").getAsString().equals("")
+						&& jobj.get("transaction_date") != null && !jobj.get("transaction_date").getAsString().equals("")
+						&& jobj.get("transaction_amount") != null && !jobj.get("transaction_amount").getAsString().equals("")
+						&& jobj.get("cheque_attach") != null && !jobj.get("cheque_attach").getAsString().equals("")){
+					
+					EOIPaymentDtl ecData1= new EOIPaymentDtl();
+					ecData1= gson.fromJson(arrayObj.get(i), EOIPaymentDtl.class);
 				
-				if (jobj.get("rowid") != null && !jobj.get("rowid").getAsString().equals("")){
 					ecData1.setEnq_sfid(enq_sfid);
 					ecData1.setProject_sfid(project_sfid);
 					ecData1.setUpdatedby(userid);
