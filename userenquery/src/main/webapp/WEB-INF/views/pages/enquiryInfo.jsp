@@ -180,7 +180,7 @@
 						<div class="group">				
 						  <div class="input-group" id="contactDiv"> 
 						      <input type="hidden" id="hiddenMobileNo" value="${mobileNo}">
-							  <input type="text" value="${countryCode}" class="autocomplete-off form-control mobile requiredField contactNoDiv" id="mobileNo" name="contact.mobileNo" maxlength="10" onkeyup="getExistingInfo();" tabindex="-1"><!--onchange="getExistingInfo();"-->
+							  <input type="text" value="${countryCode}" class="autocomplete-off form-control mobile requiredField contactNoDiv" id="mobileNo" name="contact.mobileNo" onkeyup="getExistingInfo();" tabindex="-1"><!--maxlength="10"-- --onchange="getExistingInfo();"-->
 							  <span onclick="getExistingInfo();" class="input-group-addon contactNoDiv" data-toggle="modal" ><!--   data-target="#multiEnq"-->
 								<i class="glyphicon glyphicon-search contactNoDiv" ></i>
 							  </span>
