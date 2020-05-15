@@ -12,6 +12,7 @@ var channelPartnerArray=[];
 var channelPartners = [];
 var enqArray=[];
 $(document).ready(function(){
+	$("#enMobileNo").attr("maxlength","10");
 	$(document).on('focus', '.autocomplete-off:input', function(){
 	        $( this ).attr( 'autocomplete', 'nope' );
 	});

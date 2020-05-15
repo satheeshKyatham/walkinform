@@ -1120,6 +1120,8 @@ function getCustomCountryData(dataInput)
 			$('#otpInputColDiv').show();
 			$('#generateOTPColDiv').show();
 			$('#tab_offline_enq').hide();
+			$("#enMobileNo").attr("maxlength","10");
+			
 		}
 	else
 		{
@@ -1128,6 +1130,7 @@ function getCustomCountryData(dataInput)
 			$('#otpInputColDiv').hide();
 			$('#generateOTPColDiv').hide();
 			$('#tab_offline_enq').hide();
+			$("#enMobileNo").attr("maxlength","12");
 			
 		}
 	}

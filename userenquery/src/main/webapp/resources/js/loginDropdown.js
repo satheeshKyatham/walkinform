@@ -58,7 +58,8 @@ function onProjectSelect(source) {
 		option = option+"<option value='IM'>Inventory Manager</option>";
 		option = option+"<option value='AM'>Allocation Manager</option>";
 		option = option+"<option value='CM'>Closing Manager</option>";
-		option = option+"<option value='MIS'>MIS Report</option></select>";
+		option = option+"<option value='MIS'>MIS Report</option>";
+		option = option+"<option value='OFFLINEADM'>OFFLINE</option></select>";
 			$("#role_page").append(option);
 	  }else if($('#loged_role').val()=='12') 
 		  {

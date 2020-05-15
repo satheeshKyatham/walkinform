@@ -95,7 +95,7 @@
 						<input type="hidden" id="hiddenMobileNo" value="${mobileNo}">
 						<input type="text" value="${countryCode}"
 							class="autocomplete-off form-control mobile requiredField contactNoDiv"
-							id="enMobileNo" name="enMobileNo" maxlength="10" tabindex="-1">
+							id="enMobileNo" name="enMobileNo" tabindex="-1"><!-- maxlength="10" -->
 						 <span class="highlight"></span><span class="bar"></span> <label>Contact
 							no.<strong class="mndt">*</strong>
 						</label>
@@ -673,16 +673,16 @@
     
     <script src="<c:url value='/resources/js/bootstrap-slider.min.js' />"></script>
     
-	<script src="<c:url value='/resources/js/springForm.js?v=18.22' />"></script>
-	<script src="<c:url value='/resources/js/commonValidation.js?v=18.22' />"></script>
-	<script src="<c:url value='/resources/js/utility.js?v=18.21' />"></script>
-	<script src="<c:url value='/resources/js/offline/enquiry.js?v=18.22' />"></script>	
-    <script src="<c:url value='/resources/js/intlTelInputCustom.js?v=18.22' />"></script>
+	<script src="<c:url value='/resources/js/springForm.js?v=18.23' />"></script>
+	<script src="<c:url value='/resources/js/commonValidation.js?v=18.23' />"></script>
+	<script src="<c:url value='/resources/js/utility.js?v=18.23' />"></script>
+	<script src="<c:url value='/resources/js/offline/enquiry.js?v=18.23' />"></script>	
+    <script src="<c:url value='/resources/js/intlTelInputCustom.js?v=18.23' />"></script>
     <script src="<c:url value='/resources/js/sweetalert2.min.js' />"></script>
 	
-	<script src="<c:url value='/resources/js/index.js?v=18.21' />"></script>
+	<script src="<c:url value='/resources/js/index.js?v=18.23' />"></script>
 	
-	<script src="<c:url value='/resources/js/offline/offlineEOI.js?v=18.22'/>"></script>
+	<script src="<c:url value='/resources/js/offline/offlineEOI.js?v=18.23'/>"></script>
 
 	
 	<script>
