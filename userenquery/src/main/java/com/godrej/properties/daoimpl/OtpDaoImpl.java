@@ -154,15 +154,25 @@ public class OtpDaoImpl extends AbstractDao<Integer, OTP> implements OtpDao {
 				Query query = session.createQuery(" Update OTP set  isactive ='I' where  mobileno like '%"+mobileno+"'");
 				query.executeUpdate();
 				persist(otp);	
-				String status=SendSMS.SMSSend(countryCode+mobileno,otp_str+msg);
-				/* Call for Shree SMS*/
-				String statusSreeSMS=SendSMS.ShreeSMSSend(countryCode+mobileno,otp_str+msg);
+				if(countryCode.equals("+91"))//internationalSMSSend
+				{
+					SendSMS.SMSSend(countryCode+mobileno,otp_str+msg);
+					/* Call for Shree SMS*/
+					SendSMS.ShreeSMSSend(countryCode+mobileno,otp_str+msg);
+				}
+				else
+					SendSMS.internationalSMSSend(countryCode+mobileno, otp_str);
 				
 			}
 			else {
-				String status=SendSMS.SMSSend(countryCode+mobileno,list.get(0).getOtp()+msg);
-				/* Call for Shree SMS*/
-				String statusSreeSMS=SendSMS.ShreeSMSSend(countryCode+mobileno,otp_str+msg);
+				if(countryCode.equals("+91"))//internationalSMSSend
+				{
+					SendSMS.SMSSend(countryCode+mobileno,list.get(0).getOtp()+msg);
+					/* Call for Shree SMS*/
+					SendSMS.ShreeSMSSend(countryCode+mobileno,otp_str+msg);
+				}
+				else
+					SendSMS.internationalSMSSend(countryCode+mobileno, otp_str);
 				otp=new OTP();
 				otp=list.get(0);
 			}
@@ -170,8 +180,13 @@ public class OtpDaoImpl extends AbstractDao<Integer, OTP> implements OtpDao {
 		}else {
 			
 			persist(otp);
-			String status=SendSMS.SMSSend(countryCode+mobileno,otp.getOtp()+msg);
-			String statusSreeSMS=SendSMS.ShreeSMSSend(countryCode+mobileno,otp_str+msg);
+			if(countryCode.equals("+91"))//internationalSMSSend
+			{
+				SendSMS.SMSSend(countryCode+mobileno,otp.getOtp()+msg);
+				SendSMS.ShreeSMSSend(countryCode+mobileno,otp_str+msg);
+			}
+			else
+				SendSMS.internationalSMSSend(countryCode+mobileno, otp_str);
 		}
 		
 		return otp;
