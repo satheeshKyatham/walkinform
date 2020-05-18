@@ -3421,16 +3421,49 @@ public class WebServiceController<MultipartFormDataInput> {
 		}       
 		
 		@RequestMapping(value = "/getOfferList", method = RequestMethod.GET, produces = "application/json")
-		public String getOfferList(@RequestParam("userid") String userid,@RequestParam("projectid") String projectid) {
+		public String getOfferList(@RequestParam("userid") String userid,
+				@RequestParam("projectid") String projectid,
+				@RequestParam("fromDate") String fromDate,
+				@RequestParam("toDate") String toDate) {
 			Gson gson = new GsonBuilder().disableHtmlEscaping().serializeNulls().create();
+			
+			String finalProjectid = "";
+			if (projectid!=null) {
+				// For multiple project report
+				String [] multiProjectid= projectid.split(",");
+				StringBuilder modifiedProid = new StringBuilder();
+				for (int i=0;i<multiProjectid.length;i++){
+					modifiedProid.append("'"+multiProjectid[i]+"'");
+					modifiedProid.append(",");
+				}
+				finalProjectid = modifiedProid.toString();
+				if (finalProjectid != null && finalProjectid.length() > 0 && finalProjectid.charAt(finalProjectid.length() - 1) == ',') {
+					finalProjectid = finalProjectid.substring(0, finalProjectid.length() - 1);
+				}
+				// END For multiple project report
+			} else {
+				finalProjectid = "";
+			}
+			
 			String whereCondition = "";
-			if(userid!=null && userid.length()>0)
+			
+			if(userid !=null && userid.length()>0) {
+				whereCondition = " AND  projectsfid = "+finalProjectid+" and userid="+userid+" ";
+			}else if((fromDate!=null && fromDate.length()>0) && (toDate!=null && toDate.length()>0)){
+				whereCondition = " AND projectsfid in ("+finalProjectid+") and Date(created) between '"+fromDate+"' and '"+toDate+"' ";
+			}else if(projectid!=null && projectid.length()>0) {
+				whereCondition = " AND projectsfid in ("+finalProjectid+")  ";
+			} else {
+				whereCondition = " AND projectsfid in ("+finalProjectid+")  ";
+			}
+			
+			/*if(userid!=null && userid.length()>0)
 				whereCondition = " and userid="+userid+" ";
 			if(projectid!=null && projectid.length()>0)
-				whereCondition = whereCondition+" and projectsfid='"+projectid+"' ";
+				whereCondition = whereCondition+" and projectsfid='"+projectid+"' ";*/
 
 			return gson.toJson(vW_OfferWithBalanceService.getOfferList(whereCondition));
-	 }
+		}
 		
 		
 		@RequestMapping(value = "/getApplicationList", method = RequestMethod.GET, produces = "application/json")
