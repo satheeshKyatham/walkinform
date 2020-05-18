@@ -179,7 +179,7 @@
 							<td style="width:150px;">
 								<textarea class="full form-control input-sm descriptionEOI" placeholder="Description"></textarea>
 							</td>
-							<td> </td>
+							<td id="preferenceFirstRow"> </td>
 						</tr>
 					</tbody>
 				</table>

@@ -772,6 +772,8 @@ function getEOITabPreferencRecord () {
 		
 		if(obj!=null){
 			
+			$("#preferenceFirstRow").html('<i onclick="removeEOIRow(this)" class="fa fa-times-circle redColr cursorPoint"></i>');
+			
 			for(i = 0; i< obj.length; i++){    
 				
 				html += 	'<tr class="prefrenceDataPlotRow">'
