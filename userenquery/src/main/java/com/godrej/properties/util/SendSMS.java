@@ -68,4 +68,23 @@ public class SendSMS {
 		}
 		return null;
 	}
+	
+	public static String internationalSMSSend(String mobileNo, String otp) {
+		String responce = "";
+		try {
+			
+			String requestUrl = "https://2factor.in/API/V1/d524e39b-853c-11ea-9fa5-0200cd936042/SMS/"+ mobileNo +"/"+otp+"/D4U_OTP";
+			logger.info("2factor Request OTP SMS For International Url:-"+requestUrl);
+			URL url = new URL(requestUrl);
+			HttpURLConnection uc = (HttpURLConnection) url.openConnection();
+			responce = uc.getResponseMessage();
+			uc.disconnect();
+
+			return responce;
+
+		} catch (Exception ex) {
+			logger.error("2factor International SMS 50:-"+ex.getMessage());
+		}
+		return null;
+	}
 }

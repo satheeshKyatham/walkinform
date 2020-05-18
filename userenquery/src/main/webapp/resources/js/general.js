@@ -28,3 +28,27 @@ $(document).ready(function () {
 		$("#headerProjectDD").append(option);
 	});
 });
+
+
+function userprojectmultiselect (){
+	var urlGetUsers = "getProjectListUserWise?userid="+$('#userid').val();	
+	$.getJSON(urlGetUsers, function (data) {
+		var defaultSelected = "";
+		option = '';
+		$.each(data, function (index, value) {
+			if (value.projectId == $('#projectid').val()) {
+				defaultSelected = "selected";
+			} else {
+				defaultSelected = "";
+			}
+			option = option+"<option value="+value.projectId+" "+defaultSelected+">"+value.projectName+"</option>";
+		});		
+	}).done(function() {
+		$(".userMultiselectProject").append(option);
+		$('.userMultiselectProject').multiselect({
+		maxHeight: '200',
+		allSelectedText: 'All',
+		includeSelectAllOption: true
+		});
+	});
+}

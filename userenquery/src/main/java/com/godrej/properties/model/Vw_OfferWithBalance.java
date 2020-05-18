@@ -1,6 +1,7 @@
 package com.godrej.properties.model;
 
 import java.io.Serializable;
+import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "salesforce.vw_offer_with_balance_details") 
@@ -41,11 +43,12 @@ public class Vw_OfferWithBalance implements Serializable{
 	@Column(name="offername") private String	offername;
 	@Column(name="isactive") private String	isactive;
 	@Column(name="costsheet_path") private String	costsheet_path;
-	
 	@Column(name="cs_final_amount") private double	cs_final_amount;
 	@Column(name="propstrength__property__c") private String propstrength__property__c;
+	@Column(name="createddate") private Date createddate;
 	
-	
+	@Transient private String qry_count;
+	@Transient private String qry_msg;
 	
 	public int getRow_number() {
 		return row_number;
@@ -185,5 +188,23 @@ public class Vw_OfferWithBalance implements Serializable{
 	}
 	public void setCs_final_amount(double cs_final_amount) {
 		this.cs_final_amount = cs_final_amount;
+	}
+	public Date getCreateddate() {
+		return createddate;
+	}
+	public void setCreateddate(Date createddate) {
+		this.createddate = createddate;
+	}
+	public String getQry_count() {
+		return qry_count;
+	}
+	public void setQry_count(String qry_count) {
+		this.qry_count = qry_count;
+	}
+	public String getQry_msg() {
+		return qry_msg;
+	}
+	public void setQry_msg(String qry_msg) {
+		this.qry_msg = qry_msg;
 	}
 }

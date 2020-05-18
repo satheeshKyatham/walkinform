@@ -32,7 +32,7 @@
 <table class="table table-bordered" id="createdOfferTable">
 		<thead>
 			<tr>
-				<th>Enquiry No</th>
+				<th>22 Enquiry No</th>
 				<th>Contact Name</th>
 				<th>Payment Plan</th>
 				<th>Offer Name</th>

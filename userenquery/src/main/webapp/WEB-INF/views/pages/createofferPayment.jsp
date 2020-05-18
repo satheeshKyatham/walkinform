@@ -19,6 +19,33 @@
 
 
 
+	<div class="well center-block">
+		<div class="form-inline">
+			<div>
+				<div class="form-group">	
+					<label>Project(s) </label>  
+					<select class="userMultiselectProject" id="offerProjectFilter" multiple="multiple"></select>
+				</div>
+				<div class="clearfix"></div>
+				<br>
+				<div class="form-group">
+					<label>From Date</label> 
+					<input class="form-control" type="date" id="txtFromDateOffer">
+				</div>
+				<div class="form-group">
+					<label>To Date</label> 
+					<input class="form-control" type="date" id="txtToDateOffer">
+				</div>
+				<div class="form-group">
+					<label>Search</label> 
+					<input class="form-control" type="button" value="Search" name="Search" id="amsearch" onclick="createdOfferProject()"/>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+
 
 	<!-- filter bar -->
 
@@ -28,22 +55,26 @@
 		
 		<!-- <div ><lable id="msg"> </lable></div> -->
 		
-			<table class="table table-bordered"> <!-- rwd-table -->
-			  <tr>
-				<th>Enquiry No</th>
-				<th>Contact Name</th>
-				<th>Payment Plan</th>
-				<th>Offer Name</th>
-				<th>Scheme Name</th>
-				<th>Scheme Rate</th>
-				<th>Balance Amount</th>
-				<th>Description</th>
-				<th>Final Amount</th>
-				<th>Cost Sheet</th>		
-				<th>Action</th>
-				<th>Application</th>				
-			  </tr>
-			  <tbody id="createdOfferTable"></tbody>
+			<table class="table table-bordered" id="createdOfferTable"> <!-- rwd-table -->
+				<thead>  
+				  <tr>
+				  	<th>Project</th>
+				  	<th>Date</th>
+					<th>Enquiry No</th>
+					<th>Contact Name</th>
+					<th>Payment Plan</th>
+					<th>Offer Name</th>
+					<th>Scheme Name</th>
+					<th>Scheme Rate</th>
+					<th>Balance Amount</th>
+					<th>Description</th>
+					<th>Final Amount</th>
+					<th>Cost Sheet</th>		
+					<th>Action</th>
+					<th>Application</th>				
+				  </tr>
+				 </thead> 
+			  <tbody></tbody> <!-- id="createdOfferTable" -->
 			  
 			</table>
 		<!-- </div> -->

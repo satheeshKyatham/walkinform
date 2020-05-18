@@ -125,14 +125,9 @@ userid=(String)ses.getAttribute("USERID");
 						
 						<div>
 							<div class="form-group">	
-							<label for="exampleInputNameDate">Project(s) </label>  
+							<label>Project(s) </label>  
 							<!-- Build your select: -->
-							<select id="multiselectProject" multiple="multiple" >
-							   <!--  <option value="cheese">Proj 1</option>
-							    <option value="tomatoes">Proj 2</option>
-							    <option value="mozarella">Proj 3</option>
-							    <option value="mushrooms">Proj 4</option> -->
-							</select>
+							<select id="multiselectProject" class="userMultiselectProject" multiple="multiple"></select>
 						</div>
 						<div class="clearfix"></div>
 						<br>

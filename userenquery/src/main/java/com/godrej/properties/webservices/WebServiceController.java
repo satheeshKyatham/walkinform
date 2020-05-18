@@ -2538,7 +2538,7 @@ public class WebServiceController<MultipartFormDataInput> {
 			rows.add(",");
 			rows.add(mislist.get(i).getEmpstatus());
 			rows.add(",");
-			rows.add(mislist.get(i).getCompany_name__c().replaceAll("'", ""));
+			rows.add(mislist.get(i).getCompany_name__c().replaceAll("'", "").replaceAll(",", ""));
 			rows.add(",");
 			rows.add(mislist.get(i).getIs_purchase_for_self_use_or_investment__c());
 			rows.add(",");
@@ -2577,11 +2577,18 @@ public class WebServiceController<MultipartFormDataInput> {
 			/*System.out.println("Non Edit Comments::-"+mislist.get(i).getEnquirynoneditcomment().length());
 			rows.add(mislist.get(i).getEnquirynoneditcomment().trim());*/
 			
-			if(mislist.get(i).getEnquirynoneditcomment().contains(","))
-				rows.add(mislist.get(i).getEnquirynoneditcomment().replaceAll(",", "").trim().replaceAll("\\n|\\r", " "));
+			if(mislist.get(i).getEnquirynoneditcomment()!=null && mislist.get(i).getEnquirynoneditcomment().length()>0)
+			{
+				if(mislist.get(i).getEnquirynoneditcomment().contains(","))
+				{
+					rows.add(mislist.get(i).getEnquirynoneditcomment().replaceAll(",", "").trim().replaceAll("\\n|\\r|\"", " "));
+				}
+				else
+					rows.add(mislist.get(i).getEnquirynoneditcomment().trim().replaceAll("\\n|\\r", " "));
+				rows.add(",");
+			}
 			else
-				rows.add(mislist.get(i).getEnquirynoneditcomment().trim().replaceAll("\\n|\\r", " "));
-			rows.add(",");
+				rows.add(",");
 			
 			if(mislist.get(i).getVerticle__c()!=null)
 				rows.add(mislist.get(i).getVerticle__c());

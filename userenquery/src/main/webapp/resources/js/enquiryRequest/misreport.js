@@ -13,49 +13,37 @@ $.ajaxSetup({
 var selectedProject = [];
 
 $(document).ready(function() {
-	debugger;
 	var today = new Date();
 	document.getElementById("txtFromDate").value = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
 	document.getElementById("txtToDate").value = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
 	
+	var currentDate = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
+	$('#txtFromDateOffer').val(currentDate);
+	$('#txtToDateOffer').val(currentDate);
+	
 	getAllEnquiryFormReport();
-	
-	
-
+	userprojectmultiselect ();
 	  
-	var urlGetUsers = "getProjectListUserWise?userid="+$('#userid').val();	
+	/*var urlGetUsers = "getProjectListUserWise?userid="+$('#userid').val();	
   	$.getJSON(urlGetUsers, function (data) {
-  		
   		var defaultSelected = "";
-  		//option = "<select class='inputLabel' onchange='onProjectSelect()' id='projectSelected' style='border-color: #000000 !important;   width: 100%;    min-height: 33px;    margin-bottom: 5px;'><option>Select Type</option>";
   		option = "";
-  		//var option = '';
-  		
   		$.each(data, function (index, value) {
-  			/*var name='';
-  			if(value.name==undefined)
-  				name='';
-  			else
-  				name=value.name;*/
-  			
   			if (value.projectId == $('#projectid').val()) {
   				defaultSelected = "selected";
   			} else {
   				defaultSelected = "";
   			}
-  			
   			option = option+"<option value="+value.projectId+" "+defaultSelected+">"+value.projectName+"</option>";
   		});		
-  		//option=option+"</select>";
   	}).done(function() {
   		$("#multiselectProject").append(option);
-  		
-  		 $('#multiselectProject').multiselect({
-  			maxHeight: '200',
-  			allSelectedText: 'All',
-  			includeSelectAllOption: true
-  		 });
-  	});
+  		$('#multiselectProject').multiselect({
+			maxHeight: '200',
+			allSelectedText: 'All',
+			includeSelectAllOption: true
+  		});
+  	});*/
 
 	
 	
@@ -74,7 +62,7 @@ function getDatewiseReport() {
 	getAllEnquiryFormReport();
 	$("#txtFromDate1").val($('#txtFromDate').val());
 	$("#txtToDate1").val($('#txtToDate').val());
-	}
+}
 
 function getAllEnquiryFormReport() {
 
@@ -132,51 +120,81 @@ function getAllEnquiryFormReport() {
 	}).error(function() { $("#mainPageLoad").hide(); });
 }
 
-function createdOfferProject()
-{
-
-	 $('#mainPageLoad').show();	
-	 $("#createdOfferTable").empty();
+function createdOfferProject(){
+	var project = $('#offerProjectFilter option:selected');
+	var selectedProjectOffer = [];
+	$(project).each(function(index, brand){
+		selectedProjectOffer.push($(this).val());
+	});
+	
+	$('#mainPageLoad').show();	
+	// $("#createdOfferTable").empty();
 	//alert ("Test Call 123 456");
 	 
-	 var contextPath = $("#pageContext").val();
-	 var csPath = '';
+	var contextPath = $("#pageContext").val();
+	var csPath = '';
+	var projectid = "";
 	 
-	$.get("getOfferList",{"userid":"","projectid":$('#projectid').val()},function(data){				 
+	if(selectedProjectOffer=='' || selectedProjectOffer==null){
+		projectid = $('#projectid').val();
+	} else {
+		projectid = selectedProjectOffer.join(",");
+	}  
+	 
+	//$.get("getEOIReport",{"projectSfid":$('#projectid').val(), "fromDate":$('#txtEOIFromDate').val(), "toDate":$('#txtEOIToDate').val()},function(data){				 
+			
+	
+	$.get("getOfferList",{"userid":"","projectid":projectid, "fromDate":$('#txtFromDateOffer').val(),"toDate":$('#txtToDateOffer').val()},function(data){				 
 		
 	}).done(function(data){
+		$("#createdOfferTable").DataTable().destroy();
+		
+		$("#createdOfferTable tbody").empty();
+		
 		//alert("Data:-"+data);
 		var obj =JSON.stringify(data);
 		var obj1 =JSON.parse(obj);
 		//alert(obj1.length);
-		if(obj1!=null)
-			{
-				for(var i=0;i<obj1.length;i++){
+		if(obj1!=null)  {
+			for(var i=0;i<obj1.length;i++){
+				if (obj1[i].qry_msg != "MAX_LIMIT") {
 					var schemename = "";
-					if(obj1[i].scheme_name=="Select Scheme")
-						{
+					if(obj1[i].scheme_name=="Select Scheme") {
 						schemename="";
-						}
-					else
+					} else{
 						schemename=obj1[i].scheme_name;
-					
+					}
 					csPath = contextPath+'/Costsheet?name='+obj1[i].costsheet_path + '&from=ofrList';
-					
-					
 					var fileIcon = '';
-					
 					if (obj1[i].costsheet_path != null) {
 						fileIcon = '<i class="fa fa-file"></i>';
 					} else {
 						fileIcon = '';
 					}
+					var val = $("<tr><td>"+obj1[i].projectname+"</td><td>"+obj1[i].createddate+"</td><td>"+obj1[i].enquiryname+"</td><td>"+obj1[i].contactname+"</td><td>"+obj1[i].payment_plan+"</td><td>"+obj1[i].offername+"</td><td>"+schemename+"</td><td>"+obj1[i].scheme_rate+"</td><td>"+obj1[i].amount+"</td><td>"+obj1[i].description+"</td><td>"+obj1[i].cs_final_amount+"</td> <td>  <a target='_blank' href='"+csPath+"'>"+fileIcon+"</a></td><td data-th='Action'> <button type='button' onclick='moreDetails(this,\""+obj1[i].enquiry_sfid+"\","+i+")'  id=\""+obj1[i].enquiryname+"\"  class='btn btnDefaultBlue btn-default btn-xs brdClrBlue moreDetail ' > Details </button></td><td><button class='btn btnDefaultBlue btn-default' onclick='getofferApplicantDetails(this, \""+obj1[i].offer_sfid+"\", \""+obj1[i].enquiry_sfid+"\",  \""+obj1[i].contact_sfid+"\",  \""+obj1[i].offername+"\",  \""+obj1[i].enquiryname+"\", \""+obj1[i].propstrength__property__c+"\", \""+i+"\", \"offer\")'><i class='fa fa-print printficon'></i></button></td></tr>");
+					$("#createdOfferTable tbody").append(val);
+				} else {
+					swal({
+	                	title: "Records exceeding 5000. Please narrow down dates or select few projects",
+	          			text: "Requested records count is: "+obj1[i].qry_count,
+	          			//timer: 8000,
+	          			type: "warning",
+	                });
 					
-					
-					var val = $("<tr><td>"+obj1[i].enquiryname+"</td><td>"+obj1[i].contactname+"</td><td>"+obj1[i].payment_plan+"</td><td>"+obj1[i].offername+"</td><td>"+schemename+"</td><td>"+obj1[i].scheme_rate+"</td><td>"+obj1[i].amount+"</td><td>"+obj1[i].description+"</td><td>"+obj1[i].cs_final_amount+"</td> <td>  <a target='_blank' href='"+csPath+"'>"+fileIcon+"</a></td><td data-th='Action'> <button type='button' onclick='moreDetails(this,\""+obj1[i].enquiry_sfid+"\","+i+")'  id=\""+obj1[i].enquiryname+"\"  class='btn btnDefaultBlue btn-default btn-xs brdClrBlue moreDetail ' > Details </button></td><td><button class='btn btnDefaultBlue btn-default' onclick='getofferApplicantDetails(this, \""+obj1[i].offer_sfid+"\", \""+obj1[i].enquiry_sfid+"\",  \""+obj1[i].contact_sfid+"\",  \""+obj1[i].offername+"\",  \""+obj1[i].enquiryname+"\", \""+obj1[i].propstrength__property__c+"\", \""+i+"\", \"offer\")'><i class='fa fa-print printficon'></i></button></td></tr>");
-					$("#createdOfferTable").append(val);
-					
+					$("#swal2-title").css({"font-size": "22px"});
+					return false;
 				}
 			}
+			
+		}
+		
+		$('#createdOfferTable').DataTable( {
+			 dom: 'Bfrtip',
+			 "buttons": [
+				 { "extend": 'excel', "text":'Export To Excel',"className": 'btn btn-default btn-xs' }
+		      ],
+		      "order": []
+		 });
 		
 		$('#mainPageLoad').hide();	
 		
