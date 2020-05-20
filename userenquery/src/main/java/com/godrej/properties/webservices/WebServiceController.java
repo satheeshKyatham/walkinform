@@ -2132,6 +2132,7 @@ public class WebServiceController<MultipartFormDataInput> {
 			 //session.setAttribute("PROID",""+ userMaster.getProjectId().toString());
 			 session.setAttribute("Assignto","");
 			 session.setAttribute("Closingmgr",""+ userMaster.getClosingmgr());
+			 session.setAttribute("ISOTPADMIN",""+ master.getIsotpadmin());
 			 
 		 }else {
 			 master.setMsg("You are not a user in D4U system.Please contact your site head for getting permission.");

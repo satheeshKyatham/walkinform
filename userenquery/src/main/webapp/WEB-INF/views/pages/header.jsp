@@ -16,11 +16,11 @@ session.setAttribute("version","18.39");
 	 %>
 <head>
 <script type="text/javascript">
+	var PAGECONTEXT_GV = '${pageContext.request.contextPath}/';
+	
 	var USERID_GV = '<%= session.getAttribute("USERID")%>';
 	var ROLE_GV = '<%= session.getAttribute("ROLE")%>';
-	var PAGECONTEXT_GV = '${pageContext.request.contextPath}/';
-	<%-- var PRONAME_GV = '<%= session.getAttribute("PRONAME")%>';
-	var PROID_GV = '<%= session.getAttribute("PROID")%>'; --%>
+	var PROSFID_GV = '<%= session.getAttribute("PROJECTSFID")%>';
 </script>
 
 <script src="<c:url value='/resources/js/salesdesk.js?v=${sessionScope.version}'/>"></script>
@@ -50,13 +50,51 @@ session.setAttribute("version","18.39");
 				</li> 
 	          </ul>
 	        </li>
+	        <li id="adminOTPLink">
+	        	<a href="#" onclick="otpModal()">Get OTP</a>
+	        </li>
 	        <li><a href="${pageContext.request.contextPath}/saleslogin">Logout</a></li>
 		</ul> 
-		
 	    </div>
+	
+<!-- Modal -->
+<div class="modal fade" id="OTPModal" role="dialog">
+	<div class="modal-dialog modal-sm">
+		<!-- Modal content-->
+		<div class="modal-content">
+		  	<div class="modal-header">
+		    	<button type="button" class="close" data-dismiss="modal">&times;</button>
+		    	<h4 class="modal-title">Get OTP</h4>
+		  	</div>
+			<div class="modal-body">
+				<div class="form-group">
+			    	<label>OTP Request from</label>
+			    	<select id="otpRequestorUser" class="form-control"></select>
+			  	</div>
+			  	<div class="form-group">
+			    	<label>Customer Mobile No.</label>
+			    	<input type="tel" id="mobile_num" class="form-control">
+			  	</div>
+			  	<div style="text-align:center;">
+			  		<span id="otpNum" style="font-size: 22px;"></span>
+			  	</div>
+		  	</div>
+		  	<div class="modal-footer" style="text-align: center;">
+		    	<button type="button" id="getAdminOTP" class="btn btn-default btn-sm" style="background-color: #0077b9; color: #fff;">Get OTP</button>
+		    	<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+		  	</div>
+		</div>
+	</div>
+</div>
+	    
 </body>
 </html>
 <script type="text/javascript">
 document.getElementById('userNameLoggedInShow').innerHTML = 'Welcome '+'<%= session.getAttribute("USERNAME")%>';
 var useridGlobvar = <%= session.getAttribute("USERID")%>
+
+if ('<%=session.getAttribute("ISOTPADMIN")%>' != "Y") {
+	document.getElementById('OTPModal').innerHTML = "";
+	document.getElementById('adminOTPLink').innerHTML = "";
+}
 </script>

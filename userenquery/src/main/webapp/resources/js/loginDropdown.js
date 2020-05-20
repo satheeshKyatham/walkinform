@@ -115,6 +115,33 @@ function onProjectSelect(source) {
 	}
 
 function onChangeRole(source) {
+	var urlCall = '';
+	
+	if (source == "HEADER_COMMON"){	
+		urlCall= PAGECONTEXT_GV+'setSelectedProjectDtl';
+    } else {
+    	urlCall= 'setSelectedProjectDtl';
+    }
+	
+	$.ajax({
+	    url: urlCall,
+	    data: {projectsfid : $('#projectSelected').val()},
+	    type: 'POST',
+	    success: function(data) { 
+		  if(data.msg==='STATUS_OK'){
+			  selectedRole (source);
+		  }else{
+			  $('.loginMsg').html("Invalid Project");
+		  }
+	  }, 
+	  error: function(data) {
+		  $('.loginMsg').html("Invalid Project");
+	  }
+	});
+}
+
+
+function selectedRole (source) {
 	if($("#roleSelected").val()=='AM') {
 		if (source != 'HEADER_COMMON') {
 			window.location.href = "assigntoken?userId=" + $('#loged_userid').val()+"&projectid="+$('#projectSelected').val()+"&projectname="+$('#projectSelected option:selected').text() ;
@@ -180,6 +207,7 @@ function onChangeRole(source) {
 		}
 	}
 }
+
 
 
 function pageRedirect (path) {
