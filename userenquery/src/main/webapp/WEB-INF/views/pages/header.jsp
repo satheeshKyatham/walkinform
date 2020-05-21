@@ -15,6 +15,9 @@ session.setAttribute("version","18.39");
 	 response.addHeader("X-Frame-Options", "DENY");
 	 %>
 <head>
+<link rel="stylesheet" href="<c:url value='/resources/css/multiselectDD/prettify.min.css' />" type="text/css">
+<link rel="stylesheet" href="<c:url value='/resources/css/multiselectDD/bootstrap-multiselect.css' />" type="text/css">
+
 <script type="text/javascript">
 	var PAGECONTEXT_GV = '${pageContext.request.contextPath}/';
 	
@@ -67,7 +70,7 @@ session.setAttribute("version","18.39");
 		    	<h4 class="modal-title">Get OTP</h4>
 		  	</div>
 			<div class="modal-body">
-				<div class="form-group">
+				<div class="form-group ">
 			    	<label>OTP Request from</label>
 			    	<select id="otpRequestorUser" class="form-control"></select>
 			  	</div>
