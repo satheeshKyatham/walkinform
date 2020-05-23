@@ -37,6 +37,8 @@ public class SessionCheckListner extends HandlerInterceptorAdapter {
 		filterUrlList.add("/towerPPExclusion");
 		filterUrlList.add("/paymentPlanRanking");
 		filterUrlList.add("/getpaymentplanlist_due");
+		filterUrlList.add("/getLdapUserDetails");//added by satheesh K.
+		
 		
 	}
 

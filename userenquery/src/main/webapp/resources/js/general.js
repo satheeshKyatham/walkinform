@@ -46,7 +46,9 @@ function userprojectmultiselect (){
 		$('.userMultiselectProject').multiselect({
 			maxHeight: '200',
 			allSelectedText: 'All',
-			includeSelectAllOption: true
+			includeSelectAllOption: true,
+			enableFiltering: true,
+			enableCaseInsensitiveFiltering: true
 		});
 	});
 }
@@ -61,7 +63,14 @@ function projectUserList () {
 			$('#otpRequestorUser').append("<option value="+value.user_id+">"+value.user_name+"</option>");  
 		});		
 	}).done(function() {
-		 
+		$('#otpRequestorUser').multiselect({
+			maxHeight: '200',
+			buttonWidth: '100%',
+			allSelectedText: 'All',
+			includeSelectAllOption: true,
+			enableFiltering: true,
+			enableCaseInsensitiveFiltering: true
+		});
 	});
 }
 

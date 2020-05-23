@@ -1217,18 +1217,18 @@ if(ses!=null){
 						 <div class="col-md-6 radioBtnWrp mrgT0">
 						  	<div class="titleF">Customer Classification <strong class="mndt">*</strong></div>
 							<div class="radioBtnCol requiredRadio" data-toggle="buttons">
-							  <label class="btn btn-primary sales_submitted NoLostReasonSelected">
+							  <label class="btn btn-primary NoLostReasonSelected">
 								<input type="radio" id="classificationHot" class="customerClassification" name="contact.contactReport.customerClassification"  value="Hot">Hot
 							  </label>
-							  <label class="btn btn-primary sales_submitted NoLostReasonSelected" >
+							  <label class="btn btn-primary NoLostReasonSelected" >
 								<input type="radio" id="classificationWarm" class="customerClassification" name="contact.contactReport.customerClassification" value="Warm">Warm
 							  </label>
-							  <label class="btn btn-primary sales_submitted NoLostReasonSelected">
+							  <label class="btn btn-primary NoLostReasonSelected">
 								<input type="radio" id="classificationCold"  class="customerClassification" name="contact.contactReport.customerClassification" value="Cold">Cold
 							  </label>
 							  
 							  <!-- Instract BY Ganesh - Added new radio tab -->
-							  <label class="btn btn-primary sales_submitted lostReasonSelect">
+							  <label class="btn btn-primary lostReasonSelect">
 								<input type="radio" class="customerClassification" name="contact.contactReport.customerClassification" value="Lost">Lost
 							  </label>
 							</div>
@@ -1236,7 +1236,7 @@ if(ses!=null){
 						<!-- <input type="text" name="lost_reason_c__c"> -->
 						<div id="LostReasonDivId" class="col-md-3" style="display:none;margin-top: 13px;">
 							<div class="group"><!-- requiredField sales_submitted requiredField-->
-								<select class="sales_submitted" id="LostReasonID" name="lost_reason_c__c">
+								<select class="" id="LostReasonID" name="lost_reason_c__c">
 						            <option value=""></option>
 									<option value="Not Interested">Not Interested</option>
 								    <option value="Budget">Budget</option>
@@ -1279,7 +1279,7 @@ if(ses!=null){
 							
 						<div class="col-md-3 col-sm-6 col-xs-12" id="followupDateID" style="display:none;">
 							<div class="form-group" id="fdate" style="margin-top: -15px; z-index: 0;">
-								<label style="font-weight: normal;">Follow Date</label>
+								<label style="font-weight: normal;">Follow Date & Time</label>
 								<div class='input-group date datetimepickerfollow'>
 									<input style="z-index: 0; border-radius: 0;" type='text' name="enquiryReport.followDate"
 										class="form-control autocomplete-off sales_submitted "
@@ -1289,7 +1289,7 @@ if(ses!=null){
 								</div>
 							</div>
 							<div class="form-group" id="fdatevalue" style="display: none; margin-top: -15px; z-index: 0;">
-								<label style="font-weight: normal;">Follow Date</label>
+								<label style="font-weight: normal;">Follow Date & Time</label>
 								<div class='input-group'>
 									<input style="z-index: 0; border-radius: 0;" type='text' 
 										class="form-control autocomplete-off sales_submitted "
@@ -1808,10 +1808,31 @@ if(ses!=null){
 
 	    return [day, month, year].join('-');
 	}
+ /*Start :  Added By Satheesh K - 22-05-2020 - For Followup Date and Time adding  */
+ function formatDateWithTime(date) {
+	    var d = new Date(date),
+	        month = '' + (d.getMonth() + 1),
+	        day = '' + d.getDate(),
+	        year = d.getFullYear(),
+	    	hours = addZero(d.getHours()),
+       		minutes = addZero(d.getMinutes());
+
+	    if (month.length < 2) month = '0' + month;
+	    if (day.length < 2) day = '0' + day;
+		var finalTimeStamp = [day, month, year].join('-');
+	    return finalTimeStamp+" "+hours+":"+minutes;
+	}
+ function addZero(i) {
+	  if (i < 10) {
+	    i = "0" + i;
+	  }
+	  return i;
+	}
+ /*END :*/
 var dateToday = new Date();
 $(function () {                
      $('.datetimepickerfollow').datetimepicker({
-         format: 'DD-MM-YYYY',
+         format: 'DD-MM-YYYY HH:mm',
          minDate: dateToday 
          
    });

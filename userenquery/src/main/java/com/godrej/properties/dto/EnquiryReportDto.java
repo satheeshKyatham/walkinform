@@ -1,5 +1,6 @@
 package com.godrej.properties.dto;
 
+import java.sql.Time;
 import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -365,6 +366,5 @@ public class EnquiryReportDto extends CommonDto{
 	public void setVisitType(String visitType) {
 		this.visitType = visitType;
 	}
-
 	
 }

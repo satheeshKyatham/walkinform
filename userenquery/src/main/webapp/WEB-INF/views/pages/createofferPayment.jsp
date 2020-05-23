@@ -85,7 +85,7 @@
 <!-- Offer Application Form -->
 <input id="appProjectNameOffer" style="display:none;">
 
-<div id="printApplicationFormOffer" class="col-md-8" style="border: 1px dotted #ccc; margin: 0 auto; float: none; margin-top: 40px; padding-top: 15px;"> <!-- style="display:none;" -->
+<div id="printApplicationFormOffer" class="col-md-8" style="display:none; border: 1px dotted #ccc; margin: 0 auto; float: none; margin-top: 40px; padding-top: 15px;"> <!-- style="display:none;" -->
 	
 	
 	<table class="table table-bordered"  style="margin-bottom:15px;">
