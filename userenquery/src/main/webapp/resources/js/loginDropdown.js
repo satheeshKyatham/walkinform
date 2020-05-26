@@ -110,11 +110,45 @@ function onProjectSelect(source) {
 				option = option+"<option value='OFFLINEADM'>Offline</option></select>";
 				$("#role_page").append(option);
 		  }
+		  else if($('#loged_role').val()=='20')
+		  {
+			  $("#role_page").empty();
+			  var option = "<select class='inputLabel' onchange='onChangeRole()' id='roleSelected' style='border-color: #000000 !important;   width: 100%;    min-height: 33px;    margin-bottom: 5px;'><option>Select Role</option>";
+				option = option+"<option value='SITEHEAD'>Site Head</option>";
+				$("#role_page").append(option);
+		  }
 	 
 		$("#loginMsg").html('');
 	}
 
 function onChangeRole(source) {
+	var urlCall = '';
+	
+	if (source == "HEADER_COMMON"){	
+		urlCall= PAGECONTEXT_GV+'setSelectedProjectDtl';
+    } else {
+    	urlCall= 'setSelectedProjectDtl';
+    }
+	
+	$.ajax({
+	    url: urlCall,
+	    data: {projectsfid : $('#projectSelected').val()},
+	    type: 'POST',
+	    success: function(data) { 
+		  if(data.msg==='STATUS_OK'){
+			  selectedRole (source);
+		  }else{
+			  $('.loginMsg').html("Invalid Project");
+		  }
+	  }, 
+	  error: function(data) {
+		  $('.loginMsg').html("Invalid Project");
+	  }
+	});
+}
+
+
+function selectedRole (source) {
 	if($("#roleSelected").val()=='AM') {
 		if (source != 'HEADER_COMMON') {
 			window.location.href = "assigntoken?userId=" + $('#loged_userid').val()+"&projectid="+$('#projectSelected').val()+"&projectname="+$('#projectSelected option:selected').text() ;
@@ -178,8 +212,16 @@ function onChangeRole(source) {
 			var path = "offlineEOI?projectid="+$('#projectSelected').val()+"&projectname="+$('#projectSelected option:selected').text();
 			pageRedirect (path);
 		}
+	}else if($("#roleSelected").val()=='SITEHEAD'){
+		if (source != 'HEADER_COMMON') {
+			window.location.href = "carParkCharges";
+		} else {
+			var path = "carParkCharges";
+			pageRedirect (path);
+		}
 	}
 }
+
 
 
 function pageRedirect (path) {
