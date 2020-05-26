@@ -1,5 +1,6 @@
 package com.godrej.properties.model;
 
+import java.sql.Time;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -385,5 +386,6 @@ public class EnquiryReport extends CommonModel{
 	public void setVisitType(String visitType) {
 		this.visitType = visitType;
 	}
+	
 
 }

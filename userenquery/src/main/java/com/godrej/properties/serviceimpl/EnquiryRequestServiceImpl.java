@@ -464,7 +464,10 @@ public class EnquiryRequestServiceImpl implements EnquiryRequestService {
 				dest.setFollow_up_reason__c(src.getEnquiryReport().getFollowType());
 		}
 		if(src.getEnquiryReport().getFollowDate()!=null)
-			dest.setFollow_up_Date_Time__c(src.getEnquiryReport().getFollowDate());
+		{
+			
+			dest.setFollow_up_Date_Time__c(DateUtil.getUKDateTime(src.getEnquiryReport().getFollowDate()));
+		}
 		/*=========End========*/
 		/* Selected Sourcing Manager and Vertical value are pushing to Enquiry Object and Display, -  
 	     * Change By - Satheesh Kyatham- 27-12-2019

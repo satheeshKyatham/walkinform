@@ -267,6 +267,7 @@ input:-webkit-autofill:active {
 	.nav-tabs>li {margin-right: 0 !important; padding: 0 7px !important;}
 	.padMLR15 {padding-left:15px !important; padding-right:15px !important;}
 	.mrgR0 {margin-right:0px !important;}
+	#OTPModal .modal-sm {width:300px;}
 }
 
 

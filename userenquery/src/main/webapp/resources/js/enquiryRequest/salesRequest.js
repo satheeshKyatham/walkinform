@@ -704,10 +704,11 @@ function loadEnquiryReport(enq){
 		//$( "#followDate" ).datepicker({ defaultDate: new Date(enq.enquiryReport.followDate) });
 		
 		if(enq.enquiryReport.followDate!='' && enq.enquiryReport.followDate!=null){
-			
-			$("#followdate").val(formatDate(enq.enquiryReport.followDate));
-			$("#fdate").hide();
-			$("#fdatevalue").show();
+			/* Changed By Satheesh K - 22-05-2020*/
+			//alert(formatDateWithTime(enq.enquiryReport.followDate));
+			$("#followdate").val(formatDateWithTime(enq.enquiryReport.followDate));
+			/*$("#fdate").hide();
+			$("#fdatevalue").show();*/
 		}
 		
 		// Set EOI Tab Enable while alredy data saved

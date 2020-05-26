@@ -19,8 +19,8 @@
 <link rel="stylesheet" href="<c:url value='/resources/css/style.css?v=${sessionScope.version}' />">
 <link rel="stylesheet" href="<c:url value='/resources/css/enqMap.css?v=${sessionScope.version}' />">
 
-<link rel="stylesheet" href="<c:url value='/resources/css/multiselectDD/prettify.min.css' />" type="text/css">
-<link rel="stylesheet" href="<c:url value='/resources/css/multiselectDD/bootstrap-multiselect.css' />" type="text/css">
+<%-- <link rel="stylesheet" href="<c:url value='/resources/css/multiselectDD/prettify.min.css' />" type="text/css">
+<link rel="stylesheet" href="<c:url value='/resources/css/multiselectDD/bootstrap-multiselect.css' />" type="text/css"> --%>
 <link rel="stylesheet" href="<c:url value='/resources/css/sweetalert2.min.css' />">  
 
 <%-- 
@@ -125,14 +125,9 @@ userid=(String)ses.getAttribute("USERID");
 						
 						<div>
 							<div class="form-group">	
-							<label for="exampleInputNameDate">Project(s) </label>  
+							<label>Project(s) </label>  
 							<!-- Build your select: -->
-							<select id="multiselectProject" multiple="multiple" >
-							   <!--  <option value="cheese">Proj 1</option>
-							    <option value="tomatoes">Proj 2</option>
-							    <option value="mozarella">Proj 3</option>
-							    <option value="mushrooms">Proj 4</option> -->
-							</select>
+							<select id="multiselectProject" class="userMultiselectProject" multiple="multiple"></select>
 						</div>
 						<div class="clearfix"></div>
 						<br>
@@ -254,8 +249,8 @@ userid=(String)ses.getAttribute("USERID");
 <script src="<c:url value='/resources/js/separate/allotmentreport.js?v=${sessionScope.version}'/>"></script>
 <%-- <script src="<c:url value='/resources/js/separate/offer.js?v=18.10'/>"></script> --%>
 
-<script src="<c:url value='/resources/js/multiselectDD/prettify.min.js'/>"></script>
-<script src="<c:url value='/resources/js/multiselectDD/bootstrap-multiselect.js'/>"></script>
+<%-- <script src="<c:url value='/resources/js/multiselectDD/prettify.min.js'/>"></script>
+<script src="<c:url value='/resources/js/multiselectDD/bootstrap-multiselect.js'/>"></script> --%>
 <script src="<c:url value='/resources/js/sweetalert2.min.js' />"></script>
 <!-- <script type="text/javascript">
     $(document).ready(function() {

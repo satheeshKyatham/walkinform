@@ -52,6 +52,11 @@ public class UserMaster {
 	@Column(name = "mst_user_rolemaster_id")
 	private int mst_user_rolemaster_id;
 	
+	/* added by a */
+	@Column(name = "isotpadmin")
+	private String isotpadmin;
+	/* END added by a */
+	
 	@Transient
 	private String msg;
 
@@ -209,6 +214,13 @@ public class UserMaster {
 	public void setType(String type) {
 		this.type = type;
 	}
+	public String getIsotpadmin() {
+		return isotpadmin;
+	}
+
+	public void setIsotpadmin(String isotpadmin) {
+		this.isotpadmin = isotpadmin;
+	}
 
 	@Override
 	public String toString() {
@@ -217,5 +229,5 @@ public class UserMaster {
 				+ ", longitute=" + longitute + ", projectId=" + projectId + ", projectName=" + projectName + ", role="
 				+ role + ", isActive=" + isActive + ", createdDate=" + createdDate + "]";
 	}
-
+	
 }

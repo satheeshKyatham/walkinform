@@ -1217,18 +1217,18 @@ if(ses!=null){
 						 <div class="col-md-6 radioBtnWrp mrgT0">
 						  	<div class="titleF">Customer Classification <strong class="mndt">*</strong></div>
 							<div class="radioBtnCol requiredRadio" data-toggle="buttons">
-							  <label class="btn btn-primary sales_submitted NoLostReasonSelected">
+							  <label class="btn btn-primary NoLostReasonSelected">
 								<input type="radio" id="classificationHot" class="customerClassification" name="contact.contactReport.customerClassification"  value="Hot">Hot
 							  </label>
-							  <label class="btn btn-primary sales_submitted NoLostReasonSelected" >
+							  <label class="btn btn-primary NoLostReasonSelected" >
 								<input type="radio" id="classificationWarm" class="customerClassification" name="contact.contactReport.customerClassification" value="Warm">Warm
 							  </label>
-							  <label class="btn btn-primary sales_submitted NoLostReasonSelected">
+							  <label class="btn btn-primary NoLostReasonSelected">
 								<input type="radio" id="classificationCold"  class="customerClassification" name="contact.contactReport.customerClassification" value="Cold">Cold
 							  </label>
 							  
 							  <!-- Instract BY Ganesh - Added new radio tab -->
-							  <label class="btn btn-primary sales_submitted lostReasonSelect">
+							  <label class="btn btn-primary lostReasonSelect">
 								<input type="radio" class="customerClassification" name="contact.contactReport.customerClassification" value="Lost">Lost
 							  </label>
 							</div>
@@ -1236,7 +1236,7 @@ if(ses!=null){
 						<!-- <input type="text" name="lost_reason_c__c"> -->
 						<div id="LostReasonDivId" class="col-md-3" style="display:none;margin-top: 13px;">
 							<div class="group"><!-- requiredField sales_submitted requiredField-->
-								<select class="sales_submitted" id="LostReasonID" name="lost_reason_c__c">
+								<select class="" id="LostReasonID" name="lost_reason_c__c">
 						            <option value=""></option>
 									<option value="Not Interested">Not Interested</option>
 								    <option value="Budget">Budget</option>
@@ -1264,7 +1264,7 @@ if(ses!=null){
 						<div class="col-md-3 col-sm-6 col-xs-12" id="followupTypeID" style="display:none;" >
 							<div class="group">
 							
-								<select class="sales_submitted" id="followtype" name="enquiryReport.followType">
+								<select class="" id="followtype" name="enquiryReport.followType">
 									<option value=""></option>
 									<option value="Call">Call</option>
 									<option value="Home Visit">Home Visit</option>
@@ -1277,27 +1277,27 @@ if(ses!=null){
 						</div>
 							
 							
-						<div class="col-md-3 col-sm-6 col-xs-12" id="followupDateID" style="display:none;">
+						<div class="col-md-3 col-sm-6 col-xs-12" id="followupDateID" ><!-- id="followupDateID" style="display:none;" -->
 							<div class="form-group" id="fdate" style="margin-top: -15px; z-index: 0;">
-								<label style="font-weight: normal;">Follow Date</label>
+								<label style="font-weight: normal;">Follow Date & Time</label>
 								<div class='input-group date datetimepickerfollow'>
 									<input style="z-index: 0; border-radius: 0;" type='text' name="enquiryReport.followDate"
-										class="form-control autocomplete-off sales_submitted "
-										 /> <span style="border-radius: 0;" class="input-group-addon"> <span
+										class="form-control autocomplete-off "
+										 id="followdate"/> <!-- sales_submitted --> <span style="border-radius: 0;" class="input-group-addon"> <span
 										class="glyphicon glyphicon-calendar"></span>
 									</span>
 								</div>
 							</div>
-							<div class="form-group" id="fdatevalue" style="display: none; margin-top: -15px; z-index: 0;">
-								<label style="font-weight: normal;">Follow Date</label>
-								<div class='input-group'>
-									<input style="z-index: 0; border-radius: 0;" type='text' 
-										class="form-control autocomplete-off sales_submitted "
+							<!-- <div class="form-group" id="fdatevalue" style="display: none; margin-top: -15px; z-index: 0;">
+								<label style="font-weight: normal;">Follow Date & Time</label>
+								<div class='input-group datetimepickerfollowSpan'>
+									<input style="z-index: 0; border-radius: 0;" type='text' name="enquiryReport.followDate"
+										class="form-control autocomplete-off "
 										id="followdate" /> <span style="border-radius: 0;" class="input-group-addon"> <span
-										class="glyphicon glyphicon-calendar"></span>
+										class="glyphicon glyphicon-calendar" onclick="onCalendarClick();"></span>
 									</span>
 								</div>
-							</div> 
+							</div>  -->
 						</div>
 						
 						
@@ -1808,14 +1808,44 @@ if(ses!=null){
 
 	    return [day, month, year].join('-');
 	}
+ /*Start :  Added By Satheesh K - 22-05-2020 - For Followup Date and Time adding  */
+ function formatDateWithTime(date) {
+	    var d = new Date(date),
+	        month = '' + (d.getMonth() + 1),
+	        day = '' + d.getDate(),
+	        year = d.getFullYear(),
+	    	hours = addZero(d.getHours()),
+       		minutes = addZero(d.getMinutes());
+
+	    if (month.length < 2) month = '0' + month;
+	    if (day.length < 2) day = '0' + day;
+		var finalTimeStamp = [day, month, year].join('-');
+	    return finalTimeStamp+" "+hours+":"+minutes;
+	}
+ function addZero(i) {
+	  if (i < 10) {
+	    i = "0" + i;
+	  }
+	  return i;
+	}
+ /*END :*/
 var dateToday = new Date();
 $(function () {                
      $('.datetimepickerfollow').datetimepicker({
-         format: 'DD-MM-YYYY',
-         minDate: dateToday 
+         format: 'DD-MM-YYYY HH:mm'//,
+        // minDate: dateToday 
          
    });
  });
+ 
+/* function onCalendarClick()
+{
+	$('.datetimepickerfollowSpan').datetimepicker({
+        format: 'DD-MM-YYYY HH:mm'//,
+       // minDate: dateToday 
+        
+  });
+	} */
 $(function () {                
     $('.datetimepicker').datetimepicker({
         format: 'DD-MM-YYYY',
