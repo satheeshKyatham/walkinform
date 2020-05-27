@@ -33,10 +33,9 @@ public class SessionCheckListner extends HandlerInterceptorAdapter {
 		filterUrlList.add("/ccAvenueLogin");
 		filterUrlList.add("/ccavResponseHandler");
 		filterUrlList.add("/ccavRequestHandler");
-		filterUrlList.add("/paymentPlanDue");
-		filterUrlList.add("/towerPPExclusion");
-		filterUrlList.add("/paymentPlanRanking");
 		filterUrlList.add("/getpaymentplanlist_due");
+		filterUrlList.add("/getLdapUserDetails");//added by satheesh K.
+		
 		
 	}
 
@@ -48,23 +47,38 @@ public class SessionCheckListner extends HandlerInterceptorAdapter {
 		HttpSession session = request.getSession(false);
 		String url = request.getServletPath();
 
+		/*if (isXMLHttpRequest(request) && !(isFilteredUrl(url))
+				&& (null == session )) {
+			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED); // status code is 401
+			return false;
+		} else if (!(isFilteredUrl(url)) && (null == session || session.getAttribute("UserSession") == null)) {
+			try {
+				response.sendRedirect(request.getContextPath()+"/sessiontimeout");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return false;
+		} else {
+			return true;
+		}*/
+		
 		if (isXMLHttpRequest(request) && !(isFilteredUrl(url)) && (null == session)) {
 			/// ||session.getAttribute("context") == null
-			/*
-			 * response.setStatus(HttpServletResponse.SC_UNAUTHORIZED); //
-			 * status code is 401
-			  try {*/
+			
+			/* * response.setStatus(HttpServletResponse.SC_UNAUTHORIZED); //
+			 * status code is 401*/
+			  try {
 				 response.setStatus(HttpServletResponse.SC_UNAUTHORIZED); 
-				/*response.sendRedirect(request.getContextPath() + "/sessiontimeout");*/
-				/*System.out.println("ajax "+request.getContextPath());*/
-			/*} catch (IOException e) {
+				response.sendRedirect(request.getContextPath() + "/sessiontimeout");
+				System.out.println("ajax "+request.getContextPath());
+			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}*/
+			}
 			return false;
 		} else if (!(isFilteredUrl(url)) && (null == session)) {// ||
 																// session.getAttribute("context")
-																// == null
+											 					// == null
 			try {
 				response.sendRedirect(request.getContextPath() + "/sessiontimeout");
 			} catch (IOException e) {

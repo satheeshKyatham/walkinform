@@ -240,6 +240,7 @@ function saveOtherRequest(event,el){
 
 function populateBasicInfo(enq,contact){
 		if(!isEmpty(enq)){
+			$('#hdrEnqNameoffline').val(enq.name);
 			$('.enquiryId').val(enq.enquiryId);
 			$('.enquiryId').removeAttr("disabled");
 			var projectSfid=enq.project==null?"":enq.project.sfid;
@@ -975,7 +976,7 @@ function generateOTP(no) {
 			}, function(data) {
 			});
 			/*$('.otpColCnt .square_btn span').text('Resend OTP');*/
-			$('.filterCol .otpInput_btn_Div span').text('Resend OTP');
+			$('.filterCol .otpInput_btn_Div span').text('Resend Access Code');
 		}
 	else
 		{
@@ -1045,7 +1046,7 @@ function resetOfflineEnq(e)
 	$('#tab_offline_enq').hide();
 	$('#reset_btn_ColDiv').hide();
 	$('#getEnquiry_search_btn').hide();
-	$('.filterCol .otpInput_btn_Div span').text('Send OTP');
+	$('.filterCol .otpInput_btn_Div span').text('Access Code');
 	
 	$("#enMobileNo").removeAttr("disabled");
 	$(".otpInput").removeAttr("disabled");

@@ -108,7 +108,7 @@
 					<div class="group" style="min-height: auto; margin-bottom: 0;">
 						<div class="input-group" id="otpInputDiv">
 							<button class="btn blue_btn square_btn otpInput_btn_Div" onclick="generateOTP(1);">
-								<span>SEND OTP</span>
+								<span>Access Code</span>
 							</button>
 						</div>
 						
@@ -118,7 +118,7 @@
 					<div class="group" style="min-height: auto; margin-bottom: 0;">
 						<div class="input-group" id="generateOTPDiv">
 							<span class="validBox">	
-								<input name="otp1" class="otpInput form-control" autocomplete="off" placeholder="OTP no."  onkeyup="otpvalidate(this)">
+								<input name="otp1" class="otpInput form-control" autocomplete="off" placeholder="Access Code."  onkeyup="otpvalidate(this)">
 							</span>
 						<label class="errorOTP"></label>
 						</div>
@@ -214,10 +214,24 @@
 					</div>
 			<div class="col-md-3 col-sm-6 col-xs-12">
 				<div class="group">
+					<div class="input-group" id="">
+						<input type="text"
+							class="autocomplete-off form-control "
+							id="hdrEnqNameoffline" disabled="disabled">
+						 <span class="highlight"></span><span class="bar"></span> <label>Enquiry
+							no.
+						</label>
+					</div>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			
+			<div class="col-md-3 col-sm-6 col-xs-12">
+				<div class="group">
 					<div class="input-group" id="contactDiv">
 						<input type="text" value="${countryCode}"
 							class="autocomplete-off form-control mobile requiredField readonly contactNoDiv"
-							id="inputMobileNo" name="contact.mobileNo" maxlength="10" tabindex="-1">
+							id="inputMobileNo" name="contact.mobileNo" maxlength="10" tabindex="-1" disabled="disabled">
 						 <span class="highlight"></span><span class="bar"></span> <label>Contact
 							no.<strong class="mndt">*</strong>
 						</label>
@@ -616,7 +630,7 @@
 				</form:form>
 			</div>
 			
-			<div class="tab-pane" id="tab2">
+			<div class="tab-pane" id="tab2" style="display: none">
 				<%@ include file="/WEB-INF/views/pages/offlineeoi/eoiForm.jsp" %>
 			</div>
 						

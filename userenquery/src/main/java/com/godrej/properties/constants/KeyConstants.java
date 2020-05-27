@@ -15,7 +15,7 @@ public class KeyConstants {
 	public static final String REFERENCE_CODE_REQUIREMENT_TYPE="REQUIREMENT_TYPE";
 	public static final String REFERENCE_CODE_TYPOLOGY_AREA="TYPOLOGY_AREA";
 	
-	public static final String DEFAULT_DATE_FORMAT = "dd-MM-yyyy";
+	public static final String DEFAULT_DATE_FORMAT = "dd-MM-yyyy HH:mm";
 	public static final String DEFAULT_DATETIME_FORMAT = "dd-MM-yyyy HH:mm";
 	
 	public static final String RECORD_TYPE_PROSPECT = "01290000000uHV9AAM";
