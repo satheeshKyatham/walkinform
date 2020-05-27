@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.godrej.properties.dao.OTPAdminLogDao;
+import com.godrej.properties.dao.ValidateOTPAdminDao;
 import com.godrej.properties.model.OTP;
 import com.godrej.properties.model.OTPAdminLog;
 import com.godrej.properties.service.GetOTPService;
@@ -25,6 +26,8 @@ public class GetOTPServiceImpl implements GetOTPService{
 	@Autowired
 	private OTPAdminLogDao oTPAdminLogDao;
 	
+	@Autowired
+	private ValidateOTPAdminDao validateOTPAdminDao;
 	
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
@@ -35,36 +38,48 @@ public class GetOTPServiceImpl implements GetOTPService{
 		 && otprequesterid != null && !otprequesterid.equals("")
 		 && mobileno != null && !mobileno.equals("")) {
 			
-			List<OTPAdminLog> otpLog=new ArrayList<>();
-			
-			OTP otpDtl = otpService.getOtp(mobileno);
-			if(otpDtl.getOtp_id()!=null) {
-				String OTP = otpDtl.getOtp();
-				
-				OTPAdminLog logVal= new OTPAdminLog();
-				
-				logVal.setAdmin_userid(Integer.parseInt(loggedinuserid));
-				logVal.setCreateddate(new Timestamp(System.currentTimeMillis()));
-				logVal.setMobileno(mobileno);
-				logVal.setNv_otp_log_id(Integer.parseInt(otpDtl.getOtp_id()));
-				logVal.setOtp(otpDtl.getOtp());
-				logVal.setProjectsfid(projectsfid);
-				logVal.setRequester_userid(Integer.parseInt(otprequesterid));
-				logVal.setIsactive("Y");
-				
-				otpLog.add(logVal);
-				
-				boolean isInserted = oTPAdminLogDao.insertAdminOTPLog(otpLog);
-				
-				if (isInserted) {
-					String response = "{\"otp\":"+OTP+",\"status\":\"STATUS_OK\",\"error_msg\":\"Record Founded\",\"error_id\":null}";
-					return response;
+			boolean isAdmin = validateOTPAdminDao.validateAdmin(loggedinuserid);
+			if(isAdmin) {
+				boolean isRequester = validateOTPAdminDao.validateRequester(otprequesterid);
+				if (isRequester) {
+					List<OTPAdminLog> otpLog=new ArrayList<>();
+					
+					OTP otpDtl = otpService.getOtp(mobileno);
+					if(otpDtl.getOtp_id()!=null) {
+						String OTP = otpDtl.getOtp();
+						
+						OTPAdminLog logVal= new OTPAdminLog();
+						
+						logVal.setAdmin_userid(Integer.parseInt(loggedinuserid));
+						logVal.setCreateddate(new Timestamp(System.currentTimeMillis()));
+						logVal.setMobileno(mobileno);
+						logVal.setNv_otp_log_id(Integer.parseInt(otpDtl.getOtp_id()));
+						logVal.setOtp(otpDtl.getOtp());
+						logVal.setProjectsfid(projectsfid);
+						logVal.setRequester_userid(Integer.parseInt(otprequesterid));
+						logVal.setIsactive("Y");
+						
+						otpLog.add(logVal);
+						
+						boolean isInserted = oTPAdminLogDao.insertAdminOTPLog(otpLog);
+						
+						if (isInserted) {
+							String response = "{\"otp\":"+OTP+",\"status\":\"STATUS_OK\",\"error_msg\":\"Record Founded\",\"error_id\":null}";
+							return response;
+						} else {
+							String response = "{\"otp\":null,\"status\":\"STATUS_NOTOK\",\"error_msg\":\"Error inserting data into table\",\"error_id\":\"ADMINOTP_ER1003\"}";
+							return response;
+						}
+					} else {
+						String response = "{\"otp\":null,\"status\":\"STATUS_NOTOK\",\"error_msg\":\"No OTP Created\",\"error_id\":\"ADMINOTP_ER1004\"}";
+						return response;
+					}
 				} else {
-					String response = "{\"otp\":null,\"status\":\"STATUS_NOTOK\",\"error_msg\":\"Error inserting data into table\",\"error_id\":\"ADMINOTP_ER1003\"}";
+					String response = "{\"otp\":null,\"status\":\"STATUS_NOTOK\",\"error_msg\":\"Requestor not exist\",\"error_id\":\"ADMINOTP_ER1007\"}";
 					return response;
 				}
 			} else {
-				String response = "{\"otp\":null,\"status\":\"STATUS_NOTOK\",\"error_msg\":\"No OTP Created\",\"error_id\":\"ADMINOTP_ER1004\"}";
+				String response = "{\"otp\":null,\"status\":\"STATUS_NOTOK\",\"error_msg\":\"Unauthorised user for Get OTP\",\"error_id\":\"ADMINOTP_ER1006\"}";
 				return response;
 			}
 			
