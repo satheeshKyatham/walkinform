@@ -53,10 +53,13 @@ session.setAttribute("version","18.39");
 				</li> 
 	          </ul>
 	        </li>
+	       
 	        <li id="adminOTPLink">
 	        	<a href="#" onclick="otpModal()">Get OTP</a>
 	        </li>
-	        <li><a href="${pageContext.request.contextPath}/saleslogin">Logout</a></li>
+	        <li><a href="${pageContext.request.contextPath}/saleslogin" onclick="logoutSession()">Logout</a></li>
+
+	    
 		</ul> 
 	    </div>
 	
@@ -95,6 +98,14 @@ session.setAttribute("version","18.39");
 <script type="text/javascript">
 document.getElementById('userNameLoggedInShow').innerHTML = 'Welcome '+'<%= session.getAttribute("USERNAME")%>';
 var useridGlobvar = <%= session.getAttribute("USERID")%>
+
+function logoutSession(){ 
+	$.get("logout", {
+	},
+	function(data) {
+		console.log("session out" , data);
+	});
+}
 
 if ('<%=session.getAttribute("ISOTPADMIN")%>' != "Y") {
 	document.getElementById('OTPModal').innerHTML = "";

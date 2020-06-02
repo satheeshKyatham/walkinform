@@ -219,6 +219,7 @@ function populateEnquiryAndContact(resp){
 		    
 		    $("#officeCity").val("");
 		    $("#officePinCode").val("");
+		    $('#hdrEnqNameoffline_div').hide();
 	}
 	//$("#getEnquiry").attr('disabled',false);
 }
@@ -240,6 +241,7 @@ function saveOtherRequest(event,el){
 
 function populateBasicInfo(enq,contact){
 		if(!isEmpty(enq)){
+			$('#hdrEnqNameoffline_div').show();
 			$('#hdrEnqNameoffline').val(enq.name);
 			$('.enquiryId').val(enq.enquiryId);
 			$('.enquiryId').removeAttr("disabled");
