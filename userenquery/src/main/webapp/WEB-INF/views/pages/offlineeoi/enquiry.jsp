@@ -212,7 +212,7 @@
 						  	<strong id="commonBoldMessage"></strong>
 						</div>
 					</div>
-			<div class="col-md-3 col-sm-6 col-xs-12">
+			<div class="col-md-3 col-sm-6 col-xs-12" id="hdrEnqNameoffline_div">
 				<div class="group">
 					<div class="input-group" id="">
 						<input type="text"
@@ -231,7 +231,7 @@
 					<div class="input-group" id="contactDiv">
 						<input type="text" value="${countryCode}"
 							class="autocomplete-off form-control mobile requiredField readonly contactNoDiv"
-							id="inputMobileNo" name="contact.mobileNo" maxlength="10" tabindex="-1" disabled="disabled">
+							id="inputMobileNo" name="contact.mobileNo" tabindex="-1" readonly>
 						 <span class="highlight"></span><span class="bar"></span> <label>Contact
 							no.<strong class="mndt">*</strong>
 						</label>
