@@ -64,7 +64,7 @@ public class GetOTPServiceImpl implements GetOTPService{
 						boolean isInserted = oTPAdminLogDao.insertAdminOTPLog(otpLog);
 						
 						if (isInserted) {
-							String response = "{\"otp\":"+OTP+",\"status\":\"STATUS_OK\",\"error_msg\":\"Record Founded\",\"error_id\":null}";
+							String response = "{\"otp\":\""+OTP+"\",\"status\":\"STATUS_OK\",\"error_msg\":\"Record Founded\",\"error_id\":null}";
 							return response;
 						} else {
 							String response = "{\"otp\":null,\"status\":\"STATUS_NOTOK\",\"error_msg\":\"Error inserting data into table\",\"error_id\":\"ADMINOTP_ER1003\"}";
