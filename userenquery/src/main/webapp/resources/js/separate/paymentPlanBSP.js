@@ -107,7 +107,7 @@ function addBSPCharge () {
 	
 	$.post(pageContext+"insertBSPForPP",{"bsp_amount_per": bspAmountPerVal, "bsp_amount":bspAmountVal,  "project_id":$('#projectDataList').val(), "project_name":$('#projectDataList :selected').text(), "pymt_plan_id":$('#ppDropdown').val()
 		, "pymt_plan_name":$('#ppDropdown :selected').text(), "region_id":$('#regionList').val(), "region_name":$('#regionList :selected').text()
-		, "tower_id":$('#towerMst').find('option:selected').attr('name'), "typology_name":$('#typoMst').val()},function(data){				 
+		, "tower_id":$('#towerMst').find('option:selected').attr('name'), "typology_name":$('#typoMst').val(), "inventoryCatDD":$('#inventoryCatDD').val()},function(data){				 
 		
 	}).done(function(data){
 		swal({

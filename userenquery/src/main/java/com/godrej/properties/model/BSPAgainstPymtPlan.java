@@ -60,6 +60,8 @@ private static final long serialVersionUID = 1L;
 	@Column(name = "bsp_per")
 	private double bsp_per;
 	
+	@Column(name = "inventory_category")
+	private String inventory_category;
 	
 	@Transient
 	private String insertStatus;
@@ -186,5 +188,12 @@ private static final long serialVersionUID = 1L;
 	public void setBsp_per(double bsp_per) {
 		this.bsp_per = bsp_per;
 	}
-	
+
+	public String getInventory_category() {
+		return inventory_category;
+	}
+
+	public void setInventory_category(String inventory_category) {
+		this.inventory_category = inventory_category;
+	}
 }

@@ -1,36 +1,14 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
-
-
-
-
-
-
-
-
-
-
-
-<!-- <div class="tab-pane active" id="tab1"> -->
 	<form:form id="bankPaymentForm" modelAttribute="EnquiryRequest"
 		enctype="multipart/form-data">
 
-
-
-		
-		
-		
-
-
-
 		 <input id="pageContext" type="hidden" value="${pageContext.request.contextPath}"/>
 		<input type="hidden" class="enquiryId" name="enquiryId">
-		<!-- <input type="hidden" class="unitCustom" name="enquiryReport.unit"> -->
 		<input type="hidden" class="enquiryReportId"
 			name="enquiryReport.enquiryReportId">
 
 		<div class="row ">
-			<!-- bounceInLeft animated -->
 			<div class="col-md-12 commonErrorCol commonErrorDiv"
 				style="display: none">
 				<div class="alert alert-danger">
@@ -43,74 +21,6 @@
 					<strong id="commonBoldMessage"></strong>
 				</div>
 			</div>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			<!-- commented by a - DO NOT REMOVE -->
-			<!-- <div class="col-md-2 col-xs-6">
-				<div class="group">
-					<select id="tower" class="eoi_submitted requiredField" name="EOI_Tower_Series__c">
-						<option value=""></option>
-
-					</select>
-					<input type="hidden"  class="towername" name="enquiryReport.tower"> 
-					<span class="highlight"></span><span class="bar"></span> <label
-						class="select-label">Tower<strong class="mndt"></strong></label>
-				</div>
-			</div> -->
-			
-			<!-- <div class="col-md-2 col-xs-6" >
-				<div class="group">
-					<select id="fband" class="eoi_submitted" name ="EOI_Preferred_Floor_Band__c">
-					</select>
-					<input type="hidden"  class="bandname" >
-					 <span class="highlight"></span><span class="bar"></span> <label
-						class="select-label">Floor Band 123</label>
-				</div>
-			</div> -->
-			<!-- <div class="col-md-2 col-xs-6" >
-				<div class="group">
-					<select id="unit" class="eoi_submitted" name ="Preferred_Unit__c">
-					</select>
-					<input type="hidden"  class="unitname" name="enquiryReport.unit">
-					 <span class="highlight"></span><span class="bar">
-					
-					</span> <label
-						class="select-label">Unit</label>
-				</div>
-			</div> -->
-			<!-- <div class="col-md-2 col-xs-6" style="display: none">
-				<div class="group">
-					<select id="floor" class="eoi_submitted">
-					</select> <span class="highlight"></span><span class="bar"></span> <label
-						class="select-label">Floor <strong class="mndt"></strong></label>
-				</div>
-			</div> -->
-			<!-- <div class="col-md-12 col-sm-12 col-xs-12 radioBtnWrp  padMLR15"
-				radioName="desiredUnitType" id="desiredUnitType">
-				<div class="titleF">
-					Typology Requirement <strong class="mndt">*</strong>
-				</div>
-				<div class="radioBtnCol requiredRadio" data-toggle="buttons" id="radioBtnCol">
-
-				</div>
-				<label class="select-label fnt14 padMLR15">Typology Requirement<strong class="mndt">*</strong></label>
-				<div class="claerfix"></div>
-			</div> -->
-			
-			
-			
-			
-			
 			
 			<div class="clearfix"></div>
 			<div class="col-md-12" style="margin-bottom:20px;">
@@ -149,7 +59,7 @@
 							<th style="width:32px;"></th>
 						</tr>
 						
-						<tr class="EOIDtlRow"> <!-- csPtDataRowEoi -->
+						<tr class="EOIDtlRow">  
 							<td>
 								<input class="csPtEnqSfidEoi" style="display:none;" />
 								<select class="full form-control input-sm towerListEOI requiredField"  onchange="getTypologyEOI(this); getUnitEOI(this); getfbandEOI(this); getCarparkEOIMst(this);">
@@ -188,12 +98,7 @@
 					<i class="fa fa-plus-circle"></i> Add More
 				</p>
 			</div>
-			<!-- END EOI Dtl -->
-			
-			<!-- <button onclick="insertEOIPreference()">Insert</button> -->
-			
-			
-			<!-- New EOI Payment Dtl -->
+			 
 			<div class="col-md-12" style="margin-bottom:50px;">
 				<h4 class="mrgT0">
 					Payment Details
@@ -287,18 +192,10 @@
 					<span>Total transaction amount: </span><span id="csPtGrandtotalEoi"></span>
 				</div>
 				
-				 <!-- <button type='button' onclick="csPymtDataEoi ('99999')">Test Btn</button> -->
-				
 				<div class="clearfix"></div>
 			</div>
-			<!-- END New EOI Payment Dtl -->
-		
 			
-			
-			
-			
-			
-			<div class="col-md-2 col-xs-6" style="display:none;">
+			<!-- <div class="col-md-2 col-xs-6" style="display:none;">
 				<div class="group">
 					<select id="paymentopt" class="eoi_submitted" name="transactionType">
 						<option value=""></option>
@@ -317,7 +214,6 @@
 							class="autocomplete-off bankdetails  eoi_submitted"
 							required="required" /> <span class="highlight"></span><span
 							class="bar"></span> <label>Bank name <strong class="mndt">*</strong></label>
-						<!-- <small class="errorMsg">Error message</small> -->
 					</div>
 				</div>
 
@@ -340,17 +236,7 @@
 						</label>
 					</div>
 				</div>
-
-				<!-- <div class="col-md-3 col-sm-6 col-xs-12">
-						 <div class="input-group date" id='datetimepicker1'>
-							<input type="text" id="chequedate" name="" class="form-control autocomplete-off  bankdetails " />
-							<span class="highlight"></span><span class="bar"></span>
-							<label>Cheque Date<strong class="mndt">*</strong></label>
-						</div> 
-						
-					</div> -->
-
-				<!-- Added By A -->
+ 
 				<div class='col-md-2'>
 					<div class="form-group" id="divchequedate">
 						<label>Cheque Date<strong class="mndt">*</strong></label>
@@ -375,7 +261,6 @@
 						</div>
 					</div>
 				</div>
-				<!-- END Addd By A -->
 
 
 				<div class="col-md-2 col-sm-6 col-xs-12">
@@ -386,14 +271,7 @@
 							class="mndt">*</strong></label>
 					</div>
 				</div>
-
-				<!-- <div class="col-md-3 col-sm-6 col-xs-12">
-						<div class="group">
-							<input type="text" id="panno" class="autocomplete-off requiredField  " />
-							<span class="highlight"></span><span class="bar"></span>
-							<label>Pan No<strong class="mndt">*</strong></label>
-						</div>
-					</div> -->
+ 
 				<div class="col-md-3 col-sm-6 col-xs-12">
 					<div class="group">
 						<input type="file" id="chequeFile" name="enquiryReport.chequeFile"
@@ -420,8 +298,8 @@
 					</a>
 					<div class="clearfix"></div>
 				</div>
-			</div>
-
+			</div>-->
+			<!-- 
 			<div class="clearfix"></div>
 			<div id="neftdetails" style="display: none">
 				<div class="col-md-3 col-sm-6 col-xs-6">
@@ -433,22 +311,7 @@
 							class="mndt">*</strong></label>
 					</div>
 				</div>
-				<!-- <div class="col-md-3 col-sm-6 col-xs-6">
-					<div class="group">
-						<input type="text" id="transId" name="transactionID"
-							class="autocomplete-off neftdetails requiredField eoi_submitted"
-							required="required" /> <span class="highlight"></span><span
-							class="bar"></span> <label>Transaction ID<strong
-							class="mndt">*</strong></label>
-					</div>
-				</div> -->
-				<!-- <div class="col-md-3 col-sm-6 col-xs-6">
-						<div class="group">
-							<input id="transDate" name="" class="autocomplete-off neftdetails " required="required" />
-							<span class="highlight"></span><span class="bar"></span>
-							<label>Transaction Date<strong class="mndt">*</strong></label>
-						</div>
-					</div> -->
+				 
 				<div class='col-md-2'>
 					<div class="form-group" id="divtransDate">
 						<label>Transaction Date<strong class="mndt">*</strong></label>
@@ -470,9 +333,6 @@
 							</span>
 						</div>
 					</div>
-					
-					
-					
 				</div>
 				<div class="col-md-3 col-sm-6 col-xs-6">
 					<div class="group">
@@ -503,28 +363,9 @@
 					<div class="clearfix"></div>
 				</div>
 				
-			</div>
-			
-			
-				
-				
-				<!-- <div  >
-						<div class="col-md-12 col-xs-12">
-							<div class="group">
-								<input type="text" class="eoi_submitted" id="bankotherinfo" name="EOI_Remarks__c"/>
-								<span class="highlight"></span><span class="bar"></span>
-								<label>Other informations</label>
-							</div>
-						</div>	
-						<div class="clearfix"></div>
-					</div> --> 
-			
+			</div> 
 			<div class="clearfix"></div>
-
-
-
 			<div id="onlinedetails" style="display: none">
-
 				<div class="col-md-3 col-sm-6 col-xs-6">
 					<div class="group">
 						<input type="text" id="amountinLink"
@@ -561,17 +402,14 @@
 				</div>
 				<div class="clearfix"></div>
 			</div>
+			-->
 		</div>
 
 		<div class="clearfix"></div>
 		<div class="btnWrp" style="z-index: 10;">
 			<div class="btnCol">
-				<a class="btn btn-primary btnPrevious"> <span>Previous</span>
-				
-				</a> 
-				
-				<!-- <a class="btn btn-primary blue_btn  mrgR15"	 id="eoiclose" style="display: none;"
-				onclick="savePaymentInfo(event,this);"> <span> Close</span></a> -->
+				<a class="btn btn-primary btnPrevious"> <span>Previous</span> </a> 
+				 
 				<a class="btn blue_btn  mrgR15 eoi_submitted"	 id="eoisaveclose" onclick="savePaymentInfo(event,this);"> 
 				<%
 				
@@ -594,28 +432,10 @@
 						<span>Save EOI & Generate KYC Link</span>
 				<%}%>
 				</a>
-				
-				<!--17-12-2019 Requested from - Prakash -- Hide Generate KYC button from UI and backed functionality added on Save EOI button Click And Exit & Close buttons also hide -->
-				<!-- <a class="btn blue_btn  mrgR15" style="padding: 7px 10px;" data-toggle="modal" data-target="#myModal"> <span>Exit & Close</span></a> -->
-				<!-- <a id="btnkyclink" class="btn blue_btn btn-primary mrgR15"
-					onclick="generateKYCLink(event,this,'Y');"> <span>Generate
-						KYC Link</span>
-				</a> -->
-				
-				
-				
-				
-				
-				
-				
 			</div>
 			<div class="clearfix"></div>
 		</div>
 </form:form>
-<!-- </div> -->
-
-<!-- </div> -->
-
 
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -636,15 +456,10 @@
     </div>
   </div>
 </div>
-
-
-<!-- <button onclick="getEOIPreferencPrint();">Test Print</button> -->
-
+ 
 <!-- EOI Print Form -->
 
 <div id="printEOIForm" class="col-md-8" style="display:none; border: 1px dotted #ccc; margin: 0 auto; float: none; margin-top: 40px; padding-top: 15px;">
-		<!-- <div style="padding-bottom:10px;"><b style="font-size:18px; text-align:center;">EOI Form: <span id="projectNameEOIPrint"></span></b></div> -->
-		
 		<table class="table table-bordered" style="margin-bottom:20px; border-color: #ffffff; padding:0px;">
 		    <tbody style="border-color: #ffffff; padding:0px;">
 		    	<tr style="border-color: #ffffff; padding:0px;">
@@ -653,7 +468,6 @@
 		    	</tr>
 		    </tbody>
 		 </table>
-		
 		
 		<div style="padding-bottom:10px;"><b>Applicant Details</b></div>
 		<table id="" style="margin-bottom:20px;" class="table table-bordered">

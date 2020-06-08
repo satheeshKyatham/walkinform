@@ -2624,18 +2624,33 @@ public class WebServiceController<MultipartFormDataInput> {
 			else
 				rows.add("");
 			rows.add(",");
-			rows.add(mislist.get(i).getTrigger1());
+			if(mislist.get(i).getTrigger1().trim()!=null)
+				rows.add(mislist.get(i).getTrigger1().trim());
+			else
+				rows.add("");
 			rows.add(",");
-			rows.add(mislist.get(i).getTrigger2());
+			if(mislist.get(i).getTrigger2().trim()!=null)
+				rows.add(mislist.get(i).getTrigger2().trim());
+			else
+				rows.add("");
 			rows.add(",");
-			rows.add(mislist.get(i).getBarrier1());
+			if(mislist.get(i).getBarrier1().trim()!=null)
+				rows.add(mislist.get(i).getBarrier1().trim());
+			else
+				rows.add("");
 			rows.add(",");
-			rows.add(mislist.get(i).getBarrier2());
+			if(mislist.get(i).getBarrier2().trim()!=null)
+				rows.add(mislist.get(i).getBarrier2().trim());
+			else
+				rows.add("");
 			rows.add(",");
-			rows.add(mislist.get(i).getLost_reason_c__c());
+			if(mislist.get(i).getLost_reason_c__c().trim()!=null)
+				rows.add(mislist.get(i).getLost_reason_c__c().trim());
+			else
+				rows.add("");
 			rows.add(",");
-			if(mislist.get(i).getDesignation__c()!=null)
-				rows.add(mislist.get(i).getDesignation__c().toString());
+			if(mislist.get(i).getDesignation__c().trim()!=null)
+				rows.add(mislist.get(i).getDesignation__c().trim().toString());
 			else
 				rows.add("");
 			
