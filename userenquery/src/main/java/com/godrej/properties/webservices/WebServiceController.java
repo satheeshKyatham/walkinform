@@ -665,15 +665,15 @@ public class WebServiceController<MultipartFormDataInput> {
 	/* insert BSP against Payment Plan */
 	@RequestMapping(value = "/insertBSPForPP", method = RequestMethod.POST)
 	public BSPAgainstPymtPlan insertBSPForPP(@RequestParam("bsp_amount_per") Double bsp_amount_per,  @RequestParam("bsp_amount") String bsp_amount,  @RequestParam("project_id") String project_id,    @RequestParam("project_name") String project_name, @RequestParam("pymt_plan_id") String pymt_plan_id, @RequestParam("pymt_plan_name") String pymt_plan_name, @RequestParam("region_id") String region_id
-			, @RequestParam("region_name") String region_name, @RequestParam("tower_id") String tower_id, @RequestParam("typology_name") String typology_name) // add parameter 
+			, @RequestParam("region_name") String region_name, @RequestParam("tower_id") String tower_id, @RequestParam("typology_name") String typology_name, @RequestParam("inventoryCatDD") String inventoryCatDD) // add parameter  
 	{	
 		BSPAgainstPymtPlan oc = new BSPAgainstPymtPlan();
 		
-		if (tower_id.contains("0")) {
+		if (tower_id.equals("0")) {
 			tower_id = null;
 		} 
 		
-		if (typology_name.contains("0")) {
+		if (typology_name.equals("0")) {
 			typology_name = null;
 		}
 		
@@ -691,7 +691,7 @@ public class WebServiceController<MultipartFormDataInput> {
 		oc.setTowerid(tower_id);
 		oc.setTypology(typology_name);
 		oc.setBsp_per(bsp_amount_per);
-		
+		oc.setInventory_category(inventoryCatDD);
 		/*int status = bSPAgainstPymtPlanService.checkBSPForPP(oc);
 		if(status==0)
 		{*/
@@ -1734,8 +1734,8 @@ public class WebServiceController<MultipartFormDataInput> {
 		double bspPerVal=0;
 		
 		if(plans.size()>0)
-			bspAmount =bSPAgainstPymtPlanService.getPaymentPlanBSPList(project_code,unit,towerCode,pymtPlanSfid,plans.get(0).getPropstrength__unit_type__c());
-			bspPerVal =bSPAgainstPymtPlanService.getPaymentPlanPerBSP(project_code,unit,towerCode,pymtPlanSfid,plans.get(0).getPropstrength__unit_type__c()); 
+			bspAmount =bSPAgainstPymtPlanService.getPaymentPlanBSPList(project_code,unit,towerCode,pymtPlanSfid,plans.get(0).getPropstrength__unit_type__c(), plans.get(0).getInventory_category__c());
+			bspPerVal =bSPAgainstPymtPlanService.getPaymentPlanPerBSP(project_code,unit,towerCode,pymtPlanSfid,plans.get(0).getPropstrength__unit_type__c() , plans.get(0).getInventory_category__c());  
 		
 		 if(plans.size()>0)	{
 			 
