@@ -18,7 +18,7 @@ public class PaymentEOIReport implements Serializable{
 
 	@Id 
 	@GeneratedValue(strategy=GenerationType.AUTO) 
-	@Column(name="id") private  int id ;
+	@Column(name="row_no") private  int id ;
 	@Column(name="region__c") private String	region__c;
 	@Column(name="project_name") private String	project_name;
 	@Column(name="enq_name") private String	enq_name;
