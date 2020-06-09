@@ -61,6 +61,7 @@
 				  	<th>Project</th>
 				  	<th>Date</th>
 					<th>Enquiry No</th>
+					<th>Verticle</th>
 					<th>Contact Name</th>
 					<th>Payment Plan</th>
 					<th>Offer Name</th>

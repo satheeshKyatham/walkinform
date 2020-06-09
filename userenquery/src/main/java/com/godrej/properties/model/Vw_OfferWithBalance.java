@@ -46,9 +46,9 @@ public class Vw_OfferWithBalance implements Serializable{
 	@Column(name="cs_final_amount") private double	cs_final_amount;
 	@Column(name="propstrength__property__c") private String propstrength__property__c;
 	@Column(name="createddate") private Date createddate;
-	
 	@Transient private String qry_count;
 	@Transient private String qry_msg;
+	@Column(name="verticle__c") private String	verticle__c;
 	
 	public int getRow_number() {
 		return row_number;
@@ -206,5 +206,11 @@ public class Vw_OfferWithBalance implements Serializable{
 	}
 	public void setQry_msg(String qry_msg) {
 		this.qry_msg = qry_msg;
+	}
+	public String getVerticle__c() {
+		return verticle__c;
+	}
+	public void setVerticle__c(String verticle__c) {
+		this.verticle__c = verticle__c;
 	}
 }

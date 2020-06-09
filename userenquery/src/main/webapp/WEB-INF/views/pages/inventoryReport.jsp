@@ -59,6 +59,7 @@
 							<th>Hold/ Block</th>
 							
 							<th>Enq. Name</th>
+							<th>Verticle</th>
 							<th>Customer</th>
 							<th>Mobile No.</th>
 							

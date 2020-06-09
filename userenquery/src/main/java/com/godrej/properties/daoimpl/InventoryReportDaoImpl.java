@@ -58,7 +58,9 @@ public class InventoryReportDaoImpl implements InventoryReportDao{
 				+ " CASE WHEN h.propstrength__part_of_cop__c IS NULL THEN cast(false as boolean) ELSE h.propstrength__part_of_cop__c END AS propstrength__part_of_cop__c, "
 				+ " g.propstrength__type__c, "
 				+ " CASE WHEN g.propstrength__rate_per_unit_area__c IS NULL THEN cast(0 as numeric (20,2))  ELSE cast(g.propstrength__rate_per_unit_area__c as numeric (20,2))  END AS othercharge__rate_per_unit_area__c, "
-				+ " CASE WHEN g.propstrength__fixed_charge__c IS NULL THEN cast(0 as numeric (20,2)) ELSE cast(g.propstrength__fixed_charge__c as numeric (20,2)) END AS propstrength__fixed_charge__c "
+				+ " CASE WHEN g.propstrength__fixed_charge__c IS NULL THEN cast(0 as numeric (20,2)) ELSE cast(g.propstrength__fixed_charge__c as numeric (20,2)) END AS propstrength__fixed_charge__c, "
+				
+				+ " e.verticle__c "
 				
 				
 				+ " FROM salesforce.gpl_cs_hold_admin_unit a "

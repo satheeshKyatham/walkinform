@@ -55,13 +55,11 @@ function getInventoryReportDtl () {
 			var eoi_unit_locked = [];
 			var propstrength__rate_per_unit_area__c = [];
 			var saleable_area__c = [];
-			
-			
+			var verticle__c = [];
 			
 			for(var i = 0; i< obj1.length; i++){    
                 if(uniqueId.indexOf(obj1[i].id) === -1){
                     uniqueId.push(obj1[i].id);
-                    
                     enq_name.push(obj1[i].enq_name); 
                     customer_name.push(obj1[i].customer_name); 
                     customer_mobile.push(obj1[i].customer_mobile); 
@@ -74,11 +72,11 @@ function getInventoryReportDtl () {
                     hold_description.push(obj1[i].hold_description); 
                     hold_behalf_username.push(obj1[i].hold_behalf_username); 
                     hold_behalf_email.push(obj1[i].hold_behalf_email); 
-                    
                     hold_reason.push(obj1[i].hold_reason);
                     eoi_unit_locked.push(obj1[i].eoi_unit_locked);
                     propstrength__rate_per_unit_area__c.push(obj1[i].propstrength__rate_per_unit_area__c);
                     saleable_area__c.push(obj1[i].saleable_area__c);
+                    verticle__c.push(obj1[i].verticle__c);
                 }        
             }
 			
@@ -130,6 +128,7 @@ function getInventoryReportDtl () {
 				html += "<tr class='"+rowColor+"'>" +
 							" <td>"+hold_reasonVar+"</td>" +
 							"<td>"+enq_name[j]+"</td>" +
+							"<td>"+verticle__c[j]+"</td>" +
 							"<td>"+customer_name[j]+"</td>" +
 							"<td>"+customer_mobile[j]+"</td>" +
 							" <td>"+tower_name__c[j]+"</td>" +
