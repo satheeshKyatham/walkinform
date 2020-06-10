@@ -2629,6 +2629,7 @@ var HoldReverseTimer = function(min, sec){
        $('.holdCountdown').empty();
        timer2 = min+":"+sec;
        
+       
        interval = setInterval(function(){
                timer = timer2.split(':');
                //by parsing integer, I avoid all extra string processing
