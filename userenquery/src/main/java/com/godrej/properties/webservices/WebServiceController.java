@@ -1395,8 +1395,8 @@ public class WebServiceController<MultipartFormDataInput> {
 		
 		
 		
-		
-		String mobileNo= "8356919010";
+		/* Commented By Satheesh K - Reason: No Use of Code*/
+		/*String mobileNo= "8356919010";
 		
 		if (projectid.equals("a1l6F000003MOeRQAW") || projectid.equals("a1l6F000002kSvMQAU") || projectid.equals("a1l6F000002QyqOQAS") || projectid.equals("a1l6F000002kSuPQAU") || projectid.equals("a1l6F000002kSuVQAU") || projectid.equals("a1l6F000002kSxTQAU") || projectid.equals("a1l6F000002kSuZQAU") || projectid.equals("a1l6F000002kSuYQAU") || projectid.equals("a1l6F000002kSxVQAU") || projectid.equals("a1l6F000002kSxPQAU") || projectid.equals("a1l6F000002kSxNQAU") || projectid.equals("a1l6F000002kSxLQAU") || projectid.equals("a1l6F000005jSk0QAE") || projectid.equals("a1l6F000002kSuQQAU") || projectid.equals("a1l6F000002kSxSQAU") || projectid.equals("a1l6F000003SDgIQAW") || projectid.equals("a1l6F000002kT0zQAE") || projectid.equals("a1l6F000002X6INQA0") || projectid.equals("a1l6F000004Q3l6QAC") || projectid.equals("a1l6F0000036fY5QAI") || projectid.equals("a1l6F000008fqcuQAA") || projectid.equals("a1l6F000002XIdMQAW") || projectid.equals("a1l6F000002QyUwQAK") || projectid.equals("a1l6F000003DRnNQAW") || projectid.equals("a1l6F000002X6IOQA0") || projectid.equals("a1l6F000002X6IMQA0") || projectid.equals("a1l6F000002qLhcQAE") ) {
 			System.out.println("123 Mumbai Project");
@@ -1410,7 +1410,7 @@ public class WebServiceController<MultipartFormDataInput> {
 		}else {
 			mobileNo= "8356919019";
 			System.out.println("Else 123");
-		}
+		}*/
 		
 		
 		//Send SMS
