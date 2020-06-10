@@ -1378,8 +1378,10 @@ public class WebServiceController<MultipartFormDataInput> {
 								 @RequestParam("towerName") String towerName,
 								 @RequestParam("projectsfid") String projectid,
 								 @RequestParam("herokuEnqId") String herokuEnqId,
-								 @RequestParam("userName") String userName,
-								 
+								 @RequestParam("userName") String userName, /*Added By Satheesh K - Date : 10-06-2020 - Property Name Added on Cost sheet Page*/
+								 @RequestParam("salesConA") String salesConA,
+								 @RequestParam("projectname") String projectname,
+								 @RequestParam("propertyname") String propertyname,
 								 HttpServletRequest req   
 			) {
 		GsonBuilder gsonBuilder = new GsonBuilder();
@@ -1444,14 +1446,26 @@ public class WebServiceController<MultipartFormDataInput> {
 				 * Integer.valueOf(selable))+"). Kindly share the code "
 				 * +OTP+" with Closing Manager to approve.";
 				 */
-			String text = "Dear Approver"+
+			
+			/*Added By Satheesh K - Date : 10-06-2020 - Property Name Added on Cost sheet others OTP*/
+			/*String text = "Dear Approver"+
 					  ", Approval request from "+userName
 					 + "  for Unit{"+unitName+"}, "
 					 + " Tower {"+towerName+"}, "
-					 + "Discount Value ("+otherAmount+"). Kindly share the code "+OTP+" with Closing Manager to approve.";
+					 + "Discount Value ("+otherAmount+"). Kindly share the code "+OTP+" with Closing Manager to approve.";*/
+			 		//+ "Discount Per Sqft{"+otherAmount+"} , Value ("+(Double.parseDouble(otherAmount)*Double.parseDouble(selable))+"). Kindly share the code "+OTP+" with Closing Manager to approve.";	
+			Double apr = 0.00;
+			
+			apr= (Double.parseDouble(salesConA)/Double.parseDouble(selable));
+			String text = userName+" has requested for a discount of Rs.("+otherAmount+") "+
+					  "for {"+propertyname+"} in {"+projectname+"}, Effective APR {"+Math.round(apr)+"}. Please share the OTP "+OTP+" to approve the discount. ";
+					 //+ "  for Unit{"+unitName+"}, "
+					 //+ " Tower {"+towerName+"}, "
+					 //+ "Discount Value ("+otherAmount+"). Kindly share the code "+OTP+" with Closing Manager to approve.";
 			 		//+ "Discount Per Sqft{"+otherAmount+"} , Value ("+(Double.parseDouble(otherAmount)*Double.parseDouble(selable))+"). Kindly share the code "+OTP+" with Closing Manager to approve.";	
 			
 			
+			//<SM Name> has requested for a discount of Rs. <Discount Amount> for <Unit No.> in <Project Name>, Effective APR [Sales Consideration (A) / Saleable Area]. Please share the OTP ** to approve the discount.
 			try {
 				text = URLEncoder.encode(text, "UTF-8");
 			} catch (UnsupportedEncodingException e) {
@@ -1799,6 +1813,8 @@ public class WebServiceController<MultipartFormDataInput> {
 			 
 			 paymentPlanJson.setNowData(allowedUptoDate);
 			 paymentPlanJson.setWing_block__c(paym.getWing_block__c()); 
+			 /*Added By Satheesh K - Date : 10-06-2020 - Property Name Added on Cost sheet Page*/
+			 paymentPlanJson.setPropstrength__property_name__c(paym.getPropstrength__property_name__c());
 			 //paymentPlanJson.set (paym.getSfid());
 			 
 			 
