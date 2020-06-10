@@ -53,6 +53,8 @@ public class InventoryReport implements Serializable{
 	@Column(name="othercharge__rate_per_unit_area__c", precision = 10, scale = 2)  private BigDecimal othercharge__rate_per_unit_area__c;
 	@Column(name="propstrength__fixed_charge__c", precision = 10, scale = 2)  private BigDecimal propstrength__fixed_charge__c;
 	
+	@Column(name="verticle__c") private String verticle__c;
+	
 	public int getId() {
 		return id;
 	}
@@ -241,5 +243,11 @@ public class InventoryReport implements Serializable{
 	}
 	public void setRow_number(int row_number) {
 		this.row_number = row_number;
+	}
+	public String getVerticle__c() {
+		return verticle__c;
+	}
+	public void setVerticle__c(String verticle__c) {
+		this.verticle__c = verticle__c;
 	}
 }

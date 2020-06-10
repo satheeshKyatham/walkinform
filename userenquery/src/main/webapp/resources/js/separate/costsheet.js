@@ -640,11 +640,21 @@ function bspTaxRecord (taxTag) {
        });
 }
 
-function getTaxPercentage(basicSaleprice, projectSfid, currentTaxRate){
+function getTaxPercentage(basicSaleprice, projectSfid, currentTaxRate, TotalA){
 	try{
 		if(basicSaleprice==null || projectSfid == null || currentTaxRate == null){
 			return 0;
 		}
+		
+		//Added for Project Godrej Royale Woods, bang
+		if(projectSfid == 'a1l2s00000003VlAAI'){
+			if(TotalA>=4500000){
+				return 5;
+			}
+			return 1;
+		}
+		//END Added for Project Godrej Royale Woods, bang
+		
 		if(projectSfid != 'a1l2s00000000X5AAI'){
 			return currentTaxRate;
 		}
@@ -2288,11 +2298,11 @@ function newOtherCharges2 () {
                     //New with Discount 
                     //$('#salesConsideration tbody').append('<tr> <th class="subHead">Discount Total Sales Consideration (A) </th> <th class="txtRight" id="salesConsiderationTotal">'+salesConsiderationV2+'</th>    </tr>');
              
-             
+             var TotalA = parseFloat(parseFloat(salesConsiderationV2)+parseFloat($('#scOtherChrgAmount0').text())).toFixed(2);
              
              //otherChargesGSTTotalV2 = parseInt(otherChargesGSTTotalV2)+parseInt(((bspAmount*2/3)*bspTax)/100);
              //otherChargesGSTTotalV2 = parseInt(otherChargesGSTTotalV2)+parseInt(((finalFlatAmount*2/3)*bspTax)/100);
-             bspTax = getTaxPercentage(finalFlatAmount, $('#projectid').val(), bspTax);
+             bspTax = getTaxPercentage(finalFlatAmount, $('#projectid').val(), bspTax, TotalA);
              $('#bspGSTTax').val(bspTax);
              otherChargesGSTTotalV2 = parseFloat(parseFloat(otherChargesGSTTotalV2)+parseFloat(((finalFlatAmount)*bspTax)/100)).toFixed(2);
              
@@ -2303,13 +2313,13 @@ function newOtherCharges2 () {
              
              
              //Old
-             $('#salesConsideration tbody').append('<tr> <th class="subHead"> Sale Consideration (A) </th> <th class="txtRight salesConsiderationTotalNew" id="salesConsiderationTotal" style="text-align:right;">'+ parseFloat(parseFloat(salesConsiderationV2)+parseFloat($('#scOtherChrgAmount0').text())).toFixed(2) +'</th>    </tr>');
+             $('#salesConsideration tbody').append('<tr> <th class="subHead"> Sale Consideration (A) </th> <th class="txtRight salesConsiderationTotalNew" id="salesConsiderationTotal" style="text-align:right;">'+ TotalA +'</th>    </tr>');
              
              
              
              //-----------------
              
-             $('#printSalesConsideration tbody').append('<tr> <th class="subHead"> Sale Consideration (A) </th> <th class="txtRight" id="salesConsiderationTotal" style="text-align:right;">'+ parseFloat(parseFloat(salesConsiderationV2)+parseFloat($('#scOtherChrgAmount0').text())).toFixed(2) +'</th>    </tr>');
+             $('#printSalesConsideration tbody').append('<tr> <th class="subHead"> Sale Consideration (A) </th> <th class="txtRight" id="salesConsiderationTotal" style="text-align:right;">'+ TotalA +'</th>    </tr>');
              
              
              

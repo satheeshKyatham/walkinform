@@ -131,7 +131,12 @@ function populateEnquiryAndContact(resp){
 		$('#brokerContact').val("");
 		var hasParam=$('#hasParam').val();
 		if(hasParam==="true"){
-		   var enquiryType=$("#hiddenEnquiryType").val();
+			/*Added By Satheesh K - Enquiry Type Blank - 08-06-2020 */ 
+			   var enquiryType="";
+			   if($("#hiddenEnquiryType").val()!=null)
+				   enquiryType="CP";
+			   else
+				   enquiryType=$("#hiddenEnquiryType").val();
 		   $("#isReferredByChannelPartnerRadio"+enquiryType).trigger("click");
 		   hideEnquirySourceByEnquiryType(enquiryType,null);
 		}else{

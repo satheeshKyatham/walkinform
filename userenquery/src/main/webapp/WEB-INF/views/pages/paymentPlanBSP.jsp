@@ -58,6 +58,18 @@
 					<label>Payment Plan</label>
 					<select class="form-control" id="ppDropdown"> </select>
 				</div>
+				
+				
+				<div class="form-group col-md-3">
+					<label>Inventory Category</label>
+					<select class="form-control" id="inventoryCatDD">
+						<option value="All">All</option>
+						<option value="A">A</option>
+						<option value="B">B</option>
+						<option value="C">C</option>
+					</select>
+				</div>
+				
 		    	
 		    	<div class="clearfix"></div>
 		    	

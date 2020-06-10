@@ -66,7 +66,7 @@ public class PaymentPlan implements Serializable{
 
 	@Column(name="d4u_active__c") private boolean  d4u_active__c;
 	@Column(name="wing_block__c") private String  wing_block__c;
-	
+	@Column(name="inventory_category__c") private String  inventory_category__c;
 	
 	/* @Column(name="tower_sfid") private String tower_sfid; */
 	
@@ -300,5 +300,11 @@ public class PaymentPlan implements Serializable{
 	}
 	public void setWing_block__c(String wing_block__c) {
 		this.wing_block__c = wing_block__c;
+	}
+	public String getInventory_category__c() {
+		return inventory_category__c;
+	}
+	public void setInventory_category__c(String inventory_category__c) {
+		this.inventory_category__c = inventory_category__c;
 	}
 }
