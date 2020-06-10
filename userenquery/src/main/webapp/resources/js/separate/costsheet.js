@@ -716,10 +716,23 @@ function paymentPlanOtherCharges (firstRowObj){
                     var finalCA = 0;
                     var POCfinalCA = 0;
                     var taxAmount = 0;
+                   
                     var gstFixed = 0;
+                    var gstFixed1Per = 0;
+                    var gstFixed5Per = 0;
+                    
                     var gstFlexible = 0;
+                    var gstFlexible1Per = 0;
+                    var gstFlexible5Per = 0;
+                    
                     var gstChargeAmount = 0;
+                    var gstChargeAmount1Per = 0;
+                    var gstChargeAmount5Per = 0;
+                    
                     var gstFinal = 0;
+                    var gstFinal1Per = 0;
+                    var gstFinal5Per = 0;
+                    
                     var gstPymtOcTotal = 0;
                     
                     var ocWithBspGst = 0;
@@ -831,6 +844,23 @@ function paymentPlanOtherCharges (firstRowObj){
                                                }
                                         }
                                         
+                                        
+                                        //Added for 45lac condition - 20200610
+                                        if (obj[k].propstrength__part_of_cop__c == true) { 
+                                        	if (obj[k].other_charges_name != "Club Development Charges_1098") {
+                                        		gstFixed1Per = parseFloat (fixed*1/100);
+                                        		gstFixed5Per = parseFloat (fixed*5/100);
+                                        	} else {
+                                        		gstFixed1Per = parseFloat (fixed*ocWithBspGst/100);
+                                        		gstFixed5Per = parseFloat (fixed*ocWithBspGst/100);
+                                        	}
+                                        } else if (obj[k].propstrength__part_of_cop__c == false) {
+                                        		gstFixed1Per = parseFloat (fixed*ocWithBspGst/100);
+                                        		gstFixed5Per = parseFloat (fixed*ocWithBspGst/100);
+                                        }
+                                        //END Added for 45lac condition - 20200610
+                                        
+                                        
                                         if (obj[k].propstrength__sta_applicable__c == true) {
                                                //gstFixed = parseFloat ((fixed*2/3)*ocWithBspGst/100);
                                                gstFixed = parseFloat (fixed*ocWithBspGst/100);
@@ -841,6 +871,8 @@ function paymentPlanOtherCharges (firstRowObj){
                                         //gstFixed = parseInt (fixed*obj[k].sum/100);
                                         
                                         gstChargeAmount = gstFixed+gstChargeAmount;
+                                        gstChargeAmount1Per = gstFixed1Per+gstChargeAmount1Per;
+                                        gstChargeAmount5Per = gstFixed5Per+gstChargeAmount5Per;
                                         
                                  } else if (obj[k].other_charge_type == 'Flexible') {
                                         flexible = (parseFloat(obj[k].propstrength__rate_per_unit_area__c)*(parseFloat($('.a6').text()))*(obj[k].other_charge_percent)/100); 
@@ -944,8 +976,21 @@ function paymentPlanOtherCharges (firstRowObj){
                                                      }
                                                }
                                         }
-                                               
-                                        
+                                            
+                                        //Added for 45lac condition - 20200610
+                                        if (obj[k].propstrength__part_of_cop__c == true) { 
+                                        	if (obj[k].other_charges_name != "Club Development Charges_1098") {
+                                        		gstFlexible1Per = parseFloat (flexible*1/100);
+												gstFlexible5Per = parseFloat (flexible*5/100);
+                                        	} else {
+                                        		gstFlexible1Per = parseFloat (flexible*ocWithBspGst/100);
+												gstFlexible5Per = parseFloat (flexible*ocWithBspGst/100);
+                                        	}
+                                        } else if (obj[k].propstrength__part_of_cop__c == false) {
+                                        		gstFlexible1Per = parseFloat (flexible*ocWithBspGst/100);
+                                        		gstFlexible5Per = parseFloat (flexible*ocWithBspGst/100);
+                                        }
+                                        //END Added for 45lac condition - 20200610
                                         
                                         //gstFlexible = parseInt (flexible*obj[k].sum/100);
                                         
@@ -957,16 +1002,36 @@ function paymentPlanOtherCharges (firstRowObj){
                                         }
                                         
                                         gstChargeAmount = gstFlexible+gstChargeAmount;
+                                        gstChargeAmount1Per = gstFlexible1Per+gstChargeAmount1Per;
+                                        gstChargeAmount5Per = gstFlexible5Per+gstChargeAmount5Per;
                                  }
                                  finalCA = chargeAmount;
                                  POCfinalCA = POCchargeAmount;
+                                 
                                  gstFinal = gstChargeAmount;
+                                 gstFinal1Per = gstChargeAmount1Per;
+                                 gstFinal5Per = gstChargeAmount5Per;
+                                 
                            } else { }
                     }
                     
                     ocPlsBsp =  (($('#flatCostWithDiscount').val())*uniqePPpercent[j])/parseInt(100);
                     
-                    gstPymtOcTotal = parseFloat((gstFinal) + ((ocPlsBsp)*($('#bspGSTTax').val())/100)).toFixed(2);
+                    
+                    
+                    //added for 45lac condition
+                    if($('#projectid').val() == 'a1l2s00000003VlAAI'){
+	       				if($('.salesConsiderationTotalNew').text()>=4500000){
+	       					gstPymtOcTotal = parseFloat((gstFinal5Per) + ((ocPlsBsp)*($('#bspGSTTax').val())/100)).toFixed(2);
+	       				} else {
+	       					gstPymtOcTotal = parseFloat((gstFinal1Per) + ((ocPlsBsp)*($('#bspGSTTax').val())/100)).toFixed(2);
+	       				}
+                    }else {
+                    	gstPymtOcTotal = parseFloat((gstFinal) + ((ocPlsBsp)*($('#bspGSTTax').val())/100)).toFixed(2);
+                    }
+                    //END added for 45lac condition
+                    
+                    //gstPymtOcTotal = parseFloat((gstFinal) + ((ocPlsBsp)*($('#bspGSTTax').val())/100)).toFixed(2);
                     
                     
                     //gstPymtOcTotal = parseFloat((gstFinal) + ((ocPlsBsp*2/3)*($('#bspGSTTax').val())/100)).toFixed(2);
@@ -1404,7 +1469,6 @@ function updateBSP (timeid) {
     		        	  {
     		        	  	kycStatus = obj.issubmitted;
     		        	  }
-    		          debugger;
     		          if(kycStatus!="Y")
 	       			   {
 	   	   				generateKYCLinkViaOffer(event,this,'N',offerJson.offer_sfid);
@@ -1989,6 +2053,8 @@ function newOtherCharges2 () {
        var otherChrgFinalTotal = 0;
        
        var otherChargesGSTTotalV2 = 0;
+       var otherChargesGSTTotal1Per = 0;
+       var otherChargesGSTTotal5Per = 0;
        
        var bspTax = $("#bspGSTTax").val()
        
@@ -2131,17 +2197,27 @@ function newOtherCharges2 () {
                     
                     if (value.propstrength__part_of_cop__c == true) {
                            //otherChrgRowtotal = parseInt(amount*(gstHalf+100)/100);
+                    		if (amount > 0) {
+								
+                    			//Added for 45lac GST condition - 20200609
+								if (value.propstrength__other_charge_code__c != "Club Development Charges") {	
+	                    			otherChargesGSTTotal1Per = parseFloat(parseFloat((amount)*1/100)+parseFloat(otherChargesGSTTotal1Per)).toFixed(2);
+	                    			otherChargesGSTTotal5Per = parseFloat(parseFloat((amount)*5/100)+parseFloat(otherChargesGSTTotal5Per)).toFixed(2);
+								} else {
+									otherChargesGSTTotal1Per = parseFloat(parseFloat((amount)*gstHalf/100)+parseFloat(otherChargesGSTTotal1Per)).toFixed(2);
+									otherChargesGSTTotal5Per = parseFloat(parseFloat((amount)*gstHalf/100)+parseFloat(otherChargesGSTTotal5Per)).toFixed(2);
+								}
+	                    		// END Added for 45lac condition - 20200609
                            
-                           if (amount > 0) {
                                  $('#salesConsideration tbody').append('<tr> <th> '+value.propstrength__other_charge_code__c+' </th> <td class="txtRight" id="salesConsiderationAmount'+i+'" style="text-align:right;"> '+amount+' </td>  </tr>');
                                  $('#printSalesConsideration tbody').append('<tr> <th> '+value.propstrength__other_charge_code__c+' </th> <td class="txtRight" id="salesConsiderationAmount'+i+'" style="text-align:right;"> '+amount+' </td>  </tr>');
                                  salesConsiderationV2 = parseFloat(parseFloat($("#salesConsiderationAmount"+i).text()) + parseFloat(salesConsiderationV2)).toFixed(2);
                            } 
-                           
-                           
-                           
                     } else if (value.propstrength__part_of_cop__c == false) {
-                           //otherChrgRowtotal = parseInt(amount*(gstHalf+100)/100);
+	                    	otherChargesGSTTotal1Per = parseFloat(parseFloat((amount)*gstHalf/100)+parseFloat(otherChargesGSTTotal1Per)).toFixed(2);
+							otherChargesGSTTotal5Per = parseFloat(parseFloat((amount)*gstHalf/100)+parseFloat(otherChargesGSTTotal5Per)).toFixed(2);
+                    	
+                    		//otherChrgRowtotal = parseInt(amount*(gstHalf+100)/100);
                     		$('#tentativeCharges tbody').append('<tr> <th> '+value.propstrength__other_charge_code__c+' </th> <td class="txtRight" id="tentativeChargesAmount'+i+'" style="text-align:right;"> '+amount+' </td>  </tr>');
                            $('#printTentativeCharges tbody').append('<tr> <th> '+value.propstrength__other_charge_code__c+' </th> <td class="txtRight" id="tentativeChargesAmount'+i+'" style="text-align:right;"> '+amount+' </td>  </tr>');
                            tentativeChargesV2 = parseFloat(parseFloat($("#tentativeChargesAmount"+i).text()) + parseFloat(tentativeChargesV2)).toFixed(2);
@@ -2304,8 +2380,22 @@ function newOtherCharges2 () {
              //otherChargesGSTTotalV2 = parseInt(otherChargesGSTTotalV2)+parseInt(((finalFlatAmount*2/3)*bspTax)/100);
              bspTax = getTaxPercentage(finalFlatAmount, $('#projectid').val(), bspTax, TotalA);
              $('#bspGSTTax').val(bspTax);
-             otherChargesGSTTotalV2 = parseFloat(parseFloat(otherChargesGSTTotalV2)+parseFloat(((finalFlatAmount)*bspTax)/100)).toFixed(2);
              
+             var GSTDefault = parseFloat(parseFloat(otherChargesGSTTotalV2)+parseFloat(((finalFlatAmount)*bspTax)/100)).toFixed(2);
+             var GST1Per = parseFloat(parseFloat(otherChargesGSTTotal1Per)+parseFloat(((finalFlatAmount)*bspTax)/100)).toFixed(2);
+             var GST5Per = parseFloat(parseFloat(otherChargesGSTTotal5Per)+parseFloat(((finalFlatAmount)*bspTax)/100)).toFixed(2);
+             
+             //added for 45lac condition
+             if($('#projectid').val() == 'a1l2s00000003VlAAI'){
+				if(TotalA>=4500000){
+					otherChargesGSTTotalV2 = GST5Per;
+				} else {
+					otherChargesGSTTotalV2 = GST1Per;
+				}
+             }	else {
+            	 otherChargesGSTTotalV2 = GSTDefault;
+             }
+             //END added for 45lac condition
              
               //$('#flatCostWithDiscount').val(parseFloat(parseFloat(salesConsiderationV2)+parseFloat($('#scOtherChrgAmount0').text())));
              
