@@ -640,7 +640,7 @@ function bspTaxRecord (taxTag) {
        });
 }
 
-function getTaxPercentage(basicSaleprice, projectSfid, currentTaxRate, TotalA){
+function getTaxPercentage(basicSaleprice, projectSfid, currentTaxRate, TotalA, reraCarpetSqm){
 	try{
 		if(basicSaleprice==null || projectSfid == null || currentTaxRate == null){
 			return 0;
@@ -648,7 +648,7 @@ function getTaxPercentage(basicSaleprice, projectSfid, currentTaxRate, TotalA){
 		
 		//Added for Project Godrej Royale Woods, bang
 		if(projectSfid == 'a1l2s00000003VlAAI'){
-			if(TotalA>=4500000){
+			if(TotalA>=4500000 || reraCarpetSqm >= 60){
 				return 5;
 			}
 			return 1;
@@ -1021,7 +1021,7 @@ function paymentPlanOtherCharges (firstRowObj){
                     
                     //added for 45lac condition
                     if($('#projectid').val() == 'a1l2s00000003VlAAI'){
-	       				if($('.salesConsiderationTotalNew').text()>=4500000){
+	       				if($('.salesConsiderationTotalNew').text()>=4500000  || $('#carpetSqm').text() >= 60){
 	       					gstPymtOcTotal = parseFloat((gstFinal5Per) + ((ocPlsBsp)*($('#bspGSTTax').val())/100)).toFixed(2);
 	       				} else {
 	       					gstPymtOcTotal = parseFloat((gstFinal1Per) + ((ocPlsBsp)*($('#bspGSTTax').val())/100)).toFixed(2);
@@ -2378,7 +2378,7 @@ function newOtherCharges2 () {
              
              //otherChargesGSTTotalV2 = parseInt(otherChargesGSTTotalV2)+parseInt(((bspAmount*2/3)*bspTax)/100);
              //otherChargesGSTTotalV2 = parseInt(otherChargesGSTTotalV2)+parseInt(((finalFlatAmount*2/3)*bspTax)/100);
-             bspTax = getTaxPercentage(finalFlatAmount, $('#projectid').val(), bspTax, TotalA);
+             bspTax = getTaxPercentage(finalFlatAmount, $('#projectid').val(), bspTax, TotalA, $('#carpetSqm').text());
              $('#bspGSTTax').val(bspTax);
              
              var GSTDefault = parseFloat(parseFloat(otherChargesGSTTotalV2)+parseFloat(((finalFlatAmount)*bspTax)/100)).toFixed(2);
@@ -2387,7 +2387,7 @@ function newOtherCharges2 () {
              
              //added for 45lac condition
              if($('#projectid').val() == 'a1l2s00000003VlAAI'){
-				if(TotalA>=4500000){
+				if(TotalA>=4500000 || $('#carpetSqm').text() >= 60){
 					otherChargesGSTTotalV2 = GST5Per;
 				} else {
 					otherChargesGSTTotalV2 = GST1Per;
