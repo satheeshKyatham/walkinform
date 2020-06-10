@@ -1131,10 +1131,12 @@ function paymentPlanOtherCharges (firstRowObj){
              
              
              
-             if ( $('#projectId').val() == 'a1l6F0000047Q1xQAE' && $('#stamp_duty').text() == 0 && $('#registrationCharges').text() == 0) {
+             /*if ( $('#projectId').val() == 'a1l6F0000047Q1xQAE' && $('#stamp_duty').text() == 0 && $('#registrationCharges').text() == 0) {
                    $('.payableStampAndReg').remove();
+             }*/
+             if ($('#stamp_duty').text() == 0 && $('#registrationCharges').text() == 0) {
+            	 $('.payableStampAndReg').remove();
              }
-             
              
              
              if ($('#projectId').val() == 'a1l2s00000000pEAAQ' || $('#projectId').val() == 'a1l6F000004LVk8QAG' || $('#region__c').val() == "Noida" || $('#region__c').val() == "Gurgaon"  ||  $('#region__c').val() == "New Delhi" ) {
