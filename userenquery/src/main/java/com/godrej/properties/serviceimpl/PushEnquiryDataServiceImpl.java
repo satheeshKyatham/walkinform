@@ -3,6 +3,8 @@ package com.godrej.properties.serviceimpl;
 import java.util.Date;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,7 +19,7 @@ import com.godrej.properties.service.PushEnquiryDataService;
 @Service("pushEnqService")
 @Transactional
 public class PushEnquiryDataServiceImpl  implements PushEnquiryDataService{
-
+	private Logger log = LoggerFactory.getLogger(getClass());
 	@Autowired
 	private PushEnquiryDataDao pushEnquiryDataDao;
 	
@@ -35,9 +37,9 @@ public class PushEnquiryDataServiceImpl  implements PushEnquiryDataService{
 			return null;
 		}
 		Enquiry enq=enquiryConverter.dtoToEntity(dto);
-		System.out.println("enquiry insert query started :"+new Date());
+		log.info("enquiry insert query started :{}",new Date());
 		enq=insertInputEnquiry(enq);
-		System.out.println("enquiry insert query ended :"+new Date());
+		log.info("enquiry insert query ended :{}",new Date());
 		return enquiryConverter.entityToDto(enq);
 	}
 
@@ -76,7 +78,7 @@ public class PushEnquiryDataServiceImpl  implements PushEnquiryDataService{
 	@Override
 	public List<EnquiryDto> getEnquiriesByMobileNo(String countryCode,String mobileNo, String projectSfid,String userid) {
 		List<Enquiry> enq=pushEnquiryDataDao.getEnquiriesByMobileNoAndProject(countryCode,mobileNo,projectSfid,userid);
-		System.out.println("Enquiry END="+new Date());
+		log.info("Enquiry END={}",new Date());
 		return enquiryConverter.entityToDto(enq);
 	}
 	@Override
@@ -162,7 +164,7 @@ public class PushEnquiryDataServiceImpl  implements PushEnquiryDataService{
 	@Override
 	public List<EnquiryDto> getEnquiriesByCPAppWithParam(String custname,String countryCode,String mobileno,String projectsfid,String emailid) {
 		List<Enquiry> enq=pushEnquiryDataDao.getEnquiriesByCPAppWithParam(custname,countryCode,mobileno,projectsfid,emailid);
-		System.out.println("Enquiry END="+new Date());
+		log.info("Enquiry END={}",new Date());
 		return enquiryConverter.entityToDto(enq);
 	}
 

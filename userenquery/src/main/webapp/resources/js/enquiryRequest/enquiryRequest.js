@@ -275,8 +275,13 @@ function populateBasicInfo(enq,contact){
 			if(cpHS!=null && cpHS!=""){
 			   $('label[labelName="isReferredByChannelPartner"][value="'+cpHS+'"]').trigger("click");
 			   hideEnquirySourceByEnquiryType(cpHS,null);
-			}else{
+			}
+			else if(cpHS=="NSP"){
+				hideEnquirySourceByEnquiryType(null,enq);
 				
+			}
+			else{
+			
 				if(!isEmpty(channelPartner) && !isEmpty(brokerContact) && enq.isReferredByChannelPartner==='Partner'){
 					 $("#isReferredByChannelPartnerRadioCP").trigger("click");
 				}else if(enq.isReferredByChannelPartner==='Direct' && !isEmpty(enq.walkInSource)){
@@ -798,7 +803,8 @@ function hideEnquirySourceByEnquiryType(enquiryTypeCode,enq){
   }else if(!isEmpty(enq)){
 	    var channelPartner=enq.channelPartner;
 		var brokerContact=enq.brokerContact;
-	    if(!isEmpty(channelPartner) && !isEmpty(brokerContact) && enq.isReferredByChannelPartner==='Partner'){
+		 /* Changed by Satheesh K - Date : 10-06-2020 - Requested By: Prakash Idnani - Comments: Source protection Change for Enquiry Source to Walk-in Source*/
+	    /*if(!isEmpty(channelPartner) && !isEmpty(brokerContact) && enq.isReferredByChannelPartner==='Partner'){
 		    $(".hideDirectType").hide();
 			$(".hideChannelPartnerType").show();
 			$("#enquirySourceTextDiv").show();
@@ -807,9 +813,28 @@ function hideEnquirySourceByEnquiryType(enquiryTypeCode,enq){
 			if($("#isReferredByChannelPartnerInput").val()!="Direct"){
 				isReferredChanged("D");
 			}
-			$(".hideDirectType").hide();/*$(".hideDirectType").show();*/
+			$(".hideDirectType").hide();$(".hideDirectType").show();
 			$("#enquirySourceTextDiv").hide();
 		}else if(enq.isReferredByChannelPartner==='Partner' && !isEmpty(enq.otherChannelPartner)){
+			$(".hideDirectType").hide();
+			$(".hideChannelPartnerType").show();
+			$("#enquirySourceTextDiv").show();
+	    }*/
+		
+		if(!isEmpty(channelPartner) && !isEmpty(brokerContact) && enq.walkInSource==='Channel Partner'){
+		    $(".hideDirectType").hide();
+			$(".hideChannelPartnerType").show();
+			$("#enquirySourceTextDiv").show();
+		}else if((enq.walkInSource==='Digital' || enq.walkInSource==='Exhibition' || enq.walkInSource==='Newspaper' || enq.walkInSource==='Hoarding' || enq.walkInSource==='Radio' || enq.walkInSource==='Word of mouth' 
+			|| enq.walkInSource==='SMS' || enq.walkInSource==='Referral' || enq.walkInSource==='Godrej Employee' || enq.walkInSource==='Corporate' || enq.walkInSource==='Existing Customer' || enq.walkInSource==='Other BTL activities'	
+		) && !isEmpty(enq.walkInSource)){
+			$(".hideChannelPartnerType").hide();
+			if($("#isReferredByChannelPartnerInput").val()!="Direct"){
+				isReferredChanged("D");
+			}
+			$(".hideDirectType").hide();/*$(".hideDirectType").show();*/
+			$("#enquirySourceTextDiv").hide();
+		}else if(enq.walkInSource==='Channel Partner' && !isEmpty(enq.otherChannelPartner)){
 			$(".hideDirectType").hide();
 			$(".hideChannelPartnerType").show();
 			$("#enquirySourceTextDiv").show();

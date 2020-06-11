@@ -182,7 +182,8 @@ public class EnquiryConverter implements CommonConverter<Enquiry, EnquiryDto>{
 			dto.setSourcing_Team_Lead__c(entity.getSourcing_Team_Lead__c());
 			dto.setSourcing_Team_Lead_email(tokenService.getSalesUserEmailID(entity.getEnquiryId(), entity.getSourcing_Team_Lead__c()));
 		}
-		
+		if(entity.getVirtual_meeting_count__c()!=null)
+			dto.setVirtual_meeting_count__c(entity.getVirtual_meeting_count__c());
 		return dto;
 	}
 
