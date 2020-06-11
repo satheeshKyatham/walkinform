@@ -51,7 +51,7 @@ public class BSPAgainstPymtPlanServiceImpl implements BSPAgainstPymtPlanService{
 						inventory_category = "All";
 					}
 					
-					if(payBSP.getTowerid().contains(towerCode) && payBSP.getTypology().contains(typology) && (payBSP.getInventory_category().contains(inventory_category)))
+					if(payBSP.getTowerid().equals(towerCode) && payBSP.getTypology().equals(typology) && (payBSP.getInventory_category().equals(inventory_category)))
 					{
 						valueCheck =true;
 						return bspAmountReturn=Double.parseDouble(payBSPList.get(i).getBsp_amount());
@@ -70,7 +70,7 @@ public class BSPAgainstPymtPlanServiceImpl implements BSPAgainstPymtPlanService{
 							inventory_category = "All";
 						}
 						
-						if((payBSP.getTowerid().contains(towerCode)) && (payBSP.getTypology().trim().length()<=0)  && (payBSP.getInventory_category().contains(inventory_category)))
+						if((payBSP.getTowerid().equals(towerCode)) && (payBSP.getTypology().trim().length()<=0)  && (payBSP.getInventory_category().equals(inventory_category)))
 						{
 							valueCheck =true;
 							return bspAmountReturn=Double.parseDouble(payBSPList.get(i).getBsp_amount());
@@ -91,7 +91,7 @@ public class BSPAgainstPymtPlanServiceImpl implements BSPAgainstPymtPlanService{
 							inventory_category = "All";
 						}
 						
-						if( (payBSP.getPymt_plan_id().contains(paymentPlanID)) && (payBSP.getTowerid()==null) && (payBSP.getTypology()==null) && (payBSP.getInventory_category().contains(inventory_category)))
+						if( (payBSP.getPymt_plan_id().equals(paymentPlanID)) && (payBSP.getTowerid()==null) && (payBSP.getTypology()==null) && (payBSP.getInventory_category().equals(inventory_category)))
 						{
 							valueCheck =true;
 							
@@ -134,7 +134,7 @@ public class BSPAgainstPymtPlanServiceImpl implements BSPAgainstPymtPlanService{
 						inventory_category = "All";
 					}
 					
-					if(payBSP.getTowerid().contains(towerCode) && payBSP.getTypology().contains(typology) && (payBSP.getInventory_category().contains(inventory_category)) )
+					if(payBSP.getTowerid().equals(towerCode) && payBSP.getTypology().equals(typology) && (payBSP.getInventory_category().equals(inventory_category)) )
 					{
 						valueCheck =true;
 						return bspPerReturn=payBSPList.get(i).getBsp_per();
@@ -153,7 +153,7 @@ public class BSPAgainstPymtPlanServiceImpl implements BSPAgainstPymtPlanService{
 							inventory_category = "All";
 						}
 						
-						if((payBSP.getTowerid().contains(towerCode)) && (payBSP.getTypology().trim().length()<=0) && (payBSP.getInventory_category().contains(inventory_category)))
+						if((payBSP.getTowerid().equals(towerCode)) && (payBSP.getTypology().trim().length()<=0) && (payBSP.getInventory_category().equals(inventory_category)))
 						{
 							valueCheck =true;
 							return bspPerReturn=payBSPList.get(i).getBsp_per();
@@ -174,7 +174,7 @@ public class BSPAgainstPymtPlanServiceImpl implements BSPAgainstPymtPlanService{
 							inventory_category = "All";
 						}
 						
-						if( (payBSP.getPymt_plan_id().contains(paymentPlanID)) && (payBSP.getTowerid()==null) && (payBSP.getTypology()==null)  && (payBSP.getInventory_category().contains(inventory_category)))
+						if( (payBSP.getPymt_plan_id().equals(paymentPlanID)) && (payBSP.getTowerid()==null) && (payBSP.getTypology()==null)  && (payBSP.getInventory_category().equals(inventory_category)))
 						{
 							valueCheck =true;
 							

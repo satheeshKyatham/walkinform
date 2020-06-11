@@ -308,9 +308,10 @@
 								<li>
 									<label>Saleable Area <small>(in square feet)</small></label> <span>: </span><span class="a6"></span>
 								</li>
+								<li><!-- Added By Satheesh K - Date : 10-06-2020 - Property Name Added on Cost sheet Page -->
+									<label>Unit No.</label> <span>: </span><span class="unit_property_name"></span>
+								</li>
 							</ul>
-							
-							
 							
 							<div class="clearfix"></div>
 						</div>	

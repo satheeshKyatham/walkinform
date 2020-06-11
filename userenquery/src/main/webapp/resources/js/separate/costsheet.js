@@ -343,8 +343,8 @@ function loadData (csSource) {
                            $('.balTerSqm').text(value.appurtenant_area_sq_mt__c);
                            $('#unitTval').text(value.ID);
                            $('.unitTval').text(value.ID);
-                           
-                           
+                           /*Added By Satheesh K - Date : 10-06-2020 - Property Name Added on Cost sheet Page*/
+                           $('.unit_property_name').text(value.propstrength__property_name__c);
                            
                            if (value.wing_block__c != undefined) {
                         	   wing = value.wing_block__c;
@@ -1725,7 +1725,7 @@ function otpRequestOC(){
        }*/
        
        $("#offerOPTInfo").empty();
-       
+
        $.post(pageContext+"sendForApproval", {
 	        "actionAR":"Y", 
 	        "timeid":$("#timeid").val(),
@@ -1735,7 +1735,10 @@ function otpRequestOC(){
 	        "towerName":$('#towerTval').text(),
 	        "projectsfid":$('#projectSfid').val(),
 	        "herokuEnqId":$('.enquiryId').val(),
-	        "userName":$('#username').val().split(' ')[0]
+	        "userName":$('#username').val().split(' ')[0], /*Added By Satheesh K - Date : 10-06-2020 - Property Name Added on Cost sheet Page*/
+	        "salesConA":$('.salesConsiderationTotalNew').text(),
+	        "projectname":$("#projectname").val(),
+	        "propertyname":$(".unit_property_name").text()
 	        
 	        },function(data){                       
 	        

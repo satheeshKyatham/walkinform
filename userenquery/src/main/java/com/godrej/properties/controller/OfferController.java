@@ -98,6 +98,7 @@ public class OfferController {
 			,@RequestParam("price") Double price
 			,@RequestParam("priceWithTax") Double priceWithTax
 			,@RequestParam("tokenTax") Double tokenTax
+			,@RequestParam("reraCarpetAreaSqm") double reraCarpetAreaSqm
 			) throws JRException, IOException {
 		
 
@@ -227,8 +228,8 @@ public class OfferController {
 					 
 					//Update offer created flag in sfdc property table through HEROKU
 					if((offerid!=null && offerid.length()==18)) {
-						if("a1l2s00000000X5AAI".equals(projectsfid)) {
-							boolean isPMAY = isUnderPMAY(offerid, projectsfid,salesConsiderationTotal );
+						if("a1l2s00000000X5AAI".equals(projectsfid) || "a1l2s00000003VlAAI".equals(projectsfid)) {
+							boolean isPMAY = isUnderPMAY(offerid, projectsfid,salesConsiderationTotal, reraCarpetAreaSqm);
 							propOtherChargesService.updatePropertyStatus(propid, isPMAY);
 						}
 						else {
@@ -282,7 +283,7 @@ public class OfferController {
 		
 	}
 	
-	private boolean isUnderPMAY(String offerId, String projectSfid, double basicSalePrice) {
-		return (offerId!=null && offerId.length()==18 && "a1l2s00000000X5AAI".equals(projectSfid) && basicSalePrice <=4500000) ;
+	private boolean isUnderPMAY(String offerId, String projectSfid, double basicSalePrice, double reraCarpetAreaSqm) {
+		return (offerId!=null && offerId.length()==18 && basicSalePrice < 4500000  &&  reraCarpetAreaSqm < 60  &&  ("a1l2s00000000X5AAI".equals(projectSfid) || "a1l2s00000003VlAAI".equals(projectSfid))  ) ;
 	}
 }

@@ -106,7 +106,6 @@ public class PushEnquiryDataDaoImpl  extends AAbstractDao<Enquiry> implements Pu
 	@Override
 	public List<Enquiry> getEnquiriesByMobileNoAndProject(String countryCode,String mobileNo, String projectSfid,String userid) {
 		StringBuilder jpql=new StringBuilder();
-		System.out.println("Enquiry start="+new Date());
 		jpql.append(" SELECT e FROM Enquiry e ")
 		.append(" INNER JOIN FETCH e.contactId c ")
 		.append(" LEFT JOIN FETCH c.contactReport ccr ")
@@ -122,7 +121,8 @@ public class PushEnquiryDataDaoImpl  extends AAbstractDao<Enquiry> implements Pu
 		.append(" WHERE c.mobile=:mobile ")
 		.append(" AND c.countryCode=:countryCode ")
 		//.append(" AND e.eoi_enquiry__c=:eoi_enquiry__c ")
-		.append(" AND p.sfid=:projectSfid  ORDER BY e.dateOfEnquiry desc");
+		.append(" AND p.sfid=:projectSfid  ")
+		.append(" and (Date(now())-Date(e.lastModifiedDate))<60  ORDER BY e.dateOfEnquiry asc");//(Date(now())-Date(e.dateOfEnquiry))<90 and//desc and Date(Date_of_Site_Visit__c)='2020-05-12'
 		// .append(" ORDER BY to_char(e.lastModifiedDate,'yyyy-MM-dd hh24:')"); //and e.lastModifiedDate is not null 
 		/*.append(" AND (c.recordType='"+KeyConstants.RECORD_TYPE_PROSPECT+"'")*/
 		/*.append(" OR (c.recordType='"+KeyConstants.RECORD_TYPE_CUSTOMER+"'");*/
@@ -422,7 +422,6 @@ public class PushEnquiryDataDaoImpl  extends AAbstractDao<Enquiry> implements Pu
 	public List<Enquiry> getEnquiriesByMobileNoAndProjectEOI(String countryCode,String mobileNo, String projectSfid) {
 
 		StringBuilder jpql=new StringBuilder();
-		System.out.println("Enquiry start="+new Date());
 		jpql.append(" SELECT e FROM Enquiry e ")
 		.append(" INNER JOIN FETCH e.contact c ")
 		.append(" LEFT JOIN FETCH c.contactReport ccr ")
@@ -464,7 +463,6 @@ public class PushEnquiryDataDaoImpl  extends AAbstractDao<Enquiry> implements Pu
 	public List<Enquiry> getEnquiriesByCPAppWithParam(String custname, String countryCode,String mobileno, String projectsfid,
 			String emailid) {
 		StringBuilder jpql=new StringBuilder();
-		System.out.println("Enquiry start="+new Date());
 		jpql.append(" SELECT e FROM Enquiry e ")
 		.append(" INNER JOIN FETCH e.contactId c ")
 		.append(" LEFT JOIN FETCH c.contactReport ccr ")

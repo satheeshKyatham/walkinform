@@ -14,6 +14,8 @@ import java.util.List;
 
 import javax.persistence.Column;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,7 +40,7 @@ import com.godrej.properties.util.DateUtil;
 
 @Service
 public class EnquiryRequestServiceImpl implements EnquiryRequestService {
-
+	private Logger log = LoggerFactory.getLogger(getClass());
 	@Autowired
 	private PushEnquiryDataService pushEnquiryDataService;
 	
@@ -69,7 +71,7 @@ public class EnquiryRequestServiceImpl implements EnquiryRequestService {
 			if(null==contact.getContactReport().getContactId()){
 				contactReportService.updateById(contact);
 			}			
-			System.out.println("contact insert query ended :"+new Date());
+			log.info("contact insert query ended {}",new Date());
 			dto.setContact(contact);
 			dto.setContactId(contact);
 		}else{
@@ -274,7 +276,7 @@ public class EnquiryRequestServiceImpl implements EnquiryRequestService {
 		contactDest.setAddressLine2(add2);
 		contactDest.setAddressLine3(add3);
 		contactDest.setResidenceFullAddress(add1+add2+add3+addressData.getContact().getCity()+addressData.getContact().getResidentialState()+" "+addressData.getContact().getResidentialCountry());
-		System.out.println("Country Name233:"+addressData.getContact().getCountry());
+		log.info("Country Name233: {}",addressData.getContact().getCountry());
 		Country country = countryDao.getCountryData(addressData.getContact().getCountryCode());
 		if(country!=null)
 			contactDest.setMailingCountry(country.getName().toString());//
@@ -464,10 +466,7 @@ public class EnquiryRequestServiceImpl implements EnquiryRequestService {
 				dest.setFollow_up_reason__c(src.getEnquiryReport().getFollowType());
 		}
 		if(src.getEnquiryReport().getFollowDate()!=null)
-		{
-			
-			dest.setFollow_up_Date_Time__c(DateUtil.getUKDateTime(src.getEnquiryReport().getFollowDate()));
-		}
+			dest.setFollow_up_Date_Time__c(src.getEnquiryReport().getFollowDate());
 		/*=========End========*/
 		/* Selected Sourcing Manager and Vertical value are pushing to Enquiry Object and Display, -  
 	     * Change By - Satheesh Kyatham- 27-12-2019
@@ -554,6 +553,8 @@ public class EnquiryRequestServiceImpl implements EnquiryRequestService {
 	public List<EnquiryDto> getEnquiriesByMobileNo(String countryCode,String mobileNo,String projectSfid,String userid) {
 //		 1)Get all Enquiries basis on mobile no and project SFid
 		
+			String contact_Str="CONTACT";
+			String enquiry_Str="ENQUIRY";
 			List<EnquiryDto> enquiryList=pushEnquiryDataService.getEnquiriesByMobileNo(countryCode,mobileNo,projectSfid,userid);
 			List<EnquiryDto> enquiries=new ArrayList<>();
 			
@@ -568,7 +569,7 @@ public class EnquiryRequestServiceImpl implements EnquiryRequestService {
 				for(EnquiryDto enquiry:enquiryList){
 					
 					enquiry.setContact(enquiry.getContactId());
-					int lastModifyDays=DateUtil.getDays(enquiry.getLastModifiedDate(),new Date());
+					//int lastModifyDays=DateUtil.getDays(enquiry.getLastModifiedDate(),new Date());
 				    int siteVisitDays=DateUtil.getDays(enquiry.getDateOfSiteVisit(),new Date());
 				   
 				    if(enquiry.getSite_Visit_Done__c()==null)
@@ -585,21 +586,149 @@ public class EnquiryRequestServiceImpl implements EnquiryRequestService {
 				    }
 				    //
 					if((enquiry.getSite_Visit_Done__c()>0 || enquiry.getAppointment_Done__c()>0 || enquiry.getVirtual_meeting_count__c()>0) 
-							&& siteVisitDays < KeyConstants.SITE_VISIT_DAYS_LIMIT && lastModifyDays < KeyConstants.LAST_MODIFY_DAYS_LIMIT)
+							&& siteVisitDays < KeyConstants.SITE_VISIT_DAYS_LIMIT)//&& lastModifyDays < KeyConstants.LAST_MODIFY_DAYS_LIMIT
 					{
 						enquiries.add(enquiry);
 					}
 					/* Changes By - Satheesh K   -- Requested By : Prakash Idnani
 					 * Changes done on - 24-12-2019 -- Request from Business to resolve multiple enquiry creation.*/ 
-					else if(lastModifyDays < KeyConstants.LAST_MODIFY_DAYS_LIMIT_45) //PropStrength__Request_Status__c 
+					/* Commented by - Satheesh K  -- Requested By : Prakash Idnani
+					 * Commented on - 19-05-2020 -- Request from Vaibhav comment code*/
+					/*else if(lastModifyDays < KeyConstants.LAST_MODIFY_DAYS_LIMIT_45) //PropStrength__Request_Status__c 
 					{
 						enquiries.add(enquiry);
-					}
+					}*/
 				}
 				//4) If 3) gives 0 results then latest enquires checked for Appointment propsed and site visit requested counter >0
+				//4.	if enquiries==0, check array enquiryList, if enquiryList==0, D4U allows to create new Enquiry, else check enquiryList (Only case for New Enquiry creation)
+				// No source Protection 
 				if(enquiries.size()==0)
 				{
-					EnquiryDto enquiry = enquiryList.get(0);
+					List<EnquiryDto> enquiriesStTrue=new ArrayList<>();
+					List<EnquiryDto> enquiriesStSort0=new ArrayList<>();
+					for( EnquiryDto enqSort: enquiryList)
+					{
+						if(enqSort.getEoi_enquiry__c())
+						{
+							enquiriesStTrue.add(enqSort);
+						}
+						else
+						{
+							enquiriesStSort0.add(enqSort);
+						}
+					}
+					if(enquiriesStTrue.size()>0)//if(Eoi_enquiry__c()==true), selects oldest Enquiry by dateOfEnquiry
+					{
+						enquiriesStTrue.sort(Comparator.comparing(EnquiryDto::getDateOfEnquiry));
+						EnquiryDto enquiry = enquiriesStTrue.get(0);
+						if(KeyConstants.RECORD_TYPE_CUSTOMER.equals(enquiry.getContact().getRecordType())){
+							enquiry.getContact().setHasError(true);
+							name ="Cannot edit customer details and ";
+						}
+						enquiry.setHasError(true);
+						//enquiry.setNonEdit(enquiry_Str);						
+						enquiry.setMessage("Scenario 5:"+name+"Walk-in source can be editable");
+						//enquiry.setIsReferredByChannelPartner("");
+						enquiry.setIsReferredByChannelPartnerFlag("NSP");
+						enquiries.add(enquiry);						
+						log.info("Scenario 5: {}Walk-in source can be editable",name);
+						
+					}
+					else if(enquiriesStSort0.size()>0)
+					{
+						List<EnquiryDto> enquiriesStAssignedSL=new ArrayList<>();
+						List<EnquiryDto> enquiriesStVisit=new ArrayList<>();
+						for(EnquiryDto enquiry : enquiriesStSort0)
+						{
+							if(enquiry.getSite_visit_requested__c()==null)
+						    {
+						    	enquiry.setSite_visit_requested__c(0.0);
+						    }
+							if(enquiry.getAppointment__c()==null)
+						    {
+						    	enquiry.setAppointment__c(0.0);
+						    }
+							if((enquiry.getSite_visit_requested__c()>0 || enquiry.getAppointment__c()>0))
+							{
+								enquiriesStVisit.add(enquiry);
+							}
+							else if(enquiry.getEnquiryStatus().equals(KeyConstants.ENQUIRY_STATUS_FOR_ASSINED_SALES))
+							{
+								enquiriesStAssignedSL.add(enquiry);
+							}
+									
+						}
+						if(enquiriesStVisit.size()>0)
+						{
+							
+							enquiriesStVisit.sort(Comparator.comparing(EnquiryDto::getDateOfEnquiry));
+							EnquiryDto enquiry = enquiriesStVisit.get(0);
+							
+							if(KeyConstants.RECORD_TYPE_CUSTOMER.equals(enquiry.getContact().getRecordType())){
+								enquiry.getContact().setHasError(true);
+								name ="Cannot edit customer details and ";
+							}
+							
+							enquiry.setHasError(true);
+							//enquiry.setNonEdit(enquiry_Str);						
+							enquiry.setMessage("Scenario 6:"+name+"Walk-in source can be editable");
+							/*enquiry.setIsReferredByChannelPartner("");*/
+							enquiry.setIsReferredByChannelPartnerFlag("NSP");
+							enquiries.add(enquiry);						
+							log.info("Scenario 6: {}Walk-in source can be editable ",name);
+						}
+						else if(enquiriesStAssignedSL.size()>0)
+						{
+							enquiriesStAssignedSL.sort(Comparator.comparing(EnquiryDto::getDateOfEnquiry));
+							EnquiryDto enquiry = enquiriesStAssignedSL.get(0);
+							if(KeyConstants.RECORD_TYPE_CUSTOMER.equals(enquiry.getContact().getRecordType())){
+								enquiry.getContact().setHasError(true);
+								name ="Cannot edit customer details and";
+							}
+							enquiry.setHasError(true);
+							//enquiry.setNonEdit(enquiry_Str);						
+							enquiry.setMessage("Scenario 7:"+name+"Walk-in source can be editable");
+							//enquiry.setIsReferredByChannelPartner(enquiry.getIsReferredByChannelPartner());
+							enquiry.setIsReferredByChannelPartnerFlag("NSP");
+							enquiries.add(enquiry);						
+							log.info("Scenario 7: {}Walk-in source can be editable",name);
+							
+						}
+						/*EnquiryDto enquiry = enquiriesStSort0.get(0);
+						if((enquiry.getSite_visit_requested__c()>0 || enquiry.getAppointment__c()>0))//else if((Site_visit_requested__c()>0 || Appointment__c()>0) , selects oldest Enquiry by dateOfEnquiry
+						{
+							enquiry.setHasError(true);
+							//enquiry.setNonEdit("ENQUIRY");						
+							enquiry.setMessage("Scenario 6: "+name+"Edit existing enquiry details");
+							enquiry.setIsReferredByChannelPartner("");
+							enquiry.setIsReferredByChannelPartnerFlag("");
+							enquiries.add(enquiry);						
+							log.info("Scenario 6: {} Edit existing enquiry details",name);
+						}
+						else
+						{
+							
+						}*/
+						
+					}
+					else
+					{
+						enquiryList.sort(Comparator.comparing(EnquiryDto::getDateOfEnquiry));
+						EnquiryDto enquiry = enquiryList.get(0);
+						if(KeyConstants.RECORD_TYPE_CUSTOMER.equals(enquiry.getContact().getRecordType())){
+							enquiry.getContact().setHasError(true);
+							name ="Cannot edit customer details and ";
+						}
+						enquiry.setHasError(true);
+						//enquiry.setNonEdit(enquiry_Str);						
+						enquiry.setMessage("Scenario 8:"+name+"Walk-in source can be editable");
+						//enquiry.setIsReferredByChannelPartner("");
+						enquiry.setIsReferredByChannelPartnerFlag("NSP");
+						enquiries.add(enquiry);						
+						log.info("Scenario 8: {}Walk-in source can be editable",name);
+					}
+					
+					/*EnquiryDto enquiry = enquiryList.get(0);
 					if(KeyConstants.RECORD_TYPE_CUSTOMER.equals(enquiry.getContact().getRecordType())){
 						enquiry.getContact().setHasError(true);
 						name ="Cannot edit customer details & ";
@@ -612,7 +741,7 @@ public class EnquiryRequestServiceImpl implements EnquiryRequestService {
 				    {
 				    	enquiry.setAppointment__c(0.0);
 				    }
-					if((enquiry.getSite_visit_requested__c()>0 || enquiry.getAppointment__c()>0 || enquiry.getEoi_enquiry__c()==true) && enquiry.getSite_Visit_Done__c()==0 && enquiry.getAppointment_Done__c()==0 )
+					if((enquiry.getSite_visit_requested__c()>0 || enquiry.getAppointment__c()>0 || enquiry.getEoi_enquiry__c()==true))//&& enquiry.getSite_Visit_Done__c()==0 && enquiry.getAppointment_Done__c()==0
 					{
 						enquiry.setHasError(true);
 						//enquiry.setNonEdit("ENQUIRY");						
@@ -620,16 +749,16 @@ public class EnquiryRequestServiceImpl implements EnquiryRequestService {
 						enquiry.setIsReferredByChannelPartner("");
 						enquiry.setIsReferredByChannelPartnerFlag("");
 						enquiries.add(enquiry);						
-						System.out.println("Scenario 4: "+name+"Edit existing enquiry details");
+						log.info("Scenario 4: {} Edit existing enquiry details",name);
 						//add CP hide and show logic
 					}
 					else
 					{
 						enquiry.setHasError(true);
 					    enquiry.setMessage("Scenario 2: "+"Create New Enquiry");
-					    System.out.println("Scenario 2: "+"Create New Enquiry");
+					    log.info("Scenario 2: "+"Create New Enquiry");
 						//return enquiries;
-					}
+					}*/
 				}
 				else if(enquiries.size()==1)//5) If 3) gives 1 results then source protuction.
 				{
@@ -644,19 +773,19 @@ public class EnquiryRequestServiceImpl implements EnquiryRequestService {
 					if(enquiry.getWalkInSource()!=null)
 					{
 						enquiry.setHasError(true);
-						enquiry.setNonEdit("ENQUIRY");						
+						enquiry.setNonEdit(enquiry_Str);						
 						enquiry.setMessage("Scenario 1: "+"Cannot edit "+name+" enquiry details");
 						enquiries.add(enquiry);						
-						System.out.println("Scenario 1: "+"Cannot edit "+name+"enquiry details");
+						log.info("Scenario 1: Cannot edit {} enquiry details",name);
 					}
 					else //if(enquiry.getEnquiryStatus().equals(KeyConstants.ENQUIRY_STATUS_FOR_ASSINED_SALES))
 					{
 						if(name!=null && name.length()>0)
 						{
 							enquiry.setHasError(true);
-							enquiry.setNonEdit("CONTACT");						
+							enquiry.setNonEdit(contact_Str);						
 							enquiry.setMessage("Scenario 5: "+"Cannot edit "+name+" details");
-							System.out.println("Scenario 5: "+"Cannot edit "+name+" details");
+							log.info("Scenario 5: Cannot edit {} details",name);
 						}
 						enquiries.add(enquiry);						
 						
@@ -676,7 +805,8 @@ public class EnquiryRequestServiceImpl implements EnquiryRequestService {
 					//enquiries.sort(Comparator.comparing(EnquiryDto::getDateOfSiteVisit).reversed());
 					if(enquiriesSort.size()>0)
 					{
-						enquiriesSort.sort(Comparator.comparing(EnquiryDto::getDateOfSiteVisit).reversed());
+//						enquiriesSort.sort(Comparator.comparing(EnquiryDto::getDateOfSiteVisit).reversed());
+						enquiriesSort.sort(Comparator.comparing(EnquiryDto::getDateOfSiteVisit));
 
 						EnquiryDto enquiry = enquiriesSort.get(0);
 						if(KeyConstants.RECORD_TYPE_CUSTOMER.equals(enquiry.getContact().getRecordType())){
@@ -693,7 +823,7 @@ public class EnquiryRequestServiceImpl implements EnquiryRequestService {
 							/*Added by Satheesh K- 05-09-2020 Bug Fix*/
 							enquiries.clear();
 							enquiries.add(enquiry);						
-							System.out.println("Scenario 1: "+"Cannot edit "+name+" enquiry details");
+							log.info("Scenario 1: "+"Cannot edit {} enquiry details",name);
 						}
 						else
 						{
@@ -702,7 +832,7 @@ public class EnquiryRequestServiceImpl implements EnquiryRequestService {
 								enquiry.setHasError(true);
 								enquiry.setNonEdit("CONTACT");						
 								enquiry.setMessage("Scenario 5: "+"Cannot edit "+name+" details");
-								System.out.println("Scenario 5: "+"Cannot edit "+name+" details");
+								log.info("Scenario 5: "+"Cannot edit {} details",name);
 							}
 							/*Added by Satheesh K- 05-09-2020 Bug Fix*/
 							enquiries.clear();
@@ -710,7 +840,9 @@ public class EnquiryRequestServiceImpl implements EnquiryRequestService {
 							
 						}
 					}
-					else
+					/* Commented By - Satheesh K   -- Requested By : Prakash Idnani
+					 * Commented on - 19-05-2020 -- Request from Business Team - no use of site visit blank and enquriy status for Assigned sales no required below code.*/ 
+					/*else
 					{
 						
 						List<EnquiryDto> enquiriesStatusSort=new ArrayList<>();
@@ -738,17 +870,17 @@ public class EnquiryRequestServiceImpl implements EnquiryRequestService {
 							enquiry.getContact().setHasError(true);
 							name= "customer & ";
 						}
-						/* Changes By - Satheesh K   -- Requested By : Prakash Idnani
-						 * Changes done on - 24-12-2019 -- Request from Business to resolve if walk-in source blank.*/ 
+						 Changes By - Satheesh K   -- Requested By : Prakash Idnani
+						 * Changes done on - 24-12-2019 -- Request from Business to resolve if walk-in source blank. 
 						if(enquiry.getWalkInSource()!=null)
 						{
 							enquiry.setHasError(true);
 							enquiry.setNonEdit("ENQUIRY");						
 							enquiry.setMessage("Scenario 1: "+"Cannot edit "+name+" enquiry details");
-							/*Added by Satheesh K- 05-09-2020 Bug Fix*/
+							Added by Satheesh K- 05-09-2020 Bug Fix
 							enquiries.clear();
 							enquiries.add(enquiry);						
-							System.out.println("Scenario 1: "+"Cannot edit "+name+" enquiry details");
+							log.info("Scenario 1: "+"Cannot edit {} enquiry details",name);
 						}
 						else
 						{
@@ -757,15 +889,15 @@ public class EnquiryRequestServiceImpl implements EnquiryRequestService {
 								enquiry.setHasError(true);
 								enquiry.setNonEdit("CONTACT");						
 								enquiry.setMessage("Scenario 5: "+"Cannot edit "+name+" details");
-								System.out.println("Scenario 5: "+"Cannot edit "+name+" details");
+								log.info("Scenario 5: "+"Cannot edit {} details",name);
 							}
-							/*Added by Satheesh K- 05-09-2020 Bug Fix*/
+							Added by Satheesh K- 05-09-2020 Bug Fix
 							enquiries.clear();
 							enquiries.add(enquiry);						
 							
 						}
 					
-					}
+					}*/
 					
 					
 					
@@ -943,6 +1075,7 @@ public class EnquiryRequestServiceImpl implements EnquiryRequestService {
 	@Override
 	public List<EnquiryDto> getEnquiriesByMobileNoEOI(String countryCode,String mobileNo, String projectSfid) {
 			List<EnquiryDto> enquiryList=pushEnquiryDataService.getEnquiriesByMobileNoEOI(countryCode,mobileNo,projectSfid);
+//			enquiryList.sort(Comparator.comparing(EnquiryDto::getLastModifiedDate).reversed());
 			enquiryList.sort(Comparator.comparing(EnquiryDto::getLastModifiedDate).reversed());
 			/*Comment By Satheesh Kyatham for invalid code for EOI enquiry  - 23rd Sept 2019*/
 			/*List<EnquiryDto> enquiries=new ArrayList<>();
@@ -1172,25 +1305,25 @@ public class EnquiryRequestServiceImpl implements EnquiryRequestService {
 						enquiry.setNonEdit("ENQUIRY");						
 						enquiry.setMessage("Scenario 1: "+"Cannot edit enquiry details");
 						enquiries.add(enquiry);						
-						System.out.println("Scenario 1: "+"Cannot edit enquiry details");
+						log.info("Scenario 1: "+"Cannot edit enquiry details");
 				}else if((siteVisitDays < KeyConstants.SITE_VISIT_DAYS_LIMIT && lastModifyDays > KeyConstants.LAST_MODIFY_DAYS_LIMIT)){
 					    enquiry.setHasError(true);
 					    enquiry.setMessage("Scenario 3: "+"Create New Enquiry");
-					    System.out.println("Scenario 3: "+"Create New Enquiry");
+					    log.info("Scenario 3: "+"Create New Enquiry");
 			    }else if(siteVisitDays > KeyConstants.SITE_VISIT_DAYS_LIMIT && lastModifyDays < KeyConstants.LAST_MODIFY_DAYS_LIMIT){
 						
 				    	enquiry.setHasError(true);
 					    enquiry.setMessage("Scenario 4: "+"Create New Enquiry");
-					    System.out.println("Scenario 4: "+"Create New Enquiry");
+					    log.info("Scenario 4: "+"Create New Enquiry");
 				}else if(siteVisitDays > KeyConstants.SITE_VISIT_DAYS_LIMIT){
 					   
 						enquiry.setHasError(true);
 					    enquiry.setMessage("Scenario 2: "+"Create New Enquiry");
-					    System.out.println("Scenario 2: "+"Create New Enquiry");
+					    log.info("Scenario 2: "+"Create New Enquiry");
 				}else{	
 					enquiry.setHasError(false);
 					enquiries.add(enquiry);
-					System.out.println("Scenario 5: else condition");
+					log.info("Scenario 5: else condition");
 				}
 			}else if(KeyConstants.RECORD_TYPE_CUSTOMER.equals(enquiry.getContact().getRecordType())){
 	
@@ -1200,28 +1333,28 @@ public class EnquiryRequestServiceImpl implements EnquiryRequestService {
 						enquiry.setNonEdit("ENQUIRY");
 						enquiry.setMessage("Scenario 1: "+"Cannot edit enquiry details");
 						enquiries.add(enquiry);
-						System.out.println("Scenario 1: "+"Cannot edit enquiry details");
+						log.info("Scenario 1: "+"Cannot edit enquiry details");
 				}else if((siteVisitDays < KeyConstants.SITE_VISIT_DAYS_LIMIT && lastModifyDays > KeyConstants.LAST_MODIFY_DAYS_LIMIT)){
 						
 					    enquiry.setHasError(true);
 					    enquiry.setMessage("Scenario 3: "+"Create New Enquiry");
-					    System.out.println("Scenario 3: "+"Create New Enquiry");
+					    log.info("Scenario 3: "+"Create New Enquiry");
 			    }else if(siteVisitDays > KeyConstants.SITE_VISIT_DAYS_LIMIT && lastModifyDays < KeyConstants.LAST_MODIFY_DAYS_LIMIT){
 						
 				    	enquiry.setHasError(true);
 					    enquiry.setMessage("Scenario 4: "+"Create New Enquiry");
-					    System.out.println("Scenario 4: "+"Create New Enquiry");
+					    log.info("Scenario 4: "+"Create New Enquiry");
 				}else if(siteVisitDays > KeyConstants.SITE_VISIT_DAYS_LIMIT){
 					   
 						enquiry.setHasError(true);
 					    enquiry.setMessage("Scenario 2: "+"Create New Enquiry");
-					    System.out.println("Scenario 2: "+"Create New Enquiry");
+					    log.info("Scenario 2: "+"Create New Enquiry");
 				}else{
 						enquiry.setHasError(true);
 						enquiry.setNonEdit("CONTACT");
 						enquiries.add(enquiry);
 						enquiry.setMessage("Scenario 5: "+"Cannot edit contact details");
-						System.out.println("Scenario 5: "+"Cannot edit contact details");
+						log.info("Scenario 5: "+"Cannot edit contact details");
 				}
 			}			 
 		 }		 

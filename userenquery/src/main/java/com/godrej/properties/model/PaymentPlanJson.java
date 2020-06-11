@@ -77,6 +77,7 @@ public class PaymentPlanJson {
 	private String nowData;
 	
 	private String wing_block__c;
+	private String propstrength__property_name__c;
 	
 	
 	public String getBalcony_area_sq_ft__c() {
@@ -470,4 +471,12 @@ public class PaymentPlanJson {
 	public void setWing_block__c(String wing_block__c) {
 		this.wing_block__c = wing_block__c;
 	}
+	public String getPropstrength__property_name__c() {
+		return propstrength__property_name__c;
+	}
+	public void setPropstrength__property_name__c(String propstrength__property_name__c) {
+		this.propstrength__property_name__c = propstrength__property_name__c;
+	}
+	
+	
 }

@@ -20,7 +20,8 @@ public class KeyConstants {
 	
 	public static final String RECORD_TYPE_PROSPECT = "01290000000uHV9AAM";
 	public static final String RECORD_TYPE_CUSTOMER = "01290000000uHV8AAM";
-	public static final int SITE_VISIT_DAYS_LIMIT = 90;
+//	public static final int SITE_VISIT_DAYS_LIMIT = 90;
+	public static final int SITE_VISIT_DAYS_LIMIT = 60;
 	public static final int LAST_MODIFY_DAYS_LIMIT  = 30;
 	public static final int LAST_MODIFY_DAYS_LIMIT_45  = 45;
 	public static final String ENQUIRY_STATUS_FOR_ASSINED_SALES  = "Assigned to Sales";
