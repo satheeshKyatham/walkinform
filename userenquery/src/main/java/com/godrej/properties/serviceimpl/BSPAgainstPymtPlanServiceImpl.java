@@ -35,6 +35,23 @@ public class BSPAgainstPymtPlanServiceImpl implements BSPAgainstPymtPlanService{
 			inventory_category = "All";
 		}
 		
+		if (project_code != null) {
+			project_code = project_code.trim();
+		}
+		if(towerCode != null) {
+			towerCode = towerCode.trim();
+		}
+		if (paymentPlanID != null) {
+			paymentPlanID = paymentPlanID.trim();
+		}
+		if (typology != null) {
+			typology = typology.trim();
+		}
+		if (inventory_category != null) {
+			inventory_category = inventory_category.trim();
+		}
+		
+		
 		List<BSPAgainstPymtPlan> payBSPList = dao.getPaymentPlanBSPList(paymentPlanID);
 		double bspAmountReturn = 0;
 		if(payBSPList!=null)
@@ -51,7 +68,7 @@ public class BSPAgainstPymtPlanServiceImpl implements BSPAgainstPymtPlanService{
 						inventory_category = "All";
 					}
 					
-					if(payBSP.getTowerid().equals(towerCode) && payBSP.getTypology().equals(typology) && (payBSP.getInventory_category().equals(inventory_category)))
+					if( (payBSP.getTowerid().trim().equals(towerCode)) && (payBSP.getTypology().trim().equals(typology)) && (payBSP.getInventory_category().trim().equals(inventory_category)) )
 					{
 						valueCheck =true;
 						return bspAmountReturn=Double.parseDouble(payBSPList.get(i).getBsp_amount());
@@ -70,7 +87,7 @@ public class BSPAgainstPymtPlanServiceImpl implements BSPAgainstPymtPlanService{
 							inventory_category = "All";
 						}
 						
-						if((payBSP.getTowerid().equals(towerCode)) && (payBSP.getTypology().trim().length()<=0)  && (payBSP.getInventory_category().equals(inventory_category)))
+						if((payBSP.getTowerid().trim().equals(towerCode)) && (payBSP.getTypology()==null)  && (payBSP.getInventory_category().trim().equals(inventory_category)))
 						{
 							valueCheck =true;
 							return bspAmountReturn=Double.parseDouble(payBSPList.get(i).getBsp_amount());
@@ -91,7 +108,7 @@ public class BSPAgainstPymtPlanServiceImpl implements BSPAgainstPymtPlanService{
 							inventory_category = "All";
 						}
 						
-						if( (payBSP.getPymt_plan_id().equals(paymentPlanID)) && (payBSP.getTowerid()==null) && (payBSP.getTypology()==null) && (payBSP.getInventory_category().equals(inventory_category)))
+						if( (payBSP.getPymt_plan_id().trim().equals(paymentPlanID)) && (payBSP.getTowerid()==null) && (payBSP.getTypology()==null)  && (payBSP.getInventory_category().trim().equals(inventory_category)))
 						{
 							valueCheck =true;
 							
@@ -118,6 +135,22 @@ public class BSPAgainstPymtPlanServiceImpl implements BSPAgainstPymtPlanService{
 			inventory_category = "All";
 		}
 		
+		if (project_code != null) {
+			project_code = project_code.trim();
+		}
+		if(towerCode != null) {
+			towerCode = towerCode.trim();
+		}
+		if (paymentPlanID != null) {
+			paymentPlanID = paymentPlanID.trim();
+		}
+		if (typology != null) {
+			typology = typology.trim();
+		}
+		if (inventory_category != null) {
+			inventory_category = inventory_category.trim();
+		}
+		
 		List<BSPAgainstPymtPlan> payBSPList = dao.getPaymentPlanPerBSP(paymentPlanID);
 		double bspPerReturn = 0;
 		if(payBSPList!=null)
@@ -134,7 +167,7 @@ public class BSPAgainstPymtPlanServiceImpl implements BSPAgainstPymtPlanService{
 						inventory_category = "All";
 					}
 					
-					if(payBSP.getTowerid().equals(towerCode) && payBSP.getTypology().equals(typology) && (payBSP.getInventory_category().equals(inventory_category)) )
+					if( (payBSP.getTowerid().trim().equals(towerCode)) && (payBSP.getTypology().trim().equals(typology)) && (payBSP.getInventory_category().trim().equals(inventory_category)) )
 					{
 						valueCheck =true;
 						return bspPerReturn=payBSPList.get(i).getBsp_per();
@@ -153,7 +186,7 @@ public class BSPAgainstPymtPlanServiceImpl implements BSPAgainstPymtPlanService{
 							inventory_category = "All";
 						}
 						
-						if((payBSP.getTowerid().equals(towerCode)) && (payBSP.getTypology().trim().length()<=0) && (payBSP.getInventory_category().equals(inventory_category)))
+						if((payBSP.getTowerid().trim().equals(towerCode)) && (payBSP.getTypology()==null)  && (payBSP.getInventory_category().trim().equals(inventory_category)))
 						{
 							valueCheck =true;
 							return bspPerReturn=payBSPList.get(i).getBsp_per();
@@ -174,7 +207,7 @@ public class BSPAgainstPymtPlanServiceImpl implements BSPAgainstPymtPlanService{
 							inventory_category = "All";
 						}
 						
-						if( (payBSP.getPymt_plan_id().equals(paymentPlanID)) && (payBSP.getTowerid()==null) && (payBSP.getTypology()==null)  && (payBSP.getInventory_category().equals(inventory_category)))
+						if( (payBSP.getPymt_plan_id().trim().equals(paymentPlanID)) && (payBSP.getTowerid()==null) && (payBSP.getTypology()==null)  && (payBSP.getInventory_category().trim().equals(inventory_category)))
 						{
 							valueCheck =true;
 							
