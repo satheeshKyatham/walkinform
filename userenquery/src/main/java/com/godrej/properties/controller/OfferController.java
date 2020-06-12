@@ -234,15 +234,11 @@ public class OfferController {
 							validateForPro = "a1l2s00000000X5AAI";
 							boolean isPMAY = isUnderPMAY(offerid, projectsfid,salesConsiderationTotal, reraCarpetAreaSqm, validateForPro);
 							propOtherChargesService.updatePropertyStatus(propid, isPMAY);
-						}
-						
-						if ("a1l2s00000003VlAAI".equals(projectsfid)) {
+						} else if ("a1l2s00000003VlAAI".equals(projectsfid)) {
 							validateForPro = "a1l2s00000003VlAAI";
 							boolean isPMAY = isUnderPMAY(offerid, projectsfid,salesConsiderationTotal, reraCarpetAreaSqm, validateForPro);
 							propOtherChargesService.updatePropertyStatus(propid, isPMAY);
-						}
-						
-						else {
+						} else {
 							propOtherChargesService.updatePropertyStatus(propid);
 						}
 					}
