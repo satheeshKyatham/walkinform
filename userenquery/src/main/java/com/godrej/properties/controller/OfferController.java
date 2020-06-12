@@ -228,10 +228,20 @@ public class OfferController {
 					 
 					//Update offer created flag in sfdc property table through HEROKU
 					if((offerid!=null && offerid.length()==18)) {
-						if("a1l2s00000000X5AAI".equals(projectsfid) || "a1l2s00000003VlAAI".equals(projectsfid)) {
-							boolean isPMAY = isUnderPMAY(offerid, projectsfid,salesConsiderationTotal, reraCarpetAreaSqm);
+						String validateForPro = "";
+						
+						if("a1l2s00000000X5AAI".equals(projectsfid)) {
+							validateForPro = "a1l2s00000000X5AAI";
+							boolean isPMAY = isUnderPMAY(offerid, projectsfid,salesConsiderationTotal, reraCarpetAreaSqm, validateForPro);
 							propOtherChargesService.updatePropertyStatus(propid, isPMAY);
 						}
+						
+						if ("a1l2s00000003VlAAI".equals(projectsfid)) {
+							validateForPro = "a1l2s00000003VlAAI";
+							boolean isPMAY = isUnderPMAY(offerid, projectsfid,salesConsiderationTotal, reraCarpetAreaSqm, validateForPro);
+							propOtherChargesService.updatePropertyStatus(propid, isPMAY);
+						}
+						
 						else {
 							propOtherChargesService.updatePropertyStatus(propid);
 						}
@@ -283,7 +293,15 @@ public class OfferController {
 		
 	}
 	
-	private boolean isUnderPMAY(String offerId, String projectSfid, double basicSalePrice, double reraCarpetAreaSqm) {
-		return (offerId!=null && offerId.length()==18 && basicSalePrice < 4500000  &&  reraCarpetAreaSqm < 60  &&  ("a1l2s00000000X5AAI".equals(projectSfid) || "a1l2s00000003VlAAI".equals(projectSfid))  ) ;
+	private boolean isUnderPMAY(String offerId, String projectSfid, double basicSalePrice, double reraCarpetAreaSqm, String validateForPro) {
+		if (validateForPro.equals("a1l2s00000000X5AAI")) {
+			return (offerId!=null && offerId.length()==18 && basicSalePrice < 4500000  &&  reraCarpetAreaSqm < 90  && "a1l2s00000000X5AAI".equals(projectSfid)) ;
+		}
+		
+		if (validateForPro.equals("a1l2s00000003VlAAI")) {
+			return (offerId!=null && offerId.length()==18 && basicSalePrice < 4500000  &&  reraCarpetAreaSqm < 60  && "a1l2s00000003VlAAI".equals(projectSfid)) ;
+		}
+		
+		return false;
 	}
 }

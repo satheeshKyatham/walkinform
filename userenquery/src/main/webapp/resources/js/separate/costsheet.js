@@ -646,15 +646,22 @@ function getTaxPercentage(basicSaleprice, projectSfid, currentTaxRate, TotalA, r
 			return 0;
 		}
 		
-		//Added for Project Godrej Royale Woods, bang
-		if(projectSfid == 'a1l2s00000003VlAAI' || projectSfid == 'a1l2s00000000X5AAI'){
+		//Added for Project Godrej Royale Woods and forest grove
+		if(projectSfid == 'a1l2s00000003VlAAI'){
 			if(TotalA>=4500000 || reraCarpetSqm >= 60){
 				return 5;
 			}
 			return 1;
-		}  else {
-			return currentTaxRate;
+		}  
+		
+		if (projectSfid == 'a1l2s00000000X5AAI'){
+			if(TotalA>=4500000 || reraCarpetSqm >= 90){
+				return 5;
+			}
+			return 1;
 		}
+		
+		return currentTaxRate;
 		//END Added for Project Godrej Royale Woods, bang
 		
 		/*if(projectSfid != 'a1l2s00000000X5AAI'){
