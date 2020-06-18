@@ -39,7 +39,7 @@ public class KYCApplicantDtlDaoImpl extends AbstractDao<Integer, KYCApplicantDtl
 		//order by b.id
 		authors = q.getResultList();
 		
-		
+		 
 		
 		
 		if (authors != null && !authors.isEmpty() ) {
