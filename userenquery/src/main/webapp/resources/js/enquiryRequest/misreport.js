@@ -178,7 +178,21 @@ function createdOfferProject(){
 						verticle__c = '';
 					}
 					
-					var val = $("<tr><td>"+obj1[i].projectname+"</td><td>"+obj1[i].createddate+"</td><td>"+obj1[i].enquiryname+"</td><td>"+verticle__c+"</td><td>"+obj1[i].contactname+"</td><td>"+obj1[i].payment_plan+"</td><td>"+obj1[i].offername+"</td><td>"+schemename+"</td><td>"+obj1[i].scheme_rate+"</td><td>"+obj1[i].amount+"</td><td>"+obj1[i].description+"</td><td>"+obj1[i].cs_final_amount+"</td> <td>  <a target='_blank' href='"+csPath+"'>"+fileIcon+"</a></td><td data-th='Action'> <button type='button' onclick='moreDetails(this,\""+obj1[i].enquiry_sfid+"\","+i+")'  id=\""+obj1[i].enquiryname+"\"  class='btn btnDefaultBlue btn-default btn-xs brdClrBlue moreDetail ' > Details </button></td><td><button class='btn btnDefaultBlue btn-default' onclick='getofferApplicantDetails(this, \""+obj1[i].offer_sfid+"\", \""+obj1[i].enquiry_sfid+"\",  \""+obj1[i].contact_sfid+"\",  \""+obj1[i].offername+"\",  \""+obj1[i].enquiryname+"\", \""+obj1[i].propstrength__property__c+"\", \""+i+"\", \"offer\")'><i class='fa fa-print printficon'></i></button></td></tr>");
+					var closing_manager_name__c = '';
+					if (obj1[i].closing_manager_name__c != null) {
+						closing_manager_name__c = obj1[i].closing_manager_name__c;
+					} else {
+						closing_manager_name__c = '';
+					}
+					
+					var sourcing_manager_name__c = '';
+					if (obj1[i].sourcing_manager_name__c != null) {
+						sourcing_manager_name__c = obj1[i].sourcing_manager_name__c;
+					} else {
+						sourcing_manager_name__c = '';
+					}
+					
+					var val = $("<tr><td>"+obj1[i].projectname+"</td><td>"+obj1[i].createddate+"</td><td>"+obj1[i].enquiryname+"</td>    <td>"+obj1[i].propstrength__property_name__c+"</td><td>"+closing_manager_name__c+"</td><td>"+sourcing_manager_name__c+"</td>        <td>"+verticle__c+"</td><td>"+obj1[i].contactname+"</td><td>"+obj1[i].payment_plan+"</td><td>"+obj1[i].offername+"</td><td>"+schemename+"</td><td>"+obj1[i].scheme_rate+"</td><td>"+obj1[i].amount+"</td><td>"+obj1[i].description+"</td><td>"+obj1[i].cs_final_amount+"</td> <td>  <a target='_blank' href='"+csPath+"'>"+fileIcon+"</a></td><td data-th='Action'> <button type='button' onclick='moreDetails(this,\""+obj1[i].enquiry_sfid+"\","+i+")'  id=\""+obj1[i].enquiryname+"\"  class='btn btnDefaultBlue btn-default btn-xs brdClrBlue moreDetail ' > Details </button></td><td><button class='btn btnDefaultBlue btn-default' onclick='getofferApplicantDetails(this, \""+obj1[i].offer_sfid+"\", \""+obj1[i].enquiry_sfid+"\",  \""+obj1[i].contact_sfid+"\",  \""+obj1[i].offername+"\",  \""+obj1[i].enquiryname+"\", \""+obj1[i].propstrength__property__c+"\", \""+i+"\", \"offer\")'><i class='fa fa-print printficon'></i></button></td></tr>");
 					$("#createdOfferTable tbody").append(val);
 				} else {
 					swal({
