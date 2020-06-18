@@ -95,7 +95,8 @@ public class InventoryServiceImpl implements InventoryService {
 
 	}
 	
-	
+	/* This service used for GPLAPPS EOI_BLOCK functionality as well as D4U Admin Inventory
+	 * Class Name : GPLAppsWebServiceImpl.java*/ 
 	@Override
 	public void holdInventoryAdmin(String projectId, String userId, String unitsfid, String holdmsg, String reasonInput, String holdBlockBehalfOfName, int holdBlockBehalfOfID, String  enqSFID)
 	{

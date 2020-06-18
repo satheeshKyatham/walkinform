@@ -49,6 +49,9 @@ public class Vw_OfferWithBalance implements Serializable{
 	@Transient private String qry_count;
 	@Transient private String qry_msg;
 	@Column(name="verticle__c") private String	verticle__c;
+	@Column(name="propstrength__property_name__c") private String propstrength__property_name__c;
+	@Column(name="closing_manager_name__c") private String closing_manager_name__c;
+	@Column(name="sourcing_manager_name__c") private String sourcing_manager_name__c;
 	
 	public int getRow_number() {
 		return row_number;
@@ -212,5 +215,23 @@ public class Vw_OfferWithBalance implements Serializable{
 	}
 	public void setVerticle__c(String verticle__c) {
 		this.verticle__c = verticle__c;
+	}
+	public String getPropstrength__property_name__c() {
+		return propstrength__property_name__c;
+	}
+	public void setPropstrength__property_name__c(String propstrength__property_name__c) {
+		this.propstrength__property_name__c = propstrength__property_name__c;
+	}
+	public String getClosing_manager_name__c() {
+		return closing_manager_name__c;
+	}
+	public void setClosing_manager_name__c(String closing_manager_name__c) {
+		this.closing_manager_name__c = closing_manager_name__c;
+	}
+	public String getSourcing_manager_name__c() {
+		return sourcing_manager_name__c;
+	}
+	public void setSourcing_manager_name__c(String sourcing_manager_name__c) {
+		this.sourcing_manager_name__c = sourcing_manager_name__c;
 	}
 }

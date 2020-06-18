@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.godrej.properties.dao.AAbstractDao;
 import com.godrej.properties.dao.ContactReportDao;
@@ -18,6 +19,7 @@ import com.godrej.properties.model.ContactReport;
  *
  */
 @Repository
+@Transactional
 public class ContactReportDaoImpl extends AAbstractDao<ContactReport> implements ContactReportDao{
 
 	@Override
@@ -100,5 +102,15 @@ public class ContactReportDaoImpl extends AAbstractDao<ContactReport> implements
 			updateByNative(jpql.toString(), null);
 			System.out.println("SFDC query END :"+new Date());
 		}
+	}
+
+	@Override
+	public ContactReport getContactReportData(Integer id) {
+		 StringBuilder jpql=new StringBuilder();
+		 jpql.append(" SELECT cr FROM ContactReport cr ");
+		 jpql.append(" where cr.contactId=:contactId ");
+		 Map<String, Object> params=new HashMap<>();
+		 params.put("contactId", id);
+	 return getSingleEntity(jpql.toString(), params);
 	}
 }

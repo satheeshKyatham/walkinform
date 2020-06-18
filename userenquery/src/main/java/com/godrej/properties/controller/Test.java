@@ -1,5 +1,6 @@
 package com.godrej.properties.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -205,15 +206,17 @@ public class Test {
 		System.out.println(i);*/
 		
 		 //public static Date getUKDateTime(Date date) {
-			 Calendar cal = Calendar.getInstance();
+			/* Calendar cal = Calendar.getInstance();
 			// remove next line if you're always using the current time.
 			cal.setTime(new Date());
 			cal.add(Calendar.HOUR, -5);
 			cal.add(Calendar.MINUTE, -30);
-			Date hourback = cal.getTime();
+			Date hourback = cal.getTime();*/
 			//return hourback;
 		 //}
-		
+		String timeStamp = new SimpleDateFormat("ddMMyyyy").format(new Date());
+		System.out.println(timeStamp);
+		System.out.println(Calendar.getInstance().getTimeInMillis());
 	}
 
 }

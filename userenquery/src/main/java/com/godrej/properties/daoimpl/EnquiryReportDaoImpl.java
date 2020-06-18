@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.godrej.properties.dao.AAbstractDao;
 import com.godrej.properties.dao.EnquiryReportDao;
@@ -18,8 +19,9 @@ import com.godrej.properties.model.EnquiryReport;
  *
  */
 @Repository
+@Transactional
 public class EnquiryReportDaoImpl extends AAbstractDao<EnquiryReport> implements EnquiryReportDao{
-   
+	
 	@Override
 	public EnquiryReport insertEnquiryReport(EnquiryReport enq) {
 		persist(enq);
@@ -97,6 +99,16 @@ public class EnquiryReportDaoImpl extends AAbstractDao<EnquiryReport> implements
 				
 				int i=query.executeUpdate();
 				return i;
+	}
+
+	@Override
+	public EnquiryReport getEnquiryReportEnquiryID(Integer id) {
+		 StringBuilder jpql=new StringBuilder();
+		 jpql.append(" SELECT er FROM EnquiryReport er ");
+		 jpql.append(" where er.enquiryId=:enquiryId ");
+		 Map<String, Object> params=new HashMap<>();
+		 params.put("enquiryId", id);
+	return getSingleEntity(jpql.toString(), params);
 	}
 
 }

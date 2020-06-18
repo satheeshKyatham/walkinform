@@ -39,4 +39,7 @@ public interface TokenDao {
 	String getSalesUserEmailID(int enqid, String sfid);
 	
 	public Token getTokenByEnquiry(String enquirySfid);
+	public int getEnquiryIDFromSFID(String enquirySfid);
+	public void updateEnquiryData(int enqID,String updateData);
+	public void updateContactData(int contactID,String updateData);
 }

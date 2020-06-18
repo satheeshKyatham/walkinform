@@ -64,8 +64,8 @@ public class SendMailThread implements Runnable{
 	    	  
 		      Message message1 = new MimeMessage(session);
 		      message1.setFrom(new InternetAddress(from));
-		      log.info("TO E-mail Address :::: User Enq:-",to);
-		      log.info("CC E-mail Address :::: User Enq: -",cc);
+		      log.info("TO E-mail Address :::: User Enq:-{}",to);
+		      log.info("CC E-mail Address :::: User Enq: -{}",cc);
 		      message1.setRecipients(Message.RecipientType.TO,InternetAddress.parse(to));
 		      if(cc!=null && cc.length()>0)
 		      {

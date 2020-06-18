@@ -103,6 +103,8 @@ projectid=request.getParameter("projectid");
 								<option value="W" selected>W</option>
 								<option value="E">E</option>
 								<option value="G">G</option>
+								<option value="MS">MS</option>
+								<option value="MF">MF</option>
 							</select>
 						</div>
 						<div class="form-group">

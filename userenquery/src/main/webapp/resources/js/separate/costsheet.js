@@ -646,22 +646,31 @@ function getTaxPercentage(basicSaleprice, projectSfid, currentTaxRate, TotalA, r
 			return 0;
 		}
 		
-		//Added for Project Godrej Royale Woods, bang
+		//Added for Project Godrej Royale Woods and forest grove
 		if(projectSfid == 'a1l2s00000003VlAAI'){
 			if(TotalA>=4500000 || reraCarpetSqm >= 60){
 				return 5;
 			}
 			return 1;
+		}  
+		
+		if (projectSfid == 'a1l2s00000000X5AAI'){
+			if(TotalA>=4500000 || reraCarpetSqm >= 90){
+				return 5;
+			}
+			return 1;
 		}
+		
+		return currentTaxRate;
 		//END Added for Project Godrej Royale Woods, bang
 		
-		if(projectSfid != 'a1l2s00000000X5AAI'){
+		/*if(projectSfid != 'a1l2s00000000X5AAI'){
 			return currentTaxRate;
 		}
 		if(basicSaleprice>4500000){
 			return 5;
 		}
-		return 1;
+		return 1;*/
 	}catch (e) {
 		console.log(e);
 		return 0;
@@ -1385,6 +1394,7 @@ function updateBSP (timeid) {
        var tdsPaidBy = '';
        var bspTaxGST = 0;
        var salesConsiderationTotal = 0;
+       var reraCarpetAreaSqm = 0;
        
        if ($('#tdsPaidByDD').val() != '') {
              tdsPaidBy = $('#tdsPaidByDD').val();
@@ -1397,6 +1407,11 @@ function updateBSP (timeid) {
        if ($('#salesConsiderationTotal').text() != null && $('#salesConsiderationTotal').text().trim() != '') {
     	   salesConsiderationTotal = $('#salesConsiderationTotal').text();
        }
+       
+       if ($('#carpetSqm').text() != null && $('#carpetSqm').text().trim() != '') {
+    	   reraCarpetAreaSqm = $('#carpetSqm').text();
+       }
+       
        
        var price = $("#salesConsiderationTotal").text();
        var priceWithTax = $("#salesConsiderationTotal").text();
@@ -1412,7 +1427,7 @@ function updateBSP (timeid) {
               ,"costsheet_commitment":$('#costsheet_commitment').val(),"prepaymentamt":prepaymentAmount,"bankname":bankname,"trxdate":trxdate,"trxno":trxno,"paymentmode":paymentmode, "tdsPaidBy":tdsPaidBy,"isOthers":isOthers, "costsheet_path": csPath, "cs_final_amount":$('#csFinalAmountInput').val(),"bankGL":$('#towerBankGLCode').val() 
        ,"paymentDetails": paymentDetails,"price":convertToNumber(price),"priceWithTax":convertToNumber(priceWithTax)
        ,"plannedPayment":convertToNumber(plannedPayment),"plannedPaymentWithTax":convertToNumber(plannedPaymentWithTax)
-       ,"tokenTax":convertToNumber(tokenTax)},
+       ,"tokenTax":convertToNumber(tokenTax), "reraCarpetAreaSqm":reraCarpetAreaSqm},
        function(data){                       
        }).done(function(data){
     	   var offerJson = JSON.parse(data);

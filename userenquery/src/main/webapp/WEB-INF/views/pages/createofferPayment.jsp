@@ -61,6 +61,11 @@
 				  	<th>Project</th>
 				  	<th>Date</th>
 					<th>Enquiry No</th>
+					
+					<th>Unit</th>
+					<th>Closing Manager</th>
+					<th>Sourcing Manager</th>
+					
 					<th>Verticle</th>
 					<th>Contact Name</th>
 					<th>Payment Plan</th>

@@ -23,4 +23,5 @@ public interface EnquiryReportDao {
 	
 	public void updateById(Map<String,Object> params);
 	public int updatePaymentDetails(EnquiryReportDto  dto);
+	public EnquiryReport getEnquiryReportEnquiryID(Integer id);
 }
