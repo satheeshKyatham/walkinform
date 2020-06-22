@@ -18,5 +18,6 @@ public interface ContactReportDao {
 	
 	public void updateRatingSFDC(ContactReport contcat); 
 	public void updateContactONSFDC(ContactReport contcat); 
+	public ContactReport getContactReportData(Integer id);
 	
 }

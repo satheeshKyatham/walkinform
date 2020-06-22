@@ -32,6 +32,7 @@ public class Token {
 	@Column(name="projectname") private String   projectname;
 	@Column(name="createdBy") private String   createdBy;
 	@Column(name="countrycode") private String   countrycode;
+	@Column(name="tokenfrom") private String   tokenfrom;
 	
 	
 	public String getCreatedBy() {
@@ -215,6 +216,12 @@ public class Token {
 	}
 	public void setPriorityNo(String priorityNo) {
 		this.priorityNo = priorityNo;
+	}
+	public String getTokenfrom() {
+		return tokenfrom;
+	}
+	public void setTokenfrom(String tokenfrom) {
+		this.tokenfrom = tokenfrom;
 	}
 	
 }

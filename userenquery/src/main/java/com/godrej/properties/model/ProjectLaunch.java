@@ -31,6 +31,9 @@ public class ProjectLaunch implements Serializable{
 	@Column(name="ccavenue_accesscode") private String  ccavenue_accesscode;
 	@Column(name="isallow_ccpayment_gateway") private String  isallow_payment;
 	
+	@Column(name="sitehead_user_id") private Integer  sitehead_user_id;
+	@Column(name="sitehead_user_mail") private String  sitehead_user_mail;
+	@Column(name="sitehead_user_name") private String  sitehead_user_name;
 	
 	public String getSalesmanager_sfid() {
 		return salesmanager_sfid;
@@ -100,6 +103,24 @@ public class ProjectLaunch implements Serializable{
 	}
 	public void setIsallow_payment(String isallow_payment) {
 		this.isallow_payment = isallow_payment;
+	}
+	public Integer getSitehead_user_id() {
+		return sitehead_user_id;
+	}
+	public void setSitehead_user_id(Integer sitehead_user_id) {
+		this.sitehead_user_id = sitehead_user_id;
+	}
+	public String getSitehead_user_mail() {
+		return sitehead_user_mail;
+	}
+	public void setSitehead_user_mail(String sitehead_user_mail) {
+		this.sitehead_user_mail = sitehead_user_mail;
+	}
+	public String getSitehead_user_name() {
+		return sitehead_user_name;
+	}
+	public void setSitehead_user_name(String sitehead_user_name) {
+		this.sitehead_user_name = sitehead_user_name;
 	}
 
 }

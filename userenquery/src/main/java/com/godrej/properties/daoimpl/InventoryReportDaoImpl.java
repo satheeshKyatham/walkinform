@@ -64,7 +64,7 @@ public class InventoryReportDaoImpl implements InventoryReportDao{
 				
 				
 				+ " FROM salesforce.gpl_cs_hold_admin_unit a "
-				+ " INNER JOIN salesforce.propstrength__property__c b ON   b.sfid = a.sfid AND b.propstrength__active__c = true "
+				+ " LEFT JOIN salesforce.propstrength__property__c b ON   b.sfid = a.sfid AND b.propstrength__active__c = true "
 				+ " LEFT JOIN salesforce.mst_user c ON cast(a.customer_id as integer) = c.user_id "
 				+ " LEFT JOIN salesforce.mst_user d ON a.hold_behalf_userid = d.user_id  "
 				+ " LEFT  JOIN salesforce.propstrength__request__c e ON e.sfid = a.enq_sfid " 

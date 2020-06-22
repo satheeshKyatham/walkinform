@@ -35,6 +35,8 @@ public class SessionCheckListner extends HandlerInterceptorAdapter {
 		filterUrlList.add("/ccavRequestHandler");
 		filterUrlList.add("/getpaymentplanlist_due");
 		filterUrlList.add("/getLdapUserDetails");//added by satheesh K.
+		filterUrlList.add("/d4upreofferAPI");//added by satheesh K.
+		
 		
 		
 	}

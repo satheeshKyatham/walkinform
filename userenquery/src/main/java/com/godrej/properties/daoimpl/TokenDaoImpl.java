@@ -5,30 +5,29 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-import org.hibernate.Query;
+import javax.transaction.Transactional;
+import javax.persistence.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.godrej.properties.dao.AbstractDao;
 import com.godrej.properties.dao.TokenDao;
 import com.godrej.properties.model.Token;
-import com.itextpdf.text.log.SysoCounter;
 
 @Repository("tokenDao")
+@Transactional
 public class TokenDaoImpl extends AbstractDao<Integer, Token> implements TokenDao {
-
+	private Logger log = LoggerFactory.getLogger(getClass());
 	@Autowired
 	private SessionFactory sessionFactory;
 
-	public TokenDaoImpl() {
-
-	}
 
 	@Override
 	public Token generateToken(String mobileno, String type) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -46,7 +45,7 @@ public class TokenDaoImpl extends AbstractDao<Integer, Token> implements TokenDa
 		q.setParameter("date", new Date(System.currentTimeMillis()));
 		//q.setTimestamp("now", new java.util.Date());	
 		 
-		List<Token>  list1  =(List<Token>)q.list();
+		List<Token>  list1  =(List<Token>)((org.hibernate.query.Query) q).list();
 		if(list1!=null)
 		{
 			if(list1.size()>0) {
@@ -62,7 +61,8 @@ public class TokenDaoImpl extends AbstractDao<Integer, Token> implements TokenDa
 		Query qr = session.createQuery(" from Token where mobileno like '%"+token.getMobileno()+"' and isactive='Y'  and projectname ='"+token.getProjectname()+"' ");//and Date(created)=Date(now()) 
 		//qr.setTimestamp("now", new java.util.Date());	
 		 
-		List<Token>  list2  =(List<Token>)qr.list();
+		@SuppressWarnings("unchecked")
+		List<Token>  list2  =(List<Token>)((org.hibernate.query.Query) qr).list();
 		if(list2.size()>0)
 		{
 			Query query = session.createQuery(" update Token set isactive='N' where  mobileno like '%"+token.getMobileno()+"' and projectname ='"+token.getProjectname()+"'");
@@ -87,6 +87,7 @@ public class TokenDaoImpl extends AbstractDao<Integer, Token> implements TokenDa
 	@Override
 	public List<Token> getuniqeTypes() {
 		Session session = this.sessionFactory.getCurrentSession();
+		@SuppressWarnings("unchecked")
 		List<Object> list = (List<Object>) session.createQuery(
 				" SELECT count(*) as count_type, type,case when type='W' then 'Walkin' when type='G' then 'Green Chennel'      when type='E' then 'EOI' end as type_name  FROM Token where window_assign is null group by type  ")
 				.list();
@@ -119,6 +120,7 @@ public class TokenDaoImpl extends AbstractDao<Integer, Token> implements TokenDa
 	public Token getNextType(String type, String counterNo, String lastTokenNo) {
 		Session session = this.sessionFactory.getCurrentSession();
 
+		@SuppressWarnings("unchecked")
 		List<Token> list = session
 				.createQuery("  FROM Token where  (window_assign ='' or window_assign is null) and type='" + type
 						+ "' order by queue asc ")
@@ -168,6 +170,7 @@ public class TokenDaoImpl extends AbstractDao<Integer, Token> implements TokenDa
 	@Override
 	public List<Token> getDisplayTV() {
 		Session session = this.sessionFactory.getCurrentSession();
+		@SuppressWarnings("unchecked")
 		List<Token> list = session.createQuery(
 				"  FROM Token where (window_assign is not null and window_assign<>'')  and isdone is null order by starteddate ")
 				.list();
@@ -183,6 +186,7 @@ public class TokenDaoImpl extends AbstractDao<Integer, Token> implements TokenDa
 	@Override
 	public List<Token> getTokenList(String tokenType,String projectId) {
 		Session session = this.sessionFactory.getCurrentSession();
+		@SuppressWarnings("unchecked")
 		List<Token> list = session
 				.createQuery( "  FROM Token where  type='" + tokenType + "' and window_assign is null and isactive='Y' and projectname='"+projectId+"' order by queue asc ")
 				.list();
@@ -191,12 +195,13 @@ public class TokenDaoImpl extends AbstractDao<Integer, Token> implements TokenDa
 
 			return list;
 		}
-		return null;
+		return list;
 	}
 
 	@Override
 	public List<Token> getTokenAssignList(String tokenType) {
 		Session session = this.sessionFactory.getCurrentSession();
+		@SuppressWarnings("unchecked")
 		List<Token> list = session.createQuery("  FROM Token where  type='" + tokenType
 				+ "' and queue is not null and window_assign is not null order by queue asc ").list();
 
@@ -204,7 +209,7 @@ public class TokenDaoImpl extends AbstractDao<Integer, Token> implements TokenDa
 
 			return list;
 		}
-		return null;
+		return list;
 	}
 
 	@Override
@@ -220,13 +225,14 @@ public class TokenDaoImpl extends AbstractDao<Integer, Token> implements TokenDa
 	@Override
 	public List<Token> getTokenList(String tokenType) {
 		Session session = this.sessionFactory.getCurrentSession();	
+		@SuppressWarnings("unchecked")
 		List<Token> list  =session.createQuery("  FROM Token where  type='"+tokenType+"' and window_assign is null order by queue asc ").list();
 		
 		if(list.size()>0) {
 			
 			return list;
 		}
-		return null;
+		return list;
 	}
 	
 	 
@@ -250,13 +256,13 @@ public class TokenDaoImpl extends AbstractDao<Integer, Token> implements TokenDa
 		Token t = new Token();
 		Session session = this.sessionFactory.getCurrentSession();
 		Query query = session.createQuery(" update Token set enquiry_18='"+sfid+"' where  mobileno='"+mobileno+"' and isactive='Y' and nv_token_id="+tokenid);
-		System.out.println("After execute..."+query.executeUpdate());
-		System.out.println("After execute...217777");
+		log.info("After execute...{}",query.executeUpdate());
 		return t;
 	}
 	@Override
 	public Token getTokenDetails(String tokenID) {
 		Session session = this.sessionFactory.getCurrentSession();	
+		@SuppressWarnings("unchecked")
 		List<Token> list  =session.createQuery("  FROM Token where  nv_token_id='"+tokenID+"'").list();
 		
 		if(list.size()>0) {
@@ -277,7 +283,7 @@ public class TokenDaoImpl extends AbstractDao<Integer, Token> implements TokenDa
 		if(i>0)
 		{
 			Query query = session.createNativeQuery(" update salesforce.propstrength__request__c set User__c='"+q.getResultList().get(0)+"',OwnerId='"+q.getResultList().get(0)+"' where  id="+enqid+" ");
-			System.out.println("After execute..."+query.executeUpdate());
+			log.info("After execute...{}",query.executeUpdate());
 			return "updated CM";
 		}
 		else
@@ -321,11 +327,49 @@ public class TokenDaoImpl extends AbstractDao<Integer, Token> implements TokenDa
 	
 	public Token getTokenByEnquiry(String enquirySfid) {
 		Session session = this.sessionFactory.getCurrentSession();	
+		@SuppressWarnings("unchecked")
 		List<Token> list  =session.createQuery("  FROM Token where  enquiry_18='"+enquirySfid+"'").list();
 		if(list.size()>0) {
 			
 			return list.get(0);
 		}
 		return null;
+	}
+
+	@Override
+	public int getEnquiryIDFromSFID(String enquirySfid) {
+		try
+		{
+			Session session = this.sessionFactory.getCurrentSession();
+			Query q = session.createNativeQuery("select id from  salesforce.propstrength__request__c where sfid ='"+enquirySfid+"' ");
+			int i = q.getResultList().size();
+			if(i>0)
+			{
+				return Integer.parseInt(q.getResultList().get(0).toString());
+			}
+			else return 0;
+		}
+		catch (Exception e) {
+			log.error("No Enquiry Find: {}",e);
+			return 0;
+		}
+	}
+
+	@Override
+	public void updateEnquiryData(int enqID, String updateData) {
+		Query q = getSession().createNativeQuery("Update salesforce.propstrength__request__c set "+updateData+" where id ="+enqID+" ");
+		/*q.setParameter("updateData", updateData);
+		q.setParameter("enqid", enqID);*/
+		q.executeUpdate();
+		
+	}
+
+	@Override
+	public void updateContactData(int contactID, String updateData) {
+		Query q = getSession().createNativeQuery("Update salesforce.contact set "+updateData+" where id ="+contactID+" ");
+		/*q.setParameter("updateData", updateData);
+		q.setParameter("enqid", enqID);*/
+		q.executeUpdate();
+		
 	}
 }

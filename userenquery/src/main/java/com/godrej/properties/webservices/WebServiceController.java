@@ -2878,6 +2878,7 @@ public class WebServiceController<MultipartFormDataInput> {
 				token.setUniqe_no(data.getBarcode_numeric());
 				token.setUniqe_str(data.getBarcode_str());
 				token.setIsactive("Y");
+				token.setTokenfrom("D4U");
 				token=tokenService.generateToken(token); 
 				token.setProjectname(projectname);
 				userEOIService.UpdateToken(token);
