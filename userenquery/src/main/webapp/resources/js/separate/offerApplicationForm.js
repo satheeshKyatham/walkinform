@@ -437,7 +437,7 @@ function getEnqAndOfferDtl (enqSFID, offerSFID, rowId) {
 			}
 			
 			// Godrej Meridien 2 AND Godrej Exquisite, Mumbai (Thane)
-			if ($("#projectid").val() == "a1l6F000004LVk8QAG" || $("#projectid").val() == "a1l2s00000003BMAAY") {
+			if ($("#projectid").val() == "a1l6F000004LVk8QAG" || $("#projectid").val() == "a1l2s00000003BMAAY" || $("#projectid").val() == "a1l2s00000003VlAAI" ) {
 				var totalCarpetNExclusiveArea = parseFloat($('#carpetAreaCostOffer').text())+parseFloat($('#exclusiveAreasCostOffer').text());
 				otherChargesUnit (obj[0].mappedCharges, obj[0].saleable_area__c, totalCarpetNExclusiveArea);
 			}
@@ -716,10 +716,6 @@ function otherCharges(otherCharges, saleable_area__c, offerOtherCharges) {
 
 function otherChargesUnit(otherCharges, saleable_area__c, totalSaleConsideration) {
 	if(otherCharges != null){
-		
-		
-		
-		
 		//Godrej Exquisite, Mumbai (Thane)
 		if ($("#projectid").val() == "a1l2s00000003BMAAY") {
 			var Common_Area_Charges = otherCharges.Common_Area_Charges;
@@ -728,6 +724,25 @@ function otherChargesUnit(otherCharges, saleable_area__c, totalSaleConsideration
 			// Godrej Meridien 2
 			var Other_Charges = otherCharges.Other_Charges;
 			processTotalOtherCharges (Other_Charges, saleable_area__c, totalSaleConsideration);
+		} else if ($("#projectid").val() == "a1l2s00000003VlAAI"){
+			var clubDevCharges = otherCharges.Club_Development_Charges;
+			
+			var frc = otherCharges.Floor_Rise;
+			var plc = otherCharges.PLC;
+			var infra_charges = otherCharges.INFRA_CHARGES;
+			
+			var carParkCharges = otherCharges.CAR_PARKING_CHARGES;
+			
+			var clubDevChargesAmount =  clubDevChargesRWblr (clubDevCharges);
+			var frcPlcInfraAmount = frcPlcInfraRWBlr (frc, plc, infra_charges, saleable_area__c);
+			var carParkChargesAmount = carParkChargesRWBlr (carParkCharges, saleable_area__c);
+			
+			
+			$("#totalSaleConsiderationOffer").text("");
+			$("#totalSaleConsiderationOffer").text(parseInt(parseInt(clubDevChargesAmount)+parseInt(frcPlcInfraAmount)+parseInt(carParkChargesAmount)+parseInt(totalSaleConsideration)).toFixed(2));
+			
+			convertNumberToWords ();
+			
 		}
 		
 		
@@ -850,4 +865,50 @@ function processAdvMainNSinkingCharges (Advance_Maintenance_Charges, Sinking_Fun
 		
 		convertNumberToWords ();
 	}
+}
+
+
+function clubDevChargesRWblr (clubDevCharges) {
+	if(clubDevCharges == null){
+		return 0;
+	}
+	
+	if (clubDevCharges.propstrength__fixed_charge__c == null) {
+		return 0;
+	} else {
+		$("#cniCharges").text("");
+		$("#cniCharges").text("Rs. " + parseFloat(parseFloat(clubDevCharges.propstrength__fixed_charge__c)).toFixed(2) + "/-");
+	}
+	
+	return parseFloat(parseFloat(clubDevCharges.propstrength__fixed_charge__c)).toFixed(2);
+}
+
+
+function frcPlcInfraRWBlr (frc, plc, infra_charges, saleable_area__c){
+	if(frc == null || plc == null || infra_charges == null){
+		return 0;
+	}
+	
+	if (frc.propstrength__rate_per_unit_area__c == null || plc.propstrength__rate_per_unit_area__c == null || infra_charges.propstrength__rate_per_unit_area__c == null || saleable_area__c == null) {
+		return 0;
+	} else {
+		$("#facilitiesCharges").text("");
+		$("#facilitiesCharges").text("Rs. " + parseFloat(parseFloat(frc.propstrength__rate_per_unit_area__c*saleable_area__c)+parseFloat(plc.propstrength__rate_per_unit_area__c*saleable_area__c)+parseFloat(infra_charges.propstrength__rate_per_unit_area__c*saleable_area__c)).toFixed(2) + "/-");
+	}
+	return parseFloat(parseFloat(frc.propstrength__rate_per_unit_area__c*saleable_area__c)+parseFloat(plc.propstrength__rate_per_unit_area__c*saleable_area__c)+parseFloat(infra_charges.propstrength__rate_per_unit_area__c*saleable_area__c)).toFixed(2);
+}
+
+function carParkChargesRWBlr (carParkCharges, saleable_area__c){
+	if(carParkCharges == null){
+		return 0;
+	}
+	
+	if (carParkCharges.propstrength__fixed_charge__c == null) {
+		return 0;
+	} else {
+		$("#carParkCharges").text("");
+		$("#carParkCharges").text("Rs. " + parseFloat(parseFloat(carParkCharges.propstrength__fixed_charge__c)).toFixed(2) + "/-");
+	}
+	
+	return parseFloat(parseFloat(carParkCharges.propstrength__fixed_charge__c)).toFixed(2);
 }

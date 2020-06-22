@@ -289,7 +289,7 @@ function getEnquiryForSales(){
 	var resp=fetchData("getEnquiryForSales/"+countryCode+"/"+mobileNo+"/"+projectSfid+"/"+token,null,"GET");
 	populateSearchEnquiry(resp,true);
 	debugger
-	if(token.includes("G")||token.includes("E")){
+	if(token.includes("G")||token.includes("E")||token.includes("MS")){
 //		$("#salesTabId").remove();
 		$("#salesTabId").show();
 		

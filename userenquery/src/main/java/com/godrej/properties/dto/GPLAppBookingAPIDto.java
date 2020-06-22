@@ -59,8 +59,9 @@ public class GPLAppBookingAPIDto {
 	public String discountvalue;
 	public String paymentplan_selectedsfid;
 	public String paymentplan_name;
-	
-	
+	public String comments;
+	public String drupal_booking_id;
+	public String towername;
 	public int getId() {
 		return id;
 	}
@@ -330,6 +331,24 @@ public class GPLAppBookingAPIDto {
 	}
 	public void setPaymentplan_name(String paymentplan_name) {
 		this.paymentplan_name = paymentplan_name;
+	}
+	public String getComments() {
+		return comments;
+	}
+	public void setComments(String comments) {
+		this.comments = comments;
+	}
+	public String getDrupal_booking_id() {
+		return drupal_booking_id;
+	}
+	public void setDrupal_booking_id(String drupal_booking_id) {
+		this.drupal_booking_id = drupal_booking_id;
+	}
+	public String getTowername() {
+		return towername;
+	}
+	public void setTowername(String towername) {
+		this.towername = towername;
 	}
 	
 	

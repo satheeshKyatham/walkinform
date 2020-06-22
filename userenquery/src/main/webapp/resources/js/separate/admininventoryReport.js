@@ -85,6 +85,7 @@ function getInventoryReportDtl () {
 				
 				var amount = 0;
 				var ATotal = 0;
+				var BTotal = 0;
 				
 				for(var k = 0; k< obj1.length; k++){
 					if(uniqueId[j] == obj1[k].id) {
@@ -96,6 +97,8 @@ function getInventoryReportDtl () {
 
 						if(obj1[k].propstrength__part_of_cop__c == true) {
 							ATotal = amount+ATotal;
+						} else {
+							BTotal = amount+BTotal;
 						}
 					}
 				}
@@ -139,6 +142,9 @@ function getInventoryReportDtl () {
 							" <td>"+saleable_area+"</td>" +
 							" <td>"+rate_per_unit+"</td>" +
 							" <td>"+parseFloat((rate_per_unit*saleable_area)+(ATotal)).toFixed(2)+"</td>" +
+							
+							" <td>"+parseFloat(BTotal).toFixed(2)+"</td>" +
+							
 							" <td>"+admin_name[j]+"</td>" +
 							" <td>"+hold_description[j]+"</td>" +
 							" <td>"+hold_behalf_username[j]+"</td>" +
