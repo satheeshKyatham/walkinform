@@ -214,9 +214,18 @@ public class Test {
 			Date hourback = cal.getTime();*/
 			//return hourback;
 		 //}
-		String timeStamp = new SimpleDateFormat("ddMMyyyy").format(new Date());
+		/*String timeStamp = new SimpleDateFormat("ddMMyyyy").format(new Date());
 		System.out.println(timeStamp);
-		System.out.println(Calendar.getInstance().getTimeInMillis());
+		System.out.println(Calendar.getInstance().getTimeInMillis());*/
+		
+		if(90>120 && ("Appointment Proposed".equals("Appointment Proposed")))
+		{
+			System.out.println("Qualify........");
+			
+		}
+		else
+			System.out.println("Else........");
+		
 	}
 
 }

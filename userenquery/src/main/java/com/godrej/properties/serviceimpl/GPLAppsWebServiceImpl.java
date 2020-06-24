@@ -129,7 +129,7 @@ public class GPLAppsWebServiceImpl implements GPLAppsWebService{
 						bookingData = insertPaymentDtl(bookingData);
 						
 						//update query for EOI status Update in Enquiry
-						updateData=" PropStrength__Request_Status__c='EOI', EOI_Enquiry__c='true' ";
+						updateData=" PropStrength__Request_Status__c='EOI', EOI_Enquiry__c='true',date_of_eoi__c="+new Date()+" ";
 						//bookingData.setTokenType("F");
 						//bookingData.setTokenName("REFUNDABLE");
 						
@@ -141,8 +141,10 @@ public class GPLAppsWebServiceImpl implements GPLAppsWebService{
 						bookingData.setNv_token_type("MF");
 						
 						Token token = insertIntoTokenTable(bookingData);
-						bookingData.setResp_mesg(bookingData.getResp_mesg()+token.getMsg());
-						updateData=" PropStrength__Request_Status__c='Assigned to Sales', User__c='00590000000R7gQAAS' ";//site head
+						bookingData.setNv_token_type(token.getType()+token.getQueue());
+						bookingData.setNv_tokenno(token.getQueue());
+						bookingData.setResp_mesg(bookingData.getResp_mesg());
+						updateData=" PropStrength__Request_Status__c='Assigned to Sales', User__c='"+projectData.getSalesmanager_sfid()+"' ";//site head
 						//update query for Enquiry Status to Assigned to sales in Update in Enquiry
 					}
 					
@@ -154,7 +156,7 @@ public class GPLAppsWebServiceImpl implements GPLAppsWebService{
 					{
 						bookingData.setNv_token_type("MS");
 						Token token = insertIntoTokenTable(bookingData);
-						bookingData.setResp_mesg(bookingData.getResp_mesg()+token.getMsg());
+						bookingData.setResp_mesg(bookingData.getResp_mesg());
 						bookingData.setNv_token_type(token.getType()+token.getQueue());
 						bookingData.setNv_tokenno(token.getQueue());
 						
@@ -173,8 +175,10 @@ public class GPLAppsWebServiceImpl implements GPLAppsWebService{
 					{
 						bookingData.setNv_token_type("MF");
 						Token token = insertIntoTokenTable(bookingData);
-						bookingData.setResp_mesg(bookingData.getResp_mesg()+token.getMsg());
-						updateData=" PropStrength__Request_Status__c='Assigned to Sales', User__c='00590000000R7gQAAS' ";
+						bookingData.setNv_token_type(token.getType()+token.getQueue());
+						bookingData.setNv_tokenno(token.getQueue());
+						bookingData.setResp_mesg(bookingData.getResp_mesg());
+						updateData=" PropStrength__Request_Status__c='Assigned to Sales', User__c='"+projectData.getSalesmanager_sfid()+"' ";
 					}
 				}
 				
@@ -184,8 +188,8 @@ public class GPLAppsWebServiceImpl implements GPLAppsWebService{
 				//Update contact External_Contact_ID__c
 				
 				
-//				String text = readContentFromFile("D://SW//apache-tomcat-9.0.0.M22//apache-tomcat-9.0.0.M22//htmldoc//d4u-prebookingapi-email.htm");
-				String text = readContentFromFile("D://D Drive//SW//Tomcat Server 8085//apache-tomcat-9.0.12//htmldoc//d4u-prebookingapi-email.htm");
+				String text = readContentFromFile("D://SW//apache-tomcat-9.0.0.M22//apache-tomcat-9.0.0.M22//htmldoc//d4u-prebookingapi-email.htm");
+//				String text = readContentFromFile("D://D Drive//SW//Tomcat Server 8085//apache-tomcat-9.0.12//htmldoc//d4u-prebookingapi-email.htm");
 				text = text.replaceAll("@SiteHead@", bookingData.getSiteheadName());
 				text = text.replaceAll("@CustomerName@", bookingData.getContactName());
 				text = text.replaceAll("@CustomerMobile@", bookingData.getCountryCode()+bookingData.getMobileno());
@@ -236,12 +240,13 @@ public class GPLAppsWebServiceImpl implements GPLAppsWebService{
 		eoiPref.setUnit_id(bookingData.getPropertysfid());
 		eoiPref.setUnit_name("");
 		eoiPref.setFloor_band(bookingData.getFloorband());
-		eoiPref.setDescription("Floor Band:-"+bookingData.getFloorband());
+		eoiPref.setDescription("Tower Name:"+bookingData.getTowername()+",Floor Band:-"+bookingData.getFloorband());
 		eoiPref.setCreatedby(bookingData.getSiteheadID().toString());
 		eoiPref.setUpdatedby(bookingData.getSiteheadID().toString());
 		eoiPref.setIsactive("Y");
 		eoiPref.setToken_no(bookingData.getNv_tokenno());
 		eoiPref.setEoi_date_string("");
+		eoiPref.setUserid(bookingData.getSiteheadID());
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd"); 
 		Date eoi_date;
 		try {
@@ -272,6 +277,7 @@ public class GPLAppsWebServiceImpl implements GPLAppsWebService{
 		pymtDtl.setEnq_sfid(bookingData.getEnquirySfid());
 		pymtDtl.setPayment_type(bookingData.getPaymentType());
 		pymtDtl.setBank_name(bookingData.getBankName());
+		pymtDtl.setUserid(bookingData.getSiteheadID());
 		String respAmount="";
 		if(bookingData.getAmount()!=null)
 		{
@@ -282,7 +288,9 @@ public class GPLAppsWebServiceImpl implements GPLAppsWebService{
 		pymtDtl.setTransaction_amount(respAmount);
 		pymtDtl.setTransaction_date(bookingData.getTransactionDate());
 		pymtDtl.setTransaction_id(bookingData.getTransactionID());
-		pymtDtl.setDescription(bookingData.getPaymentDescription());
+		String description="DrupalBookingID:"+bookingData.getDrupal_booking_id()+",Comments:"+bookingData.getComments()+","+bookingData.getPaymentDescription()+",agreementamount_a_total:"+bookingData.getAgreementamount_a_total()+","
+				+ "Otherchargesamount:"+bookingData.getOtherchargesamount_b_total()+",taxes_sdr_c_total:"+bookingData.getTaxes_sdr_c_total()+",totalsalesconsideration_minusdiscount:"+bookingData.getTotalsalesconsideration_minusdiscount()+",discounttype:"+bookingData.getDiscounttype()+",discountvalue:"+bookingData.getDiscountvalue()+",paymentplan_selectedsfid:"+bookingData.getPaymentplan_selectedsfid()+",paymentplan_name:"+bookingData.getPaymentplan_name();
+		pymtDtl.setDescription(description);
 		pymtDtl.setProject_sfid(bookingData.getProjectsfid());
 		pymtDtl.setIsactive("Y");
 		pymtDtl.setCreatedDate(new Timestamp(System.currentTimeMillis()));

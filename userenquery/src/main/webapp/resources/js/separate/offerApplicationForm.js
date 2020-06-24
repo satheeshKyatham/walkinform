@@ -82,6 +82,8 @@ function getofferApplicantDetails (e, offerSFID, enqSFID, contactSFID, offerName
 			
 			if ($("#projectid").val() == "a1l2s00000000pEAAQ"  || $("#projectid").val() == "a1l2s00000003lPAAQ" ) {
 				annexureName = "Annexure F";
+			} else if ($("#projectid").val() == "a1l2s00000003VlAAI") {
+				annexureName = "Annexure E";
 			} else {
 				annexureName = "Annexure G";
 			}
@@ -738,6 +740,9 @@ function otherChargesUnit(otherCharges, saleable_area__c, totalSaleConsideration
 			var carParkChargesAmount = carParkChargesRWBlr (carParkCharges, saleable_area__c);
 			
 			
+			//processCarParkCharges (CAR_PARKING_CHARGES);
+			
+			
 			$("#totalSaleConsiderationOffer").text("");
 			$("#totalSaleConsiderationOffer").text(parseInt(parseInt(clubDevChargesAmount)+parseInt(frcPlcInfraAmount)+parseInt(carParkChargesAmount)+parseInt(totalSaleConsideration)).toFixed(2));
 			
@@ -899,15 +904,21 @@ function frcPlcInfraRWBlr (frc, plc, infra_charges, saleable_area__c){
 }
 
 function carParkChargesRWBlr (carParkCharges, saleable_area__c){
-	if(carParkCharges == null){
-		return 0;
-	}
 	
-	if (carParkCharges.propstrength__fixed_charge__c == null) {
-		return 0;
-	} else {
+	if (carParkCharges != null && carParkCharges.propstrength__fixed_charge__c != null && carParkCharges.propstrength__fixed_charge__c > 0) {
 		$("#carParkCharges").text("");
 		$("#carParkCharges").text("Rs. " + parseFloat(parseFloat(carParkCharges.propstrength__fixed_charge__c)).toFixed(2) + "/-");
+		
+		$("#carParkSpaceCount").text("");
+		$("#carParkSpaceCount").text("1");
+	} else {
+		$("#carParkCharges").text("");
+		$("#carParkCharges").text("NA");
+		
+		$("#carParkSpaceCount").text("");
+		$("#carParkSpaceCount").text("0");
+		
+		return 0;
 	}
 	
 	return parseFloat(parseFloat(carParkCharges.propstrength__fixed_charge__c)).toFixed(2);

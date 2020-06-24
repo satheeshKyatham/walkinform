@@ -1271,7 +1271,7 @@ if(ses!=null){
 									<option value="Revisit">Revisit</option>
 		
 								</select> <span class="highlight"></span><span class="bar"></span> <label
-									class="select-label">Follow Type </label>
+									class="select-label">Follow-up Type <strong class="mndt">*</strong></label>
 							</div>
 							<div class="clearfix"></div>
 						</div>
@@ -1279,7 +1279,7 @@ if(ses!=null){
 							
 						<div class="col-md-3 col-sm-6 col-xs-12" id="followupDateID" ><!-- id="followupDateID" style="display:none;" -->
 							<div class="form-group" id="fdate" style="margin-top: -15px; z-index: 0;">
-								<label style="font-weight: normal;">Follow Date & Time</label>
+								<label style="font-weight: normal;">Follow-up Date & Time<strong class="mndt">*</strong></label>
 								<div class='input-group date datetimepickerfollow'>
 									<input style="z-index: 0; border-radius: 0;" type='text' name="enquiryReport.followDate"
 										class="form-control autocomplete-off "
@@ -1569,9 +1569,9 @@ if(ses!=null){
 						
 						<div class="col-md-12 col-xs-12"  id="enquiryCommentsDiv">
 							<div class="group">
-							<textarea class="autocomplete-off" id="enquiryNonEditComment" name="enquiryReport.enquiryNonEditComment"></textarea> <!-- class="sales_submitted" -->
+							<textarea class="autocomplete-off requiredField" id="enquiryNonEditComment" name="enquiryReport.enquiryNonEditComment"></textarea> <!-- class="sales_submitted" -->
 								<span class="highlight"></span><span class="bar"></span>
-								<label>Add Comments<!-- <strong class="mndt">*</strong> --></label>
+								<label>Add Comments<strong class="mndt">*</strong></label>
 							</div>
 							<div class="clearfix"></div>
 						</div>
@@ -1832,7 +1832,9 @@ if(ses!=null){
 var dateToday = new Date();
 $(function () {                
      $('.datetimepickerfollow').datetimepicker({
-         format: 'DD-MM-YYYY HH:mm'//,
+         format: 'DD-MM-YYYY HH:mm',
+        	 //inline: true,
+             sideBySide: true
         // minDate: dateToday 
          
    });
@@ -1877,6 +1879,8 @@ $(function () {
 			$('#followupTypeID').hide();
 			$('#followupDateID').hide();
 			$('#LostReasonID').addClass('requiredField');
+			$('#followtype').removeClass('requiredField');
+			$('#followdate').removeClass('requiredField');
 		});
 		$('.NoLostReasonSelected').click ( function (){
 			//alert("On select");
@@ -1884,6 +1888,8 @@ $(function () {
 			$('#followupTypeID').show();
 			$('#followupDateID').show();
 			$('#LostReasonID').removeClass('requiredField');
+			$('#followtype').addClass('requiredField');
+			$('#followdate').addClass('requiredField');
 		});
 		
 	</script>	
