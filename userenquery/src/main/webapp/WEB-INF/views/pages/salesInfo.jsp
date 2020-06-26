@@ -1710,8 +1710,8 @@ if(ses!=null){
     <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.25/webcam.min.js"></script>
 
 	<script src="<c:url value='/resources/js/springForm.js?v=${sessionScope.version}' />"></script>
-	<script src="<c:url value='/resources/js/commonValidation.js?v=18.18' />"></script>
-	<script src="<c:url value='/resources/js/utility.js?v=18.18' />"></script>
+	<script src="<c:url value='/resources/js/commonValidation.js?v=18.19' />"></script>
+	<script src="<c:url value='/resources/js/utility.js?v=18.19' />"></script>
 	<%-- <script src="<c:url value='/resources/js/enquiryRequest/enquiryRequest.js' />"></script> --%>
 	<script src="<c:url value='/resources/js/enquiryRequest/salesRequest.js?v=${sessionScope.version}' />"></script>	
     <script src="<c:url value='/resources/js/intlTelInput.js' />"></script>

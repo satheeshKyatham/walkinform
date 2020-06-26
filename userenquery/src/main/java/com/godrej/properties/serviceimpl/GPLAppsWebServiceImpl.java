@@ -208,7 +208,7 @@ public class GPLAppsWebServiceImpl implements GPLAppsWebService{
 				} */
 				
 				
-				SendMailThreadUtil mail =new SendMailThreadUtil("sathish.kyatham@godrejproperties.com",	projectData.getSitehead_user_mail(), projectName, text);		
+				SendMailThreadUtil mail =new SendMailThreadUtil(projectData.getSitehead_user_mail(),"", projectName, text);		
 			}
 		}
 		catch (Exception e) {

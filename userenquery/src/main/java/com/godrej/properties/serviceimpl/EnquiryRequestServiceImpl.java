@@ -558,7 +558,7 @@ public class EnquiryRequestServiceImpl implements EnquiryRequestService {
 			List<EnquiryDto> enquiryList=pushEnquiryDataService.getEnquiriesByMobileNo(countryCode,mobileNo,projectSfid,userid);
 			List<EnquiryDto> enquiries=new ArrayList<>();
 			log.info("Input Values for Query String:Country Code:{}, Mobile No:{}, Projectsfid:{}",countryCode,mobileNo,projectSfid);
-			log.info("Response From Enquiry Query String:"+enquiryList.size());
+			log.info("Response From Enquiry Query String:{}",enquiryList.size());
 			
 //		 2) if the list size is 0 then return  new Enquiry form
 			if(CommonUtil.isListEmpty(enquiryList)){
