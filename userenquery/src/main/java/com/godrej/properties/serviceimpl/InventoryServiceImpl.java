@@ -145,9 +145,9 @@ public class InventoryServiceImpl implements InventoryService {
 			 saveHoldInventoryAdminLog(inventoryAdminLog);
 		 } 
 		 
-		 if (holdmsg.equals("block")) {
+		 //if (holdmsg.equals("block")) {
 			 drupalInventoryStatusUpdate.inventoryStatusUpdate(unitsfid, "true");
-		 }
+		 //}
 		 
 		 
 	}
