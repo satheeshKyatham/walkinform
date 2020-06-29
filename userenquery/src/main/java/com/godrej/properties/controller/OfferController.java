@@ -283,11 +283,11 @@ public class OfferController {
 	}
 	
 	private boolean isUnderPMAY(String offerId, String projectSfid, double basicSalePrice, double reraCarpetAreaSqm) {
-		if (projectSfid.equals("a1l2s00000000X5AAI")) {
+		if (projectSfid.equals("a1l2s00000000X5AAI") || projectSfid.equals("a1l6F000003TXloQAG")) {
 			return (offerId!=null && offerId.length()==18 && basicSalePrice < 4500000  &&  reraCarpetAreaSqm < 90) ;
 		}
 		
-		if (projectSfid.equals("a1l2s00000003VlAAI") || projectSfid.equals("a1l6F000003TXloQAG")) {
+		if (projectSfid.equals("a1l2s00000003VlAAI")) {
 			return (offerId!=null && offerId.length()==18 && basicSalePrice < 4500000  &&  reraCarpetAreaSqm < 60) ;
 		}
 		
