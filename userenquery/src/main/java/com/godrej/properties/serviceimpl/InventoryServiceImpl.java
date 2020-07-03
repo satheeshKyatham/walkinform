@@ -110,6 +110,10 @@ public class InventoryServiceImpl implements InventoryService {
 		}
 			
 		 String [] data= unitsfid.split(",");
+		 
+		 StringBuilder successUnitUpdate = new StringBuilder();
+		 String drupalUpdateUnit = "";
+		 
 		 for (int i=0;i<data.length;i++){
 			 HoldInventoryAdmin inventoryAdmin= new HoldInventoryAdmin();
 			 inventoryAdmin.setUnitSfid(data[i]);
@@ -143,10 +147,18 @@ public class InventoryServiceImpl implements InventoryService {
 			 inventoryAdminLog.setEnq_sfid(enqSFID);
 			 
 			 saveHoldInventoryAdminLog(inventoryAdminLog);
+			 
+			 successUnitUpdate.append(data[i]);
+			 successUnitUpdate.append("_");
 		 } 
 		 
+		 drupalUpdateUnit = successUnitUpdate.toString();
+		 if (drupalUpdateUnit != null && drupalUpdateUnit.length() > 0 && drupalUpdateUnit.charAt(drupalUpdateUnit.length() - 1) == '_') {
+			 drupalUpdateUnit = drupalUpdateUnit.substring(0, drupalUpdateUnit.length() - 1);
+		 }
+		 
 		 //if (holdmsg.equals("block")) {
-			 drupalInventoryStatusUpdate.inventoryStatusUpdate(unitsfid, "true");
+		drupalInventoryStatusUpdate.inventoryStatusUpdate(drupalUpdateUnit, "true");
 		 //}
 		 
 		 

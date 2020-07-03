@@ -3175,7 +3175,7 @@ public class WebServiceController<MultipartFormDataInput> {
 						inventoryService.saveHoldInventoryAdminLog(inventoryAdminLog);
 						
 						successUnitUpdate.append(data[i]);
-						successUnitUpdate.append(",");
+						successUnitUpdate.append("_");
 					} catch (Exception e) {
 						log.error("error", e);
 						error.append("/n Problem in releasing Unit - ")
@@ -3184,7 +3184,7 @@ public class WebServiceController<MultipartFormDataInput> {
 				}
 				 
 				drupalUpdateUnit = successUnitUpdate.toString();
-				if (drupalUpdateUnit != null && drupalUpdateUnit.length() > 0 && drupalUpdateUnit.charAt(drupalUpdateUnit.length() - 1) == ',') {
+				if (drupalUpdateUnit != null && drupalUpdateUnit.length() > 0 && drupalUpdateUnit.charAt(drupalUpdateUnit.length() - 1) == '_') {
 					drupalUpdateUnit = drupalUpdateUnit.substring(0, drupalUpdateUnit.length() - 1);
 				}
 				 
