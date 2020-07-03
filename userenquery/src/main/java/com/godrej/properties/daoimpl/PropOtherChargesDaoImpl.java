@@ -193,4 +193,12 @@ public class PropOtherChargesDaoImpl extends AbstractDao<Integer, PropOtherCharg
 		return "updated";
 		
 	}
+
+
+	@Override
+	public String getPropertyName(String unitSfid) {
+		Session session = this.sessionFactory.getCurrentSession();	
+		Query q = session.createNativeQuery("select propstrength__house_unit_no__c from salesforce.propstrength__property__c where sfid='"+unitSfid+"'");
+		return q.getSingleResult().toString();
+	}
 }

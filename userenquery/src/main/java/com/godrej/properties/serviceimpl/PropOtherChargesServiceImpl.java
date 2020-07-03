@@ -38,4 +38,9 @@ public class PropOtherChargesServiceImpl implements PropOtherChargesService{
 	public String updatePropertyStatus(String propSfid) {
 		return propOtherChargesDao.updatePropertyStatus(propSfid);
 	}
+
+	@Override
+	public String getPropertyName(String unitSfid) {
+		return propOtherChargesDao.getPropertyName(unitSfid);
+	}
 }

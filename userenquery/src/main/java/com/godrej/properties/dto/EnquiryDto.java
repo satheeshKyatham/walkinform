@@ -114,6 +114,7 @@ public class EnquiryDto extends CommonDto {
     private String sourcing_Team_Lead_email;
     private String closingTeamLeadDto;
     private String sourcingTeamLeadDto;
+    private String internationalSMDto;
     
     private String name;
     private String isAllowCCPaymentGateway;
@@ -672,6 +673,14 @@ public class EnquiryDto extends CommonDto {
 
 	public void setVirtual_meeting_count__c(Double virtual_meeting_count__c) {
 		this.virtual_meeting_count__c = virtual_meeting_count__c;
+	}
+
+	public String getInternationalSMDto() {
+		return internationalSMDto;
+	}
+
+	public void setInternationalSMDto(String internationalSMDto) {
+		this.internationalSMDto = internationalSMDto;
 	}
 
 	

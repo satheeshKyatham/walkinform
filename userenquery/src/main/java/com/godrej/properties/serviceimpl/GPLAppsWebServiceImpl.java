@@ -21,6 +21,7 @@ import com.godrej.properties.dao.ContactReportDao;
 import com.godrej.properties.dao.EOIPaymentDtlDao;
 import com.godrej.properties.dao.EnquiryReportDao;
 import com.godrej.properties.dao.TokenDao;
+import com.godrej.properties.dao.TowerMasterDao;
 import com.godrej.properties.dao.UserContactDao;
 import com.godrej.properties.dto.GPLAppBookingAPIDto;
 import com.godrej.properties.dto.ProjectLaunchDao;
@@ -30,9 +31,11 @@ import com.godrej.properties.model.EOIPreferenceDtl;
 import com.godrej.properties.model.EnquiryReport;
 import com.godrej.properties.model.ProjectLaunch;
 import com.godrej.properties.model.Token;
+import com.godrej.properties.model.TowerMaster;
 import com.godrej.properties.service.EOIPreferenceDtlService;
 import com.godrej.properties.service.GPLAppsWebService;
 import com.godrej.properties.service.InventoryService;
+import com.godrej.properties.service.PropOtherChargesService;
 import com.godrej.properties.util.SendMailThreadUtil;
 import com.godrej.properties.webservices.DrupalInventoryStatusUpdate;
 
@@ -69,6 +72,12 @@ public class GPLAppsWebServiceImpl implements GPLAppsWebService{
 	
 	@Autowired
 	DrupalInventoryStatusUpdate drupalInventoryStatusUpdate;
+	
+	@Autowired
+	TowerMasterDao towerMasterDao;
+	
+	@Autowired
+	PropOtherChargesService propOtherChargesService;
 	
 	@Override
 	public GPLAppBookingAPIDto insertGPLBookingData(GPLAppBookingAPIDto bookingData) {
@@ -113,7 +122,8 @@ public class GPLAppsWebServiceImpl implements GPLAppsWebService{
 				//Insert NV_Token table with site head id
 				 
 				//if(eoiJourneyFlag==True && bookingJourneyFlag==False)
-				
+				TowerMaster towerMaster =null;
+				String propertyName="";
 				if(bookingData.getEoiJourneyFlag().equals("T") && bookingData.getBookingJourneyFlag().equals("F"))
 				{
 					//if(paymentStatus=="Success")
@@ -123,7 +133,22 @@ public class GPLAppsWebServiceImpl implements GPLAppsWebService{
 						Token token = insertIntoTokenTable(bookingData);
 						bookingData.setNv_token_type(token.getType()+token.getQueue());
 						bookingData.setNv_tokenno(token.getQueue());
+						//Call Tower Data
 						
+						if(bookingData.getTowersfid()!=null && bookingData.getTowersfid().length()>0)
+						{
+							towerMaster= towerMasterDao.getTowerMasterDetails(bookingData.getTowersfid());
+							bookingData.setTowersfid(towerMaster.getSfid());
+							bookingData.setTowername(towerMaster.getTower_name__c());
+						}
+						//Call Unit Data
+						
+						if(bookingData.getPropertysfid()!=null && bookingData.getPropertysfid().length()>0)
+						{
+							propertyName= propOtherChargesService.getPropertyName(bookingData.getPropertysfid());
+							bookingData.setPropertysfid(bookingData.getPropertysfid());
+							bookingData.setPropertyname(propertyName);
+						}
 						bookingData = insertEOIPreference(bookingData);
 						
 						bookingData = insertPaymentDtl(bookingData);
@@ -159,6 +184,21 @@ public class GPLAppsWebServiceImpl implements GPLAppsWebService{
 						bookingData.setResp_mesg(bookingData.getResp_mesg());
 						bookingData.setNv_token_type(token.getType()+token.getQueue());
 						bookingData.setNv_tokenno(token.getQueue());
+						//Call Tower Data
+						if(bookingData.getTowersfid()!=null)
+						{
+							towerMaster= towerMasterDao.getTowerMasterDetails(bookingData.getTowersfid());
+							bookingData.setTowersfid(towerMaster.getSfid());
+							bookingData.setTowername(towerMaster.getTower_name__c());
+						}
+						//Call Unit Data
+						
+						if(bookingData.getPropertysfid()!=null)
+						{
+							propertyName= propOtherChargesService.getPropertyName(bookingData.getPropertysfid());
+							bookingData.setPropertysfid(bookingData.getPropertysfid());
+							bookingData.setPropertyname(propertyName);
+						}
 						
 						bookingData = insertEOIPreference(bookingData);
 						
@@ -232,15 +272,15 @@ public class GPLAppsWebServiceImpl implements GPLAppsWebService{
 		eoiPref.setUser_email(bookingData.getSiteheadEmail());
 		eoiPref.setUser_name(bookingData.getSiteheadName());
 		eoiPref.setUserid(bookingData.getSiteheadID());
-//		eoiPref.setTower_id(bookingData.getTowersfid());
-		eoiPref.setTower_id("All");
-		eoiPref.setTower_name("All");
+		eoiPref.setTower_id(bookingData.getTowersfid());
+		//eoiPref.setTower_id("All");
+		eoiPref.setTower_name(bookingData.getTowername());
 		eoiPref.setTypology_id(bookingData.getTypology());
 		eoiPref.setTypology_name(bookingData.getTypology());
 		eoiPref.setUnit_id(bookingData.getPropertysfid());
-		eoiPref.setUnit_name("");
+		eoiPref.setUnit_name(bookingData.getPropertyname());
 		eoiPref.setFloor_band(bookingData.getFloorband());
-		eoiPref.setDescription("Tower Name:"+bookingData.getTowername()+",Floor Band:-"+bookingData.getFloorband());
+		eoiPref.setDescription("Tower Name:"+bookingData.getTowername()+",Floor Band:-"+bookingData.getFloorband()+",Property SFID:-"+bookingData.getPropertysfid());
 		eoiPref.setCreatedby(bookingData.getSiteheadID().toString());
 		eoiPref.setUpdatedby(bookingData.getSiteheadID().toString());
 		eoiPref.setIsactive("Y");

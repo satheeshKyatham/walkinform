@@ -62,6 +62,7 @@ public class GPLAppBookingAPIDto {
 	public String comments;
 	public String drupal_booking_id;
 	public String towername;
+	public String propertyname;
 	public int getId() {
 		return id;
 	}
@@ -349,6 +350,12 @@ public class GPLAppBookingAPIDto {
 	}
 	public void setTowername(String towername) {
 		this.towername = towername;
+	}
+	public String getPropertyname() {
+		return propertyname;
+	}
+	public void setPropertyname(String propertyname) {
+		this.propertyname = propertyname;
 	}
 	
 	
