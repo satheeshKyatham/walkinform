@@ -26,6 +26,7 @@ import com.godrej.properties.service.HoldInventoryEntryService;
 import com.godrej.properties.service.InventoryService;
 import com.godrej.properties.service.ZZExistService;
 import com.godrej.properties.service.ZZrequestProcessService;
+import com.godrej.properties.webservices.DrupalInventoryStatusUpdate;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -54,6 +55,8 @@ public class InventoryController {
  	@Autowired
  	private HoldIntervalService holdIntervalService;
 
+ 	@Autowired
+	private DrupalInventoryStatusUpdate drupalInventoryStatusUpdate;
  	
 	@PostMapping(value = { "/holdExistData" })
 	public @ResponseBody String holdExistData (@RequestParam("projectNameId") String projectNameId, @RequestParam("customerId") String customerId) {
@@ -182,8 +185,10 @@ public class InventoryController {
 
 				try {
 					holdInventoryEntryService.insertHoldRqst(action);
+					
+					drupalInventoryStatusUpdate.inventoryStatusUpdate(unitSfid, "true");
 				}catch (Exception e) {
-					log.error("Exception while holding inventory , Only one person can hold the inventory at a time");
+					log.error("Exception while holding inventory " + e);
 					return gson.toJson("Sorry this unit is Held by someone else, Please Try again after some time");
 				}
 				log.info("After Insert************************* HOLD Issue");
