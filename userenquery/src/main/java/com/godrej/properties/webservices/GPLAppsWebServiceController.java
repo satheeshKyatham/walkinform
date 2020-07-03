@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.godrej.properties.constants.KeyConstants;
 import com.godrej.properties.dto.EnquiryDto;
 import com.godrej.properties.dto.GPLAppBookingAPIDto;
 import com.godrej.properties.dto.GPLAppEnquiryReqAPIDto;
@@ -111,7 +112,7 @@ public class GPLAppsWebServiceController {
 					}
 					catch (Exception e) {
 						log.error("Error : {}",e);
-						dto.setSrc_protection_flag("ERROR");
+						dto.setSrc_protection_flag("Error");
 						dto.setComments("Data Mapping Issue");
 						return dto;
 					}
@@ -119,21 +120,21 @@ public class GPLAppsWebServiceController {
 				else
 				{
 					log.info("No Enquiry Found with Given Prameters: Country Code is {}, Mobile No is {}, projectsfid {}",enqReqDto.getCountrycode(),enqReqDto.getMobileno(),enqReqDto.getProjectsfid());
-					dto.setSrc_protection_flag("NEW");
+					dto.setSrc_protection_flag("New");
 					return dto;
 				}
 			}
 			catch (Exception e) {
 				log.info("Enquiry Fetching issue with Given Prameters: Country Code is {}, Mobile No is {}, projectsfid {}",enqReqDto.getCountrycode(),enqReqDto.getMobileno(),enqReqDto.getProjectsfid());
 				log.error("Error : {}",e);
-				dto.setSrc_protection_flag("ERROR");
+				dto.setSrc_protection_flag("Error");
 				dto.setComments("Enquiry Fetching issue");
 				return dto;
 			}
 		}
 		else
 		{
-			dto.setSrc_protection_flag("ERROR");
+			dto.setSrc_protection_flag("Error");
 			dto.setComments("Invalid Input Parameters...");
 			return dto;
 		}
@@ -159,25 +160,41 @@ public class GPLAppsWebServiceController {
 			enqResp.setContact_sfid(enquiryDto.getContact().getSfid());
 		else
 			enqResp.setContact_sfid("");
-		enqResp.setDate_of_enquiry(enquiryDto.getDateOfEnquiry().toString());
-		enqResp.setDate_of_sitevisit(enquiryDto.getDateOfSiteVisit().toString());
+		if(enquiryDto.getDateOfEnquiry()!=null)
+			enqResp.setDate_of_enquiry(enquiryDto.getDateOfEnquiry().toString());
+		else
+			enqResp.setDate_of_enquiry("");
+		if(enquiryDto.getDateOfSiteVisit()!=null)
+			enqResp.setDate_of_sitevisit(enquiryDto.getDateOfSiteVisit().toString());
+		else
+			enqResp.setDate_of_sitevisit("");
 		enqResp.setEmployee_referral_name(enquiryDto.getEmployee_Referral__c());
-		enqResp.setEmployee_referral_sfid("");
+		enqResp.setEmployee_referral_sfid(enquiryDto.getEmployee_Referral__c());
 		enqResp.setEnquiry_name(enquiryDto.getName());
 		enqResp.setEnquiry_sfid(enquiryDto.getSfid());
 		enqResp.setEnquiry_source(enquiryDto.getEnquirySource());
 		enqResp.setEnquiry_type(enquiryDto.getIsReferredByChannelPartner());
 		enqResp.setEoi_flag(enquiryDto.getEoi_enquiry__c());
 		enqResp.setLoyalty_name(enquiryDto.getContact_Loyalty__c());
-		enqResp.setLoyalty_sfid("");
+		enqResp.setLoyalty_sfid(enquiryDto.getContact_Loyalty__c());
 		enqResp.setOther_cp_name(enquiryDto.getOtherChannelPartner());
 		enqResp.setProject_name(enquiryDto.getProject().getName());
 		enqResp.setProject_sfid(enquiryDto.getProject().getSfid());
 		enqResp.setReferral_name(enquiryDto.getContact_referral__c());
-		enqResp.setReferral_sfid("");
+		enqResp.setReferral_sfid(enquiryDto.getContact_referral__c());
 		enqResp.setReferred_partner_flag(enquiryDto.getIsReferredByChannelPartnerFlag());
 		
-		if(enquiryDto.getIsReferredByChannelPartnerFlag()!=null && enquiryDto.getIsReferredByChannelPartnerFlag().equals("NSP"))
+		
+		if((enquiryDto.getIsReferredByChannelPartnerFlag()!=null && enquiryDto.getIsReferredByChannelPartnerFlag().equals("NSP")) || enquiryDto.getWalkInSource()==null 
+				/*|| (enquiryDto.getEmployee_Referral__c()!=null && enquiryDto.getEmployee_Referral__c().equals(KeyConstants.ENQUIRY_EMPLOYEE_SFID))
+				|| (enquiryDto.getContact_referral__c()!=null && enquiryDto.getContact_referral__c().equals(KeyConstants.ENQUIRY_REFERRAL_SFID))
+				|| (enquiryDto.getContact_Loyalty__c()!=null && enquiryDto.getContact_Loyalty__c().equals(KeyConstants.ENQUIRY_EXISTINGCUSTOMER_SFID))*/
+				
+				|| (enquiryDto.getWalkInSource()!=null && enquiryDto.getWalkInSource().equals("Referral"))
+				|| (enquiryDto.getWalkInSource()!=null && enquiryDto.getWalkInSource().equals("Godrej Employee"))
+				|| (enquiryDto.getWalkInSource()!=null && enquiryDto.getWalkInSource().equals("Existing Customer"))
+				
+				)
 		{
 			enqResp.setSrc_protection_flag("Edit");
 		}
@@ -185,13 +202,18 @@ public class GPLAppsWebServiceController {
 			enqResp.setSrc_protection_flag("Source");
 		enqResp.setWalkin_source(enquiryDto.getWalkInSource());
 		
-		if((enquiryDto.getWalkInSource().equals("Digital") || enquiryDto.getWalkInSource().equals("Exhibition") || enquiryDto.getWalkInSource().equals("Newspaper") || enquiryDto.getWalkInSource().equals("Hoarding") || enquiryDto.getWalkInSource().equals("Radio") || enquiryDto.getWalkInSource().equals("Word of mouth") 
-				|| enquiryDto.getWalkInSource().equals("SMS")  || enquiryDto.getWalkInSource().equals("Corporate") || enquiryDto.getWalkInSource().equals("Other BTL activities") || enquiryDto.getWalkInSource().equals("Telemarketing")))
+		if(enquiryDto.getWalkInSource()!=null)
 		{
-			enqResp.setWalkin_source_mobile("Direct");
+			if((enquiryDto.getWalkInSource().equals("Digital") || enquiryDto.getWalkInSource().equals("Exhibition") || enquiryDto.getWalkInSource().equals("Newspaper") || enquiryDto.getWalkInSource().equals("Hoarding") || enquiryDto.getWalkInSource().equals("Radio") || enquiryDto.getWalkInSource().equals("Word of mouth") 
+					|| enquiryDto.getWalkInSource().equals("SMS")  || enquiryDto.getWalkInSource().equals("Corporate") || enquiryDto.getWalkInSource().equals("Other BTL activities") || enquiryDto.getWalkInSource().equals("Telemarketing")))
+			{
+				enqResp.setWalkin_source_mobile("Direct");
+			}
+			else
+				enqResp.setWalkin_source_mobile(enquiryDto.getWalkInSource());
 		}
 		else
-			enqResp.setWalkin_source_mobile(enquiryDto.getWalkInSource());
+			enqResp.setWalkin_source_mobile("");
 			
 		return enqResp;
 		

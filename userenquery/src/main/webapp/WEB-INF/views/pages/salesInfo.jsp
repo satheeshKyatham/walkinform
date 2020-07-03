@@ -1536,7 +1536,16 @@ if(ses!=null){
 							</div>
 							<div class="clearfix"></div>
 						</div>
-						
+						<div class="col-md-3 col-sm-6 col-xs-12" id="">
+							<div class="group">
+							<div id=""></div>
+							<select class="autocomplete-off" id="internationalSMId" name="internationalSMDto">
+							</select>
+								<span class="highlight"></span><span class="bar"></span>
+								<label class="select-label">International Sales Manager</label>
+							</div>
+							<div class="clearfix"></div>
+						</div>
 						<div class="col-md-3 col-sm-6 col-xs-12">
 							<div class="group">
 								<select class="sales_submitted disableInputs" id="verticalId" name="verticle__c">

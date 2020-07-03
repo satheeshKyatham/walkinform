@@ -184,6 +184,13 @@ public class EnquiryConverter implements CommonConverter<Enquiry, EnquiryDto>{
 		}
 		if(entity.getVirtual_meeting_count__c()!=null)
 			dto.setVirtual_meeting_count__c(entity.getVirtual_meeting_count__c());
+		/* Added By Satheesh K - 26-06-2020
+		 * Requested by Prakash - International Sales Manager adding on Sales Tab*/
+		if(entity.getInternational_Sales_Manager__c()!=null)
+		{
+			dto.setInternationalSMDto(entity.getInternational_Sales_Manager__c());
+			
+		}
 		return dto;
 	}
 
@@ -332,6 +339,8 @@ public class EnquiryConverter implements CommonConverter<Enquiry, EnquiryDto>{
 			entity.setClosing_Team_Lead__c(dto.getClosing_Team_Lead__c());
 		if(dto.getSourcing_Team_Lead__c()!=null)
 			entity.setSourcing_Team_Lead__c(dto.getSourcing_Team_Lead__c());
+		if(dto.getInternationalSMDto()!=null)
+			entity.setInternational_Sales_Manager__c(dto.getInternationalSMDto());
 		
 		return entity;
 	}

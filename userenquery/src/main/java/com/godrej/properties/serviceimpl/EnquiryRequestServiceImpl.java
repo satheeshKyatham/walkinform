@@ -519,6 +519,10 @@ public class EnquiryRequestServiceImpl implements EnquiryRequestService {
 			if(sourcingTeamLead!=null && sourcingTeamLead.length()>0)
 				dest.setSourcing_Team_Lead__c(sourcingTeamLead);
 		}
+		if(src.getInternationalSMDto()!=null && src.getInternationalSMDto().length()>0)
+		{
+			dest.setInternationalSMDto(src.getInternationalSMDto());
+		}
 		
 		return dest;
 	}
@@ -815,6 +819,7 @@ public class EnquiryRequestServiceImpl implements EnquiryRequestService {
 						enquiry.setHasError(true);
 						enquiry.setNonEdit(enquiry_Str);						
 						enquiry.setMessage("Scenario 1: "+"Cannot edit "+name+" enquiry details");
+						enquiries.remove(0);
 						enquiries.add(enquiry);						
 						log.info("Scenario 1: Cannot edit {} enquiry details, Enquiry No:{}, ID:{}, ContactSFID:{}, walk-in source:{}",name,enquiry.getName(),enquiry.getEnquiryId(),enquiry.getContactId(),enquiry.getWalkInSource());
 						
@@ -829,6 +834,14 @@ public class EnquiryRequestServiceImpl implements EnquiryRequestService {
 							log.info("Scenario 5: Cannot edit {} details, Enquiry No:{}, ID:{}, ContactSFID:{}, walk-in source:{}",name,enquiry.getName(),enquiry.getEnquiryId(),enquiry.getContactId(),enquiry.getWalkInSource());
 							
 						}
+						else
+						{
+							enquiry.setHasError(true);
+							enquiry.setNonEdit(contact_Str);						
+							enquiry.setMessage("Scenario 5: "+"Cannot edit "+name+" details");
+							log.info("Scenario 5: Cannot edit {} details, Enquiry No:{}, ID:{}, ContactSFID:{}, walk-in source:{}",name,enquiry.getName(),enquiry.getEnquiryId(),enquiry.getContactId(),enquiry.getWalkInSource());
+						}
+						enquiries.remove(0);
 						enquiries.add(enquiry);						
 						
 					}

@@ -164,6 +164,9 @@ public class Enquiry extends CommonModel{
    	private String closing_Team_Lead__c;
     @Column(name="Sourcing_Team_Lead__c")
    	private String sourcing_Team_Lead__c;
+    @Column(name="International_Sales_Manager__c")
+   	private String international_Sales_Manager__c;
+    
     
 //branch__c
 //EOI_Bank_Name__c
@@ -648,6 +651,14 @@ public class Enquiry extends CommonModel{
 
 	public void setVirtual_meeting_count__c(Double virtual_meeting_count__c) {
 		this.virtual_meeting_count__c = virtual_meeting_count__c;
+	}
+
+	public String getInternational_Sales_Manager__c() {
+		return international_Sales_Manager__c;
+	}
+
+	public void setInternational_Sales_Manager__c(String international_Sales_Manager__c) {
+		this.international_Sales_Manager__c = international_Sales_Manager__c;
 	}
 
 
