@@ -2811,8 +2811,8 @@ function printPdfData(generateFrom) {
              
        }).done(function(data){
              
-    	   
-    	  var uriPath = pageContext+'Costsheet?name='+enqSfid+'-'+$('#unitSfid').val()+'-'+$('#projectId').val() +'&region='+$('#region__c').val() + '&project='+$('#marketingProjectName').val()+'&tower='+encodeURIComponent($('#towerTval').text())+'&floor=' + $('#floorTval').text() + '&unit=' + $('#unitTval').text() + '&from=costsheet';
+    	  //var uriPath = pageContext+'Costsheet?name='+enqSfid+'-'+$('#unitSfid').val()+'-'+$('#projectId').val() +'&region='+$('#region__c').val() + '&project='+$('#marketingProjectName').val()+'&tower='+encodeURIComponent($('#towerTval').text())+'&floor=' + $('#floorTval').text() + '&unit=' + $('#unitTval').text() + '&from=costsheet';
+    	  var uriPath = pageContext+'Costsheet?name='+enqSfid+'-'+$('#unitSfid').val()+'-'+$('#projectId').val() +'&region='+$('#region__c').val() + '&project='+encodeURIComponent($('#marketingProjectName').val())+'&tower='+encodeURIComponent($('#towerTval').text())+'&floor=' + $('#floorTval').text() + '&unit=' + $('#unitTval').text() + '&from=costsheet';
     	  var win = window.open(uriPath,'_blank');
            
 //    	   var win = window.open(pageContext+'Costsheet?name='+enqSfid+'-'+$('#unitSfid').val()+'-'+$('#projectId').val() +'&region='+$('#region__c').val() + '&project='+$('#marketingProjectName').val()+'&tower='+$('#towerTval').text()+'&floor=' + $('#floorTval').text() + '&unit=' + $('#unitTval').text() + '&from=costsheet', '_blank');  
