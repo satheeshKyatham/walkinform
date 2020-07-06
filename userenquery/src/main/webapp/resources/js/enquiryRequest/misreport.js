@@ -164,7 +164,8 @@ function createdOfferProject(){
 					} else{
 						schemename=obj1[i].scheme_name;
 					}
-					csPath = contextPath+'/Costsheet?name='+obj1[i].costsheet_path + '&from=ofrList';
+					//csPath = contextPath+'/Costsheet?name='+obj1[i].costsheet_path + '&from=ofrList';
+					csPath = contextPath+'/Costsheet?name='+encodeURIComponent(obj1[i].costsheet_path) + '&from=ofrList';
 					var fileIcon = '';
 					if (obj1[i].costsheet_path != null) {
 						fileIcon = '<i class="fa fa-file"></i>';
