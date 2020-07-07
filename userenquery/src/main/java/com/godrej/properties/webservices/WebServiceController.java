@@ -779,7 +779,7 @@ public class WebServiceController<MultipartFormDataInput> {
 	
 	
 	@RequestMapping(value = { "/printCSdata" }, method = RequestMethod.POST)
-	public synchronized String printCSdata (@RequestParam("unitTval") String unitTval, @RequestParam("floorTval") String floorTval, @RequestParam("towerName") String towerName, @RequestParam("regionName") String regionName, @RequestParam("projectSfid") String projectSfid, @RequestParam("unitSfid") String unitSfid, @RequestParam("enqSfid") String enqSfid, @RequestParam("csData") String csData, @RequestParam("projectName") String projectName, @RequestParam("currentDate") String currentDate) throws JRException, IOException{
+	public synchronized String printCSdata (@RequestParam("USEREMAIL_GV") String USEREMAIL_GV, @RequestParam("unitTval") String unitTval, @RequestParam("floorTval") String floorTval, @RequestParam("towerName") String towerName, @RequestParam("regionName") String regionName, @RequestParam("projectSfid") String projectSfid, @RequestParam("unitSfid") String unitSfid, @RequestParam("enqSfid") String enqSfid, @RequestParam("csData") String csData, @RequestParam("projectName") String projectName, @RequestParam("currentDate") String currentDate) throws JRException, IOException{
 		log.info("Enter Print Costsheet");
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		Gson gson = gsonBuilder.create();
@@ -791,7 +791,7 @@ public class WebServiceController<MultipartFormDataInput> {
 		 */
 		log.info("");
 		iTextHTMLtoPDF solution = new iTextHTMLtoPDF ();
-		solution.PDFReport(unitTval, floorTval, towerName, regionName, projectSfid, unitSfid, timeId ,csData, projectName, currentDate, enqSfid); 
+		solution.PDFReport(USEREMAIL_GV, unitTval, floorTval, towerName, regionName, projectSfid, unitSfid, timeId ,csData, projectName, currentDate, enqSfid); 
 		
 		return gson.toJson(timeId);
 	}

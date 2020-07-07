@@ -2788,6 +2788,12 @@ $('.printCurrentDate').text($.datepicker.formatDate('dd/mm/yy', new Date()));
 function printPdfData(generateFrom) {
        var url=$("#contextPath").val();
        
+       var USEREMAIL = '';
+       if (generateFrom != "Offered"){
+    	   USEREMAIL = USEREMAIL_GV;
+       } else {
+    	   USEREMAIL = '';
+       }
        
        
        var enq18sfid = "";
@@ -2807,7 +2813,7 @@ function printPdfData(generateFrom) {
              $('#csCommitmentTxt').html("<h5>Sales Comments: </h5><span style='font-size:8px !important;'>"+$('#costsheet_commitment').val()+"</span>");
        } 
              
-       $.post(pageContext+"printCSdata",{"unitTval":$('#unitTval').text(), "floorTval":$('#floorTval').text(), "towerName":$('#towerTval').text(), "regionName":$('#region__c').val(), "projectSfid":$('#projectId').val(),"unitSfid":$('#unitSfid').val(),"enqSfid":enqSfid,"csData":$('#getCSDataForPrint').html(), "projectName":$('#marketingProjectName').val(), "currentDate":$.datepicker.formatDate('dd/mm/yy', new Date())},function(data){                           
+       $.post(pageContext+"printCSdata",{"USEREMAIL_GV":USEREMAIL,"unitTval":$('#unitTval').text(), "floorTval":$('#floorTval').text(), "towerName":$('#towerTval').text(), "regionName":$('#region__c').val(), "projectSfid":$('#projectId').val(),"unitSfid":$('#unitSfid').val(),"enqSfid":enqSfid,"csData":$('#getCSDataForPrint').html(), "projectName":$('#marketingProjectName').val(), "currentDate":$.datepicker.formatDate('dd/mm/yy', new Date())},function(data){                           
              
        }).done(function(data){
              
