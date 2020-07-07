@@ -121,14 +121,25 @@ public class OfferValidator implements Validator{
 	}
 	
 	private BigDecimal getTaxPercentage(PaymentRequestDto paymentRequest) {
+		
+		BigDecimal zero, hundred;
+		zero   = new BigDecimal("0"); 
+		hundred = new BigDecimal("100");
+		
 		Double amount = paymentRequest.getPlannedPayment();
-	
 		Double taxAmount =  paymentRequest.getTokenTax();
 
 		if(taxAmount ==null || amount==null || amount.doubleValue() <=0) {
 			return new BigDecimal(0);
 		}
-		return BigDecimal.valueOf(taxAmount*100).divide(new BigDecimal(amount),4);
+		
+		BigDecimal amountBD = BigDecimal.valueOf(amount);
+		BigDecimal taxAmountBD = BigDecimal.valueOf(taxAmount);
+		
+		BigDecimal taxPer = (taxAmountBD.multiply(hundred)).divide(amountBD,4, RoundingMode.HALF_UP);
+		
+		//return BigDecimal.valueOf(taxAmount*100).divide(new BigDecimal(amount),4);
+		return taxPer;
 	}
 	
 	private Double validatePayments(PaymentDto []payments, Errors errors) {
