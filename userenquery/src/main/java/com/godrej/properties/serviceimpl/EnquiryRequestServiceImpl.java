@@ -1069,6 +1069,24 @@ public class EnquiryRequestServiceImpl implements EnquiryRequestService {
 				}
 			}			 
 		 }	*/
+			/* Added By Satheesh K - 03-07-2020
+			 * Requested by Prakash - Closing Team Lead and Sourcing Team Lead adding on Sales Tab*/
+			if(enquiries !=null && enquiries.size()>0)
+			{
+				if(enquiries.get(0).getSourcing_Managers__c()!=null)
+				{
+					enquiries.get(0).setSourcingmanger_email(tokenService.getSalesUserEmailID(enquiries.get(0).getEnquiryId(), enquiries.get(0).getSourcing_Managers__c()));
+				}
+				
+				if(enquiries.get(0).getClosing_Team_Lead__c()!=null)
+				{
+					enquiries.get(0).setClosing_Team_Lead_email(tokenService.getSalesUserEmailID(enquiries.get(0).getEnquiryId(), enquiries.get(0).getClosing_Team_Lead__c()));
+				}
+				if(enquiries.get(0).getSourcing_Team_Lead__c()!=null)
+				{
+					enquiries.get(0).setSourcing_Team_Lead_email(tokenService.getSalesUserEmailID(enquiries.get(0).getEnquiryId(), enquiries.get(0).getSourcing_Team_Lead__c()));
+				}
+			}
 			
 			
 		 return enquiries;
@@ -1076,7 +1094,26 @@ public class EnquiryRequestServiceImpl implements EnquiryRequestService {
 	@Override
 	public List<EnquiryDto> getEnquiriesByMobileNo(String countryCode,String mobileNo,String projectSfid,String token,String userid) {
 		
-		return pushEnquiryDataService.getEnquiriesByMobileNo(countryCode,mobileNo,projectSfid,token,userid);
+		/* Added By Satheesh K - 06-07-2020
+		 * Requested by Prakash - Closing Team Lead and Sourcing Team Lead adding on Sales Tab and Optimize the GPLAPPS Source Protection API*/
+		List<EnquiryDto> dtoList = pushEnquiryDataService.getEnquiriesByMobileNo(countryCode,mobileNo,projectSfid,token,userid);
+		if(dtoList !=null && dtoList.size()>0)
+		{
+			if(dtoList.get(0).getSourcing_Managers__c()!=null)
+			{
+				dtoList.get(0).setSourcingmanger_email(tokenService.getSalesUserEmailID(dtoList.get(0).getEnquiryId(), dtoList.get(0).getSourcing_Managers__c()));
+			}
+			
+			if(dtoList.get(0).getClosing_Team_Lead__c()!=null)
+			{
+				dtoList.get(0).setClosing_Team_Lead_email(tokenService.getSalesUserEmailID(dtoList.get(0).getEnquiryId(), dtoList.get(0).getClosing_Team_Lead__c()));
+			}
+			if(dtoList.get(0).getSourcing_Team_Lead__c()!=null)
+			{
+				dtoList.get(0).setSourcing_Team_Lead_email(tokenService.getSalesUserEmailID(dtoList.get(0).getEnquiryId(), dtoList.get(0).getSourcing_Team_Lead__c()));
+			}
+		}
+		return dtoList;
 	}
 	@Override
 	public EnquiryDto getEnquiryById(EnquiryDto dto) {

@@ -168,19 +168,19 @@ public class GPLAppsWebServiceController {
 			enqResp.setDate_of_sitevisit(enquiryDto.getDateOfSiteVisit().toString());
 		else
 			enqResp.setDate_of_sitevisit("");
-		enqResp.setEmployee_referral_name(enquiryDto.getEmployee_Referral__c());
+		enqResp.setEmployee_referral_name("");
 		enqResp.setEmployee_referral_sfid(enquiryDto.getEmployee_Referral__c());
 		enqResp.setEnquiry_name(enquiryDto.getName());
 		enqResp.setEnquiry_sfid(enquiryDto.getSfid());
 		enqResp.setEnquiry_source(enquiryDto.getEnquirySource());
 		enqResp.setEnquiry_type(enquiryDto.getIsReferredByChannelPartner());
 		enqResp.setEoi_flag(enquiryDto.getEoi_enquiry__c());
-		enqResp.setLoyalty_name(enquiryDto.getContact_Loyalty__c());
+		enqResp.setLoyalty_name("");
 		enqResp.setLoyalty_sfid(enquiryDto.getContact_Loyalty__c());
 		enqResp.setOther_cp_name(enquiryDto.getOtherChannelPartner());
 		enqResp.setProject_name(enquiryDto.getProject().getName());
 		enqResp.setProject_sfid(enquiryDto.getProject().getSfid());
-		enqResp.setReferral_name(enquiryDto.getContact_referral__c());
+		enqResp.setReferral_name("");
 		enqResp.setReferral_sfid(enquiryDto.getContact_referral__c());
 		enqResp.setReferred_partner_flag(enquiryDto.getIsReferredByChannelPartnerFlag());
 		
