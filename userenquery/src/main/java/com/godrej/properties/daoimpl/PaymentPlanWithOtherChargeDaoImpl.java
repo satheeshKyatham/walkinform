@@ -31,11 +31,11 @@ public class PaymentPlanWithOtherChargeDaoImpl extends AbstractDao<Integer, Paym
 		
 		String conditionString = "";
 		
-		if (projectid.equals("a1l2s00000000X5AAI") || projectid.equals("a1l6F000009D6IMQA0")  || projectid.equals("a1l2s00000003lPAAQ") || projectid.equals("a1l6F000005hPm5QAE") || projectid.equals("a1l6F0000080irTQAQ")  || projectid.equals("a1l6F000001l2yqQAA") || projectid.equals("a1l6F000001kj37QAA") || projectid.equals("a1l6F000008gL4oQAE") ) {
+		/*if (projectid.equals("a1l6F000001l2yqQAA") ) {
 			conditionString = " and b1.propstrength__part_of_cop__c = 't' ";
 		} else {
 			conditionString = " ";
-		}
+		}*/
 		
 		
 		/*if(projectid.equals("a1l6F0000080irTQAQ"))

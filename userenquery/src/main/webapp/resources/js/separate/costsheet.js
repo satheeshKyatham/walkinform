@@ -2275,7 +2275,7 @@ function newOtherCharges2 () {
              var carpetAreaAmount = 0;
              var exclusiveAreaAmount = 0;
              
-             if ($('#projectId').val() == 'a1l2s00000000X5AAI' || $('#projectId').val() == 'a1l6F000009D6IMQA0'  || $('#projectId').val() == 'a1l2s00000003lPAAQ' || $('#projectId').val() == 'a1l6F0000080irTQAQ' || $('#projectId').val() == 'a1l6F000001l2yqQAA' || $('#projectId').val() == 'a1l6F000008gL4oQAE') {
+             /*if ($('#projectId').val() == 'a1l6F000001l2yqQAA') {
             	 $('#tentativeCharges tbody').append("<tr> " +
             	 			"<th> Electricity Charges </th> <td class='txtRight' style='text-align:right;'> 0 </td>  </tr>" +
             	 			"<tr> <th> Legal Charges </th> <td class='txtRight' style='text-align:right;'> 0 </td>  </tr>" +
@@ -2286,7 +2286,9 @@ function newOtherCharges2 () {
          	 			"<th> Electricity Charges </th> <td class='txtRight' style='text-align:right;'> 0 </td>  </tr>" +
          	 			"<tr> <th> Legal Charges </th> <td class='txtRight' style='text-align:right;'> 0 </td>  </tr>" +
          	 			"<tr> <th> Club Development Charges </th> <td class='txtRight' style='text-align:right;'> 0 </td>  </tr>");
-             }else if ($('#projectId').val() == 'a1l6F000005hPm5QAE' || $('#projectId').val() == 'a1l6F000001kj37QAA') {
+             }*/
+             
+             /*else if ($('#projectId').val() == 'a1l6F000005hPm5QAE') {
             	 $('#tentativeCharges tbody').append("<tr> " +
             	 			"<th> Electricity Charges </th> <td class='txtRight' style='text-align:right;'> 0 </td>  </tr>" +
             	 			"<tr> <th> Club Development Charges </th> <td class='txtRight' style='text-align:right;'> 0 </td>  </tr>");
@@ -2294,7 +2296,7 @@ function newOtherCharges2 () {
             	 $('#printTentativeCharges tbody').append("<tr> " +
          	 			"<th> Electricity Charges </th> <td class='txtRight' style='text-align:right;'> 0 </td>  </tr>" +
          	 			"<tr> <th> Club Development Charges </th> <td class='txtRight' style='text-align:right;'> 0 </td>  </tr>");
-             }
+             }*/
              
              
              //alert ("otherChrgCgstTotal ::: " + otherChrgCgstTotal);
