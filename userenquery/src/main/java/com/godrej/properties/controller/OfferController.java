@@ -228,7 +228,7 @@ public class OfferController {
 					 
 					//Update offer created flag in sfdc property table through HEROKU
 					if((offerid!=null && offerid.length()==18)) {
-						if("a1l2s00000000X5AAI".equals(projectsfid) || "a1l2s00000003VlAAI".equals(projectsfid)  || "a1l6F000003TXloQAG".equals(projectsfid)) {
+						if("a1l6F0000081xb4QAA".equals(projectsfid) || "a1l2s00000000X5AAI".equals(projectsfid) || "a1l2s00000003VlAAI".equals(projectsfid)  || "a1l6F000003TXloQAG".equals(projectsfid)) {
 							boolean isPMAY = isUnderPMAY(offerid, projectsfid,salesConsiderationTotal, reraCarpetAreaSqm);
 							propOtherChargesService.updatePropertyStatus(propid, isPMAY);
 						} else {
@@ -287,7 +287,7 @@ public class OfferController {
 			return (offerId!=null && offerId.length()==18 && basicSalePrice < 4500000  &&  reraCarpetAreaSqm < 90) ;
 		}
 		
-		if (projectSfid.equals("a1l2s00000003VlAAI")) {
+		if (projectSfid.equals("a1l6F0000081xb4QAA") || projectSfid.equals("a1l2s00000003VlAAI")) {
 			return (offerId!=null && offerId.length()==18 && basicSalePrice < 4500000  &&  reraCarpetAreaSqm < 60) ;
 		}
 		
