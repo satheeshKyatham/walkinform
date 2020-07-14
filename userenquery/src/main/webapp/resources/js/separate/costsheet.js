@@ -856,7 +856,7 @@ function paymentPlanOtherCharges (firstRowObj){
                                         
                                         //Added for 45lac condition - 20200610
                                         if (obj[k].propstrength__part_of_cop__c == true) { 
-                                        	if (obj[k].other_charges_name != "Club Development Charges_1098") {
+                                        	if (obj[k].other_charges_name != "Club Development Charges_1098" && obj[k].other_charges_name != "Club Development Charges_1085") {
                                         		gstFixed1Per = parseFloat (fixed*1/100);
                                         		gstFixed5Per = parseFloat (fixed*5/100);
                                         	} else {
@@ -988,7 +988,7 @@ function paymentPlanOtherCharges (firstRowObj){
                                             
                                         //Added for 45lac condition - 20200610
                                         if (obj[k].propstrength__part_of_cop__c == true) { 
-                                        	if (obj[k].other_charges_name != "Club Development Charges_1098") {
+                                        	if (obj[k].other_charges_name != "Club Development Charges_1098"  && obj[k].other_charges_name != "Club Development Charges_1085") {
                                         		gstFlexible1Per = parseFloat (flexible*1/100);
 												gstFlexible5Per = parseFloat (flexible*5/100);
                                         	} else {
