@@ -118,6 +118,7 @@ import com.godrej.properties.service.BSPTaxRecordService;
 import com.godrej.properties.service.BSPUpdateService;
 import com.godrej.properties.service.BalanceDetailsService;
 import com.godrej.properties.service.BillingViewService;
+import com.godrej.properties.service.BookingOnMapService;
 import com.godrej.properties.service.CarParkChargesService;
 import com.godrej.properties.service.CostSheetExistsService;
 import com.godrej.properties.service.CostSheetHisService;
@@ -445,6 +446,9 @@ public class WebServiceController<MultipartFormDataInput> {
 	
 	@Autowired
 	private DrupalInventoryStatusUpdate drupalInventoryStatusUpdate;
+	
+	@Autowired
+	private BookingOnMapService bookingOnMapService;
 	
 	
 	@RequestMapping(value = "/activeproject", method = RequestMethod.GET, produces = "application/json")
@@ -1276,6 +1280,14 @@ public class WebServiceController<MultipartFormDataInput> {
 		return gson.toJson(enqOnMapService.getEnqDtl(projectId));
 	}
 	/* END Get Enq Data for place on MAP */
+	
+	
+	@RequestMapping(value = "/getBookingDataForMap", method = RequestMethod.POST)
+	public String getBookingDataForMap (@RequestParam("projectId") String projectId) {
+		Gson gson = new GsonBuilder().disableHtmlEscaping().serializeNulls().create();
+		
+		return gson.toJson(bookingOnMapService.getEnqDtl(projectId));
+	}
 	
 	
 	/* Get dynamic Properties Other Charges */
