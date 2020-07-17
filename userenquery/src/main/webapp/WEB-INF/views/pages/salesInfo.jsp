@@ -1271,7 +1271,7 @@ if(ses!=null){
 									<option value="Revisit">Revisit</option>
 		
 								</select> <span class="highlight"></span><span class="bar"></span> <label
-									class="select-label">Follow Type </label>
+									class="select-label">Follow-up Type <strong class="mndt">*</strong></label>
 							</div>
 							<div class="clearfix"></div>
 						</div>
@@ -1279,7 +1279,7 @@ if(ses!=null){
 							
 						<div class="col-md-3 col-sm-6 col-xs-12" id="followupDateID" ><!-- id="followupDateID" style="display:none;" -->
 							<div class="form-group" id="fdate" style="margin-top: -15px; z-index: 0;">
-								<label style="font-weight: normal;">Follow Date & Time</label>
+								<label style="font-weight: normal;">Follow-up Date & Time<strong class="mndt">*</strong></label>
 								<div class='input-group date datetimepickerfollow'>
 									<input style="z-index: 0; border-radius: 0;" type='text' name="enquiryReport.followDate"
 										class="form-control autocomplete-off "
@@ -1536,7 +1536,16 @@ if(ses!=null){
 							</div>
 							<div class="clearfix"></div>
 						</div>
-						
+						<div class="col-md-3 col-sm-6 col-xs-12" id="">
+							<div class="group">
+							<div id=""></div>
+							<select class="autocomplete-off" id="internationalSMId" name="internationalSMDto">
+							</select>
+								<span class="highlight"></span><span class="bar"></span>
+								<label class="select-label">International Sales Manager</label>
+							</div>
+							<div class="clearfix"></div>
+						</div>
 						<div class="col-md-3 col-sm-6 col-xs-12">
 							<div class="group">
 								<select class="sales_submitted disableInputs" id="verticalId" name="verticle__c">
@@ -1569,9 +1578,9 @@ if(ses!=null){
 						
 						<div class="col-md-12 col-xs-12"  id="enquiryCommentsDiv">
 							<div class="group">
-							<textarea class="autocomplete-off" id="enquiryNonEditComment" name="enquiryReport.enquiryNonEditComment"></textarea> <!-- class="sales_submitted" -->
+							<textarea class="autocomplete-off requiredField" id="enquiryNonEditComment" name="enquiryReport.enquiryNonEditComment"></textarea> <!-- class="sales_submitted" -->
 								<span class="highlight"></span><span class="bar"></span>
-								<label>Add Comments<!-- <strong class="mndt">*</strong> --></label>
+								<label>Add Comments<strong class="mndt">*</strong></label>
 							</div>
 							<div class="clearfix"></div>
 						</div>
@@ -1710,8 +1719,8 @@ if(ses!=null){
     <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.25/webcam.min.js"></script>
 
 	<script src="<c:url value='/resources/js/springForm.js?v=${sessionScope.version}' />"></script>
-	<script src="<c:url value='/resources/js/commonValidation.js?v=18.18' />"></script>
-	<script src="<c:url value='/resources/js/utility.js?v=18.18' />"></script>
+	<script src="<c:url value='/resources/js/commonValidation.js?v=18.19' />"></script>
+	<script src="<c:url value='/resources/js/utility.js?v=18.19' />"></script>
 	<%-- <script src="<c:url value='/resources/js/enquiryRequest/enquiryRequest.js' />"></script> --%>
 	<script src="<c:url value='/resources/js/enquiryRequest/salesRequest.js?v=${sessionScope.version}' />"></script>	
     <script src="<c:url value='/resources/js/intlTelInput.js' />"></script>
@@ -1832,7 +1841,9 @@ if(ses!=null){
 var dateToday = new Date();
 $(function () {                
      $('.datetimepickerfollow').datetimepicker({
-         format: 'DD-MM-YYYY HH:mm'//,
+         format: 'DD-MM-YYYY HH:mm',
+        	 //inline: true,
+             sideBySide: true
         // minDate: dateToday 
          
    });
@@ -1877,6 +1888,8 @@ $(function () {
 			$('#followupTypeID').hide();
 			$('#followupDateID').hide();
 			$('#LostReasonID').addClass('requiredField');
+			$('#followtype').removeClass('requiredField');
+			$('#followdate').removeClass('requiredField');
 		});
 		$('.NoLostReasonSelected').click ( function (){
 			//alert("On select");
@@ -1884,6 +1897,8 @@ $(function () {
 			$('#followupTypeID').show();
 			$('#followupDateID').show();
 			$('#LostReasonID').removeClass('requiredField');
+			$('#followtype').addClass('requiredField');
+			$('#followdate').addClass('requiredField');
 		});
 		
 	</script>	

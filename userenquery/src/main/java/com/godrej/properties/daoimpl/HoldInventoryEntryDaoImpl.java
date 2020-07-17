@@ -24,13 +24,15 @@ public class HoldInventoryEntryDaoImpl extends AbstractDao<Integer, HoldInventor
 	
 	
 	public void insertHoldRqst(HoldInventoryEntry action) {
-		logger.info("Before Insert************************* HOLD Issue");
-		try {
-			persist(action);
-		}catch (Exception e) {
-			logger.info("insertHoldRqst Error:-",e);
-			e.printStackTrace();
-		}
+		//logger.info("Before Insert************************* HOLD Issue");
+		//try {
+		
+		persist(action);
+		
+		//}catch (Exception e) {
+			//logger.info("insertHoldRqst Error:-",e);
+			//e.printStackTrace();
+		//}
 		logger.info("After Insert************************* HOLD Issue");
 	}
 	
@@ -79,15 +81,17 @@ public class HoldInventoryEntryDaoImpl extends AbstractDao<Integer, HoldInventor
 	
 	@Override
 	public void updateForelease(HoldInventoryEntry action) {
-		logger.info(" updateForelease Method :-");
+		//logger.info(" updateForelease Method :-");
 		Session session = this.sessionFactory.getCurrentSession();
-		try {
-			Query query = session.createQuery("UPDATE HoldInventoryEntry SET holdstatusyn = '"+action.getHoldstatusyn()+"',  statusai = '"+action.getStatusai()+"',version='"+action.getVersion()+"'   WHERE sfid = '"+action.getUnitSfid()+"' and version=0 and holdstatusyn='Y' ");
-			query.executeUpdate();
-		}
-		catch (Exception e) {
-			logger.info(" updateForelease Error :-",e);
-		}
+		//try {
+		
+		Query query = session.createQuery("UPDATE HoldInventoryEntry SET holdstatusyn = '"+action.getHoldstatusyn()+"',  statusai = '"+action.getStatusai()+"',version='"+action.getVersion()+"'   WHERE sfid = '"+action.getUnitSfid()+"' and version=0 and holdstatusyn='Y' ");
+		query.executeUpdate();
+		
+		//}
+		//catch (Exception e) {
+		//	logger.info(" updateForelease Error :-",e);
+		//}
 	}
 	
 	

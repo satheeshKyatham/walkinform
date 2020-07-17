@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -19,6 +21,7 @@ import com.godrej.properties.model.PaymentPlan;
 import com.godrej.properties.model.TowerMaster; 
 @SuppressWarnings("unchecked")
 @Repository("towerMasterDao")
+@Transactional
 public class TowerMasterDaoImpl extends AbstractDao<Integer, TowerMaster> implements TowerMasterDao {
 
 
@@ -38,6 +41,18 @@ public class TowerMasterDaoImpl extends AbstractDao<Integer, TowerMaster> implem
 			return list;
 		}
 		return list;
+	}
+
+	@Override
+	public TowerMaster getTowerMasterDetails(String towersfid) {
+		Session session = this.sessionFactory.getCurrentSession();
+		
+		List<TowerMaster> list  =session.createQuery("  FROM TowerMaster where sfid= '"+towersfid+"' ").list();
+		if(list.size()>0)
+		{
+			return list.get(0);
+		}
+		return null;
 	}
 
  	 

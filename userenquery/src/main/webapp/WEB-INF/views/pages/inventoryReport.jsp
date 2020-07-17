@@ -74,6 +74,8 @@
 							<th>BSP</th>
 							<th>BV</th>
 							
+							<th>Other Charges</th>
+							
 							<th>Admin</th>
 							<th>Hold/ Block Reason</th>
 							<th>Hold/ Block Behalf (name)</th>

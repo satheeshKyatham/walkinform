@@ -92,10 +92,10 @@ public class OfferValidator implements Validator{
 		String doIncludeGST =sysConfigService.getValue(SysConfigEnum.PREPAYMENT_INCLUDE_GST, projectSfid);
 		BigDecimal priceBD = new BigDecimal(price);
 		
-		BigDecimal amount  = priceBD.multiply(new BigDecimal(value)).divide(new BigDecimal(100), 0, RoundingMode.UP);
+		BigDecimal amount  = priceBD.multiply(new BigDecimal(value)).divide(new BigDecimal(100), 2, RoundingMode.HALF_UP);
 		if("Y".equalsIgnoreCase(doIncludeGST)) {
 			BigDecimal taxPercentage =  getTaxPercentage(paymentRequest);
-			BigDecimal taxAmount =  (amount.multiply(taxPercentage)).divide(BigDecimal.valueOf(100d),0,RoundingMode.UP);
+			BigDecimal taxAmount =  (amount.multiply(taxPercentage)).divide(BigDecimal.valueOf(100d),2,RoundingMode.HALF_UP);
 			amount = amount.add(taxAmount);
 		}
 		PaymentDto []payments =  paymentRequest.getPayments();
@@ -121,14 +121,25 @@ public class OfferValidator implements Validator{
 	}
 	
 	private BigDecimal getTaxPercentage(PaymentRequestDto paymentRequest) {
+		
+		BigDecimal zero, hundred;
+		zero   = new BigDecimal("0"); 
+		hundred = new BigDecimal("100");
+		
 		Double amount = paymentRequest.getPlannedPayment();
-	
 		Double taxAmount =  paymentRequest.getTokenTax();
 
 		if(taxAmount ==null || amount==null || amount.doubleValue() <=0) {
 			return new BigDecimal(0);
 		}
-		return BigDecimal.valueOf(taxAmount*100).divide(new BigDecimal(amount),4);
+		
+		BigDecimal amountBD = BigDecimal.valueOf(amount);
+		BigDecimal taxAmountBD = BigDecimal.valueOf(taxAmount);
+		
+		BigDecimal taxPer = (taxAmountBD.multiply(hundred)).divide(amountBD,6, RoundingMode.HALF_UP);
+		
+		//return BigDecimal.valueOf(taxAmount*100).divide(new BigDecimal(amount),4);
+		return taxPer;
 	}
 	
 	private Double validatePayments(PaymentDto []payments, Errors errors) {

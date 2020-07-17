@@ -69,11 +69,11 @@ public class PropOtherChargesDaoImpl extends AbstractDao<Integer, PropOtherCharg
 		String conditionString = "";
 		
 		//Forest Grove, Hillside 2 and Boulevard
-		if (projectId.equals("a1l2s00000000X5AAI") || projectId.equals("a1l6F000009D6IMQA0") || projectId.equals("a1l2s00000003lPAAQ") || projectId.equals("a1l6F000005hPm5QAE") || projectId.equals("a1l6F0000080irTQAQ")  || projectId.equals("a1l6F000001l2yqQAA") || projectId.equals("a1l6F000001kj37QAA") || projectId.equals("a1l6F000008gL4oQAE") ) {
+		/*if (projectId.equals("a1l6F000001l2yqQAA") ) {
 			conditionString = " AND  propstrength__other_charges__c.propstrength__part_of_cop__c ='t' ";
 		} else {
 			conditionString = " ";
-		}
+		}*/
 		
 		
 			
@@ -192,5 +192,13 @@ public class PropOtherChargesDaoImpl extends AbstractDao<Integer, PropOtherCharg
 		q.executeUpdate();
 		return "updated";
 		
+	}
+
+
+	@Override
+	public String getPropertyName(String unitSfid) {
+		Session session = this.sessionFactory.getCurrentSession();	
+		Query q = session.createNativeQuery("select propstrength__house_unit_no__c from salesforce.propstrength__property__c where sfid='"+unitSfid+"'");
+		return q.getSingleResult().toString();
 	}
 }

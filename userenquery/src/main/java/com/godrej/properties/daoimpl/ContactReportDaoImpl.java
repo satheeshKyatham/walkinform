@@ -6,7 +6,10 @@ import java.util.Map;
 
 import javax.persistence.Query;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.godrej.properties.dao.AAbstractDao;
 import com.godrej.properties.dao.ContactReportDao;
@@ -18,8 +21,9 @@ import com.godrej.properties.model.ContactReport;
  *
  */
 @Repository
+@Transactional
 public class ContactReportDaoImpl extends AAbstractDao<ContactReport> implements ContactReportDao{
-
+	private Logger log = LoggerFactory.getLogger(getClass());
 	@Override
 	public ContactReport insertContactReport(ContactReport enq) {
 		persist(enq);
@@ -75,15 +79,15 @@ public class ContactReportDaoImpl extends AAbstractDao<ContactReport> implements
 	public void updateRatingSFDC(ContactReport contcat) {
 		if(contcat.getContactSfid()!=null && contcat.getContactSfid().length()>0)
 		{
-			System.out.println("Rating query Start :"+new Date());
+			log.info("Rating query Start :{}",new Date());
 		 StringBuilder jpql=new StringBuilder();
 			jpql.append(" update salesforce.propstrength__request__c c set rating__c=b.customer_classification from( ")
 			.append(" select request__c.name,request__c.rating__c,hc_contcat.customer_classification,request__c.id,request__c.sfid,hc_contcat.contact_id,hc_contcat.contact_sfid from salesforce.nv_hc_contact hc_contcat ")
 			.append(" inner join salesforce.propstrength__request__c request__c on(hc_contcat.contact_id=request__c.external_contact_id__c) ")
-			.append(" where  hc_contcat.contact_sfid='"+contcat.getContactSfid()+"' ) b where b.sfid=c.sfid and b.contact_sfid='"+contcat.getContactSfid()+"'");
-			System.out.println("Rating Update Query::::"+jpql);
+			.append(" where  hc_contcat.contact_sfid='"+contcat.getContactSfid()+"' and hc_contcat.customer_classification is not null ) b where b.sfid=c.sfid and b.contact_sfid='"+contcat.getContactSfid()+"' and b.customer_classification is not null");
+			log.info("Rating Update Query::::{}",jpql);
 			updateByNative(jpql.toString(), null);
-			System.out.println("Rating query END :"+new Date());
+			log.info("Rating query END :{}",new Date());
 		}
 	}
 	
@@ -91,14 +95,24 @@ public class ContactReportDaoImpl extends AAbstractDao<ContactReport> implements
 	public void updateContactONSFDC(ContactReport contcat) {
 		if(contcat.getContactSfid()!=null && contcat.getContactSfid().length()>0)
 		{
-			System.out.println("SFDC query Start :"+new Date());
+			log.info("SFDC query Start :{}",new Date());
 		 StringBuilder jpql=new StringBuilder();
 		 //current_residence_ownership__c--contcat.getCurrentResidenceOwnership()
 			jpql.append(" Update salesforce.contact set current_residence_type__c ='"+contcat.getCurrentResidenceType()+"', current_residence_ownership__c='"+contcat.getCurrentResidenceOwnership()+"'");
 			jpql.append(" where sfid='"+contcat.getContactSfid()+"'");//contcat.getCurrentResidenceType()
 
 			updateByNative(jpql.toString(), null);
-			System.out.println("SFDC query END :"+new Date());
+			log.info("SFDC query END :{}",new Date());
 		}
+	}
+
+	@Override
+	public ContactReport getContactReportData(Integer id) {
+		 StringBuilder jpql=new StringBuilder();
+		 jpql.append(" SELECT cr FROM ContactReport cr ");
+		 jpql.append(" where cr.contactId=:contactId ");
+		 Map<String, Object> params=new HashMap<>();
+		 params.put("contactId", id);
+	 return getSingleEntity(jpql.toString(), params);
 	}
 }

@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.godrej.properties.dao.HoldInventoryEntryDao;
 import com.godrej.properties.model.HoldInventoryEntry;
 import com.godrej.properties.service.HoldInventoryEntryService;
+import com.godrej.properties.webservices.DrupalInventoryStatusUpdate;
 
 @Service("holdInventoryEntryService")
 @Transactional
@@ -24,6 +25,9 @@ public class HoldInventoryEntryServiceImpl implements HoldInventoryEntryService{
 	
 	@Autowired
 	HoldInventoryEntryDao holdInventoryEntryDao;
+	
+	@Autowired
+	private DrupalInventoryStatusUpdate drupalInventoryStatusUpdate;
 	
 	private Logger log = LoggerFactory.getLogger(getClass());
 	
@@ -87,8 +91,10 @@ public class HoldInventoryEntryServiceImpl implements HoldInventoryEntryService{
 				action.setHoldstatusyn("N");
 				action.setVersion(version);	
 				updateForelease(action);
+				
+				drupalInventoryStatusUpdate.inventoryStatusUpdate(unitSfid, "false");
 		}catch (Exception e) {
-			log.error("Error - ", e);
+			log.error("Update For Closing Manager Release -  Error - ", e);
 		}
 		
 		return 0;

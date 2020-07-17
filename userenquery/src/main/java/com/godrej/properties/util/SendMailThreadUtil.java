@@ -16,11 +16,9 @@ import javax.mail.internet.MimeMultipart;
 
 import org.apache.log4j.Logger;
 
-import com.godrej.kyc.util.SendMailThread;
-
 public class SendMailThreadUtil implements Runnable{
 	String to,message,subject,cc;
-	static Logger logger = Logger.getLogger(SendMailThread.class);
+	static Logger logger = Logger.getLogger(SendMailThreadUtil.class);
 	
 	public SendMailThreadUtil(String to,String cc,String subject,String message)
 	{
@@ -44,7 +42,7 @@ public class SendMailThreadUtil implements Runnable{
 		 final String password = "pass@123";*/
 		 
 		 final String from = "customercare.gpl@godrejproperties.com";
-		 final String password = "ccgpl@1234";
+		 final String password = "eBay@007";//eBay@007 - ccgpl@1234
 		 //
 		  properties.put("mail.smtp.auth", "true");
 	      //properties.put("mail.smtp.starttls.enable", "true");

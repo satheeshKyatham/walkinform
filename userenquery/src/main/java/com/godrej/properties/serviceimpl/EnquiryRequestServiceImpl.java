@@ -519,6 +519,10 @@ public class EnquiryRequestServiceImpl implements EnquiryRequestService {
 			if(sourcingTeamLead!=null && sourcingTeamLead.length()>0)
 				dest.setSourcing_Team_Lead__c(sourcingTeamLead);
 		}
+		if(src.getInternationalSMDto()!=null && src.getInternationalSMDto().length()>0)
+		{
+			dest.setInternationalSMDto(src.getInternationalSMDto());
+		}
 		
 		return dest;
 	}
@@ -557,7 +561,8 @@ public class EnquiryRequestServiceImpl implements EnquiryRequestService {
 			String enquiry_Str="ENQUIRY";
 			List<EnquiryDto> enquiryList=pushEnquiryDataService.getEnquiriesByMobileNo(countryCode,mobileNo,projectSfid,userid);
 			List<EnquiryDto> enquiries=new ArrayList<>();
-			
+			log.info("Input Values for Query String:Country Code:{}, Mobile No:{}, Projectsfid:{}",countryCode,mobileNo,projectSfid);
+			log.info("Response From Enquiry Query String:{}",enquiryList.size());
 			
 //		 2) if the list size is 0 then return  new Enquiry form
 			if(CommonUtil.isListEmpty(enquiryList)){
@@ -570,7 +575,18 @@ public class EnquiryRequestServiceImpl implements EnquiryRequestService {
 					
 					enquiry.setContact(enquiry.getContactId());
 					//int lastModifyDays=DateUtil.getDays(enquiry.getLastModifiedDate(),new Date());
-				    int siteVisitDays=DateUtil.getDays(enquiry.getDateOfSiteVisit(),new Date());
+					 /* Added By : Satheesh K Requested By : Vaibhav & Prakash Change Date : 22-06-2020
+					  * Comments : Date of Enquiry Logic Added if it's counter more than 120 day - no source protection*/
+					int dateofEnquiry=DateUtil.getDays(enquiry.getDateOfEnquiry(),new Date());
+					int siteVisitDays=0;
+					if(enquiry.getDateOfSiteVisit()!=null)//source protection
+					{
+						siteVisitDays=DateUtil.getDays(enquiry.getDateOfSiteVisit(),new Date());
+						if(siteVisitDays==0)//for doing the site visit date is current date
+							siteVisitDays=1;
+					}
+					else
+						siteVisitDays=0;//No source protection
 				   
 				    if(enquiry.getSite_Visit_Done__c()==null)
 				    {
@@ -586,9 +602,21 @@ public class EnquiryRequestServiceImpl implements EnquiryRequestService {
 				    }
 				    //
 					if((enquiry.getSite_Visit_Done__c()>0 || enquiry.getAppointment_Done__c()>0 || enquiry.getVirtual_meeting_count__c()>0) 
-							&& siteVisitDays < KeyConstants.SITE_VISIT_DAYS_LIMIT)//&& lastModifyDays < KeyConstants.LAST_MODIFY_DAYS_LIMIT
+							&& (siteVisitDays>0 && siteVisitDays < KeyConstants.SITE_VISIT_DAYS_LIMIT))//&& lastModifyDays < KeyConstants.LAST_MODIFY_DAYS_LIMIT
 					{
-						enquiries.add(enquiry);
+						 /* Added By : Satheesh K Requested By : Vaibhav & Prakash Change Date : 22-06-2020
+						  * Comments : Date of Enquiry Logic Added if it's counter more than 120 day - no source protection*/
+						if(enquiry.getEnquiryStatus()!=null)
+						{
+							if(dateofEnquiry>120 && (enquiry.getEnquiryStatus().equals("Appointment Proposed") || enquiry.getEnquiryStatus().equals("Site Visit requested")|| enquiry.getEnquiryStatus().equals("Assigned to Sales")))
+							{
+								//No source protection.
+							}
+							else
+								enquiries.add(enquiry);
+						}
+						else
+							enquiries.add(enquiry);
 					}
 					/* Changes By - Satheesh K   -- Requested By : Prakash Idnani
 					 * Changes done on - 24-12-2019 -- Request from Business to resolve multiple enquiry creation.*/ 
@@ -631,7 +659,7 @@ public class EnquiryRequestServiceImpl implements EnquiryRequestService {
 						//enquiry.setIsReferredByChannelPartner("");
 						enquiry.setIsReferredByChannelPartnerFlag("NSP");
 						enquiries.add(enquiry);						
-						log.info("Scenario 5: {}Walk-in source can be editable",name);
+						log.info("Scenario 5: {}Walk-in source can be editable, Enquiry No:{}, ID:{}, ContactSFID:{}, walk-in source:{}",name,enquiry.getName(),enquiry.getEnquiryId(),enquiry.getContactId(),enquiry.getWalkInSource());
 						
 					}
 					else if(enquiriesStSort0.size()>0)
@@ -675,7 +703,7 @@ public class EnquiryRequestServiceImpl implements EnquiryRequestService {
 							/*enquiry.setIsReferredByChannelPartner("");*/
 							enquiry.setIsReferredByChannelPartnerFlag("NSP");
 							enquiries.add(enquiry);						
-							log.info("Scenario 6: {}Walk-in source can be editable ",name);
+							log.info("Scenario 6: {}Walk-in source can be editable, Enquiry No:{}, ID:{}, ContactSFID:{}, walk-in source:{} ",name,enquiry.getName(),enquiry.getEnquiryId(),enquiry.getContactId(),enquiry.getWalkInSource());				
 						}
 						else if(enquiriesStAssignedSL.size()>0)
 						{
@@ -691,8 +719,24 @@ public class EnquiryRequestServiceImpl implements EnquiryRequestService {
 							//enquiry.setIsReferredByChannelPartner(enquiry.getIsReferredByChannelPartner());
 							enquiry.setIsReferredByChannelPartnerFlag("NSP");
 							enquiries.add(enquiry);						
-							log.info("Scenario 7: {}Walk-in source can be editable",name);
+							log.info("Scenario 7: {}Walk-in source can be editable, Enquiry No:{}, ID:{}, ContactSFID:{}, walk-in source:{}",name,enquiry.getName(),enquiry.getEnquiryId(),enquiry.getContactId(),enquiry.getWalkInSource());
 							
+						}
+						else
+						{
+							enquiryList.sort(Comparator.comparing(EnquiryDto::getDateOfEnquiry));
+							EnquiryDto enquiry = enquiryList.get(0);
+							if(KeyConstants.RECORD_TYPE_CUSTOMER.equals(enquiry.getContact().getRecordType())){
+								enquiry.getContact().setHasError(true);
+								name ="Cannot edit customer details and ";
+							}
+							enquiry.setHasError(true);
+							//enquiry.setNonEdit(enquiry_Str);						
+							enquiry.setMessage("Scenario 9:"+name+"Walk-in source can be editable");
+							//enquiry.setIsReferredByChannelPartner("");
+							enquiry.setIsReferredByChannelPartnerFlag("NSP");
+							enquiries.add(enquiry);						
+							log.info("Scenario 9: {}Walk-in source can be editable, Enquiry No:{}, ID:{}, ContactSFID:{}, walk-in source:{}",name,enquiry.getName(),enquiry.getEnquiryId(),enquiry.getContactId(),enquiry.getWalkInSource());							
 						}
 						/*EnquiryDto enquiry = enquiriesStSort0.get(0);
 						if((enquiry.getSite_visit_requested__c()>0 || enquiry.getAppointment__c()>0))//else if((Site_visit_requested__c()>0 || Appointment__c()>0) , selects oldest Enquiry by dateOfEnquiry
@@ -725,7 +769,7 @@ public class EnquiryRequestServiceImpl implements EnquiryRequestService {
 						//enquiry.setIsReferredByChannelPartner("");
 						enquiry.setIsReferredByChannelPartnerFlag("NSP");
 						enquiries.add(enquiry);						
-						log.info("Scenario 8: {}Walk-in source can be editable",name);
+						log.info("Scenario 8: {}Walk-in source can be editable, Enquiry No:{}, ID:{}, ContactSFID:{}, walk-in source:{}",name,enquiry.getName(),enquiry.getEnquiryId(),enquiry.getContactId(),enquiry.getWalkInSource());						
 					}
 					
 					/*EnquiryDto enquiry = enquiryList.get(0);
@@ -775,8 +819,10 @@ public class EnquiryRequestServiceImpl implements EnquiryRequestService {
 						enquiry.setHasError(true);
 						enquiry.setNonEdit(enquiry_Str);						
 						enquiry.setMessage("Scenario 1: "+"Cannot edit "+name+" enquiry details");
+						enquiries.remove(0);
 						enquiries.add(enquiry);						
-						log.info("Scenario 1: Cannot edit {} enquiry details",name);
+						log.info("Scenario 1: Cannot edit {} enquiry details, Enquiry No:{}, ID:{}, ContactSFID:{}, walk-in source:{}",name,enquiry.getName(),enquiry.getEnquiryId(),enquiry.getContactId(),enquiry.getWalkInSource());
+						
 					}
 					else //if(enquiry.getEnquiryStatus().equals(KeyConstants.ENQUIRY_STATUS_FOR_ASSINED_SALES))
 					{
@@ -785,8 +831,17 @@ public class EnquiryRequestServiceImpl implements EnquiryRequestService {
 							enquiry.setHasError(true);
 							enquiry.setNonEdit(contact_Str);						
 							enquiry.setMessage("Scenario 5: "+"Cannot edit "+name+" details");
-							log.info("Scenario 5: Cannot edit {} details",name);
+							log.info("Scenario 5: Cannot edit {} details, Enquiry No:{}, ID:{}, ContactSFID:{}, walk-in source:{}",name,enquiry.getName(),enquiry.getEnquiryId(),enquiry.getContactId(),enquiry.getWalkInSource());
+							
 						}
+						else
+						{
+							enquiry.setHasError(true);
+							enquiry.setNonEdit(contact_Str);						
+							enquiry.setMessage("Scenario 5: "+"Cannot edit "+name+" details");
+							log.info("Scenario 5: Cannot edit {} details, Enquiry No:{}, ID:{}, ContactSFID:{}, walk-in source:{}",name,enquiry.getName(),enquiry.getEnquiryId(),enquiry.getContactId(),enquiry.getWalkInSource());
+						}
+						enquiries.remove(0);
 						enquiries.add(enquiry);						
 						
 					}
@@ -823,7 +878,7 @@ public class EnquiryRequestServiceImpl implements EnquiryRequestService {
 							/*Added by Satheesh K- 05-09-2020 Bug Fix*/
 							enquiries.clear();
 							enquiries.add(enquiry);						
-							log.info("Scenario 1: "+"Cannot edit {} enquiry details",name);
+							log.info("Scenario 1: "+"Cannot edit {} enquiry details, Enquiry No:{}, ID:{}, ContactSFID:{}, walk-in source:{}",name,enquiry.getName(),enquiry.getEnquiryId(),enquiry.getContactId(),enquiry.getWalkInSource());							
 						}
 						else
 						{
@@ -832,7 +887,7 @@ public class EnquiryRequestServiceImpl implements EnquiryRequestService {
 								enquiry.setHasError(true);
 								enquiry.setNonEdit("CONTACT");						
 								enquiry.setMessage("Scenario 5: "+"Cannot edit "+name+" details");
-								log.info("Scenario 5: "+"Cannot edit {} details",name);
+								log.info("Scenario 5: "+"Cannot edit {} details, Enquiry No:{}, ID:{}, ContactSFID:{}, walk-in source:{}",name,enquiry.getName(),enquiry.getEnquiryId(),enquiry.getContactId(),enquiry.getWalkInSource());								
 							}
 							/*Added by Satheesh K- 05-09-2020 Bug Fix*/
 							enquiries.clear();
@@ -1014,6 +1069,24 @@ public class EnquiryRequestServiceImpl implements EnquiryRequestService {
 				}
 			}			 
 		 }	*/
+			/* Added By Satheesh K - 03-07-2020
+			 * Requested by Prakash - Closing Team Lead and Sourcing Team Lead adding on Sales Tab*/
+			if(enquiries !=null && enquiries.size()>0)
+			{
+				if(enquiries.get(0).getSourcing_Managers__c()!=null)
+				{
+					enquiries.get(0).setSourcingmanger_email(tokenService.getSalesUserEmailID(enquiries.get(0).getEnquiryId(), enquiries.get(0).getSourcing_Managers__c()));
+				}
+				
+				if(enquiries.get(0).getClosing_Team_Lead__c()!=null)
+				{
+					enquiries.get(0).setClosing_Team_Lead_email(tokenService.getSalesUserEmailID(enquiries.get(0).getEnquiryId(), enquiries.get(0).getClosing_Team_Lead__c()));
+				}
+				if(enquiries.get(0).getSourcing_Team_Lead__c()!=null)
+				{
+					enquiries.get(0).setSourcing_Team_Lead_email(tokenService.getSalesUserEmailID(enquiries.get(0).getEnquiryId(), enquiries.get(0).getSourcing_Team_Lead__c()));
+				}
+			}
 			
 			
 		 return enquiries;
@@ -1021,7 +1094,26 @@ public class EnquiryRequestServiceImpl implements EnquiryRequestService {
 	@Override
 	public List<EnquiryDto> getEnquiriesByMobileNo(String countryCode,String mobileNo,String projectSfid,String token,String userid) {
 		
-		return pushEnquiryDataService.getEnquiriesByMobileNo(countryCode,mobileNo,projectSfid,token,userid);
+		/* Added By Satheesh K - 06-07-2020
+		 * Requested by Prakash - Closing Team Lead and Sourcing Team Lead adding on Sales Tab and Optimize the GPLAPPS Source Protection API*/
+		List<EnquiryDto> dtoList = pushEnquiryDataService.getEnquiriesByMobileNo(countryCode,mobileNo,projectSfid,token,userid);
+		if(dtoList !=null && dtoList.size()>0)
+		{
+			if(dtoList.get(0).getSourcing_Managers__c()!=null)
+			{
+				dtoList.get(0).setSourcingmanger_email(tokenService.getSalesUserEmailID(dtoList.get(0).getEnquiryId(), dtoList.get(0).getSourcing_Managers__c()));
+			}
+			
+			if(dtoList.get(0).getClosing_Team_Lead__c()!=null)
+			{
+				dtoList.get(0).setClosing_Team_Lead_email(tokenService.getSalesUserEmailID(dtoList.get(0).getEnquiryId(), dtoList.get(0).getClosing_Team_Lead__c()));
+			}
+			if(dtoList.get(0).getSourcing_Team_Lead__c()!=null)
+			{
+				dtoList.get(0).setSourcing_Team_Lead_email(tokenService.getSalesUserEmailID(dtoList.get(0).getEnquiryId(), dtoList.get(0).getSourcing_Team_Lead__c()));
+			}
+		}
+		return dtoList;
 	}
 	@Override
 	public EnquiryDto getEnquiryById(EnquiryDto dto) {

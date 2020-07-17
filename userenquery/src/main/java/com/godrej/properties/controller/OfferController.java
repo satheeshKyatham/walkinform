@@ -228,15 +228,8 @@ public class OfferController {
 					 
 					//Update offer created flag in sfdc property table through HEROKU
 					if((offerid!=null && offerid.length()==18)) {
-						String validateForPro = "";
-						
-						if("a1l2s00000000X5AAI".equals(projectsfid)) {
-							validateForPro = "a1l2s00000000X5AAI";
-							boolean isPMAY = isUnderPMAY(offerid, projectsfid,salesConsiderationTotal, reraCarpetAreaSqm, validateForPro);
-							propOtherChargesService.updatePropertyStatus(propid, isPMAY);
-						} else if ("a1l2s00000003VlAAI".equals(projectsfid)) {
-							validateForPro = "a1l2s00000003VlAAI";
-							boolean isPMAY = isUnderPMAY(offerid, projectsfid,salesConsiderationTotal, reraCarpetAreaSqm, validateForPro);
+						if("a1l6F0000081xb4QAA".equals(projectsfid) || "a1l2s00000000X5AAI".equals(projectsfid) || "a1l2s00000003VlAAI".equals(projectsfid)  || "a1l6F000003TXloQAG".equals(projectsfid)) {
+							boolean isPMAY = isUnderPMAY(offerid, projectsfid,salesConsiderationTotal, reraCarpetAreaSqm);
 							propOtherChargesService.updatePropertyStatus(propid, isPMAY);
 						} else {
 							propOtherChargesService.updatePropertyStatus(propid);
@@ -289,13 +282,13 @@ public class OfferController {
 		
 	}
 	
-	private boolean isUnderPMAY(String offerId, String projectSfid, double basicSalePrice, double reraCarpetAreaSqm, String validateForPro) {
-		if (validateForPro.equals("a1l2s00000000X5AAI")) {
-			return (offerId!=null && offerId.length()==18 && basicSalePrice < 4500000  &&  reraCarpetAreaSqm < 90  && "a1l2s00000000X5AAI".equals(projectSfid)) ;
+	private boolean isUnderPMAY(String offerId, String projectSfid, double basicSalePrice, double reraCarpetAreaSqm) {
+		if (projectSfid.equals("a1l2s00000000X5AAI") || projectSfid.equals("a1l6F000003TXloQAG")) {
+			return (offerId!=null && offerId.length()==18 && basicSalePrice < 4500000  &&  reraCarpetAreaSqm < 90) ;
 		}
 		
-		if (validateForPro.equals("a1l2s00000003VlAAI")) {
-			return (offerId!=null && offerId.length()==18 && basicSalePrice < 4500000  &&  reraCarpetAreaSqm < 60  && "a1l2s00000003VlAAI".equals(projectSfid)) ;
+		if (projectSfid.equals("a1l6F0000081xb4QAA") || projectSfid.equals("a1l2s00000003VlAAI")) {
+			return (offerId!=null && offerId.length()==18 && basicSalePrice < 4500000  &&  reraCarpetAreaSqm < 60) ;
 		}
 		
 		return false;

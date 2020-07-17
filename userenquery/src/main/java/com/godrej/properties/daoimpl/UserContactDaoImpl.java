@@ -7,8 +7,11 @@ import java.util.Map;
 
 import javax.persistence.Query;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.godrej.properties.constants.KeyConstants;
 import com.godrej.properties.converter.ContactConverter;
@@ -19,8 +22,10 @@ import com.godrej.properties.model.Contact;
 import com.godrej.properties.model.TriggerLog; 
 
 @Repository("userContactDao")
+@Transactional
 public class UserContactDaoImpl extends AAbstractDao<Contact> implements UserContactDao {
 
+	private Logger log = LoggerFactory.getLogger(getClass());
 	@Autowired
 	private ContactConverter contactConverter;
 	
@@ -96,6 +101,20 @@ public class UserContactDaoImpl extends AAbstractDao<Contact> implements UserCon
 		 q.setParameter("AccountId", brokeraccount);
 		 q.setParameter("RecordTypeId", "0126F000000uazGQAQ");
 		 return q.getResultList().get(0).toString();
+	}
+	@Override
+	public int getContactPKID(String contactsfid) {
+		try
+		{
+		 Query q = getSession().createNativeQuery("SELECT c.id FROM salesforce.contact c where c.sfid=:contactsfid");
+		 q.setParameter("contactsfid", contactsfid);
+		 return (int) q.getResultList().get(0);
+		}
+		catch (Exception e) {
+			log.error("getContactPKID Contcat SFID: {} - "+contactsfid+" Error {}",e);
+			return 0;
+		}
+		
 	}
 
 	

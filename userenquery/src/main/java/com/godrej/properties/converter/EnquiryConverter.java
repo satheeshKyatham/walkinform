@@ -158,7 +158,7 @@ public class EnquiryConverter implements CommonConverter<Enquiry, EnquiryDto>{
 		if(entity.getSourcing_Managers__c()!=null)
 		{
 			dto.setSourcing_Managers__c(entity.getSourcing_Managers__c());
-			dto.setSourcingmanger_email(tokenService.getSalesUserEmailID(entity.getEnquiryId(), entity.getSourcing_Managers__c()));
+//			dto.setSourcingmanger_email(tokenService.getSalesUserEmailID(entity.getEnquiryId(), entity.getSourcing_Managers__c()));
 //			dto.setSourcing_Managers__c(tokenService.getSalesUserEmailID(entity.getEnquiryId(), entity.getSourcing_Managers__c()));
 		}
 		/*=========End========*/
@@ -175,15 +175,22 @@ public class EnquiryConverter implements CommonConverter<Enquiry, EnquiryDto>{
 		if(entity.getClosing_Team_Lead__c()!=null)
 		{
 			dto.setClosing_Team_Lead__c(entity.getClosing_Team_Lead__c());
-			dto.setClosing_Team_Lead_email(tokenService.getSalesUserEmailID(entity.getEnquiryId(), entity.getClosing_Team_Lead__c()));
+			//dto.setClosing_Team_Lead_email(tokenService.getSalesUserEmailID(entity.getEnquiryId(), entity.getClosing_Team_Lead__c()));
 		}
 		if(entity.getSourcing_Team_Lead__c()!=null)
 		{
 			dto.setSourcing_Team_Lead__c(entity.getSourcing_Team_Lead__c());
-			dto.setSourcing_Team_Lead_email(tokenService.getSalesUserEmailID(entity.getEnquiryId(), entity.getSourcing_Team_Lead__c()));
+			//dto.setSourcing_Team_Lead_email(tokenService.getSalesUserEmailID(entity.getEnquiryId(), entity.getSourcing_Team_Lead__c()));
 		}
 		if(entity.getVirtual_meeting_count__c()!=null)
 			dto.setVirtual_meeting_count__c(entity.getVirtual_meeting_count__c());
+		/* Added By Satheesh K - 26-06-2020
+		 * Requested by Prakash - International Sales Manager adding on Sales Tab*/
+		if(entity.getInternational_Sales_Manager__c()!=null)
+		{
+			dto.setInternationalSMDto(entity.getInternational_Sales_Manager__c());
+			
+		}
 		return dto;
 	}
 
@@ -332,6 +339,8 @@ public class EnquiryConverter implements CommonConverter<Enquiry, EnquiryDto>{
 			entity.setClosing_Team_Lead__c(dto.getClosing_Team_Lead__c());
 		if(dto.getSourcing_Team_Lead__c()!=null)
 			entity.setSourcing_Team_Lead__c(dto.getSourcing_Team_Lead__c());
+		if(dto.getInternationalSMDto()!=null)
+			entity.setInternational_Sales_Manager__c(dto.getInternationalSMDto());
 		
 		return entity;
 	}

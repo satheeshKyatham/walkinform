@@ -95,7 +95,8 @@ public class InventoryServiceImpl implements InventoryService {
 
 	}
 	
-	
+	/* This service used for GPLAPPS EOI_BLOCK functionality as well as D4U Admin Inventory
+	 * Class Name : GPLAppsWebServiceImpl.java*/ 
 	@Override
 	public void holdInventoryAdmin(String projectId, String userId, String unitsfid, String holdmsg, String reasonInput, String holdBlockBehalfOfName, int holdBlockBehalfOfID, String  enqSFID)
 	{
@@ -109,6 +110,10 @@ public class InventoryServiceImpl implements InventoryService {
 		}
 			
 		 String [] data= unitsfid.split(",");
+		 
+		 StringBuilder successUnitUpdate = new StringBuilder();
+		 String drupalUpdateUnit = "";
+		 
 		 for (int i=0;i<data.length;i++){
 			 HoldInventoryAdmin inventoryAdmin= new HoldInventoryAdmin();
 			 inventoryAdmin.setUnitSfid(data[i]);
@@ -142,11 +147,19 @@ public class InventoryServiceImpl implements InventoryService {
 			 inventoryAdminLog.setEnq_sfid(enqSFID);
 			 
 			 saveHoldInventoryAdminLog(inventoryAdminLog);
+			 
+			 successUnitUpdate.append(data[i]);
+			 successUnitUpdate.append("_");
 		 } 
 		 
-		 if (holdmsg.equals("block")) {
-			 drupalInventoryStatusUpdate.inventoryStatusUpdate(unitsfid, "true");
+		 drupalUpdateUnit = successUnitUpdate.toString();
+		 if (drupalUpdateUnit != null && drupalUpdateUnit.length() > 0 && drupalUpdateUnit.charAt(drupalUpdateUnit.length() - 1) == '_') {
+			 drupalUpdateUnit = drupalUpdateUnit.substring(0, drupalUpdateUnit.length() - 1);
 		 }
+		 
+		 //if (holdmsg.equals("block")) {
+		drupalInventoryStatusUpdate.inventoryStatusUpdate(drupalUpdateUnit, "true");
+		 //}
 		 
 		 
 	}

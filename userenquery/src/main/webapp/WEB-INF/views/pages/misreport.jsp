@@ -97,7 +97,12 @@ userid=(String)ses.getAttribute("USERID");
 				</li>
 				<li id="salesTabId" onclick="getEnqDataForMap()">
 					<a href="#tab2" data-toggle="tab">Walk-in's Map</a>
-				</li> 
+				</li>
+				
+				<li id="" onclick="getBookingDataForMap()">
+					<a href="#bookingOnMap" data-toggle="tab">Booking's on Map</a>
+				</li>
+				 
 				<li id="salesTabId" onclick="createdOfferProject()">
 					<a href="#tab3" data-toggle="tab">Created Offer List</a>
 				</li> 
@@ -201,8 +206,13 @@ userid=(String)ses.getAttribute("USERID");
 				<div class="clearfix"></div>
 			</div>
 			<div class="tab-pane" id="tab2">
-			<%@ include file="/WEB-INF/views/pages/enqOnMap.jsp" %>
+				<%@ include file="/WEB-INF/views/pages/enqOnMap.jsp" %>
 			</div>
+			
+			<div class="tab-pane" id="bookingOnMap">
+				<%@ include file="/WEB-INF/views/pages/bookingOnMap.jsp" %>
+			</div>
+			
 			<div class="tab-pane" id="tab3" >
 			<%-- <jsp:include page="createofferPayment.jsp"></jsp:include> --%>
 					<%@ include file="/WEB-INF/views/pages/createofferPayment.jsp" %>

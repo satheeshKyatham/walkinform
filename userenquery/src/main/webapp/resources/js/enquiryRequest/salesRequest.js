@@ -1596,8 +1596,6 @@ function getSourcingTeamLeadManagersList(inputVal)
 }
 
 
-
-
 function getInternationalSalesManagersList(inputVal)
 {
 	var option="";
