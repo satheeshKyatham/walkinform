@@ -647,14 +647,14 @@ function getTaxPercentage(basicSaleprice, projectSfid, currentTaxRate, TotalA, r
 		}
 		
 		//Added for Project Godrej Royale Woods and forest grove
-		if(projectSfid == 'a1l2s00000003VlAAI'){
+		if(projectSfid == 'a1l2s00000003VlAAI' || projectSfid == 'a1l6F0000081xb4QAA'){
 			if(TotalA>=4500000 || reraCarpetSqm >= 60){
 				return 5;
 			}
 			return 1;
 		}  
 		
-		if (projectSfid == 'a1l2s00000000X5AAI'){
+		if (projectSfid == 'a1l2s00000000X5AAI' || projectSfid == 'a1l6F000003TXloQAG'){
 			if(TotalA>=4500000 || reraCarpetSqm >= 90){
 				return 5;
 			}
@@ -856,7 +856,7 @@ function paymentPlanOtherCharges (firstRowObj){
                                         
                                         //Added for 45lac condition - 20200610
                                         if (obj[k].propstrength__part_of_cop__c == true) { 
-                                        	if (obj[k].other_charges_name != "Club Development Charges_1098") {
+                                        	if (obj[k].other_charges_name != "Club Development Charges_1098" && obj[k].other_charges_name != "Club Development Charges_1085") {
                                         		gstFixed1Per = parseFloat (fixed*1/100);
                                         		gstFixed5Per = parseFloat (fixed*5/100);
                                         	} else {
@@ -988,7 +988,7 @@ function paymentPlanOtherCharges (firstRowObj){
                                             
                                         //Added for 45lac condition - 20200610
                                         if (obj[k].propstrength__part_of_cop__c == true) { 
-                                        	if (obj[k].other_charges_name != "Club Development Charges_1098") {
+                                        	if (obj[k].other_charges_name != "Club Development Charges_1098"  && obj[k].other_charges_name != "Club Development Charges_1085") {
                                         		gstFlexible1Per = parseFloat (flexible*1/100);
 												gstFlexible5Per = parseFloat (flexible*5/100);
                                         	} else {
@@ -1029,13 +1029,19 @@ function paymentPlanOtherCharges (firstRowObj){
                     
                     
                     //added for 45lac condition
-                    if($('#projectid').val() == 'a1l2s00000003VlAAI'){
+                    if($('#projectid').val() == 'a1l2s00000003VlAAI' || $('#projectid').val() == 'a1l6F0000081xb4QAA'){
 	       				if($('.salesConsiderationTotalNew').text()>=4500000  || $('#carpetSqm').text() >= 60){
 	       					gstPymtOcTotal = parseFloat((gstFinal5Per) + ((ocPlsBsp)*($('#bspGSTTax').val())/100)).toFixed(2);
 	       				} else {
 	       					gstPymtOcTotal = parseFloat((gstFinal1Per) + ((ocPlsBsp)*($('#bspGSTTax').val())/100)).toFixed(2);
 	       				}
-                    }else {
+                    } else if ($('#projectid').val() == 'a1l6F000003TXloQAG'){
+                    	if($('.salesConsiderationTotalNew').text()>=4500000  || $('#carpetSqm').text() >= 90){
+	       					gstPymtOcTotal = parseFloat((gstFinal5Per) + ((ocPlsBsp)*($('#bspGSTTax').val())/100)).toFixed(2);
+	       				} else {
+	       					gstPymtOcTotal = parseFloat((gstFinal1Per) + ((ocPlsBsp)*($('#bspGSTTax').val())/100)).toFixed(2);
+	       				}
+                    } else {
                     	gstPymtOcTotal = parseFloat((gstFinal) + ((ocPlsBsp)*($('#bspGSTTax').val())/100)).toFixed(2);
                     }
                     //END added for 45lac condition
@@ -1468,7 +1474,7 @@ function updateBSP (timeid) {
 	   				showConfirmButton: true
 	   			});
     	   } else if (offerJson.offer_successMsg == "successOfferCreate101") {
-    	   
+    		   
     		   swal({
 	   				title: "Please wait, loading the Cost Sheet ...",
 	   				text: "",
@@ -1476,10 +1482,13 @@ function updateBSP (timeid) {
 	   				allowOutsideClick: false,
 	   				showConfirmButton: false
 	   			});
+    		  
 	   			//Get for KYC Status
+    		   
     		   $.post(pageContext+"getKYCStatus",{"enquiryName":$("#enquiry_name").val(),"projectid":$('#projectId').val()},function(data){                       
     		        
     		    }).done(function(data){
+    		    	debugger
     		          var obj =JSON.parse(data);
     		          var kycStatus="";
     		          if(obj!=null)
@@ -1488,15 +1497,14 @@ function updateBSP (timeid) {
     		        	  }
     		          if(kycStatus!="Y")
 	       			   {
-	   	   				generateKYCLinkViaOffer(event,this,'N',offerJson.offer_sfid);
+	   	   				generateKYCLinkViaOffer(event,this,'N',offerJson.offer_sfid,tdsPaidBy);
 	       			   }
+    		          
     		    });
     		   
     		   
-	       	   
-	            printPdfData(generateFrom);
-	            
-	   			/*if (data != '0' || data != '' || data != 'undefined' || data != null || data != 'null') {
+		       printPdfData(generateFrom);
+	           /*if (data != '0' || data != '' || data != 'undefined' || data != null || data != 'null') {
 	   				console.log("Offer SFID after API Submitted:-"+data)
 	   				console.log("Offer SFID after API Offer ID:-"+data.offer_sfid)
 	   				var offerJson = JSON.parse(data);
@@ -1510,7 +1518,8 @@ function updateBSP (timeid) {
 	   				csPymtData (offerJson);
 	   				
 	   			}
-	            
+	            /*var enq=$("#enquiry_name").val();
+				updateTDSEOIForm(enq,tdsPaidBy);*/
 	            var url=$("#contextPath").val();
 	            
 	            getDealDone();
@@ -2269,7 +2278,7 @@ function newOtherCharges2 () {
              var carpetAreaAmount = 0;
              var exclusiveAreaAmount = 0;
              
-             if ($('#projectId').val() == 'a1l2s00000000X5AAI' || $('#projectId').val() == 'a1l6F000009D6IMQA0'  || $('#projectId').val() == 'a1l2s00000003lPAAQ' || $('#projectId').val() == 'a1l6F0000080irTQAQ' || $('#projectId').val() == 'a1l6F000001l2yqQAA' || $('#projectId').val() == 'a1l6F000008gL4oQAE') {
+             /*if ($('#projectId').val() == 'a1l6F000001l2yqQAA') {
             	 $('#tentativeCharges tbody').append("<tr> " +
             	 			"<th> Electricity Charges </th> <td class='txtRight' style='text-align:right;'> 0 </td>  </tr>" +
             	 			"<tr> <th> Legal Charges </th> <td class='txtRight' style='text-align:right;'> 0 </td>  </tr>" +
@@ -2280,7 +2289,9 @@ function newOtherCharges2 () {
          	 			"<th> Electricity Charges </th> <td class='txtRight' style='text-align:right;'> 0 </td>  </tr>" +
          	 			"<tr> <th> Legal Charges </th> <td class='txtRight' style='text-align:right;'> 0 </td>  </tr>" +
          	 			"<tr> <th> Club Development Charges </th> <td class='txtRight' style='text-align:right;'> 0 </td>  </tr>");
-             }else if ($('#projectId').val() == 'a1l6F000005hPm5QAE' || $('#projectId').val() == 'a1l6F000001kj37QAA') {
+             }*/
+             
+             /*else if ($('#projectId').val() == 'a1l6F000005hPm5QAE') {
             	 $('#tentativeCharges tbody').append("<tr> " +
             	 			"<th> Electricity Charges </th> <td class='txtRight' style='text-align:right;'> 0 </td>  </tr>" +
             	 			"<tr> <th> Club Development Charges </th> <td class='txtRight' style='text-align:right;'> 0 </td>  </tr>");
@@ -2288,7 +2299,7 @@ function newOtherCharges2 () {
             	 $('#printTentativeCharges tbody').append("<tr> " +
          	 			"<th> Electricity Charges </th> <td class='txtRight' style='text-align:right;'> 0 </td>  </tr>" +
          	 			"<tr> <th> Club Development Charges </th> <td class='txtRight' style='text-align:right;'> 0 </td>  </tr>");
-             }
+             }*/
              
              
              //alert ("otherChrgCgstTotal ::: " + otherChrgCgstTotal);
@@ -2406,13 +2417,19 @@ function newOtherCharges2 () {
              var GST5Per = parseFloat(parseFloat(otherChargesGSTTotal5Per)+parseFloat(((finalFlatAmount)*bspTax)/100)).toFixed(2);
              
              //added for 45lac condition
-             if($('#projectid').val() == 'a1l2s00000003VlAAI'){
+             if($('#projectid').val() == 'a1l2s00000003VlAAI' || $('#projectid').val() == 'a1l6F0000081xb4QAA'){
 				if(TotalA>=4500000 || $('#carpetSqm').text() >= 60){
 					otherChargesGSTTotalV2 = GST5Per;
 				} else {
 					otherChargesGSTTotalV2 = GST1Per;
 				}
-             }	else {
+             } else if ($('#projectid').val() == 'a1l6F000003TXloQAG') {
+            	 if(TotalA>=4500000 || $('#carpetSqm').text() >= 90){
+ 					otherChargesGSTTotalV2 = GST5Per;
+ 				} else {
+ 					otherChargesGSTTotalV2 = GST1Per;
+ 				}
+             } else {
             	 otherChargesGSTTotalV2 = GSTDefault;
              }
              //END added for 45lac condition
@@ -2776,6 +2793,12 @@ $('.printCurrentDate').text($.datepicker.formatDate('dd/mm/yy', new Date()));
 function printPdfData(generateFrom) {
        var url=$("#contextPath").val();
        
+       var USEREMAIL = '';
+       if (generateFrom != "Offered"){
+    	   USEREMAIL = USEREMAIL_GV;
+       } else {
+    	   USEREMAIL = '';
+       }
        
        
        var enq18sfid = "";
@@ -2795,12 +2818,12 @@ function printPdfData(generateFrom) {
              $('#csCommitmentTxt').html("<h5>Sales Comments: </h5><span style='font-size:8px !important;'>"+$('#costsheet_commitment').val()+"</span>");
        } 
              
-       $.post(pageContext+"printCSdata",{"unitTval":$('#unitTval').text(), "floorTval":$('#floorTval').text(), "towerName":$('#towerTval').text(), "regionName":$('#region__c').val(), "projectSfid":$('#projectId').val(),"unitSfid":$('#unitSfid').val(),"enqSfid":enqSfid,"csData":$('#getCSDataForPrint').html(), "projectName":$('#marketingProjectName').val(), "currentDate":$.datepicker.formatDate('dd/mm/yy', new Date())},function(data){                           
+       $.post(pageContext+"printCSdata",{"USEREMAIL_GV":USEREMAIL,"unitTval":$('#unitTval').text(), "floorTval":$('#floorTval').text(), "towerName":$('#towerTval').text(), "regionName":$('#region__c').val(), "projectSfid":$('#projectId').val(),"unitSfid":$('#unitSfid').val(),"enqSfid":enqSfid,"csData":$('#getCSDataForPrint').html(), "projectName":$('#marketingProjectName').val(), "currentDate":$.datepicker.formatDate('dd/mm/yy', new Date())},function(data){                           
              
        }).done(function(data){
              
-    	   
-    	  var uriPath = pageContext+'Costsheet?name='+enqSfid+'-'+$('#unitSfid').val()+'-'+$('#projectId').val() +'&region='+$('#region__c').val() + '&project='+$('#marketingProjectName').val()+'&tower='+encodeURIComponent($('#towerTval').text())+'&floor=' + $('#floorTval').text() + '&unit=' + $('#unitTval').text() + '&from=costsheet';
+    	  //var uriPath = pageContext+'Costsheet?name='+enqSfid+'-'+$('#unitSfid').val()+'-'+$('#projectId').val() +'&region='+$('#region__c').val() + '&project='+$('#marketingProjectName').val()+'&tower='+encodeURIComponent($('#towerTval').text())+'&floor=' + $('#floorTval').text() + '&unit=' + $('#unitTval').text() + '&from=costsheet';
+    	  var uriPath = pageContext+'Costsheet?name='+enqSfid+'-'+$('#unitSfid').val()+'-'+$('#projectId').val() +'&region='+$('#region__c').val() + '&project='+encodeURIComponent($('#marketingProjectName').val())+'&tower='+encodeURIComponent($('#towerTval').text())+'&floor=' + $('#floorTval').text() + '&unit=' + $('#unitTval').text() + '&from=costsheet';
     	  var win = window.open(uriPath,'_blank');
            
 //    	   var win = window.open(pageContext+'Costsheet?name='+enqSfid+'-'+$('#unitSfid').val()+'-'+$('#projectId').val() +'&region='+$('#region__c').val() + '&project='+$('#marketingProjectName').val()+'&tower='+$('#towerTval').text()+'&floor=' + $('#floorTval').text() + '&unit=' + $('#unitTval').text() + '&from=costsheet', '_blank');  

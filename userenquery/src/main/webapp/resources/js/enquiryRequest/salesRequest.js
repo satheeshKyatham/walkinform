@@ -289,7 +289,7 @@ function getEnquiryForSales(){
 	var resp=fetchData("getEnquiryForSales/"+countryCode+"/"+mobileNo+"/"+projectSfid+"/"+token,null,"GET");
 	populateSearchEnquiry(resp,true);
 	debugger
-	if(token.includes("G")||token.includes("E")){
+	if(token.includes("G")||token.includes("E")||token.includes("MS")){
 //		$("#salesTabId").remove();
 		$("#salesTabId").show();
 		
@@ -697,8 +697,9 @@ function loadEnquiryReport(enq){
 		//var sourcingVal ="gshetty@godrejproperties.com";
 		$("#sourcingManagerId").val(enq.sourcing_Managers__c);
 		getClosingManagersList(enq.sourcingmanger_email);
-		getClosingTeamLeadManagersList(enq.closing_Team_Lead_email)
-		getSourcingTeamLeadManagersList(enq.sourcing_Team_Lead_email)
+		getClosingTeamLeadManagersList(enq.closing_Team_Lead_email);
+		getSourcingTeamLeadManagersList(enq.sourcing_Team_Lead_email);
+		getInternationalSalesManagersList(enq.internationalSMDto);
 		$("#LostReasonID").val(enq.lost_reason_c__c);
 		
 		//$( "#followDate" ).datepicker({ defaultDate: new Date(enq.enquiryReport.followDate) });
@@ -1251,30 +1252,53 @@ function generateKYCLink(event,el,isEOI){
 			    }
 			});
 }
-function generateKYCLinkViaOffer(event,el,isEOI,offersfid){
+function generateKYCLinkViaOffer(event,el,isEOI,offersfid,tdsPaidBy){
 	var userid="";
+	var enqId=$('#enquirysfid').val();
 	if($("#userid").val()=='')
 		userid=0;
 	else
 		userid=$("#userid").val();
 	var mobile=$('#mobileNo').val();
 		   	$.ajax({
-		   		url: '/kycform/genSmsKycLink?mobilestr='+mobile+"&projectid="+$("#projectid").val()+"&projectname="+$('#projectName').val()+"&enqid="+$('#enquirysfid').val()+"&emailid="+$('#useremailID').val()+"&isEOI="+isEOI+"&userid="+userid+"&offersfid="+offersfid+"",
+		   		url: '/kycform/sendKYCLinkAfterOffer?mobilestr='+mobile+"&projectid="+$("#projectid").val()+"&projectname="+$('#projectName').val()+"&enqid="+enqId+"&emailid="+$('#useremailID').val()+"&isEOI="+isEOI+"&userid="+userid+"&offersfid="+offersfid+"&tdspaidby="+tdsPaidBy+"",
 				/*data: sendingData,*/
 			    type: 'POST', 	  
 			    success: function(data) 
 			    {
-			    	//swal('KYC Link Sent...!');
+			    	debugger
+			    	
 			    	  $("#mainPageLoad").hide();
 			    },
 			    beforeSend : function() {
 		        	$("#mainPageLoad").show();
 		        },
 			    error: function(e) {
-			    	alert(e);
+//			    	alert(e);
 			    	$("#mainPageLoad").hide();
 			    }
 			});
+}
+
+function updateTDSEOIForm(enqId,tds){
+	$.ajax({
+   		
+   		url: '/kycform/updateTDSEOIForm?enqid='+enqId+"&tdsPaidBy="+tds+"",
+		/*data: sendingData,*/
+	    type: 'POST', 	  
+	    success: function(data) 
+	    {
+	    	  
+	    	  $("#mainPageLoad").hide();
+	    },
+	    beforeSend : function() {
+        	$("#mainPageLoad").show();
+        },
+	    error: function(e) {
+	    	alert(e);
+	    	$("#mainPageLoad").hide();
+	    }
+	});
 }
 function generateEOI(event,el){
 	if( $('#followtype').is('[readonly]')){
@@ -1520,10 +1544,14 @@ function getClosingTeamLeadManagersList(inputVal)
 	   var option="";
 		$.getJSON(urlGetUsers, function (data) {
 			option = "<option value=''>Select User</option>";
-			if(inputVal=="nosourcingcip@godrejproperties.com")
+			/*if(inputVal=="nosourcingcip@godrejproperties.com")
 				option = option+"<option value='nosourcingcip@godrejproperties.com' selected>No Sourcing Manager</option>";
 			else
-				option = option+"<option value='nosourcingcip@godrejproperties.com'>No Sourcing Manager</option>";
+				option = option+"<option value='nosourcingcip@godrejproperties.com'>No Sourcing Manager</option>";*/
+			if(inputVal=="noclosingtl@gpl.com")
+				option = option+"<option value='noclosingtl@gpl.com' selected>No Closing TL</option>";
+			else
+				option = option+"<option value='noclosingtl@gpl.com'>No Closing TL</option>";
 			$.each(data, function (index, value) {
 				if(inputVal==value.emailid)
 					{
@@ -1545,10 +1573,14 @@ function getSourcingTeamLeadManagersList(inputVal)
 	   var option="";
 		$.getJSON(urlGetUsers, function (data) {
 			option = "<option value=''>Select User</option>";
-			if(inputVal=="nosourcingcip@godrejproperties.com")
+			/*if(inputVal=="nosourcingcip@godrejproperties.com")
 				option = option+"<option value='nosourcingcip@godrejproperties.com' selected>No Sourcing Manager</option>";
 			else
-				option = option+"<option value='nosourcingcip@godrejproperties.com'>No Sourcing Manager</option>";
+				option = option+"<option value='nosourcingcip@godrejproperties.com'>No Sourcing Manager</option>";*/
+			if(inputVal=="nosourcingtl@gpl.com")
+				option = option+"<option value='nosourcingtl@gpl.com' selected>No Sourcing TL</option>";
+			else
+				option = option+"<option value='nosourcingtl@gpl.com'>No Sourcing TL</option>";
 			$.each(data, function (index, value) {
 				if(inputVal==value.emailid)
 					{
@@ -1562,3 +1594,25 @@ function getSourcingTeamLeadManagersList(inputVal)
 			$("#sourcingTeamLeadId").append(option);
 		});
 }
+
+
+
+
+function getInternationalSalesManagersList(inputVal)
+{
+	var option="";
+	var smNames = ["Ankit Narverkar", "Anupama Jadhav", "Anupama Jadhav","Bhavya Mehra","Chinmay Vaidya","Jessica Ann Lee","Meghna Gupta","Prashant Benjamin","Rohan Vaswani","Zubair Khan","Pratik Yagnik"
+		,"Shivam Thakur","Mayank Jain","Samarth Sharma","Deependar Singh","Komit Malik","Parag Jha","Bhavya Dwivedi"];
+		//option = option+"<option value='nosourcingtl@gpl.com' selected>No Sourcing TL</option>";
+	option = option+"<option value=''>Select Int.Sales Manager</option>";
+	for(var i=0;smNames.length-1>i;i++)
+		{
+		if(smNames[i]==inputVal)
+			{
+			option = option+"<option value='"+smNames[i]+"' selected>"+smNames[i]+"</option>";
+			}
+		else
+			option = option+"<option value='"+smNames[i]+"'>"+smNames[i]+"</option>";
+		}
+		$("#internationalSMId").append(option);
+	}

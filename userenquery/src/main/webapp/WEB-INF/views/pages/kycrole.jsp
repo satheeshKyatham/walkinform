@@ -115,6 +115,7 @@ if(ses!=null){
 								<th>Kyc Approved/Rejected By</th>
 								<th>Booking Name</th>
 								<th>Booking Status</th>
+								<th>Description</th>
 							</tr>
 						</thead>
 						<tbody>

@@ -83,6 +83,7 @@ function getCMKYCDetails()
 					+"<td>"+kycApprovalName+"</td>"
 					+"<td>"+bookingName+"</td>"
 					+"<td>"+bookingStatus+"</td>"
+					+"<td>"+description+"</td>"
 					+"</tr>");
 			$("#KYC_Admin_Details tbody").append(val);
 			i = i+1
