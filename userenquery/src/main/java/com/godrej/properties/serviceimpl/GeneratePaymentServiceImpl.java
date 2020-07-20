@@ -10,6 +10,9 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 import org.apache.http.client.ClientProtocolException;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +33,7 @@ import com.godrej.properties.model.GeneratePayment;
 import com.godrej.properties.model.ProjectLaunch;
 import com.godrej.properties.service.GeneratePaymentService;
 import com.godrej.properties.service.ProjectLaunchService;
+import com.godrej.properties.util.CommonUtil;
 
 @Service("generatePaymentService")
 @Transactional
@@ -76,8 +80,15 @@ public class GeneratePaymentServiceImpl implements GeneratePaymentService{
 		
 		try {
 			//insert into request table 
-			//callproject data
+			//call project data
 			ProjectLaunch project = projectLaunchService.getProjectSaleMgrID(payment.getProject_sfid());
+			//MerchantID and workingkey pick Preference logic to be develop here
+			//Common Utility
+			if(project.getTower_mid_access_code_json()!=null)
+			{
+				project = CommonUtil.getTowerWiseCCAvenueDetails(project,payment);
+			}
+			
 			String ccRequestFormat = createCCRequestFormat(payment,project);
 			respReq = ccGatewayRequestController.CCGatewayRequestPost(ccRequestFormat,project);
 			respReq="ccencrqst="+respReq+"&accesscode="+project.getCcavenue_accesscode();
@@ -97,7 +108,14 @@ public class GeneratePaymentServiceImpl implements GeneratePaymentService{
 		long tiddate = new Date().getTime();
 		CCAvenueGatewayRequest data = new CCAvenueGatewayRequest();
 		data.setTid(tiddate);
+		/*if(project.getTower_mid_access_code_json()!=null)
+		{
+			//follow 
+		}else
+		{*/
 		data.setMerchant_id(project.getCcavenue_merchant_id());//218829
+		/*}*/
+		
 		data.setOrder_id(String.valueOf(payment.getId()));
 		data.setCurrency("INR");
 		data.setAmount(payment.getAmount().doubleValue());
@@ -112,7 +130,7 @@ public class GeneratePaymentServiceImpl implements GeneratePaymentService{
 		data.setMerchant_param1(payment.getEnquiry_name());
 		data.setMerchant_param2(payment.getEnquiry_sfid());
 		data.setMerchant_param3(payment.getProject_sfid());
-		//merchant_param4
+		data.setMerchant_param4(payment.getTowersfid());
 		//merchant_param5
 		
 		
@@ -122,7 +140,7 @@ public class GeneratePaymentServiceImpl implements GeneratePaymentService{
 				+ "&cancel_url="+KeyConstants.CANCEL_URL+"?projectsfid="+payment.getProject_sfid()+""
 				+ "&language=EN&billing_name="+payment.getCustomer_name()+"&billing_address=&billing_city=&billing_state=&billing_zip=&billing_country=&billing_tel="+payment.getCustomer_mobile()+""
 				+ "&billing_email="+payment.getCustomer_email()+"&delivery_name=&delivery_address=&delivery_city=&delivery_state=&delivery_zip=&delivery_country=&delivery_tel="
-				+ "&merchant_param1="+payment.getEnquiry_name()+"&merchant_param2="+payment.getEnquiry_sfid()+"&merchant_param3="+payment.getProject_sfid()+"&merchant_param4=&merchant_param5=&promo_code=&";
+				+ "&merchant_param1="+payment.getEnquiry_name()+"&merchant_param2="+payment.getEnquiry_sfid()+"&merchant_param3="+payment.getProject_sfid()+"&merchant_param4="+payment.getTowersfid().trim()+"&merchant_param5=&promo_code=&";
 		
 		data.setGateway_request(format);
 		ccAvenueGatewayRequestDao.insertCCAvenueGatewayRequest(data);

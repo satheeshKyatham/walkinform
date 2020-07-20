@@ -118,6 +118,7 @@ import com.godrej.properties.service.BSPTaxRecordService;
 import com.godrej.properties.service.BSPUpdateService;
 import com.godrej.properties.service.BalanceDetailsService;
 import com.godrej.properties.service.BillingViewService;
+import com.godrej.properties.service.BookingOnMapService;
 import com.godrej.properties.service.CarParkChargesService;
 import com.godrej.properties.service.CostSheetExistsService;
 import com.godrej.properties.service.CostSheetHisService;
@@ -445,6 +446,9 @@ public class WebServiceController<MultipartFormDataInput> {
 	
 	@Autowired
 	private DrupalInventoryStatusUpdate drupalInventoryStatusUpdate;
+	
+	@Autowired
+	private BookingOnMapService bookingOnMapService;
 	
 	
 	@RequestMapping(value = "/activeproject", method = RequestMethod.GET, produces = "application/json")
@@ -779,7 +783,7 @@ public class WebServiceController<MultipartFormDataInput> {
 	
 	
 	@RequestMapping(value = { "/printCSdata" }, method = RequestMethod.POST)
-	public synchronized String printCSdata (@RequestParam("unitTval") String unitTval, @RequestParam("floorTval") String floorTval, @RequestParam("towerName") String towerName, @RequestParam("regionName") String regionName, @RequestParam("projectSfid") String projectSfid, @RequestParam("unitSfid") String unitSfid, @RequestParam("enqSfid") String enqSfid, @RequestParam("csData") String csData, @RequestParam("projectName") String projectName, @RequestParam("currentDate") String currentDate) throws JRException, IOException{
+	public synchronized String printCSdata (@RequestParam("USEREMAIL_GV") String USEREMAIL_GV, @RequestParam("unitTval") String unitTval, @RequestParam("floorTval") String floorTval, @RequestParam("towerName") String towerName, @RequestParam("regionName") String regionName, @RequestParam("projectSfid") String projectSfid, @RequestParam("unitSfid") String unitSfid, @RequestParam("enqSfid") String enqSfid, @RequestParam("csData") String csData, @RequestParam("projectName") String projectName, @RequestParam("currentDate") String currentDate) throws JRException, IOException{
 		log.info("Enter Print Costsheet");
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		Gson gson = gsonBuilder.create();
@@ -791,7 +795,7 @@ public class WebServiceController<MultipartFormDataInput> {
 		 */
 		log.info("");
 		iTextHTMLtoPDF solution = new iTextHTMLtoPDF ();
-		solution.PDFReport(unitTval, floorTval, towerName, regionName, projectSfid, unitSfid, timeId ,csData, projectName, currentDate, enqSfid); 
+		solution.PDFReport(USEREMAIL_GV, unitTval, floorTval, towerName, regionName, projectSfid, unitSfid, timeId ,csData, projectName, currentDate, enqSfid); 
 		
 		return gson.toJson(timeId);
 	}
@@ -1276,6 +1280,14 @@ public class WebServiceController<MultipartFormDataInput> {
 		return gson.toJson(enqOnMapService.getEnqDtl(projectId));
 	}
 	/* END Get Enq Data for place on MAP */
+	
+	
+	@RequestMapping(value = "/getBookingDataForMap", method = RequestMethod.POST)
+	public String getBookingDataForMap (@RequestParam("projectId") String projectId) {
+		Gson gson = new GsonBuilder().disableHtmlEscaping().serializeNulls().create();
+		
+		return gson.toJson(bookingOnMapService.getEnqDtl(projectId));
+	}
 	
 	
 	/* Get dynamic Properties Other Charges */

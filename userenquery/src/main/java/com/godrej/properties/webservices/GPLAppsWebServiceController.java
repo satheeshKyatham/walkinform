@@ -190,9 +190,9 @@ public class GPLAppsWebServiceController {
 				|| (enquiryDto.getContact_referral__c()!=null && enquiryDto.getContact_referral__c().equals(KeyConstants.ENQUIRY_REFERRAL_SFID))
 				|| (enquiryDto.getContact_Loyalty__c()!=null && enquiryDto.getContact_Loyalty__c().equals(KeyConstants.ENQUIRY_EXISTINGCUSTOMER_SFID))*/
 				
-				|| (enquiryDto.getWalkInSource()!=null && enquiryDto.getWalkInSource().equals("Referral"))
+				/*|| (enquiryDto.getWalkInSource()!=null && enquiryDto.getWalkInSource().equals("Referral"))
 				|| (enquiryDto.getWalkInSource()!=null && enquiryDto.getWalkInSource().equals("Godrej Employee"))
-				|| (enquiryDto.getWalkInSource()!=null && enquiryDto.getWalkInSource().equals("Existing Customer"))
+				|| (enquiryDto.getWalkInSource()!=null && enquiryDto.getWalkInSource().equals("Existing Customer"))*/
 				
 				)
 		{

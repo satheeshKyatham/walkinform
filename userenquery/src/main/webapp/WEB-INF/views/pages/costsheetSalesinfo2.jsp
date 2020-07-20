@@ -1314,7 +1314,7 @@
 							<div class="form-group col-md-3 col-sm-6" id="tdsPaidByDDCol">
 								<h4 >TDS paid by <strong class="mndt">*</strong> </h4> 
 								<select class="full form-control requiredField" id="tdsPaidByDD">
-									<!-- <option value="">Select</option> -->
+									<option value="">Select</option>
 									<option value="Authorization to Company">Authorization to Company</option>
 									<option value="Self">Self</option>
 								</select>

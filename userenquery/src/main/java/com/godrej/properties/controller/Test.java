@@ -1,21 +1,10 @@
 package com.godrej.properties.controller;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
-import java.util.StringTokenizer;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.json.JSONException;
-import org.json.JSONObject;
-import org.json.simple.JSONArray;
-
-import com.ccavenue.security.AesCryptUtil;
-import com.godrej.properties.model.CCAvenueResponseModel;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 public class Test {
 	/*public float ab= 1.1f;
@@ -218,14 +207,67 @@ public class Test {
 		System.out.println(timeStamp);
 		System.out.println(Calendar.getInstance().getTimeInMillis());*/
 		
-		if(90>120 && ("Appointment Proposed".equals("Appointment Proposed")))
+		/*if(90>120 && ("Appointment Proposed".equals("Appointment Proposed")))
 		{
 			System.out.println("Qualify........");
 			
 		}
 		else
-			System.out.println("Else........");
+			System.out.println("Else........");*/
+	
+		/*JSONArray jsonArray= new JSONArray();
 		
+		 JSONObject obj = new JSONObject();
+	      obj.put("merchant_id", "foo");
+	      obj.put("accesscode", "foo");
+	      obj.put("workingkey", "foo");
+	      obj.put("towercode", "foo");
+	      obj.put("towersfid", "foo");
+	     // jsonArray.
+	      JSONObject obj1 = new JSONObject();
+	      obj1.put("merchant_id", "foo");
+	      obj1.put("accesscode", "foo");
+	      obj1.put("workingkey", "foo");
+	      obj1.put("towercode", "foo");
+	      obj1.put("towersfid", "foo");
+	      jsonArray.add(obj1);
+	      System.out.println(jsonArray.toString());
+	      JSONParser parser = new JSONParser();
+	      try {
+			JSONArray objNew = (JSONArray) parser.parse(jsonArray.toString());
+			System.out.println("Count:"+objNew.length());
+			for(int i=0;i<objNew.length();i++)
+			{
+				JSONObject objEx = objNew.getJSONObject(i)k
+				//JSONObject objEx = new JSONObject(objNew.get(i));
+				System.out.println("Data:"+objEx);
+			}
+			
+		} catch (org.json.simple.parser.ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
+	     
 	}
 
+	
+	public static java.sql.Date getYYYYMMDD(String inputDate) {
+
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+       // String dateInString = inputDate;
+
+        try {
+        	Date dtDob = new Date(inputDate);
+    		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+    		     String newDate = sdf.format(dtDob);
+
+           Date myDate = formatter.parse(newDate);
+            return new java.sql.Date(myDate.getTime()); 
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+		return null; 
+
+	}
 }

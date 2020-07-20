@@ -5,7 +5,7 @@
 <%  
 /* Cookie ck=new Cookie("version","18.20");  
 response.addCookie(ck);   */
-session.setAttribute("version","18.47");  
+session.setAttribute("version","18.51");  
 %>  
 
 <%
@@ -24,6 +24,16 @@ session.setAttribute("version","18.47");
 	var USERID_GV = '<%= session.getAttribute("USERID")%>';
 	var ROLE_GV = '<%= session.getAttribute("ROLE")%>';
 	var PROSFID_GV = '<%= session.getAttribute("PROJECTSFID")%>';
+	
+	var USEREMAIL_GV = '';
+	
+	
+	
+	if ('<%= session.getAttribute("USEREMAIL")%>' != null) {
+		USEREMAIL_GV = '<%= session.getAttribute("USEREMAIL")%>';		
+	} else {
+		USEREMAIL_GV = '';
+	}	
 </script>
 
 <script src="<c:url value='/resources/js/salesdesk.js?v=${sessionScope.version}'/>"></script>
