@@ -696,6 +696,12 @@ function loadEnquiryReport(enq){
 //		$("#sourcingManagerId").val(enq.sourcing_Managers__c);
 		//var sourcingVal ="gshetty@godrejproperties.com";
 		$("#sourcingManagerId").val(enq.sourcing_Managers__c);
+		
+		$("#enquirytypeID").val(enq.isReferredByChannelPartner);
+		$("#enquirysourceID").val(enq.enquirySource);
+		$("#walkinsourceID").val(enq.walkInSource);
+		
+		
 		getClosingManagersList(enq.sourcingmanger_email);
 		getClosingTeamLeadManagersList(enq.closing_Team_Lead_email);
 		getSourcingTeamLeadManagersList(enq.sourcing_Team_Lead_email);

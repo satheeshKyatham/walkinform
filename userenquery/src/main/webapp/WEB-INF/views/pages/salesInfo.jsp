@@ -1546,6 +1546,31 @@ if(ses!=null){
 							</div>
 							<div class="clearfix"></div>
 						</div>
+						
+						<div class="col-md-3 col-sm-6 col-xs-12">
+							<div class="group">
+								<input class="disableInputs" type="text" id="enquirytypeID" disabled="disabled">
+								<span class="highlight"></span><span class="bar"></span>
+								<label>Enquiry Type</label>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+						<div class="col-md-3 col-sm-6 col-xs-12">
+							<div class="group">
+								<input class="disableInputs" type="text" id="enquirysourceID" disabled="disabled">
+								<span class="highlight"></span><span class="bar"></span>
+								<label>Enquiry Source</label>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+						<div class="col-md-3 col-sm-6 col-xs-12">
+							<div class="group">
+								<input class="disableInputs" type="text" id="walkinsourceID" disabled="disabled">
+								<span class="highlight"></span><span class="bar"></span>
+								<label>Walk-in Source</label>
+							</div>
+							<div class="clearfix"></div>
+						</div>
 						<div class="col-md-3 col-sm-6 col-xs-12">
 							<div class="group">
 								<select class="sales_submitted disableInputs" id="verticalId" name="verticle__c">
@@ -1565,7 +1590,6 @@ if(ses!=null){
 							</div>
 							<div class="clearfix"></div>
 						</div>
-						
 						<div class="col-md-12 col-xs-12">
 							<div class="group">
 								<pre class="" id="enquiryOldComment" style="border-radius: 0; margin-bottom: 40px;"></pre>

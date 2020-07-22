@@ -86,7 +86,7 @@ public class GeneratePaymentServiceImpl implements GeneratePaymentService{
 			//Common Utility
 			if(project.getTower_mid_access_code_json()!=null)
 			{
-				project = CommonUtil.getTowerWiseCCAvenueDetails(project,payment);
+				project = CommonUtil.getTowerWiseCCAvenueDetails(project,payment.getTowercode().trim());
 			}
 			
 			String ccRequestFormat = createCCRequestFormat(payment,project);
@@ -154,11 +154,19 @@ public class GeneratePaymentServiceImpl implements GeneratePaymentService{
 	}
 	@Override
 	public String getwayResponseHandler(String response,String projectsfid) {
+		Log.info("Payment Response Encript Code:{}",response);
+		
 		CCAvenueResponseModel respModel = new CCAvenueResponseModel();
 		ProjectLaunch project = projectLaunchService.getProjectSaleMgrID(projectsfid);
+		
+		/*if(project.getTower_mid_access_code_json()!=null)
+		{
+			project = CommonUtil.getTowerWiseCCAvenueDetails(project,towerCode);
+		}*/
 		//String workingKey = "AC52E9A706E2D7938203D4D554B61E2E";
 		AesCryptUtil aesUtil=new AesCryptUtil(project.getCcavenue_workingkey());
 		String decResp = aesUtil.decrypt(response);
+		Log.info("Payment Response Descript Code:{}",decResp);
 		respModel.setGateway_response(decResp);
 		StringTokenizer tokenizer = new StringTokenizer(decResp, "&");
 		String pair=null, pname=null, pvalue=null;
@@ -249,6 +257,11 @@ public class GeneratePaymentServiceImpl implements GeneratePaymentService{
 					{
 						if(strTok.hasMoreTokens())
 							respModel.setMerchant_param3((String)strTok.nextToken());
+					}
+					if(pname.contains("merchant_param4"))
+					{
+						if(strTok.hasMoreTokens())
+							respModel.setMerchant_param4((String)strTok.nextToken());
 					}
 					if(pname.contains("billing_tel"))
 					{

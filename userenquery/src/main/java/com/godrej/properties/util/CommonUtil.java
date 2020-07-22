@@ -154,7 +154,7 @@ public class CommonUtil {
 		}
 	}
 	
-	public static ProjectLaunch getTowerWiseCCAvenueDetails(ProjectLaunch project,GeneratePayment payment)
+	public static ProjectLaunch getTowerWiseCCAvenueDetails(ProjectLaunch project,String towerCode)
 	{
 		
 
@@ -165,7 +165,7 @@ public class CommonUtil {
 			for(int i=0;i<jsonArry.length();i++)
 			{
 				JSONObject objEx = jsonArry.getJSONObject(i);
-				if(payment.getTowercode().trim().equals(objEx.get("towercode")))
+				if(towerCode.trim().equals(objEx.get("towercode")))
 				{
 					project.setCcavenue_merchant_id(Integer.parseInt(objEx.get("merchant_id").toString()));
 					//project.setCcavenue_merchant_id(218829);

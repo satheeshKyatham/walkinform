@@ -67,7 +67,7 @@ function csPtcalculateGrandTotalOP() {
 
 
 function csPymtDataOP () {
-	getPaymentTowerList();
+	
 	var pageContext = $("#pageContext").val()+"/";
 	var i = 0;
 	var k = 0;
@@ -95,6 +95,8 @@ function csPymtDataOP () {
 	});
 	
 	
+	alert($('#towerMstPayment').val());
+	alert($("#towerMstPayment option:selected").attr('name'));
 	
 	$.post(pageContext+"insertPaymentRequest",{"paymentDtlJson" : JSON.stringify(arrayData), 
 		"userid" : $('#userid').val(),
@@ -107,8 +109,8 @@ function csPymtDataOP () {
 		"user_name" : $('#username').val(),
 		"customer_name" : customerFullname1,
 		"customer_email" : customerEmail1,
-		"towercode":$('#towerMstPayment').find('option:selected').attr('value'),
-		"towersfid":$('#towerMstPayment').find('option:selected').attr('name')
+		"towercode":$('#towerMstPayment').val(),
+		"towersfid":$("#towerMstPayment option:selected").attr('name')
 		
 	},function(data){				 
 	
@@ -377,3 +379,9 @@ function getPaymentTowerList () {
 		
 	});
 }
+
+//function gettowerData()
+//{
+//	alert($('#towerMstPayment').val());
+//	alert($('#towerMstPayment').name());
+//}

@@ -57,7 +57,7 @@ public class CCAvenueGatewayRequestDaoImpl extends AbstractDao<Integer, CCAvenue
 					+ "bank_ref_no='"+responseModel.getBank_ref_no()+"',order_status='"+responseModel.getOrder_status()+"',failure_message='"+responseModel.getFailure_message()+"',"
 					+ "payment_mode='"+responseModel.getPayment_mode()+"',card_name='"+responseModel.getCard_name()+"',status_message='"+responseModel.getStatus_message()+"',"
 					+ "response_currency='"+responseModel.getResponse_currency()+"',response_amount='"+responseModel.getResponse_amount()+"',vault='"+responseModel.getVault()+"',"
-					+ "trans_date=now(),updateddate=now() "
+					+ "trans_date=now(),updateddate=now(),gateway_response='"+responseModel.getGateway_response()+"' "
 					+ "WHERE order_id='"+responseModel.getOrder_id()+"'");
 			q.executeUpdate();
 			
