@@ -45,7 +45,8 @@ public class GeneratePayment implements Serializable{
 	
 	@Column(name = "bank_ref_no") private String bank_ref_no;
 	@Column(name = "payment_status") private String payment_status;
-	
+	@Column(name = "towercode") private String towercode;
+	@Column(name = "towersfid") private String towersfid;
 	@Transient private String transaction_date_string;
 	
 	public int getId() {
@@ -188,6 +189,18 @@ public class GeneratePayment implements Serializable{
 	}
 	public void setPayment_status(String payment_status) {
 		this.payment_status = payment_status;
+	}
+	public String getTowercode() {
+		return towercode;
+	}
+	public void setTowercode(String towercode) {
+		this.towercode = towercode;
+	}
+	public String getTowersfid() {
+		return towersfid;
+	}
+	public void setTowersfid(String towersfid) {
+		this.towersfid = towersfid;
 	}
 	
 	

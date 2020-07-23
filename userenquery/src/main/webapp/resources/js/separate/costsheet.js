@@ -1474,7 +1474,7 @@ function updateBSP (timeid) {
 	   				showConfirmButton: true
 	   			});
     	   } else if (offerJson.offer_successMsg == "successOfferCreate101") {
-    	   
+    		   
     		   swal({
 	   				title: "Please wait, loading the Cost Sheet ...",
 	   				text: "",
@@ -1482,10 +1482,13 @@ function updateBSP (timeid) {
 	   				allowOutsideClick: false,
 	   				showConfirmButton: false
 	   			});
+    		  
 	   			//Get for KYC Status
+    		   
     		   $.post(pageContext+"getKYCStatus",{"enquiryName":$("#enquiry_name").val(),"projectid":$('#projectId').val()},function(data){                       
     		        
     		    }).done(function(data){
+    		    	debugger
     		          var obj =JSON.parse(data);
     		          var kycStatus="";
     		          if(obj!=null)
@@ -1494,15 +1497,14 @@ function updateBSP (timeid) {
     		        	  }
     		          if(kycStatus!="Y")
 	       			   {
-	   	   				generateKYCLinkViaOffer(event,this,'N',offerJson.offer_sfid);
+	   	   				generateKYCLinkViaOffer(event,this,'N',offerJson.offer_sfid,tdsPaidBy);
 	       			   }
+    		          
     		    });
     		   
     		   
-	       	   
-	            printPdfData(generateFrom);
-	            
-	   			/*if (data != '0' || data != '' || data != 'undefined' || data != null || data != 'null') {
+		       printPdfData(generateFrom);
+	           /*if (data != '0' || data != '' || data != 'undefined' || data != null || data != 'null') {
 	   				console.log("Offer SFID after API Submitted:-"+data)
 	   				console.log("Offer SFID after API Offer ID:-"+data.offer_sfid)
 	   				var offerJson = JSON.parse(data);
@@ -1516,7 +1518,8 @@ function updateBSP (timeid) {
 	   				csPymtData (offerJson);
 	   				
 	   			}
-	            
+	            /*var enq=$("#enquiry_name").val();
+				updateTDSEOIForm(enq,tdsPaidBy);*/
 	            var url=$("#contextPath").val();
 	            
 	            getDealDone();

@@ -185,6 +185,8 @@ public class GeneratePaymentController {
 			@RequestParam("user_name") String user_name,
 			@RequestParam("customer_name") String customer_name,
 			@RequestParam("customer_email") String customer_email,
+			@RequestParam("towercode") String towercode,
+			@RequestParam("towersfid") String towersfid,
 			
 			HttpServletRequest request) throws UnsupportedEncodingException {	
 		
@@ -261,6 +263,8 @@ public class GeneratePaymentController {
 							ecData1.setCreated_date(currentTimestamp);
 							ecData1.setUpdate_date(currentTimestamp);
 							ecData1.setRequest_url(paymentRequest);
+							ecData1.setTowercode(towercode);
+							ecData1.setTowersfid(towersfid);
 							charges1.add(ecData1);
 						
 						} else {

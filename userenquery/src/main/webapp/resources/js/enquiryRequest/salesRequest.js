@@ -696,6 +696,12 @@ function loadEnquiryReport(enq){
 //		$("#sourcingManagerId").val(enq.sourcing_Managers__c);
 		//var sourcingVal ="gshetty@godrejproperties.com";
 		$("#sourcingManagerId").val(enq.sourcing_Managers__c);
+		
+		$("#enquirytypeID").val(enq.isReferredByChannelPartner);
+		$("#enquirysourceID").val(enq.enquirySource);
+		$("#walkinsourceID").val(enq.walkInSource);
+		
+		
 		getClosingManagersList(enq.sourcingmanger_email);
 		getClosingTeamLeadManagersList(enq.closing_Team_Lead_email);
 		getSourcingTeamLeadManagersList(enq.sourcing_Team_Lead_email);
@@ -1252,30 +1258,53 @@ function generateKYCLink(event,el,isEOI){
 			    }
 			});
 }
-function generateKYCLinkViaOffer(event,el,isEOI,offersfid){
+function generateKYCLinkViaOffer(event,el,isEOI,offersfid,tdsPaidBy){
 	var userid="";
+	var enqId=$('#enquirysfid').val();
 	if($("#userid").val()=='')
 		userid=0;
 	else
 		userid=$("#userid").val();
 	var mobile=$('#mobileNo').val();
 		   	$.ajax({
-		   		url: '/kycform/genSmsKycLink?mobilestr='+mobile+"&projectid="+$("#projectid").val()+"&projectname="+$('#projectName').val()+"&enqid="+$('#enquirysfid').val()+"&emailid="+$('#useremailID').val()+"&isEOI="+isEOI+"&userid="+userid+"&offersfid="+offersfid+"",
+		   		url: '/kycform/sendKYCLinkAfterOffer?mobilestr='+mobile+"&projectid="+$("#projectid").val()+"&projectname="+$('#projectName').val()+"&enqid="+enqId+"&emailid="+$('#useremailID').val()+"&isEOI="+isEOI+"&userid="+userid+"&offersfid="+offersfid+"&tdspaidby="+tdsPaidBy+"",
 				/*data: sendingData,*/
 			    type: 'POST', 	  
 			    success: function(data) 
 			    {
-			    	//swal('KYC Link Sent...!');
+			    	debugger
+			    	
 			    	  $("#mainPageLoad").hide();
 			    },
 			    beforeSend : function() {
 		        	$("#mainPageLoad").show();
 		        },
 			    error: function(e) {
-			    	alert(e);
+//			    	alert(e);
 			    	$("#mainPageLoad").hide();
 			    }
 			});
+}
+
+function updateTDSEOIForm(enqId,tds){
+	$.ajax({
+   		
+   		url: '/kycform/updateTDSEOIForm?enqid='+enqId+"&tdsPaidBy="+tds+"",
+		/*data: sendingData,*/
+	    type: 'POST', 	  
+	    success: function(data) 
+	    {
+	    	  
+	    	  $("#mainPageLoad").hide();
+	    },
+	    beforeSend : function() {
+        	$("#mainPageLoad").show();
+        },
+	    error: function(e) {
+	    	alert(e);
+	    	$("#mainPageLoad").hide();
+	    }
+	});
 }
 function generateEOI(event,el){
 	if( $('#followtype').is('[readonly]')){
@@ -1571,6 +1600,7 @@ function getSourcingTeamLeadManagersList(inputVal)
 			$("#sourcingTeamLeadId").append(option);
 		});
 }
+
 
 function getInternationalSalesManagersList(inputVal)
 {
