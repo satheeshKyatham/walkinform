@@ -678,7 +678,7 @@ function getTaxPercentage(basicSaleprice, projectSfid, currentTaxRate, TotalA, r
 }
 
 
-function paymentPlanOtherCharges (firstRowObj){
+function paymentPlanOtherCharges (firstRowObj, ppMilestone){
        
        
        
@@ -705,15 +705,22 @@ function paymentPlanOtherCharges (firstRowObj){
              var tokenAmountPP = 0;
              var firstPPText = '';
              
+             var objMilestone =JSON.parse(ppMilestone);
              
-             
-             for(i = 0; i< obj.length; i++){    
+             /* for(i = 0; i< obj.length; i++){    
                  if(uniqueId.indexOf(obj[i].id) === -1){
                      uniqueId.push(obj[i].id);
                      uniqueNames.push(obj[i].propstrength__payment_plan_line_item_name__c);
                      uniqePPpercent.push(obj[i].propstrength__amount_percent__c);
                  }        
+              } */
+             
+             for(i = 0; i< objMilestone.length; i++){    
+                 uniqueId.push(objMilestone[i].id);
+                 uniqueNames.push(objMilestone[i].nv_payment_plan_line_item_name__c);
+                 uniqePPpercent.push(objMilestone[i].nv_amount_percent__c);
               }
+             
              
              for(j = 0; j< uniqueId.length; j++){
                     var fixed = 0;
@@ -1057,12 +1064,26 @@ function paymentPlanOtherCharges (firstRowObj){
                     
                     firstPPText = '';
                     
-                    if (j == 0 && firstRowObj != 'null') {
+                    /*if (j == 0 && firstRowObj != 'null') {
                            tokenBaseAmountPP = parseFloat($('#tokenBaseAmount').text());
                            tokenGSTPP =  parseFloat($('#tokenGST').text());
                            tokenAmountPP = parseFloat($('#tokenAmount').text());
                            firstPPText = ' - Less '+$('#firstPPTextRow').text();
+                    }*/
+                    
+                    
+                    if (j == 1 && firstRowObj != 'null') {
+                        tokenBaseAmountPP = parseFloat($('#tokenBaseAmount').text());
+                        tokenGSTPP =  parseFloat($('#tokenGST').text());
+                        tokenAmountPP = parseFloat($('#tokenAmount').text());
+                        firstPPText = ' - Less '+$('#firstPPTextRow').text();
+                    } else {
+                    	tokenBaseAmountPP = 0;
+                        tokenGSTPP =  0;
+                        tokenAmountPP = 0;
+                        firstPPText = "";
                     }
+                    
                     
                     var ppFirstRowFR = '';
                     var firstPPTextRowFR = '';
@@ -1081,21 +1102,29 @@ function paymentPlanOtherCharges (firstRowObj){
                     console.log ("PP Name ::: " + uniqueNames[j] +"--------"+ "PP % ::: " + uniqePPpercent[j]);
                     
                     
-                    html += "<tr id= '"+ppFirstRowFR+"'>" +
-                                        "<td id= '"+firstPPTextRowFR+"'  >"+ uniqueNames[j] + firstPPText+" </td>" +
-                                        "<td class='txtRight' style='text-align:right;'>"+ uniqePPpercent[j] +" % </td>" +
-                                        "<td id= '"+tokenBaseAmountFR+"' class='txtRight' style='text-align:right;'>" + parseFloat(finalCA+ocPlsBsp-tokenBaseAmountPP).toFixed(2) +  "</td>  " +
-                                        
-                                        //Remove after test
-                                        //"<td class='txtRight'>" + parseFloat((ocPlsBsp)*($('#bspGSTTax').val())/100) +  "</td>  " +
-                                        //"<td class='txtRight'>" + parseFloat((ocPlsBsp*2/3)*($('#bspGSTTax').val())/100) +  "</td>  " +
-                                        //"<td class='txtRight'>" + gstFinal +  "</td>  " +
-                                        
-                                        
-                                        
-                                        "<td id= '"+tokenGSTFR+"' class='txtRight' style='text-align:right;'>" +parseFloat(gstPymtOcTotal-tokenGSTPP).toFixed(2)+  "</td> " +
-                                        "<td id= '"+tokenAmountFR+"' class='txtRight' id='payableToTotal"+i+"' style='text-align:right;'> "+parseFloat(finalCA+ocPlsBsp+parseFloat(gstPymtOcTotal)-tokenAmountPP).toFixed(2)+" </td> " +
-                                 "</tr>";
+                    
+                    if (j == 0 && firstRowObj != "null") {
+                    	/*html += "<tr id= '"+ppFirstRowFR+"'>" +
+		                        "<td id= '"+firstPPTextRowFR+"'>"+firstPPText+" </td>" +
+		                        "<td class='txtRight' style='text-align:right;'>"+ uniqePPpercent[j] +" % </td>" +
+		                        "<td id= '"+tokenBaseAmountFR+"' class='txtRight' style='text-align:right;'>" + parseFloat(tokenBaseAmountPP).toFixed(2) +  "</td>  " +
+		                        "<td id= '"+tokenGSTFR+"' class='txtRight' style='text-align:right;'>" +parseFloat(tokenGSTPP).toFixed(2)+  "</td> " +
+		                        "<td id= '"+tokenAmountFR+"' class='txtRight' id='payableToTotal"+i+"' style='text-align:right;'> "+parseFloat(tokenAmountPP).toFixed(2)+" </td> " +
+		                 "</tr>";
+		                 */
+                    } else {
+                    	html += "<tr id= '"+ppFirstRowFR+"'>" +
+		                        "<td id= '"+firstPPTextRowFR+"'  >"+ uniqueNames[j] + firstPPText+" </td>" +
+		                        "<td class='txtRight' style='text-align:right;'>"+ uniqePPpercent[j] +" % </td>" +
+		                        "<td id= '"+tokenBaseAmountFR+"' class='txtRight' style='text-align:right;'>" + parseFloat(finalCA+ocPlsBsp-tokenBaseAmountPP).toFixed(2) +  "</td>  " +
+		                        "<td id= '"+tokenGSTFR+"' class='txtRight' style='text-align:right;'>" +parseFloat(gstPymtOcTotal-tokenGSTPP).toFixed(2)+  "</td> " +
+		                        "<td id= '"+tokenAmountFR+"' class='txtRight' id='payableToTotal"+i+"' style='text-align:right;'> "+parseFloat(finalCA+ocPlsBsp+parseFloat(gstPymtOcTotal)-tokenAmountPP).toFixed(2)+" </td> " +
+		                 "</tr>";
+                    }
+                    
+                    
+                    
+                    
                     
                     amountPPTotal = parseFloat(finalCA+ocPlsBsp)+parseFloat(amountPPTotal);
                     payableTotal =        parseFloat(finalCA+ocPlsBsp+parseFloat(gstPymtOcTotal))+parseFloat(payableTotal);
@@ -1163,7 +1192,7 @@ function paymentPlanOtherCharges (firstRowObj){
 }
 
 
-
+//function firstMilstone(ppMilestone) {
 function firstMilstone() {
        
        $('#paymentPlanOtherCharges tbody').find("tr:gt(0)").remove();     
@@ -1195,10 +1224,32 @@ function firstMilstone() {
              } 
              
        }).done(function(obj){
-             paymentPlanOtherCharges(obj);
+    	   paymentPlanMilestone(obj);  
+    	   //paymentPlanOtherCharges(obj, ppMilestone);
        });
 }
 
+
+function paymentPlanMilestone(obj) {
+    
+    $.post(pageContext+"getPaymentPlanMilestone",{"paymentPlanSfid":$('#ppDropdown').val()},function(data){
+          
+          var ppMilestone =JSON.parse(data);
+          var html = '';
+          
+          if (ppMilestone != null) {
+                 for(i = 0; i< ppMilestone.length; i++){    
+                	 
+                	 ppMilestone[i].nv_payment_plan_line_item_name__c;
+                	 
+                 }
+          } 
+          
+    }).done(function(ppMilestone){
+    	//firstMilstone(ppMilestone);
+    	paymentPlanOtherCharges(obj, ppMilestone);
+    });
+}
 
 
 function printDiv(divName) {
@@ -1474,7 +1525,7 @@ function updateBSP (timeid) {
 	   				showConfirmButton: true
 	   			});
     	   } else if (offerJson.offer_successMsg == "successOfferCreate101") {
-    		   
+    	   
     		   swal({
 	   				title: "Please wait, loading the Cost Sheet ...",
 	   				text: "",
@@ -1482,13 +1533,10 @@ function updateBSP (timeid) {
 	   				allowOutsideClick: false,
 	   				showConfirmButton: false
 	   			});
-    		  
 	   			//Get for KYC Status
-    		   
     		   $.post(pageContext+"getKYCStatus",{"enquiryName":$("#enquiry_name").val(),"projectid":$('#projectId').val()},function(data){                       
     		        
     		    }).done(function(data){
-    		    	debugger
     		          var obj =JSON.parse(data);
     		          var kycStatus="";
     		          if(obj!=null)
@@ -1499,12 +1547,13 @@ function updateBSP (timeid) {
 	       			   {
 	   	   				generateKYCLinkViaOffer(event,this,'N',offerJson.offer_sfid,tdsPaidBy);
 	       			   }
-    		          
     		    });
     		   
     		   
-		       printPdfData(generateFrom);
-	           /*if (data != '0' || data != '' || data != 'undefined' || data != null || data != 'null') {
+	       	   
+	            printPdfData(generateFrom);
+	            
+	   			/*if (data != '0' || data != '' || data != 'undefined' || data != null || data != 'null') {
 	   				console.log("Offer SFID after API Submitted:-"+data)
 	   				console.log("Offer SFID after API Offer ID:-"+data.offer_sfid)
 	   				var offerJson = JSON.parse(data);
@@ -2648,9 +2697,8 @@ function newOtherCharges2 () {
               
              $('#totalDiscount').text(yres);
              
-             //paymentPlanOtherCharges();
-             
-             firstMilstone();
+            firstMilstone();
+            //paymentPlanMilestone();
        });
        
        
