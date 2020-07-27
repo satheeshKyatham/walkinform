@@ -214,12 +214,13 @@ public class InventoryController {
 	
 	/* Added for Get Inventory */
 	@PostMapping(value = "/getInventoryDetails")
-	public @ResponseBody String getUnitDtl(@RequestParam("projectId") String projectId, @RequestParam("towerMst") String towerMst, @RequestParam("typoMst") String typoMst, @RequestParam("holdMst") String holdMst, @RequestParam("soldMst") String soldMst, @RequestParam("facing") String facing , @RequestParam("unitAvailable") String unitAvailable) {
+	public @ResponseBody String getUnitDtl(@RequestParam("projectId") String projectId, @RequestParam("towerMst") String towerMst, @RequestParam("typoMst") String typoMst, @RequestParam("holdMst") String holdMst, @RequestParam("soldMst") String soldMst, @RequestParam("facing") String facing , @RequestParam("unitAvailable") String unitAvailable
+			,@RequestParam("unitCategory") String unitCategory) {
 			GsonBuilder gsonBuilder = new GsonBuilder();
 			Gson gson = gsonBuilder.create();
 						
 			
-			List<Inventory> plans=inventoryService.getUnitDtl(projectId, towerMst, typoMst, holdMst, soldMst,facing, unitAvailable);
+			List<Inventory> plans=inventoryService.getUnitDtl(projectId, towerMst, typoMst, holdMst, soldMst,facing, unitAvailable, unitCategory);
 			
 			HashSet<Integer> floor=new HashSet<>();
 			ArrayList<ArrayList<Inventory>> mainList = new ArrayList<>();
