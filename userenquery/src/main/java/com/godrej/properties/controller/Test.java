@@ -1,5 +1,7 @@
 package com.godrej.properties.controller;
 
+import java.sql.Timestamp;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -247,6 +249,43 @@ public class Test {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}*/
+		
+		//String configuredDate="2020-07-25";// 02:00:00
+		/*DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:MM");
+		Date date;
+		try {
+		    date = dateFormat.parse("2020-07-25 03:00:00");
+		    System.out.println(date.toString()); // Wed Dec 04 00:00:00 CST 2013
+		    String output = dateFormat.format(date);
+		    System.out.println(output); // 2013-12-04
+		    
+		    
+		    
+		} 
+		catch (ParseException e) {
+		    e.printStackTrace();
+		}*/
+		
+		SimpleDateFormat sdformat = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+	      
+		try {
+			Date d1 = sdformat.parse("2020-07-28 04:10:00");
+			 Date d2 = sdformat.parse("2020-07-28 04:00:00");
+		      System.out.println("The date 1 is: " + sdformat.format(d1));
+		      System.out.println("The date 2 is: " + sdformat.format(d2));
+		      if(d1.compareTo(d2) > 0) {
+		         System.out.println("Date 1 occurs after Date 2");
+		      } else if(d1.compareTo(d2) < 0) {
+		         System.out.println("Date 1 occurs before Date 2");
+		      } else if(d1.compareTo(d2) == 0) {
+		         System.out.println("Both dates are equal");
+		      }
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	     
+		
 	     
 	}
 

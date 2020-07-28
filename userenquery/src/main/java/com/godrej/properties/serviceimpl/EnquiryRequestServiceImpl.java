@@ -417,8 +417,22 @@ public class EnquiryRequestServiceImpl implements EnquiryRequestService {
 		/*=======Start==========*/
 		//dest.setAssignTo(src.getClosingmanagers());
 		/*=========End========*/
-		if(!src.getClosingmanagers().equals("null"))
-			dest.setClosingmanagers(src.getClosingmanagers());
+		
+		
+		/* Closing Manager Selection provided at Sales Tab and Information captured and moved to Enquiry Object, -  
+	     * Change By - Satheesh Kyatham- 27-07-2020
+	     * Request From - Prakash Idnani*/
+		/*=======Start==========*/
+		/*if(!src.getClosingmanagers().equals("null"))
+			dest.setClosingmanagers(src.getClosingmanagers());*/
+		if(src.getClosingmanagers()!=null && src.getClosingmanagers().length()>0)
+		{
+			String closingManager = tokenService.getSalesUserSFID(src.getEnquiryId(), src.getClosingmanagers());
+			if(closingManager!=null && closingManager.length()>0)
+				dest.setClosingmanagers(closingManager);
+		}
+		/*=========End========*/
+		
 		String manager=src.getClosingmanagers()==null?"":src.getClosingmanagers();
 		if(dest.getOtherChannelPartner()!=null){
 			dest.setOtherChannelPartner(src.getOtherChannelPartner());
@@ -1073,6 +1087,10 @@ public class EnquiryRequestServiceImpl implements EnquiryRequestService {
 			 * Requested by Prakash - Closing Team Lead and Sourcing Team Lead adding on Sales Tab*/
 			if(enquiries !=null && enquiries.size()>0)
 			{
+				if(enquiries.get(0).getClosingmanagers()!=null)
+				{
+					enquiries.get(0).setClosingmanger_email(tokenService.getSalesUserEmailID(enquiries.get(0).getEnquiryId(), enquiries.get(0).getClosingmanagers()));
+				}
 				if(enquiries.get(0).getSourcing_Managers__c()!=null)
 				{
 					enquiries.get(0).setSourcingmanger_email(tokenService.getSalesUserEmailID(enquiries.get(0).getEnquiryId(), enquiries.get(0).getSourcing_Managers__c()));
@@ -1099,6 +1117,10 @@ public class EnquiryRequestServiceImpl implements EnquiryRequestService {
 		List<EnquiryDto> dtoList = pushEnquiryDataService.getEnquiriesByMobileNo(countryCode,mobileNo,projectSfid,token,userid);
 		if(dtoList !=null && dtoList.size()>0)
 		{
+			if(dtoList.get(0).getClosingmanagers()!=null)
+			{
+				dtoList.get(0).setClosingmanger_email(tokenService.getSalesUserEmailID(dtoList.get(0).getEnquiryId(), dtoList.get(0).getClosingmanagers()));
+			}
 			if(dtoList.get(0).getSourcing_Managers__c()!=null)
 			{
 				dtoList.get(0).setSourcingmanger_email(tokenService.getSalesUserEmailID(dtoList.get(0).getEnquiryId(), dtoList.get(0).getSourcing_Managers__c()));

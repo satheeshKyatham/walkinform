@@ -701,8 +701,8 @@ function loadEnquiryReport(enq){
 		$("#enquirysourceID").val(enq.enquirySource);
 		$("#walkinsourceID").val(enq.walkInSource);
 		
-		
 		getClosingManagersList(enq.sourcingmanger_email);
+		getAllClosingManagersDataNew(enq.closing_managers__c)
 		getClosingTeamLeadManagersList(enq.closing_Team_Lead_email);
 		getSourcingTeamLeadManagersList(enq.sourcing_Team_Lead_email);
 		getInternationalSalesManagersList(enq.internationalSMDto);
@@ -1523,7 +1523,7 @@ function getClosingManagersList(inputVal)
 	       var urlGetUsers = "getUserProjectMapping?projectid="+$('#projectid').val();
 	       var j = 0
 	       var option="";
-	    	$.getJSON(urlGetUsers, function (data) {
+	    	$.getJSON(urlGetUsers, function (data) {//noclosingmanager@godrejproperties.com
 	    		option = "<option value=''>Select User</option>";
 	    		if(inputVal=="nosourcingcip@godrejproperties.com")
 	    			option = option+"<option value='nosourcingcip@godrejproperties.com' selected>No Sourcing Manager</option>";
@@ -1541,6 +1541,32 @@ function getClosingManagersList(inputVal)
 	    	}).done(function() {
 	    		$("#sourcingManagerId").append(option);
 	    	});
+}
+
+function getAllClosingManagersDataNew(inputVal)
+{
+	$("#closingManagerId").empty();
+   var urlGetUsers = "getUserProjectMapping?projectid="+$('#projectid').val();
+   var j = 0
+   var option="";
+	$.getJSON(urlGetUsers, function (data) {//noclosingmanager@godrejproperties.com
+		option = "<option value=''>Select Closing Manager</option>";
+		if(inputVal=="noclosingmanager@godrejproperties.com")
+			option = option+"<option value='noclosingmanager@godrejproperties.com' selected>No Closing Manager</option>";
+		else
+			option = option+"<option value='noclosingmanager@godrejproperties.com'>No Closing Manager</option>";
+		$.each(data, function (index, value) {
+			if(inputVal==value.emailid)
+				{
+					option = option+"<option value="+value.emailid+" selected>"+value.user_name+"</option>";
+				}
+			else
+				option = option+"<option value="+value.emailid+">"+value.user_name+"</option>";
+			j = j+1
+		});		
+	}).done(function() {
+		$("#closingManagerId").append(option);
+	});
 }
 
 function getClosingTeamLeadManagersList(inputVal)

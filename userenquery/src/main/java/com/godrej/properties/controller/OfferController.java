@@ -15,6 +15,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.godrej.properties.constants.KeyConstants;
 import com.godrej.properties.core.dto.ErrorDto;
 import com.godrej.properties.core.dto.Errors;
+import com.godrej.properties.dao.TokenDao;
 import com.godrej.properties.dto.PaymentDto;
 import com.godrej.properties.dto.PaymentRequestDto;
 import com.godrej.properties.model.BalanceDetails;
@@ -73,6 +74,9 @@ public class OfferController {
 	
 	@Autowired	
 	private InventoryService inventoryService;
+	
+	@Autowired
+	private TokenDao tokenDao;
 	
 	@PostMapping(value = { "/updateBSP" })
 	public @ResponseBody String updateBSP (@RequestParam("salesConsiderationTotal") double salesConsiderationTotal,  @RequestParam("bspTaxGST") double bspTaxGST,   @RequestParam("bspDis") String bspDis, @RequestParam("token") String token, @RequestParam("projectsfid") String projectsfid,   @RequestParam("enquirysfid") String enquirysfid,  @RequestParam("primarycontactsfid") String primarycontactsfid,   @RequestParam("sentToCrmYN") String sentToCrmYN
@@ -203,7 +207,7 @@ public class OfferController {
 						 }
 					 }
 				} else {
-					System.out.println(" Create Offer Controller - Yes, There is some technical problem (code:1) ");
+					log.info(" Create Offer Controller - Yes, There is some technical problem (code:1) ");
 					log.info(" Create Offer Controller - Yes, There is some technical problem (code:1) ");
 					action.setOffer_successMsg(errorMsg3);
 					return gson.toJson(action);
@@ -216,6 +220,9 @@ public class OfferController {
 					JsonObject jobj = new Gson().fromJson(offerId, JsonObject.class);
 					String offerid = jobj.get("offerid").getAsString();
 					String message = jobj.get("message").getAsString();
+					
+					//Offer Success
+					//Check closing manager tagged or not, if not add no closing manager if yes no required changes
 					
 					/*JSONObject ob = new JSONObject(offerId);  
 					JSONArray arr = ob.getJSONArray("offers");
@@ -234,6 +241,9 @@ public class OfferController {
 						} else {
 							propOtherChargesService.updatePropertyStatus(propid);
 						}
+						tokenDao.updateClosingMangerOnOfferCreation(enquirysfid);
+						//Call Update query for clsoing manager update
+						
 					}
 						
 					//Insert offer related details in custome table

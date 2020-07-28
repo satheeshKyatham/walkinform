@@ -383,7 +383,7 @@ function inventoryLoad (){
 	$.post(pageContext+"getInventoryDetailsAdmin",{"projectId":$('#projectid').val(), 
 		"towerMst":$('#towerMst').val(), "typoMst":$("#typoMst").val(), 
 		"holdMst":holdVal, "soldMst":soldVal
-		, "unitAvailable":$("#searchadmintype").val(), "facing":"facing"	
+		, "unitAvailable":$("#searchadmintype").val(), "facing":"facing", "unitCategory":$("#unitCategory").val()	
 	},function(data){				 
 		
 		

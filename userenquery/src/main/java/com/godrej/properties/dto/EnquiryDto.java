@@ -119,7 +119,8 @@ public class EnquiryDto extends CommonDto {
     private String name;
     private String isAllowCCPaymentGateway;
     private Double virtual_meeting_count__c;
-   	
+    private String closingmanger_email;
+    
 	public String getClosing_manager_name__c() {
 		return closing_manager_name__c;
 	}
@@ -681,6 +682,14 @@ public class EnquiryDto extends CommonDto {
 
 	public void setInternationalSMDto(String internationalSMDto) {
 		this.internationalSMDto = internationalSMDto;
+	}
+
+	public String getClosingmanger_email() {
+		return closingmanger_email;
+	}
+
+	public void setClosingmanger_email(String closingmanger_email) {
+		this.closingmanger_email = closingmanger_email;
 	}
 
 	

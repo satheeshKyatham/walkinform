@@ -145,6 +145,10 @@ public class CreateOffer {
 			SimpleDateFormat sm = new SimpleDateFormat("yyyy-MM-dd");
 			String strDate = sm.format(date);
 			
+			/*Added By Satheesh K - Date : 24-07-2020
+			 * Requested By Prakash Idnani
+			 * Task : Offer Valid Till Date Logic - check with Configured Table and Pick date */
+			
 			account.put("enquiryid",enquirysfid);
 			account.put("offerValidTillDate",sm.format(dateAdd7));
 			account.put("ProjId", projectsfid);

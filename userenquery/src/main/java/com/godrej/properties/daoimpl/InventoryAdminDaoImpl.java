@@ -20,13 +20,14 @@ public class InventoryAdminDaoImpl extends AbstractDao<Integer, InventoryAdmin> 
 	
 	@SuppressWarnings("unchecked")
 	
-	public List<InventoryAdmin> getUnitDtlAdmin(String project_code, String towerMst, String typoMst, String holdMst, String soldMst,String unitAvailable,String facing) {	 
+	public List<InventoryAdmin> getUnitDtlAdmin(String project_code, String towerMst, String typoMst, String holdMst, String soldMst,String unitAvailable,String facing, String unitCategory) {	 
 		
 		Session session = this.sessionFactory.getCurrentSession();	
 		
 		//typologyAll
 		
 		String typology = "";
+		String category = "";
 		
 		if (typoMst.equals("typologyAll")) {
 			typology = "";
@@ -42,8 +43,14 @@ public class InventoryAdminDaoImpl extends AbstractDao<Integer, InventoryAdmin> 
 			unitAvailble = "and hold_status = 't'";
 		}
 		
+		if (unitCategory.equals("All")) {
+			category = "";
+		} else {
+			category = " and inventory_category__c = '"+unitCategory+"' ";
+		}
+		
 		List<InventoryAdmin> list =session.createQuery(" FROM  InventoryAdmin  where propstrength__project_name__c='"+project_code+"' and  tower_code__c='"+towerMst+"' "
-				+unitAvailble + typology +" and propstrength__active__c='t' ORDER BY floor_number__c, propstrength__house_unit_no__c, wing_block__c").list();
+				+unitAvailble + typology + category +" and propstrength__active__c='t' ORDER BY floor_number__c, propstrength__house_unit_no__c, wing_block__c").list();
 		
 		if(list.size()>0)
 			return list;
