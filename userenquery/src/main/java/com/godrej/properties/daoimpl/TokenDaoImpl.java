@@ -372,4 +372,33 @@ public class TokenDaoImpl extends AbstractDao<Integer, Token> implements TokenDa
 		q.executeUpdate();
 		
 	}
+
+	@Override
+	public void updateClosingMangerOnOfferCreation(String enquirysfid) {
+
+		Session session = this.sessionFactory.getCurrentSession();
+		
+		Query q = session.createNativeQuery("select Closing_Managers__c from  salesforce.propstrength__request__c where sfid ='"+enquirysfid+"'");
+		//int i = q.getResultList().size();
+		/*if(i>0)
+		{
+			return q.getResultList().get(0).toString();
+		}*/
+		
+		/*int i = q.getResultList().size();
+		if(i>0)
+		{*/
+			//return Integer.parseInt(q.getResultList().get(0).toString());
+			if(q.getResultList().get(0)==null)
+			{
+				Query query = session.createNativeQuery(" update salesforce.propstrength__request__c set Closing_Managers__c='a0W6F00000S4J5UUAV' where  sfid='"+enquirysfid+"' ");
+				log.info("After execute Closing Manager Update...{}",query.executeUpdate());
+			}
+		/*}*/
+		
+		
+		
+	
+		
+	}
 }

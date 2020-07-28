@@ -63,9 +63,9 @@ public class EnquiryConverter implements CommonConverter<Enquiry, EnquiryDto>{
 		/*=======Start==========*/
 		if(entity.getEnquiryReport()!=null)
 		{
-			if(entity.getEnquiryReport().getPurpose().equals("Self Use"))
+			if(entity.getEnquiryReport().getPurpose()!=null && entity.getEnquiryReport().getPurpose().equals("Self Use"))
 				dto.setPurpose("Personal use");
-			else if(entity.getEnquiryReport().getPurpose().equals("Investment"))
+			else if(entity.getEnquiryReport().getPurpose()!=null && entity.getEnquiryReport().getPurpose().equals("Investment"))
 				dto.setPurpose("Investment");
 			else
 				dto.setPurpose(entity.getPurpose());

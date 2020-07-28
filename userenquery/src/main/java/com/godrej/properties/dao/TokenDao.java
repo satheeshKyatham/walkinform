@@ -42,4 +42,5 @@ public interface TokenDao {
 	public int getEnquiryIDFromSFID(String enquirySfid);
 	public void updateEnquiryData(int enqID,String updateData);
 	public void updateContactData(int contactID,String updateData);
+	public void updateClosingMangerOnOfferCreation(String enquirysfid);
 }

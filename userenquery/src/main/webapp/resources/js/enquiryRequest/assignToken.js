@@ -210,7 +210,7 @@ $(document).ready(function() {
 
 					var editButtonShow ="";
 					var prorityNo ="";
-					if(value.isdone=="Attended")//|| value.isdone=="Started"
+					if(value.isdone=="Session Started")//|| value.isdone=="Started" --Attended
 						{
 							editButtonShow="<td></td>";
 						}

@@ -272,7 +272,7 @@ if(ses!=null){
 				<!-- <input type="hidden" value="a2X6F000000JE2FUAW" name="advertisement" id="advertisement"> --><!--a0xO000000F8TFR a0xO000000F8TFRIA3 --><!-- a2eO0000000Mix6IAC -->
 				<input type="hidden" class="enquiryReportId" name="enquiryReport.enquiryReportId">
 				<input type="hidden" class="contactReportId" name="contact.contactReport.contactReportId">
-				<input type="hidden" id="closingmanagers" name="closingmanagers" value="${closingmanagers}">
+				<%-- <input type="hidden" id="closingmanagers" name="closingmanagers" value="${closingmanagers}"> --%>
 				
 				<div class="row "> <!-- bounceInLeft animated -->
 					<div class="col-md-12 commonErrorCol commonErrorDiv" style="display: none">
@@ -923,7 +923,7 @@ if(ses!=null){
 				<input type="hidden" class="userid" name="contact.contactReport.userid" value="<%= userid %>">
 				<input type="hidden" class="userid" name="enquiryReport.userid" value="<%= userid %>">
 				
-				<input type="hidden" id="closingmanagers" name="closingmanagers" value="${closingmanagers}">
+				<%-- <input type="hidden" id="closingmanagers" name="closingmanagers" value="${closingmanagers}"> --%>
 				<input type="hidden" id="assignTo" name="assignTo" value="${assignTo}">
 				<div class="row "> <!-- bounceInRight animated -->
 				<div class="col-md-12 commonErrorCol commonErrorDiv" style="display: none">
@@ -1506,6 +1506,17 @@ if(ses!=null){
 						</div>
 						
 						<!-- END of Barriers & Triggers -->
+						<div class="col-md-3 col-sm-6 col-xs-12" id="closingManagerIdDiv">
+							<div class="group">
+							<!-- <div id="sourcingManagerId"></div> -->
+							<select class="requiredField autocomplete-off" id="closingManagerId" name="closingmanagers">
+							</select>
+								<span class="highlight"></span><span class="bar"></span>
+								<label class="select-label">Closing Manager<strong class="mndt">*</strong></label>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+						
 						<div class="col-md-3 col-sm-6 col-xs-12" id="sourcingManagerIdDiv">
 							<div class="group">
 							<!-- <div id="sourcingManagerId"></div> -->

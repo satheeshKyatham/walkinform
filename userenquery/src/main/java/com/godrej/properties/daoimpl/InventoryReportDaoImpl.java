@@ -40,13 +40,19 @@ public class InventoryReportDaoImpl implements InventoryReportDao{
 				+ " a.hold_reason,  "
 				+ " a.hold_status,  "
 				+ " a.hold_description, " 
-				+ " b.floor_number__c,  "
+				
+				//+ " b.floor_number__c,  "
+				+ " CASE WHEN b.floor_number__c IS NULL THEN cast(0 as numeric (20,2))  ELSE cast(b.floor_number__c as numeric (20,2))  END AS floor_number__c, "
+				
 				+ " b.propstrength__house_unit_no__c, " 
 				+ " b.tower_code__c, "
 				+ " b.propstrength__unit_type__c, " 
 				+ " c.user_name as admin_name,  "
 				+ " c.emailid as admin_emailid, "
-				+ " b.propstrength__active__c, "
+				
+				//+ " b.propstrength__active__c, "
+				+ " CASE WHEN b.propstrength__active__c IS NULL THEN cast(false as boolean) ELSE b.propstrength__active__c END AS propstrength__active__c, "
+				
 				+ " b.tower_name__c, "
 				+ " b.wing_block__c, "
 				+ " b.saleable_area__c, "
@@ -73,7 +79,9 @@ public class InventoryReportDaoImpl implements InventoryReportDao{
 				+ " LEFT JOIN salesforce.propstrength__property_charges__c g ON g.propstrength__property__c = a.sfid "
 				+ " LEFT JOIN salesforce.propstrength__other_charges__c h ON CAST(g.propstrength__other_charges__c as text)  = CAST(h.sfid as text) "
 				
-				+ " where "+whereCondition+"  and a.hold_reason in ('block', 'temp') and  a.hold_status = true  order by a.created_at desc  ", InventoryReport.class);
+				+ " where "+whereCondition+"     order by a.created_at desc  ", InventoryReport.class);
+		
+				//and a.hold_reason in ('block', 'temp') and  a.hold_status = true 
 		
 		authors = q.getResultList();
 		

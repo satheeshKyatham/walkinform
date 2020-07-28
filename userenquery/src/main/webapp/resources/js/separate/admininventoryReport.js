@@ -179,3 +179,168 @@ function getInventoryReportDtl () {
 }
 
 
+
+
+
+
+function getAllInventoryReportDtl () {
+	
+	$("#allInventoryReportDtl").DataTable().destroy();
+	$("#allInventoryReportDtl tbody").empty();
+	
+	$.post(pageContext+"getAllInventoryReport",{"projectSfid":$('#projectid').val(), "towerCode":$('#allUnitTowerMstReport').val()},function(data){                      
+		
+		var obj1 =JSON.parse(data);
+		var html = '';
+			
+		var d4uHoldStatus = '';
+		var status = '';
+		
+		if (obj1 != null) {
+			for(var i=0;i<obj1.length;i++){
+				
+				if (obj1[i].hold_reason == 'temp'){
+					d4uHoldStatus= 'EOI Hold';
+				} else if (obj1[i].hold_reason == 'block'){
+					d4uHoldStatus= 'Block';
+				} else {
+					d4uHoldStatus= '';
+				}
+				
+				
+				if (obj1[i].propstrength__property_on_hold_for_reallocation__c != undefined
+						&& obj1[i].propstrength__property_alloted_through_offer__c != undefined
+						&& obj1[i].propstrength__allotted__c != undefined) {
+					
+					if (obj1[i].hold_status == true || obj1[i].propstrength__property_on_hold_for_reallocation__c == true){
+						status = 'Hold';
+					} else if (obj1[i].propstrength__property_alloted_through_offer__c == true && obj1[i].propstrength__allotted__c == true) {
+						status = 'Sold';
+					} else if (obj1[i].propstrength__property_alloted_through_offer__c == false && obj1[i].propstrength__allotted__c == false) {
+						status = 'Available';
+					} else if (obj1[i].propstrength__property_alloted_through_offer__c == true && obj1[i].propstrength__allotted__c == false) {
+						status = 'Offered';
+					} else if (obj1[i].propstrength__property_on_hold_for_reallocation__c == true && obj1[i].propstrength__property_alloted_through_offer__c == true && obj1[i].propstrength__allotted__c == false) {
+						status = 'Offered with SFDC Hold';
+					}
+					
+				} else {
+					status = '';
+				}
+				
+				
+				html += "<tr>" +
+					"<td>"+obj1[i].project_name__c+"</td>" +
+					"<td>"+obj1[i].tower_name__c+"</td>" +
+					"<td>"+obj1[i].wing_block__c+"</td>" +
+					
+					"<td>"+obj1[i].property_facing__c+"</td>" +
+					
+					
+					"<td>"+obj1[i].propstrength__house_unit_no__c+"</td>" +
+					"<td>"+obj1[i].inventory_category__c+"</td>" +
+					"<td>"+obj1[i].propstrength__property_name__c+"</td>" +
+					
+					"<td>"+obj1[i].cop+"</td>" +
+					
+					"<td>"+obj1[i].propstrength__rate_per_unit_area__c+"</td>" +
+					
+					"<td>"+obj1[i].rera_net_carpet_sqft+"</td>" +
+					"<td>"+obj1[i].rera_exclusive_sqft+"</td>" +
+					"<td>"+obj1[i].saleable_area__c+"</td>" +
+					"<td>"+obj1[i].super_area+"</td>" +  
+					"<td>"+status+"</td>" +
+					"<td>"+obj1[i].propstrength__allotted__c+"</td>" +
+					
+					"<td>"+obj1[i].propstrength__property_alloted_through_offer__c+"</td>" +
+					
+					
+					"<td>"+obj1[i].propstrength__property_on_hold_for_reallocation__c+"</td>" +
+					"<td>"+d4uHoldStatus+"</td>" +
+					"<td>"+obj1[i].enq_name+"</td>" +
+					
+					"<td>"+obj1[i].propstrength__active__c+"</td>" +
+					
+					
+					
+				" </tr>";
+			}
+			 
+			html = html.replace(/undefined/g, " - ");
+			html = html.replace(/null/g, " - ");
+			
+			$("#allInventoryReportDtl tbody").append(html);
+		} else {
+			alert ("Data not found");
+		}
+         
+	}).done(function(data){
+		$('#allInventoryReportDtl').DataTable({
+			dom: 'Bfrtip',
+			"buttons": [{ "extend": 'excel', "text":'Export To Excel',"className": 'btn btn-default btn-xs' }],
+			"order": []
+		});
+	}).fail(function(xhr, status, error) {
+    	 
+    });
+}
+
+
+
+
+
+/*
+function getAllInventoryReportDtl () {
+	
+	$("#allInventoryReportDtl").DataTable().destroy();
+	
+	$("#allInventoryReportDtl tbody").empty();
+	
+	$.get(pageContext+"getAllInventoryReport",{"projectSfid":$('#projectid').val(), "towerCode":$('#allUnitTowerMstReport').val()},function(data){				 
+		var obj =JSON.stringify(data);
+		var obj1 =JSON.parse(obj);
+		
+		var html = '';
+		
+		if(obj1!=null) {
+			
+			for(var i = 0; i< obj1.length; i++){    
+                
+				html += "<tr>" +
+							"<td>"+obj1[i].project_name__c+"</td>" +
+							"<td>"+obj1[i].tower_name__c+"</td>" +
+							"<td>"+obj1[i].propstrength__house_unit_no__c+"</td>" +
+							"<td>"+obj1[i].wing_block__c+"</td>" +
+							"<td>"+obj1[i].inventory_category__c+"</td>" +
+							"<td>"+obj1[i].propstrength__property_name__c+"</td>" +
+							"<td>"+obj1[i].propstrength__rate_per_unit_area__c+"</td>" +
+							"<td>"+obj1[i].propstrength__property_alloted_through_offer__c+"</td>" +
+							"<td>"+obj1[i].propstrength__active__c+"</td>" +
+							"<td>"+obj1[i].propstrength__property_on_hold_for_reallocation__c+"</td>" +
+							"<td>"+obj1[i].hold_reason+"</td>" +
+							"<td>"+obj1[i].enq_name+"</td>" +
+							"<td>"+obj1[i].rera_net_carpet_sqft+"</td>" +
+							"<td>"+obj1[i].rera_exclusive_sqft+"</td>" +
+							"<td>"+obj1[i].saleable_area__c+"</td>" +
+							"<td>"+obj1[i].super_area+"</td>" +  
+						" </tr>";
+			}
+			
+			html = html.replace(/undefined/g, " - ");
+			html = html.replace(/null/g, " - ");
+			
+			$("#allInventoryReportDtl tbody").append(html);
+			
+		} else {
+			alert ("Data not found");
+		}
+	}).done(function(data){
+		$('#allInventoryReportDtl').DataTable( {
+			 dom: 'Bfrtip',
+			 "buttons": [
+				 { "extend": 'excel', "text":'Export To Excel',"className": 'btn btn-default btn-xs' }
+		      ],
+		      "order": []
+		 });
+	});	
+}*/
