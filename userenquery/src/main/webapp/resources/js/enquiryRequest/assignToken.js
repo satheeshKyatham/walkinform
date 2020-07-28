@@ -325,7 +325,7 @@ $(document).ready(function() {
 					},
 					function(data) {	
 						var dd = JSON.parse(data);
-						if(dd.isdone=="Y")//dd.isdone=="S" || 
+						if(dd.isdone=="S")//dd.isdone=="Y" || 
 							{
 							swal({
 								title: "Assigned user already started the session on this token",

@@ -1,14 +1,15 @@
 package com.godrej.properties.webservices;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.servlet.ServletException;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.ContentType;
@@ -27,9 +28,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import com.godrej.properties.constants.KeyConstants;
+import com.godrej.properties.dto.SysConfigEnum;
+import com.godrej.properties.master.service.SysConfigService;
 import com.godrej.properties.service.UserContactService;
-
-import net.sf.jasperreports.engine.JRException;
 @Component
 public class CreateOffer {
 
@@ -38,6 +39,9 @@ public class CreateOffer {
 	@Autowired
 	@Qualifier("userContactService")
 	private UserContactService userContactService;
+	
+	@Autowired
+	private SysConfigService sysConfigService;
 	//Sandbox Credentials
 	/*static final String USERNAME = "sachin_more@magicsoftware.com";//pass@12345fp0D4yeOj49FYAowsRSgDm0H
 	static final String PASSWORD = "Godrej@2018cVsYTP80dGI8lHM1kqzahnj6W";
@@ -150,7 +154,8 @@ public class CreateOffer {
 			 * Task : Offer Valid Till Date Logic - check with Configured Table and Pick date */
 			
 			account.put("enquiryid",enquirysfid);
-			account.put("offerValidTillDate",sm.format(dateAdd7));
+			//account.put("offerValidTillDate",sm.format(dateAdd7));
+			account.put("offerValidTillDate",getOfferTillDate());
 			account.put("ProjId", projectsfid);
 			account.put("Propid",propid);
 			account.put("PPid",ppid);
@@ -279,4 +284,69 @@ public class CreateOffer {
 		
 		return getResult;
 		} 
+	
+	public String getOfferTillDate()
+	{
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");// hh:mm
+		Date currentDate = null;
+		try {
+			Date systemDate = new Date(); 
+			sdf.format(systemDate);
+			currentDate = sdf.parse(sdf.format(systemDate));//Current Date
+			String offerConfigDate = sysConfigService.getValue(SysConfigEnum.OFFER_VALID_TILL_DATE, "OFFER_VALID_TILL_DATE");
+			int offerConfigCount = sysConfigService.getValueAsInt(SysConfigEnum.OFFER_VALID_TILL_DATE_DIFF, "OFFER_VALID_TILL_DATE_DIFF");
+			if(offerConfigDate!=null)
+			{
+			Date configuredDate = sdf.parse(offerConfigDate);//Configuration Date
+			
+			logger.info("dateNew : "+sdf.format(systemDate));
+			logger.info("date1 : "+sdf.format(currentDate));
+			logger.info("date2 : "+sdf.format(configuredDate));
+
+	        Calendar cal1 = Calendar.getInstance();
+	        Calendar cal2 = Calendar.getInstance();
+	        cal1.setTime(currentDate);
+	        cal2.setTime(configuredDate);
+
+	        if (cal1.after(cal2)) {
+	        	logger.info("Date1 is after Date2");
+	        	logger.info("Tag Current Date:"+sdf.format(currentDate));
+	        	return sdf.format(currentDate);
+	        }
+
+	        if (cal1.before(cal2)) {
+	        	logger.info("Date1 is before Date2");
+	        	return sdf.format(currentDate);
+	        	/*System.out.println("Current Month"+cal1.get(Calendar.MONTH));
+	        	System.out.println("Configured Month"+cal2.get(Calendar.MONTH));
+	        	int currentMonth = cal1.get(Calendar.MONTH);
+	        	int configuredMonth=cal2.get(Calendar.MONTH);
+	        	if(currentMonth==configuredMonth)
+	        	{
+	        		System.out.println("Same Month");
+	        	}
+	        	else
+	        	{
+	        		System.out.println("Remove Days");
+	        	}*/
+	        	//current date and configured date month check
+	        }
+
+		        if (cal1.equals(cal2)) {
+		        	logger.info("Date1 is equal Date2");
+		        	Calendar removeDays = Calendar.getInstance();
+		        	removeDays.setTime(currentDate);
+		        	removeDays.add(Calendar.DATE, -offerConfigCount);
+		        	logger.info("Offer Date is:"+removeDays.getTime());
+		        	logger.info("Offer Date Format is:"+sdf.format(removeDays.getTime()));
+		        	return sdf.format(removeDays.getTime());
+		        }
+			}
+		} catch (ParseException e) {
+			logger.error("Error 346:-",e);
+			return sdf.format(currentDate);
+		}
+        
+		return sdf.format(currentDate);
+	}
 }

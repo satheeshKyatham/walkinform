@@ -701,8 +701,10 @@ function loadEnquiryReport(enq){
 		$("#enquirysourceID").val(enq.enquirySource);
 		$("#walkinsourceID").val(enq.walkInSource);
 		
+		//alert(enq.sourcingmanger_email);
+		//alert(enq.closingmanger_email);
 		getClosingManagersList(enq.sourcingmanger_email);
-		getAllClosingManagersDataNew(enq.closing_managers__c)
+		getAllClosingManagersDataNew(enq.closingmanger_email)
 		getClosingTeamLeadManagersList(enq.closing_Team_Lead_email);
 		getSourcingTeamLeadManagersList(enq.sourcing_Team_Lead_email);
 		getInternationalSalesManagersList(enq.internationalSMDto);
