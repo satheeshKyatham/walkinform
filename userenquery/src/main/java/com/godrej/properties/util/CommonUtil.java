@@ -2,7 +2,11 @@ package com.godrej.properties.util;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -10,7 +14,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+import com.godrej.kyc.util.DateFormateUtil;
+import com.godrej.properties.dto.SysConfigEnum;
+import com.godrej.properties.master.service.SysConfigService;
 import com.godrej.properties.model.GeneratePayment;
 import com.godrej.properties.model.ProjectLaunch;
 
@@ -22,6 +31,7 @@ import com.godrej.properties.model.ProjectLaunch;
  */
 public class CommonUtil {
 	private static Logger Log = LoggerFactory.getLogger(CommonUtil.class);
+	
 	/*private static final Logger LOG =  LoggerFactory.getLogger(CommonUtil.class);*/
 	private CommonUtil(){
 		

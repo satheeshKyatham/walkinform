@@ -84,6 +84,11 @@ if(ses!=null){
 				<li>
 					<a href="#inventoryReport" data-toggle="tab">Hold/ Block Inventory Report</a>
 				</li>
+				
+				<li>
+					<a href="#allInventoryReport" data-toggle="tab">Inventory Report</a>
+				</li>
+				
 				<li>
 					<a href="#inventorySalesHoldReport" data-toggle="tab">Closing Manager Hold Inventory Report</a>
 				</li>
@@ -118,6 +123,10 @@ if(ses!=null){
 			
 			<div class="tab-pane" id="inventoryReport" >
 				<%@ include file="/WEB-INF/views/pages/inventoryReport.jsp" %>
+			</div>
+			
+			<div class="tab-pane" id="allInventoryReport" >
+				<%@ include file="/WEB-INF/views/pages/allInventoryReport.jsp" %>
 			</div>
 			
 			<div class="tab-pane" id="inventorySalesHoldReport" >
