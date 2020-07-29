@@ -34,6 +34,7 @@ public class ProjectLaunch implements Serializable{
 	@Column(name="sitehead_user_id") private Integer  sitehead_user_id;
 	@Column(name="sitehead_user_mail") private String  sitehead_user_mail;
 	@Column(name="sitehead_user_name") private String  sitehead_user_name;
+	@Column(name="tower_mid_access_code_json") private String  tower_mid_access_code_json;
 	
 	public String getSalesmanager_sfid() {
 		return salesmanager_sfid;
@@ -122,5 +123,12 @@ public class ProjectLaunch implements Serializable{
 	public void setSitehead_user_name(String sitehead_user_name) {
 		this.sitehead_user_name = sitehead_user_name;
 	}
+	public String getTower_mid_access_code_json() {
+		return tower_mid_access_code_json;
+	}
+	public void setTower_mid_access_code_json(String tower_mid_access_code_json) {
+		this.tower_mid_access_code_json = tower_mid_access_code_json;
+	}
+
 
 }

@@ -124,7 +124,7 @@ function inventoryLoad (callFrom){
 	} 
 	
 	
-	$.post(pageContext+"getInventoryDetails",{"projectId":$('#projectId').val(), "towerMst":$('#towerMst').val(), "typoMst":$("#typoMst").val(), "holdMst":holdVal, "soldMst":soldVal, "facing":$("#facing").val(), "unitAvailable":unitAvailable },function(data){				 
+	$.post(pageContext+"getInventoryDetails",{"projectId":$('#projectId').val(), "towerMst":$('#towerMst').val(), "typoMst":$("#typoMst").val(), "holdMst":holdVal, "soldMst":soldVal, "facing":$("#facing").val(), "unitAvailable":unitAvailable, "unitCategory":$("#unitCategory").val() },function(data){				 
 		
 	}).done(function(data){
 		$("#inventoryData").empty();

@@ -3047,10 +3047,11 @@ public class WebServiceController<MultipartFormDataInput> {
 		public String getInventoryDetailsAdmin(@RequestParam("projectId") String projectId,
 				@RequestParam("towerMst") String towerMst, @RequestParam("typoMst") String typoMst,
 				@RequestParam("holdMst") String holdMst, @RequestParam("soldMst") String soldMst, 
-				@RequestParam("unitAvailable") String unitAvailable,@RequestParam("facing") String facing) {
+				@RequestParam("unitAvailable") String unitAvailable,@RequestParam("facing") String facing
+				,@RequestParam("unitCategory") String unitCategory) {
 				GsonBuilder gsonBuilder = new GsonBuilder();
 				Gson gson = gsonBuilder.create();
-				List<InventoryAdmin> plans=inventoryService.getUnitDtlAdmin(projectId, towerMst, typoMst, holdMst, soldMst,unitAvailable,facing);
+				List<InventoryAdmin> plans=inventoryService.getUnitDtlAdmin(projectId, towerMst, typoMst, holdMst, soldMst,unitAvailable,facing,unitCategory);
 				
 				HashSet<Integer> floor=new HashSet<Integer>();
 				HashMap<String, ArrayList<InventoryAdmin>>  hashMap= new HashMap<String, ArrayList<InventoryAdmin>>();

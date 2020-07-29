@@ -122,6 +122,9 @@ public class Inventory implements Serializable{
 	@Column(name = "wing_block__c")
 	private String wing_block__c;
 	
+	@Column(name = "inventory_category__c")
+	private String inventory_category__c;
+	
 	
 	public String isHold_status() {
 		return hold_status;
@@ -397,5 +400,13 @@ public class Inventory implements Serializable{
 
 	public void setWing_block__c(String wing_block__c) {
 		this.wing_block__c = wing_block__c;
+	}
+
+	public String getInventory_category__c() {
+		return inventory_category__c;
+	}
+
+	public void setInventory_category__c(String inventory_category__c) {
+		this.inventory_category__c = inventory_category__c;
 	}
 }

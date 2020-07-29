@@ -1,21 +1,11 @@
 package com.godrej.properties.controller;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
-import java.util.StringTokenizer;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.json.JSONException;
-import org.json.JSONObject;
-import org.json.simple.JSONArray;
-
-import com.ccavenue.security.AesCryptUtil;
-import com.godrej.properties.model.CCAvenueResponseModel;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 public class Test {
 	/*public float ab= 1.1f;
@@ -30,7 +20,7 @@ public class Test {
 		
 	}*/
 	
-	public static void main(String[] args) throws JSONException {
+	public static void main(String[] args) throws JSONException, ParseException {
 		/*StringBuffer s = new StringBuffer("status=0&enc_response=4259dac656c51d019a99736ccefdda518d46cf8de04d0b277cc5a433313d2275f7924794cc5562d34168a1bdbf5753b90a55a988bf5341b154488478744c6e59abbc11b267c6fcae6767c7ba0bc4a0c1238e6fec0b7ba06cf807cc4221888dc0805e60157be7cbed13e0d43a878c33ffdfefd81ba90c050f3a056952146e0de706978abe77a357cef64608234086dfee0a25bd4787882c987a33d862614512f1b6a1c6fd8fbdbfd4b5f862d5cb793b512a833cb09a4d7d51c036fa0c8588df66dafcf3eab049baddb5d55aa887736f3378b2d0961b97f43e69db84c1693f63ba48909293c06295a0c11cae4498843b0be7f74ae3586bcd1ad77c2f1ce22c9675a390821b1e14379d46fd904f0c6c0a9ff1b2576e591a86c54eca71904afa8d575ccd1a0b4ba82949672ecb67a0648fe1bca3a818030324df877b869f6df5360a91588ca805b902a0a87b1b866e1c31ba1d178e3fca638b8e45e39fd81a7e0d5875f79fae8642f0863a06c70077b2f294f144f452b35925b2ef69f85256e566e581c4c8f7237696c5f0e197e840322482b2e0441210e7fdcd28ff875121cb803edb39af257e1e632c14e658722893abe2681ea92cb09a915710d1b3baccb055188e7405ae465e7320c5af43914229a2f84181b49d58a307d884d3cfcb5b9cb9e63ef63b7ae6ee8a29f0731f803156372a68177ff8450482f6f7bdb1c65fdbdc9a67e576fbce0b02e3105c550d20b955fff12b1f37bc8fe66d8680a9d0d231643f8fbc9e99c71dc9b839cc2cbd4afa63d3cde237c7ae813e6970831fb5ff9ffbad88d2207e181f4d9cdb0debebbd2989e4cafab2d8d6351337bb1f5e8b7cc12ca7ed6a9eae367173da4e746e6830448429322956687606cf6364faea187d8f79fb6282e4c7922511f13ddd56488c5a84d853495b50ea02c4ce567dad2a8f4a5df271c994dcb2dca907e3a82b0ada7e35ab4c9d0d0683e9193db307e4fce1311df241ed8db54405bc2f38fe0afc4eddb99a8a6e11fff0575faa5a2e04a90f0a248181f678b86834763a94b4b119458170eb99e8b6164a89aaf1e6e6e3feae25d82fa092f81bcdd359ce6351a613ff7a0d486afc02954c20d5db860ff02b2ac878d76aca952f87cedac8761f691817f6bcb8ecd1fb543d41d449df1b877f0d2ed52b602b168b9278463478dc3b3c8b4c4fbc");
 		String[] params = s.toString().split("&");
 	    Map<String, String> map = new HashMap<String, String>();
@@ -218,14 +208,176 @@ public class Test {
 		System.out.println(timeStamp);
 		System.out.println(Calendar.getInstance().getTimeInMillis());*/
 		
-		if(90>120 && ("Appointment Proposed".equals("Appointment Proposed")))
+		/*if(90>120 && ("Appointment Proposed".equals("Appointment Proposed")))
 		{
 			System.out.println("Qualify........");
 			
 		}
 		else
-			System.out.println("Else........");
+			System.out.println("Else........");*/
+	
+		/*JSONArray jsonArray= new JSONArray();
 		
+		 JSONObject obj = new JSONObject();
+	      obj.put("merchant_id", "foo");
+	      obj.put("accesscode", "foo");
+	      obj.put("workingkey", "foo");
+	      obj.put("towercode", "foo");
+	      obj.put("towersfid", "foo");
+	     // jsonArray.
+	      JSONObject obj1 = new JSONObject();
+	      obj1.put("merchant_id", "foo");
+	      obj1.put("accesscode", "foo");
+	      obj1.put("workingkey", "foo");
+	      obj1.put("towercode", "foo");
+	      obj1.put("towersfid", "foo");
+	      jsonArray.add(obj1);
+	      System.out.println(jsonArray.toString());
+	      JSONParser parser = new JSONParser();
+	      try {
+			JSONArray objNew = (JSONArray) parser.parse(jsonArray.toString());
+			System.out.println("Count:"+objNew.length());
+			for(int i=0;i<objNew.length();i++)
+			{
+				JSONObject objEx = objNew.getJSONObject(i)k
+				//JSONObject objEx = new JSONObject(objNew.get(i));
+				System.out.println("Data:"+objEx);
+			}
+			
+		} catch (org.json.simple.parser.ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
+		
+		//String configuredDate="2020-07-25";// 02:00:00
+		/*DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:MM");
+		Date date;
+		try {
+		    date = dateFormat.parse("2020-07-25 03:00:00");
+		    System.out.println(date.toString()); // Wed Dec 04 00:00:00 CST 2013
+		    String output = dateFormat.format(date);
+		    System.out.println(output); // 2013-12-04
+		    
+		    
+		    
+		} 
+		catch (ParseException e) {
+		    e.printStackTrace();
+		}*/
+		
+		/*SimpleDateFormat sdformat = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+	      
+		try {
+			Date d1 = sdformat.parse("2020-07-28 04:10:00");
+			 Date d2 = sdformat.parse("2020-07-28 04:00:00");
+		      System.out.println("The date 1 is: " + sdformat.format(d1));
+		      System.out.println("The date 2 is: " + sdformat.format(d2));
+		      if(d1.compareTo(d2) > 0) {
+		         System.out.println("Date 1 occurs after Date 2");
+		      } else if(d1.compareTo(d2) < 0) {
+		         System.out.println("Date 1 occurs before Date 2");
+		      } else if(d1.compareTo(d2) == 0) {
+		         System.out.println("Both dates are equal");
+		      }
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
+		 	/*SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:MM:SS");
+	        Date date1 = sdf.parse("2020-07-28 04:20:00");
+	        Date date2 = sdf.parse("2020-07-28 04:10:00");
+
+	        System.out.println("date1 : " + sdf.format(date1));
+	        System.out.println("date2 : " + sdf.format(date2));
+
+	        Calendar cal1 = Calendar.getInstance();
+	        Calendar cal2 = Calendar.getInstance();
+	        cal1.setTime(date1);
+	        cal2.setTime(date2);
+
+	        if (cal1.after(cal2)) {
+	            System.out.println("Date1 is after Date2");
+	        }
+
+	        if (cal1.before(cal2)) {
+	            System.out.println("Date1 is before Date2");
+	        }
+
+	        if (cal1.equals(cal2)) {
+	            System.out.println("Date1 is equal Date2");
+	        }*/
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");// hh:mm
+		try {
+			Date systemDate = new Date(); 
+			sdf.format(systemDate);
+			Date currentDate = sdf.parse(sdf.format(systemDate));//Current Date
+			Date configuredDate = sdf.parse("2020-08-01 01:24");//Configuration Date
+			
+			System.out.println("dateNew : " + sdf.format(systemDate));
+			System.out.println("date1 : " + sdf.format(currentDate));
+			System.out.println("date2 : " + sdf.format(configuredDate));
+
+	        Calendar cal1 = Calendar.getInstance();
+	        Calendar cal2 = Calendar.getInstance();
+	        cal1.setTime(currentDate);
+	        cal2.setTime(configuredDate);
+
+	        if (cal1.after(cal2)) {
+	        	System.out.println("Date1 is after Date2");
+	        	System.out.println("Tag Current Date"+sdf.format(currentDate));
+	        }
+
+	        if (cal1.before(cal2)) {
+	        	System.out.println("Date1 is before Date2");
+	        	/*System.out.println("Current Month"+cal1.get(Calendar.MONTH));
+	        	System.out.println("Configured Month"+cal2.get(Calendar.MONTH));
+	        	int currentMonth = cal1.get(Calendar.MONTH);
+	        	int configuredMonth=cal2.get(Calendar.MONTH);
+	        	if(currentMonth==configuredMonth)
+	        	{
+	        		System.out.println("Same Month");
+	        	}
+	        	else
+	        	{
+	        		System.out.println("Remove Days");
+	        	}*/
+	        	//current date and configured date month check
+	        }
+
+	        if (cal1.equals(cal2)) {
+	        	System.out.println("Date1 is equal Date2");
+	        	Calendar removeDays = Calendar.getInstance();
+	        	removeDays.setTime(currentDate);
+	        	removeDays.add(Calendar.DATE, -1);
+	        	System.out.println("Offer Date is:"+removeDays.getTime());
+	        	System.out.println("Offer Date Format is:"+sdf.format(removeDays.getTime()));
+	        	
+	        }
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
+	
+	public static java.sql.Date getYYYYMMDD(String inputDate) {
+
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+       // String dateInString = inputDate;
+
+        try {
+        	Date dtDob = new Date(inputDate);
+    		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+    		     String newDate = sdf.format(dtDob);
+
+           Date myDate = formatter.parse(newDate);
+            return new java.sql.Date(myDate.getTime()); 
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+		return null; 
+
+	}
 }

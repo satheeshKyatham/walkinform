@@ -41,14 +41,14 @@ public class InventoryServiceImpl implements InventoryService {
 	
 	
 	@Override
-	public List<Inventory> getUnitDtl(String project_code, String towerMst, String typoMst, String holdMst, String soldMst,String facing, String unitAvailable) {
-		return inventoryDao.getUnitDtl(project_code, towerMst, typoMst, holdMst, soldMst,facing, unitAvailable);
+	public List<Inventory> getUnitDtl(String project_code, String towerMst, String typoMst, String holdMst, String soldMst,String facing, String unitAvailable, String unitCategory) {
+		return inventoryDao.getUnitDtl(project_code, towerMst, typoMst, holdMst, soldMst,facing, unitAvailable, unitCategory);
 	}
 			
 	@Override
 	public List<InventoryAdmin> getUnitDtlAdmin(String projectId, String towerMst, String typoMst, String holdMst,
-			String soldMst, String unitAvailable,String facing) {
-		return inventoryAdminDao.getUnitDtlAdmin(projectId, towerMst, typoMst, holdMst, soldMst ,unitAvailable,facing);
+			String soldMst, String unitAvailable,String facing, String unitCategory) {
+		return inventoryAdminDao.getUnitDtlAdmin(projectId, towerMst, typoMst, holdMst, soldMst ,unitAvailable,facing, unitCategory);
 	}
 
 	//@Override

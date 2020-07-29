@@ -10,10 +10,10 @@ import com.godrej.properties.model.Inventory;
 import com.godrej.properties.model.InventoryAdmin;
 
 public interface InventoryService {
-	List<Inventory> getUnitDtl(String project_code, String towerMst, String typoMst, String holdMst, String soldMst,String facing, String unitAvailable);
+	List<Inventory> getUnitDtl(String project_code, String towerMst, String typoMst, String holdMst, String soldMst,String facing, String unitAvailable, String unitCategory);
 
 	List<InventoryAdmin> getUnitDtlAdmin(String projectId, String towerMst, String typoMst, String holdMst, String soldMst,
-			String unitAvailable,String facing);
+			String unitAvailable,String facing, String unitCategory);
 
 	//void saveHoldInventoryAdmin(HoldInventoryAdmin inventoryAdmin);
 

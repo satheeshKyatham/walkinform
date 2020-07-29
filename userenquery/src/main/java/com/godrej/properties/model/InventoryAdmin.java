@@ -99,6 +99,9 @@ public class InventoryAdmin implements Serializable{
 	@Column(name = "propstrength__tower__c")
 	private String propstrength__tower__c;
 	
+	@Column(name = "inventory_category__c") private String inventory_category__c;
+	
+	
 	public String isHold_status() {
 		return hold_status;
 	}
@@ -319,5 +322,13 @@ public class InventoryAdmin implements Serializable{
 
 	public void setPropstrength__tower__c(String propstrength__tower__c) {
 		this.propstrength__tower__c = propstrength__tower__c;
+	}
+
+	public String getInventory_category__c() {
+		return inventory_category__c;
+	}
+
+	public void setInventory_category__c(String inventory_category__c) {
+		this.inventory_category__c = inventory_category__c;
 	}
 }

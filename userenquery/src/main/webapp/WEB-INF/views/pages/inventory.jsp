@@ -59,6 +59,17 @@
 						<option value='typologyAll'>All</option>
 					</select>
 				 </div>
+				 
+				 <div class="form-group col-md-3 col-sm-6">
+					<label>Category</label>
+					<select id="unitCategory" class="form-control">
+						<option value='All'>All</option>
+						<option value='A'>A</option>
+						<option value='B'>B</option>
+						<option value='C'>C</option>
+					</select>
+				 </div>
+				 
 				 <div class="form-group col-md-3 col-sm-6" style="display:none;">
 					<label>Facing</label>
 					<select id="facing" class="form-control">

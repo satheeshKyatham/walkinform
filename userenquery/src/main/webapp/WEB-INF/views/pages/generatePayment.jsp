@@ -6,6 +6,10 @@
 		<h4 class="mrgT0">
 			Payment Details
 		</h4>
+		<div class="form-group col-md-5">
+			<label>Tower</label>
+			<select id="towerMstPayment" class="form-control"> </select>
+		 </div>
 		<table class="table table-bordered  bgWhite mrgB8" id="csPtColOP">
 			<tbody>
 				<tr class="subHead">

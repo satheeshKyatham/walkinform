@@ -94,6 +94,10 @@ function csPymtDataOP () {
 	    k++
 	});
 	
+	
+	alert($('#towerMstPayment').val());
+	alert($("#towerMstPayment option:selected").attr('name'));
+	
 	$.post(pageContext+"insertPaymentRequest",{"paymentDtlJson" : JSON.stringify(arrayData), 
 		"userid" : $('#userid').val(),
 		"enq_sfid" : $('#enquirysfid').val(),
@@ -104,7 +108,9 @@ function csPymtDataOP () {
 		"user_email" : $('#useremailID').val(),
 		"user_name" : $('#username').val(),
 		"customer_name" : customerFullname1,
-		"customer_email" : customerEmail1
+		"customer_email" : customerEmail1,
+		"towercode":$('#towerMstPayment').val(),
+		"towersfid":$("#towerMstPayment option:selected").attr('name')
 		
 	},function(data){				 
 	
@@ -151,7 +157,7 @@ function csPymtDataOP () {
 
 
 function getPaymentReqRecord () {
-	
+	getPaymentTowerList();
 	$('#csPtColOP tbody tr.paymentDataPlotRow').remove();
 	
 	$.post(pageContext+"getPaymentReqRecord",{"enqSfid":$('#enquirysfid').val(), "projectSFID":$("#projectsfid").val()},function(data){
@@ -358,3 +364,24 @@ function copyToClipboard(elementId) {
   // Remove it from the body
   document.body.removeChild(aux);
 }
+
+function getPaymentTowerList () {
+	$('#towerMstPayment').empty();	
+	var projectNameVal = $("#projectId").val();
+	var urlTower = pageContext+"getTowerMaster?project_code="+projectNameVal;
+	$.getJSON(urlTower, function (data) {
+		$('#towerMstPayment').append('<option name="0" value="0">Select</option>');
+		$.each(data, function (index, value) {
+			//alert($('#towerMstPayment'));
+			$('#towerMstPayment').append("<option name='"+value.sfid+"' value='"+value.tower_code__c+"'>"+value.tower_name__c+"</option>");
+		});					
+	}).done(function() {
+		
+	});
+}
+
+//function gettowerData()
+//{
+//	alert($('#towerMstPayment').val());
+//	alert($('#towerMstPayment').name());
+//}

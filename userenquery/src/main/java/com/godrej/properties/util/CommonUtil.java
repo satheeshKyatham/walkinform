@@ -2,8 +2,26 @@ package com.godrej.properties.util;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.godrej.kyc.util.DateFormateUtil;
+import com.godrej.properties.dto.SysConfigEnum;
+import com.godrej.properties.master.service.SysConfigService;
+import com.godrej.properties.model.GeneratePayment;
+import com.godrej.properties.model.ProjectLaunch;
 
 /**
  * 
@@ -12,7 +30,8 @@ import java.util.List;
  *  *
  */
 public class CommonUtil {
-
+	private static Logger Log = LoggerFactory.getLogger(CommonUtil.class);
+	
 	/*private static final Logger LOG =  LoggerFactory.getLogger(CommonUtil.class);*/
 	private CommonUtil(){
 		
@@ -145,6 +164,33 @@ public class CommonUtil {
 		}
 	}
 	
+	public static ProjectLaunch getTowerWiseCCAvenueDetails(ProjectLaunch project,String towerCode)
+	{
+		
+
+		JSONArray jsonArry;
+		try {
+			jsonArry = new JSONArray(project.getTower_mid_access_code_json());
+			Log.info("Json Length:{}",jsonArry.length());
+			for(int i=0;i<jsonArry.length();i++)
+			{
+				JSONObject objEx = jsonArry.getJSONObject(i);
+				if(towerCode.trim().equals(objEx.get("towercode")))
+				{
+					project.setCcavenue_merchant_id(Integer.parseInt(objEx.get("merchant_id").toString()));
+					//project.setCcavenue_merchant_id(218829);
+					project.setCcavenue_workingkey(objEx.get("workingkey").toString());
+					project.setCcavenue_accesscode(objEx.get("accesscode").toString());
+				}
+				//JSONObject objEx = new JSONObject(objNew.get(i));
+				Log.info("Data:{}",objEx);
+			}
+		} catch (JSONException e) {
+			Log.error("Json Error:-",e);
+		}
+		
+	return project;
+	}
 	
 }
 

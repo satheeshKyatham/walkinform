@@ -60,6 +60,16 @@
 					</select>
 				 </div>
 				 
+				 <div class="form-group col-md-3 col-sm-6">
+					<label>Category</label>
+					<select id="unitCategory" class="form-control">
+						<option value='All'>All</option>
+						<option value='A'>A</option>
+						<option value='B'>B</option>
+						<option value='C'>C</option>
+					</select>
+				 </div>
+				 
 				 <div class="form-group col-md-3">
 					<label>Unit Status </label>
 					<select id="searchadmintype" class="form-control">
