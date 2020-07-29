@@ -746,7 +746,7 @@
 		});
 	</script>
 	
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDM5bKqtFEgJ0D1jXEHx-nsZUPyBLNW7B4&libraries=places&callback=initAutocomplete" async defer></script>		
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAMtXEgz-EmdSjN3vqjcG0KpVP72vMKtyI&libraries=places&callback=initAutocomplete" async defer></script>		
 	<script src="<c:url value='/resources/js/separate/rangeSlider.js' />"></script>
 	
 	<%@ include file="/WEB-INF/views/pages/footer.jsp" %>

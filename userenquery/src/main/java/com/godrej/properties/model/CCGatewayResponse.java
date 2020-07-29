@@ -27,6 +27,7 @@ public class CCGatewayResponse {
 	@Column(name="enq_name") private String enq_name;
 	@Column(name="generated_date") private Timestamp generated_date;
 	@Column(name="payment_date") private Timestamp payment_date;
+	
 	public int getNv_cc_gateway_response_id() {
 		return nv_cc_gateway_response_id;
 	}
@@ -105,6 +106,5 @@ public class CCGatewayResponse {
 	public void setPayment_date(Timestamp payment_date) {
 		this.payment_date = payment_date;
 	}
-	
 	
 }

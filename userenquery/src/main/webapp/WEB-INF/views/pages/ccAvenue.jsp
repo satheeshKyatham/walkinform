@@ -42,7 +42,7 @@ if(ses!=null){
  </script>
   <nav class="navbar topMainBar">
 	  <div class="container">
-	 <%@ include file="/WEB-INF/views/pages/header.jsp" %>
+	<%--  <%@ include file="/WEB-INF/views/pages/header.jsp" %> --%>
 		 </div>
 	</nav>
 		<div class="titleCol">
