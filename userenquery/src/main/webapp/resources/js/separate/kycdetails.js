@@ -44,6 +44,7 @@ function getCMKYCDetails()
 			var kycApprovalName = value.kycapproval_name==null?'':value.kycapproval_name;
 			var bookingName = value.booking_name==null?'':value.booking_name;
 			var bookingStatus = value.booking_status==null?'':value.booking_status;
+			var description = value.description==null?'':value.description;
 			var appFormHtml="<td>";
 			var totalAmt='';
 			var propertName ='';
