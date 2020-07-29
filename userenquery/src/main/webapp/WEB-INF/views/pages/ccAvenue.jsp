@@ -101,7 +101,7 @@ if(ses!=null){
 	<script src="<c:url value='/resources/js/dataTables.buttons.min.js'/>"></script>
 	<script src="<c:url value='/resources/js/jszip.min.js'/>"></script>
 	<script src="<c:url value='/resources/js/buttons.html5.min.js'/>"></script>
-	<script src="<c:url value='/resources/js/payment/ccAvenue.js?v=18.18'/>"></script>
+	<script src="<c:url value='/resources/js/payment/ccAvenue.js?v=18.54'/>"></script>
 	 <script type="text/javascript">	getCCAvenuePaymentDetails();</script> 
 	<%@ include file="/WEB-INF/views/pages/footer.jsp" %>
 </body>
