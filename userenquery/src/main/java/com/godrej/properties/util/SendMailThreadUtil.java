@@ -65,21 +65,28 @@ public class SendMailThreadUtil implements Runnable{
 		      logger.info("host:-"+host);
 		      logger.info("TO E-mail Address ::::-KYC:"+to);
 		      logger.info("CC E-mail Address ::::-KYC"+cc);
-		      BodyPart messageBodyPart = new MimeBodyPart();
-		      MimeMultipart multipart = new MimeMultipart();
-		      messageBodyPart.setContent(message, "text/html");
-		      multipart.addBodyPart(messageBodyPart); 
-		      message1.setRecipients(Message.RecipientType.TO,InternetAddress.parse(to));
-		      if(cc!=null && cc.length()>0)
+		      if(to!=null)
 		      {
-		    	  message1.setRecipients(Message.RecipientType.CC,InternetAddress.parse(cc));
+			      BodyPart messageBodyPart = new MimeBodyPart();
+			      MimeMultipart multipart = new MimeMultipart();
+			      messageBodyPart.setContent(message, "text/html");
+			      multipart.addBodyPart(messageBodyPart); 
+			      message1.setRecipients(Message.RecipientType.TO,InternetAddress.parse(to));
+			      if(cc!=null && cc.length()>0)
+			      {
+			    	  message1.setRecipients(Message.RecipientType.CC,InternetAddress.parse(cc));
+			      }
+			      message1.setRecipients(Message.RecipientType.BCC,InternetAddress.parse("gc.atulbhanushali@godrejproperties.com,sathish.kyatham@godrejproperties.com,prakash.idnani@godrejproperties.com"));//sathish.kyatham@godrejproperties.com,prakash.idnani@godrejproperties.com
+			      message1.setSubject(subject);
+			      message1.setText(message);  
+			      message1.setContent(multipart);
+			      Transport.send(message1);
+			      logger.info("Sent message successfully....");
 		      }
-		      message1.setRecipients(Message.RecipientType.BCC,InternetAddress.parse("gc.atulbhanushali@godrejproperties.com,sathish.kyatham@godrejproperties.com,prakash.idnani@godrejproperties.com"));//sathish.kyatham@godrejproperties.com,prakash.idnani@godrejproperties.com
-		      message1.setSubject(subject);
-		      message1.setText(message);  
-		      message1.setContent(multipart);
-		      Transport.send(message1);
-		      logger.info("Sent message successfully....");
+		      else
+		      {
+		    	  logger.info("No Email Id found....");
+		      }
 	      
 		} catch (AddressException e) {
 			logger.error("Error Email 80",e);
