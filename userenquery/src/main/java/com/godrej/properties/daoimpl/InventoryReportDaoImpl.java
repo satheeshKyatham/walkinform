@@ -79,7 +79,9 @@ public class InventoryReportDaoImpl implements InventoryReportDao{
 				+ " LEFT JOIN salesforce.propstrength__property_charges__c g ON g.propstrength__property__c = a.sfid "
 				+ " LEFT JOIN salesforce.propstrength__other_charges__c h ON CAST(g.propstrength__other_charges__c as text)  = CAST(h.sfid as text) "
 				
-				+ " where "+whereCondition+"     order by a.created_at desc  ", InventoryReport.class);
+				+ " where "+whereCondition+"  and a.hold_reason in ('block', 'temp') and  a.hold_status = true  order by a.created_at desc  ", InventoryReport.class);
+				
+				//+ " where "+whereCondition+"     order by a.created_at desc  ", InventoryReport.class);
 		
 				//and a.hold_reason in ('block', 'temp') and  a.hold_status = true 
 		

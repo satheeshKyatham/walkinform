@@ -1,5 +1,7 @@
 package com.godrej.properties.daoimpl;
 
+import java.util.List;
+
 import javax.persistence.Query;
 
 import org.hibernate.Session;
@@ -13,6 +15,7 @@ import com.godrej.properties.dao.AbstractDao;
 import com.godrej.properties.dao.CCAvenueGatewayRequestDao;
 import com.godrej.properties.model.CCAvenueGatewayRequest;
 import com.godrej.properties.model.CCAvenueResponseModel;
+import com.godrej.properties.model.CCGatewayResponse;
 
 @Repository("ccAvenueGatewayRequestDao")
 public class CCAvenueGatewayRequestDaoImpl extends AbstractDao<Integer, CCAvenueGatewayRequest> implements CCAvenueGatewayRequestDao{
@@ -73,6 +76,17 @@ public class CCAvenueGatewayRequestDaoImpl extends AbstractDao<Integer, CCAvenue
 
 		Query q = session.createNativeQuery("Update salesforce.gpl_cc_payment_request SET payment_status='"+responseModel.getOrder_status()+"',bank_ref_no='"+responseModel.getBank_ref_no()+"',ispayment_status='"+ispayment+"',update_date=now() where id ="+responseModel.getOrder_id());
 		q.executeUpdate();		
+		return null;
+	}
+
+	@Override
+	public CCAvenueGatewayRequest getCCAvenueRequest(String orderid) {
+		Session session = this.sessionFactory.getCurrentSession();
+		List<CCAvenueGatewayRequest> list =null;
+		 list =session.createQuery(" from CCAvenueGatewayRequest where  order_id = '"+orderid+"'").list();
+	 
+		if(list.size()>0)
+			return list.get(0);
 		return null;
 	}
 

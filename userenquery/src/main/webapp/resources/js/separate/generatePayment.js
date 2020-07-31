@@ -95,8 +95,8 @@ function csPymtDataOP () {
 	});
 	
 	
-	alert($('#towerMstPayment').val());
-	alert($("#towerMstPayment option:selected").attr('name'));
+	//alert($('#towerMstPayment').val());
+	//alert($("#towerMstPayment option:selected").attr('name'));
 	
 	$.post(pageContext+"insertPaymentRequest",{"paymentDtlJson" : JSON.stringify(arrayData), 
 		"userid" : $('#userid').val(),

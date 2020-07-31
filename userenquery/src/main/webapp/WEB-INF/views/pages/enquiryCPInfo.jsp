@@ -1345,7 +1345,7 @@
 		});
 	</script>
 	
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDM5bKqtFEgJ0D1jXEHx-nsZUPyBLNW7B4&libraries=places&callback=initAutocomplete" async defer></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAMtXEgz-EmdSjN3vqjcG0KpVP72vMKtyI&libraries=places&callback=initAutocomplete" async defer></script>
 	
 	<!-- <script src="https://rawgit.com/seiyria/bootstrap-slider/master/dist/bootstrap-slider.min.js"></script> -->
 		
