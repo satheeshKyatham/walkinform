@@ -334,6 +334,7 @@ public class PushEnquiryDataDaoImpl  extends AAbstractDao<Enquiry> implements Pu
 			cust.setWalkInSource(enqqty.getWalkInSource());
 			cust.setWalkInSourceDetail(enqqty.getWalkInSourceDetail());
 			cust.setSourcing_Managers__c(enqqty.getSourcing_Managers__c());
+			cust.setVirtual_meeting_count__c(enqqty.getVirtual_meeting_count__c());
 			return cust;
 		}		
 		return null;

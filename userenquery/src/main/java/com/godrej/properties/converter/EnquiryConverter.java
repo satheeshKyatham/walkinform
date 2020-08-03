@@ -276,8 +276,8 @@ public class EnquiryConverter implements CommonConverter<Enquiry, EnquiryDto>{
 		
 		/*Purchase of purpose selected value push into enquiry -  Change By Satheesh Kyatham- 26-09-2019*/
 		/*=======Start==========*/
-		if(dto.getSite_Visit_Done__c()==null || dto.getSite_Visit_Done__c()==0)
-			entity.setSite_Visit_Done__c(1.0);
+		/*if(dto.getSite_Visit_Done__c()==null || dto.getSite_Visit_Done__c()==0)
+			entity.setSite_Visit_Done__c(1.0);*/
 		/*=========End========*/
 		
 		
@@ -341,7 +341,10 @@ public class EnquiryConverter implements CommonConverter<Enquiry, EnquiryDto>{
 			entity.setSourcing_Team_Lead__c(dto.getSourcing_Team_Lead__c());
 		if(dto.getInternationalSMDto()!=null)
 			entity.setInternational_Sales_Manager__c(dto.getInternationalSMDto());
-		
+		if(dto.getVirtual_meeting_count__c()!=null)
+			entity.setVirtual_meeting_count__c(dto.getVirtual_meeting_count__c());
+		if(dto.getSite_Visit_Done__c()!=null)
+			entity.setSite_Visit_Done__c(dto.getSite_Visit_Done__c());
 		return entity;
 	}
 
