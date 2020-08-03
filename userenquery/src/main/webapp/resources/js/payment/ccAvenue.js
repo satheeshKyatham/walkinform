@@ -194,6 +194,7 @@ function requestCCPaymentGateway(e){
 		success : function(data) {
 //			 window.location.href = "ccavRequestHandler?ccencrqst="+data;
 			//alert(data);
+			//alert("ccavRequestHandler?"+data);
 			window.location.href = "ccavRequestHandler?"+data;
 			
 		}

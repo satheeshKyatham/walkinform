@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.godrej.properties.model.CCAvenueGatewayRequest;
 import com.godrej.properties.service.GeneratePaymentService;
 import com.godrej.properties.service.ProjectLaunchService;
 import com.google.gson.Gson;
@@ -29,6 +30,7 @@ public class CCAvenuePaymentController {
 	
 	@Autowired
 	private ProjectLaunchService projectLaunchService;
+	
 	
 	@RequestMapping(value = { "/ccAvenue"}, method = RequestMethod.GET)
 	public String ccAvenue(ModelMap model,HttpServletRequest request) {
@@ -67,8 +69,18 @@ public class CCAvenuePaymentController {
 	}
 	@PostMapping(value = { "/ccavResponseHandler"})
 	public String ccavResponseHandlerPost(ModelMap model,HttpServletRequest request) {
-//		return "ccAvenueLogin";
-		String resp = generatePaymentService.getwayResponseHandler(request.getParameter("encResp"),request.getParameter("projectsfid"));
+//		return "ccAvenueLogin";//merchant_param4
+		Log.info("Query String : "+request.getQueryString());
+		//Log.info("Query merchant_param4 : "+request.getParameter("merchant_param4"));
+		Log.info("orderNo : "+request.getParameter("orderNo"));
+		CCAvenueGatewayRequest ccResp = generatePaymentService.getCCAvenueRequest(request.getParameter("orderNo"));
+		/*Set<String> paramNames = request.getParameterMap().keySet();
+        // iterating over parameter names and get its value
+        for (String name : paramNames) {
+            String value = request.getParameter(name);
+            Log.info(name + ": " + value);
+        }*/
+		String resp = generatePaymentService.getwayResponseHandler(request.getParameter("encResp"),request.getParameter("projectsfid"),ccResp.getMerchant_param4().toString());
 		return "redirect:/ccAvenue?"+resp;
 	}
 	

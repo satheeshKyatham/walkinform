@@ -2,6 +2,7 @@ package com.godrej.properties.service;
 
 import java.util.List;
 
+import com.godrej.properties.model.CCAvenueGatewayRequest;
 import com.godrej.properties.model.GeneratePayment;
 
 
@@ -13,5 +14,6 @@ public interface GeneratePaymentService {
 	public String createCCGatewayRequest(GeneratePayment payment);
 	//public CCAvenueGatewayRequest insertCCAvenueGatewayRequest(CCAvenueGatewayRequest gatewayRequest);
 	public List<GeneratePayment> getPaymentDetails(String enqSfid, String projectSFID);
-	public String getwayResponseHandler(String response,String projectsfid);
+	public String getwayResponseHandler(String response,String projectsfid,String towerCode);
+	public CCAvenueGatewayRequest getCCAvenueRequest(String orderid);
 }
