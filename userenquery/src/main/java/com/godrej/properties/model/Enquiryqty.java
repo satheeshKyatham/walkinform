@@ -161,7 +161,7 @@ public class Enquiryqty extends CommonModel{
    
     @Column(name="date_of_eoi__c")
 	private Date date_of_eoi__c;
-
+    @Column(name="virtual_meeting_count__c") private Double virtual_meeting_count__c;
     
 //branch__c
 //EOI_Bank_Name__c
@@ -599,6 +599,14 @@ public class Enquiryqty extends CommonModel{
 
 	public void setFollow_up_Date_Time__c(Date follow_up_Date_Time__c) {
 		this.follow_up_Date_Time__c = follow_up_Date_Time__c;
+	}
+
+	public Double getVirtual_meeting_count__c() {
+		return virtual_meeting_count__c;
+	}
+
+	public void setVirtual_meeting_count__c(Double virtual_meeting_count__c) {
+		this.virtual_meeting_count__c = virtual_meeting_count__c;
 	}
 
 	

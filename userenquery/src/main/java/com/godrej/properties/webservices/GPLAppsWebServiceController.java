@@ -205,9 +205,13 @@ public class GPLAppsWebServiceController {
 		if(enquiryDto.getWalkInSource()!=null)
 		{
 			if((enquiryDto.getWalkInSource().equals("Digital") || enquiryDto.getWalkInSource().equals("Exhibition") || enquiryDto.getWalkInSource().equals("Newspaper") || enquiryDto.getWalkInSource().equals("Hoarding") || enquiryDto.getWalkInSource().equals("Radio") || enquiryDto.getWalkInSource().equals("Word of mouth") 
-					|| enquiryDto.getWalkInSource().equals("SMS")  || enquiryDto.getWalkInSource().equals("Corporate") || enquiryDto.getWalkInSource().equals("Other BTL activities") || enquiryDto.getWalkInSource().equals("Telemarketing")))
+					|| enquiryDto.getWalkInSource().equals("SMS")  || enquiryDto.getWalkInSource().equals("Corporate") || enquiryDto.getWalkInSource().equals("Other BTL activities") || enquiryDto.getWalkInSource().equals("Telemarketing") || enquiryDto.getWalkInSource().contains("Employee")))
 			{
 				enqResp.setWalkin_source_mobile("Direct");
+			}
+			else if(enquiryDto.getWalkInSource().equals("Existing Customer"))
+			{
+				enqResp.setWalkin_source_mobile("Loyalty");
 			}
 			else
 				enqResp.setWalkin_source_mobile(enquiryDto.getWalkInSource());

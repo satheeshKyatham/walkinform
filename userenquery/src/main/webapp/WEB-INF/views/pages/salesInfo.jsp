@@ -1094,7 +1094,7 @@ if(ses!=null){
 						<!-- Instract By Ganesh -- Add new field for loan -->
 						<div id="sourceFundingValue" style="display:none;">
 						<div class="col-md-6 col-xs-12" style="padding-left: 25px; padding-right: 25px; min-height: 150px;">
-						 <label style="margin-left: -10px; margin-bottom: 30px; font-weight:normal">Own contribution receipt </label>
+						 <label style="margin-left: -10px; margin-bottom: 30px; font-weight:normal">Own contribution receipt</label>
 						 <input readonly class="sales_submitted" type="text" id="contributionReceipt_val" name="enquiryReport.contributionReceipt_val">
 						 </div>
 						 <div class="col-md-6 col-xs-12" style="padding-left: 25px; padding-right: 25px; min-height: 150px;">
@@ -1104,7 +1104,7 @@ if(ses!=null){
 						 </div>
 						<div id="sourceFundingSlider" style="display:none;">	
 							<div class="col-md-6 col-xs-12" style="padding-left: 25px; padding-right: 25px; min-height: 150px;">
-								<label style="margin-left: -10px; margin-bottom: 30px; font-weight:normal">Own contribution receipt </label>
+								<label style="margin-left: -10px; margin-bottom: 30px; font-weight:normal">Own contribution receipt</label>
 								<input style="width:100%" id="ownContro" type="text" name="enquiryReport.contributionReceipt"/>
 								<div class="clearfix"></div>
 							</div>	

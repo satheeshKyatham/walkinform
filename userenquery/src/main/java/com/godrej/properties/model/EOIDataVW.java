@@ -54,6 +54,7 @@ public class EOIDataVW implements Serializable{
 	private String booking_name;
 	@Column(name="booking_status")
 	private String booking_status;
+	@Column(name="description")private String description;
 	
 	public String getUserdocid() {
 		return userdocid;
@@ -187,6 +188,12 @@ public class EOIDataVW implements Serializable{
 	}
 	public void setBooking_status(String booking_status) {
 		this.booking_status = booking_status;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	
 }
