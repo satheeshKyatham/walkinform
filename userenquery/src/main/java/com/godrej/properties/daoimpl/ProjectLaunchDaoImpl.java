@@ -17,7 +17,7 @@ import com.godrej.properties.model.ProjectLaunch;
 @SuppressWarnings("unchecked")
 @Repository("projectLaunchDao")
 @Transactional
-public class ProjectLaunchDaoImpl extends AbstractDao<Integer, ProjectLaunch> implements ProjectLaunchDao {
+public class ProjectLaunchDaoImpl implements ProjectLaunchDao {// extends AbstractDao<Integer, ProjectLaunch>
 	private Logger log = LoggerFactory.getLogger(getClass());
 	@Autowired
 	private SessionFactory sessionFactory;

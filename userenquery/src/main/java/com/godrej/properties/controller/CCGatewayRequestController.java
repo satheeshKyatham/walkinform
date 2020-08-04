@@ -17,7 +17,7 @@ public class CCGatewayRequestController {
 	{
 		//String accessCode= "AVHJ91HC26CC78JHCC";		
 		//String workingKey = "AC52E9A706E2D7938203D4D554B61E2E";
-		AesCryptUtil aesUtil=new AesCryptUtil(project.getCcavenue_workingkey());
+		AesCryptUtil aesUtil=new AesCryptUtil(project.getCcavenue_workingkey_config());
 		//System.out.println(aesUtil);
 		String encRequest = aesUtil.encrypt(ccaRequest);
 		/*CloseableHttpClient  httpclient = HttpClients.createDefault();
