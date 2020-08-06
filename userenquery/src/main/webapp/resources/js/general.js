@@ -122,3 +122,28 @@ function getAdminOTPData() {
 	    }
 	});
 }
+
+function checkDuplicate(id){			
+	//Create array of input values
+	var allValueArray =  $('#'+id).find('.checkDuplicate').map(function() {
+		if ($(this).val() != '')
+
+		return $(this).val()
+	}).get();
+
+	//Create array of duplicates if there are any
+	var duplicateValueArray = allValueArray.filter(function(element, pos) {
+		if(allValueArray.indexOf(element) != pos){
+			return true;
+		} else{
+			return false;
+		}
+	});
+
+	//check length of duplicate array, if any duplicate element found it is stored in duplicateValueArray after filter out.
+	if (duplicateValueArray.length != 0){
+		return false;
+	} else{
+		return true;
+	}
+}
