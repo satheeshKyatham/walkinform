@@ -1714,13 +1714,18 @@ public class WebServiceController<MultipartFormDataInput> {
 	 */
 	 
 	 public String getPaymentTrxValidationDate(String paymentTrxDaysAllow) {
-		int days = 3;
+		
+		 int days = 3;
 		 
-		 try {
-			 days = Integer.parseInt(paymentTrxDaysAllow);
-		} catch (Exception e) {
-			log.error("error", e);
-		}
+		 if (paymentTrxDaysAllow != null) {
+			 try {
+				 days = Integer.parseInt(paymentTrxDaysAllow);
+			} catch (Exception e) {
+				log.error("error", e);
+			}
+		 } else {
+			days = 3;
+		 }
 		 
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Calendar cal = Calendar.getInstance();
@@ -1736,6 +1741,7 @@ public class WebServiceController<MultipartFormDataInput> {
 		public String getProjectPlan(@RequestParam("herokuEnqId") String herokuEnqId,  @RequestParam("pymtPlanSfid") String pymtPlanSfid, @RequestParam("project_code") String project_code ,@RequestParam("unit") String unit,  @RequestParam("towerCode") String towerCode,  @RequestParam("typology") String typology) throws JRException, IOException{
 			
 		 long timeId = Long.parseLong("1234");
+		 
 		 
 		 
 		/*
@@ -1770,13 +1776,14 @@ public class WebServiceController<MultipartFormDataInput> {
 			// String nowData = df.format(new Date());
 			 
 			 
+			 
 			 String paymentTrxDaysAllow = sysConfigService.getValue(SysConfigEnum.PAYMENT_TRX_ALLOWED_DAYS, project_code);
 			 
 			 String allowedUptoDate = null;
 			 
-			 if (paymentTrxDaysAllow != null) {
+			 //if (paymentTrxDaysAllow != null) {
 				 allowedUptoDate = getPaymentTrxValidationDate(paymentTrxDaysAllow);
-			 }
+			 //}
 			  
 			 
 			 PaymentPlan paym =plans.get(0);

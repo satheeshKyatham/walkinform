@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name="salesforce.nv_projects_c")
@@ -35,6 +36,10 @@ public class ProjectLaunch implements Serializable{
 	@Column(name="sitehead_user_mail") private String  sitehead_user_mail;
 	@Column(name="sitehead_user_name") private String  sitehead_user_name;
 	@Column(name="tower_mid_access_code_json") private String  tower_mid_access_code_json;
+	
+	@Transient private Integer ccavenue_merchant_config_id;
+	@Transient private String  ccavenue_workingkey_config;
+	@Transient private String  ccavenue_accesscode_config;
 	
 	public String getSalesmanager_sfid() {
 		return salesmanager_sfid;
@@ -128,6 +133,24 @@ public class ProjectLaunch implements Serializable{
 	}
 	public void setTower_mid_access_code_json(String tower_mid_access_code_json) {
 		this.tower_mid_access_code_json = tower_mid_access_code_json;
+	}
+	public Integer getCcavenue_merchant_config_id() {
+		return ccavenue_merchant_config_id;
+	}
+	public void setCcavenue_merchant_config_id(Integer ccavenue_merchant_config_id) {
+		this.ccavenue_merchant_config_id = ccavenue_merchant_config_id;
+	}
+	public String getCcavenue_workingkey_config() {
+		return ccavenue_workingkey_config;
+	}
+	public void setCcavenue_workingkey_config(String ccavenue_workingkey_config) {
+		this.ccavenue_workingkey_config = ccavenue_workingkey_config;
+	}
+	public String getCcavenue_accesscode_config() {
+		return ccavenue_accesscode_config;
+	}
+	public void setCcavenue_accesscode_config(String ccavenue_accesscode_config) {
+		this.ccavenue_accesscode_config = ccavenue_accesscode_config;
 	}
 
 
