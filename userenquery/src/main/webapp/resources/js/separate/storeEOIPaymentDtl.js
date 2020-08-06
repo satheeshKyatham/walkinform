@@ -47,15 +47,15 @@ function csPtDdEoi (e) {
 		$(e).closest("tr").find('.csPtBranchEoi').prop('disabled', false);
 	} else  if ($(e).val() == 'NEFT') {
 		$(e).closest("tr").find(".csPtTransactionIdEoi").val("");
-  	   	$(e).closest("tr").find(".csPtTransactionIdEoi").attr("maxlength","15");
-  	   	$(e).closest("tr").find(".csPtTransactionIdEoi").after("<small class='csPtReachMexLengthEOI'>ID can be max 15 characters long.</small>");
+  	   	$(e).closest("tr").find(".csPtTransactionIdEoi").attr("maxlength","30");
+  	   	$(e).closest("tr").find(".csPtTransactionIdEoi").after("<small class='csPtReachMexLengthEOI'>ID can be max 30 characters long.</small>");
 		
 		$(e).closest("tr").find('.csPtBankNameEoi').prop('disabled', false);
 		$(e).closest("tr").find('.csPtBranchEoi').prop('disabled', false);
 	}else  if ($(e).val() == 'Swipe' || $(e).val() == 'Wire Transfer') {
 		$(e).closest("tr").find(".csPtTransactionIdEoi").val("");
- 	   	$(e).closest("tr").find(".csPtTransactionIdEoi").attr("maxlength","15");
- 	   	$(e).closest("tr").find(".csPtTransactionIdEoi").after("<small class='csPtReachMexLengthEOI'>ID can be max 15 characters long.</small>"); 
+ 	   	$(e).closest("tr").find(".csPtTransactionIdEoi").attr("maxlength","30");
+ 	   	$(e).closest("tr").find(".csPtTransactionIdEoi").after("<small class='csPtReachMexLengthEOI'>ID can be max 30 characters long.</small>"); 
 		
 		$(e).closest("tr").find('.csPtBankNameEoi').prop('disabled', false);
 		$(e).closest("tr").find('.csPtBranchEoi').prop('disabled', false);
