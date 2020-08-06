@@ -99,8 +99,8 @@ projectid=request.getParameter("projectid");
 						<div class="form-group">
 							<label for="exampleInputName2">Token Type</label> 
 							<select class="form-control" id="typeSelected">
-								<option >Select</option>
-								<option value="W" selected>W</option>
+								<option value="All" selected>All</option>
+								<option value="W">W</option>
 								<option value="E">E</option>
 								<option value="G">G</option>
 								<option value="MS">MS</option>

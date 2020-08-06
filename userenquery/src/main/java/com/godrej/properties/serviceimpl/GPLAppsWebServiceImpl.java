@@ -103,14 +103,14 @@ public class GPLAppsWebServiceImpl implements GPLAppsWebService{
 				ProjectLaunch projectData =projectLaunchDao.getProjectSaleMgrID(bookingData.getProjectsfid());
 				if(projectData.getSitehead_user_id()!=null)
 				{
-					bookingData.setWindow_Assign(projectData.getSitehead_user_id().toString());
+					//bookingData.setWindow_Assign(projectData.getSitehead_user_id().toString());
 					bookingData.setSiteheadEmail(projectData.getSitehead_user_mail());
 					bookingData.setSiteheadID(projectData.getSitehead_user_id());
 					bookingData.setSiteheadName(projectData.getSitehead_user_name());
 				}
 				else
 				{
-					bookingData.setWindow_Assign("594");
+					//bookingData.setWindow_Assign("594");
 					bookingData.setSiteheadEmail("sathish.kyatham@godrejproperties.com");
 					bookingData.setSiteheadID(594);
 					bookingData.setSiteheadName("Sathish Kyatham");
@@ -403,7 +403,7 @@ public class GPLAppsWebServiceImpl implements GPLAppsWebService{
 			token.setEnquiry_18(bookingData.getEnquiryid().toString());
 			token.setCountrycode(bookingData.getCountryCode());
 			token.setStarteddate(new Timestamp(new Date().getTime()));
-			token.setWindow_assign(bookingData.getWindow_Assign());
+			//token.setWindow_assign(bookingData.getWindow_Assign());
 			//token=tokenDao.generateToken(token);
 			return tokenDao.generateToken(token);
 		}
