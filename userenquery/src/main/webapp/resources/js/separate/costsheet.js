@@ -1322,49 +1322,66 @@ $('#getRqstForAdmin').click (function () {
 });
 
 $('#updateCRM').click (function () {
-       var validate=checkValidationOnSubmit('costsheet');//csPtContainer
-       if(validate) {
-             if ($('.paymentCScheck:checked').length > 0) {
-                    
-                    
-                    var sizeValidate = 0;
-                    $("#csPtCol .csPtFileSize").each(function () {
-                           if ($(this).find('.panAttach').get(0).files.length != 0){ 
-                                 if ($(this).find('.panAttach')[0].files[0].size < 5242880) {
-                                 } else {
-                                        sizeValidate++;
-                                 }
-                           }      
-                           
-                           if ($(this).find('.receiptAttach').get(0).files.length != 0){  
-                                 if ($(this).find('.receiptAttach')[0].files[0].size < 5242880 ) {
-                                 } else {
-                                        sizeValidate++;
-                                 }
-                           }
-                    });
-                    
-                    if (sizeValidate < 1) {
-                           updateBSP ($('#timeid').val());
-                    } else {
-                           swal({
-                                 title: "File size must be less than 5 MB",
-                               text: "",
-                               type: "error",
-                           });
-                    }
-             
-             } else {
-                    swal({
-                           title: "Select or Add Payment Details",
-                        text: "",
-                       // timer: 4000,
-                        type: "error",
-                    });
-             }
-       }  else {
-             $('#costsheetError').show();
-       }      
+       	
+		var duplicate =  checkDuplicate("csPtCol");
+		
+		if (duplicate){
+	
+			var validate=checkValidationOnSubmit('costsheet');//csPtContainer
+			if(validate) {
+	             if ($('.paymentCScheck:checked').length > 0) {
+	                    
+	                    
+	                    var sizeValidate = 0;
+	                    $("#csPtCol .csPtFileSize").each(function () {
+	                           if ($(this).find('.panAttach').get(0).files.length != 0){ 
+	                                 if ($(this).find('.panAttach')[0].files[0].size < 5242880) {
+	                                 } else {
+	                                        sizeValidate++;
+	                                 }
+	                           }      
+	                           
+	                           if ($(this).find('.receiptAttach').get(0).files.length != 0){  
+	                                 if ($(this).find('.receiptAttach')[0].files[0].size < 5242880 ) {
+	                                 } else {
+	                                        sizeValidate++;
+	                                 }
+	                           }
+	                    });
+	                    
+	                    if (sizeValidate < 1) {
+	                           updateBSP ($('#timeid').val());
+	                    } else {
+	                           swal({
+	                                 title: "File size must be less than 5 MB",
+	                               text: "",
+	                               type: "error",
+	                           });
+	                    }
+	             
+	             } else {
+	                    swal({
+	                           title: "Select or Add Payment Details",
+	                        text: "",
+	                       // timer: 4000,
+	                        type: "error",
+	                    });
+	             }
+	       }  else {
+	    	   $('#costsheetError').html("<div class='alert alert-danger' style='margin-bottom:0 !important;'>" +
+						" Kindly fill the <strong>required</strong> fields. " +
+					" </div>");
+	             $('#costsheetError').show();
+	       }    
+       
+		} else {
+			$('#costsheetError').html("<div class='alert alert-danger' style='margin-bottom:0 !important;'>" +
+						" Transaction ID cannot be <strong>duplicate</strong>. " +
+					" </div>");
+			$('#costsheetError').show();
+			
+			return;
+		}
 });
 
 function adminUpdateBSP (e,timeid, disVal){
@@ -2946,7 +2963,7 @@ function addMorePtBtn () {
 	
 	
        if(amI < amNum) { 
-             $('#csPtCol tr:last-child').after('<tr id="csPayRowID'+amNumRowID+'" class="csPtDataRow csPtFileSize"><td class="txtCenter"><input style="display:none;" class="gpl_cs_payment_details_id" value="-1"><input onchange="csPtcalculateGrandTotal()" type="checkbox" class="paymentCScheck" checked></td><td><select onchange="csPtDd(this)" class="full form-control input-sm csPtDropDown requiredField"><option value="">Select</option><option value="Cheque">Cheque</option><option value="NEFT">NEFT/Credit</option><option value="Swipe">Swipe</option><option value="Wire Transfer">Wire Transfer (PayZap, Google Pay)</option></select></td><td><input class="full form-control input-sm csPtBankName requiredField" placeholder="Bank Name"/></td><td style="display:none;"><input class="full form-control input-sm csPtBranch" placeholder="Branch Name"/></td><td><input class="full form-control input-sm csPtTransactionId requiredField" placeholder="Transaction ID" /></td><td><input onkeydown="return false" type="date" class="full form-control input-sm csPtTransactionDate requiredField" placeholder="Transaction Date"/></td><td><input  class="numericField numericWithoutDecimal full form-control input-sm csPtTransactionAmount requiredField" maxlength="10" onkeyup="csPtcalculateGrandTotal()" placeholder="Transaction Amount" name="amount"/></td> <td style="display:none;"> <input type="file" class="full form-control input-sm panAttach"/> <input class="panAttachWebcam"/> <a  class="webcamBtn" data-toggle="modal" data-target="#webcamBox" onclick="webcamAttachment(this, '+id+', '+attachPAN+')">or <span>Capture Image</span></a> </td> <td> <input type="file" class="full form-control input-sm receiptAttach"/> <input class="receiptAttachWebcam"/> <a  class="webcamBtn" data-toggle="modal" data-target="#webcamBox" onclick="webcamAttachment(this, '+id+', '+attachRec+')">or <span>Capture Image</span></a> <td><textarea class="full form-control input-sm csPtDescription" placeholder="Description"></textarea></td><td class="removeCsPtCol txtCenter"><i onclick="removeCsPtCol(this)" class="fa fa-times-circle"></i></td></tr>');
+             $('#csPtCol tr:last-child').after('<tr id="csPayRowID'+amNumRowID+'" class="csPtDataRow csPtFileSize"><td class="txtCenter"><input style="display:none;" class="gpl_cs_payment_details_id" value="-1"><input onchange="csPtcalculateGrandTotal()" type="checkbox" class="paymentCScheck" checked></td><td><select onchange="csPtDd(this)" class="full form-control input-sm csPtDropDown requiredField"><option value="">Select</option><option value="Cheque">Cheque</option><option value="NEFT">NEFT/Credit</option><option value="Swipe">Swipe</option><option value="Wire Transfer">Wire Transfer (PayZap, Google Pay)</option></select></td><td><input class="full form-control input-sm csPtBankName requiredField" placeholder="Bank Name"/></td><td style="display:none;"><input class="full form-control input-sm csPtBranch" placeholder="Branch Name"/></td><td><input class="full form-control input-sm csPtTransactionId checkDuplicate requiredField" placeholder="Transaction ID" /></td><td><input onkeydown="return false" type="date" class="full form-control input-sm csPtTransactionDate requiredField" placeholder="Transaction Date"/></td><td><input  class="numericField numericWithoutDecimal full form-control input-sm csPtTransactionAmount requiredField" maxlength="10" onkeyup="csPtcalculateGrandTotal()" placeholder="Transaction Amount" name="amount"/></td> <td style="display:none;"> <input type="file" class="full form-control input-sm panAttach"/> <input class="panAttachWebcam"/> <a  class="webcamBtn" data-toggle="modal" data-target="#webcamBox" onclick="webcamAttachment(this, '+id+', '+attachPAN+')">or <span>Capture Image</span></a> </td> <td> <input type="file" class="full form-control input-sm receiptAttach"/> <input class="receiptAttachWebcam"/> <a  class="webcamBtn" data-toggle="modal" data-target="#webcamBox" onclick="webcamAttachment(this, '+id+', '+attachRec+')">or <span>Capture Image</span></a> <td><textarea class="full form-control input-sm csPtDescription" placeholder="Description"></textarea></td><td class="removeCsPtCol txtCenter"><i onclick="removeCsPtCol(this)" class="fa fa-times-circle"></i></td></tr>');
              amI++;
        }else {
              swal({
@@ -3238,16 +3255,21 @@ function getEOIPaymentRecord () {
                                  trans_date = '';
                            }
                            
+                           var checkDuplicate = '';
                            //eoiTransactionTotalAmount = parseFloat(parseFloat(obj[i].transaction_amount)+parseFloat(eoiTransactionTotalAmount)).toFixed(2);
                            
                            if (obj[i].isactive != 'Y') {
                                  checkBox = 'disabled';
                                disableRow = 'style="background-color: #ffd4d8;"';
                                status = '<br> Not Approved';
+                               
+                               checkDuplicate = '';
                            } else {
                                  checkBox = 'checked';
                                  disableRow = '';
                                  status = '<br> Approved';
+                                 
+                                 checkDuplicate = 'checkDuplicate';
                                  
                                  eoiTransactionTotalAmount = parseFloat(parseFloat(obj[i].transaction_amount)+parseFloat(eoiTransactionTotalAmount)).toFixed(2);
                            }
@@ -3258,7 +3280,7 @@ function getEOIPaymentRecord () {
                                                      + '<td class="txtCenter"><input class="full form-control input-sm csPtEnqSfid csPtDropDown" value="'+obj[i].payment_type+'" style="display:none;" disabled >'+obj[i].payment_type+'</td>' 
                                                      + '<td class="txtCenter"><input class="full form-control input-sm csPtBankName" value="'+obj[i].bank_name+'" style="display:none; " disabled>'+obj[i].bank_name+'</td>' 
                                                      + '<td class="txtCenter" style="display:none;"><input class="full form-control input-sm csPtBranch" value="'+obj[i].branch+'" style="display:none; " disabled>'+obj[i].branch+'</td>' 
-                                                     + '<td class="txtCenter"><input class="full form-control input-sm csPtTransactionId" value="'+obj[i].transaction_id+'" style="display:none; " disabled>'+obj[i].transaction_id+'</td>' 
+                                                     + '<td class="txtCenter"><input class="full form-control input-sm csPtTransactionId '+checkDuplicate+'" value="'+obj[i].transaction_id+'" style="display:none; " disabled>'+obj[i].transaction_id+'</td>' 
                                                      + '<td class="txtCenter"><input class="full form-control input-sm csPtTransactionDate" value="'+obj[i].transaction_date+'" style="display:none; "  disabled>'+trans_date+'</td>' 
                                                      + '<td class="txtCenter"><input class="full form-control input-sm csPtTransactionAmount"  value="'+obj[i].transaction_amount+'" name="amount" style="display:none; " disabled>'+obj[i].transaction_amount+'</td>' 
                                                      + '<td class="txtCenter" style="display:none;"><input style="display:none;" class="full form-control input-sm panAttach" type="file" data-fileName="'+obj[i].pan_attach+'"  name="panAttach"> <a target="_blank" href="'+panTarget+'">'+obj[i].pan_attach+'</a></td>' 
@@ -3296,7 +3318,7 @@ function getEOIPaymentRecord () {
                                  + '<input class="full form-control input-sm csPtBranch" placeholder="Branch Name"/>'
                            + '</td>'
                            + '<td>'
-                                 + '<input class="full form-control input-sm csPtTransactionId requiredField" placeholder="Transaction ID"/>'
+                                 + '<input class="full form-control input-sm csPtTransactionId checkDuplicate requiredField" placeholder="Transaction ID"/>'
                            + '</td>'
                            + '<td>'
                                  + '<input onkeydown="return false" type="date" class="full form-control input-sm csPtTransactionDate requiredField" placeholder="Transaction Date"/>'
@@ -3347,7 +3369,7 @@ function getEOIPaymentRecord () {
                                         + '<input class="full form-control input-sm csPtBranch" placeholder="Branch Name"/>'
                                  + '</td>'
                                  + '<td>'
-                                        + '<input class="full form-control input-sm csPtTransactionId requiredField" placeholder="Transaction ID"/>'
+                                        + '<input class="full form-control input-sm csPtTransactionId requiredField checkDuplicate" placeholder="Transaction ID"/>'
                                  + '</td>'
                                  + '<td>'
                                         + '<input onkeydown="return false" type="date" class="full form-control input-sm csPtTransactionDate requiredField" placeholder="Transaction Date"/>'
@@ -3541,3 +3563,20 @@ function viewCostsheet (e, sfid, unitNo, floor, towerCode) {
 	});
 }
 /* END This function "viewCostsheet" moved from inventory.js to costsheet .js, because of commonly used for Admin Cost sheet and Sales Cost sheet*/
+
+
+
+
+
+
+
+
+
+$(document).on('change', '#csPtCol .paymentCScheck[type="checkbox"]', function(e) {
+	if($(this).is(":checked")){
+		$(this).closest("tr").find(".csPtTransactionId").addClass("checkDuplicate");
+    }
+    else if($(this).is(":not(:checked)")){
+    	$(this).closest("tr").find(".csPtTransactionId").removeClass("checkDuplicate");
+    }
+});

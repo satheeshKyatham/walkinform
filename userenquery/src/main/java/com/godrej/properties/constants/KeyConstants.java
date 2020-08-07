@@ -61,7 +61,7 @@ public class KeyConstants {
 	static final String CLIENTID = "3MVG9Nvmjd9lcjRnoT4GG3E8o7ZbQcp3HqKaX6KsWkBg77OzU6SN.6oqr00W1pLR_P50oeF8xzGIk7RWT9TTA";
 	static final String CLIENTSECRET = "8491910721028248323";*/
 	
-	public static final String LDAP_HOST = "10.21.48.21";
+	public static final String LDAP_HOST = "10.22.48.21";//10.21.48.21
 	public static final String LDAP_PORT = "389";
 	public static final String LDAP_DN = "selfservice.portal@godrejproperties.com";
 	public static final String LDAP_PW = "DFER$#34";
