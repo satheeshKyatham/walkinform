@@ -190,6 +190,15 @@ public class EOIPaymentDtlDaoImpl extends AbstractDao<Integer, EOIPaymentDtl> im
 		try {
 			for (int i = 0; i <eoiReq.size(); i++) {
 				Session session = this.sessionFactory.getCurrentSession();
+				
+				String isactiveStatus = "";
+				
+				if (eoiReq.get(i).getIsactive() != null && eoiReq.get(i).getIsactive().equals("R")) {
+					isactiveStatus = " , isactive = 'N' "; 
+				} else {
+					isactiveStatus = " "; 
+				}
+				
 				Query query = session.createQuery("UPDATE EOIPaymentDtl  "
 						+ " SET "
 								+ " payment_type = '"+eoiReq.get(i).getPayment_type()+"' "
@@ -200,7 +209,7 @@ public class EOIPaymentDtlDaoImpl extends AbstractDao<Integer, EOIPaymentDtl> im
 								+ " , cheque_attach = '"+eoiReq.get(i).getCheque_attach()+"' "
 								+ " , description = '"+eoiReq.get(i).getDescription() +"' "
 								+ " , updatedby = '"+eoiReq.get(i).getUpdatedby() +"' "
-								+ " , updated = now() "
+								+ " , updated = now() " + isactiveStatus
 
 						+ " WHERE id = '"+eoiReq.get(i).getRowid()+"' "
 						+ " AND enq_sfid = '"+eoiReq.get(i).getEnq_sfid()+"' "

@@ -99,14 +99,17 @@ public class OfferValidator implements Validator{
 			amount = amount.add(taxAmount);
 		}
 		PaymentDto []payments =  paymentRequest.getPayments();
-		Double paymentAmount = validatePayments(payments, errors);
+		BigDecimal paymentAmount = validatePayments(payments, errors);
 		if(errors.getErrorCount()>0) {
 			return;
 		}
 		
 
 		if(paymentAmount.doubleValue() < amount.doubleValue()) {
-			double difference = amount.doubleValue() - paymentAmount.doubleValue();
+			
+			//double difference = amount.doubleValue() - paymentAmount.doubleValue();
+			BigDecimal difference = amount.subtract(paymentAmount);
+			
 			StringBuilder message = new StringBuilder();
 			message.append("Payment entered (Rs. ")
 			.append(paymentAmount)
@@ -142,12 +145,18 @@ public class OfferValidator implements Validator{
 		return taxPer;
 	}
 	
-	private Double validatePayments(PaymentDto []payments, Errors errors) {
+	private BigDecimal validatePayments(PaymentDto []payments, Errors errors) {
+		BigDecimal zero;
+		zero   = new BigDecimal("0"); 
+		
 		if(payments ==null || payments.length<=0) {
 			validator.reject(errors, INVALID_PAYMENTS, "Invalid Payment Details");
-			return 0d;
+			return zero;
 		}
-		Double totalPayment = 0d;
+		//Double totalPayment = 0d;
+		
+		BigDecimal totalPayment = new BigDecimal("0");
+		
 		try {
 			for(PaymentDto payment : payments) {
 				String trxAmount = payment.getTransactionAmount();
@@ -155,14 +164,14 @@ public class OfferValidator implements Validator{
 					continue;
 				}
 				
-				totalPayment = totalPayment + Double.valueOf(trxAmount);
+				totalPayment = totalPayment.add(new BigDecimal(trxAmount));
 			}
 			return totalPayment;
 		}catch (Exception e) {
 			log.error("Error", e);
 			validator.reject(errors, INVALID_PAYMENTS, "Payment amount is not valid - " + totalPayment);
 		}
-		return 0d;
+		return zero;
 	}
 	
 	private void validateFromPlan(PaymentRequestDto paymentRequest, Errors errors, String projectSfid) {
@@ -178,12 +187,15 @@ public class OfferValidator implements Validator{
 		}
 
 		PaymentDto []payments =  paymentRequest.getPayments();
-		Double paymentAmount = validatePayments(payments, errors);
+		BigDecimal paymentAmount = validatePayments(payments, errors);
 		if(errors.getErrorCount()>0) {
 			return;
 		}
 		if(paymentAmount.doubleValue() < price.doubleValue()) {
-			double difference = price.doubleValue() - paymentAmount.doubleValue();
+			//double difference = price.doubleValue() - paymentAmount.doubleValue();
+			BigDecimal difference = BigDecimal.valueOf(price).subtract(paymentAmount);
+			
+			
 			StringBuilder message = new StringBuilder();
 			message.append("Payment entered (Rs. ")
 			.append(paymentAmount)
@@ -200,12 +212,14 @@ public class OfferValidator implements Validator{
 		
 		Double configAmount =sysConfigService.getValueAsDouble(SysConfigEnum.OFFER_CREATION_CONFIG_AMOUNT, projectSfid);
 		PaymentDto []payments =  paymentRequest.getPayments();
-		Double paymentAmount = validatePayments(payments, errors);
+		BigDecimal paymentAmount = validatePayments(payments, errors);
 		if(errors.getErrorCount()>0) {
 			return;
 		}
 		if(paymentAmount.doubleValue() < configAmount) {
-			double difference = configAmount - paymentAmount.doubleValue();
+			//double difference = configAmount - paymentAmount.doubleValue();
+			BigDecimal difference = BigDecimal.valueOf(configAmount).subtract(paymentAmount);
+			
 			StringBuilder message = new StringBuilder();
 			message.append("Payment entered (Rs. ")
 			.append(paymentAmount)

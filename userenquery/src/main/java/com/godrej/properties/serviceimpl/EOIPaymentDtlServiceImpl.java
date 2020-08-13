@@ -114,7 +114,8 @@ public class EOIPaymentDtlServiceImpl implements EOIPaymentDtlService{
 					ecData1.setEnq_sfid(enq_sfid);
 					ecData1.setProject_sfid(project_sfid);
 					ecData1.setUpdatedby(userid);
-					ecData1.setIsactive("Y");
+					//ecData1.setIsactive("Y");
+					
 					charges1.add(ecData1);
 				}  else {
 					String response = "{\"status\":\"STATUS_NOTOK\",\"error_msg\":\"Invalid Data Provide\",\"error_id\":\"UPDATE_EOI_PAYMENT_ER1001\"}";

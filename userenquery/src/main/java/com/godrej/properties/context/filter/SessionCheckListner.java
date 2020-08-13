@@ -18,6 +18,7 @@ public class SessionCheckListner extends HandlerInterceptorAdapter {
 		filterUrlList.add("/");
 		filterUrlList.add("/userValidateLogin");
 		filterUrlList.add("/10.21.48.21:389");
+		filterUrlList.add("/10.22.48.21:389");
 		filterUrlList.add("/sessiontimeout");
 		filterUrlList.add("/getUserProjectList");
 		filterUrlList.add("/authenticationDevice");
