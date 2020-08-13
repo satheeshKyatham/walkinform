@@ -49,7 +49,7 @@ public class AllUnitDataDaoImpl implements AllUnitDataDao{
 				+ " c.name as enq_name,  "
 				
 				+ " b.hold_status,  "
-				 
+				+ " c.verticle__c, "
 				
 				+ " CASE WHEN a.open_balc_sq_ft__c IS NULL THEN cast(0 as numeric (20,2))  ELSE cast(a.open_balc_sq_ft__c as numeric (20,2))  END AS rera_net_carpet_sqft, "
 				+ " CASE WHEN a.appurtenant_area_sq_ft__c IS NULL THEN cast(0 as numeric (20,2))  ELSE cast(a.appurtenant_area_sq_ft__c as numeric (20,2))  END AS rera_exclusive_sqft, "

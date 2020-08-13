@@ -259,6 +259,8 @@ function getAllInventoryReportDtl () {
 					"<td>"+d4uHoldStatus+"</td>" +
 					"<td>"+obj1[i].enq_name+"</td>" +
 					
+					"<td>"+obj1[i].verticle__c+"</td>" +
+					
 					"<td>"+obj1[i].propstrength__active__c+"</td>" +
 					
 					

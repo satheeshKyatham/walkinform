@@ -78,6 +78,7 @@
 							<th>SFDC Property On Hold</th>
 							<th>D4U  Hold</th>
 							<th>Enq</th>
+							<th>Verticle</th>
 							<th>Active</th>
 							
 							

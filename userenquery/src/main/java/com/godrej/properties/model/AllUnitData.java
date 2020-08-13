@@ -41,6 +41,9 @@ public class AllUnitData implements Serializable{
 	
 	@Column(name="property_facing__c") private String property_facing__c;
 	
+	@Column(name="verticle__c") private String verticle__c;
+	
+	
 	
 	public int getRow_number() {
 		return row_number;
@@ -176,5 +179,11 @@ public class AllUnitData implements Serializable{
 	}
 	public void setProperty_facing__c(String property_facing__c) {
 		this.property_facing__c = property_facing__c;
+	}
+	public String getVerticle__c() {
+		return verticle__c;
+	}
+	public void setVerticle__c(String verticle__c) {
+		this.verticle__c = verticle__c;
 	}
 }
