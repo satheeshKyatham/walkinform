@@ -22,12 +22,18 @@
 		<div class="mainCont " style="padding-top: 10px;">
 			
 			<div class="">
-				<div class="form-group col-md-3">
+				<!-- <div class="form-group col-md-3">
 					<label>Tower</label>
 					<select id="allUnitTowerMstReport" class="form-control">
 						<option value="All">All</option>
 					</select>
+				</div> -->
+				
+				<div class="form-group col-md-4">
+					<label>Project(s) </label>
+					<select class="userMultiselectTower" id="allReportMultiTower" multiple="multiple"></select>
 				</div>
+				
 				 
 				<div class="form-group col-md-2">
 					<label> &nbsp; </label>

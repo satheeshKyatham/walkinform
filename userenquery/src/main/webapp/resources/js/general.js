@@ -147,3 +147,64 @@ function checkDuplicate(id){
 		return true;
 	}
 }
+
+
+
+
+
+
+
+function usertowermultiselect (){
+	var urlGetUsers = PAGECONTEXT_GV+"getTowerListUserWise?userid="+$('#userid').val();	
+	
+	var uniqueId = [];
+	var uniqueNames = [];
+	
+	var defaultSelected = "";
+	var optionTower = ''; 
+	
+	$.getJSON(urlGetUsers, function (data) {
+		
+		
+		
+		$.each(data, function (index, value) {  
+            if(uniqueId.indexOf(value.projectid) === -1){
+                uniqueId.push(value.projectid);
+                uniqueNames.push(value.projectname);
+            }        
+         });
+		
+		for(j = 0; j< uniqueId.length; j++){
+			
+			optionTower = optionTower+"<optgroup label='"+uniqueNames[j]+"'>"
+			
+			$.each(data, function (index, value) {
+				 if(uniqueId[j] == value.projectid) {
+					 optionTower = optionTower+"<option value="+value.tower_sfid+" "+defaultSelected+">"+value.tower_name+"</option>";
+				 }
+			});
+			
+			optionTower = optionTower+"</optgroup>"
+		}
+		
+		//alert (uniqueId.length);
+		
+		
+		/*var defaultSelected = "";
+		option = '';
+		$.each(data, function (index, value) {
+			option = option+"<option value="+value.tower_sfid+" "+defaultSelected+">"+value.tower_name+"</option>";
+		});	*/	
+	}).done(function() {
+		$(".userMultiselectTower").append(optionTower);
+		$('.userMultiselectTower').multiselect({
+			maxHeight: '200',
+			allSelectedText: 'All',
+			enableClickableOptGroups: true,
+			includeSelectAllOption: true,
+			enableFiltering: true,
+			enableCaseInsensitiveFiltering: true,
+			buttonWidth: '100%'
+		});
+	});
+}
