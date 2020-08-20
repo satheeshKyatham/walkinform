@@ -924,6 +924,7 @@ if(ses!=null){
 				<input type="hidden" class="userid" name="enquiryReport.userid" value="<%= userid %>">
 				
 				<%-- <input type="hidden" id="closingmanagers" name="closingmanagers" value="${closingmanagers}"> --%>
+				<%-- <input type="hidden" id="assignTo" name="assignTo" value="${assignTo}"> --%>
 				<input type="hidden" id="assignTo" name="assignTo" value="${assignTo}">
 				<div class="row "> <!-- bounceInRight animated -->
 				<div class="col-md-12 commonErrorCol commonErrorDiv" style="display: none">

@@ -5,14 +5,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.godrej.properties.model.Vw_UserMaster;
 import com.godrej.properties.model.Vw_UserProjectMapping;
+import com.godrej.properties.model.Vw_UserTowerMapping;
 import com.godrej.properties.service.VW_UserMasterService;
+import com.godrej.properties.service.VW_UserTowerMasterService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -22,6 +22,9 @@ public class MasterServiceController {
 
 	@Autowired
  	private VW_UserMasterService vW_UserMasterService;
+	
+	@Autowired
+ 	private VW_UserTowerMasterService vW_UserTowerMasterService;
 	
 	@GetMapping(value = "/getUserProjectMapping", produces = "application/json")
 	public String getUserProjectMapping(@RequestParam("projectid") String projectid) {
@@ -66,4 +69,12 @@ public class MasterServiceController {
 		List<Vw_UserProjectMapping> adt=vW_UserMasterService.getProjectListUserWise(userid);
 		return gson.toJson(adt);
 	} 
+	
+	@GetMapping(value = "/getTowerListUserWise", produces = "application/json")
+	public String getTowerListUserWise(@RequestParam("userid") String userid) {
+		Gson gson = new GsonBuilder().disableHtmlEscaping().create();
+		List<Vw_UserTowerMapping> adt=vW_UserTowerMasterService.getProjectListUserWise(userid);
+		return gson.toJson(adt);
+	} 
+	
 }

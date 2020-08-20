@@ -17,11 +17,14 @@ import javax.naming.ldap.LdapContext;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.godrej.properties.constants.KeyConstants;
 import com.godrej.properties.dto.LdapUserDetailsDto;
+import com.godrej.properties.dto.SysConfigEnum;
+import com.godrej.properties.master.service.SysConfigService;
 import com.godrej.properties.service.LdapService;
 
 @Service("ldapService")
@@ -29,12 +32,17 @@ import com.godrej.properties.service.LdapService;
 public class LdapServiceImpl implements LdapService {
 	private Logger log = LoggerFactory.getLogger(getClass());
 	
+	@Autowired
+	private SysConfigService sysConfigService;
+	
 	@Override
 	public LdapUserDetailsDto getldapUserData(LdapUserDetailsDto dto) {
 		LdapUserDetailsDto ldapDto = new LdapUserDetailsDto();
 		String auth_method = "simple";
 		String ldap_version = "3";
-		String ldap_host = KeyConstants.LDAP_HOST;// 10.1.15.227//10.1.2.13
+		String ldap_host = sysConfigService.getValue(SysConfigEnum.AD_IP, "AD_IP");
+		//String ldap_host = KeyConstants.LDAP_HOST;// 10.1.15.227//10.1.2.13
+		//String ldap_host = adIP;
 		String ldap_port = KeyConstants.LDAP_PORT;
 		String ldap_dn = KeyConstants.LDAP_DN;
 		String ldap_pw = KeyConstants.LDAP_PW;// A sdf@123

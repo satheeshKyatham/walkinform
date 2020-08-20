@@ -55,6 +55,8 @@ function getInventorySalesHoldReportDtl () {
 					saleable_area = 0;
 				}
 				
+				var unitId =  '"'+obj[i].sfid+'"';
+				var customerId = '"'+obj[i].customer_id+'"';
 				
 				html += "<tr>" +
 							" <td>"+obj[i].tower_name__c+"</td>" +
@@ -70,6 +72,11 @@ function getInventorySalesHoldReportDtl () {
 							" <td>"+obj[i].held_by_name+"</td>" +
 							" <td>"+obj[i].held_by_email+"</td>" +
 							" <td><b>Min:</b>"+holdMinVar +" | <b>Sec:</b>"+holdSecVar+"</td>" +
+							
+							" <td> <div> <b>Source: </b>"+obj[i].source +" </div> <div> <b>Customer Name: </b>"+obj[i].name +" </div> <div> <b>Customer Mobile: </b>"+obj[i].mobile__c +" </div> </td>" +
+							
+							" <td><button class='btn btn-primary blue_btn' onclick='releaseCMHold("+unitId+", "+customerId+")'>Release</button></td>" +
+							
 						" </tr>";
 			}
 			
@@ -89,4 +96,25 @@ function getInventorySalesHoldReportDtl () {
 			
 		}
 	});	
+}
+
+
+
+
+
+
+
+function releaseCMHold (unitsfid, customer_id) {
+	$.post(pageContext+"releaseFromHold",{"customerId":customer_id, "unitSfid":unitsfid, "projectNameId":$('#projectid').val()},function(data){				 
+		
+	}).done(function(data){
+		swal({
+			title: "Successfully Released",
+		    text: "",
+		    timer: 3000,
+		    type: "success",
+		}); 
+		
+		getInventorySalesHoldReportDtl();
+	});
 }

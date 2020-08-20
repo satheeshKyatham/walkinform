@@ -17,16 +17,18 @@ import javax.mail.internet.MimeMultipart;
 import org.apache.log4j.Logger;
 
 public class SendMailThreadUtil implements Runnable{
-	String to,message,subject,cc;
+	String to,message,subject,cc,smtpip,smtpport;
 	static Logger logger = Logger.getLogger(SendMailThreadUtil.class);
 	
-	public SendMailThreadUtil(String to,String cc,String subject,String message)
+	public SendMailThreadUtil(String to,String cc,String subject,String message,String smtpIP,String smtpPort)
 	{
 		this.to = to;
 		this.message = message;
 		this.cc = cc;
 		this.subject = subject;
 		this.message = message;
+		this.smtpip = smtpIP;
+		this.smtpport = smtpPort;
 		mailSent(true);
 	}
 	
@@ -34,7 +36,8 @@ public class SendMailThreadUtil implements Runnable{
 	public void run() {
 		
 		Properties properties = new Properties();
-		String host = "10.21.24.32";
+		String host = "10.21.24.32";//65 server
+//		String host = "10.22.48.28";
 		//String host = "smtp.office365.com";
 		/* final String from = "selfservice.portal@godrejproperties.com";
 		 final String password = "DFER$#34";*/
@@ -46,8 +49,8 @@ public class SendMailThreadUtil implements Runnable{
 		 //
 		  properties.put("mail.smtp.auth", "true");
 	      //properties.put("mail.smtp.starttls.enable", "true");
-	      properties.put("mail.smtp.host", host);
-	      properties.put("mail.smtp.port", "25");
+	      properties.put("mail.smtp.host", smtpip);
+	      properties.put("mail.smtp.port", smtpport);//25
 	      properties.put("mail.transport.protocol", "smtps");
 	   //   properties.put("mail.smtp.ssl.trust", host);   
 	      

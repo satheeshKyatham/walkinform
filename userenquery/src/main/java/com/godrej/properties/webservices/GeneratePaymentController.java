@@ -32,6 +32,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ccavenue.security.AesCryptUtil;
 import com.godrej.kyc.util.StringEncDec;
+import com.godrej.properties.dto.SysConfigEnum;
+import com.godrej.properties.master.service.SysConfigService;
 import com.godrej.properties.model.EnqJourneyDtl;
 import com.godrej.properties.model.GeneratePayment;
 import com.godrej.properties.service.EnqJourneyDtlService;
@@ -52,6 +54,9 @@ public class GeneratePaymentController {
 	
 	@Autowired
 	private EnqJourneyDtlService enqJourneyDtlService;
+	
+	@Autowired
+	private SysConfigService sysConfigService;
 	
 	@RequestMapping(value = "/updatePaymentRequest", method = RequestMethod.POST)
 	public String insertPaymentRequest(
@@ -374,7 +379,9 @@ public class GeneratePaymentController {
 							
 							if(eoi.getEmail_id()!=null && eoi.getEmail_id().length()>0) {
 								String projectName = "Godrej Properties : Payment Requested for "+ eoi.getProjectname();
-								SendMailThreadUtil mail =new SendMailThreadUtil(eoi.getEmail_id(),	emailid, projectName, text);
+								String smtpip = sysConfigService.getValue(SysConfigEnum.SMTP_IP, "SMTP_IP");
+								String smtpPort = sysConfigService.getValue(SysConfigEnum.SMTP_PORT, "SMTP_PORT");
+								SendMailThreadUtil mail =new SendMailThreadUtil(eoi.getEmail_id(),	emailid, projectName, text,smtpip,smtpPort);
 							} 
 						}
 					}

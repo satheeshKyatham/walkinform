@@ -69,6 +69,23 @@ public class InventorySalesHoldReport implements Serializable{
 	@Column(name="saleable_area__c", precision = 10, scale = 2)  private BigDecimal saleable_area__c;
 	@Column(name="propstrength__rate_per_unit_area__c", precision = 10, scale = 2)  private BigDecimal propstrength__rate_per_unit_area__c;
 	
+	
+	@Column(name = "source")
+	private String source;
+	
+	@Column(name = "name")
+	private String name;
+	
+	@Column(name = "mobile__c")
+	private String mobile__c;
+	
+	@Column(name = "customer_id")
+	private String customer_id;
+	
+	@Column(name = "sfid")
+	private String sfid;
+	
+	
 	public int getId() {
 		return id;
 	}
@@ -215,5 +232,45 @@ public class InventorySalesHoldReport implements Serializable{
 
 	public void setPropstrength__rate_per_unit_area__c(BigDecimal propstrength__rate_per_unit_area__c) {
 		this.propstrength__rate_per_unit_area__c = propstrength__rate_per_unit_area__c;
+	}
+
+	public String getSource() {
+		return source;
+	}
+
+	public void setSource(String source) {
+		this.source = source;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getMobile__c() {
+		return mobile__c;
+	}
+
+	public void setMobile__c(String mobile__c) {
+		this.mobile__c = mobile__c;
+	}
+
+	public String getCustomer_id() {
+		return customer_id;
+	}
+
+	public void setCustomer_id(String customer_id) {
+		this.customer_id = customer_id;
+	}
+
+	public String getSfid() {
+		return sfid;
+	}
+
+	public void setSfid(String sfid) {
+		this.sfid = sfid;
 	}
 }

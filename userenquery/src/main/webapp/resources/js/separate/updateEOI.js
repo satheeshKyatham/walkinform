@@ -89,15 +89,15 @@ function csPtDdEoi (e) {
 		$(e).closest("tr").find('.csPtBranchEoi').prop('disabled', false);
 	} else  if ($(e).val() == 'NEFT') {
 		$(e).closest("tr").find(".csPtTransactionIdEoi").val("");
-  	   	$(e).closest("tr").find(".csPtTransactionIdEoi").attr("maxlength","15");
-  	   	$(e).closest("tr").find(".csPtTransactionIdEoi").after("<small class='csPtReachMexLengthEOI'>ID can be max 15 characters long.</small>");
+  	   	$(e).closest("tr").find(".csPtTransactionIdEoi").attr("maxlength","30");
+  	   	$(e).closest("tr").find(".csPtTransactionIdEoi").after("<small class='csPtReachMexLengthEOI'>ID can be max 30 characters long.</small>");
 		
 		$(e).closest("tr").find('.csPtBankNameEoi').prop('disabled', false);
 		$(e).closest("tr").find('.csPtBranchEoi').prop('disabled', false);
 	}else  if ($(e).val() == 'Swipe' || $(e).val() == 'Wire Transfer') {
 		$(e).closest("tr").find(".csPtTransactionIdEoi").val("");
- 	   	$(e).closest("tr").find(".csPtTransactionIdEoi").attr("maxlength","15");
- 	   	$(e).closest("tr").find(".csPtTransactionIdEoi").after("<small class='csPtReachMexLengthEOI'>ID can be max 15 characters long.</small>"); 
+ 	   	$(e).closest("tr").find(".csPtTransactionIdEoi").attr("maxlength","30");
+ 	   	$(e).closest("tr").find(".csPtTransactionIdEoi").after("<small class='csPtReachMexLengthEOI'>ID can be max 30 characters long.</small>"); 
 		
 		$(e).closest("tr").find('.csPtBankNameEoi').prop('disabled', false);
 		$(e).closest("tr").find('.csPtBranchEoi').prop('disabled', false);
@@ -201,6 +201,8 @@ function getEOITabPaymentRecord () {
 		var eoiTransactionTotalAmount = 0;
 		var status = '';
 		var rowStatusColr = '';
+		var isactive = '';
+		
 		if(obj!=null){
 			for(i = 0; i< obj.length; i++){    
 				//panTarget = pageContext+"file?name="+obj[i].pan_attach+"&from=EOIbookingReference&eid="+obj[i].enq_sfid+"&fid="+obj[i].pan_attach.charAt(0);
@@ -222,6 +224,8 @@ function getEOITabPaymentRecord () {
 				}
 				eoiTransactionTotalAmount = parseFloat(parseFloat(obj[i].transaction_amount)+parseFloat(eoiTransactionTotalAmount)).toFixed(2);
 				
+				isactive = obj[i].isactive;
+				
 				if (obj[i].isactive == 'N') {
 					status = 'Not Approved';
 					rowStatusColr = 'style="background-color: #ffd4d8;"';
@@ -231,6 +235,9 @@ function getEOITabPaymentRecord () {
 				} else if (obj[i].isactive == 'Y'){
 					status = 'Approved';
 					rowStatusColr = '';
+				} else if (obj[i].isactive == 'R'){
+					status = 'Rejected';
+					rowStatusColr = 'style="background-color: #ffd4d8;"';
 				} else {
 					status = 'NA';
 					rowStatusColr = '';
@@ -253,7 +260,7 @@ function getEOITabPaymentRecord () {
 				
 				
 				html += 	'<tr class="paymentDataPlotRow" '+rowStatusColr+'  data-rowid= "'+obj[i].id+'">'
-								+ '<td style="text-align:center; font-size:11px;"><span class="eoieditOldRec">'+status+'</span></td>' 
+								+ '<td style="text-align:center; font-size:11px;"><input value="'+isactive+'" class="isactiveStatus" style="display:none;"><span class="eoieditOldRec">'+status+'</span></td>' 
 								+ '<td class="paymentTypeColtd" style="text-align:center;"><span class="eoieditOldRec">'+obj[i].payment_type+'</span></td>' 
 								+ '<td class="banknameColtd" style="text-align:center;"><span class="eoieditOldRec">'+obj[i].bank_name+'</span></td>' 
 								+ '<td class="trxidColtd" style="text-align:center;"><span class="eoieditOldRec">'+obj[i].transaction_id+'</span></td>' 
@@ -450,6 +457,8 @@ function updateEOIPayment (e) {
     csPtData.transaction_date = $(e).closest("td").closest("tr").find('.csPtTransactionDateEoi').val();
     csPtData.transaction_amount = $(e).closest("td").closest("tr").find('.csPtTransactionAmountEoi').val();
     csPtData.description = $(e).closest("td").closest("tr").find('.csPtDescriptionEoi').val();
+    
+    csPtData.isactive = $(e).closest("td").closest("tr").find('.isactiveStatus').val();
     
     if ($(e).closest("td").closest("tr").find('.receiptAttachEoi').val() != "") {
     	csPtData.cheque_attach = $(e).closest("td").closest("tr").attr("data-rowid")+"Receipt_"+$(e).closest("td").closest("tr").find('.receiptAttachEoi')[0].files[0].name;
@@ -886,7 +895,7 @@ function editEOIPayment (e) {
 	banknameHtml += "<input class='full form-control input-sm csPtBankNameEoi requiredField' placeholder='Bank Name'/>"
 	trxidHtml += "<input class='full form-control input-sm csPtTransactionIdEoi requiredField' placeholder='Transaction ID' />"
 	trxdateHtml += "<input type='date' class='form-control input-sm csPtTransactionDateEoi requiredField' placeholder='Transaction Date'/>"
-	trxamountHtml += "<input maxlength='10' class='numericWithoutDecimal  numericField full form-control input-sm csPtTransactionAmountEoi requiredField'  placeholder='Transaction Amount' name='amount'/> "
+	trxamountHtml += "<input maxlength='13' class='numericWithDecimal full form-control input-sm csPtTransactionAmountEoi requiredField'  placeholder='Transaction Amount' name='amount'/> "
 	receiptHtml += "<input type='file' class='full form-control input-sm receiptAttachEoi' accept='application/pdf,image/*'/>  "
 	descriptionHtml += "<textarea class='full form-control input-sm csPtDescriptionEoi' placeholder='Description'></textarea>  "
 	
