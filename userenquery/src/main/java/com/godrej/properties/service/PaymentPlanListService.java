@@ -10,4 +10,10 @@ public interface PaymentPlanListService {
 
 	List<PaymentPlanList> getpaymentPlanWithCIPActive(String projectcode);
 	
+	
+	List<PaymentPlanList> getPPList (String whereCondition);
+	
+	
+	
+	void updatePP(PaymentPlanList paymentPlanList);
 }

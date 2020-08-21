@@ -28,4 +28,16 @@ public class PaymentPlanListServiceImpl implements PaymentPlanListService{
 		return paymentPlanListDao.getpaymentPlanWithCIPActiveQuery(project);
 	}
 	
+	
+	@Override
+	public List<PaymentPlanList> getPPList(String whereCondition) {
+		return paymentPlanListDao.getPPList(whereCondition);
+	}
+	 
+	
+	
+	@Override
+	public void updatePP(PaymentPlanList paymentPlanList) {
+		paymentPlanListDao.updatePP(paymentPlanList);
+	}
 }
