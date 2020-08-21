@@ -263,4 +263,9 @@
        <put-attribute name="body" value="/WEB-INF/views/pages/paymentPlanRanking.jsp" /> 
      </definition>
      
+     <definition name="updatePaymentPlan" extends="base-definition"> 
+       <put-attribute name="title" value="Update Payment Plan" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/updatePaymentPlan.jsp" /> 
+     </definition>
+     
 </tiles-definitions>

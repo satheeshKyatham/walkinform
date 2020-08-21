@@ -3863,6 +3863,12 @@ public class WebServiceController<MultipartFormDataInput> {
 		  model.setViewName("triggerLog");
 		  return model; }
 		
+		@RequestMapping(value = { "/updatePaymentPlan" }, method = RequestMethod.GET) public
+		  ModelAndView updatePaymentPlan() { ModelAndView model = new ModelAndView();
+		  model.setViewName("updatePaymentPlan");
+		  return model; }
+		
+		
 		@RequestMapping(value = "/getTriggerlogList", method = RequestMethod.GET, produces = "application/json")
 		public String getTriggerlogList(@RequestParam("fromDate") String fromDate, @RequestParam("toDate") String toDate) {
 			Gson gson = new GsonBuilder().disableHtmlEscaping().serializeNulls().create();
