@@ -4,7 +4,8 @@ $(document).ready(function () {
 	});
 	
 	var urlGetUsers = PAGECONTEXT_GV+"getProjectListUserWise?userid="+USERID_GV;	
-	 
+	var option = ''; 
+	
 	$.getJSON(urlGetUsers, function (data) {
 		var sourceType = '"HEADER_COMMON"';
 		var defaultSelected = "";
@@ -32,7 +33,7 @@ function userprojectmultiselect (){
 	var urlGetUsers = "getProjectListUserWise?userid="+$('#userid').val();	
 	$.getJSON(urlGetUsers, function (data) {
 		var defaultSelected = "";
-		option = '';
+		var option = '';
 		$.each(data, function (index, value) {
 			if (value.projectId == $('#projectid').val()) {
 				defaultSelected = "selected";
