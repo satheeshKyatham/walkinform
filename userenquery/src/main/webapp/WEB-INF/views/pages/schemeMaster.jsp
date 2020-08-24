@@ -14,10 +14,11 @@
 	 response.addHeader("X-Frame-Options", "DENY");
 	 %>
 <div class="col-md-10">
-	<div class="form-group col-md-4">
+<input type="hidden" id="region_id" >
+	<!-- <div class="form-group col-md-4">
 		<label>Region</label>
 		<select class="form-control" id="regionListForMaster" onchange="projectDataListForMaster()"> </select>
-	</div>
+	</div> -->
 	<div class="form-group col-md-4">
 		<label>Project</label>
 		<select class="form-control" id="projectDataListForMaster"> </select>

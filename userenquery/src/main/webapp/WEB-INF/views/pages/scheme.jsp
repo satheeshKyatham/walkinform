@@ -32,6 +32,7 @@
 
 	<div class="container">
 		<div class="row">
+		<input type="hidden" id="region_id" >
 			<h2>Scheme Charges</h2>
 		    
 		    
@@ -69,10 +70,10 @@
 			 	
 				<div class="tab-pane" id="headerSchemeTab">
 			 		
-						<div class="form-group col-md-3">
+						<!-- <div class="form-group col-md-3">
 							<label>Region</label>
 							<select class="form-control" id="regionList" onchange="projectDataList()"> </select>
-						</div>
+						</div> -->
 						<div class="form-group col-md-3">
 							<label>Project</label>
 							<select class="form-control" id="projectDataList" onchange="getHeaderSchemeSource(), getHeaderSchemePromotional (), getHeaderSchemeSite ()"> </select>

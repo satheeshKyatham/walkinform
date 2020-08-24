@@ -29,13 +29,14 @@
 
 	<div class="container">
 		<div class="row">
+		<input type="hidden" id="region_id" >
 			<h2>Payment Plan Due</h2>
 		 
 		    <div class="row">
-				<div class="form-group col-md-3">
+				<!-- <div class="form-group col-md-3">
 					<label>Region <strong class="mndt">*</strong></label>
 					<select class="form-control" id="regionList" onchange="projectDataList()" required="required"> </select>
-				</div>
+				</div> -->
 				
 				<div class="form-group col-md-3">
 					<label>Project <strong class="mndt">*</strong></label>

@@ -8,4 +8,6 @@ public interface ProjectRegionDao {
 	List<ProjectRegion> getRegion();
 
 	List<ProjectRegion> getProjectData(String region);
+
+	ProjectRegion getRegionForTncQuery(String projectid);
 }

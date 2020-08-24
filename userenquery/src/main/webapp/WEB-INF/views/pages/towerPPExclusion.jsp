@@ -28,6 +28,7 @@
 
 	<div class="container">
 		<div class="row">
+		<input type="hidden" id="region_id" >
 			<h2>Tower Payment Plan Exclusion</h2>
 		    
 		    <div class="row">
@@ -81,10 +82,7 @@
 					<th style="width: 165px;">
 						Action
 					</th>
-				</tr>
-				
-				
-				
+				</tr>				
 			</tbody>
 		</table>
 	        </div>
