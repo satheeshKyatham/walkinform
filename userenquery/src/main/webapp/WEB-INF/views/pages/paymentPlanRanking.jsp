@@ -28,6 +28,7 @@
 
 	<div class="container">
 		<div class="row">
+		<input type="hidden" id="region_id" >
 			<h2>Payment Plan Ranking</h2>
 		    
 		    <div class="row">

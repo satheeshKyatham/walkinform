@@ -8,7 +8,7 @@ $.ajaxSetup({
 var pageContext = $("#pageContext").val()+"/";	
 
 
-function projectDataListForMaster (){
+/*function projectDataListForMaster (){
 	$('#projectDataListForMaster').empty();	
 	var urlTower = pageContext+"projectDataList?region="+$('#regionListForMaster').val();
 	$.getJSON(urlTower, function (data) {
@@ -18,7 +18,7 @@ function projectDataListForMaster (){
 		});					
 	}).done(function() {
 	});
-}
+}*/
 
 
 
@@ -42,7 +42,7 @@ function insertMaster (insetFor) {
 	}
 	
 	
-	$.post(pageContext+call,{"region":$('#regionListForMaster').val(),"projectName":$('#projectDataListForMaster option:selected').text(),
+	$.post(pageContext+call,{"region":$('#region_id').val(),"projectName":$('#projectDataListForMaster option:selected').text(),
 		"projectid":$('#projectDataListForMaster').val(), 
 		"inputVal": sourceInput},function(data){				 
 		

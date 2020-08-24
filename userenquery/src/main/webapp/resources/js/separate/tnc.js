@@ -19,7 +19,7 @@ function addTnCCharge () {
 		}*/
 		
 		//	alert ("HTML ::: " + $('.Editor-editor').html() );
-		$.post(pageContext+"insertTnCForPP",{"tnc_text":$('.Editor-editor').html(),  "project_id":$('#projectDataList').val(), "project_name":$('#projectDataList :selected').text(), "pymt_plan_id":$('#ppDropdown').val(), "pymt_plan_name":$('#ppDropdown :selected').text(), "region_id":$('#regionList').val(), "region_name":$('#regionList :selected').text(),"tower_sfid":$('#towerMst').find('option:selected').attr('name')   },function(data){				 
+		$.post(pageContext+"insertTnCForPP",{"tnc_text":$('.Editor-editor').html(),  "project_id":$('#projectDataList').val(), "project_name":$('#projectDataList :selected').text(), "pymt_plan_id":$('#ppDropdown').val(), "pymt_plan_name":$('#ppDropdown :selected').text(), "region_id":$('#regionList').val(), "region_name":$('#regionList :selected').text(),"tower_sfid":$('#towerMst').find('option:selected').attr('name') ,"tower_name":$('#towerMst :selected').text()  },function(data){				 
 			
 		}).done(function(data){
 			//alert(data.insertStatus);

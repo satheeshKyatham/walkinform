@@ -1,0 +1,152 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page isELIgnored="false" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
+<%@page import="java.util.HashMap"%>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<%
+	 response.addHeader("Expires","0");
+	 response.addHeader("Pragma","no-cache");
+	 response.setHeader("Cache-Control","no-cache,no-store, must-revalidate, pre-check=0, post-check=0, max-age=0, s-maxage=0");
+	 response.addHeader("X-Frame-Options", "DENY");
+	 %>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Godrej</title>
+	
+	<link rel="stylesheet" href="<c:url value='/resources/css/bootstrap.min.css' />">
+	<link rel="stylesheet" href="<c:url value='/resources/css/costsheet.css' />">
+	<link href="<c:url value='/resources/css/animate.min.css' />" rel="stylesheet">	
+	<link rel="stylesheet" href="<c:url value='/resources/css/sweetalert.min.css'/>">   
+	
+	<link rel="stylesheet" href="<c:url value='/resources/css/editor.css' />">
+	<link rel="stylesheet" href="<c:url value='/resources/css/font-awesome.css' />">
+</head>
+<body>
+
+	<input id="pageContext" value="${pageContext.request.contextPath}" style="display:none;"/>
+	
+	<div class="container">
+		<div class="row">
+		<input type="hidden" id="region_id" >
+			<h2>Add Terms & Conditions against Project or Payment Plan</h2>
+		   	 <div class="row">
+				<div class="form-group col-md-3">
+					<label>Project</label>
+					<select class="form-control" id="projectDataListTnc" onchange="paymentPlanDropdownForTnc()">
+						<option value="">Select</option>
+					</select>
+				</div>
+				
+				<div class="form-group col-md-3">
+					<label>Tower</label>
+					<select class="form-control" id="towerMstTnc" > 
+					<option value="">Select</option>
+					</select>
+				</div>
+		    	
+		    	<div class="form-group col-md-3">
+					<label>Payment Plan</label>
+					<select class="form-control" id="paymentPlanDropdownTnc">
+						<option value="">Select</option>
+					</select>
+				</div>
+				
+		    	<div class="clearfix"></div>
+		    	<div class="form-group col-md-7">
+					<label>T & C</label>
+					<textarea id="tnc_text"> </textarea>
+				</div>
+				<div class="clearfix"></div>
+		    	
+		    	<div class="form-group col-md-3">
+		    		<label style="display: block;"> &nbsp; </label>
+		    		<button type="submit" class="btn btn-default btn-primary" onclick="addSalesTnc()">Submit</button>
+		    		<div class="clearfix"></div>
+		    	</div>
+		    	 <div class="clearfix"></div>
+		    </div>
+		     <div class="container">
+						<div class="row">
+							<div class="form-group col-md-3">
+								<label>Project</label>
+								<select class="form-control" id="projectDataListSearch" onchange="paymentAndTowerDropdownForTncSearch()">
+								<option value="">Select</option>
+								</select>
+							</div>
+							<div class="form-group col-md-3">
+								<label>Tower</label>
+								<select class="form-control" id="towerMstSearch" >
+								<option value="">Select</option>
+								</select>
+								</div>
+							<div class="form-group col-md-3">
+								<label>Payment Plan</label>
+								<select class="form-control" id="paymentPlanDropdownSearch">
+								<option value="">Select</option>
+							</select>
+							</div>
+							
+							<div class="form-group col-md-3" style="margin-top: 24px;">
+								<button style="padding-top:6px; padding-bottom:6px;" class="btn blue_btn btnCommon " type="button" value="Search" name="Search" id="amsearch" onclick="tncSearch()">
+									<span>
+									</span> Search
+								</button>
+							</div>
+						</div>
+						<div class="clearfix"></div>
+					
+			<table class="table table-bordered" id="tncTableId">
+		    <tbody>
+		    <tr class="subHead">
+					<th style="width:200px;">
+						Project Name
+					</th>
+					<th style="width: 140px;">
+						Tower
+					</th>
+					<th style="width: 140px;">
+						Payment Plan
+					</th>
+					<th style="width: 165px;">
+						Terms & Condition
+					</th>
+					<th style="width: 165px;">
+						Action
+					</th>
+				</tr>
+		    </tbody>
+		  
+		</table>
+		    <div class="clearfix"></div>
+		    
+		   </div>
+	        </div>
+		</div>
+	
+	
+	<script src="<c:url value='/resources/js/jquery-1.12.4.min.js' />"></script>
+	<script src="<c:url value='/resources/js/bootstrap.min.js'/>"></script>
+	<script src="<c:url value='/resources/js/sweetalert.min.js'/>"></script>
+	<script src="<c:url value='/resources/js/commonUtil.js'/>"></script>
+	<script src="<c:url value='/resources/js/separate/editor.js?v=18.18'/>"></script>
+	
+	<script src="<c:url value='/resources/js/separate/salesTnc.js?v=18.19'/>"></script>
+
+	<script type="text/javascript" charset="utf8" src="<c:url value='/resources/js/jquery.dataTables.js'/>"></script>
+	<script src="<c:url value='/resources/js/dataTables.buttons.min.js'/>"></script>
+	
+	
+	
+	
+	
+	
+	
+</body>
+</html>

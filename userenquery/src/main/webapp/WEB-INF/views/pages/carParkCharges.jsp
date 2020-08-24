@@ -35,11 +35,11 @@
 			    
 			    <div class="row">
 					
-					
-					<div class="form-group col-md-3">
+					<input type="hidden" id="region_id" >
+					<!-- <div class="form-group col-md-3">
 						<label>Region</label>
 						<select class="form-control" id="regionList" onchange="projectDataList()"> </select>
-					</div>
+					</div> -->
 					
 					<div class="form-group col-md-3">
 						<label>Project</label>

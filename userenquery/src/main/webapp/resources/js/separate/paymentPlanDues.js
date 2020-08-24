@@ -2,12 +2,13 @@
 var pageContext = $("#pageContext").val()+"/";	
 
 
-regionList();
+
+/*regionList();*/
 /*$(document).ready(function(){
 
 	getPymentPlanDueData();
 });*/
-function regionList () {
+/*function regionList () {
 	$('#regionList').empty();	
 	var urlRegionList = pageContext+"regionList?project_code=test";
 	
@@ -20,14 +21,15 @@ function regionList () {
 		});					
 	}).done(function() {
 	});
-}
-
+}*/
+projectDataList();
 function projectDataList(){
 	$('#projectDataList').empty();	
-	var urlTower = pageContext+"projectDataList?region="+$('#regionList').val();
+	var urlTower = pageContext+"projectListForSales?projectid="+ $("#gProjectId").val();
 	$.getJSON(urlTower, function (data) {
 		$('#projectDataList').append('<option value="">Select</option>');
 		$.each(data, function (index, value) {
+			$("#region_id").val(value.region__c);
 			$('#projectDataList').append("<option value='"+value.sfid+"'>"+value.name+  " / " +value.propstrength__project_code__c+ "</option>");
 		});					
 	}).done(function() {
@@ -37,7 +39,7 @@ function projectDataList(){
 
 function projectDataForEdit(){
 	$('#projectDataListId').empty();	
-	var urlTower = pageContext+"projectDataList?region="+$('#regionListid').val();
+	var urlTower = pageContext+"projectListForSales?projectid="+ $("#gProjectId").val();
 	$.getJSON(urlTower, function (data) {
 		$('#projectDataListId').append('<option value="">Select</option>');
 		$.each(data, function (index, value) {
@@ -150,8 +152,8 @@ function addPaymentDue () {
 	else
 		formData.append("pymt_plan_name",$('#ppDropdown :selected').attr('name'));
 	
-	formData.append("region_id",$('#regionList').val());
-	formData.append("region_name",$('#regionList :selected').text());
+	formData.append("region_id",$('#region_id').val());
+	formData.append("region_name",$('#region_id').val());
 	formData.append("towerid",tower);
 	formData.append("tower_name",$('#towerMst').val());
 	formData.append("payplan_milestones",$('#ppmilestone_json_id').val());
@@ -190,15 +192,12 @@ function addPaymentDue () {
 	        		$('#projectDataList').val("");
 	        		$('#projectDataList :selected').text("");
 	        		$('#due_amount').val("");
-	        		$('#regionList').val("");
-	        		$('#regionList :selected').text("");
+	        		/*$('#regionList').val("");
+	        		$('#regionList :selected').text("");*/
 	        		$('#ppDropdown').val("");
 	        		$('#ppDropdown :selected').text("");
-	        		$('#regionList').val("");
-	        		$('#regionList :selected').text("");
 	        		$('#towerMst :selected').text("");
 	        		$('#towerMst').val("");
-	        		
 	        		$('#due_amount').val("");
 	        		$('#booking_amount_id').val("");
 	        		$('#days_id').val("30");
@@ -261,11 +260,11 @@ function getPymentPlanDueData()
 					
 					
 					html += 	'<tr class="paymentDataPlotRow '+trxSuccess+'" data-rowid = "'+obj[i].id+'">'
-									+ '<td style="text-align:center;">'
+									/*+ '<td style="text-align:center;">'
 										+'<span class="oldregionName">'+regionname+'</span>'
-										/*+ '<input class="exisitingPayReqdate" style="display:none;" value="'+trans_date+'">'*/ 
+										+ '<input class="exisitingPayReqdate" style="display:none;" value="'+trans_date+'">' 
 										+'<select style="display:none;" class="form-control exisitingRegionName" id="regionListid" onchange="projectDataForEdit()"><option name="'+regionname+'" value="'+obj[i].region_id+'">'+regionname+'</option</select>'
-									+'</td>'	
+									+'</td>'*/	
 									+ '<td style="text-align:center;"> ' 
 									+'<select style="display:none;" class="form-control existingproject" id="projectDataListId" onchange="paymentPlanDropdownForEdit()"><option name="'+projectname+'" value="'+obj[i].project_id+'">'+projectname+'</option></select>'
 											+ '<span class="oldprojectlist">'+projectname+'</span>' 
@@ -341,16 +340,8 @@ function editPaymentDue (e) {
 	$(e).closest("td").closest("tr").find(".existingPaytPlan").show();
 	$(e).closest("td").closest("tr").find(".existDueAmount").show();
 	
-	
-	
-	
-	
-	
-	
-	
-	regionList();
-	
-	
+	projectDataList();
+	/*regionList();*/
 } 
 
 function cancelPayReq (e) {
@@ -409,8 +400,8 @@ debugger
 		formData.append("project_name",$('#projectDataListId :selected').text());
 		formData.append("pymt_plan_id",$('#paytPlanId').val());
 		formData.append("pymt_plan_name",$('#paytPlanId :selected').text());
-		formData.append("region_id",$('#regionListid').val());
-		formData.append("region_name",$('#regionListid :selected').text());
+		formData.append("region_id",$('#region_id').val());
+		formData.append("region_name",$('#region_id').val());//$('#regionListid :selected').text());
 		formData.append("towerid",$('#towername_id').val());
 		formData.append("tower_name",tower);
 	

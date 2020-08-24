@@ -8,7 +8,7 @@ $.ajaxSetup({
 var pageContext = $("#pageContext").val()+"/";	
 
 
-function projectDataListForSM (){
+/*function projectDataListForSM (){
 	$('#projectDataListForSM').empty();	
 	var urlTower = pageContext+"projectDataList?region="+$('#regionListForSM').val();
 	$.getJSON(urlTower, function (data) {
@@ -18,7 +18,7 @@ function projectDataListForSM (){
 		});					
 	}).done(function() {
 	});
-}
+}*/
 
 
 var schemeSourceArray = {};
@@ -223,7 +223,7 @@ function mainSchemeDropdown (){
 
 
 function addschemeMapping () {
-	$.post(pageContext+"insertSchemeMapping",{"region":$('#regionListForSM').val(),"projectName":$('#projectDataListForSM option:selected').text(),
+	$.post(pageContext+"insertSchemeMapping",{"region":$('#region_id').val(),"projectName":$('#projectDataListForSM option:selected').text(),
 		"projectid":$('#projectDataListForSM').val(), 
 		"headerSchemeId": $('#headerSchemeDD').val(),
 		"schemeSourceId": $('#getSchemeSource').val(),
@@ -268,7 +268,7 @@ function bulkSubmitSchemeMapping () {
               schemeData.updatedby = '999';
               
               
-              schemeData.region_name = $('#regionListForSM').val();
+              schemeData.region_name = $('#region_id').val();
               schemeData.project_name = $('#projectDataListForSM option:selected').text();
               schemeData.project_id = $('#projectDataListForSM').val();
               

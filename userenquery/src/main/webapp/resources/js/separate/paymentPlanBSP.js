@@ -8,7 +8,7 @@ $.ajaxSetup({
 var pageContext = $("#pageContext").val()+"/";	
 
 
-regionList();
+/*regionList();
 
 function regionList () {
 	$('#regionList').empty();	
@@ -21,14 +21,15 @@ function regionList () {
 		});					
 	}).done(function() {
 	});
-}
-
+}*/
+projectDataList();
 function projectDataList (){
 	$('#projectDataList').empty();	
-	var urlTower = pageContext+"projectDataList?region="+$('#regionList').val();
+	var urlTower = pageContext+"projectListForSales?projectid="+ $("#gProjectId").val();
 	$.getJSON(urlTower, function (data) {
 		$('#projectDataList').append('<option value="">Select</option>');
 		$.each(data, function (index, value) {
+			$("#region_id").val(value.region__c);
 			$('#projectDataList').append("<option value='"+value.sfid+"'>"+value.name+  " / " +value.propstrength__project_code__c+ "</option>");
 		});					
 	}).done(function() {
@@ -106,7 +107,7 @@ function addBSPCharge () {
 	}  
 	
 	$.post(pageContext+"insertBSPForPP",{"bsp_amount_per": bspAmountPerVal, "bsp_amount":bspAmountVal,  "project_id":$('#projectDataList').val(), "project_name":$('#projectDataList :selected').text(), "pymt_plan_id":$('#ppDropdown').val()
-		, "pymt_plan_name":$('#ppDropdown :selected').text(), "region_id":$('#regionList').val(), "region_name":$('#regionList :selected').text()
+		, "pymt_plan_name":$('#ppDropdown :selected').text(), "region_id":$('#region_id').val(), "region_name":$('#region_id').val()
 		, "tower_id":$('#towerMst').find('option:selected').attr('name'), "typology_name":$('#typoMst').val(), "inventoryCatDD":$('#inventoryCatDD').val()},function(data){				 
 		
 	}).done(function(data){

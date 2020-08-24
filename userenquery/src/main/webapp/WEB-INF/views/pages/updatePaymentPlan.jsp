@@ -38,15 +38,11 @@
 
 	<div class="container">
 		<div class="row">
+		<input type="hidden" id="region_id" >
 			<h2>Update Payment Plan</h2>
 		    
 		    <div class="row">
-				<div class="form-group col-md-3">
-					<label>Region</label>
-					<select class="form-control" id="regionList" onchange="projectDataList()">
-						<option value="">Select</option>
-					</select>
-				</div>
+				
 				
 				<div class="form-group col-md-3">
 					<label>Project</label>

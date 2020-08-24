@@ -7,11 +7,12 @@
    <definition name="base-definition"   template="/WEB-INF/views/tiles/layouts/defaultLayout.jsp">  
        <put-attribute name="title" value="" />  
        <put-attribute name="header" value="/WEB-INF/views/tiles/template/defaultHeader.jsp" />  
-       <put-attribute name="menu" value="/WEB-INF/views/tiles/template/defaultMenu.jsp" />  
+        <put-attribute name="menu" value="/WEB-INF/views/tiles/template/defaultMenu.jsp" /> 
        <put-attribute name="body" value="" />  
        <put-attribute name="footer" value="/WEB-INF/views/tiles/template/defaultFooter.jsp" />
          
    </definition> 
+    
      
     <definition name="downloadfile"  template="/WEB-INF/views/pages/downloadApk.jsp"> 
        <put-attribute name="title" value="Download Apk" />  
@@ -122,6 +123,11 @@
      <definition name="tnc" extends="base-definition"> 
        <put-attribute name="title" value="Add Payment Plan Wise T and C" />  
        <put-attribute name="body" value="/WEB-INF/views/pages/tnc.jsp" /> 
+     </definition>
+     
+     <definition name="salesTnc" extends="base-definition"> 
+       <put-attribute name="title" value="Add Costsheet T and C" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/salesTnc.jsp" /> 
      </definition>
      
      <definition name="tncEOI" extends="base-definition"> 
@@ -261,6 +267,11 @@
       <definition name="paymentPlanRanking" extends="base-definition"> 
        <put-attribute name="title" value="Payment Plan Ranking" />  
        <put-attribute name="body" value="/WEB-INF/views/pages/paymentPlanRanking.jsp" /> 
+     </definition>
+    
+     <definition name="updatePaymentPlan" extends="base-definition"> 
+       <put-attribute name="title" value="Update Payment Plan" />  
+       <put-attribute name="body" value="/WEB-INF/views/pages/updatePaymentPlan.jsp" /> 
      </definition>
      
      <definition name="updatePaymentPlan" extends="base-definition"> 

@@ -1,11 +1,11 @@
 
 var pageContext = $("#pageContext").val()+"/";	
 
-regionList();
+/*regionList();*/
 $(document).ready(function(){
 	getTowerPPList();
 });
-function regionList () {
+/*function regionList () {
 	$('#regionList').empty();	
 	var urlRegionList = pageContext+"regionList?project_code=test";
 	
@@ -16,14 +16,15 @@ function regionList () {
 		});					
 	}).done(function() {
 	});
-}
-
+}*/
+projectDataList();
 function projectDataList (){
 	$('#projectDataList').empty();	
-	var urlTower = pageContext+"projectDataList?region="+$('#regionList').val();
+	var urlTower = pageContext+"projectListForSales?projectid="+ $("#gProjectId").val();
 	$.getJSON(urlTower, function (data) {
 		$('#projectDataList').append('<option value="">Select</option>');
 		$.each(data, function (index, value) {
+			$("#region_id").val(value.region__c);
 			$('#projectDataList').append("<option value='"+value.sfid+"'>"+value.name+  " / " +value.propstrength__project_code__c+ "</option>");
 		});					
 	}).done(function() {
@@ -103,8 +104,8 @@ function addTowerPP () {
 	        		getTowerPPList();
 	        		$('#projectDataList').val("");
 	        		$('#projectDataList :selected').text("");
-	        		$('#regionList').val("");
-	        		$('#regionList :selected').text("");
+	        		/*$('#regionList').val("");*/
+	        		/*$('#regionList :selected').text("");*/
 	        		$('#ppDropdown').val("");
 	        		$('#ppDropdown :selected').text("");
 	        		$('#towerMst :selected').text("");
@@ -128,7 +129,6 @@ function addTowerPP () {
 
 function getTowerPPList()
 {
-	/*$("#towerPPListId").dataTable().fnDestroy();*/
 	$('#towerPPListId tbody tr.towerPPDataPlotRow').remove();
 	
 	$.get(pageContext+"getTowerPPExclusionList",function(data){
@@ -197,8 +197,6 @@ function getTowerPPList()
 				});
 		
 	}).done(function(obj){
-		//var data =JSON.parse(obj);
-		
 		if(data!=null){
 			if (data.status == "STATUS_NOTOK") {
 				alert (data.error_msg);
@@ -215,8 +213,7 @@ function deleteTowerPP(e) {
 	var towerId = $(e).closest("td").closest("tr.towerPPDataPlotRow").attr("data-rowid"); 
 	$.post(pageContext+"deleteTowerPPExclusion",{"Id" : towerId
 		},function(data){
-			debugger
-	}).done(function(data){
+		}).done(function(data){
 		var obj =JSON.parse(data);
 		if(obj!=null){
 			 if (obj.status == "STATUS_OK") {

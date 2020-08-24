@@ -13,10 +13,10 @@
 	 response.setHeader("Cache-Control","no-cache,no-store, must-revalidate, pre-check=0, post-check=0, max-age=0, s-maxage=0");
 	 response.addHeader("X-Frame-Options", "DENY");
 	 %>
-<div class="form-group col-md-3">
+<!-- <div class="form-group col-md-3">
 	<label>Region</label>
 	<select class="form-control" id="regionListForSM" onchange="projectDataListForSM()"> </select>
-</div>
+</div> -->
 <div class="form-group col-md-3">
 	<label>Project</label>
 	<select class="form-control" id="projectDataListForSM" onchange="getSchemeSource()"> </select>
