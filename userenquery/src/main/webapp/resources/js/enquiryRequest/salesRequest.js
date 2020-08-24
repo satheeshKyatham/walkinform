@@ -735,9 +735,9 @@ function loadEnquiryReport(enq){
 function salesSlider (){
 	//alert ("Test 123 NEW 123");
 	var slider = new Slider("#ownContro", {
-	    ticks: [1000000, 5000000, 10000000, 15000000, 20000000],
-	    ticks_labels: ['10L', '50L', '1Cr', '1.5Cr', '2Cr' ],
-	    ticks_positions: [0, 25, 50, 75, 100],
+	    ticks: [0, 1000000, 5000000, 10000000, 15000000, 20000000],
+	    ticks_labels: ['0', '10L', '50L', '1Cr', '1.5Cr', '2Cr' ],
+	    ticks_positions: [0, 20, 40, 60, 80, 100],
 	    tooltip: 'always',
 	   step: 100000,
 	   value: $('#contributionReceipt_val').val(),
@@ -752,9 +752,10 @@ function salesSlider (){
 	
 	
 	var slider = new Slider("#loanAlig", {
-	    ticks: [2000000, 10000000, 20000000, 30000000, 40000000, 50000000],
-	    ticks_labels: ['20L', '1Cr', '2Cr', '3Cr', '4Cr', '5Cr' ],
-	    ticks_positions: [0, 20, 40, 60, 80, 100],
+	    ticks: [0, 2000000, 10000000, 20000000, 30000000, 40000000, 50000000],
+	    ticks_labels: ['0', '20L', '1Cr', '2Cr', '3Cr', '4Cr', '5Cr' ],
+	    //ticks_positions: [0, 20, 40, 60, 80, 100],
+	    ticks_positions: [0, 16.666, 33.33, 50, 66.666, 83.333, 100],
 	    //ticks_snap_bounds: 60,
 	    tooltip: 'always',
 	   step: 100000,

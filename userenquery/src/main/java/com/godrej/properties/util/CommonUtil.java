@@ -2,11 +2,7 @@ package com.godrej.properties.util;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -14,13 +10,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
-import com.godrej.kyc.util.DateFormateUtil;
-import com.godrej.properties.dto.SysConfigEnum;
-import com.godrej.properties.master.service.SysConfigService;
-import com.godrej.properties.model.GeneratePayment;
 import com.godrej.properties.model.ProjectLaunch;
 
 /**
@@ -177,10 +167,20 @@ public class CommonUtil {
 				JSONObject objEx = jsonArry.getJSONObject(i);
 				if(towerCode!=null && towerCode.trim().equals(objEx.get("towercode")))
 				{
-					project.setCcavenue_merchant_id(Integer.parseInt(objEx.get("merchant_id").toString()));
+					/*project.setCcavenue_merchant_id(Integer.parseInt(objEx.get("merchant_id").toString()));
 					//project.setCcavenue_merchant_id(218829);
 					project.setCcavenue_workingkey(objEx.get("workingkey").toString());
-					project.setCcavenue_accesscode(objEx.get("accesscode").toString());
+					project.setCcavenue_accesscode(objEx.get("accesscode").toString());*/
+					project.setCcavenue_merchant_config_id(Integer.parseInt(objEx.get("merchant_id").toString()));
+					project.setCcavenue_workingkey_config(objEx.get("workingkey").toString());
+					project.setCcavenue_accesscode_config(objEx.get("accesscode").toString());
+					break;
+				}
+				else
+				{
+					project.setCcavenue_merchant_config_id(project.getCcavenue_merchant_id());
+					project.setCcavenue_workingkey_config(project.getCcavenue_workingkey());
+					project.setCcavenue_accesscode_config(project.getCcavenue_accesscode());
 				}
 				//JSONObject objEx = new JSONObject(objNew.get(i));
 				Log.info("Data:{}",objEx);

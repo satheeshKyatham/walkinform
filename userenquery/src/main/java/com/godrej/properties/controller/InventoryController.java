@@ -122,7 +122,9 @@ public class InventoryController {
 			@RequestParam("unitSfid") String unitSfid, @RequestParam("projectNameId") String projectNameId,
 			@RequestParam("towerCode") String towerCode, @RequestParam("towerName") String towerName,
 			@RequestParam("unitNo") String unitNo, @RequestParam("floorNo") String floorNo,
-			@RequestParam("userid") int userid) {
+			@RequestParam("userid") int userid,
+			@RequestParam("contactsfid") String contactsfid
+			) {
 
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		Gson gson = gsonBuilder.create();
@@ -165,6 +167,11 @@ public class InventoryController {
 	    			holdTime =HOLD_TIME;
 	    		}
 
+	    		if (contactsfid != null && contactsfid != "") {
+	    			contactsfid = contactsfid;
+	    		} else {
+	    			contactsfid = "999999";
+	    		}
 				
 				HoldInventoryEntry action = new HoldInventoryEntry();
 				action.setUnitSfid(unitSfid);
@@ -179,6 +186,9 @@ public class InventoryController {
 				action.setUnit_no(unitNo);
 				action.setUser_id(userid);
 				action.setHoldForTime(holdTime);
+				
+				action.setSource("D4U");
+				action.setContact_sfid(contactsfid);
 
 				action.setCreated_at(new Timestamp(System.currentTimeMillis()));
 				log.info("Before Insert************************* HOLD Issue");

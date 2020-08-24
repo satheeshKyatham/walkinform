@@ -25,6 +25,8 @@ import com.godrej.properties.dao.TowerMasterDao;
 import com.godrej.properties.dao.UserContactDao;
 import com.godrej.properties.dto.GPLAppBookingAPIDto;
 import com.godrej.properties.dto.ProjectLaunchDao;
+import com.godrej.properties.dto.SysConfigEnum;
+import com.godrej.properties.master.service.SysConfigService;
 import com.godrej.properties.model.ContactReport;
 import com.godrej.properties.model.EOIPaymentDtl;
 import com.godrej.properties.model.EOIPreferenceDtl;
@@ -79,6 +81,9 @@ public class GPLAppsWebServiceImpl implements GPLAppsWebService{
 	@Autowired
 	PropOtherChargesService propOtherChargesService;
 	
+	@Autowired
+	private SysConfigService sysConfigService;
+	
 	@Override
 	public GPLAppBookingAPIDto insertGPLBookingData(GPLAppBookingAPIDto bookingData) {
 		log.info("insertGPLBookingData......{}",bookingData.getEnquiryName());
@@ -103,14 +108,14 @@ public class GPLAppsWebServiceImpl implements GPLAppsWebService{
 				ProjectLaunch projectData =projectLaunchDao.getProjectSaleMgrID(bookingData.getProjectsfid());
 				if(projectData.getSitehead_user_id()!=null)
 				{
-					bookingData.setWindow_Assign(projectData.getSitehead_user_id().toString());
+					//bookingData.setWindow_Assign(projectData.getSitehead_user_id().toString());
 					bookingData.setSiteheadEmail(projectData.getSitehead_user_mail());
 					bookingData.setSiteheadID(projectData.getSitehead_user_id());
 					bookingData.setSiteheadName(projectData.getSitehead_user_name());
 				}
 				else
 				{
-					bookingData.setWindow_Assign("594");
+					//bookingData.setWindow_Assign("594");
 					bookingData.setSiteheadEmail("sathish.kyatham@godrejproperties.com");
 					bookingData.setSiteheadID(594);
 					bookingData.setSiteheadName("Sathish Kyatham");
@@ -247,8 +252,9 @@ public class GPLAppsWebServiceImpl implements GPLAppsWebService{
 					
 				} */
 				
-				
-				SendMailThreadUtil mail =new SendMailThreadUtil(projectData.getSitehead_user_mail(),"", projectName, text);		
+				String smtpip = sysConfigService.getValue(SysConfigEnum.SMTP_IP, "SMTP_IP");
+				String smtpPort = sysConfigService.getValue(SysConfigEnum.SMTP_PORT, "SMTP_PORT");
+				SendMailThreadUtil mail =new SendMailThreadUtil(projectData.getSitehead_user_mail(),"", projectName, text,smtpip,smtpPort);		
 			}
 		}
 		catch (Exception e) {
@@ -293,8 +299,7 @@ public class GPLAppsWebServiceImpl implements GPLAppsWebService{
 			eoi_date = df.parse(bookingData.getTransactionDate());
 			eoiPref.setEoi_date(eoi_date);
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.error(" Error ParseException :-{}",e);
 		}
 		
 		eoiPref.setTokenTypeId(1);
@@ -403,7 +408,7 @@ public class GPLAppsWebServiceImpl implements GPLAppsWebService{
 			token.setEnquiry_18(bookingData.getEnquiryid().toString());
 			token.setCountrycode(bookingData.getCountryCode());
 			token.setStarteddate(new Timestamp(new Date().getTime()));
-			token.setWindow_assign(bookingData.getWindow_Assign());
+			//token.setWindow_assign(bookingData.getWindow_Assign());
 			//token=tokenDao.generateToken(token);
 			return tokenDao.generateToken(token);
 		}
@@ -428,8 +433,8 @@ public class GPLAppsWebServiceImpl implements GPLAppsWebService{
 		}
 		return bookingData;
 	}
-	private static String readContentFromFile(String fileName) throws UnsupportedEncodingException {
-		StringBuffer contents = new StringBuffer();
+	private static String readContentFromFile(String fileName)  {
+		StringBuilder contents = new StringBuilder();
 		try {
 			// use buffering, reading one line at a time
 			BufferedReader reader = new BufferedReader(new FileReader(fileName));
@@ -444,6 +449,7 @@ public class GPLAppsWebServiceImpl implements GPLAppsWebService{
 			}
 		} catch (IOException ex) {
 			ex.printStackTrace();
+			
 		}
 		return contents.toString();
 	}

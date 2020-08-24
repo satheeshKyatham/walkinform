@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "salesforce.vw_project_inventory_uat") 
@@ -41,6 +42,11 @@ public class AllUnitData implements Serializable{
 	
 	@Column(name="property_facing__c") private String property_facing__c;
 	
+	@Column(name="verticle__c") private String verticle__c;
+	@Column(name="propstrength__tower__c") private String propstrength__tower__c;
+	
+	@Transient private String qry_count;
+	@Transient private String qry_msg;
 	
 	public int getRow_number() {
 		return row_number;
@@ -176,5 +182,29 @@ public class AllUnitData implements Serializable{
 	}
 	public void setProperty_facing__c(String property_facing__c) {
 		this.property_facing__c = property_facing__c;
+	}
+	public String getVerticle__c() {
+		return verticle__c;
+	}
+	public void setVerticle__c(String verticle__c) {
+		this.verticle__c = verticle__c;
+	}
+	public String getPropstrength__tower__c() {
+		return propstrength__tower__c;
+	}
+	public void setPropstrength__tower__c(String propstrength__tower__c) {
+		this.propstrength__tower__c = propstrength__tower__c;
+	}
+	public String getQry_count() {
+		return qry_count;
+	}
+	public void setQry_count(String qry_count) {
+		this.qry_count = qry_count;
+	}
+	public String getQry_msg() {
+		return qry_msg;
+	}
+	public void setQry_msg(String qry_msg) {
+		this.qry_msg = qry_msg;
 	}
 }

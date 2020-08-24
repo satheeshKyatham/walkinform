@@ -67,6 +67,14 @@ public class HoldInventoryEntry implements Serializable{
 	@Column(name="hold_for_time")
 	private int holdForTime;
 	
+	
+	@Column(name = "source")
+	private String source;
+	
+	@Column(name = "contact_sfid")
+	private String contact_sfid;
+	
+	
 	public int getId() {
 		return id;
 	}
@@ -198,5 +206,20 @@ public class HoldInventoryEntry implements Serializable{
 	public void setHoldForTime(int holdForTime) {
 		this.holdForTime = holdForTime;
 	}
-	
+
+	public String getSource() {
+		return source;
+	}
+
+	public void setSource(String source) {
+		this.source = source;
+	}
+
+	public String getContact_sfid() {
+		return contact_sfid;
+	}
+
+	public void setContact_sfid(String contact_sfid) {
+		this.contact_sfid = contact_sfid;
+	}
 }

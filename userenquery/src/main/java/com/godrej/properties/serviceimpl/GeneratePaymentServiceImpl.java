@@ -77,7 +77,7 @@ public class GeneratePaymentServiceImpl implements GeneratePaymentService{
 	@Override
 	public String createCCGatewayRequest(GeneratePayment payment) {
 		String respReq="";
-		
+		String ccRequestFormat="";
 		try {
 			//insert into request table 
 			//call project data
@@ -89,10 +89,12 @@ public class GeneratePaymentServiceImpl implements GeneratePaymentService{
 				//payment.getTowercode().trim()
 				project = CommonUtil.getTowerWiseCCAvenueDetails(project,(payment.getTowercode() == null) ? null : payment.getTowercode().trim());
 			}
-			
-			String ccRequestFormat = createCCRequestFormat(payment,project);
-			respReq = ccGatewayRequestController.CCGatewayRequestPost(ccRequestFormat,project);
-			respReq="ccencrqst="+respReq+"&accesscode="+project.getCcavenue_accesscode();
+			if(project.getCcavenue_workingkey_config()!=null)
+			{
+				ccRequestFormat = createCCRequestFormat(payment,project);
+				respReq = ccGatewayRequestController.CCGatewayRequestPost(ccRequestFormat,project);
+				respReq="ccencrqst="+respReq+"&accesscode="+project.getCcavenue_accesscode_config();
+			}
 			
 		} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block
@@ -114,7 +116,7 @@ public class GeneratePaymentServiceImpl implements GeneratePaymentService{
 			//follow 
 		}else
 		{*/
-		data.setMerchant_id(project.getCcavenue_merchant_id());//218829
+		data.setMerchant_id(project.getCcavenue_merchant_config_id());//218829
 		/*}*/
 		
 		data.setOrder_id(String.valueOf(payment.getId()));
@@ -137,7 +139,7 @@ public class GeneratePaymentServiceImpl implements GeneratePaymentService{
 		String towersfid=(payment.getTowercode() == null) ? null : payment.getTowercode().trim();
 		//tid=1585208745371&merchant_id=218829&order_id=123845&currency=INR&amount=1.00&redirect_url=http://kyc.gplapps.com:8084/CCAvenue/jsp/ccavResponseHandler.jsp&cancel_url=http://kyc.gplapps.com:8084/CCAvenue/jsp/ccavResponseHandler.jsp&language=EN&billing_name=Satheesh&billing_address=Worli &billing_city=Mumbai&billing_state=MH&billing_zip=400018&billing_country=India&billing_tel=9987677726&billing_email=sathish.kyatham@godrejproperties.com&delivery_name=Satheesh&delivery_address=Worli&delivery_city=Mumbai&delivery_state=Maharashtra&delivery_zip=400018&delivery_country=India&delivery_tel=9987677726&merchant_param1=0010002345&merchant_param2=GCVRND1208&merchant_param3=1123455&merchant_param4=9987677726&merchant_param5=sathish.kyatham@godrejproperties.com&promo_code=&
 		
-		String format = "tid="+tiddate+"&merchant_id="+project.getCcavenue_merchant_id()+"&order_id="+payment.getId()+"&currency=INR&amount="+payment.getAmount()+"&redirect_url="+KeyConstants.REDIRECT_URL+"?projectsfid="+payment.getProject_sfid()+""
+		String format = "tid="+tiddate+"&merchant_id="+project.getCcavenue_merchant_config_id()+"&order_id="+payment.getId()+"&currency=INR&amount="+payment.getAmount()+"&redirect_url="+KeyConstants.REDIRECT_URL+"?projectsfid="+payment.getProject_sfid()+""
 				+ "&cancel_url="+KeyConstants.CANCEL_URL+"?projectsfid="+payment.getProject_sfid()+""
 				+ "&language=EN&billing_name="+payment.getCustomer_name()+"&billing_address=&billing_city=&billing_state=&billing_zip=&billing_country=&billing_tel="+payment.getCustomer_mobile()+""
 				+ "&billing_email="+payment.getCustomer_email()+"&delivery_name=&delivery_address=&delivery_city=&delivery_state=&delivery_zip=&delivery_country=&delivery_tel="
@@ -165,7 +167,7 @@ public class GeneratePaymentServiceImpl implements GeneratePaymentService{
 			project = CommonUtil.getTowerWiseCCAvenueDetails(project,towerCode);
 		}
 		//String workingKey = "AC52E9A706E2D7938203D4D554B61E2E";
-		AesCryptUtil aesUtil=new AesCryptUtil(project.getCcavenue_workingkey());
+		AesCryptUtil aesUtil=new AesCryptUtil(project.getCcavenue_workingkey_config());
 		String decResp = aesUtil.decrypt(response);
 		Log.info("Payment Response Descript Code:{}",decResp);
 		respModel.setGateway_response(decResp);

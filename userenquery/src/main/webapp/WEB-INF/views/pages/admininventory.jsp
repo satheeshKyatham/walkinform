@@ -146,6 +146,8 @@ if(ses!=null){
 	</div>
 	
 	<script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>  
+	
+	<script src="<c:url value='/resources/js/commonValidation.js?v=18.19' />"></script>
 	<script type="text/javascript" charset="utf8" src="<c:url value='/resources/js/jquery.dataTables.js'/>"></script>
 	<script src="<c:url value='/resources/js/dataTables.buttons.min.js'/>"></script>
 	<script src = "<c:url value='/resources/js/dataTables.fixedHeader.min.js'/> "></script>

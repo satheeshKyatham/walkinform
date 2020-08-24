@@ -131,7 +131,20 @@ function savePaymentInfo(event,el){
 	   // event.preventDefault();
 	    //$("#enquiryStatus").val("EOI");
 	    submitIt("enquiryRequestBasicInfoForm","saveBaseInfo","savebasicInfoResp");
-	    submitWithFile("bankPaymentForm","savePaymentInfo","savePaymentInfoResp");
+	    
+	    var duplicate =  checkDuplicate("csPtColEoi");
+		
+		if (duplicate){
+			$('#bankPaymentForm #duplictMsg').hide();
+			submitWithFile("bankPaymentForm","savePaymentInfo","savePaymentInfoResp");
+		} else {
+			 
+			$('#bankPaymentForm #duplictMsg').show();
+			
+			return;
+		}
+	    
+	    
 	    
 }
 function savePaymentInfoResp(resp){

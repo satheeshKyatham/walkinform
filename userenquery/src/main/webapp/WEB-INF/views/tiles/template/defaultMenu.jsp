@@ -20,7 +20,10 @@ if(ses!=null){
 	<%--  <a href="${pageContext.request.contextPath}/"><img style="width: 100%;  height: 150px;"class="logo" src="${pageContext.request.contextPath}/resources/images/logo.png"></a> --%>
 	 <div class="menuLogo">
 		<img style="width: 100%;  height: 70px;"class="logo" src="${pageContext.request.contextPath}/resources/images/logo.png">
+<<<<<<< HEAD
 		 <span>Queue</span> 
+=======
+>>>>>>> refs/remotes/origin/master
 		<span>D4U</span>
 	</div>
 	<ul id="menu">
@@ -57,6 +60,9 @@ if(ses!=null){
 	<li><a href="${pageContext.request.contextPath}/createdoffers?projectid=a1l6F0000080irTQAQ">Created Offers List</a></li>
 	<li><a href="${pageContext.request.contextPath}/triggerLog">Trigger Log</a></li>
 	<%}} %> 
+	
+	
+	<li><a href="${pageContext.request.contextPath}/updatePaymentPlan">Update Payment Plan</a></li>
 	
 	
 	<li><a href="${pageContext.request.contextPath}/updatePaymentPlan">Update Payment Plan</a></li>

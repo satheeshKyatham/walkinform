@@ -268,7 +268,7 @@ function holdInterval (e, sfid, unitNo, floor, towerCode) {
 			
 			$('#inventoryLoader').show();
 			
-			$.post(pageContext+"holdInventoryRqst",{"customerId":$('#hiddenMobileNo').val(), "unitSfid":sfid, "projectNameId":$('#projectId').val(), "towerCode": $('#towerRecCode').val(),  "towerName": $('#towerRec').val(), "unitNo": unitNo, "floorNo": floor,"userid": $('#userid').val() },function(data){				 
+			$.post(pageContext+"holdInventoryRqst",{"customerId":$('#hiddenMobileNo').val(), "unitSfid":sfid, "projectNameId":$('#projectId').val(), "towerCode": $('#towerRecCode').val(),  "towerName": $('#towerRec').val(), "unitNo": unitNo, "floorNo": floor,"userid": $('#userid').val(), "contactsfid": $('#primarycontactsfid').val() },function(data){				 
 				
 			}).done(function(data){
 				

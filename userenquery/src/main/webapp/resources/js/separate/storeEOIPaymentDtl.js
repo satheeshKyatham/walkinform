@@ -16,7 +16,7 @@ var NumEoiDtl = 4;
 
 function addMorePtBtnEoi () {
 	if(amIEoi < amNumEoi) {
-		$('#csPtColEoi tr:last-child').after('<tr class="csPtDataRowEoi"> <td></td> <td><input class="csPtEnqSfidEoi" style="display:none;" value="'+$('#enquirysfid').val()+'"/>  <select onchange="csPtDdEoi(this)" class="full form-control input-sm csPtDropDownEoi requiredField"><option value="">Select</option><option value="Cheque">Cheque</option><option value="NEFT">NEFT/Credit</option><option value="Swipe">Swipe</option><option value="Wire Transfer">Wire Transfer (PayZap, Google Pay)</option> </select></td><td><input class="full form-control input-sm csPtBankNameEoi requiredField" placeholder="Bank Name"/></td><td style="display:none;"><input class="full form-control input-sm csPtBranchEoi" placeholder="Branch Name"/></td><td><input class="full form-control input-sm csPtTransactionIdEoi requiredField" placeholder="Transaction ID" /></td><td><input type="date" class="form-control input-sm csPtTransactionDateEoi requiredField" placeholder="Transaction Date"/></td><td><input maxlength="10" class="numericWithoutDecimal  numericField full form-control input-sm csPtTransactionAmountEoi requiredField" onkeyup="csPtcalculateGrandTotalEoi()" placeholder="Transaction Amount" name="amount"/></td> <td style="display:none;"> <input type="file" class="full form-control input-sm panAttachEoi"  accept="application/pdf,image/*"> </td> <td> <input type="file" class="full form-control input-sm receiptAttachEoi" accept="application/pdf,image/*"/>  <td><textarea class="full form-control input-sm csPtDescriptionEoi" placeholder="Description"></textarea></td><td class="removeCsPtColEoi txtCenter"><i onclick="removeCsPtColEoi(this)" class="fa fa-times-circle redColr cursorPoint"></i></td></tr>');
+		$('#csPtColEoi tr:last-child').after('<tr class="csPtDataRowEoi"> <td></td> <td><input class="csPtEnqSfidEoi" style="display:none;" value="'+$('#enquirysfid').val()+'"/>  <select onchange="csPtDdEoi(this)" class="full form-control input-sm csPtDropDownEoi requiredField"><option value="">Select</option><option value="Cheque">Cheque</option><option value="NEFT">NEFT/Credit</option><option value="Swipe">Swipe</option><option value="Wire Transfer">Wire Transfer (PayZap, Google Pay)</option> </select></td><td><input class="full form-control input-sm csPtBankNameEoi requiredField" placeholder="Bank Name"/></td><td style="display:none;"><input class="full form-control input-sm csPtBranchEoi" placeholder="Branch Name"/></td><td><input class="full form-control input-sm csPtTransactionIdEoi requiredField checkDuplicate" placeholder="Transaction ID" /></td><td><input type="date" class="form-control input-sm csPtTransactionDateEoi requiredField" placeholder="Transaction Date"/></td><td><input maxlength="13" class="numericWithDecimal  numericField full form-control input-sm csPtTransactionAmountEoi requiredField" onkeyup="csPtcalculateGrandTotalEoi()" placeholder="Transaction Amount" name="amount"/></td> <td style="display:none;"> <input type="file" class="full form-control input-sm panAttachEoi"  accept="application/pdf,image/*"> </td> <td> <input type="file" class="full form-control input-sm receiptAttachEoi" accept="application/pdf,image/*"/>  <td><textarea class="full form-control input-sm csPtDescriptionEoi" placeholder="Description"></textarea></td><td class="removeCsPtColEoi txtCenter"><i onclick="removeCsPtColEoi(this)" class="fa fa-times-circle redColr cursorPoint"></i></td></tr>');
 		amIEoi++;
 	}else {
 		swal({
@@ -47,15 +47,15 @@ function csPtDdEoi (e) {
 		$(e).closest("tr").find('.csPtBranchEoi').prop('disabled', false);
 	} else  if ($(e).val() == 'NEFT') {
 		$(e).closest("tr").find(".csPtTransactionIdEoi").val("");
-  	   	$(e).closest("tr").find(".csPtTransactionIdEoi").attr("maxlength","15");
-  	   	$(e).closest("tr").find(".csPtTransactionIdEoi").after("<small class='csPtReachMexLengthEOI'>ID can be max 15 characters long.</small>");
+  	   	$(e).closest("tr").find(".csPtTransactionIdEoi").attr("maxlength","30");
+  	   	$(e).closest("tr").find(".csPtTransactionIdEoi").after("<small class='csPtReachMexLengthEOI'>ID can be max 30 characters long.</small>");
 		
 		$(e).closest("tr").find('.csPtBankNameEoi').prop('disabled', false);
 		$(e).closest("tr").find('.csPtBranchEoi').prop('disabled', false);
 	}else  if ($(e).val() == 'Swipe' || $(e).val() == 'Wire Transfer') {
 		$(e).closest("tr").find(".csPtTransactionIdEoi").val("");
- 	   	$(e).closest("tr").find(".csPtTransactionIdEoi").attr("maxlength","15");
- 	   	$(e).closest("tr").find(".csPtTransactionIdEoi").after("<small class='csPtReachMexLengthEOI'>ID can be max 15 characters long.</small>"); 
+ 	   	$(e).closest("tr").find(".csPtTransactionIdEoi").attr("maxlength","30");
+ 	   	$(e).closest("tr").find(".csPtTransactionIdEoi").after("<small class='csPtReachMexLengthEOI'>ID can be max 30 characters long.</small>"); 
 		
 		$(e).closest("tr").find('.csPtBankNameEoi').prop('disabled', false);
 		$(e).closest("tr").find('.csPtBranchEoi').prop('disabled', false);
@@ -332,6 +332,10 @@ function getTokenTypeEOI (){
 		{
 			html='<option value="F">REFUNDABLE</option><option value="T">NON-REFUNDABLE</option>';
 		}
+	else if($("#projectsfid").val()=='a1l2s000000XmaMAAS')
+	{
+		html='<option value="F">NON-REFUNDABLE</option>';
+	}
 	else if($("#projectsfid").val()=='a1l2s00000003lPAAQ')
 	{
 		html='<option value="F">PLATINUM</option><option value="T">EXPRESS</option>';

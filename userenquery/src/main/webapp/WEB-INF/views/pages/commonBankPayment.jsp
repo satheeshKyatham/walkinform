@@ -99,6 +99,10 @@
 				</p>
 			</div>
 			 
+			 <div class="col-md-12 commonErrorCol" id="duplictMsg" style="display:none;">
+			 	<div class="alert alert-danger"> Transaction ID cannot be <strong>duplicate</strong>.  </div>
+			 </div>
+			 
 			<div class="col-md-12" style="margin-bottom:50px;">
 				<h4 class="mrgT0">
 					Payment Details
@@ -160,13 +164,13 @@
 								<input class="full form-control input-sm csPtBranchEoi" placeholder="Branch Name"/>
 							</td> 
 							<td>
-								<input class="full form-control input-sm csPtTransactionIdEoi requiredField" placeholder="Transaction ID"/>
+								<input class="full form-control input-sm csPtTransactionIdEoi requiredField checkDuplicate" placeholder="Transaction ID"/>
 							</td>
 							<td>
 								<input type="date" class="form-control input-sm csPtTransactionDateEoi requiredField" placeholder="Transaction Date"/>
 							</td>
 							<td>
-								<input maxlength="10" class="numericWithoutDecimal numericField full form-control input-sm csPtTransactionAmountEoi requiredField" onkeyup="csPtcalculateGrandTotalEoi()" name="amount" placeholder="Transaction Amount"/>
+								<input maxlength="13" class="numericWithDecimal full form-control input-sm csPtTransactionAmountEoi requiredField" onkeyup="csPtcalculateGrandTotalEoi()" name="amount" placeholder="Transaction Amount"/>
 							</td>
 							
 							<td style="display:none;">

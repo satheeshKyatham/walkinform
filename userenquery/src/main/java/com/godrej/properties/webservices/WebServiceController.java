@@ -1666,7 +1666,9 @@ public class WebServiceController<MultipartFormDataInput> {
 	 * IOException {
 	 */
 
+
 	public String getPaymentTrxValidationDate(String paymentTrxDaysAllow) {
+
 		
 		 int days = 3;
 		 
@@ -1679,7 +1681,6 @@ public class WebServiceController<MultipartFormDataInput> {
 		 } else {
 			days = 3;
 		 }
-
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.DAY_OF_MONTH, days);
@@ -1689,13 +1690,12 @@ public class WebServiceController<MultipartFormDataInput> {
 
 	}
 
-	@RequestMapping(value = "/getProjectPlan", method = RequestMethod.GET, produces = "application/json")
-	public String getProjectPlan(@RequestParam("herokuEnqId") String herokuEnqId,
-			@RequestParam("pymtPlanSfid") String pymtPlanSfid, @RequestParam("project_code") String project_code,
-			@RequestParam("unit") String unit, @RequestParam("towerCode") String towerCode,
-			@RequestParam("typology") String typology) throws JRException, IOException {
-
-		long timeId = Long.parseLong("1234");
+	 
+	 
+	 @RequestMapping(value = "/getProjectPlan", method = RequestMethod.GET, produces = "application/json")
+		public String getProjectPlan(@RequestParam("herokuEnqId") String herokuEnqId,  @RequestParam("pymtPlanSfid") String pymtPlanSfid, @RequestParam("project_code") String project_code ,@RequestParam("unit") String unit,  @RequestParam("towerCode") String towerCode,  @RequestParam("typology") String typology) throws JRException, IOException{
+			
+		 long timeId = Long.parseLong("1234");
 
 		/*
 		 * GeneratePDF solution = new GeneratePDF ();
@@ -1827,6 +1827,7 @@ public class WebServiceController<MultipartFormDataInput> {
 			 * paymentPlanJsons.add(paymentPlanJson);
 			 * 
 			 * }
+			 
 			 
 			 
 			 
@@ -3757,12 +3758,34 @@ public class WebServiceController<MultipartFormDataInput> {
 
 		}
 
-		if (receiptAttach != null) {
-			File ad_dir = new File(rootPath + File.separator + "EOIbookingReference" + File.separator + enqID
-					+ File.separator + rowCount);
-			String ad_path = ad_dir + File.separator + rowCount + "Receipt" + "_" + receiptAttach.getOriginalFilename();
+		if(receiptAttach!=null) {
+			File ad_dir = new File(rootPath + File.separator + "EOIbookingReference" + File.separator + enqID + File.separator + rowCount);
+			String ad_path =ad_dir +File.separator+rowCount+"Receipt"+"_"+receiptAttach.getOriginalFilename();
 			if (!ad_dir.exists()) {
-				ad_dir.mkdirs();
+				ad_dir.mkdirs();	
+			}
+			byte[] abytes;
+			abytes = receiptAttach.getBytes();
+			File aserverFile = new File(ad_path);
+			BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(aserverFile));
+			stream.write(abytes);
+			stream.close();
+		}
+		
+		
+		try {
+				
+			//FileUploadService.save(att);
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return "";
+	} 
+
 		
 		
 		
@@ -3812,50 +3835,7 @@ public class WebServiceController<MultipartFormDataInput> {
 		
 		
 		//Update EOI payment from costsheet
-		@RequestMapping(value = "/updateForSubmittedOffer", method = RequestMethod.POST, produces = "application/json")
-		public String updateEOI(@RequestParam("paymentDtlJson") String paymentData) 
-		{		
-			
-			GsonBuilder gsonBuilder = new GsonBuilder();
-			Gson gson = gsonBuilder.create();
-			
-			String str=paymentData;
-			  
-			Object object=null;
-			JsonArray arrayObj=null;
-			JsonParser jsonParser=new JsonParser();
-			object=jsonParser.parse(str);
-			arrayObj=(JsonArray) object;
-			
-			List<EOIPaymentDtl> charges1=new ArrayList<>();
-			for(int i=0;i<arrayObj.size();i++) {
-				EOIPaymentDtl ecData1= new EOIPaymentDtl();
-				ecData1= gson.fromJson(arrayObj.get(i), EOIPaymentDtl.class);
-				//ecData1.setUser_contact(contactNo);
-				//ecData1.setSeq(i);
-				//ecData1.setTimeid(timeId);
-				charges1.add(ecData1);
-			}
-			byte[] abytes;
-			abytes = receiptAttach.getBytes();
-			File aserverFile = new File(ad_path);
-			BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(aserverFile));
-			stream.write(abytes);
-			stream.close();
-		}
-
-		try {
-
-			// FileUploadService.save(att);
-
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		return "";
-	}
-
+		
 	@RequestMapping(value = "/getEOIPaymentRecord", method = RequestMethod.POST)
 	public String getEOIPaymentRecord(@RequestParam("enqSfid") String enqSfid) {
 		GsonBuilder gsonBuilder = new GsonBuilder();
@@ -3960,47 +3940,7 @@ public class WebServiceController<MultipartFormDataInput> {
 		return gson.toJson("");
 	}
 
-	@RequestMapping(value = "/getEOITabPreferencRecord", method = RequestMethod.POST)
-	public String getEOITabPreferencRecord(@RequestParam("enqSfid") String enqSfid) {
-		GsonBuilder gsonBuilder = new GsonBuilder();
-		Gson gson = gsonBuilder.create();
 
-		return gson.toJson(eOIPreferenceDtlService.getEOIPreferenceRecord(enqSfid));
-	}
-
-	@RequestMapping(value = { "/triggerLog" }, method = RequestMethod.GET)
-	public ModelAndView triggerLog() {
-		ModelAndView model = new ModelAndView();
-		model.setViewName("triggerLog");
-		return model;
-	}
-
-	@RequestMapping(value = "/getTriggerlogList", method = RequestMethod.GET, produces = "application/json")
-	public String getTriggerlogList(@RequestParam("fromDate") String fromDate, @RequestParam("toDate") String toDate) {
-		Gson gson = new GsonBuilder().disableHtmlEscaping().serializeNulls().create();
-		String whereCondition = "";
-
-		// whereCondition = "propstrength__project__c=" + "'"+projectSfid+"'";
-		// whereCondition = "updated_at BETWEEN" + "'"+fromDate+"'" + "AND" +
-		// "'"+toDate+"'";
-		whereCondition = "DATE(updated_at) = " + "'" + fromDate + "'";
-
-		return gson.toJson(triggerLogService.getTriggerLogDtl(whereCondition));
-	}
-
-	@RequestMapping(value = "/getTriggerlogArchiveList", method = RequestMethod.GET, produces = "application/json")
-	public String getTriggerlogArchiveList(@RequestParam("fromDate") String fromDate,
-			@RequestParam("toDate") String toDate) {
-		Gson gson = new GsonBuilder().disableHtmlEscaping().serializeNulls().create();
-		String whereCondition = "";
-
-		// updated_at BETWEEN '2019-09-09' AND '2019-09-14';
-		// whereCondition = "updated_at BETWEEN" + "'"+fromDate+"'" + "AND" +
-		// "'"+toDate+"'";
-		whereCondition = "DATE(updated_at) = " + "'" + fromDate + "'";
-
-		return gson.toJson(triggerLogArchiveService.getTriggerLogArchiveDtl(whereCondition));
-	}
 
 	// Update EOI payment from costsheet
 	@RequestMapping(value = "/updateForSubmittedOffer", method = RequestMethod.POST, produces = "application/json")
