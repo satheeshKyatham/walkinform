@@ -20,10 +20,6 @@ if(ses!=null){
 	<%--  <a href="${pageContext.request.contextPath}/"><img style="width: 100%;  height: 150px;"class="logo" src="${pageContext.request.contextPath}/resources/images/logo.png"></a> --%>
 	 <div class="menuLogo">
 		<img style="width: 100%;  height: 70px;"class="logo" src="${pageContext.request.contextPath}/resources/images/logo.png">
-<<<<<<< HEAD
-		 <span>Queue</span> 
-=======
->>>>>>> refs/remotes/origin/master
 		<span>D4U</span>
 	</div>
 	<ul id="menu">
@@ -39,6 +35,7 @@ if(ses!=null){
 	<li><a href="${pageContext.request.contextPath}/paymentPlanDue">Payment Plan Due</a></li>
 	<li><a href="${pageContext.request.contextPath}/salesTnc">Cost Sheet T&C</a></li>
 	<li><a href="${pageContext.request.contextPath}/towerPPExclusion">Tower PP Exclusion</a></li>
+	<li><a href="${pageContext.request.contextPath}/updatePaymentPlan">Update Payment Plan</a></li>
 	<li><a href="${pageContext.request.contextPath}/paymentPlanRanking">Payment Plan Ranking</a></li>
 	<li><a href="${pageContext.request.contextPath}/schemeCharges">Scheme Charges</a></li>
 	<% }else { %> 
@@ -51,6 +48,7 @@ if(ses!=null){
 	<li><a href="${pageContext.request.contextPath}/paymentPlanDue">Payment Plan Due</a></li>
 	<li><a href="${pageContext.request.contextPath}/towerPPExclusion">Tower PP Exclusion</a></li>
 	<li><a href="${pageContext.request.contextPath}/tnc">Cost Sheet T&C</a></li>
+	<li><a href="${pageContext.request.contextPath}/updatePaymentPlan">Update Payment Plan</a></li>
 	<li><a href="${pageContext.request.contextPath}/tncEOI">EOI T&C</a></li>
 	<li><a href="${pageContext.request.contextPath}/paymentPlanRanking">Payment Plan Ranking</a></li>
 	<li><a href="${pageContext.request.contextPath}/schemeCharges">Scheme Charges</a></li>
@@ -59,15 +57,6 @@ if(ses!=null){
 	<li><a href="${pageContext.request.contextPath}/admininventory/a1l6F0000080iilQAA/Godrej%20Lake%20Garden/80/">Inventory</a></li>
 	<li><a href="${pageContext.request.contextPath}/createdoffers?projectid=a1l6F0000080irTQAQ">Created Offers List</a></li>
 	<li><a href="${pageContext.request.contextPath}/triggerLog">Trigger Log</a></li>
-	<%}} %> 
-	
-	
-	<li><a href="${pageContext.request.contextPath}/updatePaymentPlan">Update Payment Plan</a></li>
-	
-	
-	<li><a href="${pageContext.request.contextPath}/updatePaymentPlan">Update Payment Plan</a></li>
-	
-	
 	 <%}} %> 
 	 <li><a href="${pageContext.request.contextPath}/saleslogin" onclick="logoutSession()">Logout</a></li>
 	</ul> 
