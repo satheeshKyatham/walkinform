@@ -14,8 +14,10 @@ function addSalesTnc() {
 	debugger
 	
 	if ($('#projectDataListTnc').val() != '') {
+		$("#addSalesTncId").attr("disabled","disabled");
 		$.post(pageContext+"insertTnCForPP",{"tnc_text" : $('.Editor-editor').html(),"project_id" : $('#projectDataListTnc').val(),"project_name" : $('#projectDataListTnc :selected').text(),"pymt_plan_id" : $('#paymentPlanDropdownTnc').val(),"pymt_plan_name" : $('#paymentPlanDropdownTnc :selected').text(),"region_id" :$('#region_id').val(),"region_name" : $('#region_id').val(),"tower_sfid" : $('#towerMstTnc').find('option:selected').attr('name'),"tower_name" : $('#towerMstTnc :selected').text()}, function(data) {
 				}).done(function(data) {
+			$("#addSalesTncId").removeAttr("disabled","disabled");
 			if (data.insertStatus != "NOT_OK") {
 				projectDataList();
 				$('#tncTableId tbody tr.tncDataPlotRow').remove();
@@ -125,10 +127,12 @@ function paymentAndTowerDropdownForTncSearch(){
 function towerListSearch(){
 	$('#towerMstSearch').empty();
 	var projectNameVal = $("#projectDataListSearch").val();
+	$("#amsearchId").attr("disabled","disabled");
 	var urlTower = pageContext + "getTowerMaster?project_code="+ projectNameVal;
 	$.getJSON(
 			urlTower,
 			function(data) {
+				$("#amsearchId").removeAttr("disabled","disabled");
 				$('#towerMstSearch').append('<option name="" value="">Select</option>');
 				$.each(data, function(index, value) {
 					$('#towerMstSearch').append("<option name='" + value.tower_code__c + "' value='"+ value.sfid + "'>"+ value.tower_name__c + "</option>");

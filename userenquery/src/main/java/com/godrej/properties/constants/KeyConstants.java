@@ -73,6 +73,10 @@ public class KeyConstants {
 	public static final String ERROR_MSG_103 = "errorInCode103"; //Yes, There is some technical problem.
 	public static final String ERROR_MSG_104 = "errorInCode104"; //Payment validation Error.
 	
+	public static final String ERROR_MSG_105 = "errorNoUserid"; //No User ID.
+	public static final String ERROR_MSG_106 = "errorNoProOrUnitid"; //Project ID or Unit ID is not available, because of enquiry may not sync.
+	
+	
 	public static final String SUCCESS_MSG_101 = "successOfferCreate101"; //Offer Successfully Created
 	public static final String SUCCESS_MSG_102 = "successUnitAvailable102"; //Unit Available
 	
