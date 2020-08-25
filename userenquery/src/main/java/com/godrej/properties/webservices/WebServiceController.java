@@ -4303,48 +4303,62 @@ public class WebServiceController<MultipartFormDataInput> {
 		String errorMsg3 = KeyConstants.ERROR_MSG_103; // Yes, There is some
 														// technical problem.
 		String successMsg2 = KeyConstants.SUCCESS_MSG_102; // Unit Available
-
+		String errorMsg5 = KeyConstants.ERROR_MSG_105; // No User ID
+		String errorMsg6 = KeyConstants.ERROR_MSG_106; // //No Project ID or Unit ID is available, because of enquiry may not sync.
+		 
 		try {
-			if (!"".equals(projectsfid) && !"".equals(propid)) {
-				// Add by A for check unit status
-				String propStatus = inventoryStatusController.inventoryStatus(projectsfid, propid);
+			
+			if (userid != null && !userid.equals("null")  && userid != "") {
+				if (!"".equals(projectsfid) && !"".equals(propid)) {
+					// Add by A for check unit status
+					String propStatus = inventoryStatusController.inventoryStatus(projectsfid, propid);
 
-				JsonElement root = new JsonParser().parse(propStatus);
-				JsonArray jsonArray = root.getAsJsonArray();
+					JsonElement root = new JsonParser().parse(propStatus);
+					JsonArray jsonArray = root.getAsJsonArray();
 
-				// Boolean adminUnitStatus =
-				// adminUnitHoldStatusService.getAdminUnitHold(propid);
-				Boolean salesUnitStatus = salesUnitHoldStatusService.getSalesUnitHold(propid, userid);
+					// Boolean adminUnitStatus =
+					// adminUnitHoldStatusService.getAdminUnitHold(propid);
+					Boolean salesUnitStatus = salesUnitHoldStatusService.getSalesUnitHold(propid, userid);
 
-				if (jsonArray.size() > 0) {
-					JsonObject jsonObject1 = jsonArray.get(0).getAsJsonObject();
-					String propertyoholdforreallocation = jsonObject1.get("propertyoholdforreallocation").getAsString();
-					String PropertyForWebsite = jsonObject1.get("PropertyForWebsite").getAsString();
-					String PropertyForSales = jsonObject1.get("PropertyForSales").getAsString();
-					String PropertyForCP = jsonObject1.get("PropertyForCP").getAsString();
-					String Propertyallotedthroughoffer = jsonObject1.get("Propertyallotedthroughoffer").getAsString();
-					String alloted = jsonObject1.get("alloted").getAsString();
-					String active = jsonObject1.get("active").getAsString();
+					if (jsonArray.size() > 0) {
+						JsonObject jsonObject1 = jsonArray.get(0).getAsJsonObject();
+						String propertyoholdforreallocation = jsonObject1.get("propertyoholdforreallocation").getAsString();
+						String PropertyForWebsite = jsonObject1.get("PropertyForWebsite").getAsString();
+						String PropertyForSales = jsonObject1.get("PropertyForSales").getAsString();
+						String PropertyForCP = jsonObject1.get("PropertyForCP").getAsString();
+						String Propertyallotedthroughoffer = jsonObject1.get("Propertyallotedthroughoffer").getAsString();
+						String alloted = jsonObject1.get("alloted").getAsString();
+						String active = jsonObject1.get("active").getAsString();
 
-					if (propertyoholdforreallocation != null && PropertyForWebsite != null && PropertyForSales != null
-							&& PropertyForCP != null && Propertyallotedthroughoffer != null && alloted != null
-							&& active != null) {
-						if (active.equals("true")) {
-							if (Propertyallotedthroughoffer.equals("false") && alloted.equals("false")
-									&& salesUnitStatus == false) {
-								return successMsg2;
+						if (propertyoholdforreallocation != null && PropertyForWebsite != null && PropertyForSales != null
+								&& PropertyForCP != null && Propertyallotedthroughoffer != null && alloted != null
+								&& active != null) {
+							if (active.equals("true")) {
+								if (Propertyallotedthroughoffer.equals("false") && alloted.equals("false")
+										&& salesUnitStatus == false) {
+									return successMsg2;
+								} else {
+									return errorMsg1;
+								}
 							} else {
-								return errorMsg1;
+								return errorMsg2;
 							}
-						} else {
-							return errorMsg2;
 						}
+					} else {
+						log.info(" Check inventory status - Yes, There is some technical problem (code:1) ");
+						return errorMsg3;
 					}
 				} else {
-					log.info(" Check inventory status - Yes, There is some technical problem (code:1) ");
-					return errorMsg3;
+					log.info(" Get Cost Sheet Details : Project ID or Unit ID is not available, because of enquiry may not sync. ");
+					return errorMsg6;
 				}
+			} else {
+				log.info(" Get Cost Sheet Details : User ID is null or empty ");
+
+				return errorMsg5;
 			}
+			
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
