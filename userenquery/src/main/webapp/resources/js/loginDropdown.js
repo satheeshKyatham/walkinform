@@ -140,8 +140,8 @@ function onProjectSelect(source) {
 				  option = option+"<option value='MIS'>MIS Report</option>";
 				  option = option+"<option value='EOIPA'>EOI Payment Approval</option>";
 				  option = option+"<option value='KYCA'>KYC Approval</option>";
-				  option = option+"<option value='OFFLINEADM'>Offline</option></select>";
-				  option = option+"<option value='SITEHEAD'>Sales Strategy</option>";
+				  option = option+"<option value='OFFLINEADM'>Offline</option>";
+				  option = option+"<option value='SITEHEAD'>Sales Strategy</option></select>";
 				  $("#role_page").append(option);
 		  }
 	 
