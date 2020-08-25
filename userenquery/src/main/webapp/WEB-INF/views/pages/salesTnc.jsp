@@ -67,7 +67,7 @@
 		    	
 		    	<div class="form-group col-md-3">
 		    		<label style="display: block;"> &nbsp; </label>
-		    		<button type="submit" class="btn btn-default btn-primary" onclick="addSalesTnc()">Submit</button>
+		    		<button type="submit" class="btn btn-default btn-primary" id='addSalesTncId' onclick="addSalesTnc()">Submit</button>
 		    		<div class="clearfix"></div>
 		    	</div>
 		    	 <div class="clearfix"></div>
@@ -94,7 +94,7 @@
 							</div>
 							
 							<div class="form-group col-md-3" style="margin-top: 24px;">
-								<button style="padding-top:6px; padding-bottom:6px;" class="btn blue_btn btnCommon " type="button" value="Search" name="Search" id="amsearch" onclick="tncSearch()">
+								<button style="padding-top:6px; padding-bottom:6px;" class="btn blue_btn btnCommon " type="button" value="Search" name="Search" id="amsearchId" onclick="tncSearch()">
 									<span>
 									</span> Search
 								</button>
