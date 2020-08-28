@@ -1,12 +1,12 @@
 
 var pageContext = $("#pageContext").val()+"/";	
 
-regionList();
+/*regionList();*/
 var totalPP='';
 $(document).ready(function(){
 	
 });
-function regionList () {
+/*function regionList () {
 	$('#regionList').empty();	
 	var urlRegionList = pageContext+"regionList?project_code=test";
 	
@@ -17,14 +17,15 @@ function regionList () {
 		});					
 	}).done(function() {
 	});
-}
-
+}*/
+projectDataList ();
 function projectDataList (){
 	$('#projectDataList').empty();	
-	var urlTower = pageContext+"projectDataList?region="+$('#regionList').val();
+	var urlTower = pageContext+"projectListForSales?projectid="+ $("#gProjectId").val();
 	$.getJSON(urlTower, function (data) {
 		$('#projectDataList').append('<option value="">Select</option>');
 		$.each(data, function (index, value) {
+			$("#region_id").val(value.region__c);
 			$('#projectDataList').append("<option value='"+value.sfid+"'>"+value.name+  " / " +value.propstrength__project_code__c+ "</option>");
 		});					
 	}).done(function() {
@@ -230,8 +231,8 @@ function addPaymentPlanRank () {
 	        		getTowerPPList();
 	        		$('#projectDataList').val("");
 	        		$('#projectDataList :selected').text("");
-	        		$('#regionList').val("");
-	        		$('#regionList :selected').text("");
+	        		/*$('#regionList').val("");
+	        		$('#regionList :selected').text("");*/
 	        		$('#ppDropdown').val("");
 	        		$('#ppDropdown :selected').text("");
 	        		$('#towerMst :selected').text("");

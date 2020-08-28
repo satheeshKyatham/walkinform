@@ -16,7 +16,7 @@ function addschemeCharge () {
     	zeroGovtCharges = false;
     }
 	
-	$.post(pageContext+"insertSchemeCharge",{"sourceName":$('#getHeaderSchemeSource option:selected').text(),  "siteName":$('#getHeaderSchemeSite option:selected').text(),      "promotionalName":$('#getHeaderSchemePromotional option:selected').text(),        "percentage":$('#percentage').val(), "absolute_amount":$('#absolute_amount').val(),  "region":$('#regionList').val(),"projectName":$('#projectDataList option:selected').text()
+	$.post(pageContext+"insertSchemeCharge",{"sourceName":$('#getHeaderSchemeSource option:selected').text(),  "siteName":$('#getHeaderSchemeSite option:selected').text(),      "promotionalName":$('#getHeaderSchemePromotional option:selected').text(),        "percentage":$('#percentage').val(), "absolute_amount":$('#absolute_amount').val(),  "region":$('#region_id').val(),"projectName":$('#projectDataList option:selected').text()
 		,"projectid":$('#projectDataList').val(),"scheme_name":$('#scheme_name').val(),"scheme_rate":$('#scheme_rate').val() ,"zeroGovtCharges":zeroGovtCharges},function(data){				 
 		
 	}).done(function(data){
@@ -29,7 +29,7 @@ function addschemeCharge () {
 	});
 }
 
-regionList();
+/*regionList();
 
 function regionList () {
 	$('#regionList').empty();	
@@ -46,15 +46,23 @@ function regionList () {
 		});					
 	}).done(function() {
 	});
-}
+}*/
 
+projectDataList();
 function projectDataList (){
+	debugger
 	$('#projectDataList').empty();	
-	var urlTower = pageContext+"projectDataList?region="+$('#regionList').val();
+	var urlTower = pageContext+"projectListForSales?projectid="+ $("#gProjectId").val();
+	/*$('#projectDataList').append('<option value="-1">Select</option>');*/
+	$('#projectDataListForSM').append('<option value="-1">Select</option>');
+	$('#projectDataListForMaster').append('<option value="-1">Select</option>');
 	$.getJSON(urlTower, function (data) {
 		$('#projectDataList').append('<option value="-1">Select</option>');
 		$.each(data, function (index, value) {
+			$("#region_id").val(value.region__c);
 			$('#projectDataList').append("<option value='"+value.sfid+"'>"+value.name+  " / " +value.propstrength__project_code__c+ "</option>");
+			$('#projectDataListForSM').append("<option value='"+value.sfid+"'>"+value.name+  " / " +value.propstrength__project_code__c+ "</option>");
+			$('#projectDataListForMaster').append("<option value='"+value.sfid+"'>"+value.name+  " / " +value.propstrength__project_code__c+ "</option>");
 		});					
 	}).done(function() {
 	});

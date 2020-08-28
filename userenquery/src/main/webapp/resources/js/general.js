@@ -4,7 +4,8 @@ $(document).ready(function () {
 	});
 	
 	var urlGetUsers = PAGECONTEXT_GV+"getProjectListUserWise?userid="+USERID_GV;	
-	 
+	var option = ''; 
+	
 	$.getJSON(urlGetUsers, function (data) {
 		var sourceType = '"HEADER_COMMON"';
 		var defaultSelected = "";
@@ -27,22 +28,23 @@ $(document).ready(function () {
 	});
 });
 
+var optionDtl = '';
 
 function userprojectmultiselect (){
 	var urlGetUsers = "getProjectListUserWise?userid="+$('#userid').val();	
 	$.getJSON(urlGetUsers, function (data) {
 		var defaultSelected = "";
-		option = '';
+		
 		$.each(data, function (index, value) {
 			if (value.projectId == $('#projectid').val()) {
 				defaultSelected = "selected";
 			} else {
 				defaultSelected = "";
 			}
-			option = option+"<option value="+value.projectId+" "+defaultSelected+">"+value.projectName+"</option>";
+			optionDtl = optionDtl+"<option value="+value.projectId+" "+defaultSelected+">"+value.projectName+"</option>";
 		});		
 	}).done(function() {
-		$(".userMultiselectProject").append(option);
+		$(".userMultiselectProject").append(optionDtl);
 		$('.userMultiselectProject').multiselect({
 			maxHeight: '200',
 			allSelectedText: 'All',

@@ -10,5 +10,7 @@ public interface ProjectRegionService {
 	List<ProjectRegion> getRegion();
 
 	List<ProjectRegion> getProjectData(String region);
+
+	ProjectRegion getRegionForTnc(String projectid);
 	
 }

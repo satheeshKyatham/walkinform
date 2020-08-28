@@ -9,7 +9,7 @@ $.ajaxSetup({
 var pageContext = $("#pageContext").val()+"/";	
 
 function addCarParkCharge () {
-	$.post(pageContext+"insertCarparkCharges",{ "project_id":$('#projectDataList').val(), "project_name":$('#projectDataList :selected').text(), "region_id":$('#regionList').val(), "region_name":$('#regionList :selected').text(),       "parkTypeName":$('#parkType :selected').text(),  "parkType":$('#parkType').val(),   "carParkAmount":$('#carParkAmount').val() },function(data){				 
+	$.post(pageContext+"insertCarparkCharges",{ "project_id":$('#projectDataList').val(), "project_name":$('#projectDataList :selected').text(), "region_id":$('#region_id').val(), "region_name":$('#region_id').val(),"parkTypeName":$('#parkType :selected').text(),  "parkType":$('#parkType').val(),   "carParkAmount":$('#carParkAmount').val() },function(data){				 
 		
 	}).done(function(data){
 		swal({
@@ -21,7 +21,7 @@ function addCarParkCharge () {
 	});
 }
 
-regionList();
+/*regionList();
 
 function regionList () {
 	$('#regionList').empty();	
@@ -34,14 +34,16 @@ function regionList () {
 		});					
 	}).done(function() {
 	});
-}
-
+}*/
+projectDataList();
 function projectDataList (){
+	debugger
 	$('#projectDataList').empty();	
-	var urlTower = pageContext+"projectDataList?region="+$('#regionList').val();
+	var urlTower = pageContext+"projectListForSales?projectid="+ $("#gProjectId").val();
 	$.getJSON(urlTower, function (data) {
 		$('#projectDataList').append('<option value="">Select</option>');
 		$.each(data, function (index, value) {
+			$("#region_id").val(value.region__c);
 			$('#projectDataList').append("<option value='"+value.sfid+"'>"+value.name+  " / " +value.propstrength__project_code__c+ "</option>");
 		});					
 	}).done(function() {
@@ -61,14 +63,9 @@ function getCarparkTypeList (){
 }
 
 
-
-
-
-
 function insertMaster () {
 	var call = 'insertCarparkType';
-	
-	$.post(pageContext+call,{"region":$('#regionList').val(),
+	$.post(pageContext+call,{"region":$('#region_id').val(),
 		"projectName":$('#projectDataList option:selected').text(),
 		"projectid":$('#projectDataList').val(), 
 		"carparkName": $('#carParkTypeName').val()},function(data){				 

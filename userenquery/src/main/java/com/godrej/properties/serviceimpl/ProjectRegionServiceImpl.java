@@ -35,5 +35,12 @@ public class ProjectRegionServiceImpl implements ProjectRegionService {
 		// TODO Auto-generated method stub
 		return projectRegionDao.getProjectData(region);
 	}
+
+
+	@Override
+	public ProjectRegion getRegionForTnc(String projectid) {
+		
+		return projectRegionDao.getRegionForTncQuery(projectid);
+	}
 	
 }

@@ -56,6 +56,7 @@ public class TnC implements Serializable{
 	
 	@Column(name = "tower_sfid")
 	private String tower_sfid;
+	@Column(name = "tower_name")	private String tower_name;
 	
 	public int getId() {
 		return id;
@@ -163,5 +164,14 @@ public class TnC implements Serializable{
 
 	public void setTower_sfid(String tower_sfid) {
 		this.tower_sfid = tower_sfid;
-	}	
+	}
+
+	public String getTower_name() {
+		return tower_name;
+	}
+
+	public void setTower_name(String tower_name) {
+		this.tower_name = tower_name;
+	}
+	
 }

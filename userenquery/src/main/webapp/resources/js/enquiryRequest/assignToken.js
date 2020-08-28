@@ -6,7 +6,7 @@ $.ajaxSetup({
     }
 });
 
-var option ='';
+var option1 ='';
 	var reasignOption ='';
 $(document).ready(function() {
 	
@@ -17,10 +17,13 @@ $(document).ready(function() {
 	    var value = $(this).val();
 	    if(value!='-1'){
 	    	var urlGetUsers = "getUserProjectMapping?projectid="+$('#projectid').val();
+	    	
+	    	//alert ("PROJECT ID" + $('#projectid').val());
+	    	
 	    	//$("#mainPageLoad").show();
 	       var j = 0
 	    	$.getJSON(urlGetUsers, function (data) {
-	    		option = "<select class='form-control ' onchange='onUserSelect()' id='userSelected'><option>Select Type</option>";
+	    		option1 = "<select class='form-control ' onchange='onUserSelect()' id='userSelected'><option>Select Type</option>";
 	    		reasignOption = "<select class='form-control assignToInput' style='display:none' id='userReAssSelected' ><option>Select Type</option>";
 	    		$.each(data, function (index, value) {
 	    			var name='';
@@ -28,13 +31,22 @@ $(document).ready(function() {
 	    				name='';
 	    			else
 	    				name=value.name;
-	    			option = option+"<option value="+value.user_id+">"+value.user_name+"</option>";
+	    			option1 = option1+"<option value="+value.user_id+">"+value.user_name+"</option>";
 	    			reasignOption = reasignOption+"<option value="+value.user_id+">"+value.user_name+"</option>";
 	    			j = j+1
 	    		});		
-	    		option=option+"</select>";
+	    		
+	    		//alert ('BEFORE Test APPEND');
+	    		
+	    		option1=option1+"</select>";
 	    		reasignOption = reasignOption+"</select>";
+	    		
+	    		//alert ('Test APPEND');
+	    		
 	    	}).done(function() {
+	    		
+	    		//alert ('Test DONE');
+	    		
 	    		if (j == 0){
 	    			//alert ("No record found for this no 233.");
 	    		}	
@@ -83,9 +95,9 @@ $(document).ready(function() {
 					  }
 					
 					var userlist ="";
-					if(option.indexOf("userSelected") != -1){
+					if(option1.indexOf("userSelected") != -1){
 						   //alert(option + " found");
-						   userlist = option.replace("userSelected","userSelected"+value.nv_token_id);
+						   userlist = option1.replace("userSelected","userSelected"+value.nv_token_id);
 						   //slectedID="userSelected"+value.nv_token_id;
 						}
 					var str = value.mobileno;

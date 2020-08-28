@@ -75,7 +75,25 @@ $("#getCSData").click(function (){
          	 $.post(pageContext+"getInventoryStatus",{"userid":$('#userid').val(),  "projectsfid":$('#projectsfid').val(),"propid":$('#unitSfid').val()},function(data){                       
          	       
              }).done(function(data){
-              	   if (data == "errorNoUnit101") {
+              	   if (data == "errorNoUserid") {
+              		   $('#getCSData span').html(''); 
+            		   swal({
+            			   	title: "Your session has expired. please login again", 
+        	   				text: "",
+        	   				type: "warning",
+        	   				allowOutsideClick: true,
+        	   				showConfirmButton: true
+        	   			});
+              	   } else if (data == "errorNoProOrUnitid") {
+              		 	$('#getCSData span').html(''); 
+              		 	swal({
+	          			   	title: "Enquiry Sync In-Progress,", 
+	      	   				text: "Please Wait OR Refresh the page.",
+	      	   				type: "warning",
+	      	   				allowOutsideClick: true,
+	      	   				showConfirmButton: true
+	      	   			});
+              	   } else if (data == "errorNoUnit101") {
 	              	   //$('#getCSData span').html('<i class="fa fa-spinner fa-spin" style="color:#fff !important"></i>');          
 	              	   loadData (SALESCOSTSHEET);
               		   swal({

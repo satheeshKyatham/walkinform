@@ -28,13 +28,11 @@
 
 	<div class="container">
 		<div class="row">
+		<input type="hidden" id="region_id" >
 			<h2>Tower Payment Plan Exclusion</h2>
 		    
 		    <div class="row">
-				<div class="form-group col-md-3">
-					<label>Region</label>
-					<select class="form-control" id="regionList" onchange="projectDataList()"> </select>
-				</div>
+				
 				
 				<div class="form-group col-md-3">
 					<label>Project</label>
@@ -81,10 +79,7 @@
 					<th style="width: 165px;">
 						Action
 					</th>
-				</tr>
-				
-				
-				
+				</tr>				
 			</tbody>
 		</table>
 	        </div>

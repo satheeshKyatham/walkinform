@@ -36,7 +36,7 @@ public class Vw_UserMaster {
 	@Column(name="closingmgr") private String closingmgr  ;
 	@Column(name="email") private String email  ;
 	@Column(name="user_type__c") private String user_type__c  ;
-	 
+	@Column(name="region__c") private String regionname;
 	@Transient private String	msg  ;
 	
 	public String getAssignto() {
@@ -159,6 +159,14 @@ public class Vw_UserMaster {
 	public void setRow_number(int row_number) {
 		this.row_number = row_number;
 	}
+	public String getRegionname() {
+		return regionname;
+	}
+	public void setRegionname(String regionname) {
+		this.regionname = regionname;
+	}
+	
+	
 	
 	/*@Override
 	public String toString() {

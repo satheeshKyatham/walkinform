@@ -24,7 +24,7 @@ public class BalanceDetailsDaoImpl extends AbstractDao<Integer, BalanceDetails> 
 	
 	public BalanceDetails insertBalanceDetails(BalanceDetails action) {
 		//if already offer Exists for Enquiry Check
-		Session session = this.sessionFactory.getCurrentSession();	
+		//Session session = this.sessionFactory.getCurrentSession();	
 		//List<BalanceDetails> list =session.createQuery(" from BalanceDetails where enquiry_sfid='"+action.getEnquiry_sfid()+"' and isactive='A'").list();
 		//if(list.size()>0)
 		//{
@@ -35,8 +35,13 @@ public class BalanceDetailsDaoImpl extends AbstractDao<Integer, BalanceDetails> 
 		
 			/*Query query = session.createQuery(" Update BalanceDetails set isactive ='I' where enquiry_sfid='"+action.getEnquiry_sfid()+"'");
 			query.executeUpdate();*/
-			
-			persist(action);
+			try
+			{
+				persist(action);
+			}
+			catch (Exception e) {
+				logger.error("Error on BalanceDetails Insert:-"+e);
+			}
 			
 			return action;
 		//}
