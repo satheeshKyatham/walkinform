@@ -87,7 +87,8 @@ function getEOIReport () {
 							" <td>"+obj1[i].verticle__c+"</td>" +
 							" <td>"+obj1[i].broker_account_name+"</td>" +
 							" <td>"+obj1[i].closing_manager_name__c+"</td>" +
-							" <td>"+obj1[i].date_of_eoi__c+"</td>" +
+							/*" <td>"+obj1[i].date_of_eoi__c+"</td>" +*/
+							" <td>"+obj1[i].eoi_payment_date+"</td>" +
 							" <td>"+obj1[i].tokentypename+"</td>" +
 							" <td>"+obj1[i].total_payment_done+"</td>" +
 							" <td>"+obj1[i].total_payment_approved+"</td>" +
@@ -190,7 +191,8 @@ function getPaymentEOIReport () {
 							" <td>"+obj1[i].walk_in_source__c+"</td>" +
 							" <td>"+obj1[i].verticle__c+"</td>" +
 							" <td>"+obj1[i].closing_manager_name__c+"</td>" +
-							" <td>"+obj1[i].date_of_eoi__c+"</td>" +
+							/*" <td>"+obj1[i].date_of_eoi__c+"</td>" +*/
+							" <td>"+obj1[i].eoi_payment_date+"</td>" +
 							" <td>"+obj1[i].payment_type+"</td>" +
 							" <td>"+obj1[i].bank_name+"</td>" +
 							" <td>"+obj1[i].branch+"</td>" +

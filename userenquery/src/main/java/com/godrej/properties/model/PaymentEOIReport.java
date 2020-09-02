@@ -2,6 +2,7 @@ package com.godrej.properties.model;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -41,6 +42,7 @@ public class PaymentEOIReport implements Serializable{
 	@Column(name="project_sfid") private String project_sfid;
 	
 	@Column(name="userid") private  int userid ;
+	@Column(name="eoi_payment_date") private  Timestamp eoi_payment_date ;
 	
 	
 	public int getId() {
@@ -178,4 +180,12 @@ public class PaymentEOIReport implements Serializable{
 	public void setUserid(int userid) {
 		this.userid = userid;
 	}
+	public Timestamp getEoi_payment_date() {
+		return eoi_payment_date;
+	}
+	public void setEoi_payment_date(Timestamp eoi_payment_date) {
+		this.eoi_payment_date = eoi_payment_date;
+	}
+	
+	
 }

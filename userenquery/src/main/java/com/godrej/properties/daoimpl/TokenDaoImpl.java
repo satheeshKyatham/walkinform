@@ -276,9 +276,7 @@ public class TokenDaoImpl extends AbstractDao<Integer, Token> implements TokenDa
 	public String updateEnqSalesTab(int enqid, String email) {
 		Session session = this.sessionFactory.getCurrentSession();
 		
-		Query q = session.createNativeQuery("select sfid from  salesforce.user where email ='"+email+"' and isactive='t' ");//and user_type__c='Sales User'
-		
-		
+		Query q = session.createNativeQuery("select sfid from  salesforce.user where email ='"+email+"' and isactive='t' and department	is not null ");//and user_type__c='Sales User'
 		int i = q.getResultList().size();
 		if(i>0)
 		{

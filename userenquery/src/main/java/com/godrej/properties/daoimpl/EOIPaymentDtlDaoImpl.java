@@ -89,7 +89,7 @@ public class EOIPaymentDtlDaoImpl extends AbstractDao<Integer, EOIPaymentDtl> im
 		Query q = session.createNativeQuery("select eoiPay.gpl_cs_eoi_payment_details_id,eoiPay.project_sfid,eoiPay.userid,eoiPay.payment_type,eoiPay.bank_name,eoiPay.branch,eoiPay.isactive,eoiPay.enq_sfid,req.name "
 				+ " ,eoiPay.transaction_id,eoiPay.transaction_date,eoiPay.transaction_amount,eoiPay.description,eoiPay.total_amount "
 				+ " ,eoiPay.gpl_cs_balance_details_id,eoiPay.pan_attach,cheque_attach,user_email,eoiPay.user_name,eoiPay.project_name,eoiPay.isfromcp "
-				+ " ,c.name as customername,c.mobile__c,eoiPay.created,req.Closing_Manager_Name__c "
+				+ " ,c.name as customername,c.mobile__c,eoiPay.created,eoiPay.updated,req.Closing_Manager_Name__c "
 				+ " from salesforce.gpl_cs_eoi_payment_details eoiPay "
 				+ " inner join salesforce.propstrength__request__c req on(eoiPay.enq_sfid=req.sfid) "
 				+ " inner join salesforce.contact c on(req.PropStrength__Primary_Contact__c=c.sfid)"+whereCondition+" ");
@@ -158,6 +158,7 @@ public class EOIPaymentDtlDaoImpl extends AbstractDao<Integer, EOIPaymentDtl> im
 			dtl.setMobileNo(result[22].toString());
 			dtl.setProject_sfid(result[1].toString());
 			dtl.setCreatedDate((Timestamp) result[23]);
+			dtl.setUpdatedDate((Timestamp) result[24]);
 			list.add(dtl);
 		}
 		
