@@ -4242,7 +4242,11 @@ public class WebServiceController<MultipartFormDataInput> {
 	public String insertAuditLog(@RequestBody AuditLogDto auditLogDto) {
 		System.out.println("Entery");
 		Gson gson = new GsonBuilder().disableHtmlEscaping().serializeNulls().create();
-		return gson.toJson(auditLogService.insertAuditLog(auditLogDto));
+		try {
+			return gson.toJson(auditLogService.insertAuditLog(auditLogDto));
+		} catch (Exception e) {
+			return gson.toJson(null);
+		}
 	}
 
 	@RequestMapping(value = "/getbrokercontact", method = RequestMethod.GET)
