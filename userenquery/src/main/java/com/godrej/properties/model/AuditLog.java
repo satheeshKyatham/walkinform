@@ -1,5 +1,6 @@
 package com.godrej.properties.model;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 import javax.persistence.Column;
@@ -38,6 +39,9 @@ public class AuditLog {
 	@Column(name="created_date") private Timestamp created_date;
 	@Column(name="user_machine_details") private String user_machine_details;
 	@Column(name="user_id") private int user_id;
+	
+	
+	@Column(name="source") private String source;
 	
 	public int getNv_d4u_audit_log_id() {
 		return nv_d4u_audit_log_id;
@@ -128,19 +132,7 @@ public class AuditLog {
 	}
 	public void setInventory_name(String inventory_name) {
 		this.inventory_name = inventory_name;
-	}
-	public String getScheme_name() {
-		return scheme_name;
-	}
-	public void setScheme_name(String scheme_name) {
-		this.scheme_name = scheme_name;
-	}
-	public int getScheme_rate() {
-		return scheme_rate;
-	}
-	public void setScheme_rate(int scheme_rate) {
-		this.scheme_rate = scheme_rate;
-	}
+	} 
 	public int getToken_id() {
 		return token_id;
 	}
@@ -171,6 +163,22 @@ public class AuditLog {
 	public void setUser_id(int user_id) {
 		this.user_id = user_id;
 	}
-	
-	
+	public String getSource() {
+		return source;
+	}
+	public void setSource(String source) {
+		this.source = source;
+	}
+	public String getScheme_name() {
+		return scheme_name;
+	}
+	public void setScheme_name(String scheme_name) {
+		this.scheme_name = scheme_name;
+	}
+	public int getScheme_rate() {
+		return scheme_rate;
+	}
+	public void setScheme_rate(int scheme_rate) {
+		this.scheme_rate = scheme_rate;
+	}  
 }

@@ -3724,6 +3724,7 @@ public class WebServiceController<MultipartFormDataInput> {
 			for (int i = 0; i < arrayObj.size(); i++) {
 				EOIPaymentDtl ecData1 = new EOIPaymentDtl();
 				ecData1 = gson.fromJson(arrayObj.get(i), EOIPaymentDtl.class);
+				ecData1.setCreatedDate(new Timestamp(System.currentTimeMillis()));
 				charges1.add(ecData1);
 			}
 

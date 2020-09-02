@@ -55,7 +55,7 @@ public class AllUnitDataDaoImpl implements AllUnitDataDao{
 			   
 	  			String strRowCount = Long.toString(count);
 	  		  	
-	  		  	if (count <= 5000) {
+	  		  	if (count <= 15000) {
 	  		  		
 	  		  		/* Final Query */
 		  		  	Query q = session.createNativeQuery(" SELECT  row_number() OVER () AS row_no, "
@@ -83,7 +83,8 @@ public class AllUnitDataDaoImpl implements AllUnitDataDao{
 					+ " b.hold_reason, " 
 					+ " c.name as enq_name,  "
 					
-					+ " b.hold_status,  "
+					//+ " b.hold_status,  "
+					+ " CASE WHEN b.hold_status IS NULL THEN false  ELSE (b.hold_status)  END AS hold_status, "
 					+ " c.verticle__c, "
 					
 					+ " CASE WHEN a.open_balc_sq_ft__c IS NULL THEN cast(0 as numeric (20,2))  ELSE cast(a.open_balc_sq_ft__c as numeric (20,2))  END AS rera_net_carpet_sqft, "

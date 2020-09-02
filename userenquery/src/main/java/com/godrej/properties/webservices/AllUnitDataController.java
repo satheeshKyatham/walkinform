@@ -26,7 +26,7 @@ public class AllUnitDataController {
 	
 	
 	@RequestMapping(value = "/getAllInventoryReport", method = RequestMethod.POST)
-	public String getEOIReportDtl(@RequestParam("projectSfid") String projectSfid, @RequestParam("towerCode") String towerCode) {
+	public String getEOIReportDtl(@RequestParam("projectSfid") String projectSfid, @RequestParam("towerCode") String towerCode, @RequestParam("status") String status) {
 		
 		
 		// For multiple project report
@@ -52,9 +52,29 @@ public class AllUnitDataController {
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		Gson gson = gsonBuilder.create();
 		String whereCondition = "";
+		String statusCondition = "";
+		if (status.equals("All")) {
+			statusCondition = "";
+		} 
+		
+		/*else if (status.equals("HOLD")) {
+			statusCondition = " AND (b.hold_status = true OR a.propstrength__property_on_hold_for_reallocation__c = true) AND a.propstrength__property_alloted_through_offer__c = false AND a.propstrength__allotted__c = false";
+		}*/
+		
+		else if (status.equals("SOLD")) {
+			statusCondition = " AND a.propstrength__property_alloted_through_offer__c = true  AND a.propstrength__allotted__c = true ";
+		} else if (status.equals("AVAILABLE")) {
+			statusCondition = " AND a.propstrength__property_alloted_through_offer__c = false  AND a.propstrength__allotted__c = false   ";
+		} else if (status.equals("OFFERED")) {
+			statusCondition = " AND a.propstrength__property_alloted_through_offer__c = true   AND a.propstrength__allotted__c = false  AND a.propstrength__property_on_hold_for_reallocation__c = false ";
+		} else if (status.equals("OFFEREDSFDCHOLD")) {
+			statusCondition = " AND a.propstrength__property_on_hold_for_reallocation__c = true   AND a.propstrength__property_alloted_through_offer__c = true AND a.propstrength__allotted__c = false  ";
+		}
+		
+		
 		
 		if(towerCode != null && towerCode.length()>0) {
-			whereCondition = " a.propstrength__tower__c in ("+finalProjectid+")";
+			whereCondition = " a.propstrength__tower__c in ("+finalProjectid+")" + statusCondition;
 		} else {
 			return gson.toJson(null);
 		}

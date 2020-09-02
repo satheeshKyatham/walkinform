@@ -2,6 +2,7 @@ package com.godrej.properties.model;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -62,6 +63,7 @@ public class EOIReport implements Serializable{
 	@Column(name="eoi_form_path") private String eoi_form_path;
 	@Column(name="sourcing_manager_name__c") private String sourcing_manager_name__c;
 	@Column(name="broker_account_name") private String broker_account_name;
+	@Column(name="eoi_payment_date") private Timestamp eoi_payment_date;
 	
 	
 	public int getId() {
@@ -288,6 +290,12 @@ public class EOIReport implements Serializable{
 	}
 	public void setTokentypename(String tokentypename) {
 		this.tokentypename = tokentypename;
+	}
+	public Timestamp getEoi_payment_date() {
+		return eoi_payment_date;
+	}
+	public void setEoi_payment_date(Timestamp eoi_payment_date) {
+		this.eoi_payment_date = eoi_payment_date;
 	}
 	
 	

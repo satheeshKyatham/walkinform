@@ -1,5 +1,7 @@
 package com.godrej.properties.dto;
 
+import java.math.BigDecimal;
+
 public class AuditLogDto {
 	
 	private int category;
@@ -23,6 +25,8 @@ public class AuditLogDto {
 	private String created_date;
 	private String user_machine_details;
 	private int user_id;
+	
+	private String source; 
 	
 	public int getCategory() {
 		return category;
@@ -108,18 +112,6 @@ public class AuditLogDto {
 	public void setInventory_name(String inventory_name) {
 		this.inventory_name = inventory_name;
 	}
-	public String getScheme_name() {
-		return scheme_name;
-	}
-	public void setScheme_name(String scheme_name) {
-		this.scheme_name = scheme_name;
-	}
-	public int getScheme_rate() {
-		return scheme_rate;
-	}
-	public void setScheme_rate(int scheme_rate) {
-		this.scheme_rate = scheme_rate;
-	}
 	public int getToken_id() {
 		return token_id;
 	}
@@ -150,5 +142,22 @@ public class AuditLogDto {
 	public void setUser_id(int user_id) {
 		this.user_id = user_id;
 	}
-
+	public String getSource() {
+		return source;
+	}
+	public void setSource(String source) {
+		this.source = source;
+	}
+	public String getScheme_name() {
+		return scheme_name;
+	}
+	public void setScheme_name(String scheme_name) {
+		this.scheme_name = scheme_name;
+	}
+	public int getScheme_rate() {
+		return scheme_rate;
+	}
+	public void setScheme_rate(int scheme_rate) {
+		this.scheme_rate = scheme_rate;
+	}  
 }

@@ -121,7 +121,7 @@ function onProjectSelect(source) {
 		  else if($('#loged_role').val()=='21')
 		  {
 			  $("#role_page").empty();
-			  var option = "<select class='inputLabel' onchange='onChangeRole()' id='roleSelected' style='border-color: #000000 !important;   width: 100%;    min-height: 33px;    margin-bottom: 5px;'><option>Select Role</option>";
+			  var option = "<select class='inputLabel' onchange='onChangeRole("+source+")' id='roleSelected' style='border-color: #000000 !important;   width: 100%;    min-height: 33px;    margin-bottom: 5px;'><option>Select Role</option>";
 				option = option+"<option value='IM'>Inventory Manager</option>";
 				option = option+"<option value='AM'>Allocation Manager</option>";
 				option = option+"<option value='CM'>Closing Manager</option>";
@@ -133,15 +133,15 @@ function onProjectSelect(source) {
 		  else if($('#loged_role').val()=='22')
 		  {
 			  $("#role_page").empty();
-			  var option = "<select class='inputLabel' onchange='onChangeRole()' id='roleSelected' style='border-color: #000000 !important;   width: 100%;    min-height: 33px;    margin-bottom: 5px;'><option>Select Role</option>";
+			  var option = "<select class='inputLabel' onchange='onChangeRole("+source+")' id='roleSelected' style='border-color: #000000 !important;   width: 100%;    min-height: 33px;    margin-bottom: 5px;'><option>Select Role</option>";
 			  	  option = option+"<option value='IM'>Inventory Manager</option>";
 				  option = option+"<option value='AM'>Allocation Manager</option>";
 				  option = option+"<option value='CM'>Closing Manager</option>";
 				  option = option+"<option value='MIS'>MIS Report</option>";
 				  option = option+"<option value='EOIPA'>EOI Payment Approval</option>";
 				  option = option+"<option value='KYCA'>KYC Approval</option>";
-				  option = option+"<option value='OFFLINEADM'>Offline</option></select>";
-				  option = option+"<option value='SITEHEAD'>Sales Strategy</option>";
+				  option = option+"<option value='OFFLINEADM'>Offline</option>";
+				  option = option+"<option value='SITEHEAD'>Sales Strategy</option></select>";
 				  $("#role_page").append(option);
 		  }
 	 

@@ -82,6 +82,7 @@ public class EOIPaymentDtl implements Serializable{
 	@Column(name = "gpl_cs_balance_details_id") private int gpl_cs_balance_details_id;
 	@Column(name = "isfromcp") private String isfromcp;
 	@Column(name = "created") private Timestamp createdDate;
+	@Column(name = "updated") private Timestamp updatedDate;
 	@Column(name = "payment_mode") private String payment_mode;
 	
 	@Transient
@@ -347,4 +348,13 @@ public class EOIPaymentDtl implements Serializable{
 	public void setRowid(String rowid) {
 		this.rowid = rowid;
 	}
+
+	public Timestamp getUpdatedDate() {
+		return updatedDate;
+	}
+
+	public void setUpdatedDate(Timestamp updatedDate) {
+		this.updatedDate = updatedDate;
+	}
+	
 }
