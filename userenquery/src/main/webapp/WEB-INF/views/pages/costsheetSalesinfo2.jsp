@@ -889,7 +889,7 @@
 						
 						<tr>
 							<th class="subHead">Carpet Area Amount</th>
-							<td class="carpetAreaAmount" style="text-align:right;">
+							<td class="carpetAreaAmount" id="carpetAreaAmount" style="text-align:right;">
 							
 							
 							<th class="subHead craParkTypeLabel">Car Park Type</th>
@@ -902,7 +902,7 @@
 						
 						<tr>
 							<th class="subHead">Exclusive Area Amount</th>
-							<td class="exclusiveAreaAmount" style="text-align:right;" ></td>
+							<td class="exclusiveAreaAmount" id="exclusiveAreaAmount" style="text-align:right;" ></td>
 							<th class="subHead"></th>
 							<td></td>
 						</tr>
@@ -1071,6 +1071,7 @@
 							</th>
 							<th style="width: 135px; vertical-align: middle;" >
 								<h5 id="totalABC" style="font-weight:700" class="txtRight"></h5>
+								<h5 id="totalABCnoCurrency" style="font-weight:700; display:none;" class="txtRight"></h5>
 							</th>
 						</tr>
 						

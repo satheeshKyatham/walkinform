@@ -98,6 +98,9 @@ if(ses!=null){
 					<a href="#inventorySalesHoldReport" data-toggle="tab">Closing Manager Hold Inventory Report</a>
 				</li>
 				<li>
+					<a href="#costsheetLogReport" data-toggle="tab">Cost Sheet Log</a>
+				</li>
+				<li>
 					<a href="#updateEOITab" data-toggle="tab">EOI</a>
 				</li>
 			</ul>
@@ -138,6 +141,10 @@ if(ses!=null){
 				<%@ include file="/WEB-INF/views/pages/inventorySalesHoldReport.jsp" %>
 			</div>
 			
+			<div class="tab-pane" id="costsheetLogReport" >
+				<%@ include file="/WEB-INF/views/pages/costsheetLogReport.jsp" %>
+			</div>
+			
 			<div class="tab-pane" id="updateEOITab" >
 				<%@ include file="/WEB-INF/views/pages/updateEOI.jsp" %>
 			</div>
@@ -158,10 +165,13 @@ if(ses!=null){
 	<script src="<c:url value='/resources/js/sweetalert2.min.js' />"></script>
 	<script src="<c:url value='/resources/js/separate/admininventory.js?v=${sessionScope.version}'/>"></script>
 	<script src="<c:url value='/resources/js/separate/admininventoryReport.js?v=${sessionScope.version}'/>"></script>
+	<script src="<c:url value='/resources/js/separate/costsheetLogReport.js?v=${sessionScope.version}'/>"></script>
 	<script src="<c:url value='/resources/js/separate/salesHoldinventoryReport.js?v=${sessionScope.version}'/>"></script>
 	<script src="<c:url value='/resources/js/separate/costsheet.js?v=${sessionScope.version}'/>"></script>
 	<script src="<c:url value='/resources/js/separate/updateEOI.js?v=${sessionScope.version}'/>"></script>	
 	<script src="<c:url value='/resources/js/separate/eoiFormPrint.js?v=${sessionScope.version}'/>"></script>
+
+	<script src="<c:url value='/resources/js/enquiryRequest/common.js?v=${sessionScope.version}'/>"></script>
 
 	<%@ include file="/WEB-INF/views/pages/footer.jsp" %>
 </body>

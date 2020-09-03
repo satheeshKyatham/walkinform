@@ -64,7 +64,7 @@ $("#getCSData").click(function (){
 	if ($(this).data('source') == "SALES"){
 		//alert("Get CS Data");
 		$('#getCSData span').html('<i class="fa fa-spinner fa-spin" style="color:#fff !important"></i>'); 
-		insertAuditLogCostsheet();
+		insertAuditLogCostsheet("SALES");
        $('#updateBtnCol button').prop("disabled", false);
        
        $('#paymentPlanChangeDiv').append('<input id="paymentPlanChangeID">');
@@ -151,6 +151,7 @@ $("#getCSData").click(function (){
        }
 	} else if ($(this).data('source') == "ADMIN") {
 		$('#getCSData span').html('<i class="fa fa-spinner fa-spin" style="color:#fff !important"></i>'); 
+		insertAuditLogCostsheet("ADMIN");
 		loadData ('ADMINCOSTSHEET');
 	}
 	
@@ -171,7 +172,7 @@ function loadData (csSource) {
     	   schemeDropdown ();
        } else if ($('#schemeTypeDD').val() == 'noScheme') {
     	   $('#getPln').empty();
-    	   $('#getPln').append('<option value="0" data-valuepercentage="0" data-valueabsolute="0" data-valuerate="0">No Scheme</option>');
+    	   $('#getPln').append('<option value="0" data-id="-1" data-zerogovtcharges="false" data-valuepercentage="0" data-valueabsolute="0" data-valuerate="0">No Scheme</option>');
        } else if ($('#schemeTypeDD').val() == 'other') {
     	   $('#getPln').empty();
     	   
@@ -200,7 +201,7 @@ function loadData (csSource) {
     	   // END Other scheme field validtion
     	   
     	   
-    	   $('#getPln').append('<option data-zerogovtcharges="false" data-valuepercentage="'+otherPerVal+'" data-valueabsolute="'+otherAbsVal+'" data-valuerate="'+otherNewPlanVal+'">other</option>');
+    	   $('#getPln').append('<option data-id="-1" data-zerogovtcharges="false" data-valuepercentage="'+otherPerVal+'" data-valueabsolute="'+otherAbsVal+'" data-valuerate="'+otherNewPlanVal+'">other</option>');
        }
        
        $('.printProjectName').text($('#projectname').val());
@@ -2033,7 +2034,7 @@ function schemeDropdown (){
             	// $('#getPln').append('<option value="0" data-valuepercentage="0" data-valueabsolute="0" data-valuerate="0">Select Scheme</option>');
                     $.each(data, function (index, value) {
                           	
-                           $('#getPln').prepend('<option data-zeroGovtCharges='+value.zero_govt_charges+'  data-valuePercentage='+value.percentage+' data-valueAbsolute='+value.absolute_amount+'  data-valueRate='+value.rate+'   >'+ value.scheme+'</option>');
+                           $('#getPln').prepend('<option data-id='+value.id+' data-zeroGovtCharges='+value.zero_govt_charges+'  data-valuePercentage='+value.percentage+' data-valueAbsolute='+value.absolute_amount+'  data-valueRate='+value.rate+'   >'+ value.scheme+'</option>');
                            	
                     });                              
              }).done(function() {
@@ -2072,7 +2073,7 @@ function schemeDropdown (){
                   //$('#getPln').append('<option value="0" data-valuepercentage="0" data-valueabsolute="0" data-valuerate="0">Select Scheme</option>');
                     $.each(data, function (index, value) {
                            
-                    $('#getPln').prepend('<option data-zeroGovtCharges='+value.zero_govt_charges+'  data-valuePercentage='+value.percentage+' data-valueAbsolute='+value.absolute_amount+'  data-valueRate='+value.rate+'     >'+ value.scheme+'</option>');
+                    $('#getPln').prepend('<option data-id='+value.id+' data-zeroGovtCharges='+value.zero_govt_charges+'  data-valuePercentage='+value.percentage+' data-valueAbsolute='+value.absolute_amount+'  data-valueRate='+value.rate+'     >'+ value.scheme+'</option>');
                     
                     });                              
              }).done(function() {
@@ -2626,6 +2627,8 @@ function newOtherCharges2 () {
              
              var x = parseFloat (parseFloat($('.salesConsiderationTotalNew').text()) + parseFloat($('#tentativeChargesTotal').text())  + parseFloat($('#total_flat_cost').text())   ).toFixed(2) 
              
+             $('#totalABCnoCurrency').text(x)
+             
              x=x.toString();
              var afterPoint = '';
              if(x.indexOf('.') > 0)
@@ -2904,7 +2907,9 @@ function printPdfData(generateFrom) {
        $.post(pageContext+"printCSdata",{"USEREMAIL_GV":USEREMAIL,"unitTval":$('#unitTval').text(), "floorTval":$('#floorTval').text(), "towerName":$('#towerTval').text(), "regionName":$('#region__c').val(), "projectSfid":$('#projectId').val(),"unitSfid":$('#unitSfid').val(),"enqSfid":enqSfid,"csData":$('#getCSDataForPrint').html(), "projectName":$('#marketingProjectName').val(), "currentDate":$.datepicker.formatDate('dd/mm/yy', new Date())},function(data){                           
              
        }).done(function(data){
-             
+    	   
+    	   costsheetLogger (generateFrom);
+    	   
     	  //var uriPath = pageContext+'Costsheet?name='+enqSfid+'-'+$('#unitSfid').val()+'-'+$('#projectId').val() +'&region='+$('#region__c').val() + '&project='+$('#marketingProjectName').val()+'&tower='+encodeURIComponent($('#towerTval').text())+'&floor=' + $('#floorTval').text() + '&unit=' + $('#unitTval').text() + '&from=costsheet';
     	  var uriPath = pageContext+'Costsheet?name='+enqSfid+'-'+$('#unitSfid').val()+'-'+$('#projectId').val() +'&region='+$('#region__c').val() + '&project='+encodeURIComponent($('#marketingProjectName').val())+'&tower='+encodeURIComponent($('#towerTval').text())+'&floor=' + $('#floorTval').text() + '&unit=' + $('#unitTval').text() + '&from=costsheet';
     	  var win = window.open(uriPath,'_blank');
@@ -3598,3 +3603,254 @@ $(document).on('change', '#csPtCol .paymentCScheck[type="checkbox"]', function(e
     	$(this).closest("tr").find(".csPtTransactionId").removeClass("checkDuplicate");
     }
 });
+
+
+
+function costsheetLogger (cstype) {
+	var csSource = "";
+	var tokenid = "";
+	var useremail = "";
+	var schemeName = "";
+	
+	if ($("#getCSData").data('source') == "SALES") {
+		csSource = "SALES MANAGER";
+		
+		var tokenValidate = basicValidate ("#tokenId", "val");
+		if (tokenValidate) {
+			tokenid = $("#tokenId").val();
+		} else {
+			tokenid = -1;
+		}
+		useremail = $("#useremailID").val();
+	} else if ($("#getCSData").data('source') == "ADMIN") {
+		csSource = "INVENTORY MANAGER";
+		tokenid = -1;
+		useremail = USEREMAIL_GV;
+	}
+	 
+	var contactSFIDValidate = basicValidate ("#primarycontactsfid","val");
+	var contactSFID = "";
+	if (contactSFIDValidate){
+		contactSFID = $("#primarycontactsfid").val();
+	}
+	
+	var enqSFIDValidate = basicValidate ("#enquirysfid","val");
+	var enqSFID = "";
+	if (enqSFIDValidate){
+		enqSFID = $("#enquirysfid").val();
+	}
+	
+	var projectSFIDValidate = basicValidate ("#projectId","val");
+	var projectSFID = "";
+	if (projectSFIDValidate){
+		projectSFID = $("#projectId").val();
+	}
+	var carParkType = "No Car Park"
+	if ($('#carParkType').find('option:selected').attr("data-name") != "") {
+		carParkType = $('#carParkType').find('option:selected').attr("data-name");
+	}
+	
+	
+	var userIDValidate = basicValidate ("#userid","val");
+	var useridSFID = -1;
+	if (userIDValidate){
+		useridSFID = $("#userid").val();
+	}
+	
+	
+	
+	
+	var formData = new FormData();
+	formData.append('source', csSource);
+	formData.append('costsheet_type', cstype);
+	formData.append('token_id', tokenid);
+	formData.append('contact_sfid', contactSFID);
+	formData.append('enquiry_sfid', enqSFID);
+	formData.append('project_sfid', projectSFID);
+	formData.append('tower_sfid', $('#towerSfid').val());
+	formData.append('inventory_sfid', $('#unitSfid').val());
+	formData.append('gpl_cs_scheme_id', $('#getPln').find('option:selected').attr("data-id"));
+	formData.append('scheme_type', $("#schemeTypeDD").val());
+	formData.append('scheme_name', $("#getPln :selected").text());
+	
+	formData.append('scheme_rate', $('#getPln').find('option:selected').attr("data-valuerate"));
+	formData.append('scheme_absolute', $('#getPln').find('option:selected').attr("data-valueabsolute"));
+	formData.append('scheme_percentage', $('#getPln').find('option:selected').attr("data-valuepercentage"));
+	formData.append('scheme_zero_govt_charges', $('#getPln').find('option:selected').attr("data-zerogovtcharges"));
+	formData.append('carpark_type', carParkType);
+	formData.append('carpark_count', $("#carParkCountDD select").val()); 
+	formData.append('paymentplan_sfid', $('#ppDropdown').val());
+	
+	//------------------------------------
+	var discountedbspValidate = basicValidate (".a3","text");
+	var discounted_bsp = 0;
+	if (discountedbspValidate) {
+		discounted_bsp = $('.a3').text();
+	}
+	var ogbspValidate = basicValidate (".a3_bsp","text");
+	var og_bsp = 0;
+	if (ogbspValidate) {
+		og_bsp = $('.a3_bsp').text()
+	}
+	var carpetareaValidate = basicValidate (".a4","text");
+	var carpet_area_sqft = 0;
+	if (carpetareaValidate) {
+		carpet_area_sqft = $('.a4').text()
+	}
+	var saleableareaValidate = basicValidate (".a6","text");
+	var saleable_area_sqft = 0;
+	if (saleableareaValidate) {
+		saleable_area_sqft = $('.a6').text()
+	}
+	var carpetareareraValidate = basicValidate ("#carpetSqm","text");
+	var carpet_area_rera_sqmt = 0;
+	if (carpetareareraValidate) {
+		carpet_area_rera_sqmt = $('#carpetSqm').text()
+	}
+	var exclusiveareaValidate = basicValidate ("#balTerSqm","text");
+	var exclusive_area_sqmt = 0;
+	if (exclusiveareaValidate) {
+		exclusive_area_sqmt = $('#balTerSqm').text()
+	}
+	var totalareaValidate = basicValidate ("#totalSqm","text");
+	var total_area_sqmt = 0;
+	if (totalareaValidate) {
+		total_area_sqmt = $('#totalSqm').text()
+	}
+	var carpetareaamountValidate = basicValidate ("#carpetAreaAmount","text");
+	var carpet_area_amount = 0;
+	if (carpetareaamountValidate) {
+		carpet_area_amount = $('#carpetAreaAmount').text()
+	}
+	var exclusiveareaamountValidate = basicValidate ("#exclusiveAreaAmount","text");
+	var exclusive_area_amount = 0;
+	if (exclusiveareaamountValidate) {
+		exclusive_area_amount = $('#exclusiveAreaAmount').text()
+	}
+	var flatunitcostValidate = basicValidate ("#scOtherChrgAmount0","text");
+	var flat_unit_cost = 0;
+	if (flatunitcostValidate) {
+		flat_unit_cost = $('#scOtherChrgAmount0').text()
+	}
+	var total_aValidate = basicValidate (".salesConsiderationTotalNew","text");
+	var total_a = 0;
+	if (total_aValidate) {
+		total_a = $('.salesConsiderationTotalNew').text()
+	}
+	var total_bValidate = basicValidate ("#tentativeChargesTotal","text");
+	var total_b = 0;
+	if (total_bValidate) {
+		total_b = $('#tentativeChargesTotal').text()
+	}
+	var stempdutyamountValidate = basicValidate ("#stamp_duty","text");
+	var stemp_duty_amount = 0;
+	if (stempdutyamountValidate) {
+		stemp_duty_amount = $('#stamp_duty').text()
+	}
+	var registrationamountValidate = basicValidate ("#registrationCharges","text");
+	var registration_amount = 0;
+	if (registrationamountValidate) {
+		registration_amount = $('#registrationCharges').text()
+	}
+	var gstamountValidate = basicValidate ("#goodsNServiceTax","text");
+	var gst_amount = 0;
+	if (gstamountValidate) {
+		gst_amount = $('#goodsNServiceTax').text()
+	}
+	var total_cValidate = basicValidate ("#total_flat_cost","text");
+	var total_c = 0;
+	if (total_cValidate) {
+		total_c = $('#total_flat_cost').text()
+	}
+	
+	var paymentplantotalValidate = basicValidate ("#payableToTotal3","text");
+	var paymentplan_total = 0;
+	if (paymentplantotalValidate) {
+		paymentplan_total = $('#payableToTotal3').text()
+	}
+	
+	var total_abcValidate = basicValidate ("#totalABCnoCurrency","text");
+	var total_abc = 0;
+	if (total_abcValidate) {
+		total_abc = $('#totalABCnoCurrency').text()
+	}
+	var totaldiscountValidate = basicValidate ("#finalDiscountValue","val");
+	var total_discount = 0;
+	if (totaldiscountValidate) {
+		total_discount = $('#finalDiscountValue').val()
+	}
+	
+	
+	
+	
+	formData.append('discounted_bsp', discounted_bsp);
+	formData.append('og_bsp', og_bsp);
+	formData.append('carpet_area_sqft', carpet_area_sqft);
+	formData.append('saleable_area_sqft', saleable_area_sqft);
+	formData.append('property_name', $('.unit_property_name').text());
+	formData.append('carpet_area_rera_sqmt', carpet_area_rera_sqmt);
+	formData.append('exclusive_area_sqmt', exclusive_area_sqmt);
+	formData.append('total_area_sqmt', total_area_sqmt);
+	formData.append('carpet_area_amount', carpet_area_amount);
+	formData.append('exclusive_area_amount', exclusive_area_amount);
+	formData.append('flat_unit_cost', flat_unit_cost);
+	formData.append('total_a', total_a);
+	formData.append('total_b', total_b);
+	formData.append('stemp_duty_amount', stemp_duty_amount);
+	formData.append('registration_amount', registration_amount);
+	formData.append('gst_amount', gst_amount);
+	formData.append('total_c', total_c);
+	formData.append('total_abc', total_abc);
+	formData.append('total_discount', total_discount);
+	formData.append('paymentplan_total', paymentplan_total);
+	//------------------------------------
+	
+	
+	formData.append('cs_sales_comments', $('#costsheet_commitment').val());
+	formData.append('costsheet_path', "");
+	
+	//formData.append('createddate', "XYZ");
+	formData.append('createdby', parseInt(useridSFID));
+	formData.append('createdbyemail', useremail);
+	//formData.append('updateddate', "XYZ");
+	formData.append('updatedby', parseInt(useridSFID));
+	formData.append('isactive', "Y");
+	
+	//----------------------------------------------------------------------------------
+	
+	 
+	$.ajax({
+		url : pageContext+"insertCostsheetLog",
+		type: "POST",
+		data : JSON.stringify(Object.fromEntries(formData)),
+		dataType : 'json',
+		contentType: 'application/json'
+	}).done(function(response){ //
+		 //alert("Success"+response);
+	});
+}
+
+
+function basicValidate (id, type) {
+	var condition = false;
+	
+	if (type == "val"){
+		if ($(id).val() != undefined &&  $(id).val() != "undefined" && $(id).val() != "" && $(id).val() != null && $(id).val() != "null") {
+			condition = true;
+		} else {
+			condition = false;
+		}
+	} else if (type == "text") {
+		if ($(id).text() != undefined &&  $(id).text() != "undefined" && $(id).text() != "" && $(id).text() != null && $(id).text() != "null" && $(id).text() != "NaN" && $(id).text() != NaN) {
+			condition = true;
+		} else {
+			condition = false;
+		}
+	} else {
+		condition = false;
+	}
+	
+	
+	
+	return condition;
+}

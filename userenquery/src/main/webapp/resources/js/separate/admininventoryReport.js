@@ -10,6 +10,14 @@ $.ajaxSetup({
         }
     }
 });
+
+$(document).ready(function () {
+	$('#UnitStatus').multiselect({
+		maxHeight: '200',
+		buttonWidth: '100%'
+	});
+});
+
 var pageContext = $("#contextPath").val()+"/";	
 
 /*var visible = true;
@@ -185,6 +193,7 @@ function getInventoryReportDtl () {
 
 function getAllInventoryReportDtl () {
 	
+	$('#getAllUnitBtn span').html('<i class="fa fa-spinner fa-spin" style="color:#fff !important"></i>'); 
 	
 	var project = $('#allReportMultiTower option:selected');
 	var selectedTower = [];
@@ -192,13 +201,12 @@ function getAllInventoryReportDtl () {
 		selectedTower.push($(this).val());
 	});
 	
-	
 	console.log (selectedTower);
 	
 	$("#allInventoryReportDtl").DataTable().destroy();
 	$("#allInventoryReportDtl tbody").empty();
 	
-	$.post(pageContext+"getAllInventoryReport",{"projectSfid":$('#projectid').val(), "towerCode":selectedTower.join(",")},function(data){                      
+	$.post(pageContext+"getAllInventoryReport",{"projectSfid":$('#projectid').val(), "towerCode":selectedTower.join(","), "status":$('#UnitStatus').val()},function(data){                      
 		
 		var obj1 =JSON.parse(data);
 		var html = '';
@@ -223,7 +231,7 @@ function getAllInventoryReportDtl () {
 							&& obj1[i].propstrength__property_alloted_through_offer__c != undefined
 							&& obj1[i].propstrength__allotted__c != undefined) {
 						
-						if (obj1[i].hold_status == true || obj1[i].propstrength__property_on_hold_for_reallocation__c == true){
+						/*if (obj1[i].hold_status == true || obj1[i].propstrength__property_on_hold_for_reallocation__c == true){
 							status = 'Hold';
 						} else if (obj1[i].propstrength__property_alloted_through_offer__c == true && obj1[i].propstrength__allotted__c == true) {
 							status = 'Sold';
@@ -233,6 +241,20 @@ function getAllInventoryReportDtl () {
 							status = 'Offered';
 						} else if (obj1[i].propstrength__property_on_hold_for_reallocation__c == true && obj1[i].propstrength__property_alloted_through_offer__c == true && obj1[i].propstrength__allotted__c == false) {
 							status = 'Offered with SFDC Hold';
+						}*/
+						
+						if (obj1[i].propstrength__property_alloted_through_offer__c == true && obj1[i].propstrength__allotted__c == true) {
+							status = 'Sold';
+						} else if ((obj1[i].hold_status == true || obj1[i].propstrength__property_on_hold_for_reallocation__c == true) &&  obj1[i].propstrength__property_alloted_through_offer__c == false && obj1[i].propstrength__allotted__c == false) {
+							status = 'Hold';
+						} else if (obj1[i].propstrength__property_alloted_through_offer__c == false && obj1[i].propstrength__allotted__c == false && obj1[i].hold_status == false && obj1[i].propstrength__property_on_hold_for_reallocation__c == false) {
+							status = 'Available';
+						} else if (obj1[i].propstrength__property_alloted_through_offer__c == true && obj1[i].propstrength__allotted__c == false && obj1[i].hold_status == false && obj1[i].propstrength__property_on_hold_for_reallocation__c == false) {
+							status = 'Offered';
+						} else if (obj1[i].propstrength__property_on_hold_for_reallocation__c == true && obj1[i].propstrength__property_alloted_through_offer__c == true && obj1[i].propstrength__allotted__c == false  && obj1[i].hold_status == false ) {
+							status = 'Offered with SFDC Hold';
+						} else {
+							status = '';
 						}
 						
 					} else {
@@ -280,7 +302,7 @@ function getAllInventoryReportDtl () {
 				
 				} else {
 					swal({
-	                	title: "Records exceeding 5000. Please narrow down project or select few tower",
+	                	title: "Records exceeding 15000. Please narrow down project or select few tower",
 	          			text: "Requested records count is: "+obj1[i].qry_count,
 	          			//timer: 8000,
 	          			type: "warning",
@@ -305,8 +327,10 @@ function getAllInventoryReportDtl () {
 			"buttons": [{ "extend": 'excel', "text":'Export To Excel',"className": 'btn btn-default btn-xs' }],
 			"order": []
 		});
+		
+		$('#getAllUnitBtn span').html(''); 
 	}).fail(function(xhr, status, error) {
-    	 
+		$('#getAllUnitBtn span').html(''); 
     });
 }
 
