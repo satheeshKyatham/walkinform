@@ -259,7 +259,7 @@ public class SalesRequestController {
 			/*EnquiryDto enquiry=enquiryRequestService.getEnquiryByMobileNo(mobileNo);*/
 			List< EnquiryDto> enqList=new ArrayList<EnquiryDto>();
 			List<EnquiryDto> enquiryList=enquiryRequestService.getEnquiriesByMobileNo(countryCode,mobileNo,projectSfid,token,"");
-			ProjectLaunch projectCCPaymentStatus=projectLaunchService.getprojectDetailsForCCPayment(projectSfid);
+			ProjectLaunch projectCCPaymentStatus=projectLaunchService.getprojectDetails(projectSfid);
 			ContactDto contact=null;
 			if(CommonUtil.isCollectionEmpty(enquiryList)){
 			  contact=userContactService.findMobileNoExist(countryCode,mobileNo);

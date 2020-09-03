@@ -10,6 +10,6 @@ public interface ProjectLaunchDao {
 	String UpdateProjectStatus(String id,String status);
 	List<ProjectLaunch> getProjectList(String regionid);
 	ProjectLaunch getProjectSaleMgrID(String projectid);
-	ProjectLaunch getprojectDetailsForCCPaymentQuery(String projectSfid);
+	ProjectLaunch getprojectDetailsQuery(String projectSfid);
 
 }

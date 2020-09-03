@@ -104,7 +104,7 @@ public class ProjectLaunchDaoImpl implements ProjectLaunchDao {// extends Abstra
 
 
 	@Override
-	public ProjectLaunch getprojectDetailsForCCPaymentQuery(String projectSfid) {
+	public ProjectLaunch getprojectDetailsQuery(String projectSfid) {
 		Session session = this.sessionFactory.getCurrentSession();
 		
 		List<ProjectLaunch> list = session .createQuery( "  FROM ProjectLaunch where project_18_digit__c='"+projectSfid+"'and isActive ='A' order by name asc ") .list();//where  isactive='A'

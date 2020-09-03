@@ -10,4 +10,5 @@ public interface UserProjectMappingDao {
 	String projectassignUpdate(UserProjectMapping mapping);
 	List<UserProjectMapping> getProjectMappingList(String projectID);
 	String projectMappingUpdateStatus(UserProjectMapping mapping);
+	List<UserProjectMapping> getUserProjectByQuery(int userId);
 }

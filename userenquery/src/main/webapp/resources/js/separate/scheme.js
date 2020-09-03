@@ -52,7 +52,7 @@ projectDataList();
 function projectDataList (){
 	debugger
 	$('#projectDataList').empty();	
-	var urlTower = pageContext+"projectListForSales?projectid="+ $("#gProjectId").val();
+	var urlTower = pageContext+"projectListForSales?userId="+ $("#logedInuserid").val();
 	/*$('#projectDataList').append('<option value="-1">Select</option>');*/
 	$('#projectDataListForSM').append('<option value="-1">Select</option>');
 	$('#projectDataListForMaster').append('<option value="-1">Select</option>');
@@ -60,9 +60,9 @@ function projectDataList (){
 		$('#projectDataList').append('<option value="-1">Select</option>');
 		$.each(data, function (index, value) {
 			$("#region_id").val(value.region__c);
-			$('#projectDataList').append("<option value='"+value.sfid+"'>"+value.name+  " / " +value.propstrength__project_code__c+ "</option>");
-			$('#projectDataListForSM').append("<option value='"+value.sfid+"'>"+value.name+  " / " +value.propstrength__project_code__c+ "</option>");
-			$('#projectDataListForMaster').append("<option value='"+value.sfid+"'>"+value.name+  " / " +value.propstrength__project_code__c+ "</option>");
+			$('#projectDataList').append("<option value='"+value.project_id+"'>"+value.project_name+ "</option>");
+			$('#projectDataListForSM').append("<option value='"+value.project_id+"'>"+value.project_name+ "</option>");
+			$('#projectDataListForMaster').append("<option value='"+value.project_id+"'>"+value.project_name+ "</option>");
 		});					
 	}).done(function() {
 	});
