@@ -176,6 +176,7 @@ import com.godrej.properties.service.UnitDtlService;
 import com.godrej.properties.service.UnitExistsService;
 import com.godrej.properties.service.UserContactService;
 import com.godrej.properties.service.UserMasterService;
+import com.godrej.properties.service.UserProjectMappingService;
 import com.godrej.properties.service.VW_MISReportService;
 import com.godrej.properties.service.VW_OfferWithBalanceService;
 import com.godrej.properties.service.VW_UserMasterService;
@@ -422,6 +423,9 @@ public class WebServiceController<MultipartFormDataInput> {
 
 	@Autowired
 	private BookingOnMapService bookingOnMapService;
+	
+	@Autowired
+	private UserProjectMappingService userProjectMappingService;
 
 	@RequestMapping(value = "/activeproject", method = RequestMethod.GET, produces = "application/json")
 	public String project() {
@@ -609,8 +613,9 @@ public class WebServiceController<MultipartFormDataInput> {
 			@RequestParam("scheme_rate") Double schemeRate, @RequestParam("zeroGovtCharges") Boolean zeroGovtCharges) // add
 																														// parameter
 	{
+		ProjectLaunch regionData=projectLaunchService.getprojectDetails(projectid);
 		Scheme scheCharge = new Scheme();
-		scheCharge.setRegion_name(region);
+		scheCharge.setRegion_name(regionData.getRegionname());
 		scheCharge.setProject_name(projectName);
 		scheCharge.setScheme(schemeName);
 		scheCharge.setRate(schemeRate);
@@ -664,15 +669,15 @@ public class WebServiceController<MultipartFormDataInput> {
 		if (typology_name.equals("0")) {
 			typology_name = null;
 		}
-
+		ProjectLaunch regionData=projectLaunchService.getprojectDetails(project_id);
 		oc.setBsp_amount(bsp_amount);
 		oc.setIsactive("A");
 		oc.setProject_id(project_id);
 		oc.setProject_name(project_name);
 		oc.setPymt_plan_id(pymt_plan_id);
 		oc.setPymt_plan_name(pymt_plan_name);
-		oc.setRegion_id(region_id);
-		oc.setRegion_name(region_name);
+		oc.setRegion_id(regionData.getRegionname());
+		oc.setRegion_name(regionData.getRegionname());
 		oc.setCreatedby("9999");
 		oc.setUpdatedby("9999");
 		oc.setTowerid(tower_id);
@@ -709,15 +714,15 @@ public class WebServiceController<MultipartFormDataInput> {
 			if (tower_sfid.equals("")) {
 				tower_sfid = null;
 			}
-			
+			ProjectLaunch regionData=projectLaunchService.getprojectDetails(project_id);
 			oc.setTnc_text(tnc_text);
 			oc.setIsactive("A");
 			oc.setProject_id(project_id);
 			oc.setProject_name(project_name);
 			oc.setPymt_plan_id(pymt_plan_id);
 			oc.setPymt_plan_name(pymt_plan_name);
-			oc.setRegion_id(region_id);
-			oc.setRegion_name(region_id);
+			oc.setRegion_id(regionData.getRegionname());
+			oc.setRegion_name(regionData.getRegionname());
 			oc.setTower_name(tower_name);
 			oc.setCreatedby("9999");
 			oc.setUpdatedby("9999");
@@ -802,13 +807,14 @@ public class WebServiceController<MultipartFormDataInput> {
 																													// parameter
 	{
 		CarParkCharges oc = new CarParkCharges();
+		ProjectLaunch regionData=projectLaunchService.getprojectDetails(project_id);
 		oc.setAmount(carParkAmount);
 		oc.setIsactive("A");
 		oc.setPark_type(parkTypeName);
 		oc.setProject_id(project_id);
 		oc.setProject_name(project_name);
-		oc.setRegion_id(region_id);
-		oc.setRegion_name(region_name);
+		oc.setRegion_id(regionData.getRegionname());
+		oc.setRegion_name(regionData.getRegionname());
 		oc.setCarpark_type_mst_id(parkType);
 		carParkChargesService.insertCPAmount(oc);
 		return (oc);
@@ -4059,8 +4065,9 @@ public class WebServiceController<MultipartFormDataInput> {
 			@RequestParam("projectName") String projectName, @RequestParam("projectid") String projectid,
 			@RequestParam("inputVal") String inputVal) // add parameter
 	{
+		ProjectLaunch regionData=projectLaunchService.getprojectDetails(projectid);
 		SchemeSource scheCharge = new SchemeSource();
-		scheCharge.setRegion_name(region);
+		scheCharge.setRegion_name(regionData.getRegionname());
 		scheCharge.setProject_name(projectName);
 		scheCharge.setProject_id(projectid);
 		scheCharge.setScheme(inputVal);
@@ -4077,8 +4084,9 @@ public class WebServiceController<MultipartFormDataInput> {
 			@RequestParam("projectid") String projectid, @RequestParam("inputVal") String inputVal) // add
 																									// parameter
 	{
+		ProjectLaunch regionData=projectLaunchService.getprojectDetails(projectid);
 		SchemeSite scheCharge = new SchemeSite();
-		scheCharge.setRegion_name(region);
+		scheCharge.setRegion_name(regionData.getRegionname());
 		scheCharge.setProject_name(projectName);
 		scheCharge.setProject_id(projectid);
 		scheCharge.setScheme(inputVal);
@@ -4095,8 +4103,9 @@ public class WebServiceController<MultipartFormDataInput> {
 			@RequestParam("projectName") String projectName, @RequestParam("projectid") String projectid,
 			@RequestParam("inputVal") String inputVal) // add parameter
 	{
+		ProjectLaunch regionData=projectLaunchService.getprojectDetails(projectid);
 		SchemePromotional scheCharge = new SchemePromotional();
-		scheCharge.setRegion_name(region);
+		scheCharge.setRegion_name(regionData.getRegionname());
 		scheCharge.setProject_name(projectName);
 		scheCharge.setProject_id(projectid);
 		scheCharge.setScheme(inputVal);
@@ -4259,6 +4268,7 @@ public class WebServiceController<MultipartFormDataInput> {
 	public String bulkInsertSchemeMapping(@RequestParam("mappingJson") String mappingJson) // add
 																							// parameter
 	{
+		
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		Gson gson = gsonBuilder.create();
 
@@ -4278,7 +4288,8 @@ public class WebServiceController<MultipartFormDataInput> {
 
 				charges1.add(ecData1);
 			}
-
+			ProjectLaunch regionData=projectLaunchService.getprojectDetails(charges1.get(0).getProject_id());
+			//charges1.add
 			// paymentDtlService.insertPaymentDtl(charges1);
 
 			schemeMappingService.insertBulkMapping(charges1);
@@ -4452,12 +4463,12 @@ public class WebServiceController<MultipartFormDataInput> {
 	}
 	
 	@RequestMapping(value = "/projectListForSales", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
-	public String getProjectListForSalesTnc(@RequestParam("projectid") String projectid) {
+	public String getProjectListForSalesTnc(@RequestParam("userId") String userId) {
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		Gson gson = gsonBuilder.create();
-		ProjectRegion region = projectRegionService.getRegionForTnc(projectid);
-		List<ProjectRegion> projectList = projectRegionService.getProjectData(region.getRegion__c());
-
+		int id=Integer.parseInt(userId);;
+		/*ProjectRegion region = projectRegionService.getRegionForTnc(projectid);*/
+		List<UserProjectMapping> projectList = userProjectMappingService.getUserProject(id);
 		return gson.toJson(projectList);
 	}
 	

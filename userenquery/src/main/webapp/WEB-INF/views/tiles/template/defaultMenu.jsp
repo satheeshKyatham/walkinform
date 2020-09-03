@@ -2,12 +2,16 @@
 <%@ page isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
  <%! String projectname,projectid ,projectrole,userid;%>
+ <script type="text/javascript">
+var USERID_GV = '<%= session.getAttribute("USERID")%>';
+</script>
 <%HttpSession ses=request.getSession(); 
 if(ses!=null){
 	  projectname=(String)ses.getAttribute("PRONAME");
 	  projectid=(String)ses.getAttribute("PROID");
 	  projectrole=(String)ses.getAttribute("ROLE");
 	 userid=(String)ses.getAttribute("USERID");
+	 
 }else{
 	 // Todo Login page
 }
@@ -16,6 +20,7 @@ if(ses!=null){
 <nav>
 <input type="hidden" id="roleForSite" value="<%= session.getAttribute("ROLE")%>" />
 <input type="hidden" id="gProjectId" value="<%= session.getAttribute("PROJECTSFID")%>" />
+<input type="hidden" id="logedInuserid" value="<%= session.getAttribute("USERID")%>" />
 
 	<%--  <a href="${pageContext.request.contextPath}/"><img style="width: 100%;  height: 150px;"class="logo" src="${pageContext.request.contextPath}/resources/images/logo.png"></a> --%>
 	 <div class="menuLogo">
@@ -64,6 +69,7 @@ if(ses!=null){
 
 
 <script type="text/javascript">
+var USERID_GV = '<%= session.getAttribute("USERID")%>';
 function logoutSession(){
 	debugger  
 	$.get("logout", {

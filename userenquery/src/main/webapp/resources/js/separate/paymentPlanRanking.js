@@ -21,12 +21,12 @@ $(document).ready(function(){
 projectDataList ();
 function projectDataList (){
 	$('#projectDataList').empty();	
-	var urlTower = pageContext+"projectListForSales?projectid="+ $("#gProjectId").val();
+	var urlTower = pageContext+"projectListForSales?userId="+ $("#logedInuserid").val();
 	$.getJSON(urlTower, function (data) {
 		$('#projectDataList').append('<option value="">Select</option>');
 		$.each(data, function (index, value) {
 			$("#region_id").val(value.region__c);
-			$('#projectDataList').append("<option value='"+value.sfid+"'>"+value.name+  " / " +value.propstrength__project_code__c+ "</option>");
+			$('#projectDataList').append("<option value='"+value.project_id+"'>"+value.project_name+ "</option>");
 		});					
 	}).done(function() {
 		

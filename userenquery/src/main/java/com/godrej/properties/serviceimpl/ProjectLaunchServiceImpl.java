@@ -41,9 +41,9 @@ public class ProjectLaunchServiceImpl implements ProjectLaunchService {
 	}
 
 	@Override
-	public ProjectLaunch getprojectDetailsForCCPayment(String projectSfid) {
+	public ProjectLaunch getprojectDetails(String projectSfid) {
 		// TODO Auto-generated method stub
-		return projectLaunchDao.getprojectDetailsForCCPaymentQuery(projectSfid);
+		return projectLaunchDao.getprojectDetailsQuery(projectSfid);
 	}
 	
 	 
