@@ -299,6 +299,11 @@ public class EnquiryRequestServiceImpl implements EnquiryRequestService {
 			if(null==enquiryReportDest.getContactId()){
 				enquiryReportDest.setContactId(contactDest.getContactId());
 			}
+			
+			//20200903 - Below line Added for resolve CP Comment empty at the time of recreate the offline enquiry
+			src.getEnquiryReport().setCpComments(src.getCpComment());
+			//END 20200903 - Below line Added for resolve CP Comment empty at the time of recreate the offline enquiry
+			
 			enquiryReportDest=enquiryReportService.updateBaseInfo(src.getEnquiryReport(), enquiryReportDest);
 			dest.setEnquiryReport(enquiryReportDest);			
 		}
