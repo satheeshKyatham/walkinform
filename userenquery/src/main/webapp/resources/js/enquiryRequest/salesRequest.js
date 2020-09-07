@@ -1634,8 +1634,8 @@ function getSourcingTeamLeadManagersList(inputVal)
 function getInternationalSalesManagersList(inputVal)
 {
 	var option="";
-	var smNames = ["Ankit Narverkar", "Anupama Jadhav", "Anupama Jadhav","Bhavya Mehra","Chinmay Vaidya","Jessica Ann Lee","Meghna Gupta","Prashant Benjamin","Rohan Vaswani","Zubair Khan","Pratik Yagnik"
-		,"Shivam Thakur","Mayank Jain","Samarth Sharma","Deependar Singh","Komit Malik","Parag Jha","Bhavya Dwivedi"];
+	var smNames = ["Ankit Narverkar", "Anupama Jadhav","Bhavya Mehra","Chinmay Vaidya","Jessica Ann Lee","Meghna Gupta","Prashant Benjamin","Rohan Vaswani","Zubair Khan","Pratik Yagnik"
+		,"Shivam Thakur","Mayank Jain","Samarth Sharma","Deependar Singh","Komit Malik","Parag Jha","Bhavya Dwivedi","Rachit Duggad","Vaibhav Bhasin","Bhoomika Sapru"];
 		//option = option+"<option value='nosourcingtl@gpl.com' selected>No Sourcing TL</option>";
 	option = option+"<option value=''>Select Int.Sales Manager</option>";
 	for(var i=0;smNames.length-1>i;i++)
