@@ -5,7 +5,7 @@
 <%  
 /* Cookie ck=new Cookie("version","18.20");  
 response.addCookie(ck);   */
-session.setAttribute("version","18.63");  
+session.setAttribute("version","18.65");  
 %>  
 
 <%
