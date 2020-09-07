@@ -32,4 +32,5 @@ public interface PushEnquiryDataDao {
 	public List<Enquiry> getEnquiriesByMobileNoAndProjectEOI(String countryCode,String mobileNo, String projectSfid);
 	/* Added for CP App - SK*/
 	public List<Enquiry> getEnquiriesByCPAppWithParam(String custname,String countryCode,String mobileno,String projectsfid,String emailid);
+	public List<Enquiry> getEnquiriesForAffiliateSalesPPortalService(String countryCode,String mobileNo, String projectSfid);
 }

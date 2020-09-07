@@ -55,19 +55,20 @@ function addSalesTnc() {
 
 
 function projectDataList() {
+	debugger
 	$('#projectDataListTnc').find("option:gt(0)").remove();
 	$('#projectDataListSearch').find("option:gt(0)").remove();
 	$('#paymentPlanDropdownTnc').find("option:gt(0)").remove();
 	$('#towerMstTnc').empty();
-	var urlTower = pageContext + "projectListForSales?projectid="+ $("#gProjectId").val();
+	var urlTower = pageContext + "projectListForSales?userId="+ $("#logedInuserid").val();
 	$.getJSON(
 			urlTower,
 			function(data) {
 				console.log("test",data)
 				$.each(data, function(index, value) {
 					$("#region_id").val(value.region__c);
-					$('#projectDataListTnc').append("<option value='" + value.sfid + "'>" + value.name+ " / "+ value.propstrength__project_code__c+ "</option>");
-					$('#projectDataListSearch').append("<option value='" + value.sfid + "'>" + value.name+ " / "+ value.propstrength__project_code__c+ "</option>");
+					$('#projectDataListTnc').append("<option value='" + value.project_id + "'>" + value.project_name+"</option>");
+					$('#projectDataListSearch').append("<option value='" + value.project_id + "'>" + value.project_name+ "</option>");
 				});
 			}).done(function() {
 

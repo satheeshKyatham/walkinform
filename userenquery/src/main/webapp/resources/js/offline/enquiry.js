@@ -1000,20 +1000,28 @@ function openClosingMDashboard()
 function generateOTP(no) {
 	//alert("Mobile NO:"+$("#enMobileNo").val());
 	//alert("Country Code:"+$('.selected-dial-code').text());
-	
-	if($("#enMobileNo").val()!="")
+	if($("#loged_userid").val()=="null")
 		{
-			$.get("getdetailsCountry", {
-				"countryCode" : $('.selected-dial-code').text(),
-				"mobileno" : $("#enMobileNo").val(),
-			}, function(data) {
-			});
-			/*$('.otpColCnt .square_btn span').text('Resend OTP');*/
-			$('.filterCol .otpInput_btn_Div span').text('Resend Access Code');
+			alert("Session Out, Please re-login");
+			var url=$("#contextPath").val();
+			window.location.href=url+"/saleslogin";
 		}
 	else
 		{
-			alert("Enter Mobile No.");
+		if($("#enMobileNo").val()!="")
+			{
+				$.get("getdetailsCountry", {
+					"countryCode" : $('.selected-dial-code').text(),
+					"mobileno" : $("#enMobileNo").val(),
+				}, function(data) {
+				});
+				/*$('.otpColCnt .square_btn span').text('Resend OTP');*/
+				$('.filterCol .otpInput_btn_Div span').text('Resend Access Code');
+			}
+		else
+			{
+				alert("Enter Mobile No.");
+			}
 		}
 	/*encryptStr();
 	var appStatus = validateApplicantType(no);

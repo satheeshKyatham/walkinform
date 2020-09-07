@@ -34,11 +34,21 @@
 					<select class="userMultiselectTower" id="allReportMultiTower" multiple="multiple"></select>
 				</div>
 				
+				<div class="form-group col-md-3">
+					<label>Status </label>
+					<select id="UnitStatus">
+						<option value="ALL" selected>All</option>
+					    <option value="AVAILABLE">Available + Hold</option>
+					    <option value="SOLD">Sold</option>
+					    <option value="OFFERED">Offered </option>
+					    <option value="OFFEREDSFDCHOLD">Offered with SFDC Hold</option>
+					</select>
+				</div>
 				 
 				<div class="form-group col-md-2">
 					<label> &nbsp; </label>
-					<button onclick="getAllInventoryReportDtl()" style="line-height:0; color: #fff; background-color: #0077b9;" class="form-control btn btn-primary">
-						Get Details
+					<button id="getAllUnitBtn" onclick="getAllInventoryReportDtl()" style="line-height:0; color: #fff; background-color: #0077b9;" class="form-control btn btn-primary">
+						<span></span> Get Details
 					</button>
 				</div>
 				

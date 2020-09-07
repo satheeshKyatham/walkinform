@@ -18,11 +18,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.godrej.properties.model.PaymentPlanDue;
+import com.godrej.properties.model.ProjectLaunch;
 import com.godrej.properties.model.ProjectPPRanking;
 import com.godrej.properties.model.TowerPPExclusion;
 import com.godrej.properties.service.PaymentPlanDueService;
 import com.godrej.properties.service.PaymentPlanListService;
 import com.godrej.properties.service.PaymentPlanRankingService;
+import com.godrej.properties.service.ProjectLaunchService;
 import com.godrej.properties.service.ProjectPPRankingService;
 import com.godrej.properties.service.TowerPPExclusionService;
 import com.google.gson.Gson;
@@ -48,6 +50,9 @@ public class PaymentPlanController {
 
 	@Autowired
 	private PaymentPlanRankingService paymentPlanRankingService;
+	
+	@Autowired
+	private ProjectLaunchService projectLaunchService;
 	
 	
 	@GetMapping(value = { "/paymentPlanDue"})
@@ -96,9 +101,12 @@ public class PaymentPlanController {
 		PaymentPlanDue duePaymentPlan=new PaymentPlanDue();
 		if(data != null && data.getTowerid() != null && data.getProject_id() != null){
 		String paymentPlanLineItems_str = paymentPlanDueService.getPaymentDueList(data.getProject_id(),data.getTowerid(),data.getPymt_plan_id());
-		
+		ProjectLaunch regionData=projectLaunchService.getprojectDetails(data.getProject_id());
+		data.setRegion_id(regionData.getRegionname());
+		data.setRegion_name(regionData.getRegionname());
 			if(paymentPlanLineItems_str==null)
 			{
+				
 				duePaymentPlan = paymentPlanDueService.addPaymentPlanDue(data);  /*add payment pLan with due*/
 				duePaymentPlan.setInsertStatus("Status_OK");
 				return duePaymentPlan;
@@ -148,6 +156,9 @@ public class PaymentPlanController {
 	public @ResponseBody String saveTowerPPExclusion(@RequestBody TowerPPExclusion data) 
 	{	
 		TowerPPExclusion towerPP=new TowerPPExclusion();
+		/*ProjectLaunch regionData=projectLaunchService.getprojectDetails(data.getProject_sfid());
+		data.setRegion_id(regionData.getRegionname());
+		data.setRegion_name(regionData.getRegionname());*/
 		if(data != null && data.getTower_sfid() != null && data.getProject_sfid() != null){
 			boolean towerExist=towerPPExclusionService.getTowerPP(data);
 			if(towerExist){

@@ -9,6 +9,8 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,6 +21,7 @@ import com.godrej.properties.dto.EnquiryDto;
 import com.godrej.properties.dto.GPLAppBookingAPIDto;
 import com.godrej.properties.dto.GPLAppEnquiryReqAPIDto;
 import com.godrej.properties.dto.GPLAppEnquiryRespAPIDto;
+import com.godrej.properties.service.AffiliateSalesPPortalService;
 import com.godrej.properties.service.EnquiryRequestService;
 import com.godrej.properties.serviceimpl.GPLAppsWebServiceImpl;
 
@@ -32,6 +35,9 @@ public class GPLAppsWebServiceController {
 	
 	@Autowired
 	private EnquiryRequestService enquiryRequestService;
+	
+	@Autowired
+	private AffiliateSalesPPortalService affiliateSalesPPortalService;
 	
 	@PostMapping(value = "/d4upreofferAPI", produces = "application/json")
 	public String d4upreofferAPI(@RequestBody GPLAppBookingAPIDto bookingDto)
@@ -139,6 +145,16 @@ public class GPLAppsWebServiceController {
 			return dto;
 		}
 			
+	}
+	
+	@GetMapping(value = "/affiliateSPAPI/{projectsfid}/{countrycode}/{mobileno}", produces = "application/json")
+	public String affiliateSalesPortalAPI(@PathVariable("projectsfid") String projectsfid,@PathVariable("countrycode") String countrycode
+			,@PathVariable("mobileno") String mobileno)
+	{
+		log.info("Error");
+		String resp = affiliateSalesPPortalService.getAffiliateSPEnquiries(countrycode, mobileno, projectsfid);
+		log.info("Response: {}",resp);
+		return resp;
 	}
 	
 	public GPLAppEnquiryRespAPIDto getGPLAppEnquiryRespDto(EnquiryDto enquiryDto)
