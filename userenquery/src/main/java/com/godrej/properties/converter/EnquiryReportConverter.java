@@ -160,6 +160,13 @@ public class EnquiryReportConverter implements CommonConverter<EnquiryReport, En
 			enquiry.setBarrier2(dto.getBarrier2().trim());
 		if(dto.getReferredby()!=null)
 			enquiry.setReferredby(dto.getReferredby());
+		
+		if(dto.getIs_revisit()!=null && dto.getIs_revisit().contains("Yes"))
+		{
+			enquiry.setIs_revisit("Yes");
+			if(dto.getLastvisitdate()!=null)
+				enquiry.setLastvisitdate(dto.getLastvisitdate());
+		}
 		return enquiry;
 	}
 

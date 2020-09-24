@@ -389,6 +389,7 @@ public class EnquiryRequestServiceImpl implements EnquiryRequestService {
 			//dest.setOtherChannelPartner("Comment- "+comment.replaceAll("Comment-","")+" | "+" Commented By-"+src.getClosingmanagers());
  
 		}
+	
 		/*dest.setAdvertisement(src.getAdvertisement());*/
 		return dest;
 	}
@@ -1108,6 +1109,12 @@ public class EnquiryRequestServiceImpl implements EnquiryRequestService {
 				if(enquiries.get(0).getSourcing_Team_Lead__c()!=null)
 				{
 					enquiries.get(0).setSourcing_Team_Lead_email(tokenService.getSalesUserEmailID(enquiries.get(0).getEnquiryId(), enquiries.get(0).getSourcing_Team_Lead__c()));
+				}
+				//Check if enquiry revisit or not
+				if(enquiries.get(0).getEnquiryStatus().contains("Site Visit Done") || enquiries.get(0).getEnquiryStatus().contains("Virtual Meeting Done"))
+				{
+					//Revisit
+					enquiries.get(0).getEnquiryReport().setIs_revisit("Yes");
 				}
 			}
 			
