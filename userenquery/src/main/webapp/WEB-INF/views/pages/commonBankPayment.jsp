@@ -67,7 +67,7 @@
 								</select>
 							</td>
 							<td>
-								<select class="full form-control input-sm typologyListEOI requiredField" onchange="getUnitEOI(this)">
+								<select class="full form-control input-sm typologyListEOI requiredField" onchange="getUnitEOI(this);getfbandEOI(this);">
 									<option value="">Select Typology</option>
 								</select>
 							</td>
