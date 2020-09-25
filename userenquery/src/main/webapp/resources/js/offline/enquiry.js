@@ -643,7 +643,7 @@ function hideEnquirySourceByEnquiryType(enquiryTypeCode,enq){
 			$(".hideChannelPartnerType").show();
 			$("#enquirySourceTextDiv").show();
 		}else if((enq.walkInSource==='Digital' || enq.walkInSource==='Exhibition' || enq.walkInSource==='Newspaper' || enq.walkInSource==='Hoarding' || enq.walkInSource==='Radio' || enq.walkInSource==='Word of mouth' 
-			|| enq.walkInSource==='SMS' || enq.walkInSource==='Referral' || enq.walkInSource==='Godrej Employee' || enq.walkInSource==='Corporate' || enq.walkInSource==='Existing Customer' || enq.walkInSource==='Other BTL activities'	
+			|| enq.walkInSource==='SMS' || enq.walkInSource==='Referral' || enq.walkInSource==='Godrej Employee' || enq.walkInSource==='Corporate' || enq.walkInSource==='Existing Customer' || enq.walkInSource==='Other BTL activities' || enq.walkInSource==='Affiliate Sales'	
 		) && !isEmpty(enq.walkInSource)){
 			$(".hideChannelPartnerType").hide();
 			if($("#isReferredByChannelPartnerInput").val()!="Direct"){
@@ -1000,20 +1000,28 @@ function openClosingMDashboard()
 function generateOTP(no) {
 	//alert("Mobile NO:"+$("#enMobileNo").val());
 	//alert("Country Code:"+$('.selected-dial-code').text());
-	
-	if($("#enMobileNo").val()!="")
+	if($("#loged_userid").val()=="null")
 		{
-			$.get("getdetailsCountry", {
-				"countryCode" : $('.selected-dial-code').text(),
-				"mobileno" : $("#enMobileNo").val(),
-			}, function(data) {
-			});
-			/*$('.otpColCnt .square_btn span').text('Resend OTP');*/
-			$('.filterCol .otpInput_btn_Div span').text('Resend Access Code');
+			alert("Session Out, Please re-login");
+			var url=$("#contextPath").val();
+			window.location.href=url+"/saleslogin";
 		}
 	else
 		{
-			alert("Enter Mobile No.");
+		if($("#enMobileNo").val()!="")
+			{
+				$.get("getdetailsCountry", {
+					"countryCode" : $('.selected-dial-code').text(),
+					"mobileno" : $("#enMobileNo").val(),
+				}, function(data) {
+				});
+				/*$('.otpColCnt .square_btn span').text('Resend OTP');*/
+				$('.filterCol .otpInput_btn_Div span').text('Resend Access Code');
+			}
+		else
+			{
+				alert("Enter Mobile No.");
+			}
 		}
 	/*encryptStr();
 	var appStatus = validateApplicantType(no);

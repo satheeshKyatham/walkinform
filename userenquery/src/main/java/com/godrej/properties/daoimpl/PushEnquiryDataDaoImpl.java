@@ -486,4 +486,27 @@ public class PushEnquiryDataDaoImpl  extends AAbstractDao<Enquiry> implements Pu
 		
 		return getEntities(jpql.toString(), params);
 	}
+
+	@Override
+	public List<Enquiry> getEnquiriesForAffiliateSalesPPortalService(String countryCode, String mobileNo,
+			String projectSfid) {
+
+		StringBuilder jpql=new StringBuilder();
+		jpql.append(" SELECT e FROM Enquiry e ")
+		.append(" INNER JOIN FETCH e.contactId c ")
+		.append(" LEFT JOIN FETCH c.contactReport ccr ")
+		.append(" LEFT JOIN FETCH e.project p ")
+		.append(" LEFT JOIN FETCH e.channelPartner cp ")
+		.append(" LEFT JOIN FETCH e.brokerContact bc ")
+		.append(" LEFT JOIN FETCH e.enquiryReport er ")
+		.append(" WHERE c.mobile=:mobile ")
+		.append(" AND c.countryCode=:countryCode ")
+		.append(" AND p.sfid=:projectSfid  ")
+		.append(" ORDER BY e.dateOfEnquiry asc");
+		Map<String, Object> params=new HashMap<>();
+		params.put("countryCode",countryCode);
+		params.put("mobile",mobileNo);
+		params.put("projectSfid", projectSfid);
+		return getEntities(jpql.toString(), params);
+	}
 }

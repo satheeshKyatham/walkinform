@@ -38,6 +38,8 @@ public class SessionCheckListner extends HandlerInterceptorAdapter {
 		filterUrlList.add("/getLdapUserDetails");//added by satheesh K.
 		filterUrlList.add("/d4upreofferAPI");//added by satheesh K.
 		filterUrlList.add("/d4uEnquiryprotectionAPI");//added by satheesh K.
+		filterUrlList.add("/affiliateSPAPI");//added by satheesh K.
+		
 		
 		
 		

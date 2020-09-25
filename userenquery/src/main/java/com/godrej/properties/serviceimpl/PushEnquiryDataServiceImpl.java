@@ -168,5 +168,13 @@ public class PushEnquiryDataServiceImpl  implements PushEnquiryDataService{
 		return enquiryConverter.entityToDto(enq);
 	}
 
+	@Override
+	public List<EnquiryDto> getEnquiriesForAffiliateSalesPPortalService(String countryCode, String mobileNo,
+			String projectSfid) {
+		List<Enquiry> enq=pushEnquiryDataDao.getEnquiriesForAffiliateSalesPPortalService(countryCode,mobileNo,projectSfid);
+		log.info("Enquiry END={}",new Date());
+		return enquiryConverter.entityToDto(enq);
+	}
+
 	
 }

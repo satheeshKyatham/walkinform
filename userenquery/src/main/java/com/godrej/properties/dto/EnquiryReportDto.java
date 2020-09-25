@@ -1,6 +1,5 @@
 package com.godrej.properties.dto;
 
-import java.sql.Time;
 import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -66,7 +65,10 @@ public class EnquiryReportDto extends CommonDto{
     
     private String followType;
    	private String visitType;
-    
+   	
+   	private String is_revisit;
+   	private Date lastvisitdate;
+   	
     @DateTimeFormat(pattern=KeyConstants.DEFAULT_DATE_FORMAT)
     private Date followDate;
     private String unit;
@@ -366,5 +368,19 @@ public class EnquiryReportDto extends CommonDto{
 	public void setVisitType(String visitType) {
 		this.visitType = visitType;
 	}
+	public String getIs_revisit() {
+		return is_revisit;
+	}
+	public void setIs_revisit(String is_revisit) {
+		this.is_revisit = is_revisit;
+	}
+	public Date getLastvisitdate() {
+		return lastvisitdate;
+	}
+	public void setLastvisitdate(Date lastvisitdate) {
+		this.lastvisitdate = lastvisitdate;
+	}
+	
+
 	
 }

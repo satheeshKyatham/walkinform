@@ -66,7 +66,11 @@ public class MasterServiceController {
 	@GetMapping(value = "/getProjectListUserWise", produces = "application/json")
 	public String getProjectListUserWise(@RequestParam("userid") String userid) {
 		Gson gson = new GsonBuilder().disableHtmlEscaping().create();
-		List<Vw_UserProjectMapping> adt=vW_UserMasterService.getProjectListUserWise(userid);
+		List<Vw_UserProjectMapping> adt = null;
+		if(!userid.equals("null"))
+		{
+			adt=vW_UserMasterService.getProjectListUserWise(userid);
+		}
 		return gson.toJson(adt);
 	} 
 	
