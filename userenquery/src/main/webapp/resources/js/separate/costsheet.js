@@ -22,6 +22,10 @@ $( document ).ready(function() {
 if ($('#projectId').val() == 'a1l6F0000047Q1xQAE' || $('#projectId').val() == 'a1l6F000008iEJiQAM') {
        $('#carParkDDCol').hide();
 }
+
+csChangesForFaridabad();
+
+
 });
 
 
@@ -380,6 +384,10 @@ function loadData (csSource) {
                            $('.floorTval').text(value.floorName);
                            $('#towerTval').text(value.towerName);
                            $('.towerTval').text(value.towerName);
+                           
+                           
+                           csChangesForFaridabad();
+                           
                            
                            if (value.property_facing__c != undefined) {
                         	   $('.propFacingType').text(value.property_facing__c);
@@ -3853,4 +3861,25 @@ function basicValidate (id, type) {
 	
 	
 	return condition;
+}
+
+
+function csChangesForFaridabad () {
+	if ($('#projectId').val() == 'a1l2s000000XmaMAAS') {
+		$('.towerNameCS').html('');
+		$('.towerNameCS').html('Parcel');
+		$('.floorNameCS').html('');
+		$('.floorNameCS').html('Street Name');
+		
+		$('.typologyNameCS').html('');
+		$('.typologyNameCS').html('-');
+		
+		$('.typologyTval').html('');
+		$('.typologyTval').html('-');
+		
+		$('#typologyTval').html('');
+		$('#typologyTval').html('-');
+		
+		$('.hideForPlot').remove();
+	}
 }
