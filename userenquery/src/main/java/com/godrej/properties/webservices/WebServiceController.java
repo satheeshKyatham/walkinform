@@ -3153,30 +3153,78 @@ public class WebServiceController<MultipartFormDataInput> {
 			@RequestParam("holdMst") String holdMst, @RequestParam("soldMst") String soldMst,
 			@RequestParam("unitAvailable") String unitAvailable, @RequestParam("facing") String facing,
 			@RequestParam("unitCategory") String unitCategory) {
+		
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		Gson gson = gsonBuilder.create();
-		List<InventoryAdmin> plans = inventoryService.getUnitDtlAdmin(projectId, towerMst, typoMst, holdMst, soldMst,
-				unitAvailable, facing, unitCategory);
+		
+		Boolean isPlot = false;
+		
+		if (projectId.equals("a1l2s000000XmaMAAS")) {
+			isPlot = true;
+		} else {
+			isPlot = false;
+		}
+		
+		List<InventoryAdmin> plans = inventoryService.getUnitDtlAdmin(projectId, towerMst, typoMst, holdMst, soldMst, unitAvailable, facing, unitCategory);
 
-		HashSet<Integer> floor = new HashSet<Integer>();
+		//HashSet<Integer> floor = new HashSet<Integer>();
+		
+		HashSet<String> floorName=new HashSet<>();
+		HashSet<Integer> floor=new HashSet<>();
+		
+		
 		HashMap<String, ArrayList<InventoryAdmin>> hashMap = new HashMap<String, ArrayList<InventoryAdmin>>();
 		ArrayList<InventoryAdmin> inventories = new ArrayList<InventoryAdmin>();
 
+		ArrayList<ArrayList<InventoryAdmin>> mainList = new ArrayList<>();
 		if (plans != null)
 			for (int i = 0; i < plans.size(); i++) {
-				floor.add(Integer.valueOf(plans.get(i).getFloor_number__c()));
+				//floor.add(Integer.valueOf(plans.get(i).getFloor_number__c()));
+				
+				if (isPlot) {
+					floorName.add(plans.get(i).getFloor_name__c());
+				} else {
+					floor.add(Integer.valueOf(plans.get(i).getFloor_number__c()));
+				}
 			}
 
-		List<Integer> list = new ArrayList<Integer>(floor);
-		Collections.sort(list);
-		ArrayList<ArrayList<InventoryAdmin>> mainList = new ArrayList<>();
+		//List<Integer> list = new ArrayList<Integer>(floor);
+		//Collections.sort(list);
+		
+		List<String> list = new ArrayList<>();
+		List<Integer> listInt = new ArrayList<>();
+		
+		if (isPlot) {
+			list = new ArrayList<>(floorName);
+			Collections.sort(list); 
+		} else {
+			listInt = new ArrayList<>(floor);
+			Collections.sort(listInt); 
+			
+			for (int i = 0; i < listInt.size(); i++) {
+				list.add(""+listInt.get(i));
+			}
+			
+		}
+		
+        String floorData = "";
+		
 
 		for (int j = 0; j < list.size(); j++) {
 			ArrayList<InventoryAdmin> intList = new ArrayList<>();
 			for (int k = 0; k < plans.size(); k++) {
 
-				if (list.get(j).toString().equals(plans.get(k).getFloor_number__c())) {
-
+				if (isPlot) {
+        			floorData = plans.get(k).getFloor_name__c();
+        		} else {
+        			floorData = plans.get(k).getFloor_number__c();
+        		}
+				
+				
+				if (list.get(j).toString().equals(floorData)) {
+						
+					plans.get(k).setFloor_number__c(floorData);
+					
 					if (plans.get(k).getCreated_at() != null && !(plans.get(k).getHoldstatusyn().equals("N"))
 							&& !(plans.get(k).getHoldIntervalstatusAI().equals("I"))) {
 						// System.out.println("Not null Value");

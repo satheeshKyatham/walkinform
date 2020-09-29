@@ -230,25 +230,73 @@ public class InventoryController {
 			Gson gson = gsonBuilder.create();
 						
 			
+			Boolean isPlot = false;
+			
+			if (projectId.equals("a1l2s000000XmaMAAS")) {
+				isPlot = true;
+			} else {
+				isPlot = false;
+			}
+			
+			
 			List<Inventory> plans=inventoryService.getUnitDtl(projectId, towerMst, typoMst, holdMst, soldMst,facing, unitAvailable, unitCategory);
 			
+			//HashSet<Integer> floor=new HashSet<>();
+			
+			HashSet<String> floorName=new HashSet<>();
 			HashSet<Integer> floor=new HashSet<>();
+			
 			ArrayList<ArrayList<Inventory>> mainList = new ArrayList<>();
 			if(plans !=null && !plans.isEmpty())
 			{
 				for(int i=0;i<plans.size();i++) {
-					floor.add(Integer.valueOf(plans.get(i).getFloor_number__c()));
+					//floor.add(Integer.valueOf(plans.get(i).getFloor_number__c()));
+					
+					if (isPlot) {
+						floorName.add(plans.get(i).getFloor_name__c());
+					} else {
+						floor.add(Integer.valueOf(plans.get(i).getFloor_number__c()));
+					}
+					
 				}
 				
-				List<Integer> list = new ArrayList<>(floor); 
-				Collections.sort(list); 
-                
-                for(int j=0;j<list.size();j++) {
+				//List<Integer> list = new ArrayList<>(floor);
+				List<String> list = new ArrayList<>();
+				List<Integer> listInt = new ArrayList<>();
+				 
+				
+				if (isPlot) {
+					list = new ArrayList<>(floorName);
+					Collections.sort(list); 
+				} else {
+					listInt = new ArrayList<>(floor);
+					Collections.sort(listInt); 
+					
+					for (int i = 0; i < listInt.size(); i++) {
+						list.add(""+listInt.get(i));
+					}
+					
+				}
+				
+                String floorData = "";
+              
+				for(int j=0;j<list.size();j++) {
                 	ArrayList<Inventory> intList = new ArrayList<>(); 
                 	
                 	
                 	for(int k=0;k<plans.size();k++) {
-                		if(list.get(j).toString().equals(plans.get(k).getFloor_number__c())) {
+                		
+                		
+                		if (isPlot) {
+                			floorData = plans.get(k).getFloor_name__c();
+                		} else {
+                			floorData = plans.get(k).getFloor_number__c();
+                		}
+                		
+                		//if(list.get(j).toString().equals(plans.get(k).getFloor_number__c())) {
+                		if(list.get(j).toString().equals(floorData)) {
+                			
+                			plans.get(k).setFloor_number__c(floorData);
                 			
                 			if (plans.get(k).getCreated_at() != null && !(plans.get(k).getHoldstatusyn().equals("N"))  && !(plans.get(k).getHoldIntervalstatusAI().equals("I"))  ) {
                     			log.info("Not null Value");
