@@ -358,12 +358,36 @@ function loadData (csSource) {
                            
                            $('.a4').text(Math.round(value.CarpetArea));
                            $('.a6').text(value.SaleableArea);
-                           $('#carpetSqm').text(parseFloat(value.carpet_area_converted__c));
-                           $('.carpetSqm').text(parseFloat(value.carpet_area_converted__c));
-                           $('#totalSqm').text(parseFloat(parseFloat(value.carpet_area_converted__c) + parseFloat(value.appurtenant_area_sq_mt__c)).toFixed(2));
-                           $('.totalSqm').text(parseFloat(parseFloat(value.carpet_area_converted__c) + parseFloat(value.appurtenant_area_sq_mt__c)).toFixed(2));
-                           $('#balTerSqm').text(value.appurtenant_area_sq_mt__c);
-                           $('.balTerSqm').text(value.appurtenant_area_sq_mt__c);
+                           
+                          
+                           if ($('#projectId').val() == 'a1l2s000000XmaMAAS') {
+                        	   $('#totalSqm').text(parseFloat(value.carpet_area_converted__c));
+                               $('.totalSqm').text(parseFloat(value.carpet_area_converted__c));
+                               
+                               $('#carpetSqm').text(parseFloat(value.length_sqm__c));
+                               $('.carpetSqm').text(parseFloat(value.length_sqm__c));
+                               
+                               $('#balTerSqm').text(value.breadth_sqm__c);
+                               $('.balTerSqm').text(value.breadth_sqm__c);
+                               
+                               $('#plotAreaSqyd').text(value.plot_area_sqyd__c);
+                               $('.plotAreaSqyd').text(value.plot_area_sqyd__c);
+                               
+                           } else {
+                        	   $('#totalSqm').text(parseFloat(parseFloat(value.carpet_area_converted__c) + parseFloat(value.appurtenant_area_sq_mt__c)).toFixed(2));
+                               $('.totalSqm').text(parseFloat(parseFloat(value.carpet_area_converted__c) + parseFloat(value.appurtenant_area_sq_mt__c)).toFixed(2));
+                               
+                               $('#carpetSqm').text(parseFloat(value.carpet_area_converted__c));
+                               $('.carpetSqm').text(parseFloat(value.carpet_area_converted__c));
+                               
+                               $('#balTerSqm').text(value.appurtenant_area_sq_mt__c);
+                               $('.balTerSqm').text(value.appurtenant_area_sq_mt__c);
+                               
+                               $('#plotAreaSqyd').text("0");
+                               $('.plotAreaSqyd').text("0");
+                           }
+                           
+                          
                            $('#unitTval').text(value.ID);
                            $('.unitTval').text(value.ID);
                            /*Added By Satheesh K - Date : 10-06-2020 - Property Name Added on Cost sheet Page*/
@@ -3881,5 +3905,18 @@ function csChangesForFaridabad () {
 		$('#typologyTval').html('-');
 		
 		$('.hideForPlot').remove();
+		
+		$('.hideForPlot').hide();
+		$('.removeForPlot').remove();
+		
+		$('.carpetSqmlabel').html("");
+		$('.carpetSqmlabel').html("Length (in Sq.mtr.)");
+		
+		$('.balTerSqmLabel').html("");
+		$('.balTerSqmLabel').html("Breadth (in Sq.mtr.)");
+		
+	} else {
+		$('#onlyForPlot').hide();
+		$('.onlyForPlot').remove();
 	}
 }

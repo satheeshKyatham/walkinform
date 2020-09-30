@@ -1,6 +1,7 @@
 package com.godrej.properties.model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -69,6 +70,12 @@ public class PaymentPlan implements Serializable{
 	@Column(name="inventory_category__c") private String  inventory_category__c;
 	
 	/* @Column(name="tower_sfid") private String tower_sfid; */
+	
+	
+	@Column(name="length_sqm__c", precision = 10, scale = 2)  private BigDecimal length_sqm__c;
+	@Column(name="breadth_sqm__c", precision = 10, scale = 2)  private BigDecimal breadth_sqm__c;
+	@Column(name="plot_area_sqyd__c", precision = 10, scale = 2)  private BigDecimal plot_area_sqyd__c;
+	
 	
 	public boolean isPropstrength__allotted__c() {
 		return propstrength__allotted__c;
@@ -306,5 +313,23 @@ public class PaymentPlan implements Serializable{
 	}
 	public void setInventory_category__c(String inventory_category__c) {
 		this.inventory_category__c = inventory_category__c;
+	}
+	public BigDecimal getLength_sqm__c() {
+		return length_sqm__c;
+	}
+	public void setLength_sqm__c(BigDecimal length_sqm__c) {
+		this.length_sqm__c = length_sqm__c;
+	}
+	public BigDecimal getBreadth_sqm__c() {
+		return breadth_sqm__c;
+	}
+	public void setBreadth_sqm__c(BigDecimal breadth_sqm__c) {
+		this.breadth_sqm__c = breadth_sqm__c;
+	}
+	public BigDecimal getPlot_area_sqyd__c() {
+		return plot_area_sqyd__c;
+	}
+	public void setPlot_area_sqyd__c(BigDecimal plot_area_sqyd__c) {
+		this.plot_area_sqyd__c = plot_area_sqyd__c;
 	}
 }
