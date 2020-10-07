@@ -175,10 +175,18 @@ function getPaymentEOIReport () {
 			for(var i=0;i<obj1.length;i++){
 				
 				
-				if (obj1[i].payment_status == 'Y' || obj1[i].payment_status == 'O') {
+				/*if (obj1[i].payment_status == 'Y' || obj1[i].payment_status == 'O') {
 					paymentStatus = 'Approved'
 				} else if (obj1[i].payment_status == 'N') {
 					paymentStatus = 'Not Approved'
+				}*/
+				
+				if (obj1[i].payment_status == 'Y' || obj1[i].payment_status == 'O') {
+					paymentStatus = 'Approved'
+				} else if (obj1[i].payment_status == 'N') {
+					paymentStatus = 'Pending'
+				} else if (obj1[i].payment_status == 'R'){
+					paymentStatus = 'Rejected'
 				}
 				
 				
