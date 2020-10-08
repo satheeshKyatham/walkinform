@@ -590,7 +590,7 @@
 											<tr>
 												<th class="subHead towerNameCS">Tower</th>
 												<td><span class="towerTval"></span><span class="wingVal"></span></td>
-												<th class="subHead">Carpet Area Rera (in Sq.mtr.)</th>
+												<th class="subHead carpetSqmlabel">Carpet Area Rera (in Sq.mtr.)</th>
 												<td class="carpetSqm"></td>
 											</tr>
 											<tr>
@@ -598,7 +598,7 @@
 												<td>
 													<span class="unitTval"></span>
 												</td>
-												<th class="subHead">Exclusive Area (in Sq.mtr.)</th>
+												<th class="subHead balTerSqmLabel">Exclusive Area (in Sq.mtr.)</th>
 												<td class="balTerSqm"></td>
 											</tr>
 											<tr>
@@ -613,7 +613,7 @@
 												<th class="subHead noOfCarParkLabel">No. of Car Park</th>
 												<td  class="noOfCarPark ifCarParkZero"></td>
 											</tr>
-											<tr>
+											<tr class="removeForPlot">
 												<th class="subHead">Carpet Area Amount</th>
 												<td  class="carpetAreaAmount" style="text-align:right;"></td>
 												
@@ -626,7 +626,7 @@
 												<td class=""> </td> -->
 											</tr>
 											
-											<tr>
+											<tr class="removeForPlot">
 												<th class="subHead">Exclusive Area Amount</th>
 												<td class="exclusiveAreaAmount" style="text-align:right"></td>
 												<th class="subHead"></th>
@@ -638,6 +638,13 @@
 												<td id="propFacingType" style="text-align:left;" ></td>
 												<th class="subHead"></th>
 												<td></td>
+											</tr>
+											
+											<tr class="onlyForPlot">
+												<th class="subHead"></th>
+												<td></td>
+												<th class="subHead">Plot Area (in Sq.yd.)</th>
+												<td class="plotAreaSqyd"></td>
 											</tr>
 											
 										</tbody>
@@ -858,7 +865,7 @@
 								<th class="subHead towerNameCS">Tower</th>
 								<td class="animated"><span id="towerTval"></span><span id="wingVal"></span></td>
 								
-								<th class="subHead">Carpet Area Rera (in Sq.mtr.)</th>
+								<th class="subHead carpetSqmlabel">Carpet Area Rera (in Sq.mtr.)</th>
 								<td id="carpetSqm" class="animated"></td>
 								<!-- <th>Cost of Carpet Area (A.) (In INR)</th>
 							<td class="animated" id="CostofCarpet"></td> -->
@@ -868,7 +875,7 @@
 							<td class="animated">
 								<span id="unitTval"></span>
 							</td>
-							<th class="subHead">Exclusive Area (in Sq.mtr.)</th>
+							<th class="subHead balTerSqmLabel">Exclusive Area (in Sq.mtr.)</th>
 							<td id="balTerSqm" class="animated"></td>
 							<!-- <th>Cost of Exclusive Balcony Area/Terrace Area (B.) (In INR)</th>
 							<td class="animated" id="CostofExcBalcony"></td> -->
@@ -887,7 +894,7 @@
 						</tr>
 						
 						
-						<tr>
+						<tr class="hideForPlot">
 							<th class="subHead">Carpet Area Amount</th>
 							<td class="carpetAreaAmount" id="carpetAreaAmount" style="text-align:right;">
 							
@@ -900,7 +907,7 @@
 							<td ></td> -->
 						</tr>
 						
-						<tr>
+						<tr class="hideForPlot">
 							<th class="subHead">Exclusive Area Amount</th>
 							<td class="exclusiveAreaAmount" id="exclusiveAreaAmount" style="text-align:right;" ></td>
 							<th class="subHead"></th>
@@ -914,6 +921,12 @@
 							<td></td>
 						</tr>
 						
+						<tr id="onlyForPlot">
+							<th class="subHead"></th>
+							<td></td>
+							<th class="subHead">Plot Area (in Sq.yd.)</th>
+							<td id="plotAreaSqyd"></td>
+						</tr>
 						
 							</tbody>
 						</table>

@@ -1,5 +1,7 @@
 package com.godrej.properties.model;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Column;
 
 public class PaymentPlanJson {
@@ -78,6 +80,11 @@ public class PaymentPlanJson {
 	
 	private String wing_block__c;
 	private String propstrength__property_name__c;
+	
+	
+	private BigDecimal length_sqm__c;
+	private BigDecimal breadth_sqm__c;
+	private BigDecimal plot_area_sqyd__c;
 	
 	
 	public String getBalcony_area_sq_ft__c() {
@@ -477,6 +484,22 @@ public class PaymentPlanJson {
 	public void setPropstrength__property_name__c(String propstrength__property_name__c) {
 		this.propstrength__property_name__c = propstrength__property_name__c;
 	}
-	
-	
+	public BigDecimal getLength_sqm__c() {
+		return length_sqm__c;
+	}
+	public void setLength_sqm__c(BigDecimal length_sqm__c) {
+		this.length_sqm__c = length_sqm__c;
+	}
+	public BigDecimal getBreadth_sqm__c() {
+		return breadth_sqm__c;
+	}
+	public void setBreadth_sqm__c(BigDecimal breadth_sqm__c) {
+		this.breadth_sqm__c = breadth_sqm__c;
+	}
+	public BigDecimal getPlot_area_sqyd__c() {
+		return plot_area_sqyd__c;
+	}
+	public void setPlot_area_sqyd__c(BigDecimal plot_area_sqyd__c) {
+		this.plot_area_sqyd__c = plot_area_sqyd__c;
+	}
 }

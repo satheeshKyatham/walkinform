@@ -495,9 +495,6 @@ function getfbandEOI(e) {
 	//Added By Satheesh K - 25-09-2020
 	if($('.projectSfid').val()=="a1l2s000000XmaMAAS")
 		{
-		
-		//alert("Godrej Plots name:-"+$(e).closest('.EOIDtlRow').find(".typologyListEOI").val());	
-		//alert("Godrej Plots name:-"+$(".towerListEOI  option:selected").text());	
 		if($.trim($(e).closest('.EOIDtlRow').find(".typologyListEOI").val())!='')
 			{
 				var concertArray = [

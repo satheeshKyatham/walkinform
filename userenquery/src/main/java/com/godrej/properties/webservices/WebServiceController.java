@@ -1794,6 +1794,12 @@ public class WebServiceController<MultipartFormDataInput> {
 			 * Cost sheet Page
 			 */
 			paymentPlanJson.setPropstrength__property_name__c(paym.getPropstrength__property_name__c());
+			
+			
+			paymentPlanJson.setLength_sqm__c(paym.getLength_sqm__c());
+			paymentPlanJson.setBreadth_sqm__c(paym.getBreadth_sqm__c());
+			paymentPlanJson.setPlot_area_sqyd__c(paym.getPlot_area_sqyd__c());
+			
 			// paymentPlanJson.set (paym.getSfid());
 
 			/*
