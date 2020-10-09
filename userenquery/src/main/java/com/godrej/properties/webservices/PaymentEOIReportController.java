@@ -30,14 +30,46 @@ public class PaymentEOIReportController {
 	
 	
 	@GetMapping(value = "/getPaymentEOIReport", produces = "application/json")
-	public String getEOIReportDtl(@RequestParam("projectSfid") String projectSfid, @RequestParam("fromDate") String fromDate, @RequestParam("toDate") String toDate) {
+	public String getEOIReportDtl(@RequestParam("projectSfid") String projectSfid, @RequestParam("fromDate") String fromDate, @RequestParam("toDate") String toDate, @RequestParam("userVerticals") String userVerticals) {
 		Gson gson = new GsonBuilder().disableHtmlEscaping().serializeNulls().create();
 		String whereCondition = "";
 		
+		// For multiple verticales
+		String finalVerticales = "";
+		if (userVerticals != null && !userVerticals.equals("null") && !userVerticals.equals("")) {
+			String [] multiVerticales= userVerticals.split(",");
+			
+			StringBuilder modifiedVer = new StringBuilder();
+			
+			
+			for (int i=0;i<multiVerticales.length;i++){
+				modifiedVer.append("'"+multiVerticales[i]+"'");
+				modifiedVer.append(",");
+			}
+			
+			finalVerticales = modifiedVer.toString();
+			
+			if (finalVerticales != null && finalVerticales.length() > 0 && finalVerticales.charAt(finalVerticales.length() - 1) == ',') {
+				finalVerticales = finalVerticales.substring(0, finalVerticales.length() - 1);
+			}
+		} else {
+			finalVerticales = null;
+		}
+		// END For multiple verticales
+		
+		String vertCondition= "";
+		
+		if (finalVerticales != null) {
+			vertCondition = " and verticle__c in ("+finalVerticales+")  ";
+		} else {
+			vertCondition= "";
+		}
+		
+		
 		if((fromDate!=null && fromDate.length()>0) && (toDate!=null && toDate.length()>0)) {
-			whereCondition = " project_sfid= '"+projectSfid+"' and Date(date_of_eoi__c) between '"+fromDate+"' and '"+toDate+"' order by date_of_eoi__c desc, enq_name  ";
+			whereCondition = " project_sfid= '"+projectSfid+"' and Date(date_of_eoi__c) between '"+fromDate+"' and '"+toDate+"' "+vertCondition+" order by date_of_eoi__c desc, enq_name  ";
 		} else if(projectSfid!=null && projectSfid.length()>0) {
-			whereCondition = " project_sfid= '"+projectSfid+"' order by date_of_eoi__c desc, enq_name  ";
+			whereCondition = " project_sfid= '"+projectSfid+"' "+vertCondition+" order by date_of_eoi__c desc, enq_name  ";
 		}
 		
 		return gson.toJson(paymentEOIReportService.getPaymentEOIReportDtl(whereCondition));
@@ -59,9 +91,43 @@ public class PaymentEOIReportController {
 	}
 	
 	@GetMapping(value = "/getAllotmentDayReport", produces = "application/json")
-	public String getAllotmentDayReport(@RequestParam("projectSfid") String projectSfid, @RequestParam("fromDate") String fromDate, @RequestParam("toDate") String toDate) {
+	public String getAllotmentDayReport(@RequestParam("projectSfid") String projectSfid, @RequestParam("fromDate") String fromDate, @RequestParam("toDate") String toDate, @RequestParam("userVerticals") String userVerticals) {
 		Gson gson = new GsonBuilder().disableHtmlEscaping().serializeNulls().create();
-		String whereCondition = " project_sfid= '"+projectSfid+"' and Date(offer_date__c) between '"+fromDate+"' and '"+toDate+"' order by offer_date__c desc  ";
+		
+		// For multiple verticales
+		String finalVerticales = "";
+		if (userVerticals != null && !userVerticals.equals("null") && !userVerticals.equals("")) {
+			String [] multiVerticales= userVerticals.split(",");
+			
+			StringBuilder modifiedVer = new StringBuilder();
+			
+			
+			for (int i=0;i<multiVerticales.length;i++){
+				modifiedVer.append("'"+multiVerticales[i]+"'");
+				modifiedVer.append(",");
+			}
+			
+			finalVerticales = modifiedVer.toString();
+			
+			if (finalVerticales != null && finalVerticales.length() > 0 && finalVerticales.charAt(finalVerticales.length() - 1) == ',') {
+				finalVerticales = finalVerticales.substring(0, finalVerticales.length() - 1);
+			}
+		} else {
+			finalVerticales = null;
+		}
+		// END For multiple verticales
+		
+		String vertCondition= "";
+		
+		if (finalVerticales != null) {
+			vertCondition = " and verticle__c in ("+finalVerticales+")  ";
+		} else {
+			vertCondition= "";
+		}
+		
+		
+		
+		String whereCondition = " project_sfid= '"+projectSfid+"' and Date(offer_date__c) between '"+fromDate+"' and '"+toDate+"' "+vertCondition+" order by offer_date__c desc  ";
 		
 		return gson.toJson(eOIReportService.getAllotmentReport(whereCondition));
 	}

@@ -1220,18 +1220,66 @@ public class WebServiceController<MultipartFormDataInput> {
 	// paymentPlanSfid,@RequestParam("projectid") String projectid) {
 
 	@RequestMapping(value = "/getEnqDataForMap", method = RequestMethod.POST)
-	public String getEnqDataForMap(@RequestParam("projectId") String projectId) {
+	public String getEnqDataForMap(@RequestParam("projectId") String projectId,  @RequestParam("userVerticals") String userVerticals) {
 		Gson gson = new GsonBuilder().disableHtmlEscaping().serializeNulls().create();
-
-		return gson.toJson(enqOnMapService.getEnqDtl(projectId));
+		
+		// For multiple verticales
+		String finalVerticales = "";
+		if (userVerticals != null && !userVerticals.equals("null") && !userVerticals.equals("")) {
+			String [] multiVerticales= userVerticals.split(",");
+			
+			StringBuilder modifiedVer = new StringBuilder();
+			
+			
+			for (int i=0;i<multiVerticales.length;i++){
+				modifiedVer.append("'"+multiVerticales[i]+"'");
+				modifiedVer.append(",");
+			}
+			
+			finalVerticales = modifiedVer.toString();
+			
+			if (finalVerticales != null && finalVerticales.length() > 0 && finalVerticales.charAt(finalVerticales.length() - 1) == ',') {
+				finalVerticales = finalVerticales.substring(0, finalVerticales.length() - 1);
+			}
+		} else {
+			finalVerticales = null;
+		}
+		// END For multiple verticales
+		
+		
+		return gson.toJson(enqOnMapService.getEnqDtl(projectId, finalVerticales));
 	}
 	/* END Get Enq Data for place on MAP */
 
 	@RequestMapping(value = "/getBookingDataForMap", method = RequestMethod.POST)
-	public String getBookingDataForMap(@RequestParam("projectId") String projectId) {
+	public String getBookingDataForMap(@RequestParam("projectId") String projectId,  @RequestParam("userVerticals") String userVerticals) {
 		Gson gson = new GsonBuilder().disableHtmlEscaping().serializeNulls().create();
-
-		return gson.toJson(bookingOnMapService.getEnqDtl(projectId));
+		
+		
+		// For multiple verticales
+		String finalVerticales = "";
+		if (userVerticals != null && !userVerticals.equals("null") && !userVerticals.equals("")) {
+			String [] multiVerticales= userVerticals.split(",");
+			
+			StringBuilder modifiedVer = new StringBuilder();
+			
+			
+			for (int i=0;i<multiVerticales.length;i++){
+				modifiedVer.append("'"+multiVerticales[i]+"'");
+				modifiedVer.append(",");
+			}
+			
+			finalVerticales = modifiedVer.toString();
+			
+			if (finalVerticales != null && finalVerticales.length() > 0 && finalVerticales.charAt(finalVerticales.length() - 1) == ',') {
+				finalVerticales = finalVerticales.substring(0, finalVerticales.length() - 1);
+			}
+		} else {
+			finalVerticales = null;
+		}
+		// END For multiple verticales
+		
+		return gson.toJson(bookingOnMapService.getEnqDtl(projectId, finalVerticales));
 	}
 
 	/* Get dynamic Properties Other Charges */
@@ -2234,6 +2282,8 @@ public class WebServiceController<MultipartFormDataInput> {
 			session.setAttribute("Assignto", "");
 			session.setAttribute("Closingmgr", "" + userMaster.getClosingmgr());
 			session.setAttribute("ISOTPADMIN", "" + master.getIsotpadmin());
+			
+			session.setAttribute("USER_VERTICALES", "" + master.getVerticales());
 
 		} else {
 			master.setMsg("You are not a user in D4U system.Please contact your site head for getting permission.");
@@ -2598,9 +2648,9 @@ public class WebServiceController<MultipartFormDataInput> {
 
 	@RequestMapping(value = { "/misReport" }, method = RequestMethod.GET)
 	public String userMappingList(@RequestParam("projectid") String projectid, @RequestParam("userid") String userid,
-			@RequestParam("fromdate") String fromdate, @RequestParam("todate") String todate) {
+			@RequestParam("fromdate") String fromdate, @RequestParam("todate") String todate,  @RequestParam("userVerticals") String userVerticals) {
 		Gson gson = new GsonBuilder().serializeNulls().create();
-		return gson.toJson(vW_MISReportService.getUserProjectList(projectid, userid, fromdate, todate));
+		return gson.toJson(vW_MISReportService.getUserProjectList(projectid, userid, fromdate, todate, userVerticals));
 	}
 
 	@RequestMapping(value = "/downloadCSV")
@@ -2624,8 +2674,11 @@ public class WebServiceController<MultipartFormDataInput> {
 
 		String todate = resquest.getParameter("todate");
 		System.out.println("todate:-" + todate);
+		
+		String userVerticals = resquest.getParameter("userVerticals");
+		
 		List<Vw_MISReport> mislist = vW_MISReportService.getUserProjectList(resquest.getParameter("projectid"),
-				resquest.getParameter("userid"), fromdate, todate);
+				resquest.getParameter("userid"), fromdate, todate, userVerticals);
 		for (int i = 0; i < mislist.size(); i++) {
 
 			rows.add(mislist.get(i).getProjectname().replaceAll(",", ""));
@@ -3600,7 +3653,7 @@ public class WebServiceController<MultipartFormDataInput> {
 
 	@RequestMapping(value = "/getOfferList", method = RequestMethod.GET, produces = "application/json")
 	public String getOfferList(@RequestParam("userid") String userid, @RequestParam("projectid") String projectid,
-			@RequestParam("fromDate") String fromDate, @RequestParam("toDate") String toDate) {
+			@RequestParam("fromDate") String fromDate, @RequestParam("toDate") String toDate, @RequestParam("userVerticals") String userVerticals) {
 		Gson gson = new GsonBuilder().disableHtmlEscaping().serializeNulls().create();
 
 		String finalProjectid = "";
@@ -3621,6 +3674,38 @@ public class WebServiceController<MultipartFormDataInput> {
 		} else {
 			finalProjectid = "";
 		}
+		
+		
+		// For multiple verticales
+		String finalVerticales = "";
+		if (userVerticals != null && !userVerticals.equals("null") && !userVerticals.equals("")) {
+			String [] multiVerticales= userVerticals.split(",");
+			
+			StringBuilder modifiedVer = new StringBuilder();
+			
+			
+			for (int i=0;i<multiVerticales.length;i++){
+				modifiedVer.append("'"+multiVerticales[i]+"'");
+				modifiedVer.append(",");
+			}
+			
+			finalVerticales = modifiedVer.toString();
+			
+			if (finalVerticales != null && finalVerticales.length() > 0 && finalVerticales.charAt(finalVerticales.length() - 1) == ',') {
+				finalVerticales = finalVerticales.substring(0, finalVerticales.length() - 1);
+			}
+		} else {
+			finalVerticales = null;
+		}
+		// END For multiple verticales
+		
+		String vertCondition= "";
+		
+		if (finalVerticales != null) {
+			vertCondition = " and verticle__c in ("+finalVerticales+")  ";
+		} else {
+			vertCondition= "";
+		}
 
 		String whereCondition = "";
 
@@ -3628,11 +3713,11 @@ public class WebServiceController<MultipartFormDataInput> {
 			whereCondition = " AND  projectsfid = " + finalProjectid + " and userid=" + userid + " ";
 		} else if ((fromDate != null && fromDate.length() > 0) && (toDate != null && toDate.length() > 0)) {
 			whereCondition = " AND projectsfid in (" + finalProjectid + ") and Date(created) between '" + fromDate
-					+ "' and '" + toDate + "' ";
+					+ "' and '" + toDate + "' " + vertCondition;
 		} else if (projectid != null && projectid.length() > 0) {
-			whereCondition = " AND projectsfid in (" + finalProjectid + ")  ";
+			whereCondition = " AND projectsfid in (" + finalProjectid + ")  " + vertCondition;
 		} else {
-			whereCondition = " AND projectsfid in (" + finalProjectid + ")  ";
+			whereCondition = " AND projectsfid in (" + finalProjectid + ")  " + vertCondition;
 		}
 
 		/*
@@ -3647,11 +3732,43 @@ public class WebServiceController<MultipartFormDataInput> {
 
 	@RequestMapping(value = "/getApplicationList", method = RequestMethod.GET, produces = "application/json")
 	public String getApplicationList(@RequestParam("userid") String userid,
-			@RequestParam("projectSfid") String projectSfid) {
+			@RequestParam("projectSfid") String projectSfid, @RequestParam("userVerticals") String userVerticals) {
 		Gson gson = new GsonBuilder().disableHtmlEscaping().serializeNulls().create();
 		String whereCondition = "";
-
-		whereCondition = "propstrength__project__c=" + "'" + projectSfid + "'";
+		
+		// For multiple verticales
+		String finalVerticales = "";
+		if (userVerticals != null && !userVerticals.equals("null") && !userVerticals.equals("")) {
+			String [] multiVerticales= userVerticals.split(",");
+			
+			StringBuilder modifiedVer = new StringBuilder();
+			
+			
+			for (int i=0;i<multiVerticales.length;i++){
+				modifiedVer.append("'"+multiVerticales[i]+"'");
+				modifiedVer.append(",");
+			}
+			
+			finalVerticales = modifiedVer.toString();
+			
+			if (finalVerticales != null && finalVerticales.length() > 0 && finalVerticales.charAt(finalVerticales.length() - 1) == ',') {
+				finalVerticales = finalVerticales.substring(0, finalVerticales.length() - 1);
+			}
+		} else {
+			finalVerticales = null;
+		}
+		// END For multiple verticales
+		
+		String vertCondition= "";
+		
+		if (finalVerticales != null) {
+			vertCondition = " and b.verticle__c in ("+finalVerticales+")  ";
+		} else {
+			vertCondition= "";
+		}
+		
+		
+		whereCondition = " a.propstrength__project__c=" + "'" + projectSfid + "' "+ vertCondition +" ";
 
 		return gson.toJson(applicationDtlService.getApplicationDtl(whereCondition));
 	}
@@ -4175,15 +4292,48 @@ public class WebServiceController<MultipartFormDataInput> {
 	/* EOI Report */
 	@RequestMapping(value = "/getEOIReport", method = RequestMethod.GET, produces = "application/json")
 	public String getEOIReportDtl(@RequestParam("projectSfid") String projectSfid,
-			@RequestParam("fromDate") String fromDate, @RequestParam("toDate") String toDate) {
+			@RequestParam("fromDate") String fromDate, @RequestParam("toDate") String toDate, @RequestParam("userVerticals") String userVerticals) {
 		Gson gson = new GsonBuilder().disableHtmlEscaping().serializeNulls().create();
 		String whereCondition = "";
-
+		
+		
+		// For multiple verticales
+		String finalVerticales = "";
+		if (userVerticals != null && !userVerticals.equals("null") && !userVerticals.equals("")) {
+			String [] multiVerticales= userVerticals.split(",");
+			
+			StringBuilder modifiedVer = new StringBuilder();
+			
+			
+			for (int i=0;i<multiVerticales.length;i++){
+				modifiedVer.append("'"+multiVerticales[i]+"'");
+				modifiedVer.append(",");
+			}
+			
+			finalVerticales = modifiedVer.toString();
+			
+			if (finalVerticales != null && finalVerticales.length() > 0 && finalVerticales.charAt(finalVerticales.length() - 1) == ',') {
+				finalVerticales = finalVerticales.substring(0, finalVerticales.length() - 1);
+			}
+		} else {
+			finalVerticales = null;
+		}
+		// END For multiple verticales
+		
+		String vertCondition= "";
+		
+		if (finalVerticales != null) {
+			vertCondition = " and verticle__c in ("+finalVerticales+")  ";
+		} else {
+			vertCondition= "";
+		}
+		
+		
 		if ((fromDate != null && fromDate.length() > 0) && (toDate != null && toDate.length() > 0)) {
 			whereCondition = " project_sfid= '" + projectSfid + "' and Date(date_of_eoi__c) between '" + fromDate
-					+ "' and '" + toDate + "' order by date_of_eoi__c desc ";
+					+ "' and '" + toDate + "'  "+ vertCondition +"  order by date_of_eoi__c desc ";
 		} else if (projectSfid != null && projectSfid.length() > 0) {
-			whereCondition = " project_sfid= '" + projectSfid + "' order by date_of_eoi__c desc ";
+			whereCondition = " project_sfid= '" + projectSfid + "' "+ vertCondition +" order by date_of_eoi__c desc ";
 		}
 
 		// whereCondition = " project_sfid= '"+projectSfid+"' ";

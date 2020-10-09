@@ -23,8 +23,12 @@ public class ApplicationDtlDaoImpl implements ApplicationDtlDao{
 		
 		List<ApplicationDtl> authors=null;
 		
-		Query q = session.createNativeQuery("SELECT createddate, id, application_booking_id_18__c, propstrength__project__c, propstrength__primary_applicant_name__c, booking_source__c, propstrength__broker_name__c, propstrength__property_name__c, propstrength__tower__c, propstrength__type__c, enquiry18digit__c "
-				+ " FROM salesforce.propstrength__application_booking__c  where "+whereCondition+" and booking_status__c != 'Booking_Cancelled' order by createddate DESC ", ApplicationDtl.class);
+		Query q = session.createNativeQuery("SELECT a.createddate, a.id, a.application_booking_id_18__c, a.propstrength__project__c, a.propstrength__primary_applicant_name__c, "
+				+ " a.booking_source__c, a.propstrength__broker_name__c, a.propstrength__property_name__c, a.propstrength__tower__c, a.propstrength__type__c, a.enquiry18digit__c, "
+				+ " b.verticle__c "
+				+ " FROM salesforce.propstrength__application_booking__c a "
+				+ " LEFT JOIN salesforce.propstrength__request__c b ON b.sfid = a.enquiry18digit__c  "
+				+ " where "+whereCondition+" and a.booking_status__c != 'Booking_Cancelled' order by a.createddate DESC ", ApplicationDtl.class);
 
 		authors = q.getResultList();
 		

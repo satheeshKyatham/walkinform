@@ -6,6 +6,6 @@ import com.godrej.properties.model.Vw_MISReport;
 
 public interface VW_MISReportDao {
 	
-	List<Vw_MISReport> getUserProjectList(String projectid,String userid,String fromDate,String toDate);
+	List<Vw_MISReport> getUserProjectList(String projectid,String userid,String fromDate,String toDate, String userVerticals);
 
 }

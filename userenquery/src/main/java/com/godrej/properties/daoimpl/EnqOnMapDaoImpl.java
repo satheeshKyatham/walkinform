@@ -20,11 +20,21 @@ public class EnqOnMapDaoImpl extends AbstractDao<Integer, EnqOnMap> implements E
 	
 	
 	@Override
-	public List<EnqOnMap> getEnqDtl(String projectId) {
+	public List<EnqOnMap> getEnqDtl(String projectId, String finalVerticales) {
 		Session session = this.sessionFactory.getCurrentSession();	
 		@SuppressWarnings("unchecked")
 		//Date(created) = now() and
-		List<EnqOnMap> list =session.createQuery(" from EnqOnMap where    sfid='"+projectId+"'   and residencelat <> '' and residencelng <> '' ").list();
+		
+		String condition = "";
+		
+		if (finalVerticales != null) {
+			condition = " and verticle__c in ("+finalVerticales+") ";
+		} else {
+			condition = "";
+		}
+		
+		
+		List<EnqOnMap> list =session.createQuery(" from EnqOnMap where    sfid='"+projectId+"'   and residencelat <> '' and residencelng <> ''   "+condition+" ").list();
 		
 		if(list.size()>0)
 			return list;
