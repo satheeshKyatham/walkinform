@@ -269,6 +269,7 @@ function getAllInventoryReportDtl () {
 						
 						"<td>"+obj1[i].property_facing__c+"</td>" +
 						
+						"<td>"+obj1[i].propstrength__unit_type__c+"</td>" +
 						
 						"<td>"+obj1[i].propstrength__house_unit_no__c+"</td>" +
 						"<td>"+obj1[i].inventory_category__c+"</td>" +

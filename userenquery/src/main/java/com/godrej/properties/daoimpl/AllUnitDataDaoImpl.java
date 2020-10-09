@@ -91,7 +91,8 @@ public class AllUnitDataDaoImpl implements AllUnitDataDao{
 					+ " CASE WHEN a.appurtenant_area_sq_ft__c IS NULL THEN cast(0 as numeric (20,2))  ELSE cast(a.appurtenant_area_sq_ft__c as numeric (20,2))  END AS rera_exclusive_sqft, "
 					+ " CASE WHEN a.saleable_area__c IS NULL THEN cast(0 as numeric (20,2))  ELSE cast(a.saleable_area__c as numeric (20,2))  END AS saleable_area__c, "				
 					+ " CASE WHEN a.propstrength__super_area__c IS NULL THEN cast(0 as numeric (20,2))  ELSE cast(a.propstrength__super_area__c as numeric (20,2))  END AS super_area, "
-					+ " a.propstrength__tower__c "				
+					+ " a.propstrength__tower__c, "
+					+ " a.propstrength__unit_type__c "				
 					 
 					+ " FROM salesforce.propstrength__property__c a "
 					

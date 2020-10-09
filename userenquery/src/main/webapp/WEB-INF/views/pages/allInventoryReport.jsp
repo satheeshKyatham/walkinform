@@ -75,6 +75,9 @@
 							<th>Tower</th>
 							<th>Wing</th>
 							<th>Facing</th>
+							
+							<th>Unit Type</th>
+							
 							<th>Unit</th>
 							<th>Category</th>
 							<th>Unit name</th>
