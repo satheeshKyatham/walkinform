@@ -22,7 +22,8 @@ public class Vw_UserTowerMapping {
 	@Column(name="projectid") private String	projectid;
 	@Column(name="projectname") private String	projectname;
 	@Column(name="tower_name") private String	tower_name;
-	@Column(name="tower_sfid") private String	tower_sfid;
+	@Column(name="tower_sfid") private String	tower_sfid; 
+	@Column(name="region__c") private String	region__c; 
 	
 	public int getRow_number() {
 		return row_number;
@@ -60,4 +61,10 @@ public class Vw_UserTowerMapping {
 	public void setUser_id(int user_id) {
 		this.user_id = user_id;
 	}
+	public String getRegion__c() {
+		return region__c;
+	}
+	public void setRegion__c(String region__c) {
+		this.region__c = region__c;
+	} 
 }
