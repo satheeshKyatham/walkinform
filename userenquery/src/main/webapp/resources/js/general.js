@@ -151,13 +151,8 @@ function checkDuplicate(id){
 }
 
 
-
-
-
-
-
-function usertowermultiselect (){
-	var urlGetUsers = PAGECONTEXT_GV+"getTowerListUserWise?userid="+$('#userid').val();	
+function usertowermultiselect (selectedRegion){
+	var urlGetUsers = PAGECONTEXT_GV+"getTowerListUserWise?userid="+$('#userid').val()+"&region="+selectedRegion.join(",");	
 	
 	var uniqueId = [];
 	var uniqueNames = [];
@@ -198,6 +193,8 @@ function usertowermultiselect (){
 			option = option+"<option value="+value.tower_sfid+" "+defaultSelected+">"+value.tower_name+"</option>";
 		});	*/	
 	}).done(function() {
+		$(".userMultiselectTower").html("");
+		$('.userMultiselectTower').multiselect('destroy');
 		$(".userMultiselectTower").append(optionTower);
 		$('.userMultiselectTower').multiselect({
 			maxHeight: '200',
@@ -207,6 +204,62 @@ function usertowermultiselect (){
 			enableFiltering: true,
 			enableCaseInsensitiveFiltering: true,
 			buttonWidth: '100%'
+		});
+		
+		$('.userMultiselectTower').multiselect('refresh');
+	});
+}
+
+ 
+
+function userRegionMultiselect (regionSelector){
+	
+	$('#allReportMultiTower').hide();
+	
+	var urlGetUsers = PAGECONTEXT_GV+"getTowerListUserWise?userid="+$('#userid').val()+"&region=null";	
+	
+	//var uniqueId = [];
+	var uniqueRegion = [];
+	
+	//var defaultSelected = "";
+	var optionTower = ''; 
+	
+	$.getJSON(urlGetUsers, function (data) {
+		$.each(data, function (index, value) {  
+            if(uniqueRegion.indexOf(value.region__c) === -1){
+                //uniqueId.push(value.projectid);
+                uniqueRegion.push(value.region__c);
+            }        
+         });
+		
+		for(j = 0; j< uniqueRegion.length; j++){
+			
+			optionTower = optionTower+"<option  value='"+uniqueRegion[j]+"'>"+uniqueRegion[j];
+			optionTower = optionTower+"</option>"
+		}
+		 
+	}).done(function() {
+		$(".userMultiselectRegion").append(optionTower);
+		$('.userMultiselectRegion').multiselect({
+			maxHeight: '200',
+			allSelectedText: 'All',
+			enableClickableOptGroups: true,
+			includeSelectAllOption: true,
+			enableFiltering: true,
+			enableCaseInsensitiveFiltering: true,
+			buttonWidth: '100%',
+			onChange: function(option, checked, select) {
+				
+				var region = $('#'+regionSelector).find('option:selected');
+				var selectedRegion = [];
+				$(region).each(function(index, brand){
+					selectedRegion.push($(this).val());
+				});
+				
+				usertowermultiselect(selectedRegion);
+				
+				$('#allReportMultiTower').show();
+		    }
 		});
 	});
 }

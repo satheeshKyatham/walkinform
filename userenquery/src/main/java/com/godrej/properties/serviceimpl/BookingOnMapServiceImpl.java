@@ -17,8 +17,8 @@ public class BookingOnMapServiceImpl implements BookingOnMapService{
 	BookingOnMapDao bookingOnMapDao;
 	
 	@Override
-	public List<BookingOnMap> getEnqDtl(String projectId) {
+	public List<BookingOnMap> getEnqDtl(String projectId, String finalVerticales) {
 		// TODO Auto-generated method stub
-		return bookingOnMapDao.getEnqDtl(projectId);
+		return bookingOnMapDao.getEnqDtl(projectId, finalVerticales);
 	}
 }

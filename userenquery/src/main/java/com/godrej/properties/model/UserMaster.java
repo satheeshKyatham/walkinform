@@ -53,8 +53,8 @@ public class UserMaster {
 	private int mst_user_rolemaster_id;
 	
 	/* added by a */
-	@Column(name = "isotpadmin")
-	private String isotpadmin;
+	@Column(name = "isotpadmin") private String isotpadmin;
+	@Column(name = "verticales") private String verticales;
 	/* END added by a */
 	
 	@Transient
@@ -220,6 +220,13 @@ public class UserMaster {
 
 	public void setIsotpadmin(String isotpadmin) {
 		this.isotpadmin = isotpadmin;
+	}
+	public String getVerticales() {
+		return verticales;
+	}
+
+	public void setVerticales(String verticales) {
+		this.verticales = verticales;
 	}
 
 	@Override

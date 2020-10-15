@@ -17,12 +17,19 @@ public class VW_UserTowerMasterDaoImpl  implements VW_UserTowerMasterDao {
 	private SessionFactory sessionFactory;
 	
 	@Override
-	public List<Vw_UserTowerMapping> getProjectListUserWise(String userid) {
+	public List<Vw_UserTowerMapping> getProjectListUserWise(String userid, String finalRegion) {
 		Session session = this.sessionFactory.getCurrentSession();
 		List<Vw_UserTowerMapping> list =null;
 		
+		String regionCondition= "";
 		
-		 list =session.createQuery(" from Vw_UserTowerMapping where user_id = '"+userid+"' order by projectname, tower_name").list();
+		if (finalRegion != null) {
+			regionCondition = " and region__c in ("+finalRegion+")  ";
+		} else {
+			regionCondition= "";
+		}
+		
+		list =session.createQuery(" from Vw_UserTowerMapping where user_id = '"+userid+"' "+regionCondition+" order by region__c, projectname, tower_name").list();
 	 
 		if(list.size()>0)
 			return list;

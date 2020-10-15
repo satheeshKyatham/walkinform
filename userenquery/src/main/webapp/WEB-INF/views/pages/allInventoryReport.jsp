@@ -30,6 +30,12 @@
 				</div> -->
 				
 				<div class="form-group col-md-4">
+					<label>Region </label>
+					<select class="userMultiselectRegion" id="allReportMultiRegion"  multiple="multiple"></select>
+				</div>
+				
+				
+				<div class="form-group col-md-4">
 					<label>Project(s) </label>
 					<select class="userMultiselectTower" id="allReportMultiTower" multiple="multiple"></select>
 				</div>
@@ -75,6 +81,9 @@
 							<th>Tower</th>
 							<th>Wing</th>
 							<th>Facing</th>
+							
+							<th>Unit Type</th>
+							
 							<th>Unit</th>
 							<th>Category</th>
 							<th>Unit name</th>

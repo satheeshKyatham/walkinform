@@ -28,7 +28,7 @@ function getEOIReport () {
 	$('#eoiReportTab i').show();
 	
 	$("#eoiReportTable tbody").empty();
-	$.get("getEOIReport",{"projectSfid":$('#projectid').val(), "fromDate":$('#txtEOIFromDate').val(), "toDate":$('#txtEOIToDate').val()},function(data){				 
+	$.get("getEOIReport",{"projectSfid":$('#projectid').val(), "fromDate":$('#txtEOIFromDate').val(), "toDate":$('#txtEOIToDate').val(), "userVerticals":USER_VERTICALES_GV},function(data){				 
 		var obj =JSON.stringify(data);
 		var obj1 =JSON.parse(obj);
 		
@@ -165,7 +165,7 @@ function getPaymentEOIReport () {
 	$('#paymentEOIReportTab i').show();
 	
 	$("#paymentEOIReportTable tbody").empty();
-	$.get("getPaymentEOIReport",{"projectSfid":$('#projectid').val(), "fromDate":$('#txtpaymentEOIFromDate').val(), "toDate":$('#txtpaymentEOIToDate').val()},function(data){				 
+	$.get("getPaymentEOIReport",{"projectSfid":$('#projectid').val(), "fromDate":$('#txtpaymentEOIFromDate').val(), "toDate":$('#txtpaymentEOIToDate').val(), "userVerticals": USER_VERTICALES_GV},function(data){				 
 		var obj =JSON.stringify(data);
 		var obj1 =JSON.parse(obj);
 		var html = '';

@@ -15,7 +15,7 @@ function getApplicationList () {
 	
 	 $("#applicationTable tbody").empty();
 	//alert ("Test Call 123 456");
-	$.get("getApplicationList",{"userid":$('#userid').val(),"projectSfid":$('#projectid').val()},function(data){				 
+	$.get("getApplicationList",{"userid":$('#userid').val(),"projectSfid":$('#projectid').val(), "userVerticals":USER_VERTICALES_GV},function(data){				 
 		//alert("Data:-"+data);
 		var obj =JSON.stringify(data);
 		var obj1 =JSON.parse(obj);

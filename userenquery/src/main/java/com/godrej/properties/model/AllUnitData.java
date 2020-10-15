@@ -45,6 +45,8 @@ public class AllUnitData implements Serializable{
 	@Column(name="verticle__c") private String verticle__c;
 	@Column(name="propstrength__tower__c") private String propstrength__tower__c;
 	
+	@Column(name="propstrength__unit_type__c") private String propstrength__unit_type__c;
+	
 	@Transient private String qry_count;
 	@Transient private String qry_msg;
 	
@@ -207,4 +209,10 @@ public class AllUnitData implements Serializable{
 	public void setQry_msg(String qry_msg) {
 		this.qry_msg = qry_msg;
 	}
+	public String getPropstrength__unit_type__c() {
+		return propstrength__unit_type__c;
+	}
+	public void setPropstrength__unit_type__c(String propstrength__unit_type__c) {
+		this.propstrength__unit_type__c = propstrength__unit_type__c;
+	}	
 }
