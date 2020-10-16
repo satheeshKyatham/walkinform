@@ -1488,5 +1488,11 @@ public class EnquiryRequestServiceImpl implements EnquiryRequestService {
 		 return enquiries;
 	
 	}
+	@Override
+	public List<EnquiryDto> getSourcingLeadsEnquiryList(String sourcManageremail, String projectSfid, String fromdate,
+			String todate) {
+		String sourcingLeadSFID = tokenService.getSalesUserSFID(0, sourcManageremail);
+		return pushEnquiryDataService.getSourcingLeadsEnquiryList(sourcingLeadSFID, projectSfid, fromdate, todate);
+	}
 	
 }

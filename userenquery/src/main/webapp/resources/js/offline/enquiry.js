@@ -369,6 +369,15 @@ function loadEnquiryReport(enq){
 		$('#budget').val(enq.enquiryReport.budget);
 		$("#carpetAreaRequirement").val(enq.enquiryReport.carpetAreaRequirement);
 		$('#otherChannelPartnerName').val(enq.enquiryReport.cpComments);
+		if(enq.enquiryReport.is_revisit=="Yes")
+		{
+			$('#lastvisitdate_div').show();
+			$('.is_revisit').val(enq.enquiryReport.is_revisit);
+			var date = new Date(enq.dateOfSiteVisit);
+			var newdate= (date.getMonth() + 1) + '/' + date.getDate() + '/' +  date.getFullYear();
+			$('#lastvisitdate').val(newdate);
+			$('#lastvisitdate').attr('name', 'enquiryReport.lastvisitdate');
+		}
 		var visitType = enq.enquiryReport.visitType;
 		$("#visitType").val(visitType);
 	}

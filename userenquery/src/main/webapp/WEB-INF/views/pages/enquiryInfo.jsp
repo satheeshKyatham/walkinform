@@ -683,7 +683,7 @@
 								<label class="select-label">Purchase Purpose<strong class="mndt"></strong></label>
 							</div>
 							<div class="group" id="lastvisitdate_div" style="display:none"><!--  -->
-									<input type="text" class="autocomplete-off disableInputs" id="lastvisitdate" name="enquiryReport.lastvisitdate"/>
+									<input type="text" class="autocomplete-off disableInputs" id="lastvisitdate" /><!-- name="enquiryReport.lastvisitdate" -->
 									<span class="highlight"></span><span class="bar"></span>
 									<label>Last Visit Date</label>
 							</div>
