@@ -1111,7 +1111,7 @@ public class EnquiryRequestServiceImpl implements EnquiryRequestService {
 					enquiries.get(0).setSourcing_Team_Lead_email(tokenService.getSalesUserEmailID(enquiries.get(0).getEnquiryId(), enquiries.get(0).getSourcing_Team_Lead__c()));
 				}
 				//Check if enquiry revisit or not
-				if(enquiries.get(0).getEnquiryStatus().contains("Site Visit Done") || enquiries.get(0).getEnquiryStatus().contains("Virtual Meeting Done"))
+				if((enquiries.get(0).getEnquiryStatus().contains("Site Visit Done") || enquiries.get(0).getEnquiryStatus().contains("Virtual Meeting Done")) && enquiries.get(0).getEnquiryReport()!=null)
 				{
 					//Revisit
 					enquiries.get(0).getEnquiryReport().setIs_revisit("Yes");

@@ -25,5 +25,6 @@ public interface UserContactService {
 	public List<ContactDto> getContactByEmail(String email);
 	
 	public String getBrokerContact(String brokeraccount);
+	public ContactDto getContactBySfid(String sfid);
 	
 }
