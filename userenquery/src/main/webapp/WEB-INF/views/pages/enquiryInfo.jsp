@@ -1318,7 +1318,7 @@
 	</script>
 	
 	<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB1YQeqmJoubsXBr0BLkIqOtwWyYk2mKJQ&libraries=places&callback=initAutocomplete" async defer></script> -->
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAMtXEgz-EmdSjN3vqjcG0KpVP72vMKtyI&libraries=places&callback=initAutocomplete" async defer></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6tHZRohy-YmfuSL_TuvYpLt33w4THz1M&libraries=places&callback=initAutocomplete" async defer></script>
 	
 	<!-- <script src="https://rawgit.com/seiyria/bootstrap-slider/master/dist/bootstrap-slider.min.js"></script> -->
 		
