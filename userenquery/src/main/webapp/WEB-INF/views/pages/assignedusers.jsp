@@ -120,6 +120,9 @@ if(ses!=null){
 						<a href="#paymentEOIReportSales" data-toggle="tab">Payment Report <i class="fa fa-spinner fa-spin" style="display:none;"></i> </a>
 					</li>
 					<!-- END EOI Report -->
+					<li onclick="getMySourcingLead()" id="mySourcingLeadReportTabSales">
+						<a href="#mySourcingLeadReportSales" data-toggle="tab">My Sourcing Lead <i class="fa fa-spinner fa-spin" style="display:none;"></i> </a>
+					</li>
 					
 				</ul>
 				<div class=""></div>
@@ -332,7 +335,9 @@ if(ses!=null){
 					<%@ include file="/WEB-INF/views/pages/paymentEOIReportSales.jsp" %>
 				</div>		
 				<!-- EOI Reports -->
-				
+				<div class="tab-pane" id="mySourcingLeadReportSales">
+					<%@ include file="/WEB-INF/views/pages/mysourcinglead.jsp" %>
+				</div>	
 				
 				<div class="clearfix"></div>
 			</div>
@@ -369,6 +374,7 @@ if(ses!=null){
 	
 	<script src="<c:url value='/resources/js/separate/eoiReportSales.js?v=${sessionScope.version}'/>"></script>
 	<script src="<c:url value='/resources/js/demo/offerTemplate.js?v=${sessionScope.version}'/>"></script>
+	<script src="<c:url value='/resources/js/separate/mysourcinglead.js?v=${sessionScope.version}'/>"></script>
 	
 	<%@ include file="/WEB-INF/views/pages/footer.jsp" %>
 	

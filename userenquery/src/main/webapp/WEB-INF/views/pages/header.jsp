@@ -5,7 +5,7 @@
 <%  
 /* Cookie ck=new Cookie("version","18.20");  
 response.addCookie(ck);   */
-session.setAttribute("version","18.70");  
+session.setAttribute("version","18.81");  
 %>  
 
 <%
@@ -41,6 +41,7 @@ session.setAttribute("version","18.70");
 <input type="hidden" id="loged_role" value="<%= session.getAttribute("ROLE")%>" />
 <input type="hidden" id="userNameLoggedIn" value="<%= session.getAttribute("USERNAME")%>" />
 <input type="hidden" id="loged_userid" value="<%= session.getAttribute("USERID")%>" />
+<input type="hidden" id="loged_useremail" value="<%= session.getAttribute("USEREMAIL")%>" />
 
   <div class="navbar-header" style="width:100%;">
       	<a class="navbar-brand" href="#">

@@ -67,6 +67,7 @@ public class EnquiryReportDto extends CommonDto{
    	private String visitType;
    	
    	private String is_revisit;
+   	
    	private Date lastvisitdate;
    	
     @DateTimeFormat(pattern=KeyConstants.DEFAULT_DATE_FORMAT)

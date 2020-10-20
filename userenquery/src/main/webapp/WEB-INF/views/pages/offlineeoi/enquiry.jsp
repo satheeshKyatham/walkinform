@@ -201,6 +201,7 @@
 				<input type="hidden" class="enquiryReportId" name="enquiryReport.enquiryReportId">
 				<input type="hidden" class="enquiryprojectidId" name="enquiryReport.projectId"  value="${projectSfid}">
 				<input type="hidden" class="contactReportId" name="contact.contactReport.contactReportId">
+				<input type="hidden" class="is_revisit" name="enquiryReport.is_revisit">
 				<div class="row "> <!-- bounceInLeft animated -->
 					<div class="col-md-12 commonErrorCol commonErrorDiv" style="display: none">
 						<div class="alert alert-danger">
@@ -557,6 +558,11 @@
 	                             </select>
 								<span class="highlight"></span><span class="bar"></span>
 								<label class="select-label">Purchase Purpose<strong class="mndt"></strong></label>
+							</div>
+							<div class="group" id="lastvisitdate_div" style="display:none"><!--  -->
+									<input type="text" class="autocomplete-off disableInputs" id="lastvisitdate" /><!-- name="enquiryReport.lastvisitdate" -->
+									<span class="highlight"></span><span class="bar"></span>
+									<label>Last Visit Date</label>
 							</div>
 							<div class="clearfix"></div>
 						</div> 

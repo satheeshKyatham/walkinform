@@ -80,7 +80,7 @@ public class EnquiryReportServiceImpl implements EnquiryReportService{
 		{
 			dest.setReferredby(src.getReferredby());
 		}
-		if(src.getIs_revisit().contains("Yes"))
+		if(src.getIs_revisit()!=null && src.getIs_revisit().contains("Yes"))
 		{
 			dest.setIs_revisit(src.getIs_revisit());
 			if(src.getLastvisitdate()!=null)

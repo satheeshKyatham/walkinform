@@ -176,5 +176,13 @@ public class PushEnquiryDataServiceImpl  implements PushEnquiryDataService{
 		return enquiryConverter.entityToDto(enq);
 	}
 
+	@Override
+	public List<EnquiryDto> getSourcingLeadsEnquiryList(String sourcManagerSFID, String projectSfid, String fromdate,
+			String todate) {
+		// TODO Auto-generated method stub
+		List<Enquiry> enq= pushEnquiryDataDao.getSourcingLeadsEnquiryList(sourcManagerSFID, projectSfid, fromdate, todate);
+		return enquiryConverter.entityToDto(enq);
+	}
+
 	
 }

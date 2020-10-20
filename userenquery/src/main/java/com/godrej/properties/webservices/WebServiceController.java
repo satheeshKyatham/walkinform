@@ -34,6 +34,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -4700,5 +4701,13 @@ public class WebServiceController<MultipartFormDataInput> {
 			return "{\"status\":\"STATUS_NOTOK\",\"error_msg\":\"Invalid Data Provide\"}";
 		}
 	}
+	@GetMapping(value = "/getSourcingLeadReport", produces = "application/json;charset=UTF-8")
+	public String getSourcingLeadReport(@RequestParam("emailid") String sourcManageremail,
+			@RequestParam("projectsfid") String projectsfid,@RequestParam("fromdate") String fromdate,@RequestParam("todate") String todate) {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		Gson gson = gsonBuilder.create();
+		return gson.toJson(enquiryRequestService.getSourcingLeadsEnquiryList(sourcManageremail, projectsfid, fromdate, todate));
+	}
 
+	
 }

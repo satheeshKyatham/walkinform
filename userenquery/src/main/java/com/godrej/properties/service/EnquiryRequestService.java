@@ -29,6 +29,7 @@ public interface EnquiryRequestService {
 	public EnquiryDto savePaymentDetails(EnquiryDto enq);
 
 	public List<EnquiryDto> getEnquiriesByMobileNoEOI(String countryCode,String mobileNo, String projectSfid);
-	/* Added for CP App - SK*/
+	/* Added for CP App - Satheesh Kyatham*/
 	public List<EnquiryDto> getEnquiriesByCPAppWithParam(String custname,String countryCode,String mobileno,String projectsfid,String emailid);
+	public List<EnquiryDto> getSourcingLeadsEnquiryList(String sourcManageremail,String projectSfid,String fromdate,String todate);
 }

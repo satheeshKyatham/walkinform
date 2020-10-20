@@ -430,6 +430,7 @@ function loadEnquiryReport(enq){
 				var date = new Date(enq.dateOfSiteVisit);
 				var newdate= (date.getMonth() + 1) + '/' + date.getDate() + '/' +  date.getFullYear();
 				$('#lastvisitdate').val(newdate);
+				$('#lastvisitdate').attr('name', 'enquiryReport.lastvisitdate');
 			}
 	}
 	 $(this).scrollTop(0);

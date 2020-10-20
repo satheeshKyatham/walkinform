@@ -20,5 +20,7 @@ public interface UserContactDao {
 	
 	public String getBrokerContact(String brokeraccount);
 	public int getContactPKID(String contactsfid);
+	
+	public ContactDto getContactBySfid(String sfid);
 
 }
