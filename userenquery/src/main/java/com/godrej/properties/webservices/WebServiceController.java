@@ -3010,6 +3010,26 @@ public class WebServiceController<MultipartFormDataInput> {
 		return gson.toJson(token);
 	}
 
+	@RequestMapping(value = "/android_generateTokenMobileEOIData", method = RequestMethod.POST, produces = "application/json")
+	public String generateTokenMobileEOIData(@RequestParam("countryCode") String countryCode,
+			@RequestParam("mobileNo") String mobileNo, @RequestParam("projectname") String projectSfid,
+			@RequestParam("createdBy") String createdBy) throws UnsupportedEncodingException {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		Gson gson = gsonBuilder.create();
+		List<EnquiryDto> enquiryList = enquiryRequestService.getEnquiriesByMobileNoEOI(countryCode, mobileNo,
+				projectSfid);
+
+		if (enquiryList.size() > 0) {
+			enquiryList.get(0).setMessage("Success");
+			return gson.toJson(enquiryList.get(0));
+		} else {
+			EnquiryDto enqDto = new EnquiryDto();
+			enqDto.setMessage("No EOI found");
+			return gson.toJson(enqDto);
+		}
+
+	}
+	
 	@RequestMapping(value = "/android_generateTokenMobile", method = RequestMethod.POST, produces = "application/json")
 	public String setTokenMobile(@RequestParam("mobileNo") String mobileNo,
 			@RequestParam("projectname") String projectname, @RequestParam("createdBy") String createdBy)

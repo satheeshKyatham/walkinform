@@ -415,12 +415,42 @@ function getEnqAndOfferDtl (enqSFID, offerSFID, rowId) {
 			if ($('#projectid').val() == "a1l6F000003TXloQAG") {
 				$('#carpetAreaOffer').text(obj[0].open_balc_sq_ft__c);
 				$('#exclusiveAreasOffer').text(obj[0].appurtenant_area_sq_ft__c);
+			} else if ($('#projectid').val() == "a1l2s000000XmaMAAS") {
+				
+				var length_sqm__c = 0;
+				var breadth_sqm__c = 0;
+				var totalCarpetArea = 0;
+				
+				if (obj[0].open_balc_sq_mt__c != undefined) {
+					totalCarpetArea = obj[0].open_balc_sq_mt__c;
+				} 
+				
+				if (obj[0].length_sqm__c != undefined) {
+					length_sqm__c = obj[0].length_sqm__c;
+				} 
+				
+				if (obj[0].breadth_sqm__c != undefined) {
+					breadth_sqm__c = obj[0].breadth_sqm__c;
+				} else {
+					breadth_sqm__c= parseFloat(totalCarpetArea/length_sqm__c).toFixed(2);
+				}
+				
+				$('#carpetAreaOffer').text(breadth_sqm__c);
+				$('#exclusiveAreasOffer').text(length_sqm__c);
 			} else {
 				$('#carpetAreaOffer').text(obj[0].open_balc_sq_mt__c);
 				$('#exclusiveAreasOffer').text(obj[0].appurtenant_area_sq_mt__c);
 			}
 			
-			$('#totalAreaOffer').text(parseFloat(parseFloat($('#carpetAreaOffer').text())+parseFloat($('#exclusiveAreasOffer').text())).toFixed(2));
+			if ($('#projectid').val() == "a1l2s000000XmaMAAS") {
+				$('#totalAreaOffer').text(obj[0].open_balc_sq_mt__c);
+			} else {
+				$('#totalAreaOffer').text(parseFloat(parseFloat($('#carpetAreaOffer').text())+parseFloat($('#exclusiveAreasOffer').text())).toFixed(2));
+			}
+			
+			
+			
+			
 			
 			console.log ('propstrength__total_basic_sales_price__c ::: ' + obj[0].propstrength__total_basic_sales_price__c);
 			
@@ -456,8 +486,16 @@ function getEnqAndOfferDtl (enqSFID, offerSFID, rowId) {
 			}
 			
 			// Godrej Meridien 2 AND Godrej Exquisite, Mumbai (Thane)
-			if ($("#projectid").val() == "a1l6F000004LVk8QAG" || $("#projectid").val() == "a1l2s00000003BMAAY" || $("#projectid").val() == "a1l2s00000003VlAAI" ) {
-				var totalCarpetNExclusiveArea = parseFloat($('#carpetAreaCostOffer').text())+parseFloat($('#exclusiveAreasCostOffer').text());
+			if ($("#projectid").val() == "a1l6F000004LVk8QAG" || $("#projectid").val() == "a1l2s00000003BMAAY" || $("#projectid").val() == "a1l2s00000003VlAAI" || $("#projectid").val() == "a1l2s000000XmaMAAS" ) {
+				
+				var totalCarpetNExclusiveArea = 0;
+				
+				if ($("#projectid").val() == "a1l2s000000XmaMAAS") {
+					totalCarpetNExclusiveArea = parseFloat($('#carpetAreaCostOffer').text());
+				} else {
+					totalCarpetNExclusiveArea = parseFloat($('#carpetAreaCostOffer').text())+parseFloat($('#exclusiveAreasCostOffer').text());
+				}
+				
 				otherChargesUnit (obj[0].mappedCharges, obj[0].saleable_area__c, totalCarpetNExclusiveArea);
 			}
 			
@@ -773,6 +811,15 @@ function otherChargesUnit(otherCharges, saleable_area__c, totalSaleConsideration
 			
 			convertNumberToWords ();
 			
+		} else if ($("#projectid").val() == "a1l2s000000XmaMAAS") {
+			
+			var otherCharge = otherCharge_RetreatGurg (otherCharges.Other_Charges, saleable_area__c);
+			
+			$("#totalSaleConsiderationOffer").text("");
+			$("#totalSaleConsiderationOffer").text(parseInt(parseInt(otherCharge)+parseInt(totalSaleConsideration)).toFixed(2));
+			
+			convertNumberToWords ();
+			
 		}
 		
 		
@@ -947,4 +994,19 @@ function carParkChargesRWBlr (carParkCharges, saleable_area__c){
 	}
 	
 	return parseFloat(parseFloat(carParkCharges.propstrength__fixed_charge__c)).toFixed(2);
+}
+
+
+function otherCharge_RetreatGurg (other_charges, saleable_area__c){
+	if(other_charges == null){
+		return 0;
+	}
+	
+	if (other_charges.propstrength__rate_per_unit_area__c == null || saleable_area__c == null) {
+		return 0;
+	} else {
+		$("#otherChrg_RetreatGurg").text("");
+		$("#otherChrg_RetreatGurg").text(parseFloat(other_charges.propstrength__rate_per_unit_area__c*saleable_area__c).toFixed(2));
+	}
+	return parseFloat(other_charges.propstrength__rate_per_unit_area__c*saleable_area__c).toFixed(2);
 }

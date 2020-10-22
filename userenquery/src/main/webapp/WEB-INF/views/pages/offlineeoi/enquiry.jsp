@@ -86,7 +86,7 @@
 				<input type="hidden" id="recordTypeProspect" value="${recordTypeProspect}">
 			    <input type="hidden" id="recordTypeCustomer" value="${recordTypeCustomer}">
 		
-		<div class="filterColBg">
+		<%-- <div class="filterColBg">
 			<div class="filterCol">
 
 			<div class="col-md-3 col-sm-6 col-xs-12">
@@ -154,22 +154,25 @@
 				<div class="clearfix"></div>
 			</div>
 			<div class="clearfix"></div>
-		</div>
+		</div> --%>
 		
 		<div class="clearfix"></div>
-		<div id="tab_offline_enq" style="display: none">
+		<!-- <div id="tab_offline_enq"> style="display: none" -->
 		<div>
 		
 			<div class="clearfix"></div>
 			<ul class="nav nav-tabs tabNav">
 
 				<li id="" class="active"><!-- tab1_offline_enq -->
-						<a href="#tab1" data-toggle="tab">Enquiry</a>
-			</li>
-			
-			<li id="" onclick="getTowerEOI()" style="display:none;">
-						<a href="#tab2" data-toggle="tab">EOI</a>
-			</li>
+					<a href="#tab1" data-toggle="tab">Enquiry</a>
+				</li>
+				
+				<li id="" onclick="getTowerEOI()" style="display:none;">
+					<a href="#tab2" data-toggle="tab">EOI</a>
+				</li>
+				<li id="" class="" onclick="onclickGenerateEToken()">
+					<a href="#tab3" data-toggle="tab">Generate E-Token</a>
+				</li>
 			</ul>
 			<div class=""></div>
 		</div>
@@ -180,6 +183,78 @@
 			
 			
 			<div class="tab-pane active" id="tab1">
+			
+			<div class="filterColBg">
+			<div class="filterCol">
+
+			<div class="col-md-3 col-sm-6 col-xs-12">
+				<div class="group">
+					<div class="input-group" id="contactDiv">
+						<input type="hidden" id="hiddenMobileNo" value="${mobileNo}">
+						<input type="text" value="${countryCode}"
+							class="autocomplete-off form-control mobile requiredField contactNoDiv"
+							id="enMobileNo" name="enMobileNo" tabindex="-1"><!-- maxlength="10" -->
+						 <span class="highlight"></span><span class="bar"></span> <label>Contact
+							no.<strong class="mndt">*</strong>
+						</label>
+					</div>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			
+			
+				<div class="form-group col-md-2" id="otpInputColDiv">
+					<div class="group" style="min-height: auto; margin-bottom: 0;">
+						<div class="input-group" id="otpInputDiv">
+							<button class="btn blue_btn square_btn otpInput_btn_Div" onclick="generateOTP(1);">
+								<span>Access Code</span>
+							</button>
+						</div>
+						
+					</div>
+				</div>
+				<div class="form-group col-md-2" id="generateOTPColDiv">
+					<div class="group" style="min-height: auto; margin-bottom: 0;">
+						<div class="input-group" id="generateOTPDiv">
+							<span class="validBox">	
+								<input name="otp1" class="otpInput form-control" autocomplete="off" placeholder="Access Code."  onkeyup="otpvalidate(this)">
+							</span>
+						<label class="errorOTP"></label>
+						</div>
+					</div>
+				</div>
+				
+				<!-- <div class="form-group col-md-2">
+					<div class="group" style="min-height: auto; margin-bottom: 0;">
+						<div class="input-group" id="generateOTPDiv">
+							<button class="btn blue_btn" id="getGenerateOTP">Generate OTP</button>
+						</div>
+					</div>
+				</div> -->
+				<div class="form-group col-md-2" id="getEnquiry_search_btn" style="display: none">
+					<div class="group" style="min-height: auto; margin-bottom: 0;">
+						<div class="input-group" id="contactInputDiv">
+							<button class="btn blue_btn getEnquiry_btn" id="getEnquiry">Search</button>
+						</div>
+					</div>
+				</div>
+				<div class="form-group col-md-2" id="reset_btn_ColDiv" style="display: none;">
+					<div class="group" style="min-height: auto; margin-bottom: 0;">
+						<div class="input-group" id="otpInputResetDiv">
+							<button class="btn blue_btn square_btn" onclick="resetOfflineEnq(this);">
+								<span>Reset</span>
+							</button>
+						</div>
+						
+					</div>
+				</div>
+
+
+				<div class="clearfix"></div>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+		<div id="tab_offline_enq" style="display: none">
 				<form:form modelAttribute="EnquiryRequest" id="enquiryRequestBasicInfoForm">
 
 				<input type="hidden" value="${projectName}" id="projectName" name="projectName">
@@ -202,7 +277,7 @@
 				<input type="hidden" class="enquiryprojectidId" name="enquiryReport.projectId"  value="${projectSfid}">
 				<input type="hidden" class="contactReportId" name="contact.contactReport.contactReportId">
 				<input type="hidden" class="is_revisit" name="enquiryReport.is_revisit">
-				<div class="row "> <!-- bounceInLeft animated -->
+				<div class="row " style="padding-top: 10px;"> <!-- bounceInLeft animated -->
 					<div class="col-md-12 commonErrorCol commonErrorDiv" style="display: none">
 						<div class="alert alert-danger">
 						  	Kindly fill the <strong>required</strong> fields.
@@ -636,11 +711,14 @@
 				</form:form>
 			</div>
 			
-			<div class="tab-pane" id="tab2" style="display: none">
-				<%@ include file="/WEB-INF/views/pages/offlineeoi/eoiForm.jsp" %>
-			</div>
-						
+					
 		</div>
+		<div class="tab-pane" id="tab2" style="display: none">
+			<%@ include file="/WEB-INF/views/pages/offlineeoi/eoiForm.jsp" %>
+		</div>
+		<div class="tab-pane" id="tab3">
+			<%@ include file="/WEB-INF/views/pages/etokengenerate.jsp" %>
+		</div>	
 	</div>
 	<div class="clearfix"></div>
 	</div>
@@ -703,6 +781,7 @@
 	<script src="<c:url value='/resources/js/index.js?v=18.26' />"></script>
 	
 	<script src="<c:url value='/resources/js/offline/offlineEOI.js?v=18.26'/>"></script>
+	<script src="<c:url value='/resources/js/separate/etokengenerate.js' />"></script>
 
 	
 	<script>
