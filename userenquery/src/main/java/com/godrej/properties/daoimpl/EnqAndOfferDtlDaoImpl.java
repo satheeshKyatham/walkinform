@@ -68,7 +68,11 @@ public class EnqAndOfferDtlDaoImpl extends AbstractDao<Integer, EnqAndOfferDtl> 
 				+ " CASE  WHEN d.open_balc_sq_ft__c IS NULL THEN CAST(0 as double precision)  ELSE d.open_balc_sq_ft__c  END AS open_balc_sq_ft__c, "
 				+ " d.saleable_area__c, "
 				+ " d.wing_block__c, "
-				+ " e.rera_registration_number__c as tower_rera_no"
+				+ " e.rera_registration_number__c as tower_rera_no, "
+				
+				+ " d.length_sqm__c, "
+				+ " d.breadth_sqm__c, "
+				+ " d.plot_area_sqyd__c "
 				
 				+ " FROM salesforce.propstrength__offer__c a "
 				+ " INNER JOIN salesforce.propstrength__request__c b ON a.propstrength__request__c = b.sfid  "

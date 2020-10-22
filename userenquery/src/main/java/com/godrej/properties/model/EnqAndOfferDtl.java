@@ -73,6 +73,10 @@ public class EnqAndOfferDtl implements Serializable{
 	@Column(name="open_balc_sq_ft__c") private double open_balc_sq_ft__c;
 	
 	
+	@Column(name="length_sqm__c", precision = 10, scale = 2)  private BigDecimal length_sqm__c;
+	@Column(name="breadth_sqm__c", precision = 10, scale = 2)  private BigDecimal breadth_sqm__c;
+	@Column(name="plot_area_sqyd__c", precision = 10, scale = 2)  private BigDecimal plot_area_sqyd__c;
+	
 	public int getId() {
 		return id;
 	}
@@ -288,5 +292,23 @@ public class EnqAndOfferDtl implements Serializable{
 	}
 	public void setOpen_balc_sq_ft__c(double open_balc_sq_ft__c) {
 		this.open_balc_sq_ft__c = open_balc_sq_ft__c;
+	}
+	public BigDecimal getLength_sqm__c() {
+		return length_sqm__c;
+	}
+	public void setLength_sqm__c(BigDecimal length_sqm__c) {
+		this.length_sqm__c = length_sqm__c;
+	}
+	public BigDecimal getBreadth_sqm__c() {
+		return breadth_sqm__c;
+	}
+	public void setBreadth_sqm__c(BigDecimal breadth_sqm__c) {
+		this.breadth_sqm__c = breadth_sqm__c;
+	}
+	public BigDecimal getPlot_area_sqyd__c() {
+		return plot_area_sqyd__c;
+	}
+	public void setPlot_area_sqyd__c(BigDecimal plot_area_sqyd__c) {
+		this.plot_area_sqyd__c = plot_area_sqyd__c;
 	}
 }
