@@ -1,8 +1,8 @@
 
 <div class="row">
-	<div>
-		<div class="col-md-3 col-sm-6 col-xs-12">
-			<div class="group">
+	
+		
+			<div class="group col-md-3 col-sm-6 col-xs-12">
 				<div class="input-group" id="contactDivENew">
 					<input type="hidden" id="hiddenEMobileNo" value="${mobileNo}">
 					<input type="text" value="${countryCode}"
@@ -12,59 +12,63 @@
 						no.<strong class="mndt">*</strong>
 					</label>
 				</div>
-				<div class="form-group col-md-2" id="generateEToken_btn_Div">
-						<div class="group" style="min-height: auto; margin-bottom: 0;">
-							<div class="input-group" id="otpInputDiv">
-								<button class="btn blue_btn square_btn generateEToken_btn" onclick="searchEToken()"><!-- getGeneratedEtoken() -->
-									<span>Search</span><!-- /Generate E Token -->
-								</button>
-							</div>
-							
-						</div>
+			</div>	
+			<div class="form-group col-md-2" id="generateEToken_btn_Div">
+				<div class="group" style="min-height: auto; margin-bottom: 0;">
+					<div class="input-group" id="otpInputDiv">
+						<button class="btn blue_btn square_btn generateEToken_btn" onclick="searchEToken()"><!-- getGeneratedEtoken() -->
+							<span>Search</span><!-- /Generate E Token -->
+						</button>
 					</div>
+					
+				</div>
 			</div>
+		
 			<div class="clearfix"></div>
-		</div>
-	</div>
+				
+			<div  id="unitDtls" class="col-md-9">
+				<h5 class="">Enquiry Details</h5>
+				<div class="">
+					<table class="table table-bordered bgWhite">
+						<tbody>
+							<tr>
+								<th class="subHead towerNameCS">Enquiry No.</th>
+								<td><span class="towerTval"></span><span class="wingVal"></span></td>
+								<th class="subHead carpetSqmlabel">Customer Name</th>
+								<td class="carpetSqm"></td>
+							</tr>
+							<tr>
+								<th class="subHead">Customer Mobile No</th>
+								<td>
+									<span class="unitTval"></span>
+								</td>
+								<th class="subHead balTerSqmLabel">Enquiry Type</th>
+								<td class="balTerSqm"></td>
+							</tr>
+							<tr>
+								<th class="subHead floorNameCS">Walk-in Source</th>
+								<td class="floorTval"></td>
+								<th class="subHead">CP Name</th>
+								<td class="totalSqm"></td>
+							</tr>
+							<tr class="hideForPlot">
+								<th class="subHead typologyNameCS">Date of EOI</th>
+								<td   class="typologyTval"></td>
+								<!-- <th class="subHead noOfCarParkLabel">No. of Car Park</th>
+								<td  class="noOfCarPark ifCarParkZero"></td> -->
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+				
+		
+	
     <div class="clearfix"></div>
-	<div id="printColLeft" style="width:460px; float:left; padding-right:10px;">
-	<div class="printBasicDetails" id="unitDtls">
-	<h5 class="">Enquiry Details</h5>
-	<div class="">
-		<table class="table table-bordered bgWhite" style="width:100%; font-size:8px !important;">
-			<tbody>
-				<tr>
-					<th class="subHead towerNameCS">Enquiry No.</th>
-					<td><span class="towerTval"></span><span class="wingVal"></span></td>
-					<th class="subHead carpetSqmlabel">Customer Name</th>
-					<td class="carpetSqm"></td>
-				</tr>
-				<tr>
-					<th class="subHead">Customer Mobile No</th>
-					<td>
-						<span class="unitTval"></span>
-					</td>
-					<th class="subHead balTerSqmLabel">Enquiry Type</th>
-					<td class="balTerSqm"></td>
-				</tr>
-				<tr>
-					<th class="subHead floorNameCS">Walk-in Source</th>
-					<td class="floorTval"></td>
-					<th class="subHead">CP Name</th>
-					<td class="totalSqm"></td>
-				</tr>
-				<tr class="hideForPlot">
-					<th class="subHead typologyNameCS">Date of EOI</th>
-					<td   class="typologyTval"></td>
-					<!-- <th class="subHead noOfCarParkLabel">No. of Car Park</th>
-					<td  class="noOfCarPark ifCarParkZero"></td> -->
-				</tr>
-			</tbody>
-		</table>
-	</div>
-	<div class="clearfix"></div>
-	</div>
-	</div>
+	
+	
+	
 
 	<div class="form-group col-md-2" id="generateEToken_btn_Div">
 		<div class="group" style="min-height: auto; margin-bottom: 0;">
