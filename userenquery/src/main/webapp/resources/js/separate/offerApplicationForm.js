@@ -81,7 +81,7 @@ function getofferApplicantDetails (e, offerSFID, enqSFID, contactSFID, offerName
 			
 			var annexureName = '';
 			
-			if ($("#projectid").val() == "a1l2s00000000pEAAQ"  || $("#projectid").val() == "a1l2s00000003lPAAQ" ) {
+			if ($("#projectid").val() == "a1l2s00000000pEAAQ"  || $("#projectid").val() == "a1l2s00000003lPAAQ" || $("#projectid").val() == "a1l2s000000XmaMAAS" ) {
 				annexureName = "Annexure F";
 			} else if ($("#projectid").val() == "a1l2s00000003VlAAI") {
 				annexureName = "Annexure E";

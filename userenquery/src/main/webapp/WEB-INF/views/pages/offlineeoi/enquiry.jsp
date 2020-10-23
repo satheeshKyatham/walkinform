@@ -170,9 +170,9 @@
 				<li id="" onclick="getTowerEOI()" style="display:none;">
 					<a href="#tab2" data-toggle="tab">EOI</a>
 				</li>
-				<li id="" class="" onclick="onclickGenerateEToken()">
+				<!-- <li id="" class="" onclick="onclickGenerateEToken()">
 					<a href="#tab3" data-toggle="tab">Generate E-Token</a>
-				</li>
+				</li> -->
 			</ul>
 			<div class=""></div>
 		</div>
@@ -716,9 +716,9 @@
 		<div class="tab-pane" id="tab2" style="display: none">
 			<%@ include file="/WEB-INF/views/pages/offlineeoi/eoiForm.jsp" %>
 		</div>
-		<div class="tab-pane" id="tab3">
+		<%-- <div class="tab-pane" id="tab3">
 			<%@ include file="/WEB-INF/views/pages/etokengenerate.jsp" %>
-		</div>	
+		</div> --%>	
 	</div>
 	<div class="clearfix"></div>
 	</div>
