@@ -17,8 +17,8 @@ public class EnqOnMapServiceImpl implements EnqOnMapService{
 	EnqOnMapDao enqOnMapDao;
 	
 	@Override
-	public List<EnqOnMap> getEnqDtl(String projectId) {
+	public List<EnqOnMap> getEnqDtl(String projectId, String finalVerticales) {
 		// TODO Auto-generated method stub
-		return enqOnMapDao.getEnqDtl(projectId);
+		return enqOnMapDao.getEnqDtl(projectId, finalVerticales);
 	}
 }

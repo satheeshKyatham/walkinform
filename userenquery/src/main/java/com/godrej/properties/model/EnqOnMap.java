@@ -22,7 +22,7 @@ public class EnqOnMap {
 	@Column(name="mobileno") private String mobileno;
 	@Column(name="referred_partner_flag__c") private String referred_partner_flag__c;
 	@Column(name="walk_in_source__c") private String walk_in_source__c;
-	
+	@Column(name="verticle__c") private String verticle__c;
 	
 	
 	public int getRow_number() {
@@ -84,5 +84,11 @@ public class EnqOnMap {
 	}
 	public void setWalk_in_source__c(String walk_in_source__c) {
 		this.walk_in_source__c = walk_in_source__c;
+	}
+	public String getVerticle__c() {
+		return verticle__c;
+	}
+	public void setVerticle__c(String verticle__c) {
+		this.verticle__c = verticle__c;
 	}
 }

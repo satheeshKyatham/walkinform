@@ -270,6 +270,12 @@ public class UserContactServiceImpl implements UserContactService {
 		return userContactDao.getBrokerContact(brokeraccount);
 	}
 
+	@Override
+	public ContactDto getContactBySfid(String sfid) {
+		// TODO Auto-generated method stub
+		return userContactDao.getContactBySfid(sfid);
+	}
+
 	
 
 }

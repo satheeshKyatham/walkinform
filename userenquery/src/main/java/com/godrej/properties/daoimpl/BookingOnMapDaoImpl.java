@@ -21,10 +21,19 @@ public class BookingOnMapDaoImpl extends AbstractDao<Integer, BookingOnMap> impl
 	
 	
 	@Override
-	public List<BookingOnMap> getEnqDtl(String projectId) {
+	public List<BookingOnMap> getEnqDtl(String projectId, String finalVerticales) {
 		Session session = this.sessionFactory.getCurrentSession();	
 		@SuppressWarnings("unchecked")
-		List<BookingOnMap> list =session.createQuery(" from BookingOnMap where    sfid='"+projectId+"'   and residencelat <> '' and residencelng <> '' AND propstrength__status__c = 'Closed Won' ").list();
+		
+		String condition = "";
+		
+		if (finalVerticales != null) {
+			condition = " and verticle__c in ("+finalVerticales+") ";
+		} else {
+			condition = "";
+		}
+		
+		List<BookingOnMap> list =session.createQuery(" from BookingOnMap where    sfid='"+projectId+"'   and residencelat <> '' and residencelng <> '' AND propstrength__status__c = 'Closed Won' "+condition+" ").list();
 		
 		if(list.size()>0)
 			return list;

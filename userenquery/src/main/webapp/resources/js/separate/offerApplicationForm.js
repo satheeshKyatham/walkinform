@@ -10,6 +10,7 @@ $.ajaxSetup({
 var reraRegistrationNo = '';
 var towerReraRegistrationNo = '';
 var reraLabel = "";
+var towerName1 = "";
 
 if ($('#projectid').val() == "a1l6F000003TXloQAG"){
 	reraLabel = "WBHIRA";
@@ -80,7 +81,7 @@ function getofferApplicantDetails (e, offerSFID, enqSFID, contactSFID, offerName
 			
 			var annexureName = '';
 			
-			if ($("#projectid").val() == "a1l2s00000000pEAAQ"  || $("#projectid").val() == "a1l2s00000003lPAAQ" ) {
+			if ($("#projectid").val() == "a1l2s00000000pEAAQ"  || $("#projectid").val() == "a1l2s00000003lPAAQ" || $("#projectid").val() == "a1l2s000000XmaMAAS" ) {
 				annexureName = "Annexure F";
 			} else if ($("#projectid").val() == "a1l2s00000003VlAAI") {
 				annexureName = "Annexure E";
@@ -316,6 +317,14 @@ function getEnqAndOfferDtl (enqSFID, offerSFID, rowId) {
 				towerReraRegistrationNo = '';
 			}
 			
+			if (obj[0].propstrength__tower_name__c != undefined){
+				towerName1 = obj[0].propstrength__tower_name__c;
+			} else {
+				towerName1 = '';
+			}
+			
+			
+			
 			if (obj[0].propstrength__enquiry_type__c != "Partner") {
 				
 				if (obj[0].walk_in_source__c != undefined){
@@ -364,8 +373,16 @@ function getEnqAndOfferDtl (enqSFID, offerSFID, rowId) {
 			
 			//$('#projectName').text(obj[0].project_name__c);
 			
-			$('#projectNameLocationOffer').text(obj[0].propstrength__description__c);
 			
+			if ($("#projectid").val() == "a1l2s000000XmaMAAS") {
+				$('#projectNameLocationOffer').text(towerName1);
+				$('#towerNameOffer').text(towerName1);
+			} else {
+				$('#projectNameLocationOffer').text(obj[0].propstrength__description__c);
+				$('#towerNameOffer').text(obj[0].propstrength__tower_name__c+wing);
+			}
+				
+				
 			if ($("#projectid").val() == "a1l2s00000000pEAAQ") {
 				jvCityStateCountry = obj[0].jv_city__c 	
 			} else {
@@ -389,7 +406,7 @@ function getEnqAndOfferDtl (enqSFID, offerSFID, rowId) {
          	   wing = "";
             }
 			
-			$('#towerNameOffer').text(obj[0].propstrength__tower_name__c+wing);
+			
 			$('#floorNameOffer').text(obj[0].propstrength__floor_name__c);
 			
 			$('#flatNoOffer').text(obj[0].propstrength__property_name__c);
@@ -398,12 +415,42 @@ function getEnqAndOfferDtl (enqSFID, offerSFID, rowId) {
 			if ($('#projectid').val() == "a1l6F000003TXloQAG") {
 				$('#carpetAreaOffer').text(obj[0].open_balc_sq_ft__c);
 				$('#exclusiveAreasOffer').text(obj[0].appurtenant_area_sq_ft__c);
+			} else if ($('#projectid').val() == "a1l2s000000XmaMAAS") {
+				
+				var length_sqm__c = 0;
+				var breadth_sqm__c = 0;
+				var totalCarpetArea = 0;
+				
+				if (obj[0].open_balc_sq_mt__c != undefined) {
+					totalCarpetArea = obj[0].open_balc_sq_mt__c;
+				} 
+				
+				if (obj[0].length_sqm__c != undefined) {
+					length_sqm__c = obj[0].length_sqm__c;
+				} 
+				
+				if (obj[0].breadth_sqm__c != undefined) {
+					breadth_sqm__c = obj[0].breadth_sqm__c;
+				} else {
+					breadth_sqm__c= parseFloat(totalCarpetArea/length_sqm__c).toFixed(2);
+				}
+				
+				$('#carpetAreaOffer').text(breadth_sqm__c);
+				$('#exclusiveAreasOffer').text(length_sqm__c);
 			} else {
 				$('#carpetAreaOffer').text(obj[0].open_balc_sq_mt__c);
 				$('#exclusiveAreasOffer').text(obj[0].appurtenant_area_sq_mt__c);
 			}
 			
-			$('#totalAreaOffer').text(parseFloat(parseFloat($('#carpetAreaOffer').text())+parseFloat($('#exclusiveAreasOffer').text())).toFixed(2));
+			if ($('#projectid').val() == "a1l2s000000XmaMAAS") {
+				$('#totalAreaOffer').text(obj[0].open_balc_sq_mt__c);
+			} else {
+				$('#totalAreaOffer').text(parseFloat(parseFloat($('#carpetAreaOffer').text())+parseFloat($('#exclusiveAreasOffer').text())).toFixed(2));
+			}
+			
+			
+			
+			
 			
 			console.log ('propstrength__total_basic_sales_price__c ::: ' + obj[0].propstrength__total_basic_sales_price__c);
 			
@@ -439,8 +486,16 @@ function getEnqAndOfferDtl (enqSFID, offerSFID, rowId) {
 			}
 			
 			// Godrej Meridien 2 AND Godrej Exquisite, Mumbai (Thane)
-			if ($("#projectid").val() == "a1l6F000004LVk8QAG" || $("#projectid").val() == "a1l2s00000003BMAAY" || $("#projectid").val() == "a1l2s00000003VlAAI" ) {
-				var totalCarpetNExclusiveArea = parseFloat($('#carpetAreaCostOffer').text())+parseFloat($('#exclusiveAreasCostOffer').text());
+			if ($("#projectid").val() == "a1l6F000004LVk8QAG" || $("#projectid").val() == "a1l2s00000003BMAAY" || $("#projectid").val() == "a1l2s00000003VlAAI" || $("#projectid").val() == "a1l2s000000XmaMAAS" ) {
+				
+				var totalCarpetNExclusiveArea = 0;
+				
+				if ($("#projectid").val() == "a1l2s000000XmaMAAS") {
+					totalCarpetNExclusiveArea = parseFloat($('#carpetAreaCostOffer').text());
+				} else {
+					totalCarpetNExclusiveArea = parseFloat($('#carpetAreaCostOffer').text())+parseFloat($('#exclusiveAreasCostOffer').text());
+				}
+				
 				otherChargesUnit (obj[0].mappedCharges, obj[0].saleable_area__c, totalCarpetNExclusiveArea);
 			}
 			
@@ -668,11 +723,19 @@ function convertNumberToWords() {
 function printApplicationOfferForm(offerSFID, rowId) {
 	var pageContext = $("#pageContext").val()+"/";
 	
-	if ($('#projectid').val() == "a1l6F000003TXloQAG"){
+	var projectName1 = "";
+	
+	if ($('#projectid').val() == "a1l6F000003TXloQAG" || $('#projectid').val() == "a1l2s000000XmaMAAS"){
 		reraRegistrationNo = towerReraRegistrationNo;
 	}
 	
-	$.post(pageContext+"printApplicationForm",{"projectid":$('#projectid').val(), "enqSfid":offerSFID,"appFormData":$('#printApplicationFormOffer').html(),"projectName":$('#appProjectNameOffer').val(),"reraRegistrationNo":reraRegistrationNo},function(data){				 
+	if ($('#projectid').val() == "a1l2s000000XmaMAAS"){
+		projectName1 = towerName1;
+	} else {
+		projectName1 = $('#appProjectNameOffer').val();
+	}
+	
+	$.post(pageContext+"printApplicationForm",{"projectid":$('#projectid').val(), "enqSfid":offerSFID,"appFormData":$('#printApplicationFormOffer').html(),"projectName":projectName1,"reraRegistrationNo":reraRegistrationNo},function(data){				 
 		
 	}).done(function(data){
 		
@@ -745,6 +808,15 @@ function otherChargesUnit(otherCharges, saleable_area__c, totalSaleConsideration
 			
 			$("#totalSaleConsiderationOffer").text("");
 			$("#totalSaleConsiderationOffer").text(parseInt(parseInt(clubDevChargesAmount)+parseInt(frcPlcInfraAmount)+parseInt(carParkChargesAmount)+parseInt(totalSaleConsideration)).toFixed(2));
+			
+			convertNumberToWords ();
+			
+		} else if ($("#projectid").val() == "a1l2s000000XmaMAAS") {
+			
+			var otherCharge = otherCharge_RetreatGurg (otherCharges.Other_Charges, saleable_area__c);
+			
+			$("#totalSaleConsiderationOffer").text("");
+			$("#totalSaleConsiderationOffer").text(parseInt(parseInt(otherCharge)+parseInt(totalSaleConsideration)).toFixed(2));
 			
 			convertNumberToWords ();
 			
@@ -922,4 +994,19 @@ function carParkChargesRWBlr (carParkCharges, saleable_area__c){
 	}
 	
 	return parseFloat(parseFloat(carParkCharges.propstrength__fixed_charge__c)).toFixed(2);
+}
+
+
+function otherCharge_RetreatGurg (other_charges, saleable_area__c){
+	if(other_charges == null){
+		return 0;
+	}
+	
+	if (other_charges.propstrength__rate_per_unit_area__c == null || saleable_area__c == null) {
+		return 0;
+	} else {
+		$("#otherChrg_RetreatGurg").text("");
+		$("#otherChrg_RetreatGurg").text(parseFloat(other_charges.propstrength__rate_per_unit_area__c*saleable_area__c).toFixed(2));
+	}
+	return parseFloat(other_charges.propstrength__rate_per_unit_area__c*saleable_area__c).toFixed(2);
 }

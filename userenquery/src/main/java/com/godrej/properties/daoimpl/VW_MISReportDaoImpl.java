@@ -24,16 +24,26 @@ public class VW_MISReportDaoImpl extends AbstractDao<Integer, Vw_MISReport> impl
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Vw_MISReport> getUserProjectList(String projectid,String userid, String fromDate, String toDate) {
+	public List<Vw_MISReport> getUserProjectList(String projectid,String userid, String fromDate, String toDate, String userVerticals) {
 		Session session = this.sessionFactory.getCurrentSession();
 		List<Vw_MISReport> list =null;
+		
+		String condition = "";
+		
+		if (userVerticals != null) {
+			condition = " and verticle__c in ("+userVerticals+") ";
+		} else {
+			condition = "";
+		}
+		
+		
 		
 		String SQL_QUERY = "";
 		
 		if(((fromDate!=null && fromDate.length()>0) && (toDate!=null && toDate.length()>0)) && (userid !=null && userid.length()>0) )
 			list =session.createQuery(" from Vw_MISReport where projectid= "+projectid+" and user_id="+userid+" and Date(created) between '"+fromDate+"' and '"+toDate+"' order by created desc ").list();
 		else if((fromDate!=null && fromDate.length()>0) && (toDate!=null && toDate.length()>0)){
-			SQL_QUERY = "SELECT COUNT(*) FROM Vw_MISReport where projectid in ("+projectid+") and Date(created) between '"+fromDate+"' and '"+toDate+"'";
+			SQL_QUERY = "SELECT COUNT(*) FROM Vw_MISReport where projectid in ("+projectid+") and Date(created) between '"+fromDate+"' and '"+toDate+"'" + condition;
 		  	Query query = session.createQuery(SQL_QUERY);
 		
 		  	long row = 0L;
@@ -44,14 +54,14 @@ public class VW_MISReportDaoImpl extends AbstractDao<Integer, Vw_MISReport> impl
 		  	String strRowCount = Long.toString(row);
 		  	
 		  	if (row <= 5000) {
-		  		list =session.createQuery(" from Vw_MISReport where projectid in ("+projectid+") and Date(created) between '"+fromDate+"' and '"+toDate+"' order by projectname,created desc ").list();
+		  		list =session.createQuery(" from Vw_MISReport where projectid in ("+projectid+") and Date(created) between '"+fromDate+"' and '"+toDate+"' " +condition+ " order by projectname,created desc ").list();
 		  	}else {
 		  		List<Vw_MISReport> lists = new ArrayList<Vw_MISReport>();
 		  		lists = getlist(lists,"MAX_LIMIT",strRowCount);
 		  		return lists;
 		  	}
 		}else if(projectid!=null && projectid.length()>0) {
-			SQL_QUERY = "SELECT COUNT(*) FROM Vw_MISReport where projectid in ("+projectid+")";
+			SQL_QUERY = "SELECT COUNT(*) FROM Vw_MISReport where projectid in ("+projectid+")" + condition;
 		  	Query query = session.createQuery(SQL_QUERY);
 		
 		  	long row = 0L;
@@ -62,7 +72,7 @@ public class VW_MISReportDaoImpl extends AbstractDao<Integer, Vw_MISReport> impl
 		  	String strRowCount = Long.toString(row);
 		  	
 		  	if (row <= 5000) {
-		  		list =session.createQuery(" from Vw_MISReport where projectid in ("+projectid+") order by projectname,created desc ").list();
+		  		list =session.createQuery(" from Vw_MISReport where projectid in ("+projectid+") "+ condition +" order by projectname,created desc ").list();
 		  	}else {
 		  		List<Vw_MISReport> lists = new ArrayList<Vw_MISReport>();
 		  		lists = getlist(lists,"MAX_LIMIT", strRowCount);

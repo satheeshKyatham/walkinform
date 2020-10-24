@@ -339,6 +339,8 @@ function getTokenTypeEOI (){
 	else if($("#projectsfid").val()=='a1l2s00000003lPAAQ')
 	{
 		html='<option value="F">PLATINUM</option><option value="T">EXPRESS</option>';
+	} else if ($("#projectsfid").val()=='a1l6F000002X6IOQA0') {
+		html='<option value="F">REFUNDABLE</option>';
 	}
 	
 	
@@ -490,25 +492,95 @@ function getUnitEOI (e){
 
 
 function getfbandEOI(e) {
-	 
-	$.get("getTowerBand", {
-		"project_code" : $('.projectSfid').val(),
-		"tower_code":$(e).val()
-	}, function(data) {
+	
+	//Changing for Plot Faridabad Project
+	//Added By Satheesh K - 25-09-2020
+	if($('.projectSfid').val()=="a1l2s000000XmaMAAS")
+		{
+		if($.trim($(e).closest('.EOIDtlRow').find(".typologyListEOI").val())!='')
+			{
+				var concertArray = [
+					{towername:"Godrej Retreat Vista", range:"Plot_104-119", streetname:"Amaryllis Street"},
+					{towername:"Godrej Retreat Vista", range:"Plot_150-159", streetname:"Amaryllis Street"},
+					{towername:"Godrej Retreat Orchard", range:"Plot_160-169", streetname:"Berry Garden Street 1"},
+					{towername:"Godrej Retreat Orchard", range:"Plot_160-169", streetname:"Berry Garden Street 2"},
+					{towername:"Godrej Retreat Orchard", range:"Plot_140-149", streetname:"Canna Street"},
+					{towername:"Godrej Retreat Orchard", range:"Plot_120-129", streetname:"Copperpod Street"},
+					{towername:"Godrej Retreat Vibe", range:"Plot_104-119", streetname:"Duranta Street"},
+					{towername:"Godrej Retreat Vibe", range:"Plot_170-179", streetname:"Ficus Street"},
+					{towername:"Godrej Retreat Aroma", range:"Plot_104-119", streetname:"Fragrance Park Street 1"},
+					{towername:"Godrej Retreat Aroma", range:"Plot_104-119", streetname:"Fragrance Park Street 2"},
+					{towername:"Godrej Retreat Aroma", range:"Plot_130-139", streetname:"Fragrance Park Street 2"},
+					{towername:"Godrej Retreat Orchard", range:"Plot_130-139", streetname:"Galphimia Street"},
+					{towername:"Godrej Retreat Orchard", range:"Plot_140-149", streetname:"Galphimia Street"},
+					{towername:"Godrej Retreat Vista", range:"Plot_104-119", streetname:"Hibiscus Street"},
+					{towername:"Godrej Retreat Vista", range:"Plot_170-179", streetname:"Hibiscus Street"},
+					{towername:"Godrej Retreat Vista", range:"Plot_120-129", streetname:"Hues Park Street"},
+					{towername:"Godrej Retreat Symphony", range:"Plot_140-149", streetname:"Iris Street"},
+					{towername:"Godrej Retreat Symphony", range:"Plot_170-179", streetname:"Iris Street"},
+					{towername:"Godrej Retreat Aroma", range:"Plot_120-129", streetname:"Jacaranda Street"},
+					{towername:"Godrej Retreat Aroma", range:"Plot_140-149", streetname:"Jacaranda Street"},
+					{towername:"Godrej Retreat Aroma", range:"Plot_150-159", streetname:"Jacaranda Street"},
+					{towername:"Godrej Retreat Orchard", range:"Plot_160-169", streetname:"Lantana Street"},
+					{towername:"Godrej Retreat Symphony", range:"Plot_104-119", streetname:"Lily Street"},
+					{towername:"Godrej Retreat Symphony", range:"Plot_150-159", streetname:"Lily Street"},
+					{towername:"Godrej Retreat Symphony", range:"Plot_170-179", streetname:"Lily Street"},
+					{towername:"Godrej Retreat Aroma", range:"Plot_130-139", streetname:"Orchid Street"},
+					{towername:"Godrej Retreat Aroma", range:"Plot_140-149", streetname:"Orchid Street"},
+					{towername:"Godrej Retreat Aroma", range:"Plot_170-179", streetname:"Orchid Street"},
+					{towername:"Godrej Retreat Vibe", range:"Plot_120-129", streetname:"Pilkhan Street"},
+					{towername:"Godrej Retreat Vibe", range:"Plot_130-139", streetname:"Pilkhan Street"},
+					{towername:"Godrej Retreat Aroma", range:"Plot_150-159", streetname:"Plumbago Street"},
+					{towername:"Godrej Retreat Aroma", range:"Plot_160-169", streetname:"Plumbago Street"},
+					{towername:"Godrej Retreat Aroma", range:"Plot_170-179", streetname:"Plumbago Street"},
+					{towername:"Godrej Retreat Symphony", range:"Plot_170-179", streetname:"Ripple Park Street 1"},
+					{towername:"Godrej Retreat Vista", range:"Plot_104-119", streetname:"Semal Street"},
+					{towername:"Godrej Retreat Vibe", range:"Plot_140-149", streetname:"Sheesham Street"},
+					{towername:"Godrej Retreat Symphony", range:"Plot_104-119", streetname:"Vinca Street"},
+					{towername:"Godrej Plots_Parcel C", range:"Plot_104-119", streetname:"Amaryllis Street Test"},
+					{towername:"Godrej Plots_Parcel C", range:"Plot_104-119", streetname:"Amaryllis Street 2"}
 
-		$(e).closest('.EOIDtlRow').find(".floorListEOI").find("option:gt(0)").remove();
-		
-		var html="";
-		
-		if(data!=null){
-			for(var i=0;i<data.length;i++){
-				html=html+'<option value="'+data[i].name+'">'+data[i].name+'</option>';
+				];
+				var html="";
+				for(var i = 0; i < concertArray.length; i++) 
+				{
+					var fullname = concertArray[i].range+concertArray[i].towername;
+					var inputfullname = $(e).closest('.EOIDtlRow').find(".typologyListEOI").val()+$(".towerListEOI  option:selected").text();
+					if(fullname==inputfullname)
+					{
+					    $(e).closest('.EOIDtlRow').find(".floorListEOI").find("option:gt(0)").remove();
+						var valName = concertArray[i].towername+"-"+concertArray[i].range+"-"+concertArray[i].streetname;
+						html=html+'<option value="'+valName+'">'+concertArray[i].streetname+'</option>';
+						 
+						
+					 }
+				
+				}
+				$(e).closest('.EOIDtlRow').find(".floorListEOI").append(html);
 			}
 		}
-		 
-		$(e).closest('.EOIDtlRow').find(".floorListEOI").append(html);
+	else
+		{
+			$.get("getTowerBand", {
+				"project_code" : $('.projectSfid').val(),
+				"tower_code":$(e).val()
+			}, function(data) {
 		
-	});
+				$(e).closest('.EOIDtlRow').find(".floorListEOI").find("option:gt(0)").remove();
+				
+				var html="";
+				
+				if(data!=null){
+					for(var i=0;i<data.length;i++){
+						html=html+'<option value="'+data[i].name+'">'+data[i].name+'</option>';
+					}
+				}
+				 
+				$(e).closest('.EOIDtlRow').find(".floorListEOI").append(html);
+				
+			});
+		}
+	
 }
 
 

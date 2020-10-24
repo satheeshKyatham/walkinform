@@ -56,7 +56,7 @@ function getEnqDataForMap() {
 	// alert ("Test Call 123 456");
 	$('#map-canvas').hide();
 	$.post(pageContext + "getEnqDataForMap", {
-		"projectId" : $('#projectid').val()
+		"projectId" : $('#projectid').val(), "userVerticals" : USER_VERTICALES_GV
 	}, function(data) {
 
 	}).done(function(data) {
@@ -179,7 +179,7 @@ function getBookingDataForMap() {
 	$('#bookingMapLoading').show();
 	$('#booking-map-canvas').hide();
 	$.post(pageContext + "getBookingDataForMap", {
-		"projectId" : $('#projectid').val()
+		"projectId" : $('#projectid').val(), "userVerticals" : USER_VERTICALES_GV
 	}, function(data) {
 
 	}).done(function(data) {

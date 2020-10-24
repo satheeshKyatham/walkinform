@@ -5,7 +5,7 @@
 <%  
 /* Cookie ck=new Cookie("version","18.20");  
 response.addCookie(ck);   */
-session.setAttribute("version","18.65");  
+session.setAttribute("version","18.83");  
 %>  
 
 <%
@@ -25,10 +25,9 @@ session.setAttribute("version","18.65");
 	var ROLE_GV = '<%= session.getAttribute("ROLE")%>';
 	var PROSFID_GV = '<%= session.getAttribute("PROJECTSFID")%>';
 	
+	var USER_VERTICALES_GV = '<%= session.getAttribute("USER_VERTICALES")%>';
+	
 	var USEREMAIL_GV = '';
-	
-	
-	
 	if ('<%= session.getAttribute("USEREMAIL")%>' != null) {
 		USEREMAIL_GV = '<%= session.getAttribute("USEREMAIL")%>';		
 	} else {
@@ -42,6 +41,7 @@ session.setAttribute("version","18.65");
 <input type="hidden" id="loged_role" value="<%= session.getAttribute("ROLE")%>" />
 <input type="hidden" id="userNameLoggedIn" value="<%= session.getAttribute("USERNAME")%>" />
 <input type="hidden" id="loged_userid" value="<%= session.getAttribute("USERID")%>" />
+<input type="hidden" id="loged_useremail" value="<%= session.getAttribute("USEREMAIL")%>" />
 
   <div class="navbar-header" style="width:100%;">
       	<a class="navbar-brand" href="#">

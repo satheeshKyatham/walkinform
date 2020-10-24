@@ -83,6 +83,8 @@ public class EnquiryReport extends CommonModel{
     @Column(name="barrier1") private String barrier1;
     @Column(name="trigger2") private String trigger2;
     @Column(name="barrier2") private String barrier2;
+    @Column(name="is_revisit") private String is_revisit;
+    @Column(name="revisitdate") private Date lastvisitdate;
     
 	private String visitType;
     /*=========End========*/
@@ -385,6 +387,18 @@ public class EnquiryReport extends CommonModel{
 
 	public void setVisitType(String visitType) {
 		this.visitType = visitType;
+	}
+	public String getIs_revisit() {
+		return is_revisit;
+	}
+	public void setIs_revisit(String is_revisit) {
+		this.is_revisit = is_revisit;
+	}
+	public Date getLastvisitdate() {
+		return lastvisitdate;
+	}
+	public void setLastvisitdate(Date lastvisitdate) {
+		this.lastvisitdate = lastvisitdate;
 	}
 	
 

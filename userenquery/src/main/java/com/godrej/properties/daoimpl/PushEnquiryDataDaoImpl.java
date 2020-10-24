@@ -509,4 +509,20 @@ public class PushEnquiryDataDaoImpl  extends AAbstractDao<Enquiry> implements Pu
 		params.put("projectSfid", projectSfid);
 		return getEntities(jpql.toString(), params);
 	}
+
+	@Override
+	public List<Enquiry> getSourcingLeadsEnquiryList(String sourcManagerSFID, String projectSfid, String fromdate,
+			String todate) {
+		StringBuilder jpql=new StringBuilder();
+		jpql.append(" SELECT e FROM Enquiry e ")
+		.append(" INNER JOIN FETCH e.contactId c ")
+		.append(" LEFT JOIN FETCH e.project p ")
+		.append(" WHERE p.sfid=:projectSfid  ")
+		.append(" AND e.sourcing_Managers__c=:sourcing_Managers__c ")
+		.append(" AND  Date(e.lastModifiedDate) BETWEEN '"+fromdate+"' and '"+todate+"' ORDER BY e.lastModifiedDate asc "); 
+		Map<String, Object> params=new HashMap<>();
+		params.put("projectSfid",projectSfid);
+		params.put("sourcing_Managers__c",sourcManagerSFID);
+		return getEntities(jpql.toString(),params);
+	}
 }

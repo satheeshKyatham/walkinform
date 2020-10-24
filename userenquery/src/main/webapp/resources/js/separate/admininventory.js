@@ -64,7 +64,9 @@ $(document).ready(function(){
 			}
 		});
 	 
-	 usertowermultiselect ();
+	// usertowermultiselect ();
+	 
+	 userRegionMultiselect("allReportMultiRegion");
 });
 
 
@@ -772,3 +774,6 @@ function enqDtlForAdminHold () {
     	 
     });
 }
+ 
+ 
+//usertowermultiselect ();

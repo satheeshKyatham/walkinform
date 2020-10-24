@@ -33,7 +33,7 @@ function getAllotmentDashboardReport () {
 	$("#holdInvId").empty();
 	
 	
-	$.get("getAllotmentDayReport",{"projectSfid":$('#projectid').val(), "fromDate":$('#txtAllotFromDate').val(), "toDate":$('#txtAllotToDate').val()},function(data){				 
+	$.get("getAllotmentDayReport",{"projectSfid":$('#projectid').val(), "fromDate":$('#txtAllotFromDate').val(), "toDate":$('#txtAllotToDate').val(), "userVerticals":USER_VERTICALES_GV },function(data){				 
 		var obj =JSON.stringify(data);
 		var obj1 =JSON.parse(obj);
 		

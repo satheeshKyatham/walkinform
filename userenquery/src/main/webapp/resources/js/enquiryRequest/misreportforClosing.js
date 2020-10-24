@@ -37,7 +37,7 @@ function getAllEnquiryFormReport()
 	$("#downloadCSV").append("<input type='hidden' value='"+$('#txtToDate').val()+"' name='todate' id='txtToDate1'/>");
 	//$("#misReportDetails_CM tbody").empty();
 	 $("#mainPageLoad").show();//$('#projectid').val() -- $('#txtFromDate').val()//
-	var urlPP = "misReport?projectid="+$('#projectid').val()+"&userid="+$('#userid').val()+"&fromdate="+$('#txtFromDateclsoing').val()+"&todate="+$('#txtToDate').val();
+	var urlPP = "misReport?projectid="+$('#projectid').val()+"&userid="+$('#userid').val()+"&fromdate="+$('#txtFromDateclsoing').val()+"&todate="+$('#txtToDate').val()+"&userVerticals=";
 	var i = 0
 	$("#misReportDetails_CM").dataTable().fnDestroy();
 	$("#misReportDetails_CM tbody").empty();

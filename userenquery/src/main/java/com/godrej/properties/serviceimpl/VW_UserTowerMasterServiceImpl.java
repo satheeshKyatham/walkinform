@@ -19,7 +19,7 @@ public class VW_UserTowerMasterServiceImpl implements VW_UserTowerMasterService 
 	 VW_UserTowerMasterDao vw_UserTowerMasterDao;
 
 	@Override
-	public List<Vw_UserTowerMapping> getProjectListUserWise(String userid) {
-		return vw_UserTowerMasterDao.getProjectListUserWise(userid);
+	public List<Vw_UserTowerMapping> getProjectListUserWise(String userid, String finalRegion) {
+		return vw_UserTowerMasterDao.getProjectListUserWise(userid, finalRegion);
 	}
 }

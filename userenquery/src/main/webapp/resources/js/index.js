@@ -58,6 +58,12 @@ $("#enMobileNo").intlTelInput({
 	preferredCountries: ["in"]
 });
 
+$("#enMobileNoEtoken").intlTelInput({
+	separateDialCode: true ,
+	//autoFormat:false,
+	utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/8.4.6/js/utils.js",
+	preferredCountries: ["in"]
+});
 
 $(".input-group-addon").click(function() {
 	$('#countryCode').val($('.selected-dial-code').text());

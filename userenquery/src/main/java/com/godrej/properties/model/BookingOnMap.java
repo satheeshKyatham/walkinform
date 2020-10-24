@@ -24,6 +24,9 @@ public class BookingOnMap {
 	@Column(name="walk_in_source__c") private String walk_in_source__c;
 	@Column(name="propstrength__status__c") private String propstrength__status__c;
 	
+	@Column(name="verticle__c") private String verticle__c;
+	
+	
 	public int getRow_number() {
 		return row_number;
 	}
@@ -89,5 +92,11 @@ public class BookingOnMap {
 	}
 	public void setPropstrength__status__c(String propstrength__status__c) {
 		this.propstrength__status__c = propstrength__status__c;
+	}
+	public String getVerticle__c() {
+		return verticle__c;
+	}
+	public void setVerticle__c(String verticle__c) {
+		this.verticle__c = verticle__c;
 	}
 }

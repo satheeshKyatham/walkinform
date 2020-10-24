@@ -75,9 +75,36 @@ public class MasterServiceController {
 	} 
 	
 	@GetMapping(value = "/getTowerListUserWise", produces = "application/json")
-	public String getTowerListUserWise(@RequestParam("userid") String userid) {
+	public String getTowerListUserWise(@RequestParam("userid") String userid, @RequestParam("region") String region) {
+		
+		
+		// For multiple verticales
+		String finalRegion = "";
+		if (region != null && !region.equals("null") && !region.equals("")) {
+			String [] multiVerticales= region.split(",");
+			
+			StringBuilder modifiedVer = new StringBuilder();
+			
+			
+			for (int i=0;i<multiVerticales.length;i++){
+				modifiedVer.append("'"+multiVerticales[i]+"'");
+				modifiedVer.append(",");
+			}
+			
+			finalRegion = modifiedVer.toString();
+			
+			if (finalRegion != null && finalRegion.length() > 0 && finalRegion.charAt(finalRegion.length() - 1) == ',') {
+				finalRegion = finalRegion.substring(0, finalRegion.length() - 1);
+			}
+		} else {
+			finalRegion = null;
+		}
+		// END For multiple verticales
+		
+		
+		
 		Gson gson = new GsonBuilder().disableHtmlEscaping().create();
-		List<Vw_UserTowerMapping> adt=vW_UserTowerMasterService.getProjectListUserWise(userid);
+		List<Vw_UserTowerMapping> adt=vW_UserTowerMasterService.getProjectListUserWise(userid, finalRegion);
 		return gson.toJson(adt);
 	} 
 	

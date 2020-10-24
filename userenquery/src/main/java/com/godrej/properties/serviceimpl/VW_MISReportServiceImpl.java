@@ -21,7 +21,7 @@ public class VW_MISReportServiceImpl implements VW_MISReportService {
 	VW_MISReportDao vW_MISReportDao;
 	
 	@Override
-	public List<Vw_MISReport> getUserProjectList(String projectid,String userid, String fromDate, String toDate) {
+	public List<Vw_MISReport> getUserProjectList(String projectid,String userid, String fromDate, String toDate, String userVerticals) {
 		 
 		
 		// For multiple project report
@@ -43,8 +43,32 @@ public class VW_MISReportServiceImpl implements VW_MISReportService {
 		// END For multiple project report
 		
 		
+		// For multiple verticales
+		String finalVerticales = "";
+		if (userVerticals != null && !userVerticals.equals("null") && !userVerticals.equals("")) {
+			String [] multiVerticales= userVerticals.split(",");
+			
+			StringBuilder modifiedVer = new StringBuilder();
+			
+			
+			for (int i=0;i<multiVerticales.length;i++){
+				modifiedVer.append("'"+multiVerticales[i]+"'");
+				modifiedVer.append(",");
+			}
+			
+			finalVerticales = modifiedVer.toString();
+			
+			if (finalVerticales != null && finalVerticales.length() > 0 && finalVerticales.charAt(finalVerticales.length() - 1) == ',') {
+				finalVerticales = finalVerticales.substring(0, finalVerticales.length() - 1);
+			}
+		} else {
+			finalVerticales = null;
+		}
+		// END For multiple verticales
+		
+		
 		List<Vw_MISReport> finalMislist = new ArrayList<Vw_MISReport>();
-		List<Vw_MISReport> mislist  = vW_MISReportDao.getUserProjectList(finalProjectid,userid, fromDate, toDate);
+		List<Vw_MISReport> mislist  = vW_MISReportDao.getUserProjectList(finalProjectid,userid, fromDate, toDate, finalVerticales);
 		if(mislist!=null && mislist.size()>0)
 		{
 			for (int i = 0; i < mislist.size(); i++) {

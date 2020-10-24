@@ -116,7 +116,17 @@ public class UserContactDaoImpl extends AAbstractDao<Contact> implements UserCon
 		}
 		
 	}
-
+	@Override
+	public ContactDto getContactBySfid(String sfid) {
+		//Added By Satheesh Kyahtam - 19-10-2020
+		 List<Contact> contact=null;
+		 StringBuilder jpql=new StringBuilder();
+		 jpql.append(" SELECT c FROM Contact c where c.sfid=:sfid");
+		 Map<String, Object> params=new HashMap<>();
+		 params.put("sfid", sfid);
+		 contact= getEntities(jpql.toString(), params);
+		 return contactConverter.entityToDto(contact.get(0));
+	}
 	
 	
 }

@@ -301,6 +301,7 @@ function populateBasicInfo(enq,contact){
 			
 			//$('#walkInSource').find('option[value='+enq.walkInSource+']').attr('selected','selected');
 			$('#walkInSource').val(enq.walkInSource);
+			
 			/*if(enq.walkInSource==='Referral')
 				{
 					$(".referred_by_name").show();
@@ -422,6 +423,15 @@ function loadEnquiryReport(enq){
 		$('#budget').val(enq.enquiryReport.budget);
 		$("#carpetAreaRequirement").val(enq.enquiryReport.carpetAreaRequirement);
 		$('#otherChannelPartnerName').val(enq.enquiryReport.cpComments);
+		if(enq.enquiryReport.is_revisit=="Yes")
+			{
+				$('#lastvisitdate_div').show();
+				$('.is_revisit').val(enq.enquiryReport.is_revisit);
+				var date = new Date(enq.dateOfSiteVisit);
+				var newdate= (date.getMonth() + 1) + '/' + date.getDate() + '/' +  date.getFullYear();
+				$('#lastvisitdate').val(newdate);
+				$('#lastvisitdate').attr('name', 'enquiryReport.lastvisitdate');
+			}
 	}
 	 $(this).scrollTop(0);
 	 
@@ -826,7 +836,7 @@ function hideEnquirySourceByEnquiryType(enquiryTypeCode,enq){
 			$(".hideChannelPartnerType").show();
 			$("#enquirySourceTextDiv").show();
 		}else if((enq.walkInSource==='Digital' || enq.walkInSource==='Exhibition' || enq.walkInSource==='Newspaper' || enq.walkInSource==='Hoarding' || enq.walkInSource==='Radio' || enq.walkInSource==='Word of mouth' 
-			|| enq.walkInSource==='SMS' || enq.walkInSource==='Referral' || enq.walkInSource==='Godrej Employee' || enq.walkInSource==='Corporate' || enq.walkInSource==='Existing Customer' || enq.walkInSource==='Other BTL activities'	
+			|| enq.walkInSource==='SMS' || enq.walkInSource==='Referral' || enq.walkInSource==='Godrej Employee' || enq.walkInSource==='Corporate' || enq.walkInSource==='Existing Customer' || enq.walkInSource==='Other BTL activities' || enq.walkInSource==='Affiliate Sales'	
 		) && !isEmpty(enq.walkInSource)){
 			$(".hideChannelPartnerType").hide();
 			if($("#isReferredByChannelPartnerInput").val()!="Direct"){

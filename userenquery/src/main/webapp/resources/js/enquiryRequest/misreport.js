@@ -68,6 +68,9 @@ function getAllEnquiryFormReport() {
 
 	$("#downloadCSV").append("<input type='hidden' value='"+$('#txtFromDate').val()+"' name='fromdate' id='txtFromDate1'/>");
 	$("#downloadCSV").append("<input type='hidden' value='"+$('#txtToDate').val()+"' name='todate' id='txtToDate1'/>");
+	
+	$("#downloadCSV").append("<input type='hidden' value='"+USER_VERTICALES_GV+"' name='userVerticals' />");
+	
 	//alert($('#txtFromDate').val());
 	//alert($('#txtToDate').val());
 	$("#misReportDetails").dataTable().fnDestroy();
@@ -78,10 +81,10 @@ function getAllEnquiryFormReport() {
 	 var urlPP = '';
 	 if(selectedProject=='' || selectedProject==null){
 		 $('#multiProjectid').val($('#projectid').val());
-		 urlPP = "misReport?projectid="+$('#projectid').val()+"&userid=&fromdate="+$('#txtFromDate').val()+"&todate="+$('#txtToDate').val();
+		 urlPP = "misReport?projectid="+$('#projectid').val()+"&userid=&fromdate="+$('#txtFromDate').val()+"&todate="+$('#txtToDate').val()+"&userVerticals="+USER_VERTICALES_GV;
 	 } else {
 		 $('#multiProjectid').val(selectedProject.join(","));
-		 urlPP = "misReport?projectid="+selectedProject.join(",")+"&userid=&fromdate="+$('#txtFromDate').val()+"&todate="+$('#txtToDate').val();
+		 urlPP = "misReport?projectid="+selectedProject.join(",")+"&userid=&fromdate="+$('#txtFromDate').val()+"&todate="+$('#txtToDate').val()+"&userVerticals="+USER_VERTICALES_GV;
 	 } 
 	 
 	//var urlPP = "misReport?projectid="+$('#projectid').val()+"&userid=&fromdate="+$('#txtFromDate').val()+"&todate="+$('#txtToDate').val();
@@ -144,7 +147,7 @@ function createdOfferProject(){
 	//$.get("getEOIReport",{"projectSfid":$('#projectid').val(), "fromDate":$('#txtEOIFromDate').val(), "toDate":$('#txtEOIToDate').val()},function(data){				 
 			
 	
-	$.get("getOfferList",{"userid":"","projectid":projectid, "fromDate":$('#txtFromDateOffer').val(),"toDate":$('#txtToDateOffer').val()},function(data){				 
+	$.get("getOfferList",{"userid":"","projectid":projectid, "fromDate":$('#txtFromDateOffer').val(),"toDate":$('#txtToDateOffer').val(), "userVerticals":USER_VERTICALES_GV},function(data){				 
 		
 	}).done(function(data){
 		$("#createdOfferTable").DataTable().destroy();

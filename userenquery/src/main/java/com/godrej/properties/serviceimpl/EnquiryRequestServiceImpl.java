@@ -389,6 +389,7 @@ public class EnquiryRequestServiceImpl implements EnquiryRequestService {
 			//dest.setOtherChannelPartner("Comment- "+comment.replaceAll("Comment-","")+" | "+" Commented By-"+src.getClosingmanagers());
  
 		}
+	
 		/*dest.setAdvertisement(src.getAdvertisement());*/
 		return dest;
 	}
@@ -1109,6 +1110,12 @@ public class EnquiryRequestServiceImpl implements EnquiryRequestService {
 				{
 					enquiries.get(0).setSourcing_Team_Lead_email(tokenService.getSalesUserEmailID(enquiries.get(0).getEnquiryId(), enquiries.get(0).getSourcing_Team_Lead__c()));
 				}
+				//Check if enquiry revisit or not
+				if((enquiries.get(0).getEnquiryStatus().contains("Site Visit Done") || enquiries.get(0).getEnquiryStatus().contains("Virtual Meeting Done")) && enquiries.get(0).getEnquiryReport()!=null)
+				{
+					//Revisit
+					enquiries.get(0).getEnquiryReport().setIs_revisit("Yes");
+				}
 			}
 			
 			
@@ -1480,6 +1487,12 @@ public class EnquiryRequestServiceImpl implements EnquiryRequestService {
 	
 		 return enquiries;
 	
+	}
+	@Override
+	public List<EnquiryDto> getSourcingLeadsEnquiryList(String sourcManageremail, String projectSfid, String fromdate,
+			String todate) {
+		String sourcingLeadSFID = tokenService.getSalesUserSFID(0, sourcManageremail);
+		return pushEnquiryDataService.getSourcingLeadsEnquiryList(sourcingLeadSFID, projectSfid, fromdate, todate);
 	}
 	
 }

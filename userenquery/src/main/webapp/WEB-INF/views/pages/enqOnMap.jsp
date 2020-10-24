@@ -52,7 +52,7 @@
 	<script src="<c:url value='/resources/js/bootstrap.min.js'/>"></script>
 	<script src="<c:url value='/resources/js/separate/enqMap.js?v=18.15'/>"></script>
 	<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB1YQeqmJoubsXBr0BLkIqOtwWyYk2mKJQ&libraries=places" async defer></script> -->
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAMtXEgz-EmdSjN3vqjcG0KpVP72vMKtyI&libraries=places" async defer></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6tHZRohy-YmfuSL_TuvYpLt33w4THz1M&libraries=places" async defer></script>
 	
 	<!-- &callback=getEnqDataForMap -->
 </body>

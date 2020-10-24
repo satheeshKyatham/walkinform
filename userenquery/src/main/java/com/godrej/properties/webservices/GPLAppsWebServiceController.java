@@ -17,12 +17,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.godrej.properties.constants.KeyConstants;
+import com.godrej.properties.dto.ContactDto;
 import com.godrej.properties.dto.EnquiryDto;
 import com.godrej.properties.dto.GPLAppBookingAPIDto;
 import com.godrej.properties.dto.GPLAppEnquiryReqAPIDto;
 import com.godrej.properties.dto.GPLAppEnquiryRespAPIDto;
 import com.godrej.properties.service.AffiliateSalesPPortalService;
 import com.godrej.properties.service.EnquiryRequestService;
+import com.godrej.properties.service.UserContactService;
 import com.godrej.properties.serviceimpl.GPLAppsWebServiceImpl;
 
 @RestController
@@ -38,6 +40,9 @@ public class GPLAppsWebServiceController {
 	
 	@Autowired
 	private AffiliateSalesPPortalService affiliateSalesPPortalService;
+	
+	@Autowired
+	UserContactService userContactService;
 	
 	@PostMapping(value = "/d4upreofferAPI", produces = "application/json")
 	public String d4upreofferAPI(@RequestBody GPLAppBookingAPIDto bookingDto)
@@ -191,12 +196,20 @@ public class GPLAppsWebServiceController {
 		enqResp.setEnquiry_source(enquiryDto.getEnquirySource());
 		enqResp.setEnquiry_type(enquiryDto.getIsReferredByChannelPartner());
 		enqResp.setEoi_flag(enquiryDto.getEoi_enquiry__c());
-		enqResp.setLoyalty_name("");
+		if(enquiryDto.getContact_Loyalty__c()!=null)
+		{
+			ContactDto contactLoyalty = userContactService.getContactBySfid(enquiryDto.getContact_Loyalty__c());
+			enqResp.setLoyalty_name(contactLoyalty.getFirstName()+" "+contactLoyalty.getLastName());
+		}
 		enqResp.setLoyalty_sfid(enquiryDto.getContact_Loyalty__c());
 		enqResp.setOther_cp_name(enquiryDto.getOtherChannelPartner());
 		enqResp.setProject_name(enquiryDto.getProject().getName());
 		enqResp.setProject_sfid(enquiryDto.getProject().getSfid());
-		enqResp.setReferral_name("");
+		if(enquiryDto.getContact_referral__c()!=null)
+		{
+			ContactDto contactReferral = userContactService.getContactBySfid(enquiryDto.getContact_referral__c());
+			enqResp.setReferral_name(contactReferral.getFirstName()+" "+contactReferral.getLastName());
+		}
 		enqResp.setReferral_sfid(enquiryDto.getContact_referral__c());
 		enqResp.setReferred_partner_flag(enquiryDto.getIsReferredByChannelPartnerFlag());
 		
@@ -221,7 +234,7 @@ public class GPLAppsWebServiceController {
 		if(enquiryDto.getWalkInSource()!=null)
 		{
 			if((enquiryDto.getWalkInSource().equals("Digital") || enquiryDto.getWalkInSource().equals("Exhibition") || enquiryDto.getWalkInSource().equals("Newspaper") || enquiryDto.getWalkInSource().equals("Hoarding") || enquiryDto.getWalkInSource().equals("Radio") || enquiryDto.getWalkInSource().equals("Word of mouth") 
-					|| enquiryDto.getWalkInSource().equals("SMS")  || enquiryDto.getWalkInSource().equals("Corporate") || enquiryDto.getWalkInSource().equals("Other BTL activities") || enquiryDto.getWalkInSource().equals("Telemarketing") || enquiryDto.getWalkInSource().contains("Employee")))
+					|| enquiryDto.getWalkInSource().equals("SMS")  || enquiryDto.getWalkInSource().equals("Corporate") || enquiryDto.getWalkInSource().equals("Other BTL activities") || enquiryDto.getWalkInSource().equals("Telemarketing") || enquiryDto.getWalkInSource().contains("Affiliate Sales") || enquiryDto.getWalkInSource().contains("Employee")))
 			{
 				enqResp.setWalkin_source_mobile("Direct");
 			}

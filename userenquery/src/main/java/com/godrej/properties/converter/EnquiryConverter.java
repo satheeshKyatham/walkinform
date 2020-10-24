@@ -103,6 +103,7 @@ public class EnquiryConverter implements CommonConverter<Enquiry, EnquiryDto>{
 		dto.setTransactionType( entity.getTransactionType());
 		dto.setTransactionID(entity.getTransactionID());
 		dto.setClosingmanagers(entity.getClosingmanagers());
+		dto.setClosing_manager_name__c(entity.getClosing_manager_name__c());
 		dto.setAssignTo(entity.getAssignTo());
 		
 		dto.setEOI_Tower_Series__c(entity.getEOI_Tower_Series__c());

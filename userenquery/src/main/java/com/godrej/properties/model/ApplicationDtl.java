@@ -30,6 +30,7 @@ public class ApplicationDtl implements Serializable{
 	@Column(name="propstrength__type__c") private String	propstrength__type__c;
 	@Column(name="enquiry18digit__c") private String enquiry18digit__c;
 	@Column(name="createddate") private Date createddate;
+	@Column(name="verticle__c") private String	verticle__c;
 	
 	public int getId() {
 		return id;
@@ -99,5 +100,11 @@ public class ApplicationDtl implements Serializable{
 	}
 	public void setCreateddate(Date createddate) {
 		this.createddate = createddate;
+	}
+	public String getVerticle__c() {
+		return verticle__c;
+	}
+	public void setVerticle__c(String verticle__c) {
+		this.verticle__c = verticle__c;
 	}
 }
