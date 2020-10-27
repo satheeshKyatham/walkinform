@@ -41,12 +41,12 @@
 		    
 		    
 		    <!-- New changes --> 
-		    <div class="titleCol">
+		   <%--  <div class="titleCol">
 				<h4 class="">
 					<span id="projectTitle">${projectName}</span>					
 				</h4>
 				<div class="clearfix"></div>
-			</div>
+			</div> --%>
 			
 			<div>
 				<ul class="nav nav-tabs tabNav">

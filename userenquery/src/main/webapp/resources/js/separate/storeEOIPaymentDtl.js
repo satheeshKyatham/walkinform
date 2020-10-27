@@ -563,7 +563,10 @@ function getfbandEOI(e) {
 		{
 			$.get("getTowerBand", {
 				"project_code" : $('.projectSfid').val(),
-				"tower_code":$(e).val()
+				//"tower_code":$(e).val()
+				"tower_code":$(e).closest('.EOIDtlRow').find(".towerListEOI").val()
+				
+			
 			}, function(data) {
 		
 				$(e).closest('.EOIDtlRow').find(".floorListEOI").find("option:gt(0)").remove();

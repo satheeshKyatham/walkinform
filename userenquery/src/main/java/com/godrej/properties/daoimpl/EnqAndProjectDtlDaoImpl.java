@@ -40,7 +40,8 @@ public class EnqAndProjectDtlDaoImpl extends AbstractDao<Integer, EnqAndProjectD
 				+ " b.mobile_no__c as broker_mobile, "
 				+ " c.marketing_project_name__c, "
 				+ " c.region__c, "
-				+ " c.name as projectNameWithoutCity "
+				+ " c.name as projectNameWithoutCity, "
+				+ " c.sfid as project_sfid"
 
 				+ " FROM salesforce.propstrength__request__c a "
 				+ " LEFT JOIN salesforce.account b ON a.propStrength__broker_account__c = b.sfid  and b.recordtypeid = '0126F000000uazCQAQ' "

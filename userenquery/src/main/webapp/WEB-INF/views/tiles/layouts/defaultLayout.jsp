@@ -10,6 +10,9 @@
 	<title><tiles:getAsString name="title" /></title>
 	<link rel="stylesheet" href="<c:url value='/resources/css/bootstrap.min.css' />" type="text/css" />
 	<link href="<c:url value='/resources/css/bootstrap.css' />"  rel="stylesheet"></link>
+	
+	<link rel="stylesheet" href="<c:url value='/resources/css/inner.css?v=${sessionScope.version}' />">
+	<link rel="stylesheet" href="<c:url value='/resources/css/style.css?v=${sessionScope.version}' />">
 	<link href="<c:url value='/resources/css/app.css' />" rel="stylesheet"></link>
 	<%-- <script src="<c:url value='/resources/js/jquery.min.js' />"></script> --%>
 	
@@ -28,7 +31,11 @@
 		 <%--  <header id="header">
 			<tiles:insertAttribute name="header" />
 		</header>   --%>
-	
+		<nav class="navbar topMainBar">
+		<div class="container">
+	<%@ include file="/WEB-INF/views/pages/header.jsp" %>
+		 </div>
+		 </nav>
 	
 		<section id="sidemenu">
 			<tiles:insertAttribute name="menu" />

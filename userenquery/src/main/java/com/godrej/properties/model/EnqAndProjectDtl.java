@@ -30,6 +30,9 @@ public class EnqAndProjectDtl implements Serializable{
 	@Column(name="region__c") private String region__c;
 	@Column(name="projectNameWithoutCity") private String projectNameWithoutCity;
 	
+	@Column(name="project_sfid") private String project_sfid;
+	
+	
 	
 	public int getId() {
 		return id;
@@ -117,5 +120,11 @@ public class EnqAndProjectDtl implements Serializable{
 	}
 	public void setProjectNameWithoutCity(String projectNameWithoutCity) {
 		this.projectNameWithoutCity = projectNameWithoutCity;
+	}
+	public String getProject_sfid() {
+		return project_sfid;
+	}
+	public void setProject_sfid(String project_sfid) {
+		this.project_sfid = project_sfid;
 	}
 }

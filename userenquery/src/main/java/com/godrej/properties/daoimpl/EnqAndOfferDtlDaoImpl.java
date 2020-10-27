@@ -72,7 +72,8 @@ public class EnqAndOfferDtlDaoImpl extends AbstractDao<Integer, EnqAndOfferDtl> 
 				
 				+ " d.length_sqm__c, "
 				+ " d.breadth_sqm__c, "
-				+ " d.plot_area_sqyd__c "
+				+ " d.plot_area_sqyd__c, "
+				+ " e.sfid as tower_sfid "
 				
 				+ " FROM salesforce.propstrength__offer__c a "
 				+ " INNER JOIN salesforce.propstrength__request__c b ON a.propstrength__request__c = b.sfid  "

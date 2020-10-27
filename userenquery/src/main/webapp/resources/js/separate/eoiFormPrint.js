@@ -19,24 +19,51 @@ function getEOIPreferencPrint (source) {
 			for(i = 0; i< obj.length; i++){
 				eoiTokenType = obj[i].tokenTypeName;
 				var unitno = '';
-				if(obj[i].unit_name=='Select Unit')
-					{
-						unitno=''
-					}
-				else
-					{
+				var description = '';
+				var carPark = '';
+				var floorBand = '';
+				var ticketSize = '';
+				
+				if(obj[i].unit_name=='Select Unit') {
+					unitno='-';
+				} else {
 					unitno=obj[i].unit_name;
-					}
-						
+				}
+				
+				if(obj[i].description=='') {
+					description='-' ;
+				} else { 
+					description=obj[i].description; 
+				}
+				
+				if(obj[i].eoi_carpark_name=='') {
+					carPark='-' ;
+				} else { 
+					carPark=obj[i].eoi_carpark_name; 
+				}
+				
+				if (obj[i].floor_band == '') {
+					floorBand = '-';
+				} else {
+					floorBand = obj[i].floor_band;
+				}
+				
+				if ($('#projectid').val() == "a1l6F000002X6IOQA0") {
+					ticketSize += '<td style="text-align:center;">-</td>';
+				} else {
+					ticketSize += '<td style="text-align:center;"> </td>';
+				}
+				
+				
 				html += 	'<tr>'
 								//+ '<td>'+obj[i].tokenTypeName+'</td>'
 								+ '<td>'+obj[i].typology_name+'</td>'
-								+ '<td></td>'
-								+ '<td>'+obj[i].floor_band+'</td>'
+								+ ticketSize
+								+ '<td style="text-align:center;">'+floorBand+'</td>'
 								+ '<td>'+obj[i].tower_name+'</td>'
-								+ '<td>'+unitno+'</td>'
-								+ '<td>'+obj[i].eoi_carpark_name+'</td>'
-								+ '<td>'+obj[i].description+'</td>' 
+								+ '<td style="text-align:center;">'+unitno+'</td>'
+								+ '<td style="text-align:center;">'+carPark+'</td>'
+								+ '<td style="text-align:center;">'+description+'</td>' 
 							"</tr>";
 			}
 			
@@ -142,7 +169,17 @@ function enqAndProjectDtl (source) {
          if (obj != null) {
 			$('#closingMangrEOIPrint').text(obj[0].closing_manager_name__c);
 			$('#verticalEOIPrint').text(obj[0].verticle__c);
-			$('#projectNameEOIPrint').text(obj[0].marketing_project_name__c);
+			
+			
+			if ($('#projectid').val() == "a1l6F000002X6IOQA0") {
+				$('#projectNameEOIPrint').text("The Highlands, Godrej City, Panvel");
+			} else {
+				$('#projectNameEOIPrint').text(obj[0].marketing_project_name__c);
+			}
+			
+			
+			
+			
 			$('.dateOfEOIPrint').text(obj[0].date_of_eoi__c);
 			/*$('#enqTypeEOIPrint').text(obj[0].propstrength__enquiry_type__c);*/
 			$('#enqTypeEOIPrint').text(obj[0].walk_in_source__c);
