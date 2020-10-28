@@ -373,6 +373,10 @@ function getEnqAndOfferDtl (enqSFID, offerSFID, rowId) {
 		var broker_mobile = '';
 		var walkinSource = '';
 		var wing = ''; 
+		var cmNameHtml = '';
+		
+		var brokerDtlHtml = '';
+		var closingMngrName = "";
 		
 		$('#modeOfBookingOffer tbody').empty();
 		
@@ -397,15 +401,38 @@ function getEnqAndOfferDtl (enqSFID, offerSFID, rowId) {
 				towerName1 = '';
 			}
 			
-			
-			
 			if (obj[0].propstrength__enquiry_type__c != "Partner") {
 				
 				if (obj[0].walk_in_source__c != undefined){
 					walkinSource = obj[0].walk_in_source__c;
 				}
 				
-				$('#modeOfBookingOffer tbody').append('<tr> <td> Direct or Channel Partner : <span>Direct</span> </td> <td>Walk In Source : <span>'+walkinSource+'</span></td></tr>');
+				closingMngrName = "";
+				
+				if (obj[0].closing_manager_name__c != "No Closing Manager" && obj[0].closing_manager_name__c != "null" && obj[0].closing_manager_name__c != "" && obj[0].closing_manager_name__c != undefined && obj[0].closing_manager_name__c != 'undefined') {
+					closingMngrName = obj[0].closing_manager_name__c;
+				} else {
+					closingMngrName = "";
+				}
+				
+				
+				if ($("#projectid").val() == "a1l2s000000XmaMAAS") {
+					cmNameHtml +=  "<tr> " +
+										'<td colspan="2"> Name of the Developer\'s sale\'s representative: '+closingMngrName+' </td> ' +
+									"</tr>";
+				} else {
+					cmNameHtml = "";
+				}
+				
+				
+				html +=  "<tr> " +
+							"<td> Direct or Channel Partner : <span>Direct</span> </td> " +
+							'<td>Walk In Source : <span>'+walkinSource+'</span></td>' +
+						"</tr>" + 
+						cmNameHtml;
+				
+				$('#modeOfBookingOffer tbody').append(html);
+				//$('#modeOfBookingOffer tbody').append('<tr> <td> Direct or Channel Partner : <span>Direct</span> </td> <td>Walk In Source : <span>'+walkinSource+'</span></td></tr>');
 				
 			} else {
 				
@@ -421,7 +448,43 @@ function getEnqAndOfferDtl (enqSFID, offerSFID, rowId) {
 					broker_mobile = obj[0].broker_mobile;
 				}
 				
-				$('#modeOfBookingOffer tbody').append('<tr> <td colspan="2"> Direct or Channel Partner : <span>Channel Partner</span> </td> </tr> <tr> <td colspan="2">Name: <span>'+broker_name+'</span></td>  </tr> <tr> <td>'+reraLabel+' Registration No.______________ </td> <td>Valid upto ______________</td></tr>');
+				html = "";
+				cmNameHtml = "";
+				closingMngrName = "";
+				
+				if (obj[0].closing_manager_name__c != "No Closing Manager" && obj[0].closing_manager_name__c != "null" && obj[0].closing_manager_name__c != "" && obj[0].closing_manager_name__c != undefined && obj[0].closing_manager_name__c != 'undefined') {
+					closingMngrName = obj[0].closing_manager_name__c;
+				} else {
+					closingMngrName = "";
+				}
+				
+				
+				if ($("#projectid").val() == "a1l2s000000XmaMAAS") {
+					brokerDtlHtml += '<tr>  <td colspan="2" style="height:100px; vertical-align: top;">Name, contact number, stamp and signature of Channel Partner (if applicable): '+broker_name+'</td>  </tr> ' ;
+					cmNameHtml +=  "<tr>" +
+										'<td colspan="2"> Name of the Developer\'s sale\'s representative: '+closingMngrName+' </td> ' +
+									"</tr>";
+				} else {
+					brokerDtlHtml += '<tr>  <td colspan="2">Name: <span>'+broker_name+'</span></td>  </tr> ' ;
+					cmNameHtml = "";
+				}
+				
+				
+				html += " <tr> " +
+								'<td colspan="2"> Direct or Channel Partner : <span>Channel Partner</span> </td> ' +
+						"</tr> " +
+						cmNameHtml +
+						brokerDtlHtml +
+						//'<tr>  <td colspan="2">Name: <span>'+broker_name+'</span></td>  </tr> ' +
+						"<tr> " +
+							'<td>'+reraLabel+' Registration No.______________ </td> ' +
+							"<td>Valid upto ______________</td>" +
+						"</tr> " ;
+							 
+				$('#modeOfBookingOffer tbody').append(html);
+				
+				
+				//$('#modeOfBookingOffer tbody').append('<tr> <td colspan="2"> Direct or Channel Partner : <span>Channel Partner</span> </td> </tr> <tr> <td colspan="2">Name: <span>'+broker_name+'</span></td>  </tr> <tr> <td>'+reraLabel+' Registration No.______________ </td> <td>Valid upto ______________</td></tr>');
 				
 			}
 			

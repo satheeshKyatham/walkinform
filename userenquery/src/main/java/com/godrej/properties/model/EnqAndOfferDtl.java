@@ -78,7 +78,7 @@ public class EnqAndOfferDtl implements Serializable{
 	@Column(name="plot_area_sqyd__c", precision = 10, scale = 2)  private BigDecimal plot_area_sqyd__c;
 	
 	@Column(name="tower_sfid") private String tower_sfid;
-	
+	@Column(name="closing_manager_name__c") private String closing_manager_name__c;
 	
 	public int getId() {
 		return id;
@@ -320,5 +320,10 @@ public class EnqAndOfferDtl implements Serializable{
 	public void setTower_sfid(String tower_sfid) {
 		this.tower_sfid = tower_sfid;
 	}
-	
+	public String getClosing_manager_name__c() {
+		return closing_manager_name__c;
+	}
+	public void setClosing_manager_name__c(String closing_manager_name__c) {
+		this.closing_manager_name__c = closing_manager_name__c;
+	}
 }
