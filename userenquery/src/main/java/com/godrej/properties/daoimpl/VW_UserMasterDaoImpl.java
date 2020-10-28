@@ -77,7 +77,7 @@ public class VW_UserMasterDaoImpl extends AbstractDao<Integer, Vw_UserMaster> im
 		Session session = this.sessionFactory.getCurrentSession();
 		List<Vw_UserProjectMapping> list =null;
 		
-		 list =session.createQuery(" from Vw_UserProjectMapping where projectid = '"+projectID+"' and roleid in(1,3,6,7,10,11,12,17, 47, 16,14) order by user_name asc ").list();
+		 list =session.createQuery(" from Vw_UserProjectMapping where projectid = '"+projectID+"' and roleid in(1,3,6,7,10,11,12,17, 47, 16,14,21,22) order by user_name asc ").list();
 	 
 		if(list.size()>0)
 			return list;
@@ -88,7 +88,7 @@ public class VW_UserMasterDaoImpl extends AbstractDao<Integer, Vw_UserMaster> im
 	public List<Vw_UserProjectMapping> getUserProjectMappingTeamLead(String projectID,String condition) {
 		Session session = this.sessionFactory.getCurrentSession();
 		List<Vw_UserProjectMapping> list =null;
-		 list =session.createQuery(" from Vw_UserProjectMapping where projectid = '"+projectID+"' and roleid in(1,3,6,7,10,11,12,17, 47, 16,14) "+condition+" order by user_name asc ").list();
+		 list =session.createQuery(" from Vw_UserProjectMapping where projectid = '"+projectID+"' and roleid in(1,3,6,7,10,11,12,17, 47, 16,14,21,22) "+condition+" order by user_name asc ").list();
 		if(list.size()>0)
 			return list;
 		return null;

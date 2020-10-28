@@ -102,6 +102,7 @@ public class OfflineEOIController {
 		ProjectLaunch projectLaunch=projectLaunchService.getProjectSaleMgrID(projectId);
 		if(projectLaunch!=null) {
 			view.addObject("AssignTO",projectLaunch.getSalesmanager_sfid());
+			view.addObject("etokenTab",projectLaunch.getIsallow_etokentab());
 		}
 		else {
 			/* show error page*/

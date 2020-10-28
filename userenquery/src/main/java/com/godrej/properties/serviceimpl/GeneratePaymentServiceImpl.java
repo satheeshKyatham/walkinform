@@ -89,6 +89,12 @@ public class GeneratePaymentServiceImpl implements GeneratePaymentService{
 				//payment.getTowercode().trim()
 				project = CommonUtil.getTowerWiseCCAvenueDetails(project,(payment.getTowercode() == null) ? null : payment.getTowercode().trim());
 			}
+			else
+			{
+				project.setCcavenue_merchant_config_id(project.getCcavenue_merchant_id());
+				project.setCcavenue_workingkey_config(project.getCcavenue_workingkey());
+				project.setCcavenue_accesscode_config(project.getCcavenue_accesscode());
+			}
 			if(project.getCcavenue_workingkey_config()!=null)
 			{
 				ccRequestFormat = createCCRequestFormat(payment,project);

@@ -75,13 +75,19 @@ function getofferApplicantDetails (e, offerSFID, enqSFID, contactSFID, offerName
 		var aadhaarNo = '';
 		var passportNo = '';
 		
+		var applicantNote = '';
+		var tdsStatus = '';
+		var tdsSharing = '';
+		var sonOf = '';
+		var passportNoHtml = '';
+		
 		if(obj!=null){
 			var objLength = obj.length;
 			var sharingRatio = '0';
 			
 			var annexureName = '';
 			
-			if ($("#projectid").val() == "a1l2s00000000pEAAQ"  || $("#projectid").val() == "a1l2s00000003lPAAQ" ) {
+			if ($("#projectid").val() == "a1l2s00000000pEAAQ"  || $("#projectid").val() == "a1l2s00000003lPAAQ" || $("#projectid").val() == "a1l2s000000XmaMAAS" ) {
 				annexureName = "Annexure F";
 			} else if ($("#projectid").val() == "a1l2s00000003VlAAI") {
 				annexureName = "Annexure E";
@@ -149,38 +155,69 @@ function getofferApplicantDetails (e, offerSFID, enqSFID, contactSFID, offerName
 					appTypeCompOrIndv = 'company';
 					
 					
-					companyHtml += '<div  style="padding-bottom:10px;"><b>1. In case of Company/ LLP/ HUF/ Partnership Firm</b></div>';
+					if ($("#projectid").val() == "a1l2s000000XmaMAAS") {
+						companyHtml += '<div  style="padding-bottom:10px;"><b>1. In case of Company/ Partnership Firm/ LLP /Trust / HUF</b></div>';
+						
+						companyHtml += '<table class="table table-bordered" style="margin-bottom:15px;">'
+								+ '<tbody>'
+									+ '<tr>'
+										+ '<td>Name</td>'
+										+ '<td id="niNameOffer">'+obj[i].name+'</td>'
+									+ '</tr>'
+									+ '<tr>'
+										+ '<td>Date of Incorporation/ Formation</td>'
+										+ '<td id="niDOBOffer">'+obj[i].birthdate+'</td>'
+									+ '</tr>'
+									+ '<tr>'
+										+ '<td>PAN/CIN/LLPIN</td>'
+										+ '<td id="niPANOffer">'+obj[i].propstrength__income_tax_permanent_account_no__c+'</td>'
+									+ '</tr>'
+									+ '<tr>'
+										+ '<td>Registered Office Address</td>'
+										+ '<td>'+officeAddress+'</td>'
+									+ '</tr>'
+									+ '<tr>'
+										+ '<td>Name of Authorized Representative/ Partner /Karta /Trustee</td>'
+										+ '<td>'+obj[i].relationship__c+' '+obj[i].relationship_name__c+'</td>'
+									+ '</tr>'
+									+ '<tr>'
+										+ "<td colspan='2' style='font-size:10px;'>Note: If Applicant/s is Company, Partnership Firm, Limited Liability Partnership (LLP), Trust, Hindu Undivided Family (HUF), the following incorporation documents are required to be submitted along with this Application Form: (a) Certificate of Incorporation/Registration Certificate for the applicable entity (b) Memorandum of Association (c) Articles of Association (d) Partnership Deed (e) Limited Liability Partnership Agreement (f) Trust Deed (g) HUF PAN (h) Board/Partner/Trust's Resolution authorizing this purchase along with the name of the authorized representative/Partner. Please affix the official stamp/signature of the respective Company//Partnership Firm/LLP/Trust/HUF as may be applicable</td>"											
+									+ '</tr>'
+								+ '</tbody>'
+							+ '</table>';
+					} else {
+						companyHtml += '<div  style="padding-bottom:10px;"><b>1. In case of Company/ LLP/ HUF/ Partnership Firm</b></div>';
+						
+						companyHtml += '<table class="table table-bordered" style="margin-bottom:15px;">'
+								+ '<tbody>'
+									+ '<tr>'
+										+ '<td>Name</td>'
+										+ '<td id="niNameOffer">'+obj[i].name+'</td>'
+									+ '</tr>'
+									+ '<tr>'
+										+ '<td>Date of Incorporation/ Formation</td>'
+										+ '<td id="niDOBOffer">'+obj[i].birthdate+'</td>'
+									+ '</tr>'
+									+ '<tr>'
+										+ '<td>PAN/CIN</td>'
+										+ '<td id="niPANOffer">'+obj[i].propstrength__income_tax_permanent_account_no__c+'</td>'
+									+ '</tr>'
+									+ '<tr>'
+										+ '<td>Registered Office Address</td>'
+										+ '<td>'+officeAddress+'</td>'
+									+ '</tr>'
+									+ '<tr>'
+										+ '<td>Name of Authorized Representative/ Partner /Karta</td>'
+										+ '<td>'+obj[i].relationship__c+' '+obj[i].relationship_name__c+'</td>'
+									+ '</tr>'
+									+ '<tr>'
+										+ "<td colspan='2' style='font-size:10px;'>Note: If Applicant/s is company, partnership firm, limited liability partnership, the following incorporation documents are required to be submitted along with this Application Form: (a) Certificate of Incorporation/Registration Certificate for the applicable entity (b) Memorandum of Association (c) Articles of Association (d) Partnership Deed (e) Limited Liability Partnership Agreement (f) Board/Partner's Resolution authorizing this purchase. Please affix the official stamp of the respective Company/LLP/Trust/Partnership firm/HUF/Society as may be applicable.</td>"											
+									+ '</tr>'
+								+ '</tbody>'
+							+ '</table>';
+					}
 					
-					companyHtml += '<table class="table table-bordered" style="margin-bottom:15px;">'
-							+ '<tbody>'
-								/*+ '<tr>'
-									+ '<th colspan="2"  style="text-align:center;"><b>In case of Company/ LLP/ HUF/ Partnership Firm</b></th>'
-								+ '</tr>'*/
-								+ '<tr>'
-									+ '<td>Name</td>'
-									+ '<td id="niNameOffer">'+obj[i].name+'</td>'
-								+ '</tr>'
-								+ '<tr>'
-									+ '<td>Date of Incorporation/ Formation</td>'
-									+ '<td id="niDOBOffer">'+obj[i].birthdate+'</td>'
-								+ '</tr>'
-								+ '<tr>'
-									+ '<td>PAN/CIN</td>'
-									+ '<td id="niPANOffer">'+obj[i].propstrength__income_tax_permanent_account_no__c+'</td>'
-								+ '</tr>'
-								+ '<tr>'
-									+ '<td>Registered Office Address</td>'
-									+ '<td>'+officeAddress+'</td>'
-								+ '</tr>'
-								+ '<tr>'
-									+ '<td>Name of Authorized Representative/ Partner /Karta</td>'
-									+ '<td>'+obj[i].relationship__c+' '+obj[i].relationship_name__c+'</td>'
-								+ '</tr>'
-								+ '<tr>'
-									+ "<td colspan='2' style='font-size:10px;'>Note: If Applicant/s is company, partnership firm, limited liability partnership, the following incorporation documents are required to be submitted along with this Application Form: (a) Certificate of Incorporation/Registration Certificate for the applicable entity (b) Memorandum of Association (c) Articles of Association (d) Partnership Deed (e) Limited Liability Partnership Agreement (f) Board/Partner's Resolution authorizing this purchase. Please affix the official stamp of the respective Company/LLP/Trust/Partnership firm/HUF/Society as may be applicable.</td>"											
-								+ '</tr>'
-							+ '</tbody>'
-						+ '</table>';
+					
 					
 				
 						
@@ -230,32 +267,69 @@ function getofferApplicantDetails (e, offerSFID, enqSFID, contactSFID, offerName
 			
 			
 			
+			if ($("#projectid").val() == "a1l2s000000XmaMAAS") {
+				applicantNote += "<tr> "
+						+ '<td colspan="'+parseInt(objLength+1)+'" style="font-size:10px;">' 
+							+ "Note: Applicant's passport size photograph and photocopies of PAN Card/OCI/PIO and Voter Card to be mandatorily submitted along with this Application Form. All compliance in terms of the Foreign Exchange Management Act, 1999 and its amendments shall be the sole responsibility of the Applicant/s. By providing Applicant's personal information in this Application Form, the Applicant/s hereby consents and authorizes Godrej Properties Limited or/and its affiliates to communicate with the Applicant/s by email(s), call(s), SMS(es),WhatsApp, electronic communication(s) using digital media or via any other mode of communication in relation to any of the information pertaining to the Project.   Applicant understands that Share in the property shall not be determined by the Payment Share of TDS and the same shall be as per the Applicable Laws."
+						+ "</td> " 
+					"</tr>" ;
+				tdsStatus = "";
+				tdsSharing += '<tr><td>Payment share for TDS</td>'+tdsSharingPer+'</tr>';
+				
+				sonOf = "";
+				passportNoHtml = "";
+				
+			} else {
+				applicantNote += "<tr> "
+						+ '<td colspan="'+parseInt(objLength+1)+'" style="font-size:10px;">' 
+							+ "Note: Applicant's passport size photograph and photocopies of PAN Card/OCI/PIO and Voter Card to be mandatorily submitted along with this Application Form. *All compliance in terms of the Foreign Exchange Management Act, 1999 and its amendments shall be the sole responsibility of the Applicant. By providing Applicant's personal information in this Application Form, the Applicant/s hereby consents and authorizes Godrej Properties Limited or/and its affiliates to communicate with the Applicant/s  by email(s), call(s), SMS(es), electronic communication(s) using digital media or via any other mode of communication in relation to any of the information pertaining to the Project."
+						+ "</td> " 
+					"</tr>" ;
+				tdsStatus += '<tr><td>TDS Status</td>'+propstrength__sharing_ratio__c+'</tr>';
+				tdsSharing += '<tr><td>TDS Sharing Ratio</td>'+tdsSharingPer+'</tr>';
+				
+				sonOf += '<tr><td>S/o/W/o/D/o</td>'+relationshipDtl +'</tr>';
+				passportNoHtml += '<tr><td>Passport No.(In case of *NRI/ Foreign Customers) </td>'+passport_no__c+'</tr>'; 
+			}
+			
+			
 			html +=  "<div style='padding-bottom:10px;'> <b>1. APPLICANT/S DETAILS</b> </div>" +
 						"<table class='table table-bordered' style='margin-bottom:15px;' id='applicantDtlOffer'>" +
 							"<tbody>" +
 								"<tr> <th colspan='"+parseInt(objLength+1)+"' style='text-align:center;'><b>IN CASE OF INDIVIDUAL</b></th></tr>";
+								
+								
+			
 			
 								html +=	'<tr><td></td>'+appType+'</tr>' 
 										+ '<tr><td>Full Name</td>'+fullName+'</tr>'
 										+ '<tr><td>Date of Birth</td>'+birthdate+'</tr>'
-										+ '<tr><td>TDS Sharing Ratio</td>'+tdsSharingPer+'</tr>'
-										+ '<tr><td>S/o/W/o/D/o</td>'+relationshipDtl +'</tr>'
+										+ tdsSharing
+										//+ '<tr><td>TDS Sharing Ratio</td>'+tdsSharingPer+'</tr>'
+										+ sonOf
+										//+ '<tr><td>S/o/W/o/D/o</td>'+relationshipDtl +'</tr>'
 										+ '<tr><td>PAN</td>'+pan+'</tr>'
-										//+ '<tr><td>Aadhar No.</td>'+aadhar_card_no__c+'</tr>'  
-/*										+ '<tr><td>Payment share for TDS</td>'+propstrength__sharing_ratio__c+'</tr>'*/
-										+ '<tr><td>TDS Status</td>'+propstrength__sharing_ratio__c+'</tr>'
+										+ tdsStatus
+										//+ '<tr><td>TDS Status</td>'+propstrength__sharing_ratio__c+'</tr>'
 										+ '<tr><td>Nationality</td>'+nationality_a__c+'</tr>'
 										+ '<tr><td>Residential Status</td>'+propstrength__resident_status__c+'</tr>'
-										+ '<tr><td>Passport No.(In case of *NRI/ Foreign Customers) </td>'+passport_no__c+'</tr>' 
+										+ passportNoHtml
+										//+ '<tr><td>Passport No.(In case of *NRI/ Foreign Customers) </td>'+passport_no__c+'</tr>' 
 										+ '<tr><td>Permanent Address</td>'+permanentAddress+'</tr>'
 										+ '<tr><td>Mobile No.</td>'+mobile_number__c+'</tr>'
 										+ '<tr><td>Email</td>'+email+'</tr>'  
-										+ '<tr><td>Address for Communication</td>'+communicationAddress+'</tr>'
-										+ "<tr> "
+										+ '<tr><td>Address for Communication</td>'+communicationAddress+'</tr>' +
+										applicantNote
+										/*+ "<tr> "
 											+ '<td colspan="'+parseInt(objLength+1)+'" style="font-size:10px;">' 
 												+ "Note: Applicant's passport size photograph and photocopies of PAN Card/OCI/PIO and Voter Card to be mandatorily submitted along with this Application Form. *All compliance in terms of the Foreign Exchange Management Act, 1999 and its amendments shall be the sole responsibility of the Applicant. By providing Applicant's personal information in this Application Form, the Applicant/s hereby consents and authorizes Godrej Properties Limited or/and its affiliates to communicate with the Applicant/s  by email(s), call(s), SMS(es), electronic communication(s) using digital media or via any other mode of communication in relation to any of the information pertaining to the Project."
 											+ "</td> " 
-										"</tr>" +
+										"</tr>" +*/
+										
+										
+										
+										
+										
 										
 						"</tbody>" +
 						"</table>";
@@ -299,6 +373,10 @@ function getEnqAndOfferDtl (enqSFID, offerSFID, rowId) {
 		var broker_mobile = '';
 		var walkinSource = '';
 		var wing = ''; 
+		var cmNameHtml = '';
+		
+		var brokerDtlHtml = '';
+		var closingMngrName = "";
 		
 		$('#modeOfBookingOffer tbody').empty();
 		
@@ -323,15 +401,38 @@ function getEnqAndOfferDtl (enqSFID, offerSFID, rowId) {
 				towerName1 = '';
 			}
 			
-			
-			
 			if (obj[0].propstrength__enquiry_type__c != "Partner") {
 				
 				if (obj[0].walk_in_source__c != undefined){
 					walkinSource = obj[0].walk_in_source__c;
 				}
 				
-				$('#modeOfBookingOffer tbody').append('<tr> <td> Direct or Channel Partner : <span>Direct</span> </td> <td>Walk In Source : <span>'+walkinSource+'</span></td></tr>');
+				closingMngrName = "";
+				
+				if (obj[0].closing_manager_name__c != "No Closing Manager" && obj[0].closing_manager_name__c != "null" && obj[0].closing_manager_name__c != "" && obj[0].closing_manager_name__c != undefined && obj[0].closing_manager_name__c != 'undefined') {
+					closingMngrName = obj[0].closing_manager_name__c;
+				} else {
+					closingMngrName = "";
+				}
+				
+				
+				if ($("#projectid").val() == "a1l2s000000XmaMAAS") {
+					cmNameHtml +=  "<tr> " +
+										'<td colspan="2"> Name of the Developer\'s sale\'s representative: '+closingMngrName+' </td> ' +
+									"</tr>";
+				} else {
+					cmNameHtml = "";
+				}
+				
+				
+				html +=  "<tr> " +
+							"<td> Direct or Channel Partner : <span>Direct</span> </td> " +
+							'<td>Walk In Source : <span>'+walkinSource+'</span></td>' +
+						"</tr>" + 
+						cmNameHtml;
+				
+				$('#modeOfBookingOffer tbody').append(html);
+				//$('#modeOfBookingOffer tbody').append('<tr> <td> Direct or Channel Partner : <span>Direct</span> </td> <td>Walk In Source : <span>'+walkinSource+'</span></td></tr>');
 				
 			} else {
 				
@@ -347,7 +448,43 @@ function getEnqAndOfferDtl (enqSFID, offerSFID, rowId) {
 					broker_mobile = obj[0].broker_mobile;
 				}
 				
-				$('#modeOfBookingOffer tbody').append('<tr> <td colspan="2"> Direct or Channel Partner : <span>Channel Partner</span> </td> </tr> <tr> <td colspan="2">Name: <span>'+broker_name+'</span></td>  </tr> <tr> <td>'+reraLabel+' Registration No.______________ </td> <td>Valid upto ______________</td></tr>');
+				html = "";
+				cmNameHtml = "";
+				closingMngrName = "";
+				
+				if (obj[0].closing_manager_name__c != "No Closing Manager" && obj[0].closing_manager_name__c != "null" && obj[0].closing_manager_name__c != "" && obj[0].closing_manager_name__c != undefined && obj[0].closing_manager_name__c != 'undefined') {
+					closingMngrName = obj[0].closing_manager_name__c;
+				} else {
+					closingMngrName = "";
+				}
+				
+				
+				if ($("#projectid").val() == "a1l2s000000XmaMAAS") {
+					brokerDtlHtml += '<tr>  <td colspan="2" style="height:100px; vertical-align: top;">Name, contact number, stamp and signature of Channel Partner (if applicable): '+broker_name+'</td>  </tr> ' ;
+					cmNameHtml +=  "<tr>" +
+										'<td colspan="2"> Name of the Developer\'s sale\'s representative: '+closingMngrName+' </td> ' +
+									"</tr>";
+				} else {
+					brokerDtlHtml += '<tr>  <td colspan="2">Name: <span>'+broker_name+'</span></td>  </tr> ' ;
+					cmNameHtml = "";
+				}
+				
+				
+				html += " <tr> " +
+								'<td colspan="2"> Direct or Channel Partner : <span>Channel Partner</span> </td> ' +
+						"</tr> " +
+						cmNameHtml +
+						brokerDtlHtml +
+						//'<tr>  <td colspan="2">Name: <span>'+broker_name+'</span></td>  </tr> ' +
+						"<tr> " +
+							'<td>'+reraLabel+' Registration No.______________ </td> ' +
+							"<td>Valid upto ______________</td>" +
+						"</tr> " ;
+							 
+				$('#modeOfBookingOffer tbody').append(html);
+				
+				
+				//$('#modeOfBookingOffer tbody').append('<tr> <td colspan="2"> Direct or Channel Partner : <span>Channel Partner</span> </td> </tr> <tr> <td colspan="2">Name: <span>'+broker_name+'</span></td>  </tr> <tr> <td>'+reraLabel+' Registration No.______________ </td> <td>Valid upto ______________</td></tr>');
 				
 			}
 			
@@ -377,6 +514,24 @@ function getEnqAndOfferDtl (enqSFID, offerSFID, rowId) {
 			if ($("#projectid").val() == "a1l2s000000XmaMAAS") {
 				$('#projectNameLocationOffer').text(towerName1);
 				$('#towerNameOffer').text(towerName1);
+				
+				if (obj[0].tower_sfid == "a2F2s000000csVgEAI") {
+					//Godrej Retreat Symphony: 
+					$('#plotArea').text('9.31875'); 
+				} else if (obj[0].tower_sfid == "a2F2s000000csVlEAI") {
+					//Godrej Retreat Vista: 
+					$('#plotArea').text('6.7');
+				} else if (obj[0].tower_sfid == "a2F2s000000csVqEAI") {
+					//Godrej Retreat Aroma: 
+					$('#plotArea').text('9.706');
+				} else if (obj[0].tower_sfid == "a2F2s000000csVvEAI") {
+					//Godrej Retreat Vibe: 
+					$('#plotArea').text('7.806');
+				} else if (obj[0].tower_sfid == "a2F2s000000csW0EAI") {
+					//Godrej Retreat Orchard: 
+					$('#plotArea').text('10.3375');
+				}
+				
 			} else {
 				$('#projectNameLocationOffer').text(obj[0].propstrength__description__c);
 				$('#towerNameOffer').text(obj[0].propstrength__tower_name__c+wing);
@@ -540,9 +695,17 @@ function getOfferReceivedPaymentDtl (offerSFID, rowId) {
 		var html = '';
 		var obj =JSON.parse(data);
 		var txsNo = '';
+		var branchHtml = '';
 		
 		if(obj!=null){
 			for(i = 0; i< obj.length; i++){ 
+				
+				
+				if ($("#projectid").val() == "a1l2s000000XmaMAAS") {
+					 branchHtml += "<td> </td>" ; 
+				} else {
+					branchHtml = "";
+				}
 				
 				
 				if (obj[i].propstrength__payment_mode__c == 'Cheque') {
@@ -564,8 +727,11 @@ function getOfferReceivedPaymentDtl (offerSFID, rowId) {
 				"<td>"+obj[i].propstrength__payment_mode__c+"</td> " +
 				"<td>"+obj[i].propstrength__bank_name__c+"</td>" +
 				"<td>"+obj[i].propstrength__amount__c+"</td>" +
+				
+				branchHtml 
+				
 				//"<td></td>" +
-				"<td>"+txsNo+"</td>" +
+				+ "<td>"+txsNo+"</td>" +
 			"</tr>";
 				
 				

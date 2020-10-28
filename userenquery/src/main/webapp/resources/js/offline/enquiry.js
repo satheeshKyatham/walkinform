@@ -48,6 +48,12 @@ function getEnquiry(){
 }
 
 function onPageLoad(){
+	if($("#etokentaballow").val()=="Y")
+	{
+		$("#etokentabli").show();
+	}
+else
+	$("#etokentabli").hide();
 	$(".referred_by_name").hide();
 		var projectName=$('#projectName').val();
 	    if(projectName!=""){
@@ -78,6 +84,7 @@ function onPageLoad(){
       $("#contactDiv").removeClass('disableCol');
     }  
     fetchChannelPartners();
+    
 }
 
 function fetchChannelPartners(){

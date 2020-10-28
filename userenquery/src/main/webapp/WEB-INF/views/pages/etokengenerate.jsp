@@ -26,37 +26,37 @@
 		
 			<div class="clearfix"></div>
 				
-			<div  id="unitDtls" class="col-md-9">
+			<div  id="etokendispDiv" class="col-md-9" style="display: none">
 				<h5 class="">Enquiry Details</h5>
 				<div class="">
 					<table class="table table-bordered bgWhite">
 						<tbody>
 							<tr>
 								<th class="subHead towerNameCS">Enquiry No.</th>
-								<td><span class="towerTval"></span><span class="wingVal"></span></td>
+								<td><span class="eenquiryno"></span></td>
 								<th class="subHead carpetSqmlabel">Customer Name</th>
-								<td class="carpetSqm"></td>
+								<td class="ecustomername"></td>
 							</tr>
 							<tr>
 								<th class="subHead">Customer Mobile No</th>
 								<td>
-									<span class="unitTval"></span>
+									<span class="ecustomermobile"></span>
 								</td>
 								<th class="subHead balTerSqmLabel">Enquiry Type</th>
-								<td class="balTerSqm"></td>
+								<td class="eenquiryrtpe"></td>
 							</tr>
 							<tr>
 								<th class="subHead floorNameCS">Walk-in Source</th>
-								<td class="floorTval"></td>
-								<th class="subHead">CP Name</th>
-								<td class="totalSqm"></td>
+								<td class="ewalkinsource"></td>
+								<!-- <th class="subHead">CP Name</th>
+								<td class="ecpname"></td> -->
 							</tr>
-							<tr class="hideForPlot">
+							<!-- <tr class="hideForPlot">
 								<th class="subHead typologyNameCS">Date of EOI</th>
-								<td   class="typologyTval"></td>
-								<!-- <th class="subHead noOfCarParkLabel">No. of Car Park</th>
-								<td  class="noOfCarPark ifCarParkZero"></td> -->
-							</tr>
+								<td   class="edateofeoi"></td>
+								<th class="subHead noOfCarParkLabel">No. of Car Park</th>
+								<td  class="noOfCarPark ifCarParkZero"></td>
+							</tr> -->
 						</tbody>
 					</table>
 				</div>
@@ -70,7 +70,7 @@
 	
 	
 
-	<div class="form-group col-md-2" id="generateEToken_btn_Div">
+	<div class="form-group col-md-2" id="generateEToken_btn_Div_show" style="display: none">
 		<div class="group" style="min-height: auto; margin-bottom: 0;">
 			<div class="input-group" id="otpInputDiv">
 				<button class="btn blue_btn square_btn generateEToken_btn" onclick="getGeneratedEtoken()">
@@ -81,7 +81,7 @@
 		</div>
 	</div>
 	<div class="clearfix"></div>
-	<div class="col-md-4"  id="etokengenratedCol">
+	<div class="col-md-4"  id="etokengenratedCol" style="display: none">
 		<div style="border: 1px solid #ccc; box-shadow: 4px 3px 4px #999; padding: 8px; background-color: #fff; border-radius: 10px;">
 			
 			<ul class="basicDetailsCS" >
