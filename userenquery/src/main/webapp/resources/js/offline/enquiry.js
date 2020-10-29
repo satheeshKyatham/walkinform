@@ -41,6 +41,7 @@ function getEnquiry(){
 	//$("#getEnquiry").attr('disabled',true);
 	var inputMobile =  $('#enMobileNo').val();
 	var inputCountryCode =  $('.selected-dial-code').text();
+	inputCountryCode = inputCountryCode.substring(3);
 	$('#inputMobileNo').val(inputMobile);
 	$('#countryCode').val(inputCountryCode);
 	getExistingInfoByMobileAndProject();
@@ -1001,6 +1002,7 @@ function openClosingMDashboard()
 {
 	var countryCodeEN = $('.selected-dial-code').text();
 	countryCodeEN =countryCodeEN.replace("+","%2B");
+	countryCodeEN = countryCodeEN.substring(3);
 	window.location.href = "salesDetails?tokenid="+$("#tokenId").val()
 		+"&countrycode="+ countryCodeEN
 		+"&mobileno="+$("#inputMobileNo").val() 
@@ -1026,8 +1028,10 @@ function generateOTP(no) {
 		{
 		if($("#enMobileNo").val()!="")
 			{
+			var countrycode = $('.selected-dial-code').text();
+			countrycode=countrycode.substring(3);
 				$.get("getdetailsCountry", {
-					"countryCode" : $('.selected-dial-code').text(),
+					"countryCode" : countrycode,
 					"mobileno" : $("#enMobileNo").val(),
 				}, function(data) {
 				});
