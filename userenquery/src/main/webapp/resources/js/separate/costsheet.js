@@ -698,7 +698,7 @@ function getTaxPercentage(basicSaleprice, projectSfid, currentTaxRate, TotalA, r
 		}
 		
 		//Added for Project Godrej Royale Woods and forest grove
-		if(projectSfid == 'a1l2s00000003VlAAI' || projectSfid == 'a1l6F0000081xb4QAA'){
+		if(projectSfid == 'a1l2s00000003VlAAI' || projectSfid == 'a1l6F0000081xb4QAA' || projectSfid == 'a1l2s000000PGu3AAG' || projectSfid == 'a1l2s000000PGu8AAG' || projectSfid == 'a1l2s000000PGuDAAW' || projectSfid == 'a1l2s000000PGuIAAW' || projectSfid == 'a1l2s000000PGuNAAW' || projectSfid == 'a1l2s000000PGuSAAW'){
 			if(TotalA>=4500000 || reraCarpetSqm >= 60){
 				return 5;
 			}
@@ -1087,7 +1087,7 @@ function paymentPlanOtherCharges (firstRowObj, ppMilestone){
                     
                     
                     //added for 45lac condition
-                    if($('#projectid').val() == 'a1l2s00000003VlAAI' || $('#projectid').val() == 'a1l6F0000081xb4QAA'){
+                    if($('#projectid').val() == 'a1l2s00000003VlAAI' || $('#projectid').val() == 'a1l6F0000081xb4QAA' || $('#projectid').val() == 'a1l2s000000PGu3AAG' || $('#projectid').val() == 'a1l2s000000PGu8AAG' || $('#projectid').val() == 'a1l2s000000PGuDAAW' || $('#projectid').val() == 'a1l2s000000PGuIAAW' || $('#projectid').val() == 'a1l2s000000PGuNAAW' || $('#projectid').val() == 'a1l2s000000PGuSAAW'){
 	       				if($('.salesConsiderationTotalNew').text()>=4500000  || $('#carpetSqm').text() >= 60){
 	       					gstPymtOcTotal = parseFloat((gstFinal5Per) + ((ocPlsBsp)*($('#bspGSTTax').val())/100)).toFixed(2);
 	       				} else {
@@ -2534,7 +2534,7 @@ function newOtherCharges2 () {
              var GST5Per = parseFloat(parseFloat(otherChargesGSTTotal5Per)+parseFloat(((finalFlatAmount)*bspTax)/100)).toFixed(2);
              
              //added for 45lac condition
-             if($('#projectid').val() == 'a1l2s00000003VlAAI' || $('#projectid').val() == 'a1l6F0000081xb4QAA'){
+             if($('#projectid').val() == 'a1l2s00000003VlAAI' || $('#projectid').val() == 'a1l6F0000081xb4QAA' || $('#projectid').val() == 'a1l2s000000PGu3AAG' || $('#projectid').val() == 'a1l2s000000PGu8AAG' || $('#projectid').val() == 'a1l2s000000PGuDAAW' || $('#projectid').val() == 'a1l2s000000PGuIAAW' || $('#projectid').val() == 'a1l2s000000PGuNAAW' || $('#projectid').val() == 'a1l2s000000PGuSAAW'){
 				if(TotalA>=4500000 || $('#carpetSqm').text() >= 60){
 					otherChargesGSTTotalV2 = GST5Per;
 				} else {
