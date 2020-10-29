@@ -36,6 +36,7 @@ public class ProjectLaunch implements Serializable{
 	@Column(name="sitehead_user_mail") private String  sitehead_user_mail;
 	@Column(name="sitehead_user_name") private String  sitehead_user_name;
 	@Column(name="tower_mid_access_code_json") private String  tower_mid_access_code_json;
+	@Column(name="isallow_etokentab") private String  isallow_etokentab;
 	
 	@Transient private Integer ccavenue_merchant_config_id;
 	@Transient private String  ccavenue_workingkey_config;
@@ -151,6 +152,12 @@ public class ProjectLaunch implements Serializable{
 	}
 	public void setCcavenue_accesscode_config(String ccavenue_accesscode_config) {
 		this.ccavenue_accesscode_config = ccavenue_accesscode_config;
+	}
+	public String getIsallow_etokentab() {
+		return isallow_etokentab;
+	}
+	public void setIsallow_etokentab(String isallow_etokentab) {
+		this.isallow_etokentab = isallow_etokentab;
 	}
 
 

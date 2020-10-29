@@ -98,7 +98,7 @@ if(ses!=null){
 					<a href="#inventorySalesHoldReport" data-toggle="tab">Closing Manager Hold Inventory Report</a>
 				</li>
 				<li>
-					<a href="#costsheetLogReport" data-toggle="tab">Cost Sheet Log</a>
+					<a href="#costsheetLogReport" onclick="usertowermultiselect('');" data-toggle="tab">Cost Sheet Log</a>
 				</li>
 				<li>
 					<a href="#updateEOITab" data-toggle="tab">EOI</a>
