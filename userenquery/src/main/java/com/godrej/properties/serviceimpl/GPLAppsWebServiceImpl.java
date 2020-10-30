@@ -233,8 +233,8 @@ public class GPLAppsWebServiceImpl implements GPLAppsWebService{
 				//Update contact External_Contact_ID__c
 				
 				
-				String text = readContentFromFile("D://SW//apache-tomcat-9.0.0.M22//apache-tomcat-9.0.0.M22//htmldoc//d4u-prebookingapi-email.htm");
-//				String text = readContentFromFile("D://D Drive//SW//Tomcat Server 8085//apache-tomcat-9.0.12//htmldoc//d4u-prebookingapi-email.htm");
+//				String text = readContentFromFile("D://SW//apache-tomcat-9.0.0.M22//apache-tomcat-9.0.0.M22//htmldoc//d4u-prebookingapi-email.htm");
+				String text = readContentFromFile("D://D Drive//SW//Tomcat Server 8085//apache-tomcat-9.0.12//htmldoc//d4u-prebookingapi-email.htm");
 				text = text.replaceAll("@SiteHead@", bookingData.getSiteheadName());
 				text = text.replaceAll("@CustomerName@", bookingData.getContactName());
 				text = text.replaceAll("@CustomerMobile@", bookingData.getCountryCode()+bookingData.getMobileno());
