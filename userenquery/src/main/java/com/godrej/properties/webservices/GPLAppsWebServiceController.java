@@ -22,7 +22,9 @@ import com.godrej.properties.dto.EnquiryDto;
 import com.godrej.properties.dto.GPLAppBookingAPIDto;
 import com.godrej.properties.dto.GPLAppEnquiryReqAPIDto;
 import com.godrej.properties.dto.GPLAppEnquiryRespAPIDto;
+import com.godrej.properties.model.EOIPaymentDtl;
 import com.godrej.properties.service.AffiliateSalesPPortalService;
+import com.godrej.properties.service.EOIPaymentDtlService;
 import com.godrej.properties.service.EnquiryRequestService;
 import com.godrej.properties.service.UserContactService;
 import com.godrej.properties.serviceimpl.GPLAppsWebServiceImpl;
@@ -43,6 +45,9 @@ public class GPLAppsWebServiceController {
 	
 	@Autowired
 	UserContactService userContactService;
+	
+	@Autowired
+	EOIPaymentDtlService eOIpaymentDtlService;
 	
 	@PostMapping(value = "/d4upreofferAPI", produces = "application/json")
 	public String d4upreofferAPI(@RequestBody GPLAppBookingAPIDto bookingDto)
@@ -247,7 +252,37 @@ public class GPLAppsWebServiceController {
 		}
 		else
 			enqResp.setWalkin_source_mobile("");
-			
+		/* Added By Satheesh K - Date 30-10-2020*/
+		//Call EOI table to check entrys
+		
+		if(enquiryDto.getProject().getSfid().equals("a1l2s000000XmaMAAS"))//Only for Foridabad
+		{
+			List<EOIPaymentDtl> eoiData = eOIpaymentDtlService.getEOIPaymentRecord(enquiryDto.getSfid());
+			double eoiTotalAmt=0;
+			double eoiReceivedTotalAmt=0;
+			if(eoiData!=null)
+			{
+				for(EOIPaymentDtl eoiDtl : eoiData)
+				{
+					if(eoiDtl.getTransaction_amount()!=null && eoiDtl.getIsactive().equals("Y") || eoiDtl.getIsactive().equals("O"))
+					{
+						eoiReceivedTotalAmt=eoiReceivedTotalAmt+Double.parseDouble(eoiDtl.getTransaction_amount());
+						eoiTotalAmt=eoiTotalAmt+Double.parseDouble(eoiDtl.getTransaction_amount());
+					}
+					if(eoiDtl.getTransaction_amount()!=null && eoiDtl.getIsactive().equals("N"))
+					{
+						eoiTotalAmt=eoiTotalAmt+Double.parseDouble(eoiDtl.getTransaction_amount());
+					}
+					
+				}
+			}
+			if(eoiReceivedTotalAmt>0)
+				enqResp.setPayment_eoi("True");
+			else
+				enqResp.setPayment_eoi("False");
+			enqResp.setApproved_payment_amount(String.valueOf(eoiTotalAmt));
+			enqResp.setTotal_eoi_amount_recd(String.valueOf(eoiReceivedTotalAmt));
+		}
 		return enqResp;
 		
 	}
