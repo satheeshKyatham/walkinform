@@ -172,6 +172,12 @@ public class GeneratePaymentServiceImpl implements GeneratePaymentService{
 		{
 			project = CommonUtil.getTowerWiseCCAvenueDetails(project,towerCode);
 		}
+		else
+		{
+			project.setCcavenue_merchant_config_id(project.getCcavenue_merchant_id());
+			project.setCcavenue_workingkey_config(project.getCcavenue_workingkey());
+			project.setCcavenue_accesscode_config(project.getCcavenue_accesscode());
+		}
 		//String workingKey = "AC52E9A706E2D7938203D4D554B61E2E";
 		AesCryptUtil aesUtil=new AesCryptUtil(project.getCcavenue_workingkey_config());
 		String decResp = aesUtil.decrypt(response);

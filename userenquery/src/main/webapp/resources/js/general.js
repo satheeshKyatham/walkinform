@@ -152,7 +152,15 @@ function checkDuplicate(id){
 
 
 function usertowermultiselect (selectedRegion){
-	var urlGetUsers = PAGECONTEXT_GV+"getTowerListUserWise?userid="+$('#userid').val()+"&region="+selectedRegion.join(",");	
+	
+	if (selectedRegion != "") {
+		selectedRegion = selectedRegion.join(",");
+	} else {
+		selectedRegion = "";
+	}
+	
+	//var urlGetUsers = PAGECONTEXT_GV+"getTowerListUserWise?userid="+$('#userid').val()+"&region="+selectedRegion.join(",");
+	var urlGetUsers = PAGECONTEXT_GV+"getTowerListUserWise?userid="+$('#userid').val()+"&region="+selectedRegion;
 	
 	var uniqueId = [];
 	var uniqueNames = [];

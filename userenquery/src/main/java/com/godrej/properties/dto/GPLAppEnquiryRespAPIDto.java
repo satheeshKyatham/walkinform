@@ -27,6 +27,10 @@ public class GPLAppEnquiryRespAPIDto {
 	private String referred_partner_flag;
 	private String comments;
 	private String walkin_source_mobile;	
+	private String payment_eoi;
+	private String approved_payment_amount;
+	private String total_eoi_amount_recd;
+	
 	public String getSrc_protection_flag() {
 		return src_protection_flag;
 	}
@@ -177,6 +181,24 @@ public class GPLAppEnquiryRespAPIDto {
 	}
 	public void setWalkin_source_mobile(String walkin_source_mobile) {
 		this.walkin_source_mobile = walkin_source_mobile;
+	}
+	public String getPayment_eoi() {
+		return payment_eoi;
+	}
+	public void setPayment_eoi(String payment_eoi) {
+		this.payment_eoi = payment_eoi;
+	}
+	public String getApproved_payment_amount() {
+		return approved_payment_amount;
+	}
+	public void setApproved_payment_amount(String approved_payment_amount) {
+		this.approved_payment_amount = approved_payment_amount;
+	}
+	public String getTotal_eoi_amount_recd() {
+		return total_eoi_amount_recd;
+	}
+	public void setTotal_eoi_amount_recd(String total_eoi_amount_recd) {
+		this.total_eoi_amount_recd = total_eoi_amount_recd;
 	}
 
 	
