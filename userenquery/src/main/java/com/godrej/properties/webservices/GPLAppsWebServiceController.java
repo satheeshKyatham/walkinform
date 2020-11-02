@@ -276,7 +276,7 @@ public class GPLAppsWebServiceController {
 					
 				}
 			}
-			if(eoiReceivedTotalAmt>0)
+			if(eoiTotalAmt>0)
 				enqResp.setPayment_eoi("True");
 			else
 				enqResp.setPayment_eoi("False");
