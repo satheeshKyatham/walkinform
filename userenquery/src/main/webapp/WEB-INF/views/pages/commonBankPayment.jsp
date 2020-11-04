@@ -183,7 +183,7 @@
 							<td>
 								<textarea class="full form-control input-sm csPtDescriptionEoi" placeholder="Description"></textarea>
 							</td>
-							<td> </td>
+							<td id="eoiPaymentFirstRow"> </td>
 						</tr>
 						
 					</tbody>

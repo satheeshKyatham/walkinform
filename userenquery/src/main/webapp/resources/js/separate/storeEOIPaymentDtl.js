@@ -195,6 +195,8 @@ function getEOITabPaymentRecord () {
 		
 		if(obj!=null){
 			
+			$("#eoiPaymentFirstRow").html('<i onclick="removeCsPtColEoi(this)" class="fa fa-times-circle redColr cursorPoint"></i>');
+			
 			for(i = 0; i< obj.length; i++){    
 				
 				if (obj[i].pan_attach != undefined){
@@ -785,7 +787,9 @@ function insertEOIPreference () {
 	    
 	    csPtData.isactive = "Y";
 	    
-	    csPtData.token_no = $('#token').val().substring(1);
+	    //csPtData.token_no = $('#token').val().substring(1);
+	    csPtData.token_no = $('#token').val().replace(/[^0-9]/gi, '');
+	    
 	    csPtData.eoi_form_path = eoiFormPath;
 	    
 	    
