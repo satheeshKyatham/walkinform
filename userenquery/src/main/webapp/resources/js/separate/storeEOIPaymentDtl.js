@@ -195,6 +195,8 @@ function getEOITabPaymentRecord () {
 		
 		if(obj!=null){
 			
+			$("#eoiPaymentFirstRow").html('<i onclick="removeCsPtColEoi(this)" class="fa fa-times-circle redColr cursorPoint"></i>');
+			
 			for(i = 0; i< obj.length; i++){    
 				
 				if (obj[i].pan_attach != undefined){
@@ -341,7 +343,9 @@ function getTokenTypeEOI (){
 		html='<option value="F">PLATINUM</option><option value="T">EXPRESS</option>';
 	} else if ($("#projectsfid").val()=='a1l6F000002X6IOQA0') {
 		html='<option value="F">REFUNDABLE</option>';
-	}
+	} else if($("#projectsfid").val()=='a1l2s000000XoezAAC') {
+		html='<option value="F">PLATINUM</option>';
+	} 
 	
 	
 	
@@ -783,7 +787,9 @@ function insertEOIPreference () {
 	    
 	    csPtData.isactive = "Y";
 	    
-	    csPtData.token_no = $('#token').val().substring(1);
+	    //csPtData.token_no = $('#token').val().substring(1);
+	    csPtData.token_no = $('#token').val().replace(/[^0-9]/gi, '');
+	    
 	    csPtData.eoi_form_path = eoiFormPath;
 	    
 	    
