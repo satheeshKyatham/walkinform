@@ -17,7 +17,11 @@ function onclickGenerateEToken()
 function searchEToken()
 {
 	var url=$("#contextPath").val();//$('#enquirysfid').val()
-	
+	$('#etokengenratedCol').hide();
+	$('.etokenNo').text('');
+	$('.ename').text('');
+	$('.emobile').text('');
+	$('.eenquiry').text('');
 	var inputMobile =  $('#enMobileNoEtoken').val();
 	var inputCountryCode =  $('.selected-dial-code').text();
 	$.post(url+"/android_generateTokenMobileEOIData",{"countryCode":inputCountryCode.substring(3),"mobileNo":inputMobile,"projectname":$('#projectSfid').val(),"createdBy":$('#loged_userid').val()},function(data){                       
@@ -53,6 +57,16 @@ function getGeneratedEtoken(){
 	       
     }).done(function(data){
     	if (data != null && data != "") {
+    		
+    		//Call assigned to token
+    		if(data.type=="E" || data.type=="G")
+    			{
+		    		$.post(url+"/assignToEToken",{"id":data.nv_token_id,"assinedto":$('#loged_userid').val()},function(data){                       
+		    			alert("Offline E Token Generated");
+		    	    }).done(function(data){}).fail(function(xhr, status, error) {
+		    	    	alert("Offline E Token Error, Please check with D4U Team.");
+		    	    });
+    			}
     		//$('#enquiryOldComment').html(data);
     		$('.etokenNo').text(data.type+data.queue);
     		$('.ename').text(data.name);

@@ -782,7 +782,7 @@
 	<script src="<c:url value='/resources/js/index.js?v=18.80' />"></script>
 	
 	<script src="<c:url value='/resources/js/offline/offlineEOI.js?v=18.80'/>"></script>
-	<script src="<c:url value='/resources/js/separate/etokengenerate.js' />"></script>
+	<script src="<c:url value='/resources/js/separate/etokengenerate.js?v=18.80' />"></script>
 
 	
 	<script>
