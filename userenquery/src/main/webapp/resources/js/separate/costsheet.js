@@ -406,9 +406,14 @@ function loadData (csSource) {
                            $('.typologyTval').text(value.Typology);
                            $('#floorTval').text(value.floorName);
                            $('.floorTval').text(value.floorName);
-                           $('#towerTval').text(value.towerName);
-                           $('.towerTval').text(value.towerName);
-                           
+                          
+                           if ($('#projectId').val() == 'a1l2s000000PGu3AAG' || $('#projectId').val() == 'a1l2s000000PGu8AAG' || $('#projectId').val() == 'a1l2s000000PGuDAAW' || $('#projectId').val() == 'a1l2s000000PGuIAAW' || $('#projectId').val() == 'a1l2s000000PGuNAAW' || $('#projectId').val() == 'a1l2s000000PGuSAAW') {
+                        	   $('#towerTval').text("");
+                               $('.towerTval').text("");
+                           } else {
+                        	   $('#towerTval').text(value.towerName);
+                               $('.towerTval').text(value.towerName);
+                           }
                            
                            csChangesForFaridabad();
                            
@@ -3911,10 +3916,10 @@ function csChangesForFaridabad () {
 		$('.removeForPlot').remove();
 		
 		$('.carpetSqmlabel').html("");
-		$('.carpetSqmlabel').html("Length (in Sq.mtr.)");
+		$('.carpetSqmlabel').html("Length (in mtr.)");
 		
 		$('.balTerSqmLabel').html("");
-		$('.balTerSqmLabel').html("Breadth (in Sq.mtr.)");
+		$('.balTerSqmLabel').html("Breadth (in mtr.)");
 		
 	} else {
 		$('#onlyForPlot').hide();
