@@ -62,9 +62,12 @@ function getApprovedPaymentDetails()
 	var urlPP = "getApprovedPaymentData?projectid="+projectid;
 	// var urlPP = "getApprovedPaymentData";
 	 var i = 0;
+	 var reciptTarget = "";
 	$.getJSON(urlPP, function (data) {
 		$.each(data, function (index, value) {//<td>"+value.customerName+"</td><td>"+value.mobileNo+"</td>
-			var val = $("<tr><td>"+value.createdDate+"</td><td>"+value.name+"</td><td>"+value.customerName+"</td><td>"+value.mobileNo+"</td><td>"+value.user_name+"</td><td>"+value.payment_type+"</td><td>"+value.bank_name+"</td><td>"+value.branch+"</td><td>"+value.transaction_id+"</td><td>"+value.transaction_date+"</td><td>"+value.transaction_amount+"</td></tr>");
+			reciptTarget = "file?name="+encodeURIComponent(value.cheque_attach)+"&from=EOIbookingReference&eid="+value.enq_sfid+"&fid="+value.cheque_attach.charAt(0);//<td>"+value.customerName+"</td><td>"+value.mobileNo+"</td> --value.createdDate
+			var val = $("<tr><td>"+value.createdDate+"</td><td>"+value.name+"</td><td>"+value.customerName+"</td><td>"+value.mobileNo+"</td><td>"+value.user_name+"</td><td>"+value.payment_type+"</td><td>"+value.bank_name+"</td><td>"+value.branch+"</td><td>"+value.transaction_id+"</td><td>"+value.transaction_date+"</td><td>"+value.transaction_amount+"</td>" +
+					" <td class='txtCenter'><input style='display:none;' class='full form-control input-sm panAttach' type='file' data-fileName="+value.cheque_attach+"  name='panAttach'> <a target='_blank' href="+reciptTarget+">"+value.cheque_attach+"</a></td></tr> </tr>");
 			$("#Payment_Approved tbody").append(val);
 			i = i+1
 		});
@@ -94,9 +97,12 @@ function getRejectedPaymentDetails()
 	var urlPP = "getRejectedPaymentData?projectid="+projectid;
 	// var urlPP = "getRejectedPaymentData";
 	 var i = 0;
+	 var reciptTarget = "";
 	$.getJSON(urlPP, function (data) {
 		$.each(data, function (index, value) {//<td>"+value.customerName+"</td><td>"+value.mobileNo+"</td>
-			var val = $("<tr><td>"+value.createdDate+"</td><td>"+value.name+"</td><td>"+value.customerName+"</td><td>"+value.mobileNo+"</td><td>"+value.user_name+"</td><td>"+value.payment_type+"</td><td>"+value.bank_name+"</td><td>"+value.branch+"</td><td>"+value.transaction_id+"</td><td>"+value.transaction_date+"</td><td>"+value.transaction_amount+"</td></tr>");
+			reciptTarget = "file?name="+encodeURIComponent(value.cheque_attach)+"&from=EOIbookingReference&eid="+value.enq_sfid+"&fid="+value.cheque_attach.charAt(0);//<td>"+value.customerName+"</td><td>"+value.mobileNo+"</td> --value.createdDate
+			var val = $("<tr><td>"+value.createdDate+"</td><td>"+value.name+"</td><td>"+value.customerName+"</td><td>"+value.mobileNo+"</td><td>"+value.user_name+"</td><td>"+value.payment_type+"</td><td>"+value.bank_name+"</td><td>"+value.branch+"</td><td>"+value.transaction_id+"</td><td>"+value.transaction_date+"</td><td>"+value.transaction_amount+"</td>" +
+					" <td class='txtCenter'><input style='display:none;' class='full form-control input-sm panAttach' type='file' data-fileName="+value.cheque_attach+"  name='panAttach'> <a target='_blank' href="+reciptTarget+">"+value.cheque_attach+"</a></td></tr> </tr>");
 			$("#Payment_Reject tbody").append(val);
 			i = i+1
 		});

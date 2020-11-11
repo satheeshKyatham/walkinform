@@ -145,6 +145,7 @@ if(ses!=null){
 									<th>Trx ID</th>
 									<th>Trx Date</th>
 									<th>Trx Amount</th>
+									<th>Cheque/Receipt Attachment</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -173,6 +174,7 @@ if(ses!=null){
 									<th>Trx ID</th>
 									<th>Trx Date</th>
 									<th>Trx Amount</th>
+									<th>Cheque/Receipt Attachment</th>
 								</tr>
 							</thead>
 							<tbody>

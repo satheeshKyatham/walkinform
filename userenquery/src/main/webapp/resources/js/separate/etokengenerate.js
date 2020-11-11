@@ -72,7 +72,7 @@ function getGeneratedEtoken(){
     		$('.ename').text(data.name);
     		$('.emobile').text(data.mobileno);
     		$('.eenquiry').text(data.enqName);
-    		$('.epriority').text();
+    		$('.epriority').text(data.priorityNo);
     	} else {
     		//$('#enquiryOldComment').html("No record found");
     	}
