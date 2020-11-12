@@ -123,6 +123,12 @@ public class EOIReportDaoImpl implements EOIReportDao{
 		Query coverd2bhk = session.createNativeQuery("select count(car_park_type) from salesforce.gpl_cs_balance_details where project_sfid='"+whereCondition+"' and isactive='A' and car_park_type='Covered (2 BHK)' group by car_park_type ");
 		
 		Query coverd3bhk = session.createNativeQuery("select count(car_park_type) from salesforce.gpl_cs_balance_details where project_sfid='"+whereCondition+"' and isactive='A' and car_park_type='Covered (3 BHK)' group by car_park_type ");
+
+		
+		Query stack1bhk = session.createNativeQuery("select count(car_park_type) from salesforce.gpl_cs_balance_details where project_sfid='"+whereCondition+"' and isactive='A' and car_park_type='Stack (1 BHK)' group by car_park_type ");
+		Query stack2bhk = session.createNativeQuery("select count(car_park_type) from salesforce.gpl_cs_balance_details where project_sfid='"+whereCondition+"' and isactive='A' and car_park_type='Stack (2 BHK)' group by car_park_type ");
+		
+		
 		
 		Query eOIHold = session.createNativeQuery("select count(hold_reason) as EOIHold from salesforce.gpl_cs_hold_admin_unit where project_id='"+whereCondition+"' and  eoi_unit_locked=true and hold_reason='temp' and hold_status=true and version=0");
 		Query blockInv = session.createNativeQuery("select count(hold_reason) as block from salesforce.gpl_cs_hold_admin_unit where project_id='"+whereCondition+"' and hold_reason='block' and hold_status=true and version=0");
@@ -130,11 +136,13 @@ public class EOIReportDaoImpl implements EOIReportDao{
 
 				
 
-		System.out.println("***********"+result[1].toString());
+		//System.out.println("***********"+result[1].toString());
 		
-		alotMIS.setTotalArealSold(result[0].toString());
-		alotMIS.setTotalBSP(result[1].toString());
-		alotMIS.setUnitcount(result[2].toString());
+		alotMIS.setTotalArealSold(result[0] == null ? "0" : result[0].toString());
+		alotMIS.setTotalBSP(result[1] == null ? "0" : result[1].toString());
+		alotMIS.setUnitcount(result[2] == null ? "" : result[2].toString());
+		
+		
 		alotMIS.setKycApprovedCount(approvedCount.getSingleResult().toString());
 		alotMIS.setBookingcount(bookingcount.getSingleResult().toString());
 		alotMIS.setTotalEtoken(totalEToken.getSingleResult().toString());
@@ -150,6 +158,17 @@ public class EOIReportDaoImpl implements EOIReportDao{
 			alotMIS.setCoverd3bhk(coverd3bhk.getResultList().get(0).toString());
 		else
 			alotMIS.setCoverd3bhk("");
+		
+		if(stack1bhk.getResultList().size()>0)
+			alotMIS.setStack1bhk(stack1bhk.getResultList().get(0).toString());
+		else
+			alotMIS.setStack1bhk("");
+		
+		if(stack2bhk.getResultList().size()>0)
+			alotMIS.setStack2bhk(stack2bhk.getResultList().get(0).toString());
+		else
+			alotMIS.setStack2bhk("");
+		
 		alotMIS.setHoldInventoryCount(eOIHold.getSingleResult().toString());
 		alotMIS.setBlockedInventoryCount(blockInv.getSingleResult().toString());
 		return alotMIS;

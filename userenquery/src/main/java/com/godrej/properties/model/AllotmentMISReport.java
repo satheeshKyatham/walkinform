@@ -16,6 +16,9 @@ public class AllotmentMISReport {
 	private String coverd2bhk;
 	private String coverd3bhk;
 	
+	private String stack1bhk;
+	private String stack2bhk;
+	
 	public String getTotalArealSold() {
 		return totalArealSold;
 	}
@@ -83,6 +86,16 @@ public class AllotmentMISReport {
 	public void setCoverd3bhk(String coverd3bhk) {
 		this.coverd3bhk = coverd3bhk;
 	}
-	
-	
+	public String getStack1bhk() {
+		return stack1bhk;
+	}
+	public void setStack1bhk(String stack1bhk) {
+		this.stack1bhk = stack1bhk;
+	}
+	public String getStack2bhk() {
+		return stack2bhk;
+	}
+	public void setStack2bhk(String stack2bhk) {
+		this.stack2bhk = stack2bhk;
+	}
 }
