@@ -65,6 +65,8 @@ function getInventoryReportDtl () {
 			var saleable_area__c = [];
 			var verticle__c = [];
 			
+			var closing_manager_name__c = [];
+			
 			for(var i = 0; i< obj1.length; i++){    
                 if(uniqueId.indexOf(obj1[i].id) === -1){
                     uniqueId.push(obj1[i].id);
@@ -85,6 +87,8 @@ function getInventoryReportDtl () {
                     propstrength__rate_per_unit_area__c.push(obj1[i].propstrength__rate_per_unit_area__c);
                     saleable_area__c.push(obj1[i].saleable_area__c);
                     verticle__c.push(obj1[i].verticle__c);
+                    closing_manager_name__c.push(obj1[i].closing_manager_name__c);
+                    
                 }        
             }
 			
@@ -139,6 +143,7 @@ function getInventoryReportDtl () {
 				html += "<tr class='"+rowColor+"'>" +
 							" <td>"+hold_reasonVar+"</td>" +
 							"<td>"+enq_name[j]+"</td>" +
+							"<td>"+closing_manager_name__c[j]+"</td>" +
 							"<td>"+verticle__c[j]+"</td>" +
 							"<td>"+customer_name[j]+"</td>" +
 							"<td>"+customer_mobile[j]+"</td>" +

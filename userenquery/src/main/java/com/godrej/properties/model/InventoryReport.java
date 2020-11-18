@@ -55,6 +55,9 @@ public class InventoryReport implements Serializable{
 	
 	@Column(name="verticle__c") private String verticle__c;
 	
+	@Column(name="closing_manager_name__c") private String closing_manager_name__c;
+	
+	
 	public int getId() {
 		return id;
 	}
@@ -249,5 +252,11 @@ public class InventoryReport implements Serializable{
 	}
 	public void setVerticle__c(String verticle__c) {
 		this.verticle__c = verticle__c;
+	}
+	public String getClosing_manager_name__c() {
+		return closing_manager_name__c;
+	}
+	public void setClosing_manager_name__c(String closing_manager_name__c) {
+		this.closing_manager_name__c = closing_manager_name__c;
 	}
 }

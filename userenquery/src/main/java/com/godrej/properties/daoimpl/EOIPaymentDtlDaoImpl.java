@@ -137,26 +137,32 @@ public class EOIPaymentDtlDaoImpl extends AbstractDao<Integer, EOIPaymentDtl> im
 			EOIPaymentDtl dtl = new EOIPaymentDtl();
 			dtl.setId(Integer.parseInt(result[0].toString()));
 			dtl.setUserid(Integer.parseInt(result[2].toString()));
-			dtl.setPayment_type(result[3].toString());
-			dtl.setBank_name(result[4].toString());
-			dtl.setBranch(result[5].toString());
-			dtl.setEnq_sfid(result[7].toString());
-			dtl.setTransaction_id(result[9].toString());
-			dtl.setTransaction_date(result[10].toString());
-			dtl.setTransaction_amount(result[11].toString());
-			dtl.setDescription(result[12].toString());
-			dtl.setTotal_amount(result[13].toString());
-			dtl.setPan_attach(result[15].toString());
-			dtl.setCheque_attach(result[16].toString());
+			
+			dtl.setPayment_type(result[3] == null ? "" : result[3].toString());
+			dtl.setBank_name(result[4] == null ? "" : result[4].toString());
+			dtl.setBranch(result[5] == null ? "" : result[5].toString());
+			dtl.setEnq_sfid(result[7] == null ? "" : result[7].toString());
+			dtl.setTransaction_id(result[9] == null ? "" : result[9].toString());
+			dtl.setTransaction_date(result[10] == null ? "" : result[10].toString());
+			dtl.setTransaction_amount(result[11] == null ? "" : result[11].toString());
+			dtl.setDescription(result[12] == null ? "" : result[12].toString());
+			dtl.setTotal_amount(result[13] == null ? "" : result[13].toString());
+			dtl.setPan_attach(result[15] == null ? "" : result[15].toString());
+			dtl.setCheque_attach(result[16] == null ? "" : result[16].toString());
+			
 			//dtl.setUser_email(result[17].toString());
-			if(result[24]!=null)
+			/*if(result[24]!=null)
 				dtl.setUser_name(result[24].toString());
 			else
-				dtl.setUser_name("");
-			dtl.setName(result[8].toString());
-			dtl.setCustomerName(result[21].toString());
-			dtl.setMobileNo(result[22].toString());
-			dtl.setProject_sfid(result[1].toString());
+				dtl.setUser_name("");*/
+			
+			dtl.setUser_name(result[25] == null ? "" : result[25].toString());
+			
+			
+			dtl.setName(result[8] == null ? "" : result[8].toString());
+			dtl.setCustomerName(result[21] == null ? "" : result[21].toString());
+			dtl.setMobileNo(result[22] == null ? "" : result[22].toString());
+			dtl.setProject_sfid(result[1] == null ? "" : result[1].toString());
 			dtl.setCreatedDate((Timestamp) result[23]);
 			dtl.setUpdatedDate((Timestamp) result[24]);
 			list.add(dtl);

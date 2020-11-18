@@ -2668,13 +2668,13 @@ public class WebServiceController<MultipartFormDataInput> {
 				"Project Name,Tokenno,Created,Enquiry Name,Mobile Phone,Customer Name,Email,have_we_met_before,age_a__c,residenceaddress,officelocation,"
 						+ "empstatus,company_name__c,is_purchase_for_self_use_or_investment__c,budget"
 						+ ",typology_requirement,walk_in_source__c,advertisementname,brokername,current_residence_configuration,current_residence_ownership,source_of_funding,customer_classification,ethnicity,unit_availability,accompanied_by,deal_negotiation,construction_status,timeframe_to_book,enquirynoneditcomment,verticle,sourcingname,closingname,closingemail,own_contribution_receipt,loan_eligibility,Assined To,IsAttended,CP Comments,FollowType,FollowDate"
-						+ ",Trigger 1,Trigger 2,Barrier 1,Barrier 2,Lost Reason,Designation");
+						+ ",Trigger 1,Trigger 2,Barrier 1,Barrier 2,Lost Reason,Designation,Media Type,Media Sub Type,Type of visit,Revisit,Last site visit date");
 		rows.add("\n");
 		String fromdate = resquest.getParameter("fromdate");
-		System.out.println("fromdate:-" + fromdate);
+		log.info("fromdate:-{}",fromdate);
 
 		String todate = resquest.getParameter("todate");
-		System.out.println("todate:-" + todate);
+		log.info("todate:-{}",todate);
 		
 		String userVerticals = resquest.getParameter("userVerticals");
 		
@@ -2832,10 +2832,34 @@ public class WebServiceController<MultipartFormDataInput> {
 				rows.add(mislist.get(i).getDesignation__c().trim().toString());
 			else
 				rows.add("");
+			rows.add(",");
+			if(mislist.get(i).getMedia_type__c() != null)
+				rows.add(mislist.get(i).getMedia_type__c());
+			else
+				rows.add("");
+			rows.add(",");
+			if(mislist.get(i).getMedia_sub_type__c() != null)
+				rows.add(mislist.get(i).getMedia_sub_type__c());
+			else
+				rows.add("");
+			rows.add(",");
 
-			// rows.add(mislist.get(i).getFollowtype());
-			// rows.add(",");
-
+			if(mislist.get(i).getType_of_visit() != null)
+				rows.add(mislist.get(i).getType_of_visit());
+			else
+				rows.add("");
+			rows.add(",");
+			if(mislist.get(i).getIs_revisit() != null)
+				rows.add(mislist.get(i).getIs_revisit());
+			else
+				rows.add("");
+			rows.add(",");
+			if(mislist.get(i).getLastvisitdate() != null)
+				rows.add(mislist.get(i).getLastvisitdate());
+			else
+				rows.add("");
+			rows.add(",");
+			
 			rows.add("\n");
 		}
 

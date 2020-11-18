@@ -142,17 +142,74 @@ function getAllotmentDashboardReport () {
 					" </tr>";
 	
 	$("#allotmentmisReport tbody").append(html);
-	if($("#projectid").val()=="a1l6F000009D6IMQA0")
-		{
-			$("#coveredcarpark_id").show();
-			var coverd1bhk=data.coverd1bhk;
-			$("#covered1bhkid").append(coverd1bhk.toString()+"/69");
-			$("#covered2bhkid").append(data.coverd2bhk+"/96");
-			$("#covered3bhkid").append(data.coverd3bhk+"/147");
-		}
-	else
+	if($("#projectid").val()=="a1l6F000009D6IMQA0") {
+		$("#coveredcarpark_id").show();
+		var coverd1bhk=data.coverd1bhk;
+		$("#covered1bhkid").append(coverd1bhk.toString()+"/69");
+		$("#covered2bhkid").append(data.coverd2bhk+"/96");
+		$("#covered3bhkid").append(data.coverd3bhk+"/147");
+	} else if ($("#projectid").val()=="a1l2s000000XoezAAC") {
+		
+		$("#coveredcarpark_id").empty();
+		$("#coveredcarpark_id").show();
+		
+		var carparkHTML = "<div class='col-lg-3 col-xs-6'>" +
+								"<div class='small-box bg-aqua'>"+
+									"<div class='inner'>"+
+										"<h3>"+data.coverd2bhk+"/268</h3>"+
+										"<p>Sold Car Park Covered (2 bhk)</p>"+
+									"</div>"+
+									"<div class='icon'>"+
+										"<i class='fa fa-car'></i>"+
+									"</div>"+
+								"</div>"+
+								"<div class='clearfix'></div>"+
+							"</div>"+
+							
+							"<div class='col-lg-3 col-xs-6'>" +
+								"<div class='small-box bg-aqua'>"+
+									"<div class='inner'>"+
+										"<h3>"+data.coverd3bhk+"/180</h3>"+
+										"<p>Sold Car Park Covered (3 bhk)</p>"+
+									"</div>"+
+									"<div class='icon'>"+
+										"<i class='fa fa-car'></i>"+
+									"</div>"+
+								"</div>"+
+								"<div class='clearfix'></div>"+
+							"</div>"+
+								
+							"<div class='col-lg-3 col-xs-6'>" +
+								"<div class='small-box bg-aqua'>"+
+									"<div class='inner'>"+
+										"<h3>"+data.stack1bhk+"/94</h3>"+
+										"<p>Sold Car Park Stack (1 bhk)</p>"+
+									"</div>"+
+									"<div class='icon'>"+
+										"<i class='fa fa-car'></i>"+
+									"</div>"+
+								"</div>"+
+								"<div class='clearfix'></div>"+
+							"</div>"+	
+							
+							"<div class='col-lg-3 col-xs-6'>" +
+								"<div class='small-box bg-aqua'>"+
+									"<div class='inner'>"+
+										"<h3>"+data.stack2bhk+"/76</h3>"+
+										"<p>Sold Car Park Stack (2 bhk)</p>"+
+									"</div>"+
+									"<div class='icon'>"+
+										"<i class='fa fa-car'></i>"+
+									"</div>"+
+								"</div>"+
+								"<div class='clearfix'></div>"+
+							"</div>";
+		
+		$("#coveredcarpark_id").append(carparkHTML);
+		
+	} else {
 		$("#coveredcarpark_id").hide();
-	
+	}
 	
 	
 	$("#blockInvId").append(data.blockedInventoryCount);

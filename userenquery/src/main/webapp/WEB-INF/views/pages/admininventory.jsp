@@ -15,7 +15,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Users</title>
+<title>Admin Inventory Page</title>
 <link rel="stylesheet" href="<c:url value='/resources/css/bootstrap.min.css' />" type="text/css" />
      <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
      <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/fixedHeader.dataTables.min.css' />">
@@ -103,6 +103,9 @@ if(ses!=null){
 				<li>
 					<a href="#updateEOITab" data-toggle="tab">EOI</a>
 				</li>
+				<!-- <li>
+					<a href="#EOIRefundTab" data-toggle="tab">EOI Refund</a>
+				</li> -->
 			</ul>
 			<div class=""></div>
 		</div>
@@ -148,6 +151,9 @@ if(ses!=null){
 			<div class="tab-pane" id="updateEOITab" >
 				<%@ include file="/WEB-INF/views/pages/updateEOI.jsp" %>
 			</div>
+			<%-- <div class="tab-pane" id="EOIRefundTab" >
+				<%@ include file="/WEB-INF/views/pages/refundreport/initiateRefundEOI.jsp" %>
+			</div> --%>
 			
 	 	</div>
 	</div>
@@ -172,6 +178,8 @@ if(ses!=null){
 	<script src="<c:url value='/resources/js/separate/eoiFormPrint.js?v=${sessionScope.version}'/>"></script>
 
 	<script src="<c:url value='/resources/js/enquiryRequest/common.js?v=${sessionScope.version}'/>"></script>
+	
+	
 
 	<%@ include file="/WEB-INF/views/pages/footer.jsp" %>
 </body>

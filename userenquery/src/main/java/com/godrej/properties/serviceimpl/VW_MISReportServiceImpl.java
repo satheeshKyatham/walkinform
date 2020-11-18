@@ -123,7 +123,11 @@ public class VW_MISReportServiceImpl implements VW_MISReportService {
 				mis.setDesignation__c(checkNull(mislist.get(i).getDesignation__c()));
 				mis.setQry_count(checkNull(mislist.get(i).getQry_count()));
 				mis.setQry_msg(checkNull(mislist.get(i).getQry_msg()));
-				
+				mis.setMedia_type__c(checkNull(mislist.get(i).getMedia_type__c()));
+				mis.setMedia_sub_type__c(checkNull(mislist.get(i).getMedia_sub_type__c()));
+				mis.setIs_revisit(checkNull(mislist.get(i).getIs_revisit()));
+				mis.setLastvisitdate(checkNull(mislist.get(i).getLastvisitdate()));
+				mis.setType_of_visit(checkNull(mislist.get(i).getType_of_visit()));
 				finalMislist.add(mis);
 			}
 		}
