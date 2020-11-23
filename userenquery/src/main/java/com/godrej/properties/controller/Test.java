@@ -4,7 +4,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.UUID;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.json.JSONException;
 
 public class Test {
@@ -307,7 +309,14 @@ public class Test {
 	            System.out.println("Date1 is equal Date2");
 	        }*/
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");// hh:mm
+		UUID uniqueKey = UUID.randomUUID();   
+		  System.out.println (uniqueKey); 
+		  
+		  String ts = String.valueOf(System.currentTimeMillis());
+		    String rand = UUID.randomUUID().toString();
+		    System.out.println(DigestUtils.sha1Hex(ts + rand));
+		  
+		/*SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");// hh:mm
 		try {
 			Date systemDate = new Date(); 
 			sdf.format(systemDate);
@@ -330,7 +339,7 @@ public class Test {
 
 	        if (cal1.before(cal2)) {
 	        	System.out.println("Date1 is before Date2");
-	        	/*System.out.println("Current Month"+cal1.get(Calendar.MONTH));
+	        	System.out.println("Current Month"+cal1.get(Calendar.MONTH));
 	        	System.out.println("Configured Month"+cal2.get(Calendar.MONTH));
 	        	int currentMonth = cal1.get(Calendar.MONTH);
 	        	int configuredMonth=cal2.get(Calendar.MONTH);
@@ -341,7 +350,7 @@ public class Test {
 	        	else
 	        	{
 	        		System.out.println("Remove Days");
-	        	}*/
+	        	}
 	        	//current date and configured date month check
 	        }
 
@@ -357,7 +366,7 @@ public class Test {
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 	}
 
 	

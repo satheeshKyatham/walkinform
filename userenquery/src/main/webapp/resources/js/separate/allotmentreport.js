@@ -205,12 +205,44 @@ function getAllotmentDashboardReport () {
 								"<div class='clearfix'></div>"+
 							"</div>";
 		
-		$("#coveredcarpark_id").append(carparkHTML);
 		
+		var unitFacingTypeHTML = "<table class='table table-bordered' id='unitFacingType' style='font-size: 16px;'>" +
+			"<thead>" +
+				"<tr>" +
+					"<th>Offers created in d4u</th>" +
+					"<th>City Facing</th>" +
+					"<th>Garden Facing</th>" +
+				"</tr>" +
+			"</thead>" +
+			"<tbody>" +
+				"<tr>" + 
+					"<td>1 BHK</td>" + 
+					"<td>"+data.city1bhk+"</td>" + 
+					"<td>"+data.garden1bhk+"</td>" +
+				"</tr>" +
+				
+				"<tr>" + 
+					"<td>2 BHK</td>" + 
+					"<td>"+data.city2bhk+"</td>" + 
+					"<td>"+data.garden2bhk+"</td>" +
+				"</tr>" +
+				
+				"<tr>" + 
+					"<td>3 BHK</td>" + 
+					"<td>"+data.city3bhk+"</td>" + 
+					"<td>"+data.garden3bhk+"</td>" +
+				"</tr>" +
+				
+			"</tbody>" +
+		"</table>";		
+				
+		$("#coveredcarpark_id").append(carparkHTML);
+		$("#coveredcarpark_id").after(unitFacingTypeHTML);
+
 	} else {
 		$("#coveredcarpark_id").hide();
+		$('#unitFacingType').remove();
 	}
-	
 	
 	$("#blockInvId").append(data.blockedInventoryCount);
 	$("#holdInvId").append(data.holdInventoryCount);

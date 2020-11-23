@@ -134,8 +134,37 @@ public class EOIReportDaoImpl implements EOIReportDao{
 		Query blockInv = session.createNativeQuery("select count(hold_reason) as block from salesforce.gpl_cs_hold_admin_unit where project_id='"+whereCondition+"' and hold_reason='block' and hold_status=true and version=0");
 		
 
-				
+		Query city1bhk = session.createNativeQuery("SELECT count(c.propstrength__unit_type__c) FROM salesforce.gpl_cs_balance_details a "
+				+ " INNER JOIN salesforce.propstrength__offer__c b ON a.offer_sfid = b.sfid "
+				+ " INNER JOIN salesforce.propstrength__property__c c ON c.sfid = b.propstrength__property__c "
+				+ " where a.project_sfid = '"+whereCondition+"' and a.isactive = 'A' and c.propstrength__unit_type__c = '1 BHK' and property_facing__c = 'City' group by c.propstrength__unit_type__c ");
+		
+		Query city2bhk = session.createNativeQuery("SELECT count(c.propstrength__unit_type__c) FROM salesforce.gpl_cs_balance_details a "
+				+ " INNER JOIN salesforce.propstrength__offer__c b ON a.offer_sfid = b.sfid "
+				+ " INNER JOIN salesforce.propstrength__property__c c ON c.sfid = b.propstrength__property__c "
+				+ " where a.project_sfid = '"+whereCondition+"' and a.isactive = 'A' and c.propstrength__unit_type__c = '2 BHK' and property_facing__c = 'City' group by c.propstrength__unit_type__c ");
+		
+		Query city3bhk = session.createNativeQuery("SELECT count(c.propstrength__unit_type__c) FROM salesforce.gpl_cs_balance_details a "
+				+ " INNER JOIN salesforce.propstrength__offer__c b ON a.offer_sfid = b.sfid "
+				+ " INNER JOIN salesforce.propstrength__property__c c ON c.sfid = b.propstrength__property__c "
+				+ " where a.project_sfid = '"+whereCondition+"' and a.isactive = 'A' and c.propstrength__unit_type__c = '3 BHK' and property_facing__c = 'City' group by c.propstrength__unit_type__c ");
 
+		Query garden1bhk = session.createNativeQuery("SELECT count(c.propstrength__unit_type__c) FROM salesforce.gpl_cs_balance_details a "
+				+ " INNER JOIN salesforce.propstrength__offer__c b ON a.offer_sfid = b.sfid "
+				+ " INNER JOIN salesforce.propstrength__property__c c ON c.sfid = b.propstrength__property__c "
+				+ " where a.project_sfid = '"+whereCondition+"' and a.isactive = 'A' and c.propstrength__unit_type__c = '1 BHK' and property_facing__c = 'Garden' group by c.propstrength__unit_type__c ");
+		
+		Query garden2bhk = session.createNativeQuery("SELECT count(c.propstrength__unit_type__c) FROM salesforce.gpl_cs_balance_details a "
+				+ " INNER JOIN salesforce.propstrength__offer__c b ON a.offer_sfid = b.sfid "
+				+ " INNER JOIN salesforce.propstrength__property__c c ON c.sfid = b.propstrength__property__c "
+				+ " where a.project_sfid = '"+whereCondition+"' and a.isactive = 'A' and c.propstrength__unit_type__c = '2 BHK' and property_facing__c = 'Garden' group by c.propstrength__unit_type__c ");
+		
+		Query garden3bhk = session.createNativeQuery("SELECT count(c.propstrength__unit_type__c) FROM salesforce.gpl_cs_balance_details a "
+				+ " INNER JOIN salesforce.propstrength__offer__c b ON a.offer_sfid = b.sfid "
+				+ " INNER JOIN salesforce.propstrength__property__c c ON c.sfid = b.propstrength__property__c "
+				+ " where a.project_sfid = '"+whereCondition+"' and a.isactive = 'A' and c.propstrength__unit_type__c = '3 BHK' and property_facing__c = 'Garden' group by c.propstrength__unit_type__c ");
+		
+		
 		//System.out.println("***********"+result[1].toString());
 		
 		alotMIS.setTotalArealSold(result[0] == null ? "0" : result[0].toString());
@@ -168,6 +197,42 @@ public class EOIReportDaoImpl implements EOIReportDao{
 			alotMIS.setStack2bhk(stack2bhk.getResultList().get(0).toString());
 		else
 			alotMIS.setStack2bhk("");
+		
+		if(city1bhk.getResultList().size()>0) {
+			alotMIS.setCity1bhk(city1bhk.getResultList().get(0).toString());
+		} else {
+			alotMIS.setCity1bhk("0");
+		}
+		
+		if(city2bhk.getResultList().size()>0) {
+			alotMIS.setCity2bhk(city2bhk.getResultList().get(0).toString());
+		} else {
+			alotMIS.setCity2bhk("0");
+		}
+		
+		if(city3bhk.getResultList().size()>0) {
+			alotMIS.setCity3bhk(city3bhk.getResultList().get(0).toString());
+		} else {
+			alotMIS.setCity3bhk("0");
+		}
+		
+		if(garden1bhk.getResultList().size()>0) {
+			alotMIS.setGarden1bhk(garden1bhk.getResultList().get(0).toString());
+		} else {
+			alotMIS.setGarden1bhk("0");
+		}
+		
+		if(garden2bhk.getResultList().size()>0) {
+			alotMIS.setGarden2bhk(garden2bhk.getResultList().get(0).toString());
+		} else {
+			alotMIS.setGarden2bhk("0");
+		}
+		
+		if(garden3bhk.getResultList().size()>0) {
+			alotMIS.setGarden3bhk(garden3bhk.getResultList().get(0).toString());
+		} else {
+			alotMIS.setGarden3bhk("0");
+		}
 		
 		alotMIS.setHoldInventoryCount(eOIHold.getSingleResult().toString());
 		alotMIS.setBlockedInventoryCount(blockInv.getSingleResult().toString());

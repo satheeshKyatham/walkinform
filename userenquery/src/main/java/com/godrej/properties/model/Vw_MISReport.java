@@ -78,6 +78,11 @@ public class Vw_MISReport {
 	
 	@Column(name="verticle__c") private String verticle__c;
 	@Column(name="designation__c") private String designation__c;
+	@Column(name="media_type__c") private String media_type__c;
+	@Column(name="media_sub_type__c") private String media_sub_type__c;
+	@Column(name="is_revisit") private String is_revisit;
+	@Column(name="lastvisitdate") private String lastvisitdate;
+	@Column(name="type_of_visit") private String type_of_visit;
 	
 	@Transient private String qry_count;
 	@Transient private String qry_msg;
@@ -436,4 +441,35 @@ public class Vw_MISReport {
 	public void setQry_msg(String qry_msg) {
 		this.qry_msg = qry_msg;
 	}
+	public String getMedia_type__c() {
+		return media_type__c;
+	}
+	public void setMedia_type__c(String media_type__c) {
+		this.media_type__c = media_type__c;
+	}
+	public String getMedia_sub_type__c() {
+		return media_sub_type__c;
+	}
+	public void setMedia_sub_type__c(String media_sub_type__c) {
+		this.media_sub_type__c = media_sub_type__c;
+	}
+	public String getIs_revisit() {
+		return is_revisit;
+	}
+	public void setIs_revisit(String is_revisit) {
+		this.is_revisit = is_revisit;
+	}
+	public String getLastvisitdate() {
+		return lastvisitdate;
+	}
+	public void setLastvisitdate(String lastvisitdate) {
+		this.lastvisitdate = lastvisitdate;
+	}
+	public String getType_of_visit() {
+		return type_of_visit;
+	}
+	public void setType_of_visit(String type_of_visit) {
+		this.type_of_visit = type_of_visit;
+	}
+	
 }
