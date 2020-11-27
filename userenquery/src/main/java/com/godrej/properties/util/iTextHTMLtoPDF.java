@@ -150,7 +150,10 @@ public static void ApplicationFormPDF(String appFormData, String enqSfid, String
 	    	  reraLabel = "WBHIRA registration no.";
 	    	 // reraRegistrationNo = "HIRA/P/SOU/2019/000456 / HIRA/P/SOU/2019/000455";
 	    	  projectName = "Godrej Se7en, Kolkata";
-	      } else {
+	      } else if(projectid.equals("a1l6F000002X6IOQA0") ){
+	    	  projectName = "The Highlands at Godrej City, Panvel";
+	    	  reraLabel = "RERA registration no.";
+	      }else {
 	    	  reraLabel = "RERA registration no.";
 	    	 // reraRegistrationNo = reraRegistrationNo;
 	      }
