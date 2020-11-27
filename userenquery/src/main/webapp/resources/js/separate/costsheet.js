@@ -1200,9 +1200,11 @@ function paymentPlanOtherCharges (firstRowObj, ppMilestone){
              var html = '';
              
              
-             
-             
-             html+="<tr class='payableStampAndReg'><td colspan='4'>Payable at the time of registration</td><td class='txtRight' style='text-align:right'>"+ parseFloat(parseFloat($('#stamp_duty').text())+parseFloat($('#registrationCharges').text())).toFixed(2)+"</td></tr>";
+             if ($('#projectid').val() == 'a1l6F000002X6IOQA0') {
+            	 html+="<tr class='payableStampAndReg'><td colspan='4'>Stamp Duty & Registration Charges (Payable within 21 days from booking)</td><td class='txtRight' style='text-align:right'>"+ parseFloat(parseFloat($('#stamp_duty').text())+parseFloat($('#registrationCharges').text())).toFixed(2)+"</td></tr>";
+             } else {
+            	 html+="<tr class='payableStampAndReg'><td colspan='4'>Payable at the time of registration</td><td class='txtRight' style='text-align:right'>"+ parseFloat(parseFloat($('#stamp_duty').text())+parseFloat($('#registrationCharges').text())).toFixed(2)+"</td></tr>";
+             }
              
              //html+="<tr><td colspan='4'>Goods & Service Tax (GST)</td><td class='txtRight'>"+$('#registrationCharges').text()+"</td></tr>";
              
@@ -3227,8 +3229,18 @@ $("#carParkType").change(function () {
 	
 	$('#carParkCountDD').empty();
     if ($('#carParkType option:selected').val() != -1) {
-		$('#carParkCountDD').append('<select class="full form-control"><option value="1">1</option> <option value="2">2</option> <option value="3">3</option>  <option value="4">4</option> </select>');
-		if ($('#projectId').val() == 'a1l6F000009D6IMQA0') {
+	
+    	if ($('#projectId').val() == 'a1l6F000002X6IOQA0') {
+    		$('#carParkCountDD').append('<select class="full form-control"><option value="1">1</option> </select>');
+    	} else {
+    		$('#carParkCountDD').append('<select class="full form-control"><option value="1">1</option> <option value="2">2</option> <option value="3">3</option>  <option value="4">4</option> </select>');
+    	}
+    	
+    	
+		
+    	
+    	
+    	if ($('#projectId').val() == 'a1l6F000009D6IMQA0') {
 			$('#carParkCount').hide();
 		} else {
 			$('#carParkCount').show();
