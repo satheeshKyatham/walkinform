@@ -37,14 +37,14 @@ public class EOIPaymentDtlDaoImpl extends AbstractDao<Integer, EOIPaymentDtl> im
 	
 	
 	@Override
-	public List<EOIPaymentDtl> getEOIPaymentRecord(String enqSfid) {
+	public List<EOIPaymentDtl> getEOIPaymentRecord(String enqSfid,String whereCondition) {
 		Session session = this.sessionFactory.getCurrentSession();	
 		
 		List<EOIPaymentDtl> authors=null;
 		
 		Query q = session.createNativeQuery("SELECT * FROM salesforce.gpl_cs_eoi_payment_details "
 				//+ " where enq_sfid = '"+enqSfid+"' and isactive = 'Y' order by gpl_cs_eoi_payment_details_id ", EOIPaymentDtl.class);
-				+ " where enq_sfid = '"+enqSfid+"' order by gpl_cs_eoi_payment_details_id ", EOIPaymentDtl.class);
+				+ " where enq_sfid = '"+enqSfid+"' "+whereCondition+" order by gpl_cs_eoi_payment_details_id ", EOIPaymentDtl.class);
 		//order by b.id
 		authors = q.getResultList();
 		

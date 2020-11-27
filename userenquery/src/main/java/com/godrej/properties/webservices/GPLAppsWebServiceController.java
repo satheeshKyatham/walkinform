@@ -257,7 +257,7 @@ public class GPLAppsWebServiceController {
 		
 		if(enquiryDto.getProject().getSfid().equals("a1l2s000000XmaMAAS"))//Only for Foridabad
 		{
-			List<EOIPaymentDtl> eoiData = eOIpaymentDtlService.getEOIPaymentRecord(enquiryDto.getSfid());
+			List<EOIPaymentDtl> eoiData = eOIpaymentDtlService.getEOIPaymentRecord(enquiryDto.getSfid(),"");
 			double eoiTotalAmt=0;
 			double eoiReceivedTotalAmt=0;
 			if(eoiData!=null)

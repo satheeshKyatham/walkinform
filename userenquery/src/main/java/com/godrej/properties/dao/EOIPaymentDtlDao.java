@@ -8,7 +8,7 @@ import com.godrej.properties.model.EOIPreferenceDtl;
 public interface EOIPaymentDtlDao {
 	void insertPaymentDtl (List<EOIPaymentDtl> pymtDtl);
 	
-	List<EOIPaymentDtl> getEOIPaymentRecord(String enqSfid);
+	List<EOIPaymentDtl> getEOIPaymentRecord(String enqSfid,String whereCondition);
 	
 	void updateEOIForOffer(List<EOIPaymentDtl> charges);
 	public List<EOIPaymentDtl> getCommonEOIPaymentEntrys(String whereCondition);

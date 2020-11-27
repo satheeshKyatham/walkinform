@@ -4059,12 +4059,20 @@ public class WebServiceController<MultipartFormDataInput> {
 		
 		//Update EOI payment from costsheet
 		
-	@RequestMapping(value = "/getEOIPaymentRecord", method = RequestMethod.POST)
+		@PostMapping(value = "/getEOIPaymentRecord")
 	public String getEOIPaymentRecord(@RequestParam("enqSfid") String enqSfid) {
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		Gson gson = gsonBuilder.create();
 
-		return gson.toJson(eOIpaymentDtlService.getEOIPaymentRecord(enqSfid));
+		return gson.toJson(eOIpaymentDtlService.getEOIPaymentRecord(enqSfid,""));
+	}
+	
+	@PostMapping(value = "/getEOIPaymentRecordForRefund")
+	public String getEOIPaymentRecordForRefund(@RequestParam("enqSfid") String enqSfid) {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		Gson gson = gsonBuilder.create();
+		String whereCondition=" and refund_trx_no is null";
+		return gson.toJson(eOIpaymentDtlService.getEOIPaymentRecord(enqSfid,whereCondition));
 	}
 
 	@RequestMapping(value = "/getEOIList", method = RequestMethod.GET, produces = "application/json")
