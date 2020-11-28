@@ -17,7 +17,6 @@ import com.godrej.properties.model.AppOfferContact;
 import com.godrej.properties.model.EOIData;
 import com.godrej.properties.model.EOIDataVW;
 import com.godrej.properties.model.KYCApplicantDtl;
-import com.godrej.properties.model.PaymentPlanWithOtherCharge;
 
 @Repository("kYCapplicantDtlDao")
 public class KYCApplicantDtlDaoImpl extends AbstractDao<Integer, KYCApplicantDtl> implements KYCApplicantDtlDao{
@@ -146,11 +145,11 @@ public class KYCApplicantDtlDaoImpl extends AbstractDao<Integer, KYCApplicantDtl
 		
 		String whereCondintion=" ";
 		if(userid!=null && userid.length()>0)
-			whereCondintion=" where (userid ="+userid+" or createdoffer_userid="+userid+")";
+			whereCondintion=" and (balnce.userid ="+userid+" or balnce.userid="+userid+")";
 		if(userid!=null && userid.length()>0 && projectid!=null)//(a.userid=594 or balnce.userid=594)
-			whereCondintion=" where (userid ="+userid+" or createdoffer_userid="+userid+") and project_sfid='"+projectid+"'";
+			whereCondintion=" and (balnce.userid ="+userid+" or balnce.userid="+userid+") and a.project_sfid='"+projectid+"'";
 		else
-			whereCondintion=" where project_sfid='"+projectid+"'";
+			whereCondintion=" and a.project_sfid='"+projectid+"'";
 		
 		Query q = session.createNativeQuery("SELECT row_number() OVER (ORDER BY a.id) AS id,a.enquiryid,a.application_name,a.phone_number,a.issubmitted,"
 				+ "a.userdocid,a.userid,a.kyclink,a.kycapproval_status,a.kycreject_comment,a.project_sfid,"
@@ -167,7 +166,7 @@ public class KYCApplicantDtlDaoImpl extends AbstractDao<Integer, KYCApplicantDtl
 				+ " LEFT JOIN salesforce.mst_user mstuser ON mstuser.user_id = balnce.userid"//::integer
 				+ " LEFT JOIN salesforce.propstrength__application_booking__c application ON c.sfid = application.propstrength__offer__c"
 				+ " LEFT JOIN salesforce.mst_user kycapproval ON kycapproval.user_id = a.approve_reject_by"
-				+ " WHERE a.enquiryid IS NOT NULL and a.project_sfid='a1l6F000002X6IOQA0'"
+				+ " WHERE a.enquiryid IS NOT NULL "+whereCondintion+""
 				+ " GROUP BY a.id, a.enquiryid, a.application_name, a.phone_number, a.issubmitted, a.userdocid, a.userid, a.kyclink, a.kycapproval_status, a.kycreject_comment, a.project_sfid, b.sfid, b.propstrength__primary_contact__c, c.name, c.sfid, c.property_name1__c, balnce.userid, mstuser.user_name, application.name, kycapproval.user_name, application.propstrength__status__c, balnce.description ", EOIDataVW.class);
 		
 		authors = (List<EOIDataVW>)q.getResultList();

@@ -80,6 +80,11 @@ public class EnqAndOfferDtl implements Serializable{
 	@Column(name="tower_sfid") private String tower_sfid;
 	@Column(name="closing_manager_name__c") private String closing_manager_name__c;
 	
+	
+	@Column(name="propstrength__total_sales_consideration__c", precision = 10, scale = 2)  private BigDecimal propstrength__total_sales_consideration__c;
+	
+	
+	
 	public int getId() {
 		return id;
 	}
@@ -325,5 +330,11 @@ public class EnqAndOfferDtl implements Serializable{
 	}
 	public void setClosing_manager_name__c(String closing_manager_name__c) {
 		this.closing_manager_name__c = closing_manager_name__c;
+	}
+	public BigDecimal getPropstrength__total_sales_consideration__c() {
+		return propstrength__total_sales_consideration__c;
+	}
+	public void setPropstrength__total_sales_consideration__c(BigDecimal propstrength__total_sales_consideration__c) {
+		this.propstrength__total_sales_consideration__c = propstrength__total_sales_consideration__c;
 	}
 }
