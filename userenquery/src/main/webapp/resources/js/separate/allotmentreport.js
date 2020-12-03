@@ -150,6 +150,8 @@ function getAllotmentDashboardReport () {
 		$("#covered3bhkid").append(data.coverd3bhk+"/147");
 	} else if ($("#projectid").val()=="a1l2s000000XoezAAC") {
 		
+		$("#unitFacingType").remove();
+		
 		$("#coveredcarpark_id").empty();
 		$("#coveredcarpark_id").show();
 		
