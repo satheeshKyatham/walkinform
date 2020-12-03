@@ -15,7 +15,7 @@
 	 response.addHeader("X-Frame-Options", "DENY");
 	 %>
 	 
-<script src="<c:url value='/resources/js/refundreport/initiateRefundEOI.js?v=${sessionScope.version}'/>"></script>	
+
 <input type="hidden" id="enquirysfid">	
 <input type="hidden" id="enquiry_name">
 	
@@ -91,6 +91,10 @@
 			
 			<div class="">
 				
+				<div class="form-group col-md-3">
+					<label>A/C Holder Name</label>
+					<input type="text"/>
+				 </div>
 				 <div class="form-group col-md-3">
 					<label>Bank Name</label>
 					<input type="text"/>
@@ -108,13 +112,22 @@
 					<input type="text"/>
 				 </div>
 				 <div class="form-group col-md-3">
+					<label>Account Type</label>
+					<select id="" class="form-control">
+						<option value='NRE'>NRE</option>
+						<option value='NRO'>NRO</option>
+						<option value='Saving'>Saving</option>
+						<option value='Current'>Current</option>
+					</select>
+				 </div>
+				 <div class="form-group col-md-3">
 					<label>Upload Cancelled Check</label>
 					<input type="file"/>
 				 </div>
 				 <div class="form-group col-md-3">
 					<label>Reason for Cancellation/Refund</label>
 					<select id="" class="form-control">
-						<option value=''></option>
+						<option value='Customer Request'>Customer Request</option>
 					</select>
 				 </div>
 				 
@@ -127,7 +140,7 @@
 			</div>
 			<div class="form-group col-md-3">
 				<label> &nbsp; </label>
-				<button onclick="" style="line-height:0; color: #fff; background-color: #0077b9;" class="form-control btn btn-primary mrgT0">
+				<button onclick="initiateRefundRequest()" style="line-height:0; color: #fff; background-color: #0077b9;" class="form-control btn btn-primary mrgT0">
 					Initiate Cancellation/Refund
 				</button>
 				

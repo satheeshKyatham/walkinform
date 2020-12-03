@@ -32,8 +32,8 @@ public class EOIPaymentDtlServiceImpl implements EOIPaymentDtlService{
 	}
 	
 	@Override
-	public List<EOIPaymentDtl> getEOIPaymentRecord(String enqSfid) {
-		return dao.getEOIPaymentRecord(enqSfid);
+	public List<EOIPaymentDtl> getEOIPaymentRecord(String enqSfid,String whereCondition) {
+		return dao.getEOIPaymentRecord(enqSfid,whereCondition);
 	}
 	
 	@Override

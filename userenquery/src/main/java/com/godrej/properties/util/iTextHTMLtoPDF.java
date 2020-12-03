@@ -81,11 +81,12 @@ public class iTextHTMLtoPDF {
 
               annexureName = "Annexure E";
 
+           } else if (projectSfid.equals("a1l6F000002X6IOQA0")) {
+                  annexureName = "Annexure D";
            } else {
-
               annexureName = "Annexure F";
+           }
 
-          }
 	      
 	      String csLogo = "";
 	      

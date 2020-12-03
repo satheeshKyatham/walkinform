@@ -11,10 +11,11 @@ var enqName = '';
 var enqid = '';
 var paymentDataisNull = true;
 var preferencDataisNull = true;
+var pageContext = $("#pageContext").val();
 function enqDtlForAdminRefund () {
 	var enqName = "ENQ - " + $('#enqNameInputRefund').val().trim();
 	
-	$.post(pageContext+"getEnqForAdminInventoryHold",{"enqName":enqName, "projectSFID":$('#projectid').val()},function(data){                      
+	$.post(pageContext+"/getEnqForAdminInventoryHold",{"enqName":enqName, "projectSFID":$('#projectid').val()},function(data){                      
 		$("#enqDtlTableRefundEOI tbody").empty();
 		var obj =JSON.parse(data);
 		 var html = '';
@@ -91,7 +92,7 @@ function csPtDdEoi (e) {
 
 // function call in salesRequest.js in "populateBasicInfo" function end 
 function getEOITabPaymentRecordRefund() {
-	$.post(pageContext+"getEOIPaymentRecord",{"enqSfid":enqSFIDforEOI},function(data){
+	$.post(pageContext+"/getEOIPaymentRecordForRefund",{"enqSfid":enqSFIDforEOI},function(data){
 		$('#csPtColRefundEoi tbody').empty();
 		var html = '';
 		var obj =JSON.parse(data);
@@ -169,7 +170,11 @@ function getEOITabPaymentRecordRefund() {
 }
 
 
-
+function initiateRefundRequest()
+{
+	alert("initiateRefundRequest:-");
+	
+	}
 
 
 

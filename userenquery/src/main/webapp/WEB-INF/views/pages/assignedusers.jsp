@@ -123,7 +123,9 @@ if(ses!=null){
 					<li onclick="getMySourcingLead()" id="mySourcingLeadReportTabSales">
 						<a href="#mySourcingLeadReportSales" data-toggle="tab">My Sourcing Lead <i class="fa fa-spinner fa-spin" style="display:none;"></i> </a>
 					</li>
-					
+					<!-- <li>
+						<a href="#EOIRefundTab" data-toggle="tab">EOI Refund</a>
+					</li> -->
 				</ul>
 				<div class=""></div>
 			</div>
@@ -338,7 +340,9 @@ if(ses!=null){
 				<div class="tab-pane" id="mySourcingLeadReportSales">
 					<%@ include file="/WEB-INF/views/pages/mysourcinglead.jsp" %>
 				</div>	
-				
+				<%-- <div class="tab-pane" id="EOIRefundTab" >
+					<%@ include file="/WEB-INF/views/pages/refundreport/initiateRefundEOI.jsp" %>
+				</div> --%>
 				<div class="clearfix"></div>
 			</div>
 		  <div class="clearfix"></div>
@@ -375,7 +379,7 @@ if(ses!=null){
 	<script src="<c:url value='/resources/js/separate/eoiReportSales.js?v=${sessionScope.version}'/>"></script>
 	<script src="<c:url value='/resources/js/demo/offerTemplate.js?v=${sessionScope.version}'/>"></script>
 	<script src="<c:url value='/resources/js/separate/mysourcinglead.js?v=${sessionScope.version}'/>"></script>
-	
+	<script src="<c:url value='/resources/js/refundreport/initiateRefundEOI.js?v=${sessionScope.version}'/>"></script>	
 	<%@ include file="/WEB-INF/views/pages/footer.jsp" %>
 	
 </body>

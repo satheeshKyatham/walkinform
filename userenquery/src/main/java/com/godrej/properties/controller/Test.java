@@ -1,5 +1,6 @@
 package com.godrej.properties.controller;
 
+import java.math.BigInteger;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -309,13 +310,17 @@ public class Test {
 	            System.out.println("Date1 is equal Date2");
 	        }*/
 		
-		UUID uniqueKey = UUID.randomUUID();   
+		/*UUID uniqueKey = UUID.randomUUID();   
 		  System.out.println (uniqueKey); 
 		  
 		  String ts = String.valueOf(System.currentTimeMillis());
 		    String rand = UUID.randomUUID().toString();
-		    System.out.println(DigestUtils.sha1Hex(ts + rand));
-		  
+		    System.out.println(DigestUtils.sha1Hex(ts + rand));*/
+		
+		String uuid = String.format("%040d", new BigInteger(UUID.randomUUID().toString().replace("-", ""), 16));
+		System.out.println(uuid);
+		String uuid16digits = uuid.substring(uuid.length() - 16);
+		System.out.println(uuid16digits);
 		/*SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");// hh:mm
 		try {
 			Date systemDate = new Date(); 
