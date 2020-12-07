@@ -567,10 +567,19 @@ function loadData (csSource) {
        }else {
     	   if ($('#projectId').val() == 'a1l2s00000000X5AAI') {     
 	        	$('.craParkTypeLabel').text('Covered Car Park Space');
-	        }  else {
+	        } else if ($('#projectId').val() == 'a1l2s000000XoezAAC'){
+	        	$('.craParkTypeLabel').text('Parking Space');
+	        } else {
 	        	$('.craParkTypeLabel').text('Car Park Type');
 	        }
-	        $('.noOfCarParkLabel').text('No. of Car Park');
+    	   
+    	   	if ($('#projectId').val() == 'a1l2s000000XoezAAC'){
+    	   		$('.noOfCarParkLabel').text('No. of Parking');
+    	   	} else {
+    	   		$('.noOfCarParkLabel').text('No. of Car Park');
+    	   	}
+    	   
+	       
        }
        
       if (csSource == "SALESCOSTSHEET") {

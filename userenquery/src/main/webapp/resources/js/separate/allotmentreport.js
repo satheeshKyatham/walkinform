@@ -182,7 +182,7 @@ function carparkCountList (){
 							+ "<thead>" 
 								+ "<tr>"
 									+ "<th>Car park type</th>"
-									+ "<th>Car park </th>" 
+									+ "<th>Car park <small><b>(*Indicative - Its considering offers created through D4U only)</b><small></th>" 
 								+ "</tr>"
 							+ "</thead>"
 							+ "<tbody>";
