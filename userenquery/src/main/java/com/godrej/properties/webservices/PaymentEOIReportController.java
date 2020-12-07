@@ -140,4 +140,15 @@ public class PaymentEOIReportController {
 		return gson.toJson(eOIReportService.getAllotmentMISReport(projectSfid));
 	}
 	
+	@GetMapping(value = "/getTowerdashboard", produces = "application/json")
+	public String getTowerdashboard(@RequestParam("projectSfid") String projectSfid) {
+		Gson gson = new GsonBuilder().disableHtmlEscaping().serializeNulls().create();
+		return gson.toJson(eOIReportService.getTowerdashboard(projectSfid));
+	}
+	
+	@GetMapping(value = "/getFacingdashboard", produces = "application/json")
+	public String getFacingdashboard(@RequestParam("projectSfid") String projectSfid) {
+		Gson gson = new GsonBuilder().disableHtmlEscaping().serializeNulls().create();
+		return gson.toJson(eOIReportService.getFacingdashboard(projectSfid));
+	}
 }
