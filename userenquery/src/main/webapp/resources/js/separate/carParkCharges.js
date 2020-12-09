@@ -68,7 +68,9 @@ function insertMaster () {
 	$.post(pageContext+call,{"region":$('#region_id').val(),
 		"projectName":$('#projectDataList option:selected').text(),
 		"projectid":$('#projectDataList').val(), 
-		"carparkName": $('#carParkTypeName').val()},function(data){				 
+		"carparkName": $('#carParkTypeName').val(),
+		"carparkAlias": $('#carparkAlias').val(),
+		"totalCarpark": $('#totalCarpark').val()},function(data){				 
 		
 	}).done(function(data){
 		
