@@ -157,6 +157,10 @@ function enqAndProjectDtl (source) {
 	$('#enqTypeEOIPrint').text('');
 	$('#sourcingMngrEOIPrint').text('');
 	$('#channelpartnerNameEOIPrint').text('');
+	
+	$("#reraid").html("");
+	
+	
 	var contactSFID = '';
 	var enqName = '';
 	var regionName = '';
@@ -177,8 +181,9 @@ function enqAndProjectDtl (source) {
 				$('#projectNameEOIPrint').text(obj[0].marketing_project_name__c);
 			}
 			
-			
-			
+			if ($('#projectid').val() == "a1l2s000000PJPmAAO") {
+				$("#reraid").html("RERA Registration Number: P51700027436");
+			}
 			
 			$('.dateOfEOIPrint').text(obj[0].date_of_eoi__c);
 			/*$('#enqTypeEOIPrint').text(obj[0].propstrength__enquiry_type__c);*/
