@@ -16,4 +16,5 @@ public enum SysConfigEnum {
 	SMTP_IP,
 	SMTP_PORT,
 	AD_IP,
+	CS_ANNEXURE,
 }

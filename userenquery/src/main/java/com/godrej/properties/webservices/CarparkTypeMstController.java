@@ -58,9 +58,25 @@ public class CarparkTypeMstController {
 	public String addSchemePromotional(@RequestParam("region") String region,
 			@RequestParam("projectName") String projectName,
 			@RequestParam("projectid") String projectid,
-			@RequestParam("carparkName") String carparkName) {	
+			@RequestParam("carparkName") String carparkName,
+			@RequestParam("carparkAlias") String carparkAlias, 	
+			@RequestParam("totalCarpark") String totalCarpark) {
 		
 		CarparkTypeMst carparkDtl = new CarparkTypeMst();
+		
+		
+		if (!totalCarpark.equals("null") && !totalCarpark.equals("") && !totalCarpark.equals(" ")) {
+			carparkDtl.setTotal_carpark(Integer.parseInt(totalCarpark) );
+		} else {
+			carparkDtl.setTotal_carpark(0);
+		}
+		
+		if (!carparkAlias.equals("null") && !carparkAlias.equals("") && !carparkAlias.equals(" ")) {
+			carparkDtl.setCarpark_alias(carparkAlias);
+		} else {
+			carparkDtl.setCarpark_alias(null);
+		}
+		
 		carparkDtl.setRegion_name(region);
 		carparkDtl.setProject_name(projectName);
 		carparkDtl.setProject_id(projectid);

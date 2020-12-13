@@ -31,7 +31,7 @@ public class CarparkTypeMstDaoImpl extends AbstractDao<Integer, CarparkTypeMst> 
 		
 		List<CarparkTypeMst> authors=null;
 		
-		Query q = session.createNativeQuery("SELECT id, region_name, project_name, project_id, carpark_type, isactive, createdby, updatedby  "
+		Query q = session.createNativeQuery("SELECT carpark_alias, total_carpark, id, region_name, project_name, project_id, carpark_type, isactive, createdby, updatedby  "
 				+ " FROM salesforce.gpl_cs_carpark_type_mst where project_id = '"+projectSFID+"' and isactive = 'A'  ", CarparkTypeMst.class);
 
 		authors = q.getResultList();

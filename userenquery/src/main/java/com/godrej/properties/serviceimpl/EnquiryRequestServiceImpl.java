@@ -412,6 +412,8 @@ public class EnquiryRequestServiceImpl implements EnquiryRequestService {
 			enquiryReport= new EnquiryReportDto();
 					
 		}
+		else
+			src.getEnquiryReport().setCustomerClassification(src.getContact().getContactReport().getCustomerClassification());
 		enquiryReport=enquiryReportService.updateAddressInfo(src.getEnquiryReport(), enquiryReport);
 		if(enquiryReport==null) {
 			enquiryReport= new EnquiryReportDto();

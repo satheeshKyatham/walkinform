@@ -40,6 +40,9 @@ public class CarparkTypeMst implements Serializable{
 	@Column(name = "updatedby")
 	private String updatedby;
 	
+	@Column(name = "carpark_alias") private String carpark_alias;
+	@Column(name = "total_carpark") private Integer total_carpark;
+	
 	
 	public int getId() {
 		return id;
@@ -108,5 +111,20 @@ public class CarparkTypeMst implements Serializable{
 	public void setUpdatedby(String updatedby) {
 		this.updatedby = updatedby;
 	}
-	
+
+	public String getCarpark_alias() {
+		return carpark_alias;
+	}
+
+	public void setCarpark_alias(String carpark_alias) {
+		this.carpark_alias = carpark_alias;
+	}
+
+	public Integer getTotal_carpark() {
+		return total_carpark;
+	}
+
+	public void setTotal_carpark(Integer total_carpark) {
+		this.total_carpark = total_carpark;
+	}
 }

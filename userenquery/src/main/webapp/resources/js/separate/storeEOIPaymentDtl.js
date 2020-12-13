@@ -330,7 +330,7 @@ function getTokenTypeEOI (){
 		{
 			html='<option value="F">GOLD</option><option value="F">PLATINUM</option><option value="T">EXPRESS</option>';
 		}
-	else if($("#projectsfid").val()=='a1l6F000004RvPHQA0' || $("#projectsfid").val()=='a1l6F000004LVk8QAG' || $("#projectsfid").val()=='a1l6F000008DnniQAC' || $("#projectsfid").val()=='a1l2s00000000pEAAQ' || $("#projectsfid").val()=='a1l6F000008iZJMQA2' || $("#projectsfid").val()=='a1l2s00000003BMAAY' || $("#projectsfid").val()=='a1l2s00000003VlAAI')
+	else if($("#projectsfid").val()=='a1l2s000000PJPmAAO' || $("#projectsfid").val()=='a1l6F000004RvPHQA0' || $("#projectsfid").val()=='a1l6F000004LVk8QAG' || $("#projectsfid").val()=='a1l6F000008DnniQAC' || $("#projectsfid").val()=='a1l2s00000000pEAAQ' || $("#projectsfid").val()=='a1l6F000008iZJMQA2' || $("#projectsfid").val()=='a1l2s00000003BMAAY' || $("#projectsfid").val()=='a1l2s00000003VlAAI')
 		{
 			html='<option value="F">REFUNDABLE</option><option value="T">NON-REFUNDABLE</option>';
 		}

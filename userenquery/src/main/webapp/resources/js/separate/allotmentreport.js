@@ -10,6 +10,12 @@ $(document).ready(function() {
 	var today = new Date();
 	document.getElementById("txtAllotFromDate").value = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
 	document.getElementById("txtAllotToDate").value = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
+	
+	if ($('#projectid').val() != "a1l2s000000XoezAAC") {
+		$("#facingSoldUnitTab").hide();
+		$("#towerSoldUnitTab").hide();
+	}
+
 });
 
 
@@ -24,6 +30,7 @@ function getAllotmentDashboardReport () {
 	$("#eoiReportCSVInputCol").append("<input type='hidden' value='"+$('#projectid').val()+"' name='projectSfid' />");
 	
 	$('#allotmentReportID i').show();
+	$('#journeyTab i').show();
 	
 	$("#allotmentReportTable tbody").empty();
 	$("#covered1bhkid").empty();
@@ -110,6 +117,7 @@ function getAllotmentDashboardReport () {
 		});*/
 		
 		$('#allotmentReportID i').hide();
+		$('#journeyTab i').hide();
 		
 		//$('#eoiReportTable').dataTable({
 			//"ordering": true,
@@ -148,104 +156,210 @@ function getAllotmentDashboardReport () {
 		$("#covered1bhkid").append(coverd1bhk.toString()+"/69");
 		$("#covered2bhkid").append(data.coverd2bhk+"/96");
 		$("#covered3bhkid").append(data.coverd3bhk+"/147");
-	} else if ($("#projectid").val()=="a1l2s000000XoezAAC") {
-		
-		$("#coveredcarpark_id").empty();
-		$("#coveredcarpark_id").show();
-		
-		var carparkHTML = "<div class='col-lg-3 col-xs-6'>" +
-								"<div class='small-box bg-aqua'>"+
-									"<div class='inner'>"+
-										"<h3>"+data.coverd2bhk+"/268</h3>"+
-										"<p>Sold Car Park Covered (2 bhk)</p>"+
-									"</div>"+
-									"<div class='icon'>"+
-										"<i class='fa fa-car'></i>"+
-									"</div>"+
-								"</div>"+
-								"<div class='clearfix'></div>"+
-							"</div>"+
-							
-							"<div class='col-lg-3 col-xs-6'>" +
-								"<div class='small-box bg-aqua'>"+
-									"<div class='inner'>"+
-										"<h3>"+data.coverd3bhk+"/180</h3>"+
-										"<p>Sold Car Park Covered (3 bhk)</p>"+
-									"</div>"+
-									"<div class='icon'>"+
-										"<i class='fa fa-car'></i>"+
-									"</div>"+
-								"</div>"+
-								"<div class='clearfix'></div>"+
-							"</div>"+
-								
-							"<div class='col-lg-3 col-xs-6'>" +
-								"<div class='small-box bg-aqua'>"+
-									"<div class='inner'>"+
-										"<h3>"+data.stack1bhk+"/94</h3>"+
-										"<p>Sold Car Park Stack (1 bhk)</p>"+
-									"</div>"+
-									"<div class='icon'>"+
-										"<i class='fa fa-car'></i>"+
-									"</div>"+
-								"</div>"+
-								"<div class='clearfix'></div>"+
-							"</div>"+	
-							
-							"<div class='col-lg-3 col-xs-6'>" +
-								"<div class='small-box bg-aqua'>"+
-									"<div class='inner'>"+
-										"<h3>"+data.stack2bhk+"/76</h3>"+
-										"<p>Sold Car Park Stack (2 bhk)</p>"+
-									"</div>"+
-									"<div class='icon'>"+
-										"<i class='fa fa-car'></i>"+
-									"</div>"+
-								"</div>"+
-								"<div class='clearfix'></div>"+
-							"</div>";
-		
-		
-		var unitFacingTypeHTML = "<table class='table table-bordered' id='unitFacingType' style='font-size: 16px;'>" +
-			"<thead>" +
-				"<tr>" +
-					"<th>Offers created in d4u</th>" +
-					"<th>City Facing</th>" +
-					"<th>Garden Facing</th>" +
-				"</tr>" +
-			"</thead>" +
-			"<tbody>" +
-				"<tr>" + 
-					"<td>1 BHK</td>" + 
-					"<td>"+data.city1bhk+"</td>" + 
-					"<td>"+data.garden1bhk+"</td>" +
-				"</tr>" +
-				
-				"<tr>" + 
-					"<td>2 BHK</td>" + 
-					"<td>"+data.city2bhk+"</td>" + 
-					"<td>"+data.garden2bhk+"</td>" +
-				"</tr>" +
-				
-				"<tr>" + 
-					"<td>3 BHK</td>" + 
-					"<td>"+data.city3bhk+"</td>" + 
-					"<td>"+data.garden3bhk+"</td>" +
-				"</tr>" +
-				
-			"</tbody>" +
-		"</table>";		
-				
-		$("#coveredcarpark_id").append(carparkHTML);
-		$("#coveredcarpark_id").after(unitFacingTypeHTML);
-
-	} else {
-		$("#coveredcarpark_id").hide();
-		$('#unitFacingType').remove();
-	}
+	} 
 	
 	$("#blockInvId").append(data.blockedInventoryCount);
 	$("#holdInvId").append(data.holdInventoryCount);
 	
 		});
+}
+
+function carparkCountList (){
+	$('#soldCarparkTab i').show();
+	$.get("getCarparkCount",{"projectSFID":$('#projectid').val() },function(data){				 
+		//var obj =JSON.stringify(data);
+		
+		var countHTML = "";
+		var carparkTypeName = "";
+		
+		if(data!=null) {
+			$("#carparkCountTbl").html("");
+			
+			var totalSold = 0;
+			var totalCarpark = 0;
+			
+			countHTML += "<div class='clearfix'></div> <h4>Sold Car Park</h4> <table class='table table-bordered table-striped'>" 
+							+ "<thead>" 
+								+ "<tr>"
+									+ "<th>Car park type</th>"
+									+ "<th>Car park <small><b>(*Indicative - Its considering offers created through D4U only)</b><small></th>" 
+								+ "</tr>"
+							+ "</thead>"
+							+ "<tbody>";
+				
+								for(var i=0;i<data.length;i++){
+									
+									if (data[i].carpark_alias != "null" && data[i].carpark_alias != undefined && data[i].carpark_alias != null){
+										carparkTypeName = data[i].carpark_alias;
+									} else {
+										carparkTypeName = data[i].carpark_type;
+									}
+									
+									countHTML += "<tr>" 
+													+ "<td>"+carparkTypeName+"</td>" 
+													+ "<td>"+data[i].sold_carpark+"/"+data[i].total_carpark+"</td>"  
+												+ "</tr>"; 
+									
+									totalSold = parseInt(data[i].sold_carpark)+parseInt(totalSold);
+									totalCarpark = parseInt(data[i].total_carpark)+parseInt(totalCarpark); 
+									
+								}
+			
+				countHTML += "<tr><th>Grand Total</th><th>"+totalSold+"/"+totalCarpark+"</th></tr>"; 
+								
+				countHTML += "</tbody>" 
+						+ "</table>";		
+				
+				$("#carparkCountTbl").html(countHTML);
+				
+		} else {
+			$('#soldCarparkTab i').hide();
+			$("#carparkCountTbl").html("");
+		}
+	}).done(function(data){
+		$('#soldCarparkTab i').hide();
+	});	
+}
+
+			
+function  towerDashboard (){
+	$('#towerSoldUnitTab i').show();
+	$.get("getTowerdashboard",{"projectSfid":$('#projectid').val()},function(data){
+	}).done(function(data){
+			
+		$("#towerDashboard").html("");
+		
+		var t1 = parseInt(data.t1BHK1)+parseInt(data.t1BHK2)+parseInt(data.t1BHK3);
+		var t2 = parseInt(data.t2BHK1)+parseInt(data.t2BHK2)+parseInt(data.t2BHK3);
+		var t3 = parseInt(data.t3BHK1)+parseInt(data.t3BHK2)+parseInt(data.t3BHK3);
+		var t4 = parseInt(data.t4BHK1)+parseInt(data.t4BHK2)+parseInt(data.t4BHK3);
+		
+		var bhk1 = parseInt(data.t1BHK1)+parseInt(data.t2BHK1)+parseInt(data.t3BHK1)+parseInt(data.t4BHK1);
+		var bhk2 = parseInt(data.t1BHK2)+parseInt(data.t2BHK2)+parseInt(data.t3BHK2)+parseInt(data.t4BHK2);
+		var bhk3 = parseInt(data.t1BHK3)+parseInt(data.t2BHK3)+parseInt(data.t3BHK3)+parseInt(data.t4BHK3);
+			
+		var grandTotal = parseInt(bhk1)+parseInt(bhk2)+parseInt(bhk3);
+		
+		var unitFacingTypeHTML = "<div class='clearfix'></div> <h4>Tower Wise Offer Created</h4>" +
+		"<table class='table table-bordered table-striped' >" +
+			"<thead>" +
+				"<tr>" +
+					"<th>Type</th>" +
+					"<th>T1</th>" +
+					"<th>T2</th>" +
+					"<th>T3</th>" +
+					"<th>T4</th>" +
+					"<th>Grand Total</th>" +
+				"</tr>" +
+			"</thead>" +
+			"<tbody>" +
+				"<tr>" + 
+					"<td>1 BHK</td>" + 
+					"<td>"+data.t1BHK1+"/46</td>" + 
+					"<td>"+data.t2BHK1+"/46</td>" +
+					"<td>"+data.t3BHK1+"/48</td>" +
+					"<td>"+data.t4BHK1+"/48</td>" +
+					"<td>"+bhk1+"/188</td>" +
+				"</tr>" + 
+				
+				"<tr>" + 
+					"<td>2 BHK</td>" + 
+					"<td>"+data.t1BHK2+"/84</td>" + 
+					"<td>"+data.t2BHK2+"/84</td>" +
+					"<td>"+data.t3BHK2+"/88</td>" +
+					"<td>"+data.t4BHK2+"/88</td>" +
+					"<td>"+bhk2+"/344</td>" +
+				"</tr>" + 
+				
+				"<tr>" + 
+					"<td>3 BHK</td>" + 
+					"<td>"+data.t1BHK3+"/44</td>" + 
+					"<td>"+data.t2BHK3+"/44</td>" +
+					"<td>"+data.t3BHK3+"/46</td>" +
+					"<td>"+data.t4BHK3+"/46</td>" +
+					"<td>"+bhk3+"/180</td>" +
+				"</tr>" + 
+				
+				"<tr>" + 
+					"<th>Grand Total</th>" + 
+					"<th>"+t1+"/174</th>" + 
+					"<th>"+t2+"/174</th>" +
+					"<th>"+t3+"/182</th>" +
+					"<th>"+t4+"/182</th>" +
+					"<th>"+grandTotal+"/712</th>" +
+				"</tr>" + 
+				
+			"</tbody>" +
+		"</table>";		
+				
+		$("#towerDashboard").html(unitFacingTypeHTML);
+		$('#towerSoldUnitTab i').hide();
+	});
+}
+
+function  facingDashboard (){
+	$('#facingSoldUnitTab i').show();
+	$.get("getFacingdashboard",{"projectSfid":$('#projectid').val()},function(data){
+	}).done(function(data){
+		
+		$("#unitFacingType").html("");
+		
+		var bhk1CityGard = parseInt(data.city1bhk)+parseInt(data.garden1bhk);
+		var bhk2CityGard = parseInt(data.city2bhk)+parseInt(data.garden2bhk);
+		var bhk3CityGard = parseInt(data.city3bhk)+parseInt(data.garden3bhk);
+		var totalCityGard = parseInt(bhk1CityGard)+parseInt(bhk2CityGard)+parseInt(bhk3CityGard);
+		
+		
+		var cityTotal = parseInt(data.city1bhk)+parseInt(data.city2bhk)+parseInt(data.city3bhk);
+		var gardenTotal = parseInt(data.garden1bhk)+parseInt(data.garden2bhk)+parseInt(data.garden3bhk);
+		
+		
+		
+		
+		var unitFacingTypeHTML = "<div class='clearfix'></div> <h4>Facing Wise Offer Created</h4>" +
+		"<table class='table table-bordered table-striped' id='unitFacingType' >" +
+			"<thead>" +
+				"<tr>" +
+					"<th>Type</th>" +
+					"<th>City Facing</th>" +
+					"<th>Garden Facing</th>" +
+					"<th>Grand Total</th>" +
+				"</tr>" +
+			"</thead>" +
+			"<tbody>" +
+				"<tr>" + 
+					"<td>1 BHK</td>" + 
+					"<td>"+data.city1bhk+"/24</td>" + 
+					"<td>"+data.garden1bhk+"/164</td>" +
+					"<td>"+bhk1CityGard+"/188</td>" +
+				"</tr>" +
+				
+				"<tr>" + 
+					"<td>2 BHK</td>" + 
+					"<td>"+data.city2bhk+"/262</td>" + 
+					"<td>"+data.garden2bhk+"/82</td>" +
+					"<td>"+bhk2CityGard+"/344</td>" +
+				"</tr>" +
+				
+				"<tr>" + 
+					"<td>3 BHK</td>" + 
+					"<td>"+data.city3bhk+"/98</td>" + 
+					"<td>"+data.garden3bhk+"/82</td>" +
+					"<td>"+bhk3CityGard+"/180</td>" +
+				"</tr>" +
+				
+				"<tr>" + 
+					"<th>Grand Total</th>" + 
+					"<th>"+cityTotal+"/384</th>" + 
+					"<th>"+gardenTotal+"/328</th>" +
+					"<th>"+totalCityGard+"/712</th>" +
+				"</tr>" +
+				
+			"</tbody>" +
+		"</table>";		
+				
+		//$("#coveredcarpark_id").append(carparkHTML);
+		$("#unitFacingType").html(unitFacingTypeHTML);
+		$('#facingSoldUnitTab i').hide();
+	});
 }

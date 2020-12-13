@@ -89,7 +89,7 @@ function getofferApplicantDetails (e, offerSFID, enqSFID, contactSFID, offerName
 			
 			if ($("#projectid").val() == "a1l2s00000000pEAAQ"  || $("#projectid").val() == "a1l2s00000003lPAAQ" || $("#projectid").val() == "a1l2s000000XmaMAAS" ) {
 				annexureName = "Annexure F";
-			} else if ($("#projectid").val() == "a1l2s00000003VlAAI" || $("#projectid").val() == "a1l2s000000PGu3AAG" || $("#projectid").val() == "a1l2s000000PGu8AAG" || $("#projectid").val() == "a1l2s000000PGuDAAW" || $("#projectid").val() == "a1l2s000000PGuIAAW" || $("#projectid").val() == "a1l2s000000PGuNAAW" || $("#projectid").val() == "a1l2s000000PGuSAAW") {
+			} else if ($("#projectid").val() == "a1l6F000002X6IOQA0" || $("#projectid").val() == "a1l2s00000003VlAAI" || $("#projectid").val() == "a1l2s000000PGu3AAG" || $("#projectid").val() == "a1l2s000000PGu8AAG" || $("#projectid").val() == "a1l2s000000PGuDAAW" || $("#projectid").val() == "a1l2s000000PGuIAAW" || $("#projectid").val() == "a1l2s000000PGuNAAW" || $("#projectid").val() == "a1l2s000000PGuSAAW") {
 				annexureName = "Annexure E";
 			} else {
 				annexureName = "Annexure G";
@@ -621,7 +621,10 @@ function getEnqAndOfferDtl (enqSFID, offerSFID, rowId) {
 			
 			
 			
-			var netMinTotalOther = obj[0].propstrength__net_revenue__c-obj[0].propstrength__total_other_charges__c;
+			
+			//var netMinTotalOther = obj[0].propstrength__net_revenue__c-obj[0].propstrength__total_other_charges__c;
+			
+			var netMinTotalOther = obj[0].propstrength__total_sales_consideration__c-obj[0].propstrength__total_other_charges__c;
 			
 			$('#carpetAreaCostOffer').text(parseFloat(netMinTotalOther/parseFloat(parseFloat(obj[0].open_balc_sq_mt__c)+parseFloat(obj[0].appurtenant_area_sq_mt__c))*obj[0].open_balc_sq_mt__c).toFixed(2));
 			//$('#exclusiveAreasCostOffer').text(parseFloat(netMinTotalOther/parseFloat(parseFloat(obj[0].carpet_area_converted__c)+parseFloat(obj[0].appurtenant_area_sq_mt__c))*obj[0].appurtenant_area_sq_mt__c).toFixed(2));

@@ -567,10 +567,19 @@ function loadData (csSource) {
        }else {
     	   if ($('#projectId').val() == 'a1l2s00000000X5AAI') {     
 	        	$('.craParkTypeLabel').text('Covered Car Park Space');
-	        }  else {
+	        } else if ($('#projectId').val() == 'a1l2s000000XoezAAC'){
+	        	$('.craParkTypeLabel').text('Parking Space');
+	        } else {
 	        	$('.craParkTypeLabel').text('Car Park Type');
 	        }
-	        $('.noOfCarParkLabel').text('No. of Car Park');
+    	   
+    	   	if ($('#projectId').val() == 'a1l2s000000XoezAAC'){
+    	   		$('.noOfCarParkLabel').text('No. of Parking');
+    	   	} else {
+    	   		$('.noOfCarParkLabel').text('No. of Car Park');
+    	   	}
+    	   
+	       
        }
        
       if (csSource == "SALESCOSTSHEET") {
@@ -1201,7 +1210,8 @@ function paymentPlanOtherCharges (firstRowObj, ppMilestone){
              
              
              if ($('#projectid').val() == 'a1l6F000002X6IOQA0') {
-            	 html+="<tr class='payableStampAndReg'><td colspan='4'>Stamp Duty & Registration Charges (Payable within 21 days from booking)</td><td class='txtRight' style='text-align:right'>"+ parseFloat(parseFloat($('#stamp_duty').text())+parseFloat($('#registrationCharges').text())).toFixed(2)+"</td></tr>";
+            	 //html+="<tr class='payableStampAndReg'><td colspan='4'>Stamp Duty & Registration Charges (Payable within 21 days from booking)</td><td class='txtRight' style='text-align:right'>"+ parseFloat(parseFloat($('#stamp_duty').text())+parseFloat($('#registrationCharges').text())).toFixed(2)+"</td></tr>";
+            	 html+="<tr class='payableStampAndReg'><td colspan='4'>SDR Charges (Payable within 21 days from booking)</td><td class='txtRight' style='text-align:right'>"+ parseFloat(parseFloat($('#stamp_duty').text())+parseFloat($('#registrationCharges').text())).toFixed(2)+"</td></tr>";
              } else {
             	 html+="<tr class='payableStampAndReg'><td colspan='4'>Payable at the time of registration</td><td class='txtRight' style='text-align:right'>"+ parseFloat(parseFloat($('#stamp_duty').text())+parseFloat($('#registrationCharges').text())).toFixed(2)+"</td></tr>";
              }

@@ -13,6 +13,8 @@ import com.godrej.properties.dao.EOIReportDao;
 import com.godrej.properties.model.AllotmentMISReport;
 import com.godrej.properties.model.AllotmentReport;
 import com.godrej.properties.model.EOIReport;
+import com.godrej.properties.model.FacingDashboard;
+import com.godrej.properties.model.TowerDashboard;
 
 @Repository("eOIReportDao")
 public class EOIReportDaoImpl implements EOIReportDao{
@@ -123,47 +125,12 @@ public class EOIReportDaoImpl implements EOIReportDao{
 		Query coverd2bhk = session.createNativeQuery("select count(car_park_type) from salesforce.gpl_cs_balance_details where project_sfid='"+whereCondition+"' and isactive='A' and car_park_type='Covered (2 BHK)' group by car_park_type ");
 		
 		Query coverd3bhk = session.createNativeQuery("select count(car_park_type) from salesforce.gpl_cs_balance_details where project_sfid='"+whereCondition+"' and isactive='A' and car_park_type='Covered (3 BHK)' group by car_park_type ");
-
 		
 		Query stack1bhk = session.createNativeQuery("select count(car_park_type) from salesforce.gpl_cs_balance_details where project_sfid='"+whereCondition+"' and isactive='A' and car_park_type='Stack (1 BHK)' group by car_park_type ");
 		Query stack2bhk = session.createNativeQuery("select count(car_park_type) from salesforce.gpl_cs_balance_details where project_sfid='"+whereCondition+"' and isactive='A' and car_park_type='Stack (2 BHK)' group by car_park_type ");
 		
-		
-		
 		Query eOIHold = session.createNativeQuery("select count(hold_reason) as EOIHold from salesforce.gpl_cs_hold_admin_unit where project_id='"+whereCondition+"' and  eoi_unit_locked=true and hold_reason='temp' and hold_status=true and version=0");
 		Query blockInv = session.createNativeQuery("select count(hold_reason) as block from salesforce.gpl_cs_hold_admin_unit where project_id='"+whereCondition+"' and hold_reason='block' and hold_status=true and version=0");
-		
-
-		Query city1bhk = session.createNativeQuery("SELECT count(c.propstrength__unit_type__c) FROM salesforce.gpl_cs_balance_details a "
-				+ " INNER JOIN salesforce.propstrength__offer__c b ON a.offer_sfid = b.sfid "
-				+ " INNER JOIN salesforce.propstrength__property__c c ON c.sfid = b.propstrength__property__c "
-				+ " where a.project_sfid = '"+whereCondition+"' and a.isactive = 'A' and c.propstrength__unit_type__c = '1 BHK' and property_facing__c = 'City' group by c.propstrength__unit_type__c ");
-		
-		Query city2bhk = session.createNativeQuery("SELECT count(c.propstrength__unit_type__c) FROM salesforce.gpl_cs_balance_details a "
-				+ " INNER JOIN salesforce.propstrength__offer__c b ON a.offer_sfid = b.sfid "
-				+ " INNER JOIN salesforce.propstrength__property__c c ON c.sfid = b.propstrength__property__c "
-				+ " where a.project_sfid = '"+whereCondition+"' and a.isactive = 'A' and c.propstrength__unit_type__c = '2 BHK' and property_facing__c = 'City' group by c.propstrength__unit_type__c ");
-		
-		Query city3bhk = session.createNativeQuery("SELECT count(c.propstrength__unit_type__c) FROM salesforce.gpl_cs_balance_details a "
-				+ " INNER JOIN salesforce.propstrength__offer__c b ON a.offer_sfid = b.sfid "
-				+ " INNER JOIN salesforce.propstrength__property__c c ON c.sfid = b.propstrength__property__c "
-				+ " where a.project_sfid = '"+whereCondition+"' and a.isactive = 'A' and c.propstrength__unit_type__c = '3 BHK' and property_facing__c = 'City' group by c.propstrength__unit_type__c ");
-
-		Query garden1bhk = session.createNativeQuery("SELECT count(c.propstrength__unit_type__c) FROM salesforce.gpl_cs_balance_details a "
-				+ " INNER JOIN salesforce.propstrength__offer__c b ON a.offer_sfid = b.sfid "
-				+ " INNER JOIN salesforce.propstrength__property__c c ON c.sfid = b.propstrength__property__c "
-				+ " where a.project_sfid = '"+whereCondition+"' and a.isactive = 'A' and c.propstrength__unit_type__c = '1 BHK' and property_facing__c = 'Garden' group by c.propstrength__unit_type__c ");
-		
-		Query garden2bhk = session.createNativeQuery("SELECT count(c.propstrength__unit_type__c) FROM salesforce.gpl_cs_balance_details a "
-				+ " INNER JOIN salesforce.propstrength__offer__c b ON a.offer_sfid = b.sfid "
-				+ " INNER JOIN salesforce.propstrength__property__c c ON c.sfid = b.propstrength__property__c "
-				+ " where a.project_sfid = '"+whereCondition+"' and a.isactive = 'A' and c.propstrength__unit_type__c = '2 BHK' and property_facing__c = 'Garden' group by c.propstrength__unit_type__c ");
-		
-		Query garden3bhk = session.createNativeQuery("SELECT count(c.propstrength__unit_type__c) FROM salesforce.gpl_cs_balance_details a "
-				+ " INNER JOIN salesforce.propstrength__offer__c b ON a.offer_sfid = b.sfid "
-				+ " INNER JOIN salesforce.propstrength__property__c c ON c.sfid = b.propstrength__property__c "
-				+ " where a.project_sfid = '"+whereCondition+"' and a.isactive = 'A' and c.propstrength__unit_type__c = '3 BHK' and property_facing__c = 'Garden' group by c.propstrength__unit_type__c ");
-		
 		
 		//System.out.println("***********"+result[1].toString());
 		
@@ -198,6 +165,173 @@ public class EOIReportDaoImpl implements EOIReportDao{
 		else
 			alotMIS.setStack2bhk("");
 		
+		alotMIS.setHoldInventoryCount(eOIHold.getSingleResult().toString());
+		alotMIS.setBlockedInventoryCount(blockInv.getSingleResult().toString());
+		return alotMIS;
+	}
+	
+	@Override
+	public TowerDashboard getTowerdashboard(String whereCondition) {
+		TowerDashboard alotMIS = new TowerDashboard();
+		Session session = this.sessionFactory.getCurrentSession();
+		 
+		//Tower - 1
+		Query t1BHK1 = session.createNativeQuery("SELECT count(c.propstrength__unit_type__c) FROM salesforce.gpl_cs_balance_details a "
+				+ " INNER JOIN salesforce.propstrength__offer__c b ON a.offer_sfid = b.sfid AND propstrength__status__c	= 'Closed Won' "
+				+ " INNER JOIN salesforce.propstrength__property__c c ON c.sfid = b.propstrength__property__c   "
+				+ " where a.project_sfid = '"+whereCondition+"' and a.isactive = 'A' and c.propstrength__unit_type__c = '1 BHK' and c.propstrength__tower__c = 'a2F2s000000csXDEAY'  group by c.propstrength__unit_type__c ");
+		
+		Query t1BHK2 = session.createNativeQuery("SELECT count(c.propstrength__unit_type__c) FROM salesforce.gpl_cs_balance_details a "
+				+ " INNER JOIN salesforce.propstrength__offer__c b ON a.offer_sfid = b.sfid AND propstrength__status__c	= 'Closed Won' "
+				+ " INNER JOIN salesforce.propstrength__property__c c ON c.sfid = b.propstrength__property__c   "
+				+ " where a.project_sfid = '"+whereCondition+"' and a.isactive = 'A' and c.propstrength__unit_type__c = '2 BHK' and c.propstrength__tower__c = 'a2F2s000000csXDEAY'  group by c.propstrength__unit_type__c ");
+		
+		Query t1BHK3 = session.createNativeQuery("SELECT count(c.propstrength__unit_type__c) FROM salesforce.gpl_cs_balance_details a "
+				+ " INNER JOIN salesforce.propstrength__offer__c b ON a.offer_sfid = b.sfid AND propstrength__status__c	= 'Closed Won' "
+				+ " INNER JOIN salesforce.propstrength__property__c c ON c.sfid = b.propstrength__property__c   "
+				+ " where a.project_sfid = '"+whereCondition+"' and a.isactive = 'A' and c.propstrength__unit_type__c = '3 BHK' and c.propstrength__tower__c = 'a2F2s000000csXDEAY'  group by c.propstrength__unit_type__c ");
+		
+		
+		//Tower - 2
+		Query t2BHK1 = session.createNativeQuery("SELECT count(c.propstrength__unit_type__c) FROM salesforce.gpl_cs_balance_details a "
+				+ " INNER JOIN salesforce.propstrength__offer__c b ON a.offer_sfid = b.sfid AND propstrength__status__c	= 'Closed Won' "
+				+ " INNER JOIN salesforce.propstrength__property__c c ON c.sfid = b.propstrength__property__c   "
+				+ " where a.project_sfid = '"+whereCondition+"' and a.isactive = 'A' and c.propstrength__unit_type__c = '1 BHK' and c.propstrength__tower__c = 'a2F2s000000csXEEAY'  group by c.propstrength__unit_type__c ");
+		
+		Query t2BHK2 = session.createNativeQuery("SELECT count(c.propstrength__unit_type__c) FROM salesforce.gpl_cs_balance_details a "
+				+ " INNER JOIN salesforce.propstrength__offer__c b ON a.offer_sfid = b.sfid AND propstrength__status__c	= 'Closed Won' "
+				+ " INNER JOIN salesforce.propstrength__property__c c ON c.sfid = b.propstrength__property__c   "
+				+ " where a.project_sfid = '"+whereCondition+"' and a.isactive = 'A' and c.propstrength__unit_type__c = '2 BHK' and c.propstrength__tower__c = 'a2F2s000000csXEEAY'  group by c.propstrength__unit_type__c ");
+		
+		Query t2BHK3 = session.createNativeQuery("SELECT count(c.propstrength__unit_type__c) FROM salesforce.gpl_cs_balance_details a "
+				+ " INNER JOIN salesforce.propstrength__offer__c b ON a.offer_sfid = b.sfid AND propstrength__status__c	= 'Closed Won' "
+				+ " INNER JOIN salesforce.propstrength__property__c c ON c.sfid = b.propstrength__property__c   "
+				+ " where a.project_sfid = '"+whereCondition+"' and a.isactive = 'A' and c.propstrength__unit_type__c = '3 BHK' and c.propstrength__tower__c = 'a2F2s000000csXEEAY'  group by c.propstrength__unit_type__c ");
+		
+		
+		//Tower - 3
+		Query t3BHK1 = session.createNativeQuery("SELECT count(c.propstrength__unit_type__c) FROM salesforce.gpl_cs_balance_details a "
+				+ " INNER JOIN salesforce.propstrength__offer__c b ON a.offer_sfid = b.sfid AND propstrength__status__c	= 'Closed Won' "
+				+ " INNER JOIN salesforce.propstrength__property__c c ON c.sfid = b.propstrength__property__c   "
+				+ " where a.project_sfid = '"+whereCondition+"' and a.isactive = 'A' and c.propstrength__unit_type__c = '1 BHK' and c.propstrength__tower__c = 'a2F2s000000csXFEAY'  group by c.propstrength__unit_type__c ");
+		
+		Query t3BHK2 = session.createNativeQuery("SELECT count(c.propstrength__unit_type__c) FROM salesforce.gpl_cs_balance_details a "
+				+ " INNER JOIN salesforce.propstrength__offer__c b ON a.offer_sfid = b.sfid AND propstrength__status__c	= 'Closed Won' "
+				+ " INNER JOIN salesforce.propstrength__property__c c ON c.sfid = b.propstrength__property__c   "
+				+ " where a.project_sfid = '"+whereCondition+"' and a.isactive = 'A' and c.propstrength__unit_type__c = '2 BHK' and c.propstrength__tower__c = 'a2F2s000000csXFEAY'  group by c.propstrength__unit_type__c ");
+		
+		Query t3BHK3 = session.createNativeQuery("SELECT count(c.propstrength__unit_type__c) FROM salesforce.gpl_cs_balance_details a "
+				+ " INNER JOIN salesforce.propstrength__offer__c b ON a.offer_sfid = b.sfid AND propstrength__status__c	= 'Closed Won' "
+				+ " INNER JOIN salesforce.propstrength__property__c c ON c.sfid = b.propstrength__property__c   "
+				+ " where a.project_sfid = '"+whereCondition+"' and a.isactive = 'A' and c.propstrength__unit_type__c = '3 BHK' and c.propstrength__tower__c = 'a2F2s000000csXFEAY'  group by c.propstrength__unit_type__c ");
+		
+		//Tower - 4
+		Query t4BHK1 = session.createNativeQuery("SELECT count(c.propstrength__unit_type__c) FROM salesforce.gpl_cs_balance_details a "
+				+ " INNER JOIN salesforce.propstrength__offer__c b ON a.offer_sfid = b.sfid AND propstrength__status__c	= 'Closed Won' "
+				+ " INNER JOIN salesforce.propstrength__property__c c ON c.sfid = b.propstrength__property__c   "
+				+ " where a.project_sfid = '"+whereCondition+"' and a.isactive = 'A' and c.propstrength__unit_type__c = '1 BHK' and c.propstrength__tower__c = 'a2F2s000000csXGEAY'  group by c.propstrength__unit_type__c ");
+		
+		Query t4BHK2 = session.createNativeQuery("SELECT count(c.propstrength__unit_type__c) FROM salesforce.gpl_cs_balance_details a "
+				+ " INNER JOIN salesforce.propstrength__offer__c b ON a.offer_sfid = b.sfid AND propstrength__status__c	= 'Closed Won' "
+				+ " INNER JOIN salesforce.propstrength__property__c c ON c.sfid = b.propstrength__property__c   "
+				+ " where a.project_sfid = '"+whereCondition+"' and a.isactive = 'A' and c.propstrength__unit_type__c = '2 BHK' and c.propstrength__tower__c = 'a2F2s000000csXGEAY'  group by c.propstrength__unit_type__c ");
+		
+		Query t4BHK3 = session.createNativeQuery("SELECT count(c.propstrength__unit_type__c) FROM salesforce.gpl_cs_balance_details a "
+				+ " INNER JOIN salesforce.propstrength__offer__c b ON a.offer_sfid = b.sfid AND propstrength__status__c	= 'Closed Won' "
+				+ " INNER JOIN salesforce.propstrength__property__c c ON c.sfid = b.propstrength__property__c   "
+				+ " where a.project_sfid = '"+whereCondition+"' and a.isactive = 'A' and c.propstrength__unit_type__c = '3 BHK' and c.propstrength__tower__c = 'a2F2s000000csXGEAY'  group by c.propstrength__unit_type__c ");
+		
+		 
+		//Tower 1
+		if(t1BHK1.getResultList().size()>0) {
+			alotMIS.setT1BHK1(t1BHK1.getResultList().get(0).toString());
+		} else { alotMIS.setT1BHK1("0"); }
+		
+		if(t1BHK2.getResultList().size()>0) {
+			alotMIS.setT1BHK2(t1BHK2.getResultList().get(0).toString());
+		} else { alotMIS.setT1BHK2("0"); }
+		 
+		if(t1BHK3.getResultList().size()>0) {
+			alotMIS.setT1BHK3(t1BHK3.getResultList().get(0).toString());
+		} else { alotMIS.setT1BHK3("0"); }
+		//Tower 2
+		if(t2BHK1.getResultList().size()>0) {
+			alotMIS.setT2BHK1(t2BHK1.getResultList().get(0).toString());
+		} else { alotMIS.setT2BHK1("0"); }
+		
+		if(t2BHK2.getResultList().size()>0) {
+			alotMIS.setT2BHK2(t2BHK2.getResultList().get(0).toString());
+		} else { alotMIS.setT2BHK2("0"); }
+		 
+		if(t2BHK3.getResultList().size()>0) {
+			alotMIS.setT2BHK3(t2BHK3.getResultList().get(0).toString());
+		} else { alotMIS.setT2BHK3("0"); }		
+		// Tower 3
+		if(t3BHK1.getResultList().size()>0) {
+			alotMIS.setT3BHK1(t3BHK1.getResultList().get(0).toString());
+		} else { alotMIS.setT3BHK1("0"); }
+		
+		if(t3BHK2.getResultList().size()>0) {
+			alotMIS.setT3BHK2(t3BHK2.getResultList().get(0).toString());
+		} else { alotMIS.setT3BHK2("0"); }
+		 
+		if(t3BHK3.getResultList().size()>0) {
+			alotMIS.setT3BHK3(t3BHK3.getResultList().get(0).toString());
+		} else { alotMIS.setT3BHK3("0"); }		
+		// Tower 4
+		if(t4BHK1.getResultList().size()>0) {
+			alotMIS.setT4BHK1(t4BHK1.getResultList().get(0).toString());
+		} else { alotMIS.setT4BHK1("0"); }
+		
+		if(t4BHK2.getResultList().size()>0) {
+			alotMIS.setT4BHK2(t4BHK2.getResultList().get(0).toString());
+		} else { alotMIS.setT4BHK2("0"); }
+		 
+		if(t4BHK3.getResultList().size()>0) {
+			alotMIS.setT4BHK3(t4BHK3.getResultList().get(0).toString());
+		} else { alotMIS.setT4BHK3("0"); }
+		
+		return alotMIS;
+	}
+	
+	
+	@Override
+	public FacingDashboard getFacingdashboard(String whereCondition) {
+		FacingDashboard alotMIS = new FacingDashboard();
+		Session session = this.sessionFactory.getCurrentSession();
+		 
+		Query city1bhk = session.createNativeQuery("SELECT count(c.propstrength__unit_type__c) FROM salesforce.gpl_cs_balance_details a "
+				+ " INNER JOIN salesforce.propstrength__offer__c b ON a.offer_sfid = b.sfid AND propstrength__status__c	= 'Closed Won' "
+				+ " INNER JOIN salesforce.propstrength__property__c c ON c.sfid = b.propstrength__property__c "
+				+ " where a.project_sfid = '"+whereCondition+"' and a.isactive = 'A' and c.propstrength__unit_type__c = '1 BHK' and property_facing__c in ('City','Podium') group by c.propstrength__unit_type__c ");
+		
+		Query city2bhk = session.createNativeQuery("SELECT count(c.propstrength__unit_type__c) FROM salesforce.gpl_cs_balance_details a "
+				+ " INNER JOIN salesforce.propstrength__offer__c b ON a.offer_sfid = b.sfid AND propstrength__status__c	= 'Closed Won' "
+				+ " INNER JOIN salesforce.propstrength__property__c c ON c.sfid = b.propstrength__property__c "
+				+ " where a.project_sfid = '"+whereCondition+"' and a.isactive = 'A' and c.propstrength__unit_type__c = '2 BHK' and property_facing__c in ('City','Podium') group by c.propstrength__unit_type__c ");
+		
+		Query city3bhk = session.createNativeQuery("SELECT count(c.propstrength__unit_type__c) FROM salesforce.gpl_cs_balance_details a "
+				+ " INNER JOIN salesforce.propstrength__offer__c b ON a.offer_sfid = b.sfid AND propstrength__status__c	= 'Closed Won' "
+				+ " INNER JOIN salesforce.propstrength__property__c c ON c.sfid = b.propstrength__property__c "
+				+ " where a.project_sfid = '"+whereCondition+"' and a.isactive = 'A' and c.propstrength__unit_type__c = '3 BHK' and property_facing__c in ('City','Podium') group by c.propstrength__unit_type__c ");
+
+		Query garden1bhk = session.createNativeQuery("SELECT count(c.propstrength__unit_type__c) FROM salesforce.gpl_cs_balance_details a "
+				+ " INNER JOIN salesforce.propstrength__offer__c b ON a.offer_sfid = b.sfid AND propstrength__status__c	= 'Closed Won' "
+				+ " INNER JOIN salesforce.propstrength__property__c c ON c.sfid = b.propstrength__property__c "
+				+ " where a.project_sfid = '"+whereCondition+"' and a.isactive = 'A' and c.propstrength__unit_type__c = '1 BHK' and property_facing__c = 'Garden' group by c.propstrength__unit_type__c ");
+		
+		Query garden2bhk = session.createNativeQuery("SELECT count(c.propstrength__unit_type__c) FROM salesforce.gpl_cs_balance_details a "
+				+ " INNER JOIN salesforce.propstrength__offer__c b ON a.offer_sfid = b.sfid AND propstrength__status__c	= 'Closed Won' "
+				+ " INNER JOIN salesforce.propstrength__property__c c ON c.sfid = b.propstrength__property__c "
+				+ " where a.project_sfid = '"+whereCondition+"' and a.isactive = 'A' and c.propstrength__unit_type__c = '2 BHK' and property_facing__c = 'Garden' group by c.propstrength__unit_type__c ");
+		
+		Query garden3bhk = session.createNativeQuery("SELECT count(c.propstrength__unit_type__c) FROM salesforce.gpl_cs_balance_details a "
+				+ " INNER JOIN salesforce.propstrength__offer__c b ON a.offer_sfid = b.sfid AND propstrength__status__c	= 'Closed Won' "
+				+ " INNER JOIN salesforce.propstrength__property__c c ON c.sfid = b.propstrength__property__c "
+				+ " where a.project_sfid = '"+whereCondition+"' and a.isactive = 'A' and c.propstrength__unit_type__c = '3 BHK' and property_facing__c = 'Garden' group by c.propstrength__unit_type__c ");
+		
+		
+		 
 		if(city1bhk.getResultList().size()>0) {
 			alotMIS.setCity1bhk(city1bhk.getResultList().get(0).toString());
 		} else {
@@ -234,8 +368,6 @@ public class EOIReportDaoImpl implements EOIReportDao{
 			alotMIS.setGarden3bhk("0");
 		}
 		
-		alotMIS.setHoldInventoryCount(eOIHold.getSingleResult().toString());
-		alotMIS.setBlockedInventoryCount(blockInv.getSingleResult().toString());
 		return alotMIS;
 	}
 }	

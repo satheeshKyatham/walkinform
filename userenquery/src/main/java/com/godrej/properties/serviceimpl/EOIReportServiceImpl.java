@@ -11,6 +11,8 @@ import com.godrej.properties.dao.EOIReportDao;
 import com.godrej.properties.model.AllotmentMISReport;
 import com.godrej.properties.model.AllotmentReport;
 import com.godrej.properties.model.EOIReport;
+import com.godrej.properties.model.FacingDashboard;
+import com.godrej.properties.model.TowerDashboard;
 import com.godrej.properties.service.EOIReportService;
 
 @Service("eOIReportService")
@@ -35,5 +37,15 @@ public class EOIReportServiceImpl implements EOIReportService{
 	public AllotmentMISReport getAllotmentMISReport(String whereCondition) {
 		// TODO Auto-generated method stub
 		return eOIReportDao.getAllotmentMISReport(whereCondition);
+	}
+	
+	@Override
+	public TowerDashboard getTowerdashboard(String whereCondition) {
+		return eOIReportDao.getTowerdashboard(whereCondition);
+	}
+	
+	@Override
+	public FacingDashboard getFacingdashboard(String whereCondition) {
+		return eOIReportDao.getFacingdashboard(whereCondition);
 	}
 }

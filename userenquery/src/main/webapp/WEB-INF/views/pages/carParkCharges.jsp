@@ -56,6 +56,16 @@
 						<label>Car park type</label>
 						<input class="form-control" id="carParkTypeName" />
 					</div>
+					
+					<div class="form-group col-md-3">
+						<label>Alias car park name</label>
+						<input class="form-control" id="carparkAlias" />
+					</div>
+					
+					<div class="form-group col-md-2">
+						<label>Total car park</label>
+						<input class="form-control" type="number" id="totalCarpark" value="0"/>
+					</div>
 			    	
 			    	
 			    	<div class="form-group col-md-3">

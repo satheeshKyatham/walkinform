@@ -779,10 +779,19 @@ public class WebServiceController<MultipartFormDataInput> {
 		 * GeneratePDF solution = new GeneratePDF (); solution.PDFReport(20
 		 * ,csData);
 		 */
+		String csAnnexure = "";
+		String annexure = sysConfigService.getValue(SysConfigEnum.CS_ANNEXURE, projectSfid);
+		
+		if (annexure != null) {
+			csAnnexure = annexure;
+		} else {
+			csAnnexure = sysConfigService.getValue(SysConfigEnum.CS_ANNEXURE, null);			
+		}
+		
 		log.info("");
 		iTextHTMLtoPDF solution = new iTextHTMLtoPDF();
 		solution.PDFReport(USEREMAIL_GV, unitTval, floorTval, towerName, regionName, projectSfid, unitSfid, timeId,
-				csData, projectName, currentDate, enqSfid);
+				csData, projectName, currentDate, enqSfid, csAnnexure);
 
 		return gson.toJson(timeId);
 	}

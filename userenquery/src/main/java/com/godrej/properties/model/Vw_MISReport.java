@@ -11,7 +11,8 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 @Entity
-@Table(name = "salesforce.vw_MISReport") 
+@Table(name = "salesforce.vw_MISReport")
+//@Table(name = "salesforce.vw_MISReport_uat_test")
 public class Vw_MISReport {
 	@Id 
 	@GeneratedValue(strategy=GenerationType.AUTO) 
@@ -83,10 +84,10 @@ public class Vw_MISReport {
 	@Column(name="is_revisit") private String is_revisit;
 	@Column(name="lastvisitdate") private String lastvisitdate;
 	@Column(name="type_of_visit") private String type_of_visit;
+	@Column(name="d4u_comments") private String d4u_comments;
 	
 	@Transient private String qry_count;
 	@Transient private String qry_msg;
-	
 	public int getRow_number() {
 		return row_number;
 	}
@@ -471,5 +472,12 @@ public class Vw_MISReport {
 	public void setType_of_visit(String type_of_visit) {
 		this.type_of_visit = type_of_visit;
 	}
+	public String getD4u_comments() {
+		return d4u_comments;
+	}
+	public void setD4u_comments(String d4u_comments) {
+		this.d4u_comments = d4u_comments;
+	}
+
 	
 }

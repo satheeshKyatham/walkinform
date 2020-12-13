@@ -20,7 +20,7 @@ public class iTextHTMLtoPDF {
 	public static void main( String[] args ) throws DocumentException, IOException
     {
 		try {
-			PDFReport("USEREMAIL_GV", "unitTval", "floorTval", "towerName", "regionName", "projectSfid", "unitSfid", 20, "20", "ProjectName", "Date", "enqSfid");
+			PDFReport("USEREMAIL_GV", "unitTval", "floorTval", "towerName", "regionName", "projectSfid", "unitSfid", 20, "20", "ProjectName", "Date", "enqSfid", null);
 		} catch (JRException e) {
 			// TODO Auto-generated catch block
 			logger.error("Error : ",e);
@@ -30,7 +30,7 @@ public class iTextHTMLtoPDF {
 		}	
     }
 	
-	public static void PDFReport(String USEREMAIL_GV, String unitTval, String floorTval, String towerName, String regionName, String projectSfid, String unitSfid, long timeId, String csData, String projectName, String currentDate, String enqSfid) throws JRException, IOException {
+	public static void PDFReport(String USEREMAIL_GV, String unitTval, String floorTval, String towerName, String regionName, String projectSfid, String unitSfid, long timeId, String csData, String projectName, String currentDate, String enqSfid, String annexureName) throws JRException, IOException {
 		
 		try {
 			
@@ -75,17 +75,16 @@ public class iTextHTMLtoPDF {
 
 	      XMLWorkerHelper worker = XMLWorkerHelper.getInstance();
 
+	      /*
 	      String annexureName = "";
-	      
-	      if (projectSfid.equals("a1l6F000003TRcCQAW") || projectSfid.equals("a1l6F000005TUCvQAO") || projectSfid.equals("a1l2s00000000pEAAQ") || projectSfid.equals("a1l6F000004LVk8QAG")  || projectSfid.equals("a1l2s00000003lPAAQ")  || projectSfid.equals("a1l6F000005hPm5QAE") ) {
-
+	      if (projectSfid.equals("a1l2s000000XoezAAC") || projectSfid.equals("a1l6F000003TRcCQAW") || projectSfid.equals("a1l6F000005TUCvQAO") || projectSfid.equals("a1l2s00000000pEAAQ") || projectSfid.equals("a1l6F000004LVk8QAG")  || projectSfid.equals("a1l2s00000003lPAAQ")  || projectSfid.equals("a1l6F000005hPm5QAE") ) {
               annexureName = "Annexure E";
-
            } else if (projectSfid.equals("a1l6F000002X6IOQA0")) {
                   annexureName = "Annexure D";
            } else {
               annexureName = "Annexure F";
            }
+           */
 
 	      
 	      String csLogo = "";

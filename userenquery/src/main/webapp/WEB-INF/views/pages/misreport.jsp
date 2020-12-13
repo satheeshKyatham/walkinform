@@ -115,8 +115,8 @@ userid=(String)ses.getAttribute("USERID");
 				<li onclick="getPaymentEOIReport()" id="paymentEOIReportTab">
 					<a href="#paymentEOIReport" data-toggle="tab">Payment Report <i class="fa fa-spinner fa-spin" style="display:none;"></i> </a>
 				</li>
-				<li id="allotmentReportID" onclick="getAllotmentDashboardReport()">
-					<a href="#allotmentReportTab" data-toggle="tab">Allotment Day Report<i class="fa fa-spinner fa-spin" style="display:none;"></i></a>
+				<li id="allotmentReportID" onclick="getAllotmentDashboardReport();">
+					<a href="#allotmentReportTab" data-toggle="tab">Allotment Day Report <i class="fa fa-spinner fa-spin" style="display:none;"></i></a>
 				</li>
 			</ul>
 			<div class=""></div>
