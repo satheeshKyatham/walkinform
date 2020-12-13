@@ -2677,7 +2677,7 @@ public class WebServiceController<MultipartFormDataInput> {
 				"Project Name,Tokenno,Created,Enquiry Name,Mobile Phone,Customer Name,Email,have_we_met_before,age_a__c,residenceaddress,officelocation,"
 						+ "empstatus,company_name__c,is_purchase_for_self_use_or_investment__c,budget"
 						+ ",typology_requirement,walk_in_source__c,advertisementname,brokername,current_residence_configuration,current_residence_ownership,source_of_funding,customer_classification,ethnicity,unit_availability,accompanied_by,deal_negotiation,construction_status,timeframe_to_book,enquirynoneditcomment,verticle,sourcingname,closingname,closingemail,own_contribution_receipt,loan_eligibility,Assined To,IsAttended,CP Comments,FollowType,FollowDate"
-						+ ",Trigger 1,Trigger 2,Barrier 1,Barrier 2,Lost Reason,Designation,Media Type,Media Sub Type,Type of visit,Revisit,Last site visit date");
+						+ ",Trigger 1,Trigger 2,Barrier 1,Barrier 2,Lost Reason,Designation,Media Type,Media Sub Type,Type of visit,Revisit,Last site visit date,D4U Comments Log");
 		rows.add("\n");
 		String fromdate = resquest.getParameter("fromdate");
 		log.info("fromdate:-{}",fromdate);
@@ -2868,7 +2868,12 @@ public class WebServiceController<MultipartFormDataInput> {
 			else
 				rows.add("");
 			rows.add(",");
-			
+			if(mislist.get(i).getD4u_comments() != null)
+				rows.add(mislist.get(i).getD4u_comments().replaceAll(",", ""));
+			else
+				rows.add("");
+			rows.add(",");
+		
 			rows.add("\n");
 		}
 
