@@ -114,6 +114,7 @@ public class EnquiryReportServiceImpl implements EnquiryReportService{
 		dest.setBarrier1(src.getBarrier1().trim());
 		dest.setTrigger2(src.getTrigger2().trim());
 		dest.setBarrier2(src.getBarrier2().trim());
+		dest.setCustomerClassification(src.getCustomerClassification());
 		
 		//Added By Satheesh Kyahtam
 		EnquiryReportLog enqLog = new EnquiryReportLog();
@@ -150,6 +151,7 @@ public class EnquiryReportServiceImpl implements EnquiryReportService{
 		enqLog.setCreateddate(new java.sql.Date(System.currentTimeMillis()));
 		enqLog.setTokenno(dest.getTokenno());
 		enqLog.setUserid(dest.getUserid());
+		enqLog.setCustomerClassification(dest.getCustomerClassification());
 		enquiryReportLogDao.insertEnquiryReportLog(enqLog);
 		return update(dest);
 	}

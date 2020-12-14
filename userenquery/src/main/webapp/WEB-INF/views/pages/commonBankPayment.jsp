@@ -467,7 +467,7 @@
 		<table class="table table-bordered" style="margin-bottom:20px; border-color: #ffffff; padding:0px;">
 		    <tbody style="border-color: #ffffff; padding:0px;">
 		    	<tr style="border-color: #ffffff; padding:0px;">
-		    		<td style="border-color: #ffffff; padding:0px;"><b style="font-size:18px; text-align:left;">EOI Form: <span id="projectNameEOIPrint"></span></b></td>
+		    		<td style="border-color: #ffffff; padding:0px;"><b style="font-size:18px; text-align:left;">EOI Form: <span id="projectNameEOIPrint"></span></b> <div id="reraid" style="padding-top:15px;"></div> </td>
 		    		<td class="dateOfEOIPrint" style="text-align:right; border-color: #ffffff; padding:0px;"></td>
 		    	</tr>
 		    </tbody>

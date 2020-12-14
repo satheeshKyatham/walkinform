@@ -128,6 +128,7 @@ public class VW_MISReportServiceImpl implements VW_MISReportService {
 				mis.setIs_revisit(checkNull(mislist.get(i).getIs_revisit()));
 				mis.setLastvisitdate(checkNull(mislist.get(i).getLastvisitdate()));
 				mis.setType_of_visit(checkNull(mislist.get(i).getType_of_visit()));
+				mis.setD4u_comments(checkNull(mislist.get(i).getD4u_comments()));
 				finalMislist.add(mis);
 			}
 		}

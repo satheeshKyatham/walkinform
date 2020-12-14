@@ -93,6 +93,8 @@ public class EnquiryReportDto extends CommonDto{
     /*=======Start==========*/
     private String referredby;
     /*=========End========*/
+    private String customerClassification;
+    
     public String getProjectId() {
 		return projectId;
 	}
@@ -380,6 +382,12 @@ public class EnquiryReportDto extends CommonDto{
 	}
 	public void setLastvisitdate(Date lastvisitdate) {
 		this.lastvisitdate = lastvisitdate;
+	}
+	public String getCustomerClassification() {
+		return customerClassification;
+	}
+	public void setCustomerClassification(String customerClassification) {
+		this.customerClassification = customerClassification;
 	}
 	
 

@@ -77,6 +77,8 @@ public class EnquiryReportLog extends CommonModel{
     @Column(name="tokenno") private String tokenno;
     @Column(name="createddate")   private Date createddate;
     @Column(name="userid") private Integer userid;
+    
+    @Column(name="customer_classification") private String customerClassification;
     @Id
 	@SequenceGenerator(allocationSize=1,name="salesforce.nv_hc_enquiry_log_seq",sequenceName="salesforce.nv_hc_enquiry_log_seq")
 	@GeneratedValue(generator="salesforce.nv_hc_enquiry_log_seq",strategy=GenerationType.SEQUENCE)
@@ -348,8 +350,10 @@ public class EnquiryReportLog extends CommonModel{
 	public void setUserid(Integer userid) {
 		this.userid = userid;
 	}
-	
-
-
-
+	public String getCustomerClassification() {
+		return customerClassification;
+	}
+	public void setCustomerClassification(String customerClassification) {
+		this.customerClassification = customerClassification;
+	}
 }
