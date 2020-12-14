@@ -42,7 +42,7 @@ function getEOIPreferencPrint (source) {
 					carPark=obj[i].eoi_carpark_name; 
 				}
 				
-				if (obj[i].floor_band == '') {
+				if (obj[i].floor_band == '' || obj[i].floor_band == '0') {
 					floorBand = '-';
 				} else {
 					floorBand = obj[i].floor_band;
