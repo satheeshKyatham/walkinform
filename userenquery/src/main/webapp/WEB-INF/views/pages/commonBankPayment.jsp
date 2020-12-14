@@ -62,12 +62,12 @@
 						<tr class="EOIDtlRow">  
 							<td>
 								<input class="csPtEnqSfidEoi" style="display:none;" />
-								<select class="full form-control input-sm towerListEOI requiredField"  onchange="getTypologyEOI(this); getUnitEOI(this); getfbandEOI(this); getCarparkEOIMst(this);">
+								<select class="full form-control input-sm towerListEOI requiredField"  onchange="getTypologyEOI(this); getUnitEOI(this); getfbandEOI(this); getCarparkEOIMst(this); ">
 									<option value="">Select Tower</option>
 								</select>
 							</td>
 							<td>
-								<select class="full form-control input-sm typologyListEOI requiredField" onchange="getUnitEOI(this);getfbandEOI(this);">
+								<select class="full form-control input-sm typologyListEOI requiredField" onchange="getUnitEOI(this);getfbandEOI(this); ">
 									<option value="">Select Typology</option>
 								</select>
 							</td>
@@ -75,9 +75,10 @@
 								<select class="full form-control input-sm unitListEOI" onchange="unitChangeConditionEOI(this)">
 									<option value="0">Select Unit</option>
 								</select>
+								<div class="text-center"><span class="smapleUnit"></span></div>
 							</td>
 							<td>
-								<select class="full form-control input-sm floorListEOI">
+								<select class="full form-control input-sm floorListEOI" onchange="getSampleUnit(this)">
 									<option value="">Select Floor Band</option>
 								</select>
 							</td>

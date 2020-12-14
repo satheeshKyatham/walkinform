@@ -24,11 +24,21 @@ function getEOIPreferencPrint (source) {
 				var floorBand = '';
 				var ticketSize = '';
 				
-				if(obj[i].unit_name=='Select Unit') {
+				/*if(obj[i].unit_name=='Select Unit') {
 					unitno='-';
 				} else {
 					unitno=obj[i].unit_name;
+				}*/
+				
+				
+				if(obj[i].unit_name != 'Select Unit' && obj[i].unit_name != '' && obj[i].unit_name != '0' && obj[i].unit_name != 'null' && obj[i].unit_name != undefined) {
+					unitno=obj[i].unit_name;
+				} else if (obj[i].sample_unit_name != '' && obj[i].sample_unit_name != '0' && obj[i].sample_unit_name != 'null' && obj[i].sample_unit_name != undefined) {
+					unitno=obj[i].sample_unit_name;
+				} else {
+					unitno='-';
 				}
+				
 				
 				if(obj[i].description=='') {
 					description='-' ;
