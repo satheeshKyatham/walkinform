@@ -597,7 +597,8 @@ function getfbandEOI(e) {
 function unitChangeConditionEOI (e){
 	if ($(e).val() != 0) {
 		$(e).closest('.EOIDtlRow').find('.floorListEOI').prop("disabled", true);
-		$(e).closest('.EOIDtlRow').find('.floorListEOI').html("<option value='0'>Select Floor Band</option>");
+		//$(e).closest('.EOIDtlRow').find('.floorListEOI').html("<option value='0'>Select Floor Band</option>");
+		$(e).closest('.EOIDtlRow').find('.floorListEOI').html("<option value=''>Select Floor Band</option>");
 		
 		$(e).closest('.EOIDtlRow').find('.smapleUnit').html("");
 		
@@ -661,8 +662,9 @@ function addMoreEoiRowBtn () {
 					" <div class='text-center'><span class='smapleUnit'>Sample1</span></div> "
 				+"</td>"
 				+"<td>"
-					+"<select class='full form-control input-sm floorListEOI' onchange='getSampleUnit(this);'>"
-						+"<option value='0'>Select Floor Band</option>"
+					+"<select class='full form-control input-sm floorListEOI requiredField' onchange='getSampleUnit(this);'>"
+						/*+"<option value='0'>Select Floor Band</option>"*/
+						+"<option value=''>Select Floor Band</option>"
 					+"</select>"
 				+"</td>"
 				+"<td>"
@@ -1007,10 +1009,10 @@ function getSampleUnit (e) {
 		$(e).closest('.EOIDtlRow').find(".smapleUnit").text(smapleUnit); 
 		
 	}).done(function(obj){
-		if (obj!="null") {
+		/*if (obj!="null") {
 			alert ("Record Found");
 		} else {
 			alert ("No Record Found");
-		}	
+		}*/	
 	});	
 }

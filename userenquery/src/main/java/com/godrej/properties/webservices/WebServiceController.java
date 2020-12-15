@@ -2869,7 +2869,7 @@ public class WebServiceController<MultipartFormDataInput> {
 				rows.add("");
 			rows.add(",");
 			if(mislist.get(i).getD4u_comments() != null)
-				rows.add(mislist.get(i).getD4u_comments().replaceAll(",", ""));
+				rows.add(mislist.get(i).getD4u_comments().replaceAll(",", "").trim().replaceAll("\\n|\\r|\"", " "));
 			else
 				rows.add("");
 			rows.add(",");
