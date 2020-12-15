@@ -426,6 +426,8 @@ function getUnitEOI (e) {
 function getUnitEOI (e) {
 	$(e).closest('.EOIDtlRow').find(".unitListEOI").find("option:gt(0)").remove();
 	
+	$(e).closest('.EOIDtlRow').find('.smapleUnit').html("");
+	
 	var typologyListEOI = 0;
 	
 	if ($(e).closest('.EOIDtlRow').find(".typologyListEOI").val().trim() != "") {
@@ -597,6 +599,8 @@ function unitChangeConditionEOI (e){
 		$(e).closest('.EOIDtlRow').find('.floorListEOI').prop("disabled", true);
 		$(e).closest('.EOIDtlRow').find('.floorListEOI').html("<option value='0'>Select Floor Band</option>");
 		
+		$(e).closest('.EOIDtlRow').find('.smapleUnit').html("");
+		
 	} else {
 		$(e).closest('.EOIDtlRow').find('.floorListEOI').prop("disabled", false);
 		
@@ -646,17 +650,18 @@ function addMoreEoiRowBtn () {
 					+"</select>"
 				+"</td>"
 				+"<td>"
-					+"<select class='full form-control input-sm typologyListEOI requiredField' onchange='getUnitEOI(this)'>"
+					+"<select class='full form-control input-sm typologyListEOI requiredField' onchange='getUnitEOI(this); getfbandEOI(this);'>"
 						+"<option value=''>Select Typology</option>"
 					+"</select>"
 				+"</td>"
 				+"<td>"
 					+"<select class='full form-control input-sm unitListEOI' onchange='unitChangeConditionEOI(this)'>"
 						+"<option value='0'>Select Unit</option>"
-					+"</select>"
+					+"</select>" +
+					" <div class='text-center'><span class='smapleUnit'>Sample1</span></div> "
 				+"</td>"
 				+"<td>"
-					+"<select class='full form-control input-sm floorListEOI'>"
+					+"<select class='full form-control input-sm floorListEOI' onchange='getSampleUnit(this);'>"
 						+"<option value='0'>Select Floor Band</option>"
 					+"</select>"
 				+"</td>"
@@ -796,7 +801,7 @@ function insertEOIPreference () {
 	    csPtData.eoi_carpark_name =  $(this).find('.carparkListEOI option:selected').attr("data-carparkname");
 	    csPtData.eoi_carpark_mst_id =  $(this).find('.carparkListEOI option:selected').val();
 	   
-	    
+	    csPtData.sample_unit_name = $(this).find('.smapleUnit').text();
 	    
 	    csPtData.eoi_date_string = currentDate;
 	    
@@ -864,7 +869,7 @@ function getEOITabPreferencRecord () {
 				html += 	'<tr class="prefrenceDataPlotRow">'
 								+ '<td style="text-align:center;">'+obj[i].tower_name+'</td>' 
 								+ '<td style="text-align:center;">'+obj[i].typology_name+'</td>' 
-								+ '<td style="text-align:center;">'+obj[i].unit_name+'</td>' 
+								+ '<td style="text-align:center;">'+obj[i].unit_name+'<div>'+obj[i].sample_unit_name+'</div></td>' 
 								+ '<td style="text-align:center;">'+obj[i].floor_band+'</td>' 
 								+ '<td style="text-align:center;">'+obj[i].eoi_carpark_name+'</td>'
 								+ '<td style="text-align:center;">'+obj[i].description+'</td>' 
@@ -966,4 +971,46 @@ function getCarparkEOIMst(e) {
 		$(e).closest('.EOIDtlRow').find(".carparkListEOI").append(html);
 		
 	});
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+function getSampleUnit (e) {
+	
+	var towerCode = $(e).closest('.EOIDtlRow').find(".towerListEOI option:selected").val();
+	var typology = $(e).closest('.EOIDtlRow').find(".typologyListEOI option:selected").val();
+	var floorBand = $(e).closest('.EOIDtlRow').find(".floorListEOI option:selected").val();
+	 
+	
+	$.post(pageContext+"getSampleUnit",{"projectSFID":$('#projectId').val(), "towerCode":towerCode, "typology":typology, "floorBand":floorBand },function(data){
+		
+		var obj =JSON.parse(data);
+		
+		var smapleUnit = "";
+		
+		if(obj!=null){
+			smapleUnit = obj.sample_unit_name;
+		} else {
+			smapleUnit = "";
+		}
+		
+		$(e).closest('.EOIDtlRow').find(".smapleUnit").text(smapleUnit); 
+		
+	}).done(function(obj){
+		if (obj!="null") {
+			alert ("Record Found");
+		} else {
+			alert ("No Record Found");
+		}	
+	});	
 }

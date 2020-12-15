@@ -62,12 +62,12 @@
 						<tr class="EOIDtlRow">  
 							<td>
 								<input class="csPtEnqSfidEoi" style="display:none;" />
-								<select class="full form-control input-sm towerListEOI requiredField"  onchange="getTypologyEOI(this); getUnitEOI(this); getfbandEOI(this); getCarparkEOIMst(this);">
+								<select class="full form-control input-sm towerListEOI requiredField"  onchange="getTypologyEOI(this); getUnitEOI(this); getfbandEOI(this); getCarparkEOIMst(this); ">
 									<option value="">Select Tower</option>
 								</select>
 							</td>
 							<td>
-								<select class="full form-control input-sm typologyListEOI requiredField" onchange="getUnitEOI(this);getfbandEOI(this);">
+								<select class="full form-control input-sm typologyListEOI requiredField" onchange="getUnitEOI(this);getfbandEOI(this); ">
 									<option value="">Select Typology</option>
 								</select>
 							</td>
@@ -75,9 +75,10 @@
 								<select class="full form-control input-sm unitListEOI" onchange="unitChangeConditionEOI(this)">
 									<option value="0">Select Unit</option>
 								</select>
+								<div class="text-center"><span class="smapleUnit"></span></div>
 							</td>
 							<td>
-								<select class="full form-control input-sm floorListEOI">
+								<select class="full form-control input-sm floorListEOI" onchange="getSampleUnit(this)">
 									<option value="">Select Floor Band</option>
 								</select>
 							</td>
@@ -467,7 +468,7 @@
 		<table class="table table-bordered" style="margin-bottom:20px; border-color: #ffffff; padding:0px;">
 		    <tbody style="border-color: #ffffff; padding:0px;">
 		    	<tr style="border-color: #ffffff; padding:0px;">
-		    		<td style="border-color: #ffffff; padding:0px;"><b style="font-size:18px; text-align:left;">EOI Form: <span id="projectNameEOIPrint"></span></b></td>
+		    		<td style="border-color: #ffffff; padding:0px;"><b style="font-size:18px; text-align:left;">EOI Form: <span id="projectNameEOIPrint"></span></b> <div id="reraid" style="padding-top:15px;"></div> </td>
 		    		<td class="dateOfEOIPrint" style="text-align:right; border-color: #ffffff; padding:0px;"></td>
 		    	</tr>
 		    </tbody>

@@ -102,6 +102,9 @@ private static final long serialVersionUID = 1L;
 	@Transient
 	private String rowid;
 	
+	@Column(name = "sample_unit_name") private String sample_unit_name;
+	
+	
 	public int getId() {
 		return id;
 	}
@@ -327,5 +330,13 @@ private static final long serialVersionUID = 1L;
 
 	public void setRowid(String rowid) {
 		this.rowid = rowid;
+	}
+
+	public String getSample_unit_name() {
+		return sample_unit_name;
+	}
+
+	public void setSample_unit_name(String sample_unit_name) {
+		this.sample_unit_name = sample_unit_name;
 	}
 }
