@@ -108,7 +108,7 @@ function validateDesk() {
 		    				name='';
 		    			else
 		    				name=value.name;
-		    			option = option+"<option value="+value.projectId+">"+value.projectName+"</option>";
+		    			option = option+"<option value="+value.projectId+" name="+value.region__c+" >"+value.projectName+"</option>";
 		    			j = j+1
 		    		});		
 		    		option=option+"</select>";

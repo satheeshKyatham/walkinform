@@ -78,7 +78,7 @@
 								<div class="text-center"><span class="smapleUnit"></span></div>
 							</td>
 							<td>
-								<select class="full form-control input-sm floorListEOI" onchange="getSampleUnit(this)">
+								<select class="full form-control input-sm floorListEOI requiredField" onchange="getSampleUnit(this)">
 									<option value="">Select Floor Band</option>
 								</select>
 							</td>

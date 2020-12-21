@@ -25,16 +25,18 @@
 	<link rel="stylesheet" href="<c:url value='/resources/css/style.css?v=${sessionScope.version}' />">
 	<link rel="stylesheet" href="<c:url value='/resources/css/font-awesome.css' />">
 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+	<link rel="stylesheet" href="<c:url value='/resources/css/sweetalert2.min.css' />">  
 	
 <%-- <script src="<c:url value='/resources/js/jquery-1.12.4.min.js'/>"></script>
 <script src="<c:url value='/resources/js/bootstrap.min.js'/>"></script> --%>
 
 <%-- <script src="<c:url value='/resources/js/enquiryRequest/kycdetails.js'/>"></script> --%>
 </head> 
-<%! String projectname,projectid ,projectrole,userid;%>
+<%! String projectname,projectid ,projectrole,userid,region_name;%>
 <%
 projectname = request.getParameter("projectname");
 projectid = request.getParameter("projectid");
+region_name = request.getParameter("region_name");
 HttpSession ses=request.getSession(); 
 if(ses!=null){
 	//  projectname=(String)ses.getAttribute("PRONAME");
@@ -53,6 +55,7 @@ if(ses!=null){
 <input type="hidden" id="projectid" value="<%=projectid%>">
 <input type="hidden" id="role" value="<%= projectrole %>">
 <input type="hidden" id="userid" value="<%= userid %>">
+<input type="hidden" id="region_name" value="<%= region_name %>">
   <!-- <input type="text" > -->
  <script type="text/javascript">
   var offerTemplate = '${offerTemplate}';
@@ -123,9 +126,9 @@ if(ses!=null){
 					<li onclick="getMySourcingLead()" id="mySourcingLeadReportTabSales">
 						<a href="#mySourcingLeadReportSales" data-toggle="tab">My Sourcing Lead <i class="fa fa-spinner fa-spin" style="display:none;"></i> </a>
 					</li>
-					<!-- <li>
-						<a href="#EOIRefundTab" data-toggle="tab">EOI Refund</a>
-					</li> -->
+					<li>
+						<a href="#EOIRefundTab" data-toggle="tab" onclick="callEOIREFUND()">EOI Refund</a>
+					</li>
 				</ul>
 				<div class=""></div>
 			</div>
@@ -340,9 +343,9 @@ if(ses!=null){
 				<div class="tab-pane" id="mySourcingLeadReportSales">
 					<%@ include file="/WEB-INF/views/pages/mysourcinglead.jsp" %>
 				</div>	
-				<%-- <div class="tab-pane" id="EOIRefundTab" >
+				<div class="tab-pane" id="EOIRefundTab" >
 					<%@ include file="/WEB-INF/views/pages/refundreport/initiateRefundEOI.jsp" %>
-				</div> --%>
+				</div>
 				<div class="clearfix"></div>
 			</div>
 		  <div class="clearfix"></div>
@@ -379,7 +382,10 @@ if(ses!=null){
 	<script src="<c:url value='/resources/js/separate/eoiReportSales.js?v=${sessionScope.version}'/>"></script>
 	<script src="<c:url value='/resources/js/demo/offerTemplate.js?v=${sessionScope.version}'/>"></script>
 	<script src="<c:url value='/resources/js/separate/mysourcinglead.js?v=${sessionScope.version}'/>"></script>
+	 <script src="<c:url value='/resources/js/sweetalert2.min.js' />"></script>
 	<script src="<c:url value='/resources/js/refundreport/initiateRefundEOI.js?v=${sessionScope.version}'/>"></script>	
+	<script src="<c:url value='/resources/js/commonValidation.js?v=${sessionScope.version}' />"></script>
+	<script src="<c:url value='/resources/js/utility.js?v=${sessionScope.version}' />"></script> 
 	<%@ include file="/WEB-INF/views/pages/footer.jsp" %>
 	
 </body>

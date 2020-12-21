@@ -38,8 +38,11 @@ public class Vw_UserProjectMapping {
 	@Column(name="user_type__c") private String user_type__c  ;
 	@Column(name="roleid") private String roleid  ;
 	@Column(name = "isstlead") private String isstlead;
-	@Column(name = "isctlead") private String isctlead; 
+	@Column(name = "isctlead") private String isctlead;
+	@Column(name = "region__c") private String region__c;
 	@Transient private String	msg  ;
+	
+	
 	
 	public String getAssignto() {
 		return assignto;
@@ -178,6 +181,12 @@ public class Vw_UserProjectMapping {
 	}
 	public void setIsctlead(String isctlead) {
 		this.isctlead = isctlead;
+	}
+	public String getRegion__c() {
+		return region__c;
+	}
+	public void setRegion__c(String region__c) {
+		this.region__c = region__c;
 	}
 	
 	

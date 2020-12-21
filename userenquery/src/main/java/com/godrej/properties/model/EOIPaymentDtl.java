@@ -85,6 +85,9 @@ public class EOIPaymentDtl implements Serializable{
 	@Column(name = "updated") private Timestamp updatedDate;
 	@Column(name = "payment_mode") private String payment_mode;
 	
+	@Column(name = "refund_trx_no") private String refund_trx_no;
+	@Column(name = "refund_status") private String refund_status;
+	
 	@Transient
 	private String offerid;
 	@Transient
@@ -355,6 +358,22 @@ public class EOIPaymentDtl implements Serializable{
 
 	public void setUpdatedDate(Timestamp updatedDate) {
 		this.updatedDate = updatedDate;
+	}
+
+	public String getRefund_trx_no() {
+		return refund_trx_no;
+	}
+
+	public void setRefund_trx_no(String refund_trx_no) {
+		this.refund_trx_no = refund_trx_no;
+	}
+
+	public String getRefund_status() {
+		return refund_status;
+	}
+
+	public void setRefund_status(String refund_status) {
+		this.refund_status = refund_status;
 	}
 	
 }
