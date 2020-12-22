@@ -18,7 +18,7 @@ function onProjectSelect(source) {
 		}
 	else if($('#loged_role').val()=='3' || $('#loged_role').val()=='1' )
 	  {
-		 window.location.href = "assignedusers?userId=" + $('#loged_userid').val()+"&projectid="+$('#projectSelected').val()+"&projectname="+$('#projectSelected option:selected').text() ;
+		 window.location.href = "assignedusers?userId=" + $('#loged_userid').val()+"&projectid="+$('#projectSelected').val()+"&projectname="+$('#projectSelected option:selected').text()+"&region_name="+$('#projectSelected option:selected').attr('name') ;
 	  }
 	else if($('#loged_role').val()=='2')
 	  {
@@ -192,9 +192,9 @@ function selectedRole (source) {
 		}
 	} else if($("#roleSelected").val()=='CM'){
 		if (source != 'HEADER_COMMON') {
-			window.location.href = "assignedusers?userId=" + $('#loged_userid').val()+"&projectid="+$('#projectSelected').val()+"&projectname="+$('#projectSelected option:selected').text() ;
+			window.location.href = "assignedusers?userId=" + $('#loged_userid').val()+"&projectid="+$('#projectSelected').val()+"&projectname="+$('#projectSelected option:selected').text()+"&region_name="+$('#projectSelected option:selected').attr('name') ;
 		} else {
-			var path = "assignedusers?userId=" + $('#loged_userid').val()+"&projectid="+$('#projectSelected').val()+"&projectname="+$('#projectSelected option:selected').text() ;
+			var path = "assignedusers?userId=" + $('#loged_userid').val()+"&projectid="+$('#projectSelected').val()+"&projectname="+$('#projectSelected option:selected').text()+"&region_name="+$('#projectSelected option:selected').attr('name') ;
 			pageRedirect (path);
 		}
 	} else if($("#roleSelected").val()=='OA'){

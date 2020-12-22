@@ -18,6 +18,7 @@
 
 <input type="hidden" id="enquirysfid">	
 <input type="hidden" id="enquiry_name">
+<input type="hidden" id="eoi_trx_amount">
 	
 	<div class="clearfix"></div>
 	
@@ -89,31 +90,31 @@
 					<div class="clearfix"></div>
 				</div>
 			
-			<div class="">
+			<div id="refund_div_id">
 				
 				<div class="form-group col-md-3">
-					<label>A/C Holder Name</label>
-					<input type="text"/>
+					<label>A/C Holder Name<strong class="mndt">*</strong></label>
+					<input type="text" id="ref_acholder_name" class="full form-control input-sm requiredField"/>
 				 </div>
 				 <div class="form-group col-md-3">
-					<label>Bank Name</label>
-					<input type="text"/>
+					<label>Bank Name<strong class="mndt">*</strong></label>
+					<input type="text" id="ref_bank_name" class="full form-control input-sm requiredField"/>
 				 </div>
 				 <div class="form-group col-md-3">
-					<label>Branch Name</label>
-					<input type="text"/>
+					<label>Branch Name<strong class="mndt">*</strong></label>
+					<input type="text" id="ref_branch_name" class="full form-control input-sm requiredField"/>
 				 </div>
 				 <div class="form-group col-md-3">
-					<label>Account No</label>
-					<input type="text"/>
+					<label>Account No<strong class="mndt">*</strong></label>
+					<input type="text"id="ref_ac_no" class="full form-control input-sm requiredField"/>
 				 </div>
 				 <div class="form-group col-md-3">
-					<label>IFSC Code</label>
-					<input type="text"/>
+					<label>IFSC Code<strong class="mndt">*</strong></label>
+					<input type="text" id="ref_ifsc_code" class="full form-control input-sm requiredField"/>
 				 </div>
 				 <div class="form-group col-md-3">
-					<label>Account Type</label>
-					<select id="" class="form-control">
+					<label>Account Type<strong class="mndt">*</strong></label>
+					<select id="ref_ac_type" class="full form-control input-sm requiredField" >
 						<option value='NRE'>NRE</option>
 						<option value='NRO'>NRO</option>
 						<option value='Saving'>Saving</option>
@@ -121,19 +122,19 @@
 					</select>
 				 </div>
 				 <div class="form-group col-md-3">
-					<label>Upload Cancelled Check</label>
-					<input type="file"/>
+					<label>Upload Cancelled Check<strong class="mndt">*</strong></label>
+					<input type="file" id="ref_cncelled_check" class="full form-control input-sm requiredField" accept="application/pdf,image/*"/>
 				 </div>
 				 <div class="form-group col-md-3">
-					<label>Reason for Cancellation/Refund</label>
-					<select id="" class="form-control">
+					<label>Reason for Cancellation/Refund<strong class="mndt">*</strong></label>
+					<select id="ref_reason_cancellation" class="full form-control input-sm requiredField" class="form-control">
 						<option value='Customer Request'>Customer Request</option>
 					</select>
 				 </div>
 				 
 				 <div class="form-group col-md-3">
-					<label>Description </label>
-					<input type="text"/><strong>*</strong>
+					<label>Description<strong class="mndt">*</strong> </label>
+					<textarea id="ref_description" class="full form-control input-sm requiredField"></textarea>
 				 </div>
 			
 				<div class="clearfix"></div>
@@ -143,29 +144,52 @@
 				<button onclick="initiateRefundRequest()" style="line-height:0; color: #fff; background-color: #0077b9;" class="form-control btn btn-primary mrgT0">
 					Initiate Cancellation/Refund
 				</button>
+				<!-- <div class="col-md-12">
+						<table class="table table-bordered" id="enqDtlTableRefundEOI">
+							<thead>
+								<tr>
+									<th>ENQ ID</th>
+									<th>ENQ Name</th>
+									<th>Mobile</th>
+									<th>Name</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr><td colspan='4' style="text-align:center;">No records found</td></tr>
+							</tbody>
+						</table>
+						<div class="clearfix"></div>
+					</div> -->
+					<div class="clearfix"></div>
 				
-				<h4 class="mrgT0">
+			</div>
+			<div class="clearfix"></div>
+			<h4 class="mrgT0 col-md-12">
 					Refund Initiated Log
 				</h4>
-				
+				<div class="clearfix"></div>
+				<div class="col-md-12">
 				<table class="table table-bordered  bgWhite mrgB8" id="csPtColRefundIntiatedEoi">
 					<thead>
 						<tr class="subHead">
+							<th>A/C Holder Name</th>
 							<th>Bank Name</th>
 							<th style="width:130px;"> Branch Name </th>
 							<th style="width:120px;"> Account No. </th>
 							<th> IFSC Code </th>
 							<th> Transaction No. </th>
-							<th> Cancelled Cheque</th>
-							<th style="width:200px;"> Reason for Cancellation </th>
-							<th style="width:150px;"> Description </th>
+							<th> Account Type</th>
+							<th> Reason for Cancellation </th>
+							<th style="width:250px;"> Description </th>
+							<th> Refund Total Amt </th>
 						</tr>
 					</thead>
 					<tbody>
 						
 					</tbody>
 				</table>
-			</div>
+				<div class="clearfix"></div>
+				</div>
 			<div class="clearfix"></div>
 		</div>
 		

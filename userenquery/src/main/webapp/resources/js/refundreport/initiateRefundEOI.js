@@ -156,7 +156,7 @@ function getEOITabPaymentRecordRefund() {
 								+ '<td class="descriptionColtd" style="text-align:center;"><span class="eoieditOldRec">'+obj[i].description+'</span></td>'
 								+'</tr>';
 			}
-			
+			$("#eoi_trx_amount").val(eoiTransactionTotalAmount);
 			html = html.replace(/undefined/g, "");
 			$("#csPtColRefundEoi tbody").append(html);
 			paymentDataisNull = false;
@@ -172,11 +172,105 @@ function getEOITabPaymentRecordRefund() {
 
 function initiateRefundRequest()
 {
-	alert("initiateRefundRequest:-");
+	var validate=checkValidationOnSubmit('refund_div_id');
+	if(validate) {
+		
+		//var tower=$('#towerMst').find('option:selected').attr('name');
+		var formData = new FormData();	
+		formData.append('ac_holder_name' ,$('#ref_acholder_name').val());
+		//formData.append("project_name",$('#projectDataList :selected').text());
+		formData.append("bank_name",$('#ref_bank_name').val());
+		formData.append("branch_name",$('#ref_branch_name').val());
+		formData.append("account_no",$('#ref_ac_no').val());
+		formData.append("ifsc_code",$('#ref_ifsc_code').val());
+		formData.append("account_type",$('#ref_ac_type').val());
+//		formData.append("cancelled_check_path",$('#ref_cncelled_check').val());
+		//formData.append("cancelledCheck",$('#ref_cncelled_check')[0].files[0]);
+		
+		formData.append("reason_for_cancel_refund",$('#ref_reason_cancellation').val());
+		formData.append("description",$('#ref_description').val());
+		formData.append("enquiry_sfid",$('#enquirysfid').val());
+		formData.append("refund_initiated_by",$('#userid').val());
+		formData.append("refund_amount",$('#eoi_trx_amount').val());
+		
+		formData.append("cancelled_check_file",$("#ref_cncelled_check")[0].files[0]);
+		formData.append("project_sfid",$('#projectid').val());
+		formData.append("region_name",$('#region_name').val());
+		formData.append("projectname",$('#projectname').val());
+		
+		//formData.append("tower_name",$('#towerMst').val());
+		var submitURL="refund_initiateData";
+			$.ajax({
+				url : submitURL,
+				type : 'POST',
+				data : formData,
+				dataType: 'text',
+				processData : false, 
+				contentType : false,
+				
+		        success: function (data) {
+		        	callEOIREFUND();
+		        		swal({
+		        			title: "Successfully Submitted",
+		        		    text: "",
+		        		    timer: 2000,
+		        		    type: "success",
+		    			});
+		        		$("#enqDtlTableRefundEOI tbody").empty();
+		        		$("#csPtColRefundEoi tbody").empty();
+		        		
+		        		$('#ref_acholder_name').val('');
+		        		$('#ref_bank_name').val('');
+		        		$('#ref_branch_name').val('');
+		        		$('#ref_ac_no').val('');
+		        		$('#ref_ifsc_code').val('');
+		        		$('#ref_ac_type').val('');
+		        		$('#ref_reason_cancellation').val('');
+		        		$('#ref_description').val('');
+		        		//$('#enquirysfid').val('');
+		        		$("#ref_cncelled_check").val('');
+		        		$("#enqNameInputRefund").val('');
+		        }
+			});
+	}
+}
+
+function callEOIREFUND()
+{
+	
+	$.get(pageContext+"/getInitiateRefundData",{"userid":$('#userid').val(), "project_sfid":$('#projectid').val()},function(data){                      
+		$("#csPtColRefundIntiatedEoi tbody").empty();
+		var obj =JSON.stringify(data);
+		var objJson =JSON.parse(obj);
+		
+		 var html = '';
+         if (objJson != null) {
+        	 for(var i=0;i<objJson.length;i++){
+        		 html += "<tr>" +
+        		 	" <td>"+objJson[i].ac_holder_name+"</td>" +
+        		 	" <td>"+objJson[i].bank_name+"</td>" +
+					" <td>"+objJson[i].branch_name+"</td>" +
+					" <td>"+objJson[i].account_no+"</td>" +
+					" <td>"+objJson[i].ifsc_code+"</td>" +
+					" <td>"+objJson[i].trx_id+"</td>" +
+					" <td>"+objJson[i].account_type+"</td>" +
+					" <td>"+objJson[i].reason_for_cancel_refund+"</td>" +
+					" <td>"+objJson[i].description+"</td>" +
+					" <td>"+objJson[i].refund_amount+"</td>" +
+				" </tr>";
+        	 }
+        	 $("#csPtColRefundIntiatedEoi tbody").append(html);
+         } else {
+        	 enqSFIDforEOI = '';
+        	 $("#csPtColRefundIntiatedEoi tbody").append("<tr><td colspan='4'>No records found</td></tr>");
+         }
+	}).done(function(data){
+		
+	}).fail(function(xhr, status, error) {
+		alert (error);
+    });
 	
 	}
-
-
 
 
 

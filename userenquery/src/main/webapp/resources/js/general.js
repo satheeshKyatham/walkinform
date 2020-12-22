@@ -18,7 +18,7 @@ $(document).ready(function () {
 				defaultSelected = "";
 			}*/
 			
-			option = option+"<option value="+value.projectId+" "+defaultSelected+">"+value.projectName+"</option>";
+			option = option+"<option value="+value.projectId+" name="+value.region__c+" "+defaultSelected+">"+value.projectName+"</option>";
 			
 		});		
 		option=option+"</select>";
@@ -41,7 +41,7 @@ function userprojectmultiselect (){
 			} else {
 				defaultSelected = "";
 			}
-			optionDtl = optionDtl+"<option value="+value.projectId+" "+defaultSelected+">"+value.projectName+"</option>";
+			optionDtl = optionDtl+"<option value="+value.projectId+" name="+value.region__c+" "+defaultSelected+">"+value.projectName+"</option>";
 		});		
 	}).done(function() {
 		$(".userMultiselectProject").append(optionDtl);
