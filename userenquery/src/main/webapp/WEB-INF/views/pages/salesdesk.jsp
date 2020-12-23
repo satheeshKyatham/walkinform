@@ -31,7 +31,7 @@
 <link rel="stylesheet" href="<c:url value='/resources/css/bootstrap.min.css' />" type="text/css" />
  <script src="<c:url value='/resources/js/bootstrap.min.js'/>"></script>
 
-<script src="<c:url value='/resources/js/salesdesk.js?v=18.21'/>"></script>
+<script src="<c:url value='/resources/js/salesdesk.js?v=18.90'/>"></script>
 <script src="<c:url value='/resources/js/jquery-1.12.4.min.js'/>"></script>
 </head>
 <body>

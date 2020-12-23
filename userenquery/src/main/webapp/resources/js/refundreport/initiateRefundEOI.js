@@ -109,7 +109,7 @@ function getEOITabPaymentRecordRefund() {
 				//panTarget = pageContext+"file?name="+obj[i].pan_attach+"&from=EOIbookingReference&eid="+obj[i].enq_sfid+"&fid="+obj[i].pan_attach.charAt(0);
 				
 				if (obj[i].cheque_attach != undefined){
-					reciptTarget = pageContext+"file?name="+obj[i].cheque_attach+"&from=EOIbookingReference&eid="+obj[i].enq_sfid+"&fid="+obj[i].cheque_attach.substring(0, obj[i].cheque_attach.indexOf("Receipt_"));
+					reciptTarget = pageContext+"/file?name="+obj[i].cheque_attach+"&from=EOIbookingReference&eid="+obj[i].enq_sfid+"&fid="+obj[i].cheque_attach.substring(0, obj[i].cheque_attach.indexOf("Receipt_"));
 				} else {
 					reciptTarget = "";
 				}
@@ -199,39 +199,51 @@ function initiateRefundRequest()
 		formData.append("projectname",$('#projectname').val());
 		
 		//formData.append("tower_name",$('#towerMst').val());
-		var submitURL="refund_initiateData";
-			$.ajax({
-				url : submitURL,
-				type : 'POST',
-				data : formData,
-				dataType: 'text',
-				processData : false, 
-				contentType : false,
-				
-		        success: function (data) {
-		        	callEOIREFUND();
-		        		swal({
-		        			title: "Successfully Submitted",
-		        		    text: "",
-		        		    timer: 2000,
-		        		    type: "success",
-		    			});
-		        		$("#enqDtlTableRefundEOI tbody").empty();
-		        		$("#csPtColRefundEoi tbody").empty();
-		        		
-		        		$('#ref_acholder_name').val('');
-		        		$('#ref_bank_name').val('');
-		        		$('#ref_branch_name').val('');
-		        		$('#ref_ac_no').val('');
-		        		$('#ref_ifsc_code').val('');
-		        		$('#ref_ac_type').val('');
-		        		$('#ref_reason_cancellation').val('');
-		        		$('#ref_description').val('');
-		        		//$('#enquirysfid').val('');
-		        		$("#ref_cncelled_check").val('');
-		        		$("#enqNameInputRefund").val('');
-		        }
-			});
+		if($('#eoi_trx_amount').val()== 0 || $('#eoi_trx_amount').val()==null || $('#eoi_trx_amount').val()=='null')
+			{
+				swal({
+					title: "Payment Details are not available OR Refund Amount Showing 0.00",
+				    text: "",
+				    timer: 3000,
+				    type: "error",
+				});
+			}
+		else
+			{
+			var submitURL="refund_initiateData";
+				$.ajax({
+					url : submitURL,
+					type : 'POST',
+					data : formData,
+					dataType: 'text',
+					processData : false, 
+					contentType : false,
+					
+			        success: function (data) {
+			        	callEOIREFUND();
+			        		swal({
+			        			title: "Successfully Submitted",
+			        		    text: "",
+			        		    timer: 2000,
+			        		    type: "success",
+			    			});
+			        		$("#enqDtlTableRefundEOI tbody").empty();
+			        		$("#csPtColRefundEoi tbody").empty();
+			        		
+			        		$('#ref_acholder_name').val('');
+			        		$('#ref_bank_name').val('');
+			        		$('#ref_branch_name').val('');
+			        		$('#ref_ac_no').val('');
+			        		$('#ref_ifsc_code').val('');
+			        		$('#ref_ac_type').val('');
+			        		$('#ref_reason_cancellation').val('');
+			        		$('#ref_description').val('');
+			        		//$('#enquirysfid').val('');
+			        		$("#ref_cncelled_check").val('');
+			        		$("#enqNameInputRefund").val('');
+			        }
+				});
+			}
 	}
 }
 

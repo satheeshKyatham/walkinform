@@ -4085,7 +4085,7 @@ public class WebServiceController<MultipartFormDataInput> {
 	public String getEOIPaymentRecordForRefund(@RequestParam("enqSfid") String enqSfid) {
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		Gson gson = gsonBuilder.create();
-		String whereCondition=" and refund_trx_no is null";
+		String whereCondition=" and isactive='Y' and refund_trx_no is null";
 		return gson.toJson(eOIpaymentDtlService.getEOIPaymentRecord(enqSfid,whereCondition));
 	}
 
