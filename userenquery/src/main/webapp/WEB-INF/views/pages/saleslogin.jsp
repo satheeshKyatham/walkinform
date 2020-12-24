@@ -25,8 +25,8 @@
 		<link rel="stylesheet" href="<c:url value="/resources/css/login.css" />" type="text/css" />		
 		<link rel="stylesheet" href="<c:url value="/resources/css/app.css" />" type="text/css" />		
 		
-		<script src="<c:url value='/resources/js/salesdesk.js?v=18.18'/>"></script>	
-		<script src="<c:url value='/resources/js/loginDropdown.js?v=18.19'/>"></script>
+		<script src="<c:url value='/resources/js/salesdesk.js?v=18.90'/>"></script>	
+		<script src="<c:url value='/resources/js/loginDropdown.js?v=18.90'/>"></script>
 		<script src="<c:url value='/resources/js/jquery-1.12.4.min.js'/>"></script>		
 		
 	</head>

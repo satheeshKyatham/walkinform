@@ -140,6 +140,8 @@ function csPymtDataEoi () {
 	    
 	    csPtData.isactive = 'N';
 	    
+	    csPtData.refund_trx_no = 0;
+	    
 	    // csPtData.gpl_cs_balance_details_id = balance_details_primeryId.id;
 	    //csPtData.offerid = balance_details_primeryId.offer_sfid;
 	    

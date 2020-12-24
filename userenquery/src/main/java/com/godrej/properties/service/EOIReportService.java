@@ -8,6 +8,7 @@ import com.godrej.properties.model.EOIReport;
 import com.godrej.properties.model.FacingDashboard;
 import com.godrej.properties.model.TowerDashboard;
 import com.godrej.properties.model.UnitFacingCount;
+import com.godrej.properties.model.UnitTowerCount;
 
 public interface EOIReportService {
 	List<EOIReport> getEOIReportDtl(String whereCondition);
@@ -19,4 +20,5 @@ public interface EOIReportService {
 	public FacingDashboard getFacingdashboard(String whereCondition);
 	
 	List<UnitFacingCount> getUnitFacingCount(String projectSFID);
+	List<UnitTowerCount> getUnitTowerCount(String projectSFID);
 }

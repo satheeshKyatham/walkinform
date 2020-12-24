@@ -221,7 +221,7 @@ function carparkCountList (){
 	});	
 }
 
-			
+/*
 function  towerDashboard (){
 	$('#towerSoldUnitTab i').show();
 	$.get("getTowerdashboard",{"projectSfid":$('#projectid').val()},function(data){
@@ -295,8 +295,8 @@ function  towerDashboard (){
 		$("#towerDashboard").html(unitFacingTypeHTML);
 		$('#towerSoldUnitTab i').hide();
 	});
-}
-
+}*/
+/*
 function  facingDashboard (){
 	$('#facingSoldUnitTab i').show();
 	$.get("getFacingdashboard",{"projectSfid":$('#projectid').val()},function(data){
@@ -308,13 +308,8 @@ function  facingDashboard (){
 		var bhk2CityGard = parseInt(data.city2bhk)+parseInt(data.garden2bhk);
 		var bhk3CityGard = parseInt(data.city3bhk)+parseInt(data.garden3bhk);
 		var totalCityGard = parseInt(bhk1CityGard)+parseInt(bhk2CityGard)+parseInt(bhk3CityGard);
-		
-		
 		var cityTotal = parseInt(data.city1bhk)+parseInt(data.city2bhk)+parseInt(data.city3bhk);
 		var gardenTotal = parseInt(data.garden1bhk)+parseInt(data.garden2bhk)+parseInt(data.garden3bhk);
-		
-		
-		
 		
 		var unitFacingTypeHTML = "<div class='clearfix'></div> <h4>Facing Wise Offer Created</h4>" +
 		"<table class='table table-bordered table-striped' id='unitFacingType' >" +
@@ -358,20 +353,18 @@ function  facingDashboard (){
 			"</tbody>" +
 		"</table>";		
 				
-		//$("#coveredcarpark_id").append(carparkHTML);
 		$("#unitFacingType").html(unitFacingTypeHTML);
 		$('#facingSoldUnitTab i').hide();
 	});
 }
-
+*/
 
 
 function getUnitFacingCount (){
-	 
+	$('#facingSoldUnitTab i').show(); 
 	$.get("getUnitFacingCount",{"projectSFID":$('#projectid').val() },function(data){				 
 		
 		var countHTML = "";
-		var carparkTypeName = "";
 		
 		if(data!=null) {
 			$("#unitFacingCount").html("");
@@ -391,104 +384,201 @@ function getUnitFacingCount (){
                 } 
             }
 			
-			countHTML += "<div class='clearfix'></div> <h4>Facing Wise Offer Created</h4> <table class='table table-bordered table-striped'>" ;
-							/*+ "<thead>" 
-								+ "<tr>"
-									+ "<th>Car park type</th>"
-									+ "<th>Car park <small><b>(*Indicative - Its considering offers created through D4U only)</b><small></th>" 
-								+ "</tr>"
-							+ "</thead>"*/
-							 
+			countHTML += "<div class='clearfix'></div> <h4>Facing Wise Offer Created <small><b>(*Indicative - Its considering offers created through D4U only)</b></small> </h4> <table class='table table-bordered table-striped'>" ;
+							 	
+				countHTML += "<thead> <tr> <th>Type</th>"; 
+				for(h = 0; h< unitFacing.length; h++){
+					countHTML += "<th>"+unitFacing[h]+"</th>";
+				}
+				
+				countHTML += "<th>Grand Total</th>";
+				
+				countHTML += "</tr></thead><tbody>";
+	
+				for(j = 0; j< unitType.length; j++){
+					countHTML += "<tr>";
+						countHTML += "<th>"+unitType[j]+"</th>";
+						
+						var soldUnit = 0;
+						var totalUnit = 0;
+						
+						var t = 0;
+						
+						for (p = 0; p< unitFacing.length; p++){
+							
+							var cond1 = 0;
+							
+							for (k = 0; k < data.length; k++) {
 								
-								countHTML += "<thead> <tr> <th>Type</th>"; 
-								for(h = 0; h< unitFacing.length; h++){
-									countHTML += "<th>"+unitFacing[h]+"</th>";
-								}
-								
-								countHTML += "<th>Grand Total</th>";
-								
-								countHTML += "</tr></thead><tbody>";
-			
-								for(j = 0; j< unitType.length; j++){
-									countHTML += "<tr>";
-										countHTML += "<th>"+unitType[j]+"</th>";
-										var x = 0;
-										var soldUnit = 0;
-										var totalUnit = 0;
-										
-										for (k = 0; k < data.length; k++) {
-											
-											if (unitType[j] == data[k].propstrength__unit_type__c) {
-												
-												for (p = 0; p< unitFacing.length; p++){
-													if (unitFacing[p] == data[k].property_facing__c){
-														countHTML += "<td>"+data[k].sold+"/"+data[k].total+"</td>";
-													} else {
-														countHTML += "<td></td>";
-													}
-												}
-												
-												
-												//x++
-												 
-												soldUnit = parseInt(data[k].sold)+parseInt(soldUnit);
-												totalUnit = parseInt(data[k].total)+parseInt(totalUnit);
-											} 
-											
-										}
-										
-										//var remTD = unitFacing.length - x;
-										
-										/*for (y = 0; y < remTD; y++){
-											countHTML += "<td>-</td>";
-										}*/
-										
-										countHTML += "<td>"+soldUnit+"/"+totalUnit+"</td>";
+								if (unitType[j] == data[k].propstrength__unit_type__c && unitFacing[p] == data[k].property_facing__c) {
 									
-									countHTML += "</tr>";
-								}
-								
-								countHTML += "<tr><th>Grand Total</th>";
-								
-								var grandTotal = 0;
-								var grandSold = 0;
-								
-								for(m = 0; m< unitFacing.length; m++){
+									cond1 = 1;
 									
-										var soldUnit1 = 0;
-										var totalUnit1 = 0;
-										
-										
-										
+									countHTML += "<td>"+data[k].sold+"/"+data[k].total+"</td>";
 									
-										for (n = 0; n < data.length; n++) {
-											if (unitFacing[m] == data[n].property_facing__c) {
-												
-												soldUnit1 = parseInt(data[n].sold)+parseInt(soldUnit1);
-												totalUnit1 = parseInt(data[n].total)+parseInt(totalUnit1);
-												
-											}
-										}
-										
-										grandTotal = parseInt(grandTotal)+parseInt(totalUnit1);
-										grandSold = parseInt(grandSold)+parseInt(soldUnit1);
-										
-										countHTML += "<th>"+soldUnit1+"/"+totalUnit1+"</th>";
-								}
-								countHTML += "<th>"+grandSold+"/"+grandTotal+"</th></tr>";	
+									soldUnit = parseInt(data[k].sold)+parseInt(soldUnit);
+									totalUnit = parseInt(data[k].total)+parseInt(totalUnit);
+								}  
+							}
+							
+							if (cond1 != 1) {
+								countHTML += "<td></td>";
+							}
+							
+						}
+						
+						countHTML += "<td>"+soldUnit+"/"+totalUnit+"</td>";
+						countHTML += "</tr>";
+				}
+				
+				countHTML += "<tr><th>Grand Total</th>";
+				
+				var grandTotal = 0;
+				var grandSold = 0;
+				
+				for(m = 0; m< unitFacing.length; m++){
+					
+						var soldUnit1 = 0;
+						var totalUnit1 = 0;
+					
+						for (n = 0; n < data.length; n++) {
+							if (unitFacing[m] == data[n].property_facing__c) {
 								
-				//countHTML += "<tr><th>Grand Total</th><th>"+totalSold+"/"+totalCarpark+"</th></tr>"; 
+								soldUnit1 = parseInt(data[n].sold)+parseInt(soldUnit1);
+								totalUnit1 = parseInt(data[n].total)+parseInt(totalUnit1);
 								
-				countHTML += "</tbody>" 
-						+ "</table>";		
+							}
+						}
+						
+						grandTotal = parseInt(grandTotal)+parseInt(totalUnit1);
+						grandSold = parseInt(grandSold)+parseInt(soldUnit1);
+						
+						countHTML += "<th>"+soldUnit1+"/"+totalUnit1+"</th>";
+				}
+				countHTML += "<th>"+grandSold+"/"+grandTotal+"</th></tr>";	
+								
+			countHTML += "</tbody>" 
+				+ "</table>";		
 				
 				$("#unitFacingCount").html(countHTML);
-				
 		} else {
-			 
 			$("#unitFacingCount").html("");
+			$('#facingSoldUnitTab i').hide();
 		}
 	}).done(function(data){
-
+		$('#facingSoldUnitTab i').hide();
 	});	
-}
+} 
+
+
+
+
+function getUnitTowerCount (){
+	$('#towerSoldUnitTab i').show(); 
+	$.get("getUnitTowerCount",{"projectSFID":$('#projectid').val() },function(data){				 
+		
+		var countHTML = "";
+		
+		if(data!=null) {
+			$("#unitTowerCount").html("");
+			
+			var unitType = [];
+            var unitTower = [];
+			
+			for(i = 0; i< data.length; i++){    
+				if(unitType.indexOf(data[i].propstrength__unit_type__c) === -1){
+					unitType.push(data[i].propstrength__unit_type__c);
+                }
+            }
+			
+			for(h = 0; h< data.length; h++){    
+				if(unitTower.indexOf(data[h].tower_name__c) === -1){
+					unitTower.push(data[h].tower_name__c);
+                } 
+            }
+			
+			countHTML += "<div class='clearfix'></div> <h4>Tower Wise Offer Created <small><b>(*Indicative - Its considering offers created through D4U only)</b></small> </h4> <table class='table table-bordered table-striped'>" ;
+							 	
+				countHTML += "<thead> <tr> <th>Type</th>"; 
+				for(h = 0; h< unitTower.length; h++){
+					countHTML += "<th>"+unitTower[h]+"</th>";
+				}
+				
+				countHTML += "<th>Grand Total</th>";
+				
+				countHTML += "</tr></thead><tbody>";
+	
+				for(j = 0; j< unitType.length; j++){
+					countHTML += "<tr>";
+						countHTML += "<th>"+unitType[j]+"</th>";
+						
+						var soldUnit = 0;
+						var totalUnit = 0;
+						
+						var t = 0;
+						
+						for (p = 0; p< unitTower.length; p++){
+							
+							var cond1 = 0;
+							
+							for (k = 0; k < data.length; k++) {
+								
+								if (unitType[j] == data[k].propstrength__unit_type__c && unitTower[p] == data[k].tower_name__c) {
+									
+									cond1 = 1;
+									
+									countHTML += "<td>"+data[k].sold+"/"+data[k].total+"</td>";
+									
+									soldUnit = parseInt(data[k].sold)+parseInt(soldUnit);
+									totalUnit = parseInt(data[k].total)+parseInt(totalUnit);
+								}  
+							}
+							
+							if (cond1 != 1) {
+								countHTML += "<td></td>";
+							}
+							
+						}
+						
+						countHTML += "<td>"+soldUnit+"/"+totalUnit+"</td>";
+						countHTML += "</tr>";
+				}
+				
+				countHTML += "<tr><th>Grand Total</th>";
+				
+				var grandTotal = 0;
+				var grandSold = 0;
+				
+				for(m = 0; m< unitTower.length; m++){
+					
+						var soldUnit1 = 0;
+						var totalUnit1 = 0;
+					
+						for (n = 0; n < data.length; n++) {
+							if (unitTower[m] == data[n].tower_name__c) {
+								
+								soldUnit1 = parseInt(data[n].sold)+parseInt(soldUnit1);
+								totalUnit1 = parseInt(data[n].total)+parseInt(totalUnit1);
+								
+							}
+						}
+						
+						grandTotal = parseInt(grandTotal)+parseInt(totalUnit1);
+						grandSold = parseInt(grandSold)+parseInt(soldUnit1);
+						
+						countHTML += "<th>"+soldUnit1+"/"+totalUnit1+"</th>";
+				}
+				countHTML += "<th>"+grandSold+"/"+grandTotal+"</th></tr>";	
+								
+			countHTML += "</tbody>" 
+				+ "</table>";		
+				
+				$("#unitTowerCount").html(countHTML);
+		} else {
+			$("#unitTowerCount").html("");
+			$('#towerSoldUnitTab i').hide();
+		}
+	}).done(function(data){
+		$('#towerSoldUnitTab i').hide();
+	});	
+} 

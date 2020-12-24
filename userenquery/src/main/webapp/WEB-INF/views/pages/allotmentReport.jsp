@@ -22,10 +22,10 @@
 			<a href="#soldCarpark" role="tab" data-toggle="tab" onclick="carparkCountList();">Sold Car Park <i class="fa fa-spinner fa-spin" style="display:none;"></i></a>
 		</li>
 		<li role="presentation" id="facingSoldUnitTab">
-			<a href="#facingSoldUnit" role="tab" data-toggle="tab" onclick="facingDashboard(); getUnitFacingCount();">Facing Wise Offer Created <i class="fa fa-spinner fa-spin" style="display:none;"></i></a>
+			<a href="#facingSoldUnit" role="tab" data-toggle="tab" onclick="getUnitFacingCount();">Facing Wise Offer Created <i class="fa fa-spinner fa-spin" style="display:none;"></i></a>
 		</li>
 		<li role="presentation" id="towerSoldUnitTab">
-			<a href="#towerSoldUnit" role="tab" data-toggle="tab" onclick="towerDashboard();">Tower Wise Offer Created <i class="fa fa-spinner fa-spin" style="display:none;"></i></a>
+			<a href="#towerSoldUnit" role="tab" data-toggle="tab" onclick="getUnitTowerCount();">Tower Wise Offer Created <i class="fa fa-spinner fa-spin" style="display:none;"></i></a>
 		</li>
 	</ul>
 
@@ -199,19 +199,20 @@
 			</div>
 		</div>
 		<div role="tabpanel" class="tab-pane" id="facingSoldUnit">
-			<div id="unitFacingType">
+			<!-- <div id="unitFacingType">
 				<div class="clearfix"></div>
-			</div>
-			
+			</div> -->
 			<div id="unitFacingCount">
 				<div class="clearfix"></div>
 			</div>
-			
 		</div>
 		<div role="tabpanel" class="tab-pane" id="towerSoldUnit">
-			<div id="towerDashboard">
+			<!-- <div id="towerDashboard">
 				<div class="clearfix"></div>
-			</div>  
+			</div> -->  
+			<div id="unitTowerCount">
+				<div class="clearfix"></div>
+			</div>
 		</div>
 	</div>
 </div>
