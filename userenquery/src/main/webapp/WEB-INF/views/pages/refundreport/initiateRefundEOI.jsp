@@ -184,6 +184,7 @@
 							<th> Reason for Cancellation </th>
 							<th style="width:250px;"> Description </th>
 							<th> Refund Total Amt </th>
+							<th> Refund Status </th>
 						</tr>
 					</thead>
 					<tbody>

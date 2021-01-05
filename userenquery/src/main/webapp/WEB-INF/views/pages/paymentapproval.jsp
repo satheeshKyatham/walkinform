@@ -29,7 +29,7 @@
 <script src="<c:url value='/resources/js/bootstrap.min.js'/>"></script>
 <script type="text/javascript" charset="utf8" src="<c:url value='/resources/js/jquery.dataTables.js'/>"></script>
 <script type="text/javascript" charset="utf8" src="<c:url value='/resources/js/payment/paymentapprove.js'/>"></script>
-<script type="text/javascript" charset="utf8" src="<c:url value='/resources/js/refundreport/initiateRefundEOI.js'/>"></script>
+<script type="text/javascript" charset="utf8" src="<c:url value='/resources/js/refundreport/initiateRefundEOI.js?v=${sessionScope.version}'/>"></script>
 <script src="<c:url value='/resources/js/sweetalert2.min.js' />"></script>
 <script src="<c:url value='/resources/js/utility.js?v=${sessionScope.version}' />"></script> 
 </head> 

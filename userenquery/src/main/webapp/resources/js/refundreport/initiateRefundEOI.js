@@ -269,6 +269,7 @@ function callEOIREFUND()
 					" <td>"+objJson[i].reason_for_cancel_refund+"</td>" +
 					" <td>"+objJson[i].description+"</td>" +
 					" <td>"+objJson[i].refund_amount+"</td>" +
+					" <td>"+objJson[i].approval_refund_status+"</td>" +
 				" </tr>";
         	 }
         	 $("#csPtColRefundIntiatedEoi tbody").append(html);
@@ -305,7 +306,7 @@ function getEOIREFUNDDetails()
 								"<td><textarea class='refund_comments"+data[i].id+"'></textarea></td>" +
 								"<td><select class='selection' id='srefund"+data[i].id+"' class='form-control'>" +
 								"<option value='Pending with Accounts'>Pending with Accounts</option><option value='Partial Processed'>Partial Processed</option><option value='Fully Processed'>Fully Processed</option><option value='Rejected'>Rejected</option></select></td>" +
-								" <td><button onclick='RefundSumbit("+data[i].id+")'>Approve</button></td>" ;
+								" <td><button onclick='RefundSumbit("+data[i].id+")'>Submit</button></td>" ;
 					}
         		 html += "<tr>" +
         		 	" <td>"+data[i].ac_holder_name+"</td>" +
