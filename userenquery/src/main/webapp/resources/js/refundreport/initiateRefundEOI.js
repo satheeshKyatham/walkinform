@@ -295,7 +295,7 @@ function getEOIREFUNDDetails()
          if (data != null) {
         	 for(var i=0;i<data.length;i++){
         		 var statusSelect="";
-        		 if(data[i].approval_refund_status!=null)
+        		 if(data[i].approval_refund_status!=null || data[i].approval_refund_status!='null')
 					{
         			 statusSelect = "<td>"+data[i].neft_rtgs_utr_no+"</td><td>"+data[i].refund_comments+"</td><td>"+data[i].approval_refund_status+"</td><td></td>";
 					}

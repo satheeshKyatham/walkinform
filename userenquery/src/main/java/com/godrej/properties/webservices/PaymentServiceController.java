@@ -162,7 +162,7 @@ public class PaymentServiceController {
 		refund.setRefund_initiated_by(refund_initiated_by);
 		refund.setRefund_amount(refund_amount);
 		refund.setProject_sfid(project_sfid);
-		refund.setApproval_refund_status("Not Processed");
+		//refund.setApproval_refund_status("Not Processed");
 		
 		if(cancelled_check_file != null) {
 			File ad_dir = new File(rootPath+ File.separator +"D4U File Storage"+ File.separator +region_name + File.separator +projectname+ File.separator + "EOIREFUNDCHEQUE" + File.separator + enquiry_sfid);
