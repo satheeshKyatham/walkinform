@@ -13,6 +13,8 @@ import com.godrej.properties.model.AllotmentReport;
 import com.godrej.properties.model.EOIReport;
 import com.godrej.properties.model.FacingDashboard;
 import com.godrej.properties.model.TowerDashboard;
+import com.godrej.properties.model.UnitFacingCount;
+import com.godrej.properties.model.UnitTowerCount;
 import com.godrej.properties.service.EOIReportService;
 
 @Service("eOIReportService")
@@ -47,5 +49,15 @@ public class EOIReportServiceImpl implements EOIReportService{
 	@Override
 	public FacingDashboard getFacingdashboard(String whereCondition) {
 		return eOIReportDao.getFacingdashboard(whereCondition);
+	}
+	
+	@Override
+	public List<UnitFacingCount> getUnitFacingCount(String projectSFID) {
+		return eOIReportDao.getUnitFacingCount(projectSFID);
+	}
+	
+	@Override
+	public List<UnitTowerCount> getUnitTowerCount(String projectSFID) {
+		return eOIReportDao.getUnitTowerCount(projectSFID);
 	}
 }

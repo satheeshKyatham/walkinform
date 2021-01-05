@@ -70,7 +70,7 @@ public class StringEncDec {
     public static void main(String[] args) {
         //Scanner sc = new Scanner(System.in);
         //System.out.println("Enter String : ");
-        String plainString = "9886430496";
+        String plainString = "9850297816";
         
         String encyptStr   = encrypt(plainString);
         String decryptStr  = decrypt(encyptStr);

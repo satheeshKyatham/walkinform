@@ -43,6 +43,10 @@ public class RefundInitiateServiceImpl implements RefundInitiateService{
 		// TODO Auto-generated method stub
 		return refundInitiateDao.updateEOIRefundEnty(enquiry_Sfid,trx_no, whereCodnition);
 	}
+	@Override
+	public String approveRejectRefund(Integer id, String updateValues, String whereCodnition) {
+		return refundInitiateDao.approveRejectRefund(id, updateValues, whereCodnition);
+	}
 
 	
 }

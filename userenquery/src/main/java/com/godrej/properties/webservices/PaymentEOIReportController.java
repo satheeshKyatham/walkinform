@@ -1,15 +1,17 @@
 package com.godrej.properties.webservices;
 
+import java.util.List;
+
 import javax.servlet.ServletContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.godrej.properties.model.UnitFacingCount;
+import com.godrej.properties.model.UnitTowerCount;
 import com.godrej.properties.service.EOIReportService;
 import com.godrej.properties.service.PaymentEOIReportService;
 import com.google.gson.Gson;
@@ -151,4 +153,25 @@ public class PaymentEOIReportController {
 		Gson gson = new GsonBuilder().disableHtmlEscaping().serializeNulls().create();
 		return gson.toJson(eOIReportService.getFacingdashboard(projectSfid));
 	}
+	
+	
+	@GetMapping(value = "/getUnitFacingCount", produces = "application/json")
+	public String getUnitFacingCount(@RequestParam("projectSFID") String projectSFID) {
+		Gson gson = new GsonBuilder().disableHtmlEscaping().serializeNulls().create();
+		
+		List<UnitFacingCount> carparkTypeList=eOIReportService.getUnitFacingCount(projectSFID);
+		
+		return gson.toJson(carparkTypeList); 
+	}
+	
+	
+	@GetMapping(value = "/getUnitTowerCount", produces = "application/json")
+	public String getUnitTowerCount(@RequestParam("projectSFID") String projectSFID) {
+		Gson gson = new GsonBuilder().disableHtmlEscaping().serializeNulls().create();
+		
+		List<UnitTowerCount> carparkTypeList=eOIReportService.getUnitTowerCount(projectSFID);
+		
+		return gson.toJson(carparkTypeList); 
+	}
+	
 }

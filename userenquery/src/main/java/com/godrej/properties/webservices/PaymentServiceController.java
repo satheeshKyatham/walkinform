@@ -4,6 +4,7 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.persistence.Query;
@@ -22,6 +23,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.godrej.properties.dto.SysConfigEnum;
+import com.godrej.properties.master.service.SysConfigService;
 import com.godrej.properties.model.PaymentPlanDue;
 import com.godrej.properties.model.PaymentPlanLineItem;
 import com.godrej.properties.model.RefundInitiate;
@@ -31,6 +34,7 @@ import com.godrej.properties.service.PaymentPlanDueService;
 import com.godrej.properties.service.PaymentPlanLineItemService;
 import com.godrej.properties.service.PrePaymentReceivedService;
 import com.godrej.properties.service.RefundInitiateService;
+import com.godrej.properties.util.SendMailThreadUtil;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -52,6 +56,9 @@ public class PaymentServiceController {
 	
 	@Autowired
 	private	RefundInitiateService refundInitiateService;
+	
+	@Autowired
+	private SysConfigService sysConfigService;
 	
 	@GetMapping(value = "/getPendingPaymentData", produces = "application/json")
 	public String getPendingPaymentData(@RequestParam("projectid") String projectid)
@@ -155,7 +162,7 @@ public class PaymentServiceController {
 		refund.setRefund_initiated_by(refund_initiated_by);
 		refund.setRefund_amount(refund_amount);
 		refund.setProject_sfid(project_sfid);
-		
+		refund.setApproval_refund_status("Not Processed");
 		
 		if(cancelled_check_file != null) {
 			File ad_dir = new File(rootPath+ File.separator +"D4U File Storage"+ File.separator +region_name + File.separator +projectname+ File.separator + "EOIREFUNDCHEQUE" + File.separator + enquiry_sfid);
@@ -188,25 +195,41 @@ public class PaymentServiceController {
 	public String getInitiateRefundData(@RequestParam("userid") String userid,@RequestParam("project_sfid") String project_sfid)
 	{
 		Gson gson = new GsonBuilder().disableHtmlEscaping().serializeNulls().create();
-		String whereCondition=" where project_sfid='"+project_sfid+"' and refund_initiated_by='"+userid+"'";
-		return gson.toJson(refundInitiateService.getRefundInitiatedData(whereCondition));	
+		String whereCondition="";
+		if(userid!=null && userid.length()>0)
+		{
+			whereCondition =" where project_sfid='"+project_sfid+"' and refund_initiated_by='"+userid+"' order by refund_initiated_date desc";
+			
+		}
+		else
+			whereCondition=" where project_sfid='"+project_sfid+"' order by refund_initiated_date desc";
+		return gson.toJson(refundInitiateService.getRefundInitiatedData(whereCondition));
+			
 	}
 	
-	/*@PostMapping(value = "/updateEOIEntry", produces = "application/json")
-	public String updateEOIStatusForRefund(@RequestParam("enquiry_sfid") String enquiry_sfid,@RequestParam("trx_no") String trx_no)
+	@PostMapping(value = "/approvalInitiateRefundProcess")
+	public String approvalInitiateRefundProcess(@RequestParam("id") Integer id,@RequestParam("rtgs_no") String rtgs_no,@RequestParam("comments") String comments
+			,@RequestParam("status") String status,@RequestParam("loged_useremail") String loged_useremail,@RequestParam("loged_userid") String loged_userid,@RequestParam("trx_id") String trx_id)
 	{
-		for (int i = 0; i <charges.size(); i++) {
-			Session session = this.sessionFactory.getCurrentSession();
+//		Log.info("ID {}",id+rtgs_no+comments+status+loged_useremail+loged_userid);
+		Log.info("Refund ID - {}, RTGS No - {}, Comments - {}, Status - {}, Logged Email - {}, userID - {}",id,rtgs_no,comments,status,loged_useremail,loged_userid);
+		String whereCondtion = " WHERE id="+id;
+		String updateValues = " neft_rtgs_utr_no='"+rtgs_no+"',refund_comments='"+comments+"',approval_refund_status='"+status+"',refund_updated_by="+loged_userid+",refund_updated_date='"+new Timestamp(System.currentTimeMillis())+"'";
+		refundInitiateService.approveRejectRefund(id, updateValues, whereCondtion);
+		String smtpip = sysConfigService.getValue(SysConfigEnum.SMTP_IP, "SMTP_IP");
+		String smtpPort = sysConfigService.getValue(SysConfigEnum.SMTP_PORT, "SMTP_PORT");
+		String subject="EOI Refund Status:"+status;
+		String mailBody= "Dear Manager, </br></br> Initiated Refund has been "+status+", kindly check in your report with "+trx_id+"</br></br> Regards,</br>D4U Team.";
+		SendMailThreadUtil mail =new SendMailThreadUtil(loged_useremail,	"sathish.kyatham@godrejproperties.com", subject, mailBody,smtpip,smtpPort);
+		return "{'data':'success'}";
+		/*if(userid!=null && userid.length()>0)
+		{
+			whereCondition =" where project_sfid='"+project_sfid+"' and refund_initiated_by='"+userid+"' order by refund_initiated_date desc";
 			
-			Log.info("Test :::{} ", charges.get(i).getId());
-			
-			charges.get(i).getDescription();
-			Query query = session.createQuery("UPDATE EOIPaymentDtl SET isactive = 'O' WHERE id = '"+charges.get(i).getId()+"' ");
-			
-			query.executeUpdate();
 		}
-		Gson gson = new GsonBuilder().disableHtmlEscaping().serializeNulls().create();
-		
-		return gson.toJson(refundInitiateService.updateEOIRefundEnty(enquiry_sfid,"",""));	
-	}*/
+		else
+			whereCondition=" where project_sfid='"+project_sfid+"' order by refund_initiated_date desc";
+		return gson.toJson(refundInitiateService.getRefundInitiatedData(whereCondition));*/
+			
+	}
 }

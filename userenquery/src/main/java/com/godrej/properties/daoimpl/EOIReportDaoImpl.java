@@ -15,6 +15,8 @@ import com.godrej.properties.model.AllotmentReport;
 import com.godrej.properties.model.EOIReport;
 import com.godrej.properties.model.FacingDashboard;
 import com.godrej.properties.model.TowerDashboard;
+import com.godrej.properties.model.UnitFacingCount;
+import com.godrej.properties.model.UnitTowerCount;
 
 @Repository("eOIReportDao")
 public class EOIReportDaoImpl implements EOIReportDao{
@@ -370,4 +372,64 @@ public class EOIReportDaoImpl implements EOIReportDao{
 		
 		return alotMIS;
 	}
+	
+	
+	
+	@Override
+	public List<UnitFacingCount> getUnitFacingCount(String projectSFID) {
+		Session session = this.sessionFactory.getCurrentSession();	
+		
+		List<UnitFacingCount> authors=null;
+		
+		Query q = session.createNativeQuery("SELECT row_number() OVER () AS id, "
+				
+				+ " CASE WHEN a.propstrength__unit_type__c IS NULL THEN '-' ELSE a.propstrength__unit_type__c END as propstrength__unit_type__c,  "
+				+ " CASE WHEN a.property_facing__c IS NULL THEN '-' ELSE a.property_facing__c END as property_facing__c, "
+				+ " CASE WHEN b.count IS NULL THEN 0 ELSE b.count END as sold, "
+				+ " CASE WHEN a.count IS NULL THEN 0 ELSE a.count END as total  "
+				+ " FROM salesforce.vw_unit_facing_count a "
+				
+				+ " LEFT JOIN salesforce.vw_offered_unit_facing_count b  "
+				+ " ON a.propstrength__unit_type__c = b.propstrength__unit_type__c  "
+				+ " AND a.property_facing__c = b.property_facing__c "
+				+ " AND b.project_sfid = '"+projectSFID+"' and b.isactive = 'A'  "
+				+ " where a.project18digit__c = '"+projectSFID+"'  AND a.propstrength__active__c = true order by a.propstrength__unit_type__c,  a.property_facing__c ASC ", UnitFacingCount.class);
+
+		authors = q.getResultList();
+		
+		if (authors.size() > 0)
+			return authors;
+
+		return null;
+	}
+	
+	
+	@Override
+	public List<UnitTowerCount> getUnitTowerCount(String projectSFID) {
+		Session session = this.sessionFactory.getCurrentSession();	
+		
+		List<UnitTowerCount> authors=null;
+		
+		Query q = session.createNativeQuery("SELECT row_number() OVER () AS id, "
+				
+				+ " CASE WHEN a.propstrength__unit_type__c IS NULL THEN '-' ELSE a.propstrength__unit_type__c END as propstrength__unit_type__c,  "
+				+ " CASE WHEN a.tower_name__c IS NULL THEN '-' ELSE a.tower_name__c END as tower_name__c, "
+				+ " CASE WHEN b.count IS NULL THEN 0 ELSE b.count END as sold, "
+				+ " CASE WHEN a.count IS NULL THEN 0 ELSE a.count END as total  "
+				+ " FROM salesforce.vw_unit_tower_count a "
+				
+				+ " LEFT JOIN salesforce.vw_offered_unit_tower_count b  "
+				+ " ON a.propstrength__unit_type__c = b.propstrength__unit_type__c  "
+				+ " AND a.tower_name__c = b.tower_name__c "
+				+ " AND b.project_sfid = '"+projectSFID+"' and b.isactive = 'A'  "
+				+ " where a.project18digit__c = '"+projectSFID+"'  AND a.propstrength__active__c = true order by a.propstrength__unit_type__c,  a.tower_name__c ASC ", UnitTowerCount.class);
+
+		authors = q.getResultList();
+		
+		if (authors.size() > 0)
+			return authors;
+
+		return null;
+	}
+	
 }	

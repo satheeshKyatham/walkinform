@@ -282,11 +282,186 @@ function callEOIREFUND()
 		alert (error);
     });
 	
+}
+
+function getEOIREFUNDDetails()
+{
+	$("#mainPageLoad4").show();
+	$.get($('#contextPath').val()+"/getInitiateRefundData",{"userid":null, "project_sfid":$('#projectid').val()},function(data){                      
+		$("#EOI_Payment_Refund_List").dataTable().fnDestroy();
+		$("#EOI_Payment_Refund_List tbody").empty();
+		 var html = '';
+         if (data != null) {
+        	 for(var i=0;i<data.length;i++){
+        		 var statusSelect="";
+        		 if(data[i].approval_refund_status!=null)
+					{
+        			 statusSelect = "<td>"+data[i].neft_rtgs_utr_no+"</td><td>"+data[i].refund_comments+"</td><td>"+data[i].approval_refund_status+"</td><td></td>";
+					}
+				else
+					{
+						statusSelect = 
+								"<td><input type='text' class='neft_rtgs_utr_no"+data[i].id+"'></td>" +
+								"<td><textarea class='refund_comments"+data[i].id+"'></textarea></td>" +
+								"<td><select class='selection' id='srefund"+data[i].id+"' class='form-control'>" +
+								"<option value='Pending with Accounts'>Pending with Accounts</option><option value='Partial Processed'>Partial Processed</option><option value='Fully Processed'>Fully Processed</option><option value='Rejected'>Rejected</option></select></td>" +
+								" <td><button onclick='RefundSumbit("+data[i].id+")'>Approve</button></td>" ;
+					}
+        		 html += "<tr>" +
+        		 	" <td>"+data[i].ac_holder_name+"</td>" +
+        		 	" <td>"+data[i].bank_name+"</td>" +
+					" <td>"+data[i].branch_name+"</td>" +
+					" <td>"+data[i].account_no+"</td>" +
+					" <td>"+data[i].ifsc_code+"</td>" +
+					" <td id='trx_id"+data[i].id+"'>"+data[i].trx_id+"</td>" +
+					" <td>"+data[i].account_type+"</td>" +
+					" <td>"+data[i].reason_for_cancel_refund+"</td>" +
+					" <td>"+data[i].description+"</td>" +
+					" <td>"+data[i].refund_amount+"</td>" +
+					statusSelect+
+				" </tr>";
+        	 }
+        	 $("#EOI_Payment_Refund_List tbody").append(html);
+         } else {
+        	 enqSFIDforEOI = '';
+        	 $("#EOI_Payment_Refund_List tbody").append("<tr><td colspan='4'>No records found</td></tr>");
+         }
+         $('#EOI_Payment_Refund_List').DataTable(
+ 				{
+ 					destroy: true,
+ 					dom: 'Bfrtip',
+ 					 "buttons": [
+ 						 { "extend": 'excel', "text":'Export To Excel',"className": 'btn btn-default btn-xs',title: 'EOI Refund List' }
+ 				      ],
+ 				      "order": []
+ 				});
+	}).done(function(data){
+		$("#mainPageLoad4").hide();
+	}).fail(function(xhr, status, error) {
+		alert (error);
+		$("#mainPageLoad4").hide();
+    });
+	
+}
+
+function RefundSumbit(id)
+{
+	if($('#srefund'+id).val()=='Pending with Accounts')
+	{
+		//alert("Please change the status before Submit");
+		swal({
+			title: "Please change the status before Submit",
+		    text: "",
+		    timer: 3000,
+		    type: "error",
+		});
+	}
+	else
+		{
+		if($('#srefund'+id).val()=='Rejected')
+		{
+			if($('.refund_comments'+id).val()=='')
+				{
+					//alert("Comments should be mandatory on Rejected Refund");
+					swal({
+						title: "Comments should be mandatory on Rejected Refund",
+					    text: "",
+					    timer: 3000,
+					    type: "error",
+					});
+				}
+			else
+				approvalInitiateRefundProcess(id);
+		}
+		else
+			{
+			if($('.neft_rtgs_utr_no'+id).val()=='')
+				{
+					//alert("NEFT RTGS No. Mandatory");
+					swal({
+						title: "NEFT RTGS No. Mandatory",
+					    text: "",
+					    timer: 3000,
+					    type: "error",
+					});
+				}
+			else
+				approvalInitiateRefundProcess(id);
+			}
+		
+		}
+	
+	
+	}
+function approvalInitiateRefundProcess(id)
+{
+	$.post($('#contextPath').val()+"/approvalInitiateRefundProcess",{"id":id, "rtgs_no":$('.neft_rtgs_utr_no'+id).val(),"comments":$('.refund_comments'+id).val(), "status":$('#srefund'+id).val()
+		,"loged_useremail":$('#loged_useremail').val(), "loged_userid":$('#loged_userid').val(),"trx_id":$('#trx_id'+id).text()},function(data){                      
+		//refresh table
+	}).done(function(data){
+		getEOIREFUNDDetails();
+		swal({
+			title: "Refund status has been submitted",
+		    text: "",
+		    timer: 3000,
+		    type: "success",
+		});
+	}).fail(function(xhr, status, error) {
+		getEOIREFUNDDetails();
+		alert (error);
+    });
+	
 	}
 
+/*$(document).ready(function() {
+var table;
 
 
+$("#EOI_Payment_Refund_List").on('mousedown.edit', "i.fa.fa-pencil-square", function(e) {
+
+  $(this).removeClass().addClass("fa fa-envelope-o");
+  var $row = $(this).closest("tr").off("mousedown");
+//  var $tds = $row.find("td").not(':first').not(':last');
+  var $tds = $row.find("td:nth-last-child(-n+2)").not(':last');
+
+  $.each($tds, function(i, el) {
+    var txt = $(this).text();
+    $(this).html("").append("<input type='text' value=\""+txt+"\">");
+  });
+  
+  var $firstTdSelect = $row.find("td:first");
+  var selectOptions = $("#selectbasic").clone();
+ 
+  $row.find("td:nth-last-child(-n+2)").not(':last').html(selectOptions.show());
+
+});
+
+$("#EOI_Payment_Refund_List").on('mousedown', "input", function(e) {
+  e.stopPropagation();
+});
+
+$("#EOI_Payment_Refund_List").on('mousedown.save', "i.fa.fa-envelope-o", function(e) {
+  
+  $(this).removeClass().addClass("fa fa-pencil-square");
+  var $row = $(this).closest("tr");
+  var $tds = $row.find("td:nth-last-child(-n+2)").not(':last');
+  
+  $.each($tds, function(i, el) {
+    var txt = $(this).find("input").val()
+    $(this).html(txt);
+  });
+  
+  var $firstTdSelect = $row.find("td:first");
+  var selectValue = $firstTdSelect.find("select").val();
+  $row.find("td:nth-last-child(-n+2)").not(':last').html(selectValue);
+  alert(selectValue);
+  //table.cell($firstTdSelect).data(selectValue);
+});
 
 
-
+ $("#EOI_Payment_Refund_List").on('mousedown', "#selectbasic", function(e) {
+  e.stopPropagation();
+});
+});
+*/
 

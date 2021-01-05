@@ -41,7 +41,15 @@ public class RefundInitiateDaoImpl extends AbstractDao<Integer, RefundInitiate> 
 	@Override
 	public String updateEOIRefundEnty(String enquiry_Sfid,String trx_no, String whereCodnition) {
 		Session session = this.sessionFactory.getCurrentSession();
-		Query query = session.createQuery("UPDATE EOIPaymentDtl SET refund_trx_no ='"+trx_no+"'  WHERE enq_sfid = '"+enquiry_Sfid+"' and refund_trx_no is null ");
+		Query query = session.createQuery("UPDATE EOIPaymentDtl SET refund_trx_no ='"+trx_no+"'  WHERE enq_sfid = '"+enquiry_Sfid+"' and refund_trx_no is null and isactive='Y' ");
+		query.executeUpdate();
+		return null;
+	}
+
+	@Override
+	public String approveRejectRefund(Integer id, String updateValues, String whereCodnition) {
+		Session session = this.sessionFactory.getCurrentSession();
+		Query query = session.createQuery("UPDATE RefundInitiate SET "+updateValues+"  "+whereCodnition+" ");
 		query.executeUpdate();
 		return null;
 	}
