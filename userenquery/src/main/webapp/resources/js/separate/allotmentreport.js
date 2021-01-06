@@ -384,7 +384,7 @@ function getUnitFacingCount (){
                 } 
             }
 			
-			countHTML += "<div class='clearfix'></div> <h4>Facing Wise Offer Created <small><b>(*Indicative - Its considering offers created through D4U only)</b></small> </h4> <table class='table table-bordered table-striped'>" ;
+			countHTML += "<div class='clearfix'></div> <h4>Facing Wise Offer Created</h4> <table class='table table-bordered table-striped'>" ;
 							 	
 				countHTML += "<thead> <tr> <th>Type</th>"; 
 				for(h = 0; h< unitFacing.length; h++){
@@ -497,7 +497,7 @@ function getUnitTowerCount (){
                 } 
             }
 			
-			countHTML += "<div class='clearfix'></div> <h4>Tower Wise Offer Created <small><b>(*Indicative - Its considering offers created through D4U only)</b></small> </h4> <table class='table table-bordered table-striped'>" ;
+			countHTML += "<div class='clearfix'></div> <h4>Tower Wise Offer Created</h4> <table class='table table-bordered table-striped'>" ;
 							 	
 				countHTML += "<thead> <tr> <th>Type</th>"; 
 				for(h = 0; h< unitTower.length; h++){

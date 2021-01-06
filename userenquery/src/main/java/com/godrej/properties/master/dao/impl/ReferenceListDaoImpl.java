@@ -26,7 +26,7 @@ public class ReferenceListDaoImpl extends AAbstractDao<ReferenceList> implements
 		StringBuilder jpql=new StringBuilder();
 		jpql.append(" SELECT c FROM ReferenceList c ")
 		.append(" INNER JOIN FETCH c.reference r ")
-		.append(" WHERE  r.code=:referenceCode AND c.isActive='Y'");
+		.append(" WHERE  r.code=:referenceCode AND c.isActive='Y' order by c.name asc");
 		Map<String,Object> params=new HashMap<>();
 		params.put("referenceCode",referenceCode);
 		

@@ -22,11 +22,16 @@
 <link rel="stylesheet" href="<c:url value='/resources/css/inner.css?v=2.0' />">
 <link rel="stylesheet" href="<c:url value='/resources/css/style.css?v=2.0' />">
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="<c:url value='/resources/css/sweetalert2.min.css' />"> 
 	
 <script src="<c:url value='/resources/js/jquery-1.12.4.min.js'/>"></script>
 <script src="<c:url value='/resources/js/bootstrap.min.js'/>"></script>
 <script type="text/javascript" charset="utf8" src="<c:url value='/resources/js/jquery.dataTables.js'/>"></script>
 <script type="text/javascript" charset="utf8" src="<c:url value='/resources/js/payment/paymentapprove.js'/>"></script>
+<script type="text/javascript" charset="utf8" src="<c:url value='/resources/js/refundreport/initiateRefundEOI.js?v=${sessionScope.version}'/>"></script>
+<script src="<c:url value='/resources/js/sweetalert2.min.js' />"></script>
+<script src="<c:url value='/resources/js/utility.js?v=${sessionScope.version}' />"></script> 
 </head> 
 <%! String projectname,projectid ,projectrole,userid;%>
 <%
@@ -83,6 +88,9 @@ if(ses!=null){
 					</li>
 					<li id="Payment_Reject_Id" onclick="getRejectedPaymentDetails()">
 						<a href="#tab3" data-toggle="tab">Payment Rejected List</a>
+					</li>
+					<li id="EOI_Refund_Process_Id" onclick="getEOIREFUNDDetails()">
+						<a href="#tab4" data-toggle="tab">EOI REFUND List</a>
 					</li>    
 				</ul>
 				<div class=""></div>
@@ -185,6 +193,43 @@ if(ses!=null){
 					<div class="clearfix"></div>
 				</div>
 				<div class="clearfix"></div>
+				<div class="tab-pane" id="tab4"> 
+				<div class="commonLoad" id="mainPageLoad4" style="display: none;"></div>
+					<div class="col-md-12">
+						<div class="clearfix"></div>
+						
+						<select style="display:none" class="selection" id="selectbasic" name="selectbasic" class="form-control">
+						    <option value="1">option 1</option>
+						    <option value="2">option 2</option>
+						    <option value="3">option 3</option>
+						  </select>
+						<table class="table table-bordered  bgWhite mrgB8" id="EOI_Payment_Refund_List">
+							<thead>
+								<tr class="subHead">
+									<th>A/C Holder Name</th>
+									<th>Bank Name</th>
+									<th>Branch Name </th>
+									<th>Account No. </th>
+									<th>IFSC Code </th>
+									<th>Transaction No. </th>
+									<th>Account Type</th>
+									<th>Reason for Cancellation </th>
+									<th>Description </th>
+									<th>Refund Total Amt </th>
+									<th>NEFT / RTGS UTR No </th>
+									<th>Comments </th>
+									<th>Status </th>
+									<th>Action</th>
+								</tr>
+							</thead>
+							<tbody>
+								
+							</tbody>
+						</table>
+						<div class="clearfix"></div>
+					</div>
+					<div class="clearfix"></div>
+				</div>
 			</div>
 		  <div class="clearfix"></div>
 		</div>  

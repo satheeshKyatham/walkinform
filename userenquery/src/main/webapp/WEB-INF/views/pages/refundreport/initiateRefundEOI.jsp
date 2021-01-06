@@ -169,6 +169,8 @@
 				</h4>
 				<div class="clearfix"></div>
 				<div class="col-md-12">
+				
+				
 				<table class="table table-bordered  bgWhite mrgB8" id="csPtColRefundIntiatedEoi">
 					<thead>
 						<tr class="subHead">
@@ -182,6 +184,7 @@
 							<th> Reason for Cancellation </th>
 							<th style="width:250px;"> Description </th>
 							<th> Refund Total Amt </th>
+							<th> Refund Status </th>
 						</tr>
 					</thead>
 					<tbody>
