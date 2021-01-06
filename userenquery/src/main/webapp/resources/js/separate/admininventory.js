@@ -777,3 +777,11 @@ function enqDtlForAdminHold () {
  
  
 //usertowermultiselect ();
+
+
+function sendEmail() {
+    var email = "atulbhanushali93@gmail.com";//message.emailId;
+    var subject = "TestSubject"; //message.subject;
+    var emailBody = 'Hi <b>Test Body</b>';//+message.from;
+    document.location = "mailto:"+email+"?subject="+subject+"&body="+emailBody;
+}

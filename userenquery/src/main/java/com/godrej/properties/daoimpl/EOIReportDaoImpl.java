@@ -389,10 +389,16 @@ public class EOIReportDaoImpl implements EOIReportDao{
 				+ " CASE WHEN a.count IS NULL THEN 0 ELSE a.count END as total  "
 				+ " FROM salesforce.vw_unit_facing_count a "
 				
+				//+ " LEFT JOIN salesforce.vw_offered_unit_facing_count b  "
+				
 				+ " LEFT JOIN salesforce.vw_offered_unit_facing_count b  "
+				
 				+ " ON a.propstrength__unit_type__c = b.propstrength__unit_type__c  "
 				+ " AND a.property_facing__c = b.property_facing__c "
-				+ " AND b.project_sfid = '"+projectSFID+"' and b.isactive = 'A'  "
+				//+ " AND b.project_sfid = '"+projectSFID+"' and b.isactive = 'A'  "
+				
+				+ " AND b.project_sfid = '"+projectSFID+"' AND b.propstrength__property_alloted_through_offer__c = true AND b.propstrength__active__c = true  "
+				
 				+ " where a.project18digit__c = '"+projectSFID+"'  AND a.propstrength__active__c = true order by a.propstrength__unit_type__c,  a.property_facing__c ASC ", UnitFacingCount.class);
 
 		authors = q.getResultList();
@@ -418,10 +424,12 @@ public class EOIReportDaoImpl implements EOIReportDao{
 				+ " CASE WHEN a.count IS NULL THEN 0 ELSE a.count END as total  "
 				+ " FROM salesforce.vw_unit_tower_count a "
 				
+				//+ " LEFT JOIN salesforce.vw_offered_unit_tower_count b  "
 				+ " LEFT JOIN salesforce.vw_offered_unit_tower_count b  "
+				
 				+ " ON a.propstrength__unit_type__c = b.propstrength__unit_type__c  "
 				+ " AND a.tower_name__c = b.tower_name__c "
-				+ " AND b.project_sfid = '"+projectSFID+"' and b.isactive = 'A'  "
+				+ " AND b.project_sfid = '"+projectSFID+"' AND b.propstrength__property_alloted_through_offer__c = true AND b.propstrength__active__c = true  "
 				+ " where a.project18digit__c = '"+projectSFID+"'  AND a.propstrength__active__c = true order by a.propstrength__unit_type__c,  a.tower_name__c ASC ", UnitTowerCount.class);
 
 		authors = q.getResultList();
