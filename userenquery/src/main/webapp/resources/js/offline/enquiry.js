@@ -154,6 +154,7 @@ function populateEnquiryAndContact(resp){
 		   hideEnquirySourceByEnquiryType(null,null);
 		}
 		$('#walkInSource').val("");
+		$('#phasedto').val("");
 	    $('#walkInSourceDetail').val("");
 	    $('#otherChannelPartnerName').val("");
 	    $("#desiredUnitType0").trigger("click");
@@ -197,6 +198,7 @@ function populateEnquiryAndContact(resp){
 				   hideEnquirySourceByEnquiryType(null,null);
 				}
 				$('#walkInSource').val("");
+				$('#phasedto').val("");
 			    $('#walkInSourceDetail').val("");
 			    $('#otherChannelPartnerName').val("");
 			    $("#desiredUnitType0").trigger("click");
@@ -300,7 +302,8 @@ function populateBasicInfo(enq,contact){
 			}
 			$('#walkInSource').val(enq.walkInSource);			
 			$('#walkInSourceDetail').val(enq.walkInSourceDetail);
-						
+			if(enq.phasedto!=null)
+				$('#phasedto').val(enq.phasedto.sfid);			
 			$('.enquiryId').val(enq.enquiryId);
 			loadEnquiryReport(enq);
 			if(!isEmpty(contact=enq.contact)){

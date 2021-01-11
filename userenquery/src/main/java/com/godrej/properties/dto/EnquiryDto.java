@@ -2,14 +2,11 @@ package com.godrej.properties.dto;
 
 import java.util.Date;
 
-import javax.persistence.Column;
-
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.godrej.properties.common.dto.CommonDto;
 import com.godrej.properties.common.utilities.CommonValidations;
 import com.godrej.properties.constants.KeyConstants;
-import com.godrej.properties.model.ProjectLaunch;
 
 public class EnquiryDto extends CommonDto {
 
@@ -120,6 +117,7 @@ public class EnquiryDto extends CommonDto {
     private String isAllowCCPaymentGateway;
     private Double virtual_meeting_count__c;
     private String closingmanger_email;
+    private PhaseDto phasedto;
     
 	public String getClosing_manager_name__c() {
 		return closing_manager_name__c;
@@ -691,6 +689,18 @@ public class EnquiryDto extends CommonDto {
 	public void setClosingmanger_email(String closingmanger_email) {
 		this.closingmanger_email = closingmanger_email;
 	}
+
+	public PhaseDto getPhasedto() {
+		return phasedto;
+	}
+
+	public void setPhasedto(PhaseDto phasedto) {
+		this.phasedto = phasedto;
+	}
+
+
+
+
 
 	
 	

@@ -409,7 +409,7 @@
 						
 						<div class="col-md-2 col-sm-6 col-xs-6">
 							<div class="group">
-								<input class="autocomplete-off postal_code contactFields xss_input_txt_validation"  type="text" name="contact.pinCode" id="pinCode" maxlength="6"/>
+								<input class="autocomplete-off postal_code contactFields xss_input_txt_validation_optional"  type="text" name="contact.pinCode" id="pinCode" maxlength="6"/>
 								<span class="highlight"></span><span class="bar"></span>
 								<label>Pin Code</label>
 							</div>	
@@ -734,9 +734,20 @@
 							<input style="width:100%" id="ex13" type="text" name="enquiryReport.budget" data-slider-value="0" data-slider-step="1" />
 							<div class="clearfix"></div>
 						</div>
-						
-						
-						
+						<c:if test="${!empty phaseList}">
+							<div class="col-md-6 col-xs-12">
+									<div class="group">
+										<select class="isphaselist requiredField enquiryFields" id="phasedto" name="phasedto.sfid"><!-- disabled="disabled" -->
+										    <option value=""></option>
+											<c:forEach var="phaseList" items="${phaseList}">
+		                                       <option value="${phaseList.sfid}">${phaseList.name}</option>
+		                                     </c:forEach>
+										</select>
+										<span class="highlight"></span><span class="bar"></span>
+										<label class="select-label">Phase <strong class="mndt">*</strong></label>
+									</div>
+								</div>
+							</c:if>
 						
 						<!-- END Added By A -->
 						<div class="clearfix"></div>
@@ -1261,7 +1272,7 @@
 	<script src="<c:url value='/resources/js/springForm.js?v=18.25' />"></script>
 	<script src="<c:url value='/resources/js/commonValidation.js?v=18.90' />"></script>
 	<script src="<c:url value='/resources/js/utility.js?v=18.25' />"></script>
-	<script src="<c:url value='/resources/js/enquiryRequest/enquiryRequest.js?v=18.25' />" /></script>
+	<script src="<c:url value='/resources/js/enquiryRequest/enquiryRequest.js?v=19.01' />" /></script>
 	<%-- <script src="<c:url value='/resources/js/enquiryRequest/salesRequest.js?v=1' />"></script> --%>
 	
     <script src="<c:url value='/resources/js/intlTelInput.js' />"></script>

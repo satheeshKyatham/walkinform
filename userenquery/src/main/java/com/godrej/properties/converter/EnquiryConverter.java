@@ -35,6 +35,9 @@ public class EnquiryConverter implements CommonConverter<Enquiry, EnquiryDto>{
 	@Autowired
 	private TokenService tokenService;
 	
+	@Autowired
+	private PhaseConverter phaseConverter;
+	
 	@Override
 	public EnquiryDto entityToDto(Enquiry entity) {
 		
@@ -192,6 +195,7 @@ public class EnquiryConverter implements CommonConverter<Enquiry, EnquiryDto>{
 			dto.setInternationalSMDto(entity.getInternational_Sales_Manager__c());
 			
 		}
+		dto.setPhasedto(phaseConverter.entityToDto(entity.getPhase()));
 		return dto;
 	}
 
@@ -346,6 +350,7 @@ public class EnquiryConverter implements CommonConverter<Enquiry, EnquiryDto>{
 			entity.setVirtual_meeting_count__c(dto.getVirtual_meeting_count__c());
 		if(dto.getSite_Visit_Done__c()!=null)
 			entity.setSite_Visit_Done__c(dto.getSite_Visit_Done__c());
+		entity.setPhase(phaseConverter.dtoToEntity(dto.getPhasedto()));
 		return entity;
 	}
 

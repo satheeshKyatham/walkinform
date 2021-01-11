@@ -22,7 +22,9 @@ import com.godrej.properties.common.dto.CustomResponseDto;
 import com.godrej.properties.constants.KeyConstants;
 import com.godrej.properties.constants.MessageConstants;
 import com.godrej.properties.dto.EnquiryDto;
+import com.godrej.properties.dto.PhaseDto;
 import com.godrej.properties.master.dto.ReferenceListDto;
+import com.godrej.properties.master.service.PhaseListService;
 import com.godrej.properties.master.service.ReferenceListService;
 import com.godrej.properties.model.ProjectLaunch;
 import com.godrej.properties.service.EnquiryReportService;
@@ -45,6 +47,9 @@ public class OfflineEOIController {
 	
 	@Autowired
 	private EnquiryReportService enquiryReportService;
+	
+	@Autowired
+	private PhaseListService phaseListService;
 	
 	@GetMapping(value = {"/offlineEOI"})
 	public ModelAndView offlineEOI(@RequestParam("countrycode") Optional<String> countrycode,@RequestParam("mobileno") Optional<String> mobileno,
@@ -112,6 +117,8 @@ public class OfflineEOIController {
 		view.addObject("communcationMediumList",communcationMediumList);
 		List<ReferenceListDto> visitTypes=referenceListService.getReferenceListByReferenceCode(KeyConstants.REFERENCE_CODE_VISIT_TYPE);
 		view.addObject("visitTypes", visitTypes);
+		List<PhaseDto> phaseList = phaseListService.getPhaseListByProjectCode(projectId);
+		view.addObject("phaseList",phaseList);
 		return view;		 
 	}
 	
