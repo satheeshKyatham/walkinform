@@ -591,7 +591,7 @@
      						<!-- Start -->
 							<div class="referred_by_name ccol-md-3 col-xs-6">
 								<div class="group">
-									<input type="text" class="autocomplete-off xss_input_txt_validation" id="referredbyId" name="enquiryReport.referredby"/>
+									<input type="text" class="autocomplete-off xss_input_txt_validation_optional" id="referredbyId" name="enquiryReport.referredby"/>
 									<span class="highlight"></span><span class="bar"></span>
 									<label>Referred by</label>
 								</div>
@@ -636,7 +636,7 @@
 								<label class="select-label">Purchase Purpose<strong class="mndt"></strong></label>
 							</div>
 							<div class="group" id="lastvisitdate_div" style="display:none"><!--  -->
-									<input type="text" class="autocomplete-off disableInputs xss_input_txt_validation_optional" id="lastvisitdate" /><!-- name="enquiryReport.lastvisitdate" -->
+									<input type="text" class="autocomplete-off disableInputs" id="lastvisitdate" /><!-- name="enquiryReport.lastvisitdate" -->
 									<span class="highlight"></span><span class="bar"></span>
 									<label>Last Visit Date</label>
 							</div>
