@@ -36,6 +36,10 @@ public class ViewFiles extends HttpServlet {
 		} else if (from.equals("eoiForm")) {
 			file = new File(rootPath+"\\"+fileName);
 			fileName = file.getName();
+		} else if(from.equals("D4U File Storage")){
+			String regionname=request.getParameter("rname");
+			String projecctName=request.getParameter("pname");
+			file = new File(rootPath+"\\"+from+"\\"+regionname+"\\"+projecctName+"\\EOIREFUNDCHEQUE\\"+eid+"\\"+fileName);
 		}
 		
 	    response.setHeader("Content-Type",    getServletContext().getMimeType(file.getName()));

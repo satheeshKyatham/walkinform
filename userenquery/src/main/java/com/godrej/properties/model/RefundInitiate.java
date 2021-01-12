@@ -19,7 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class RefundInitiate implements Serializable{
 
 	/**
-	 * Author : Satheesh K
+	 * @author sathish.kyatham
 	 */
 	private static final long serialVersionUID = 1L;
 	

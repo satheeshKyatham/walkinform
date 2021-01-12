@@ -232,4 +232,12 @@ public class PaymentServiceController {
 		return gson.toJson(refundInitiateService.getRefundInitiatedData(whereCondition));*/
 			
 	}
+	
+	@GetMapping(value = "/getInitiatedRefundByTrx_id", produces = "application/json")
+	public String getInitiatedRefundByTrx_id(@RequestParam("trx_id") String trx_id)
+	{
+		Gson gson = new GsonBuilder().disableHtmlEscaping().serializeNulls().create();
+		//String whereCondition=" where project_sfid='"+projectid+"' and isactive='Y'";
+		return gson.toJson(eoiPaymentService.getInitiatedRefundEntrysByTrx_id(trx_id));	
+	}
 }

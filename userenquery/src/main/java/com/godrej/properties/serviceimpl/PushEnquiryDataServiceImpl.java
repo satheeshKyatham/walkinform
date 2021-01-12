@@ -110,36 +110,74 @@ public class PushEnquiryDataServiceImpl  implements PushEnquiryDataService{
 	public String getAdvertisementForEnquiry(EnquiryDto dto) {
 		String mediaType="";
 		String mediaSubType="";
+		String mediapPhaseId="";
 		String projectSfid=dto.getProject()==null?"":dto.getProject().getSfid();
 		
 		if("Partner".equals(dto.getIsReferredByChannelPartner()) && ((null!=dto.getChannelPartner() && null!=dto.getBrokerContact()) || (null!=dto.getOtherChannelPartner()))){
 			mediaType="Channel Partner";
 			mediaSubType="CP - Walk-in";
+			if(dto.getPhasedto().getSfid()!=null)
+			{
+				//getAdvertisementForEnquiryWithPhase
+				mediapPhaseId=dto.getPhasedto().getSfid();
+			}
 		}else if("Direct".equals(dto.getIsReferredByChannelPartner()) && null!=dto.getWalkInSource()){
 			mediaType="Walkin";
 			mediaSubType="Walkin";
+			if(dto.getPhasedto().getSfid()!=null)
+			{
+				//getAdvertisementForEnquiryWithPhase
+				mediapPhaseId=dto.getPhasedto().getSfid();
+			}
 		}
 		else if("Employee".equals(dto.getIsReferredByChannelPartner()) && null!=dto.getWalkInSource())
 		{
 			mediaType="Employee";
 			mediaSubType="Employee Referral";
+			if(dto.getPhasedto().getSfid()!=null)
+			{
+				mediapPhaseId=dto.getPhasedto().getSfid();
+			}
 		}
 		else if("Referral".equals(dto.getIsReferredByChannelPartner()) && null!=dto.getWalkInSource())
 		{
 			mediaType="Referral";
 			mediaSubType="Customer Referral";
+			if(dto.getPhasedto().getSfid()!=null)
+			{
+				mediapPhaseId=dto.getPhasedto().getSfid();
+			}
 		}
 		else if("Loyalty".equals(dto.getIsReferredByChannelPartner()) && null!=dto.getWalkInSource())
 		{
 			mediaType="Referral";
 			mediaSubType="Loyalty customers";
+			if(dto.getPhasedto().getSfid()!=null)
+			{
+				mediapPhaseId=dto.getPhasedto().getSfid();
+			}
 		}
 		else
 		{
 			mediaType="Walkin";
 			mediaSubType="Walkin";
+			if(dto.getPhasedto().getSfid()!=null)
+			{
+				mediapPhaseId=dto.getPhasedto().getSfid();
+			}
 		}
-		return pushEnquiryDataDao.getAdvertisementForEnquiry(projectSfid, mediaType, mediaSubType);
+		if(mediapPhaseId!=null)
+		{
+			String phaseIDVal = pushEnquiryDataDao.getAdvertisementForEnquiryWithPhase(projectSfid, mediaType, mediaSubType, mediapPhaseId);
+			if(phaseIDVal!=null && phaseIDVal.length()>0)
+			{
+				return phaseIDVal;
+			}
+			else
+				return pushEnquiryDataDao.getAdvertisementForEnquiry(projectSfid, mediaType, mediaSubType);
+		}
+		else
+			return pushEnquiryDataDao.getAdvertisementForEnquiry(projectSfid, mediaType, mediaSubType);
 	}
 
 	@Override

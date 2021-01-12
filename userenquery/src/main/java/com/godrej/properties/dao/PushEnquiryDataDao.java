@@ -27,6 +27,7 @@ public interface PushEnquiryDataDao {
 	public Token validateMobileAndToken(String mobileNo,String token,String projectSfid);
 
 	public String getAdvertisementForEnquiry(String projectSfid,String mediaType,String mediaSubType);
+	public String getAdvertisementForEnquiryWithPhase(String projectSfid,String mediaType,String mediaSubType,String phasesfid);
 	public int savePaymentDetails(EnquiryDto enq);
 
 	public List<Enquiry> getEnquiriesByMobileNoAndProjectEOI(String countryCode,String mobileNo, String projectSfid);

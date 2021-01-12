@@ -190,5 +190,11 @@ public class EOIPaymentDtlServiceImpl implements EOIPaymentDtlService{
 			return response;
 		}
 	}
+
+	@Override
+	public List<EOIPaymentDtl> getInitiatedRefundEntrysByTrx_id(String trx_id) {
+		// TODO Auto-generated method stub
+		return dao.getInitiatedRefundEntrysByTrx_id(trx_id);
+	}
 	
 }

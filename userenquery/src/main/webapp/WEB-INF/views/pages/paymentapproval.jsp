@@ -217,6 +217,7 @@ if(ses!=null){
 									<th>Description </th>
 									<th>Refund Total Amt </th>
 									<th>NEFT / RTGS UTR No </th>
+									<th>Cancelled Cheque Copy</th>
 									<th>Comments </th>
 									<th>Status </th>
 									<th>Action</th>
@@ -234,6 +235,41 @@ if(ses!=null){
 		  <div class="clearfix"></div>
 		</div>  
      	<div class="clearfix"></div>
+     	 	<!-- Model -->
+	<div class="modal fade" id="paymentDetails_EOI_Refund" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	  <div class="modal-dialog" role="document" style="width: 100%;">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title" id="ModalLabelAdmin">EOI Initiated Refund Details</h4>
+	      </div>
+	      <div class="modal-body">
+	      <div class="col-md-12" style="margin-bottom:50px;">
+				<table class="table table-bordered" id="paymentDetails_EOI_Refund_table">
+						<thead>
+							<tr>
+								<th style="width:130px;"> Payment Type </th>
+								<th style="width:120px;"> Bank Name </th>
+								<th> Transaction ID </th>
+								<th> Transaction</br>Date </th>
+								<th> Transaction Amount </th>
+								<th style="width:200px;"> Receipt/</br>Cheque Attachment </th>
+								<th style="width:150px;"> Description </th>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+				<div class="clearfix"></div>
+			</div>
+	      <div class="clearfix"></div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-primary btn-default" data-dismiss="modal">Close</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	</div>
 	<script src="<c:url value='/resources/js/dataTables.buttons.min.js'/>"></script>
 	<script src="<c:url value='/resources/js/jszip.min.js'/>"></script>
 	<script src="<c:url value='/resources/js/buttons.html5.min.js'/>"></script>
