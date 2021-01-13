@@ -116,7 +116,7 @@ public class PushEnquiryDataServiceImpl  implements PushEnquiryDataService{
 		if("Partner".equals(dto.getIsReferredByChannelPartner()) && ((null!=dto.getChannelPartner() && null!=dto.getBrokerContact()) || (null!=dto.getOtherChannelPartner()))){
 			mediaType="Channel Partner";
 			mediaSubType="CP - Walk-in";
-			if(dto.getPhasedto().getSfid()!=null)
+			if(dto.getPhasedto()!=null && dto.getPhasedto().getSfid()!=null)
 			{
 				//getAdvertisementForEnquiryWithPhase
 				mediapPhaseId=dto.getPhasedto().getSfid();
@@ -124,7 +124,7 @@ public class PushEnquiryDataServiceImpl  implements PushEnquiryDataService{
 		}else if("Direct".equals(dto.getIsReferredByChannelPartner()) && null!=dto.getWalkInSource()){
 			mediaType="Walkin";
 			mediaSubType="Walkin";
-			if(dto.getPhasedto().getSfid()!=null)
+			if(dto.getPhasedto()!=null && dto.getPhasedto().getSfid()!=null)
 			{
 				//getAdvertisementForEnquiryWithPhase
 				mediapPhaseId=dto.getPhasedto().getSfid();
@@ -134,7 +134,7 @@ public class PushEnquiryDataServiceImpl  implements PushEnquiryDataService{
 		{
 			mediaType="Employee";
 			mediaSubType="Employee Referral";
-			if(dto.getPhasedto().getSfid()!=null)
+			if(dto.getPhasedto()!=null && dto.getPhasedto().getSfid()!=null)
 			{
 				mediapPhaseId=dto.getPhasedto().getSfid();
 			}
@@ -143,7 +143,7 @@ public class PushEnquiryDataServiceImpl  implements PushEnquiryDataService{
 		{
 			mediaType="Referral";
 			mediaSubType="Customer Referral";
-			if(dto.getPhasedto().getSfid()!=null)
+			if(dto.getPhasedto()!=null && dto.getPhasedto().getSfid()!=null)
 			{
 				mediapPhaseId=dto.getPhasedto().getSfid();
 			}
@@ -152,7 +152,7 @@ public class PushEnquiryDataServiceImpl  implements PushEnquiryDataService{
 		{
 			mediaType="Referral";
 			mediaSubType="Loyalty customers";
-			if(dto.getPhasedto().getSfid()!=null)
+			if(dto.getPhasedto()!=null && dto.getPhasedto().getSfid()!=null)
 			{
 				mediapPhaseId=dto.getPhasedto().getSfid();
 			}

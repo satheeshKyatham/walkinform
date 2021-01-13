@@ -220,9 +220,9 @@ function selectedRole (source) {
 		}
 	} else if($("#roleSelected").val()=='EOIPA'){
 		if (source != 'HEADER_COMMON') {
-			window.location.href = "paymentapproval?projectid="+$('#projectSelected').val()+"&projectname="+$('#projectSelected option:selected').text();
+			window.location.href = "paymentapproval?projectid="+$('#projectSelected').val()+"&projectname="+$('#projectSelected option:selected').text()+"&region_name="+$('#projectSelected option:selected').attr('name');
 		} else {
-			var path = "paymentapproval?projectid="+$('#projectSelected').val()+"&projectname="+$('#projectSelected option:selected').text();
+			var path = "paymentapproval?projectid="+$('#projectSelected').val()+"&projectname="+$('#projectSelected option:selected').text()+"&region_name="+$('#projectSelected option:selected').attr('name');
 			pageRedirect (path);
 		}
 	} else if($("#roleSelected").val()=='KYCA') {

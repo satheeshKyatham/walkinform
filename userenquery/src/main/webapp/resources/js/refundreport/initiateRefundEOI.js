@@ -172,6 +172,7 @@ function getEOITabPaymentRecordRefund() {
 
 function initiateRefundRequest()
 {
+	$("#initiateRefundRequest_id").prop("disabled", true);
 	var validate=checkValidationOnSubmit('refund_div_id');
 	if(validate) {
 		
@@ -207,6 +208,7 @@ function initiateRefundRequest()
 				    timer: 3000,
 				    type: "error",
 				});
+				$("#initiateRefundRequest_id").prop("disabled", false);
 			}
 		else
 			{
@@ -241,10 +243,13 @@ function initiateRefundRequest()
 			        		//$('#enquirysfid').val('');
 			        		$("#ref_cncelled_check").val('');
 			        		$("#enqNameInputRefund").val('');
+			        		$("#initiateRefundRequest_id").prop("disabled", false);
 			        }
 				});
 			}
 	}
+	else
+		{$("#initiateRefundRequest_id").prop("disabled", false);}
 }
 
 function callEOIREFUND()
@@ -259,6 +264,7 @@ function callEOIREFUND()
          if (objJson != null) {
         	 for(var i=0;i<objJson.length;i++){
         		 html += "<tr>" +
+        		 	" <td>"+objJson[i].enq_name+"</td>" +
         		 	" <td>"+objJson[i].ac_holder_name+"</td>" +
         		 	" <td>"+objJson[i].bank_name+"</td>" +
 					" <td>"+objJson[i].branch_name+"</td>" +
@@ -301,7 +307,7 @@ function getEOIREFUNDDetails()
         		 var cancelledCheque="";
         		 if(data[i].cancelled_check_path!="")
 					{
-						cancelledCheque = contextPath+"/file?name=REFUND_"+ encodeURIComponent(data[i].cancelled_check_file_name.trim())+"&from="+encodeURIComponent("D4U File Storage")+"&eid="+data[i].enquiry_sfid+"&fid="+data[i].cancelled_check_path.charAt(0)+"&rname=Pune&pname="+encodeURIComponent($('#projectname').val());
+						cancelledCheque = contextPath+"/file?name=REFUND_"+ encodeURIComponent(data[i].cancelled_check_file_name.trim())+"&from="+encodeURIComponent("D4U File Storage")+"&eid="+data[i].enquiry_sfid+"&fid="+data[i].cancelled_check_path.charAt(0)+"&rname="+$('#region_name').val()+"&pname="+encodeURIComponent($('#projectname').val());
 						console.log(cancelledCheque)
 					}
         		 
@@ -319,6 +325,10 @@ function getEOIREFUNDDetails()
 								" <td><button onclick='RefundSumbit("+data[i].id+")'>Submit</button></td>" ;
 					}
         		 html += "<tr>" +
+        		 	" <td>"+data[i].enq_name+"</td>" +
+        		 	" <td>"+data[i].customer_name+"</td>" +
+        		 	" <td>"+data[i].cm_name+"</td>" +
+        		 	" <td>"+data[i].refund_initiated_date+"</td>" +
         		 	" <td>"+data[i].ac_holder_name+"</td>" +
         		 	" <td>"+data[i].bank_name+"</td>" +
 					" <td>"+data[i].branch_name+"</td>" +
@@ -327,8 +337,9 @@ function getEOIREFUNDDetails()
 					" <td id='trx_id"+data[i].id+"'>"+data[i].trx_id+"</td>" +
 					" <td>"+data[i].account_type+"</td>" +
 					" <td>"+data[i].reason_for_cancel_refund+"</td>" +
-					" <td><a target='_blank' href="+cancelledCheque+">"+data[i].cancelled_check_file_name.trim()+"</a></td>" +
 					" <td>"+data[i].description+"</td>" +
+					" <td><a target='_blank' href="+cancelledCheque+">"+data[i].cancelled_check_file_name.trim()+"</a></td>" +
+					
 //					" <td>"+data[i].refund_amount+"</td>" +
 //					+"<td><a type='button' data-toggle='modal' data-target='#paymentDetails_KYC' onclick='getKYCPaymentDetails(this,\""+value.offerSfid+"\")'>"+data[i].refund_amount+"</a></td>"+
 					"<td><a type='button' data-toggle='modal' data-target='#paymentDetails_EOI_Refund' onclick='getEOIRefundPaymentDetails(this,\""+data[i].trx_id.trim()+"\")' >"+data[i].refund_amount+"</a></td>"+
@@ -513,6 +524,7 @@ function getEOIRefundPaymentDetails(e,trx_id)
 							" <td>"+obj1[i].transaction_id+"</td>" +
 							" <td>"+obj1[i].transaction_date+"</td>" +
 							" <td>"+obj1[i].transaction_amount+"</td>" +
+							" <td>"+obj1[i].createdDate+"</td>" +
 							" <td><a target='_blank' href="+reciptTarget+">"+obj1[i].cheque_attach+"</a></td>" +
 							" <td>"+obj1[i].description+"</td>" +
 						" </tr>";

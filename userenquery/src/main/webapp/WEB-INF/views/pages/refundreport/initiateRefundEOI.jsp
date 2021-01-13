@@ -141,7 +141,7 @@
 			</div>
 			<div class="form-group col-md-3">
 				<label> &nbsp; </label>
-				<button onclick="initiateRefundRequest()" style="line-height:0; color: #fff; background-color: #0077b9;" class="form-control btn btn-primary mrgT0">
+				<button id="initiateRefundRequest_id" onclick="initiateRefundRequest()" style="line-height:0; color: #fff; background-color: #0077b9;" class="form-control btn btn-primary mrgT0">
 					Initiate Cancellation/Refund
 				</button>
 				<!-- <div class="col-md-12">
@@ -174,12 +174,13 @@
 				<table class="table table-bordered  bgWhite mrgB8" id="csPtColRefundIntiatedEoi">
 					<thead>
 						<tr class="subHead">
+							<th>Enquiry No.</th>
 							<th>A/C Holder Name</th>
 							<th>Bank Name</th>
 							<th style="width:130px;"> Branch Name </th>
 							<th style="width:120px;"> Account No. </th>
 							<th> IFSC Code </th>
-							<th> Transaction No. </th>
+							<th> D4U's Transaction No. </th>
 							<th> Account Type</th>
 							<th> Reason for Cancellation </th>
 							<th style="width:250px;"> Description </th>

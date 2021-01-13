@@ -198,11 +198,11 @@ public class PaymentServiceController {
 		String whereCondition="";
 		if(userid!=null && userid.length()>0)
 		{
-			whereCondition =" where project_sfid='"+project_sfid+"' and refund_initiated_by='"+userid+"' order by refund_initiated_date desc";
+			whereCondition =" where refund.project_sfid='"+project_sfid+"' and refund.refund_initiated_by='"+userid+"' order by refund.refund_initiated_date desc";
 			
 		}
 		else
-			whereCondition=" where project_sfid='"+project_sfid+"' order by refund_initiated_date desc";
+			whereCondition=" where refund.project_sfid='"+project_sfid+"' order by refund.refund_initiated_date desc";
 		return gson.toJson(refundInitiateService.getRefundInitiatedData(whereCondition));
 			
 	}
