@@ -41,7 +41,10 @@ public class ViewFiles extends HttpServlet {
 			String projecctName=request.getParameter("pname");
 			file = new File(rootPath+"\\"+from+"\\"+regionname+"\\"+projecctName+"\\EOIREFUNDCHEQUE\\"+eid+"\\"+fileName);
 		}
-		
+		else if(from.equals("ExternalAccessFiles")){
+			String regionname=request.getParameter("regionname");
+			file = new File(rootPath+"\\"+from+"\\"+regionname+"\\"+fileName);
+		}
 	    response.setHeader("Content-Type",    getServletContext().getMimeType(file.getName()));
 	    response.setHeader("Content-Length", String.valueOf(file.length()));
 	    response.setHeader("Content-Disposition", "inline; filename="+fileName);
