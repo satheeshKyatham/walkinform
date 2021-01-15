@@ -379,6 +379,27 @@ public class PushEnquiryDataDaoImpl  extends AAbstractDao<Enquiry> implements Pu
 		}
 		return null;
 	}
+	
+	@Override
+	public String getAdvertisementForEnquiryWithPhase(String projectSfid,String mediaType,String mediaSubType, String phaseID) {
+		StringBuilder nQuery= new StringBuilder(" select sfid from salesforce.vcc1__advertisement__c ad ")
+		.append(" where ad.Project__c=:projectSfid ")
+		.append(" AND ad.Media_Type__c=:mediaType ")
+		.append(" AND ad.Media_Sub_Type__c=:mediaSubType ")
+		.append(" AND ad.Project_Phase_Name__c=:phaseID ");
+		Query query=getSession().createNativeQuery(nQuery.toString());
+		query.setParameter("projectSfid", projectSfid);
+		query.setParameter("mediaType", mediaType);
+		query.setParameter("mediaSubType", mediaSubType);
+		query.setParameter("phaseID", phaseID);
+		@SuppressWarnings("unchecked")
+		List<String> list=query.getResultList();
+		if(!CommonUtil.isListEmpty(list)){
+			return list.get(0);
+		}
+		return null;
+	}
+	
 
 	@Override
 	public int savePaymentDetails(EnquiryDto enq) {

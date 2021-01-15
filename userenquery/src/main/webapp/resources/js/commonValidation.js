@@ -59,6 +59,34 @@ $(document).ready(function(){
 			  $(this).parent().append("<p id='errorParagraph' style='color:red;margin-bottom: 20px;'>Invalid email address</p>");
 		  }		  
 	  });
+	  
+	  /* For Input Data contains Scripts Ex: <script></script>
+		 * Added By Satheesh K.
+		 * Date : 06-01-2020	*/
+	  $(".xss_input_txt_validation").on('keyup', function (){
+		  debugger;
+		  $("#errorParagraph_xss").remove();
+//		  var emailReg = /^[^0-9*\\\^\/<>_#']+$/;
+		  var emailReg = /^[^*\\\^\/<>_#']+$/;
+//		  var emailReg = /(^$)|^[^*\\\^\/<>_#']+$/;
+		  
+		  if(!emailReg.test($(this).val()) && $(this).val().length>1){
+			  $(this).parent().append("<p id='errorParagraph_xss' style='color:red;margin-bottom: 20px;'>Not allowing scripts</p>");
+		  }		  
+	  });
+	  /* For Input Data contains Scripts Ex: <script></script>
+		 * Added By Satheesh K.
+		 * Date : 06-01-2020	*/
+	  $(".xss_input_txt_validation_optional").on('keyup', function (){
+		  debugger;
+		  $("#errorParagraph_xss_optional").remove();
+		  var emailReg = /(^$)|^[^*\\\^\/<>_#']+$/;
+		  if(!emailReg.test($(this).val()) && $(this).val().length>1){
+			  $(this).parent().append("<p id='errorParagraph_xss_optional' style='color:red;margin-bottom: 20px;'>Not allowing scripts</p>");
+		  }		  
+	  });
+	  
+	  
 });
 function checkValidationOnSubmit(id){
 	debugger;
@@ -525,6 +553,39 @@ function checkValidationOnSubmit(id){
 		    		validationFlag=false;
 		    }
 		 }
+		/* For Input Data contains Scripts Ex: <script></script>
+		 * Added By Satheesh K.
+		 * Date : 06-01-2020	*/
+		if($(obj).hasClass("xss_input_txt_validation")){
+			debugger;
+			//var xss_input_txt = /^[^0-9*\\\^\/<>_#']+$/;
+			var xss_input_txt = /^[^*\\\^\/<>_#']+$/;
+//			var xss_input_txt = /(^$)|^[^*\\\^\/<>_#']+$/;
+	    	if(xss_input_txt.test($(this).val())){
+	    		$(this).removeClass('errorinput');
+	    			removeValidationMsg(this,validationFlag,validationFlag);
+	    	}else{
+	    		$(this).addClass('errorinput');
+	    		setValidationMsg(8,this);
+	    		validationFlag=false;
+	    	}    
+		}
+		
+		/* For Input Data contains Scripts Ex: <script></script>
+		 * Added By Satheesh K.
+		 * Date : 06-01-2020	*/
+		if($(obj).hasClass("xss_input_txt_validation_optional")){
+			var xss_input_txt = /(^$)|^[^*\\\^\/<>_#']+$/;
+	    	if(xss_input_txt.test($(this).val())){
+	    		$(this).removeClass('errorinput');
+	    			removeValidationMsg(this,validationFlag,validationFlag);
+	    	}else{
+	    		$(this).addClass('errorinput');
+	    		setValidationMsg(8,this);
+	    		validationFlag=false;
+	    	}    
+		}
+		
 });
 return validationFlag;
 }

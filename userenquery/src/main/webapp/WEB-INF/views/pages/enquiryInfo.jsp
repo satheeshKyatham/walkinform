@@ -236,7 +236,7 @@
 					
 					<div class="col-md-3 col-sm-6 col-xs-6">
 						<div class="group">
-							<input type="text" id="firstName" class="contactFields autocomplete-off requiredField" required="required" name="contact.firstName"/>
+							<input type="text" id="firstName" class="contactFields autocomplete-off requiredField xss_input_txt_validation" required="required" name="contact.firstName"/>
 							<span class="highlight"></span><span class="bar"></span>
 							<label>First name <strong class="mndt">*</strong></label>
 							<!-- <small class="errorMsg">Error message</small> -->
@@ -246,7 +246,7 @@
 					
 					<div class="col-md-3 col-sm-6 col-xs-6">
 						<div class="group">
-							<input type="text" id="lastName" class="contactFields autocomplete-off requiredField" required="required" name="contact.lastName"/>
+							<input type="text" id="lastName" class="contactFields autocomplete-off requiredField xss_input_txt_validation" required="required" name="contact.lastName"/>
 							<span class="highlight"></span><span class="bar"></span>
 							<label>Last name <strong class="mndt">*</strong></label>
 						</div>
@@ -332,7 +332,7 @@
 						
 						<div class="col-md-4 col-sm-12">
 							<div class="group">
-							  <input class="autocomplete-off autocomplete contactFields requiredField" required="required" type="text" id="addressLine2" name="contact.addressLine2" />
+							  <input class="autocomplete-off autocomplete contactFields requiredField xss_input_txt_validation" required="required" type="text" id="addressLine2" name="contact.addressLine2" />
 							  <span class="highlight"></span>
 							  <span class="bar"></span>
 							  <label>Residence Location <strong class="mndt"> *</strong></label>
@@ -374,14 +374,14 @@
 						<!-- Add new field -->
 						<div class="col-md-2 col-sm-6 col-xs-6">
 							<div class="group">
-								<input class="autocomplete-off administrative_area_level_1 contactFields requiredField" type="text" id="residentialState" name="contact.residentialState"/>
+								<input class="autocomplete-off administrative_area_level_1 contactFields requiredField xss_input_txt_validation" type="text" id="residentialState" name="contact.residentialState"/>
 								<span class="highlight"></span><span class="bar"></span>
 								<label>State <strong class="mndt"> *</strong></label>
 							</div>
 						</div>
 						<div class="col-md-2 col-sm-6 col-xs-6">
 							<div class="group">
-								<input class="autocomplete-off country contactFields requiredField" type="text" id="residentialCountry" name="contact.residentialCountry"/>
+								<input class="autocomplete-off country contactFields requiredField xss_input_txt_validation" type="text" id="residentialCountry" name="contact.residentialCountry"/>
 								<span class="highlight"></span><span class="bar"></span>
 								<label>Country<strong class="mndt"> *</strong></label>
 							</div>
@@ -401,7 +401,7 @@
 						
 						<div class="col-md-2 col-sm-6 col-xs-6">
 							<div class="group">
-								<input class="autocomplete-off locality contactFields requiredField" type="text" name="contact.city" id="city"/>
+								<input class="autocomplete-off locality contactFields requiredField xss_input_txt_validation" type="text" name="contact.city" id="city"/>
 								<span class="highlight"></span><span class="bar"></span>
 								<label>City <strong class="mndt"> *</strong></label>
 							</div>
@@ -409,7 +409,7 @@
 						
 						<div class="col-md-2 col-sm-6 col-xs-6">
 							<div class="group">
-								<input class="autocomplete-off postal_code contactFields" type="text" name="contact.pinCode" id="pinCode" maxlength="6"/>
+								<input class="autocomplete-off postal_code contactFields xss_input_txt_validation_optional"  type="text" name="contact.pinCode" id="pinCode" maxlength="6"/>
 								<span class="highlight"></span><span class="bar"></span>
 								<label>Pin Code</label>
 							</div>	
@@ -476,7 +476,7 @@
 							
 							<div class="col-md-3 col-xs-6">
 								<div class="group">
-									<input type="text" id="companyName" name="contact.companyName" class="contactFields autocomplete-off"/>
+									<input type="text" id="companyName" name="contact.companyName" class="contactFields autocomplete-off xss_input_txt_validation_optional"/>
 									<span class="highlight"></span><span class="bar"></span>
 									<label>Organisation Name<strong class="mndt"></strong></label>
 								</div>
@@ -487,7 +487,7 @@
 							<div id="address2">
 								<div class="col-md-3 col-xs-12">
 									<div class="group">
-									  <input class="autocomplete-off autocomplete contactFields" type="text"  id="officeAddress" name="contact.contactReport.officeAddress"/> <!-- autocomplete -->
+									  <input class="autocomplete-off autocomplete contactFields xss_input_txt_validation_optional" type="text"  id="officeAddress" name="contact.contactReport.officeAddress"/> <!-- autocomplete -->
 									  <span class="highlight"></span> <span class="bar"></span>
 									  <label>Office Location</label>
 									</div>
@@ -503,7 +503,7 @@
 								
 								<div class="col-md-2 col-xs-6">
 									<div class="group">
-										<input class="autocomplete-off contactFields  locality" type="text" id="officeCity" name="contact.contactReport.officeCity"/> <!-- locality -->
+										<input class="autocomplete-off contactFields  locality xss_input_txt_validation_optional" type="text" id="officeCity" name="contact.contactReport.officeCity"/> <!-- locality -->
 										<span class="highlight"></span><span class="bar"></span>
 										<label>City</label>
 									</div>
@@ -511,7 +511,7 @@
 								</div> 
 								<div class="col-md-2 col-xs-6">
 									<div class="group">
-										<input class="autocomplete-off contactFields postal_code" type="text" maxlength="6" id="officePinCode" name="contact.contactReport.officePincode"/> <!-- postal_code -->
+										<input class="autocomplete-off contactFields postal_code xss_input_txt_validation_optional" type="text" maxlength="6" id="officePinCode" name="contact.contactReport.officePincode"/> <!-- postal_code -->
 										<span class="highlight"></span><span class="bar"></span>
 										<label>Pin Code</label>
 									</div>
@@ -606,7 +606,7 @@
      						<!-- Start -->
 							<div class="referred_by_name ccol-md-3 col-xs-6">
 								<div class="group">
-									<input type="text" class="autocomplete-off" id="referredbyId" name="enquiryReport.referredby"/>
+									<input type="text" class="autocomplete-off xss_input_txt_validation_optional" id="referredbyId" name="enquiryReport.referredby"/>
 									<span class="highlight"></span><span class="bar"></span>
 									<label>Referred by</label>
 								</div>
@@ -626,7 +626,7 @@
 						<div id="isReferredByChannelPartnerO" class="sourceCol animated" style="display: none;">
 							<div class="col-md-6 col-xs-12">
 								<div class="group">
-									<input class="autocomplete-off isReferredByChannelPartnerO requiredField enquiryFields" type="text" required="required" disabled="disabled" name="cpComment" id="otherChannelPartnerName"/>
+									<input class="autocomplete-off isReferredByChannelPartnerO requiredField enquiryFields xss_input_txt_validation_optional" type="text" required="required" disabled="disabled" name="cpComment" id="otherChannelPartnerName"/>
 									<span class="highlight"></span><span class="bar"></span>
 									<label>Enter channel partner name <strong class="mndt">*</strong></label>
 								</div>
@@ -734,9 +734,20 @@
 							<input style="width:100%" id="ex13" type="text" name="enquiryReport.budget" data-slider-value="0" data-slider-step="1" />
 							<div class="clearfix"></div>
 						</div>
-						
-						
-						
+						<c:if test="${!empty phaseList}">
+							<div class="col-md-6 col-xs-12">
+									<div class="group">
+										<select class="isphaselist requiredField enquiryFields" id="phasedto" name="phasedto.sfid"><!-- disabled="disabled" -->
+										    <option value=""></option>
+											<c:forEach var="phaseList" items="${phaseList}">
+		                                       <option value="${phaseList.sfid}">${phaseList.name}</option>
+		                                     </c:forEach>
+										</select>
+										<span class="highlight"></span><span class="bar"></span>
+										<label class="select-label">Phase <strong class="mndt">*</strong></label>
+									</div>
+								</div>
+							</c:if>
 						
 						<!-- END Added By A -->
 						<div class="clearfix"></div>
@@ -1259,9 +1270,9 @@
     <script src="<c:url value='/resources/js/bootstrap-slider.min.js' />"></script>
     
 	<script src="<c:url value='/resources/js/springForm.js?v=18.25' />"></script>
-	<script src="<c:url value='/resources/js/commonValidation.js?v=18.25' />"></script>
+	<script src="<c:url value='/resources/js/commonValidation.js?v=18.90' />"></script>
 	<script src="<c:url value='/resources/js/utility.js?v=18.25' />"></script>
-	<script src="<c:url value='/resources/js/enquiryRequest/enquiryRequest.js?v=18.25' />" /></script>
+	<script src="<c:url value='/resources/js/enquiryRequest/enquiryRequest.js?v=19.01' />" /></script>
 	<%-- <script src="<c:url value='/resources/js/enquiryRequest/salesRequest.js?v=1' />"></script> --%>
 	
     <script src="<c:url value='/resources/js/intlTelInput.js' />"></script>

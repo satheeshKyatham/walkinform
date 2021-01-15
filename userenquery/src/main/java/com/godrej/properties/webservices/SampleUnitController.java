@@ -28,7 +28,7 @@ public class SampleUnitController<MultipartFormDataInput> {
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		Gson gson = gsonBuilder.create();	
 			
-		String condition = " project_sfid = 'a1l2s000000PJPmAAO' AND tower_code = '"+towerCode+"' AND typology = '"+typology+"' AND floor_range_name = '"+floorBand+"' AND isactive = 'A' ";
+		String condition = " project_sfid = '"+projectSFID+"' AND tower_code = '"+towerCode+"' AND typology = '"+typology+"' AND floor_range_name = '"+floorBand+"' AND isactive = 'A' ";
 		
 		return gson.toJson(sampleUnitService.geteoiSampleUnit(condition));
 	}

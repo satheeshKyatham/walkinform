@@ -198,11 +198,11 @@ public class PaymentServiceController {
 		String whereCondition="";
 		if(userid!=null && userid.length()>0)
 		{
-			whereCondition =" where project_sfid='"+project_sfid+"' and refund_initiated_by='"+userid+"' order by refund_initiated_date desc";
+			whereCondition =" where refund.project_sfid='"+project_sfid+"' and refund.refund_initiated_by='"+userid+"' order by refund.refund_initiated_date desc";
 			
 		}
 		else
-			whereCondition=" where project_sfid='"+project_sfid+"' order by refund_initiated_date desc";
+			whereCondition=" where refund.project_sfid='"+project_sfid+"' order by refund.refund_initiated_date desc";
 		return gson.toJson(refundInitiateService.getRefundInitiatedData(whereCondition));
 			
 	}
@@ -231,5 +231,13 @@ public class PaymentServiceController {
 			whereCondition=" where project_sfid='"+project_sfid+"' order by refund_initiated_date desc";
 		return gson.toJson(refundInitiateService.getRefundInitiatedData(whereCondition));*/
 			
+	}
+	
+	@GetMapping(value = "/getInitiatedRefundByTrx_id", produces = "application/json")
+	public String getInitiatedRefundByTrx_id(@RequestParam("trx_id") String trx_id)
+	{
+		Gson gson = new GsonBuilder().disableHtmlEscaping().serializeNulls().create();
+		//String whereCondition=" where project_sfid='"+projectid+"' and isactive='Y'";
+		return gson.toJson(eoiPaymentService.getInitiatedRefundEntrysByTrx_id(trx_id));	
 	}
 }

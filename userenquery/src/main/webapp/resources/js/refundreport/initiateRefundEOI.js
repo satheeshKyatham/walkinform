@@ -172,6 +172,7 @@ function getEOITabPaymentRecordRefund() {
 
 function initiateRefundRequest()
 {
+	$("#initiateRefundRequest_id").prop("disabled", true);
 	var validate=checkValidationOnSubmit('refund_div_id');
 	if(validate) {
 		
@@ -207,6 +208,7 @@ function initiateRefundRequest()
 				    timer: 3000,
 				    type: "error",
 				});
+				$("#initiateRefundRequest_id").prop("disabled", false);
 			}
 		else
 			{
@@ -241,10 +243,13 @@ function initiateRefundRequest()
 			        		//$('#enquirysfid').val('');
 			        		$("#ref_cncelled_check").val('');
 			        		$("#enqNameInputRefund").val('');
+			        		$("#initiateRefundRequest_id").prop("disabled", false);
 			        }
 				});
 			}
 	}
+	else
+		{$("#initiateRefundRequest_id").prop("disabled", false);}
 }
 
 function callEOIREFUND()
@@ -259,6 +264,7 @@ function callEOIREFUND()
          if (objJson != null) {
         	 for(var i=0;i<objJson.length;i++){
         		 html += "<tr>" +
+        		 	" <td>"+objJson[i].enq_name+"</td>" +
         		 	" <td>"+objJson[i].ac_holder_name+"</td>" +
         		 	" <td>"+objJson[i].bank_name+"</td>" +
 					" <td>"+objJson[i].branch_name+"</td>" +
@@ -288,6 +294,7 @@ function callEOIREFUND()
 function getEOIREFUNDDetails()
 {
 	$("#mainPageLoad4").show();
+	var contextPath = $('#contextPath').val();
 	$.get($('#contextPath').val()+"/getInitiateRefundData",{"userid":null, "project_sfid":$('#projectid').val()},function(data){                      
 		$("#EOI_Payment_Refund_List").dataTable().fnDestroy();
 		$("#EOI_Payment_Refund_List tbody").empty();
@@ -295,7 +302,16 @@ function getEOIREFUNDDetails()
          if (data != null) {
         	 for(var i=0;i<data.length;i++){
         		 var statusSelect="";
-        		 if(data[i].approval_refund_status!=null || data[i].approval_refund_status!='null')
+        		 console.log(data[i].cancelled_check_path.trim());
+        		 console.log(data[i].cancelled_check_file_name)
+        		 var cancelledCheque="";
+        		 if(data[i].cancelled_check_path!="")
+					{
+						cancelledCheque = contextPath+"/file?name=REFUND_"+ encodeURIComponent(data[i].cancelled_check_file_name.trim())+"&from="+encodeURIComponent("D4U File Storage")+"&eid="+data[i].enquiry_sfid+"&fid="+data[i].cancelled_check_path.charAt(0)+"&rname="+$('#region_name').val()+"&pname="+encodeURIComponent($('#projectname').val());
+						console.log(cancelledCheque)
+					}
+        		 
+        		 if(data[i].approval_refund_status!=null)
 					{
         			 statusSelect = "<td>"+data[i].neft_rtgs_utr_no+"</td><td>"+data[i].refund_comments+"</td><td>"+data[i].approval_refund_status+"</td><td></td>";
 					}
@@ -309,6 +325,10 @@ function getEOIREFUNDDetails()
 								" <td><button onclick='RefundSumbit("+data[i].id+")'>Submit</button></td>" ;
 					}
         		 html += "<tr>" +
+        		 	" <td>"+data[i].enq_name+"</td>" +
+        		 	" <td>"+data[i].customer_name+"</td>" +
+        		 	" <td>"+data[i].cm_name+"</td>" +
+        		 	" <td>"+data[i].refund_initiated_date+"</td>" +
         		 	" <td>"+data[i].ac_holder_name+"</td>" +
         		 	" <td>"+data[i].bank_name+"</td>" +
 					" <td>"+data[i].branch_name+"</td>" +
@@ -318,7 +338,11 @@ function getEOIREFUNDDetails()
 					" <td>"+data[i].account_type+"</td>" +
 					" <td>"+data[i].reason_for_cancel_refund+"</td>" +
 					" <td>"+data[i].description+"</td>" +
-					" <td>"+data[i].refund_amount+"</td>" +
+					" <td><a target='_blank' href="+cancelledCheque+">"+data[i].cancelled_check_file_name.trim()+"</a></td>" +
+					
+//					" <td>"+data[i].refund_amount+"</td>" +
+//					+"<td><a type='button' data-toggle='modal' data-target='#paymentDetails_KYC' onclick='getKYCPaymentDetails(this,\""+value.offerSfid+"\")'>"+data[i].refund_amount+"</a></td>"+
+					"<td><a type='button' data-toggle='modal' data-target='#paymentDetails_EOI_Refund' onclick='getEOIRefundPaymentDetails(this,\""+data[i].trx_id.trim()+"\")' >"+data[i].refund_amount+"</a></td>"+
 					statusSelect+
 				" </tr>";
         	 }
@@ -465,4 +489,50 @@ $("#EOI_Payment_Refund_List").on('mousedown.save', "i.fa.fa-envelope-o", functio
 });
 });
 */
-
+function getEOIRefundPaymentDetails(e,trx_id)
+{
+	$("#paymentDetails_EOI_Refund_table tbody").empty();
+	$.get("getInitiatedRefundByTrx_id",{"trx_id":trx_id},function(data){
+		
+		var obj =JSON.stringify(data);
+		var obj1 =JSON.parse(obj);
+		var html = '';
+		if(obj1!=null) {
+			for(var i=0;i<obj1.length;i++){
+				var chequeNo = '';
+				var panTarget='';
+				var reciptTarget='';
+				if(obj1[i].propstrength__cheque_demand_draft_number__c==0)
+				{
+					chequeNo=obj1[i].propstrength__ifsc_rtgs_code__c;
+					if(chequeNo==null)
+						chequeNo=obj1[i].propStrength__Cheque_Demand_Draft_No__c;
+				}
+			else
+				chequeNo=obj1[i].propstrength__cheque_demand_draft_number__c;
+	
+				var pageContext = $("#contextPath").val()+"/";
+				if(obj1[i].cheque_attach!="")
+					{
+						reciptTarget = pageContext+"file?name="+ encodeURIComponent(obj1[i].cheque_attach)+"&from=EOIbookingReference&eid="+obj1[i].enq_sfid+"&fid="+obj1[i].cheque_attach.charAt(0);
+					}
+				
+				
+				html += "<tr>" +
+							" <td>"+obj1[i].payment_type+"</td>" +
+							" <td>"+obj1[i].bank_name+"</td>" +
+							" <td>"+obj1[i].transaction_id+"</td>" +
+							" <td>"+obj1[i].transaction_date+"</td>" +
+							" <td>"+obj1[i].transaction_amount+"</td>" +
+							" <td>"+obj1[i].createdDate+"</td>" +
+							" <td><a target='_blank' href="+reciptTarget+">"+obj1[i].cheque_attach+"</a></td>" +
+							" <td>"+obj1[i].description+"</td>" +
+						" </tr>";
+			}
+			
+			html = html.replace(/null/g, " - ");
+			$("#paymentDetails_EOI_Refund_table tbody").append(html);
+		}
+	});
+	
+}

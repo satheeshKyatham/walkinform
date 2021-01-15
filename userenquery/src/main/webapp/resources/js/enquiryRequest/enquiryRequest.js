@@ -115,6 +115,7 @@ function populateEnquiryAndContact(resp){
 		   hideEnquirySourceByEnquiryType(null,null);
 		}
 		$('#walkInSource').val("");
+		$('#phasedto').val("");
 	    $('#walkInSourceDetail').val("");
 	    $('#otherChannelPartnerName').val("");
 	    $("#desiredUnitType0").trigger("click");
@@ -156,6 +157,7 @@ function populateEnquiryAndContact(resp){
 			    $('label[labelName="isReferredByChannelPartner"][value="CP"]').trigger("click");
 			   */ 
 				$('#walkInSource').val("");
+				$('#phasedto').val("");
 			    $('#walkInSourceDetail').val("");
 			    $('#otherChannelPartnerName').val("");
 			    /*$('input[name="desiredUnitType"][value="'+enq.desiredUnitType+'"]').trigger('click');*/
@@ -245,7 +247,7 @@ function saveOtherRequest(event,el){
 }
 
 function populateBasicInfo(enq,contact){
-	//alert("test543");
+	//alert("test543"+enq.phasedto.name);
 		if(!isEmpty(enq)){
 			$('.enquiryId').val(enq.enquiryId);
 			/*$('.enquirysfid').val(enq.sfid);*/
@@ -301,7 +303,8 @@ function populateBasicInfo(enq,contact){
 			
 			//$('#walkInSource').find('option[value='+enq.walkInSource+']').attr('selected','selected');
 			$('#walkInSource').val(enq.walkInSource);
-			
+			if(enq.phasedto!=null)
+				$('#phasedto').val(enq.phasedto.sfid);
 			/*if(enq.walkInSource==='Referral')
 				{
 					$(".referred_by_name").show();

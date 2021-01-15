@@ -2980,18 +2980,95 @@ function printPdfData(generateFrom) {
              $('#printBtnFloat').html('<i class="fa fa-print printficon"></i>') 
              
              if (generateFrom == 'Offered') {
-             swal({
-               title: "Offer Created, Cost Sheet Successfully Generated & KYC Link Sent To Customer.",
-               text: "",
-               icon: "success",
-               type: "success",
-               dangerMode: true,
-             }).then(function(isConfirm) {
-               if (isConfirm) {
-                    window.location.href =url+ "/assignedusers?userId="+$("#userid").val()+"&projectid="+$("#projectid").val()+"&projectname="+$("#projectname").val()  ;
-               }
-             });
-       }
+	             swal({
+	               title: "Offer Created, Cost Sheet Successfully Generated & KYC Link Sent To Customer.",
+	               text: "",
+	               icon: "success",
+	               type: "success",
+	               dangerMode: true,
+	             }).then(function(isConfirm) {
+	               if (isConfirm) {
+	                    window.location.href =url+ "/assignedusers?userId="+$("#userid").val()+"&projectid="+$("#projectid").val()+"&projectname="+$("#projectname").val()  ;
+	               }
+	             });
+             }
+             
+             //-----------------  Cost Sheet Email
+             /*
+             var csImagePath = "D:\\atul_data\\apache-tomcat-9.0.22\\costSheetPDF\\"+$('#region__c').val()+'\\'+$('#marketingProjectName').val()+'\\'+$('#towerTval').text()+'\\' + $('#floorTval').text() + '\\' + $('#unitTval').text() + '\\' + enqSfid+'-'+$('#unitSfid').val()+'-'+$('#projectId').val()+'.png';
+             
+             var emailHTML = '';
+             
+             emailHTML +=  '<html>'
+		            	 + '<head>'
+			             
+		            	 + '<style>'
+			             + ' body, html, table {'
+			             + '     font-family: Calibri, Arial, sans-serif;'
+			             + ' }'
+			             + ' .pastdue { color: crimson; }'
+			             + ' table {'
+			             + ' 	border: 1px solid silver;'
+			             + ' 	padding: 6px;'
+			             + ' }'
+			             + ' thead {'
+			             + '     text-align: center;'
+			             + '     font-size: 1.2em;'
+			             + '     color: navy;'
+			             + '     background-color: silver;'
+			             + '     font-weight: bold;'
+			             + ' }'
+			             + ' tbody td {'
+			             + ' 	text-align: center;'
+			             + ' }'
+			             + '</style>'
+			             + '</head>'
+			             + '<body>'
+			             	 
+			             + '<div>Dear '+$('#hdrCustomerName').text()+',</div> <br>'
+			             + '<div>Greetings from Godrej Properties!</div> <br>'
+			             + '<div>We heartily welcome you to the Godrej family.</div> <br><br>'
+			             
+			             +'<div>As part of the booking process, we would require your consent through email on the below cost sheet:</div> <br><br>'
+			             
+			             + '<table width=700>'
+			             + '	<tr>'
+			             + '		<td><img src="'+csImagePath+'"  width="700" alt=""></td>' 
+			             + '	</tr>'
+			             + '</table>'
+			              
+			             	
+			             + '<br><br><div>Best Regards,</div>'
+			             + '<div>'+USERNAME_GV+'</div>'
+			             + '</body>'
+			             + '</html>'; 
+              
+            var link = document.getElementById('downloadlink');
+         	
+            var textFile = null,
+         	
+         	makeTextFile = function (text) {
+         		var data = new Blob([text], {type: 'text/plain'});
+         		if (textFile !== null) {
+         		  window.URL.revokeObjectURL(textFile);
+         		}
+         		textFile = window.URL.createObjectURL(data);
+         		return textFile;
+         	};
+
+         	var create = document.getElementById('create'),
+         	textbox = document.getElementById('textbox');
+         	
+         		var link = document.getElementById('downloadlink');
+         		link.href = makeTextFile(textbox.value + emailHTML);
+         		link.style.display = 'block';
+         		link.click();
+             */
+            //----------------- END Cost Sheet Email
+         	
+             
+             
+             
        });
        
        //alert ("Test 123 ::: " + $('.getCustomerPD table').html());

@@ -253,5 +253,27 @@ public class EOIPaymentDtlDaoImpl extends AbstractDao<Integer, EOIPaymentDtl> im
 		 * false; }
 		 */
 	}
+
+
+
+
+	@Override
+	public List<EOIPaymentDtl> getInitiatedRefundEntrysByTrx_id(String trx_id) {
+
+		Session session = this.sessionFactory.getCurrentSession();	
+		
+		List<EOIPaymentDtl> authors=null;
+		Query q = session.createNativeQuery("SELECT * FROM salesforce.gpl_cs_eoi_payment_details "
+				+ " where refund_trx_no = '"+trx_id+"' order by gpl_cs_eoi_payment_details_id ", EOIPaymentDtl.class);
+		authors = q.getResultList();
+		
+		Log.info("Final Size::{}",authors.size());
+		
+		if (authors.size() > 0)
+			return authors;
+
+		return null;
+	
+	}
 	
 }

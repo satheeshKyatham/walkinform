@@ -75,7 +75,8 @@ public class Enquiry extends CommonModel{
 	
 	@Column(name="virtual_meeting_count__c") private Double virtual_meeting_count__c;
 	
-
+	private Phase phase;
+	
 	public String getClosing_manager_name__c() {
 		return closing_manager_name__c;
 	}
@@ -661,7 +662,12 @@ public class Enquiry extends CommonModel{
 		this.international_Sales_Manager__c = international_Sales_Manager__c;
 	}
 
-
-	
-	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="Project_Phase__c",referencedColumnName="sfid")
+	public Phase getPhase() {
+		return phase;
+	}
+	public void setPhase(Phase phase) {
+		this.phase = phase;
+	}
 }

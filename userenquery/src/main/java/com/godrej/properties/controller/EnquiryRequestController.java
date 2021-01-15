@@ -29,8 +29,10 @@ import com.godrej.properties.constants.KeyConstants;
 import com.godrej.properties.constants.MessageConstants;
 import com.godrej.properties.dto.ContactDto;
 import com.godrej.properties.dto.EnquiryDto;
+import com.godrej.properties.dto.PhaseDto;
 import com.godrej.properties.dto.UserTokenDto;
 import com.godrej.properties.master.dto.ReferenceListDto;
+import com.godrej.properties.master.service.PhaseListService;
 import com.godrej.properties.master.service.ReferenceListService;
 import com.godrej.properties.model.Contact;
 import com.godrej.properties.model.ProjectLaunch;
@@ -66,6 +68,9 @@ public class EnquiryRequestController {
 
  	@Autowired
 	private	TokenService tokenService; 
+ 	
+ 	@Autowired
+	private PhaseListService phaseListService;
 	
 	@RequestMapping(value = { "/"}, method = RequestMethod.GET)
 	public String login(ModelMap model,HttpServletRequest request) {
@@ -155,7 +160,8 @@ public class EnquiryRequestController {
 		}
 		List<ReferenceListDto> communcationMediumList=referenceListService.getReferenceListByReferenceCode(KeyConstants.REFERENCE_CODE_COMMUNICATION_MEDIUM);
 		view.addObject("communcationMediumList",communcationMediumList);
-		
+		List<PhaseDto> phaseList = phaseListService.getPhaseListByProjectCode(projectid);
+		view.addObject("phaseList",phaseList);
 		return view;		 
 	}
 	

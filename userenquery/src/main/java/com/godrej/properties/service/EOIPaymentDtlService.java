@@ -12,6 +12,7 @@ public interface EOIPaymentDtlService {
 	
 	void updateEOIForOffer(List<EOIPaymentDtl> charges);
 	public List<EOIPaymentDtl> getCommonEOIPaymentEntrys(String whereCondition);
+	public List<EOIPaymentDtl> getInitiatedRefundEntrysByTrx_id(String trx_id);
 	public void paymentEOIApproveReject(String whereCondition);
 	
 	String updateEOIPayment(String paymentDtlJson, String userid, String enq_sfid, String project_sfid, String username);

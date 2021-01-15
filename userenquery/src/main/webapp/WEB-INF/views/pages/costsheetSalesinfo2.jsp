@@ -1476,3 +1476,19 @@
   </div>
 </div>
 <!-- END Webcam Modal -->
+ 
+<!-- 
+<div style="display:none;"> 
+<textarea id="textbox" style="width: 300px; height: 600px;">
+To: User <user@domain.demo>
+Subject: Subject
+X-Unsent: 1
+Content-Type: text/html
+
+ 
+</textarea>
+<br>
+<button id="create">Create file</button><br><br>
+<a download="message.eml" id="downloadlink" style="display: none">Download</a>
+</div>
+ -->

@@ -19,7 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class RefundInitiate implements Serializable{
 
 	/**
-	 * Author : Satheesh K
+	 * @author sathish.kyatham
 	 */
 	private static final long serialVersionUID = 1L;
 	
@@ -50,6 +50,10 @@ public class RefundInitiate implements Serializable{
 	@Column(name="neft_rtgs_utr_no") private String neft_rtgs_utr_no;
 	@Column(name="approval_refund_status") private String approval_refund_status;
 	@Column(name="refund_comments") private String refund_comments;
+	
+	@Column(name="enq_name") private String enq_name;
+	@Column(name="customer_name") private String customer_name;
+	@Column(name="cm_name") private String cm_name;
 	
 	public int getId() {
 		return id;
@@ -207,5 +211,24 @@ public class RefundInitiate implements Serializable{
 	public void setRefund_comments(String refund_comments) {
 		this.refund_comments = refund_comments;
 	}
+	public String getEnq_name() {
+		return enq_name;
+	}
+	public void setEnq_name(String enq_name) {
+		this.enq_name = enq_name;
+	}
+	public String getCustomer_name() {
+		return customer_name;
+	}
+	public void setCustomer_name(String customer_name) {
+		this.customer_name = customer_name;
+	}
+	public String getCm_name() {
+		return cm_name;
+	}
+	public void setCm_name(String cm_name) {
+		this.cm_name = cm_name;
+	}
+	
 
 }
