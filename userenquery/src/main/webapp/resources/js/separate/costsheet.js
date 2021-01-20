@@ -2994,6 +2994,7 @@ function printPdfData(generateFrom) {
              }
              
              //-----------------  Cost Sheet Email
+            
              /*
              var csImagePath = "D:\\atul_data\\apache-tomcat-9.0.22\\costSheetPDF\\"+$('#region__c').val()+'\\'+$('#marketingProjectName').val()+'\\'+$('#towerTval').text()+'\\' + $('#floorTval').text() + '\\' + $('#unitTval').text() + '\\' + enqSfid+'-'+$('#unitSfid').val()+'-'+$('#projectId').val()+'.png';
              
@@ -3036,13 +3037,18 @@ function printPdfData(generateFrom) {
 			             + '		<td><img src="'+csImagePath+'"  width="700" alt=""></td>' 
 			             + '	</tr>'
 			             + '</table>'
-			              
-			             	
-			             + '<br><br><div>Best Regards,</div>'
-			             + '<div>'+USERNAME_GV+'</div>'
 			             + '</body>'
 			             + '</html>'; 
-              
+           
+             
+             var emlContent =  'To: To: User <zzzzzztestuser@domain.demo>'+'\n';
+             emlContent += 'Subject: Subject'+'\n';
+             emlContent += 'X-Unsent: 1'+'\n';
+             emlContent += 'Content-Type: text/html'+'\n';
+             emlContent += ''+'\n';
+             emlContent += emailHTML;
+             
+             
             var link = document.getElementById('downloadlink');
          	
             var textFile = null,
@@ -3059,11 +3065,11 @@ function printPdfData(generateFrom) {
          	var create = document.getElementById('create'),
          	textbox = document.getElementById('textbox');
          	
-         		var link = document.getElementById('downloadlink');
-         		link.href = makeTextFile(textbox.value + emailHTML);
-         		link.style.display = 'block';
-         		link.click();
-             */
+     		var link = document.getElementById('downloadlink');
+     		link.href = makeTextFile(emlContent);
+     		link.style.display = 'block';
+     		link.click();
+            */
             //----------------- END Cost Sheet Email
          	
              
