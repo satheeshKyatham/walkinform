@@ -169,6 +169,11 @@ $("#getCSData").click(function (){
 function loadData (csSource) {     
 	$('#schemeInput').val("");
 	
+	if ($('#projectId').val() == 'a1l2s000000PJPmAAO' ) {
+		schemeInSalesComment();
+	}
+	
+	
 		tncData ();
 		getBSPTax ();
        
@@ -4032,4 +4037,49 @@ function csChangesForFaridabad () {
 		$('#onlyForPlot').hide();
 		$('.onlyForPlot').remove();
 	}
+}
+
+
+function schemeInSalesComment (){
+	
+	$("#costsheet_commitment").val(""); 
+	
+	var schemes = "";
+	
+	if ($('#schemeTypeDD').val() == 'scheme') {
+		
+		$("#costsheet_commitment").css("min-height", "70px");
+		
+		$("#costsheet_commitment").attr('readonly', true);
+  	    
+		if ($('#getSchemeSource').val() != '-1') {
+			schemes += "* Source discount: " + $('#getSchemeSource option:selected').text();
+		} else {
+			schemes += ""  
+		}
+		    
+		if ($('#getSchemeSite').val() != '-1') {
+			schemes += "* Site discount: " + $('#getSchemeSite option:selected').text();
+		} else {
+			schemes += ""  
+		}
+		
+		if ($('#getSchemePromotional').val() != '-1') {
+			schemes += "* Promotional discount: " + $("#getSchemePromotional option:selected").text();
+		} else {
+			schemes += ""  
+		}
+  	  
+     } else if ($('#schemeTypeDD').val() == 'noScheme') {
+    	 $("#costsheet_commitment").css("min-height", "0px");
+    	 $("#costsheet_commitment").attr('readonly', false);
+    	 schemes = "";
+     } else if ($('#schemeTypeDD').val() == 'other') {
+    	 $("#costsheet_commitment").css("min-height", "0px");
+    	 $("#costsheet_commitment").attr('readonly', false);
+    	 schemes = "";
+     }
+	
+	$("#costsheet_commitment").val(schemes);
+	
 }
