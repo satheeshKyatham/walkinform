@@ -10,11 +10,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 
 
 @WebServlet("/Costsheet")
 public class ViewPDF extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	@Autowired
+	PDFtoImage pDFtoImage;
+	
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
@@ -32,7 +38,7 @@ public class ViewPDF extends HttpServlet {
 		
 		String rootPath = System.getProperty("catalina.home");
 		
-		
+		String folderPath = "";
 		
 		
 		
@@ -51,6 +57,9 @@ public class ViewPDF extends HttpServlet {
 			}
 		
 			file = new File(rootPath+"\\costSheetPDF\\"+ regionName + File.separator + projectName + File.separator + towerName + File.separator + floorNameVal + File.separator + unitName + File.separator + fileName + ".pdf");
+		
+			folderPath = rootPath+"\\costSheetPDF\\"+ regionName + File.separator + projectName + File.separator + towerName + File.separator + floorNameVal + File.separator + unitName + File.separator;
+		
 		} else if (from.equals("ofrList")) {
 			file = new File(rootPath+"\\costSheetPDF\\"+ fileName + ".pdf");
 		}
@@ -61,6 +70,11 @@ public class ViewPDF extends HttpServlet {
 	    response.setHeader("Content-Length", String.valueOf(file.length()));
 	    response.setHeader("Content-Disposition", "inline; filename=\""+fileName+".pdf\"");
 	    Files.copy(file.toPath(), response.getOutputStream());
+	    
+	    /*if (from.equals("costsheet")) {
+	    	pDFtoImage.pdfToImage(file, folderPath);
+	    }*/
+	    
 	}
 	
 }

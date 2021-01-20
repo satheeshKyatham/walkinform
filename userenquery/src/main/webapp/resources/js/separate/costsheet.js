@@ -712,7 +712,7 @@ function getTaxPercentage(basicSaleprice, projectSfid, currentTaxRate, TotalA, r
 		}
 		
 		//Added for Project Godrej Royale Woods and forest grove
-		if(projectSfid == 'a1l6F000002X6IOQA0' || projectSfid == 'a1l2s00000003VlAAI' || projectSfid == 'a1l6F0000081xb4QAA' || projectSfid == 'a1l2s000000PGu3AAG' || projectSfid == 'a1l2s000000PGu8AAG' || projectSfid == 'a1l2s000000PGuDAAW' || projectSfid == 'a1l2s000000PGuIAAW' || projectSfid == 'a1l2s000000PGuNAAW' || projectSfid == 'a1l2s000000PGuSAAW'){
+		if(projectSfid == 'a1l2s000000PJPmAAO' || projectSfid == 'a1l6F000002X6IOQA0' || projectSfid == 'a1l2s00000003VlAAI' || projectSfid == 'a1l6F0000081xb4QAA' || projectSfid == 'a1l2s000000PGu3AAG' || projectSfid == 'a1l2s000000PGu8AAG' || projectSfid == 'a1l2s000000PGuDAAW' || projectSfid == 'a1l2s000000PGuIAAW' || projectSfid == 'a1l2s000000PGuNAAW' || projectSfid == 'a1l2s000000PGuSAAW'){
 			if(TotalA>=4500000 || reraCarpetSqm >= 60){
 				return 5;
 			}
@@ -1102,7 +1102,7 @@ function paymentPlanOtherCharges (firstRowObj, ppMilestone){
                     
                     
                     //added for 45lac condition
-                    if($('#projectid').val() == 'a1l6F000002X6IOQA0' || $('#projectid').val() == 'a1l2s00000003VlAAI' || $('#projectid').val() == 'a1l6F0000081xb4QAA' || $('#projectid').val() == 'a1l2s000000PGu3AAG' || $('#projectid').val() == 'a1l2s000000PGu8AAG' || $('#projectid').val() == 'a1l2s000000PGuDAAW' || $('#projectid').val() == 'a1l2s000000PGuIAAW' || $('#projectid').val() == 'a1l2s000000PGuNAAW' || $('#projectid').val() == 'a1l2s000000PGuSAAW'){
+                    if($('#projectid').val() == 'a1l2s000000PJPmAAO' || $('#projectid').val() == 'a1l6F000002X6IOQA0' || $('#projectid').val() == 'a1l2s00000003VlAAI' || $('#projectid').val() == 'a1l6F0000081xb4QAA' || $('#projectid').val() == 'a1l2s000000PGu3AAG' || $('#projectid').val() == 'a1l2s000000PGu8AAG' || $('#projectid').val() == 'a1l2s000000PGuDAAW' || $('#projectid').val() == 'a1l2s000000PGuIAAW' || $('#projectid').val() == 'a1l2s000000PGuNAAW' || $('#projectid').val() == 'a1l2s000000PGuSAAW'){
 	       				if($('.salesConsiderationTotalNew').text()>=4500000  || $('#carpetSqm').text() >= 60){
 	       					gstPymtOcTotal = parseFloat((gstFinal5Per) + ((ocPlsBsp)*($('#bspGSTTax').val())/100)).toFixed(2);
 	       				} else {
@@ -2552,7 +2552,7 @@ function newOtherCharges2 () {
              var GST5Per = parseFloat(parseFloat(otherChargesGSTTotal5Per)+parseFloat(((finalFlatAmount)*bspTax)/100)).toFixed(2);
              
              //added for 45lac condition
-             if($('#projectid').val() == 'a1l6F000002X6IOQA0' || $('#projectid').val() == 'a1l2s00000003VlAAI' || $('#projectid').val() == 'a1l6F0000081xb4QAA' || $('#projectid').val() == 'a1l2s000000PGu3AAG' || $('#projectid').val() == 'a1l2s000000PGu8AAG' || $('#projectid').val() == 'a1l2s000000PGuDAAW' || $('#projectid').val() == 'a1l2s000000PGuIAAW' || $('#projectid').val() == 'a1l2s000000PGuNAAW' || $('#projectid').val() == 'a1l2s000000PGuSAAW'){
+             if($('#projectid').val() == 'a1l2s000000PJPmAAO' || $('#projectid').val() == 'a1l6F000002X6IOQA0' || $('#projectid').val() == 'a1l2s00000003VlAAI' || $('#projectid').val() == 'a1l6F0000081xb4QAA' || $('#projectid').val() == 'a1l2s000000PGu3AAG' || $('#projectid').val() == 'a1l2s000000PGu8AAG' || $('#projectid').val() == 'a1l2s000000PGuDAAW' || $('#projectid').val() == 'a1l2s000000PGuIAAW' || $('#projectid').val() == 'a1l2s000000PGuNAAW' || $('#projectid').val() == 'a1l2s000000PGuSAAW'){
 				if(TotalA>=4500000 || $('#carpetSqm').text() >= 60){
 					otherChargesGSTTotalV2 = GST5Per;
 				} else {
@@ -2980,18 +2980,101 @@ function printPdfData(generateFrom) {
              $('#printBtnFloat').html('<i class="fa fa-print printficon"></i>') 
              
              if (generateFrom == 'Offered') {
-             swal({
-               title: "Offer Created, Cost Sheet Successfully Generated & KYC Link Sent To Customer.",
-               text: "",
-               icon: "success",
-               type: "success",
-               dangerMode: true,
-             }).then(function(isConfirm) {
-               if (isConfirm) {
-                    window.location.href =url+ "/assignedusers?userId="+$("#userid").val()+"&projectid="+$("#projectid").val()+"&projectname="+$("#projectname").val()  ;
-               }
-             });
-       }
+	             swal({
+	               title: "Offer Created, Cost Sheet Successfully Generated & KYC Link Sent To Customer.",
+	               text: "",
+	               icon: "success",
+	               type: "success",
+	               dangerMode: true,
+	             }).then(function(isConfirm) {
+	               if (isConfirm) {
+	                    window.location.href =url+ "/assignedusers?userId="+$("#userid").val()+"&projectid="+$("#projectid").val()+"&projectname="+$("#projectname").val()  ;
+	               }
+	             });
+             }
+             
+             //-----------------  Cost Sheet Email
+            
+             /*
+             var csImagePath = "D:\\atul_data\\apache-tomcat-9.0.22\\costSheetPDF\\"+$('#region__c').val()+'\\'+$('#marketingProjectName').val()+'\\'+$('#towerTval').text()+'\\' + $('#floorTval').text() + '\\' + $('#unitTval').text() + '\\' + enqSfid+'-'+$('#unitSfid').val()+'-'+$('#projectId').val()+'.png';
+             
+             var emailHTML = '';
+             
+             emailHTML +=  '<html>'
+		            	 + '<head>'
+			             
+		            	 + '<style>'
+			             + ' body, html, table {'
+			             + '     font-family: Calibri, Arial, sans-serif;'
+			             + ' }'
+			             + ' .pastdue { color: crimson; }'
+			             + ' table {'
+			             + ' 	border: 1px solid silver;'
+			             + ' 	padding: 6px;'
+			             + ' }'
+			             + ' thead {'
+			             + '     text-align: center;'
+			             + '     font-size: 1.2em;'
+			             + '     color: navy;'
+			             + '     background-color: silver;'
+			             + '     font-weight: bold;'
+			             + ' }'
+			             + ' tbody td {'
+			             + ' 	text-align: center;'
+			             + ' }'
+			             + '</style>'
+			             + '</head>'
+			             + '<body>'
+			             	 
+			             + '<div>Dear '+$('#hdrCustomerName').text()+',</div> <br>'
+			             + '<div>Greetings from Godrej Properties!</div> <br>'
+			             + '<div>We heartily welcome you to the Godrej family.</div> <br><br>'
+			             
+			             +'<div>As part of the booking process, we would require your consent through email on the below cost sheet:</div> <br><br>'
+			             
+			             + '<table width=700>'
+			             + '	<tr>'
+			             + '		<td><img src="'+csImagePath+'"  width="700" alt=""></td>' 
+			             + '	</tr>'
+			             + '</table>'
+			             + '</body>'
+			             + '</html>'; 
+           
+             
+             var emlContent =  'To: To: User <zzzzzztestuser@domain.demo>'+'\n';
+             emlContent += 'Subject: Subject'+'\n';
+             emlContent += 'X-Unsent: 1'+'\n';
+             emlContent += 'Content-Type: text/html'+'\n';
+             emlContent += ''+'\n';
+             emlContent += emailHTML;
+             
+             
+            var link = document.getElementById('downloadlink');
+         	
+            var textFile = null,
+         	
+         	makeTextFile = function (text) {
+         		var data = new Blob([text], {type: 'text/plain'});
+         		if (textFile !== null) {
+         		  window.URL.revokeObjectURL(textFile);
+         		}
+         		textFile = window.URL.createObjectURL(data);
+         		return textFile;
+         	};
+
+         	var create = document.getElementById('create'),
+         	textbox = document.getElementById('textbox');
+         	
+     		var link = document.getElementById('downloadlink');
+     		link.href = makeTextFile(emlContent);
+     		link.style.display = 'block';
+     		link.click();
+            */
+            //----------------- END Cost Sheet Email
+         	
+             
+             
+             
        });
        
        //alert ("Test 123 ::: " + $('.getCustomerPD table').html());
@@ -3240,7 +3323,7 @@ $("#carParkType").change(function () {
 	$('#carParkCountDD').empty();
     if ($('#carParkType option:selected').val() != -1) {
 	
-    	if ($('#projectId').val() == 'a1l6F000002X6IOQA0') {
+    	if ($('#projectId').val() == 'a1l2s000000PJPmAAO' || $('#projectId').val() == 'a1l6F000002X6IOQA0') {
     		$('#carParkCountDD').append('<select class="full form-control"><option value="1">1</option> </select>');
     	} else {
     		$('#carParkCountDD').append('<select class="full form-control"><option value="1">1</option> <option value="2">2</option> <option value="3">3</option>  <option value="4">4</option> </select>');

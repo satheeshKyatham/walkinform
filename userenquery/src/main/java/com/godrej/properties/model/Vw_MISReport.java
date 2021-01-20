@@ -12,7 +12,7 @@ import javax.persistence.Transient;
 
 @Entity
 @Table(name = "salesforce.vw_MISReport")
-//@Table(name = "salesforce.vw_MISReport_uat_test")
+//@Table(name = "salesforce.vw_misreport_phase")
 public class Vw_MISReport {
 	@Id 
 	@GeneratedValue(strategy=GenerationType.AUTO) 
@@ -85,6 +85,7 @@ public class Vw_MISReport {
 	@Column(name="lastvisitdate") private String lastvisitdate;
 	@Column(name="type_of_visit") private String type_of_visit;
 	@Column(name="d4u_comments") private String d4u_comments;
+	@Column(name="phase_name") private String phase_name;
 	
 	@Transient private String qry_count;
 	@Transient private String qry_msg;
@@ -477,6 +478,12 @@ public class Vw_MISReport {
 	}
 	public void setD4u_comments(String d4u_comments) {
 		this.d4u_comments = d4u_comments;
+	}
+	public String getPhase_name() {
+		return phase_name;
+	}
+	public void setPhase_name(String phase_name) {
+		this.phase_name = phase_name;
 	}
 
 	

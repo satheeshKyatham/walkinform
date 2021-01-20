@@ -29,7 +29,7 @@ function generateEOIForm() {
 
 function enqDtlForAdminEOI () {
 	var enqName = "ENQ - " + $('#enqNameInputEOI').val().trim();
-	alert($('#enqNameInputEOI').val());
+	//alert($('#enqNameInputEOI').val());
 	$.post(pageContext+"getEnqForAdminInventoryHold",{"enqName":enqName, "projectSFID":$('#projectid').val()},function(data){                      
 		$("#enqDtlTableEOI tbody").empty();
 		var obj =JSON.parse(data);

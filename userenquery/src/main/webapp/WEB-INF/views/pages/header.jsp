@@ -5,7 +5,7 @@
 <%  
 /* Cookie ck=new Cookie("version","18.20");  
 response.addCookie(ck);   */
-session.setAttribute("version","19.02");  
+session.setAttribute("version","19.06");  
 
 %>  
 
@@ -109,6 +109,7 @@ session.setAttribute("version","19.02");
 <script type="text/javascript">
 document.getElementById('userNameLoggedInShow').innerHTML = 'Welcome '+'<%= session.getAttribute("USERNAME")%>';
 var useridGlobvar = <%= session.getAttribute("USERID")%>
+var USERNAME_GV = '<%= session.getAttribute("USERNAME")%>';
 
 function logoutSession(){ 
 	$.get("logout", {

@@ -108,11 +108,7 @@ if(ses!=null){
 		</div>
 		
 		<div class="tab-content formTabCont">
-			<div class="tab-pane active" id="tab1">
-			  	
-			  	<button class="emailReplyButton" onClick="sendEmail()">Reply</button>
- 
-			  	
+			<div class="tab-pane active" id="tab1">			   
 			  	
 			  	<div class="col-md-2" style="margin-top:10px; margin-bottom:10px;">
 			   
