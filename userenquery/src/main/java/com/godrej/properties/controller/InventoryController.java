@@ -232,7 +232,7 @@ public class InventoryController {
 			
 			Boolean isPlot = false;
 			
-			if (projectId.equals("a1l2s000000XmaMAAS")) {
+			if (projectId.equals("a1l2s000000XmaMAAS") || projectId.equals("a1l2s000000PJMJAA4")) {
 				isPlot = true;
 			} else {
 				isPlot = false;

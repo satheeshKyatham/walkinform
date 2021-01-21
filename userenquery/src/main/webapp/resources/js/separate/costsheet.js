@@ -2766,7 +2766,7 @@ function newOtherCharges2 () {
                     	$('#totalDicountView').hide();
                     }*/
                     
-                    if ($('#projectid').val() == 'a1l6F000002X6IOQA0' || $('#region__c').val() == "Gurgaon" || $('#region__c').val() == "New Delhi" || $('#region__c').val() == "Noida") {
+                    if ($('#projectid').val() == 'a1l2s000000PJPmAAO' || $('#projectid').val() == 'a1l6F000002X6IOQA0' || $('#region__c').val() == "Gurgaon" || $('#region__c').val() == "New Delhi" || $('#region__c').val() == "Noida") {
 	                	$('#totalDiscountCol').append(printDiscountHtml);
 	                	$('#totalDicountView').show();
 	                } else {
@@ -4052,6 +4052,8 @@ function schemeInSalesComment (){
 		
 		$("#costsheet_commitment").attr('readonly', true);
   	    
+		$("#costsheet_commitment").addClass("disableInputs");
+		
 		if ($('#getSchemeSource').val() != '-1') {
 			schemes += "* Source discount: " + $('#getSchemeSource option:selected').text();
 		} else {
@@ -4073,10 +4075,12 @@ function schemeInSalesComment (){
      } else if ($('#schemeTypeDD').val() == 'noScheme') {
     	 $("#costsheet_commitment").css("min-height", "0px");
     	 $("#costsheet_commitment").attr('readonly', false);
+    	 $("#costsheet_commitment").removeClass("disableInputs");
     	 schemes = "";
      } else if ($('#schemeTypeDD').val() == 'other') {
     	 $("#costsheet_commitment").css("min-height", "0px");
     	 $("#costsheet_commitment").attr('readonly', false);
+    	 $("#costsheet_commitment").removeClass("disableInputs");
     	 schemes = "";
      }
 	
