@@ -664,7 +664,7 @@ function hideEnquirySourceByEnquiryType(enquiryTypeCode,enq){
 			$(".hideChannelPartnerType").show();
 			$("#enquirySourceTextDiv").show();
 		}else if((enq.walkInSource==='Digital' || enq.walkInSource==='Exhibition' || enq.walkInSource==='Newspaper' || enq.walkInSource==='Hoarding' || enq.walkInSource==='Radio' || enq.walkInSource==='Word of mouth' 
-			|| enq.walkInSource==='SMS' || enq.walkInSource==='Referral' || enq.walkInSource==='Godrej Employee' || enq.walkInSource==='Corporate' || enq.walkInSource==='Existing Customer' || enq.walkInSource==='Other BTL activities' || enq.walkInSource==='Affiliate Sales' || enq.walkInSource==='Telemarketing'	
+			|| enq.walkInSource==='SMS' || enq.walkInSource==='Referral' || enq.walkInSource==='Godrej Employee' || enq.walkInSource==='Corporate' || enq.walkInSource==='Existing Customer' || enq.walkInSource==='Other BTL activities' || enq.walkInSource==='Affiliate Sales' || enq.walkInSource==='Telemarketing' || enq.walkInSource==='VDNB Referral'	
 		) && !isEmpty(enq.walkInSource)){
 			$(".hideChannelPartnerType").hide();
 			if($("#isReferredByChannelPartnerInput").val()!="Direct"){

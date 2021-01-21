@@ -349,6 +349,8 @@ function getTokenTypeEOI (){
 		html='<option value="F">PLATINUM</option><option value="T">EXPRESS</option>';
 	} else if($("#projectsfid").val()=='a1l2s000000PJMJAA4') {
 		html='<option value="F">GOLD</option><option value="T">PLATINUM</option><option value="T">EXPRESS</option>';
+	} else if($("#projectsfid").val()=='a1l2s00000002YZAAY') {
+		html='<option value="F">PLATINUM</option>';
 	}
 	
 	
@@ -381,27 +383,46 @@ function tokenTypeChangeEOI(e)
 
 function getTypologyEOI (e){
 	 
-	$.get("getunittype", {
-		"project_code" : $('.projectSfid').val(),
-		"tower_code": $(e).val(),
-		"floor_code":""
-	}, function(data) {
+	if ($('.projectSfid').val() == "a1l2s00000002YZAAY") {
+		var html = "";
 		
 		$(e).closest('.EOIDtlRow').find('.typologyListEOI').find("option:gt(0)").remove();
 		$(e).closest('.EOIDtlRow').find('.unitListEOI').find("option:gt(0)").remove();
 		
-		var html="";
 		
-		if(data!=null){
-			for(var i=0;i<data.length;i++){
-				
-				html=html+'<option value="'+data[i].propstrength__unit_type__c+'">'+data[i].propstrength__unit_type__c+'</option>';
-				
-				//html=html+  "<input type='radio' id='desiredUnitType"+i+"' class='desiredUnitType' name='enquiryReport.desiredUnitType' value='"+data[i].propstrength__unit_type__c+"' >"+data[i].propstrength__unit_type__c+"</label>";
-			}
+		if ($(e).closest('.EOIDtlRow').find('.towerListEOI  option:selected').val() == "SC01") {
+			html = "<option value='2 BHK'>2 BHK</option>";
+		} else if ($(e).closest('.EOIDtlRow').find('.towerListEOI  option:selected').val() == "SC02") {
+			html = "<option value='3 BHK'>3 BHK</option>";
+		} else if ($(e).closest('.EOIDtlRow').find('.towerListEOI  option:selected').val() == "SC03") {
+			html = "<option value='3 BHK'>3 BHK</option>";
 		}
+		
+		
 		$(e).closest('.EOIDtlRow').find('.typologyListEOI').append(html);
-	});
+	} else {
+		$.get("getunittype", {
+			"project_code" : $('.projectSfid').val(),
+			"tower_code": $(e).val(),
+			"floor_code":""
+		}, function(data) {
+			
+			$(e).closest('.EOIDtlRow').find('.typologyListEOI').find("option:gt(0)").remove();
+			$(e).closest('.EOIDtlRow').find('.unitListEOI').find("option:gt(0)").remove();
+			
+			var html="";
+			
+			if(data!=null){
+				for(var i=0;i<data.length;i++){
+					
+					html=html+'<option value="'+data[i].propstrength__unit_type__c+'">'+data[i].propstrength__unit_type__c+'</option>';
+				}
+			}
+			$(e).closest('.EOIDtlRow').find('.typologyListEOI').append(html);
+		});
+	}
+	
+	
 }
 /*
 function getUnitEOI (e) {

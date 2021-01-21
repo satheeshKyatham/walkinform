@@ -239,7 +239,7 @@ public class GPLAppsWebServiceController {
 		if(enquiryDto.getWalkInSource()!=null)
 		{
 			if((enquiryDto.getWalkInSource().equals("Digital") || enquiryDto.getWalkInSource().equals("Exhibition") || enquiryDto.getWalkInSource().equals("Newspaper") || enquiryDto.getWalkInSource().equals("Hoarding") || enquiryDto.getWalkInSource().equals("Radio") || enquiryDto.getWalkInSource().equals("Word of mouth") 
-					|| enquiryDto.getWalkInSource().equals("SMS")  || enquiryDto.getWalkInSource().equals("Corporate") || enquiryDto.getWalkInSource().equals("Other BTL activities") || enquiryDto.getWalkInSource().equals("Telemarketing") || enquiryDto.getWalkInSource().contains("Affiliate Sales") || enquiryDto.getWalkInSource().contains("Employee")))
+					|| enquiryDto.getWalkInSource().equals("SMS")  || enquiryDto.getWalkInSource().equals("Corporate") || enquiryDto.getWalkInSource().equals("Other BTL activities") || enquiryDto.getWalkInSource().equals("Telemarketing") || enquiryDto.getWalkInSource().contains("Affiliate Sales") || enquiryDto.getWalkInSource().contains("Employee") || enquiryDto.getWalkInSource().contains("VDNB Referral")))
 			{
 				enqResp.setWalkin_source_mobile("Direct");
 			}

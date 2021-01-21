@@ -223,6 +223,7 @@ if(ses!=null){
 				 <li id="salesTabId"><!--   onclick="getSalesDetails(event);"-->
 					<a href="#tab2" data-toggle="tab">Sales</a>
 				</li>  
+				 
 				 <li id="paymentDetailsTab" style="display: none;" onclick="getEOITabPaymentRecord (); getEOITabPreferencRecord();">
 					<a href="#tab3" data-toggle="tab">EOI Details</a>
 				</li>
@@ -1673,6 +1674,7 @@ if(ses!=null){
 					</form:form>
 			</div>
 			<div class="clearfix"></div>
+			 
 			
 			<div  class="tab-pane" id="tab3">
 			  <jsp:include page="commonBankPayment.jsp"></jsp:include>
