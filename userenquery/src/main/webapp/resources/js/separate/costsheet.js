@@ -612,10 +612,10 @@ function getBSPTax () {
                            
                            //NO GST tax on bsp calculation if propstrength__completion_certificate_received__c == Trure OR value.propstrength__category__c == 'Plot'
                            
-                           if (value.propstrength__completion_certificate_received__c == true || value.propstrength__category__c == 'Plot') { 
+                           if (value.propstrength__completion_certificate_received__c == true || value.propstrength__category__c == 'Plot' || value.propstrength__category__c == 'Plots') { 
                                  bspTaxRecord ('noGst');
                                  //no gst
-                           } else if (value.propstrength__completion_certificate_received__c == false || value.propstrength__category__c != 'Plot') {
+                           } else if (value.propstrength__completion_certificate_received__c == false || value.propstrength__category__c != 'Plot' || value.propstrength__category__c != 'Plots') {
                                  
                                  if (value.propstrength__pmay_abatement__c == false){
                                         
