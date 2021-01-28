@@ -8,11 +8,13 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.nio.file.Files;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
@@ -767,14 +769,14 @@ public class WebServiceController<MultipartFormDataInput> {
 			@RequestParam("towerName") String towerName, @RequestParam("regionName") String regionName,
 			@RequestParam("projectSfid") String projectSfid, @RequestParam("unitSfid") String unitSfid,
 			@RequestParam("enqSfid") String enqSfid, @RequestParam("csData") String csData,
-			@RequestParam("projectName") String projectName, @RequestParam("currentDate") String currentDate)
+			@RequestParam("projectName") String projectName, @RequestParam("currentDate") String currentDate, @RequestParam("generateFrom") String generateFrom)
 			throws JRException, IOException {
 		log.info("Enter Print Costsheet");
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		Gson gson = gsonBuilder.create();
 
 		long timeId = new Date().getTime();
-
+		
 		/*
 		 * GeneratePDF solution = new GeneratePDF (); solution.PDFReport(20
 		 * ,csData);
@@ -790,10 +792,34 @@ public class WebServiceController<MultipartFormDataInput> {
 		
 		log.info("");
 		iTextHTMLtoPDF solution = new iTextHTMLtoPDF();
-		solution.PDFReport(USEREMAIL_GV, unitTval, floorTval, towerName, regionName, projectSfid, unitSfid, timeId,
-				csData, projectName, currentDate, enqSfid, csAnnexure);
+		solution.PDFReport(USEREMAIL_GV, unitTval, floorTval, towerName, regionName, projectSfid, unitSfid, timeId, csData, projectName, currentDate, enqSfid, csAnnexure);
+		
+		//Base 64
+		String b64 = "";
+		if (!generateFrom.equals("Email")) {
+			return gson.toJson(timeId);
+		} else {
+			try {
+				String floorName = "";
+				if (floorTval.equals("")) {
+			    	  floorName = "NoFloor";
+			      } else {
+			    	  floorName = floorTval;
+			      }
+				String rootPath = System.getProperty("catalina.home");	
+				String path = (rootPath + File.separator + "costSheetPDF" + File.separator + regionName + File.separator + projectName + File.separator + towerName + File.separator + floorName + File.separator + unitTval + File.separator + enqSfid+"-"+unitSfid+"-"+projectSfid+".pdf");
+				
+				File file = new File(path);
+				byte [] bytes = Files.readAllBytes(file.toPath());
 
-		return gson.toJson(timeId);
+				b64 = Base64.getEncoder().encodeToString(bytes);
+				System.out.println(b64); 
+			} catch (Exception e) {
+			      e.printStackTrace();
+		    }
+			return b64;
+		}
+		// END Base 64
 	}
 
 	@RequestMapping(value = { "/getCarParkCharges" }, method = RequestMethod.POST)
@@ -3283,7 +3309,7 @@ public class WebServiceController<MultipartFormDataInput> {
 		
 		Boolean isPlot = false;
 		
-		if (projectId.equals("a1l2s000000XmaMAAS") || projectId.equals("a1l2s000000PJMJAA4")) {
+		if (projectId.equals("a1l2s000000XmaMAAS") || projectId.equals("a1l2s000000PJMJAA4") || projectId.equals("a1l2s000000PKjdAAG")) {
 			isPlot = true;
 		} else {
 			isPlot = false;

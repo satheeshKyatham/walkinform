@@ -71,9 +71,9 @@ public class ViewPDF extends HttpServlet {
 	    response.setHeader("Content-Disposition", "inline; filename=\""+fileName+".pdf\"");
 	    Files.copy(file.toPath(), response.getOutputStream());
 	    
-	    /*if (from.equals("costsheet")) {
+	    if (from.equals("costsheet") && request.getParameter("name").contains("Draft")) {
 	    	pDFtoImage.pdfToImage(file, folderPath);
-	    }*/
+	    }
 	    
 	}
 	
