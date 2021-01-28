@@ -556,12 +556,13 @@ function populateBasicInfo(enq,contact){
 			/*isReferredChanged(cpHS);*/
 			
 		//	$('#walkInSource').val(enq.walkInSource);
-		 
+		
 			
 			$('#walkInSource option[value="'+enq.walkInSource+'"]').attr('selected','selected');
 		 
 			$('#walkInSourceDetail').val(enq.walkInSourceDetail);
-			
+			if(enq.phasedto!=null)
+				$('#phasedto').val(enq.phasedto.sfid);	
 			//alert(enq.otherChannelPartner);
 			$('#otherChannelPartnerName').val(enq.otherChannelPartner);
 			/*$('input[name="desiredUnitType"][value="'+enq.desiredUnitType+'"]').trigger('click');*/
@@ -709,6 +710,12 @@ function loadEnquiryReport(enq){
 		getSourcingTeamLeadManagersList(enq.sourcing_Team_Lead_email);
 		getInternationalSalesManagersList(enq.internationalSMDto);
 		$("#LostReasonID").val(enq.lost_reason_c__c);
+		if(enq.phasedto!=null)
+			{
+				$('.phasesfid').val(enq.phasedto.sfid);
+				$('.phaseid').val(enq.phasedto.phaseId);
+				$('.phasename').val(enq.phasedto.name);
+			}
 		
 		//$( "#followDate" ).datepicker({ defaultDate: new Date(enq.enquiryReport.followDate) });
 		
@@ -811,6 +818,7 @@ function loadContactReport(contact){
 		$('#ageGroup').val(contact.contactReport.ageGroup);
 		$('#employmentStatus').val(contact.contactReport.employmentStatus);
 		$('#designationCustSales').val(contact.designation);
+		
 		
 	}
 }

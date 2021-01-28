@@ -863,6 +863,7 @@ if(ses!=null){
 								<label>Details of Newspaper, Website, Hoarding etc. <strong class="mndt">*</strong></label>
 							</div>
 						</div>	
+						
 						<div class="clearfix"></div>
 					</div>
 					
@@ -876,8 +877,20 @@ if(ses!=null){
 						</div>	
 						<div class="clearfix"></div>
 					</div>
-					
-						
+					<%-- <c:if test="${!empty phaseList}">
+							<div class="col-md-6 col-xs-12">
+									<div class="group">
+										<select class="isphaselist requiredField enquiryFields contactSalesView" id="phasedto" name="phasedto.sfid"><!-- disabled="disabled" -->
+										    <option value=""></option>
+											<c:forEach var="phaseList" items="${phaseList}">
+		                                       <option value="${phaseList.sfid}">${phaseList.name}</option>
+		                                     </c:forEach>
+										</select>
+										<span class="highlight"></span><span class="bar"></span>
+										<label class="select-label">Phase <strong class="mndt">*</strong></label>
+									</div>
+								</div>
+							</c:if> --%>
 						<div class="clearfix"></div>
 						
 					<!-- </div> -->
@@ -923,6 +936,9 @@ if(ses!=null){
 				<input type="hidden" class="tokenno" name="enquiryReport.tokenno" value="${tokenId}">
 				<input type="hidden" class="userid" name="contact.contactReport.userid" value="<%= userid %>">
 				<input type="hidden" class="userid" name="enquiryReport.userid" value="<%= userid %>">
+				<input type="hidden" class="phasesfid" name="phasedto.sfid">
+				<input type="hidden" class="phaseid" name="phasedto.phaseId">
+				<input type="hidden" class="phasename" name="phasedto.name">
 				
 				<%-- <input type="hidden" id="closingmanagers" name="closingmanagers" value="${closingmanagers}"> --%>
 				<%-- <input type="hidden" id="assignTo" name="assignTo" value="${assignTo}"> --%>

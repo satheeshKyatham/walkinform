@@ -545,7 +545,10 @@ public class EnquiryRequestServiceImpl implements EnquiryRequestService {
 		{
 			dest.setInternationalSMDto(src.getInternationalSMDto());
 		}
-		
+		if(src.getPhasedto()!=null)
+		{
+			dest.setPhasedto(src.getPhasedto());
+		}
 		return dest;
 	}
 	
