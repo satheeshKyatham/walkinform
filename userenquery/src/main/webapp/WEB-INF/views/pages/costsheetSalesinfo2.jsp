@@ -86,9 +86,9 @@
 	</a> -->
 	
 	
-	<a class="printFloat" id="emailBtnFloat"  style="bottom: 172px !important; display:none;" onclick="printPdfData('Email')">
+	<!-- <a class="printFloat" id="emailBtnFloat"  style="bottom: 172px !important; display:none;" onclick="printPdfData('Email')">
 		<i class="fa fa-envelope printficon" style="line-height: 50px !important; font-size: 22px !important;"></i>
-	</a>
+	</a> -->
 	
 	<a class="printFloat" id="printBtnFloat" style="bottom: 106px !important; display:none;" onclick="printPdfData('Draft')" data-toggle="tooltip" title="Print Cost Sheet">
 		<i class="fa fa-print printficon" style="line-height: 50px !important; font-size: 22px !important;"></i>
