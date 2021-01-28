@@ -1,5 +1,6 @@
 package com.godrej.properties.webservices;
 
+import java.awt.image.BufferedImage;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -31,6 +32,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.xml.bind.DatatypeConverter;
 
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.rendering.ImageType;
+import org.apache.pdfbox.rendering.PDFRenderer;
+import org.apache.pdfbox.tools.imageio.ImageIOUtil;
 import org.ksoap2.serialization.SoapObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -430,6 +435,7 @@ public class WebServiceController<MultipartFormDataInput> {
 	@Autowired
 	private UserProjectMappingService userProjectMappingService;
 
+	
 	@RequestMapping(value = "/activeproject", method = RequestMethod.GET, produces = "application/json")
 	public String project() {
 		GsonBuilder gsonBuilder = new GsonBuilder();
@@ -795,7 +801,9 @@ public class WebServiceController<MultipartFormDataInput> {
 		solution.PDFReport(USEREMAIL_GV, unitTval, floorTval, towerName, regionName, projectSfid, unitSfid, timeId, csData, projectName, currentDate, enqSfid, csAnnexure);
 		
 		//Base 64
+		String response = "";
 		String b64 = "";
+		String b64Image = "";
 		if (!generateFrom.equals("Email")) {
 			return gson.toJson(timeId);
 		} else {
@@ -806,18 +814,37 @@ public class WebServiceController<MultipartFormDataInput> {
 			      } else {
 			    	  floorName = floorTval;
 			      }
-				String rootPath = System.getProperty("catalina.home");	
+				
+				File filePath=null;
+				String folderPath = "";
+				String rootPath = System.getProperty("catalina.home");
+				
+				filePath = new File(rootPath+"\\costSheetPDF\\"+ regionName + File.separator + projectName + File.separator + towerName + File.separator + floorName + File.separator + unitTval + File.separator + enqSfid+"-"+unitSfid+"-"+projectSfid+".pdf");
+				folderPath = rootPath+"\\costSheetPDF\\"+ regionName + File.separator + projectName + File.separator + towerName + File.separator + floorName + File.separator + unitTval + File.separator;
+				
+				pdfToImage(filePath, folderPath);
+				
+				//-------------- PDF ----------------
 				String path = (rootPath + File.separator + "costSheetPDF" + File.separator + regionName + File.separator + projectName + File.separator + towerName + File.separator + floorName + File.separator + unitTval + File.separator + enqSfid+"-"+unitSfid+"-"+projectSfid+".pdf");
 				
 				File file = new File(path);
 				byte [] bytes = Files.readAllBytes(file.toPath());
 
 				b64 = Base64.getEncoder().encodeToString(bytes);
-				System.out.println(b64); 
+				 
+				//-------------- IMAGE ----------------
+				String pathImage = (rootPath + File.separator + "costSheetPDF" + File.separator + regionName + File.separator + projectName + File.separator + towerName + File.separator + floorName + File.separator + unitTval + File.separator + enqSfid+"-"+unitSfid+"-"+projectSfid+".png");
+				File fileImage = new File(pathImage);
+				byte [] bytesImage = Files.readAllBytes(fileImage.toPath());
+				b64Image = Base64.getEncoder().encodeToString(bytesImage);
+				
+				response = "{\"status\":\"STATUS_OK\",\"pdf\":\""+b64+"\",\"image\":\""+b64Image+"\",\"error_msg\":\"\",\"error_id\":\"\"}";
+				//response = "{\"status\":\""+b64+"\",\"error_msg\":\"Details is not updated on portal, please try again later\",\"error_id\":\"UPDATE_EOI_PAYMENT_ER1004\"}";
 			} catch (Exception e) {
 			      e.printStackTrace();
+			      response = "{\"status\":\"STATUS_NOTOK\",\"error_msg\":\"\",\"error_id\":\"\"}";
 		    }
-			return b64;
+			return response;
 		}
 		// END Base 64
 	}
@@ -4818,5 +4845,30 @@ public class WebServiceController<MultipartFormDataInput> {
 		return gson.toJson(enquiryRequestService.getSourcingLeadsEnquiryList(sourcManageremail, projectsfid, fromdate, todate));
 	}
 
+	public static void pdfToImage(File file, String folderPath) {
+		//private static void pdfToImage(String pdfPath) {
+			
+			String pdfPath = file.toPath().toString();
+					
+			try (PDDocument doc = PDDocument.load(new File(pdfPath))) {
+				PDFRenderer pdfRenderer = new PDFRenderer(doc); 
+				
+				for (int page = 0;page<doc.getNumberOfPages();++page) {
+					BufferedImage bim = pdfRenderer.renderImageWithDPI(page, 150, ImageType.RGB);
+					//String fileName = "D:\\atul_data\\apache-tomcat-9.0.22\\costSheetPDF\\Mumbai\\Godrej City, Panvel, Mumbai\\The Highlands Tower 1\\4th floor\\403\\image-"+page+".png";
+					
+					String imageName = file.getName();
+					imageName = imageName.substring(0, imageName.lastIndexOf(".")+1);
+					
+					String fileName = folderPath+imageName+"png";
+					
+					ImageIOUtil.writeImage(bim, fileName, 150);
+				}
+				doc.close();
+				
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+		}
 	
 }
