@@ -776,7 +776,7 @@ public class WebServiceController<MultipartFormDataInput> {
 		Gson gson = gsonBuilder.create();
 
 		long timeId = new Date().getTime();
-		
+
 		/*
 		 * GeneratePDF solution = new GeneratePDF (); solution.PDFReport(20
 		 * ,csData);
@@ -2703,7 +2703,7 @@ public class WebServiceController<MultipartFormDataInput> {
 				"Project Name,Tokenno,Created,Enquiry Name,Mobile Phone,Customer Name,Email,have_we_met_before,age_a__c,residenceaddress,officelocation,"
 						+ "empstatus,company_name__c,is_purchase_for_self_use_or_investment__c,budget"
 						+ ",typology_requirement,walk_in_source__c,advertisementname,brokername,current_residence_configuration,current_residence_ownership,source_of_funding,customer_classification,ethnicity,unit_availability,accompanied_by,deal_negotiation,construction_status,timeframe_to_book,enquirynoneditcomment,verticle,sourcingname,closingname,closingemail,own_contribution_receipt,loan_eligibility,Assined To,IsAttended,CP Comments,FollowType,FollowDate"
-						+ ",Trigger 1,Trigger 2,Barrier 1,Barrier 2,Lost Reason,Designation,Media Type,Media Sub Type,Type of visit,Revisit,Last site visit date,D4U Comments Log,Project Phase");
+						+ ",Trigger 1,Trigger 2,Barrier 1,Barrier 2,Lost Reason,Designation,Media Type,Media Sub Type,Type of visit,Revisit,Last site visit date,D4U Comments Log,Project Phase,Sourcing TL,Closing TL");
 		rows.add("\n");
 		String fromdate = resquest.getParameter("fromdate");
 		log.info("fromdate:-{}",fromdate);
@@ -2905,6 +2905,17 @@ public class WebServiceController<MultipartFormDataInput> {
 			else
 				rows.add("");
 			rows.add(",");
+			if(mislist.get(i).getSourcing_Team_Lead_Name__c() != null)
+				rows.add(mislist.get(i).getSourcing_Team_Lead_Name__c());
+			else
+				rows.add("");
+			rows.add(",");
+			if(mislist.get(i).getClosing_Team_Lead_Name__c() != null)
+				rows.add(mislist.get(i).getClosing_Team_Lead_Name__c());
+			else
+				rows.add("");
+			rows.add(",");
+			
 			
 			rows.add("\n");
 		}

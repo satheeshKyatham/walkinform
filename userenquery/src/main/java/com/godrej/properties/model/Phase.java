@@ -25,9 +25,13 @@ public class Phase extends CommonModel{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")
 	private Integer phaseid;
+	@Column(name="createddate")
 	private Timestamp createddate;
+	@Column(name="isdeleted")
 	private boolean isdeleted;
+	@Column(name="name")
 	private String name;
+	@Column(name="project__c")
 	private String project__c;
 	public Integer getPhaseid() {
 		return phaseid;

@@ -11,8 +11,8 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 @Entity
-@Table(name = "salesforce.vw_MISReport")
-//@Table(name = "salesforce.vw_misreport_phase")
+//@Table(name = "salesforce.vw_MISReport")
+@Table(name = "salesforce.vw_misreport_new")
 public class Vw_MISReport {
 	@Id 
 	@GeneratedValue(strategy=GenerationType.AUTO) 
@@ -86,6 +86,8 @@ public class Vw_MISReport {
 	@Column(name="type_of_visit") private String type_of_visit;
 	@Column(name="d4u_comments") private String d4u_comments;
 	@Column(name="phase_name") private String phase_name;
+	@Column(name="Sourcing_Team_Lead_Name__c") private String Sourcing_Team_Lead_Name__c;
+	@Column(name="Closing_Team_Lead_Name__c") private String Closing_Team_Lead_Name__c;
 	
 	@Transient private String qry_count;
 	@Transient private String qry_msg;
@@ -484,6 +486,18 @@ public class Vw_MISReport {
 	}
 	public void setPhase_name(String phase_name) {
 		this.phase_name = phase_name;
+	}
+	public String getSourcing_Team_Lead_Name__c() {
+		return Sourcing_Team_Lead_Name__c;
+	}
+	public void setSourcing_Team_Lead_Name__c(String sourcing_Team_Lead_Name__c) {
+		Sourcing_Team_Lead_Name__c = sourcing_Team_Lead_Name__c;
+	}
+	public String getClosing_Team_Lead_Name__c() {
+		return Closing_Team_Lead_Name__c;
+	}
+	public void setClosing_Team_Lead_Name__c(String closing_Team_Lead_Name__c) {
+		Closing_Team_Lead_Name__c = closing_Team_Lead_Name__c;
 	}
 
 	

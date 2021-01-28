@@ -26,6 +26,14 @@ $(document).ready(function () {
 		$("#headerProjectDD").append("");
 		$("#headerProjectDD").append(option);
 	});
+	
+	if (FOYRAPI_GV != "null"){
+		$('#foyrTab').show();
+		$('#foyrFram').html('<iframe src="'+FOYRAPI_GV+'"  style="width:100%; height:500px;"></iframe>');
+	} else {
+		$('#foyrTab').hide();
+	}
+	
 });
 
 var optionDtl = '';
