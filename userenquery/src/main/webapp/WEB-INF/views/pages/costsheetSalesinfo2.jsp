@@ -86,7 +86,9 @@
 	</a> -->
 	
 	
-	
+	<a class="printFloat" id="emailBtnFloat"  style="bottom: 172px !important; display:none;" onclick="printPdfData('Email')">
+		<i class="fa fa-envelope printficon" style="line-height: 50px !important; font-size: 22px !important;"></i>
+	</a>
 	
 	<a class="printFloat" id="printBtnFloat" style="bottom: 106px !important; display:none;" onclick="printPdfData('Draft')" data-toggle="tooltip" title="Print Cost Sheet">
 		<i class="fa fa-print printficon" style="line-height: 50px !important; font-size: 22px !important;"></i>
@@ -1477,7 +1479,7 @@
 </div>
 <!-- END Webcam Modal -->
  
-<!-- 
+
 <div style="display:none;"> 
 <textarea id="textbox" style="width: 300px; height: 600px;">
 To: User <user@domain.demo>
@@ -1491,4 +1493,3 @@ Content-Type: text/html
 <button id="create">Create file</button><br><br>
 <a download="message.eml" id="downloadlink" style="display: none">Download</a>
 </div>
- -->

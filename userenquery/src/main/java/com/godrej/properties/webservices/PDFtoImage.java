@@ -40,7 +40,7 @@ public class PDFtoImage {
 			PDFRenderer pdfRenderer = new PDFRenderer(doc); 
 			
 			for (int page = 0;page<doc.getNumberOfPages();++page) {
-				BufferedImage bim = pdfRenderer.renderImageWithDPI(page, 300, ImageType.RGB);
+				BufferedImage bim = pdfRenderer.renderImageWithDPI(page, 150, ImageType.RGB);
 				//String fileName = "D:\\atul_data\\apache-tomcat-9.0.22\\costSheetPDF\\Mumbai\\Godrej City, Panvel, Mumbai\\The Highlands Tower 1\\4th floor\\403\\image-"+page+".png";
 				
 				String imageName = file.getName();
@@ -48,7 +48,7 @@ public class PDFtoImage {
 				
 				String fileName = folderPath+imageName+"png";
 				
-				ImageIOUtil.writeImage(bim, fileName, 300);
+				ImageIOUtil.writeImage(bim, fileName, 150);
 			}
 			doc.close();
 			

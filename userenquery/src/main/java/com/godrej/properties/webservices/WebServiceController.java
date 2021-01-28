@@ -8,11 +8,13 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.nio.file.Files;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
@@ -767,14 +769,14 @@ public class WebServiceController<MultipartFormDataInput> {
 			@RequestParam("towerName") String towerName, @RequestParam("regionName") String regionName,
 			@RequestParam("projectSfid") String projectSfid, @RequestParam("unitSfid") String unitSfid,
 			@RequestParam("enqSfid") String enqSfid, @RequestParam("csData") String csData,
-			@RequestParam("projectName") String projectName, @RequestParam("currentDate") String currentDate)
+			@RequestParam("projectName") String projectName, @RequestParam("currentDate") String currentDate, @RequestParam("generateFrom") String generateFrom)
 			throws JRException, IOException {
 		log.info("Enter Print Costsheet");
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		Gson gson = gsonBuilder.create();
 
 		long timeId = new Date().getTime();
-
+		
 		/*
 		 * GeneratePDF solution = new GeneratePDF (); solution.PDFReport(20
 		 * ,csData);
@@ -790,10 +792,34 @@ public class WebServiceController<MultipartFormDataInput> {
 		
 		log.info("");
 		iTextHTMLtoPDF solution = new iTextHTMLtoPDF();
-		solution.PDFReport(USEREMAIL_GV, unitTval, floorTval, towerName, regionName, projectSfid, unitSfid, timeId,
-				csData, projectName, currentDate, enqSfid, csAnnexure);
+		solution.PDFReport(USEREMAIL_GV, unitTval, floorTval, towerName, regionName, projectSfid, unitSfid, timeId, csData, projectName, currentDate, enqSfid, csAnnexure);
+		
+		//Base 64
+		String b64 = "";
+		if (!generateFrom.equals("Email")) {
+			return gson.toJson(timeId);
+		} else {
+			try {
+				String floorName = "";
+				if (floorTval.equals("")) {
+			    	  floorName = "NoFloor";
+			      } else {
+			    	  floorName = floorTval;
+			      }
+				String rootPath = System.getProperty("catalina.home");	
+				String path = (rootPath + File.separator + "costSheetPDF" + File.separator + regionName + File.separator + projectName + File.separator + towerName + File.separator + floorName + File.separator + unitTval + File.separator + enqSfid+"-"+unitSfid+"-"+projectSfid+".pdf");
+				
+				File file = new File(path);
+				byte [] bytes = Files.readAllBytes(file.toPath());
 
-		return gson.toJson(timeId);
+				b64 = Base64.getEncoder().encodeToString(bytes);
+				System.out.println(b64); 
+			} catch (Exception e) {
+			      e.printStackTrace();
+		    }
+			return b64;
+		}
+		// END Base 64
 	}
 
 	@RequestMapping(value = { "/getCarParkCharges" }, method = RequestMethod.POST)
@@ -2677,7 +2703,7 @@ public class WebServiceController<MultipartFormDataInput> {
 				"Project Name,Tokenno,Created,Enquiry Name,Mobile Phone,Customer Name,Email,have_we_met_before,age_a__c,residenceaddress,officelocation,"
 						+ "empstatus,company_name__c,is_purchase_for_self_use_or_investment__c,budget"
 						+ ",typology_requirement,walk_in_source__c,advertisementname,brokername,current_residence_configuration,current_residence_ownership,source_of_funding,customer_classification,ethnicity,unit_availability,accompanied_by,deal_negotiation,construction_status,timeframe_to_book,enquirynoneditcomment,verticle,sourcingname,closingname,closingemail,own_contribution_receipt,loan_eligibility,Assined To,IsAttended,CP Comments,FollowType,FollowDate"
-						+ ",Trigger 1,Trigger 2,Barrier 1,Barrier 2,Lost Reason,Designation,Media Type,Media Sub Type,Type of visit,Revisit,Last site visit date,D4U Comments Log,Project Phase,Sourcing TL,Closing TL");
+						+ ",Trigger 1,Trigger 2,Barrier 1,Barrier 2,Lost Reason,Designation,Media Type,Media Sub Type,Type of visit,Revisit,Last site visit date,D4U Comments Log,Project Phase");
 		rows.add("\n");
 		String fromdate = resquest.getParameter("fromdate");
 		log.info("fromdate:-{}",fromdate);
@@ -2879,17 +2905,6 @@ public class WebServiceController<MultipartFormDataInput> {
 			else
 				rows.add("");
 			rows.add(",");
-			if(mislist.get(i).getSourcing_Team_Lead_Name__c() != null)
-				rows.add(mislist.get(i).getSourcing_Team_Lead_Name__c());
-			else
-				rows.add("");
-			rows.add(",");
-			if(mislist.get(i).getClosing_Team_Lead_Name__c() != null)
-				rows.add(mislist.get(i).getClosing_Team_Lead_Name__c());
-			else
-				rows.add("");
-			rows.add(",");
-			
 			
 			rows.add("\n");
 		}
@@ -3294,7 +3309,7 @@ public class WebServiceController<MultipartFormDataInput> {
 		
 		Boolean isPlot = false;
 		
-		if (projectId.equals("a1l2s000000XmaMAAS") || projectId.equals("a1l2s000000PJMJAA4")) {
+		if (projectId.equals("a1l2s000000XmaMAAS") || projectId.equals("a1l2s000000PJMJAA4") || projectId.equals("a1l2s000000PKjdAAG")) {
 			isPlot = true;
 		} else {
 			isPlot = false;
