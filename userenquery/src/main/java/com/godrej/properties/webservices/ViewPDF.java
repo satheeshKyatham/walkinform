@@ -18,10 +18,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class ViewPDF extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	@Autowired
-	PDFtoImage pDFtoImage;
-	
-	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String floorNameVal = "";
@@ -71,9 +67,9 @@ public class ViewPDF extends HttpServlet {
 	    response.setHeader("Content-Disposition", "inline; filename=\""+fileName+".pdf\"");
 	    Files.copy(file.toPath(), response.getOutputStream());
 	    
-	    if (from.equals("costsheet") && request.getParameter("name").contains("Draft")) {
+	    /*if (from.equals("costsheet") && request.getParameter("name").contains("Draft")) {
 	    	pDFtoImage.pdfToImage(file, folderPath);
-	    }
+	    }*/
 	    
 	}
 	

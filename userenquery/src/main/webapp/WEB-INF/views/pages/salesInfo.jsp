@@ -228,6 +228,10 @@ if(ses!=null){
 					<a href="#tab3" data-toggle="tab">EOI Details</a>
 				</li>
 				
+				<li id="foyrTab">
+					<a href="#foyrFram" data-toggle="tab">Foyr</a>
+				</li>
+				
 				<li id="inventoryTab" onclick="holdExistData()">
 					<a href="#inventoryTabCont" data-toggle="tab">Inventory</a>
 				</li>
@@ -1700,6 +1704,9 @@ if(ses!=null){
 			  <jsp:include page="inventory.jsp"></jsp:include>
 			</div>	
 			
+			<div class="tab-pane" id="foyrFram">
+			   
+			</div>
 			
 			<div class="tab-pane" id="costsheetTabCont">
 			  <%-- <jsp:include page="costsheetSalesinfo.jsp"></jsp:include> --%>

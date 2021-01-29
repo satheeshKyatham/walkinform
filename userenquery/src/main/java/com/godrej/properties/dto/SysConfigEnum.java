@@ -17,4 +17,5 @@ public enum SysConfigEnum {
 	SMTP_PORT,
 	AD_IP,
 	CS_ANNEXURE,
+	FOYR_API_ENDPOINT,
 }

@@ -34,6 +34,7 @@ session.setAttribute("version","19.10");
 	} else {
 		USEREMAIL_GV = '';
 	}	
+	var FOYRAPI_GV = '<%= session.getAttribute("FOYRAPI")%>';
 </script>
 
 <script src="<c:url value='/resources/js/salesdesk.js?v=${sessionScope.version}'/>"></script>

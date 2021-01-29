@@ -161,7 +161,7 @@ public class PushEnquiryDataServiceImpl  implements PushEnquiryDataService{
 		{
 			mediaType="Walkin";
 			mediaSubType="Walkin";
-			if(dto.getPhasedto().getSfid()!=null)
+			if(dto.getPhasedto()!=null)
 			{
 				mediapPhaseId=dto.getPhasedto().getSfid();
 			}
