@@ -228,7 +228,7 @@ if(ses!=null){
 					<a href="#tab3" data-toggle="tab">EOI Details</a>
 				</li>
 				
-				<li id="foyrTab">
+				<li id="foyrTab" style="display:none;"> 
 					<a href="#foyrFram" data-toggle="tab">Foyr</a>
 				</li>
 				
