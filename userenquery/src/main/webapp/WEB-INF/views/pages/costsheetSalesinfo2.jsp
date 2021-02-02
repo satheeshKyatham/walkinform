@@ -606,7 +606,7 @@
 											<tr>
 												<th class="subHead floorNameCS">Floor</th>
 												<td class="floorTval"></td>
-												<th class="subHead">Total Area (in Sq.mtr.)</th>
+												<th class="subHead totalAreaInSqmt">Total Area (in Sq.mtr.)</th>
 												<td class="totalSqm"></td>
 											</tr>
 											<tr class="hideForPlot">
@@ -615,7 +615,7 @@
 												<th class="subHead noOfCarParkLabel">No. of Car Park</th>
 												<td  class="noOfCarPark ifCarParkZero"></td>
 											</tr>
-											<tr class="removeForPlot">
+											<tr class="removeForPlot rfpRow">
 												<th class="subHead">Carpet Area Amount</th>
 												<td  class="carpetAreaAmount" style="text-align:right;"></td>
 												
@@ -628,7 +628,7 @@
 												<td class=""> </td> -->
 											</tr>
 											
-											<tr class="removeForPlot">
+											<tr class="removeForPlot rfpRow">
 												<th class="subHead">Exclusive Area Amount</th>
 												<td class="exclusiveAreaAmount" style="text-align:right"></td>
 												<th class="subHead"></th>
@@ -885,7 +885,7 @@
 						<tr>
 							<th class="subHead floorNameCS">Floor</th>
 							<td id="floorTval"></td>
-							<th class="subHead">Total Area (in Sq.mtr.)</th>
+							<th class="subHead totalAreaInSqmt">Total Area (in Sq.mtr.)</th>
 							<td id="totalSqm"></td>
 						</tr>
 						<tr class="hideForPlot">
@@ -896,7 +896,7 @@
 						</tr>
 						
 						
-						<tr class="hideForPlot">
+						<tr class="hideForPlot rfpRow">
 							<th class="subHead">Carpet Area Amount</th>
 							<td class="carpetAreaAmount" id="carpetAreaAmount" style="text-align:right;">
 							
@@ -909,7 +909,7 @@
 							<td ></td> -->
 						</tr>
 						
-						<tr class="hideForPlot">
+						<tr class="hideForPlot rfpRow">
 							<th class="subHead">Exclusive Area Amount</th>
 							<td class="exclusiveAreaAmount" id="exclusiveAreaAmount" style="text-align:right;" ></td>
 							<th class="subHead"></th>

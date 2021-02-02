@@ -378,6 +378,18 @@ function loadData (csSource) {
                                $('#plotAreaSqyd').text(value.plot_area_sqyd__c);
                                $('.plotAreaSqyd').text(value.plot_area_sqyd__c);
                                
+                           } else if ($('#projectId').val() == 'a1l2s000000PJMJAA4' || $('#projectId').val() == 'a1l2s000000PKjdAAG'){
+                        	   $('#carpetSqm').text(parseFloat(parseFloat(value.carpet_area_converted__c) + parseFloat(value.appurtenant_area_sq_mt__c)).toFixed(2));
+                               $('.carpetSqm').text(parseFloat(parseFloat(value.carpet_area_converted__c) + parseFloat(value.appurtenant_area_sq_mt__c)).toFixed(2));
+                               
+                               $('#totalSqm').text(parseFloat(value.carpet_area_converted__c));
+                               $('.totalSqm').text(parseFloat(value.carpet_area_converted__c));
+                               
+                               $('#balTerSqm').text(value.appurtenant_area_sq_mt__c);
+                               $('.balTerSqm').text(value.appurtenant_area_sq_mt__c);
+                               
+                               $('#plotAreaSqyd').text("0");
+                               $('.plotAreaSqyd').text("0");
                            } else {
                         	   $('#totalSqm').text(parseFloat(parseFloat(value.carpet_area_converted__c) + parseFloat(value.appurtenant_area_sq_mt__c)).toFixed(2));
                                $('.totalSqm').text(parseFloat(parseFloat(value.carpet_area_converted__c) + parseFloat(value.appurtenant_area_sq_mt__c)).toFixed(2));
@@ -717,7 +729,7 @@ function getTaxPercentage(basicSaleprice, projectSfid, currentTaxRate, TotalA, r
 		}
 		
 		//Added for Project Godrej Royale Woods and forest grove
-		if(projectSfid == 'a1l2s000000PJPmAAO' || projectSfid == 'a1l6F000002X6IOQA0' || projectSfid == 'a1l2s00000003VlAAI' || projectSfid == 'a1l6F0000081xb4QAA' || projectSfid == 'a1l2s000000PGu3AAG' || projectSfid == 'a1l2s000000PGu8AAG' || projectSfid == 'a1l2s000000PGuDAAW' || projectSfid == 'a1l2s000000PGuIAAW' || projectSfid == 'a1l2s000000PGuNAAW' || projectSfid == 'a1l2s000000PGuSAAW'){
+		if(projectSfid == 'a1l2s000000PJMJAA4' || projectSfid == 'a1l2s000000PJPmAAO' || projectSfid == 'a1l6F000002X6IOQA0' || projectSfid == 'a1l2s00000003VlAAI' || projectSfid == 'a1l6F0000081xb4QAA' || projectSfid == 'a1l2s000000PGu3AAG' || projectSfid == 'a1l2s000000PGu8AAG' || projectSfid == 'a1l2s000000PGuDAAW' || projectSfid == 'a1l2s000000PGuIAAW' || projectSfid == 'a1l2s000000PGuNAAW' || projectSfid == 'a1l2s000000PGuSAAW'){
 			if(TotalA>=4500000 || reraCarpetSqm >= 60){
 				return 5;
 			}
@@ -725,7 +737,7 @@ function getTaxPercentage(basicSaleprice, projectSfid, currentTaxRate, TotalA, r
 		}  
 		
 		//if (projectSfid == 'a1l2s00000000X5AAI' || projectSfid == 'a1l6F000003TXloQAG'){
-		if (projectSfid == 'a1l2s00000000X5AAI' || projectSfid == 'a1l6F000003TXloQAG' || projectSfid == 'a1l2s000000XoezAAC'){
+		if (projectSfid == 'a1l2s000000PKjdAAG' || projectSfid == 'a1l2s00000000X5AAI' || projectSfid == 'a1l6F000003TXloQAG' || projectSfid == 'a1l2s000000XoezAAC'){
 			if(TotalA>=4500000 || reraCarpetSqm >= 90){
 				return 5;
 			}
@@ -1107,7 +1119,7 @@ function paymentPlanOtherCharges (firstRowObj, ppMilestone){
                     
                     
                     //added for 45lac condition
-                    if($('#projectid').val() == 'a1l2s000000PJPmAAO' || $('#projectid').val() == 'a1l6F000002X6IOQA0' || $('#projectid').val() == 'a1l2s00000003VlAAI' || $('#projectid').val() == 'a1l6F0000081xb4QAA' || $('#projectid').val() == 'a1l2s000000PGu3AAG' || $('#projectid').val() == 'a1l2s000000PGu8AAG' || $('#projectid').val() == 'a1l2s000000PGuDAAW' || $('#projectid').val() == 'a1l2s000000PGuIAAW' || $('#projectid').val() == 'a1l2s000000PGuNAAW' || $('#projectid').val() == 'a1l2s000000PGuSAAW'){
+                    if($('#projectid').val() == 'a1l2s000000PJMJAA4' || $('#projectid').val() == 'a1l2s000000PJPmAAO' || $('#projectid').val() == 'a1l6F000002X6IOQA0' || $('#projectid').val() == 'a1l2s00000003VlAAI' || $('#projectid').val() == 'a1l6F0000081xb4QAA' || $('#projectid').val() == 'a1l2s000000PGu3AAG' || $('#projectid').val() == 'a1l2s000000PGu8AAG' || $('#projectid').val() == 'a1l2s000000PGuDAAW' || $('#projectid').val() == 'a1l2s000000PGuIAAW' || $('#projectid').val() == 'a1l2s000000PGuNAAW' || $('#projectid').val() == 'a1l2s000000PGuSAAW'){
 	       				if($('.salesConsiderationTotalNew').text()>=4500000  || $('#carpetSqm').text() >= 60){
 	       					gstPymtOcTotal = parseFloat((gstFinal5Per) + ((ocPlsBsp)*($('#bspGSTTax').val())/100)).toFixed(2);
 	       				} else {
@@ -2564,7 +2576,7 @@ function newOtherCharges2 () {
              var GST5Per = parseFloat(parseFloat(otherChargesGSTTotal5Per)+parseFloat(((finalFlatAmount)*bspTax)/100)).toFixed(2);
              
              //added for 45lac condition
-             if($('#projectid').val() == 'a1l2s000000PJPmAAO' || $('#projectid').val() == 'a1l6F000002X6IOQA0' || $('#projectid').val() == 'a1l2s00000003VlAAI' || $('#projectid').val() == 'a1l6F0000081xb4QAA' || $('#projectid').val() == 'a1l2s000000PGu3AAG' || $('#projectid').val() == 'a1l2s000000PGu8AAG' || $('#projectid').val() == 'a1l2s000000PGuDAAW' || $('#projectid').val() == 'a1l2s000000PGuIAAW' || $('#projectid').val() == 'a1l2s000000PGuNAAW' || $('#projectid').val() == 'a1l2s000000PGuSAAW'){
+             if($('#projectid').val() == 'a1l2s000000PJMJAA4' || $('#projectid').val() == 'a1l2s000000PJPmAAO' || $('#projectid').val() == 'a1l6F000002X6IOQA0' || $('#projectid').val() == 'a1l2s00000003VlAAI' || $('#projectid').val() == 'a1l6F0000081xb4QAA' || $('#projectid').val() == 'a1l2s000000PGu3AAG' || $('#projectid').val() == 'a1l2s000000PGu8AAG' || $('#projectid').val() == 'a1l2s000000PGuDAAW' || $('#projectid').val() == 'a1l2s000000PGuIAAW' || $('#projectid').val() == 'a1l2s000000PGuNAAW' || $('#projectid').val() == 'a1l2s000000PGuSAAW'){
 				if(TotalA>=4500000 || $('#carpetSqm').text() >= 60){
 					otherChargesGSTTotalV2 = GST5Per;
 				} else {
@@ -4111,7 +4123,35 @@ function csChangesForFaridabad () {
 		
 		$('.balTerSqmLabel').html("");
 		$('.balTerSqmLabel').html("Breadth (in mtr.)");
+	} else if ($('#projectId').val() == 'a1l2s000000PJMJAA4' || $('#projectId').val() == 'a1l2s000000PKjdAAG') {
+		$('.towerNameCS').html('');
+		$('.towerNameCS').html('Phase');
 		
+		$('.floorNameCS').html('');
+		$('.floorNameCS').html('District');
+		
+		//$('.hideForPlot').remove();
+		//$('.hideForPlot').hide();
+		
+		//$('.removeForPlot').remove();
+		
+		$('.rfpRow').remove();
+		
+		$('.carpetSqmlabel').html("");
+		$('.carpetSqmlabel').html("Total Area (in Sq.mtr.)");
+		
+		$('.balTerSqmLabel').html("");
+		$('.balTerSqm').html("");
+		$('#balTerSqm').html("");
+		
+		$('.totalAreaInSqmt').html("");
+		$('.totalSqm').html("");
+		$('#totalSqm').html("");
+		
+		
+		
+		$('#onlyForPlot').hide();
+		$('.onlyForPlot').remove();
 	} else {
 		$('#onlyForPlot').hide();
 		$('.onlyForPlot').remove();
