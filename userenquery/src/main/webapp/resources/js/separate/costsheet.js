@@ -737,7 +737,7 @@ function getTaxPercentage(basicSaleprice, projectSfid, currentTaxRate, TotalA, r
 		}  
 		
 		//if (projectSfid == 'a1l2s00000000X5AAI' || projectSfid == 'a1l6F000003TXloQAG'){
-		if (projectSfid == 'a1l2s000000PKjdAAG' || projectSfid == 'a1l2s00000000X5AAI' || projectSfid == 'a1l6F000003TXloQAG' || projectSfid == 'a1l2s000000XoezAAC'){
+		if (projectSfid == 'a1l2s000000PK3IAAW' || projectSfid == 'a1l2s000000PKjdAAG' || projectSfid == 'a1l2s00000000X5AAI' || projectSfid == 'a1l6F000003TXloQAG' || projectSfid == 'a1l2s000000XoezAAC'){
 			if(TotalA>=4500000 || reraCarpetSqm >= 90){
 				return 5;
 			}
