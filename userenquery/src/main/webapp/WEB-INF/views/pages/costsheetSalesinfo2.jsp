@@ -603,7 +603,7 @@
 												<th class="subHead balTerSqmLabel">Exclusive Area (in Sq.mtr.)</th>
 												<td class="balTerSqm"></td>
 											</tr>
-											<tr>
+											<tr class="unitDtlRow3">
 												<th class="subHead floorNameCS">Floor</th>
 												<td class="floorTval"></td>
 												<th class="subHead totalAreaInSqmt">Total Area (in Sq.mtr.)</th>
@@ -635,7 +635,7 @@
 												<td></td>
 											</tr>
 											
-											<tr class="facingCSCol">
+											<tr class="facingCSCol unitDtlRow7">
 												<th class="subHead">Facing</th>
 												<td id="propFacingType" style="text-align:left;" ></td>
 												<th class="subHead"></th>
@@ -882,7 +882,7 @@
 							<!-- <th>Cost of Exclusive Balcony Area/Terrace Area (B.) (In INR)</th>
 							<td class="animated" id="CostofExcBalcony"></td> -->
 						</tr>
-						<tr>
+						<tr class="unitDtlRow3">
 							<th class="subHead floorNameCS">Floor</th>
 							<td id="floorTval"></td>
 							<th class="subHead totalAreaInSqmt">Total Area (in Sq.mtr.)</th>
@@ -916,7 +916,7 @@
 							<td></td>
 						</tr>
 						
-						<tr class="facingCSCol">
+						<tr class="facingCSCol unitDtlRow7">
 							<th class="subHead">Facing</th>
 							<td class="propFacingType" style="text-align:left;" ></td>
 							<th class="subHead"></th>
