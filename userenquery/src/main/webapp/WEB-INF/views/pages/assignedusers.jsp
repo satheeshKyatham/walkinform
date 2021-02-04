@@ -99,6 +99,11 @@ if(ses!=null){
 					<li class="active" id="basicInfoTabId">
 						<a href="#tab1" data-toggle="tab">Assigned Token List</a>
 					</li>
+					
+					<li class="" id="collateralTab">
+						<a href="#collateralPaneCol" data-toggle="tab" onclick="getDrupalProjectDtl ()">Collateral</a>
+					</li>
+					
 					 <li id="salesTabId" onclick="getCreatedOfferList()">
 						<a href="#tab2" data-toggle="tab">Created Offer List</a>
 					</li>  
@@ -185,9 +190,13 @@ if(ses!=null){
 						</div>
 			      		<div class="clearfix"></div>
 			      	</div>
-			      	
-				  	
 				</div>
+				
+				<div class="tab-pane" id="collateralPaneCol">
+					 <div id="collateral" class="col-md-8"> </div>
+					<div class="clearfix"></div>
+				</div>
+				
 				<div class="tab-pane" id="tab2">
 					<%-- <%@ include file="/WEB-INF/views/pages/createdoffers.jsp" %> --%>
 					<%@ include file="/WEB-INF/views/pages/createdOfferTab.jsp" %>

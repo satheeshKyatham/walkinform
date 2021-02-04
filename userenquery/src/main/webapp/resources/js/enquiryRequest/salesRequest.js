@@ -1660,7 +1660,7 @@ function getInternationalSalesManagersList(inputVal)
 
 
 
-
+/*
 function getDrupalProjectDtl () {
 	var pageContext = $("#pageContext").val()+"/";
 	$('#collateral').html("<div style='text-align:center'><i class='fa fa-spinner fa-spin' style='font-size: 26px;'></i></div>");
@@ -1750,4 +1750,4 @@ function getDrupalProjectDtl () {
 			$('#collateral').append(html);
 		
 	}).done(function(obj){ });	
-}
+}*/
