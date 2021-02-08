@@ -3,6 +3,7 @@ package com.godrej.properties.model;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -35,7 +36,7 @@ public class InventoryReport implements Serializable{
 	@Column(name="admin_emailid") private String	admin_emailid;
 	@Column(name="propstrength__active__c") private boolean	propstrength__active__c;
 	@Column(name="tower_name__c") private String tower_name__c;
-	@Column(name="created_at") private Date created_at;
+	@Column(name="created_at") private Timestamp created_at;
 	@Column(name="hold_behalf_email") private String hold_behalf_email;
 	
 	@Column(name="enq_name") private String enq_name;
@@ -57,6 +58,10 @@ public class InventoryReport implements Serializable{
 	
 	@Column(name="closing_manager_name__c") private String closing_manager_name__c;
 	
+	@Column(name="walk_in_source__c") private String walk_in_source__c;
+	@Column(name="sourcing_manager_name__c") private String sourcing_manager_name__c;
+	@Column(name="broker_name") private String broker_name;
+	//@Column(name="created_at") private Timestamp hold_created_at;
 	
 	public int getId() {
 		return id;
@@ -157,10 +162,11 @@ public class InventoryReport implements Serializable{
 	public void setTower_name__c(String tower_name__c) {
 		this.tower_name__c = tower_name__c;
 	}
-	public Date getCreated_at() {
+	
+	public Timestamp getCreated_at() {
 		return created_at;
 	}
-	public void setCreated_at(Date created_at) {
+	public void setCreated_at(Timestamp created_at) {
 		this.created_at = created_at;
 	}
 	public String getHold_behalf_email() {
@@ -258,5 +264,23 @@ public class InventoryReport implements Serializable{
 	}
 	public void setClosing_manager_name__c(String closing_manager_name__c) {
 		this.closing_manager_name__c = closing_manager_name__c;
+	}
+	public String getWalk_in_source__c() {
+		return walk_in_source__c;
+	}
+	public void setWalk_in_source__c(String walk_in_source__c) {
+		this.walk_in_source__c = walk_in_source__c;
+	}
+	public String getSourcing_manager_name__c() {
+		return sourcing_manager_name__c;
+	}
+	public void setSourcing_manager_name__c(String sourcing_manager_name__c) {
+		this.sourcing_manager_name__c = sourcing_manager_name__c;
+	}
+	public String getBroker_name() {
+		return broker_name;
+	}
+	public void setBroker_name(String broker_name) {
+		this.broker_name = broker_name;
 	}
 }

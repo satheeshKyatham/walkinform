@@ -56,7 +56,16 @@
 				<table class="table table-bordered display" id="inventoryReportDtl">
 					<thead>
 						<tr>
+							<!-- <th>Walk-in Source</th>
+							<th>Sourcing Manager</th>
+							<th>CP Name</th> -->
+							<th>Hold/ Block Date</th>
 							<th>Hold/ Block</th>
+							
+							<th>Walk-in Source</th>
+							<th>Sourcing Manager</th>
+							<th>CP Name</th>
+							
 							
 							<th>Enq. Name</th>
 							

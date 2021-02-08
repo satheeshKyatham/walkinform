@@ -27,6 +27,12 @@ public class InventoryReportDaoImpl implements InventoryReportDao{
 		List<InventoryReport> authors=null;
 		
 		Query q = session.createNativeQuery(" SELECT  row_number() OVER () AS row_no, "
+				
+				+ " e.walk_in_source__c, "
+				+ " e.sourcing_manager_name__c, "
+				+ " i.name as broker_name, "
+				
+				
 				+ " e.name as enq_name, "
 				+ " f.name as customer_name, "
 				+ " f.mobile__c as customer_mobile, "
@@ -76,6 +82,8 @@ public class InventoryReportDaoImpl implements InventoryReportDao{
 				+ " LEFT JOIN salesforce.mst_user d ON a.hold_behalf_userid = d.user_id  "
 				+ " LEFT  JOIN salesforce.propstrength__request__c e ON e.sfid = a.enq_sfid " 
 				+ " LEFT JOIN salesforce.contact f ON f.sfid = e.propstrength__primary_contact__c "
+				
++ " LEFT JOIN salesforce.account i ON i.sfid = e.propstrength__broker_account__c AND e.isdeleted = false "
 				
 				+ " LEFT JOIN salesforce.propstrength__property_charges__c g ON g.propstrength__property__c = a.sfid "
 				+ " LEFT JOIN salesforce.propstrength__other_charges__c h ON CAST(g.propstrength__other_charges__c as text)  = CAST(h.sfid as text) "
