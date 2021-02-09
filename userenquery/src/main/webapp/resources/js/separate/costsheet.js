@@ -586,11 +586,13 @@ function loadData (csSource) {
 	        	$('.craParkTypeLabel').text('Covered Car Park Space');
 	        } else if ($('#projectId').val() == 'a1l2s000000XoezAAC'){
 	        	$('.craParkTypeLabel').text('Parking Space');
+	        } else if ($('#projectId').val() == 'a1l2s000000PK3IAAW') {
+	        	$('.craParkTypeLabel').text('Parking Type');
 	        } else {
 	        	$('.craParkTypeLabel').text('Car Park Type');
 	        }
     	   
-    	   	if ($('#projectId').val() == 'a1l2s000000XoezAAC'){
+    	   	if ($('#projectId').val() == 'a1l2s000000XoezAAC' || $('#projectId').val() == 'a1l2s000000PK3IAAW'){
     	   		$('.noOfCarParkLabel').text('No. of Parking');
     	   	} else {
     	   		$('.noOfCarParkLabel').text('No. of Car Park');
