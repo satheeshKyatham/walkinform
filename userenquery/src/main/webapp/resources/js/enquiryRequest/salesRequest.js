@@ -1522,14 +1522,14 @@ function getEnqDtlFromSFDCAPI () {
 
 function getClosingManagersList(inputVal)
 {
-	if(($('#isReferredByChannelPartnerInput').val()==='Direct') && ($('#walkInSource').val()==='Digital' || $('#walkInSource').val()==='Newspaper'
+	/*if(($('#isReferredByChannelPartnerInput').val()==='Direct') && ($('#walkInSource').val()==='Digital' || $('#walkInSource').val()==='Newspaper'
 			|| $('#walkInSource').val()==='Hoarding' || $('#walkInSource').val()==='Radio' || $('#walkInSource').val()==='Word of mouth' || $('#walkInSource').val()==='SMS' ))//|| $('#walkInSource').val()==='Exhibition'
 		{
 		$('#sourcingManagerIdDiv').hide();
 		$("#sourcingManagerId").removeClass('requiredField');
 		}
-	else
-		$('#sourcingManagerIdDiv').show();
+	else*/
+		//$('#sourcingManagerIdDiv').show();
 	//
 	       var urlGetUsers = "getUserProjectMapping?projectid="+$('#projectid').val();
 	       var j = 0

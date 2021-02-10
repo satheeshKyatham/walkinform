@@ -1528,17 +1528,6 @@ if(ses!=null){
 						</div>
 						
 						<!-- END of Barriers & Triggers -->
-						<div class="col-md-3 col-sm-6 col-xs-12" id="closingManagerIdDiv">
-							<div class="group">
-							<!-- <div id="sourcingManagerId"></div> -->
-							<select class="requiredField autocomplete-off" id="closingManagerId" name="closingmanagers">
-							</select>
-								<span class="highlight"></span><span class="bar"></span>
-								<label class="select-label">Closing Manager<strong class="mndt">*</strong></label>
-							</div>
-							<div class="clearfix"></div>
-						</div>
-						
 						<div class="col-md-3 col-sm-6 col-xs-12" id="sourcingManagerIdDiv">
 							<div class="group">
 							<!-- <div id="sourcingManagerId"></div> -->
@@ -1549,16 +1538,6 @@ if(ses!=null){
 							</div>
 							<div class="clearfix"></div>
 						</div>
-						<div class="col-md-3 col-sm-6 col-xs-12" id="closingTeamLeadIdDiv">
-							<div class="group">
-							<div id="sourcingManagerId"></div>
-							<select class="requiredField autocomplete-off" id="closingTeamLeadId" name="closingTeamLeadDto">
-							</select>
-								<span class="highlight"></span><span class="bar"></span>
-								<label class="select-label">Closing Team lead<strong class="mndt">*</strong></label>
-							</div>
-							<div class="clearfix"></div>
-						</div>
 						<div class="col-md-3 col-sm-6 col-xs-12" id="sourcingTeamLeadIdDiv">
 							<div class="group">
 							<div id="sourcingManagerId"></div>
@@ -1566,6 +1545,26 @@ if(ses!=null){
 							</select>
 								<span class="highlight"></span><span class="bar"></span>
 								<label class="select-label">Sourcing Team Lead</label>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+						<div class="col-md-3 col-sm-6 col-xs-12" id="closingManagerIdDiv">
+							<div class="group">
+							<!-- <div id="sourcingManagerId"></div> -->
+							<select class="requiredField autocomplete-off" id="closingManagerId" name="closingmanagers">
+							</select>
+								<span class="highlight"></span><span class="bar"></span>
+								<label class="select-label">Closing Manager<strong class="mndt">*</strong></label>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+						<div class="col-md-3 col-sm-6 col-xs-12" id="closingTeamLeadIdDiv">
+							<div class="group">
+							<div id="sourcingManagerId"></div>
+							<select class="requiredField autocomplete-off" id="closingTeamLeadId" name="closingTeamLeadDto">
+							</select>
+								<span class="highlight"></span><span class="bar"></span>
+								<label class="select-label">Closing Team lead<strong class="mndt">*</strong></label>
 							</div>
 							<div class="clearfix"></div>
 						</div>

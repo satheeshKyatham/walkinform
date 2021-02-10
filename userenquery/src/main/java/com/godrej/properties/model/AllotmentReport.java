@@ -54,6 +54,8 @@ public class AllotmentReport {
 	@Column(name="booking_name") private String booking_name;
 	@Column(name="booking_status") private String booking_status;
 	@Column(name="kyc_approvedby") private String kyc_approvedby;
+	@Column(name="Sourcing_Team_Lead_Name__c") private String Sourcing_Team_Lead_Name__c;
+	@Column(name="Closing_Team_Lead_Name__c") private String Closing_Team_Lead_Name__c;
 	
 	public int getId() {
 		return id;
@@ -264,6 +266,18 @@ public class AllotmentReport {
 	}
 	public void setKyc_approvedby(String kyc_approvedby) {
 		this.kyc_approvedby = kyc_approvedby;
+	}
+	public String getSourcing_Team_Lead_Name__c() {
+		return Sourcing_Team_Lead_Name__c;
+	}
+	public void setSourcing_Team_Lead_Name__c(String sourcing_Team_Lead_Name__c) {
+		Sourcing_Team_Lead_Name__c = sourcing_Team_Lead_Name__c;
+	}
+	public String getClosing_Team_Lead_Name__c() {
+		return Closing_Team_Lead_Name__c;
+	}
+	public void setClosing_Team_Lead_Name__c(String closing_Team_Lead_Name__c) {
+		Closing_Team_Lead_Name__c = closing_Team_Lead_Name__c;
 	}
 	
 	

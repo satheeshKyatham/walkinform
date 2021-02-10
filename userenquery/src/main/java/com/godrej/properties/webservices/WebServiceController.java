@@ -2318,7 +2318,7 @@ public class WebServiceController<MultipartFormDataInput> {
 				master = validateUser(master, "A");
 			} else {
 				master.setMsg(
-						"Please check your username and password. If you still can't login , your account might be locked, please send email to servicedesk@godrejinds.com");
+						"Please check your username and password. If you still can't login , your account might be locked, please send email to servicedesk@godrejinds.com or reset your password with https://passwordreset.microsoftonline.com");
 				return gson.toJson(master);
 			}
 		} else {
