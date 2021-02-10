@@ -67,6 +67,15 @@ function getInventoryReportDtl () {
 			
 			var closing_manager_name__c = [];
 			
+			
+			 
+			
+			var walk_in_source__c = [];
+			var sourcing_manager_name__c = [];
+			var broker_name = [];
+			var created_at = [];
+			
+			
 			for(var i = 0; i< obj1.length; i++){    
                 if(uniqueId.indexOf(obj1[i].id) === -1){
                     uniqueId.push(obj1[i].id);
@@ -88,6 +97,13 @@ function getInventoryReportDtl () {
                     saleable_area__c.push(obj1[i].saleable_area__c);
                     verticle__c.push(obj1[i].verticle__c);
                     closing_manager_name__c.push(obj1[i].closing_manager_name__c);
+                    
+                    
+                    walk_in_source__c.push(obj1[i].walk_in_source__c);
+        			sourcing_manager_name__c.push(obj1[i].sourcing_manager_name__c);
+        			broker_name.push(obj1[i].broker_name);
+        			created_at.push(obj1[i].created_at);
+                    
                     
                 }        
             }
@@ -141,7 +157,16 @@ function getInventoryReportDtl () {
 				}
 				
 				html += "<tr class='"+rowColor+"'>" +
+							
+							
+				
+							" <td>"+created_at[j]+"</td>" +
 							" <td>"+hold_reasonVar+"</td>" +
+							
+							" <td>"+walk_in_source__c[j]+"</td>" +
+							" <td>"+sourcing_manager_name__c[j]+"</td>" +
+							" <td>"+broker_name[j]+"</td>" +
+							
 							"<td>"+enq_name[j]+"</td>" +
 							"<td>"+closing_manager_name__c[j]+"</td>" +
 							"<td>"+verticle__c[j]+"</td>" +

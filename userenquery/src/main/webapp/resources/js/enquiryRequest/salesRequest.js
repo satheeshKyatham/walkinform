@@ -1522,14 +1522,14 @@ function getEnqDtlFromSFDCAPI () {
 
 function getClosingManagersList(inputVal)
 {
-	/*if(($('#isReferredByChannelPartnerInput').val()==='Direct') && ($('#walkInSource').val()==='Digital' || $('#walkInSource').val()==='Newspaper'
+	if(($('#isReferredByChannelPartnerInput').val()==='Direct') && ($('#walkInSource').val()==='Digital' || $('#walkInSource').val()==='Newspaper'
 			|| $('#walkInSource').val()==='Hoarding' || $('#walkInSource').val()==='Radio' || $('#walkInSource').val()==='Word of mouth' || $('#walkInSource').val()==='SMS' ))//|| $('#walkInSource').val()==='Exhibition'
 		{
 		$('#sourcingManagerIdDiv').hide();
 		$("#sourcingManagerId").removeClass('requiredField');
 		}
-	else*/
-		//$('#sourcingManagerIdDiv').show();
+	else
+		$('#sourcingManagerIdDiv').show();
 	//
 	       var urlGetUsers = "getUserProjectMapping?projectid="+$('#projectid').val();
 	       var j = 0
@@ -1657,3 +1657,97 @@ function getInternationalSalesManagersList(inputVal)
 		}
 		$("#internationalSMId").append(option);
 	}
+
+
+
+/*
+function getDrupalProjectDtl () {
+	var pageContext = $("#pageContext").val()+"/";
+	$('#collateral').html("<div style='text-align:center'><i class='fa fa-spinner fa-spin' style='font-size: 26px;'></i></div>");
+	$.post(pageContext+"getDrupalProjectDtl",{"projectsfid":$('#projectid').val()},function(data){
+		var html = '';
+		var obj =JSON.parse(data);
+		 
+		var btnDisBrochure = "";
+		var btnDisPdf = "";
+		var btnDisVid = "";
+		var btnDisFoyr = "";
+		
+		var hrefDisBrochure = "";
+		var hrefDisPdf = "";
+		var hrefDisVid = "";
+		var hrefDisFoyr = "";
+		
+		$('#collateral').empty();
+		 
+		$('#collateral').html("<div style='text-align:center'><i class='fa fa-spinner fa-spin' style='font-size: 26px;'></i></div>");
+		
+			html +=  "<div class='collateralCol'>";
+			
+			if (obj.bannerStatus != "STATUS_NOTOK" && obj.banner != null && obj.banner != "null") {
+				html += "<img class='full' src='"+obj.banner+"' alt=' image not found'/>"; 
+			}
+			
+			if (obj.projectStatus != "STATUS_NOTOK") {
+				
+				if (obj.project_dis != null && obj.project_dis != "null" && obj.project_dis != "") {
+					html +=	"<h4>Project Description</h4>" + 
+							"<div class='clearfix'></div>" + 	
+							"<p>"+obj.project_dis+"</p>"; 			
+				}
+				
+				if (obj.brochure_url == null || obj.brochure_url == "" || obj.brochure_url == "null") {
+					btnDisBrochure = "disableCol";
+				} else {
+					hrefDisBrochure = obj.brochure_url;
+				}
+				
+				if (obj.other_pdf_url == null || obj.other_pdf_url == "" || obj.other_pdf_url == "null") {
+					btnDisPdf = "disableCol";
+				} else {
+					hrefDisPdf = obj.other_pdf_url;
+				}
+				
+				if (obj.proj_vid == null || obj.proj_vid == "" || obj.proj_vid == "null") {
+					btnDisVid = "disableCol";
+				} else {
+					hrefDisVid = obj.proj_vid;
+				}
+				
+				if (obj.foyr_url == null || obj.foyr_url == "" || obj.foyr_url == "null") {
+					btnDisFoyr = "disableCol";
+				} else {
+					hrefDisFoyr = obj.foyr_url;
+				}
+				
+				html +="<div class='row'>" + 
+						"<div class='col-md-3 col-xs-6'>" + 
+							"<a class='btn btn-primary btnBlack full "+ btnDisBrochure+"' href='"+hrefDisBrochure+"' target='_blank' >" + 
+								"<i class='fa fa-image'></i> View Brochure" + 
+							"</a>" + 
+						"</div>	" + 
+						"<div class='col-md-3 col-xs-6'>	" + 
+							"<a class='btn btn-primary btnBlack full "+ btnDisPdf+"' href='"+hrefDisPdf+"' target='_blank' >" + 
+								"<i class='fa fa-file'></i> View PDF" + 
+							"</a>" + 
+						"</div>" + 
+						"<div class='col-md-3 col-xs-6'>	" + 
+							"<a class='btn btn-primary btnBlack full "+ btnDisVid+"' href='"+hrefDisVid+"' target='_blank' >" + 
+								"<i class='fa fa-play-circle'></i> View AV" + 
+							"</a>" + 
+						"</div>" + 
+						"<div class='col-md-3 col-xs-6'>	" + 
+							"<a class='btn btn-primary btnBlack full "+ btnDisFoyr+"' href='"+hrefDisFoyr+"' target='_blank' >" + 
+								"<i class='fa fa-street-view'></i> 3D Visualisation" + 
+							"</a>" + 
+						"</div>	" + 
+						"<div class='clearfix'></div>" + 
+					"</div>";
+			}
+			
+			html +="<div class='clearfix'></div> </div>" ;
+			$('#collateral').empty();	
+			$('#collateral').append(html);
+		
+	}).done(function(obj){ });	
+}*/

@@ -77,7 +77,7 @@
 					<th>Final Amount</th>
 					<th>Cost Sheet</th>		
 					<th>Action</th>
-					<th>Application</th>				
+					<!-- <th>Application</th> -->				
 				  </tr>
 				 </thead> 
 			  <tbody></tbody> <!-- id="createdOfferTable" -->
@@ -169,7 +169,7 @@
 	
 	<div  style="padding-bottom:10px;"><b>4. FINANCE FROM BANK/FINANCIAL INSTITUTION:</b> <span>YES / NO</span></div>
 	<div  style="padding-bottom:12px; padding-left:10px;"> IF <b>YES</b>, PREFERRED FINANCIAL INSTITUTION: _______________________________ </div>
-	
+	<div style="padding-left:10px;">I/We consent that my/our available information can be shared with Godrej group entities who may contact me/us with personalized product offers.</div>
 	<div style="page-break-before: always"></div>
 	<div style="padding-bottom:10px;"><b>5. DETAILS OF FLAT/UNIT ("Flat"/"Unit") SALE CONSIDERATION AND ESTIMATED OTHER CHARGES:</b></div>
 	<table class="table table-bordered"  style="margin-bottom:15px;">

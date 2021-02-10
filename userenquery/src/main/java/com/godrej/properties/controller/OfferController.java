@@ -235,7 +235,7 @@ public class OfferController {
 					 
 					//Update offer created flag in sfdc property table through HEROKU
 					if((offerid!=null && offerid.length()==18)) {
-						if("a1l2s000000PJPmAAO".equals(projectsfid) || "a1l6F000002X6IOQA0".equals(projectsfid) || "a1l6F0000081xb4QAA".equals(projectsfid) || "a1l2s00000000X5AAI".equals(projectsfid) || "a1l2s00000003VlAAI".equals(projectsfid)  || "a1l6F000003TXloQAG".equals(projectsfid) || "a1l2s000000PGu3AAG".equals(projectsfid)  || "a1l2s000000PGu8AAG".equals(projectsfid) || "a1l2s000000PGuDAAW".equals(projectsfid) || "a1l2s000000PGuIAAW".equals(projectsfid) || "a1l2s000000PGuNAAW".equals(projectsfid) || "a1l2s000000PGuSAAW".equals(projectsfid) || "a1l2s000000XoezAAC".equals(projectsfid)) {
+						if("a1l2s000000PK3IAAW".equals(projectsfid) || "a1l2s000000PJPmAAO".equals(projectsfid) || "a1l6F000002X6IOQA0".equals(projectsfid) || "a1l6F0000081xb4QAA".equals(projectsfid) || "a1l2s00000000X5AAI".equals(projectsfid) || "a1l2s00000003VlAAI".equals(projectsfid)  || "a1l6F000003TXloQAG".equals(projectsfid) || "a1l2s000000PGu3AAG".equals(projectsfid)  || "a1l2s000000PGu8AAG".equals(projectsfid) || "a1l2s000000PGuDAAW".equals(projectsfid) || "a1l2s000000PGuIAAW".equals(projectsfid) || "a1l2s000000PGuNAAW".equals(projectsfid) || "a1l2s000000PGuSAAW".equals(projectsfid) || "a1l2s000000XoezAAC".equals(projectsfid)) {
 							boolean isPMAY = isUnderPMAY(offerid, projectsfid,salesConsiderationTotal, reraCarpetAreaSqm);
 							propOtherChargesService.updatePropertyStatus(propid, isPMAY);
 						} else {
@@ -293,7 +293,7 @@ public class OfferController {
 	}
 	
 	private boolean isUnderPMAY(String offerId, String projectSfid, double basicSalePrice, double reraCarpetAreaSqm) {
-		if (projectSfid.equals("a1l2s00000000X5AAI") || projectSfid.equals("a1l6F000003TXloQAG") || projectSfid.equals("a1l2s000000XoezAAC")) {
+		if (projectSfid.equals("a1l2s000000PK3IAAW") ||  projectSfid.equals("a1l2s00000000X5AAI") || projectSfid.equals("a1l6F000003TXloQAG") || projectSfid.equals("a1l2s000000XoezAAC")) {
 			return (offerId!=null && offerId.length()==18 && basicSalePrice < 4500000  &&  reraCarpetAreaSqm < 90) ;
 		}
 		

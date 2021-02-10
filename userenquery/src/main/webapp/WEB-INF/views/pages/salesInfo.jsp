@@ -228,8 +228,12 @@ if(ses!=null){
 					<a href="#tab3" data-toggle="tab">EOI Details</a>
 				</li>
 				
-				<li id="foyrTab">
+				<li id="foyrTab" style="display:none;"> 
 					<a href="#foyrFram" data-toggle="tab">Foyr</a>
+				</li>
+				
+				<li id="collateralTab"> 
+					<a href="#collateral" data-toggle="tab" onclick="getDrupalProjectDtl ()">Collateral</a>
 				</li>
 				
 				<li id="inventoryTab" onclick="holdExistData()">
@@ -1528,26 +1532,6 @@ if(ses!=null){
 						</div>
 						
 						<!-- END of Barriers & Triggers -->
-						<div class="col-md-3 col-sm-6 col-xs-12" id="sourcingManagerIdDiv">
-							<div class="group">
-							<!-- <div id="sourcingManagerId"></div> -->
-							<select class="requiredField autocomplete-off" id="sourcingManagerId" name="closingManagerDto">
-							</select>
-								<span class="highlight"></span><span class="bar"></span>
-								<label class="select-label">Sourcing Manager<strong class="mndt">*</strong></label>
-							</div>
-							<div class="clearfix"></div>
-						</div>
-						<div class="col-md-3 col-sm-6 col-xs-12" id="sourcingTeamLeadIdDiv">
-							<div class="group">
-							<div id="sourcingManagerId"></div>
-							<select class="autocomplete-off" id="sourcingTeamLeadId" name="sourcingTeamLeadDto">
-							</select>
-								<span class="highlight"></span><span class="bar"></span>
-								<label class="select-label">Sourcing Team Lead</label>
-							</div>
-							<div class="clearfix"></div>
-						</div>
 						<div class="col-md-3 col-sm-6 col-xs-12" id="closingManagerIdDiv">
 							<div class="group">
 							<!-- <div id="sourcingManagerId"></div> -->
@@ -1558,6 +1542,17 @@ if(ses!=null){
 							</div>
 							<div class="clearfix"></div>
 						</div>
+						
+						<div class="col-md-3 col-sm-6 col-xs-12" id="sourcingManagerIdDiv">
+							<div class="group">
+							<!-- <div id="sourcingManagerId"></div> -->
+							<select class="requiredField autocomplete-off" id="sourcingManagerId" name="closingManagerDto">
+							</select>
+								<span class="highlight"></span><span class="bar"></span>
+								<label class="select-label">Sourcing Manager<strong class="mndt">*</strong></label>
+							</div>
+							<div class="clearfix"></div>
+						</div>
 						<div class="col-md-3 col-sm-6 col-xs-12" id="closingTeamLeadIdDiv">
 							<div class="group">
 							<div id="sourcingManagerId"></div>
@@ -1565,6 +1560,16 @@ if(ses!=null){
 							</select>
 								<span class="highlight"></span><span class="bar"></span>
 								<label class="select-label">Closing Team lead<strong class="mndt">*</strong></label>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+						<div class="col-md-3 col-sm-6 col-xs-12" id="sourcingTeamLeadIdDiv">
+							<div class="group">
+							<div id="sourcingManagerId"></div>
+							<select class="autocomplete-off" id="sourcingTeamLeadId" name="sourcingTeamLeadDto">
+							</select>
+								<span class="highlight"></span><span class="bar"></span>
+								<label class="select-label">Sourcing Team Lead</label>
 							</div>
 							<div class="clearfix"></div>
 						</div>
@@ -1705,6 +1710,41 @@ if(ses!=null){
 			
 			<div class="tab-pane" id="foyrFram">
 			   
+			</div>
+			
+			
+			<div class="tab-pane" id="collateral">
+				<!-- <div class="collateralCol">
+					<img class="full" src="https://www.godrejproperties.com//backoffice//data_content//projects//godrej_lake_gardens_bangalore//banners//GLG_Landing_Page_1920x608.jpg" />
+					<h4>Project Description</h4>
+					<div class="clearfix"></div>	
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>			
+					<div class="row">
+						<div class="col-md-3 col-xs-6">
+							<a class="btn btn-primary btnBlack full">
+								<i class="fa fa-image"></i> View Brochure
+							</a>
+						</div>	
+						<div class="col-md-3 col-xs-6">	
+							<a class="btn btn-primary btnBlack full">
+								<i class="fa fa-file"></i> View PDF
+							</a>
+						</div>
+						<div class="col-md-3 col-xs-6">	
+							<a class="btn btn-primary btnBlack full">
+								<i class="fa fa-play-circle"></i> View AV
+							</a>
+						</div>
+						<div class="col-md-3 col-xs-6">	
+							<a class="btn btn-primary btnBlack full">
+								<i class="fa fa-street-view"></i> 3D Visualisation
+							</a>
+						</div>	
+						<div class="clearfix"></div>
+					</div>
+					<div class="clearfix"></div>
+				</div> -->
+				<div class="clearfix"></div>
 			</div>
 			
 			<div class="tab-pane" id="costsheetTabCont">

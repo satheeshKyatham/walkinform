@@ -603,10 +603,10 @@
 												<th class="subHead balTerSqmLabel">Exclusive Area (in Sq.mtr.)</th>
 												<td class="balTerSqm"></td>
 											</tr>
-											<tr>
+											<tr class="unitDtlRow3">
 												<th class="subHead floorNameCS">Floor</th>
 												<td class="floorTval"></td>
-												<th class="subHead">Total Area (in Sq.mtr.)</th>
+												<th class="subHead totalAreaInSqmt">Total Area (in Sq.mtr.)</th>
 												<td class="totalSqm"></td>
 											</tr>
 											<tr class="hideForPlot">
@@ -615,7 +615,7 @@
 												<th class="subHead noOfCarParkLabel">No. of Car Park</th>
 												<td  class="noOfCarPark ifCarParkZero"></td>
 											</tr>
-											<tr class="removeForPlot">
+											<tr class="removeForPlot rfpRow">
 												<th class="subHead">Carpet Area Amount</th>
 												<td  class="carpetAreaAmount" style="text-align:right;"></td>
 												
@@ -628,14 +628,14 @@
 												<td class=""> </td> -->
 											</tr>
 											
-											<tr class="removeForPlot">
+											<tr class="removeForPlot rfpRow">
 												<th class="subHead">Exclusive Area Amount</th>
 												<td class="exclusiveAreaAmount" style="text-align:right"></td>
 												<th class="subHead"></th>
 												<td></td>
 											</tr>
 											
-											<tr class="facingCSCol">
+											<tr class="facingCSCol unitDtlRow7">
 												<th class="subHead">Facing</th>
 												<td id="propFacingType" style="text-align:left;" ></td>
 												<th class="subHead"></th>
@@ -882,10 +882,10 @@
 							<!-- <th>Cost of Exclusive Balcony Area/Terrace Area (B.) (In INR)</th>
 							<td class="animated" id="CostofExcBalcony"></td> -->
 						</tr>
-						<tr>
+						<tr class="unitDtlRow3">
 							<th class="subHead floorNameCS">Floor</th>
 							<td id="floorTval"></td>
-							<th class="subHead">Total Area (in Sq.mtr.)</th>
+							<th class="subHead totalAreaInSqmt">Total Area (in Sq.mtr.)</th>
 							<td id="totalSqm"></td>
 						</tr>
 						<tr class="hideForPlot">
@@ -896,7 +896,7 @@
 						</tr>
 						
 						
-						<tr class="hideForPlot">
+						<tr class="hideForPlot rfpRow">
 							<th class="subHead">Carpet Area Amount</th>
 							<td class="carpetAreaAmount" id="carpetAreaAmount" style="text-align:right;">
 							
@@ -909,14 +909,14 @@
 							<td ></td> -->
 						</tr>
 						
-						<tr class="hideForPlot">
+						<tr class="hideForPlot rfpRow">
 							<th class="subHead">Exclusive Area Amount</th>
 							<td class="exclusiveAreaAmount" id="exclusiveAreaAmount" style="text-align:right;" ></td>
 							<th class="subHead"></th>
 							<td></td>
 						</tr>
 						
-						<tr class="facingCSCol">
+						<tr class="facingCSCol unitDtlRow7">
 							<th class="subHead">Facing</th>
 							<td class="propFacingType" style="text-align:left;" ></td>
 							<th class="subHead"></th>

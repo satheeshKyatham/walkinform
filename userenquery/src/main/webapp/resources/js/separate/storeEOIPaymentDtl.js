@@ -340,7 +340,7 @@ function getTokenTypeEOI (){
 	{
 		html='<option value="F">NON-REFUNDABLE</option>';
 	}
-	else if($("#projectsfid").val()=='a1l2s00000003lPAAQ')
+	else if($("#projectsfid").val()=='a1l2s00000003lPAAQ' || $("#projectsfid").val()=='a1l2s000000PK3IAAW')
 	{
 		html='<option value="F">PLATINUM</option><option value="T">EXPRESS</option>';
 	} else if ($("#projectsfid").val()=='a1l6F000002X6IOQA0') {

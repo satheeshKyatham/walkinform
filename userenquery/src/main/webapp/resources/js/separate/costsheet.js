@@ -378,6 +378,18 @@ function loadData (csSource) {
                                $('#plotAreaSqyd').text(value.plot_area_sqyd__c);
                                $('.plotAreaSqyd').text(value.plot_area_sqyd__c);
                                
+                           } else if ($('#projectId').val() == 'a1l2s000000PJMJAA4' || $('#projectId').val() == 'a1l2s000000PKjdAAG'){
+                        	   $('#carpetSqm').text(parseFloat(parseFloat(value.carpet_area_converted__c) + parseFloat(value.appurtenant_area_sq_mt__c)).toFixed(2));
+                               $('.carpetSqm').text(parseFloat(parseFloat(value.carpet_area_converted__c) + parseFloat(value.appurtenant_area_sq_mt__c)).toFixed(2));
+                               
+                               $('#totalSqm').text(parseFloat(value.carpet_area_converted__c));
+                               $('.totalSqm').text(parseFloat(value.carpet_area_converted__c));
+                               
+                               $('#balTerSqm').text(value.appurtenant_area_sq_mt__c);
+                               $('.balTerSqm').text(value.appurtenant_area_sq_mt__c);
+                               
+                               $('#plotAreaSqyd').text("0");
+                               $('.plotAreaSqyd').text("0");
                            } else {
                         	   $('#totalSqm').text(parseFloat(parseFloat(value.carpet_area_converted__c) + parseFloat(value.appurtenant_area_sq_mt__c)).toFixed(2));
                                $('.totalSqm').text(parseFloat(parseFloat(value.carpet_area_converted__c) + parseFloat(value.appurtenant_area_sq_mt__c)).toFixed(2));
@@ -574,11 +586,13 @@ function loadData (csSource) {
 	        	$('.craParkTypeLabel').text('Covered Car Park Space');
 	        } else if ($('#projectId').val() == 'a1l2s000000XoezAAC'){
 	        	$('.craParkTypeLabel').text('Parking Space');
+	        } else if ($('#projectId').val() == 'a1l2s000000PK3IAAW') {
+	        	$('.craParkTypeLabel').text('Parking Type');
 	        } else {
 	        	$('.craParkTypeLabel').text('Car Park Type');
 	        }
     	   
-    	   	if ($('#projectId').val() == 'a1l2s000000XoezAAC'){
+    	   	if ($('#projectId').val() == 'a1l2s000000XoezAAC' || $('#projectId').val() == 'a1l2s000000PK3IAAW'){
     	   		$('.noOfCarParkLabel').text('No. of Parking');
     	   	} else {
     	   		$('.noOfCarParkLabel').text('No. of Car Park');
@@ -725,7 +739,7 @@ function getTaxPercentage(basicSaleprice, projectSfid, currentTaxRate, TotalA, r
 		}  
 		
 		//if (projectSfid == 'a1l2s00000000X5AAI' || projectSfid == 'a1l6F000003TXloQAG'){
-		if (projectSfid == 'a1l2s00000000X5AAI' || projectSfid == 'a1l6F000003TXloQAG' || projectSfid == 'a1l2s000000XoezAAC'){
+		if (projectSfid == 'a1l2s000000PK3IAAW' || projectSfid == 'a1l2s00000000X5AAI' || projectSfid == 'a1l6F000003TXloQAG' || projectSfid == 'a1l2s000000XoezAAC'){
 			if(TotalA>=4500000 || reraCarpetSqm >= 90){
 				return 5;
 			}
@@ -4111,7 +4125,60 @@ function csChangesForFaridabad () {
 		
 		$('.balTerSqmLabel').html("");
 		$('.balTerSqmLabel').html("Breadth (in mtr.)");
+	} else if ($('#projectId').val() == 'a1l2s000000PJMJAA4') {
+		$('.towerNameCS').html('');
+		$('.towerNameCS').html('Phase');
 		
+		$('.floorNameCS').html('');
+		$('.floorNameCS').html('District');
+		
+		//$('.hideForPlot').remove();
+		//$('.hideForPlot').hide();
+		
+		//$('.removeForPlot').remove();
+		
+		$('.rfpRow').remove();
+		
+		$('.carpetSqmlabel').html("");
+		$('.carpetSqmlabel').html("Total Area (in Sq.mtr.)");
+		
+		$('.balTerSqmLabel').html("");
+		$('.balTerSqm').html("");
+		$('#balTerSqm').html("");
+		
+		$('.totalAreaInSqmt').html("");
+		$('.totalSqm').html("");
+		$('#totalSqm').html("");
+		
+		
+		
+		$('#onlyForPlot').hide();
+		$('.onlyForPlot').remove();
+	} else if ($('#projectId').val() == 'a1l2s000000PKjdAAG') {
+		$('.towerNameCS').html('');
+		$('.towerNameCS').html('Phase');
+		
+		$('.floorNameCS').html('');
+		$('.floorNameCS').html('District');
+		 
+		$('.rfpRow').remove();
+		
+		$('.carpetSqmlabel').html("");
+		$('.carpetSqmlabel').html("Total Area (in Sq.mtr.)");
+		
+		$('.balTerSqmLabel').html("");
+		$('.balTerSqm').html("");
+		$('#balTerSqm').html("");
+		
+		$('.totalAreaInSqmt').html("");
+		$('.totalSqm').html("");
+		$('#totalSqm').html("");
+		
+		$('.unitDtlRow3').remove();
+		$('.unitDtlRow7').remove();
+		
+		$('#onlyForPlot').hide();
+		$('.onlyForPlot').remove();
 	} else {
 		$('#onlyForPlot').hide();
 		$('.onlyForPlot').remove();
