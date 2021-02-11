@@ -97,6 +97,8 @@ function getAllotmentDashboardReport () {
 							" <td>"+obj1[i].propStrength__House_Unit_No__c+"</td>" +
 							" <td>"+obj1[i].actula_5_per+"</td>" +
 							" <td>"+obj1[i].diffamount+"</td>" +
+							" <td>"+obj1[i].Sourcing_Team_Lead_Name__c+"</td>" +
+							" <td>"+obj1[i].Closing_Team_Lead_Name__c+"</td>" +
 						" </tr>";
 			}
 			

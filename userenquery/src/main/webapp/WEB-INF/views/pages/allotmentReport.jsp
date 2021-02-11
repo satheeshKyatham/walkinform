@@ -185,6 +185,8 @@
 								<th>Unit No</th>
 								<th>5% Amount</th>
 								<th>Balance Amt. w.r.t 5%</th>
+								<th>Sourcing TL</th>
+								<th>Closing TL</th>
 							</tr>
 						</thead>
 						<tbody>

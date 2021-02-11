@@ -627,13 +627,13 @@
 					<div class="formDivider" >
 						<div class="col-md-2 col-sm-6 col-xs-12">
 							<div class="group">
-								<select  id="purpose" name="enquiryReport.purpose" class="enquiryFields">
+								<select  id="purpose" name="enquiryReport.purpose" class="enquiryFields requiredField">
 								            <option value=""></option>									
 	                                        <option value="Personal use">Personal use</option>                                    
 	                                        <option value="Investment">Investment</option> 
 	                             </select>
 								<span class="highlight"></span><span class="bar"></span>
-								<label class="select-label">Purchase Purpose<strong class="mndt"></strong></label>
+								<label class="select-label">Purchase Purpose<strong class="mndt">*</strong></label>
 							</div>
 							<div class="group" id="lastvisitdate_div" style="display:none"><!--  -->
 									<input type="text" class="autocomplete-off disableInputs" id="lastvisitdate" /><!-- name="enquiryReport.lastvisitdate" -->
