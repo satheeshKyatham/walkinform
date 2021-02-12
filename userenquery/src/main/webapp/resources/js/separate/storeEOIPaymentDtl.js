@@ -354,8 +354,10 @@ function getTokenTypeEOI (){
 		html='<option value="F">PLATINUM</option><option value="T">EXPRESS</option>';
 	} else if($("#projectsfid").val()=='a1l2s000000PJMJAA4') {
 		html='<option value="F">GOLD</option><option value="T">PLATINUM</option><option value="T">EXPRESS</option>';
-	} else if($("#projectsfid").val()=='a1l2s00000002YZAAY' || $("#projectsfid").val()=='a1l6F000003TRcCQAW') {
+	} else if($("#projectsfid").val()=='a1l2s00000002YZAAY') {
 		html='<option value="F">PLATINUM</option>';
+	} else if ($("#projectsfid").val()=='a1l6F000003TRcCQAW') {
+		html='<option value="F">SERENITY</option>';
 	}
 	
 	
