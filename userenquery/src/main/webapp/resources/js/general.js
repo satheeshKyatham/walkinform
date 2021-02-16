@@ -382,6 +382,12 @@ function towerCustomList (){
 		html=html+'<option value="SO10">Godrej Nature+ Tower-D2</option>';
 		
 		return html;
+	} else if ($('#projectid').val() == "a1l2s000000PJpLAAW") {
+		var html="";
+		
+		html=html+'<option value="All">All</option>'; 
+		
+		return html;
 	} else {
 		return "";
 	}
