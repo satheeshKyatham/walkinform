@@ -30,9 +30,18 @@ function getMySourcingLead () {
 		var obj1 =JSON.parse(obj);
 		var html = '';
 		var paymentStatus = '';
+		var cpName = '';
 		
 		if(obj1!=null) {
 			for(var i=0;i<obj1.length;i++){
+				
+				if (obj1[i].channelPartner && obj1[i].channelPartner.name) {
+					cpName = obj1[i].channelPartner.name;
+				} else {
+					cpName = '-';
+				}
+				
+				
 				html += "<tr>" +
 							" <td>"+obj1[i].name+"</td>" +
 							" <td>"+obj1[i].contact.firstName+" "+obj1[i].contact.lastName+"</td>" +
@@ -42,7 +51,7 @@ function getMySourcingLead () {
 							" <td>"+obj1[i].walkInSource+"</td>" +
 							" <td>"+obj1[i].closing_manager_name__c+"</td>" +
 							" <td>"+obj1[i].dateOfSiteVisit+"</td>" +
-							" <td>"+obj1[i].channelPartner.name+"</td>" +
+							" <td>"+cpName+"</td>" +
 						" </tr>";
 			}
 			
