@@ -151,7 +151,7 @@ public class PaymentEOIReportController {
 		
 		
 		//String whereCondition = " project_sfid in (" + finalProjectid + ") and Date(offer_date__c) between '"+fromDate+"' and '"+toDate+"' "+vertCondition+" order by offer_date__c desc  ";
-		String whereCondition = " project_sfid in (" + finalProjectid + ") and Date(offer_date__c) between '"+fromDate+"' and '"+toDate+"' "+vertCondition+" ";
+		String whereCondition = "  in (" + finalProjectid + ") and Date(offer_date__c) between '"+fromDate+"' and '"+toDate+"' "+vertCondition+" ";
 		
 		return gson.toJson(eOIReportService.getAllotmentReport(whereCondition));
 	}

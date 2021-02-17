@@ -78,6 +78,7 @@ function getAllotmentDashboardReport () {
 						offerAmount=obj1[i].offeramount;
 					
 					html += "<tr>" +
+								" <td>"+obj1[i].project_name__c+"</td>" +
 								" <td>"+obj1[i].priority_no__c+"</td>" +
 								" <td>"+obj1[i].enqname+"</td>" +
 								" <td>"+obj1[i].custname+"</td>" +

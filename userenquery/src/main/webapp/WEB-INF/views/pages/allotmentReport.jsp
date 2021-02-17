@@ -162,6 +162,7 @@
 					<table class="table table-bordered" id="allotmentReportTable">
 						<thead>
 							<tr>
+								<th>Project</th>
 								<th>Priority No.</th>
 								<th>ENQ Name</th>
 								<th>Customer Name</th>

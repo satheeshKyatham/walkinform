@@ -61,6 +61,7 @@ public class AllotmentReport {
 	
 	@Transient private String qry_count;
 	@Transient private String qry_msg;
+	@Column(name="project_name__c") private String project_name__c;
 	
 	public int getId() {
 		return id;
@@ -295,5 +296,11 @@ public class AllotmentReport {
 	}
 	public void setQry_msg(String qry_msg) {
 		this.qry_msg = qry_msg;
+	}
+	public String getProject_name__c() {
+		return project_name__c;
+	}
+	public void setProject_name__c(String project_name__c) {
+		this.project_name__c = project_name__c;
 	}
 }

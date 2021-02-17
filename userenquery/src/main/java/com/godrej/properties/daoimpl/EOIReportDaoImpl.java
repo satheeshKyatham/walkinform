@@ -97,7 +97,8 @@ public class EOIReportDaoImpl implements EOIReportDao{
 		List<AllotmentReport> allot=null;
 		
 		// Count the records
-		Query countQuery = session.createNativeQuery(" SELECT COUNT(*) FROM salesforce.vw_allotment_report where "+whereCondition+" ");
+		Query countQuery = session.createNativeQuery(" SELECT COUNT(*) FROM salesforce.propstrength__offer__c where propstrength__status__c = 'Closed Won' "
+				+ " AND propstrength__project__c "+whereCondition+" ");
 		
 		long count = ((Number) countQuery.getSingleResult()).intValue();
   	
@@ -105,7 +106,7 @@ public class EOIReportDaoImpl implements EOIReportDao{
 	  	
 	  	if (count <= 5000) {
 	  		Query q = session.createNativeQuery(" SELECT * FROM salesforce.vw_allotment_report "
-					+ " where "+whereCondition+" order by offer_date__c desc  ", AllotmentReport.class);
+					+ " where project_sfid "+whereCondition+" order by offer_date__c desc  ", AllotmentReport.class);
 			allot = q.getResultList();
 	  	} else {
 	  		List<AllotmentReport> lists = new ArrayList<AllotmentReport>();
