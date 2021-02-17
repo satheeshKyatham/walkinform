@@ -21,6 +21,18 @@ $(document).ready(function() {
 
 function getAllotmentDashboardReport () {
 	
+	var project = $('#allotmentDayProject option:selected');
+	var selectedProjectOffer = [];
+	$(project).each(function(index, brand){
+		selectedProjectOffer.push($(this).val());
+	});
+	
+	if(selectedProjectOffer=='' || selectedProjectOffer==null){
+		projectid = $('#projectid').val();
+	} else {
+		projectid = selectedProjectOffer.join(",");
+	}
+	
 	$("#allotmentReportTable").DataTable().destroy();
 	
 	$("#eoiReportCSVInputCol").empty();
@@ -39,8 +51,8 @@ function getAllotmentDashboardReport () {
 	$("#blockInvId").empty();
 	$("#holdInvId").empty();
 	
-	
-	$.get("getAllotmentDayReport",{"projectSfid":$('#projectid').val(), "fromDate":$('#txtAllotFromDate').val(), "toDate":$('#txtAllotToDate').val(), "userVerticals":USER_VERTICALES_GV },function(data){				 
+	$.get("getAllotmentDayReport",{"projectSfid":projectid, "fromDate":$('#txtAllotFromDate').val(), "toDate":$('#txtAllotToDate').val(), "userVerticals":USER_VERTICALES_GV },function(data){
+	//$.get("getAllotmentDayReport",{"projectSfid":$('#projectid').val(), "fromDate":$('#txtAllotFromDate').val(), "toDate":$('#txtAllotToDate').val(), "userVerticals":USER_VERTICALES_GV },function(data){				 
 		var obj =JSON.stringify(data);
 		var obj1 =JSON.parse(obj);
 		
@@ -55,51 +67,67 @@ function getAllotmentDashboardReport () {
 		//alert(obj1.length);
 		if(obj1!=null) {
 			for(var i=0;i<obj1.length;i++){
-				if (obj1[i].preferences != null && obj1[i].preferences != "" && obj1[i].preferences != undefined && obj1[i].preferences != "undefined") {
-					tab = obj1[i].preferences.replace(/\|/g, "</div><div class='prefTab'>");
-				}
-				var offerAmount =0; 
-				if(obj1[i].offeramount!=null)
-					offerAmount=obj1[i].offeramount;
 				
-				html += "<tr>" +
-							" <td>"+obj1[i].priority_no__c+"</td>" +
-							" <td>"+obj1[i].enqname+"</td>" +
-							" <td>"+obj1[i].custname+"</td>" +
-							" <td>"+obj1[i].mobile__c+"</td>" +
-							" <td>"+obj1[i].email+"</td>" +
-							" <td>"+obj1[i].walk_in_source__c+"</td>" +
-							" <td>"+obj1[i].sourcing_manager_name__c+"</td>" +
-							
-							" <td>"+obj1[i].verticle__c+"</td>" +
-							" <td>"+obj1[i].brokername+"</td>" +
-							" <td>"+obj1[i].closing_manager_name__c+"</td>" +
-							" <td>"+obj1[i].propstrength__request_source__c+"</td>" +
-							" <td>"+obj1[i].propstrength__enquiry_type__c+"</td>" +
-							" <td>"+obj1[i].offername+"</td>" +
-							" <td>"+obj1[i].user_name+"</td>" +
-							" <td>"+obj1[i].offer_date+"</td>" +
-							" <td>"+obj1[i].propstrength__super_area__c+"</td>" +
-							" <td>"+obj1[i].propstrength__carpet_area__c+"</td>" +
-							" <td>"+obj1[i].propstrength__unit_type__c+"</td>" +
-							" <td>"+obj1[i].car_park_type+"</td>" +
-							" <td>"+obj1[i].scheme_name+"</td>" +
-							" <td>"+obj1[i].propstrength__total_basic_sale_price__c+"</td>" +
-							" <td>"+obj1[i].propstrength__total_sales_consideration__c+"</td>" +
-							/*" <td>"+obj1[i].user_name+"</td>" +*/
-							
-							" <td>"+obj1[i].booking_name+"</td>" +
-							" <td>"+obj1[i].booking_status+"</td>" +
-							" <td>"+obj1[i].kyc_approvedby+"</td>" +
-							
-							" <td>"+obj1[i].offeramount+"</td>" +
-							" <td>"+obj1[i].propStrength__Property_Name__c+"</td>" +
-							" <td>"+obj1[i].propStrength__House_Unit_No__c+"</td>" +
-							" <td>"+obj1[i].actula_5_per+"</td>" +
-							" <td>"+obj1[i].diffamount+"</td>" +
-							" <td>"+obj1[i].Sourcing_Team_Lead_Name__c+"</td>" +
-							" <td>"+obj1[i].Closing_Team_Lead_Name__c+"</td>" +
-						" </tr>";
+				if (obj1[i].qry_msg != "MAX_LIMIT") {
+					
+					if (obj1[i].preferences != null && obj1[i].preferences != "" && obj1[i].preferences != undefined && obj1[i].preferences != "undefined") {
+						tab = obj1[i].preferences.replace(/\|/g, "</div><div class='prefTab'>");
+					}
+					var offerAmount =0; 
+					if(obj1[i].offeramount!=null)
+						offerAmount=obj1[i].offeramount;
+					
+					html += "<tr>" +
+								" <td>"+obj1[i].priority_no__c+"</td>" +
+								" <td>"+obj1[i].enqname+"</td>" +
+								" <td>"+obj1[i].custname+"</td>" +
+								" <td>"+obj1[i].mobile__c+"</td>" +
+								" <td>"+obj1[i].email+"</td>" +
+								" <td>"+obj1[i].walk_in_source__c+"</td>" +
+								" <td>"+obj1[i].sourcing_manager_name__c+"</td>" +
+								
+								" <td>"+obj1[i].verticle__c+"</td>" +
+								" <td>"+obj1[i].brokername+"</td>" +
+								" <td>"+obj1[i].closing_manager_name__c+"</td>" +
+								" <td>"+obj1[i].propstrength__request_source__c+"</td>" +
+								" <td>"+obj1[i].propstrength__enquiry_type__c+"</td>" +
+								" <td>"+obj1[i].offername+"</td>" +
+								" <td>"+obj1[i].user_name+"</td>" +
+								" <td>"+obj1[i].offer_date+"</td>" +
+								" <td>"+obj1[i].propstrength__super_area__c+"</td>" +
+								" <td>"+obj1[i].propstrength__carpet_area__c+"</td>" +
+								" <td>"+obj1[i].propstrength__unit_type__c+"</td>" +
+								" <td>"+obj1[i].car_park_type+"</td>" +
+								" <td>"+obj1[i].scheme_name+"</td>" +
+								" <td>"+obj1[i].propstrength__total_basic_sale_price__c+"</td>" +
+								" <td>"+obj1[i].propstrength__total_sales_consideration__c+"</td>" +
+								/*" <td>"+obj1[i].user_name+"</td>" +*/
+								
+								" <td>"+obj1[i].booking_name+"</td>" +
+								" <td>"+obj1[i].booking_status+"</td>" +
+								" <td>"+obj1[i].kyc_approvedby+"</td>" +
+								
+								" <td>"+obj1[i].offeramount+"</td>" +
+								" <td>"+obj1[i].propStrength__Property_Name__c+"</td>" +
+								" <td>"+obj1[i].propStrength__House_Unit_No__c+"</td>" +
+								" <td>"+obj1[i].actula_5_per+"</td>" +
+								" <td>"+obj1[i].diffamount+"</td>" +
+								" <td>"+obj1[i].Sourcing_Team_Lead_Name__c+"</td>" +
+								" <td>"+obj1[i].Closing_Team_Lead_Name__c+"</td>" +
+							" </tr>";
+				
+				} else {
+					swal({
+	                	title: "Records exceeding 5000. Please narrow down dates or select few projects",
+	          			text: "Requested records count is: "+obj1[i].qry_count,
+	          			//timer: 8000,
+	          			type: "warning",
+	                });
+					
+					$("#swal2-title").css({"font-size": "22px"});
+					return false;
+				}
+				
 			}
 			
 			html = html.replace(/null/g, " - ");

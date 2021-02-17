@@ -128,7 +128,15 @@
 			</form:form> --%>
 			<div class="well center-block">
 				<div class="form-inline">
-					<i class="glyphicon glyphicon-filter" style="border-right: 1px solid #333; margin-right: 10px; padding-right: 10px;"></i>
+					<!-- <i class="glyphicon glyphicon-filter" style="border-right: 1px solid #333; margin-right: 10px; padding-right: 10px;"></i> -->
+					
+					<div class="form-group" style="margin-bottom:20px;">	
+						<label>Project(s) </label>  
+						<select id="allotmentDayProject" class="userMultiselectProject" multiple="multiple"></select>
+					</div>
+					
+					<div class="clearfix"></div>
+										
 					<div class="form-group">
 						<label for="exampleInputNameDate">From Date</label> 
 						<input class="form-control" type="date" name="" id="txtAllotFromDate">
