@@ -62,6 +62,7 @@ public class AllotmentReport {
 	@Transient private String qry_count;
 	@Transient private String qry_msg;
 	@Column(name="project_name__c") private String project_name__c;
+	@Column(name="propstrength__total_agreement_amount__c") private String propstrength__total_agreement_amount__c;
 	
 	public int getId() {
 		return id;
@@ -302,5 +303,11 @@ public class AllotmentReport {
 	}
 	public void setProject_name__c(String project_name__c) {
 		this.project_name__c = project_name__c;
+	}
+	public String getPropstrength__total_agreement_amount__c() {
+		return propstrength__total_agreement_amount__c;
+	}
+	public void setPropstrength__total_agreement_amount__c(String propstrength__total_agreement_amount__c) {
+		this.propstrength__total_agreement_amount__c = propstrength__total_agreement_amount__c;
 	}
 }

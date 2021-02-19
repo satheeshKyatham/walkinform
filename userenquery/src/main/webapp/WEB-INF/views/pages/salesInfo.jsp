@@ -1541,10 +1541,10 @@ if(ses!=null){
 						<div class="col-md-3 col-sm-6 col-xs-12" id="sourcingTeamLeadIdDiv">
 							<div class="group">
 							<div id="sourcingManagerId"></div>
-							<select class="autocomplete-off" id="sourcingTeamLeadId" name="sourcingTeamLeadDto">
+							<select class="requiredField autocomplete-off" id="sourcingTeamLeadId" name="sourcingTeamLeadDto">
 							</select>
 								<span class="highlight"></span><span class="bar"></span>
-								<label class="select-label">Sourcing Team Lead</label>
+								<label class="select-label">Sourcing Team Lead<strong class="mndt">*</strong></label>
 							</div>
 							<div class="clearfix"></div>
 						</div>
