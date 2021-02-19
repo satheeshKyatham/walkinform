@@ -3290,6 +3290,13 @@ public class WebServiceController<MultipartFormDataInput> {
 		// if(cpflag.equals("D"))
 		msg = "Thank you for your interest in " + projName + ". Your token no is " + token
 				+ ". Regards, Godrej Properties.";
+		
+		/*msg = "Thank you for your interest in " + projName + ". Your token no is " + token
+				+ "."
+				+ "\nWhile our sales representatives attend to you, explore an immersive experience of " + projName + " on our App, through the below link:"
+				+ "\niOS : https://cutt.ly/GPLIOS"
+				+ "\nAndroid : https://cutt.ly/GPLAndroid " 
+				+ "\nRegards, Godrej Properties.";*/
 
 		/*
 		 * if(cpflag.equals("CP") || cpflag.equals("O"))

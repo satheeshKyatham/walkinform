@@ -17,10 +17,11 @@ public class SendSMS {
 		String responceNew = "";
 		try {
 			//9987677726&from=GPLPLB&text=
-			String requestUrl = "http://www.myvaluefirst.com/smpp/sendsms?username=godrejhtptrn&password=godrj001&to="+mobileNo+"&from=GPLCHP&text="+text+"&dlr-mask=19&dlr-url";
+//			String requestUrl = "http://www.myvaluefirst.com/smpp/sendsms?username=godrejhtptrn&password=godrj001&to="+mobileNo+"&from=GPLCHP&text="+text+"&dlr-mask=19&dlr-url";
 			//String requestUrl = "http://203.212.70.200/smpp/sendsms?username=godrejhttp1&password=godrej12&to="+mobileNo+"&from=GPLPLB&text="+text;
 			//String requestUrl = "http://ip.shreesms.net/smsserver/SMS10N.aspx?Userid=GODREJPROPERTIES&UserPassword=123456&PhoneNumber="+ mobileNo + "&Text=" + text + "&GSM=Godrej";
-			logger.info("request My ValueFirst SMS Url:-"+requestUrl);
+			String requestUrl = "https://buzzify.in/V2/http-api.php?apikey=tevF3ldEUBoXS8nd&senderid=GODREJ&number="+ mobileNo + "&message="+text+"";
+			logger.info("request buzzify SMS Url:-"+requestUrl);
 			URL url = new URL(requestUrl);
 			HttpURLConnection uc = (HttpURLConnection) url.openConnection();
 			responce = uc.getResponseMessage();

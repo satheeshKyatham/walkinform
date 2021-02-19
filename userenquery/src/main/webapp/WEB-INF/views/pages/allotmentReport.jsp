@@ -196,6 +196,7 @@
 								<th>Balance Amt. w.r.t 5%</th>
 								<th>Sourcing TL</th>
 								<th>Closing TL</th>
+								<th>Total Agreement Value</th>
 							</tr>
 						</thead>
 						<tbody>

@@ -590,3 +590,5 @@ border: 1px Solid #ccc; top: 10px;     margin: 70px auto 20px !important; float:
 
 #collateralPaneCol .collateralCol {border: 1px solid #ccc; padding: 10px;}
 #collateralPaneCol #collateral {float: none; margin: 0 auto;}
+
+.nav>li>a {padding: 10px 10px;}

@@ -318,7 +318,9 @@ public class Test {
 		    System.out.println(DigestUtils.sha1Hex(ts + rand));*/
 		
 		String uuid = String.format("%040d", new BigInteger(UUID.randomUUID().toString().replace("-", ""), 16));
+		System.out.println(UUID.randomUUID().toString());
 		System.out.println(uuid);
+		System.out.println(uuid.length() - 16);
 		String uuid16digits = uuid.substring(uuid.length() - 16);
 		System.out.println(uuid16digits);
 		/*SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");// hh:mm
