@@ -99,6 +99,7 @@ function getAllotmentDashboardReport () {
 							" <td>"+obj1[i].diffamount+"</td>" +
 							" <td>"+obj1[i].Sourcing_Team_Lead_Name__c+"</td>" +
 							" <td>"+obj1[i].Closing_Team_Lead_Name__c+"</td>" +
+							" <td>"+obj1[i].propstrength__total_agreement_amount__c+"</td>" +
 						" </tr>";
 			}
 			

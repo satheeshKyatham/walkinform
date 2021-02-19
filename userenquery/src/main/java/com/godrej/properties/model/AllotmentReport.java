@@ -56,6 +56,7 @@ public class AllotmentReport {
 	@Column(name="kyc_approvedby") private String kyc_approvedby;
 	@Column(name="Sourcing_Team_Lead_Name__c") private String Sourcing_Team_Lead_Name__c;
 	@Column(name="Closing_Team_Lead_Name__c") private String Closing_Team_Lead_Name__c;
+	@Column(name="propstrength__total_agreement_amount__c") private String propstrength__total_agreement_amount__c;
 	
 	public int getId() {
 		return id;
@@ -278,6 +279,12 @@ public class AllotmentReport {
 	}
 	public void setClosing_Team_Lead_Name__c(String closing_Team_Lead_Name__c) {
 		Closing_Team_Lead_Name__c = closing_Team_Lead_Name__c;
+	}
+	public String getPropstrength__total_agreement_amount__c() {
+		return propstrength__total_agreement_amount__c;
+	}
+	public void setPropstrength__total_agreement_amount__c(String propstrength__total_agreement_amount__c) {
+		this.propstrength__total_agreement_amount__c = propstrength__total_agreement_amount__c;
 	}
 	
 	
