@@ -304,6 +304,11 @@ function getTowerEOI (){
 			html=html+'<option value="'+data[i].tower_code__c+'">'+data[i].tower_name__c+'</option>';
 		}
 		
+		var customTower = towerCustomList ();
+		if (customTower != "") {
+			html = towerCustomList ();
+		}
+		
 		$(".towerListEOI").append(html);
 	});
 }
@@ -332,7 +337,7 @@ function getTokenTypeEOI (){
 		{
 			html='<option value="F">GOLD</option><option value="F">PLATINUM</option><option value="T">EXPRESS</option>';
 		}
-	else if($("#projectsfid").val()=='a1l2s000000PJpLAAW' || $("#projectsfid").val()=='a1l2s000000PJPmAAO' || $("#projectsfid").val()=='a1l6F000004RvPHQA0' || $("#projectsfid").val()=='a1l6F000004LVk8QAG' || $("#projectsfid").val()=='a1l6F000008DnniQAC' || $("#projectsfid").val()=='a1l2s00000000pEAAQ' || $("#projectsfid").val()=='a1l6F000008iZJMQA2' || $("#projectsfid").val()=='a1l2s00000003BMAAY' || $("#projectsfid").val()=='a1l2s00000003VlAAI')
+	else if($("#projectsfid").val()=='a1l2s000000PJPmAAO' || $("#projectsfid").val()=='a1l6F000004RvPHQA0' || $("#projectsfid").val()=='a1l6F000004LVk8QAG' || $("#projectsfid").val()=='a1l6F000008DnniQAC' || $("#projectsfid").val()=='a1l2s00000000pEAAQ' || $("#projectsfid").val()=='a1l6F000008iZJMQA2' || $("#projectsfid").val()=='a1l2s00000003BMAAY' || $("#projectsfid").val()=='a1l2s00000003VlAAI')
 		{
 			html='<option value="F">REFUNDABLE</option><option value="T">NON-REFUNDABLE</option>';
 		}
@@ -350,6 +355,10 @@ function getTokenTypeEOI (){
 	} else if($("#projectsfid").val()=='a1l2s000000PJMJAA4') {
 		html='<option value="F">GOLD</option><option value="T">PLATINUM</option><option value="T">EXPRESS</option>';
 	} else if($("#projectsfid").val()=='a1l2s00000002YZAAY') {
+		html='<option value="F">PLATINUM</option>';
+	} else if ($("#projectsfid").val()=='a1l6F000003TRcCQAW') {
+		html='<option value="F">SERENITY</option>';
+	} else if ($("#projectsfid").val()=='a1l2s000000PJpLAAW') {
 		html='<option value="F">PLATINUM</option>';
 	}
 	
@@ -400,7 +409,25 @@ function getTypologyEOI (e){
 		
 		
 		$(e).closest('.EOIDtlRow').find('.typologyListEOI').append(html);
-	} else {
+	} else if ($('.projectSfid').val() == "a1l6F000003TRcCQAW" && $(e).closest('.EOIDtlRow').find('.towerListEOI  option:selected').val() != "SO03") {
+		var html = "";
+		
+		$(e).closest('.EOIDtlRow').find('.typologyListEOI').find("option:gt(0)").remove();
+		$(e).closest('.EOIDtlRow').find('.unitListEOI').find("option:gt(0)").remove();
+		
+		
+		if ($(e).closest('.EOIDtlRow').find('.towerListEOI  option:selected').val() == "SO04") {
+			html = html+"<option value='2BHK (Type-A)'>2BHK (Type-A)</option>";
+			html = html+"<option value='2BHK (Type-C)'>2BHK (Type-C)</option>";
+			html = html+"<option value='3BHK'>3BHK</option>";
+		} else if ($(e).closest('.EOIDtlRow').find('.towerListEOI  option:selected').val() == "SO10") {
+			html = html+"<option value='2BHK (Type-A)'>2BHK (Type-A)</option>";
+			html = html+"<option value='2BHK (Type-C)'>2BHK (Type-C)</option>";
+			html = html+"<option value='3BHK'>3BHK</option>";
+		} 
+		
+		$(e).closest('.EOIDtlRow').find('.typologyListEOI').append(html);
+	}else {
 		$.get("getunittype", {
 			"project_code" : $('.projectSfid').val(),
 			"tower_code": $(e).val(),
@@ -684,7 +711,7 @@ function addMoreEoiRowBtn () {
 					+"<select class='full form-control input-sm unitListEOI' onchange='unitChangeConditionEOI(this)'>"
 						+"<option value='0'>Select Unit</option>"
 					+"</select>" +
-					" <div class='text-center'><span class='smapleUnit'>Sample1</span></div> "
+					" <div class='text-center'><span class='smapleUnit'></span></div> "
 				+"</td>"
 				+"<td>"
 					+"<select class='full form-control input-sm floorListEOI requiredField' onchange='getSampleUnit(this);'>"
@@ -722,11 +749,15 @@ function addMoreEoiRowBtn () {
 						html=html+'<option value="'+data[i].tower_code__c+'">'+data[i].tower_name__c+'</option>';
 					}
 					
+					var customTower = towerCustomList ();
+					if (customTower != "") {
+						html = towerCustomList ();
+					}
+					
 					$(k).find(".towerListEOI").append(html);
+					
+					
 				});
-				
-				
-				
 				
 		EOIDtl++;
 	}else {

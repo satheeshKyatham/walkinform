@@ -1,5 +1,6 @@
 package com.godrej.properties.daoimpl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Query;
@@ -89,17 +90,31 @@ public class EOIReportDaoImpl implements EOIReportDao{
 
 		return null;
 	}
-
+	
 	@Override
 	public List<AllotmentReport> getAllotmentReport(String whereCondition) {
 		Session session = this.sessionFactory.getCurrentSession();	
-		
 		List<AllotmentReport> allot=null;
-		Query q = session.createNativeQuery(" SELECT * FROM salesforce.vw_allotment_report "
-				+ " where "+whereCondition+"  ", AllotmentReport.class);
 		
-		allot = q.getResultList();
+		// Count the records
+		Query countQuery = session.createNativeQuery(" SELECT COUNT(*) FROM salesforce.propstrength__offer__c where propstrength__status__c = 'Closed Won' "
+				+ " AND propstrength__project__c "+whereCondition+" ");
 		
+		long count = ((Number) countQuery.getSingleResult()).intValue();
+  	
+		String strRowCount = Long.toString(count);
+	  	
+	  	if (count <= 5000) {
+	  		Query q = session.createNativeQuery(" SELECT * FROM salesforce.vw_allotment_report "
+					+ " where project_sfid "+whereCondition+" order by offer_date__c desc  ", AllotmentReport.class);
+			allot = q.getResultList();
+	  	} else {
+	  		List<AllotmentReport> lists = new ArrayList<AllotmentReport>();
+	  		lists = getlist(lists,"MAX_LIMIT",strRowCount);
+	  		return lists;
+	  	}
+		// END Count the records
+	  	
 		if (allot.size() > 0)
 			return allot;
 
@@ -438,6 +453,17 @@ public class EOIReportDaoImpl implements EOIReportDao{
 			return authors;
 
 		return null;
+	}
+	
+	private List<AllotmentReport> getlist(List<AllotmentReport> list,String msg, String count){
+		List<AllotmentReport> lists= list;
+		if(lists.size()==0) {
+			AllotmentReport getMisReport=	new AllotmentReport();;
+			getMisReport.setQry_count(count);
+			getMisReport.setQry_msg(msg);
+			lists.add(getMisReport);
+		}
+		return lists;
 	}
 	
 }	

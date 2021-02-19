@@ -371,3 +371,24 @@ function getDrupalProjectDtl () {
 		
 	}).done(function(obj){ });	
 }
+
+
+function towerCustomList (){
+	if ($('#projectid').val() == "a1l6F000003TRcCQAW") {
+		var html="";
+		
+		html=html+'<option value="SO03">Godrej Nature+ Tower-C</option>';
+		html=html+'<option value="SO04">Godrej Nature+ Tower-D1</option>';
+		html=html+'<option value="SO10">Godrej Nature+ Tower-D2</option>';
+		
+		return html;
+	} else if ($('#projectid').val() == "a1l2s000000PJpLAAW") {
+		var html="";
+		
+		html=html+'<option value="All">All</option>'; 
+		
+		return html;
+	} else {
+		return "";
+	}
+}

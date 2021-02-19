@@ -3422,6 +3422,8 @@ $("#carParkType").change(function () {
 	
     	if ($('#projectId').val() == 'a1l2s000000PJPmAAO' || $('#projectId').val() == 'a1l6F000002X6IOQA0') {
     		$('#carParkCountDD').append('<select class="full form-control"><option value="1">1</option> </select>');
+    	} else if ($('#projectId').val() == 'a1l6F000002QWXnQAO') {
+    		$('#carParkCountDD').append('<select class="full form-control"><option value="1">1</option> <option value="2">2</option> </select>');
     	} else {
     		$('#carParkCountDD').append('<select class="full form-control"><option value="1">1</option> <option value="2">2</option> <option value="3">3</option>  <option value="4">4</option> </select>');
     	}

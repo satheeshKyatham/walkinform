@@ -128,8 +128,30 @@ public class PaymentEOIReportController {
 		}
 		
 		
+		//for multiple project
+		String finalProjectid = "";
+		if (projectSfid != null  && !projectSfid.equals("null") && !projectSfid.equals("")) {
+			// For multiple project report
+			String[] multiProjectid = projectSfid.split(",");
+			StringBuilder modifiedProid = new StringBuilder();
+			for (int i = 0; i < multiProjectid.length; i++) {
+				modifiedProid.append("'" + multiProjectid[i] + "'");
+				modifiedProid.append(",");
+			}
+			finalProjectid = modifiedProid.toString();
+			if (finalProjectid != null && finalProjectid.length() > 0
+					&& finalProjectid.charAt(finalProjectid.length() - 1) == ',') {
+				finalProjectid = finalProjectid.substring(0, finalProjectid.length() - 1);
+			}
+			// END For multiple project report
+		} else {
+			finalProjectid = "";
+		}
+		//END for multiple project
 		
-		String whereCondition = " project_sfid= '"+projectSfid+"' and Date(offer_date__c) between '"+fromDate+"' and '"+toDate+"' "+vertCondition+" order by offer_date__c desc  ";
+		
+		//String whereCondition = " project_sfid in (" + finalProjectid + ") and Date(offer_date__c) between '"+fromDate+"' and '"+toDate+"' "+vertCondition+" order by offer_date__c desc  ";
+		String whereCondition = "  in (" + finalProjectid + ") and Date(offer_date__c) between '"+fromDate+"' and '"+toDate+"' "+vertCondition+" ";
 		
 		return gson.toJson(eOIReportService.getAllotmentReport(whereCondition));
 	}

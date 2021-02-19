@@ -304,6 +304,12 @@ function getTowerEOI (){
 		for(var i=0;i<data.length;i++) {
 			html=html+'<option value="'+data[i].tower_code__c+'">'+data[i].tower_name__c+'</option>';
 		}
+		
+		var customTower = towerCustomList ();
+		if (customTower != "") {
+			html = towerCustomList ();
+		}
+		
 		$(".towerListEOI").append(html);
 	});
 }
@@ -363,6 +369,23 @@ function getTypologyEOI (e){
 		}
 		
 		
+		$(e).closest('.EOIDtlRow').find('.typologyListEOI').append(html);
+	} else if ($('#projectid').val() == "a1l6F000003TRcCQAW" && $(e).closest('.EOIDtlRow').find('.towerListEOI  option:selected').val() != "SO03") {
+		var html = "";
+		
+		$(e).closest('.EOIDtlRow').find('.typologyListEOI').find("option:gt(0)").remove();
+		$(e).closest('.EOIDtlRow').find('.unitListEOI').find("option:gt(0)").remove();
+		
+		
+		if ($(e).closest('.EOIDtlRow').find('.towerListEOI  option:selected').val() == "SO04") {
+			html = html+"<option value='2BHK (Type-A)'>2BHK (Type-A)</option>";
+			html = html+"<option value='2BHK (Type-C)'>2BHK (Type-C)</option>";
+			html = html+"<option value='3BHK'>3BHK</option>";
+		} else if ($(e).closest('.EOIDtlRow').find('.towerListEOI  option:selected').val() == "SO10") {
+			html = html+"<option value='2BHK (Type-A)'>2BHK (Type-A)</option>";
+			html = html+"<option value='2BHK (Type-C)'>2BHK (Type-C)</option>";
+			html = html+"<option value='3BHK'>3BHK</option>";
+		} 
 		$(e).closest('.EOIDtlRow').find('.typologyListEOI').append(html);
 	} else {
 		$.get(pageContext+"getunittype", {
@@ -922,6 +945,11 @@ function editEOIPreference (e) {
 		
 		for(var i=0;i<data.length;i++) {
 			html=html+'<option value="'+data[i].tower_code__c+'">'+data[i].tower_name__c+'</option>';
+		}
+		
+		var customTower = towerCustomList ();
+		if (customTower != "") {
+			html = towerCustomList ();
 		}
 		
 		$(e).closest("td").closest("tr").find(".towerListEOI").append(html);

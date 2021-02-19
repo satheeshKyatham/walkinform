@@ -228,7 +228,7 @@ if(ses!=null){
 					<a href="#tab3" data-toggle="tab">EOI Details</a>
 				</li>
 				
-				<li id="foyrTab">
+				<li id="foyrTab" style="display:none;">
 					<a href="#foyrFram" data-toggle="tab">Foyr</a>
 				</li>
 				
@@ -1541,10 +1541,10 @@ if(ses!=null){
 						<div class="col-md-3 col-sm-6 col-xs-12" id="sourcingTeamLeadIdDiv">
 							<div class="group">
 							<div id="sourcingManagerId"></div>
-							<select class="requiredField autocomplete-off" id="sourcingTeamLeadId" name="sourcingTeamLeadDto">
+							<select class="autocomplete-off" id="sourcingTeamLeadId" name="sourcingTeamLeadDto">
 							</select>
 								<span class="highlight"></span><span class="bar"></span>
-								<label class="select-label">Sourcing Team Lead<strong class="mndt">*</strong></label>
+								<label class="select-label">Sourcing Team Lead</label>
 							</div>
 							<div class="clearfix"></div>
 						</div>

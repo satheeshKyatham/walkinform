@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "salesforce.vw_allotment_report") 
@@ -56,7 +57,11 @@ public class AllotmentReport {
 	@Column(name="kyc_approvedby") private String kyc_approvedby;
 	@Column(name="Sourcing_Team_Lead_Name__c") private String Sourcing_Team_Lead_Name__c;
 	@Column(name="Closing_Team_Lead_Name__c") private String Closing_Team_Lead_Name__c;
-	@Column(name="propstrength__total_agreement_amount__c") private String propstrength__total_agreement_amount__c;
+	
+	
+	@Transient private String qry_count;
+	@Transient private String qry_msg;
+	@Column(name="project_name__c") private String project_name__c;
 	
 	public int getId() {
 		return id;
@@ -280,12 +285,22 @@ public class AllotmentReport {
 	public void setClosing_Team_Lead_Name__c(String closing_Team_Lead_Name__c) {
 		Closing_Team_Lead_Name__c = closing_Team_Lead_Name__c;
 	}
-	public String getPropstrength__total_agreement_amount__c() {
-		return propstrength__total_agreement_amount__c;
+	public String getQry_count() {
+		return qry_count;
 	}
-	public void setPropstrength__total_agreement_amount__c(String propstrength__total_agreement_amount__c) {
-		this.propstrength__total_agreement_amount__c = propstrength__total_agreement_amount__c;
+	public void setQry_count(String qry_count) {
+		this.qry_count = qry_count;
 	}
-	
-	
+	public String getQry_msg() {
+		return qry_msg;
+	}
+	public void setQry_msg(String qry_msg) {
+		this.qry_msg = qry_msg;
+	}
+	public String getProject_name__c() {
+		return project_name__c;
+	}
+	public void setProject_name__c(String project_name__c) {
+		this.project_name__c = project_name__c;
+	}
 }
