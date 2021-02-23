@@ -9,6 +9,14 @@ $.ajaxSetup({
     }
 });
 $(document).ready(function() {
+	//setting region name on page load
+	var urlPP = "getSelectedProjectMaster?projectid="+$('#projectid').val();
+	$.getJSON(urlPP, function (data) {
+		$("#region_name").val(data.regionname);
+	}).done(function() {
+	}).error(function() { alert("error");
+	});
+	
 	 var today = new Date();
 	 document.getElementById("txtFromDateAssigned").value = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
 	 document.getElementById("txtToDateAssigned").value = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
