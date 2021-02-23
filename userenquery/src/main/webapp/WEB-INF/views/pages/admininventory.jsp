@@ -103,6 +103,9 @@ if(ses!=null){
 				<li>
 					<a href="#updateEOITab" data-toggle="tab">EOI</a>
 				</li>
+				<!-- <li>
+					<a href="#promoCode" data-toggle="tab">Promo Code</a>
+				</li> -->
 			</ul>
 			<div class=""></div>
 		</div>
@@ -149,6 +152,10 @@ if(ses!=null){
 			<div class="tab-pane" id="updateEOITab" >
 				<%@ include file="/WEB-INF/views/pages/updateEOI.jsp" %>
 			</div>
+			
+			<div class="tab-pane" id="promoCode">
+				<%@ include file="/WEB-INF/views/pages/promoCode.jsp" %>
+			</div>
 	 	</div>
 	</div>
 	
@@ -170,6 +177,8 @@ if(ses!=null){
 	<script src="<c:url value='/resources/js/separate/costsheet.js?v=${sessionScope.version}'/>"></script>
 	<script src="<c:url value='/resources/js/separate/updateEOI.js?v=${sessionScope.version}'/>"></script>	
 	<script src="<c:url value='/resources/js/separate/eoiFormPrint.js?v=${sessionScope.version}'/>"></script>
+	
+	<script src="<c:url value='/resources/js/separate/promocode.js?v=${sessionScope.version}'/>"></script>
 
 	<script src="<c:url value='/resources/js/enquiryRequest/common.js?v=${sessionScope.version}'/>"></script>
 	

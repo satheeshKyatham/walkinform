@@ -359,7 +359,7 @@ function getTokenTypeEOI (){
 	} else if ($("#projectsfid").val()=='a1l6F000003TRcCQAW') {
 		html='<option value="F">SERENITY</option>';
 	} else if ($("#projectsfid").val()=='a1l2s000000PJpLAAW') {
-		html='<option value="F">PLATINUM</option>';
+		html='<option value="F">REFUNDABLE</option>';
 	}
 	
 	
