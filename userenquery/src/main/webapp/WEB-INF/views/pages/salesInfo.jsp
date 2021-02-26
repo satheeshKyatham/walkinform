@@ -1825,7 +1825,7 @@ if(ses!=null){
    
   	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/8.4.7/js/intlTelInput.js"></script> -->
 	<script src="<c:url value='/resources/js/bankdetails.js?v=${sessionScope.version}' />"></script>
-	<script src="<c:url value='/resources/js/index.js?v=18.18' />"></script>
+	<script src="<c:url value='/resources/js/index.js?v=${sessionScope.version}' />"></script>
 	
 	<script>
 	
@@ -1887,7 +1887,7 @@ if(ses!=null){
 <!-- Costsheet --> 
 <script src="<c:url value='/resources/js/jquery.tabletojson.min.js'/>"></script>
 <%-- <script type="text/javascript" src="<c:url value='/resources/js/jquery.countdownTimer.js'/>"></script> --%>
-<script src="<c:url value='/resources/js/enquiryRequest/common.js?v=18.18'/>"></script>
+<script src="<c:url value='/resources/js/enquiryRequest/common.js?v=${sessionScope.version}'/>"></script>
 <script src="<c:url value='/resources/js/separate/costsheet.js?v=${sessionScope.version}'/>"></script>
 <script src="<c:url value='/resources/js/separate/webcamAttachmentCS.js?v=${sessionScope.version}'/>"></script>
 

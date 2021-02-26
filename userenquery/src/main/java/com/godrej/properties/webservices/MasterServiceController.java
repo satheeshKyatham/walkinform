@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.godrej.properties.model.Vw_UserMaster;
 import com.godrej.properties.model.Vw_UserProjectMapping;
 import com.godrej.properties.model.Vw_UserTowerMapping;
+import com.godrej.properties.service.ProjectLaunchService;
 import com.godrej.properties.service.VW_UserMasterService;
 import com.godrej.properties.service.VW_UserTowerMasterService;
 import com.google.gson.Gson;
@@ -25,6 +26,9 @@ public class MasterServiceController {
 	
 	@Autowired
  	private VW_UserTowerMasterService vW_UserTowerMasterService;
+	
+	@Autowired
+	private ProjectLaunchService projectLaunchService;
 	
 	@GetMapping(value = "/getUserProjectMapping", produces = "application/json")
 	public String getUserProjectMapping(@RequestParam("projectid") String projectid) {
@@ -106,6 +110,12 @@ public class MasterServiceController {
 		Gson gson = new GsonBuilder().disableHtmlEscaping().create();
 		List<Vw_UserTowerMapping> adt=vW_UserTowerMasterService.getProjectListUserWise(userid, finalRegion);
 		return gson.toJson(adt);
+	} 
+	
+	@GetMapping(value = "/getSelectedProjectMaster", produces = "application/json")
+	public String getSelectedProjectMaster(@RequestParam("projectid") String projectid) {
+		Gson gson = new GsonBuilder().disableHtmlEscaping().create();
+		return gson.toJson(projectLaunchService.getprojectDetails(projectid));
 	} 
 	
 }

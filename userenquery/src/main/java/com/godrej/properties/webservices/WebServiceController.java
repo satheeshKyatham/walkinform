@@ -530,6 +530,13 @@ public class WebServiceController<MultipartFormDataInput> {
 		return model;
 	}
 
+	@RequestMapping(value = { "/tokenScreen" }, method = RequestMethod.GET)
+	public ModelAndView tokenScreen() {
+		ModelAndView model = new ModelAndView();
+		model.setViewName("tokenScreen");
+		return model;
+	}
+	
 	@RequestMapping(value = {
 			"/inventory/{token}/{projectsfid}/{enquirysfid}/{primarycontactsfid}/{tokentype}" }, method = RequestMethod.GET)
 	public ModelAndView inventory(@PathVariable("token") String token, @PathVariable("enquirysfid") String enquirysfid,

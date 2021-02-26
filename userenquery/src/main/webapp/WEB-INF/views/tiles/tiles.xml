@@ -278,5 +278,9 @@
        <put-attribute name="title" value="Update Payment Plan" />  
        <put-attribute name="body" value="/WEB-INF/views/pages/updatePaymentPlan.jsp" /> 
      </definition>
+      
+     <definition name="tokenScreen"  template="/WEB-INF/views/pages/tokenScreen.jsp"> 
+       <put-attribute name="title" value="tokenScreen" />  
+     </definition> 
      
 </tiles-definitions>

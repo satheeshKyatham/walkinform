@@ -7,6 +7,9 @@
 	 response.addHeader("Pragma","no-cache");
 	 response.setHeader("Cache-Control","no-cache,no-store, must-revalidate, pre-check=0, post-check=0, max-age=0, s-maxage=0");
 	 response.addHeader("X-Frame-Options", "DENY");
+
+	 session.setAttribute("home_version","19.18");  
+
 	 %>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">

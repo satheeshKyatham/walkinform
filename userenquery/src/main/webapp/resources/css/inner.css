@@ -592,3 +592,6 @@ border: 1px Solid #ccc; top: 10px;     margin: 70px auto 20px !important; float:
 #collateralPaneCol #collateral {float: none; margin: 0 auto;}
 
 .nav>li>a {padding: 10px 10px;}
+
+.inactivePCBtn {background-color: #ce1818 !important; font-size: 11px !important;}
+.activePCBtn {background-color: #0077b9; !important; font-size: 11px !important;}
