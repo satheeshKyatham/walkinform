@@ -388,6 +388,12 @@ function towerCustomList (){
 		html=html+'<option value="All">All</option>'; 
 		
 		return html;
+	} else if ($('#projectid').val() == "a1l6F000004RvPHQA0") {
+		var html="";
+		
+		html=html+'<option value="J079">VANAANGAN</option>'; 
+		
+		return html;
 	} else {
 		return "";
 	}

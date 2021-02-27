@@ -337,7 +337,7 @@ function getTokenTypeEOI (){
 		{
 			html='<option value="F">GOLD</option><option value="F">PLATINUM</option><option value="T">EXPRESS</option>';
 		}
-	else if($("#projectsfid").val()=='a1l2s000000PJPmAAO' || $("#projectsfid").val()=='a1l6F000004RvPHQA0' || $("#projectsfid").val()=='a1l6F000004LVk8QAG' || $("#projectsfid").val()=='a1l6F000008DnniQAC' || $("#projectsfid").val()=='a1l2s00000000pEAAQ' || $("#projectsfid").val()=='a1l6F000008iZJMQA2' || $("#projectsfid").val()=='a1l2s00000003BMAAY' || $("#projectsfid").val()=='a1l2s00000003VlAAI')
+	else if($("#projectsfid").val()=='a1l2s000000PJPmAAO' || $("#projectsfid").val()=='a1l6F000004LVk8QAG' || $("#projectsfid").val()=='a1l6F000008DnniQAC' || $("#projectsfid").val()=='a1l2s00000000pEAAQ' || $("#projectsfid").val()=='a1l6F000008iZJMQA2' || $("#projectsfid").val()=='a1l2s00000003BMAAY' || $("#projectsfid").val()=='a1l2s00000003VlAAI')
 		{
 			html='<option value="F">REFUNDABLE</option><option value="T">NON-REFUNDABLE</option>';
 		}
@@ -350,7 +350,7 @@ function getTokenTypeEOI (){
 		html='<option value="F">PLATINUM</option><option value="T">EXPRESS</option>';
 	} else if ($("#projectsfid").val()=='a1l6F000002X6IOQA0') {
 		html='<option value="F">REFUNDABLE</option>';
-	} else if($("#projectsfid").val()=='a1l2s000000XoezAAC') {
+	} else if($("#projectsfid").val()=='a1l2s000000XoezAAC' || $("#projectsfid").val()=='a1l6F000004RvPHQA0') {
 		html='<option value="F">PLATINUM</option><option value="T">EXPRESS</option>';
 	} else if($("#projectsfid").val()=='a1l2s000000PJMJAA4') {
 		html='<option value="F">GOLD</option><option value="T">PLATINUM</option><option value="T">EXPRESS</option>';
@@ -427,7 +427,22 @@ function getTypologyEOI (e){
 		} 
 		
 		$(e).closest('.EOIDtlRow').find('.typologyListEOI').append(html);
-	}else {
+	} else if ($('.projectSfid').val() == "a1l6F000004RvPHQA0") {
+		var html = "";
+		
+		$(e).closest('.EOIDtlRow').find('.typologyListEOI').find("option:gt(0)").remove();
+		$(e).closest('.EOIDtlRow').find('.unitListEOI').find("option:gt(0)").remove();
+		
+		
+		if ($(e).closest('.EOIDtlRow').find('.towerListEOI  option:selected').val() == "J079") {
+			html = html+"<option value='1.5 BHK'>1.5 BHK</option>";
+			html = html+"<option value='1 BHK'>1 BHK</option>";
+			html = html+"<option value='1 BHK Premium'>1 BHK Premium</option>";
+			html = html+"<option value='Studio'>Studio</option>";
+		} 
+		
+		$(e).closest('.EOIDtlRow').find('.typologyListEOI').append(html);
+	} else {
 		$.get("getunittype", {
 			"project_code" : $('.projectSfid').val(),
 			"tower_code": $(e).val(),
