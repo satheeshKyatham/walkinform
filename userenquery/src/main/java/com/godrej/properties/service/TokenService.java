@@ -41,4 +41,8 @@ public interface TokenService {
 	String getSalesUserSFID(int enqid, String email);
 	String getSalesUserEmailID(int enqid, String sfid);
 	public Token getTokenByEnquiry(String enquirySfid);
+	
+	List<VW_Token> getUpcomingToken(String tokenType, String projectId, String inputDate,String toDate);
+	
+	List<VW_Token> getAssignedList(String tokenType, String projectid, String inputDate,String toDate);
 }

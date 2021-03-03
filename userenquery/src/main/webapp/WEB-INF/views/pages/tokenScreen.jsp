@@ -26,13 +26,16 @@
 			.card {padding-bottom:2vh;} 
 			.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {padding-top:5px; padding-bottom:5px;}
 			.table-bordered>tbody>tr>td, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>td, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>thead>tr>th {border: 1px solid}
-			.tokenCol {color: #fff; text-align: center; background: rgb(10,87,140); background: linear-gradient(0deg, rgba(10,87,140,1) 0%, rgba(25,122,190,1) 100%);}
+			/* .tokenCol {color: #fff; text-align: center; background: rgb(10,87,140); background: linear-gradient(0deg, rgba(10,87,140,1) 0%, rgba(25,122,190,1) 100%);} */
+			.tokenCol {color: #fff; text-align: center; background: rgb(0,0,0); background: linear-gradient(0deg, rgb(0 0 0) 0%, rgb(72 72 72) 100%);}
+			
 			
 			.tokenTable tbody td:nth-child(2) {border-right: 0; border-left: 0;}
 			.tokenTable thead th:nth-child(2) {border-right: 0; border-left: 0;} 
 			.tokenTable thead th:nth-child(1) {text-align:center;}
-			.tokenTable thead th {background: rgb(10,87,140); background: linear-gradient(0deg, rgba(10,87,140,1) 0%, rgba(25,122,190,1) 100%); color:#fff;}
-			.assignedLine {border-right: 1vh solid #5bad03 !important ;} 
+			/* .tokenTable thead th {background: rgb(10,87,140); background: linear-gradient(0deg, rgba(10,87,140,1) 0%, rgba(25,122,190,1) 100%); color:#fff;} */
+			.tokenTable thead th {background: rgb(0,0,0); background: linear-gradient(0deg, rgb(0 0 0) 0%, rgb(72 72 72) 100%); color:#fff;}
+			.assignedLine {border-right: 1vh solid #5bad03 !important ;}  
 			.upcomingLine {border-right: 1vh solid #d6be06 !important ;}  
 			
 			/* BASE
@@ -59,6 +62,7 @@
 }
 .black { 
   background: #000; 
+  background: linear-gradient(0deg, rgb(0 0 0) 0%, rgb(72 72 72) 100%); 
   /*background: rgba(0,0,0,1.0);*/
   color:#fff; 
   box-shadow:0px 5px 15px 0px rgba(0, 0, 0, 0.4);
@@ -135,15 +139,15 @@
 	<body>
 		<div class="col-md-12" style="height:10vh" > 
 			<div class="row" style="height:100%">	
-				<div class="col-md-4 text-left" style="height:100%">
+				<div class="col-md-2 text-left" style="height:100%">
 					<img src="<c:url value='/resources/images/gplLogo.jpg' />" style="height:100%"/>
-				</div>
-				<div class="col-md-4 text-center" style="height:100%; text-transform: uppercase;  position: relative;">
+				</div>  
+				<div class="col-md-8 text-center" style="height:100%; position: relative;">
 					<span style="position: absolute; top: 45%; width: 100%; display: block; line-height: 0;">
 						<span style="border-bottom: 0.5vh solid;" id="projectname"></span>
 					</span>
 				</div>
-				<div class="col-md-4 text-right" style="height:100%; padding-top:1vh; padding-bottom:1vh;">
+				<div class="col-md-2 text-right" style="height:100%; padding-top:1vh; padding-bottom:1vh;">
 					<img src="<c:url value='/resources/images/logo6.png' />" style="height:100%"/>
 				</div>
 				<div class="clearfix"></div>
@@ -153,7 +157,7 @@
 		<div class="clearfix"></div>
 		<div class="col-md-5 leftMainCol" style="height:80vh"> 
 			<div class="card mediaCol" style="height:50%;">
-				<div class="videoImageCol" style="height:100%; text-align: center; background-color: #000;">
+				<div class="videoImageCol" style="height:100%; text-align: center; background-color: #000; overflow: hidden;">
 					<!-- <video height="100%" controls autoplay loop>
 					  <source src="https://customercare.godrejproperties.com/sites/default/files/2020-05/RW%20WALKTHROUGH%20COMPRESSED%20CUT.mp4" type="video/mp4">
 					  Your browser does not support HTML video.
@@ -195,8 +199,8 @@
 		</div>
 		<div class="col-md-7 rightMainCol" style="height:80vh">
 			<div class="row" style="height:100%;">
-				<div class="col-md-12" style="height:100%;">       
-					<div id="myCarousel" class="carousel slide" data-interval="3000" data-ride="carousel" style="height:100%;">
+				<div class="col-md-12" style="height:100%;">         
+					<div id="myCarousel" class="carousel slide" data-interval="12000" data-ride="carousel" style="height:100%;">
 						<div class="carousel-inner" style="height:100%;">
 							<div class="item active" style="height:100%;">
 								<table class="table table-bordered tokenTable" id="tokenAssignedTable" style="margin-top:-0.9vh; font-size:3.5vmin; border-collapse: separate; border-spacing: 0 0.9vh; border: 0;">
@@ -207,30 +211,47 @@
 										<tr>
 											<th style="border-top: 1px solid;">Token</th>
 											<th style="border-top: 1px solid;">Customer</th>
-											<th style="border-top: 1px solid;">Closing manager</th>
+											<th style="border-top: 1px solid;">Sales manager</th>
 										</tr>
 									</thead>
 									<tbody>
 										 
 								   </tbody>
 								</table>
-							</div>
+							</div> 
 							<div class="item" style="height:100%;">
-								<table class="table table-bordered tokenTable"  id="tokenUpcomingTable" style="margin-top:-0.9vh; font-size:3.5vmin; border-collapse: separate; border-spacing: 0 0.9vh; border: 0;">
-									<thead>
-										<tr>
-											<th style="border-top: 1px solid;" colspan="3">Upcoming Token</th> 
-										</tr>
-										<tr>
-											<th style="border-top: 1px solid;">Token</th>
-											<th style="border-top: 1px solid;">Customer</th>
-											<th style="border-top: 1px solid;">Closing manager</th>
-										</tr>
-									</thead>
-									<tbody>
-										 
-								   </tbody>
-								</table>
+								<div style="width:100%;">
+									<table class="table table-bordered tokenTable"  style="margin-bottom: 1vh; font-size:3.5vmin; border: 0;"> 
+										<thead>
+											<tr>
+												<th style="border-top: 1px solid;" colspan="3">Upcoming Token</th> 
+											</tr>
+										</thead>
+									</table>
+								</div>
+								<div class="clearfix"></div>
+								<div style="float:left; width:50%; padding-right:1vh">
+									<table class="table table-bordered tokenTable"  id="tokenUpcomingNextTable" style="margin-top:-0.9vh; font-size:3.5vmin; border-collapse: separate; border-spacing: 0 0.9vh; border: 0;">
+										<thead>
+											<tr>
+												<th style="border-top: 1px solid;">Next</th>
+												<th style="border-top: 1px solid;">Customer</th>
+											</tr>
+										</thead>
+										<tbody> </tbody>
+									</table>
+								</div>
+								<div style="float:left; width:50%; padding-left:1vh">
+									<table class="table table-bordered tokenTable"  id="tokenUpcomingLaterTable" style="margin-top:-0.9vh; font-size:3.5vmin; border-collapse: separate; border-spacing: 0 0.9vh; border: 0;">
+										<thead> 
+											<tr>
+												<th style="border-top: 1px solid;">Later</th>
+												<th style="border-top: 1px solid;">Customer</th>
+											</tr>
+										</thead>
+										<tbody> </tbody>
+									</table>
+								</div>
 							</div>  
 						</div>
 					</div>
@@ -242,13 +263,13 @@
 			</div>
 			<div class="clearfix"></div>
 		</div>
-		<div class="clearfix"></div>
-		<div class="footerTicker" style="background-color: #eaeaea; height:10vh">
-			 <div style="float:left; width:10%; height:100%; background-color: #000; color: #fff; ext-align: center; position: relative;">
-			 	<span style="position: absolute; top:25%;"> UPDATES: </span> 
+		<div class="clearfix"></div> 
+		<div class="footerTicker" style="background-color: #000000;height:10vh;color: #fff;">
+			 <div style="float:left; height: 100%; background-color: #000; color: #fff; padding: 0 2vh;">
+			 	<span style="position: relative; top:25%;" id="footerMarqueelabel"></span> 
 			 </div> 
-			 <div style="float:left; width: 90%; height:100%; position: relative;">
-			 	<marquee style="position: absolute; top:25%;">Book online @ godrejproperties.com or download app "GODREJ PROPERTIES LIMITED"</marquee>
+			 <div style="width: 100%; height:100%; position: relative;">
+			 	<marquee id="footerMarquee" style="position: absolute; top:25%;"></marquee>
 			 </div> 
 			<div class="clearfix"></div>
 		</div>	
@@ -256,6 +277,5 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   		<script src="<c:url value='/resources/js/separate/tokenScreen.js'/>"></script> 
-  		
 	</body>
 </html>

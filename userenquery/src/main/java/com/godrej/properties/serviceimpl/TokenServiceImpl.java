@@ -156,4 +156,15 @@ public class TokenServiceImpl implements TokenService {
 		}
 		return null;
 	}
+	
+	
+	@Override
+	public List<VW_Token> getUpcomingToken(String tokenType,String projectId,String inputDate,String toDate) {
+		return vw_tokenDao.getUpcomingToken(tokenType,projectId,inputDate,toDate);
+	}
+	
+	@Override
+	public List<VW_Token> getAssignedList(String tokenType,String projectid,String inputDate,String toDate) {
+		return vw_tokenDao.getAssignedList(tokenType,projectid,inputDate,toDate);
+	}
 }
