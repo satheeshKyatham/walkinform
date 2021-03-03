@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.godrej.properties.model.VW_Token;
+import com.godrej.properties.model.VWTokenScreen;
 import com.godrej.properties.service.TokenService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -29,7 +29,7 @@ public class TokenScreenController {
 			@RequestParam("ProjectId") String projectId) {
 		Date date = new Date();
 		String todayDate= new SimpleDateFormat("yyyy-MM-dd").format(date);
-		List<VW_Token> tokens = tokenService.getUpcomingToken(tokenType, projectId, todayDate, todayDate);
+		List<VWTokenScreen> tokens = tokenService.getUpcomingToken(tokenType, projectId, todayDate, todayDate);
 		Gson gson = new GsonBuilder().disableHtmlEscaping().create();
 		return gson.toJson(tokens);
 	}
@@ -39,7 +39,7 @@ public class TokenScreenController {
 			@RequestParam("projectid") String projectid) {
 		Date date = new Date();
 		String todayDate= new SimpleDateFormat("yyyy-MM-dd").format(date);
-		List<VW_Token> tokens = tokenService.getAssignedList(tokenType, projectid, todayDate, todayDate);
+		List<VWTokenScreen> tokens = tokenService.getAssignedList(tokenType, projectid, todayDate, todayDate);
 		Gson gson = new GsonBuilder().disableHtmlEscaping().create();
 		return gson.toJson(tokens);
 	}

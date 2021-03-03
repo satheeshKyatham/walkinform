@@ -14,6 +14,7 @@ import com.godrej.properties.dao.TokenDao;
 import com.godrej.properties.dao.VW_TokenDao;
 import com.godrej.properties.model.PriceSheet;
 import com.godrej.properties.model.Token;
+import com.godrej.properties.model.VWTokenScreen;
 import com.godrej.properties.model.VW_Token;
 import com.godrej.properties.service.TokenService;
 
@@ -159,12 +160,12 @@ public class TokenServiceImpl implements TokenService {
 	
 	
 	@Override
-	public List<VW_Token> getUpcomingToken(String tokenType,String projectId,String inputDate,String toDate) {
+	public List<VWTokenScreen> getUpcomingToken(String tokenType,String projectId,String inputDate,String toDate) {
 		return vw_tokenDao.getUpcomingToken(tokenType,projectId,inputDate,toDate);
 	}
 	
 	@Override
-	public List<VW_Token> getAssignedList(String tokenType,String projectid,String inputDate,String toDate) {
+	public List<VWTokenScreen> getAssignedList(String tokenType,String projectid,String inputDate,String toDate) {
 		return vw_tokenDao.getAssignedList(tokenType,projectid,inputDate,toDate);
 	}
 }

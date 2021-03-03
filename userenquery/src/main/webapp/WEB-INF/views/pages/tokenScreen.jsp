@@ -199,8 +199,8 @@
 		</div>
 		<div class="col-md-7 rightMainCol" style="height:80vh">
 			<div class="row" style="height:100%;">
-				<div class="col-md-12" style="height:100%;">         
-					<div id="myCarousel" class="carousel slide" data-interval="12000" data-ride="carousel" style="height:100%;">
+				<div class="col-md-12" style="height:100%;">          
+					<div id="myCarousel" class="carousel slide" data-interval="15000" data-ride="carousel" data-pause="false" style="height:100%;">
 						<div class="carousel-inner" style="height:100%;">
 							<div class="item active" style="height:100%;">
 								<table class="table table-bordered tokenTable" id="tokenAssignedTable" style="margin-top:-0.9vh; font-size:3.5vmin; border-collapse: separate; border-spacing: 0 0.9vh; border: 0;">
@@ -230,7 +230,7 @@
 									</table>
 								</div>
 								<div class="clearfix"></div>
-								<div style="float:left; width:50%; padding-right:1vh">
+								<div id="upcomingLeft" style="width:100%;"> 
 									<table class="table table-bordered tokenTable"  id="tokenUpcomingNextTable" style="margin-top:-0.9vh; font-size:3.5vmin; border-collapse: separate; border-spacing: 0 0.9vh; border: 0;">
 										<thead>
 											<tr>
@@ -241,7 +241,7 @@
 										<tbody> </tbody>
 									</table>
 								</div>
-								<div style="float:left; width:50%; padding-left:1vh">
+								<div id="upcomingRight" style="float:left; width:50%; padding-left:1vh; display:none;">
 									<table class="table table-bordered tokenTable"  id="tokenUpcomingLaterTable" style="margin-top:-0.9vh; font-size:3.5vmin; border-collapse: separate; border-spacing: 0 0.9vh; border: 0;">
 										<thead> 
 											<tr>

@@ -219,6 +219,18 @@ function getPendingAssignList(){
 						"</tr>";
 		}
 		
+		if (y == 0) { 
+			$("#upcomingRight").hide();
+			$("#upcomingLeft").removeAttr("style");
+			$("#upcomingLeft").css({"width":"100%"});
+		} else {
+			$("#upcomingRight").show();
+			$("#upcomingLeft").removeAttr("style");
+			$("#upcomingLeft").css({"float":"left", "width":"50%", "padding-right":"1vh"});
+		}
+		
+		 
+		
 		$("#tokenUpcomingNextTable tbody").empty();
 		$("#tokenUpcomingLaterTable tbody").empty();
 		$("#tokenUpcomingNextTable tbody").append(htmlNext);
