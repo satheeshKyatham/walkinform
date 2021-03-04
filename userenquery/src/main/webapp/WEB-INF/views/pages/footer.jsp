@@ -15,7 +15,7 @@
 						<img src="<c:url value="/resources/images/d4u_logo.png"/>" alt="D4U">
 					</div>
 					<ul class="footer-links">
-						<li>Copyright © 2020. Godrej Properties</li>
+						<li>Copyright © 2021. Godrej Properties</li>
 					</ul>
 				</div>
 			</div>

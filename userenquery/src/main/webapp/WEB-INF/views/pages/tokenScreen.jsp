@@ -133,8 +133,14 @@
     0.4em 4.8em #fff, 
     0.4em 5.2em #fff;
 }
+	 
 			
-		</style>
+		</style> 
+		
+		<script type="text/javascript">
+			var pageContext = '${pageContext.request.contextPath}/';
+		</script>
+		
 	</head>
 	<body>
 		<div class="col-md-12" style="height:10vh" > 

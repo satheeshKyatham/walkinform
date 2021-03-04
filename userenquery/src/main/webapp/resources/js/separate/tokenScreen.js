@@ -6,99 +6,26 @@ $.ajaxSetup({
     }
 });
 
+let searchParams = new URLSearchParams(window.location.search)
+var projectid = searchParams.get('projectid');
+var projectname = searchParams.get('projectname');;
+
+//var pageContext = $("#pageContext").val()+'/';
+
+
+
+
 var parent = "";
-var projectid = "";
-var projectname = "";
 var htmlGV = "";
 var tokenType = "";
 
-/*htmlGV += 	'<tr> <td class="tokenCol">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>'
-	+'<tr> <td class="tokenCol">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td> </tr>'
-	+'<tr> <td class="tokenCol">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td> </tr>'
-	+'<tr> <td class="tokenCol">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td> </tr>'
-	+'<tr> <td class="tokenCol">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td> </tr>'
-	+'<tr> <td class="tokenCol">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td> </tr>'
-	+'<tr> <td class="tokenCol">&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td> </tr>';
+var eoicount = "";
+var eoitext = "";
+var avUrl = "";
+var imageUrl = "";
+var footerUpdate = "";
+var footerUpdateLabel = "";
 
-$("#tokenAssignedTable tbody").append(htmlGV);
-$("#tokenUpcomingTable tbody").append(htmlGV);
-*/
-$(function () {
-    
-	var eoicount = "";
-	var eoitext = "";
-	var avUrl = "";
-	var imageUrl = "";
-	var footerUpdate = "";
-	var footerUpdateLabel = "";
-	
-	
-	if (window.opener != null && !window.opener.closed) {
-        parent = $(window.opener.document).contents();
-        
-        eoicount = parent.find("#keyCont1").val().trim();
-        eoitext = parent.find("#keyCont2").val().trim();
-        avUrl = parent.find("#avUrl").val().trim();
-        imageUrl = parent.find("#imageUrl").val().trim();
-        footerUpdate = parent.find("#footerUpdate").val().trim();
-        footerUpdateLabel = parent.find("#footerUpdateLabel").val().trim();
-        projectid = parent.find("#projectid").val();
-        projectname = parent.find("#projectname").val();
-        tokenType = parent.find("#tokenType").val();
-        
-        // EOI Box
-        if (eoicount.length > 0 || eoitext.length > 0){
-        	$('#eoiCount').html(eoicount);
-        	$('#eoiText').html(eoitext);
-        } else {
-        	$('.eoiMainCol').remove();
-        }
-        // END EOI Box
-        
-        // Hide left panel based on condition
-        if (imageUrl.length == 0 && avUrl.length == 0 && eoicount.length == 0  && eoitext.length == 0) {
-        	$(".leftMainCol").remove();
-        	$(".rightMainCol").removeClass("col-md-7");
-        	$(".rightMainCol").addClass("col-md-12");
-        }
-        // END Hide left panel based on condition
-        
-        // Media
-        if (avUrl.length > 0){
-        	var video = $('<video />', {
-                id: 'video',
-                src: avUrl,
-                type: 'video/mp4',
-                controls: true,
-                loop: true,
-                height: '100%'
-            });
-            video.appendTo($('.videoImageCol'));
-        } else if (imageUrl.length > 0) {
-        	$('.videoImageCol').empty();
-        	$('.videoImageCol').html("<img width='100%' style='padding: 1vh;' src='"+imageUrl+"'>");
-        	
-        } else {
-        	$('.mediaCol').remove();
-        }
-        //END Media
-        
-        // Footer
-        if (footerUpdate.length > 0) {
-        	$("#footerMarquee").html(footerUpdate);
-        	$("#footerMarqueelabel").html(footerUpdateLabel);
-        } else {
-        	$('.footerTicker').remove();
-        }
-        // END Footer
-        
-        $('#projectname').html(projectname);
-    }
-	
-	getAssignedList();
-});
-
-var pageContext = $("#pageContext").val()+'/'; 
 $("#myCarousel").on('slide.bs.carousel', function (){
 	console.log($('.item.active').index());  
 	
@@ -111,8 +38,97 @@ $("#myCarousel").on('slide.bs.carousel', function (){
 	}
 });
 
+getTokenScreenConfig();
+
+function getTokenScreenConfig () {
+    $.post(pageContext+"getScreenConfig",{"projectid":projectid},function(data){                      
+    }).done(function(data){
+          var obj =JSON.parse(data);
+          
+          if (obj.status == "NO_RECORD") {
+				 alert ("No record found");
+          } else if (obj.status == "ERROR") {
+        	  alert ("Something went wrong");
+          } else {
+        	  	screendata (obj);
+          }
+    });
+}
+
+function screendata (obj) {
+	
+	/*$('#tokenType [value='+obj.token_type.trim()+']').attr('selected', 'true');
+	$("#keyCont1").val(obj.key_cont1);
+	$("#keyCont2").val(obj.key_cont2);
+	$("#avUrl").val(obj.video_url);
+	$("#imageUrl").val(obj.image_url);
+	$("#footerUpdateLabel").val(obj.ticker_label);
+	$("#footerUpdate").val(obj.ticker_text);
+	$("#recordid").val(obj.id);*/
+	 
+    eoicount = obj.key_cont1.trim();
+    eoitext = obj.key_cont2.trim();
+    avUrl = obj.video_url;
+    imageUrl = obj.image_url;
+    footerUpdate = obj.ticker_text.trim();
+    footerUpdateLabel = obj.ticker_label.trim();
+    
+    //tokenType = parent.find("#tokenType").val();
+    
+    // EOI Box
+    if (eoicount.length > 0 || eoitext.length > 0){
+    	$('#eoiCount').html(eoicount);
+    	$('#eoiText').html(eoitext);
+    } else {
+    	$('.eoiMainCol').remove();
+    }
+    // END EOI Box
+    
+    // Hide left panel based on condition
+    if (imageUrl.length == 0 && avUrl.length == 0 && eoicount.length == 0  && eoitext.length == 0) {
+    	$(".leftMainCol").remove();
+    	$(".rightMainCol").removeClass("col-md-7");
+    	$(".rightMainCol").addClass("col-md-12");
+    }
+    // END Hide left panel based on condition
+    
+    // Media
+    if (avUrl.length > 0){
+    	var video = $('<video />', {
+            id: 'video',
+            src: avUrl,
+            type: 'video/mp4',
+            controls: true,
+            loop: true,
+            height: '100%'
+        });
+        video.appendTo($('.videoImageCol'));
+    } else if (imageUrl.length > 0) {
+    	$('.videoImageCol').empty();
+    	$('.videoImageCol').html("<img width='100%' style='padding: 1vh;' src='"+imageUrl+"'>");
+    	
+    } else {
+    	$('.mediaCol').remove();
+    }
+    //END Media
+    
+    // Footer
+    if (footerUpdate.length > 0) {
+    	$("#footerMarquee").html(footerUpdate);
+    	$("#footerMarqueelabel").html(footerUpdateLabel);
+    } else {
+    	$('.footerTicker').remove();
+    }
+    // END Footer
+    
+    $('#projectname').html(projectname);
+     
+    eoiInterval();
+	getAssignedList();
+}
+
 function getAssignedList() {
-	var urlPPtoken = "getAssignedTokenScreen?tokenType="+tokenType+"&projectid="+projectid;
+	var urlPPtoken = "getAssignedTokenScreen?tokenType=All&projectid="+projectid;
 	var contactName = "";
 	var html = '';
 	
@@ -153,9 +169,8 @@ function getAssignedList() {
 	});
 }
 
-
 function getPendingAssignList(){	
-	var urlPP = "getUpcomingTokenScreen?tokenType="+tokenType+"&ProjectId="+projectid;
+	var urlPP = "getUpcomingTokenScreen?tokenType=All&ProjectId="+projectid;
 	var contactName = "";
 	var htmlNext = '';
 	var htmlLater = '';
@@ -237,6 +252,29 @@ function getPendingAssignList(){
 		$("#tokenUpcomingLaterTable tbody").append(htmlLater);
 		
 	}).done(function() {});
+}
+ 
+
+function eoiInterval() {
+  setInterval(function(){ 
+	  updateEOI();
+  }, 3000);
+}
+
+function updateEOI () {
+    $.post(pageContext+"getScreenConfig",{"projectid":projectid},function(data){                      
+    }).done(function(data){
+          var obj =JSON.parse(data);
+          
+          if (obj.status != "NO_RECORD" && obj.status != "ERROR") {
+			if (obj.key_cont1.trim().length > 0 || obj.key_cont2.trim().length > 0){
+				$('#eoiCount').html(obj.key_cont1.trim());
+				$('#eoiText').html(obj.key_cont2.trim());
+			} else {
+				$('.eoiMainCol').remove();
+			}
+          } 
+    });
 }
 
 

@@ -1,5 +1,6 @@
 <div class="row">
-	<div class="form-group col-md-2">
+	<input type="text" id="recordid" class="form-control" style="display:none;">
+	<div class="form-group col-md-2" style="display:none;">
 		<label>Token Type:</label>
 		<select id="tokenType" class="form-control">
 			<option value="All" selected="">All</option>
@@ -43,6 +44,8 @@
 	</div>
   	<div class="clearfix"></div> 
   	<div class="col-md-12">
-		<button id="openTokenScreen" class="btn blue_btn" >Generate Token Screen</button>
+		<button class="btn blue_btn" id="tcInsertBtn" onclick="insertScreenConfig();">Insert</button>
+		<button class="btn blue_btn" id="tcUpdateBtn" onclick="updateScreenConfig();">Update</button>
+		<a id="generateScreenBtn" class="btn blue_btn" href="#" target="_blank">Generate Token Screen</a>
 	</div>		
 </div>	

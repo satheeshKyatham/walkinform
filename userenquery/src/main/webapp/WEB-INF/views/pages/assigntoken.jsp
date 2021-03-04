@@ -87,7 +87,7 @@ projectid=request.getParameter("projectid");
 					</a>
 				</li>
 				<li>
-					<a href="#tokenScreen" data-toggle="tab">Token Screen Configuration</a>
+					<a href="#tokenScreen" data-toggle="tab" onclick="getTokenScreenConfig()">Token Screen Configuration</a>
 				</li>
 			</ul>
 			<div class=""></div>
