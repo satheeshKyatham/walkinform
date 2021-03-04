@@ -29,7 +29,6 @@
 			<input class="form-control" type="date" name="" id="txtpaymentEOIToSalesDate">
 		</div>
 		<div class="form-group">
-			<label>Search</label> 
 			<input class="form-control" type="button" value="Search" name="Search" onclick="getPaymentEOIReportSales()"/>
 		</div>
 	</div>

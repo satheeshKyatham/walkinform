@@ -101,7 +101,7 @@ function validateDesk() {
 			  var urlGetUsers = "getProjectListUserWise?userid="+data.user_id;	
 		       var j = 0
 		    	$.getJSON(urlGetUsers, function (data) {
-		    		option = "<select class='inputLabel' onchange='onProjectSelect("+sourceType+")' id='projectSelected' style='border-color: #000000 !important;   width: 100%;    min-height: 33px;    margin-bottom: 5px;'><option>Select Project</option>";
+		    		option = "<select class='' onchange='onProjectSelect("+sourceType+")' id='projectSelected' style='border-color: #000000 !important;   width: 100%;    min-height: 33px;    margin-bottom: 5px;'><option>Select Project</option>";
 		    		$.each(data, function (index, value) {
 		    			var name='';
 		    			if(value.name==undefined)

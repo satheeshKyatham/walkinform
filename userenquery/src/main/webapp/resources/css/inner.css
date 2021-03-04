@@ -25,7 +25,7 @@
 
 /* body { background: #f4f4f4; } */
 
-body { background: #fff; }
+body { background: #fff; font-family: "Open Sans", sans-serif !important;}
 
 /* form {  width: 100%; margin: 45px auto; }
 form h1 { font-size: 3em; font-weight: 300; text-align: center; color: #0077b9; }
@@ -34,9 +34,9 @@ form hr.sep { background: #0077b9; box-shadow: none; border: none; height: 2px; 
 form .emoji { font-size: 1.2em; } */
 
 .group {position: relative; margin: 10px 0 20px 0; min-height: 61px;}
-textarea {resize: none;}
-input[type=text], input[type="password"], textarea, select {
-	    min-height: 32px; background: none; color: rgba(0,0,0,.9); font-size: 16px; padding: 4px; display: block; width: 100%; border: none; /* border-radius: 4px; */  border: 1px solid rgba(0,0,0,.2);
+textarea {resize: none;} 
+input[type=text], input[type="password"], input[type="date"], input[type="number"], textarea, select {
+	    border-radius: 0 !important; min-height: 32px; background: #fff; color: rgba(0,0,0,.9); font-size: 16px; padding: 4px; display: block; width: 100%; border: none; /* border-radius: 4px; */  border: 1px solid rgba(0,0,0,.2);
 }
 input[type=text]:focus, input[type="password"]:focus, textarea:focus, select:focus {
 	outline: none;
@@ -143,10 +143,10 @@ input:-webkit-autofill:active {
 
 
 .btn{outline:none !important;}		
-.radioBtnCol .btn.active {background-color: #0077b9 !important; }
-.radioBtnCol .btn {border: 1px solid #e6e6e6; box-shadow: none !important; border-radius: 150px; margin-right: 8px; padding: 8px 15px; font-size: 12px;}	
+.radioBtnCol .btn.active {background-color: #26262a !important; color:#fff !important;}
+.radioBtnCol .btn {border: 1px solid #26262a; color:#000; box-shadow: none !important; margin-right: 8px; padding: 8px 15px; font-size: 12px;}	
 .radioBtnCol .btn:focus, .radioBtnCol .btn:hover {color:#959595 !important; background-color: inherit !important;}	
-.radioBtnCol .btn.active:focus, .radioBtnCol .btn.active:hover{ border-color: #0077b9 !important; background-color: #0077b9 !important; color: #fff !important;
+.radioBtnCol .btn.active:focus, .radioBtnCol .btn.active:hover{ border-color: #616169 !important; background-color: #616169 !important; color: #fff !important;
     box-shadow: none !important;}
 		
 		
@@ -280,7 +280,7 @@ input:-webkit-autofill:active {
 
 
 .topMainBar .navbar-brand {padding: 0;}
-.topMainBar {border-radius: 0; padding: 0; margin: 0; border-bottom:0; box-shadow: 0 -1px 9px #ccc; border-top: 0;}
+.topMainBar {border-radius: 0; padding: 0; margin: 0; border-bottom:1px solid #d7d7d7; box-shadow:0 0 5px #000; border-top: 0;}
 
 .proTopTitle {text-align: center;
     float: left;
@@ -295,18 +295,11 @@ input:-webkit-autofill:active {
     padding: 15px;
     padding-top: 35px;}
 .titleCol {text-align: center; padding: 15px 0px;}
-.titleCol span {border: 1px dotted;
-    border-left: 0;
-    border-right: 0;
-    padding: 5px 10px;
-    background-color: #fbfbfb;
-    color: #000;}
+.titleCol span {border: 1px dotted; border-left: 0; border-right: 0; padding: 5px 10px; color: #000;} 
     
 .tabNav.nav-tabs>li>a {border-radius:0 !important;     margin-right: 0 !important;}
 
-.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {color: #555;
-    border-top: 2px solid #0077b9 !important;
-    border-bottom: 0 !important;}
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {color: #555; border-top: 2px solid #171718 !important; border-bottom: 0 !important;}
 
 .nav-tabs>li.active {font-weight: 700;}
 
@@ -443,7 +436,7 @@ background-position: center; background-repeat: no-repeat; background-size: 40px
 .filterCol input {background-color: #ffffff !important;}
 
 
-.enquiryDtlCol {border: 1px solid #ccc; padding: 15px; margin-bottom: 20px; border-top: 0; color: #000000; background-color: #ceeeff; border-radius: 0px 0px 8px 8px; box-shadow: 1px 2px 4px #ccc;}
+.enquiryDtlCol {border: 1px solid #ccc; padding: 15px; margin-bottom: 20px; border-top: 0; color: #000000; background-color: #f4f4f4; box-shadow: 1px 2px 4px #ccc;}
 
 .customerNameBtn {font-weight: 700;}
 
@@ -595,3 +588,43 @@ border: 1px Solid #ccc; top: 10px;     margin: 70px auto 20px !important; float:
 
 .inactivePCBtn {background-color: #ce1818 !important; font-size: 11px !important;}
 .activePCBtn {background-color: #0077b9; !important; font-size: 11px !important;}
+
+.nav-tabs>li>a { color: #000 !important;}
+
+button, input[type=button], input[type=submit], .btnNext, .blue_btn {padding: 6px 8px; border:0 !important; background-color: #26262a !important; border-radius: 0 !important; color:#fff !important;} 
+button:hover, input[type=button]:hover, input[type=submit]:hover, .btnNext:hover, .blue_btn:hover {background: #616169 !important; color:#fff !important;}
+input[type=submit] {padding:5px 8px;}
+
+.multiselect  {background-color: #fff !important; color: #000 !important; box-shadow: none !important; border: 1px solid #ccc !important; padding: 6px !important;}
+.dropdown-menu>.active>a, .dropdown-menu>.active>a:focus, .dropdown-menu>.active>a:hover {background-color: #26262a;} 
+.input-group-addon {border-radius: 0 !important;}
+.input-group-addon:last-child {background-color:#26262a; color:#fff;}
+
+.dropdown a, #adminOTPLink a, .headerLogoutBtn a {color:#000; padding: 15px 10px !important;} 
+.headerLogoutBtn a{background-color: #000; color: #fff;}
+.headerLogoutBtn a:hover{background: #616169 !important; color:#fff !important;}
+.well {background-color: #f4f4f4 !important; border-radius: 0 !important;}
+
+#appDetails input[type=button] {padding:3px 8px !important;}
+#assinedDetails input[type=button] {margin-bottom:10px !important; padding:3px 8px !important;}
+
+#createdOfferTable i.fa-file, #KYC_CM_Details i.fa-file, #eoiReportTableSales i.fa-file, #eoiReportTable i.fa-file {color: #26262a;}
+
+#createdOfferTable .btnDefaultBlue, #KYC_CM_Details .btnDefaultBlue, #applicationTable .btnDefaultBlue, #KYC_Admin_Details .btnDefaultBlue{background-color: #26262a !important; color:#fff !important;}
+#createdOfferTable .btnDefaultBlue:hover, #KYC_CM_Details .btnDefaultBlue:hover, #applicationTable .btnDefaultBlue:hover, #KYC_Admin_Details .btnDefaultBlue:hover {background-color: #616169 !important; color:#fff !important;}
+
+#printApplicationFormOffer, #printApplicationForm {display:none;}
+
+.nav-tabs>li>a {border-radius:0 !important;}
+
+
+#d4uFooter { position: absolute;  right: 0; bottom: 0; left: 0;  background-color: #171718; }
+
+html {height: 100%; box-sizing: border-box;}
+body {position: relative; margin: 0; padding-bottom: 6rem; min-height: 100%;}
+.footer-main .logo {margin: 0; padding: 0; float: left; width: 125px;}    
+.footer-main .logo img {width: 100%;}
+.footer-main .footer-links {float: right; padding-top: 10px; list-style: none;}
+.footer-main .footer-links li:first-child {border-left: none; padding-left: 0;}
+.footer-main .footer-links li {float: left; color: #797979; font-size: 0.75em; line-height: normal; padding: 0 25px; padding-left: 25px; border-left: 1px solid #797979;}
+.footer-main {padding: 20px 0;}

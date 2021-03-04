@@ -149,7 +149,6 @@ userid=(String)ses.getAttribute("USERID");
 							<input class="form-control" type="date" name="" id="txtToDate">
 						</div>
 						<div class="form-group">
-							<label for="exampleInputNameDate">Search</label> 
 							<input class="form-control" type="button" value="Search" name="Search" id="amsearch" onclick="getDatewiseReport()"/>
 						</div>
 							<div class="clearfix"></div>
@@ -174,7 +173,7 @@ userid=(String)ses.getAttribute("USERID");
 						<!-- <input type="hidden" id="userid" value="" name="userid"/> -->
 						<%-- <input type="hidden" value="<%=projectid%>" name="fromdate"/>
 						<input type="hidden" value="<%=projectid%>" name="todate"/> --%>
-						<fieldset style="width: 400px;">
+						<fieldset >
 							<h3>Download Enquiry Form Submitted Data</h3>
 							<input id="submitId" type="submit" value="Download In Excel">
 						</fieldset>

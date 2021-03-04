@@ -146,7 +146,6 @@
 						<input class="form-control" type="date" name="" id="txtAllotToDate">
 					</div>
 					<div class="form-group">
-						<label for="exampleInputNameDate">Search</label> 
 						<input class="form-control" type="button" value="Search" name="Search" onclick="getAllotmentDashboardReport()"/>
 					</div>
 				</div>

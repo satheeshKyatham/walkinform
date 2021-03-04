@@ -29,7 +29,6 @@
 			<input class="form-control" type="date" name="" id="txtEOIToDate">
 		</div>
 		<div class="form-group">
-			<label for="exampleInputNameDate">Search</label> 
 			<input class="form-control" type="button" value="Search" name="Search" onclick="getEOIReport()"/>
 		</div>
 	</div>

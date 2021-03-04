@@ -15,6 +15,7 @@
 	 %>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1">
 		<title> Godrej Properties</title>
 		<meta name="description">
 		<%@ include file="/WEB-INF/views/pages/home.jsp" %>
@@ -31,10 +32,20 @@
 		
 	</head>
 	<body class="overflow_auto">
-		<img class="login_page_bg" src="<c:url value="/resources/images/loginBg.jpg"/>">
+		<%-- <img class="login_page_bg" src="<c:url value="/resources/images/loginBg.jpg"/>"> --%>
+		<img class="login_page_bg" src="<c:url value="/resources/images/bg-login.jpg"/>">
 		<div class="clearfix"></div>
 		<div class=" col-md-12">
-			<div class="login_bg col-md-3 col-sm-6" style="min-height:324px;">
+			
+			<header class="headerLogin">
+				<div class="container">
+					<div class="loginHeaderlogo">
+						<img src="<c:url value="/resources/images/logo.png"/>" alt="Godrej Properties">
+					</div>
+				</div>
+			</header>
+			
+			<div class="login_bg col-md-3 col-sm-6">
 			
 			<div class=""></div>
 			
@@ -44,10 +55,10 @@
 				<div class="login_cont">
 					 
 						
-						<div class="lLoginCol">
+						<%-- <div class="lLoginCol">
 							<img src="<c:url value="/resources/images/logo.png"/>">
-						</div>
-						<div class="commonLoad" id="mainPageLoad" style="display: none; border-radius: 8px !important;"></div>
+						</div> --%>
+						<div class="commonLoadLogin" id="mainPageLoad" style="display: none;"></div>
 						<div id="login_div">
 							<label class="inputLabel">Username</label>
 							<input type="text" name='username' id="userid"  style="margin-bottom:20px;" autofocus/>
@@ -58,7 +69,7 @@
 							<div class="clearfix"></div>
 							<div class="btnCol" style="margin-top: 20px; text-align: center;"> 
 								<button class="btn btn-primary btnNext" id="loginbtn" onclick="validateDesk();"> 
-									<span>Login</span> 
+									<span>LOGIN</span> 
 								</button>
 								
 								 
@@ -88,6 +99,24 @@
 					<div class="clearfix"></div>
 				</div>	
 			</div>
+			
+			<footer class="footer">
+				<div class="footer-main">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="logo">
+									<img src="<c:url value="/resources/images/d4u_logo.png"/>" alt="D4U">
+								</div>
+								<ul class="footer-links">
+									<li>Copyright © 2020. Godrej Properties</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</footer>
+			
 		</div>
 	</body>
 </html>
