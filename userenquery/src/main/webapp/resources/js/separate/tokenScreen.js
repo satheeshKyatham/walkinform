@@ -258,7 +258,7 @@ function getPendingAssignList(){
 function eoiInterval() {
   setInterval(function(){ 
 	  updateEOI();
-  }, 3000);
+  }, 120000);
 }
 
 function updateEOI () {

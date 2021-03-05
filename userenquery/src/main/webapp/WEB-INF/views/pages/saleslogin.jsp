@@ -23,8 +23,8 @@
 		<link rel="icon" href="<c:url value='/resources/images/favicon.ico' />" type="image/x-icon">
 		
 		<link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css" />" type="text/css" />
-		<link rel="stylesheet" href="<c:url value="/resources/css/login.css" />" type="text/css" />		
-		<link rel="stylesheet" href="<c:url value="/resources/css/app.css" />" type="text/css" />		
+		<link rel="stylesheet" href="<c:url value="/resources/css/login.css?v=${sessionScope.home_version}" />" type="text/css" />		
+		<link rel="stylesheet" href="<c:url value="/resources/css/app.css?v=${sessionScope.home_version}" />" type="text/css" />		
 		
 		<script src="<c:url value='/resources/js/salesdesk.js?v=${sessionScope.home_version}'/>"></script>	
 		<script src="<c:url value='/resources/js/loginDropdown.js?v=${sessionScope.home_version}'/>"></script>
