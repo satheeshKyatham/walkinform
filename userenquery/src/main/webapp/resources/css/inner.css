@@ -628,3 +628,5 @@ body {position: relative; margin: 0; padding-bottom: 6rem; min-height: 100%;}
 .footer-main .footer-links li:first-child {border-left: none; padding-left: 0;}
 .footer-main .footer-links li {float: left; color: #797979; font-size: 0.75em; line-height: normal; padding: 0 25px; padding-left: 25px; border-left: 1px solid #797979;}
 .footer-main {padding: 20px 0;}
+
+.btnWrp {z-index:100 !important;}
