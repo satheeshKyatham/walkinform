@@ -5,7 +5,7 @@
 <%  
 /* Cookie ck=new Cookie("version","18.20");  
 response.addCookie(ck);   */
-session.setAttribute("version","19.15");  
+session.setAttribute("version","20");  
 
 %>  
 
@@ -52,8 +52,8 @@ session.setAttribute("version","19.15");
 		
 		
 		
-		<ul class="nav navbar-nav navbar-right pull-right">
-			<li style="padding-top: 15px; padding-right: 10px; color: #0077b9;"><label id="userNameLoggedInShow"></label></li>
+		<ul class="nav navbar-nav navbar-right pull-right"> 
+			<li style="padding-top: 14px; padding-right: 10px; color: #000;"><label id="userNameLoggedInShow"></label></li>
 			<li class="dropdown">
 	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Change Project/Roles <span class="caret"></span></a>
 	          <ul class="dropdown-menu" id="changeProjectRole" style="width: 300px; padding: 10px;">
@@ -69,7 +69,9 @@ session.setAttribute("version","19.15");
 	        <li id="adminOTPLink">
 	        	<a href="#" onclick="otpModal()">Get OTP</a>
 	        </li>
-	        <li><a href="${pageContext.request.contextPath}/saleslogin" onclick="logoutSession()">Logout</a></li>
+	        <li class="headerLogoutBtn">
+	        	<a href="${pageContext.request.contextPath}/saleslogin" onclick="logoutSession()">Logout</a>
+	        </li>
 
 	    
 		</ul> 

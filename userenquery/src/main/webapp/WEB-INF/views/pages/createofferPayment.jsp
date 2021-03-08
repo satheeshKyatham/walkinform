@@ -37,7 +37,6 @@
 					<input class="form-control" type="date" id="txtToDateOffer">
 				</div>
 				<div class="form-group">
-					<label>Search</label> 
 					<input class="form-control" type="button" value="Search" name="Search" id="amsearch" onclick="createdOfferProject()"/>
 				</div>
 				<div class="clearfix"></div>

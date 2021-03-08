@@ -5,6 +5,7 @@ import java.io.IOException;
 import javax.ws.rs.core.HttpHeaders;
 
 import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -21,53 +22,45 @@ import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
  
 @Component
-public class DrupalProjectBasicDtl {
+public class DrupalFetchPromoCode {
 	
+	static Logger logger = Logger.getLogger(DrupalFetchPromoCode.class);
+	 
 	@Autowired
 	private SysConfigService sysConfigService;
 	
-	static Logger logger = Logger.getLogger(DrupalProjectBasicDtl.class);
-	 
-	public String drupalProjectDtl (String projectsfid) {
+	public String fetchPromoCode (String project_sfdc_id) {
+	//public static void main(String[] args) {	
 		try {
 			ClientConfig config = new DefaultClientConfig();
 	        Client client = Client.create(config);
 	        
-	        String drupalAPIEndpoint = sysConfigService.getValue(SysConfigEnum.DRUPAL_API_ENDPOINT, null);
-	        String constUrl= drupalAPIEndpoint+"gpl-api/get_project_details_info.json";
+	        //String drupalAPIEndpoint = sysConfigService.getValue(SysConfigEnum.DRUPAL_API_ENDPOINT, null);
 	        
-	        String jsonBody = "{" + 
-		        		" \"device_id\": \"d4u-AQWs43fdsg12KSKFG\"," + 
-		        		" \"user_id\": \"\"," +
-		        		" \"project_id\": \"\"," +
-		                "\"project_sfid\": \""+projectsfid+"\"  " + 
-	                "}"; 
+	        //String constUrl= drupalAPIEndpoint+"gpl-sfdc-api/update_promo_code ";
 	        
-	       StringEntity postingString = new StringEntity(jsonBody);
-	           
-	        HttpPost httpost = new HttpPost(constUrl);
+	        String constUrl= "http://43.242.212.209/gpl-project/gpl-api/promo_list.json?project_sfdc_id="+project_sfdc_id;
+	        
+	        HttpGet httget = new HttpGet(constUrl);
 	            
-	        httpost.setHeader(HttpHeaders.CONTENT_TYPE, "application/json");
-	        
-	        httpost.setEntity(postingString);
+	        httget.setHeader(HttpHeaders.CONTENT_TYPE, "application/json");
 			CloseableHttpClient  httpclient = HttpClients.createDefault();
-			CloseableHttpResponse  closeableresponse = httpclient.execute(httpost);
+			CloseableHttpResponse  closeableresponse = httpclient.execute(httget);
 			String getResult = null;
 			
 			try {
 				getResult = EntityUtils.toString(closeableresponse.getEntity());
-				 
-				logger.info("Get drupal basic details of project - getResult : "+getResult);
+				logger.info("Fetch Drupal Promo Code - getResult : "+getResult);
 			} catch (IOException ioException) {
-				logger.info("Get drupal basic details of project : "+ioException);
+				logger.info("Fetch Drupal Promo Code - ioException : "+ioException);
 			}
 	          
 			return getResult;
 	        
 		} catch (Exception e) {
 			e.printStackTrace();
-			logger.info("Get drupal basic details of project : "+e);
+			logger.info("Fetch Drupal Promo Code - projectsfid : "+project_sfdc_id+" - "+e+"");
 		}
-		return null;
+		return "";
 	}
 }

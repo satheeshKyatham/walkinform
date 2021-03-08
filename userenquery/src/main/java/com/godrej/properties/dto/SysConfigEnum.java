@@ -18,4 +18,5 @@ public enum SysConfigEnum {
 	AD_IP,
 	CS_ANNEXURE,
 	FOYR_API_ENDPOINT,
+	OTP_BYPASS,
 }

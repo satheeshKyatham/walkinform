@@ -278,7 +278,7 @@
 					 
 					
 					<div class="col-md-4"  id="csHoldCountCol">
-						<div style="border: 1px solid #ccc; box-shadow: 4px 3px 4px #999; padding: 8px; background-color: #fff; border-radius: 10px;">
+						<div style="border: 1px solid #ccc; box-shadow: 4px 3px 4px #999; padding: 8px; background-color: #fff; border-radius: 4px;">
 							
 							<div class="counterCol">
 								<div class="counterTxt1">Property Release in</div>
@@ -397,7 +397,7 @@
 				<div class="clearfix"></div>
 			</div>
 			
-			<div id="printableArea" style="display:none; border-top: 1px dotted #000; padding-top: 20px;  background-color: #effaff;">
+			<div id="printableArea" style="display:none; border-top: 1px dotted #000; padding-top: 20px;  background-color: #fff;">
 				
 				
 				

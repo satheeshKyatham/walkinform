@@ -86,6 +86,9 @@ projectid=request.getParameter("projectid");
 						<i class="fa fa-spinner fa-spin" style="display:none;"></i>
 					</a>
 				</li>
+				<li>
+					<a href="#tokenScreen" data-toggle="tab" onclick="getTokenScreenConfig()">Token Screen Configuration</a>
+				</li>
 			</ul>
 			<div class=""></div>
 		</div>
@@ -181,6 +184,10 @@ projectid=request.getParameter("projectid");
 			</div>
 			<!-- END Set EOI Priority -->
 			
+			<div class="tab-pane" id="tokenScreen">
+				<%@ include file="/WEB-INF/views/pages/tokenScreenConfig.jsp" %>
+			</div>
+			
 			<div class="clearfix"></div>
 		</div>
 		
@@ -195,6 +202,7 @@ projectid=request.getParameter("projectid");
 <script src="<c:url value='/resources/js/sweetalert.min.js'/>"></script>
 
 <script src="<c:url value='/resources/js/separate/eoiData.js?v=${sessionScope.version}'/>"></script>
+<script src="<c:url value='/resources/js/separate/tokenScreenConfig.js?v=${sessionScope.version}'/>"></script>
 
 <%@ include file="/WEB-INF/views/pages/footer.jsp" %>
 

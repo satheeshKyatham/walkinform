@@ -6,7 +6,7 @@
 		<h4 class="mrgT0">
 			Payment Details
 		</h4>
-		<div class="form-group col-md-5">
+		<div class="form-group col-md-3" style="padding-left:0;">
 			<label>Tower</label>
 			<select id="towerMstPayment" class="form-control"> </select>
 		 </div>

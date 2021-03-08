@@ -14,22 +14,21 @@
  response.setHeader("Cache-Control","no-cache,no-store, must-revalidate, pre-check=0, post-check=0, max-age=0, s-maxage=0");
  response.addHeader("X-Frame-Options", "DENY");
  %>
- 
-	
+
 <div class="clearfix"></div>
 <div class="col-md-12" style="margin: 0 auto; float: none;">
 	<div class="mainCont " style="padding-top: 10px;">
 		<div id=""> 
-			<div class="col-md-12">
+			<div class="col-md-12" style="margin-bottom:15px;">
 				<div class="row">
 				 	<div class="form-group col-md-3">
 					  <label>Promo Code</label>
-					  <input type="text" class="form-control">
+					  <input id="pcPromoCode" type="text" class="form-control">
 					</div>
 					
 					<div class="form-group col-md-3">
 					  <label>Expiry Date</label>
-					  <input type="date" class="form-control">
+					  <input id="pcExpiryDate" type="date" class="form-control">
 					</div>
 					
 					<!-- <div class="form-group col-md-3">
@@ -39,7 +38,7 @@
 					
 					<div class="form-group col-md-3">
 						<label>Discount Type</label>
-					  	<select class="form-control" onchange="discountType(this)">
+					  	<select id="pcDisType" class="form-control" onchange="discountType(this)">
 							<option value = "0">Percentage Discount</option>
 							<option value = "1">Flat Discount</option>
 					  	</select>
@@ -47,35 +46,32 @@
 			
 					<div class="form-group col-md-3 perDisInput">
 					  <label>Discount Percentage</label>
-					  <input type="text" class="form-control">
+					  <input id="pcDisPercentage" type="number" class="form-control">
 					</div>
 					
 					<div class="form-group col-md-3 perDisInput">
 					  <label>Coupon Discount Upto</label>
-					  <input type="text" class="form-control">
+					  <input id="pcDisUpto" type="number"  class="form-control">
 					</div>
 			
 					<div class="form-group col-md-3 flatDisInput" style="display:none;">
 					  <label>Flat Discount Amount</label>
-					  <input type="text" class="form-control">
+					  <input id="pcFlatDisAmount" type="number" class="form-control">
 					</div>
 					
 					<div class="form-group col-md-3">
 					  <label>Discount On Typology</label>
-					  <input type="text" class="form-control">
-					</div>
-					
-					<div class="form-group col-md-3">
-					  <label>Promocode Use Count</label>
-					  <input type="text" class="form-control">
+					  <select id="pcDisOnTypology" type="text" class="form-control pcMultiselectTower" multiple="multiple"></select>
 					</div>
 					
 					<div class="form-group col-md-3">
 					  <label>Promocode Max Use Count</label>
-					  <input type="text" class="form-control">
+					  <input id="pcMaxUseCount" type="number"  class="form-control">
 					</div>
-					
-					<button type="submit" class="btn btn-default">Submit</button>
+					<div class="clearfix"></div>
+					<div class="col-md-12">
+						<button type="submit" onclick="createPromoCode(this, 'ACTIVE');" style="color: #fff; background-color: #0077b9;" class="btn btn-primary btn-sm">Submit</button>
+					</div>
 					
 				 	<div class="clearfix"></div>
 				</div>
@@ -83,17 +79,25 @@
 			</div>
 			<div class="clearfix"></div>
 			<div class="col-md-12">
-				<table class="table table-bordered" id="enqDtlTableEOI">
+				<table class="table table-bordered" id="fetchPromoCode">
 					<thead>
 						<tr>
-							<th>ENQ ID</th>
-							<th>ENQ Name</th>
-							<th>Mobile</th>
-							<th>Name</th>
+							<th>PromoCode</th>
+							<th>Project</th>
+							<th>Coupon discount upto</th>
+							<th>Discount on typology</th>
+							<th>Discount percentage</th>
+							
+							<th>Discount Type</th>
+							<th>End Date</th>
+							<th>Flat discount amount</th>
+							<th>Promocode max use count</th>
+							<th>Promocode use count</th>
+							<th>Status</th>
+							<th></th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr><td colspan='4' style="text-align:center;">No records found</td></tr>
 					</tbody>
 				</table>
 				<div class="clearfix"></div>
@@ -104,12 +108,3 @@
 	</div>
 	<div class="clearfix"></div>
 </div>
-	
-	
-	
-	
-	
-	
-	
-	
-	 

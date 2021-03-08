@@ -1937,7 +1937,23 @@ function otpRequestOC(){
 		             
 		            $("#offerOPTInfo").append(html);
 	        	}
+	        	
+	        	// SMS - 20210308
+	        	/*var userName = $('#username').val().split(' ')[0];
+	        	var otherAmount = $('#finalDiscountValue').val();
+	        	var propertyname = $(".unit_property_name").text();
+	        	var projectname = $("#projectname").val();
+	        	var salesConA = $('.salesConsiderationTotalNew').text();
+	        	var selable = $('.a6').text();
+	        	var apr = parseFloat(parseFloat(salesConA)/parseFloat(selable)).toFixed(2);
+	        	var otpMsg = userName + " has requested for a discount of Rs.(" + otherAmount + ") " + "for {"
+				+ propertyname + "} in {" + projectname + "}, Effective APR {" + Math.round(apr)
+				+ "}. Customer Mobile No: "+$('#hiddenMobileNo').val()+". Please share the OTP to approve the discount. ";
+	        	
+	        	$("#offerOPTInfo").append("<br><div> SMS: "+otpMsg+"</div>");*/
+	        	// END SMS - 20210308
 	        });
+       
 }
 
 function getRqstForSales (){

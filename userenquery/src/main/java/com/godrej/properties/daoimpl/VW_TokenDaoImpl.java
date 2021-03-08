@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.godrej.properties.dao.AbstractDao;
 import com.godrej.properties.dao.VW_TokenDao;
-import com.godrej.properties.model.Token;
+import com.godrej.properties.model.VWTokenScreen;
 import com.godrej.properties.model.VW_Token;
 
 @Repository("vw_tokenDao")
@@ -63,6 +63,51 @@ public class VW_TokenDaoImpl extends AbstractDao<Integer, VW_Token> implements V
 		}
 
 		
+		return null;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<VWTokenScreen> getUpcomingToken(String tokenType,String projectId,String inputDate,String toDate) {
+		Session session = this.sessionFactory.getCurrentSession();
+		List<VWTokenScreen> list = null;
+		String tokenTypeConfig="";
+		if(!tokenType.equals("All"))
+			tokenTypeConfig="type='" + tokenType+ "' and ";
+		if(inputDate!=null && inputDate.length()>0)
+		{
+			list = session.createQuery( "  FROM VWTokenScreen where  "+tokenTypeConfig+" window_assign is null and isactive='Y' and projectname='"+projectId+"' and Date(created) between '"+inputDate+"' and '"+toDate+"' order by created asc").setMaxResults(20).list();
+		}
+		else
+			list = session.createQuery( "  FROM VWTokenScreen where  "+tokenTypeConfig+" window_assign is null and isactive='Y' and projectname='"+projectId+"' order by created asc ").setMaxResults(10).list();
+		
+		if (list.size() > 0) {
+			return list;
+		}
+
+		
+		return null;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<VWTokenScreen> getAssignedList(String tokenType,String projectid,String inputDate,String toDate) {
+		Session session = this.sessionFactory.getCurrentSession();
+		List<VWTokenScreen> list=null;
+		String tokenTypeConfig="";
+		if(!tokenType.equals("All"))
+			tokenTypeConfig="type='" + tokenType+ "' and ";
+		if(inputDate!=null && inputDate.length()>0)
+		{
+			list = session.createQuery("  FROM VWTokenScreen where "+tokenTypeConfig+"  projectname='"+projectid+"' and Date(created) between '"+inputDate+"' and '"+toDate+"' and queue is not null and window_assign is not null order by created DESC ").setMaxResults(10).list();
+		}
+		else
+			list = session.createQuery("  FROM VWTokenScreen where  " +tokenTypeConfig+" and projectname='"+projectid+"' and queue is not null and window_assign is not null order by created DESC ").setMaxResults(10).list();
+			
+		if (list.size() > 0) {
+
+			return list;
+		}
 		return null;
 	}
 }

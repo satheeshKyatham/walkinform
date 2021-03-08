@@ -103,9 +103,9 @@ if(ses!=null){
 				<li>
 					<a href="#updateEOITab" data-toggle="tab">EOI</a>
 				</li>
-				<!-- <li>
-					<a href="#promoCode" data-toggle="tab">Promo Code</a>
-				</li> -->
+				<li>
+					<a href="#promoCode" onclick="getTypologyPromoCode(); fetchPromoCode()" data-toggle="tab">Promo Code</a>
+				</li>
 			</ul>
 			<div class=""></div>
 		</div>

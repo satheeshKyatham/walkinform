@@ -50,6 +50,7 @@
     	width:100%;
     	height:100%;
     	font-size:8px !important;
+    	font-family: "Open Sans", sans-serif !important;
     }
     
     .printHeader {width:100%; display: block !important;}
@@ -139,7 +140,7 @@ background-position: center; background-repeat: no-repeat; background-size: 40px
 .basicDetailsCS li {border-bottom: 1px dotted #ccc; padding: 12px 0;}
 .filterCSCol {padding-bottom:20px;}
 
-.counterCol {text-align: center; background-color: #0077b9; color: #fff; border-radius: 6px; padding: 5px 0;}
+.counterCol {text-align: center; background-color: #26262a; color: #fff; border-radius: 3px; padding: 5px 0;}
 .counterCol .counterTxt1 {text-align: center; font-size: 18px;}
 .size_lg {color: #fff !important; font-size: 26px !important;}
 
@@ -147,7 +148,7 @@ background-position: center; background-repeat: no-repeat; background-size: 40px
 .printFloat:hover {color:#fff;}
 
 
-.printFloat{ z-index: 1000; position:fixed; width:50px; height:50px; bottom:40px; right:40px; background-color:#9b034a; color:#FFF; border-radius:50px; text-align:center; box-shadow: 2px 2px 3px #999; }
+.printFloat{ z-index: 1000; position:fixed; width:50px; height:50px; bottom:40px; right:40px; background-color:#26262a; color:#FFF; border-radius:50px; text-align:center; box-shadow: 2px 2px 3px #999; }
 
 .printficon{ line-height: 49px !important; font-size: 28px !important;}
 
@@ -191,4 +192,5 @@ background-position: center; background-repeat: no-repeat; background-size: 40px
 
 #csPtCol td, #csPtCol th {vertical-align: middle;}
 
-.schemeFilterCol {padding: 10px 0 0 0; background-color: #f1f1f1; margin-bottom: 20px; border-radius: 10px; border: 1px solid #ccc;}
+.schemeFilterCol {padding: 10px 0 0 0; background-color: #f4f4f4; margin-bottom: 20px; border: 1px solid #ccc;}
+.btnPrevious {border-radius: 0 !important; padding: 10px 20px !important;}

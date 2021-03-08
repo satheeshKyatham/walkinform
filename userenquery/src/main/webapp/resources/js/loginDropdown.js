@@ -6,7 +6,7 @@ function onProjectSelect(source) {
 	
 	if($('#loged_role').val()=='5'){
 		$("#role_page").empty();
-		var option = "<select class='inputLabel' onchange='onChangeRole()' id='roleSelected' style='border-color: #000000 !important;   width: 100%;    min-height: 33px;    margin-bottom: 5px;'><option>Select Role</option>";
+		var option = "<select class='' onchange='onChangeRole()' id='roleSelected' style='border-color: #000000 !important;   width: 100%;    min-height: 33px;    margin-bottom: 5px;'><option>Select Role</option>";
  		option = option+"<option value='AM'>Allocation Manager</option>";
 		option = option+"<option value='MIS'>MIS Report</option></select>";
 		
@@ -27,7 +27,7 @@ function onProjectSelect(source) {
 	else if($('#loged_role').val()=='6') 
 	  {
 		$("#role_page").empty();
-		var option = "<select class='inputLabel' onchange='onChangeRole()' id='roleSelected' style='border-color: #000000 !important;   width: 100%;    min-height: 33px;    margin-bottom: 5px;'><option>Select Role</option>";
+		var option = "<select class='' onchange='onChangeRole()' id='roleSelected' style='border-color: #000000 !important;   width: 100%;    min-height: 33px;    margin-bottom: 5px;'><option>Select Role</option>";
  		option = option+"<option value='AM'>Allocation Manager</option>";
 		option = option+"<option value='MIS'>MIS Report</option>";
 		option = option+"<option value='CM'>Closing Manager</option></select>";
@@ -37,7 +37,7 @@ function onProjectSelect(source) {
 	else if($('#loged_role').val()=='7') 
 	  {
 		$("#role_page").empty();
-		var option = "<select class='inputLabel' onchange='onChangeRole()' id='roleSelected' style='border-color: #000000 !important;   width: 100%;    min-height: 33px;    margin-bottom: 5px;'><option>Select Role</option>";
+		var option = "<select class='' onchange='onChangeRole()' id='roleSelected' style='border-color: #000000 !important;   width: 100%;    min-height: 33px;    margin-bottom: 5px;'><option>Select Role</option>";
 		option = option+"<option value='AM'>Allocation Manager</option>";
 		option = option+"<option value='CM'>Closing Manager</option></select>";
 		$("#role_page").append(option);
@@ -45,7 +45,7 @@ function onProjectSelect(source) {
 	  }else if($('#loged_role').val()=='11') 
 	  {
 			$("#role_page").empty();
-			var option = "<select class='inputLabel' onchange='onChangeRole()' id='roleSelected' style='border-color: #000000 !important;   width: 100%;    min-height: 33px;    margin-bottom: 5px;'><option>Select Role</option>";
+			var option = "<select class='' onchange='onChangeRole()' id='roleSelected' style='border-color: #000000 !important;   width: 100%;    min-height: 33px;    margin-bottom: 5px;'><option>Select Role</option>";
 			option = option+"<option value='IM'>Inventory Manager</option>";
 			option = option+"<option value='AM'>Allocation Manager</option>";
 			option = option+"<option value='CM'>Closing Manager</option>";
@@ -55,7 +55,7 @@ function onProjectSelect(source) {
 	else if($('#loged_role').val()=='10') 
 	  {
 		$("#role_page").empty();
-		var option = "<select class='inputLabel' onchange='onChangeRole()' id='roleSelected' style='border-color: #000000 !important;   width: 100%;    min-height: 33px;    margin-bottom: 5px;'><option>Select Role</option>";
+		var option = "<select class='' onchange='onChangeRole()' id='roleSelected' style='border-color: #000000 !important;   width: 100%;    min-height: 33px;    margin-bottom: 5px;'><option>Select Role</option>";
 		option = option+"<option value='IM'>Inventory Manager</option>";
 		option = option+"<option value='AM'>Allocation Manager</option>";
 		option = option+"<option value='CM'>Closing Manager</option>";
@@ -64,7 +64,7 @@ function onProjectSelect(source) {
 			$("#role_page").append(option);
 	  }else if($('#loged_role').val()=='12') 
 		  {
-			var option = "<select class='inputLabel' onchange='onChangeRole()' id='roleSelected' style='border-color: #000000 !important;   width: 100%;    min-height: 33px;    margin-bottom: 5px;'><option>Select Role</option>";
+			var option = "<select class='' onchange='onChangeRole()' id='roleSelected' style='border-color: #000000 !important;   width: 100%;    min-height: 33px;    margin-bottom: 5px;'><option>Select Role</option>";
 			$("#role_page").empty();
 			option = option+"<option value='IM'>Inventory Manager</option>";
 			option = option+"<option value='AM'>Allocation Manager</option>";
@@ -73,7 +73,7 @@ function onProjectSelect(source) {
 			$("#role_page").append(option);
 		  }else if($('#loged_role').val()=='13') 
 		  {
-				var option = "<select class='inputLabel' onchange='onChangeRole()' id='roleSelected' style='border-color: #000000 !important;   width: 100%;    min-height: 33px;    margin-bottom: 5px;'><option>Select Role</option>";
+				var option = "<select class='' onchange='onChangeRole()' id='roleSelected' style='border-color: #000000 !important;   width: 100%;    min-height: 33px;    margin-bottom: 5px;'><option>Select Role</option>";
 				$("#role_page").empty();
 				option = option+"<option value='IM'>Inventory Manager</option>";
 				option = option+"<option value='AM'>Allocation Manager</option>";
@@ -93,7 +93,7 @@ function onProjectSelect(source) {
 		  else if($('#loged_role').val()=='16')
 		  {
 			  $("#role_page").empty();
-			  var option = "<select class='inputLabel' onchange='onChangeRole("+source+")' id='roleSelected' style='border-color: #000000 !important;   width: 100%;    min-height: 33px;    margin-bottom: 5px;'><option>Select Role</option>";
+			  var option = "<select class='' onchange='onChangeRole("+source+")' id='roleSelected' style='border-color: #000000 !important;   width: 100%;    min-height: 33px;    margin-bottom: 5px;'><option>Select Role</option>";
 				option = option+"<option value='IM'>Inventory Manager</option>";
 				option = option+"<option value='AM'>Allocation Manager</option>";
 				option = option+"<option value='CM'>Closing Manager</option>";
@@ -106,7 +106,7 @@ function onProjectSelect(source) {
 		  else if($('#loged_role').val()=='17')
 		  {
 			  $("#role_page").empty();
-			  var option = "<select class='inputLabel' onchange='onChangeRole()' id='roleSelected' style='border-color: #000000 !important;   width: 100%;    min-height: 33px;    margin-bottom: 5px;'><option>Select Role</option>";
+			  var option = "<select class='' onchange='onChangeRole()' id='roleSelected' style='border-color: #000000 !important;   width: 100%;    min-height: 33px;    margin-bottom: 5px;'><option>Select Role</option>";
 				option = option+"<option value='CM'>Closing Manager</option>";
 				option = option+"<option value='OFFLINEADM'>Offline</option></select>";
 				$("#role_page").append(option);
@@ -114,14 +114,14 @@ function onProjectSelect(source) {
 		  else if($('#loged_role').val()=='20')
 		  {
 			  $("#role_page").empty();
-			  var option = "<select class='inputLabel' onchange='onChangeRole()' id='roleSelected' style='border-color: #000000 !important;   width: 100%;    min-height: 33px;    margin-bottom: 5px;'><option>Select Role</option>";
+			  var option = "<select class='' onchange='onChangeRole()' id='roleSelected' style='border-color: #000000 !important;   width: 100%;    min-height: 33px;    margin-bottom: 5px;'><option>Select Role</option>";
 				option = option+"<option value='SITEHEAD'>Sales Strategy</option></select>";
 				$("#role_page").append(option);
 		  }
 		  else if($('#loged_role').val()=='21')
 		  {
 			  $("#role_page").empty();
-			  var option = "<select class='inputLabel' onchange='onChangeRole("+source+")' id='roleSelected' style='border-color: #000000 !important;   width: 100%;    min-height: 33px;    margin-bottom: 5px;'><option>Select Role</option>";
+			  var option = "<select class='' onchange='onChangeRole("+source+")' id='roleSelected' style='border-color: #000000 !important;   width: 100%;    min-height: 33px;    margin-bottom: 5px;'><option>Select Role</option>";
 				option = option+"<option value='IM'>Inventory Manager</option>";
 				option = option+"<option value='AM'>Allocation Manager</option>";
 				option = option+"<option value='CM'>Closing Manager</option>";
@@ -133,7 +133,7 @@ function onProjectSelect(source) {
 		  else if($('#loged_role').val()=='22')
 		  {
 			  $("#role_page").empty();
-			  var option = "<select class='inputLabel' onchange='onChangeRole("+source+")' id='roleSelected' style='border-color: #000000 !important;   width: 100%;    min-height: 33px;    margin-bottom: 5px;'><option>Select Role</option>";
+			  var option = "<select class='' onchange='onChangeRole("+source+")' id='roleSelected' style='border-color: #000000 !important;   width: 100%;    min-height: 33px;    margin-bottom: 5px;'><option>Select Role</option>";
 			  	  option = option+"<option value='IM'>Inventory Manager</option>";
 				  option = option+"<option value='AM'>Allocation Manager</option>";
 				  option = option+"<option value='CM'>Closing Manager</option>";
