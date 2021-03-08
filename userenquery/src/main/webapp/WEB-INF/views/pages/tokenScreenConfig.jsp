@@ -21,7 +21,7 @@
 		<input type="text" id="keyCont2" class="form-control">
 	</div>
 	<div class="form-group col-md-10">
-		<label>Video URL:</label>
+		<label>Video URL (.mp4 format only):</label>
 		<input type="text" id="avUrl" class="form-control">
 	</div>
 	<div class="clearfix"></div>
