@@ -19,4 +19,5 @@ public enum SysConfigEnum {
 	CS_ANNEXURE,
 	FOYR_API_ENDPOINT,
 	OTP_BYPASS,
+	APPROVAL_OTP_BYPASS,
 }

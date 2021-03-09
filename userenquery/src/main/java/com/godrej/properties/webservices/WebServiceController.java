@@ -1557,6 +1557,7 @@ public class WebServiceController<MultipartFormDataInput> {
 				String text = userName + " has requested for a discount of Rs.(" + otherAmount + ") " + "for {"
 						+ propertyname + "} in {" + projectname + "}, Effective APR {" + Math.round(apr)
 						+ "}. Please share the OTP " + OTP + " to approve the discount. ";
+				String emailText=text;
 				// + " for Unit{"+unitName+"}, "
 				// + " Tower {"+towerName+"}, "
 				// + "Discount Value ("+otherAmount+"). Kindly share the code
@@ -1578,12 +1579,13 @@ public class WebServiceController<MultipartFormDataInput> {
 
 				SendSMS.SMSSend(customerContact.getMobileNo(), text);
 				SendSMS.ShreeSMSSend(customerContact.getMobileNo(), text);
-				String otpbypass = sysConfigService.getValue(SysConfigEnum.OTP_BYPASS,"OTP_BYPASS");
+				String otpbypass = sysConfigService.getValue(SysConfigEnum.APPROVAL_OTP_BYPASS,"APPROVAL_OTP_BYPASS");
 				if(otpbypass.equals("true")) {
 					String smtpip = sysConfigService.getValue(SysConfigEnum.SMTP_IP, "SMTP_IP");
 					String smtpPort = sysConfigService.getValue(SysConfigEnum.SMTP_PORT, "SMTP_PORT");
 					String subject="Offer Approval OTP";
-					SendMailThreadUtil mail =new SendMailThreadUtil(customerContact.getEmailid(),	"sathish.kyatham@godrejproperties.com", subject, text,smtpip,smtpPort);
+					SendMailThreadUtil mail =new SendMailThreadUtil(customerContact.getEmailid(),	"sathish.kyatham@godrejproperties.com", subject, emailText,smtpip,smtpPort);
+					/*SendMailThreadUtil mail =new SendMailThreadUtil(customerContact.getEmailid(),	"sathish.kyatham@godrejproperties.com", subject, emailText,smtpip,smtpPort);*/
 				}
 				// SendSMS.SMSSend(mobileNo, text);
 
