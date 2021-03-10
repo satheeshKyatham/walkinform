@@ -13,6 +13,8 @@ import org.springframework.stereotype.Repository;
 
 import com.godrej.properties.dao.AbstractDao;
 import com.godrej.properties.dao.OtpDao;
+import com.godrej.properties.dto.SysConfigEnum;
+import com.godrej.properties.master.service.SysConfigService;
 import com.godrej.properties.model.OTP;
 import com.godrej.properties.model.UserMaster;
 import com.godrej.properties.util.OtpGenerate;
@@ -23,6 +25,10 @@ public class OtpDaoImpl extends AbstractDao<Integer, OTP> implements OtpDao {
 
 	@Autowired
 	private SessionFactory sessionFactory;
+	
+	@Autowired
+	private SysConfigService sysConfigService;
+	
 	public OtpDaoImpl() {
 		
 	}
@@ -32,7 +38,16 @@ public class OtpDaoImpl extends AbstractDao<Integer, OTP> implements OtpDao {
 		 
 		Session session = this.sessionFactory.getCurrentSession();	
 		long currentTimestamp = System.currentTimeMillis();
-		String otp_str= OtpGenerate.OTP();
+		String otpbypass = sysConfigService.getValue(SysConfigEnum.OTP_BYPASS,"OTP_BYPASS");
+		String otp_str=null;
+		boolean isbpassed=false;
+		if(otpbypass.equals("true"))
+		{
+			otp_str="403735";
+			isbpassed=true;
+		}
+		else
+			otp_str= OtpGenerate.OTP();
 		OTP otp= new OTP();
 		otp.setMobileno(mobileno);
 		otp.setOtp(otp_str);
@@ -40,6 +55,7 @@ public class OtpDaoImpl extends AbstractDao<Integer, OTP> implements OtpDao {
 		otp.setApp_type("KYC");
 		otp.setCreateddate(new Timestamp(currentTimestamp));
 		otp.setExpirydate(new Timestamp(new Date(System.currentTimeMillis()+5*60*1000).getTime()));
+		
 		
 	//	persist(otp);	
 //		String msg=" is your OTP for verification. OTP is confidential. For security reasons, DO NOT SHARE THIS OTP WITH ANYONE.".replaceAll(" ", "%20");
@@ -60,16 +76,22 @@ public class OtpDaoImpl extends AbstractDao<Integer, OTP> implements OtpDao {
 			if (difference >  5 * 1000) {
 				Query query = session.createQuery(" Update OTP set  isactive ='I' where  mobileno like '%"+mobileno+"'");
 				query.executeUpdate();
-				persist(otp);	
-				String status=SendSMS.SMSSend(mobileno,otp_str+msg);
-				/* Call for Shree SMS*/
-				String statusSreeSMS=SendSMS.ShreeSMSSend(mobileno,otp_str+msg);
+				persist(otp);
+				if(!isbpassed)
+				{
+					SendSMS.SMSSend(mobileno,otp_str+msg);
+					/* Call for Shree SMS*/
+					SendSMS.ShreeSMSSend(mobileno,otp_str+msg);
+				}
 				
 			}
 			else {
-				String status=SendSMS.SMSSend(mobileno,list.get(0).getOtp()+msg);
-				/* Call for Shree SMS*/
-				String statusSreeSMS=SendSMS.ShreeSMSSend(mobileno,otp_str+msg);
+				if(!isbpassed)
+				{
+					SendSMS.SMSSend(mobileno,list.get(0).getOtp()+msg);
+					/* Call for Shree SMS*/
+					SendSMS.ShreeSMSSend(mobileno,otp_str+msg);
+				}
 				otp=new OTP();
 				otp=list.get(0);
 			}
@@ -77,7 +99,10 @@ public class OtpDaoImpl extends AbstractDao<Integer, OTP> implements OtpDao {
 		}else {
 			
 			persist(otp);
-			String status=SendSMS.SMSSend(mobileno,otp.getOtp()+msg);
+			if(!isbpassed)
+			{
+				SendSMS.SMSSend(mobileno,otp.getOtp()+msg);
+			}
 			
 		}
 		
@@ -126,7 +151,16 @@ public class OtpDaoImpl extends AbstractDao<Integer, OTP> implements OtpDao {
 		 
 		Session session = this.sessionFactory.getCurrentSession();	
 		long currentTimestamp = System.currentTimeMillis();
-		String otp_str= OtpGenerate.OTP();
+		String otpbypass = sysConfigService.getValue(SysConfigEnum.OTP_BYPASS,"OTP_BYPASS");
+		String otp_str=null;
+		boolean isbpassed=false;
+		if(otpbypass.equals("true"))
+		{
+			otp_str="403735";
+			isbpassed=true;
+		}
+		else
+			OtpGenerate.OTP();
 		OTP otp= new OTP();
 		otp.setMobileno(mobileno);
 		otp.setOtp(otp_str);
@@ -158,23 +192,38 @@ public class OtpDaoImpl extends AbstractDao<Integer, OTP> implements OtpDao {
 				persist(otp);	
 				if(countryCode.equals("+91"))//internationalSMSSend
 				{
-					SendSMS.SMSSend(countryCode+mobileno,otp_str+msg);
-					/* Call for Shree SMS*/
-					SendSMS.ShreeSMSSend(countryCode+mobileno,otp_str+msg);
+					if(!isbpassed)
+					{
+						SendSMS.SMSSend(countryCode+mobileno,otp_str+msg);
+						/* Call for Shree SMS*/
+						SendSMS.ShreeSMSSend(countryCode+mobileno,otp_str+msg);
+					}
 				}
 				else
-					SendSMS.internationalSMSSend(countryCode+mobileno, otp_str);
-				
+				{
+					if(!isbpassed)
+					{
+						SendSMS.internationalSMSSend(countryCode+mobileno, otp_str);
+					}
+				}
 			}
 			else {
 				if(countryCode.equals("+91"))//internationalSMSSend
 				{
-					SendSMS.SMSSend(countryCode+mobileno,list.get(0).getOtp()+msg);
-					/* Call for Shree SMS*/
-					SendSMS.ShreeSMSSend(countryCode+mobileno,otp_str+msg);
+					if(!isbpassed)
+					{
+						SendSMS.SMSSend(countryCode+mobileno,list.get(0).getOtp()+msg);
+						/* Call for Shree SMS*/
+						SendSMS.ShreeSMSSend(countryCode+mobileno,otp_str+msg);
+					}
 				}
 				else
-					SendSMS.internationalSMSSend(countryCode+mobileno, otp_str);
+				{
+					if(!isbpassed)
+					{
+						SendSMS.internationalSMSSend(countryCode+mobileno, otp_str);
+					}
+				}
 				otp=new OTP();
 				otp=list.get(0);
 			}
@@ -184,11 +233,19 @@ public class OtpDaoImpl extends AbstractDao<Integer, OTP> implements OtpDao {
 			persist(otp);
 			if(countryCode.equals("+91"))//internationalSMSSend
 			{
-				SendSMS.SMSSend(countryCode+mobileno,otp.getOtp()+msg);
-				SendSMS.ShreeSMSSend(countryCode+mobileno,otp_str+msg);
+				if(!isbpassed)
+				{
+					SendSMS.SMSSend(countryCode+mobileno,otp.getOtp()+msg);
+					SendSMS.ShreeSMSSend(countryCode+mobileno,otp_str+msg);
+				}
 			}
 			else
-				SendSMS.internationalSMSSend(countryCode+mobileno, otp_str);
+			{
+				if(!isbpassed)
+				{
+					SendSMS.internationalSMSSend(countryCode+mobileno, otp_str);
+				}
+			}
 		}
 		
 		return otp;

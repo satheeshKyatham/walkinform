@@ -155,8 +155,8 @@ function getofferApplicantDetails (e, offerSFID, enqSFID, contactSFID, offerName
 					appTypeCompOrIndv = 'company';
 					
 					
-					if ($("#projectid").val() == "a1l2s000000XmaMAAS") {
-						companyHtml += '<div  style="padding-bottom:10px;"><b>1. In case of Company/ Partnership Firm/ LLP /Trust / HUF</b></div>';
+					//if ($("#projectid").val() == "a1l2s000000XmaMAAS") {
+						companyHtml += '<div  style="padding-bottom:10px;"><b>1. In case of Company/Partnership Firm/LLP/Trust/HUF</b></div>';
 						
 						companyHtml += '<table class="table table-bordered" style="margin-bottom:15px;">'
 								+ '<tbody>'
@@ -165,7 +165,7 @@ function getofferApplicantDetails (e, offerSFID, enqSFID, contactSFID, offerName
 										+ '<td id="niNameOffer">'+obj[i].name+'</td>'
 									+ '</tr>'
 									+ '<tr>'
-										+ '<td>Date of Incorporation/ Formation</td>'
+										+ '<td>Date of Incorporation/Formation</td>'
 										+ '<td id="niDOBOffer">'+obj[i].birthdate+'</td>'
 									+ '</tr>'
 									+ '<tr>'
@@ -181,12 +181,12 @@ function getofferApplicantDetails (e, offerSFID, enqSFID, contactSFID, offerName
 										+ '<td>'+obj[i].relationship__c+' '+obj[i].relationship_name__c+'</td>'
 									+ '</tr>'
 									+ '<tr>'
-										+ "<td colspan='2' style='font-size:10px;'>Note: If Applicant/s is Company, Partnership Firm, Limited Liability Partnership (LLP), Trust, Hindu Undivided Family (HUF), the following incorporation documents are required to be submitted along with this Application Form: (a) Certificate of Incorporation/Registration Certificate for the applicable entity (b) Memorandum of Association (c) Articles of Association (d) Partnership Deed (e) Limited Liability Partnership Agreement (f) Trust Deed (g) HUF PAN (h) Board/Partner/Trust's Resolution authorizing this purchase along with the name of the authorized representative/Partner. Please affix the official stamp/signature of the respective Company//Partnership Firm/LLP/Trust/HUF as may be applicable</td>"											
+										+ "<td colspan='2' style='font-size:10px;'>Note: If Applicant/s is Company, Partnership Firm, Limited Liability Partnership (LLP), Trust, Hindu Undivided Family (HUF), the following incorporation documents are required to be submitted along with this Application Form: (a) Certificate of Incorporation/Registration Certificate for the applicable entity (b) Memorandum of Association (c) Articles of Association (d) Partnership Deed (e) Limited Liability Partnership Agreement (f) Trust Deed (g) HUF PAN (h) Board/Partner/Trust's Resolution authorizing this purchase along with the name of the authorized representative/Partner. Please affix the official stamp/signature of the respective Company/Partnership Firm/LLP/Trust/HUF as may be applicable.</td>"											
 									+ '</tr>'
 								+ '</tbody>'
 							+ '</table>';
-					} else {
-						companyHtml += '<div  style="padding-bottom:10px;"><b>1. In case of Company/ LLP/ HUF/ Partnership Firm</b></div>';
+					/*} else {
+						companyHtml += '<div  style="padding-bottom:10px;"><b>1. In case of Company/LLP/HUF/Partnership Firm</b></div>';
 						
 						companyHtml += '<table class="table table-bordered" style="margin-bottom:15px;">'
 								+ '<tbody>'
@@ -195,7 +195,7 @@ function getofferApplicantDetails (e, offerSFID, enqSFID, contactSFID, offerName
 										+ '<td id="niNameOffer">'+obj[i].name+'</td>'
 									+ '</tr>'
 									+ '<tr>'
-										+ '<td>Date of Incorporation/ Formation</td>'
+										+ '<td>Date of Incorporation/Formation</td>'
 										+ '<td id="niDOBOffer">'+obj[i].birthdate+'</td>'
 									+ '</tr>'
 									+ '<tr>'
@@ -215,7 +215,7 @@ function getofferApplicantDetails (e, offerSFID, enqSFID, contactSFID, offerName
 									+ '</tr>'
 								+ '</tbody>'
 							+ '</table>';
-					}
+					}*/
 					
 					
 					
@@ -237,7 +237,7 @@ function getofferApplicantDetails (e, offerSFID, enqSFID, contactSFID, offerName
 					passportNo = obj[i].address_proof_no;
 				}
 				var lastName = obj[i].lastName==null?'':obj[i].lastName;
-				appType += "<td>"+obj[i].propstrength__type__c+"</td>";
+				appType += "<td>Applicant "+obj[i].propstrength__type__c+"</td>";
 				fullName +="<td>"+obj[i].name + ' ' + lastName + "</td>";
 				pan +="<td>"+obj[i].propstrength__income_tax_permanent_account_no__c+"</td>";
 				email +="<td>"+obj[i].email+"</td>";
@@ -267,7 +267,7 @@ function getofferApplicantDetails (e, offerSFID, enqSFID, contactSFID, offerName
 			
 			
 			
-			if ($("#projectid").val() == "a1l2s000000XmaMAAS") {
+			/*if ($("#projectid").val() == "a1l2s000000XmaMAAS") {
 				applicantNote += "<tr> "
 						+ '<td colspan="'+parseInt(objLength+1)+'" style="font-size:10px;">' 
 							+ "Note: Applicant's passport size photograph and photocopies of PAN Card/OCI/PIO and Voter Card to be mandatorily submitted along with this Application Form. All compliance in terms of the Foreign Exchange Management Act, 1999 and its amendments shall be the sole responsibility of the Applicant/s. By providing Applicant's personal information in this Application Form, the Applicant/s hereby consents and authorizes Godrej Properties Limited or/and its affiliates to communicate with the Applicant/s by email(s), call(s), SMS(es),WhatsApp, electronic communication(s) using digital media or via any other mode of communication in relation to any of the information pertaining to the Project.   Applicant understands that Share in the property shall not be determined by the Payment Share of TDS and the same shall be as per the Applicable Laws."
@@ -279,18 +279,18 @@ function getofferApplicantDetails (e, offerSFID, enqSFID, contactSFID, offerName
 				sonOf = "";
 				passportNoHtml = "";
 				
-			} else {
+			} else {*/
 				applicantNote += "<tr> "
 						+ '<td colspan="'+parseInt(objLength+1)+'" style="font-size:10px;">' 
-							+ "Note: Applicant's passport size photograph and photocopies of PAN Card/OCI/PIO and Voter Card to be mandatorily submitted along with this Application Form. *All compliance in terms of the Foreign Exchange Management Act, 1999 and its amendments shall be the sole responsibility of the Applicant. By providing Applicant's personal information in this Application Form, the Applicant/s hereby consents and authorizes Godrej Properties Limited or/and its affiliates to communicate with the Applicant/s  by email(s), call(s), SMS(es), electronic communication(s) using digital media or via any other mode of communication in relation to any of the information pertaining to the Project."
+							+ "Note: Applicant's passport size photograph and photocopies of PAN Card/OCI/PIO and Voter Card to be mandatorily submitted along with this Application Form. *All compliance in terms of the Foreign Exchange Management Act, 1999 and its amendments shall be the sole responsibility of the Applicant. By providing Applicant's personal information in this Application Form, the Applicant/s hereby consents and authorizes Godrej Properties Limited or/and its affiliates to communicate with the Applicant/s  by email(s), call(s), SMS(es), WhatsApp, electronic communication(s) using digital media or via any other mode of communication in relation to any of the information pertaining to the Project."
 						+ "</td> " 
 					"</tr>" ;
-				tdsStatus += '<tr><td>TDS Status</td>'+propstrength__sharing_ratio__c+'</tr>';
-				tdsSharing += '<tr><td>TDS Sharing Ratio</td>'+tdsSharingPer+'</tr>';
+				tdsStatus = "";
+				tdsSharing += '<tr><td>Payment share for TDS</td>'+tdsSharingPer+'</tr>';
 				
 				sonOf += '<tr><td>S/o/W/o/D/o</td>'+relationshipDtl +'</tr>';
 				passportNoHtml += '<tr><td>Passport No.(In case of *NRI/ Foreign Customers) </td>'+passport_no__c+'</tr>'; 
-			}
+			//}
 			
 			
 			html +=  "<div style='padding-bottom:10px;'> <b>1. APPLICANT/S DETAILS</b> </div>" +
@@ -304,7 +304,7 @@ function getofferApplicantDetails (e, offerSFID, enqSFID, contactSFID, offerName
 								html +=	'<tr><td></td>'+appType+'</tr>' 
 										+ '<tr><td>Full Name</td>'+fullName+'</tr>'
 										+ '<tr><td>Date of Birth</td>'+birthdate+'</tr>'
-										+ tdsSharing
+										
 										//+ '<tr><td>TDS Sharing Ratio</td>'+tdsSharingPer+'</tr>'
 										+ sonOf
 										//+ '<tr><td>S/o/W/o/D/o</td>'+relationshipDtl +'</tr>'
@@ -317,9 +317,10 @@ function getofferApplicantDetails (e, offerSFID, enqSFID, contactSFID, offerName
 										//+ '<tr><td>Passport No.(In case of *NRI/ Foreign Customers) </td>'+passport_no__c+'</tr>' 
 										+ '<tr><td>Permanent Address</td>'+permanentAddress+'</tr>'
 										+ '<tr><td>Mobile No.</td>'+mobile_number__c+'</tr>'
-										+ '<tr><td>Email</td>'+email+'</tr>'  
-										+ '<tr><td>Address for Communication</td>'+communicationAddress+'</tr>' +
-										applicantNote
+										+ '<tr><td>Email Id</td>'+email+'</tr>'  
+										+ '<tr><td>Address for Communication</td>'+communicationAddress+'</tr>' 
+										+ tdsSharing
+										+ applicantNote
 										/*+ "<tr> "
 											+ '<td colspan="'+parseInt(objLength+1)+'" style="font-size:10px;">' 
 												+ "Note: Applicant's passport size photograph and photocopies of PAN Card/OCI/PIO and Voter Card to be mandatorily submitted along with this Application Form. *All compliance in terms of the Foreign Exchange Management Act, 1999 and its amendments shall be the sole responsibility of the Applicant. By providing Applicant's personal information in this Application Form, the Applicant/s hereby consents and authorizes Godrej Properties Limited or/and its affiliates to communicate with the Applicant/s  by email(s), call(s), SMS(es), electronic communication(s) using digital media or via any other mode of communication in relation to any of the information pertaining to the Project."
@@ -416,13 +417,13 @@ function getEnqAndOfferDtl (enqSFID, offerSFID, rowId) {
 				}
 				
 				
-				if ($("#projectid").val() == "a1l2s000000XmaMAAS") {
+				//if ($("#projectid").val() == "a1l2s000000XmaMAAS") {
 					cmNameHtml +=  "<tr> " +
 										'<td colspan="2"> Name of the Developer\'s sale\'s representative: '+closingMngrName+' </td> ' +
 									"</tr>";
-				} else {
+				/*} else {
 					cmNameHtml = "";
-				}
+				}*/
 				
 				
 				html +=  "<tr> " +
@@ -459,15 +460,15 @@ function getEnqAndOfferDtl (enqSFID, offerSFID, rowId) {
 				}
 				
 				
-				if ($("#projectid").val() == "a1l2s000000XmaMAAS") {
+				//if ($("#projectid").val() == "a1l2s000000XmaMAAS") {
 					brokerDtlHtml += '<tr>  <td colspan="2" style="height:100px; vertical-align: top;">Name, contact number, stamp and signature of Channel Partner (if applicable): '+broker_name+'</td>  </tr> ' ;
 					cmNameHtml +=  "<tr>" +
 										'<td colspan="2"> Name of the Developer\'s sale\'s representative: '+closingMngrName+' </td> ' +
 									"</tr>";
-				} else {
+				/*} else {
 					brokerDtlHtml += '<tr>  <td colspan="2">Name: <span>'+broker_name+'</span></td>  </tr> ' ;
 					cmNameHtml = "";
-				}
+				}*/
 				
 				
 				html += " <tr> " +
