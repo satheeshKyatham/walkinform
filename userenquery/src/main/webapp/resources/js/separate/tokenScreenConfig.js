@@ -1,5 +1,3 @@
-$("#generateScreenBtn").attr("href", PAGECONTEXT_GV+"tokenScreen?projectid="+$('#projectid').val()+"&projectname="+$('#projectname').val())
-
 function insertScreenConfig() {
 	var formData = new FormData();
 	formData.append('projectsfid', $("#projectid").val().trim());
@@ -49,7 +47,46 @@ function getTokenScreenConfig () {
 				$("#tcUpdateBtn").show();
 				$("#generateScreenBtn").show();
 	        	  
-				$('#tokenType [value='+obj.token_type.trim()+']').attr('selected', 'true');
+				//$('#tokenType [value='+obj.token_type.trim()+']').attr('selected', 'selected');
+				
+				/*$('#tokenType option')
+			     .removeAttr('selected')
+			     .filter('[value='+obj.token_type.trim()+']')
+			         .attr('selected', true)*/
+			         
+			    var tokenTypeHtml = '';
+				var selectedAll = '';
+				var selectedW = '';
+				var selectedE = '';
+				var selectedG = '';
+				var selectedMS = '';
+				var selectedMF = '';
+				
+				if (obj.token_type.trim() == "All") {
+					selectedAll = "selected";
+				}else if (obj.token_type.trim() == "W") {
+					selectedW = "selected";
+				}else if (obj.token_type.trim() == "E") {
+					selectedE = "selected";
+				}else if (obj.token_type.trim() == "G") {
+					selectedG = "selected";
+				}else if (obj.token_type.trim() == "MS") {
+					selectedMS = "selected";
+				}else if (obj.token_type.trim() == "MF") {
+					selectedMF = "selected";
+				} 
+				
+				tokenTypeHtml += 	'<option value="All" '+selectedAll+'>All</option>'
+									+ '<option value="W" '+selectedW+'>W</option>' 
+									+ '<option value="E" '+selectedE+'>E</option>' 
+									+ '<option value="G" '+selectedG+'>G</option>' 
+									+ '<option value="MS" '+selectedMS+'>MS</option>' 
+									+ '<option value="MF" '+selectedMF+'>MF</option>';    
+			         
+			     
+				$("#tokenType").empty();
+				$("#tokenType").append(tokenTypeHtml);
+				
 				$("#keyCont1").val(obj.key_cont1.trim());
 				$("#keyCont2").val(obj.key_cont2.trim());
 				$("#avUrl").val(obj.video_url.trim());
@@ -57,6 +94,10 @@ function getTokenScreenConfig () {
 				$("#footerUpdateLabel").val(obj.ticker_label.trim());
 				$("#footerUpdate").val(obj.ticker_text.trim());
 				$("#recordid").val(obj.id);
+				
+				$('#tokenTypeVal').val(obj.token_type.trim());
+				
+				$("#generateScreenBtn").attr("href", PAGECONTEXT_GV+"tokenScreen?tokentype="+$('#tokenTypeVal').val()+"&projectid="+$('#projectid').val()+"&projectname="+$('#projectname').val())
           }
     });
 }

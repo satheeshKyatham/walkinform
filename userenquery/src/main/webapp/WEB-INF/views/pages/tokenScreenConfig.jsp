@@ -1,6 +1,6 @@
 <div class="row">
 	<input type="text" id="recordid" class="form-control" style="display:none;">
-	<div class="form-group col-md-2" style="display:none;">
+	<div class="form-group col-md-2">
 		<label>Token Type:</label>
 		<select id="tokenType" class="form-control">
 			<option value="All" selected="">All</option>
@@ -10,6 +10,10 @@
 			<option value="MS">MS</option>
 			<option value="MF">MF</option>
 		</select> 
+	</div>
+	<div class="form-group col-md-2">
+		<label>Submitted Token Type:</label>
+		<input type="text" id="tokenTypeVal" class="form-control" readonly>
 	</div>
 	<div class="clearfix"></div>
 	<div class="form-group col-md-5">
