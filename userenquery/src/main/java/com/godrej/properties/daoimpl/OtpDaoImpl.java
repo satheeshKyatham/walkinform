@@ -81,7 +81,7 @@ public class OtpDaoImpl extends AbstractDao<Integer, OTP> implements OtpDao {
 				{
 					SendSMS.SMSSend(mobileno,otp_str+msg);
 					/* Call for Shree SMS*/
-					SendSMS.ShreeSMSSend(mobileno,otp_str+msg);
+					//SendSMS.ShreeSMSSend(mobileno,otp_str+msg);
 				}
 				
 			}
@@ -90,7 +90,7 @@ public class OtpDaoImpl extends AbstractDao<Integer, OTP> implements OtpDao {
 				{
 					SendSMS.SMSSend(mobileno,list.get(0).getOtp()+msg);
 					/* Call for Shree SMS*/
-					SendSMS.ShreeSMSSend(mobileno,otp_str+msg);
+					//SendSMS.ShreeSMSSend(mobileno,otp_str+msg);
 				}
 				otp=new OTP();
 				otp=list.get(0);
@@ -160,7 +160,7 @@ public class OtpDaoImpl extends AbstractDao<Integer, OTP> implements OtpDao {
 			isbpassed=true;
 		}
 		else
-			OtpGenerate.OTP();
+			otp_str=OtpGenerate.OTP();
 		OTP otp= new OTP();
 		otp.setMobileno(mobileno);
 		otp.setOtp(otp_str);
@@ -196,7 +196,7 @@ public class OtpDaoImpl extends AbstractDao<Integer, OTP> implements OtpDao {
 					{
 						SendSMS.SMSSend(countryCode+mobileno,otp_str+msg);
 						/* Call for Shree SMS*/
-						SendSMS.ShreeSMSSend(countryCode+mobileno,otp_str+msg);
+						//SendSMS.ShreeSMSSend(countryCode+mobileno,otp_str+msg);
 					}
 				}
 				else
@@ -214,7 +214,7 @@ public class OtpDaoImpl extends AbstractDao<Integer, OTP> implements OtpDao {
 					{
 						SendSMS.SMSSend(countryCode+mobileno,list.get(0).getOtp()+msg);
 						/* Call for Shree SMS*/
-						SendSMS.ShreeSMSSend(countryCode+mobileno,otp_str+msg);
+						//SendSMS.ShreeSMSSend(countryCode+mobileno,otp_str+msg);
 					}
 				}
 				else
@@ -236,7 +236,7 @@ public class OtpDaoImpl extends AbstractDao<Integer, OTP> implements OtpDao {
 				if(!isbpassed)
 				{
 					SendSMS.SMSSend(countryCode+mobileno,otp.getOtp()+msg);
-					SendSMS.ShreeSMSSend(countryCode+mobileno,otp_str+msg);
+					//SendSMS.ShreeSMSSend(countryCode+mobileno,otp_str+msg);
 				}
 			}
 			else

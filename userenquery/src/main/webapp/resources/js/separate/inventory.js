@@ -76,7 +76,7 @@ function holdExistData () {
 				
 				$('#inventoryBreadcrumb').empty();
 				
-				$('#inventoryBreadcrumb').append('<div style="min-height: 40px; text-align: right; background-color: #0077b9; color: #fff; padding-right: 15px; "> Property Release in <span class="holdCountdown"></span> min. </div>');
+				$('#inventoryBreadcrumb').append('<div style="min-height: 40px; text-align: right; background-color: #26262a; color: #fff; padding-right: 15px; "> Property Release in <span class="holdCountdown"></span> min. </div>');
 				$('#inventoryBreadcrumb').append("<nav aria-label='breadcrumb'><ol class='breadcrumb'> <li class='breadcrumb-item'><a>Held by You</a></li> <li class='breadcrumb-item'> Tower: "+obj[i].tower_name+" </li> <li class='breadcrumb-item'>Floor: "+obj[i].floor_no+"</li>  <li class='breadcrumb-item'>Unit No: "+obj[i].unit_no+" </li>  <li class='breadcrumb-item pull-right' onclick='releaseFromHold(this, "+unitId+", "+customerId+")'><a>Release Unit for other</a></li> </ol></nav>");
 			}
 		} else {

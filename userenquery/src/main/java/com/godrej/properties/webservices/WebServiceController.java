@@ -1579,14 +1579,14 @@ public class WebServiceController<MultipartFormDataInput> {
 
 				SendSMS.SMSSend(customerContact.getMobileNo(), text);
 				SendSMS.ShreeSMSSend(customerContact.getMobileNo(), text);
-				String otpbypass = sysConfigService.getValue(SysConfigEnum.APPROVAL_OTP_BYPASS,"APPROVAL_OTP_BYPASS");
-				if(otpbypass.equals("true")) {
-					String smtpip = sysConfigService.getValue(SysConfigEnum.SMTP_IP, "SMTP_IP");
-					String smtpPort = sysConfigService.getValue(SysConfigEnum.SMTP_PORT, "SMTP_PORT");
-					String subject="Offer Approval OTP";
-					SendMailThreadUtil mail =new SendMailThreadUtil(customerContact.getEmailid(),	"sathish.kyatham@godrejproperties.com", subject, emailText,smtpip,smtpPort);
+				/*String otpbypass = sysConfigService.getValue(SysConfigEnum.APPROVAL_OTP_BYPASS,"APPROVAL_OTP_BYPASS");
+				if(otpbypass.equals("true")) {*/
+				String smtpip = sysConfigService.getValue(SysConfigEnum.SMTP_IP, "SMTP_IP");
+				String smtpPort = sysConfigService.getValue(SysConfigEnum.SMTP_PORT, "SMTP_PORT");
+				String subject="D4U - OTP for Offer Approval";
+				SendMailThreadUtil mail =new SendMailThreadUtil(customerContact.getSitehead_user_mail(),"", subject, emailText,smtpip,smtpPort);
 					/*SendMailThreadUtil mail =new SendMailThreadUtil(customerContact.getEmailid(),	"sathish.kyatham@godrejproperties.com", subject, emailText,smtpip,smtpPort);*/
-				}
+				/*}*/
 				// SendSMS.SMSSend(mobileNo, text);
 
 				// SendSMS.SMSSend("8356919019", text);

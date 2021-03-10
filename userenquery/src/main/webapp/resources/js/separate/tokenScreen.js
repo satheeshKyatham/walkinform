@@ -8,7 +8,8 @@ $.ajaxSetup({
 
 let searchParams = new URLSearchParams(window.location.search)
 var projectid = searchParams.get('projectid');
-var projectname = searchParams.get('projectname');;
+var projectname = searchParams.get('projectname');
+var tokentypeval = searchParams.get('tokentype');
 
 //var pageContext = $("#pageContext").val()+'/';
 
@@ -128,7 +129,7 @@ function screendata (obj) {
 }
 
 function getAssignedList() {
-	var urlPPtoken = "getAssignedTokenScreen?tokenType=All&projectid="+projectid;
+	var urlPPtoken = "getAssignedTokenScreen?tokenType="+tokentypeval+"&projectid="+projectid;
 	var contactName = "";
 	var html = '';
 	
@@ -170,7 +171,7 @@ function getAssignedList() {
 }
 
 function getPendingAssignList(){	
-	var urlPP = "getUpcomingTokenScreen?tokenType=All&ProjectId="+projectid;
+	var urlPP = "getUpcomingTokenScreen?tokenType="+tokentypeval+"&ProjectId="+projectid;
 	var contactName = "";
 	var htmlNext = '';
 	var htmlLater = '';
