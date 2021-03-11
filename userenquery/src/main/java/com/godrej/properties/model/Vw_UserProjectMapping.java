@@ -40,6 +40,7 @@ public class Vw_UserProjectMapping {
 	@Column(name = "isstlead") private String isstlead;
 	@Column(name = "isctlead") private String isctlead;
 	@Column(name = "region__c") private String region__c;
+	@Column(name = "sitehead_user_mail") private String sitehead_user_mail;
 	@Transient private String	msg  ;
 	
 	
@@ -187,6 +188,12 @@ public class Vw_UserProjectMapping {
 	}
 	public void setRegion__c(String region__c) {
 		this.region__c = region__c;
+	}
+	public String getSitehead_user_mail() {
+		return sitehead_user_mail;
+	}
+	public void setSitehead_user_mail(String sitehead_user_mail) {
+		this.sitehead_user_mail = sitehead_user_mail;
 	}
 	
 	

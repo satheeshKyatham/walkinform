@@ -88,7 +88,7 @@ function onProjectSelect(source) {
 		  }
 		  else if($('#loged_role').val()=='15') 
 		  {
-			  window.location.href = "paymentapproval?projectid="+$('#projectSelected').val()+"&projectname="+$('#projectSelected option:selected').text();;
+			  window.location.href = "paymentapproval?projectid="+$('#projectSelected').val()+"&projectname="+$('#projectSelected option:selected').text()+"&region_name="+$('#projectSelected option:selected').attr('name');
 		  }
 		  else if($('#loged_role').val()=='16')
 		  {
