@@ -1578,7 +1578,7 @@ public class WebServiceController<MultipartFormDataInput> {
 				}
 
 				SendSMS.SMSSend(customerContact.getMobileNo(), text);
-				SendSMS.ShreeSMSSend(customerContact.getMobileNo(), text);
+				//SendSMS.ShreeSMSSend(customerContact.getMobileNo(), text);
 				/*String otpbypass = sysConfigService.getValue(SysConfigEnum.APPROVAL_OTP_BYPASS,"APPROVAL_OTP_BYPASS");
 				if(otpbypass.equals("true")) {*/
 				String smtpip = sysConfigService.getValue(SysConfigEnum.SMTP_IP, "SMTP_IP");

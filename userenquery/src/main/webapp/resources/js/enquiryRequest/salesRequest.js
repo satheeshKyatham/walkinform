@@ -294,7 +294,7 @@ function getEnquiryForSales(){
 		$("#salesTabId").show();
 		
 		$("#paymentDetailsTab").show();
-		$("#eoisaveclose").hide();
+		/*$("#eoisaveclose").hide();*/
 		
 	}
 	
