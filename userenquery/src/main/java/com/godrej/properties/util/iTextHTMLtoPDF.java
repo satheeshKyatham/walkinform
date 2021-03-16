@@ -153,7 +153,10 @@ public static void ApplicationFormPDF(String appFormData, String enqSfid, String
 	      } else if(projectid.equals("a1l6F000002X6IOQA0") ){
 	    	  projectName = "The Highlands at Godrej City, Panvel";
 	    	  reraLabel = "RERA registration no.";
-	      }else {
+	      } else if (projectid.equals("a1l6F000004RvPHQA0") ) {
+	    	  projectName = "Vanaangan at Godrej Garden City";
+	    	  reraLabel = "RERA registration no.";
+	      } else {
 	    	  reraLabel = "RERA registration no.";
 	    	 // reraRegistrationNo = reraRegistrationNo;
 	      }

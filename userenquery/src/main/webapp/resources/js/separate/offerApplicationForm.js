@@ -907,7 +907,7 @@ function printApplicationOfferForm(offerSFID, rowId) {
 	
 	var projectName1 = "";
 	
-	if ($('#projectid').val() == "a1l6F000003TXloQAG" || $('#projectid').val() == "a1l2s000000XmaMAAS" || $('#projectid').val() == "a1l6F000002X6IOQA0"){
+	if ($('#projectid').val() == "a1l6F000004RvPHQA0" || $('#projectid').val() == "a1l6F000003TXloQAG" || $('#projectid').val() == "a1l2s000000XmaMAAS" || $('#projectid').val() == "a1l6F000002X6IOQA0"){
 		reraRegistrationNo = towerReraRegistrationNo;
 	}
 	
