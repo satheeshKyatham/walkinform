@@ -2615,15 +2615,21 @@ function newOtherCharges2 () {
              
               $('#flatCostWithDiscount').val(parseFloat(parseFloat($('#scOtherChrgAmount0').text())));
              
+              var totalALabel = "Sale Consideration (A)"; 
              
+              if($('#projectid').val() == 'a1l2s00000002YZAAY') {
+            	  totalALabel = "Sale Consideration/Cost of Property (A)";
+              } 
+              
+              
              //Old
-             $('#salesConsideration tbody').append('<tr> <th class="subHead"> Sale Consideration (A) </th> <th class="txtRight salesConsiderationTotalNew" id="salesConsiderationTotal" style="text-align:right;">'+ TotalA +'</th>    </tr>');
+             $('#salesConsideration tbody').append('<tr> <th class="subHead"> '+totalALabel+' </th> <th class="txtRight salesConsiderationTotalNew" id="salesConsiderationTotal" style="text-align:right;">'+ TotalA +'</th>    </tr>');
              
              
              
              //-----------------
              
-             $('#printSalesConsideration tbody').append('<tr> <th class="subHead"> Sale Consideration (A) </th> <th class="txtRight" id="salesConsiderationTotal" style="text-align:right;">'+ TotalA +'</th>    </tr>');
+             $('#printSalesConsideration tbody').append('<tr> <th class="subHead"> '+totalALabel+' </th> <th class="txtRight" id="salesConsiderationTotal" style="text-align:right;">'+ TotalA +'</th>    </tr>');
              
              
              
@@ -4194,6 +4200,12 @@ function csChangesForFaridabad () {
 		
 		$('.unitDtlRow3').remove();
 		$('.unitDtlRow7').remove();
+		
+		$('#onlyForPlot').hide();
+		$('.onlyForPlot').remove();
+	} else if ($('#projectId').val() == 'a1l2s00000002YZAAY') {
+		$(".totalABCLabel").html("");
+		$(".totalABCLabel").html("Total Price including Government Levies (A+B+C)");
 		
 		$('#onlyForPlot').hide();
 		$('.onlyForPlot').remove();

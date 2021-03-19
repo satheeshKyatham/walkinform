@@ -657,7 +657,7 @@ function getEnqAndOfferDtl (enqSFID, offerSFID, rowId) {
 			}
 			
 			// Godrej Meridien 2 AND Godrej Exquisite, Mumbai (Thane)
-			if ($("#projectid").val() == "a1l2s000000PJMJAA4" || $("#projectid").val() == "a1l6F000004LVk8QAG" || $("#projectid").val() == "a1l2s00000003BMAAY" || $("#projectid").val() == "a1l2s00000003VlAAI" || $("#projectid").val() == "a1l2s000000XmaMAAS" || $("#projectid").val() == "a1l2s000000PGu3AAG" || $("#projectid").val() == "a1l2s000000PGu8AAG" || $("#projectid").val() == "a1l2s000000PGuDAAW" || $("#projectid").val() == "a1l2s000000PGuIAAW" || $("#projectid").val() == "a1l2s000000PGuNAAW" || $("#projectid").val() == "a1l2s000000PGuSAAW") {
+			if ($("#projectid").val() == "a1l2s00000002YZAAY" || $("#projectid").val() == "a1l2s000000PJMJAA4" || $("#projectid").val() == "a1l6F000004LVk8QAG" || $("#projectid").val() == "a1l2s00000003BMAAY" || $("#projectid").val() == "a1l2s00000003VlAAI" || $("#projectid").val() == "a1l2s000000XmaMAAS" || $("#projectid").val() == "a1l2s000000PGu3AAG" || $("#projectid").val() == "a1l2s000000PGu8AAG" || $("#projectid").val() == "a1l2s000000PGuDAAW" || $("#projectid").val() == "a1l2s000000PGuIAAW" || $("#projectid").val() == "a1l2s000000PGuNAAW" || $("#projectid").val() == "a1l2s000000PGuSAAW") {
 				
 				var totalCarpetNExclusiveArea = 0;
 				
@@ -1007,6 +1007,9 @@ function otherChargesUnit(otherCharges, saleable_area__c, totalSaleConsideration
 			$("#totalSaleConsiderationOffer").text(parseInt(parseInt(otherCharge)+parseInt(totalSaleConsideration)).toFixed(2));
 			
 			convertNumberToWords ();
+		} else if ($("#projectid").val() == "a1l2s00000002YZAAY") {
+			var Other_Charges = otherCharges.Other_Charges;
+			processTotalOtherCharges (Other_Charges, saleable_area__c, totalSaleConsideration);
 		}
 		
 		
