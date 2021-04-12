@@ -720,7 +720,7 @@
 							<table class="table table-bordered  bgWhite" style="width:100%">
 								<tbody>
 									<tr>
-										<th class="subHead" style="text-align:left; font-size: 10px; font-weight: normal;">
+										<th class="subHead totalABCLabel" style="text-align:left; font-size: 10px; font-weight: normal;">
 											Total Sale Price including Government Levies (A+B+C)
 										</th>
 										<th class="totalABC" width="80" align="right" style="text-align:right !important; font-size: 10px;"> 
@@ -1082,7 +1082,7 @@
 					<tbody>
 						<tr>
 							<th class="subHead">
-								<h5 class="txtLeft">Total Sale Price including Government Levies (A+B+C)</h5>
+								<h5 class="txtLeft totalABCLabel">Total Sale Price including Government Levies (A+B+C)</h5>
 							</th>
 							<th style="width: 135px; vertical-align: middle;" >
 								<h5 id="totalABC" style="font-weight:700" class="txtRight"></h5>

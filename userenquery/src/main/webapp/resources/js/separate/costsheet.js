@@ -169,7 +169,7 @@ $("#getCSData").click(function (){
 function loadData (csSource) {     
 	$('#schemeInput').val("");
 	
-	if ($('#projectId').val() == 'a1l2s000000PJPmAAO' ) {
+	if ($('#projectId').val() == 'a1l2s000000PJPmAAO' || $('#projectId').val() == 'a1l2s00000002YZAAY' ) {
 		schemeInSalesComment();
 	}
 	
@@ -586,13 +586,13 @@ function loadData (csSource) {
 	        	$('.craParkTypeLabel').text('Covered Car Park Space');
 	        } else if ($('#projectId').val() == 'a1l2s000000XoezAAC'){
 	        	$('.craParkTypeLabel').text('Parking Space');
-	        } else if ($('#projectId').val() == 'a1l2s000000PK3IAAW') {
+	        } else if ($('#projectId').val() == 'a1l2s000000PK3IAAW' || $('#projectId').val() == 'a1l2s000000PKrrAAG') {
 	        	$('.craParkTypeLabel').text('Parking Type');
 	        } else {
 	        	$('.craParkTypeLabel').text('Car Park Type');
 	        }
     	   
-    	   	if ($('#projectId').val() == 'a1l2s000000XoezAAC' || $('#projectId').val() == 'a1l2s000000PK3IAAW'){
+    	   	if ($('#projectId').val() == 'a1l2s000000XoezAAC' || $('#projectId').val() == 'a1l2s000000PK3IAAW' || $('#projectId').val() == 'a1l2s000000PKrrAAG'){
     	   		$('.noOfCarParkLabel').text('No. of Parking');
     	   	} else {
     	   		$('.noOfCarParkLabel').text('No. of Car Park');
@@ -739,7 +739,9 @@ function getTaxPercentage(basicSaleprice, projectSfid, currentTaxRate, TotalA, r
 		}  
 		
 		//if (projectSfid == 'a1l2s00000000X5AAI' || projectSfid == 'a1l6F000003TXloQAG'){
-		if (projectSfid == 'a1l2s000000PK3IAAW' || projectSfid == 'a1l2s00000000X5AAI' || projectSfid == 'a1l6F000003TXloQAG' || projectSfid == 'a1l2s000000XoezAAC'){
+		//Remove GST logic for Godrej Garden City - JV 
+		if (projectSfid == 'a1l2s000000PKrrAAG' || projectSfid == 'a1l2s000000PK3IAAW' || projectSfid == 'a1l2s00000000X5AAI' || projectSfid == 'a1l6F000003TXloQAG' || projectSfid == 'a1l2s000000XoezAAC'){
+		//if (projectSfid == 'a1l6F000004RvPHQA0' || projectSfid == 'a1l2s000000PKrrAAG' || projectSfid == 'a1l2s000000PK3IAAW' || projectSfid == 'a1l2s00000000X5AAI' || projectSfid == 'a1l6F000003TXloQAG' || projectSfid == 'a1l2s000000XoezAAC'){
 			if(TotalA>=4500000 || reraCarpetSqm >= 90){
 				return 5;
 			}
@@ -2615,15 +2617,21 @@ function newOtherCharges2 () {
              
               $('#flatCostWithDiscount').val(parseFloat(parseFloat($('#scOtherChrgAmount0').text())));
              
+              var totalALabel = "Sale Consideration (A)"; 
              
+              if($('#projectid').val() == 'a1l2s00000002YZAAY') {
+            	  totalALabel = "Sale Consideration/Cost of Property (A)";
+              } 
+              
+              
              //Old
-             $('#salesConsideration tbody').append('<tr> <th class="subHead"> Sale Consideration (A) </th> <th class="txtRight salesConsiderationTotalNew" id="salesConsiderationTotal" style="text-align:right;">'+ TotalA +'</th>    </tr>');
+             $('#salesConsideration tbody').append('<tr> <th class="subHead"> '+totalALabel+' </th> <th class="txtRight salesConsiderationTotalNew" id="salesConsiderationTotal" style="text-align:right;">'+ TotalA +'</th>    </tr>');
              
              
              
              //-----------------
              
-             $('#printSalesConsideration tbody').append('<tr> <th class="subHead"> Sale Consideration (A) </th> <th class="txtRight" id="salesConsiderationTotal" style="text-align:right;">'+ TotalA +'</th>    </tr>');
+             $('#printSalesConsideration tbody').append('<tr> <th class="subHead"> '+totalALabel+' </th> <th class="txtRight" id="salesConsiderationTotal" style="text-align:right;">'+ TotalA +'</th>    </tr>');
              
              
              
@@ -4194,6 +4202,12 @@ function csChangesForFaridabad () {
 		
 		$('.unitDtlRow3').remove();
 		$('.unitDtlRow7').remove();
+		
+		$('#onlyForPlot').hide();
+		$('.onlyForPlot').remove();
+	} else if ($('#projectId').val() == 'a1l2s00000002YZAAY') {
+		$(".totalABCLabel").html("");
+		$(".totalABCLabel").html("Total Price including Government Levies (A+B+C)");
 		
 		$('#onlyForPlot').hide();
 		$('.onlyForPlot').remove();
