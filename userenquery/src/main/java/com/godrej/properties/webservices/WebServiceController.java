@@ -2637,7 +2637,7 @@ public class WebServiceController<MultipartFormDataInput> {
 		// "+usermaster.getUser_name()+"
 		// Sales Desk User SMS
 		String textsms = cust_name + " with token no. " + tokenNo + " has been assigned to you at "
-				+ formatter.format(ts) + ". Please login and update comments on portal, after the session.";
+				+ formatter.format(ts) + ". Please login and update comments on portal, after the session. Regards, Godrej Properties";
 		String strencryptedText = "";
 		try {
 			strencryptedText = URLEncoder.encode(textsms, "UTF-8");
@@ -2649,7 +2649,7 @@ public class WebServiceController<MultipartFormDataInput> {
 
 		// Customer Message
 		textsms = "Dear " + cust_name + ", you will be greeted shortly by your sales manager " + salesperson
-				+ ". He/She can be reached at " + usermaster.getMobileNo();
+				+ ". He/She can be reached at " + usermaster.getMobileNo()+". Regards, Godrej Properties";
 		// "sales Person +"+salesperson+"/"+cust_name+" with token no.
 		// "+tokenNo+" has been assigned to you at "+formatter.format(ts)+".
 		// Please login and update comments on portal, after the session.";
@@ -3287,7 +3287,7 @@ public class WebServiceController<MultipartFormDataInput> {
 		} else
 			prority = "NA";
 		String msg = "Thank you for coming to the Landmark allotment of " + projectName + ". Your priority number is "
-				+ prority + "";
+				+ prority + ". Regards, Godrej Properties";
 		msg = URLEncoder.encode(msg, "UTF-8");
 		String value = null;
 		try {
