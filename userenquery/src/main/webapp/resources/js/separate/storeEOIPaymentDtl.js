@@ -360,6 +360,8 @@ function getTokenTypeEOI (){
 		html='<option value="F">SERENITY</option>';
 	} else if ($("#projectsfid").val()=='a1l2s000000PJpLAAW') {
 		html='<option value="F">REFUNDABLE</option>';
+	} else if($("#projectsfid").val()=='a1l2s000000g6eqAAA') {
+		html='<option value="F">VIP</option><option value="T">EXPRESS</option>';
 	}
 	
 	
