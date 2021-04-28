@@ -132,7 +132,9 @@ public class PushEnquiryDataServiceImpl  implements PushEnquiryDataService{
 		}
 		else if("Employee".equals(dto.getIsReferredByChannelPartner()) && null!=dto.getWalkInSource())
 		{
-			mediaType="Employee";
+			/*mediaType="Employee";
+			mediaSubType="Employee Referral";*/
+			mediaType="Referral";
 			mediaSubType="Employee Referral";
 			if(dto.getPhasedto()!=null && dto.getPhasedto().getSfid()!=null)
 			{

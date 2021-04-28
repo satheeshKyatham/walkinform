@@ -589,6 +589,9 @@ function checkValidationOnSubmit(id){
 	    	}    
 		}
 		
+		//console.log("ID:" + $(this).attr('id') + "FLAG:" + validationFlag);
+		
+		
 });
 return validationFlag;
 }
