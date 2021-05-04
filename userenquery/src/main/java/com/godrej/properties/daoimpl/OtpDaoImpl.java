@@ -146,7 +146,7 @@ public class OtpDaoImpl extends AbstractDao<Integer, OTP> implements OtpDao {
 	}
 
 	@Override
-	public OTP createOtpCountry(String countryCode, String mobileno) {
+	public OTP createOtpCountry(String countryCode, String mobileno,String cpdirectname) {
 
 		 
 		Session session = this.sessionFactory.getCurrentSession();	
@@ -174,8 +174,8 @@ public class OtpDaoImpl extends AbstractDao<Integer, OTP> implements OtpDao {
 		
 		/* Date : 13-04-2020; Requested By : Prakash Idnni; Change By : Satheesh Kyahtam; Reason: Virtual Meeting changes OTP*/
 //		String msg=" is the access code to initiate your Video Presentation for a Godrej Properties Home.  Kindly share this code with Godrej Properties Relationship Manager for confirming your interest %26 the source of your enquiry [Company Authorized Seller OR Direct through Company Advertisement]".replaceAll(" ", "%20");
-		String msg=" is the access code to initiate your meeting for a Godrej Properties Home.  Kindly share this code with Godrej Properties Relationship Manager for confirming your interest %26 the source of your enquiry [Company Authorized Seller OR Direct through Company Advertisement]".replaceAll(" ", "%20");
-
+//		String msg=" is the access code to initiate your meeting for a Godrej Properties Home.  Kindly share this code with Godrej Properties Relationship Manager for confirming your interest %26 the source of your enquiry [Company Authorized Seller OR Direct through Company Advertisement]".replaceAll(" ", "%20");
+		String msg=" is the access code to initiate your meeting for a Godrej Properties Home.  Kindly share this code with Godrej Properties representative to confirm your interest %26 source of your enquiry - "+cpdirectname+". Regards, Godrej Properties".replaceAll(" ", "%20");
 		List<OTP> list =session.createQuery(" from OTP where isactive='A' and mobileno like '%"+mobileno+"'").list();
 		if(list.size()>0) {
 			

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.godrej.properties.model.CarparkTypeEOI;
 import com.godrej.properties.model.CarparkTypeMst;
+import com.godrej.properties.model.TokenTypeEOI;
 import com.godrej.properties.model.TowerBand;
 import com.godrej.properties.service.CarparkTypeEOIService;
 import com.godrej.properties.service.CarparkTypeMstService;
@@ -53,7 +54,6 @@ public class CarparkTypeMstController {
 		return gson.toJson(plans);
 	}
 	
-	
 	@RequestMapping(value = "/insertCarparkType", method = RequestMethod.POST)
 	public String addSchemePromotional(@RequestParam("region") String region,
 			@RequestParam("projectName") String projectName,
@@ -88,5 +88,24 @@ public class CarparkTypeMstController {
 		return ("inserted");
 	}
 	
+	
+	/*@RequestMapping(value = "/getEOITokenType", method = RequestMethod.GET, produces = "application/json")
+	public String getToken(@RequestParam("project_sfid") String project_sfid) {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		Gson gson = gsonBuilder.create();
+		List<TokenTypeEOI> plans=carparkTypeEOIService.getTokenType(project_sfid);
+		
+		return gson.toJson(plans);
+	}*/	
+	
+	
+	@RequestMapping(value = "/getEOITokenType", method = RequestMethod.POST)
+	public String getEnqDtl(@RequestParam("project_sfid") String project_sfid) {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		Gson gson = gsonBuilder.create();	
+		List<TokenTypeEOI> plans=carparkTypeEOIService.getTokenType(project_sfid);	
+		
+		return gson.toJson(plans);
+	}
 	
 }

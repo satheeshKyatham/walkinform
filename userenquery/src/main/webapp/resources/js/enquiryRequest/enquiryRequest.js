@@ -134,7 +134,7 @@ function populateEnquiryAndContact(resp){
 	}else{			
 		
 		enqSlider();
-	 
+				
 			    $('.enquiryId').val("");
 			    $('.enquiryReportId').val("");
 			    $('.contactReportId').val("");
@@ -193,6 +193,7 @@ function populateEnquiryAndContact(resp){
 		    
 		    $("#officeCity").val("");
 		    $("#officePinCode").val("");
+		    $('#custNameorMobileShow').text("Welcome to "+$('#hiddenMobileNo').val());
 	}
 
 }
@@ -401,6 +402,7 @@ function populateBasicInfo(enq,contact){
 			$('#city').val(contact.city);
 			$('#pinCode').val(contact.pinCode);
 			$('#locality').val(contact.locality);
+			$('#custNameorMobileShow').text("Welcome to "+$('#hiddenMobileNo').val()+"("+contact.firstName+" "+contact.lastName+")");
 			loadContactReport(contact);
 		}
 		 $(this).scrollTop(0);
@@ -859,13 +861,14 @@ function hideEnquirySourceByEnquiryType(enquiryTypeCode,enq){
   }
 }
 function isReferredChanged(cpHS){
-	//debugger;
+	debugger;
 	$("div.sourceCol").hide();
 	$("#isReferredByChannelPartner"+cpHS).show();
 	$(".isReferredByChannelPartner"+cpHS).removeAttr("disabled");
 	$("#isReferredByChannelPartnerRadio"+cpHS).prop("checked",true);
 	var propVal=$("#isReferredByChannelPartnerRadio"+cpHS).attr("propValue");
 	$("#isReferredByChannelPartnerInput").val(propVal);
+	
 	
 	if(cpHS=='CP'){
 		$("#isReferredByChannelPartnerRadioD").prop("checked",false);
@@ -1379,3 +1382,173 @@ function onSelectWalkinSrcReferral(event,el)
 		//$("#brokerContactId").val(brkContId);
 	}
 /*  END  */
+function generateOTP(no) {
+	
+	var cpdirectname="";
+	if($("#hiddenEnquiryTypeOTP").val()=="CP")
+		{
+			cpdirectname = "Channel Partner ("+$("#channelPartnerName").val()+")";
+		}
+	else if($("#hiddenEnquiryTypeOTP").val()=="D")
+		{
+			cpdirectname = "Direct ("+$("#walkInSource").val()+")";
+		}
+	else 
+		cpdirectname = "Channel Partner ("+$("#otherChannelPartnerName").val()+")";
+	if(cpdirectname.length==0)
+		{
+			alert("kinldy eneter mandatory fields");
+		}
+	else{
+		$("#otpInputColDiv").hide();
+		$("#resendotpInputColDiv").show();
+		var url=$("#contextPath").val();
+			if($("#hiddenMobileNo").val()!="")
+				{
+				var countrycode = $("#countryCode").val();
+					$.get(url+"/getdetailsCountry", {
+						"countryCode" : countrycode,
+						"mobileno" : $("#hiddenMobileNo").val(),
+						"cpdirectname" : cpdirectname,
+					}, function(data) {
+						console.log(data);
+					});
+					/*$('.otpColCnt .square_btn span').text('Resend OTP');*/
+					$('.filterCol .otpInput_btn_Div span').text('Resend Access Code');
+				}
+			else
+				{
+					alert("Enter Mobile No.");
+				}
+		}
+}
+
+function reSendOTP(no) {
+	var cpdirectname="";
+	if($("#hiddenEnquiryType").val()=="CP")
+		{
+			cpdirectname = $("#channelPartnerName").val();
+		}
+	else
+		{
+			cpdirectname = $("#walkInSource").val();
+		}
+	var url=$("#contextPath").val();
+		if($("#hiddenMobileNo").val()!="")
+			{
+			var countrycode = $("#countryCode").val();
+				$.get(url+"/getdetailsCountry", {
+					"countryCode" : countrycode,
+					"mobileno" : $("#hiddenMobileNo").val(),
+					"cpdirectname" : cpdirectname,
+				}, function(data) {
+					console.log(data);
+				});
+				/*$('.otpColCnt .square_btn span').text('Resend OTP');*/
+				$('.filterCol .otpInput_btn_Div span').text('Resend Access Code');
+			}
+		else
+			{
+				alert("Enter Mobile No.");
+			}
+}
+function otpvalidate(e) {
+
+	if ($(e).val().length == 6) {
+		//Validate OTP
+		validateOTP(e);
+		//$(".errorOTP").text("Valid");
+		//alert($('#otp_verify').val());
+		//_search_data($('#mobileno').val(),encStr);
+		
+		
+	} else {
+		//alert("Enter valid no");	
+		$(".errorOTP").text("Invalid OTP");
+		$("#respo").val("Invalid");
+		$('#getEnquiry_search_btn').hide();
+		$('#tab_offline_enq').hide();
+		//errorOTP
+
+	}
+}
+function validateOTP(e) {
+	var otp_verify = $(e).val();
+	var url=$("#contextPath").val();
+	if($("#hiddenMobileNo").val()!="")
+			{
+		$.get(url+"/getotpvalid", {
+			"mobileno" : $("#hiddenMobileNo").val(),
+			"OTP" : otp_verify
+		}, function(data) {
+			if (data.otp == undefined) {
+				$(".errorOTP").text("Invalid OTP");
+				$("#respo").val("Invalid");
+				$('#nextInputColDiv').hide();
+				
+			} else {
+				$(".errorOTP").text("Valid");
+				$("#respo").val("Valid");
+				$('#getEnquiry_search_btn').show();
+				$(".getEnquiry_btn").removeAttr("disabled");
+				$('#nextInputColDiv').show();
+				//$('#tab_offline_enq').show();
+			}
+		});
+		}
+}
+
+function verifyNext()
+{
+	if($("#hiddenEnquiryTypeOTP").val()=='CP'){
+		$(".hideDirectTypeOTP").hide();
+		$(".hideChannelPartnerTypeOTP").show();
+		$("#enquirySourceTextDivOTP").show();
+		$("#channelPartnerNameSearchOTP").val($("#channelPartnerNameSearch").val());
+		$('#channelPartnerNameOTP').val($("#channelPartnerName").val());
+		$('#channelPartnerSfidOTP').val($("#channelPartnerSfid").val());
+		$('#channelPartnerIdOTP').val($("#channelPartnerId").val());
+		$('#isReferredByChannelPartnerInputOTP').val($("#isReferredByChannelPartnerInput").val());
+		
+		$("#channelPartnerNameSearchOTP").addClass('disableInputs');
+		$("#isReferredByChannelPartnerRadioOTPCP").addClass('disableInputs');
+		
+	}else if($("#hiddenEnquiryTypeOTP").val()=='D'){
+		$(".hideChannelPartnerTypeOTP").hide();
+		$("#enquirySourceTextDivOTP").hide();
+		if($("#isReferredByChannelPartnerInput").val()!="Direct"){
+			isReferredChanged("D");
+		}
+		$(".hideDirectTypeOTP").hide();/*$(".hideDirectType").show();*/
+		//$("#enquirySourceTextDivOTP").hide();
+		$('#walkInSourceOTP').val($("#walkInSource").val());
+		$('#referredbyIdOTP').val($("#referredbyId").val());
+		$("#walkInSourceOTP").addClass('disableInputs');
+		$("#referredbyIdOTP").addClass('disableInputs');
+		$('#isReferredByChannelPartnerInputOTP').val($("#isReferredByChannelPartnerInput").val());
+		
+	}else if($("#hiddenEnquiryTypeOTP").val()=='O'){
+		$("#isReferredByChannelPartnerRadioOTP"+$("#hiddenEnquiryTypeOTP").val()).prop("checked",true);
+		$(".hideDirectTypeOTP").hide();
+		$(".hideChannelPartnerTypeOTP").show();
+		$("#enquirySourceTextDivOTP").show();
+		$("#otherChannelPartnerNameOTP").val($("#otherChannelPartnerName").val());
+		$("#otherChannelPartnerNameOTP").addClass('disableInputs');
+		$("#isReferredByChannelPartnerRadioOTPO").addClass('disableInputs');
+		$('#isReferredByChannelPartnerInputOTP').val($("#isReferredByChannelPartnerInput").val());
+		//isReferredByChannelPartnerRadioOTPO
+		//isReferredByChannelPartner
+	}
+	$(".hideChannelPartnerTypeOTP").addClass('disableInputs');
+//	var cpHS=$("#hiddenEnquiryType").val();
+	var cpHS=$("#hiddenEnquiryTypeOTP").val();
+	//alert($('label[labelName="isReferredByChannelPartner"][value="'+cpHS+'"]').trigger("click"));
+	$("div.sourceColOTP").hide();
+	$("#isReferredByChannelPartnerOTP"+cpHS).show();
+	
+	$('#enquiryform_div').show();
+	$('#cpdotp_div').hide();
+	$("#isReferredByChannelPartnerRadioOTP"+cpHS).prop("checked",true);
+	$("#isReferredByChannelPartnerRadioOTP"+cpHS).trigger("click");
+}
+

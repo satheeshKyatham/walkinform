@@ -3341,12 +3341,12 @@ public class WebServiceController<MultipartFormDataInput> {
 	}
 
 	@RequestMapping(value = "/getdetailsCountry", method = RequestMethod.GET, produces = "application/json")
-	public String getOtp(@RequestParam("countryCode") String countryCode, @RequestParam("mobileno") String mobileno) {
+	public String getOtp(@RequestParam("countryCode") String countryCode, @RequestParam("mobileno") String mobileno, @RequestParam("cpdirectname") String cpdirectname) {
 		Gson gson = new GsonBuilder().disableHtmlEscaping().create();
 
-		return gson.toJson(otpService.createOtpCountry(countryCode, mobileno));
+		return gson.toJson(otpService.createOtpCountry(countryCode, mobileno,cpdirectname));
 	}
-
+	
 	@RequestMapping(value = "/getotpvalid", method = RequestMethod.GET, produces = "application/json")
 	public String getValidOtp(@RequestParam("mobileno") String mobileno, @RequestParam("OTP") String otp) {
 		Gson gson = new GsonBuilder().disableHtmlEscaping().create();

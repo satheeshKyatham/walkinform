@@ -10,6 +10,14 @@ $.ajaxSetup({
         }
     }
 });
+
+$(document).ready(function() {
+	var today = new Date();
+	var currentDate = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
+	$('#csLogFromDateOffer').val(currentDate);
+	$('#csLogToDateOffer').val(currentDate);
+});
+
 var pageContext = $("#contextPath").val()+"/";	
 
 function getCostsheetLogReportDtl () {
@@ -28,7 +36,7 @@ function getCostsheetLogReportDtl () {
 	$("#csLogReportTable").DataTable().destroy();
 	$("#csLogReportTable tbody").empty();
 	
-	$.post(pageContext+"getCostSheetLogReport",{"projectSfid":$('#projectid').val(), "towerCode":selectedTower.join(",")},function(data){                      
+	$.post(pageContext+"getCostSheetLogReport",{"projectSfid":$('#projectid').val(), "towerCode":selectedTower.join(","), "fromDate":$('#csLogFromDateOffer').val(),"toDate":$('#csLogToDateOffer').val(),},function(data){                      
 		
 		var obj1 =JSON.parse(data);
 		var html = '';

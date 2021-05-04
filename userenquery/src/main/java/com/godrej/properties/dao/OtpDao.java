@@ -5,7 +5,7 @@ import com.godrej.properties.model.UserMaster;
 
 public interface OtpDao {
 	OTP createOtp(String mobileNo);
-	OTP createOtpCountry(String countryCode,String mobileNo);
+	OTP createOtpCountry(String countryCode,String mobileNo,String cpdirectname);
 	OTP getValidOtp(String mobileno, String otp);
 
 	OTP getOtp(String mobileno);
