@@ -225,7 +225,7 @@ public class SalesRequestController {
 			 
 			String textsms = 
 					"Thank you for visiting Godrej Properties. For any further queries, please contact your sales manager "
-					+ ""+USERNAME+" at "+USERMOBILENO+" . " ;
+					+ ""+USERNAME+" at "+USERMOBILENO+" . Regards, Godrej Properties" ;
 					/*
 					"Project Name="+PRONAME+"M="+USERMOBILENO
 					+" with token no. ABC has been assigned to you at . Please login and update comments on portal, after the session.";*/

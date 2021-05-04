@@ -53,9 +53,9 @@ public class OtpServiceImpl implements OtpService {
 	}
 
 	@Override
-	public OTP createOtpCountry(String countryCode, String mobileNo) {
+	public OTP createOtpCountry(String countryCode, String mobileNo,String cpdirectname) {
 		// TODO Auto-generated method stub
-		return otpDao.createOtpCountry(countryCode,mobileNo);
+		return otpDao.createOtpCountry(countryCode,mobileNo,cpdirectname);
 	}
 
  

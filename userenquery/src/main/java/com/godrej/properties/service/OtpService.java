@@ -7,7 +7,7 @@ import com.google.gson.JsonElement;
 public interface OtpService {
 
 	OTP createOtp(String mobileNo);
-	OTP createOtpCountry(String countryCode, String mobileNo);
+	OTP createOtpCountry(String countryCode, String mobileNo,String cpdirectname);
 
 	OTP getValidOtp(String mobileno, String otp); 
 	
