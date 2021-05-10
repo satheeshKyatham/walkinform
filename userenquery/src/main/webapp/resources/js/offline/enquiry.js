@@ -528,6 +528,7 @@ function savebasicInfoResp(data){
 		        dangerMode: true,
 		      }).then(function(isConfirm) {
 		        if (isConfirm) {
+		        	forNextEnquiryCall ();
 		        	console.log('OK');
 		        } 
 		      });	 		
@@ -1163,6 +1164,9 @@ function callForSearch()
 {
 	$("#offline_header_div").hide();
 	$("#fornext_enq_ColDiv").show();
+	
+	
+	$('#tab1 .filterCol').css({'padding-top': '0px', 'background-color' : 'initial'});
 	
 	var cpHS="";
 	//alert($("#isReferredByChannelPartnerInput").val());

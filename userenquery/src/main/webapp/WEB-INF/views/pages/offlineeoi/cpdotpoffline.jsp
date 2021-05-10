@@ -1,4 +1,5 @@
-<div class="row">
+<div class="clearfix"></div>
+<div class="">
 <div>
 	<div class="col-md-12 radioBtnWrp mrgT0">
 		<div class="titleF" id="enquirySourceTextDiv">Is accompanied/ referred by a channel partner? <strong class="mndt">*</strong></div>

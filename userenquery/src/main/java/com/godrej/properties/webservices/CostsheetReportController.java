@@ -28,7 +28,9 @@ public class CostsheetReportController {
 	
 	
 	@RequestMapping(value = "/getCostSheetLogReport", method = RequestMethod.POST)
-	public String getEOIReportDtl(@RequestParam("projectSfid") String projectSfid, @RequestParam("towerCode") String towerCode) {
+	public String getEOIReportDtl(@RequestParam("projectSfid") String projectSfid, 
+			@RequestParam("towerCode") String towerCode,
+			@RequestParam("fromDate") String fromDate, @RequestParam("toDate") String toDate) {
 		
 		String [] multiProjectid= towerCode.split(",");
 		
@@ -50,8 +52,8 @@ public class CostsheetReportController {
 		Gson gson = gsonBuilder.create();
 		String whereCondition = "";
 		
-		if(towerCode != null && towerCode.length()>0) {
-			whereCondition = " a.tower_sfid in ("+finalProjectid+")";
+		if(towerCode != null && towerCode.length()>0 && (fromDate != null && fromDate.length() > 0) && (toDate != null && toDate.length() > 0)) {
+			whereCondition = " a.tower_sfid in ("+finalProjectid+") AND Date(a.createddate) between '"+fromDate+"' AND '"+toDate+"' ";
 		} else {
 			return gson.toJson(null);
 		}

@@ -26,6 +26,14 @@
 					<label>Project(s) </label>
 					<select class="userMultiselectTower" id="csLogReportMultiTower" multiple="multiple"></select>
 				</div>
+				<div class="form-group col-md-3">
+					<label>From Date </label>
+					<input type="date" id="csLogFromDateOffer"></select>
+				</div>
+				<div class="form-group col-md-3">
+					<label>To Date </label>
+					<input type="date" id="csLogToDateOffer"></select>
+				</div>
 				<div class="form-group col-md-2">
 					<label> &nbsp; </label>
 					<button id="getCSLogBtn" onclick="getCostsheetLogReportDtl()" style="line-height:0; color: #fff; background-color: #0077b9;" class="form-control btn btn-primary">

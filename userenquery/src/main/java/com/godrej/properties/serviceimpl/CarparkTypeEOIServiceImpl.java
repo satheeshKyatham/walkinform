@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.godrej.properties.dao.CarparkTypeEOIDao;
 import com.godrej.properties.model.CarparkTypeEOI;
+import com.godrej.properties.model.TokenTypeEOI;
 import com.godrej.properties.service.CarparkTypeEOIService;
 
 @Service("carparkTypeEOIService")
@@ -21,5 +22,10 @@ public class CarparkTypeEOIServiceImpl implements CarparkTypeEOIService {
 	@Override
 	public List<CarparkTypeEOI> getTowerBand(String project_code) {
 		return carparkTypeEOIDao.getTowerBand(project_code);
+	}
+	
+	@Override
+	public List<TokenTypeEOI> getTokenType(String projectsfid) {
+		return carparkTypeEOIDao.getTokenType(projectsfid);
 	}
 }

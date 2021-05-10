@@ -50,7 +50,7 @@
   <body onload="initialize()" >
    
    
-   <nav class="navbar topMainBar">
+   <nav class="navbar topMainBar mobileTopBar">
 	  <div class="container">
 	    <!-- Brand and toggle get grouped for better mobile display -->
 	    <div class="navbar-header">
@@ -60,8 +60,8 @@
 	        <span class="icon-bar"></span>
 	        <span class="icon-bar"></span>
 	      </button> -->
-      	<a class="navbar-brand" href="#">
-			<img class="topLogo" src="<c:url value='/resources/images/gplLogo.jpg' />"/>
+      	<a class="navbar-brand" href="#" style="width: 100%;">
+			<img style="margin: 0 auto;" class="topLogo" src="<c:url value='/resources/images/gplLogo.jpg' />"/>
 		</a>
 	    </div> 
 		
@@ -1262,7 +1262,19 @@
   </div>
 </div>
 	
-	
+	<footer id="d4uFooter"> 
+		<div class="footer-main">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="logo">
+							<img src="/walkinform/resources/images/d4u_logo.png" alt="D4U">
+						</div> 
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
 	
 	
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

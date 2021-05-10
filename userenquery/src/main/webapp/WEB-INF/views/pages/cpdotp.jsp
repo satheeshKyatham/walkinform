@@ -1,6 +1,6 @@
 <div class="row">
-<div>
-<div style="margin-left:15px !important;">
+<div style="margin-top: -10px;">
+<div style="margin-left:15px !important; font-size: 16px; margin-bottom: 20px;">
 	<label id="custNameorMobileShow"></label>
 </div>
 	<div class="col-md-12 radioBtnWrp mrgT0">
@@ -104,40 +104,46 @@
 	<div class="clearfix"></div>
 </div>
 		<div class="clearfix"></div>
-		<div class="form-group col-md-2" id="otpInputColDiv">
-			<div class="group" style="min-height: auto; margin-bottom: 0;">
-				<div class="input-group" id="otpInputDiv">
-					<button class="btn blue_btn square_btn otpInput_btn_Div" onclick="generateOTP(1);">
-						<span>Send OTP</span>
-					</button>
-				</div>
-				
-			</div>
-		</div>
-		<div class="form-group col-md-2" id="resendotpInputColDiv" style="display: none;">
-			<div class="group" style="min-height: auto; margin-bottom: 0;">
-				<div class="input-group" id="otpInputDiv">
-					<button class="btn blue_btn square_btn otpInput_btn_Div" onclick="reSendOTP(1);">
-						<span>ReSend OTP</span>
-					</button>
-				</div>
-				
-			</div>
-		</div>
-		<div class="form-group col-md-2" id="generateOTPColDiv">
-			<div class="group" style="min-height: auto; margin-bottom: 0;">
-				<div class="input-group" id="generateOTPDiv">
-					<span class="validBox">	
-						<input name="otp1" class="otpInput form-control" autocomplete="off" placeholder="Access Code."  onkeyup="otpvalidate(this)">
-					</span>
-				<label class="errorOTP"></label>
+		
+		
+		<div class="col-md-12">
+			<div class="form-group pull-left" id="generateOTPColDiv" style="margin-right:20px;">
+				<div class="group" style="min-height: auto; margin-bottom: 0;">
+					<div class="input-group" id="generateOTPDiv">
+						<span class="validBox">	
+							<input style="font-size:16px; width:150px;" name="otp1" class="otpInput form-control" autocomplete="off" placeholder="Access Code."  onkeyup="otpvalidate(this)">
+						</span>
+					<label class="errorOTP"></label>
+					</div>
 				</div>
 			</div>
+			
+			<div class="form-group pull-left" id="otpInputColDiv">
+				<div class="group" style="min-height: auto; margin-bottom: 0;">
+					<div  class="input-group" id="otpInputDiv" >
+						<button  class="btn blue_btn square_btn otpInput_btn_Div" onclick="generateOTP(1);">
+							<span>Send OTP</span>
+						</button>
+					</div>
+					
+				</div>
+			</div>
+			<div class="form-group pull-left" id="resendotpInputColDiv" style="display: none;">
+				<div class="group" style="min-height: auto; margin-bottom: 0;">
+					<div class="input-group" id="otpInputDiv" >
+						<button class="btn blue_btn square_btn otpInput_btn_Div" onclick="reSendOTP(1);">
+							<span>ReSend OTP</span>
+						</button>
+					</div>
+					
+				</div>
+			</div>
 		</div>
-		<div class="form-group col-md-2" id="nextInputColDiv" style="display: none;">
+		<div class="clearfix"></div>
+		<div class="form-group col-md-12" id="nextInputColDiv" style="display: none;">
 			<div class="group" style="min-height: auto; margin-bottom: 0;">
-				<div class="input-group" id="nextInputCol_Div">
-					<button class="btn blue_btn square_btn nextbuttnInputCol_Div" onclick="verifyNext();">
+				<div class="input-group" id="nextInputCol_Div" style="width:100%">
+					<button style="width:100%" class="btn blue_btn square_btn nextbuttnInputCol_Div" onclick="verifyNext();">
 						<span>Next</span>
 					</button>
 				</div>

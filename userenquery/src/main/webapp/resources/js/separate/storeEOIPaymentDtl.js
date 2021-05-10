@@ -286,7 +286,8 @@ function getEOITabPaymentRecord () {
 
 $("#paymentDetailsTab").click(function(){
 	getTowerEOI ();
-	getTokenTypeEOI();
+	//getTokenTypeEOI();
+	getEOITokenType();
 });
 
 function getTowerEOI (){
@@ -1087,5 +1088,27 @@ function getSampleUnit (e) {
 		} else {
 			alert ("No Record Found");
 		}*/	
+	});	
+}
+
+
+
+function getEOITokenType (e) {
+	
+	var html="";
+	$.post(pageContext+"getEOITokenType",{"project_sfid":$('#projectId').val() },function(data){
+		
+		$('.tokenTypeEOI').find("option:gt(0)").remove();
+		
+		var obj =JSON.parse(data);
+		
+		if(obj!=null){
+			for(var i=0;i<obj.length;i++){
+				html=html+'<option value="'+obj[i].tokentype+'">'+obj[i].tokenname+'</option>';
+			}
+		}
+		
+	}).done(function(obj){
+		$(".tokenTypeEOI ").append(html);
 	});	
 }

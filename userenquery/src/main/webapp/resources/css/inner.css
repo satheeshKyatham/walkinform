@@ -268,6 +268,7 @@ input:-webkit-autofill:active {
 	.padMLR15 {padding-left:15px !important; padding-right:15px !important;}
 	.mrgR0 {margin-right:0px !important;}
 	#OTPModal .modal-sm {width:300px;}
+	.footer-main .logo {margin: 0 auto !important; float: none !important;}
 }
 
 
@@ -630,3 +631,8 @@ body {position: relative; margin: 0; padding-bottom: 6rem; min-height: 100%;}
 .footer-main {padding: 20px 0;}
 
 .btnWrp {z-index:100 !important;}
+
+.mobileTopBar {border-bottom: 1px solid #eaeaea !important; box-shadow: 0 0 5px #e6e6e6 !important;}
+
+.ofBtn {border-radius: 0;  border: 1px solid;  color: #000;  margin-right: 10px;  padding: 5px 10px;}
+.ofBtn:hover {background-color: #fff !important;}
