@@ -1023,10 +1023,6 @@ function openClosingMDashboard()
 /*added by Satheesh - For Add OTP option on offline EOI */
 function generateOTP(no) {
 	
-	$('#generateOTPDiv').show();
-	$('#generateOTPColDiv').show();
-	$(".errorOTP").text('');
-	$("#respo").val("Invalid");
 	if($("#loged_userid").val()=="null")
 		{
 			alert("Session Out, Please re-login");
@@ -1041,26 +1037,35 @@ function generateOTP(no) {
 			var sourcename="";
 			if($("#isReferredByChannelPartnerInput").val()=="Direct")
 				{
-					sourcename="Direct ("+$("#walkInSource").val()+")";
+					if($("#walkInSource").val().length>0)
+						sourcename="Direct ("+$("#walkInSource").val()+")";
 				}
 			else
 				{ 
-				if($("#channelPartnerName").val()!=null)
+				if($("#channelPartnerName").val().length>0)
 					sourcename="Channel Partner ("+$("#channelPartnerName").val()+")";
-				else
+				else if($("#otherChannelPartnerName").val().length>0)
 					sourcename="Channel Partner ("+$("#otherChannelPartnerName").val()+")";
 				}
-				
-			var countrycode = $('.selected-dial-code').text();
-			countrycode=countrycode.slice(0, -3);
-				$.get("getdetailsCountry", {
-					"countryCode" : countrycode,
-					"mobileno" : $("#enMobileNo").val(),
-					"cpdirectname":sourcename,
-				}, function(data) {
-				});
-				/*$('.otpColCnt .square_btn span').text('Resend OTP');*/
-				$('.filterCol .otpInput_btn_Div span').text('Resend Access Code');
+			if(sourcename.length>0)
+				{
+				$('#generateOTPDiv').show();
+				$('#generateOTPColDiv').show();
+				$(".errorOTP").text('');
+				$("#respo").val("Invalid");
+				var countrycode = $('.selected-dial-code').text();
+				countrycode=countrycode.slice(0, -3);
+					$.get("getdetailsCountry", {
+						"countryCode" : countrycode,
+						"mobileno" : $("#enMobileNo").val(),
+						"cpdirectname":sourcename,
+					}, function(data) {
+					});
+					/*$('.otpColCnt .square_btn span').text('Resend OTP');*/
+					$('.filterCol .otpInput_btn_Div span').text('Resend Access Code');
+				}
+			else
+				alert("Please Select Walk-in source Name.");
 			}
 		else
 			{
@@ -1154,11 +1159,18 @@ $(document).bind("contextmenu",function(e) {
 
 function clickForNext()
 {
-	$("#enMobileNo").attr("disabled","disabled");
-	$("#nextbtnDiv").hide();
-	$("#cpdotp_div").show();
-	$("#otpInputColDiv").show();
-	getEnquiry();	
+	if($("#enMobileNo").val()!="")
+	{
+		$("#enMobileNo").attr("disabled","disabled");
+		$("#nextbtnDiv").hide();
+		$("#cpdotp_div").show();
+		$("#otpInputColDiv").show();
+		getEnquiry();	
+	}
+	else
+		{
+		 alert("Please Enter Mobile No.");
+		}
 }
 function callForSearch()
 {
