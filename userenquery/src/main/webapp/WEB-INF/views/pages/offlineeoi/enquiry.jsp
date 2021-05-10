@@ -187,12 +187,13 @@
 			
 			<div class="filterColBg">
 			<div class="filterCol">
-			<div class="form-group col-md-2" id="fornext_enq_ColDiv" style="display: none;">
+			<div class="form-group" id="fornext_enq_ColDiv" style="display: none;">
 					<div class="group" style="min-height: auto; margin-bottom: 0;">
 						<div class="input-group" id="otpInputResetDiv">
-							<button class="btn blue_btn square_btn" onclick="forNextEnquiryCall(this);">
-								<span>For Next Enquiry</span>
-							</button>
+							<a class="btn btn-primary ofBtn btnPrevious" onclick="forNextEnquiryCall(this);">
+								<!-- <span>For Next Enquiry</span> -->
+								<span>Back</span>
+							</a>
 						</div>
 						
 					</div>
@@ -226,8 +227,8 @@
 			<div id="cpdotp_div" style="display: none;">
 				<%@ include file="/WEB-INF/views/pages/offlineeoi/cpdotpoffline.jsp" %>
 			</div>	
-			
-				<div class="form-group col-md-2" id="otpInputColDiv" style="display: none">
+				<div class="col-md-12">
+				<div class="form-group pull-left" id="otpInputColDiv" style="display: none">
 					<div class="group" style="min-height: auto; margin-bottom: 0;">
 						<div class="input-group" id="otpInputDiv">
 							<button class="btn blue_btn square_btn otpInput_btn_Div" onclick="generateOTP(1);">
@@ -247,7 +248,7 @@
 						</div>
 					</div>
 				</div>
-				
+				</div>
 				<!-- <div class="form-group col-md-2">
 					<div class="group" style="min-height: auto; margin-bottom: 0;">
 						<div class="input-group" id="generateOTPDiv">
@@ -737,13 +738,18 @@
 				</div>
 				
 				<div class="txtCenter">
+					<a class="btn btn-primary ofBtn btnPrevious" onclick="forNextEnquiryCall();" >
+						<span>Back</span>
+					</a>
+					
+					<a class="btn btn-primary ofBtn" onclick="openClosingMDashboard(event,this);">
+						<span>Open Dashboard</span>
+					</a>
+					
 					<a class="btn btn-primary btnNext" onclick="saveBaseInfo(event,this);">
 						<span>Submit</span>
 					</a>
 					
-					<a class="btn btn-primary btnNext" onclick="openClosingMDashboard(event,this);">
-						<span>Open Dashboard</span>
-					</a>
 					<div class="clearfix"></div>
 				</div>
 				</form:form>
