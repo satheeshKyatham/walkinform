@@ -528,7 +528,6 @@ function savebasicInfoResp(data){
 		        dangerMode: true,
 		      }).then(function(isConfirm) {
 		        if (isConfirm) {
-		        	forNextEnquiryCall ();
 		        	console.log('OK');
 		        } 
 		      });	 		
