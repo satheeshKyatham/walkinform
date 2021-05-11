@@ -223,7 +223,16 @@
 						
 					</div>
 				</div>
-			
+			<div class="form-group col-md-2" id="reset_btn_ColDiv" style="display: none;">
+					<div class="group" style="min-height: auto; margin-bottom: 0;">
+						<div class="input-group" id="otpInputResetDiv">
+							<button class="btn blue_btn square_btn" onclick="resetOfflineEnq(this);">
+								<span>Refresh</span>
+							</button>
+						</div>
+						
+					</div>
+				</div>
 			<div id="cpdotp_div" style="display: none;">
 				<%@ include file="/WEB-INF/views/pages/offlineeoi/cpdotpoffline.jsp" %>
 			</div>	
@@ -263,16 +272,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="form-group col-md-2" id="reset_btn_ColDiv" style="display: none;">
-					<div class="group" style="min-height: auto; margin-bottom: 0;">
-						<div class="input-group" id="otpInputResetDiv">
-							<button class="btn blue_btn square_btn" onclick="resetOfflineEnq(this);">
-								<span>Reset</span>
-							</button>
-						</div>
-						
-					</div>
-				</div>
+				
 
 
 				<div class="clearfix"></div>

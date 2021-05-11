@@ -34,7 +34,7 @@ function getEnquiry(){
 	//$("#enMobileNo").attr("disabled","disabled");
 	//$(".otpInput").attr("disabled","disabled");
 	//$(".otpInput_btn_Div").attr("disabled","disabled");
-	$(".getEnquiry_btn").attr("disabled","disabled");
+	//$(".getEnquiry_btn").attr("disabled","disabled");
 	
 	
 	//$('#tab_offline_enq').show();
@@ -1134,15 +1134,19 @@ function validateOTP(e) {
 
 function resetOfflineEnq(e)
 {
-	$('#tab_offline_enq').hide();
-	$('#reset_btn_ColDiv').hide();
-	$('#getEnquiry_search_btn').hide();
-	$('.filterCol .otpInput_btn_Div span').text('Access Code');
+	location.reload(true);
+	//$('#tab_offline_enq').hide();
+	//$('#reset_btn_ColDiv').hide();
+	/*$('#cpdotp_div').hide();
+	$('#nextbtnDiv').show();
+	$("#otpInputColDiv").hide();*/
+	//$('#getEnquiry_search_btn').hide();
+	//$('.filterCol .otpInput_btn_Div span').text('Access Code');
 	
-	$("#enMobileNo").removeAttr("disabled");
-	$(".otpInput").removeAttr("disabled");
+	/*$("#enMobileNo").removeAttr("disabled");*/
+	/*$(".otpInput").removeAttr("disabled");
 	$(".otpInput_btn_Div").removeAttr("disabled");
-	$(".otpInput").val('');
+	$(".otpInput").val('');*/
 	 
 }
 
@@ -1158,12 +1162,26 @@ $(document).bind("contextmenu",function(e) {
 
 function clickForNext()
 {
+	$("#mainPageLoad").show();
 	if($("#enMobileNo").val()!="")
 	{
+		var inputCountryCode =  $('.selected-dial-code').text();
+		inputCountryCode = inputCountryCode.slice(0, -3);
 		$("#enMobileNo").attr("disabled","disabled");
 		$("#nextbtnDiv").hide();
 		$("#cpdotp_div").show();
-		$("#otpInputColDiv").show();
+		if(inputCountryCode=="+91")
+			{
+				$("#otpInputColDiv").show();
+				$("#getEnquiry_search_btn").hide();
+			}
+		else
+			{
+			
+				$("#getEnquiry_search_btn").show();
+				$(".getEnquiry_btn").removeAttr("disabled");
+			}
+		$("#reset_btn_ColDiv").show();
 		getEnquiry();	
 	}
 	else
@@ -1173,18 +1191,28 @@ function clickForNext()
 }
 function callForSearch()
 {
-	$("#offline_header_div").hide();
-	$("#fornext_enq_ColDiv").show();
 	
+	var sourcename="";
+	if($("#isReferredByChannelPartnerInput").val()=="Direct")
+		{
+			if($("#walkInSource").val().length>0)
+				sourcename="Direct ("+$("#walkInSource").val()+")";
+		}
+	else
+		{ 
+		if($("#channelPartnerName").val().length>0)
+			sourcename="Channel Partner ("+$("#channelPartnerName").val()+")";
+		else if($("#otherChannelPartnerName").val().length>0)
+			sourcename="Channel Partner ("+$("#otherChannelPartnerName").val()+")";
+		}
 	
-	$('#tab1 .filterCol').css({'padding-top': '0px', 'background-color' : 'initial'});
-	
-	var cpHS="";
-	//alert($("#isReferredByChannelPartnerInput").val());
-	if($("#hiddenEnquiryTypeOTP").val()=='CP'){
-		
-		/*if($("#channelPartnerName").val().length>1)
-			{*/
+	if(sourcename.length>0)
+		{
+		$("#offline_header_div").hide();
+		$("#fornext_enq_ColDiv").show();
+		$('#tab1 .filterCol').css({'padding-top': '0px', 'background-color' : 'initial'});
+		var cpHS="";
+		if($("#hiddenEnquiryTypeOTP").val()=='CP'){
 				$(".hideDirectTypeOTP").hide();
 				$(".hideChannelPartnerTypeOTP").show();
 				$("#enquirySourceTextDivOTP").show();
@@ -1197,55 +1225,46 @@ function callForSearch()
 				$("#channelPartnerNameSearchOTP").addClass('disableInputs');
 				$("#isReferredByChannelPartnerRadioOTPCP").addClass('disableInputs');
 				cpHS="CP";
-			/*}else
-				{
-					$("#isReferredByChannelPartnerRadioOTPO").prop("checked",true);
-					$(".hideDirectTypeOTP").hide();
-					$(".hideChannelPartnerTypeOTP").show();
-					$("#enquirySourceTextDivOTP").show();
-					$("#otherChannelPartnerNameOTP").val($("#otherChannelPartnerName").val());
-					$("#otherChannelPartnerNameOTP").addClass('disableInputs');
-					$("#isReferredByChannelPartnerRadioOTPO").addClass('disableInputs');
-					$('#isReferredByChannelPartnerInputOTP').val($("#isReferredByChannelPartnerInput").val());
-					cpHS="O";
-				}*/
-	}
-	else if($("#hiddenEnquiryTypeOTP").val()=='D')
-		{
-			$(".hideChannelPartnerTypeOTP").hide();
-			$("#enquirySourceTextDivOTP").hide();
-			if($("#isReferredByChannelPartnerInput").val()!="Direct"){
-				isReferredChanged("D");
+		}
+		else if($("#hiddenEnquiryTypeOTP").val()=='D')
+			{
+				$(".hideChannelPartnerTypeOTP").hide();
+				$("#enquirySourceTextDivOTP").hide();
+				if($("#isReferredByChannelPartnerInput").val()!="Direct"){
+					isReferredChanged("D");
+				}
+				$(".hideDirectTypeOTP").hide();
+				$('#walkInSourceOTP').val($("#walkInSource").val());
+				$('#referredbyIdOTP').val($("#referredbyId").val());
+				$("#walkInSourceOTP").addClass('disableInputs');
+				$("#referredbyIdOTP").addClass('disableInputs');
+				$('#isReferredByChannelPartnerInputOTP').val($("#isReferredByChannelPartnerInput").val());
+				cpHS="D";
 			}
-			$(".hideDirectTypeOTP").hide();
-			$('#walkInSourceOTP').val($("#walkInSource").val());
-			$('#referredbyIdOTP').val($("#referredbyId").val());
-			$("#walkInSourceOTP").addClass('disableInputs');
-			$("#referredbyIdOTP").addClass('disableInputs');
-			$('#isReferredByChannelPartnerInputOTP').val($("#isReferredByChannelPartnerInput").val());
-			cpHS="D";
+		else if($("#hiddenEnquiryTypeOTP").val()=='O')
+			{
+				$("#isReferredByChannelPartnerRadioOTPO").prop("checked",true);
+				$(".hideDirectTypeOTP").hide();
+				$(".hideChannelPartnerTypeOTP").show();
+				$("#enquirySourceTextDivOTP").show();
+				$("#otherChannelPartnerNameOTP").val($("#otherChannelPartnerName").val());
+				$("#otherChannelPartnerNameOTP").addClass('disableInputs');
+				$("#isReferredByChannelPartnerRadioOTPO").addClass('disableInputs');
+				$('#isReferredByChannelPartnerInputOTP').val($("#isReferredByChannelPartnerInput").val());
+				cpHS="O";
+			}
+		
+		$("div.sourceColOTP").hide();
+		$("#isReferredByChannelPartnerOTP"+cpHS).show();
+		$(".hideChannelPartnerTypeOTP").addClass('disableInputs');
+		
+		$('#tab_offline_enq').show();
+		$('#cpdotp_div').hide();
+		$("#isReferredByChannelPartnerRadioOTP"+cpHS).prop("checked",true);
+		$("#isReferredByChannelPartnerRadioOTP"+cpHS).trigger("click");
 		}
-	else if($("#hiddenEnquiryTypeOTP").val()=='O')
-		{
-			$("#isReferredByChannelPartnerRadioOTPO").prop("checked",true);
-			$(".hideDirectTypeOTP").hide();
-			$(".hideChannelPartnerTypeOTP").show();
-			$("#enquirySourceTextDivOTP").show();
-			$("#otherChannelPartnerNameOTP").val($("#otherChannelPartnerName").val());
-			$("#otherChannelPartnerNameOTP").addClass('disableInputs');
-			$("#isReferredByChannelPartnerRadioOTPO").addClass('disableInputs');
-			$('#isReferredByChannelPartnerInputOTP').val($("#isReferredByChannelPartnerInput").val());
-			cpHS="O";
-		}
-	
-	$("div.sourceColOTP").hide();
-	$("#isReferredByChannelPartnerOTP"+cpHS).show();
-	$(".hideChannelPartnerTypeOTP").addClass('disableInputs');
-	
-	$('#tab_offline_enq').show();
-	$('#cpdotp_div').hide();
-	$("#isReferredByChannelPartnerRadioOTP"+cpHS).prop("checked",true);
-	$("#isReferredByChannelPartnerRadioOTP"+cpHS).trigger("click");
+	else
+		alert("Please Select Walk-in source Name.");
 }
 
 function forNextEnquiryCall()
@@ -1262,5 +1281,7 @@ function forNextEnquiryCall()
 	$("#fornext_enq_ColDiv").hide();
 	$("#nextbtnDiv").show();
 	$('.filterCol .otpInput_btn_Div span').text('Access Code');
+	$("#reset_btn_ColDiv").hide();
+	
 	
 }

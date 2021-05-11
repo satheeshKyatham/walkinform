@@ -8,6 +8,8 @@ import javax.persistence.Query;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -22,7 +24,7 @@ import com.godrej.properties.util.SendSMS;
 @Repository("otpDao")
 public class OtpDaoImpl extends AbstractDao<Integer, OTP> implements OtpDao {
 
-
+	private Logger log = LoggerFactory.getLogger(getClass());
 	@Autowired
 	private SessionFactory sessionFactory;
 	
@@ -176,6 +178,7 @@ public class OtpDaoImpl extends AbstractDao<Integer, OTP> implements OtpDao {
 //		String msg=" is the access code to initiate your Video Presentation for a Godrej Properties Home.  Kindly share this code with Godrej Properties Relationship Manager for confirming your interest %26 the source of your enquiry [Company Authorized Seller OR Direct through Company Advertisement]".replaceAll(" ", "%20");
 //		String msg=" is the access code to initiate your meeting for a Godrej Properties Home.  Kindly share this code with Godrej Properties Relationship Manager for confirming your interest %26 the source of your enquiry [Company Authorized Seller OR Direct through Company Advertisement]".replaceAll(" ", "%20");
 		String msg=" is the access code to initiate your meeting for a Godrej Properties Home.  Kindly share this code with Godrej Properties representative to confirm your interest %26 source of your enquiry - "+cpdirectname+". Regards, Godrej Properties".replaceAll(" ", "%20");
+		log.info("Message template {}",msg);
 		List<OTP> list =session.createQuery(" from OTP where isactive='A' and mobileno like '%"+mobileno+"'").list();
 		if(list.size()>0) {
 			
@@ -194,7 +197,7 @@ public class OtpDaoImpl extends AbstractDao<Integer, OTP> implements OtpDao {
 				{
 					if(!isbpassed)
 					{
-						SendSMS.SMSSend(countryCode+mobileno,otp_str+msg);
+						SendSMS.SMSSend(countryCode+mobileno,otp_str+msg.replaceAll(" ", "%20"));
 						/* Call for Shree SMS*/
 						//SendSMS.ShreeSMSSend(countryCode+mobileno,otp_str+msg);
 					}

@@ -193,7 +193,7 @@ function populateEnquiryAndContact(resp){
 		    
 		    $("#officeCity").val("");
 		    $("#officePinCode").val("");
-		    $('#custNameorMobileShow').text("Welcome to "+$('#hiddenMobileNo').val());
+		    $('#custNameorMobileShow').text("Mobile No.: "+$('#hiddenMobileNo').val());
 	}
 
 }
@@ -402,7 +402,7 @@ function populateBasicInfo(enq,contact){
 			$('#city').val(contact.city);
 			$('#pinCode').val(contact.pinCode);
 			$('#locality').val(contact.locality);
-			$('#custNameorMobileShow').text("Welcome to "+$('#hiddenMobileNo').val()+"("+contact.firstName+" "+contact.lastName+")");
+			$('#custNameorMobileShow').text("Welcome "+contact.firstName+" "+contact.lastName+"");
 			loadContactReport(contact);
 		}
 		 $(this).scrollTop(0);
