@@ -681,7 +681,7 @@
 					<div class="formDivider" >
 						<div class="col-md-2 col-sm-6 col-xs-12">
 							<div class="group">
-								<select  id="purpose" name="enquiryReport.purpose" class="enquiryFields requiredField">
+								<select  id="purpose" name="enquiryReport.purpose" class="requiredField"><!-- enquiryFields -->
 								            <option value=""></option>									
 	                                        <option value="Personal use">Personal use</option>                                    
 	                                        <option value="Investment">Investment</option> 
