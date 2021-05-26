@@ -118,6 +118,9 @@ userid=(String)ses.getAttribute("USERID");
 				<li id="allotmentReportID" onclick="getAllotmentDashboardReport();">
 					<a href="#allotmentReportTab" data-toggle="tab">Allotment Day Report <i class="fa fa-spinner fa-spin" style="display:none;"></i></a>
 				</li>
+				<li onclick="getCPEngmntReportDtl('MISROLE');" class="cpEngmntSpinner">
+					<a href="#cpEngmntReportTab" data-toggle="tab">CP Engagement <span></span></a>
+				</li>
 			</ul>
 			<div class=""></div>
 		</div>	
@@ -233,6 +236,9 @@ userid=(String)ses.getAttribute("USERID");
 				</div> --%>	
 			<div class="tab-pane" id="allotmentReportTab">
 				<%@ include file="/WEB-INF/views/pages/allotmentReport.jsp" %>
+			</div>	
+			<div class="tab-pane" id="cpEngmntReportTab">
+				<%@ include file="/WEB-INF/views/pages/cpEngagementReport.jsp" %>
 			</div>	
 				
 			</div>
