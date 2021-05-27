@@ -21,6 +21,9 @@ $(document).ready(function() {
 	$('#txtFromDateOffer').val(currentDate);
 	$('#txtToDateOffer').val(currentDate);
 	
+	$('#cancelledOfferFromDate').val(currentDate);
+	$('#cancelledOfferToDate').val(currentDate);
+	
 	getAllEnquiryFormReport();
 	userprojectmultiselect ();
 	  
@@ -306,3 +309,106 @@ function moreDetails (e,enq,i) {
 	$(e).data("clicked", !$(e).data("clicked"));
 }
 /* END add more data fileds after table row*/
+
+
+
+
+
+
+function cancelledOffer(){
+	var project = $('#cancelledOfferProjectDD option:selected');
+	var selectedProjectOffer = [];
+	$(project).each(function(index, brand){
+		selectedProjectOffer.push($(this).val());
+	});
+	
+	$('.cancelledOfferSpinner span').html('<i class="fa fa-spinner fa-spin" style="color:#000"></i>'); 	
+	 
+	var projectid = "";
+	 
+	if(selectedProjectOffer=='' || selectedProjectOffer==null){
+		projectid = $('#projectid').val();
+	} else {
+		projectid = selectedProjectOffer.join(",");
+	}  
+	 
+	$.get("getOfferCancelledList",{"projectid":projectid, "fromDate":$('#cancelledOfferFromDate').val(),"toDate":$('#cancelledOfferToDate').val(), "userVerticals":USER_VERTICALES_GV},function(data){				 
+		
+	}).done(function(data){
+		$("#cancelledOfferTable").DataTable().destroy();
+		
+		$("#cancelledOfferTable tbody").empty();
+		
+		var obj =JSON.stringify(data);
+		var obj1 =JSON.parse(obj);
+		var html = '';
+		
+		if(obj1!=null)  {
+			for(var i=0;i<obj1.length;i++){
+				if (obj1[i].qry_msg != "MAX_LIMIT") {
+					 
+					 
+					var verticle__c = '';
+					if (obj1[i].verticle__c != null) {
+						verticle__c = obj1[i].verticle__c;
+					} else {
+						verticle__c = '';
+					}
+					
+					var closing_manager_name__c = '';
+					if (obj1[i].closing_manager_name__c != null) {
+						closing_manager_name__c = obj1[i].closing_manager_name__c;
+					} else {
+						closing_manager_name__c = '';
+					}
+					
+					var sourcing_manager_name__c = '';
+					if (obj1[i].sourcing_manager_name__c != null) {
+						sourcing_manager_name__c = obj1[i].sourcing_manager_name__c;
+					} else {
+						sourcing_manager_name__c = '';
+					}
+					
+					html += "<tr>" +
+								"<td>"+obj1[i].projectname+"</td>" +
+								"<td>"+obj1[i].createddate+"</td>" +
+								"<td>"+obj1[i].enquiryname+"</td>" +
+								"<td>"+obj1[i].propstrength__property_name__c+"</td>" +
+								"<td>"+closing_manager_name__c+"</td>" +
+								"<td>"+sourcing_manager_name__c+"</td>" +
+								"<td>"+verticle__c+"</td>" +
+								"<td>"+obj1[i].contactname+"</td>" +
+								"<td>"+obj1[i].offername+"</td>" +
+							"</tr>";
+	
+					html = html.replace(/undefined/g, " - ");
+					html = html.replace(/null/g, " - ");
+					
+					$("#cancelledOfferTable tbody").empty();
+					$("#cancelledOfferTable tbody").append(html);
+				} else {
+					swal({
+	                	title: "Records exceeding 5000. Please narrow down dates or select few projects",
+	          			text: "Requested records count is: "+obj1[i].qry_count,
+	          			type: "warning",
+	                });
+					
+					$("#swal2-title").css({"font-size": "22px"});
+					return false;
+				}
+			}
+			
+		}
+		
+		$('#cancelledOfferTable').DataTable( {
+			 dom: 'Bfrtip',
+			 "buttons": [
+				 { "extend": 'excel', "text":'Export To Excel',"className": 'btn btn-default btn-xs' }
+		      ],
+		      "order": []
+		 });
+		
+		$('.cancelledOfferSpinner span').html(''); 
+		
+	});	
+}

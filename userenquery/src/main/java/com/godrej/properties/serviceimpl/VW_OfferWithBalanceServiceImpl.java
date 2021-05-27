@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.godrej.properties.dao.VW_OfferWithBalanceDao;
+import com.godrej.properties.model.OfferReport;
 import com.godrej.properties.model.Vw_OfferWithBalance;
 import com.godrej.properties.service.VW_OfferWithBalanceService;
 
@@ -23,5 +24,9 @@ public class VW_OfferWithBalanceServiceImpl implements VW_OfferWithBalanceServic
 		// TODO Auto-generated method stub
 		return vw_OfferWithBalanceDao.getOfferListList(whereCondition);
 	}
-
+	
+	@Override
+	public List<OfferReport> getOfferDtl(String whereCondition) {
+		return vw_OfferWithBalanceDao.getOfferDtl(whereCondition);
+	}
 }
