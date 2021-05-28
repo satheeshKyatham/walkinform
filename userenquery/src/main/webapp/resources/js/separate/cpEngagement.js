@@ -66,6 +66,8 @@ function insertCPEngmnt () {
 		  			//text: "Requested records count is: "+obj1[i].qry_count,
 		  			type: "success",
 		        });
+				
+				getCPEngmntReportDtl('CLOSINGROLE');
 			} else {
 				swal({
 		        	title: "Unable to Submit a Record.",
