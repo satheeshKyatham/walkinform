@@ -636,3 +636,12 @@ body {position: relative; margin: 0; padding-bottom: 6rem; min-height: 100%;}
 
 .ofBtn {border-radius: 0;  border: 1px solid;  color: #000;  margin-right: 10px;  padding: 5px 10px;}
 .ofBtn:hover {background-color: #fff !important;}
+
+/* For Tab Scroll*/
+.navTabsWrapper { position:relative; margin:0 auto; overflow:hidden; height:42px;}
+.navTabList {position:absolute; left:0px; top:0px; min-width:3000px; margin-top:0px;} /* margin-left:12px; */ 
+.navTabList li{display:table-cell; position:relative; text-align:center; cursor:grab; cursor:-webkit-grab; color:#efefef; vertical-align:middle;}
+.navTabScroller {background-color: rgb(0, 0, 0); color: rgb(255, 255, 255); border-bottom: 1px solid #ddd; text-align:center; cursor:pointer; display:none; padding: 14px 10px 14px 10px; font-size: 14px; white-space:no-wrap; vertical-align:middle;}
+.scroller-right{float:right;}
+.scroller-left {float:left;}
+/* END For Tab Scroll*/

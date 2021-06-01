@@ -1,4 +1,10 @@
 $(document).ready(function () {
+	var today = new Date();
+	var currentDate = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
+	$('.cpEngmntFromDateOffer').val(currentDate);
+	$('.cpEngmntToDateOffer').val(currentDate);
+	$('#visit_date').val(currentDate);
+	
 	$('#changeProjectRole').click(function(e) {
 	    e.stopPropagation();
 	});
@@ -398,3 +404,129 @@ function towerCustomList (){
 		return "";
 	}
 }
+
+
+function getCPEngmntReportDtl (source) {
+	
+	$('.cpEngmntSpinner span').html('<i class="fa fa-spinner fa-spin" style="color:#000"></i>'); 
+	
+	var project = "";
+	
+	project = $('#cpEngmntMultiselectProject option:selected');
+	
+	var selectedTower = [];
+	$(project).each(function(index, brand){
+		selectedTower.push($(this).val());
+	});
+	
+	$("#cpEngmntTable").DataTable().destroy();
+	$("#cpEngmntTable tbody").empty();
+	
+	$.post(PAGECONTEXT_GV+"getCPEngmntReport",{"reportSource":source, "userid":$('#userid').val(), "projectSfid":selectedTower.join(","), "fromDate":$('.cpEngmntFromDateOffer').val(),"toDate":$('.cpEngmntToDateOffer').val(),},function(data){                      
+		$("#cpEngmntTable tbody").empty();
+		var obj1 =JSON.parse(data);
+		var html = '';
+		var schemeType = "";
+			
+		if (obj1 != null) {
+			for(var i=0;i<obj1.length;i++){
+				
+				if (obj1[i].qry_msg != "MAX_LIMIT") {
+					
+					html += "<tr>" +
+						"<td>"+obj1[i].visit_date+"</td>" +
+						"<td>"+obj1[i].project_name+"</td>" +
+						"<td>"+obj1[i].cp_name+"</td>" +
+						"<td>"+obj1[i].meeting_place+"</td>" +
+						"<td>"+obj1[i].topic+"</td>" +
+						"<td>"+obj1[i].discussed_point+"</td>" +
+						"<td>"+obj1[i].user_name+"</td>" +
+					" </tr>";
+				
+				} else {
+					swal({
+	                	title: "Records exceeding 5000. Please narrow down project selection or date range",
+	          			text: "Requested records count is: "+obj1[i].qry_count,
+	          			type: "warning",
+	                });
+					
+					$("#swal2-title").css({"font-size": "22px"});
+					return false;
+				}
+			}
+			 
+			html = html.replace(/undefined/g, " - ");
+			html = html.replace(/null/g, " - ");
+			$("#cpEngmntTable tbody").empty();
+			$("#cpEngmntTable tbody").append(html);
+		} else {
+			//alert ("Data not found");
+		}
+	}).done(function(data){
+		$('#cpEngmntTable').DataTable({
+			dom: 'Bfrtip',
+			"buttons": [{ "extend": 'excel', "text":'Export To Excel',"className": 'btn btn-default btn-xs' }],
+			"order": []
+		});
+		$('.cpEngmntSpinner span').html('');
+	}).fail(function(xhr, status, error) {
+		$('.cpEngmntSpinner span').html(''); 
+    });
+}
+
+
+/* For Tab Scroll*/
+var hidWidth;
+var scrollBarWidths = 40;
+
+var widthOfList = function(){
+	var itemsWidth = 0;
+	$('.navTabList li').each(function(){
+		var itemWidth = $(this).outerWidth();
+		itemsWidth+=itemWidth;
+	});
+	return itemsWidth;
+};
+
+var widthOfHidden = function(){
+	return (($('.navTabsWrapper').outerWidth())-widthOfList()-getLeftPosi())-scrollBarWidths;
+};
+
+var getLeftPosi = function(){
+	return $('.navTabList').position().left;
+};
+
+var reAdjust = function(){
+	if (($('.navTabsWrapper').outerWidth()) < widthOfList()) {
+		$('.scroller-right').show();
+	}
+	else {
+		$('.scroller-right').hide();
+	}
+	if (getLeftPosi()<0) {
+		$('.scroller-left').show();
+	}
+	else {
+		$('.navTabItem').animate({left:"-="+getLeftPosi()+"px"},'slow');
+		$('.scroller-left').hide();
+	}
+}
+
+reAdjust();
+
+$(window).on('resize',function(e){  
+	reAdjust();
+});
+
+$('.scroller-right').click(function() {
+	$('.scroller-left').fadeIn('slow');
+	$('.scroller-right').fadeOut('slow');
+	$('.navTabList').animate({left:"+="+widthOfHidden()+"px"},'slow',function(){});
+});
+
+$('.scroller-left').click(function() {
+	$('.scroller-right').fadeIn('slow');
+	$('.scroller-left').fadeOut('slow');
+  	$('.navTabList').animate({left:"-="+getLeftPosi()+"px"},'slow',function(){});
+});   
+/* END For Tab Scroll*/

@@ -134,6 +134,9 @@ if(ses!=null){
 					<li>
 						<a href="#EOIRefundTab" data-toggle="tab" onclick="callEOIREFUND()">EOI Refund</a>
 					</li>
+					<li onclick="cpEngProjectDD(); getCPEngmntReportDtl('CLOSINGROLE');" class="cpEngmntSpinner">
+						<a href="#cpEngagement" data-toggle="tab">CP Engagement <span></span></a>
+					</li>
 				</ul>
 				<div class=""></div>
 			</div>
@@ -354,6 +357,9 @@ if(ses!=null){
 				<div class="tab-pane" id="EOIRefundTab" >
 					<%@ include file="/WEB-INF/views/pages/refundreport/initiateRefundEOI.jsp" %>
 				</div>
+				<div class="tab-pane" id="cpEngagement" >
+					<%@ include file="/WEB-INF/views/pages/cpEngagement.jsp" %>
+				</div>
 				<div class="clearfix"></div>
 			</div>
 		  <div class="clearfix"></div>
@@ -394,6 +400,7 @@ if(ses!=null){
 	<script src="<c:url value='/resources/js/refundreport/initiateRefundEOI.js?v=${sessionScope.version}'/>"></script>	
 	<script src="<c:url value='/resources/js/commonValidation.js?v=${sessionScope.version}' />"></script>
 	<script src="<c:url value='/resources/js/utility.js?v=${sessionScope.version}' />"></script> 
+	<script src="<c:url value='/resources/js/separate/cpEngagement.js?v=${sessionScope.version}'/>"></script>
 	<%@ include file="/WEB-INF/views/pages/footer.jsp" %>
 	
 </body>

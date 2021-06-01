@@ -90,19 +90,19 @@ userid=(String)ses.getAttribute("USERID");
 			<div class="clearfix"></div>
 		</div>
 		
-		<div>
-			<ul class="nav nav-tabs tabNav">
+		<div class="navTabScroller scroller-left"><i class="glyphicon glyphicon-chevron-left"></i></div>
+  		<div class="navTabScroller scroller-right"><i class="glyphicon glyphicon-chevron-right"></i></div>
+		<div class="navTabsWrapper">
+			<ul class="nav nav-tabs tabNav navTabList">
 				<li class="active" id="basicInfoTabId">
 					<a href="#tab1" data-toggle="tab">MIS Report</a>
 				</li>
 				<li id="salesTabId" onclick="getEnqDataForMap()">
 					<a href="#tab2" data-toggle="tab">Walk-in's Map</a>
 				</li>
-				
 				<li id="" onclick="getBookingDataForMap()">
 					<a href="#bookingOnMap" data-toggle="tab">Booking's on Map</a>
 				</li>
-				 
 				<li id="salesTabId" onclick="createdOfferProject()">
 					<a href="#tab3" data-toggle="tab">Created Offer List</a>
 				</li> 
@@ -117,6 +117,12 @@ userid=(String)ses.getAttribute("USERID");
 				</li>
 				<li id="allotmentReportID" onclick="getAllotmentDashboardReport();">
 					<a href="#allotmentReportTab" data-toggle="tab">Allotment Day Report <i class="fa fa-spinner fa-spin" style="display:none;"></i></a>
+				</li>
+				<li onclick="getCPEngmntReportDtl('MISROLE');" class="cpEngmntSpinner">
+					<a href="#cpEngmntReportTab" data-toggle="tab">CP Engagement <span></span></a>
+				</li>
+				<li class="cancelledOfferSpinner" onclick="cancelledOffer();">
+					<a href="#cancelledOfferReportTab" data-toggle="tab">Cancelled Offer <span></span></a>
 				</li>
 			</ul>
 			<div class=""></div>
@@ -234,7 +240,12 @@ userid=(String)ses.getAttribute("USERID");
 			<div class="tab-pane" id="allotmentReportTab">
 				<%@ include file="/WEB-INF/views/pages/allotmentReport.jsp" %>
 			</div>	
-				
+			<div class="tab-pane" id="cpEngmntReportTab">
+				<%@ include file="/WEB-INF/views/pages/cpEngagementReport.jsp" %>
+			</div>	
+			<div class="tab-pane" id="cancelledOfferReportTab">
+				<%@ include file="/WEB-INF/views/pages/cancelledOffer.jsp" %>
+			</div>	
 			</div>
 	</div>
 

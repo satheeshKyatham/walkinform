@@ -169,5 +169,9 @@ public class AdminController {
 	public String chromeerror(ModelMap model,HttpServletRequest request) {
 		 return "chromeerror";
 	}
+	@RequestMapping(value = { "/urlredirect"}, method = RequestMethod.GET)
+	public String urlredirect(ModelMap model,HttpServletRequest request) {
+		 return "urlredirect";
+	}
 	
 }

@@ -92,7 +92,7 @@ public class EnquiryRequestController {
 		/*model.addAttribute("ageGroupList",ageGroupList);*/
 		/*model.addAttribute("requirementList",requirementList);*/
 //		return "enquiryInfo";
-		return "enquiryInfo";
+		return "saleslogin";
 		 
 	}
 	
