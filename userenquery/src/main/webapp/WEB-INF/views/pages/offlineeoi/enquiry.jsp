@@ -871,6 +871,7 @@
 			debugger;
 			var cpHS = $(this).attr('value');
 			$("#hiddenEnquiryTypeOTP").val(cpHS);
+			//$("#isReferredByChannelPartnerInput").val('')
 			isReferredChanged(cpHS);			
 			//$("#cp" + cpHS).addClass("shake");						
 		});

@@ -31,7 +31,24 @@ public class CPEngmntServiceImpl implements CPEngmntService{
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
         String dateInString = aLogDto.getVisit_date();
         Date date = null;
+        Integer cpid = null;
+        String cpsfid = null;
 		try {
+			
+			if (!aLogDto.getCpid().equals("")) {
+				cpid = Integer.parseInt(aLogDto.getCpid());
+			} else {
+				cpid = null;
+			}
+			
+			if (!aLogDto.getCpsfid().equals("")) {
+				cpsfid = aLogDto.getCpsfid();
+			} else {
+				cpsfid = null;
+			}
+			
+			
+			
 			date = formatter.parse(dateInString);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
@@ -55,6 +72,8 @@ public class CPEngmntServiceImpl implements CPEngmntService{
 		aLog.setCreateddate(timestamp);
 		aLog.setUpdateddate(timestamp);
 		
+		aLog.setCpid(cpid);
+		aLog.setCpsfid(cpsfid);
 		 
 		aLog.setIsactive("Y");
 		

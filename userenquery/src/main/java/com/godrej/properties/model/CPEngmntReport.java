@@ -28,6 +28,9 @@ public class CPEngmntReport {
 	@Column(name="topic") private String topic;
 	@Column(name="discussed_point") private String discussed_point;
 	
+	@Column(name="cpid") private Integer cpid;
+	@Column(name="cpsfid") private String cpsfid;
+	
 	@Transient private String qry_count;
 	@Transient private String qry_msg;
 	
@@ -108,5 +111,17 @@ public class CPEngmntReport {
 	}
 	public void setQry_msg(String qry_msg) {
 		this.qry_msg = qry_msg;
+	}
+	public Integer getCpid() {
+		return cpid;
+	}
+	public void setCpid(Integer cpid) {
+		this.cpid = cpid;
+	}
+	public String getCpsfid() {
+		return cpsfid;
+	}
+	public void setCpsfid(String cpsfid) {
+		this.cpsfid = cpsfid;
 	}   
 }

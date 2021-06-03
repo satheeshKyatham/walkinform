@@ -62,6 +62,8 @@
 					<th>Verticle</th>
 					<th>Contact Name</th>
 					<th>Offer Name</th>
+					<th>Reason For Loss</th>
+					<th>Comment</th>
 					<!-- <th>Application</th> -->				
 				  </tr>
 				 </thead> 

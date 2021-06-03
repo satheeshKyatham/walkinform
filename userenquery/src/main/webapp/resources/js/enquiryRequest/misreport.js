@@ -379,6 +379,8 @@ function cancelledOffer(){
 								"<td>"+verticle__c+"</td>" +
 								"<td>"+obj1[i].contactname+"</td>" +
 								"<td>"+obj1[i].offername+"</td>" +
+								"<td>"+obj1[i].propstrength__reason_for_loss__c+"</td>" +
+								"<td>"+obj1[i].propstrength__comment__c+"</td>" +
 							"</tr>";
 	
 					html = html.replace(/undefined/g, " - ");

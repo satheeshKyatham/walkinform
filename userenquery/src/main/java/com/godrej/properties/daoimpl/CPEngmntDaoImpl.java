@@ -53,7 +53,7 @@ public class CPEngmntDaoImpl extends AbstractDao<Integer, CPEngmnt> implements C
 	  		  		
 	  		  		/* Final Query */
 		  		  	Query q = session.createNativeQuery(" SELECT  b.name as project_name, c.user_name, "
-		  		  	+ " a.project_sfid, a.createdby, a.isactive, a.id, a.visit_date, a.cp_name, a.meeting_place, a.topic, a.discussed_point "
+		  		  	+ " a.cpsfid, a.cpid, a.project_sfid, a.createdby, a.isactive, a.id, a.visit_date, a.cp_name, a.meeting_place, a.topic, a.discussed_point "
 					+ " FROM salesforce.nv_cp_engagement a "
 					+ " LEFT JOIN salesforce.nv_projects_c b ON a.project_sfid = b.sfid "
 					+ " LEFT JOIN salesforce.mst_user c ON a.createdby = c.user_id "

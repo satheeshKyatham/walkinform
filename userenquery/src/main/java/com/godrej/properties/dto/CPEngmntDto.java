@@ -11,6 +11,9 @@ public class CPEngmntDto {
 	private String createdby;
 	private String updatedby;  
 	
+	private String cpid;
+	private String cpsfid; 
+	
 	public String getVisit_date() {
 		return visit_date;
 	}
@@ -58,5 +61,17 @@ public class CPEngmntDto {
 	}
 	public void setUpdatedby(String updatedby) {
 		this.updatedby = updatedby;
+	}
+	public String getCpid() {
+		return cpid;
+	}
+	public void setCpid(String cpid) {
+		this.cpid = cpid;
+	}
+	public String getCpsfid() {
+		return cpsfid;
+	}
+	public void setCpsfid(String cpsfid) {
+		this.cpsfid = cpsfid;
 	}
 }

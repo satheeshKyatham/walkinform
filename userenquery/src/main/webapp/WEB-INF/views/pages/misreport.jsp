@@ -105,10 +105,10 @@ userid=(String)ses.getAttribute("USERID");
 				</li>
 				<li id="salesTabId" onclick="createdOfferProject()">
 					<a href="#tab3" data-toggle="tab">Created Offer List</a>
-				</li> 
-				<li onclick="getApplicationList()" id="applicationsListCol">
+				</li>  
+				<!-- <li onclick="getApplicationList()" id="applicationsListCol" >
 					<a href="#applications" data-toggle="tab">Applications <i class="fa fa-spinner fa-spin" style="display:none;"></i> </a>
-				</li>
+				</li> -->
 				<li onclick="getEOIReport()" id="eoiReportTab">
 					<a href="#eoiReport" data-toggle="tab">EOI Report <i class="fa fa-spinner fa-spin" style="display:none;"></i> </a>
 				</li>

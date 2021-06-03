@@ -26,7 +26,7 @@
 	<link rel="stylesheet" href="<c:url value='/resources/css/font-awesome.css' />">
 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
 	<link rel="stylesheet" href="<c:url value='/resources/css/sweetalert2.min.css' />">  
-	
+	<link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel = "stylesheet">
 <%-- <script src="<c:url value='/resources/js/jquery-1.12.4.min.js'/>"></script>
 <script src="<c:url value='/resources/js/bootstrap.min.js'/>"></script> --%>
 
@@ -399,6 +399,11 @@ if(ses!=null){
 	 <script src="<c:url value='/resources/js/sweetalert2.min.js' />"></script>
 	<script src="<c:url value='/resources/js/refundreport/initiateRefundEOI.js?v=${sessionScope.version}'/>"></script>	
 	<script src="<c:url value='/resources/js/commonValidation.js?v=${sessionScope.version}' />"></script>
+	
+	
+	
+    <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+	
 	<script src="<c:url value='/resources/js/utility.js?v=${sessionScope.version}' />"></script> 
 	<script src="<c:url value='/resources/js/separate/cpEngagement.js?v=${sessionScope.version}'/>"></script>
 	<%@ include file="/WEB-INF/views/pages/footer.jsp" %>
