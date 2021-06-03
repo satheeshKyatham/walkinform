@@ -11,8 +11,8 @@
 	<input id="pageContext" value="${pageContext.request.contextPath}" style="display:none;"/>
 	
 	<div style="margin-bottom:15px;">
-		<img src='https://d4u.gplapps.com:8085/walkinform/resources/images/z3.png'/> <b style="margin-right:25px;">Channel Partner</b>
-		<img src='https://d4u.gplapps.com:8085/walkinform/resources/images/Z1596.png'/> <b>Direct</b>
+		<img src='https://d4u.godrejproperties.com/walkinform/resources/images/z3.png'/> <b style="margin-right:25px;">Channel Partner</b>
+		<img src='https://d4u.godrejproperties.com/walkinform/resources/images/Z1596.png'/> <b>Direct</b>
 	</div>
 	
 	<div id="bookingMapLoading" style="text-align: center; display:none;">

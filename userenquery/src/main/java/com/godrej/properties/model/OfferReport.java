@@ -30,6 +30,10 @@ public class OfferReport{
 	@Column(name="isdeleted") private Boolean isdeleted;
 	@Column(name="propstrength__project__c") private String propstrength__project__c;
 	
+	@Column(name="propstrength__reason_for_loss__c") private String propstrength__reason_for_loss__c;
+	@Column(name="propstrength__comment__c") private String propstrength__comment__c;
+	
+	
 	@Transient private String qry_count;
 	@Transient private String qry_msg;
 	
@@ -122,5 +126,17 @@ public class OfferReport{
 	}
 	public void setQry_msg(String qry_msg) {
 		this.qry_msg = qry_msg;
+	}
+	public String getPropstrength__reason_for_loss__c() {
+		return propstrength__reason_for_loss__c;
+	}
+	public void setPropstrength__reason_for_loss__c(String propstrength__reason_for_loss__c) {
+		this.propstrength__reason_for_loss__c = propstrength__reason_for_loss__c;
+	}
+	public String getPropstrength__comment__c() {
+		return propstrength__comment__c;
+	}
+	public void setPropstrength__comment__c(String propstrength__comment__c) {
+		this.propstrength__comment__c = propstrength__comment__c;
 	}
 }

@@ -69,6 +69,8 @@ public class PaymentPlan implements Serializable{
 	@Column(name="wing_block__c") private String  wing_block__c;
 	@Column(name="inventory_category__c") private String  inventory_category__c;
 	
+	@Column(name="Discount_Limit_Amount__c") private BigDecimal  discount_Limit_Amount__c;
+	
 	/* @Column(name="tower_sfid") private String tower_sfid; */
 	
 	
@@ -332,4 +334,11 @@ public class PaymentPlan implements Serializable{
 	public void setPlot_area_sqyd__c(BigDecimal plot_area_sqyd__c) {
 		this.plot_area_sqyd__c = plot_area_sqyd__c;
 	}
+	public BigDecimal getDiscount_Limit_Amount__c() {
+		return discount_Limit_Amount__c;
+	}
+	public void setDiscount_Limit_Amount__c(BigDecimal discount_Limit_Amount__c) {
+		this.discount_Limit_Amount__c = discount_Limit_Amount__c;
+	}
+	
 }

@@ -1927,6 +1927,7 @@ public class WebServiceController<MultipartFormDataInput> {
 			paymentPlanJson.setLength_sqm__c(paym.getLength_sqm__c());
 			paymentPlanJson.setBreadth_sqm__c(paym.getBreadth_sqm__c());
 			paymentPlanJson.setPlot_area_sqyd__c(paym.getPlot_area_sqyd__c());
+			paymentPlanJson.setDiscount_Limit_Amount__c(paym.getDiscount_Limit_Amount__c());
 			
 			// paymentPlanJson.set (paym.getSfid());
 

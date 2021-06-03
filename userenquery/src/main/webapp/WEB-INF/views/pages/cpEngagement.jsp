@@ -31,7 +31,9 @@
 		</div>
 		<div class="form-group col-md-3">
 			<label>CP Name</label>
-			<input id="cp_name" type="text" class="form-control requiredField">
+			<input id="cp_name" type="text" onkeyup="getChannelPartners(event,this);" class="form-control requiredField">
+			 
+			<input style="display:none;" id="cpName" data-cpid="" data-cpname="" data-cpsfid="123">
 		</div>
 		<div class="form-group col-md-3">
 			<label>Place of Meeting</label>
@@ -62,7 +64,7 @@
 		</div>
 		<div class="clearfix"></div>
 		<div class="col-md-12">
-			<button type="submit" class="btn btn-default" onclick="insertCPEngmnt();">Submit</button>
+			<button id="insertCPRec" type="submit" class="btn btn-default" onclick="insertCPEngmnt();">Submit</button>
 		</div>
 		<div class="clearfix"></div>
 	</div>
