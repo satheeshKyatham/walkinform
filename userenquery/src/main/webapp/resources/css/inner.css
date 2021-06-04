@@ -645,3 +645,7 @@ body {position: relative; margin: 0; padding-bottom: 6rem; min-height: 100%;}
 .scroller-right{float:right;}
 .scroller-left {float:left;}
 /* END For Tab Scroll*/
+
+
+#sidemenu #d4uFooter {display: none;}
+#sidemenu {padding-bottom: 200px;}

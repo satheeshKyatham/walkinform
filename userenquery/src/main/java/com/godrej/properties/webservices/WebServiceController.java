@@ -1554,7 +1554,7 @@ public class WebServiceController<MultipartFormDataInput> {
 				Double apr = 0.00;
 
 				apr = (Double.parseDouble(salesConA) / Double.parseDouble(selable));
-				String text = userName + " has requested for a discount of Rs.(" + otherAmount + ") " + "for {"
+				String text = userName + " has requested for a discount of Rs.( " + otherAmount + ") " + "for {"
 						+ propertyname + "} in {" + projectname + "}, Effective APR {" + Math.round(apr)
 						+ "}. Please share the OTP " + OTP + " to approve the discount. ";
 				String emailText=text;

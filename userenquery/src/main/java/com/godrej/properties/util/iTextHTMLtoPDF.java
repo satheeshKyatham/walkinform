@@ -91,9 +91,9 @@ public class iTextHTMLtoPDF {
 	      
 	      //if (projectSfid.equals("a1l2s00000003VlAAI")) {
 	      if (projectSfid.equals("a1l2s000000PGu3AAG") || projectSfid.equals("a1l2s000000PGu8AAG")  || projectSfid.equals("a1l2s000000PGuDAAW") || projectSfid.equals("a1l2s000000PGuIAAW")  || projectSfid.equals("a1l2s000000PGuNAAW") || projectSfid.equals("a1l2s000000PGuSAAW")) {
-	    	  csLogo = "<img width=\"300\" height=\"40\"  src=\"https://d4u.godrejproperties.com/walkinform/resources/images/gplLogoRoyalWoods.jpg\"/>"; 
+	    	  csLogo = "<img width=\"300\" height=\"40\"  src=\"https://d4u.gplapps.com:8085/walkinform/resources/images/gplLogoRoyalWoods.jpg\"/>"; 
 	      } else {
-	    	  csLogo = "<img width=\"191\" height=\"50\"  src=\"https://d4u.godrejproperties.com/walkinform/resources/images/gplLogo.jpg\"/>";
+	    	  csLogo = "<img width=\"191\" height=\"50\"  src=\"https://d4u.gplapps.com:8085/walkinform/resources/images/gplLogo.jpg\"/>";
 	      }
 	      
 	      
@@ -169,9 +169,9 @@ public static void ApplicationFormPDF(String appFormData, String enqSfid, String
 	      
 	      String appFormLogo = "";
 	      if (projectid.equals("a1l2s000000PGu3AAG") || projectid.equals("a1l2s000000PGu8AAG")  || projectid.equals("a1l2s000000PGuDAAW") || projectid.equals("a1l2s000000PGuIAAW")  || projectid.equals("a1l2s000000PGuNAAW") || projectid.equals("a1l2s000000PGuSAAW")) {
-	    	  appFormLogo = "<img width=\"300\" height=\"40\"  src=\"https://d4u.godrejproperties.com/walkinform/resources/images/gplLogoRoyalWoods.jpg\"/>"; 
+	    	  appFormLogo = "<img width=\"300\" height=\"40\"  src=\"https://d4u.gplapps.com:8085/walkinform/resources/images/gplLogoRoyalWoods.jpg\"/>"; 
 	      } else {
-	    	  appFormLogo = "<img height='50' width='191' src='https://d4u.godrejproperties.com/walkinform/resources/images/gplLogo.jpg' />";
+	    	  appFormLogo = "<img height='50' width='191' src='https://d4u.gplapps.com:8085/walkinform/resources/images/gplLogo.jpg' />";
 	      }
 	      //<img height='50' width='191' src='https://d4u.godrejproperties.com/walkinform/resources/images/gplLogo.jpg' />
 	      
