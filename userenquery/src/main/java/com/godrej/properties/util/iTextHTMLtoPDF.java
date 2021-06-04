@@ -91,9 +91,9 @@ public class iTextHTMLtoPDF {
 	      
 	      //if (projectSfid.equals("a1l2s00000003VlAAI")) {
 	      if (projectSfid.equals("a1l2s000000PGu3AAG") || projectSfid.equals("a1l2s000000PGu8AAG")  || projectSfid.equals("a1l2s000000PGuDAAW") || projectSfid.equals("a1l2s000000PGuIAAW")  || projectSfid.equals("a1l2s000000PGuNAAW") || projectSfid.equals("a1l2s000000PGuSAAW")) {
-	    	  csLogo = "<img width=\"300\" height=\"40\"  src=\"https://d4u.gplapps.com:8085/walkinform/resources/images/gplLogoRoyalWoods.jpg\"/>"; 
+	    	  csLogo = "<img width=\"300\" height=\"40\"  src=\"https://d4u.godrejproperties.com/walkinform/resources/images/gplLogoRoyalWoods.jpg\"/>"; 
 	      } else {
-	    	  csLogo = "<img width=\"191\" height=\"50\"  src=\"https://d4u.gplapps.com:8085/walkinform/resources/images/gplLogo.jpg\"/>";
+	    	  csLogo = "<img width=\"191\" height=\"50\"  src=\"https://d4u.godrejproperties.com/walkinform/resources/images/gplLogo.jpg\"/>";
 	      }
 	      
 	      
@@ -169,11 +169,11 @@ public static void ApplicationFormPDF(String appFormData, String enqSfid, String
 	      
 	      String appFormLogo = "";
 	      if (projectid.equals("a1l2s000000PGu3AAG") || projectid.equals("a1l2s000000PGu8AAG")  || projectid.equals("a1l2s000000PGuDAAW") || projectid.equals("a1l2s000000PGuIAAW")  || projectid.equals("a1l2s000000PGuNAAW") || projectid.equals("a1l2s000000PGuSAAW")) {
-	    	  appFormLogo = "<img width=\"300\" height=\"40\"  src=\"https://d4u.gplapps.com:8085/walkinform/resources/images/gplLogoRoyalWoods.jpg\"/>"; 
+	    	  appFormLogo = "<img width=\"300\" height=\"40\"  src=\"https://d4u.godrejproperties.com/walkinform/resources/images/gplLogoRoyalWoods.jpg\"/>"; 
 	      } else {
-	    	  appFormLogo = "<img height='50' width='191' src='https://d4u.gplapps.com:8085/walkinform/resources/images/gplLogo.jpg' />";
+	    	  appFormLogo = "<img height='50' width='191' src='https://d4u.godrejproperties.com/walkinform/resources/images/gplLogo.jpg' />";
 	      }
-	      //<img height='50' width='191' src='https://d4u.gplapps.com:8085/walkinform/resources/images/gplLogo.jpg' />
+	      //<img height='50' width='191' src='https://d4u.godrejproperties.com/walkinform/resources/images/gplLogo.jpg' />
 	      
 	      
 	      String str = "<html><head><style>body{font-size:12px;}.table-bordered {border: 0; border-color: #333333; border-right-width: 1px; border-right-style: solid;  border-bottom-width: 1px; border-bottom-style: solid;} table {font-size:12px; border-collapse: collapse; border-spacing: 1px; width:100%;} th,td {padding:8px;} th {border: 0; border-color: #333333; border-left-width: 1px; border-left-style: solid;  border-top-width: 1px; border-top-style: solid; border-collapse: collapse; border-spacing: 1px; } td {border: 0; border-color: #333333; border-left-width: 1px; border-left-style: solid;  border-top-width: 1px; border-top-style: solid; border-collapse: collapse; border-spacing: 1px; }</style></head><body><table class='' style='margin-top:0px; margin-bottom:15px; text-align:center; font-size:16px;'> <tbody> <tr> <th style='text-transform: uppercase !important; height:100px;  color:#000000;   vertical-align: top; font-size:20px !important; text-align:left; border: 0; border-color: #ffffff; border-left-width: 0px; border-left-style: solid;  border-top-width: 0px; border-top-style: solid; border-collapse: collapse; border-spacing: 1px; '> "+appFormLogo+" </th> <th id='appProjectName' style='text-transform: uppercase !important; height:100px;  color:#666666;   vertical-align: top; font-size:18px !important; text-align:right; border: 0; border-color: #ffffff; border-left-width: 0px; border-left-style: solid;  border-top-width: 0px; border-top-style: solid; border-collapse: collapse; border-spacing: 1px; '> "+projectName+" <div></div> <span style='font-size:10px !important;'>"+reraLabel+" "+reraRegistrationNo+"</span> "+reraWebsite+" </th> </tr> <tr> <th colspan='2' style='border: 0; border-color: #ffffff; border-left-width: 0px; border-left-style: solid;  border-top-width: 0px; border-top-style: solid; border-collapse: collapse; border-spacing: 1px; '> APPLICATION FORM</th> </tr> </tbody> </table>"+appFormData+"</body></html>";

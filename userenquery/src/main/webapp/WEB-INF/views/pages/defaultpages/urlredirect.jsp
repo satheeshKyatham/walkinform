@@ -29,7 +29,7 @@
 <br />  
 <%-- D4U application is now migrated to Amazon Cloud. Please bookmark new URL (https://d4u.godrejpropeties.com) You will be redirected to new URL in <%> seconds. This URL will no longer work after June 30, 2021 --%>
 <div id="dvCountDown" style="display: none;text-align: center;font-size: 30px;font-weight: bold;font-size: larger;" > 
-<p>D4U application is now migrated to Amazon Cloud. Please bookmark new URL <a href="https://d4u.godrejproperties.com">(https://d4u.godrejproperties.com)</a>. You will be redirected to new URL in <span id="lblCount"></span>&nbsp;seconds.</p>
+<p>D4U application is now migrated to Amazon Cloud. Please bookmark new URL <a href="https://d4u.godrejproperties.com">https://d4u.godrejproperties.com</a>. You will be redirected to new URL in <span id="lblCount"></span>&nbsp;seconds.</p>
 <a>https://d4u.gplapps.com:8085/walkinform/saleslogin</a> will no longer work after June 30, 2021. 
 <br/>
 For any queries , send email to d4u support email id.

@@ -106,14 +106,14 @@ function initialize(json) {
 
 		// https://d4u.gplapps.com:8085/walkinform/resources/images/gplLogo.jpg
 
-		var pinStatus = 'https://d4u.gplapps.com:8085/walkinform/resources/images/z4.png'
+		var pinStatus = 'https://d4u.godrejproperties.com/walkinform/resources/images/z4.png'
 
 		if (obj.referred_partner_flag__c == "O") {
-			pinStatus = 'https://d4u.gplapps.com:8085/walkinform/resources/images/z3.png';
+			pinStatus = 'https://d4u.godrejproperties.com/walkinform/resources/images/z3.png';
 		} else if (obj.referred_partner_flag__c == "D") {
-			pinStatus = 'https://d4u.gplapps.com:8085/walkinform/resources/images/Z1596.png';
+			pinStatus = 'https://d4u.godrejproperties.com/walkinform/resources/images/Z1596.png';
 		} else if (obj.referred_partner_flag__c == "CP") {
-			pinStatus = 'https://d4u.gplapps.com:8085/walkinform/resources/images/z3.png';
+			pinStatus = 'https://d4u.godrejproperties.com/walkinform/resources/images/z3.png';
 		}
 
 		var image = {
@@ -210,14 +210,14 @@ function initializeBooking(json) {
 		console.log("obj.residencelat ::: " + obj.residencelat);
 		console.log("obj.residencelng ::: " + obj.residencelng);
 
-		var pinStatus = 'https://d4u.gplapps.com:8085/walkinform/resources/images/z4.png'
+		var pinStatus = 'https://d4u.godrejproperties.com/walkinform/resources/images/z4.png'
 
 		if (obj.referred_partner_flag__c == "O") {
-			pinStatus = 'https://d4u.gplapps.com:8085/walkinform/resources/images/z3.png';
+			pinStatus = 'https://d4u.godrejproperties.com/walkinform/resources/images/z3.png';
 		} else if (obj.referred_partner_flag__c == "D") {
-			pinStatus = 'https://d4u.gplapps.com:8085/walkinform/resources/images/Z1596.png';
+			pinStatus = 'https://d4u.godrejproperties.com/walkinform/resources/images/Z1596.png';
 		} else if (obj.referred_partner_flag__c == "CP") {
-			pinStatus = 'https://d4u.gplapps.com:8085/walkinform/resources/images/z3.png';
+			pinStatus = 'https://d4u.godrejproperties.com/walkinform/resources/images/z3.png';
 		}
 
 		var image = {

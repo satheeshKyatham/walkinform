@@ -118,6 +118,7 @@
 							<input type="text" id="unitSfid" style="display:none;"/> 
 							<input type="text" id="towerSfid" style="display:none;"/> 
 							<input type="text" id="bspGSTTax" style="display:none;"/> 
+							<input type="text" id="unit_limit_amount" style="display:none;"/> 
 							
 							<div class="schemeFilterCol">
 								<div class="form-group col-md-3 col-sm-6">

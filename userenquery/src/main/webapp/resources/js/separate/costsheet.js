@@ -31,16 +31,19 @@ csChangesForFaridabad();
 
 function schemeType (e) {
        if ($(e).val() == 'other'){
+    	  
             $('#schemeSourceCol').hide(); 
             $('#schemeSite').hide();
             $('#schemePromotional').hide();
             
             
     	   	$('#newPlan').empty();
-             $('#updateCRM').hide();
+    	   	$('#newPlan').append('<div class="form-group col-md-3"><label >Rate per sqf </label> <input class="full form-control" id="newPlanVal" value="0" type="number"></div> <div class="form-group col-md-3"><label >Absolute </label> <input class="full form-control" id="otherAbsVal" value="0" type="number"></div> <div class="form-group col-md-3"><label >Percentage </label> <input class="full form-control" id="otherPerVal" value="0" type="number"></div>');
+    	    /* Commented By Satheesh - 02-06-2021*/
+             /*$('#updateCRM').hide();
              $('#otpApprovalCol').show();
+             */
              //$('#newPlan').append('<div class="form-group col-md-4"><label >Other </label> <input class="full form-control" id="newPlanVal" type="number"></div>');
-             $('#newPlan').append('<div class="form-group col-md-3"><label >Rate per sqf </label> <input class="full form-control" id="newPlanVal" value="0" type="number"></div> <div class="form-group col-md-3"><label >Absolute </label> <input class="full form-control" id="otherAbsVal" value="0" type="number"></div> <div class="form-group col-md-3"><label >Percentage </label> <input class="full form-control" id="otherPerVal" value="0" type="number"></div>');
        } else if ($(e).val() == 'noScheme') {
     	   $('#schemeSourceCol').hide(); 
            $('#schemeSite').hide();
@@ -407,6 +410,10 @@ function loadData (csSource) {
                           
                            $('#unitTval').text(value.ID);
                            $('.unitTval').text(value.ID);
+                           /*Added By Satheesh K - Date : 02-06-2021 - Property Wise Discount Approval OTP*/
+                           //alert(value.discount_Limit_Amount__c);
+                           $('#unit_limit_amount').val(value.discount_Limit_Amount__c);
+                           
                            /*Added By Satheesh K - Date : 10-06-2020 - Property Name Added on Cost sheet Page*/
                            $('.unit_property_name').text(value.propstrength__property_name__c);
                            
@@ -2834,7 +2841,39 @@ function newOtherCharges2 () {
              
               
              $('#totalDiscount').text(yres);
-             
+            /* Added by Satheesh - 02-06-2021
+             * Task : Unit Wise discount limit compare with given discount, if it's grater than, ask otp
+             * or less than, without otp create offer*/ 
+             //alert($('#unit_limit_amount').val());
+            // alert($('#finalDiscountValue').val());
+             debugger;
+             if($("#schemeTypeDD").val() == 'other')
+            	 {
+            	 //alert("Limit amount Length"+$('#unit_limit_amount').val().length);
+            	 	if($('#unit_limit_amount').val().length>1)
+            	 		{
+            	 		//alert("Mentioned Limit amount")
+				         if((parseFloat($('#unit_limit_amount').val()))<=(parseFloat($('#finalDiscountValue').val())))
+				        	 {
+				        	 	//alert("Otp approval show")
+				        	 	$('#updateCRM').hide();
+				                $('#otpApprovalCol').show();
+				        	 }
+				         else
+				        	 {
+				        	 	//alert("No Otp approval show")
+				        	 	$('#updateCRM').show();
+				    			$('#otpApprovalCol').hide();
+				    			//$('#newPlan').empty();
+				        	 }
+            	 		}
+            	 	else
+            	 		{
+            	 			//alert("No limit added");
+            	 			$('#otpApprovalCol').show();
+            	 			$('#updateCRM').hide();
+            	 		}
+            	 }
             firstMilstone();
             //paymentPlanMilestone();
        });
