@@ -20,7 +20,7 @@ public class iTextHTMLtoPDF {
 	public static void main( String[] args ) throws DocumentException, IOException
     {
 		try {
-			PDFReport("USEREMAIL_GV", "unitTval", "floorTval", "towerName", "regionName", "projectSfid", "unitSfid", 20, "20", "ProjectName", "Date", "enqSfid", null);
+			PDFReport("USEREMAIL_GV", "unitTval", "floorTval", "towerName", "regionName", "projectSfid", "unitSfid", 20, "20", "ProjectName", "Date", "enqSfid", null, null);
 		} catch (JRException e) {
 			// TODO Auto-generated catch block
 			logger.error("Error : ",e);
@@ -30,7 +30,7 @@ public class iTextHTMLtoPDF {
 		}	
     }
 	
-	public static void PDFReport(String USEREMAIL_GV, String unitTval, String floorTval, String towerName, String regionName, String projectSfid, String unitSfid, long timeId, String csData, String projectName, String currentDate, String enqSfid, String annexureName) throws JRException, IOException {
+	public static void PDFReport(String USEREMAIL_GV, String unitTval, String floorTval, String towerName, String regionName, String projectSfid, String unitSfid, long timeId, String csData, String projectName, String currentDate, String enqSfid, String annexureName, String csLogo) throws JRException, IOException {
 		
 		try {
 			
@@ -87,14 +87,14 @@ public class iTextHTMLtoPDF {
            */
 
 	      
-	      String csLogo = "";
+	      //String csLogo = "";
 	      
 	      //if (projectSfid.equals("a1l2s00000003VlAAI")) {
-	      if (projectSfid.equals("a1l2s000000PGu3AAG") || projectSfid.equals("a1l2s000000PGu8AAG")  || projectSfid.equals("a1l2s000000PGuDAAW") || projectSfid.equals("a1l2s000000PGuIAAW")  || projectSfid.equals("a1l2s000000PGuNAAW") || projectSfid.equals("a1l2s000000PGuSAAW")) {
+	      /*if (projectSfid.equals("a1l2s000000PGu3AAG") || projectSfid.equals("a1l2s000000PGu8AAG")  || projectSfid.equals("a1l2s000000PGuDAAW") || projectSfid.equals("a1l2s000000PGuIAAW")  || projectSfid.equals("a1l2s000000PGuNAAW") || projectSfid.equals("a1l2s000000PGuSAAW")) {
 	    	  csLogo = "<img width=\"300\" height=\"40\"  src=\"https://d4u.gplapps.com:8085/walkinform/resources/images/gplLogoRoyalWoods.jpg\"/>"; 
 	      } else {
 	    	  csLogo = "<img width=\"191\" height=\"50\"  src=\"https://d4u.gplapps.com:8085/walkinform/resources/images/gplLogo.jpg\"/>";
-	      }
+	      }*/
 	      
 	      
 	      
@@ -119,7 +119,7 @@ public class iTextHTMLtoPDF {
 	
 	
 	
-public static void ApplicationFormPDF(String appFormData, String enqSfid, String projectName, String reraRegistrationNo, String projectid) throws JRException, IOException {
+public static void ApplicationFormPDF(String appFormData, String enqSfid, String projectName, String reraRegistrationNo, String projectid, String appFormLogo) throws JRException, IOException {
 		
 		try {
 	      Document document = new Document(PageSize.A4);
@@ -167,12 +167,12 @@ public static void ApplicationFormPDF(String appFormData, String enqSfid, String
 	    	  reraWebsite = "";
 	      }
 	      
-	      String appFormLogo = "";
+	      /*String appFormLogo = "";
 	      if (projectid.equals("a1l2s000000PGu3AAG") || projectid.equals("a1l2s000000PGu8AAG")  || projectid.equals("a1l2s000000PGuDAAW") || projectid.equals("a1l2s000000PGuIAAW")  || projectid.equals("a1l2s000000PGuNAAW") || projectid.equals("a1l2s000000PGuSAAW")) {
 	    	  appFormLogo = "<img width=\"300\" height=\"40\"  src=\"https://d4u.gplapps.com:8085/walkinform/resources/images/gplLogoRoyalWoods.jpg\"/>"; 
 	      } else {
 	    	  appFormLogo = "<img height='50' width='191' src='https://d4u.gplapps.com:8085/walkinform/resources/images/gplLogo.jpg' />";
-	      }
+	      }*/
 	      //<img height='50' width='191' src='https://d4u.godrejproperties.com/walkinform/resources/images/gplLogo.jpg' />
 	      
 	      

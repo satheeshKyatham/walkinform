@@ -395,7 +395,16 @@ function getEnqAndBookingDtl (enqId, applicationBookingId18, rowId) {
 function printApplicationForm(applicationBookingId18, rowId) {
 	var pageContext = $("#pageContext").val()+"/";
 	
-	$.post(pageContext+"printApplicationForm",{"projectid":$('#projectid').val(), "enqSfid":applicationBookingId18,"appFormData":$('#printApplicationForm').html(),"projectName":$('#appProjectName').val(),"reraRegistrationNo":reraRegistrationNo},function(data){				 
+	var appFormLogo ='';
+	
+	if ( $('#projectid').val() == "a1l2s000000PGu3AAG"  || $('#projectid').val() == "a1l2s000000PGu8AAG"  || $('#projectid').val() == "a1l2s000000PGuDAAW" || $('#projectid').val() ==  "a1l2s000000PGuIAAW" || $('#projectid').val() == "a1l2s000000PGuNAAW" || $('#projectid').val() == "a1l2s000000PGuSAAW") {
+  	  appFormLogo = "<img width=\"300\" height=\"40\"  src=\"https://d4u.godrejproperties.com/walkinform/resources/images/gplLogoRoyalWoods.jpg\"/>"; 
+    } else {
+  	  appFormLogo = "<img height='50' width='191' src='https://d4u.godrejproperties.com/walkinform/resources/images/gplLogo.jpg' />";
+    }
+	
+	
+	$.post(pageContext+"printApplicationForm",{"appFormLogo":appFormLogo, "projectid":$('#projectid').val(), "enqSfid":applicationBookingId18,"appFormData":$('#printApplicationForm').html(),"projectName":$('#appProjectName').val(),"reraRegistrationNo":reraRegistrationNo},function(data){				 
 		
 	}).done(function(data){
 		

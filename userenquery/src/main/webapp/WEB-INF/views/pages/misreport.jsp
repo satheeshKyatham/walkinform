@@ -241,7 +241,7 @@ userid=(String)ses.getAttribute("USERID");
 				<%@ include file="/WEB-INF/views/pages/allotmentReport.jsp" %>
 			</div>	
 			<div class="tab-pane" id="cpEngmntReportTab">
-				<%@ include file="/WEB-INF/views/pages/cpEngagementReport.jsp" %>
+				<%@ include file="/WEB-INF/views/pages/cpEngagementReportMIS.jsp" %>
 			</div>	
 			<div class="tab-pane" id="cancelledOfferReportTab">
 				<%@ include file="/WEB-INF/views/pages/cancelledOffer.jsp" %>
