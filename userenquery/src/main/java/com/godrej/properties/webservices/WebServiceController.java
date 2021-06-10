@@ -1451,7 +1451,7 @@ public class WebServiceController<MultipartFormDataInput> {
 														 * on Cost sheet Page
 														 */
 			@RequestParam("salesConA") String salesConA, @RequestParam("projectname") String projectname,
-			@RequestParam("propertyname") String propertyname, HttpServletRequest req) {
+			@RequestParam("propertyname") String propertyname,@RequestParam("limit_amount") String limit_amount, HttpServletRequest req) {
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		Gson gson = gsonBuilder.create();
 		HttpSession httpSession = req.getSession();
@@ -1577,14 +1577,35 @@ public class WebServiceController<MultipartFormDataInput> {
 					e.printStackTrace();
 				}
 
-				SendSMS.SMSSend(customerContact.getMobileNo(), text);
+				
 				//SendSMS.ShreeSMSSend(customerContact.getMobileNo(), text);
 				/*String otpbypass = sysConfigService.getValue(SysConfigEnum.APPROVAL_OTP_BYPASS,"APPROVAL_OTP_BYPASS");
 				if(otpbypass.equals("true")) {*/
 				String smtpip = sysConfigService.getValue(SysConfigEnum.SMTP_IP, "SMTP_IP");
 				String smtpPort = sysConfigService.getValue(SysConfigEnum.SMTP_PORT, "SMTP_PORT");
 				String subject="D4U - OTP for Offer Approval";
-				SendMailThreadUtil mail =new SendMailThreadUtil(customerContact.getSitehead_user_mail(),"", subject, emailText,smtpip,smtpPort);
+				if(limit_amount!=null)
+				{
+					double limit_amount_math=Double.parseDouble(limit_amount);
+					double otherAmount_math=Double.parseDouble(otherAmount);
+					
+					if(limit_amount_math<otherAmount_math)
+					{
+						//send otp to region head
+//						SendMailThreadUtil mail =new SendMailThreadUtil(customerContact.getSitehead_user_mail(),"", subject, emailText,smtpip,smtpPort);
+						userList.get(i).setIsregionhead_approval(true);
+						SendSMS.SMSSend(customerContact.getRegion_head_mobile(), text);
+						new SendMailThreadUtil(customerContact.getRegion_head_email(),"", subject, emailText,smtpip,smtpPort);
+					}
+					else
+					{
+						//send otp to site head
+						SendSMS.SMSSend(customerContact.getMobileNo(), text);
+						new SendMailThreadUtil(customerContact.getSitehead_user_mail(),"", subject, emailText,smtpip,smtpPort);
+					}
+				}
+				
+				
 					/*SendMailThreadUtil mail =new SendMailThreadUtil(customerContact.getEmailid(),	"sathish.kyatham@godrejproperties.com", subject, emailText,smtpip,smtpPort);*/
 				/*}*/
 				// SendSMS.SMSSend(mobileNo, text);

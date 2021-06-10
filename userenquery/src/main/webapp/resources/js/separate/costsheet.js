@@ -31,19 +31,16 @@ csChangesForFaridabad();
 
 function schemeType (e) {
        if ($(e).val() == 'other'){
-    	  
             $('#schemeSourceCol').hide(); 
             $('#schemeSite').hide();
             $('#schemePromotional').hide();
             
             
     	   	$('#newPlan').empty();
-    	   	$('#newPlan').append('<div class="form-group col-md-3"><label >Rate per sqf </label> <input class="full form-control" id="newPlanVal" value="0" type="number"></div> <div class="form-group col-md-3"><label >Absolute </label> <input class="full form-control" id="otherAbsVal" value="0" type="number"></div> <div class="form-group col-md-3"><label >Percentage </label> <input class="full form-control" id="otherPerVal" value="0" type="number"></div>');
-    	    /* Commented By Satheesh - 02-06-2021*/
-             /*$('#updateCRM').hide();
+             $('#updateCRM').hide();
              $('#otpApprovalCol').show();
-             */
              //$('#newPlan').append('<div class="form-group col-md-4"><label >Other </label> <input class="full form-control" id="newPlanVal" type="number"></div>');
+             $('#newPlan').append('<div class="form-group col-md-3"><label >Rate per sqf </label> <input class="full form-control" id="newPlanVal" value="0" type="number"></div> <div class="form-group col-md-3"><label >Absolute </label> <input class="full form-control" id="otherAbsVal" value="0" type="number"></div> <div class="form-group col-md-3"><label >Percentage </label> <input class="full form-control" id="otherPerVal" value="0" type="number"></div>');
        } else if ($(e).val() == 'noScheme') {
     	   $('#schemeSourceCol').hide(); 
            $('#schemeSite').hide();
@@ -1932,7 +1929,8 @@ function otpRequestOC(){
 	        "userName":$('#username').val().split(' ')[0], /*Added By Satheesh K - Date : 10-06-2020 - Property Name Added on Cost sheet Page*/
 	        "salesConA":$('.salesConsiderationTotalNew').text(),
 	        "projectname":$("#projectname").val(),
-	        "propertyname":$(".unit_property_name").text()
+	        "propertyname":$(".unit_property_name").text(),
+	        "limit_amount":$('#unit_limit_amount').val()
 	        
 	        },function(data){                       
 	        
@@ -1941,7 +1939,10 @@ function otpRequestOC(){
 	        		var obj =JSON.parse(data);
 		            var html = '';
 		            for (var i = 0; obj.length > i; i++) {
-		                 html += "<div> OTP sent to "+obj[i].user_name+ " - "  +obj[i].mobileNo+"</div>";
+		            	if(obj[i].isregionhead_approval==true)
+		            		html += "<div> OTP sent to "+obj[i].region_head_name+ " - "  +obj[i].region_head_mobile+"</div>";
+		            	else
+		            		html += "<div> OTP sent to "+obj[i].user_name+ " - "  +obj[i].mobileNo+"</div>";
 		            };
 		             
 		            $("#offerOPTInfo").append(html);
@@ -2846,8 +2847,7 @@ function newOtherCharges2 () {
              * or less than, without otp create offer*/ 
              //alert($('#unit_limit_amount').val());
             // alert($('#finalDiscountValue').val());
-             debugger;
-             if($("#schemeTypeDD").val() == 'other')
+            /* if($("#schemeTypeDD").val() == 'other')
             	 {
             	 //alert("Limit amount Length"+$('#unit_limit_amount').val().length);
             	 	if($('#unit_limit_amount').val().length>1)
@@ -2873,7 +2873,7 @@ function newOtherCharges2 () {
             	 			$('#otpApprovalCol').show();
             	 			$('#updateCRM').hide();
             	 		}
-            	 }
+            	 }*/
             firstMilstone();
             //paymentPlanMilestone();
        });
