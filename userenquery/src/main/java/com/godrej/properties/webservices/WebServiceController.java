@@ -783,7 +783,7 @@ public class WebServiceController<MultipartFormDataInput> {
 			@RequestParam("towerName") String towerName, @RequestParam("regionName") String regionName,
 			@RequestParam("projectSfid") String projectSfid, @RequestParam("unitSfid") String unitSfid,
 			@RequestParam("enqSfid") String enqSfid, @RequestParam("csData") String csData,
-			@RequestParam("projectName") String projectName, @RequestParam("currentDate") String currentDate, @RequestParam("generateFrom") String generateFrom)
+			@RequestParam("projectName") String projectName, @RequestParam("currentDate") String currentDate, @RequestParam("generateFrom") String generateFrom, @RequestParam("logoPath") String logoPath)
 			throws JRException, IOException {
 		log.info("Enter Print Costsheet");
 		GsonBuilder gsonBuilder = new GsonBuilder();
@@ -806,7 +806,7 @@ public class WebServiceController<MultipartFormDataInput> {
 		
 		log.info("");
 		iTextHTMLtoPDF solution = new iTextHTMLtoPDF();
-		solution.PDFReport(USEREMAIL_GV, unitTval, floorTval, towerName, regionName, projectSfid, unitSfid, timeId, csData, projectName, currentDate, enqSfid, csAnnexure);
+		solution.PDFReport(USEREMAIL_GV, unitTval, floorTval, towerName, regionName, projectSfid, unitSfid, timeId, csData, projectName, currentDate, enqSfid, csAnnexure, logoPath);
 		
 		//Base 64
 		String response = "";
@@ -3931,7 +3931,7 @@ public class WebServiceController<MultipartFormDataInput> {
 	public synchronized String printApplicationForm(@RequestParam("projectid") String projectid,
 			@RequestParam("reraRegistrationNo") String reraRegistrationNo,
 			@RequestParam("appFormData") String appFormData, @RequestParam("enqSfid") String enqSfid,
-			@RequestParam("projectName") String projectName) throws JRException, IOException {
+			@RequestParam("projectName") String projectName, @RequestParam("appFormLogo") String appFormLogo) throws JRException, IOException {
 
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		Gson gson = gsonBuilder.create();
@@ -3944,7 +3944,7 @@ public class WebServiceController<MultipartFormDataInput> {
 		 */
 
 		iTextHTMLtoPDF solution = new iTextHTMLtoPDF();
-		solution.ApplicationFormPDF(appFormData, enqSfid, projectName, reraRegistrationNo, projectid);
+		solution.ApplicationFormPDF(appFormData, enqSfid, projectName, reraRegistrationNo, projectid, appFormLogo);
 
 		return gson.toJson("");
 	}

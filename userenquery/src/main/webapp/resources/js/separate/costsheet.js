@@ -3050,9 +3050,15 @@ function printPdfData(generateFrom) {
              $('#csCommitmentTxt').html("<h5>Sales Comments: </h5><span style='font-size:8px !important;'>"+$('#costsheet_commitment').val()+"</span>");
        } 
              
+       var logoPath = '';
+       if ($('#projectId').val() == "a1l2s000000PGu3AAG" || $('#projectId').val() == "a1l2s000000PGu8AAG"  || $('#projectId').val() == "a1l2s000000PGuDAAW" || $('#projectId').val() == "a1l2s000000PGuIAAW"  || $('#projectId').val() == "a1l2s000000PGuNAAW" || $('#projectId').val() == "a1l2s000000PGuSAAW") {
+    	   logoPath = "<img width=\"300\" height=\"40\"  src=\"https://d4u.godrejproperties.com/walkinform/resources/images/gplLogoRoyalWoods.jpg\"/>"; 
+       } else {
+    	   logoPath = "<img width=\"191\" height=\"50\"  src=\"https://d4u.godrejproperties.com/walkinform/resources/images/gplLogo.jpg\"/>";
+       }
        
        
-       $.post(pageContext+"printCSdata",{"generateFrom":generateFrom, "USEREMAIL_GV":USEREMAIL,"unitTval":$('#unitTval').text(), "floorTval":$('#floorTval').text(), "towerName":$('#towerTval').text(), "regionName":$('#region__c').val(), "projectSfid":$('#projectId').val(),"unitSfid":$('#unitSfid').val(),"enqSfid":enqSfid,"csData":$('#getCSDataForPrint').html(), "projectName":$('#marketingProjectName').val(), "currentDate":$.datepicker.formatDate('dd/mm/yy', new Date())},function(data){                           
+       $.post(pageContext+"printCSdata",{"logoPath":logoPath, "generateFrom":generateFrom, "USEREMAIL_GV":USEREMAIL,"unitTval":$('#unitTval').text(), "floorTval":$('#floorTval').text(), "towerName":$('#towerTval').text(), "regionName":$('#region__c').val(), "projectSfid":$('#projectId').val(),"unitSfid":$('#unitSfid').val(),"enqSfid":enqSfid,"csData":$('#getCSDataForPrint').html(), "projectName":$('#marketingProjectName').val(), "currentDate":$.datepicker.formatDate('dd/mm/yy', new Date())},function(data){                           
              
        }).done(function(data){
     	   
