@@ -48,7 +48,14 @@ public class GeneratePayment implements Serializable{
 	@Column(name = "towercode") private String towercode;
 	@Column(name = "towersfid") private String towersfid;
 	@Transient private String transaction_date_string;
+	@Column(name = "requestsource") private String requestsource;
 	
+	public String getRequestsource() {
+		return requestsource;
+	}
+	public void setRequestsource(String requestsource) {
+		this.requestsource = requestsource;
+	}
 	public int getId() {
 		return id;
 	}
