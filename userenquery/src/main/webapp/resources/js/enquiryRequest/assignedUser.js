@@ -8,6 +8,9 @@ $.ajaxSetup({
         }
     }
 });
+var today ='';
+var atFromDate= "";
+var atToDate= "";
 $(document).ready(function() {
 	//setting region name on page load
 	var urlPP = "getSelectedProjectMaster?projectid="+$('#projectid').val();
@@ -17,10 +20,14 @@ $(document).ready(function() {
 	}).error(function() { alert("error");
 	});
 	
-	 var today = new Date();
-	 document.getElementById("txtFromDateAssigned").value = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
-	 document.getElementById("txtToDateAssigned").value = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
-	
+	 today = new Date();
+	 if (sessionStorage.getItem('dateCount') < 1) {
+		 document.getElementById("txtFromDateAssigned").value = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
+		 document.getElementById("txtToDateAssigned").value = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
+	 } else {
+		$("#txtFromDateAssigned").val(sessionStorage.getItem('fromDate'));
+		$("#txtToDateAssigned").val(sessionStorage.getItem('toDate'));
+	 }
 	loadData();
 });
 function loadData () {
@@ -32,21 +39,50 @@ function loadData () {
 			  
 			  getPendingAssignList();
 		}
-function getPendingAssignList()
-		{
+function getPendingAssignList() {
+		
+			/* From & To date from javaScript sessionStorage */
 			
+			sessionStorage.setItem('fromDate', $("#txtFromDateAssigned").val());
+			sessionStorage.setItem('toDate', $("#txtToDateAssigned").val());
+			sessionStorage.setItem('dateCount', 1);
+			
+			atFromDate = sessionStorage.getItem('fromDate');
+			atToDate = sessionStorage.getItem('toDate');
+			
+			console.log ("fromDate:: " + sessionStorage.getItem('fromDate'));
+			console.log ("toDate:: " + sessionStorage.getItem('toDate'));
+			console.log ("dateCount:: " + sessionStorage.getItem('dateCount'));
+			
+			/* END From & To date from javaScript sessionStorage */
 	
 			$("#dtOrderExample").dataTable().fnDestroy();
 			$("#dtOrderExample tbody").empty();
 			 $("#mainPageLoad").show();
-			var urlPP = "getAssignedUserToken?projectid="+$('#projectid').val()+"&user_id="+$('#userid').val()+"&fromdate="+$('#txtFromDateAssigned').val()+"&todate="+$('#txtToDateAssigned').val();
+			var urlPP = "getAssignedUserToken?projectid="+$('#projectid').val()+"&user_id="+$('#userid').val()+"&fromdate="+atFromDate+"&todate="+atToDate;
 			var i = 0
+			var followdate = "";
+			var followtype = "";
+			
 			//alert("Alert");
 			$.getJSON(urlPP, function (data) {
 				$.each(data, function (index, value) {
 					debugger;
 					//alert("Alert"+value.offerName);
-					var val = "<tr><td><label>"+value.nv_token_id+"</label></td><td>"+value.token_no+"</td><td>"+value.name+"</td><td>"+value.mobileno+"</td><td>"+value.priority_no__c+"</td><td>"+value.closing_manager_name__c+"</td><td>"+value.starteddate+"</td><td>"+value.offerName+"</td><td>"+value.isdone+"</td>";
+					
+					if (value.followdate != null) {
+						followdate = value.followdate;
+					} else {
+						followdate = "";
+					}
+					
+					if (value.followtype != null) {
+						followtype = value.followtype;
+					} else {
+						followtype = "";
+					}
+					
+					var val = "<tr><td><label>"+value.nv_token_id+"</label></td><td>"+value.token_no+"</td><td>"+value.name+"</td><td>"+value.mobileno+"</td><td>"+value.priority_no__c+"</td><td>"+value.closing_manager_name__c+"</td> <td>"+followdate+"</td> <td>"+followtype+"</td> <td>"+value.starteddate+"</td><td>"+value.offerName+"</td><td>"+value.isdone+"</td>";
 					
 					if(value.isdone=='Attended')
 						{
@@ -79,9 +115,10 @@ function getPendingAssignList()
 				
 				$("#mainPageLoad").hide();
 				/*$('#dtOrderExample').DataTable();*/
-				if (i == 0){
-				}	
-				 
+				if (i == 0){ }
+
+				//sessionStorage.setItem('fromDate', $("#txtFromDateAssigned").val());
+				//sessionStorage.setItem('toDate', $("#txtToDateAssigned").val());
 			}).error(function() { //alert("error");
 			 $("#amsearch").prop("disabled", false);
 			 $('#amsearch span').html('');

@@ -97,6 +97,9 @@ public class VW_OfferWithBalanceDaoImpl implements VW_OfferWithBalanceDao{
 	  				+ " a.propstrength__status__c, "
 	  				+ " a.propstrength__project__c, "
 	  				
+	  				+ " a.propstrength__reason_for_loss__c, "
+	  				+ " a.propstrength__comment__c, "
+	  				
 	  				+ " b.name AS enquiryname, "
 	  				+ " b.verticle__c, "
 	  				+ " b.closing_manager_name__c, "

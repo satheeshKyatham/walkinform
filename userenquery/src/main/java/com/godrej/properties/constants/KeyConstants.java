@@ -103,7 +103,9 @@ public class KeyConstants {
 	/*public static final String REDIRECT_URL="https://d4u.gplapps.com:8085/walkinformuat/ccavResponseHandler";
 	public static final String CANCEL_URL="https://d4u.gplapps.com:8085/walkinformuat/ccavResponseHandler";*/
 	
-	public static final String REDIRECT_URL="https://d4u.gplapps.com:8085/walkinform/ccavResponseHandler";
-	public static final String CANCEL_URL="https://d4u.gplapps.com:8085/walkinform/ccavResponseHandler";
+	/*public static final String REDIRECT_URL="https://d4u.gplapps.com:8085/walkinform/ccavResponseHandler";
+	public static final String CANCEL_URL="https://d4u.gplapps.com:8085/walkinform/ccavResponseHandler";*/
+	public static final String REDIRECT_URL="https://d4u.godrejproperties.com/walkinform/ccavResponseHandler";
+	public static final String CANCEL_URL="https://d4u.godrejproperties.com/walkinform/ccavResponseHandler";
 }
 

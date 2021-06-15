@@ -34,8 +34,9 @@ public class AssignedUser {
 	@Column(name="offersfid") private String offersfid;
 	@Column(name="offerName") private String offerName;
 	@Column(name="countrycode") private String countrycode;
-
 	
+	@Column(name="followdate") private Timestamp followdate;
+	@Column(name="followtype") private String followtype;
 	
 	public String getPriority_no__c() {
 		return priority_no__c;
@@ -127,5 +128,16 @@ public class AssignedUser {
 	public void setCountrycode(String countrycode) {
 		this.countrycode = countrycode;
 	}
+	public Timestamp getFollowdate() {
+		return followdate;
+	}
+	public void setFollowdate(Timestamp followdate) {
+		this.followdate = followdate;
+	}
+	public String getFollowtype() {
+		return followtype;
+	}
+	public void setFollowtype(String followtype) {
+		this.followtype = followtype;
+	}
 }
-

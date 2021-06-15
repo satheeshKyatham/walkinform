@@ -127,6 +127,21 @@ public class UserContactDaoImpl extends AAbstractDao<Contact> implements UserCon
 		 contact= getEntities(jpql.toString(), params);
 		 return contactConverter.entityToDto(contact.get(0));
 	}
+	@Override
+	public Contact createContact(Contact contact) {
+		// TODO Auto-generated method stub
+		persist(contact);
+		
+		StringBuilder jpql=new StringBuilder();
+		 jpql.append(" SELECT c FROM Contact c where c.email=:email");
+		 Map<String, Object> params=new HashMap<>();
+		 params.put("email", contact.getEmail());
+		 List<Contact> contacts=getEntities(jpql.toString(), params);
+		 if(contacts.size()>0) {
+			 return contacts.get(0);
+		 }
+		return contact;
+	}
 	
 	
 }

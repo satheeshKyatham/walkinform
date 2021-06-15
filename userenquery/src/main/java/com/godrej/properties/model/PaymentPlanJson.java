@@ -85,6 +85,7 @@ public class PaymentPlanJson {
 	private BigDecimal length_sqm__c;
 	private BigDecimal breadth_sqm__c;
 	private BigDecimal plot_area_sqyd__c;
+	private BigDecimal discount_Limit_Amount__c;
 	
 	
 	public String getBalcony_area_sq_ft__c() {
@@ -502,4 +503,11 @@ public class PaymentPlanJson {
 	public void setPlot_area_sqyd__c(BigDecimal plot_area_sqyd__c) {
 		this.plot_area_sqyd__c = plot_area_sqyd__c;
 	}
+	public BigDecimal getDiscount_Limit_Amount__c() {
+		return discount_Limit_Amount__c;
+	}
+	public void setDiscount_Limit_Amount__c(BigDecimal discount_Limit_Amount__c) {
+		this.discount_Limit_Amount__c = discount_Limit_Amount__c;
+	}
+	
 }

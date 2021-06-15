@@ -30,6 +30,9 @@ public class CPEngmnt {
 	@Column(name="createddate") private Timestamp createddate;
 	@Column(name="updateddate") private Timestamp updateddate;
 	
+	@Column(name="cpid") private Integer cpid;
+	@Column(name="cpsfid") private String cpsfid;
+	
 	@Transient private String project_name;
 	@Transient private String user_name; 
 	
@@ -131,5 +134,17 @@ public class CPEngmnt {
 	}
 	public void setUser_name(String user_name) {
 		this.user_name = user_name;
+	}
+	public Integer getCpid() {
+		return cpid;
+	}
+	public void setCpid(Integer cpid) {
+		this.cpid = cpid;
+	}
+	public String getCpsfid() {
+		return cpsfid;
+	}
+	public void setCpsfid(String cpsfid) {
+		this.cpsfid = cpsfid;
 	}
 }

@@ -783,7 +783,7 @@ public class WebServiceController<MultipartFormDataInput> {
 			@RequestParam("towerName") String towerName, @RequestParam("regionName") String regionName,
 			@RequestParam("projectSfid") String projectSfid, @RequestParam("unitSfid") String unitSfid,
 			@RequestParam("enqSfid") String enqSfid, @RequestParam("csData") String csData,
-			@RequestParam("projectName") String projectName, @RequestParam("currentDate") String currentDate, @RequestParam("generateFrom") String generateFrom)
+			@RequestParam("projectName") String projectName, @RequestParam("currentDate") String currentDate, @RequestParam("generateFrom") String generateFrom, @RequestParam("logoPath") String logoPath)
 			throws JRException, IOException {
 		log.info("Enter Print Costsheet");
 		GsonBuilder gsonBuilder = new GsonBuilder();
@@ -806,7 +806,7 @@ public class WebServiceController<MultipartFormDataInput> {
 		
 		log.info("");
 		iTextHTMLtoPDF solution = new iTextHTMLtoPDF();
-		solution.PDFReport(USEREMAIL_GV, unitTval, floorTval, towerName, regionName, projectSfid, unitSfid, timeId, csData, projectName, currentDate, enqSfid, csAnnexure);
+		solution.PDFReport(USEREMAIL_GV, unitTval, floorTval, towerName, regionName, projectSfid, unitSfid, timeId, csData, projectName, currentDate, enqSfid, csAnnexure, logoPath);
 		
 		//Base 64
 		String response = "";
@@ -1451,7 +1451,7 @@ public class WebServiceController<MultipartFormDataInput> {
 														 * on Cost sheet Page
 														 */
 			@RequestParam("salesConA") String salesConA, @RequestParam("projectname") String projectname,
-			@RequestParam("propertyname") String propertyname, HttpServletRequest req) {
+			@RequestParam("propertyname") String propertyname,@RequestParam("limit_amount") String limit_amount, HttpServletRequest req) {
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		Gson gson = gsonBuilder.create();
 		HttpSession httpSession = req.getSession();
@@ -1554,7 +1554,7 @@ public class WebServiceController<MultipartFormDataInput> {
 				Double apr = 0.00;
 
 				apr = (Double.parseDouble(salesConA) / Double.parseDouble(selable));
-				String text = userName + " has requested for a discount of Rs.(" + otherAmount + ") " + "for {"
+				String text = userName + " has requested for a discount of Rs.( " + otherAmount + ") " + "for {"
 						+ propertyname + "} in {" + projectname + "}, Effective APR {" + Math.round(apr)
 						+ "}. Please share the OTP " + OTP + " to approve the discount. ";
 				String emailText=text;
@@ -1577,14 +1577,35 @@ public class WebServiceController<MultipartFormDataInput> {
 					e.printStackTrace();
 				}
 
-				SendSMS.SMSSend(customerContact.getMobileNo(), text);
+				
 				//SendSMS.ShreeSMSSend(customerContact.getMobileNo(), text);
 				/*String otpbypass = sysConfigService.getValue(SysConfigEnum.APPROVAL_OTP_BYPASS,"APPROVAL_OTP_BYPASS");
 				if(otpbypass.equals("true")) {*/
 				String smtpip = sysConfigService.getValue(SysConfigEnum.SMTP_IP, "SMTP_IP");
 				String smtpPort = sysConfigService.getValue(SysConfigEnum.SMTP_PORT, "SMTP_PORT");
 				String subject="D4U - OTP for Offer Approval";
-				SendMailThreadUtil mail =new SendMailThreadUtil(customerContact.getSitehead_user_mail(),"", subject, emailText,smtpip,smtpPort);
+				if(limit_amount!=null)
+				{
+					double limit_amount_math=Double.parseDouble(limit_amount);
+					double otherAmount_math=Double.parseDouble(otherAmount);
+					
+					if(limit_amount_math<otherAmount_math)
+					{
+						//send otp to region head
+//						SendMailThreadUtil mail =new SendMailThreadUtil(customerContact.getSitehead_user_mail(),"", subject, emailText,smtpip,smtpPort);
+						userList.get(i).setIsregionhead_approval(true);
+						SendSMS.SMSSend(customerContact.getRegion_head_mobile(), text);
+						new SendMailThreadUtil(customerContact.getRegion_head_email(),"", subject, emailText,smtpip,smtpPort);
+					}
+					else
+					{
+						//send otp to site head
+						SendSMS.SMSSend(customerContact.getMobileNo(), text);
+						new SendMailThreadUtil(customerContact.getSitehead_user_mail(),"", subject, emailText,smtpip,smtpPort);
+					}
+				}
+				
+				
 					/*SendMailThreadUtil mail =new SendMailThreadUtil(customerContact.getEmailid(),	"sathish.kyatham@godrejproperties.com", subject, emailText,smtpip,smtpPort);*/
 				/*}*/
 				// SendSMS.SMSSend(mobileNo, text);
@@ -1927,6 +1948,7 @@ public class WebServiceController<MultipartFormDataInput> {
 			paymentPlanJson.setLength_sqm__c(paym.getLength_sqm__c());
 			paymentPlanJson.setBreadth_sqm__c(paym.getBreadth_sqm__c());
 			paymentPlanJson.setPlot_area_sqyd__c(paym.getPlot_area_sqyd__c());
+			paymentPlanJson.setDiscount_Limit_Amount__c(paym.getDiscount_Limit_Amount__c());
 			
 			// paymentPlanJson.set (paym.getSfid());
 
@@ -3930,7 +3952,7 @@ public class WebServiceController<MultipartFormDataInput> {
 	public synchronized String printApplicationForm(@RequestParam("projectid") String projectid,
 			@RequestParam("reraRegistrationNo") String reraRegistrationNo,
 			@RequestParam("appFormData") String appFormData, @RequestParam("enqSfid") String enqSfid,
-			@RequestParam("projectName") String projectName) throws JRException, IOException {
+			@RequestParam("projectName") String projectName, @RequestParam("appFormLogo") String appFormLogo) throws JRException, IOException {
 
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		Gson gson = gsonBuilder.create();
@@ -3943,7 +3965,7 @@ public class WebServiceController<MultipartFormDataInput> {
 		 */
 
 		iTextHTMLtoPDF solution = new iTextHTMLtoPDF();
-		solution.ApplicationFormPDF(appFormData, enqSfid, projectName, reraRegistrationNo, projectid);
+		solution.ApplicationFormPDF(appFormData, enqSfid, projectName, reraRegistrationNo, projectid, appFormLogo);
 
 		return gson.toJson("");
 	}

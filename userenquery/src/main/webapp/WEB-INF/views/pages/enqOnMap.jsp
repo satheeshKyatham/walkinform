@@ -40,8 +40,8 @@
 	
 	<div class="clearfix"></div> -->
 	<div style="margin-bottom:15px;">
-		<img src='https://d4u.gplapps.com:8085/walkinform/resources/images/z3.png'/> <b style="margin-right:25px;">Channel Partner</b>
-		<img src='https://d4u.gplapps.com:8085/walkinform/resources/images/Z1596.png'/> <b>Direct</b>
+		<img src='https://d4u.godrejproperties.com/walkinform/resources/images/z3.png'/> <b style="margin-right:25px;">Channel Partner</b>
+		<img src='https://d4u.godrejproperties.com/walkinform/resources/images/Z1596.png'/> <b>Direct</b>
 	</div>
 	<div id="mapLoading" style="text-align: center; display:none;">
 		<h3> Loading... </h3>

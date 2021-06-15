@@ -1277,6 +1277,11 @@ if(ses!=null){
 								    <option value="Test Enquiry">Test Enquiry</option>
 								    <option value="Frequent Disconnect">Frequent Disconnect</option>
 								    <option value="Ready Possession">Ready Possession</option>
+								    <option value="Language Barrier">Language Barrier</option>
+								    <option value="Channel Partner">Channel Partner</option>
+								    <option value="Proptiger Reason">Proptiger Reason</option>
+								    <option value="Delaying decision due to Covid">Delaying decision due to Covid</option>
+								    <option value="Cancelling plan due to Covid">Cancelling plan due to Covid</option>
 								</select>
 								<span class="highlight"></span><span class="bar"></span>
 								<label class="select-label">Lost Reason<strong class="mndt">*</strong></label>

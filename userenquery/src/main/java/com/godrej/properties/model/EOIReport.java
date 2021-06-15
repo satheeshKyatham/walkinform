@@ -65,7 +65,16 @@ public class EOIReport implements Serializable{
 	@Column(name="broker_account_name") private String broker_account_name;
 	@Column(name="eoi_payment_date") private Timestamp eoi_payment_date;
 	
+	//Added by balram 
+	@Column(name="broker_sfid_id") private String broker_sfid_id;
 	
+	
+	public String getBroker_sfid_id() {
+		return broker_sfid_id;
+	}
+	public void setBroker_sfid_id(String broker_sfid_id) {
+		this.broker_sfid_id = broker_sfid_id;
+	}
 	public int getId() {
 		return id;
 	}

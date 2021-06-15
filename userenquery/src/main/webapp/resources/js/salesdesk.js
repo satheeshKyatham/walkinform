@@ -87,6 +87,9 @@ function validateDesk() {
 	    	
 		   debugger;
 		  if(data.msg==='Success'){
+			  sessionStorage.clear();
+			  sessionStorage.setItem('dateCount', 0);
+			  
 			  $("#login_div").hide();
 			  $("#mainPageLoad").show();
 			  $("#projectdropdownlist").show();

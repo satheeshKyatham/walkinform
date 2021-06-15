@@ -244,7 +244,9 @@
      </definition>
      <definition name="chromeerror"  template="/WEB-INF/views/pages/defaultpages/chromeerror.jsp"> 
        <put-attribute name="title" value="Default Browser" /> 
-        
+    </definition>
+    <definition name="urlredirect"  template="/WEB-INF/views/pages/defaultpages/urlredirect.jsp"> 
+       <put-attribute name="title" value="Default Browser" /> 
     </definition>
     <definition name="ccAvenue"  template="/WEB-INF/views/pages/ccAvenue.jsp"> 
        <put-attribute name="title" value="CCAvenue Payment" /> 
