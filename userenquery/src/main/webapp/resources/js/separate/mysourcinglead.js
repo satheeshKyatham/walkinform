@@ -31,6 +31,10 @@ function getMySourcingLead () {
 		var html = '';
 		var paymentStatus = '';
 		var cpName = '';
+		var firstName = '';
+		var lastName = '';
+		var mobile = '';
+		var email = '';
 		
 		if(obj1!=null) {
 			for(var i=0;i<obj1.length;i++){
@@ -41,12 +45,35 @@ function getMySourcingLead () {
 					cpName = '-';
 				}
 				
+				if (obj1[i].contact != undefined && obj1[i].contact.firstName != undefined) {
+					firstName = obj1[i].contact.firstName;
+				} else {
+					firstName = '';
+				}
+				
+				if (obj1[i].contact != undefined && obj1[i].contact.lastName != undefined) {
+					lastName = obj1[i].contact.lastName;
+				} else {
+					lastName = '';
+				}
+				
+				if (obj1[i].contact != undefined && obj1[i].contact.mobile != undefined) {
+					mobile = obj1[i].contact.mobile;
+				} else {
+					mobile = '';
+				}
+				
+				if (obj1[i].contact != undefined && obj1[i].contact.email != undefined) {
+					email = obj1[i].contact.email;
+				} else {
+					email = '';
+				}
 				
 				html += "<tr>" +
 							" <td>"+obj1[i].name+"</td>" +
-							" <td>"+obj1[i].contact.firstName+" "+obj1[i].contact.lastName+"</td>" +
-							" <td>"+obj1[i].contact.mobile+"</td>" +
-							" <td>"+obj1[i].contact.email+"</td>" +
+							" <td>"+firstName+" "+lastName+"</td>" +
+							" <td>"+mobile+"</td>" +
+							" <td>"+email+"</td>" +
 							" <td>"+obj1[i].isReferredByChannelPartner+"</td>" +
 							" <td>"+obj1[i].walkInSource+"</td>" +
 							" <td>"+obj1[i].closing_manager_name__c+"</td>" +
