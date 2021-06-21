@@ -3,6 +3,7 @@ package com.godrej.properties.dao;
 import java.util.List;
 
 import com.godrej.properties.dto.ContactDto;
+import com.godrej.properties.model.Contact;
 
 public interface UserContactDao {
 
@@ -22,5 +23,11 @@ public interface UserContactDao {
 	public int getContactPKID(String contactsfid);
 	
 	public ContactDto getContactBySfid(String sfid);
+
+	/**
+	 * @param contact
+	 * @return
+	 */
+	public Contact createContact(Contact contact);
 
 }

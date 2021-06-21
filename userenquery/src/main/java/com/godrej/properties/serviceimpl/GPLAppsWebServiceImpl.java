@@ -454,4 +454,190 @@ public class GPLAppsWebServiceImpl implements GPLAppsWebService{
 		return contents.toString();
 	}
 
+
+	/**
+	 * @param bookingDto
+	 * @return
+	 */
+	public GPLAppBookingAPIDto insertCPBookingData(GPLAppBookingAPIDto bookingData) {
+
+		log.info("insertGPLBookingData......{}",bookingData.getEnquiryName());
+		String updateData="";
+		try
+		{
+			//Call Enquiry SFID to get enquiry PK ID
+			int enquiryPKID = tokenDao.getEnquiryIDFromSFID(bookingData.getEnquirySfid());
+			int contcatPKID = userContactDao.getContactPKID(bookingData.getContactSfid());
+			if(enquiryPKID==0 || contcatPKID==0)
+			{
+				bookingData.setResp_mesg("No Enquiry/Contact Found OR Somthing Went Wrong");
+				return bookingData;
+			}
+			else
+			{
+				bookingData.setEnquiryid(enquiryPKID);
+				bookingData.setContactid(contcatPKID);
+			
+			
+				//Site HEad ID and Email pick from Nv_project table
+				ProjectLaunch projectData =projectLaunchDao.getProjectSaleMgrID(bookingData.getProjectsfid());
+				if(projectData.getSitehead_user_id()!=null)
+				{
+					//bookingData.setWindow_Assign(projectData.getSitehead_user_id().toString());
+					bookingData.setSiteheadEmail(projectData.getSitehead_user_mail());
+					bookingData.setSiteheadID(projectData.getSitehead_user_id());
+					bookingData.setSiteheadName(projectData.getSitehead_user_name());
+				}
+				else
+				{
+					//bookingData.setWindow_Assign("594");
+					bookingData.setSiteheadEmail("sathish.kyatham@godrejproperties.com");
+					bookingData.setSiteheadID(594);
+					bookingData.setSiteheadName("Sathish Kyatham");
+				}
+				
+				//Contact Report & Enquiry Report Data Insert
+				ContactReport contactRepprt = insertContactReport(bookingData);
+				EnquiryReport enquiryReport = insertEnquiryReport(bookingData);
+				//Insert NV_Token table with site head id
+				 
+				//if(eoiJourneyFlag==True && bookingJourneyFlag==False)
+				TowerMaster towerMaster =null;
+				String propertyName="";
+				if(bookingData.getEoiJourneyFlag().equals("T") && bookingData.getBookingJourneyFlag().equals("F"))
+				{
+					//if(paymentStatus=="Success")
+					if(bookingData.getPaymentStatus().equals("Success"))
+					{
+						bookingData.setNv_token_type("CPS");
+						Token token = insertIntoTokenTable(bookingData);
+						bookingData.setNv_token_type(token.getType()+token.getQueue());
+						bookingData.setNv_tokenno(token.getQueue());
+						//Call Tower Data
+						
+						if(bookingData.getTowersfid()!=null && bookingData.getTowersfid().length()>0)
+						{
+							towerMaster= towerMasterDao.getTowerMasterDetails(bookingData.getTowersfid());
+							bookingData.setTowersfid(towerMaster.getSfid());
+							bookingData.setTowername(towerMaster.getTower_name__c());
+						}
+						//Call Unit Data
+						
+						if(bookingData.getPropertysfid()!=null && bookingData.getPropertysfid().length()>0)
+						{
+							propertyName= propOtherChargesService.getPropertyName(bookingData.getPropertysfid());
+							bookingData.setPropertysfid(bookingData.getPropertysfid());
+							bookingData.setPropertyname(propertyName);
+						}
+						bookingData = insertEOIPreference(bookingData);
+						
+						bookingData = insertPaymentDtl(bookingData);
+						
+						//update query for EOI status Update in Enquiry
+						updateData=" PropStrength__Request_Status__c='EOI', EOI_Enquiry__c='true',date_of_eoi__c='"+new Date()+"' ";
+						//bookingData.setTokenType("F");
+						//bookingData.setTokenName("REFUNDABLE");
+						
+						//bookingData = insertIntoHoldUnit(bookingData);
+						
+					}
+					else if(bookingData.getPaymentStatus().equals("Fail"))//else(paymentStatus=="Fail")
+					{
+						bookingData.setNv_token_type("CPF");
+						
+						Token token = insertIntoTokenTable(bookingData);
+						bookingData.setNv_token_type(token.getType()+token.getQueue());
+						bookingData.setNv_tokenno(token.getQueue());
+						bookingData.setResp_mesg(bookingData.getResp_mesg());
+						updateData=" PropStrength__Request_Status__c='Assigned to Sales', User__c='"+projectData.getSalesmanager_sfid()+"' ";//site head
+						//update query for Enquiry Status to Assigned to sales in Update in Enquiry
+					}
+					
+				}
+				else if(bookingData.getEoiJourneyFlag().equals("F") && bookingData.getBookingJourneyFlag().equals("T"))//else(eoiJourneyFlag==False && bookingJourneyFlag==True)
+				{
+					//if(paymentStatus=="Success")
+					if(bookingData.getPaymentStatus().equals("Success"))
+					{
+						bookingData.setNv_token_type("CPS");
+						Token token = insertIntoTokenTable(bookingData);
+						bookingData.setResp_mesg(bookingData.getResp_mesg());
+						bookingData.setNv_token_type(token.getType()+token.getQueue());
+						bookingData.setNv_tokenno(token.getQueue());
+						//Call Tower Data
+						if(bookingData.getTowersfid()!=null)
+						{
+							towerMaster= towerMasterDao.getTowerMasterDetails(bookingData.getTowersfid());
+							bookingData.setTowersfid(towerMaster.getSfid());
+							bookingData.setTowername(towerMaster.getTower_name__c());
+						}
+						//Call Unit Data
+						
+						if(bookingData.getPropertysfid()!=null)
+						{
+							propertyName= propOtherChargesService.getPropertyName(bookingData.getPropertysfid());
+							bookingData.setPropertysfid(bookingData.getPropertysfid());
+							bookingData.setPropertyname(propertyName);
+						}
+						
+						bookingData = insertEOIPreference(bookingData);
+						
+						bookingData = insertPaymentDtl(bookingData);
+						
+						updateData=" PropStrength__Request_Status__c='Initiate Offer' ";
+						bookingData.setTokenType("F");
+						bookingData.setTokenName("REFUNDABLE");
+						
+						bookingData = insertIntoHoldUnit(bookingData);
+						
+					}
+					else if(bookingData.getPaymentStatus().equals("Fail"))//else(paymentStatus=="Fail")
+					{
+						bookingData.setNv_token_type("CPF");
+						Token token = insertIntoTokenTable(bookingData);
+						bookingData.setNv_token_type(token.getType()+token.getQueue());
+						bookingData.setNv_tokenno(token.getQueue());
+						bookingData.setResp_mesg(bookingData.getResp_mesg());
+						updateData=" PropStrength__Request_Status__c='Assigned to Sales', User__c='"+projectData.getSalesmanager_sfid()+"' ";
+					}
+				}
+				
+				tokenDao.updateEnquiryData(enquiryPKID, updateData+",External_Contact_ID__c="+contcatPKID+", NVHC_Enquiry_ID__c="+enquiryReport.getEnquiryReportId());//+",External_Contact_ID__c="+contcatPKID
+				tokenDao.updateContactData(contcatPKID, "External_Contact_ID__c="+contactRepprt.getContactReportId()+"");
+				
+				//Update contact External_Contact_ID__c
+				
+				
+//				String text = readContentFromFile("D://SW//apache-tomcat-9.0.0.M22//apache-tomcat-9.0.0.M22//htmldoc//d4u-prebookingapi-email.htm");
+				String text = readContentFromFile("D://D Drive//SW//Tomcat Server 8085//apache-tomcat-9.0.12//htmldoc//d4u-prebookingapi-email.htm");
+				text = text.replaceAll("@SiteHead@", bookingData.getSiteheadName());
+				text = text.replaceAll("@CustomerName@", bookingData.getContactName());
+				text = text.replaceAll("@CustomerMobile@", bookingData.getCountryCode()+bookingData.getMobileno());
+				text = text.replaceAll("@Tower@", bookingData.getTowersfid());
+				text = text.replaceAll("@InventoryNo@", bookingData.getPropertysfid());
+				text = text.replaceAll("@PaymentStatus@", bookingData.getPaymentStatus());
+				text = text.replaceAll("@TokenNo@", bookingData.getNv_token_type());
+				
+				/*String emailTempl = "Please find herewith the <a href=\"@Link@\">link</a> to update your KYC details. </br></br>Regards</br>Godrej Properties";
+				emailTempl = emailTempl.replaceAll("@Link@", kyclink);*/
+				String projectName = bookingData.getProjectName()+" : EOI received through Mobile App ";
+				/*if(projectData.getSitehead_user_mail()!=null && projectData.getSitehead_user_mail().length()>0) {
+					
+					SendMailThreadUtil mail =new SendMailThreadUtil("sathish.kyatham@godrejproperties.com",	projectData.getSitehead_user_mail(), projectName, text);
+					
+				} */
+				
+				String smtpip = sysConfigService.getValue(SysConfigEnum.SMTP_IP, "SMTP_IP");
+				String smtpPort = sysConfigService.getValue(SysConfigEnum.SMTP_PORT, "SMTP_PORT");
+				SendMailThreadUtil mail =new SendMailThreadUtil(projectData.getSitehead_user_mail(),"", projectName, text,smtpip,smtpPort);		
+			}
+		}
+		catch (Exception e) {
+			log.error("Somthing went wrong.....{}",e);
+			bookingData.setResp_mesg(bookingData.getResp_mesg()+" & Somthing went wrong.....");
+		}
+		return bookingData;
+	
+	}
+
 }
