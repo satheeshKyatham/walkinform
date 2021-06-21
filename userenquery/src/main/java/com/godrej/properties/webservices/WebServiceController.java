@@ -1584,26 +1584,32 @@ public class WebServiceController<MultipartFormDataInput> {
 				String smtpip = sysConfigService.getValue(SysConfigEnum.SMTP_IP, "SMTP_IP");
 				String smtpPort = sysConfigService.getValue(SysConfigEnum.SMTP_PORT, "SMTP_PORT");
 				String subject="D4U - OTP for Offer Approval";
-				if(limit_amount!=null)
-				{
-					double limit_amount_math=Double.parseDouble(limit_amount);
-					double otherAmount_math=Double.parseDouble(otherAmount);
-					
-					if(limit_amount_math<otherAmount_math)
-					{
-						//send otp to region head
-//						SendMailThreadUtil mail =new SendMailThreadUtil(customerContact.getSitehead_user_mail(),"", subject, emailText,smtpip,smtpPort);
-						userList.get(i).setIsregionhead_approval(true);
-						SendSMS.SMSSend(customerContact.getRegion_head_mobile(), text);
-						new SendMailThreadUtil(customerContact.getRegion_head_email(),"", subject, emailText,smtpip,smtpPort);
-					}
-					else
-					{
-						//send otp to site head
-						SendSMS.SMSSend(customerContact.getMobileNo(), text);
-						new SendMailThreadUtil(customerContact.getSitehead_user_mail(),"", subject, emailText,smtpip,smtpPort);
-					}
-				}
+				
+				if(limit_amount!=null && limit_amount.length()>0 )
+                {
+                    double limit_amount_math=Double.parseDouble(limit_amount);
+                    double otherAmount_math=Double.parseDouble(otherAmount);
+                   
+                    if(limit_amount_math<otherAmount_math)
+                    {
+                        //send otp to region head
+//                        SendMailThreadUtil mail =new SendMailThreadUtil(customerContact.getSitehead_user_mail(),"", subject, emailText,smtpip,smtpPort);
+                        userList.get(i).setIsregionhead_approval(true);
+                        SendSMS.SMSSend(customerContact.getRegion_head_mobile(), text);
+                        new SendMailThreadUtil(customerContact.getRegion_head_email(),"", subject, emailText,smtpip,smtpPort);
+                    }
+                    else
+                    {
+                        //send otp to site head
+                        SendSMS.SMSSend(customerContact.getMobileNo(), text);
+                        new SendMailThreadUtil(customerContact.getSitehead_user_mail(),"", subject, emailText,smtpip,smtpPort);
+                    }
+                }
+                else
+                {
+                    SendSMS.SMSSend(customerContact.getMobileNo(), text);
+                    new SendMailThreadUtil(customerContact.getSitehead_user_mail(),"", subject, emailText,smtpip,smtpPort);
+                }
 				
 				
 					/*SendMailThreadUtil mail =new SendMailThreadUtil(customerContact.getEmailid(),	"sathish.kyatham@godrejproperties.com", subject, emailText,smtpip,smtpPort);*/

@@ -147,23 +147,25 @@ public static void ApplicationFormPDF(String appFormData, String enqSfid, String
 	      String reraWebsite = "";
 	      
 	      if (projectid.equals("a1l6F000003TXloQAG") ) {
-	    	  reraLabel = "WBHIRA registration no.";
+	    	  reraLabel = "WBHIRA Registration No.";
 	    	 // reraRegistrationNo = "HIRA/P/SOU/2019/000456 / HIRA/P/SOU/2019/000455";
 	    	  projectName = "Godrej Se7en, Kolkata";
 	      } else if(projectid.equals("a1l6F000002X6IOQA0") ){
 	    	  projectName = "The Highlands at Godrej City, Panvel";
-	    	  reraLabel = "RERA registration no.";
+	    	  reraLabel = "RERA Registration No.";
 	      } else if (projectid.equals("a1l6F000004RvPHQA0") ) {
 	    	  projectName = "Vanaangan at Godrej Garden City";
-	    	  reraLabel = "RERA registration no.";
+	    	  reraLabel = "RERA Registration No.";
 	      } else {
-	    	  reraLabel = "RERA registration no.";
+	    	  reraLabel = "RERA Registration No.";
 	    	 // reraRegistrationNo = reraRegistrationNo;
 	      }
 	      
-	      if (projectid.equals("a1l2s000000XmaMAAS") ) {
-	    	  reraWebsite = "<div></div> <span style='font-size:10px !important;'>RERA website: https://haryanarera.gov.in/</span>";
-	      } else {
+	      if (projectid.equals("a1l2s000000XmaMAAS")) {
+	    	  reraWebsite = "<div></div> <span style='font-size:10px !important;'>RERA Website: https://haryanarera.gov.in/</span>";
+	      } else if (projectid.equals("a1l2s000000g6eqAAA")) {
+	    	  reraWebsite = "<div></div> <span style='font-size:10px !important;'>RERA Website: https://rera.karnataka.gov.in/</span>";
+	      }else {
 	    	  reraWebsite = "";
 	      }
 	      

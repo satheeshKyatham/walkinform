@@ -181,7 +181,7 @@ function getofferApplicantDetails (e, offerSFID, enqSFID, contactSFID, offerName
 										+ '<td>'+obj[i].relationship__c+' '+obj[i].relationship_name__c+'</td>'
 									+ '</tr>'
 									+ '<tr>'
-										+ "<td colspan='2' style='font-size:10px;'>Note: If Applicant/s is Company, Partnership Firm, Limited Liability Partnership (LLP), Trust, Hindu Undivided Family (HUF), the following incorporation documents are required to be submitted along with this Application Form: (a) Certificate of Incorporation/Registration Certificate for the applicable entity (b) Memorandum of Association (c) Articles of Association (d) Partnership Deed (e) Limited Liability Partnership Agreement (f) Trust Deed (g) HUF PAN (h) Board/Partner/Trust's Resolution authorizing this purchase along with the name of the authorized representative/Partner. Please affix the official stamp/signature of the respective Company/Partnership Firm/LLP/Trust/HUF as may be applicable.</td>"											
+										+ "<td colspan='2' style='font-size:10px;'>Note: If Applicant/s is Company/Partnership Firm/Limited Liability Partnership (LLP)/Trust/Hindu Undivided Family (HUF), then the following incorporation documents (as applicable) are required to be submitted along with this Application Form: (a) Certificate of Incorporation/Registration Certificate for the applicable entity (b) Memorandum of Association (c) Articles of Association (d) Partnership Deed (e) Limited Liability Partnership Agreement (f) Trust Deed (g) HUF PAN (h) Board/Partner/Trust's Resolution authorizing this purchase along with the name of the authorized representative/Partner. Please affix the official stamp/signature of the respective Company/Partnership Firm/LLP/Trust/HUF as may be applicable.</td>"											
 									+ '</tr>'
 								+ '</tbody>'
 							+ '</table>';
@@ -419,7 +419,7 @@ function getEnqAndOfferDtl (enqSFID, offerSFID, rowId) {
 				
 				//if ($("#projectid").val() == "a1l2s000000XmaMAAS") {
 					cmNameHtml +=  "<tr> " +
-										'<td colspan="2"> Name of the Developer\'s sale\'s representative: '+closingMngrName+' </td> ' +
+										'<td colspan="2"> Name of the Developer/DM\'s sale\'s representative: '+closingMngrName+' </td> ' +
 									"</tr>";
 				/*} else {
 					cmNameHtml = "";
@@ -920,9 +920,9 @@ function printApplicationOfferForm(offerSFID, rowId) {
 	var appFormLogo ='';
 	
 	if ( $('#projectid').val() == "a1l2s000000PGu3AAG"  || $('#projectid').val() == "a1l2s000000PGu8AAG"  || $('#projectid').val() == "a1l2s000000PGuDAAW" || $('#projectid').val() ==  "a1l2s000000PGuIAAW" || $('#projectid').val() == "a1l2s000000PGuNAAW" || $('#projectid').val() == "a1l2s000000PGuSAAW") {
-	  	  appFormLogo = "<img width=\"300\" height=\"40\"  src=\"https://d4u.godrejproperties.com/walkinform/resources/images/gplLogoRoyalWoods.jpg\"/>"; 
+	  	  appFormLogo = "<img width=\"300\" height=\"40\"  src=\"https://atulbhanushali.com/d4u/gplLogoRoyalWoods.jpg\"/>"; 
     } else {
-  	  appFormLogo = "<img height='50' width='191' src='https://d4u.godrejproperties.com/walkinform/resources/images/gplLogo.jpg' />";
+  	  appFormLogo = "<img height='50' width='191' src='https://atulbhanushali.com/d4u/gplLogo.jpg' />";
     }
 	
 	$.post(pageContext+"printApplicationForm",{"appFormLogo":appFormLogo, "projectid":$('#projectid').val(), "enqSfid":offerSFID,"appFormData":$('#printApplicationFormOffer').html(),"projectName":projectName1,"reraRegistrationNo":reraRegistrationNo},function(data){				 

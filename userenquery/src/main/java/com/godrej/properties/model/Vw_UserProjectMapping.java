@@ -45,6 +45,8 @@ public class Vw_UserProjectMapping {
 	@Column(name = "region_head_name") private String region_head_name;
 	@Column(name = "region_head_email") private String region_head_email;
 	@Column(name = "region_head_mobile") private String region_head_mobile;
+	@Column(name = "sitehead_user_name") private String sitehead_user_name;
+	@Column(name = "sitehead_user_mobile") private String sitehead_user_mobile;
 	
 	@Transient private String	msg  ;
 	@Transient private boolean	isregionhead_approval=false;
@@ -224,6 +226,18 @@ public class Vw_UserProjectMapping {
 	}
 	public void setIsregionhead_approval(boolean isregionhead_approval) {
 		this.isregionhead_approval = isregionhead_approval;
+	}
+	public String getSitehead_user_name() {
+		return sitehead_user_name;
+	}
+	public void setSitehead_user_name(String sitehead_user_name) {
+		this.sitehead_user_name = sitehead_user_name;
+	}
+	public String getSitehead_user_mobile() {
+		return sitehead_user_mobile;
+	}
+	public void setSitehead_user_mobile(String sitehead_user_mobile) {
+		this.sitehead_user_mobile = sitehead_user_mobile;
 	}
 	
 	

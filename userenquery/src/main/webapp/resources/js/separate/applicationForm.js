@@ -398,9 +398,9 @@ function printApplicationForm(applicationBookingId18, rowId) {
 	var appFormLogo ='';
 	
 	if ( $('#projectid').val() == "a1l2s000000PGu3AAG"  || $('#projectid').val() == "a1l2s000000PGu8AAG"  || $('#projectid').val() == "a1l2s000000PGuDAAW" || $('#projectid').val() ==  "a1l2s000000PGuIAAW" || $('#projectid').val() == "a1l2s000000PGuNAAW" || $('#projectid').val() == "a1l2s000000PGuSAAW") {
-  	  appFormLogo = "<img width=\"300\" height=\"40\"  src=\"https://d4u.godrejproperties.com/walkinform/resources/images/gplLogoRoyalWoods.jpg\"/>"; 
+  	  appFormLogo = "<img width=\"300\" height=\"40\"  src=\"https://atulbhanushali.com/d4u/gplLogoRoyalWoods.jpg\"/>"; 
     } else {
-  	  appFormLogo = "<img height='50' width='191' src='https://d4u.godrejproperties.com/walkinform/resources/images/gplLogo.jpg' />";
+  	  appFormLogo = "<img height='50' width='191' src='https://atulbhanushali.com/d4u/gplLogo.jpg' />";
     }
 	
 	

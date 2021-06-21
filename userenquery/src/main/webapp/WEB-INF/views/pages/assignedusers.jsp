@@ -179,7 +179,11 @@ if(ses!=null){
 										<th>Name</th>
 										<th>Mobile</th>									
 										<th>Priority No</th>									
-										<th>Closing Mgr</th>									
+										<th>Closing Mgr</th>
+										
+										<th>Follow-up Date & Time</th>
+										<th>Follow-up Type</th>
+																			
 										<th>Date</th>
 										<th>Offer</th>
 										<th>Status</th>

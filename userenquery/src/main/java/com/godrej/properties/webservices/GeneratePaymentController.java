@@ -192,8 +192,7 @@ public class GeneratePaymentController {
 			@RequestParam("customer_email") String customer_email,
 			@RequestParam("towercode") String towercode,
 			@RequestParam("towersfid") String towersfid,
-			
-			HttpServletRequest request) throws UnsupportedEncodingException {	
+			@RequestParam("requestSource") String requestSource, HttpServletRequest request) throws UnsupportedEncodingException {	
 		
 		if(    !enq_sfid.equals("")  
 			&& !enquiry_name.equals("")  
@@ -244,7 +243,7 @@ public class GeneratePaymentController {
 						{
 							//JsonObject jobj = new Gson().fromJson(arrayObj.get(i), JsonObject.class);
 							try {
-								if (!(jobj.get("transaction_date_string").getAsString()).isEmpty()) {
+								if (!(jobj.get("transaction_date_string").getAsString().trim()).isEmpty()) {
 									Date date  =  df.parse(jobj.get("transaction_date_string").getAsString());
 									ecData1.setTransaction_date(date); 
 								} else {
@@ -270,6 +269,7 @@ public class GeneratePaymentController {
 							ecData1.setRequest_url(paymentRequest);
 							ecData1.setTowercode(towercode);
 							ecData1.setTowersfid(towersfid);
+							ecData1.setRequestsource(requestSource);;
 							charges1.add(ecData1);
 						
 						} else {
