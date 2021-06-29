@@ -657,7 +657,7 @@ function getEnqAndOfferDtl (enqSFID, offerSFID, rowId) {
 			}
 			
 			// Godrej Meridien 2 AND Godrej Exquisite, Mumbai (Thane)
-			if ($("#projectid").val() == "a1l2s00000002YZAAY" || $("#projectid").val() == "a1l2s000000PJMJAA4" || $("#projectid").val() == "a1l6F000004LVk8QAG" || $("#projectid").val() == "a1l2s00000003BMAAY" || $("#projectid").val() == "a1l2s00000003VlAAI" || $("#projectid").val() == "a1l2s000000XmaMAAS" || $("#projectid").val() == "a1l2s000000PGu3AAG" || $("#projectid").val() == "a1l2s000000PGu8AAG" || $("#projectid").val() == "a1l2s000000PGuDAAW" || $("#projectid").val() == "a1l2s000000PGuIAAW" || $("#projectid").val() == "a1l2s000000PGuNAAW" || $("#projectid").val() == "a1l2s000000PGuSAAW") {
+			if ($("#projectid").val() == "a1l2s000000g6eqAAA" || $("#projectid").val() == "a1l2s00000002YZAAY" || $("#projectid").val() == "a1l2s000000PJMJAA4" || $("#projectid").val() == "a1l6F000004LVk8QAG" || $("#projectid").val() == "a1l2s00000003BMAAY" || $("#projectid").val() == "a1l2s00000003VlAAI" || $("#projectid").val() == "a1l2s000000XmaMAAS" || $("#projectid").val() == "a1l2s000000PGu3AAG" || $("#projectid").val() == "a1l2s000000PGu8AAG" || $("#projectid").val() == "a1l2s000000PGuDAAW" || $("#projectid").val() == "a1l2s000000PGuIAAW" || $("#projectid").val() == "a1l2s000000PGuNAAW" || $("#projectid").val() == "a1l2s000000PGuSAAW") {
 				
 				var totalCarpetNExclusiveArea = 0;
 				
@@ -1018,6 +1018,19 @@ function otherChargesUnit(otherCharges, saleable_area__c, totalSaleConsideration
 		} else if ($("#projectid").val() == "a1l2s00000002YZAAY") {
 			var Other_Charges = otherCharges.Other_Charges;
 			processTotalOtherCharges (Other_Charges, saleable_area__c, totalSaleConsideration);
+		} else if ($("#projectid").val() == "a1l2s000000g6eqAAA") {
+			var clubDevCharges = otherCharges.Club_Development_Charges;
+			var carParkCharges = otherCharges.CAR_PARKING_CHARGES;
+			var infra_charges = otherCharges.INFRA_CHARGES;
+			
+			var clubDevChargesAmount =  clubDevChargesRWblr (clubDevCharges);
+			var carParkChargesAmount = carParkChargesRWBlr (carParkCharges, saleable_area__c);
+			var infraAmount = infraCharges (infra_charges, saleable_area__c);
+			
+			$("#totalSaleConsiderationOffer").text("");
+			$("#totalSaleConsiderationOffer").text(parseInt(parseInt(clubDevChargesAmount)+parseInt(carParkChargesAmount)+parseInt(infraAmount)+parseInt(totalSaleConsideration)).toFixed(2));
+			
+			convertNumberToWords ();
 		}
 		
 		
@@ -1221,4 +1234,19 @@ function otherCharge_WoodlandBlr (other_charges, saleable_area__c){
 		$("#otherChrg_WoodlandBlr").text(parseFloat(other_charges.propstrength__rate_per_unit_area__c*saleable_area__c).toFixed(2));
 	}
 	return parseFloat(other_charges.propstrength__rate_per_unit_area__c*saleable_area__c).toFixed(2);
+}
+
+
+function infraCharges (infra_charges, saleable_area__c){
+	if(infra_charges == null){
+		return 0;
+	}
+	
+	if (infra_charges.propstrength__rate_per_unit_area__c == null || saleable_area__c == null) {
+		return 0;
+	} else {
+		$("#facilitiesCharges").text("");
+		$("#facilitiesCharges").text("Rs. " + parseFloat(infra_charges.propstrength__rate_per_unit_area__c*saleable_area__c).toFixed(2) + "/-");
+	}
+	return parseFloat(infra_charges.propstrength__rate_per_unit_area__c*saleable_area__c).toFixed(2);
 }
