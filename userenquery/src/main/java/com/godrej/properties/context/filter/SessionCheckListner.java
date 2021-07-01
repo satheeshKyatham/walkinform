@@ -43,6 +43,10 @@ public class SessionCheckListner extends HandlerInterceptorAdapter {
 		//Added by balram for CP
 		filterUrlList.add("/getCPSourceProtection");
 		filterUrlList.add("/CPContactEnquiryCreateUpdate");
+		filterUrlList.add("/CPD4UGeneratePaymentLink");
+		filterUrlList.add("/CPGetPastEOISubmissions");
+		filterUrlList.add("/EOIPaymentCPApp");
+		
 		//
 		
 		
