@@ -91,13 +91,57 @@ if(ses!=null){
 			</h4>
 			<div class="clearfix"></div>
 		</div>	
-		
+		 
+		 
+		<div class="col-md-12 closingDash"> 
+			<div class="cdBox"> 
+				<div class="cdBoxText">Today's Assigned Lead</div>
+				<div class="cdBCountCol">
+					<div class="cdBCount todayAssLead">
+						-
+					</div>
+					<div class="cdBIcon">
+						<i class="fa fa-list"></i>
+					</div>
+					<div class="clearfix"></div> 
+				</div>
+			</div> 
+			<div class="cdBox"> 
+				<div class="cdBoxText">Total pending Lead Submission</div>
+				<div class="cdBCountCol">
+					<div class="cdBCount totalPendingLead">
+						-
+					</div>
+					<div class="cdBIcon">
+						<i class="fa fa-list"></i>
+					</div>
+					<div class="clearfix"></div> 
+				</div>
+			</div>
+			<div class="cdBox"> 
+				<div class="cdBoxText">Today's Follow up</div>
+				<div class="cdBCountCol">
+					<div class="cdBCount todayFollowupCount">
+						-
+					</div>
+					<div class="cdBIcon">  
+						<i class="fa fa-phone"></i>
+					</div>
+					<div class="clearfix"></div> 
+				</div>
+			</div>
+		</div> 
+		 
 	
 	  	<div class="col-md-12">
 	   		<div>
 				<ul class="nav nav-tabs tabNav">
 					<li class="active" id="basicInfoTabId">
 						<a href="#tab1" data-toggle="tab">Assigned Token List</a>
+					</li>
+					
+					<li class="" id="" onclick="getTodayFollowup();">
+						<a href="#todayFollowUp" data-toggle="tab">Today's follow-up</a>
 					</li>
 					
 					<li class="" id="collateralTab">
@@ -197,6 +241,10 @@ if(ses!=null){
 						</div>
 			      		<div class="clearfix"></div>
 			      	</div>
+				</div>
+				
+				<div class="tab-pane" id="todayFollowUp">
+					<%@ include file="/WEB-INF/views/pages/followupList.jsp" %>
 				</div>
 				
 				<div class="tab-pane" id="collateralPaneCol">

@@ -1554,7 +1554,7 @@ public class WebServiceController<MultipartFormDataInput> {
 				Double apr = 0.00;
 
 				apr = (Double.parseDouble(salesConA) / Double.parseDouble(selable));
-				String text = userName + " has requested for a discount of Rs.( " + otherAmount + ") " + "for {"
+				String text = userName.trim() + " has requested for a discount of Rs.( " + otherAmount + ") " + "for {"
 						+ propertyname + "} in {" + projectname + "}, Effective APR {" + Math.round(apr)
 						+ "}. Please share the OTP " + OTP + " to approve the discount. ";
 				String emailText=text;
@@ -1596,8 +1596,8 @@ public class WebServiceController<MultipartFormDataInput> {
 						userList.get(i).setIsregionhead_approval(true);
 						SendSMS.SMSSend(customerContact.getRegion_head_mobile(), text);
 						new SendMailThreadUtil(customerContact.getRegion_head_email(),"", subject, emailText,smtpip,smtpPort);
-						String siteheadMail = customerContact.getSitehead_user_name()+" has requested for discount of Rs. ("+otherAmount+") "
-								+ " for {"+propertyname+"} in {"+projectname+"}. Effective APR {"+Math.round(apr)+"}. OTP shared with "+customerContact.getSitehead_user_name()+" for approval.";
+						String siteheadMail = customerContact.getSitehead_user_name().trim()+" has requested for discount of Rs. ("+otherAmount+") "
+								+ " for {"+propertyname+"} in {"+projectname+"}. Effective APR {"+Math.round(apr)+"}. OTP shared with "+customerContact.getSitehead_user_name().trim()+" for approval. Regards, Godrej Properties.";
 						SendSMS.SMSSend(customerContact.getSitehead_user_mobile(), siteheadMail);
 						new SendMailThreadUtil(customerContact.getSitehead_user_mail(),"", subject, siteheadMail,smtpip,smtpPort);
 					}

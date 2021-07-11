@@ -1,5 +1,7 @@
 package com.godrej.properties.daoimpl;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Query;
@@ -42,7 +44,7 @@ public class AssignUserDaoImpl extends AbstractDao<Integer, AssignedUser> implem
 	
 	
 	@Override
-	public List<AssignedUser> getassignedusers(String user_id,String projectId,String fromdate,String todate) {
+	public List<AssignedUser> getassignedusers(String user_id,String projectId,String fromdate,String todate, String source) {
 		Session session = this.sessionFactory.getCurrentSession();	
 		
 		List<AssignedUser> list=null;
@@ -53,8 +55,21 @@ public class AssignUserDaoImpl extends AbstractDao<Integer, AssignedUser> implem
 		 * " where enq_sfid = '"+enqSfid+"' order by gpl_cs_eoi_header_dtl ",
 		 * AssignedUser.class);
 		 */
+		String whereCondition = "";
 		
-		
+		if (source.equals("followup")) {
+			Date date = new Date();
+			String todayDate= "";
+			try {
+				todayDate= new SimpleDateFormat("yyyy-MM-dd").format(date);
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			
+			whereCondition = "a.isactive = 'Y' AND window_assign = '"+user_id+"' and projectname= '"+projectId+"' and Date(nvreq.followdate) between '"+todayDate+"' and '"+todayDate+"' order by isdone asc";
+		} else {
+			whereCondition = "a.isactive = 'Y' AND window_assign = '"+user_id+"' and projectname= '"+projectId+"' and Date(a.created) between '"+fromdate+"' and '"+todate+"' order by isdone asc";
+		}
 		
 		
 		Query q = session.createNativeQuery(" SELECT row_number() OVER (ORDER BY a.nv_token_id) AS row_number,  "
@@ -80,7 +95,8 @@ public class AssignUserDaoImpl extends AbstractDao<Integer, AssignedUser> implem
 			+ " LEFT JOIN salesforce.contact c ON req.propstrength__primary_contact__c = c.sfid "
 			+ " LEFT JOIN salesforce.gpl_cs_balance_details bdetails ON req.sfid = bdetails.enquiry_sfid AND bdetails.isactive = 'A' "
 			+ " LEFT JOIN salesforce.propstrength__offer__c offername ON bdetails.offer_sfid = offername.sfid AND offername.propstrength__status__c = 'Closed Won' "
-			+ " WHERE a.isactive = 'Y' AND window_assign = '"+user_id+"' and projectname= '"+projectId+"' and Date(a.created) between '"+fromdate+"' and '"+todate+"' order by isdone asc ", AssignedUser.class);
+			//+ " WHERE a.isactive = 'Y' AND window_assign = '"+user_id+"' and projectname= '"+projectId+"' and Date(a.created) between '"+fromdate+"' and '"+todate+"' order by isdone asc ", AssignedUser.class);
+			+ " WHERE "+whereCondition+" ", AssignedUser.class);
 		
 		//order by b.id
 		list = q.getResultList();

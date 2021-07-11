@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.text.ParseException;
 
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,7 +56,13 @@ public class EOIPaymentController {
 					
 					String responseVal = eOIPaymentDtlService.updateEOIPayment(paymentDtlJson, userid, enq_sfid, project_sfid, username);
 					
-					if(responseVal.equals("STATUS_OK")) {
+					String status = "";
+					if (responseVal != null) {
+						JSONObject json = new JSONObject(responseVal);
+						status = json.getString("status"); 
+					}
+					
+					if(status.equals("STATUS_OK")) {
 						if(receiptAttach!=null) {
 							File ad_dir = new File(rootPath + File.separator + "EOIbookingReference" + File.separator + enq_sfid + File.separator + rowid);
 							String ad_path =ad_dir +File.separator+rowid+"Receipt"+"_"+receiptAttach.getOriginalFilename();

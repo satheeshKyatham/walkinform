@@ -649,3 +649,11 @@ body {position: relative; margin: 0; padding-bottom: 6rem; min-height: 100%;}
 
 #sidemenu #d4uFooter {display: none;}
 #sidemenu {padding-bottom: 200px;}
+
+.closingDash {padding-top: 10px; padding-bottom: 20px;}
+.closingDash .cdBox {float:left; width: 13.3%; margin-left:0.5%; margin-right:0.5%; padding: 20px; background-color: #f9f9f9; height: 111px; overflow: hidden; border-radius: 16px; box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);}
+
+.cdBoxText {text-transform: uppercase; min-height: 44px;} 
+.cdBCount {float:left; font-size: 26px; font-weight: 500;}
+.cdBIcon {float:right; text-align: center;}
+.cdBIcon i {line-height: 30px; background-color: #000; color: #fff; height: 30px; width: 30px; border-radius: 100px; font-size: 18px;}

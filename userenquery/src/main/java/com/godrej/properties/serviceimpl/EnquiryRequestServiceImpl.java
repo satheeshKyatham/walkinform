@@ -336,8 +336,8 @@ public class EnquiryRequestServiceImpl implements EnquiryRequestService {
 			}
 		}
 		/* Update Site visit done to ensure sync delays does not violate source protection*/
-		if(dest.getSite_Visit_Done__c()==null || dest.getSite_Visit_Done__c()==0)
-			dest.setSite_Visit_Done__c(1.0);
+		/*if(dest.getSite_Visit_Done__c()==null || dest.getSite_Visit_Done__c()==0)
+			dest.setSite_Visit_Done__c(1.0);*/
 		
 		if(dest.getIsReferredByChannelPartnerFlag().equals("O")) {
 			 ContactDto contactDto=dest.getContact();
