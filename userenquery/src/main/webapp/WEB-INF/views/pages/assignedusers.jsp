@@ -91,10 +91,19 @@ if(ses!=null){
 			</h4>
 			<div class="clearfix"></div>
 		</div>	
-		 
-		 
-		<div class="col-md-12 closingDash"> 
-			<div class="cdBox"> 
+		
+		<div class="col-md-12 dbCBtnCol" style="margin-bottom: 10px;">
+			<a class="" role="button" data-toggle="collapse" href="#dashboardCollapse" aria-expanded="true" aria-controls="dashboardCollapse">
+			  	Dashboard
+			  	<span class="if-collapsed"><i class="fa fa-plus"></i></span>
+	  			<span class="if-not-collapsed"><i class="fa fa-minus"></i></span>
+			</a>
+		</div> 
+		
+		<div class="collapse in col-md-12 closingDash" id="dashboardCollapse">
+		   
+			 
+			<div class="cdBox" style="margin-left: 0;"> 
 				<div class="cdBoxText">Today's Assigned Lead</div>
 				<div class="cdBCountCol">
 					<div class="cdBCount todayAssLead">
@@ -130,7 +139,11 @@ if(ses!=null){
 					<div class="clearfix"></div> 
 				</div>
 			</div>
+		 
 		</div> 
+		 
+		 
+		
 		 
 	
 	  	<div class="col-md-12">
