@@ -5,6 +5,10 @@ public class DashboardReport {
 	private String todayAssigned;
 	private Integer totalPendingLead;
 	private String todayFollowup;
+	private String totalPendingKYCApproval;
+	private String totalCreatedOffer;
+	private String totalBookingDone;
+	
 	public String getTodayAssigned() {
 		return todayAssigned;
 	}
@@ -22,5 +26,23 @@ public class DashboardReport {
 	}
 	public void setTodayFollowup(String todayFollowup) {
 		this.todayFollowup = todayFollowup;
+	}
+	public String getTotalPendingKYCApproval() {
+		return totalPendingKYCApproval;
+	}
+	public void setTotalPendingKYCApproval(String totalPendingKYCApproval) {
+		this.totalPendingKYCApproval = totalPendingKYCApproval;
+	}
+	public String getTotalCreatedOffer() {
+		return totalCreatedOffer;
+	}
+	public void setTotalCreatedOffer(String totalCreatedOffer) {
+		this.totalCreatedOffer = totalCreatedOffer;
+	}
+	public String getTotalBookingDone() {
+		return totalBookingDone;
+	}
+	public void setTotalBookingDone(String totalBookingDone) {
+		this.totalBookingDone = totalBookingDone;
 	}
 }

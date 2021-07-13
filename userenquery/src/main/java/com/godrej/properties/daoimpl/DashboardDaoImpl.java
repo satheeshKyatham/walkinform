@@ -41,9 +41,19 @@ public class DashboardDaoImpl implements DashboardDao{
 		
 		Query todayFollowup = session.createNativeQuery("Select count(a.nv_token_id) as todayFollowup FROM salesforce.nv_token a INNER JOIN salesforce.nv_hc_enquiry b ON  CAST(a.enquiry_18 as integer) = b.enquiry_id  where a.isactive = 'Y' AND a.window_assign = '"+userid+"' and a.projectname= '"+projectSFID+"' and Date(b.followdate) between '"+todayDate+"' and '"+todayDate+"'   ");
 		
+		Query totalPendingKYCApproval = session.createNativeQuery("SELECT count(*) FROM salesforce.nv_eoi_form  where issubmitted = 'Y' AND kycapproval_status is NULL AND userid = '"+userid+"' and project_sfid = '"+projectSFID+"' ");
+		
+		Query totalCreatedOffer = session.createNativeQuery("SELECT count(*) FROM salesforce.gpl_cs_balance_details a INNER JOIN salesforce.propstrength__offer__c b ON a.offer_sfid = b.sfid where  a.project_sfid = '"+projectSFID+"' and userid= '"+userid+"' AND b.propstrength__status__c  = 'Closed Won'  ");
+		
+		Query totalBookingDone = session.createNativeQuery("SELECT count(*) FROM salesforce.gpl_cs_balance_details a INNER JOIN salesforce.propstrength__offer__c b ON a.offer_sfid = b.sfid AND b.propstrength__status__c = 'Closed Won'  INNER JOIN salesforce.propstrength__application_booking__c c ON c.propstrength__offer__c = b.sfid AND c.deal_status__c = 'Approved' AND c.propstrength__status__c = 'Deal Approved'  where  a.project_sfid = '"+projectSFID+"' and userid= '"+userid+"' ");
+		
+		
 		alotMIS.setTodayAssigned(todayAssigned.getResultList().get(0) == null ? "0" : todayAssigned.getResultList().get(0).toString().toString());
 		//alotMIS.setTotalPendingLead(totalPendingLead.getResultList().get(0) == null ? "0" : totalPendingLead.getResultList().get(0).toString().toString());
 		alotMIS.setTodayFollowup(todayFollowup.getResultList().get(0) == null ? "0" : todayFollowup.getResultList().get(0).toString().toString());
+		alotMIS.setTotalPendingKYCApproval(totalPendingKYCApproval.getResultList().get(0) == null ? "0" : totalPendingKYCApproval.getResultList().get(0).toString());
+		alotMIS.setTotalCreatedOffer(totalCreatedOffer.getResultList().get(0) == null ? "0" : totalCreatedOffer.getResultList().get(0).toString());
+		alotMIS.setTotalBookingDone(totalBookingDone.getResultList().get(0) == null ? "0" : totalBookingDone.getResultList().get(0).toString());
 		
 		Integer tpISNull = 0;
 		Integer tpISS = 0;

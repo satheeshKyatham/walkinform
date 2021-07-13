@@ -92,7 +92,7 @@ if(ses!=null){
 			<div class="clearfix"></div>
 		</div>	
 		
-		<div class="col-md-12 dbCBtnCol" style="margin-bottom: 10px;">
+		<!-- <div class="col-md-12 dbCBtnCol" style="margin-bottom: 10px;">
 			<a class="" role="button" data-toggle="collapse" href="#dashboardCollapse" aria-expanded="true" aria-controls="dashboardCollapse">
 			  	Dashboard
 			  	<span class="if-collapsed"><i class="fa fa-plus"></i></span>
@@ -101,9 +101,7 @@ if(ses!=null){
 		</div> 
 		
 		<div class="collapse in col-md-12 closingDash" id="dashboardCollapse">
-		   
-			 
-			<div class="cdBox" style="margin-left: 0;"> 
+			<div class="cdBox" style="margin-left: 0;" onclick="dashboardBox ('TODAYSASSIGNED');"> 
 				<div class="cdBoxText">Today's Assigned Lead</div>
 				<div class="cdBCountCol">
 					<div class="cdBCount todayAssLead">
@@ -127,7 +125,7 @@ if(ses!=null){
 					<div class="clearfix"></div> 
 				</div>
 			</div>
-			<div class="cdBox"> 
+			<div class="cdBox" onclick="dashboardBox ('TODAYSFOLLOWUP');"> 
 				<div class="cdBoxText">Today's Follow up</div>
 				<div class="cdBCountCol">
 					<div class="cdBCount todayFollowupCount">
@@ -139,22 +137,52 @@ if(ses!=null){
 					<div class="clearfix"></div> 
 				</div>
 			</div>
-		 
-		</div> 
-		 
-		 
-		
-		 
-	
+		 	<div class="cdBox"> 
+				<div class="cdBoxText">Total Pending KYC Approval</div>
+				<div class="cdBCountCol">
+					<div class="cdBCount totalPendingKYCApproval">
+						-
+					</div>
+					<div class="cdBIcon">  
+						<i class="fa fa-user"></i>
+					</div>
+					<div class="clearfix"></div> 
+				</div>
+			</div>
+			<div class="cdBox"> 
+				<div class="cdBoxText">Total Created Offers</div>
+				<div class="cdBCountCol">
+					<div class="cdBCount totalCreatedOffer">
+						-
+					</div>
+					<div class="cdBIcon">  
+						<i class="fa fa-check"></i>
+					</div>
+					<div class="clearfix"></div> 
+				</div>
+			</div>
+			<div class="cdBox"> 
+				<div class="cdBoxText">Total Booking Done</div>
+				<div class="cdBCountCol">
+					<div class="cdBCount totalBookingDone">
+						-
+					</div>
+					<div class="cdBIcon">  
+						<i class="fa fa-check"></i>
+					</div>
+					<div class="clearfix"></div> 
+				</div>
+			</div>
+		</div> -->
 	  	<div class="col-md-12">
 	   		<div>
 				<ul class="nav nav-tabs tabNav">
-					<li class="active" id="basicInfoTabId">
+					<li class="active dbAtl" id="basicInfoTabId">
 						<a href="#tab1" data-toggle="tab">Assigned Token List</a>
 					</li>
 					
-					<li class="" id="" onclick="getTodayFollowup();">
-						<a href="#todayFollowUp" data-toggle="tab">Today's follow-up</a>
+					<li class="dbTfu">
+						<a href="#todayFollowUp" data-toggle="tab" onclick="getTodayFollowup();">Today's follow-up</a>
 					</li>
 					
 					<li class="" id="collateralTab">

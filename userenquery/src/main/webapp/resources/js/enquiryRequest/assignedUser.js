@@ -38,7 +38,7 @@ function loadData () {
 			  
 			  
 			  getPendingAssignList();
-			  closingDashboard();
+			  //closingDashboard();
 		}
 function getPendingAssignList() {
 		
@@ -227,6 +227,9 @@ function closingDashboard () {
 		$('.todayAssLead').html("");
 		$('.totalPendingLead').html("");
 		$('.todayFollowupCount').html("");
+		$('.totalPendingKYCApproval').html("");
+		$('.totalCreatedOffer').html("");
+		$('.totalBookingDone').html("");
 	}).done(function(data){
 		var obj =JSON.parse(data);
 		
@@ -234,8 +237,19 @@ function closingDashboard () {
 			$('.todayAssLead').html(obj.todayAssigned);
 			$('.totalPendingLead').html(obj.totalPendingLead);
 			$('.todayFollowupCount').html(obj.todayFollowup);
+			$('.totalPendingKYCApproval').html(obj.totalPendingKYCApproval);
+			$('.totalCreatedOffer').html(obj.totalCreatedOffer);
+			$('.totalBookingDone').html(obj.totalBookingDone);
 		} else {
 			//smapleUnit = "";
 		}
 	});	
+}
+
+function dashboardBox (source) {
+	if (source == "TODAYSASSIGNED") {
+		$('.dbAtl a').trigger('click');
+	} else if (source == "TODAYSFOLLOWUP") {
+		$('.dbTfu a').trigger('click');
+	}
 }
