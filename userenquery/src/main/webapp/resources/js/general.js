@@ -405,6 +405,14 @@ function towerCustomList (){
 		html=html+'<option value="J079">VANAANGAN</option>'; 
 		
 		return html;
+	} else if ($('#projectid').val() == "a1l2s00000002YZAAY") {
+		var html="";
+		
+		html=html+'<option value="SC04">Cyprus (Tower-4)</option>';
+		html=html+'<option value="SC05">Robusta (Tower-5)</option>';
+		html=html+'<option value="SC06">Alba (Tower-6)</option>';
+		
+		return html;
 	} else {
 		return "";
 	}
