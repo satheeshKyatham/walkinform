@@ -651,9 +651,9 @@ body {position: relative; margin: 0; padding-bottom: 6rem; min-height: 100%;}
 #sidemenu {padding-bottom: 200px;}
 
 .closingDash {padding-bottom: 20px;}
-.closingDash .cdBox {float:left; width: 13.3%; margin-left:0.5%; margin-right:0.5%; padding: 20px; background-color: #f9f9f9; height: 111px; overflow: hidden; border-radius: 16px; box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);}
+.closingDash .cdBox {float:left; width: 13.3%; margin-left:0.5%; margin-right:0.5%; padding: 15px; background-color: #f9f9f9; height: 100px; overflow: hidden; border-radius: 16px; box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);}
 
-.cdBoxText {text-transform: uppercase; min-height: 44px;} 
+.cdBoxText {text-transform: uppercase; min-height: 41px;} 
 .cdBCount {float:left; font-size: 26px; font-weight: 500;}
 .cdBIcon {float:right; text-align: center;}
 .cdBIcon i {line-height: 30px; background-color: #000; color: #fff; height: 30px; width: 30px; border-radius: 100px; font-size: 18px;}
@@ -667,3 +667,49 @@ body {position: relative; margin: 0; padding-bottom: 6rem; min-height: 100%;}
 .dbCBtnCol [data-toggle="collapse"]:not(.collapsed) .if-collapsed {
   display: none;
 }
+
+
+.fuRattingHot {background-color: #ffd5af !important; border-right: 5px solid #ff8114 !important;}
+.fuRattingWarm {background-color: #fffab6 !important; border-right: 5px solid #ffec00 !important;}
+.fuRattingCold {background-color: #d8f2ff !important; border-right: 5px solid #8cdaff !important;}
+.fuRattingLost {background-color: #f3f3f3 !important; border-right: 5px solid #cccccc !important;}
+
+
+.rattingCol {line-height: 18px; margin-right:18px;  position: relative;  padding-left: 22px;  cursor: pointer; font-size: 14px; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;}
+/* Hide the browser's default checkbox */
+.rattingCol input { position: absolute; opacity: 0; cursor: pointer; height: 0; width: 0;}
+
+/* Create a custom checkbox */
+.rattingCol .checkmarkFU { position: absolute; top: 0; left: 0; height: 16px; width: 16px;background-color: #eee;}
+
+/* On mouse-over, add a grey background color */
+/* .rattingCol:hover input ~ .checkmarkFU {  background-color: #ccc;} */
+
+/* When the checkbox is checked, add a blue background */
+/* .rattingCol input:checked ~ .checkmarkFU { background-color: #2196F3;} */
+
+/* Create the checkmarkFU/indicator (hidden when not checked) */
+.checkmarkFU:after { content: ""; position: absolute; display: none;}
+
+/* Show the checkmarkFU when checked */
+.rattingCol input:checked ~ .checkmarkFU:after { display: block;}
+
+/* Style the checkmarkFU/indicator */
+.rattingCol .checkmarkFU:after { left:5px; top: 2px;  width: 6px; height: 10px; border: solid #000; border-width: 0 3px 3px 0; -webkit-transform: rotate(45deg);  -ms-transform: rotate(45deg);  transform: rotate(45deg);}
+.rattingCol.rcbAll .checkmarkFU:after {border: solid #ffffff !important; border-width: 0 3px 3px 0 !important;}
+.rcbAll .checkmarkFU {background-color: #000000;}
+.rcbWarm .checkmarkFU {background-color: #fffab6 ;}
+.rcbCold .checkmarkFU {background-color: #d8f2ff  ;}
+.rcbHot .checkmarkFU {background-color: #ffd5af   ;}
+.rcbLost .checkmarkFU {background-color: #f3f3f3   ;}
+
+.rattingCBCol {position: absolute; top: 26px; left: 10%; z-index: 10;}
+
+#followUpList tr td {border: 1px solid #fff !important;} 
+
+.todayAssignedCol {background-color: #6259CA !important; color:#fff !important;}
+.todayAssignedCol .cdBIcon i {background-color: #4B4778 !important;}
+.totalPendingCol {background-color: #FF7A19 !important; color:#fff !important;}
+.totalPendingCol .cdBIcon i {background-color: #c06600 !important;}
+.todayFollowupCol {background-color: #00667a !important; color:#fff !important;}
+.todayFollowupCol .cdBIcon i {background-color: #015161 !important;}

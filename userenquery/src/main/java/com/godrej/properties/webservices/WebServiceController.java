@@ -105,6 +105,7 @@ import com.godrej.properties.model.SchemePromotional;
 import com.godrej.properties.model.SchemeSite;
 import com.godrej.properties.model.SchemeSource;
 import com.godrej.properties.model.TnC;
+import com.godrej.properties.model.TodaysFollowUp;
 import com.godrej.properties.model.Token;
 import com.godrej.properties.model.TowerBand;
 import com.godrej.properties.model.UnitDtl;
@@ -4924,5 +4925,21 @@ public class WebServiceController<MultipartFormDataInput> {
 				// TODO: handle exception
 			}
 		}
+	
+	@RequestMapping(value = { "/getTodayFollowUp" }, method = RequestMethod.GET)
+	public String getTodayFollowUp(@RequestParam("projectid") String projectid,
+			@RequestParam("user_id") String userId, @RequestParam("fromdate") String fromdate,
+			@RequestParam("todate") String todate,@RequestParam("source") String source) {
+		Gson gson = new GsonBuilder().serializeNulls().create();
+		List<TodaysFollowUp> assign = assignUserService.getData(userId, projectid, fromdate, todate, source);
+		if (assign != null) {
+			for (int i = 0; assign.size() > i; i++) {
+				Timestamp later = new Timestamp(assign.get(i).getStarteddate().getTime() + (330 * 60 * 1000));
+				assign.get(i).setStarteddate(later);
+				// assign.add(assignData);
+			}
+		}
+		return gson.toJson(assign);
+	}
 	
 }
