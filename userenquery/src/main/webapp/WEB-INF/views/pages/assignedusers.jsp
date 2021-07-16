@@ -92,12 +92,96 @@ if(ses!=null){
 			<div class="clearfix"></div>
 		</div>	
 		
-	
+		<div class="col-md-12 dbCBtnCol" style="margin-bottom: 10px;">
+			<a style="text-decoration: none;" class="cursorPoint" role="button" data-toggle="collapse" href="#dashboardCollapse" aria-expanded="true" aria-controls="dashboardCollapse">
+			  	<span class="if-collapsed">Expand <i class="fa fa-plus" style="font-size: 12px;"></i></span>
+	  			<span class="if-not-collapsed">Collapse <i class="fa fa-minus" style="font-size: 12px;"></i></span>
+			</a>
+		</div> 
+		
+		<div class="collapse in col-md-12 closingDash" id="dashboardCollapse">
+			<div class="cdBox todayAssignedCol cursorPoint" style="margin-left: 0;" onclick="dashboardBox ('TODAYSASSIGNED');"> 
+				<div class="cdBoxText">Today's Assigned Lead</div>
+				<div class="cdBCountCol">
+					<div class="cdBCount todayAssLead">
+						-
+					</div>
+					<div class="cdBIcon">
+						<i class="fa fa-list"></i>
+					</div>
+					<div class="clearfix"></div> 
+				</div>
+			</div> 
+			<div class="cdBox totalPendingCol cursorPoint"  onclick="dashboardBox ('TOTALPENDINGLEAD');"> 
+				<div class="cdBoxText">Total pending Lead Submission</div>
+				<div class="cdBCountCol">
+					<div class="cdBCount totalPendingLead">
+						-
+					</div>
+					<div class="cdBIcon">
+						<i class="fa fa-list"></i>
+					</div>
+					<div class="clearfix"></div> 
+				</div>
+			</div>
+			<div class="cdBox todayFollowupCol cursorPoint" onclick="dashboardBox ('TODAYSFOLLOWUP');"> 
+				<div class="cdBoxText">Today's Follow up</div>
+				<div class="cdBCountCol">
+					<div class="cdBCount todayFollowupCount">
+						- 
+					</div>
+					<div class="cdBIcon">  
+						<i class="fa fa-phone"></i>
+					</div>
+					<div class="clearfix"></div> 
+				</div>
+			</div>
+		 	<!-- <div class="cdBox"> 
+				<div class="cdBoxText">Total Pending KYC Approval</div>
+				<div class="cdBCountCol">
+					<div class="cdBCount totalPendingKYCApproval">
+						-
+					</div>
+					<div class="cdBIcon">  
+						<i class="fa fa-user"></i>
+					</div>
+					<div class="clearfix"></div> 
+				</div>
+			</div> -->
+			<!-- <div class="cdBox"> 
+				<div class="cdBoxText">Total Created Offers</div>
+				<div class="cdBCountCol">
+					<div class="cdBCount totalCreatedOffer">
+						-
+					</div>
+					<div class="cdBIcon">  
+						<i class="fa fa-check"></i>
+					</div>
+					<div class="clearfix"></div> 
+				</div>
+			</div> -->
+			<!-- <div class="cdBox"> 
+				<div class="cdBoxText">Total Booking Done</div>
+				<div class="cdBCountCol">
+					<div class="cdBCount totalBookingDone">
+						-
+					</div>
+					<div class="cdBIcon">  
+						<i class="fa fa-check"></i>
+					</div>
+					<div class="clearfix"></div> 
+				</div>
+			</div> -->
+		</div> 
 	  	<div class="col-md-12">
 	   		<div>
 				<ul class="nav nav-tabs tabNav">
-					<li class="active" id="basicInfoTabId">
+					<li class="active dbAtl" id="basicInfoTabId">
 						<a href="#tab1" data-toggle="tab">Assigned Token List</a>
+					</li>
+					
+					<li class="dbTfu">
+						<a href="#todayFollowUp" data-toggle="tab" onclick="getTodayFollowup();">Today's follow-up</a>
 					</li>
 					
 					<li class="" id="collateralTab">
@@ -142,8 +226,18 @@ if(ses!=null){
 			</div>
 		
 	   		<div class="tab-content formTabCont">
-				<div class="tab-pane active" id="tab1"> 
-			      <div class="well center-block">
+				<div class="tab-pane active" id="tab1">
+				
+					<div class="tokenRadio" style="padding: 0px 0px 20px 0;">
+						<label class="radio-inline">
+						  <input type="radio" name="atData" value="assignedToken" checked> Assigned Token
+						</label>
+						<label class="radio-inline">
+						  <input type="radio" name="atData" value="totalPendingLead"> Total Pending Lead Submission
+						</label> 
+					</div>
+				 
+			      <div class="well center-block" id="atFilterCol">
 						<div class="form-inline">
 							
 							<i class="glyphicon glyphicon-filter" style="border-right: 1px solid #333; margin-right: 10px; padding-right: 10px;"></i>
@@ -163,7 +257,8 @@ if(ses!=null){
 										
 									</span> Search
 								</button>
-							</div>
+							</div> 
+							
 						</div>
 						<div class="clearfix"></div>
 					</div>
@@ -197,6 +292,10 @@ if(ses!=null){
 						</div>
 			      		<div class="clearfix"></div>
 			      	</div>
+				</div>
+				
+				<div class="tab-pane" id="todayFollowUp">
+					<%@ include file="/WEB-INF/views/pages/followupList.jsp" %>
 				</div>
 				
 				<div class="tab-pane" id="collateralPaneCol">

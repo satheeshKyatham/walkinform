@@ -282,6 +282,8 @@ public class CPWebServices {
 							"No Enquiry Found with Given Prameters: Country Code is {}, Mobile No is {}, projectsfid {}",
 							enqReqDto.getCountrycode(), enqReqDto.getMobileno(), enqReqDto.getProjectsfid());
 					dto.setSrc_protection_flag("New");
+					dto.setLead_status(true);
+					dto.setResp_msg("Success");
 					return dto;
 				}
 			} catch (Exception e) {
@@ -299,6 +301,24 @@ public class CPWebServices {
 			return dto;
 		}
 
+	}
+	
+	//Added By Satheesh K - For CP App
+	@GetMapping("/getEnquiryByPKData/{enquiryid}")
+	@ResponseBody
+	public EnquiryDto getExistingEnquiry(@PathVariable("enquiryid") int enquiryid) {
+		EnquiryDto enquiryData = new EnquiryDto();
+		try {
+			EnquiryDto dto = new EnquiryDto();
+			dto.setEnquiryId(enquiryid);
+			enquiryData = enquiryRequestService.getEnquiryById(dto);
+			log.info(MessageConstants.ENQUIRY_GET_SUCCESS);
+		} catch (Exception ex) {
+			log.error(ex.getMessage());
+			log.error(MessageConstants.ENQUIRY_GET_FAILED);
+			ex.printStackTrace();
+		}
+		return enquiryData;
 	}
 
 	public CPEnquiryRespAPIDto getGPLAppEnquiryRespDto(EnquiryDto enquiryDto, String brokerId) {
@@ -403,10 +423,14 @@ public class CPWebServices {
 		// Condition Add for broker id same as input
 		if (brokerId.equals(enqResp.getBroker_account_sfid())) {
 			enqResp.setIs_same_broker("True");
+			enqResp.setLead_status(true);
+			enqResp.setResp_msg("Success");
 		} else {
 			enqResp.setIs_same_broker("False");
+			enqResp.setLead_status(false);
+			enqResp.setResp_msg("EOI cannot be generated");
 		}
-
+		
 		return enqResp;
 
 	}

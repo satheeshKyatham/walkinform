@@ -224,5 +224,4 @@ public class PushEnquiryDataServiceImpl  implements PushEnquiryDataService{
 		return enquiryConverter.entityToDto(enq);
 	}
 
-	
 }

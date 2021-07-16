@@ -14,7 +14,7 @@ import javax.persistence.Transient;
 
 @Entity
 @Table(name = "salesforce.vw_assigneduser") 
-public class AssignedUser {
+public class TodaysFollowUp {
 	@Id 
 	@GeneratedValue(strategy=GenerationType.IDENTITY) 
 	@Column(name="row_number") private String	row_number;
@@ -37,7 +37,8 @@ public class AssignedUser {
 	
 	@Column(name="followdate") private Timestamp followdate;
 	@Column(name="followtype") private String followtype;
-	 
+	@Column(name="enqname") private String enqname;
+	@Column(name="rating__c") private String rating__c;
 	
 	public String getPriority_no__c() {
 		return priority_no__c;
@@ -140,5 +141,17 @@ public class AssignedUser {
 	}
 	public void setFollowtype(String followtype) {
 		this.followtype = followtype;
-	} 
+	}
+	public String getEnqname() {
+		return enqname;
+	}
+	public void setEnqname(String enqname) {
+		this.enqname = enqname;
+	}
+	public String getRating__c() {
+		return rating__c;
+	}
+	public void setRating__c(String rating__c) {
+		this.rating__c = rating__c;
+	}
 }
