@@ -46,7 +46,7 @@ public class SessionCheckListner extends HandlerInterceptorAdapter {
 		filterUrlList.add("/CPD4UGeneratePaymentLink");
 		filterUrlList.add("/CPGetPastEOISubmissions");
 		filterUrlList.add("/EOIPaymentCPApp");
-		
+		filterUrlList.add("/getEnquiryByPKData");
 		//
 		
 		

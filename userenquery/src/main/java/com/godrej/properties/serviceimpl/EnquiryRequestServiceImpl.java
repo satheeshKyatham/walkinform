@@ -1499,5 +1499,4 @@ public class EnquiryRequestServiceImpl implements EnquiryRequestService {
 		String sourcingLeadSFID = tokenService.getSalesUserSFID(0, sourcManageremail);
 		return pushEnquiryDataService.getSourcingLeadsEnquiryList(sourcingLeadSFID, projectSfid, fromdate, todate);
 	}
-	
 }

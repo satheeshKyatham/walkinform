@@ -41,6 +41,7 @@ public class CPEnquiryRespAPIDto {
 	private String contact_emailid;
 	private String contact_countrycode;
 	private String resp_msg;
+	private boolean lead_status;
 
 	
 	public String getSrc_protection_flag() {
@@ -254,7 +255,12 @@ public class CPEnquiryRespAPIDto {
 	public void setResp_msg(String resp_msg) {
 		this.resp_msg = resp_msg;
 	}
-	 
+	public boolean isLead_status() {
+		return lead_status;
+	}
+	public void setLead_status(boolean lead_status) {
+		this.lead_status = lead_status;
+	}
 	 
 
 	
