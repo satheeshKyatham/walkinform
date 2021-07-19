@@ -581,7 +581,15 @@ function loadData (csSource) {
        $('.customerName').text($('#firstName').val() +" "+ $('#lastName').val());
        $('.customerContact').text($('#hiddenMobileNo').val());
        
-       if ($('#carParkCountDD option').val() == 0) {
+       var carparkCountDDVal = "";
+       
+       if ($('#projectId').val() == 'a1l2s000000g6kZAAQ' && $('#carParkType').find('option:selected').attr("data-name").trim() == "Studio/1 BHK No Parking") {
+    	   carparkCountDDVal = "NA";
+       } else {
+    	   carparkCountDDVal = $('#carParkCountDD option').val();
+       }
+       
+       if (carparkCountDDVal == 0) {
              $('.ifCarParkZero').html('');
              $('.craParkTypeLabel').html('');
              $('.noOfCarParkLabel').html('');
@@ -3491,15 +3499,17 @@ $("#carParkType").change(function () {
 	
     	if ($('#projectId').val() == 'a1l2s000000PJPmAAO' || $('#projectId').val() == 'a1l6F000002X6IOQA0') {
     		$('#carParkCountDD').append('<select class="full form-control"><option value="1">1</option> </select>');
+    	} else if ($('#projectId').val() == 'a1l2s000000g6kZAAQ') {
+    		if ($('#carParkType').find('option:selected').attr("data-name").trim() == "Studio/1 BHK No Parking") {
+    			$('#carParkCountDD').append('<select class="full form-control"><option value="0">0</option></select>');
+    		} else {
+    			$('#carParkCountDD').append('<select class="full form-control"><option value="1">1</option> <option value="2">2</option> </select>');
+    		}
     	} else if ($('#projectId').val() == 'a1l6F000002QWXnQAO') {
     		$('#carParkCountDD').append('<select class="full form-control"><option value="1">1</option> <option value="2">2</option> </select>');
     	} else {
     		$('#carParkCountDD').append('<select class="full form-control"><option value="1">1</option> <option value="2">2</option> <option value="3">3</option>  <option value="4">4</option> </select>');
     	}
-    	
-    	
-		
-    	
     	
     	if ($('#projectId').val() == 'a1l6F000009D6IMQA0') {
 			$('#carParkCount').hide();
