@@ -48,6 +48,8 @@ public class SessionCheckListner extends HandlerInterceptorAdapter {
 		filterUrlList.add("/EOIPaymentCPApp");
 		filterUrlList.add("/getEnquiryByPKData");
 		//
+		filterUrlList.add("/lwWebhook");
+		
 		
 		
 	}

@@ -42,7 +42,7 @@ function loadData () {
 			  
 			  
 			  getPendingAssignList('DEFAULT');
-			  closingDashboard();
+			  //closingDashboard();
 		}
 function getPendingAssignList(sourecVal) {
 			

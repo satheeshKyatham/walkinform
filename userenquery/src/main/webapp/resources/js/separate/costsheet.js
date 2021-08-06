@@ -581,7 +581,15 @@ function loadData (csSource) {
        $('.customerName').text($('#firstName').val() +" "+ $('#lastName').val());
        $('.customerContact').text($('#hiddenMobileNo').val());
        
-       if ($('#carParkCountDD option').val() == 0) {
+       var carparkCountDDVal = "";
+       
+       if ($('#projectId').val() == 'a1l2s000000g6kZAAQ' && $('#carParkType').find('option:selected').attr("data-name").trim() == "Studio/1 BHK No Parking") {
+    	   carparkCountDDVal = "NA";
+       } else {
+    	   carparkCountDDVal = $('#carParkCountDD option').val();
+       }
+       
+       if (carparkCountDDVal == 0) {
              $('.ifCarParkZero').html('');
              $('.craParkTypeLabel').html('');
              $('.noOfCarParkLabel').html('');
@@ -3052,9 +3060,11 @@ function printPdfData(generateFrom) {
              
        var logoPath = '';
        if ($('#projectId').val() == "a1l2s000000PGu3AAG" || $('#projectId').val() == "a1l2s000000PGu8AAG"  || $('#projectId').val() == "a1l2s000000PGuDAAW" || $('#projectId').val() == "a1l2s000000PGuIAAW"  || $('#projectId').val() == "a1l2s000000PGuNAAW" || $('#projectId').val() == "a1l2s000000PGuSAAW") {
-    	   logoPath = "<img width=\"300\" height=\"40\"  src=\"https://atulbhanushali.com/d4u/gplLogoRoyalWoods.jpg\"/>"; 
+    	   //logoPath = "<img width=\"300\" height=\"40\"  src=\"https://atulbhanushali.com/d4u/gplLogoRoyalWoods.jpg\"/>";
+    	   logoPath = "<img width=\"300\" height=\"40\"  src=\"https://storage.googleapis.com/gplimagehost.appspot.com/gplLogoRoyalWoods.jpg\"/>";
        } else {
-    	   logoPath = "<img width=\"191\" height=\"50\"  src=\"https://atulbhanushali.com/d4u/gplLogo.jpg\"/>";
+    	   //logoPath = "<img width=\"191\" height=\"50\"  src=\"https://atulbhanushali.com/d4u/gplLogo.jpg\"/>";
+    	   logoPath = "<img width=\"191\" height=\"50\"  src=\"https://storage.googleapis.com/gplimagehost.appspot.com/gplLogo.jpg\"/>";
        }
        
        
@@ -3491,15 +3501,17 @@ $("#carParkType").change(function () {
 	
     	if ($('#projectId').val() == 'a1l2s000000PJPmAAO' || $('#projectId').val() == 'a1l6F000002X6IOQA0') {
     		$('#carParkCountDD').append('<select class="full form-control"><option value="1">1</option> </select>');
+    	} else if ($('#projectId').val() == 'a1l2s000000g6kZAAQ') {
+    		if ($('#carParkType').find('option:selected').attr("data-name").trim() == "Studio/1 BHK No Parking") {
+    			$('#carParkCountDD').append('<select class="full form-control"><option value="0">0</option></select>');
+    		} else {
+    			$('#carParkCountDD').append('<select class="full form-control"><option value="1">1</option> <option value="2">2</option> </select>');
+    		}
     	} else if ($('#projectId').val() == 'a1l6F000002QWXnQAO') {
     		$('#carParkCountDD').append('<select class="full form-control"><option value="1">1</option> <option value="2">2</option> </select>');
     	} else {
     		$('#carParkCountDD').append('<select class="full form-control"><option value="1">1</option> <option value="2">2</option> <option value="3">3</option>  <option value="4">4</option> </select>');
     	}
-    	
-    	
-		
-    	
     	
     	if ($('#projectId').val() == 'a1l6F000009D6IMQA0') {
 			$('#carParkCount').hide();

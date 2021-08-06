@@ -35,8 +35,8 @@ public class SendMailThread implements Runnable{
 		
 		Properties properties = new Properties();
 		//String host = "Smtp.office365.com";
-		String host = "10.21.24.32";//65 server
-//		String host = "10.22.48.28";//65 server
+//		String host = "10.21.24.32";//65 server
+		String host = "10.21.48.220";//New SMTP
 		//String host = "smtp.office365.com";
 		/* final String from = "selfservice.portal@godrejproperties.com";
 		 final String password = "DFER$#34";*/
