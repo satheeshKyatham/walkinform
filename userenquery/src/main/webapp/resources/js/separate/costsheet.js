@@ -1541,12 +1541,14 @@ function updateBSP (timeid) {
       
        if ($('#channelPartnerSfidCS').val() === "") {
     	   
-    	   if($('#walkInSource').val()==="Referral" || $('#walkInSource').val()==="Existing Customer")
+    	   if($('#walkInSource').val()==="Referral")//|| $('#walkInSource').val()==="Existing Customer"
     		   offerthrough = "Referral";
     	   else if($('#walkInSource').val()==="Corporate")
     		   offerthrough = "Corporate";
     	   else if($('#walkInSource').val()==="Godrej Employee")
     		   offerthrough = "Employee";
+    	   else if($('#walkInSource').val()==="Existing Customer")
+    		   offerthrough = "Loyalty";
     	   else
     		   offerthrough = "Direct";
     	   
