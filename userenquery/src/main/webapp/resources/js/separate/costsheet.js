@@ -3060,9 +3060,11 @@ function printPdfData(generateFrom) {
              
        var logoPath = '';
        if ($('#projectId').val() == "a1l2s000000PGu3AAG" || $('#projectId').val() == "a1l2s000000PGu8AAG"  || $('#projectId').val() == "a1l2s000000PGuDAAW" || $('#projectId').val() == "a1l2s000000PGuIAAW"  || $('#projectId').val() == "a1l2s000000PGuNAAW" || $('#projectId').val() == "a1l2s000000PGuSAAW") {
-    	   logoPath = "<img width=\"300\" height=\"40\"  src=\"https://atulbhanushali.com/d4u/gplLogoRoyalWoods.jpg\"/>"; 
+    	   //logoPath = "<img width=\"300\" height=\"40\"  src=\"https://atulbhanushali.com/d4u/gplLogoRoyalWoods.jpg\"/>";
+    	   logoPath = "<img width=\"300\" height=\"40\"  src=\"https://storage.googleapis.com/gplimagehost.appspot.com/gplLogoRoyalWoods.jpg\"/>";
        } else {
-    	   logoPath = "<img width=\"191\" height=\"50\"  src=\"https://atulbhanushali.com/d4u/gplLogo.jpg\"/>";
+    	   //logoPath = "<img width=\"191\" height=\"50\"  src=\"https://atulbhanushali.com/d4u/gplLogo.jpg\"/>";
+    	   logoPath = "<img width=\"191\" height=\"50\"  src=\"https://storage.googleapis.com/gplimagehost.appspot.com/gplLogo.jpg\"/>";
        }
        
        

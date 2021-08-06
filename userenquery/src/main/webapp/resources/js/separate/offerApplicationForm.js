@@ -920,9 +920,11 @@ function printApplicationOfferForm(offerSFID, rowId) {
 	var appFormLogo ='';
 	
 	if ( $('#projectid').val() == "a1l2s000000PGu3AAG"  || $('#projectid').val() == "a1l2s000000PGu8AAG"  || $('#projectid').val() == "a1l2s000000PGuDAAW" || $('#projectid').val() ==  "a1l2s000000PGuIAAW" || $('#projectid').val() == "a1l2s000000PGuNAAW" || $('#projectid').val() == "a1l2s000000PGuSAAW") {
-	  	  appFormLogo = "<img width=\"300\" height=\"40\"  src=\"https://atulbhanushali.com/d4u/gplLogoRoyalWoods.jpg\"/>"; 
+	  	  //appFormLogo = "<img width=\"300\" height=\"40\"  src=\"https://atulbhanushali.com/d4u/gplLogoRoyalWoods.jpg\"/>";
+			appFormLogo = "<img width=\"300\" height=\"40\"  src=\"https://storage.googleapis.com/gplimagehost.appspot.com/gplLogoRoyalWoods.jpg\"/>";
     } else {
-  	  appFormLogo = "<img height='50' width='191' src='https://atulbhanushali.com/d4u/gplLogo.jpg' />";
+  	  //appFormLogo = "<img height='50' width='191' src='https://atulbhanushali.com/d4u/gplLogo.jpg' />";
+    	appFormLogo = "<img height='50' width='191' src='https://storage.googleapis.com/gplimagehost.appspot.com/gplLogo.jpg' />";
     }
 	
 	$.post(pageContext+"printApplicationForm",{"appFormLogo":appFormLogo, "projectid":$('#projectid').val(), "enqSfid":offerSFID,"appFormData":$('#printApplicationFormOffer').html(),"projectName":projectName1,"reraRegistrationNo":reraRegistrationNo},function(data){				 
