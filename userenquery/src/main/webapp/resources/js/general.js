@@ -413,6 +413,15 @@ function towerCustomList (){
 		html=html+'<option value="SC06">Alba (Tower-6)</option>';
 		
 		return html;
+	} else if ($('#projectid').val() == "a1l6F000002X6IOQA0") {
+		var html="";
+		
+		html=html+'<option value="CP10">The Highlands Tower 1</option>';
+		html=html+'<option value="CP11">The Highlands Tower 2</option>';
+		html=html+'<option value="CP12">The Highlands Tower 3</option>';
+		html=html+'<option value="CP13">The Highlands Tower 4</option>';
+		
+		return html;
 	} else {
 		return "";
 	}
