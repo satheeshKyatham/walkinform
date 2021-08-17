@@ -145,6 +145,8 @@ function floorList (){
 
 function updateEDP () {
 	
+	document.getElementById('updateEDPBtn').style.pointerEvents = 'none'; 
+	
 	//BTNLOADING.loading("edpUpdateBtn", "show");
 	
 	$("#edpUpdateBtn i").show();
@@ -172,7 +174,7 @@ function updateEDP () {
 			//allowOutsideClick: false,
 			//showConfirmButton: false
 		});
-    	
+		document.getElementById('updateEDPBtn').style.pointerEvents = 'auto'; 
     	return false;
 	}
 	
@@ -205,8 +207,9 @@ function updateEDP () {
 				//BTNLOADING.loading("edpUpdateBtn", "hide"); 
 				$("#edpUpdateBtn i").hide();
 				
-				towerRefresh ();
-				floorRefresh ();
+				projectDataList (); 
+				towerRefresh (); 
+				floorRefresh (); 
 				edpDateRefresh ();
 				
 			} else {
@@ -226,10 +229,12 @@ function updateEDP () {
 				//BTNLOADING.loading("edpUpdateBtn", "hide");
 				$("#edpUpdateBtn i").hide();
 			}
+			document.getElementById('updateEDPBtn').style.pointerEvents = 'auto';
 	    },
 	    error: function(data) {
 	    	//BTNLOADING.loading("edpUpdateBtn", "hide");
 	    	$("#edpUpdateBtn i").hide();
+	    	document.getElementById('updateEDPBtn').style.pointerEvents = 'auto';
 	    }
 	});
 }

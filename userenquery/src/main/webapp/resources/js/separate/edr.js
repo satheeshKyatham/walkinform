@@ -207,7 +207,7 @@ function bookingList (){
 
 
 function updateEDR () {
-	
+	document.getElementById('updateEDRBtn').style.pointerEvents = 'none'; 
 	//BTNLOADING.loading("edrUpdateBtn", "show");
 	$("#edrUpdateBtn i").show();
 	
@@ -242,7 +242,7 @@ function updateEDR () {
 			icon: 'warning',
 			title: 'Please enter all mandatory fields.'
 		})*/
-    	
+		document.getElementById('updateEDRBtn').style.pointerEvents = 'auto';
     	return false;
 	}
 	
@@ -270,6 +270,12 @@ function updateEDR () {
         		})*/
         		$("#edrUpdateBtn i").hide();
 				//BTNLOADING.loading("edrUpdateBtn", "hide"); 
+        		
+        		projectDataListEDR (); 
+        		floorRefreshEDR (); 
+        		customerRefreshEDR (); 
+        		edrDateRefresh ();
+        		
 			} else {
 				swal({
 					text: obj.error_msg,
@@ -282,10 +288,12 @@ function updateEDR () {
         		$("#edrUpdateBtn i").hide();
 				//BTNLOADING.loading("edrUpdateBtn", "hide");
 			}
+			document.getElementById('updateEDRBtn').style.pointerEvents = 'auto';
 	    },
 	    error: function(data) {
 	    	$("#edrUpdateBtn i").hide();
 	    	//BTNLOADING.loading("edrUpdateBtn", "hide");
+	    	document.getElementById('updateEDRBtn').style.pointerEvents = 'auto';
 	    }
 	});
 }

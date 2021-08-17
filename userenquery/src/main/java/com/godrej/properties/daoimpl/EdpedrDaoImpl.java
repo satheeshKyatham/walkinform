@@ -63,7 +63,7 @@ public class EdpedrDaoImpl extends AbstractDao<Integer, Edpedr>implements Edpedr
 		
 		Query query = session.createNativeQuery("INSERT INTO salesforce.nv_edp_log "
 				+ " (projectsfid, tower_multiple_sfid, floor_multiple_sfid, newdate, created, createdby, isactive) "
-				+ " VALUES ('"+projectsfid+"', '"+multiTower+"', '"+multiFloor+"', '"+edpDate+"', "+currentTpm+", "+userid+", 'Y')  ");
+				+ " VALUES ('"+projectsfid+"', '"+multiTower+"', '"+multiFloor+"', '"+edpDate+"', '"+currentTpm+"', "+userid+", 'Y')  ");
 		
 		query.executeUpdate();
 		
@@ -79,7 +79,7 @@ public class EdpedrDaoImpl extends AbstractDao<Integer, Edpedr>implements Edpedr
 		
 		Query query = session.createNativeQuery("INSERT INTO salesforce.nv_edr_log "
 				+ " (projectsfid, tower_multiple_sfid, floor_multiple_sfid, booking_multiple_sfid, newdate, created, createdby, isactive) "
-				+ " VALUES ('"+projectsfid+"', '"+selectedTower+"', '"+selectedFloor+"', '"+bookingsfid+"', '"+edrDate+"', "+currentTpm+", "+userid+", 'Y')  ");
+				+ " VALUES ('"+projectsfid+"', '"+selectedTower+"', '"+selectedFloor+"', '"+bookingsfid+"', '"+edrDate+"', '"+currentTpm+"', "+userid+", 'Y')  ");
 		
 		query.executeUpdate();
 		

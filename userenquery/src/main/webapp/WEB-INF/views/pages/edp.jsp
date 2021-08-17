@@ -33,7 +33,7 @@
 		</div> 
 		<div class="clearfix"></div>
 	</div> 
-	<a class="btn btn-primary" onclick="updateEDP();" style="background-color: #000; color: #fff;">
+	<a class="btn btn-primary" onclick="updateEDP();" id="updateEDPBtn" style="background-color: #000; color: #fff;">
 		<span class="icon text-white-50" id="edpUpdateBtn">
 			<i class="fa fa-spinner fa-spin" style="color:#fff !important; display:none;"></i>
 		</span>

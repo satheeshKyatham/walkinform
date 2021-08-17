@@ -76,7 +76,7 @@ public class EdpedrController {
 					 return result;
 						
 				} catch (Exception e) {
-					result = "{\"status\":\"STATUS_NOTOK\",\"edpUpdateCount\":\"0\", \"errorid\": \"E3\",\"error_msg\":\"Problem in updating the EDP\"}";
+					result = "{\"status\":\"STATUS_NOTOK\",\"edpUpdateCount\":\"0\", \"errorid\": \"E3\",\"error_msg\":\"Problem in updating the Expected date of possession\"}";
 					return result;
 				}
 			} else {
@@ -126,7 +126,7 @@ public class EdpedrController {
 					 return result;
 						
 				} catch (Exception e) {
-					result = "{\"status\":\"STATUS_NOTOK\",\"edpUpdateCount\":\"0\", \"errorid\": \"E3\",\"error_msg\":\"Problem in updating the EDP\"}";
+					result = "{\"status\":\"STATUS_NOTOK\",\"edpUpdateCount\":\"0\", \"errorid\": \"E3\",\"error_msg\":\"Problem in updating the Expected date of registration\"}";
 					return result;
 				}
 			} else {
