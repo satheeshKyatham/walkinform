@@ -125,7 +125,6 @@ import com.godrej.properties.service.AssignUserService;
 import com.godrej.properties.service.AuditLogService;
 import com.godrej.properties.service.BSPAgainstPymtPlanService;
 import com.godrej.properties.service.BSPTaxRecordService;
-import com.godrej.properties.service.BSPUpdateService;
 import com.godrej.properties.service.BalanceDetailsService;
 import com.godrej.properties.service.BillingViewService;
 import com.godrej.properties.service.BookingOnMapService;
@@ -147,16 +146,15 @@ import com.godrej.properties.service.EnquiryRequestService;
 import com.godrej.properties.service.ExtraChargesExistsService;
 import com.godrej.properties.service.ExtraChargesHisService;
 import com.godrej.properties.service.ExtraChargesService;
+import com.godrej.properties.service.FloorService;
+import com.godrej.properties.service.FloorWiseBookingService;
 import com.godrej.properties.service.HeaderSchemeService;
-import com.godrej.properties.service.HoldIntervalService;
-import com.godrej.properties.service.HoldInventoryEntryService;
 import com.godrej.properties.service.InventoryService;
 import com.godrej.properties.service.OTPRequestOCService;
 import com.godrej.properties.service.OrderDataMapppingService;
 import com.godrej.properties.service.OtherChargesService;
 import com.godrej.properties.service.OtpService;
 import com.godrej.properties.service.PaymentDtlService;
-import com.godrej.properties.service.PaymentPlanDueService;
 import com.godrej.properties.service.PaymentPlanLineItemService;
 import com.godrej.properties.service.PaymentPlanListService;
 import com.godrej.properties.service.PaymentPlanService;
@@ -436,7 +434,13 @@ public class WebServiceController<MultipartFormDataInput> {
 	
 	@Autowired
 	private UserProjectMappingService userProjectMappingService;
-
+	
+	@Autowired
+	private FloorService floorService;
+	
+	@Autowired
+	private FloorWiseBookingService floorWiseBookingService;
+	
 	
 	@RequestMapping(value = "/activeproject", method = RequestMethod.GET, produces = "application/json")
 	public String project() {
@@ -4940,6 +4944,18 @@ public class WebServiceController<MultipartFormDataInput> {
 			}
 		}
 		return gson.toJson(assign);
+	}
+	
+	@RequestMapping(value = "/getFloorMaster", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
+	public @ResponseBody String getFloorMaster(@RequestParam("towersfid") String towersfid) {
+		Gson gson = new GsonBuilder().disableHtmlEscaping().create();
+		return gson.toJson(floorService.getData(towersfid));
+	}
+	
+	@RequestMapping(value = "/getFloorWiseBooking", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
+	public @ResponseBody String getFloorWiseBooking(@RequestParam("floorsfid") String floorsfid, @RequestParam("projectsfid") String projectsfid) {
+		Gson gson = new GsonBuilder().disableHtmlEscaping().create();
+		return gson.toJson(floorWiseBookingService.getData(floorsfid, projectsfid));
 	}
 	
 }

@@ -24,6 +24,8 @@
 	
 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
 	
+	<link rel="stylesheet" href="<c:url value='/resources/css/sweetalert2.min.css' />">
+	
 <script src="<c:url value='/resources/js/jquery-1.12.4.min.js'/>"></script>
 <script src="<c:url value='/resources/js/bootstrap.min.js'/>"></script>
 <script type="text/javascript" charset="utf8" src="<c:url value='/resources/js/jquery.dataTables.js'/>"></script>
@@ -86,7 +88,13 @@ if(ses!=null){
 					</li>
 					 <li id="salesTabId" onclick="getKYCApprovalView()">
 						<a href="#tab2" data-toggle="tab">KYC Approve/Reject</a>
-					</li>  
+					</li>
+					<li id="" onclick="projectDataList (); towerRefresh (); floorRefresh (); edpDateRefresh ();">
+						<a href="#tabEDP" data-toggle="tab">Expected date of possession</a>
+					</li>
+					<li id="" onclick="projectDataListEDR (); floorRefreshEDR (); customerRefreshEDR (); edrDateRefresh ();">
+						<a href="#tabEDR" data-toggle="tab">Expected date of registration</a>
+					</li>    
 				</ul>
 				<div class=""></div>
 			</div>
@@ -135,7 +143,12 @@ if(ses!=null){
 				<div class="tab-pane" id="tab2"> 
 				  	<iframe id="kyc_approval_iframe" width="100%" height="400px"></iframe>
 				</div>
-				
+				<div class="tab-pane" id="tabEDP"> 
+				  	 <%@ include file="/WEB-INF/views/pages/edp.jsp" %>
+				</div>
+				<div class="tab-pane" id="tabEDR"> 
+				  	 <%@ include file="/WEB-INF/views/pages/edr.jsp" %>
+				</div>
 				
 				<div class="clearfix"></div>
 			</div>
@@ -188,6 +201,11 @@ if(ses!=null){
 	<script src="<c:url value='/resources/js/separate/applicationForm.js?v=${sessionScope.version}'/>"></script>
 	<script src="<c:url value='/resources/js/separate/offerApplicationForm.js?v=${sessionScope.version}'/>"></script>
 	<script src="<c:url value='/resources/js/demo/offerTemplate.js?v=${sessionScope.version}'/>"></script>	
+	
+	<script src="<c:url value='/resources/js/sweetalert2.min.js' />"></script>
+	
+	<script src="<c:url value='/resources/js/separate/edp.js?v=${sessionScope.version}'/>"></script>
+	<script src="<c:url value='/resources/js/separate/edr.js?v=${sessionScope.version}'/>"></script>	
 	
 	<%@ include file="/WEB-INF/views/pages/footer.jsp" %>
 </body>
