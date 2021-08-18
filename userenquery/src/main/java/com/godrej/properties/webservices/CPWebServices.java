@@ -540,13 +540,13 @@ public class CPWebServices {
 				cpapp_EnquiryRequest.setPropStrength__Request_Status__c("Transaction in Progress");
 				cpapp_EnquiryRequest.setSfid(cpContactEnquiryCreateUpdateReqDto.getEnquiry_sfid());
 				cpapp_Service.updateEnquery_status_CPAPP(cpapp_EnquiryRequest);
-				return "{status:success}";
+				return "{\"status\":\"success\"}";
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 			log.error("Error : {}", e);
-			return "{status:failed}";
+			return "{\"status\":\"failed\"}";
 
 		}
 		return "{status:success}";
