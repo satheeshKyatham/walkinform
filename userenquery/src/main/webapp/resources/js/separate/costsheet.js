@@ -2583,6 +2583,12 @@ function newOtherCharges2 () {
                     $('.exclusiveAreaAmount').text(exclusiveAreaAmount);
                     
                     
+                    if ($('#projectid').val() == 'a1l6F000003TRcCQAW') {
+                    	$('.excAmountRow').hide();
+                    	$('.excAmountRowPrint').remove();
+                    	$('.carpetAreaAmount').text(finalFlatAmount);
+                    }
+                    
                     $('#printScOtherChrgAmount0').text(parseFloat(($('#otherChrgAmount0').text())-(discountGross)+parseFloat(bspIncrease)).toFixed(2));
                     
                     

@@ -437,6 +437,15 @@ function getTypologyEOI (e){
 		} 
 		
 		$(e).closest('.EOIDtlRow').find('.typologyListEOI').append(html);
+	} else if ($('.projectSfid').val() == "a1l6F000002X6IOQA0" && $(e).closest('.EOIDtlRow').find('.towerListEOI  option:selected').val() != "CP13") {
+		var html = "";
+		
+		$(e).closest('.EOIDtlRow').find('.typologyListEOI').find("option:gt(0)").remove();
+		$(e).closest('.EOIDtlRow').find('.unitListEOI').find("option:gt(0)").remove();
+		
+		html = html+"<option value='2 BHK Premium'>2 BHK Premium</option>";
+		
+		$(e).closest('.EOIDtlRow').find('.typologyListEOI').append(html);
 	} else if ($('.projectSfid').val() == "a1l6F000004RvPHQA0") {
 		var html = "";
 		
