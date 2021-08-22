@@ -598,11 +598,11 @@ public class GPLAppsWebServiceImpl implements GPLAppsWebService{
 						bookingData.setNv_token_type(token.getType()+token.getQueue());
 						bookingData.setNv_tokenno(token.getQueue());
 						bookingData.setResp_mesg(bookingData.getResp_mesg());
-						updateData=" PropStrength__Request_Status__c='Assigned to Sales', User__c='"+projectData.getSalesmanager_sfid()+"' ";
+						updateData=" PropStrength__Request_Status__c='Assigned to Sales', User__c='"+projectData.getSalesmanager_sfid()+"', ";
 					}
 				}
 				
-				tokenDao.updateEnquiryData(enquiryPKID, updateData+",External_Contact_ID__c="+contcatPKID+", NVHC_Enquiry_ID__c="+enquiryReport.getEnquiryReportId());//+",External_Contact_ID__c="+contcatPKID
+				tokenDao.updateEnquiryData(enquiryPKID, updateData+"External_Contact_ID__c="+contcatPKID+", NVHC_Enquiry_ID__c="+enquiryReport.getEnquiryReportId());//+",External_Contact_ID__c="+contcatPKID
 				tokenDao.updateContactData(contcatPKID, "External_Contact_ID__c="+contactRepprt.getContactReportId()+"");
 				
 				//Update contact External_Contact_ID__c
