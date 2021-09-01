@@ -407,11 +407,11 @@ function towerCustomList (){
 		return html;
 	} else if ($('#projectid').val() == "a1l2s00000002YZAAY") {
 		var html="";
-		
 		html=html+'<option value="SC04">Cyprus (Tower-4)</option>';
 		html=html+'<option value="SC05">Robusta (Tower-5)</option>';
 		html=html+'<option value="SC06">Alba (Tower-6)</option>';
-		
+		html=html+'<option value="SC07">Verbena (Tower-7)</option>';
+		html=html+'<option value="SC08">Fern (Tower-8)</option>';
 		return html;
 	} else if ($('#projectid').val() == "a1l6F000002X6IOQA0") {
 		var html="";

@@ -416,6 +416,10 @@ function getTypologyEOI (e){
 			html = "<option value='2 BHK'>2 BHK</option> <option value='3 BHK'>3 BHK</option>";
 		} else if ($(e).closest('.EOIDtlRow').find('.towerListEOI  option:selected').val() == "SC06") {
 			html = "<option value='3 BHK'>3 BHK</option><option value='4 BHK'>4 BHK</option>";
+		} else if ($(e).closest('.EOIDtlRow').find('.towerListEOI  option:selected').val() == "SC07") {
+			html = "<option value='2 BHK'>2 BHK</option><option value='3 BHK'>3 BHK</option>";
+		} else if ($(e).closest('.EOIDtlRow').find('.towerListEOI  option:selected').val() == "SC08") {
+			html = "<option value='2 BHK'>2 BHK</option><option value='3 BHK'>3 BHK</option>";
 		}
 		
 		$(e).closest('.EOIDtlRow').find('.typologyListEOI').append(html);
