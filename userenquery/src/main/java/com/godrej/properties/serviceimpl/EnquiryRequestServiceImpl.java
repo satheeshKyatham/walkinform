@@ -458,6 +458,10 @@ public class EnquiryRequestServiceImpl implements EnquiryRequestService {
 		dest.setEnquiryRating(src.getContact().getContactReport().getCustomerClassification());
 		if(src.getLost_reason_c__c()!=null)
 			dest.setLost_reason_c__c(src.getLost_reason_c__c());
+		
+		if(src.getRating_reason__c()!=null)
+			dest.setRating_reason__c(src.getRating_reason__c());
+		
 		if(src.getEnquiryReport().getEnquiryNonEditComment()!=null)
 			dest.setOtherChannelPartner(src.getEnquiryReport().getEnquiryNonEditComment());
 		/* Trigger 1,2 and Barrier 1, 2 pushing to SFDC Enquiry Object from Sales Tab -  
