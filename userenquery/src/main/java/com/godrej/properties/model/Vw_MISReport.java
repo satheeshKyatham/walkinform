@@ -88,6 +88,7 @@ public class Vw_MISReport {
 	@Column(name="phase_name") private String phase_name;
 	@Column(name="Sourcing_Team_Lead_Name__c") private String Sourcing_Team_Lead_Name__c;
 	@Column(name="Closing_Team_Lead_Name__c") private String Closing_Team_Lead_Name__c;
+	@Column(name="rating_reason__c") private String rating_reason__c;
 	
 	@Transient private String qry_count;
 	@Transient private String qry_msg;
@@ -499,6 +500,10 @@ public class Vw_MISReport {
 	public void setClosing_Team_Lead_Name__c(String closing_Team_Lead_Name__c) {
 		Closing_Team_Lead_Name__c = closing_Team_Lead_Name__c;
 	}
-
-	
+	public String getRating_reason__c() {
+		return rating_reason__c;
+	}
+	public void setRating_reason__c(String rating_reason__c) {
+		this.rating_reason__c = rating_reason__c;
+	}
 }

@@ -2937,10 +2937,24 @@ public class WebServiceController<MultipartFormDataInput> {
 			else
 				rows.add("");
 			rows.add(",");
-			if (mislist.get(i).getLost_reason_c__c().trim() != null)
-				rows.add(mislist.get(i).getLost_reason_c__c().trim());
-			else
+			
+			if (mislist.get(i).getCustomer_classification() != null) {
+				if (mislist.get(i).getCustomer_classification().equals("Lost")) {
+					if (mislist.get(i).getLost_reason_c__c() != null)
+						rows.add(mislist.get(i).getLost_reason_c__c().trim());
+					else
+						rows.add("");
+				} else {
+					if (mislist.get(i).getRating_reason__c() != null)
+						rows.add(mislist.get(i).getRating_reason__c().trim());
+					else 
+						rows.add("");
+				}
+			} else {
 				rows.add("");
+			}
+			
+			
 			rows.add(",");
 			if (mislist.get(i).getDesignation__c().trim() != null)
 				rows.add(mislist.get(i).getDesignation__c().trim().toString());
