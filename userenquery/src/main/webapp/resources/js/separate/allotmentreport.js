@@ -168,7 +168,7 @@ function getAllotmentDashboardReport () {
 		
 	});	
 	
-	$.get("getAllotmentDayMISReport",{"projectSfid":$('#projectid').val()},function(data){
+	$.get("getAllotmentDayMISReport",{"projectSfid":$('#projectid').val(),"fromDate":$('#txtAllotFromDate').val(), "toDate":$('#txtAllotToDate').val()},function(data){
 	}).done(function(data){
 		$("#allotmentmisReport tbody").empty();
 		var html = "<tr>" +

@@ -14,7 +14,7 @@ import com.godrej.properties.model.UnitTowerCount;
 public interface EOIReportDao {
 	List<EOIReport>getEOIReportDtl(String whereCondition);
 	List<AllotmentReport>getAllotmentReport(String whereCondition);
-	public AllotmentMISReport getAllotmentMISReport(String whereCondition);
+	public AllotmentMISReport getAllotmentMISReport(String whereCondition,String fromDate,String toDate);
 	
 	public TowerDashboard getTowerdashboard(String whereCondition);
 	public FacingDashboard getFacingdashboard(String whereCondition);

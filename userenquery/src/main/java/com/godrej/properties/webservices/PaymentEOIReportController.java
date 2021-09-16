@@ -158,11 +158,10 @@ public class PaymentEOIReportController {
 	}
 	
 	@GetMapping(value = "/getAllotmentDayMISReport", produces = "application/json")
-	public String getAllotmentDayMISReport(@RequestParam("projectSfid") String projectSfid) {
+	public String getAllotmentDayMISReport(@RequestParam("projectSfid") String projectSfid, @RequestParam("fromDate") String fromDate, @RequestParam("toDate") String toDate) {
 		Gson gson = new GsonBuilder().disableHtmlEscaping().serializeNulls().create();
 		//String whereCondition = " propstrength__project__c= '"+projectSfid+"'  ";
-		
-		return gson.toJson(eOIReportService.getAllotmentMISReport(projectSfid));
+		return gson.toJson(eOIReportService.getAllotmentMISReport(projectSfid,fromDate,toDate));
 	}
 	
 	@GetMapping(value = "/getTowerdashboard", produces = "application/json")
