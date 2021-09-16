@@ -150,6 +150,10 @@
 						<input class="form-control" type="date" name="" id="txtAllotToDate">
 					</div>
 					<div class="form-group">
+						<label for="exampleInputNameDate">Exclude this filter on journey so far</label> 
+						<input class="form-control" type="checkbox" name="" id="journey_so_far_filter_disable">
+					</div>
+					<div class="form-group">
 						<input class="form-control" type="button" value="Search" name="Search" onclick="getAllotmentDashboardReport()"/>
 					</div>
 				</div>

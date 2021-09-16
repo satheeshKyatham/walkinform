@@ -168,7 +168,15 @@ function getAllotmentDashboardReport () {
 		
 	});	
 	
-	$.get("getAllotmentDayMISReport",{"projectSfid":$('#projectid').val(),"fromDate":$('#txtAllotFromDate').val(), "toDate":$('#txtAllotToDate').val()},function(data){
+	var checkBox = document.getElementById("journey_so_far_filter_disable");
+	var fromDate="";
+	var toDate="";
+		if (checkBox.checked == false){
+			fromDate=$('#txtAllotFromDate').val();
+			toDate=$('#txtAllotToDate').val();
+		}
+	
+	$.get("getAllotmentDayMISReport",{"projectSfid":$('#projectid').val(),"fromDate":fromDate, "toDate":toDate},function(data){
 	}).done(function(data){
 		$("#allotmentmisReport tbody").empty();
 		var html = "<tr>" +
