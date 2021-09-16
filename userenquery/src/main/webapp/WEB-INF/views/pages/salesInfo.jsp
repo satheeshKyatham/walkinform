@@ -1236,7 +1236,7 @@ if(ses!=null){
 							  </label>
 							</div>
 						</div> -->
-						 <div class="col-md-6 radioBtnWrp mrgT0">
+						 <div class="col-md-5 radioBtnWrp mrgT0">
 						  	<div class="titleF">Customer Classification <strong class="mndt">*</strong></div>
 							<div class="radioBtnCol requiredRadio" data-toggle="buttons">
 							  <label class="btn btn-primary NoLostReasonSelected">
@@ -1255,11 +1255,24 @@ if(ses!=null){
 							  </label>
 							</div>
 						</div>
+						 
+						<div class="col-md-2" style="margin-top: 13px; display:none;" id="ratingReasonRRDivId">
+							<div class="group">
+								<select class="" id="ratingReasonRR" name="rating_reason__c">
+									 
+								</select> 
+								<span class="highlight"></span><span class="bar"></span> 
+								<label class="select-label">Reason<strong class="mndt">*</strong></label>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+						
+						
 						<!-- <input type="text" name="lost_reason_c__c"> -->
-						<div id="LostReasonDivId" class="col-md-3" style="display:none;margin-top: 13px;">
+						<div id="LostReasonDivId" class="col-md-2" style="display:none;margin-top: 13px;">
 							<div class="group"><!-- requiredField sales_submitted requiredField-->
 								<select class="" id="LostReasonID" name="lost_reason_c__c">
-						            <option value=""></option>
+						           <option value=""></option>
 									<option value="Not Interested">Not Interested</option>
 								    <option value="Budget">Budget</option>
 								    <option value="Time constraint">Time constraint</option>
@@ -1288,7 +1301,7 @@ if(ses!=null){
 							</div>
 							<div class="clearfix"></div>
 						</div>
-						<div class="col-md-3 col-sm-6 col-xs-12" id="followupTypeID" style="display:none;" >
+						<div class="col-md-2 col-sm-6 col-xs-12" id="followupTypeID" style="display:none; margin-top: 13px;" >
 							<div class="group">
 							
 								<select class="" id="followtype" name="enquiryReport.followType">
@@ -1302,9 +1315,9 @@ if(ses!=null){
 							</div>
 							<div class="clearfix"></div>
 						</div>
-							
-							
-						<div class="col-md-3 col-sm-6 col-xs-12" id="followupDateID" ><!-- id="followupDateID" style="display:none;" -->
+							 
+							 
+						<div class="col-md-3 col-sm-6 col-xs-12" id="followupDateID" style="margin-top: 13px;"><!-- id="followupDateID" style="display:none;" -->
 							<div class="form-group" id="fdate" style="margin-top: -15px; z-index: 0;">
 								<label style="font-weight: normal;">Follow-up Date & Time<strong class="mndt">*</strong></label>
 								<div class='input-group date datetimepickerfollow'>
@@ -1348,7 +1361,7 @@ if(ses!=null){
 						
 						
 						
-						<div class="col-md-6 radioBtnWrp mrgT0">
+						<div class="col-md-5 radioBtnWrp mrgT0">
 						  <div class="titleF">Preferred Unit Availability <strong class="mndt">*</strong></div>
 							<div class="radioBtnCol requiredRadio" data-toggle="buttons">
 							  <label class="btn btn-primary sales_submitted">
@@ -1971,11 +1984,7 @@ $(function () {
 	<%-- <script src="<c:url value='/resources/js/separate/rangeSlider.js' />"></script>		 --%>
 		
 	<script>
-		
-		
-		
-		
-		$('#sourceOfFundingLoanLabel').click ( function (){
+		/* $('#sourceOfFundingLoanLabel').click ( function (){
 			$('#sourceFundingSlider').show();
 		});
 		
@@ -1983,7 +1992,6 @@ $(function () {
 			$('#sourceFundingSlider').hide();
 		});
 		$('.lostReasonSelect').click ( function (){
-			//alert("On select");
 			$('#LostReasonDivId').show();
 			$('#followupTypeID').hide();
 			$('#followupDateID').hide();
@@ -1992,15 +2000,13 @@ $(function () {
 			$('#followdate').removeClass('requiredField');
 		});
 		$('.NoLostReasonSelected').click ( function (){
-			//alert("On select");
 			$('#LostReasonDivId').hide();
 			$('#followupTypeID').show();
 			$('#followupDateID').show();
 			$('#LostReasonID').removeClass('requiredField');
 			$('#followtype').addClass('requiredField');
 			$('#followdate').addClass('requiredField');
-		});
-		
+		}); */
 	</script>	
 		
 				

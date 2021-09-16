@@ -13,15 +13,10 @@ $(document).ready(function(){
 });
 
 setInterval(function(){
-	if ($('#towerMst').val().trim() != ""){
-		inventoryLoad("autoRefresh");
-	} else {
-		/*swal({
-			title: "For an auto refresh tower selection are mandatory",
-		    text: "",
-		    timer: 3000,
-		    type: "error",
-		});*/
+	if ($('#inventoryTab').hasClass('active')) {
+		if ($('#towerMst').val().trim() != ""){
+			inventoryLoad("autoRefresh");
+		}
 	}
 },30000);
 

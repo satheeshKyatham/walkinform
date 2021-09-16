@@ -132,6 +132,7 @@ public class VW_MISReportServiceImpl implements VW_MISReportService {
 				mis.setPhase_name(checkNull(mislist.get(i).getPhase_name()));
 				mis.setSourcing_Team_Lead_Name__c(checkNull(mislist.get(i).getSourcing_Team_Lead_Name__c()));
 				mis.setClosing_Team_Lead_Name__c(checkNull(mislist.get(i).getClosing_Team_Lead_Name__c()));
+				mis.setRating_reason__c(checkNull(mislist.get(i).getRating_reason__c()));
 				finalMislist.add(mis);
 			}
 		}

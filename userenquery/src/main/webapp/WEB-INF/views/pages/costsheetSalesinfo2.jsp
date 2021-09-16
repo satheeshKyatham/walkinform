@@ -629,7 +629,7 @@
 												<td class=""> </td> -->
 											</tr>
 											
-											<tr class="removeForPlot rfpRow">
+											<tr class="removeForPlot rfpRow excAmountRowPrint">
 												<th class="subHead">Exclusive Area Amount</th>
 												<td class="exclusiveAreaAmount" style="text-align:right"></td>
 												<th class="subHead"></th>
@@ -910,7 +910,7 @@
 							<td ></td> -->
 						</tr>
 						
-						<tr class="hideForPlot rfpRow">
+						<tr class="hideForPlot rfpRow excAmountRow">
 							<th class="subHead">Exclusive Area Amount</th>
 							<td class="exclusiveAreaAmount" id="exclusiveAreaAmount" style="text-align:right;" ></td>
 							<th class="subHead"></th>

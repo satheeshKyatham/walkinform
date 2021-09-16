@@ -16,6 +16,7 @@ import com.godrej.properties.model.AllotmentReport;
 import com.godrej.properties.model.EOIReport;
 import com.godrej.properties.model.FacingDashboard;
 import com.godrej.properties.model.TowerDashboard;
+import com.godrej.properties.model.UnitCategoryCount;
 import com.godrej.properties.model.UnitFacingCount;
 import com.godrej.properties.model.UnitTowerCount;
 
@@ -464,6 +465,62 @@ public class EOIReportDaoImpl implements EOIReportDao{
 			lists.add(getMisReport);
 		}
 		return lists;
+	}
+	
+	
+	@Override
+	public List<UnitCategoryCount> getUnitCategoryCount(String projectSFID) {
+		Session session = this.sessionFactory.getCurrentSession();	
+		
+		List<UnitCategoryCount> authors=null;
+		
+		Query q = session.createNativeQuery("SELECT row_number() OVER () AS id, "
+				+ " CASE WHEN a.propstrength__unit_type__c IS NULL THEN '-' ELSE a.propstrength__unit_type__c END as propstrength__unit_type__c,  "
+				+ " CASE WHEN a.inventory_category__c IS NULL THEN '-' ELSE a.inventory_category__c END as inventory_category__c, "
+				+ " CASE WHEN b.count IS NULL THEN 0 ELSE b.count END as sold, "
+				+ " CASE WHEN a.count IS NULL THEN 0 ELSE a.count END as total  "
+				
+				//-------------------------------
+				+ " FROM "
+				+ " (SELECT row_number() OVER () AS row_number, "
+				+ " propstrength__property__c.project18digit__c, "
+				+ " propstrength__property__c.propstrength__active__c, "
+				+ " propstrength__property__c.propstrength__unit_type__c, "
+				+ " CASE "
+				+ " WHEN propstrength__property__c.inventory_category__c IS NULL THEN '-' "
+				+ " ELSE propstrength__property__c.inventory_category__c "
+				+ " END AS inventory_category__c, "
+				+ " count(propstrength__property__c.propstrength__unit_type__c) AS count "
+				+ " FROM salesforce.propstrength__property__c "
+				+ " GROUP BY propstrength__property__c.project18digit__c, propstrength__property__c.propstrength__active__c, propstrength__property__c.propstrength__unit_type__c, propstrength__property__c.inventory_category__c "
+				+ " ORDER BY propstrength__property__c.propstrength__unit_type__c, propstrength__property__c.inventory_category__c) a "
+				
+				+ " LEFT JOIN "
+				+ " (SELECT row_number() OVER () AS row_number, "
+				+ " c.project18digit__c AS project_sfid, "
+				+ " c.propstrength__unit_type__c, "
+				+ " CASE "
+				+ " WHEN c.inventory_category__c IS NULL THEN '-' "
+				+ " ELSE c.inventory_category__c "
+				+ " END AS inventory_category__c, "
+				+ " count(c.propstrength__unit_type__c) AS count, "
+				+ " c.propstrength__active__c, "
+				+ " c.propstrength__property_alloted_through_offer__c "
+				+ " FROM salesforce.propstrength__property__c c "
+				+ " GROUP BY c.project18digit__c, c.propstrength__unit_type__c, c.inventory_category__c, c.propstrength__property_alloted_through_offer__c, c.propstrength__active__c) b  "
+				//-------------------
+				
+				+ " ON a.propstrength__unit_type__c = b.propstrength__unit_type__c  "
+				+ " AND a.inventory_category__c = b.inventory_category__c "
+				+ " AND b.project_sfid = '"+projectSFID+"' AND b.propstrength__property_alloted_through_offer__c = true AND b.propstrength__active__c = true  "
+				+ " where a.project18digit__c = '"+projectSFID+"'  AND a.propstrength__active__c = true order by a.propstrength__unit_type__c,  a.inventory_category__c ASC ", UnitCategoryCount.class);
+
+		authors = q.getResultList();
+		
+		if (authors.size() > 0)
+			return authors;
+
+		return null;
 	}
 	
 }	

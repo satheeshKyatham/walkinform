@@ -373,6 +373,7 @@ public class CPWebServices {
 		}
 		enqResp.setReferral_sfid(enquiryDto.getContact_referral__c());
 		enqResp.setReferred_partner_flag(enquiryDto.getIsReferredByChannelPartnerFlag());
+		enqResp.setEnquiryId(enquiryDto.getEnquiryId());
 
 		if ((enquiryDto.getIsReferredByChannelPartnerFlag() != null
 				&& enquiryDto.getIsReferredByChannelPartnerFlag().equals("NSP")) || enquiryDto.getWalkInSource() == null
@@ -438,7 +439,7 @@ public class CPWebServices {
 	@PostMapping(value = "CPContactEnquiryCreateUpdate", produces = "application/json")
 	public String CPContactEnquiryCreateUpdate(
 			@RequestBody CPContactEnquiryCreateUpdateReqDto cpContactEnquiryCreateUpdateReqDto) {
-		CPEnquiryRespAPIDto enqResp = new CPEnquiryRespAPIDto();
+		//CPEnquiryRespAPIDto enqResp = new CPEnquiryRespAPIDto();
 		Gson gson = new GsonBuilder().disableHtmlEscaping().create();
 		try {
 			Contact contact = new Contact();
@@ -449,9 +450,21 @@ public class CPWebServices {
 				// Existing Contact
 				cpapp_EnquiryRequest
 						.setPropstrength__primary_contact__c(cpContactEnquiryCreateUpdateReqDto.getContact_sfid());
+				contact.setContactId(cpContactEnquiryCreateUpdateReqDto.getContactId());
+				contact.setMobileNo(cpContactEnquiryCreateUpdateReqDto.getCust_mobile());
+				contact.setFirstName(cpContactEnquiryCreateUpdateReqDto.getCust_first_name());
+				contact.setLastName(cpContactEnquiryCreateUpdateReqDto.getCust_last_name());
+				contact.setEmail(cpContactEnquiryCreateUpdateReqDto.getCust_emailId());
+				contact.setAddressLine1(cpContactEnquiryCreateUpdateReqDto.getCommunication_address1());
+				contact.setAddressLine2(cpContactEnquiryCreateUpdateReqDto.getCommunication_address2());
+				contact.setAddressLine3(cpContactEnquiryCreateUpdateReqDto.getCommunication_address3());
+				contact.setCity(cpContactEnquiryCreateUpdateReqDto.getCommunication_city());
+				contact.setResidentialCountry(cpContactEnquiryCreateUpdateReqDto.getCommunication_country());
+				contact.setPinCode(cpContactEnquiryCreateUpdateReqDto.getCommunication_pin());
 			} else {
 				// Create Contact
 
+				contact.setCountryCode(cpContactEnquiryCreateUpdateReqDto.getCust_country_code());
 				contact.setMobileNo(cpContactEnquiryCreateUpdateReqDto.getCust_mobile());
 				contact.setFirstName(cpContactEnquiryCreateUpdateReqDto.getCust_first_name());
 				contact.setLastName(cpContactEnquiryCreateUpdateReqDto.getCust_last_name());
@@ -470,17 +483,22 @@ public class CPWebServices {
 			cpapp_EnquiryRequest
 					.setPropStrength__Broker_Account__c(cpContactEnquiryCreateUpdateReqDto.getBroker_sfid());
 			cpapp_EnquiryRequest.setPropstrength__enquiry_type__c("Partner");
-			cpapp_EnquiryRequest.setPropstrength__request_source__c("Digital");
+			cpapp_EnquiryRequest.setPropstrength__request_source__c("Partner Connect");
 			cpapp_EnquiryRequest.setWalk_In_Source__c("Channel Partner");
+			cpapp_EnquiryRequest.setPropStrength__Request_Status__c("Virtual Meeting Done");
 
 			if (cpContactEnquiryCreateUpdateReqDto.getEnquiry_sfid() != null
 					&& !"".equals(cpContactEnquiryCreateUpdateReqDto.getEnquiry_sfid())) {
 				// Existing Enquiry
 				// Update Enquiry
 				cpapp_EnquiryRequest.setSfid(cpContactEnquiryCreateUpdateReqDto.getEnquiry_sfid());
+				cpapp_EnquiryRequest.setExternal_contact_id__c(cpContactEnquiryCreateUpdateReqDto.getContactId());
+				cpapp_EnquiryRequest.setId(cpContactEnquiryCreateUpdateReqDto.getEnquiryId());
 				cpapp_Service.updateEnquery_CPAPP(cpapp_EnquiryRequest);
 			} else {
 				// Create New Enquiry
+				cpapp_EnquiryRequest.setSynchronised__c("N");
+				cpapp_EnquiryRequest.setPropstrength__project__c(cpContactEnquiryCreateUpdateReqDto.getProject_sfid());
 				cpapp_Service.createEnquery_CPAPP(cpapp_EnquiryRequest);
 			}
 
@@ -712,7 +730,8 @@ public class CPWebServices {
 							ecData1.setRequest_url(paymentRequest);
 							ecData1.setTowercode(towercode);
 							ecData1.setTowersfid(towersfid);
-							ecData1.setRequestsource(requestSource);;
+							ecData1.setRequestsource(requestSource);
+							//ecData1.setAmount(amount);
 							charges1.add(ecData1);
 						
 						} else {

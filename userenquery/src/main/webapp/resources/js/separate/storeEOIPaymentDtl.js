@@ -416,6 +416,10 @@ function getTypologyEOI (e){
 			html = "<option value='2 BHK'>2 BHK</option> <option value='3 BHK'>3 BHK</option>";
 		} else if ($(e).closest('.EOIDtlRow').find('.towerListEOI  option:selected').val() == "SC06") {
 			html = "<option value='3 BHK'>3 BHK</option><option value='4 BHK'>4 BHK</option>";
+		} else if ($(e).closest('.EOIDtlRow').find('.towerListEOI  option:selected').val() == "SC07") {
+			html = "<option value='2 BHK'>2 BHK</option><option value='3 BHK'>3 BHK</option>";
+		} else if ($(e).closest('.EOIDtlRow').find('.towerListEOI  option:selected').val() == "SC08") {
+			html = "<option value='2 BHK'>2 BHK</option><option value='3 BHK'>3 BHK</option>";
 		}
 		
 		$(e).closest('.EOIDtlRow').find('.typologyListEOI').append(html);
@@ -435,6 +439,15 @@ function getTypologyEOI (e){
 			html = html+"<option value='2BHK (Type-C)'>2BHK (Type-C)</option>";
 			html = html+"<option value='3BHK'>3BHK</option>";
 		} 
+		
+		$(e).closest('.EOIDtlRow').find('.typologyListEOI').append(html);
+	} else if ($('.projectSfid').val() == "a1l6F000002X6IOQA0" && $(e).closest('.EOIDtlRow').find('.towerListEOI  option:selected').val() != "CP13") {
+		var html = "";
+		
+		$(e).closest('.EOIDtlRow').find('.typologyListEOI').find("option:gt(0)").remove();
+		$(e).closest('.EOIDtlRow').find('.unitListEOI').find("option:gt(0)").remove();
+		
+		html = html+"<option value='2 BHK Premium'>2 BHK Premium</option>";
 		
 		$(e).closest('.EOIDtlRow').find('.typologyListEOI').append(html);
 	} else if ($('.projectSfid').val() == "a1l6F000004RvPHQA0") {

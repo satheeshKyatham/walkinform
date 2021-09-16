@@ -56,6 +56,8 @@ public class CPAPP_EnquiryRequest implements Serializable{
 	@Column(name = "external_contact_id__c")
 	private double external_contact_id__c;
 	
+	@Column(name = "Synchronised__c")
+	private String synchronised__c;
 	
 	public double getExternal_contact_id__c() {
 		return external_contact_id__c;
@@ -155,6 +157,14 @@ public class CPAPP_EnquiryRequest implements Serializable{
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public String getSynchronised__c() {
+		return synchronised__c;
+	}
+
+	public void setSynchronised__c(String synchronised__c) {
+		this.synchronised__c = synchronised__c;
 	}
 
 

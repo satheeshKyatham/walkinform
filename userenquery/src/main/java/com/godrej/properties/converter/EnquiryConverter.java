@@ -81,6 +81,12 @@ public class EnquiryConverter implements CommonConverter<Enquiry, EnquiryDto>{
 			dto.setLost_reason_c__c(entity.getLost_reason_c__c());
 		/*=========End========*/
 		
+		/*Rating Reason selected value Display/Push into enquiry -  Change By A - 02-09-2021*/
+		/*=======Start==========*/
+		if(entity.getRating_reason__c()!=null)
+			dto.setRating_reason__c(entity.getRating_reason__c());
+		/*=========End========*/
+		
 		dto.setPriority_no__c(entity.getPriority_no__c());
 		
 		
@@ -237,6 +243,12 @@ public class EnquiryConverter implements CommonConverter<Enquiry, EnquiryDto>{
 		/*=======Start==========*/
 		if(dto.getLost_reason_c__c()!=null && dto.getLost_reason_c__c().length()>0)
 			entity.setLost_reason_c__c(dto.getLost_reason_c__c());
+		/*=========End========*/
+		
+		/*Rating Reason selected value Display/Push into enquiry -  Change By A - 02-09-2021*/
+		/*=======Start==========*/
+		if(dto.getRating_reason__c()!=null && dto.getRating_reason__c().length()>0)
+			entity.setRating_reason__c(dto.getRating_reason__c());
 		/*=========End========*/
 		
 		entity.setRequiredPossesionTimeLine(dto.getRequiredPossesionTimeLine());

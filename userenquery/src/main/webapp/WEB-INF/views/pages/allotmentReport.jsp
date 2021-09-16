@@ -27,8 +27,12 @@
 		<li role="presentation" id="towerSoldUnitTab">
 			<a href="#towerSoldUnit" role="tab" data-toggle="tab" onclick="getUnitTowerCount();">Tower Wise Offer Created <i class="fa fa-spinner fa-spin" style="display:none;"></i></a>
 		</li>
+		
+		<li role="presentation" id="categorySoldUnitTab">
+			<a href="#categorySoldUnit" role="tab" data-toggle="tab" onclick="getUnitCategoryCount();">Category Wise Offer Created <i class="fa fa-spinner fa-spin" style="display:none;"></i></a>
+		</li>
 	</ul>
-
+ 
 	<div class="tab-content" style="padding: 15px; border: 1px solid #ccc; border-top: 0;">
 		<div role="tabpanel" class="tab-pane active" id="journey">
 			<h4 style="margin-top:0">Allotment Journey So Far</h4>
@@ -222,6 +226,17 @@
 				<div class="clearfix"></div>
 			</div> -->  
 			<div id="unitTowerCount">
+				<div class="clearfix"></div>
+			</div>
+		</div>
+		
+		
+		
+		<div role="tabpanel" class="tab-pane" id="categorySoldUnit">
+			<!-- <div id="unitFacingType">
+				<div class="clearfix"></div>
+			</div> -->
+			<div id="unitCategoryCount">
 				<div class="clearfix"></div>
 			</div>
 		</div>

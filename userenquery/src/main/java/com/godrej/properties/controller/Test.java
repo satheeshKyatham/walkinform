@@ -3,6 +3,10 @@ package com.godrej.properties.controller;
 import java.math.BigInteger;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
@@ -11,6 +15,8 @@ import java.util.UUID;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.json.JSONException;
+
+import com.google.common.net.UrlEscapers;
 
 public class Test {
 	/*public float ab= 1.1f;
@@ -26,7 +32,27 @@ public class Test {
 	}*/
 	
 	public static void main(String[] args) throws JSONException, ParseException {
-		String animals = "dog; cat; bear; elephant; cat";
+		
+		/*System.out.println(LocalTime.now());
+		LocalDateTime date = LocalDateTime.now();
+		 DateTimeFormatter formatters = DateTimeFormatter.ISO_DATE_TIME;
+		System.out.println(date);
+
+		System.out.println(LocalDate.now().format(DateTimeFormatter.ofPattern("ddMMyyyy")));*/
+		
+		
+		
+		/*LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss");
+        String formatDateTime = now.format(formatter);
+        System.out.println("After : " + formatDateTime);*/
+		
+		String inputString="509015 is the access code to initiate your meeting for a Godrej Properties Home.  Kindly share this code with Godrej Properties representative to confirm your interest %26 source of your enquiry - Channel Partner (Reliable Trading and Real Estate). Regards, Godrej Properties";
+		String encodedString = UrlEscapers.urlFragmentEscaper().escape(inputString);
+		System.out.println("encodedString:-"+encodedString);
+		System.out.println(""+inputString.replaceAll("\\s", "%20"));
+		
+		/*String animals = "dog; cat; bear; elephant; cat";
 
 		String newanimals="";
 		if(animals.contains("cat"))
@@ -36,7 +62,7 @@ public class Test {
 			
 			newanimals+=";val"; 
 			System.out.println(newanimals);
-		}
+		}*/
 		
 		/*System.out.println(animals.replaceAll("cat", "cat22"));
 		System.out.println(animals);

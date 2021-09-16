@@ -15,7 +15,80 @@ var customerEmail1 = ""
 
 var channelPartnerArray=[];
 var enqArray=[];
+
+var HTML_LOST = '';
+var HTML_HOT = '';
+var HTML_WARM = '';
+var HTML_COLD = '';
+var RATING_REASON_VAL = '';
+
 $(document).ready(function(){
+	
+	/*Added by A*/
+	HTML_HOT += '<option value=""></option>'
+		+'<option value="EOI Submitted / Booked">EOI Submitted / Booked</option>'
+		+'<option value="Interested / Under Negotiation">Interested / Under Negotiation</option>';
+	
+	HTML_WARM += '<option value=""></option>'
+		+'<option value="Interested / Under Negotiation">Interested / Under Negotiation</option>'
+		+'<option value="Needs time to discuss with Family">Needs time to discuss with Family</option>'
+		+'<option value="Needs time to decide on Inventory">Needs time to decide on Inventory</option>'
+		+'<option value="Needs time to finalise Pricing / Budget">Needs time to finalise Pricing / Budget</option>'
+		+'<option value="Needs time to visit the site">Needs time to visit the site</option>'; 
+	
+	HTML_COLD += '<option value=""></option>'
+		+'<option value="Payment Plan issues">Payment Plan issues</option>'
+		+'<option value="Possession Timeline issues">Possession Timeline issues</option>'
+		+'<option value="Inventory Availability issues">Inventory Availability issues</option>'
+		+'<option value="Design / Size issues">Design / Size issues</option>'
+		+'<option value="Budget / Finance issues">Budget / Finance issues</option>'
+		+'<option value="Pricing / Other Charges issues">Pricing / Other Charges issues</option>'
+		+'<option value="Specification / Amenities issues">Specification / Amenities issues</option>'
+		+'<option value="Location / Neighbourhood issues">Location / Neighbourhood issues</option>'
+		+'<option value="Not Contactable / Connection issues">Not Contactable / Connection issues</option>'
+		+'<option value="Personal issues">Personal issues</option>'; 
+	
+	$('#sourceOfFundingLoanLabel').click ( function (){
+		$('#sourceFundingSlider').show();
+	});
+	
+	$('#sourceOfFundingLabel').click ( function (){
+		$('#sourceFundingSlider').hide();
+	});
+	$('.lostReasonSelect').click ( function (){
+		$('#LostReasonDivId').show();
+		$('#followupTypeID').hide();
+		$('#followupDateID').hide();
+		$('#LostReasonID').addClass('requiredField');
+		$('#followtype').removeClass('requiredField');
+		$('#followdate').removeClass('requiredField'); 
+		$('#ratingReasonRRDivId').hide();
+	});
+	$('.NoLostReasonSelected').click ( function (){
+		$('#LostReasonDivId').hide();
+		$('#followupTypeID').show();
+		$('#followupDateID').show();
+		$('#LostReasonID').removeClass('requiredField');
+		$('#followtype').addClass('requiredField');
+		$('#followdate').addClass('requiredField');
+		$('#ratingReasonRRDivId').show();
+		
+		var rating = $(this).find('input').val();
+		if (rating == "Hot") {
+			$('#ratingReasonRR').empty(); 
+			$('#ratingReasonRR').append(HTML_HOT);
+		} else if (rating == "Warm") {
+			$('#ratingReasonRR').empty(); 
+			$('#ratingReasonRR').append(HTML_WARM);
+		} else if (rating == "Cold") {
+			$('#ratingReasonRR').empty(); 
+			$('#ratingReasonRR').append(HTML_COLD);
+		}
+		
+		$("#ratingReasonRR option[value='"+RATING_REASON_VAL+"']").attr('selected', true)
+	});
+	/*END Added by A*/
+	
 	$('[data-toggle="tooltip"]').tooltip();   
 	
 	$("#mainPageLoad").fadeOut("slow"); 
@@ -709,6 +782,9 @@ function loadEnquiryReport(enq){
 		getClosingTeamLeadManagersList(enq.closing_Team_Lead_email);
 		getSourcingTeamLeadManagersList(enq.sourcing_Team_Lead_email);
 		getInternationalSalesManagersList(enq.internationalSMDto);
+		 
+		RATING_REASON_VAL = enq.rating_reason__c;
+		
 		$("#LostReasonID").val(enq.lost_reason_c__c);
 		if(enq.phasedto!=null)
 			{

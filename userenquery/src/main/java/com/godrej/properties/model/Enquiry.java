@@ -77,6 +77,8 @@ public class Enquiry extends CommonModel{
 	
 	private Phase phase;
 	
+	@Column(name="rating_reason__c") private String rating_reason__c;
+	
 	public String getClosing_manager_name__c() {
 		return closing_manager_name__c;
 	}
@@ -669,5 +671,13 @@ public class Enquiry extends CommonModel{
 	}
 	public void setPhase(Phase phase) {
 		this.phase = phase;
+	}
+
+	public String getRating_reason__c() {
+		return rating_reason__c;
+	}
+
+	public void setRating_reason__c(String rating_reason__c) {
+		this.rating_reason__c = rating_reason__c;
 	}
 }

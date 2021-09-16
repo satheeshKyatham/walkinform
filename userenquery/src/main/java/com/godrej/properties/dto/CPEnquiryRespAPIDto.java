@@ -6,7 +6,7 @@ package com.godrej.properties.dto;
 public class CPEnquiryRespAPIDto {
 	
 	private String src_protection_flag;
-	private String enquiryid;
+	private Integer enquiryId;
 	private String enquiry_sfid;
 	private String enquiry_name;
 	private String date_of_enquiry;
@@ -195,11 +195,12 @@ public class CPEnquiryRespAPIDto {
 	public void setWalkin_source_mobile(String walkin_source_mobile) {
 		this.walkin_source_mobile = walkin_source_mobile;
 	}
-	public String getEnquiryid() {
-		return enquiryid;
+	
+	public Integer getEnquiryId() {
+		return enquiryId;
 	}
-	public void setEnquiryid(String enquiryid) {
-		this.enquiryid = enquiryid;
+	public void setEnquiryId(Integer enquiryId) {
+		this.enquiryId = enquiryId;
 	}
 	public String getBroker_account_name() {
 		return broker_account_name;
