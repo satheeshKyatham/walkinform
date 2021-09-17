@@ -20,7 +20,8 @@ import com.godrej.properties.master.service.SysConfigService;
 import com.godrej.properties.model.OTP;
 import com.godrej.properties.model.UserMaster;
 import com.godrej.properties.util.OtpGenerate;
-import com.godrej.properties.util.SendSMS; 
+import com.godrej.properties.util.SendSMS;
+import com.google.common.net.UrlEscapers; 
 @Repository("otpDao")
 public class OtpDaoImpl extends AbstractDao<Integer, OTP> implements OtpDao {
 
@@ -177,8 +178,10 @@ public class OtpDaoImpl extends AbstractDao<Integer, OTP> implements OtpDao {
 		/* Date : 13-04-2020; Requested By : Prakash Idnni; Change By : Satheesh Kyahtam; Reason: Virtual Meeting changes OTP*/
 //		String msg=" is the access code to initiate your Video Presentation for a Godrej Properties Home.  Kindly share this code with Godrej Properties Relationship Manager for confirming your interest %26 the source of your enquiry [Company Authorized Seller OR Direct through Company Advertisement]".replaceAll(" ", "%20");
 //		String msg=" is the access code to initiate your meeting for a Godrej Properties Home.  Kindly share this code with Godrej Properties Relationship Manager for confirming your interest %26 the source of your enquiry [Company Authorized Seller OR Direct through Company Advertisement]".replaceAll(" ", "%20");
-		String msg=" is the access code to initiate your meeting for a Godrej Properties Home.  Kindly share this code with Godrej Properties representative to confirm your interest %26 source of your enquiry - "+cpdirectname+". Regards, Godrej Properties".replaceAll(" ", "%20");
+		String msg=" is the access code to initiate your meeting for a Godrej Properties Home.  Kindly share this code with Godrej Properties representative to confirm your interest & source of your enquiry - "+cpdirectname+". Regards, Godrej Properties";
 		log.info("Message template {}",msg);
+		String encodedMSGString = UrlEscapers.urlFragmentEscaper().escape(msg);
+		log.info("Message template After ASCII{}",encodedMSGString);
 		List<OTP> list =session.createQuery(" from OTP where isactive='A' and mobileno like '%"+mobileno+"'").list();
 		if(list.size()>0) {
 			
@@ -197,7 +200,7 @@ public class OtpDaoImpl extends AbstractDao<Integer, OTP> implements OtpDao {
 				{
 					if(!isbpassed)
 					{
-						SendSMS.SMSSend(countryCode+mobileno,otp_str+msg.replaceAll(" ", "%20"));
+						SendSMS.SMSSend(countryCode+mobileno,otp_str+encodedMSGString.replaceAll("&", "%26"));
 						/* Call for Shree SMS*/
 						//SendSMS.ShreeSMSSend(countryCode+mobileno,otp_str+msg);
 					}
@@ -215,7 +218,7 @@ public class OtpDaoImpl extends AbstractDao<Integer, OTP> implements OtpDao {
 				{
 					if(!isbpassed)
 					{
-						SendSMS.SMSSend(countryCode+mobileno,list.get(0).getOtp()+msg);
+						SendSMS.SMSSend(countryCode+mobileno,list.get(0).getOtp()+encodedMSGString.replaceAll("&", "%26"));
 						/* Call for Shree SMS*/
 						//SendSMS.ShreeSMSSend(countryCode+mobileno,otp_str+msg);
 					}
@@ -238,7 +241,7 @@ public class OtpDaoImpl extends AbstractDao<Integer, OTP> implements OtpDao {
 			{
 				if(!isbpassed)
 				{
-					SendSMS.SMSSend(countryCode+mobileno,otp.getOtp()+msg);
+					SendSMS.SMSSend(countryCode+mobileno,otp.getOtp()+encodedMSGString.replaceAll("&", "%26"));
 					//SendSMS.ShreeSMSSend(countryCode+mobileno,otp_str+msg);
 				}
 			}

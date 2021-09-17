@@ -37,9 +37,9 @@ public class EOIReportServiceImpl implements EOIReportService{
 	}
 
 	@Override
-	public AllotmentMISReport getAllotmentMISReport(String whereCondition) {
+	public AllotmentMISReport getAllotmentMISReport(String whereCondition,String fromDate,String toDate) {
 		// TODO Auto-generated method stub
-		return eOIReportDao.getAllotmentMISReport(whereCondition);
+		return eOIReportDao.getAllotmentMISReport(whereCondition,fromDate,toDate);
 	}
 	
 	@Override

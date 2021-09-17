@@ -47,6 +47,8 @@ public class CPContactEnquiryCreateUpdateReqDto implements Serializable{
 	private String loginemail_id;
 	private String loginUser_id;
 	private String requestsource="CP APP";
+	private Integer contactId;
+	private Integer enquiryId;
 	
 	
 	
@@ -244,6 +246,18 @@ public class CPContactEnquiryCreateUpdateReqDto implements Serializable{
 	}
 	public void setCommunication_pin(String communication_pin) {
 		this.communication_pin = communication_pin;
+	}
+	public Integer getContactId() {
+		return contactId;
+	}
+	public void setContactId(Integer contactId) {
+		this.contactId = contactId;
+	}
+	public Integer getEnquiryId() {
+		return enquiryId;
+	}
+	public void setEnquiryId(Integer enquiryId) {
+		this.enquiryId = enquiryId;
 	}
 
 

@@ -123,13 +123,19 @@ public class EOIReportDaoImpl implements EOIReportDao{
 	}
 
 	@Override
-	public AllotmentMISReport getAllotmentMISReport(String whereCondition) {
+	public AllotmentMISReport getAllotmentMISReport(String whereCondition,String fromDate,String toDate) {
 		AllotmentMISReport alotMIS = new AllotmentMISReport();
 		Session session = this.sessionFactory.getCurrentSession();
-		Query q = session.createNativeQuery("select sum(PropStrength__Super_Area__c) as TotalSelableAreaSold,(sum(propstrength__total_basic_sale_price__c)/10000000) as TotalBSP,count(id) as unitcount from salesforce.propstrength__offer__c where propstrength__project__c='"+whereCondition+"' and propstrength__status__c='Closed Won'");
+		String dateCondition="";
+		if((fromDate!=null && fromDate.length()>0) && (toDate != null && toDate.length()>0))
+		{
+			dateCondition=" and Date(createddate) between '"+fromDate+"' and '"+toDate+"'";
+		}
+		Query q = session.createNativeQuery("select round(sum(PropStrength__Super_Area__c),2) as TotalSelableAreaSold,round((sum(propstrength__total_basic_sale_price__c)/10000000),2) as TotalBSP,count(id) as unitcount from salesforce.propstrength__offer__c where propstrength__project__c='"+whereCondition+"' and propstrength__status__c='Closed Won' "
+				+dateCondition);
 		Object[] result = (Object[])q.getSingleResult();
 		
-		Query bookingcount = session.createNativeQuery("select count(id) bookingcount from salesforce.propstrength__application_booking__c where propstrength__project__c='"+whereCondition+"' and booking_status__c='Deal Approved'");
+		Query bookingcount = session.createNativeQuery("select count(id) bookingcount from salesforce.propstrength__application_booking__c where propstrength__project__c='"+whereCondition+"' and booking_status__c='Deal Approved' "+dateCondition+"");
 		//Object[] resultBooking = (Object[])bookingcount.getSingleResult();
 		
 		Query totalEToken = session.createNativeQuery("select count(nv_token_id) as totalEtoken from salesforce.nv_token where isactive='Y' and projectname='"+whereCondition+"' and type='E'");
