@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.godrej.properties.model.CategoryTowerCount;
 import com.godrej.properties.model.UnitCategoryCount;
 import com.godrej.properties.model.UnitFacingCount;
 import com.godrej.properties.model.UnitTowerCount;
@@ -203,6 +204,15 @@ public class PaymentEOIReportController {
 		Gson gson = new GsonBuilder().disableHtmlEscaping().serializeNulls().create();
 		
 		List<UnitCategoryCount> carparkTypeList=eOIReportService.getUnitCategoryCount(projectSFID);
+		
+		return gson.toJson(carparkTypeList); 
+	}
+	
+	@GetMapping(value = "/getCategoryTowerCount", produces = "application/json")
+	public String getCategoryTowerCount(@RequestParam("projectSFID") String projectSFID) {
+		Gson gson = new GsonBuilder().disableHtmlEscaping().serializeNulls().create();
+		
+		List<CategoryTowerCount> carparkTypeList=eOIReportService.getCategoryTowerCount(projectSFID);
 		
 		return gson.toJson(carparkTypeList); 
 	}
