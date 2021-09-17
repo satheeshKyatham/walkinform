@@ -22,15 +22,20 @@
 			<a href="#soldCarpark" role="tab" data-toggle="tab" onclick="carparkCountList();">Sold Car Park <i class="fa fa-spinner fa-spin" style="display:none;"></i></a>
 		</li>
 		<li role="presentation" id="facingSoldUnitTab">
-			<a href="#facingSoldUnit" role="tab" data-toggle="tab" onclick="getUnitFacingCount();">Facing Wise Offer Created <i class="fa fa-spinner fa-spin" style="display:none;"></i></a>
+			<a href="#facingSoldUnit" role="tab" data-toggle="tab" onclick="getUnitFacingCount();">Facing Wise Offer <i class="fa fa-spinner fa-spin" style="display:none;"></i></a>
 		</li>
 		<li role="presentation" id="towerSoldUnitTab">
-			<a href="#towerSoldUnit" role="tab" data-toggle="tab" onclick="getUnitTowerCount();">Tower Wise Offer Created <i class="fa fa-spinner fa-spin" style="display:none;"></i></a>
+			<a href="#towerSoldUnit" role="tab" data-toggle="tab" onclick="getUnitTowerCount();">Tower Wise Offer <i class="fa fa-spinner fa-spin" style="display:none;"></i></a>
 		</li>
 		
 		<li role="presentation" id="categorySoldUnitTab">
-			<a href="#categorySoldUnit" role="tab" data-toggle="tab" onclick="getUnitCategoryCount();">Category Wise Offer Created <i class="fa fa-spinner fa-spin" style="display:none;"></i></a>
+			<a href="#categorySoldUnit" role="tab" data-toggle="tab" onclick="getUnitCategoryCount();">Category Wise Offer <i class="fa fa-spinner fa-spin" style="display:none;"></i></a>
 		</li>
+		  
+		<li role="presentation" id="categoryTowerSoldUnitTab">
+			<a href="#categoryTowerSoldUnit" role="tab" data-toggle="tab" onclick="getUnitCategoryTowerCount();">Tower-wise Category Offer <i class="fa fa-spinner fa-spin" style="display:none;"></i></a>
+		</li>
+		
 	</ul>
  
 	<div class="tab-content" style="padding: 15px; border: 1px solid #ccc; border-top: 0;">
@@ -241,6 +246,17 @@
 				<div class="clearfix"></div>
 			</div> -->
 			<div id="unitCategoryCount">
+				<div class="clearfix"></div>
+			</div>
+		</div>
+		
+		
+		
+		<div role="tabpanel" class="tab-pane" id="categoryTowerSoldUnit">
+			<!-- <div id="towerDashboard">
+				<div class="clearfix"></div>
+			</div> -->  
+			<div id="unitCategoryTowerCount">
 				<div class="clearfix"></div>
 			</div>
 		</div>

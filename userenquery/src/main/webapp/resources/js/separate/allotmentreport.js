@@ -737,3 +737,120 @@ function getUnitCategoryCount (){
 		$('#categorySoldUnitTab i').hide();
 	});	
 } 
+
+
+
+
+
+
+
+
+function getUnitCategoryTowerCount (){
+	$('#categoryTowerSoldUnitTab i').show(); 
+	$.get("getCategoryTowerCount",{"projectSFID":$('#projectid').val() },function(data){				 
+		
+		var countHTML = "";
+		
+		if(data!=null) {
+			$("#unitCategoryTowerCount").html("");
+			
+			var unitType = [];
+            var unitTower = [];
+			
+			for(i = 0; i< data.length; i++){    
+				if(unitType.indexOf(data[i].inventory_category__c) === -1){
+					unitType.push(data[i].inventory_category__c);
+                }
+            }
+			
+			for(h = 0; h< data.length; h++){    
+				if(unitTower.indexOf(data[h].tower_name__c) === -1){
+					unitTower.push(data[h].tower_name__c);
+                } 
+            }
+			
+			countHTML += "<div class='clearfix'></div> <h4>Tower-wise Category Offer Created</h4> <table class='table table-bordered table-striped'>" ;
+							 	
+				countHTML += "<thead> <tr> <th>Type</th>"; 
+				for(h = 0; h< unitTower.length; h++){
+					countHTML += "<th>"+unitTower[h]+"</th>";
+				}
+				
+				countHTML += "<th>Grand Total</th>";
+				
+				countHTML += "</tr></thead><tbody>";
+	
+				for(j = 0; j< unitType.length; j++){
+					countHTML += "<tr>";
+						countHTML += "<th>"+unitType[j]+"</th>";
+						
+						var soldUnit = 0;
+						var totalUnit = 0;
+						
+						var t = 0;
+						
+						for (p = 0; p< unitTower.length; p++){
+							
+							var cond1 = 0;
+							
+							for (k = 0; k < data.length; k++) {
+								
+								if (unitType[j] == data[k].inventory_category__c && unitTower[p] == data[k].tower_name__c) {
+									
+									cond1 = 1;
+									
+									countHTML += "<td>"+data[k].sold+"/"+data[k].total+"</td>";
+									
+									soldUnit = parseInt(data[k].sold)+parseInt(soldUnit);
+									totalUnit = parseInt(data[k].total)+parseInt(totalUnit);
+								}  
+							}
+							
+							if (cond1 != 1) {
+								countHTML += "<td></td>";
+							}
+							
+						}
+						
+						countHTML += "<td>"+soldUnit+"/"+totalUnit+"</td>";
+						countHTML += "</tr>";
+				}
+				
+				countHTML += "<tr><th>Grand Total</th>";
+				
+				var grandTotal = 0;
+				var grandSold = 0;
+				
+				for(m = 0; m< unitTower.length; m++){
+					
+						var soldUnit1 = 0;
+						var totalUnit1 = 0;
+					
+						for (n = 0; n < data.length; n++) {
+							if (unitTower[m] == data[n].tower_name__c) {
+								
+								soldUnit1 = parseInt(data[n].sold)+parseInt(soldUnit1);
+								totalUnit1 = parseInt(data[n].total)+parseInt(totalUnit1);
+								
+							}
+						}
+						
+						grandTotal = parseInt(grandTotal)+parseInt(totalUnit1);
+						grandSold = parseInt(grandSold)+parseInt(soldUnit1);
+						
+						countHTML += "<th>"+soldUnit1+"/"+totalUnit1+"</th>";
+				}
+				countHTML += "<th>"+grandSold+"/"+grandTotal+"</th></tr>";	
+								
+			countHTML += "</tbody>" 
+				+ "</table>";		
+				
+				$("#unitCategoryTowerCount").html(countHTML);
+		} else {
+			$("#unitCategoryTowerCount").html("");
+			$('#categoryTowerSoldUnitTab i').hide();
+		}
+	}).done(function(data){
+		$('#categoryTowerSoldUnitTab i').hide();
+	});	
+} 

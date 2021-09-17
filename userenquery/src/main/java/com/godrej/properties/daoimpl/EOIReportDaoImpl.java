@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import com.godrej.properties.dao.EOIReportDao;
 import com.godrej.properties.model.AllotmentMISReport;
 import com.godrej.properties.model.AllotmentReport;
+import com.godrej.properties.model.CategoryTowerCount;
 import com.godrej.properties.model.EOIReport;
 import com.godrej.properties.model.FacingDashboard;
 import com.godrej.properties.model.TowerDashboard;
@@ -520,6 +521,61 @@ public class EOIReportDaoImpl implements EOIReportDao{
 				+ " AND a.inventory_category__c = b.inventory_category__c "
 				+ " AND b.project_sfid = '"+projectSFID+"' AND b.propstrength__property_alloted_through_offer__c = true AND b.propstrength__active__c = true  "
 				+ " where a.project18digit__c = '"+projectSFID+"'  AND a.propstrength__active__c = true order by a.propstrength__unit_type__c,  a.inventory_category__c ASC ", UnitCategoryCount.class);
+
+		authors = q.getResultList();
+		
+		if (authors.size() > 0)
+			return authors;
+
+		return null;
+	}
+	
+	
+	@Override
+	public List<CategoryTowerCount> getCategoryTowerCount(String projectSFID) {
+		Session session = this.sessionFactory.getCurrentSession();	
+		
+		List<CategoryTowerCount> authors=null;
+		
+		Query q = session.createNativeQuery("SELECT row_number() OVER () AS id, "
+				
+				+ " CASE WHEN a.inventory_category__c IS NULL THEN '-' ELSE a.inventory_category__c END as inventory_category__c,  "
+				+ " CASE WHEN a.tower_name__c IS NULL THEN '-' ELSE a.tower_name__c END as tower_name__c, "
+				+ " CASE WHEN b.count IS NULL THEN 0 ELSE b.count END as sold, "
+				+ " CASE WHEN a.count IS NULL THEN 0 ELSE a.count END as total  "
+				
+				//--------------------------
+				+ " FROM "
+				+ " (SELECT row_number() OVER () AS row_number, "
+				+ " propstrength__property__c.project18digit__c, "
+				+ " propstrength__property__c.propstrength__active__c, "
+				//+ " propstrength__property__c.inventory_category__c, "
+				+ " CASE WHEN propstrength__property__c.inventory_category__c IS NULL THEN '-'  ELSE propstrength__property__c.inventory_category__c END AS inventory_category__c, "
+				+ " propstrength__property__c.tower_name__c, "
+				//+ " count(propstrength__property__c.inventory_category__c) AS count "
+				+ " count(CASE WHEN propstrength__property__c.inventory_category__c IS NULL THEN '-'  ELSE propstrength__property__c.inventory_category__c END ) AS count "
+				+ " FROM salesforce.propstrength__property__c "
+				+ " GROUP BY propstrength__property__c.project18digit__c, propstrength__property__c.propstrength__active__c, propstrength__property__c.inventory_category__c, propstrength__property__c.tower_name__c "
+				+ " ORDER BY propstrength__property__c.inventory_category__c, propstrength__property__c.tower_name__c) a  "
+				//--------------------------
+				+ " LEFT JOIN "
+				+ " (SELECT row_number() OVER () AS row_number, "
+				+ " c.project18digit__c AS project_sfid, "
+				//+ " c.inventory_category__c, "
+				+ " CASE WHEN c.inventory_category__c IS NULL THEN '-' ELSE c.inventory_category__c END AS inventory_category__c, "
+				+ " c.tower_name__c, "
+				//+ " count(c.inventory_category__c) AS count, "
+				+ " count(CASE WHEN c.inventory_category__c IS NULL THEN '-' ELSE c.inventory_category__c END) AS count, "
+				+ " c.propstrength__active__c, "
+				+ " c.propstrength__property_alloted_through_offer__c "
+				+ " FROM salesforce.propstrength__property__c c "
+				+ " GROUP BY c.project18digit__c, c.inventory_category__c, c.tower_name__c, c.propstrength__property_alloted_through_offer__c, c.propstrength__active__c) b  "
+				//--------------------------
+				
+				+ " ON a.inventory_category__c = b.inventory_category__c  "
+				+ " AND a.tower_name__c = b.tower_name__c "
+				+ " AND b.project_sfid = '"+projectSFID+"' AND b.propstrength__property_alloted_through_offer__c = true AND b.propstrength__active__c = true  "
+				+ " where a.project18digit__c = '"+projectSFID+"'  AND a.propstrength__active__c = true order by a.inventory_category__c,  a.tower_name__c ASC ", CategoryTowerCount.class);
 
 		authors = q.getResultList();
 		

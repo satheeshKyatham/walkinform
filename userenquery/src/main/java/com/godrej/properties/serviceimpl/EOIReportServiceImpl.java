@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.godrej.properties.dao.EOIReportDao;
 import com.godrej.properties.model.AllotmentMISReport;
 import com.godrej.properties.model.AllotmentReport;
+import com.godrej.properties.model.CategoryTowerCount;
 import com.godrej.properties.model.EOIReport;
 import com.godrej.properties.model.FacingDashboard;
 import com.godrej.properties.model.TowerDashboard;
@@ -66,5 +67,11 @@ public class EOIReportServiceImpl implements EOIReportService{
 	@Override
 	public List<UnitCategoryCount> getUnitCategoryCount(String projectSFID) {
 		return eOIReportDao.getUnitCategoryCount(projectSFID);
+	}
+	
+	
+	@Override
+	public List<CategoryTowerCount> getCategoryTowerCount(String projectSFID) {
+		return eOIReportDao.getCategoryTowerCount(projectSFID);
 	}
 }

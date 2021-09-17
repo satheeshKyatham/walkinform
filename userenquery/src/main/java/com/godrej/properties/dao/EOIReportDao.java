@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.godrej.properties.model.AllotmentMISReport;
 import com.godrej.properties.model.AllotmentReport;
+import com.godrej.properties.model.CategoryTowerCount;
 import com.godrej.properties.model.EOIReport;
 import com.godrej.properties.model.FacingDashboard;
 import com.godrej.properties.model.TowerDashboard;
@@ -23,4 +24,6 @@ public interface EOIReportDao {
 	List<UnitTowerCount> getUnitTowerCount(String projectSFID);
 	
 	List<UnitCategoryCount> getUnitCategoryCount(String projectSFID);
+	
+	List<CategoryTowerCount> getCategoryTowerCount(String projectSFID);
 }
