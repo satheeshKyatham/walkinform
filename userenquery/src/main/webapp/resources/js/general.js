@@ -396,7 +396,13 @@ function towerCustomList (){
 	} else if ($('#projectid').val() == "a1l2s000000PJpLAAW") {
 		var html="";
 		
-		html=html+'<option value="All">All</option>'; 
+		html=html+'<option value="CD01">Godrej Urban Park Tower 1</option>';
+		html=html+'<option value="CD02">Godrej Urban Park Tower 2</option>';
+		html=html+'<option value="CD03">Godrej Urban Park Tower 3</option>';
+		html=html+'<option value="CD04">Godrej Urban Park Tower 4</option>';
+		html=html+'<option value="CD05">Godrej Urban Park Tower 5</option>';
+		html=html+'<option value="CD06">Godrej Urban Park Tower 6</option>'; 
+		html=html+'<option value="CD09">Godrej Urban Park Tower 9</option>'; 
 		
 		return html;
 	} else if ($('#projectid').val() == "a1l6F000004RvPHQA0") {
