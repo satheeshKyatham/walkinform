@@ -428,6 +428,22 @@ function towerCustomList (){
 		html=html+'<option value="CP13">The Highlands Tower 4</option>';
 		
 		return html;
+	} else if ($('#projectid').val() == "a1l6F0000080x9rQAA") {
+		var html="";
+		
+		html=html+'<option value="AE11">C1</option>';
+		html=html+'<option value="AE12">Iconic C2</option>';
+		html=html+'<option value="AE13">C3</option>';
+		html=html+'<option value="AE14">C4</option>';
+		html=html+'<option value="AE15">C5</option>';
+		
+		return html;
+	} else if ($('#projectid').val() == "a1l6F0000047Q1xQAE") {
+		var html="";
+		
+		html=html+'<option value="VS01">Tower 1</option>'; 
+		
+		return html;
 	} else {
 		return "";
 	}

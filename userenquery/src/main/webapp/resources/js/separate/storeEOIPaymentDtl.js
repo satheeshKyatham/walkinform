@@ -465,6 +465,43 @@ function getTypologyEOI (e){
 		} 
 		
 		$(e).closest('.EOIDtlRow').find('.typologyListEOI').append(html);
+	} else if ($('.projectSfid').val() == "a1l6F0000080x9rQAA") {
+		var html = "";
+		
+		$(e).closest('.EOIDtlRow').find('.typologyListEOI').find("option:gt(0)").remove();
+		$(e).closest('.EOIDtlRow').find('.unitListEOI').find("option:gt(0)").remove();
+		
+		if ($(e).closest('.EOIDtlRow').find('.towerListEOI  option:selected').val() == "AE11") {
+			html = html+"<option value='2 BHK'>2 BHK</option>";
+			html = html+"<option value='3 BHK'>3 BHK</option>"; 
+		} else if ($(e).closest('.EOIDtlRow').find('.towerListEOI  option:selected').val() == "AE12") {
+			html = html+"<option value='3 BHK'>3 BHK</option>";
+			html = html+"<option value='4 BHK'>4 BHK</option>"; 
+		} else if ($(e).closest('.EOIDtlRow').find('.towerListEOI  option:selected').val() == "AE13") {
+			html = html+"<option value='1 BHK'>1 BHK</option>";
+			html = html+"<option value='2 BHK'>2 BHK</option>"; 
+		} else if ($(e).closest('.EOIDtlRow').find('.towerListEOI  option:selected').val() == "AE14") {
+			html = html+"<option value='1 BHK'>1 BHK</option>";
+			html = html+"<option value='2 BHK'>2 BHK</option>"; 
+		} else if ($(e).closest('.EOIDtlRow').find('.towerListEOI  option:selected').val() == "AE15") {
+			html = html+"<option value='2 BHK'>2 BHK</option>";
+			html = html+"<option value='3 BHK'>3 BHK</option>"; 
+		}
+		
+		$(e).closest('.EOIDtlRow').find('.typologyListEOI').append(html);
+	} else if ($('.projectSfid').val() == "a1l6F0000047Q1xQAE") {
+		var html = "";
+		
+		$(e).closest('.EOIDtlRow').find('.typologyListEOI').find("option:gt(0)").remove();
+		$(e).closest('.EOIDtlRow').find('.unitListEOI').find("option:gt(0)").remove();
+		
+		if ($(e).closest('.EOIDtlRow').find('.towerListEOI  option:selected').val() == "VS01") {
+			html = html+"<option value='1 BHK'>1 BHK</option>";
+			html = html+"<option value='2 BHK'>2 BHK</option>";
+			html = html+"<option value='3 BHK'>3 BHK</option>";
+		} 
+		
+		$(e).closest('.EOIDtlRow').find('.typologyListEOI').append(html);
 	} else {
 		$.get("getunittype", {
 			"project_code" : $('.projectSfid').val(),

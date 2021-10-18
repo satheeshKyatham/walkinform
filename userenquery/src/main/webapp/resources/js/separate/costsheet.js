@@ -2583,7 +2583,7 @@ function newOtherCharges2 () {
                     $('.exclusiveAreaAmount').text(exclusiveAreaAmount);
                     
                     
-                    if ($('#projectid').val() == 'a1l6F000003TRcCQAW') {
+                    if ($('#projectid').val() == 'a1l6F000003TRcCQAW' || $('#projectid').val() == 'a1l6F000002QWXsQAO' || $('#projectid').val() == 'a1l6F000002QWXnQAO' || $('#projectid').val() == 'a1l6F000005IdzrQAC' || $('#projectid').val() == 'a1l6F000004LVk8QAG' || $('#projectid').val() == 'a1l6F000005TUCvQAO') {
                     	$('.excAmountRow').hide();
                     	$('.excAmountRowPrint').remove();
                     	$('.carpetAreaAmount').text(finalFlatAmount);
