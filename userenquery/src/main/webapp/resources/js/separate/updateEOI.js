@@ -441,7 +441,7 @@ function getfbandEOI(e) {
 		{
 		if($.trim($(e).closest('.EOIDtlRow').find(".typologyListEOI").val())!='')
 			{
-				var concertArray = [
+				/*var concertArray = [
 					{towername:"Godrej Retreat Vista", range:"Plot_104-119", streetname:"Amaryllis Street"},
 					{towername:"Godrej Retreat Vista", range:"Plot_150-159", streetname:"Amaryllis Street"},
 					{towername:"Godrej Retreat Orchard", range:"Plot_160-169", streetname:"Berry Garden Street 1"},
@@ -482,7 +482,68 @@ function getfbandEOI(e) {
 					{towername:"Godrej Plots_Parcel C", range:"Plot_104-119", streetname:"Amaryllis Street Test"},
 					{towername:"Godrej Plots_Parcel C", range:"Plot_104-119", streetname:"Amaryllis Street 2"}
 
-				];
+				];*/
+			
+			var concertArray = [
+				{towername:"Godrej Retreat Aroma", range:"Plot_104-119", streetname:"-"},
+				//{towername:"Godrej Retreat Aroma", range:"Plot_104-119", streetname:"-"},
+				{towername:"Godrej Retreat Aroma", range:"Plot_120-129", streetname:"-"},
+				//{towername:"Godrej Retreat Aroma", range:"Plot_130-139", streetname:"-"},
+				{towername:"Godrej Retreat Aroma", range:"Plot_130-139", streetname:"-"},
+				//{towername:"Godrej Retreat Aroma", range:"Plot_140-149", streetname:"-"},
+				{towername:"Godrej Retreat Aroma", range:"Plot_140-149", streetname:"-"},
+				//{towername:"Godrej Retreat Aroma", range:"Plot_150-159", streetname:"-"},
+				{towername:"Godrej Retreat Aroma", range:"Plot_150-159", streetname:"-"},
+				{towername:"Godrej Retreat Aroma", range:"Plot_160-169", streetname:"-"},
+				//{towername:"Godrej Retreat Aroma", range:"Plot_170-179", streetname:"-"},
+				{towername:"Godrej Retreat Aroma", range:"Plot_170-179", streetname:"-"},
+				
+				//-----------------------------------------------------------------------
+				
+				//{towername:"Godrej Retreat Orchard", range:"Plot_160-169", streetname:"-"},
+				//{towername:"Godrej Retreat Orchard", range:"Plot_160-169", streetname:"-"},
+				{towername:"Godrej Retreat Orchard", range:"Plot_160-169", streetname:"-"},
+				//{towername:"Godrej Retreat Orchard", range:"Plot_140-149", streetname:"-"},
+				{towername:"Godrej Retreat Orchard", range:"Plot_140-149", streetname:"-"},
+				{towername:"Godrej Retreat Orchard", range:"Plot_120-129", streetname:"-"},
+				{towername:"Godrej Retreat Orchard", range:"Plot_130-139", streetname:"-"},
+				
+				
+				//-----------------------------------------------------------------------
+				
+				{towername:"Godrej Retreat Symphony", range:"Plot_140-149", streetname:"-"},
+				//{towername:"Godrej Retreat Symphony", range:"Plot_170-179", streetname:"-"},
+				//{towername:"Godrej Retreat Symphony", range:"Plot_170-179", streetname:"-"},
+				{towername:"Godrej Retreat Symphony", range:"Plot_170-179", streetname:"-"},
+				//{towername:"Godrej Retreat Symphony", range:"Plot_104-119", streetname:"-"},
+				{towername:"Godrej Retreat Symphony", range:"Plot_104-119", streetname:"-"},
+				{towername:"Godrej Retreat Symphony", range:"Plot_150-159", streetname:"-"},
+				
+				
+				//-----------------------------------------------------------------------
+				
+				//{towername:"Godrej Retreat Vista", range:"Plot_104-119", streetname:"-"},
+				//{towername:"Godrej Retreat Vista", range:"Plot_104-119", streetname:"-"},
+				{towername:"Godrej Retreat Vista", range:"Plot_104-119", streetname:"-"},
+				{towername:"Godrej Retreat Vista", range:"Plot_150-159", streetname:"-"},
+				{towername:"Godrej Retreat Vista", range:"Plot_170-179", streetname:"-"},
+				{towername:"Godrej Retreat Vista", range:"Plot_120-129", streetname:"-"},
+				
+				
+				//-----------------------------------------------------------------------
+				
+				{towername:"Godrej Retreat Vibe", range:"Plot_104-119", streetname:"-"},
+				{towername:"Godrej Retreat Vibe", range:"Plot_170-179", streetname:"-"},
+				{towername:"Godrej Retreat Vibe", range:"Plot_120-129", streetname:"-"},
+				{towername:"Godrej Retreat Vibe", range:"Plot_130-139", streetname:"-"},
+				{towername:"Godrej Retreat Vibe", range:"Plot_140-149", streetname:"-"},
+				
+				//-----------------------------------------------------------------------
+				
+				//{towername:"Godrej Plots_Parcel C", range:"Plot_104-119", streetname:"-"},
+				{towername:"Godrej Plots_Parcel C", range:"Plot_104-119", streetname:"-"}
+
+			];
 				var html="";
 				for(var i = 0; i < concertArray.length; i++) 
 				{

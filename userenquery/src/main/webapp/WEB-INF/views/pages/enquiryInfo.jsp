@@ -743,8 +743,8 @@
 						</div>
 						<c:if test="${!empty phaseList}">
 							<div class="col-md-6 col-xs-12">
-									<div class="group">
-										<select class="isphaselist requiredField enquiryFields" id="phasedto" name="phasedto.sfid"><!-- disabled="disabled" -->
+									<div class="group"><!-- enquiryFields -->
+										<select class="isphaselist requiredField" id="phasedto" name="phasedto.sfid"><!-- disabled="disabled" -->
 										    <option value=""></option>
 											<c:forEach var="phaseList" items="${phaseList}">
 		                                       <option value="${phaseList.sfid}">${phaseList.name}</option>

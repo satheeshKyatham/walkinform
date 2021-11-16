@@ -396,7 +396,13 @@ function towerCustomList (){
 	} else if ($('#projectid').val() == "a1l2s000000PJpLAAW") {
 		var html="";
 		
-		html=html+'<option value="All">All</option>'; 
+		html=html+'<option value="CD01">Godrej Urban Park Tower 1</option>';
+		html=html+'<option value="CD02">Godrej Urban Park Tower 2</option>';
+		html=html+'<option value="CD03">Godrej Urban Park Tower 3</option>';
+		html=html+'<option value="CD04">Godrej Urban Park Tower 4</option>';
+		html=html+'<option value="CD05">Godrej Urban Park Tower 5</option>';
+		html=html+'<option value="CD06">Godrej Urban Park Tower 6</option>'; 
+		html=html+'<option value="CD09">Godrej Urban Park Tower 9</option>'; 
 		
 		return html;
 	} else if ($('#projectid').val() == "a1l6F000004RvPHQA0") {
@@ -420,6 +426,22 @@ function towerCustomList (){
 		html=html+'<option value="CP11">The Highlands Tower 2</option>';
 		html=html+'<option value="CP12">The Highlands Tower 3</option>';
 		html=html+'<option value="CP13">The Highlands Tower 4</option>';
+		
+		return html;
+	} else if ($('#projectid').val() == "a1l6F0000080x9rQAA") {
+		var html="";
+		
+		html=html+'<option value="AE11">C1</option>';
+		html=html+'<option value="AE12">Iconic C2</option>';
+		html=html+'<option value="AE13">C3</option>';
+		html=html+'<option value="AE14">C4</option>';
+		html=html+'<option value="AE15">C5</option>';
+		
+		return html;
+	} else if ($('#projectid').val() == "a1l6F0000047Q1xQAE") {
+		var html="";
+		
+		html=html+'<option value="VS01">Tower 1</option>'; 
 		
 		return html;
 	} else {

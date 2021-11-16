@@ -254,7 +254,6 @@ public class CPWebServices {
 
 	@PostMapping(value = "/getCPSourceProtection", produces = "application/json")
 	public CPEnquiryRespAPIDto getCPSourceProtection(@RequestBody CPEnquiryReqAPIDto enqReqDto) {
-
 		log.info("Input Value getCPSourceProtection of projectsfid is {} countrycode is {} mobileno is {}",
 				enqReqDto.getProjectsfid(), enqReqDto.getCountrycode(), enqReqDto.getMobileno());
 		CPEnquiryRespAPIDto dto = new CPEnquiryRespAPIDto();
@@ -266,6 +265,13 @@ public class CPWebServices {
 				List<EnquiryDto> enquiryListDto = enquiryRequestService.getEnquiriesByMobileNo(
 						enqReqDto.getCountrycode(), enqReqDto.getMobileno(), enqReqDto.getProjectsfid(), "");
 
+				/*if(CommonUtil.isCollectionEmpty(enquiryListDto)){
+					  contact=userContactService.findMobileNoExist(countryCode,mobileNo);			  
+					}else {
+						contact=enquiryList.get(0).getContact();
+						enquiryDto =  enquiryList.get(0);
+					}*/
+				
 				if (enquiryListDto.size() > 0) {
 					// convert to GPLAPPS Format
 					try {
@@ -277,7 +283,22 @@ public class CPWebServices {
 						dto.setComments("Data Mapping Issue");
 						return dto;
 					}
-				} else {
+				} 
+				else if(CommonUtil.isCollectionEmpty(enquiryListDto)){
+					ContactDto contact=userContactService.findMobileNoExist(enqReqDto.getCountrycode(),enqReqDto.getMobileno());
+					dto.setContact_sfid(contact.getSfid());
+					dto.setContact_firstname(contact.getFirstName());
+					dto.setContact_lastname(contact.getLastName());
+					dto.setContact_id(contact.getContactId().toString());
+					dto.setContact_mobileno(contact.getMobile());
+					dto.setContact_emailid(contact.getEmail());
+					dto.setContact_countrycode(contact.getCountryCode());
+					dto.setSrc_protection_flag("New");
+					dto.setLead_status(true);
+					dto.setResp_msg("Success");
+					return dto;
+				}
+				else {
 					log.info(
 							"No Enquiry Found with Given Prameters: Country Code is {}, Mobile No is {}, projectsfid {}",
 							enqReqDto.getCountrycode(), enqReqDto.getMobileno(), enqReqDto.getProjectsfid());

@@ -296,8 +296,11 @@ public class GPLAppsWebServiceImpl implements GPLAppsWebService{
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd"); 
 		Date eoi_date;
 		try {
-			eoi_date = df.parse(bookingData.getTransactionDate());
-			eoiPref.setEoi_date(eoi_date);
+			if(bookingData.getTransactionDate()!=null && bookingData.getTransactionDate().length()>0)
+			{
+				eoi_date = df.parse(bookingData.getTransactionDate());
+				eoiPref.setEoi_date(eoi_date);
+			}
 		} catch (ParseException e) {
 			log.error(" Error ParseException :-{}",e);
 		}
@@ -461,7 +464,7 @@ public class GPLAppsWebServiceImpl implements GPLAppsWebService{
 	 */
 	public GPLAppBookingAPIDto insertCPBookingData(GPLAppBookingAPIDto bookingData) {
 
-		log.info("insertGPLBookingData......{}",bookingData.getEnquiryName());
+		log.info("insertCPBookingData......{}",bookingData.getEnquiryName());
 		String updateData="";
 		try
 		{
@@ -565,7 +568,7 @@ public class GPLAppsWebServiceImpl implements GPLAppsWebService{
 						bookingData.setNv_token_type(token.getType()+token.getQueue());
 						bookingData.setNv_tokenno(token.getQueue());
 						//Call Tower Data
-						if(bookingData.getTowersfid()!=null)
+						if(bookingData.getTowersfid()!=null && bookingData.getTowersfid().length()>0)
 						{
 							towerMaster= towerMasterDao.getTowerMasterDetails(bookingData.getTowersfid());
 							bookingData.setTowersfid(towerMaster.getSfid());
@@ -573,7 +576,7 @@ public class GPLAppsWebServiceImpl implements GPLAppsWebService{
 						}
 						//Call Unit Data
 						
-						if(bookingData.getPropertysfid()!=null)
+						if(bookingData.getPropertysfid()!=null && bookingData.getPropertysfid().length()>0)
 						{
 							propertyName= propOtherChargesService.getPropertyName(bookingData.getPropertysfid());
 							bookingData.setPropertysfid(bookingData.getPropertysfid());
@@ -584,11 +587,11 @@ public class GPLAppsWebServiceImpl implements GPLAppsWebService{
 						
 						bookingData = insertPaymentDtl(bookingData);
 						
-						updateData=" PropStrength__Request_Status__c='Initiate Offer' ";
+						updateData=" PropStrength__Request_Status__c='Initiate Offer', ";
 						bookingData.setTokenType("F");
 						bookingData.setTokenName("REFUNDABLE");
 						
-						bookingData = insertIntoHoldUnit(bookingData);
+						//bookingData = insertIntoHoldUnit(bookingData);
 						
 					}
 					else if(bookingData.getPaymentStatus().equals("Fail"))//else(paymentStatus=="Fail")
@@ -608,8 +611,8 @@ public class GPLAppsWebServiceImpl implements GPLAppsWebService{
 				//Update contact External_Contact_ID__c
 				
 				
-//				String text = readContentFromFile("D://SW//apache-tomcat-9.0.0.M22//apache-tomcat-9.0.0.M22//htmldoc//d4u-prebookingapi-email.htm");
-				String text = readContentFromFile("D://D Drive//SW//Tomcat Server 8085//apache-tomcat-9.0.12//htmldoc//d4u-prebookingapi-email.htm");
+				String text = readContentFromFile("D://SW//apache-tomcat-9.0.0.M22//apache-tomcat-9.0.0.M22//htmldoc//d4u-prebookingapi-email.htm");
+//				String text = readContentFromFile("D://D Drive//SW//Tomcat Server 8085//apache-tomcat-9.0.12//htmldoc//d4u-prebookingapi-email.htm");
 				text = text.replaceAll("@SiteHead@", bookingData.getSiteheadName());
 				text = text.replaceAll("@CustomerName@", bookingData.getContactName());
 				text = text.replaceAll("@CustomerMobile@", bookingData.getCountryCode()+bookingData.getMobileno());
