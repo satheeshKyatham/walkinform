@@ -231,6 +231,63 @@ function loadData (csSource) {
        $('#viewPDF .commonLoad').show();
        
        
+       //Parking
+       /*$('#parkingNameVal').text($("#parkingNameCS").val());
+       $('#parkingCatVal').text($("#parkingCatCS").val());
+       $('.parkingNameVal').text($("#parkingNameCS").val());
+       $('.parkingCatVal').text($("#parkingCatCS").val());*/
+       
+       var parkingHTML = '';
+       var parkingHTMLPrint = '';
+       
+       if (PARKING_MODULE_GV == "Y") {
+       //if (PARKING_MODULE_GV == "Y" && GV_ParkingSource == 'PARKING') {
+    	   if ($('#parkingSFIDCS').val() == 'NO_PARKING_SELECTION') {
+    		   $('.parkingV2Col').empty();
+    		   $('.parkingV2ColPrint').empty();
+    	   } else {
+    		   parkingHTMLPrint += 	'<h4 style="margin-bottom:0px !important; padding-bottom:0px !important;">Parking Details</h4>' +
+				   					'<div class="clearfix"></div>' +
+				   					'<table class="table table-bordered bgWhite" style="width:100%; font-size:8px !important;">' +
+				   					'<tbody>' +
+				    		   			"<tr>" +
+											"<th class='subHead'>Parking Name</th>" +
+											"<th class='subHead'>Category Of Parking</th>" +
+											" </tr>" +
+											" <tr> " +
+							          		"<td>"+$('#parkingNameCS').val()+"</td>" +
+							          		"<td>"+$('#parkingCatCS').val()+"</td>" +
+							          " </tr> "+	
+				   					'</tbody>'+
+				   					'</table>';	
+    		   
+		   		parkingHTML += '<h4>Parking Details</h4>' +
+								'<div class="clearfix"></div>' +
+								'<table class="table table-bordered bgWhite">' +
+								'<tbody>' +
+					   			"<tr>" +
+									"<th class='subHead'>Parking Name</th>" +
+									"<th class='subHead'>Category Of Parking</th>" +
+									"</tr>" +
+									"<tr> " +
+					          		"<td>"+$('#parkingNameCS').val()+"</td>" +
+					          		"<td>"+$('#parkingCatCS').val()+"</td>" +
+					          	"</tr> "+	
+								'</tbody>'+
+								'</table>';
+				
+				$('.parkingV2Col').empty();
+				$('.parkingV2ColPrint').empty();
+				
+				$('.parkingV2Col').append(parkingHTML);
+				$('.parkingV2ColPrint').append(parkingHTMLPrint);
+    	   }
+       } else {
+    	   $('.parkingV2Col').empty();
+    	   $('.parkingV2ColPrint').empty();
+       }  
+       //END Parking
+       
        // Not in use 20191025
        var plnVal = '';
        
@@ -752,7 +809,7 @@ function getTaxPercentage(basicSaleprice, projectSfid, currentTaxRate, TotalA, r
 		
 		//if (projectSfid == 'a1l2s00000000X5AAI' || projectSfid == 'a1l6F000003TXloQAG'){
 		//Remove GST logic for Godrej Garden City - JV 
-		if (projectSfid == 'a1l2s000000g6kZAAQ' || projectSfid == 'a1l2s000000PKrrAAG' || projectSfid == 'a1l2s000000PK3IAAW' || projectSfid == 'a1l2s00000000X5AAI' || projectSfid == 'a1l6F000003TXloQAG' || projectSfid == 'a1l2s000000XoezAAC'){
+		if (projectSfid == 'a1l2s000000UQ25AAG' || projectSfid == 'a1l2s000000g6kZAAQ' || projectSfid == 'a1l2s000000PKrrAAG' || projectSfid == 'a1l2s000000PK3IAAW' || projectSfid == 'a1l2s00000000X5AAI' || projectSfid == 'a1l6F000003TXloQAG' || projectSfid == 'a1l2s000000XoezAAC'){
 		//if (projectSfid == 'a1l6F000004RvPHQA0' || projectSfid == 'a1l2s000000PKrrAAG' || projectSfid == 'a1l2s000000PK3IAAW' || projectSfid == 'a1l2s00000000X5AAI' || projectSfid == 'a1l6F000003TXloQAG' || projectSfid == 'a1l2s000000XoezAAC'){
 			if(TotalA>=4500000 || reraCarpetSqm >= 90){
 				return 5;
@@ -1141,7 +1198,7 @@ function paymentPlanOtherCharges (firstRowObj, ppMilestone){
 	       				} else {
 	       					gstPymtOcTotal = parseFloat((gstFinal1Per) + ((ocPlsBsp)*($('#bspGSTTax').val())/100)).toFixed(2);
 	       				}
-                    } else if ($('#projectid').val() == 'a1l6F000003TXloQAG'){
+                    } else if ($('#projectid').val() == 'a1l2s000000UQ25AAG' || $('#projectid').val() == 'a1l6F000003TXloQAG'){
                     	if($('.salesConsiderationTotalNew').text()>=4500000  || $('#carpetSqm').text() >= 90){
 	       					gstPymtOcTotal = parseFloat((gstFinal5Per) + ((ocPlsBsp)*($('#bspGSTTax').val())/100)).toFixed(2);
 	       				} else {
@@ -2254,10 +2311,11 @@ function newOtherCharges2 () {
        var amountTotal = 0;
        var otherFinalTotal = 0;
        
+       //var bspAmount = parseFloat(parseFloat($(".a3").text())*parseFloat($(".a6").text())+parseFloat($('#carParkAmount').val()*$('#carParkCount select').val())).toFixed(2);
        
-       
-       //var bspAmount = parseInt($(".a3").text())*parseInt($(".a6").text())+parseInt($('#carParkAmount').val()*$('#carParkCount select').val());
-       var bspAmount = parseFloat(parseFloat($(".a3").text())*parseFloat($(".a6").text())+parseFloat($('#carParkAmount').val()*$('#carParkCount select').val())).toFixed(2);
+       //Parking
+       var bspAmount = parseFloat(parseFloat($(".a3").text())*parseFloat($(".a6").text())+parseFloat($('#carParkAmount').val()*$('#carParkCount select').val())+parseFloat($('#parkingAmountCS').val())).toFixed(2);
+     // END Parking
        
        /*2nd Other Charges*/
        var taxableAmount = 0;
@@ -2626,7 +2684,7 @@ function newOtherCharges2 () {
 				} else {
 					otherChargesGSTTotalV2 = GST1Per;
 				}
-             } else if ($('#projectid').val() == 'a1l6F000003TXloQAG') {
+             } else if ($('#projectid').val() == 'a1l2s000000UQ25AAG' || $('#projectid').val() == 'a1l6F000003TXloQAG') {
             	 if(TotalA>=4500000 || $('#carpetSqm').text() >= 90){
  					otherChargesGSTTotalV2 = GST5Per;
  				} else {
@@ -2929,7 +2987,7 @@ var HoldReverseTimer = function(min, sec){
                
                if (countStatus == 'countEnd'){
                       $('.holdCountdown').html('0:00');
-                      $('#inventoryBreadcrumb').empty();
+                      $('.inventoryBreadcrumb').empty();
                      // seconds = 0;
                }else {
                       $('.holdCountdown').html(minutes + ':' + seconds);
@@ -3891,8 +3949,10 @@ function paymentTrxValidatore () {
 }
 
 
+
+
 /*This function "viewCostsheet" moved from inventory.js to costsheet .js, because of commonly used for Admin Cost sheet and Sales Cost sheet*/
-function viewCostsheet (e, sfid, unitNo, floor, towerCode) {
+function viewCostsheet (e, sfid, unitNo, floor, towerCode, propertyTypeSfidCS) {
 	var urlProject = pageContext+"getPropertyTypeStatus?propertyid="+sfid
 	var propertyTypeChargeStatus="";
 	$.getJSON(urlProject, function (data) {
@@ -3915,7 +3975,17 @@ function viewCostsheet (e, sfid, unitNo, floor, towerCode) {
 			$('#emailBtnFloat').hide();
 			$('#unitSfid').val(sfid);
 			$('#towerSfid').val(towerCode);
-			$('#costsheetTab a').trigger('click');	
+			
+			//Parking
+			if (PARKING_MODULE_GV == "Y"){
+				$('#propertyTypeSfidCS').val('');
+				$('#propertyTypeSfidCS').val(propertyTypeSfidCS);
+				$('#parkingData').empty();
+				$('#parkingTab a').trigger('click');
+			} else {
+				$('#costsheetTab a').trigger('click');
+			}
+			// END Parking
 		}
 	});
 }

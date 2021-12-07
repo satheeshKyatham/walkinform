@@ -57,6 +57,7 @@ function getInventorySalesHoldReportDtl () {
 				
 				var unitId =  '"'+obj[i].sfid+'"';
 				var customerId = '"'+obj[i].customer_id+'"';
+				var flatHoldBy = '"'+obj[i].flat_hold_by+'"';
 				
 				html += "<tr>" +
 							" <td>"+obj[i].tower_name__c+"</td>" +
@@ -65,6 +66,9 @@ function getInventorySalesHoldReportDtl () {
 							" <td>"+obj[i].propstrength__house_unit_no__c+"</td>" +
 							
 							" <td>"+obj[i].wing_block__c+"</td>" +
+							//Parking
+							" <td>"+obj[i].propstrength__car_parking_name__c+"</td>" +
+							//END Parking
 							" <td>"+saleable_area+"</td>" +
 							" <td>"+rate_per_unit+"</td>" +
 							" <td>"+parseFloat(rate_per_unit*saleable_area).toFixed(2)+"</td>" +
@@ -75,7 +79,7 @@ function getInventorySalesHoldReportDtl () {
 							
 							" <td> <div> <b>Source: </b>"+obj[i].source +" </div> <div> <b>Customer Name: </b>"+obj[i].name +" </div> <div> <b>Customer Mobile: </b>"+obj[i].mobile__c +" </div> </td>" +
 							
-							" <td><button class='btn btn-primary blue_btn' onclick='releaseCMHold("+unitId+", "+customerId+")'>Release</button></td>" +
+							" <td><button class='btn btn-primary blue_btn' onclick='releaseCMHold("+unitId+", "+customerId+", "+flatHoldBy+")'>Release</button></td>" +
 							
 						" </tr>";
 			}
@@ -104,8 +108,30 @@ function getInventorySalesHoldReportDtl () {
 
 
 
-function releaseCMHold (unitsfid, customer_id) {
+function releaseCMHold (unitsfid, customer_id, flatHoldBy) {
 	$.post(pageContext+"releaseFromHold",{"customerId":customer_id, "unitSfid":unitsfid, "projectNameId":$('#projectid').val()},function(data){				 
+		
+	}).done(function(data){
+		 
+		//Parking
+		if (PARKING_MODULE_GV == "Y"){
+			parkingReleaseFromHoldAdmin(flatHoldBy, unitsfid);
+		} else {
+			swal({
+				title: "Successfully Released",
+			    text: "",
+			    timer: 3000,
+			    type: "success",
+			});
+			getInventorySalesHoldReportDtl();
+		}
+		//END Parking
+	});
+}
+
+//Parking
+function parkingReleaseFromHoldAdmin (flatHoldBy, unitsfid) {
+	$.post(pageContext+"parkingReleaseFromHold",{"projectsfid":$('#projectid').val(), "userid":flatHoldBy, "flatsfid":unitsfid},function(data){				 
 		
 	}).done(function(data){
 		swal({
@@ -113,8 +139,8 @@ function releaseCMHold (unitsfid, customer_id) {
 		    text: "",
 		    timer: 3000,
 		    type: "success",
-		}); 
-		
+		});
 		getInventorySalesHoldReportDtl();
 	});
 }
+//Parking

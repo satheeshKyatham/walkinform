@@ -12,7 +12,8 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 @Entity
-@Table(name="salesforce.vw_project_inventory_uat")
+//@Table(name="salesforce.vw_project_inventory_uat")
+@Table(name="salesforce.vw_project_inventory_uat_v2")
 public class Inventory implements Serializable{
 	
 	private static final long serialVersionUID = 1L; 
@@ -89,6 +90,9 @@ public class Inventory implements Serializable{
 	@Column(name = "Property_Facing__c")
 	private String Property_Facing__c;
 	
+	@Column(name = "propstrength__property_type__c") private String propstrength__property_type__c;
+	
+	
 	@Transient
 	private int holdMin;
 	
@@ -122,9 +126,16 @@ public class Inventory implements Serializable{
 	@Column(name = "wing_block__c")
 	private String wing_block__c;
 	
+	@Column(name = "hold_user_id") private Integer hold_user_id;
+	
+	
 	@Column(name = "inventory_category__c")
 	private String inventory_category__c;
 	
+	//Parking
+	@Column(name = "parking_hold_reason") private String parking_hold_reason;
+	@Column(name = "parking_hold_status") private Boolean parking_hold_status;
+	// END Parking
 	
 	public String isHold_status() {
 		return hold_status;
@@ -408,5 +419,37 @@ public class Inventory implements Serializable{
 
 	public void setInventory_category__c(String inventory_category__c) {
 		this.inventory_category__c = inventory_category__c;
+	}
+
+	public String getPropstrength__property_type__c() {
+		return propstrength__property_type__c;
+	}
+
+	public void setPropstrength__property_type__c(String propstrength__property_type__c) {
+		this.propstrength__property_type__c = propstrength__property_type__c;
+	}
+
+	public Integer getHold_user_id() {
+		return hold_user_id;
+	}
+
+	public void setHold_user_id(Integer hold_user_id) {
+		this.hold_user_id = hold_user_id;
+	}
+
+	public String getParking_hold_reason() {
+		return parking_hold_reason;
+	}
+
+	public void setParking_hold_reason(String parking_hold_reason) {
+		this.parking_hold_reason = parking_hold_reason;
+	}
+
+	public Boolean getParking_hold_status() {
+		return parking_hold_status;
+	}
+
+	public void setParking_hold_status(Boolean parking_hold_status) {
+		this.parking_hold_status = parking_hold_status;
 	}
 }

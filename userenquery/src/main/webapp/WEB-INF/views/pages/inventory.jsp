@@ -226,7 +226,7 @@
 		
 		<div class="clearfix"></div>
 		
-		<div id="inventoryBreadcrumb">
+		<div class="inventoryBreadcrumb">
 			
 			<div class="clearfix"></div>
 		</div>

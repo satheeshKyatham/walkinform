@@ -56,7 +56,7 @@
 
 
 
-#inventoryBreadcrumb .breadcrumb {border-radius: 0 !important;}
+.inventoryBreadcrumb .breadcrumb {border-radius: 0 !important;}
 
 
 #inventoryLoader{background-attachment: inherit !important; background-position: center 50px !important;}

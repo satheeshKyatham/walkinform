@@ -44,7 +44,17 @@ public class ProjectDtlController {
 			session.setAttribute("FOYRAPI",null);		
 		}
 		/* END Add Foyr API URL */
-		 
+		
+		
+		// PARKING
+		String isParking = sysConfigService.getValue(SysConfigEnum.PARKING_MODULE, projectsfid);
+		if (isParking != null) {
+			session.setAttribute("PARKING_MODULE",""+isParking);
+		} else {
+			session.setAttribute("PARKING_MODULE",null);		
+		}
+		// END PARKING
+		
 		 session.setAttribute("PROJECTSFID",""+projectsfid);
 		 
 		 

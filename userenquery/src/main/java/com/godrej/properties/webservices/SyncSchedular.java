@@ -12,10 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.godrej.properties.model.HoldInventoryEntry;
+import com.godrej.properties.model.HoldParkingEntry;
 import com.godrej.properties.service.BalanceDetailsService;
 import com.godrej.properties.service.ContactReportService;
 import com.godrej.properties.service.EnquiryReportService;
 import com.godrej.properties.service.HoldInventoryEntryService;
+import com.godrej.properties.service.HoldParkingEntryService;
 import com.godrej.properties.service.PushEnquiryDataService;
 
 /*@Configuration
@@ -35,6 +37,9 @@ public class SyncSchedular {
 	
 	@Autowired
 	private HoldInventoryEntryService holdInventoryEntryService;
+	
+	@Autowired
+	private HoldParkingEntryService holdParkingEntryService;
 	
 	/*@Scheduled(fixedRate=60*60*1000)*/	
 	/*@RequestMapping("/syncContactAndEnquiry")*/
@@ -75,10 +80,22 @@ public class SyncSchedular {
 			HoldInventoryEntry updateHold = new HoldInventoryEntry ();
 			updateHold.setStatusai("I");
 			updateHold.setHoldstatusyn("N");
-			holdInventoryEntryService.updatePreviousHold(updateHold);//20
+			holdInventoryEntryService.updatePreviousHold(updateHold);//20 
 		}
 		catch (Exception e) {
 			LOG.error("updateBulkInventoryStatus ::*************",e);
+		}
+		
+		try {
+			LOG.info("updateBulkParkingStatus ::*************");
+			//Parking
+			HoldParkingEntry updateParkingHold = new HoldParkingEntry ();
+			updateParkingHold.setStatusai("I");
+			updateParkingHold.setHoldstatusyn("N");
+			holdParkingEntryService.updateParkingPreviousHold(updateParkingHold);//20
+			// END Parking
+		} catch (Exception e) {
+			LOG.error("updateBulkParkingStatus ::*************",e);
 		}
 	}
 	/*For SFDC Cancelled offer inactive in D4U*/

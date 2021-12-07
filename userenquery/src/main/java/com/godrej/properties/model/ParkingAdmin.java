@@ -1,0 +1,180 @@
+package com.godrej.properties.model;
+
+import java.io.Serializable;
+import java.sql.Timestamp;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+@Entity
+@Table(name="salesforce.propstrength__car_parking__c")
+public class ParkingAdmin implements Serializable{
+	
+	private static final long serialVersionUID = 1L; 
+	
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")  private int id;
+	@Column(name = "sfid") private String sfid;
+	@Column(name = "propstrength__car_parking_name__c") private String propstrength__car_parking_name__c;
+	@Column(name = "propstrength__parking_type__c") private String propstrength__parking_type__c;
+	@Column(name = "propstrength__category_of_parking__c") private String propstrength__category_of_parking__c;
+	@Column(name = "propstrength__parking_size__c") private String propstrength__parking_size__c;
+	@Column(name = "property__c") private String property__c;
+	@Column(name = "propstrength__project__c") private String propstrength__project__c;
+	@Column(name = "propstrength__tower_name__c") private String propstrength__tower_name__c;
+	@Column(name = "propstrength__is_released__c") private Boolean propstrength__is_released__c;
+	@Column(name = "propstrength__is_parking_blocked__c") private Boolean propstrength__is_parking_blocked__c;
+	@Column(name = "propstrength__allotted__c") private Boolean propstrength__allotted__c;
+	@Column(name = "propstrength__active__c") private Boolean propstrength__active__c;
+	
+	@Column(name = "holdstatusyn") private String holdstatusyn;
+	@Column(name = "holdIntervalstatusAI") private String holdIntervalstatusAI;
+	@Column(name = "created_at") private Timestamp created_at;
+	@Column(name = "hold_user_id") private Integer hold_user_id;
+	@Column(name = "holdForTime") private Integer holdForTime; 
+	
+	@Column(name = "hold_status") private Boolean hold_status;
+	@Column(name = "hold_reason") private String hold_reason;
+	
+	@Column(name = "absolute_amount") private Double absolute_amount;
+	
+	@Transient private String flagForHold;
+	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getSfid() {
+		return sfid;
+	}
+	public void setSfid(String sfid) {
+		this.sfid = sfid;
+	}
+	public String getPropstrength__car_parking_name__c() {
+		return propstrength__car_parking_name__c;
+	}
+	public void setPropstrength__car_parking_name__c(String propstrength__car_parking_name__c) {
+		this.propstrength__car_parking_name__c = propstrength__car_parking_name__c;
+	}
+	public String getPropstrength__parking_type__c() {
+		return propstrength__parking_type__c;
+	}
+	public void setPropstrength__parking_type__c(String propstrength__parking_type__c) {
+		this.propstrength__parking_type__c = propstrength__parking_type__c;
+	}
+	public String getPropstrength__category_of_parking__c() {
+		return propstrength__category_of_parking__c;
+	}
+	public void setPropstrength__category_of_parking__c(String propstrength__category_of_parking__c) {
+		this.propstrength__category_of_parking__c = propstrength__category_of_parking__c;
+	}
+	public String getPropstrength__parking_size__c() {
+		return propstrength__parking_size__c;
+	}
+	public void setPropstrength__parking_size__c(String propstrength__parking_size__c) {
+		this.propstrength__parking_size__c = propstrength__parking_size__c;
+	}
+	public String getProperty__c() {
+		return property__c;
+	}
+	public void setProperty__c(String property__c) {
+		this.property__c = property__c;
+	}
+	public String getPropstrength__project__c() {
+		return propstrength__project__c;
+	}
+	public void setPropstrength__project__c(String propstrength__project__c) {
+		this.propstrength__project__c = propstrength__project__c;
+	}
+	public String getPropstrength__tower_name__c() {
+		return propstrength__tower_name__c;
+	}
+	public void setPropstrength__tower_name__c(String propstrength__tower_name__c) {
+		this.propstrength__tower_name__c = propstrength__tower_name__c;
+	}
+	public Boolean getPropstrength__is_released__c() {
+		return propstrength__is_released__c;
+	}
+	public void setPropstrength__is_released__c(Boolean propstrength__is_released__c) {
+		this.propstrength__is_released__c = propstrength__is_released__c;
+	}
+	public Boolean getPropstrength__is_parking_blocked__c() {
+		return propstrength__is_parking_blocked__c;
+	}
+	public void setPropstrength__is_parking_blocked__c(Boolean propstrength__is_parking_blocked__c) {
+		this.propstrength__is_parking_blocked__c = propstrength__is_parking_blocked__c;
+	}
+	public Boolean getPropstrength__allotted__c() {
+		return propstrength__allotted__c;
+	}
+	public void setPropstrength__allotted__c(Boolean propstrength__allotted__c) {
+		this.propstrength__allotted__c = propstrength__allotted__c;
+	}
+	public Boolean getPropstrength__active__c() {
+		return propstrength__active__c;
+	}
+	public void setPropstrength__active__c(Boolean propstrength__active__c) {
+		this.propstrength__active__c = propstrength__active__c;
+	}
+	public String getHoldstatusyn() {
+		return holdstatusyn;
+	}
+	public void setHoldstatusyn(String holdstatusyn) {
+		this.holdstatusyn = holdstatusyn;
+	}
+	public String getHoldIntervalstatusAI() {
+		return holdIntervalstatusAI;
+	}
+	public void setHoldIntervalstatusAI(String holdIntervalstatusAI) {
+		this.holdIntervalstatusAI = holdIntervalstatusAI;
+	}
+	public Timestamp getCreated_at() {
+		return created_at;
+	}
+	public void setCreated_at(Timestamp created_at) {
+		this.created_at = created_at;
+	}
+	public Integer getHold_user_id() {
+		return hold_user_id;
+	}
+	public void setHold_user_id(Integer hold_user_id) {
+		this.hold_user_id = hold_user_id;
+	}
+	public Integer getHoldForTime() {
+		return holdForTime;
+	}
+	public void setHoldForTime(Integer holdForTime) {
+		this.holdForTime = holdForTime;
+	}
+	public Boolean getHold_status() {
+		return hold_status;
+	}
+	public void setHold_status(Boolean hold_status) {
+		this.hold_status = hold_status;
+	}
+	public String getHold_reason() {
+		return hold_reason;
+	}
+	public void setHold_reason(String hold_reason) {
+		this.hold_reason = hold_reason;
+	}
+	public String getFlagForHold() {
+		return flagForHold;
+	}
+	public void setFlagForHold(String flagForHold) {
+		this.flagForHold = flagForHold;
+	}
+	public Double getAbsolute_amount() {
+		return absolute_amount;
+	}
+	public void setAbsolute_amount(Double absolute_amount) {
+		this.absolute_amount = absolute_amount;
+	}
+}

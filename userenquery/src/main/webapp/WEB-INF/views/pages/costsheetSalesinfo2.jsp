@@ -120,6 +120,14 @@
 							<input type="text" id="bspGSTTax" style="display:none;"/> 
 							<input type="text" id="unit_limit_amount" style="display:none;"/> 
 							
+							<!-- Parking -->
+							<input type="text" id="propertyTypeSfidCS" style="display:none;"/>
+							<input type="text" id="parkingSFIDCS" style="display:none;"/>
+							<input type="text" id="parkingAmountCS" value="0" style="display:none;"/>
+							<input type="text" id="parkingCatCS" style="display:none;"/>
+							<input type="text" id="parkingNameCS" style="display:none;"/>
+							<!-- END Parking -->
+							
 							<div class="schemeFilterCol">
 								<div class="form-group col-md-3 col-sm-6">
 									<label >Scheme Type</label> 
@@ -655,6 +663,17 @@
 								</div>
 								<div class="clearfix"></div>
 						 	</div>
+						 	
+						 	<!-- Parking -->
+						  	<div class="parkingV2ColPrint">
+								<!-- <h4 style="margin-bottom:0px !important; padding-bottom:0px !important;">Parking Details</h4>
+		  	   					<div class='clearfix'></div>
+		  	   					<table class='table table-bordered bgWhite' style="width:100%; font-size:8px !important;">
+			  	   					<tbody></tbody>
+			  	   				</table>  -->
+							</div>
+						  	<!-- END Parking -->
+						 	
 							<div>
 								<h5 class="flipInX paySchTitle">Payment Plan</h5>      
 								<table class="table table-bordered bgWhite" id="printPPOtherCharges" style="width:100%; font-size:8px !important;">
@@ -939,6 +958,16 @@
 						
 						<div class="clearfix"></div>
 					 </div>
+				  	 
+				  	<!-- Parking -->
+				  	<div class="parkingV2Col">
+						<!-- <h4>Parking Details</h4>
+  	   					<div class='clearfix'></div>
+  	   					<table class='table table-bordered bgWhite'>
+	  	   					<tbody></tbody>
+	  	   				</table> -->
+					 </div>
+				  	<!-- END Parking -->
 				  	
 				  	<div class="scrollYauto">
 					<!-- PAYMENT SCHEDULE -->

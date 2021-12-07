@@ -57,7 +57,7 @@ public class PaymentPlanDaoImpl extends AbstractDao<Integer, PaymentPlan> implem
 	@Override
 	public List<PaymentPlan> getTower(String project_code) {
 		Session session = this.sessionFactory.getCurrentSession();
-		List<Object>  list  =(List<Object>)session.createQuery( " select Distinct(tower_code__c),tower_name__c FROM  PaymentPlan  where propstrength__project_name__c='"+project_code+"'" + " order by tower_name__c" ).list();
+		List<Object>  list  =(List<Object>)session.createQuery( " select Distinct(tower_code__c),tower_name__c, towersfid FROM  PaymentPlan  where propstrength__project_name__c='"+project_code+"'" + " order by tower_name__c" ).list();
 		if(list.size()>0)
 		{
 			List<PaymentPlan> paymentPlans = new ArrayList<PaymentPlan>();
@@ -69,8 +69,10 @@ public class PaymentPlanDaoImpl extends AbstractDao<Integer, PaymentPlan> implem
 			      
 			     String client = String.valueOf(obj[0]); 
 			     String clien1t = String.valueOf(obj[1]);
+			     String towerSFID = String.valueOf(obj[2]);
 			     paymentPlan.setTower_code__c(client);
 			     paymentPlan.setTower_name__c(clien1t);
+			     paymentPlan.setTowersfid(towerSFID);
 			     
 			     paymentPlans.add(paymentPlan);
 			  }

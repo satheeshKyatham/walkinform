@@ -49,6 +49,7 @@
 							<th>Unit Type</th>
 							<th>Unit</th>
 							<th>Wing/ Block</th>
+							<th>Parking Name</th>
 							<th>Saleable Area</th>
 							<th>BSP</th>
 							<th>BV</th>

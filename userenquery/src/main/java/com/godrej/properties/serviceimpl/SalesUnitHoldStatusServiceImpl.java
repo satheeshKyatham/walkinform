@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.godrej.properties.dao.SalesUnitHoldStatusDao;
+import com.godrej.properties.model.HoldInventoryEntry;
 import com.godrej.properties.service.SalesUnitHoldStatusService;
 
 @Service("salesUnitHoldStatusService")
@@ -18,4 +19,8 @@ public class SalesUnitHoldStatusServiceImpl implements SalesUnitHoldStatusServic
 		return salesUnitHoldStatusDao.getSalesUnitHold(unitSFID, userid);
 	}
 	
+	@Override
+	public HoldInventoryEntry getUnitHoldDtl(String unitSFID) {
+		return salesUnitHoldStatusDao.getUnitHoldDtl(unitSFID);
+	}
 }

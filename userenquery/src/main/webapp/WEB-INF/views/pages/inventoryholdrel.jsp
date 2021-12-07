@@ -17,7 +17,7 @@
 	<div class="clearfix"></div>
 	
 	
-	<div class="col-md-11" style="margin: 0 auto; float: none;">
+	<div class="col-md-10" style="margin: 0 auto; float: none;">
 	
 	
 	<%-- <input type="text" id="projectname" value="<%= projectname %>">
@@ -214,7 +214,7 @@
 		</div>
 		
 		<div class="clearfix"></div>
-		<div id="inventoryBreadcrumb">
+		<div class="inventoryBreadcrumb">
 			
 			<div class="clearfix"></div>
 		</div>

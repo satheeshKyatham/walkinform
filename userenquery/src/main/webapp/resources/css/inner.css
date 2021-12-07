@@ -713,3 +713,17 @@ body {position: relative; margin: 0; padding-bottom: 6rem; min-height: 100%;}
 .totalPendingCol .cdBIcon i {background-color: #c06600 !important;}
 .todayFollowupCol {background-color: #00667a !important; color:#fff !important;}
 .todayFollowupCol .cdBIcon i {background-color: #015161 !important;}
+
+
+.fixed .floorCel {
+    position: fixed !important;
+    top: 66px;
+    width: 120px !important;
+    background-color: #fff;
+    z-index: 100;
+}
+
+#parkingData .floorCel {width: 120px !important; position: absolute; padding-bottom: 50px;}
+#parkingData .parkingBoxCol {width: 100%; margin-left: 120px;}
+
+.parkingBoxCol .fcData {margin-top:0; margin-bottom:0;}

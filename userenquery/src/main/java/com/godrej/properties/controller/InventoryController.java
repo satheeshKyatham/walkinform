@@ -196,7 +196,10 @@ public class InventoryController {
 				try {
 					holdInventoryEntryService.insertHoldRqst(action);
 					
+					// Drupal API Comment for Parking Testing
 					drupalInventoryStatusUpdate.inventoryStatusUpdate(unitSfid, "true");
+					// END Drupal API Comment for Parking Testing
+					
 				}catch (Exception e) {
 					log.error("Exception while holding inventory " + e);
 					return gson.toJson("Sorry this unit is Held by someone else, Please Try again after some time");

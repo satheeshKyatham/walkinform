@@ -92,7 +92,10 @@ public class HoldInventoryEntryServiceImpl implements HoldInventoryEntryService{
 				action.setVersion(version);	
 				updateForelease(action);
 				
+				// Drupal API Comment for Parking Testing
 				drupalInventoryStatusUpdate.inventoryStatusUpdate(unitSfid, "false");
+				//  END Drupal API Comment for Parking Testing
+				
 		}catch (Exception e) {
 			log.error("Update For Closing Manager Release -  Error - ", e);
 		}

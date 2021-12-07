@@ -78,6 +78,7 @@ public class PaymentPlan implements Serializable{
 	@Column(name="breadth_sqm__c", precision = 10, scale = 2)  private BigDecimal breadth_sqm__c;
 	@Column(name="plot_area_sqyd__c", precision = 10, scale = 2)  private BigDecimal plot_area_sqyd__c;
 	
+	@Column(name="towersfid") private String  towersfid;
 	
 	public boolean isPropstrength__allotted__c() {
 		return propstrength__allotted__c;
@@ -340,5 +341,10 @@ public class PaymentPlan implements Serializable{
 	public void setDiscount_Limit_Amount__c(BigDecimal discount_Limit_Amount__c) {
 		this.discount_Limit_Amount__c = discount_Limit_Amount__c;
 	}
-	
+	public String getTowersfid() {
+		return towersfid;
+	}
+	public void setTowersfid(String towersfid) {
+		this.towersfid = towersfid;
+	}
 }

@@ -63,6 +63,10 @@ public class InventoryReport implements Serializable{
 	@Column(name="broker_name") private String broker_name;
 	//@Column(name="created_at") private Timestamp hold_created_at;
 	
+	//Parking
+	@Column(name="parkingname") private String parkingname;
+	//END Parking
+	
 	public int getId() {
 		return id;
 	}
@@ -282,5 +286,11 @@ public class InventoryReport implements Serializable{
 	}
 	public void setBroker_name(String broker_name) {
 		this.broker_name = broker_name;
+	}
+	public String getParkingname() {
+		return parkingname;
+	}
+	public void setParkingname(String parkingname) {
+		this.parkingname = parkingname;
 	}
 }
