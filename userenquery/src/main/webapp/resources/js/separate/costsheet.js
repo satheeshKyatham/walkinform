@@ -743,7 +743,8 @@ function getTaxPercentage(basicSaleprice, projectSfid, currentTaxRate, TotalA, r
 		}
 		
 		//Added for Project Godrej Royale Woods and forest grove
-		if(projectSfid == 'a1l2s000000g6eqAAA' || projectSfid == 'a1l2s000000PJPmAAO' || projectSfid == 'a1l6F000002X6IOQA0' || projectSfid == 'a1l2s00000003VlAAI' || projectSfid == 'a1l6F0000081xb4QAA' || projectSfid == 'a1l2s000000PGu3AAG' || projectSfid == 'a1l2s000000PGu8AAG' || projectSfid == 'a1l2s000000PGuDAAW' || projectSfid == 'a1l2s000000PGuIAAW' || projectSfid == 'a1l2s000000PGuNAAW' || projectSfid == 'a1l2s000000PGuSAAW'){
+		//if(projectSfid == 'a1l2s000000g6eqAAA' || projectSfid == 'a1l2s000000PJPmAAO' || projectSfid == 'a1l6F000002X6IOQA0' || projectSfid == 'a1l2s00000003VlAAI' || projectSfid == 'a1l6F0000081xb4QAA' || projectSfid == 'a1l2s000000PGu3AAG' || projectSfid == 'a1l2s000000PGu8AAG' || projectSfid == 'a1l2s000000PGuDAAW' || projectSfid == 'a1l2s000000PGuIAAW' || projectSfid == 'a1l2s000000PGuNAAW' || projectSfid == 'a1l2s000000PGuSAAW'){
+		if (projectSfid == 'a1l2s000000ZtXPAA0' || projectSfid == 'a1l2s000000UQ25AAG' || projectSfid == 'a1l2s000000g6kZAAQ' || projectSfid == 'a1l2s000000PKrrAAG' || projectSfid == 'a1l2s000000PK3IAAW' || projectSfid == 'a1l2s00000000X5AAI' || projectSfid == 'a1l6F000003TXloQAG' || projectSfid == 'a1l2s000000XoezAAC'){	
 			if(TotalA>=4500000 || reraCarpetSqm >= 60){
 				return 5;
 			}
@@ -1141,7 +1142,8 @@ function paymentPlanOtherCharges (firstRowObj, ppMilestone){
 	       				} else {
 	       					gstPymtOcTotal = parseFloat((gstFinal1Per) + ((ocPlsBsp)*($('#bspGSTTax').val())/100)).toFixed(2);
 	       				}
-                    } else if ($('#projectid').val() == 'a1l6F000003TXloQAG'){
+                    //} else if ($('#projectid').val() == 'a1l6F000003TXloQAG'){
+                    } else if ($('#projectid').val() == 'a1l2s000000ZtXPAA0' || $('#projectid').val() == 'a1l2s000000UQ25AAG' || $('#projectid').val() == 'a1l6F000003TXloQAG'){	
                     	if($('.salesConsiderationTotalNew').text()>=4500000  || $('#carpetSqm').text() >= 90){
 	       					gstPymtOcTotal = parseFloat((gstFinal5Per) + ((ocPlsBsp)*($('#bspGSTTax').val())/100)).toFixed(2);
 	       				} else {
@@ -2626,7 +2628,8 @@ function newOtherCharges2 () {
 				} else {
 					otherChargesGSTTotalV2 = GST1Per;
 				}
-             } else if ($('#projectid').val() == 'a1l6F000003TXloQAG') {
+             //} else if ($('#projectid').val() == 'a1l6F000003TXloQAG') {
+             } else if ($('#projectid').val() == 'a1l2s000000ZtXPAA0' || $('#projectid').val() == 'a1l2s000000UQ25AAG' || $('#projectid').val() == 'a1l6F000003TXloQAG') {	
             	 if(TotalA>=4500000 || $('#carpetSqm').text() >= 90){
  					otherChargesGSTTotalV2 = GST5Per;
  				} else {

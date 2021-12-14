@@ -3,12 +3,16 @@ package com.godrej.properties.util;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+/*import org.apache.log4j.Logger;*/
 
 import com.godrej.properties.daoimpl.HoldIntervalDaoImpl;
 
 public class SendSMS {
-	static Logger logger = Logger.getLogger(SendSMS.class);
+	/*static Logger logger = Logger.getLogger(SendSMS.class);*/
+	private static Logger logger = LogManager.getLogger(SendSMS.class);
 //	public static void main(String[] args) {
 //		 SMSSend("8898821453", " 123123 youe top kjs ajshASH ashAS . kajsh . as ASaASs. as ");
 //	}

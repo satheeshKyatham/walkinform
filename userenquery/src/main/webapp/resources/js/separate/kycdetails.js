@@ -14,11 +14,14 @@ function getCMKYCDetails()
 	 var url_string = window.location.href; //window.location.href
 	   var url = new URL(url_string);
 	   var projectid = url.searchParams.get("projectid");
+	   var projectname = url.searchParams.get("projectname");
+	   $("#KYC_Admin_Details").DataTable().destroy();
 	$("#KYC_Admin_Details tbody").empty();
 	 $("#mainPageLoad").show();
 	var urlPP = "getKYCData?userid=&projectid="+projectid;
 	var i = 0;
-	
+	var d = new Date();
+	var currentDate = d.getFullYear() + "/" + (d.getMonth()+1) + "/" + d.getDate()+"_"+projectname;
 	$.getJSON(urlPP, function (data) {
 		$.each(data, function (index, value) {
 			/*if(value.phone_number=="4447775522")
@@ -85,16 +88,24 @@ function getCMKYCDetails()
 					+"<td>"+bookingName+"</td>"
 					+"<td>"+bookingStatus+"</td>"
 					+"<td>"+description+"</td>"
+					+"<td>"+value.kyclink+"</td>"
 					+"</tr>");
 			$("#KYC_Admin_Details tbody").append(val);
 			i = i+1
 		});
-		$('#KYC_Admin_Details').DataTable(
+		/*$('#KYC_Admin_Details').DataTable(
 				{
 					destroy: true
-					//processing:true,
-					//serverSide:true
-				});
+				});*/
+		
+		$('#KYC_Admin_Details').DataTable( {
+			 dom: 'Bfrtip',
+			 "buttons": [
+				 { "extend": 'excel', "text":'Export To Excel',"className": 'btn btn-default btn-xs',"title":'KYC_Dump_'+currentDate }
+		      ],
+		      "order": []
+		 });
+		//$("#KYC_Admin_Details").DataTable().destroy();
 	}).done(function() {
 		$("#mainPageLoad").hide();
 		

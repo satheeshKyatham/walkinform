@@ -7,8 +7,10 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+/*import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;*/
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,8 +35,8 @@ import com.google.gson.GsonBuilder;
 @Controller
 public class InventoryController {
 
-	private Logger log = LoggerFactory.getLogger(getClass());
-	
+	/*private Logger log = LoggerFactory.getLogger(getClass());*/
+	private Logger log = LogManager.getLogger(getClass());
 	private static final int HOLD_TIME=5*60*1000;
 	
  	@Autowired
@@ -97,7 +99,7 @@ public class InventoryController {
 			int minutes = (int) ((milliseconds / 1000)  / 60);
 			//int minutes = (seconds % 3600) / 60;
 			seconds = (seconds % 3600) % 60;
-
+			log.debug("***************************************");
 			log.info("currentTpm: " + currentTpm);
 			log.info("timestampValue: " + timestampValue);
 

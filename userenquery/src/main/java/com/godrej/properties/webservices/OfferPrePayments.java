@@ -18,7 +18,8 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.joda.time.LocalDate;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -31,7 +32,8 @@ import com.godrej.properties.model.PaymentDtl;
 import net.sf.jasperreports.engine.JRException;
 
 public class OfferPrePayments {
-	static Logger logger = Logger.getLogger(OfferPrePayments.class);
+	/*static Logger logger = Logger.getLogger(OfferPrePayments.class);*/
+	private static Logger logger = LogManager.getLogger(OfferPrePayments.class);
 	
 	static String USERNAME = KeyConstants.SFDC_USERNAME;//pass@12345fp0D4yeOj49FYAowsRSgDm0H
 	static String PASSWORD = KeyConstants.SFDC_PASSWORD;

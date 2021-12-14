@@ -106,6 +106,9 @@ if(ses!=null){
 				<li>
 					<a href="#promoCode" onclick="getTypologyPromoCode(); fetchPromoCode()" data-toggle="tab">Promo Code</a>
 				</li>
+				<li>
+					<a href="#carparkMapping" onclick="" data-toggle="tab">Car Park Mapping</a>
+				</li>
 			</ul>
 			<div class=""></div>
 		</div>
@@ -156,6 +159,9 @@ if(ses!=null){
 			<div class="tab-pane" id="promoCode">
 				<%@ include file="/WEB-INF/views/pages/promoCode.jsp" %>
 			</div>
+			<div class="tab-pane" id="carparkMapping">
+				<%@ include file="/WEB-INF/views/pages/prakingcharges/carchargesmapping.jsp" %>
+			</div>
 	 	</div>
 	</div>
 	
@@ -181,6 +187,7 @@ if(ses!=null){
 	<script src="<c:url value='/resources/js/separate/promocode.js?v=${sessionScope.version}'/>"></script>
 
 	<script src="<c:url value='/resources/js/enquiryRequest/common.js?v=${sessionScope.version}'/>"></script>
+	<script src="<c:url value='/resources/js/prakingcharges/carchargesmapping.js?v=${sessionScope.version}'/>"></script>
 	
 	
 

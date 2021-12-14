@@ -3,7 +3,9 @@ package com.godrej.properties.controller;
 import java.io.IOException;
 
 import org.apache.http.client.ClientProtocolException;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+/*import org.apache.log4j.Logger;*/
 import org.springframework.stereotype.Component;
 
 import com.ccavenue.security.AesCryptUtil;
@@ -11,8 +13,8 @@ import com.godrej.properties.model.ProjectLaunch;
 
 @Component
 public class CCGatewayRequestController {
-
-	static Logger logger = Logger.getLogger(CCGatewayRequestController.class);
+	final Logger logger = LogManager.getLogger(getClass());
+	/*static Logger logger = Logger.getLogger(getClass());*/
 	public String CCGatewayRequestPost(String ccaRequest,ProjectLaunch project) throws ClientProtocolException, IOException
 	{
 		//String accessCode= "AVHJ91HC26CC78JHCC";		

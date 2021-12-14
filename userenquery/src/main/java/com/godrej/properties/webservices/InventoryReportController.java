@@ -2,7 +2,6 @@ package com.godrej.properties.webservices;
 
 import javax.servlet.ServletContext;
 
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;

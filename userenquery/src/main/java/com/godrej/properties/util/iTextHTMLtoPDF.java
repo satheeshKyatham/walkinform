@@ -5,7 +5,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.StringReader;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+/*import org.apache.log4j.Logger;*/
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -16,7 +19,8 @@ import com.itextpdf.tool.xml.XMLWorkerHelper;
 import net.sf.jasperreports.engine.JRException;
 
 public class iTextHTMLtoPDF {
-	static Logger logger = Logger.getLogger(iTextHTMLtoPDF.class);
+	/*static Logger logger = Logger.getLogger(iTextHTMLtoPDF.class);*/
+	private static Logger logger = LogManager.getLogger(iTextHTMLtoPDF.class);
 	public static void main( String[] args ) throws DocumentException, IOException
     {
 		try {

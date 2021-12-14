@@ -7,6 +7,9 @@ $.ajaxSetup({
 });
 
 $(document).ready(function() {
+	
+	
+	alert(PARKING_MODULE_GV);
 	var today = new Date();
 	document.getElementById("txtAllotFromDate").value = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
 	document.getElementById("txtAllotToDate").value = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
@@ -115,7 +118,13 @@ function getAllotmentDashboardReport () {
 								" <td>"+obj1[i].diffamount+"</td>" +
 								" <td>"+obj1[i].Sourcing_Team_Lead_Name__c+"</td>" +
 								" <td>"+obj1[i].Closing_Team_Lead_Name__c+"</td>" +
-							        " <td>"+obj1[i].propstrength__total_agreement_amount__c+"</td>" +
+							    " <td>"+obj1[i].propstrength__total_agreement_amount__c+"</td>" +
+							    
+							    " <td>"+obj1[i].propStrength__Car_Parking_Name__c+"</td>" +
+							    " <td>"+obj1[i].propStrength__Category_of_Parking__c+"</td>" +
+							    " <td>"+obj1[i].location_of_Parking__c+"</td>" +
+							    " <td>"+obj1[i].parking_Area_Sq_Ft__c+"</td>" +
+							    " <td>"+obj1[i].dimensions__c+"</td>" +
 							" </tr>";
 				
 				} else {

@@ -7,7 +7,8 @@ import java.util.List;
 
 import javax.servlet.ServletContext;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +25,8 @@ import com.google.gson.GsonBuilder;
 @CrossOrigin(origins="*")
 @RestController
 public class InventorySalesHoldReportController {
-	static Logger logger = Logger.getLogger(CreateOffer.class);
+	/*static Logger logger = Logger.getLogger(CreateOffer.class);*/
+	private Logger logger = LogManager.getLogger(getClass());
 	
 	@Autowired
 	ServletContext context;

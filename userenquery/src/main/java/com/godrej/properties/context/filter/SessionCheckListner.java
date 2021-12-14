@@ -49,6 +49,7 @@ public class SessionCheckListner extends HandlerInterceptorAdapter {
 		filterUrlList.add("/getEnquiryByPKData");
 		//
 		filterUrlList.add("/lwWebhook");
+		filterUrlList.add("/insertCarParkingCombination");
 		
 		
 		

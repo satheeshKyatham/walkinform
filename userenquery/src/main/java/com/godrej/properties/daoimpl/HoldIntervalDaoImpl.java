@@ -2,7 +2,9 @@ package com.godrej.properties.daoimpl;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
+/*import org.apache.log4j.Logger;*/
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +21,8 @@ public class HoldIntervalDaoImpl extends AbstractDao<Integer, Inventory> impleme
 	@Autowired
 	private SessionFactory sessionFactory;
 	
-	static Logger logger = Logger.getLogger(HoldIntervalDaoImpl.class);
+	/*static Logger logger = Logger.getLogger(HoldIntervalDaoImpl.class);*/
+	private Logger logger = LogManager.getLogger(getClass());
 
 	public Inventory unitExist(String unitSfid, String projectNameId, String towerCode) {
 		logger.info(" unitExist method - unitSfid :"+unitSfid+" Project Name:"+projectNameId+" Tower Code:- "+towerCode);

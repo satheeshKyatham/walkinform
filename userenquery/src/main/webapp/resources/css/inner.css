@@ -713,3 +713,5 @@ body {position: relative; margin: 0; padding-bottom: 6rem; min-height: 100%;}
 .totalPendingCol .cdBIcon i {background-color: #c06600 !important;}
 .todayFollowupCol {background-color: #00667a !important; color:#fff !important;}
 .todayFollowupCol .cdBIcon i {background-color: #015161 !important;}
+
+.has-error{border-color:red;}
