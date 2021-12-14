@@ -4,7 +4,9 @@ import java.util.List;
 
 import javax.persistence.Query;
 
-import org.apache.log4j.Logger;
+/*import org.apache.log4j.Logger;*/
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +19,8 @@ import com.godrej.properties.model.HoldParkingEntry;
 @SuppressWarnings("unchecked")
 @Repository("holdParkingEntryDao")
 public class HoldParkingEntryDaoImpl extends AbstractDao<Integer, HoldParkingEntry> implements HoldParkingEntryDao {
-	
-	private Logger logger = Logger.getLogger(getClass());
+	private Logger logger = LogManager.getLogger(getClass());
+	//private Logger logger = Logger.getLogger(getClass());
 	@Autowired
 	private SessionFactory sessionFactory;
 	

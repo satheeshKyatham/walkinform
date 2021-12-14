@@ -17,7 +17,9 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+/*import org.apache.log4j.Logger;*/
 import org.joda.time.LocalDate;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -34,8 +36,8 @@ import net.sf.jasperreports.engine.JRException;
 public class ParkingStatusController {
 	
 	
-	
-	static Logger logger = Logger.getLogger(ParkingStatusController.class);
+	private Logger logger = LogManager.getLogger(getClass());
+	//static Logger logger = Logger.getLogger(ParkingStatusController.class);
 	
 	@Autowired
 	@Qualifier("userContactService")

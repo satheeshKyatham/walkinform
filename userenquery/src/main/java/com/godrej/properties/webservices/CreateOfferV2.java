@@ -18,7 +18,9 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+/*import org.apache.log4j.Logger;*/
 import org.joda.time.LocalDate;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -33,8 +35,9 @@ import com.godrej.properties.master.service.SysConfigService;
 import com.godrej.properties.service.UserContactService;
 @Component
 public class CreateOfferV2 {
-
-	static Logger logger = Logger.getLogger(CreateOfferV2.class);
+	
+	private Logger logger = LogManager.getLogger(getClass());
+	//static Logger logger = Logger.getLogger(CreateOfferV2.class);
 	
 	@Autowired
 	@Qualifier("userContactService")
