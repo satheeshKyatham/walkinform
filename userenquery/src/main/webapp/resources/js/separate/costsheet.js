@@ -63,7 +63,18 @@ function schemeType (e) {
 
 $("#getCSData").click(function (){
 	
-	
+	//Parking
+   if (PARKING_MODULE_GV != 'Y' && PARKING_MODULE_GV != 'N') {
+	   swal({
+	   	title: "Your session has expired. please login again", 
+			text: "",
+			type: "warning",
+			allowOutsideClick: true,
+			showConfirmButton: true
+		});
+	   return; 
+   }
+   // END Parking
 	
 	if ($(this).data('source') == "SALES"){
 		//alert("Get CS Data");
@@ -76,7 +87,8 @@ $("#getCSData").click(function (){
        $('#paymentPlanChangeID').val($('#ppDropdown').val());
        if ( $('#unitSfid').val() != '') {             
              	
-         	 $.post(pageContext+"getInventoryStatus",{"userid":$('#userid').val(),  "projectsfid":$('#projectsfid').val(),"propid":$('#unitSfid').val()},function(data){                       
+    	   
+         	 $.post(pageContext+"getInventoryStatus",{"userid":$('#userid').val(),  "projectsfid":$('#projectsfid').val(),"propid":$('#unitSfid').val(), "isParkingModule":PARKING_MODULE_GV, "parkingsfid" : $('#parkingSFIDCS').val()},function(data){                       
          	       
              }).done(function(data){
               	   if (data == "errorNoUserid") {
@@ -117,7 +129,40 @@ $("#getCSData").click(function (){
           	   				allowOutsideClick: true,
           	   				showConfirmButton: true
           	   			});
-              	   } else if (data == "errorInCode103") {
+              	   } 
+              	   
+              	   //Parking
+              	   else if (data == "errorInvalidParkingSFID") {
+	              	   loadData (SALESCOSTSHEET);
+            		   swal({
+        	   				title: "Invalid Parking SFID.",
+        	   				text: "",
+        	   				type: "warning",
+        	   				allowOutsideClick: true,
+        	   				showConfirmButton: true
+        	   			});
+            	   } else if (data == "errorParkingNotAvailable") {
+	              	   loadData (SALESCOSTSHEET);
+            		   swal({
+        	   				title: "Selected parking is no longer available please select another parking.",
+        	   				text: "",
+        	   				type: "warning",
+        	   				allowOutsideClick: true,
+        	   				showConfirmButton: true
+        	   			});
+            	   } else if (data == "errorParkingInactive") {
+	              	   loadData (SALESCOSTSHEET);
+            		   swal({
+        	   				title: "Parking is not activated.",
+        	   				text: "",
+        	   				type: "warning",
+        	   				allowOutsideClick: true,
+        	   				showConfirmButton: true
+        	   			});
+            	   }
+              	   // END Parking
+              	   
+              	   else if (data == "errorInCode103") {
               		 $('#getCSData span').html(''); 
               		   swal({
 
@@ -809,7 +854,7 @@ function getTaxPercentage(basicSaleprice, projectSfid, currentTaxRate, TotalA, r
 		
 		//if (projectSfid == 'a1l2s00000000X5AAI' || projectSfid == 'a1l6F000003TXloQAG'){
 		//Remove GST logic for Godrej Garden City - JV 
-		if (projectSfid == 'a1l2s000000UQ25AAG' || projectSfid == 'a1l2s000000g6kZAAQ' || projectSfid == 'a1l2s000000PKrrAAG' || projectSfid == 'a1l2s000000PK3IAAW' || projectSfid == 'a1l2s00000000X5AAI' || projectSfid == 'a1l6F000003TXloQAG' || projectSfid == 'a1l2s000000XoezAAC'){
+		if (projectSfid == 'a1l2s000000ZtXPAA0' || projectSfid == 'a1l2s000000UQ25AAG' || projectSfid == 'a1l2s000000g6kZAAQ' || projectSfid == 'a1l2s000000PKrrAAG' || projectSfid == 'a1l2s000000PK3IAAW' || projectSfid == 'a1l2s00000000X5AAI' || projectSfid == 'a1l6F000003TXloQAG' || projectSfid == 'a1l2s000000XoezAAC'){
 		//if (projectSfid == 'a1l6F000004RvPHQA0' || projectSfid == 'a1l2s000000PKrrAAG' || projectSfid == 'a1l2s000000PK3IAAW' || projectSfid == 'a1l2s00000000X5AAI' || projectSfid == 'a1l6F000003TXloQAG' || projectSfid == 'a1l2s000000XoezAAC'){
 			if(TotalA>=4500000 || reraCarpetSqm >= 90){
 				return 5;
@@ -1198,7 +1243,7 @@ function paymentPlanOtherCharges (firstRowObj, ppMilestone){
 	       				} else {
 	       					gstPymtOcTotal = parseFloat((gstFinal1Per) + ((ocPlsBsp)*($('#bspGSTTax').val())/100)).toFixed(2);
 	       				}
-                    } else if ($('#projectid').val() == 'a1l2s000000UQ25AAG' || $('#projectid').val() == 'a1l6F000003TXloQAG'){
+                    } else if ($('#projectid').val() == 'a1l2s000000ZtXPAA0' || $('#projectid').val() == 'a1l2s000000UQ25AAG' || $('#projectid').val() == 'a1l6F000003TXloQAG'){
                     	if($('.salesConsiderationTotalNew').text()>=4500000  || $('#carpetSqm').text() >= 90){
 	       					gstPymtOcTotal = parseFloat((gstFinal5Per) + ((ocPlsBsp)*($('#bspGSTTax').val())/100)).toFixed(2);
 	       				} else {
@@ -1566,6 +1611,20 @@ function adminUpdateBSP (e,timeid, disVal){
 
 function updateBSP (timeid) {
        
+	   //Parking
+	   if (PARKING_MODULE_GV != 'Y' && PARKING_MODULE_GV != 'N') {
+		   swal({
+		   	title: "Your session has expired. please login again", 
+				text: "",
+				type: "warning",
+				allowOutsideClick: true,
+				showConfirmButton: true
+			});
+		   return; 
+	   }
+	   // END Parking
+	
+	
        $('.creatOfferBtnCommon span.spanLoad').html('<i class="fa fa-spinner fa-spin" style="color:#fff !important"></i>');
        
        var floorName = '';
@@ -1669,7 +1728,10 @@ function updateBSP (timeid) {
               ,"costsheet_commitment":$('#costsheet_commitment').val(),"prepaymentamt":prepaymentAmount,"bankname":bankname,"trxdate":trxdate,"trxno":trxno,"paymentmode":paymentmode, "tdsPaidBy":tdsPaidBy,"isOthers":isOthers, "costsheet_path": csPath, "cs_final_amount":$('#csFinalAmountInput').val(),"bankGL":$('#towerBankGLCode').val() 
        ,"paymentDetails": paymentDetails,"price":convertToNumber(price),"priceWithTax":convertToNumber(priceWithTax)
        ,"plannedPayment":convertToNumber(plannedPayment),"plannedPaymentWithTax":convertToNumber(plannedPaymentWithTax)
-       ,"tokenTax":convertToNumber(tokenTax), "reraCarpetAreaSqm":reraCarpetAreaSqm},
+       ,"tokenTax":convertToNumber(tokenTax), "reraCarpetAreaSqm":reraCarpetAreaSqm
+       ,"parkingsfid":$('#parkingSFIDCS').val()
+       ,"isParkingModule":PARKING_MODULE_GV
+       },
        function(data){                       
        }).done(function(data){
     	   var offerJson = JSON.parse(data);
@@ -1709,7 +1771,23 @@ function updateBSP (timeid) {
 	   				allowOutsideClick: true,
 	   				showConfirmButton: true
 	   			});
-    	   } else if (offerJson.offer_successMsg == "successOfferCreate101") {
+    	   } 
+    	   
+    	   //Parking
+    	   else if (offerJson.offer_successMsg == "errorParkingNotAvailable") {
+    		   $('#updateBtnCol button').prop("disabled", false);
+    		   $('.creatOfferBtnCommon span.spanLoad').html('');  
+    		   swal({
+    			   	title: "Selected parking is no longer available please select another parking.",
+	   				text: "",
+	   				type: "warning",
+	   				allowOutsideClick: true,
+	   				showConfirmButton: true
+	   			});
+    	   }
+    	   //END Parking
+    	   
+    	   else if (offerJson.offer_successMsg == "successOfferCreate101") {
     	   
     		   swal({
 	   				title: "Please wait, loading the Cost Sheet ...",
@@ -2684,7 +2762,7 @@ function newOtherCharges2 () {
 				} else {
 					otherChargesGSTTotalV2 = GST1Per;
 				}
-             } else if ($('#projectid').val() == 'a1l2s000000UQ25AAG' || $('#projectid').val() == 'a1l6F000003TXloQAG') {
+             } else if ($('#projectid').val() == 'a1l2s000000ZtXPAA0' || $('#projectid').val() == 'a1l2s000000UQ25AAG' || $('#projectid').val() == 'a1l6F000003TXloQAG') {
             	 if(TotalA>=4500000 || $('#carpetSqm').text() >= 90){
  					otherChargesGSTTotalV2 = GST5Per;
  				} else {
@@ -4221,6 +4299,28 @@ function costsheetLogger (cstype) {
 	formData.append('isactive', "Y");
 	
 	//----------------------------------------------------------------------------------
+	
+	
+	//Parking
+	if (PARKING_MODULE_GV == 'Y') {
+		if ($('#parkingSFIDCS').val() == "NO_PARKING_SELECTION") {
+			formData.append('parking_selection', "NO_PARKING_SELECTION");
+			formData.append('parking_name', "");
+			formData.append('parking_sfid', "");
+			formData.append('parking_amount', "0");
+		} else {
+			formData.append('parking_selection', "PARKING_SELECTION");
+			formData.append('parking_name', $('#parkingNameCS').val());
+			formData.append('parking_sfid', $('#parkingSFIDCS').val());
+			formData.append('parking_amount', $('#parkingAmountCS').val());
+		}
+	} else {
+		formData.append('parking_selection', "");
+		formData.append('parking_name', "");
+		formData.append('parking_sfid', "");
+		formData.append('parking_amount', "");
+	}
+	//END Parking
 	
 	 
 	$.ajax({

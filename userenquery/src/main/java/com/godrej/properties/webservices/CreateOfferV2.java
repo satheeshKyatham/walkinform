@@ -32,9 +32,9 @@ import com.godrej.properties.dto.SysConfigEnum;
 import com.godrej.properties.master.service.SysConfigService;
 import com.godrej.properties.service.UserContactService;
 @Component
-public class CreateOffer {
+public class CreateOfferV2 {
 
-	static Logger logger = Logger.getLogger(CreateOffer.class);
+	static Logger logger = Logger.getLogger(CreateOfferV2.class);
 	
 	@Autowired
 	@Qualifier("userContactService")
@@ -59,7 +59,7 @@ public class CreateOffer {
 	static String CLIENTSECRET = KeyConstants.SFDC_CLIENTSECRET;
 	
 	//public static void main(String[] args) {
-	public String PropOffer (String bspDis, String token, String projectsfid, String enquirysfid, String primarycontactsfid,String propid,String ppid,String offerthrough,String brokersfid,double discount_Value,String enquiry_name,String prepaymentamt,String bankname,String trxdate,String trxno,String paymentmode, String tdsPaidBy,boolean isothers,String bankGL) throws Exception{
+	public String PropOffer (String bspDis, String token, String projectsfid, String enquirysfid, String primarycontactsfid,String propid,String ppid,String offerthrough,String brokersfid,double discount_Value,String enquiry_name,String prepaymentamt,String bankname,String trxdate,String trxno,String paymentmode, String tdsPaidBy,boolean isothers,String bankGL, String parkingsfid) throws Exception{
 		
 		DefaultHttpClient httpclient = new DefaultHttpClient();
 		// Assemble the login request URL
@@ -110,7 +110,7 @@ public class CreateOffer {
 		//https://godrej--test.cs5.my.salesforce.com/services/apexrest/api/createcontact
 		String testVal="";
 		try {
-			testVal = createAccount(loginAccessToken,bspDis,token,projectsfid,enquirysfid,primarycontactsfid,propid,ppid,offerthrough,brokersfid,discount_Value,enquiry_name,prepaymentamt,bankname,trxdate,trxno,paymentmode,tdsPaidBy,isothers,bankGL);
+			testVal = createAccount(loginAccessToken,bspDis,token,projectsfid,enquirysfid,primarycontactsfid,propid,ppid,offerthrough,brokersfid,discount_Value,enquiry_name,prepaymentamt,bankname,trxdate,trxno,paymentmode,tdsPaidBy,isothers,bankGL,parkingsfid);
 			
 			logger.info("testVal :::: " + testVal);
 			
@@ -131,7 +131,7 @@ public class CreateOffer {
 
  
 //	@RequestMapping(value = { "/createOffer"}, method = RequestMethod.POST)
-	private String createAccount(String loginAccessToken, String bspDis, String token, String projectsfid, String enquirysfid, String primarycontactsfid,String propid,String ppid,String offerthrough,String brokersfid,double discount_Value,String enquiry_name,String prepaymentamt,String bankname,String trxdate,String trxno,String paymentmode, String tdsPaidBy,boolean isothers,String bankGL) throws ServletException, IOException {
+	private String createAccount(String loginAccessToken, String bspDis, String token, String projectsfid, String enquirysfid, String primarycontactsfid,String propid,String ppid,String offerthrough,String brokersfid,double discount_Value,String enquiry_name,String prepaymentamt,String bankname,String trxdate,String trxno,String paymentmode, String tdsPaidBy,boolean isothers,String bankGL,String parkingsfid) throws ServletException, IOException {
 		String accountId = null;
 		CloseableHttpClient  httpclient = HttpClients.createDefault();
 		JSONObject account = new JSONObject();
@@ -224,7 +224,14 @@ public class CreateOffer {
 			/* ----------- End -------------*/
 			
 			account.put("Tdspaidby",tdsPaidBy);
-			 
+			
+			//Parking
+			account.put("firstCarParking",parkingsfid);
+			account.put("SecondCarParking","");
+			account.put("ThirdCarParking","");
+			account.put("FourthCarParking","");
+			//END Parking
+			
 			logger.info("Final Creat Offer Data:-"+account);
 		
 		}
@@ -234,7 +241,7 @@ public class CreateOffer {
 			throw new ServletException(e);
 		}
 //		HttpPost httpost = new HttpPost("https://godrej.my.salesforce.com/services/apexrest/api/CreateOfferPrepayment");
-		HttpPost httpost = new HttpPost(KeyConstants.SFDC_OFFERAPI);
+		HttpPost httpost = new HttpPost(KeyConstants.SFDC_OFFERAPIV2);
 //		HttpPost httpost = new HttpPost(KeyConstants.SFDC_OFFERAPI_BULKY);
 		
 		httpost.addHeader("Authorization", "OAuth " + loginAccessToken);

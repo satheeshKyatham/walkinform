@@ -36,6 +36,8 @@ import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.rendering.ImageType;
 import org.apache.pdfbox.rendering.PDFRenderer;
 import org.apache.pdfbox.tools.imageio.ImageIOUtil;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -154,6 +156,7 @@ import com.godrej.properties.service.OTPRequestOCService;
 import com.godrej.properties.service.OrderDataMapppingService;
 import com.godrej.properties.service.OtherChargesService;
 import com.godrej.properties.service.OtpService;
+import com.godrej.properties.service.ParkingService;
 import com.godrej.properties.service.PaymentDtlService;
 import com.godrej.properties.service.PaymentPlanLineItemService;
 import com.godrej.properties.service.PaymentPlanListService;
@@ -441,6 +444,11 @@ public class WebServiceController<MultipartFormDataInput> {
 	@Autowired
 	private FloorWiseBookingService floorWiseBookingService;
 	
+	@Autowired
+	private ParkingStatusController parkingStatusController;
+	
+	@Autowired
+	private ParkingService parkingService;
 	
 	@RequestMapping(value = "/activeproject", method = RequestMethod.GET, produces = "application/json")
 	public String project() {
@@ -4728,7 +4736,8 @@ public class WebServiceController<MultipartFormDataInput> {
 	// @RequestParam("customerContact") long contact,
 	@RequestMapping(value = { "/getInventoryStatus" }, method = RequestMethod.POST)
 	public String getInventoryStatus(@RequestParam("userid") String userid,
-			@RequestParam("projectsfid") String projectsfid, @RequestParam("propid") String propid)
+			@RequestParam("projectsfid") String projectsfid, @RequestParam("propid") String propid,
+			@RequestParam("isParkingModule") String isParkingModule, @RequestParam("parkingsfid") String parkingsfid)
 			throws JRException, IOException {
 
 		log.info(" Check inventory status Parameters - projectsfid : " + projectsfid + " propid :" + propid);
@@ -4777,7 +4786,14 @@ public class WebServiceController<MultipartFormDataInput> {
 							if (active.equals("true")) {
 								if (Propertyallotedthroughoffer.equals("false") && alloted.equals("false")
 										&& salesUnitStatus == false) {
-									return successMsg2;
+									//Parking test 
+									//return successMsg2;
+									if (isParkingModule.equals("Y") && !parkingsfid.equals("NO_PARKING_SELECTION")) {
+										return parkingStatusCheck (parkingsfid, userid);
+									} else {
+										return successMsg2;
+									}
+									// END Parking test
 								} else {
 									return errorMsg1;
 								}
@@ -4789,6 +4805,11 @@ public class WebServiceController<MultipartFormDataInput> {
 						log.info(" Check inventory status - Yes, There is some technical problem (code:1) ");
 						return errorMsg3;
 					}
+					
+					//Parking
+					
+					//END Parking
+					
 				} else {
 					log.info(" Get Cost Sheet Details : Project ID or Unit ID is not available, because of enquiry may not sync. ");
 					return errorMsg6;
@@ -4983,4 +5004,49 @@ public class WebServiceController<MultipartFormDataInput> {
 		return gson.toJson(floorWiseBookingService.getData(floorsfid, projectsfid));
 	}
 	
+	//Parking
+	public String parkingStatusCheck(String parkingsfid, String userid) {
+		String errorMsg3 = KeyConstants.ERROR_MSG_103; // Yes, There is some
+		String errorMsg7 = KeyConstants.ERROR_MSG_107; //"errorInvalidParkingSFID"; //Invalid Parking SFID.
+		String errorMsg8 = KeyConstants.ERROR_MSG_108; //"errorParkingNotAvailable";//This parking is no longer available please select another parking.
+		String errorMsg9 = KeyConstants.ERROR_MSG_109; //"errorParkingInactive"; //Parking is not activated
+		String successMsg2 = KeyConstants.SUCCESS_MSG_102; // Unit Available
+		
+		try {
+			String parkingStatus = parkingStatusController.parkingStatus(parkingsfid);
+			
+			Boolean salesParkingStatus = parkingService.getSalesParkingHold(parkingsfid, userid);
+			
+			if (!parkingStatus.contains("NullPointerException")) {
+				JSONObject jsonProject = new JSONObject(parkingStatus);
+			    JSONArray  getPro = jsonProject.getJSONArray("carParkings");
+			    JSONObject result1 = getPro.getJSONObject(0);
+			    
+			    String active = result1.get("Active").toString();
+			    String allotted = result1.get("Allotted").toString();
+			    String allottedThroughOffer = result1.get("Allotted through offer").toString();
+			    String isReleased = result1.get("Is Released").toString();
+			    String isParkingBlocked = result1.get("Is Parking blocked").toString();
+			    
+			    if (active != null && allotted != null && allottedThroughOffer != null && isReleased != null && isParkingBlocked != null) {
+					if (active.equals("true")) {
+						if (allottedThroughOffer.equals("false") && allotted.equals("false") && salesParkingStatus == false) {
+							return successMsg2;
+						} else {
+							return errorMsg8;
+						}
+					} else {
+						return errorMsg9;
+					}
+				} else {
+					return errorMsg3;
+				}
+			} else {
+				return errorMsg7;
+			}
+		} catch (Exception e) {
+			return errorMsg3;
+		}
+	}
+	// END Parking
 }

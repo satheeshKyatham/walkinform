@@ -19,4 +19,8 @@ public interface ParkingService {
 	void updateHoldParkingAdmin(HoldParkingAdmin parkingAdmin);
 	
 	List<Parking> getLocation(String towersfid);
+	
+	Boolean getSalesParkingHold(String parkingsfid, String userid);
+	
+	String updateParkingStatus(String parkingsfid);
 }

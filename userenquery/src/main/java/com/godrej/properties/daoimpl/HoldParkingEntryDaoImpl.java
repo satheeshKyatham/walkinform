@@ -1,5 +1,7 @@
 package com.godrej.properties.daoimpl;
 
+import java.util.List;
+
 import javax.persistence.Query;
 
 import org.apache.log4j.Logger;
@@ -21,17 +23,14 @@ public class HoldParkingEntryDaoImpl extends AbstractDao<Integer, HoldParkingEnt
 	private SessionFactory sessionFactory;
 	
 	
-	public void insertHoldRqst(HoldParkingEntry action) {
-		//logger.info("Before Insert************************* HOLD Issue");
-		//try {
-		
-		persist(action);
-		
-		//}catch (Exception e) {
-			//logger.info("insertHoldRqst Error:-",e);
-			//e.printStackTrace();
-		//}
-		logger.info("After Insert************************* HOLD Issue");
+	public Boolean insertHoldRqst(HoldParkingEntry action) {
+		try {
+			persist(action);
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 	
 	@Override
@@ -96,5 +95,25 @@ public class HoldParkingEntryDaoImpl extends AbstractDao<Integer, HoldParkingEnt
 		catch (Exception e) {
 			logger.info("Exception ",e);
 		}
+	}
+	
+	
+	public Boolean getSalesParkingHold(String parkingsfid, String userid) {	 
+		
+		Session session = this.sessionFactory.getCurrentSession();	
+		
+		List<HoldParkingEntry> authors=null;
+		
+		Query q = session.createNativeQuery(" select * from salesforce.gpl_cs_hold_parking "
+				+ " where parkingsfid = '"+parkingsfid+"' and  statusai = 'A' and holdstatusyn = 'Y' and user_id != '"+userid+"' ", HoldParkingEntry.class);
+		
+		authors = q.getResultList();
+		
+		if (authors.size() > 0) {
+			return true;
+		} else {
+			return false;
+		}
+		
 	}
 }

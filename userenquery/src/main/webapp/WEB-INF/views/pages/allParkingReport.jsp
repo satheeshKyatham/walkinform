@@ -60,11 +60,11 @@
 				
 				 <ul style="display: inline-block; padding: 12px 12px 12px 12px; list-style: none; border: 1px dotted;  margin: 5px 0 25px 0;">
 					<li style="background-color: #ccc; padding: 2px; text-align: center;"><b>Status</b></li>
-					<li style="border-top: 1px dotted;"><b style="width: 90px; display: inline-block;">Hold :</b> D4U EOI Hold <small>or</small> D4U Block <small>or</small> SFDC Property On Hold</li>
-					<li style="border-top: 1px dotted;"><b style="width: 90px; display: inline-block;">Sold :</b> Unit Allotted <small>and</small> Allotted Through Offer </li>
-					<li style="border-top: 1px dotted;"><b style="width: 90px; display: inline-block;">Available:</b> Unit Not Allotted <small>and</small> Not Allotted Through Offer  </li>
-					<li style="border-top: 1px dotted;"><b style="width: 90px; display: inline-block;">Offered :</b> Unit Not Allotted <small>and</small> Only Allotted Through Offer</li>
-					<li style="border-top: 1px dotted;"><b style="width: 90px; display: inline-block;">Offered with SFDC Hold :</b> Unit Not Allotted <small>and</small> Only Allotted Through Offer with SFDC Hold</li>  
+					<li style="border-top: 1px dotted;"><b style="width: 90px; display: inline-block;">Hold :</b> D4U Hold against flat/unit <small>or</small> D4U Block <small>or</small> SFDC Parking On Hold</li>
+					<li style="border-top: 1px dotted;"><b style="width: 90px; display: inline-block;">Sold :</b> Parking Allotted <small>and</small> Allotted Through Offer </li>
+					<li style="border-top: 1px dotted;"><b style="width: 90px; display: inline-block;">Available:</b> Parking Not Allotted <small>and</small> Not Allotted Through Offer  </li>
+					<li style="border-top: 1px dotted;"><b style="width: 90px; display: inline-block;">Offered :</b> Parking Not Allotted <small>and</small> Only Allotted Through Offer</li>
+					<li style="border-top: 1px dotted;"><b style="width: 90px; display: inline-block;">Offered with SFDC Hold :</b> Parking Not Allotted <small>and</small> Only Allotted Through Offer with SFDC Hold</li>  
 				</ul>
 			  
 				<table class="table table-bordered display" id="allParkingReportDtl">

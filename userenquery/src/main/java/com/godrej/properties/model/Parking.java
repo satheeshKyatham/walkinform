@@ -61,6 +61,9 @@ public class Parking implements Serializable{
 	@Column(name = "sfdc_propstrength__allotted__c")  private Boolean sfdc_propstrength__allotted__c;
 	@Column(name = "flatsfid") private String flatsfid;
 	
+	@Column(name = "allotted_through_offer__c")  private Boolean allotted_through_offer__c;
+	
+	
 	public int getId() {
 		return id;
 	}
@@ -234,5 +237,11 @@ public class Parking implements Serializable{
 	}
 	public void setPropstrength__tower_code__c(String propstrength__tower_code__c) {
 		this.propstrength__tower_code__c = propstrength__tower_code__c;
+	}
+	public Boolean getAllotted_through_offer__c() {
+		return allotted_through_offer__c;
+	}
+	public void setAllotted_through_offer__c(Boolean allotted_through_offer__c) {
+		this.allotted_through_offer__c = allotted_through_offer__c;
 	}
 }

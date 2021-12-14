@@ -158,7 +158,7 @@ function parkingLoad (){
 				
 				
 				/*New Admin*/
-				if (obj1[j].propstrength__is_parking_blocked__c == true) {
+				if (obj1[j].propstrength__is_parking_blocked__c == true || obj1[j].allotted_through_offer__c == true) {
 					unitHTML = "";
 					unitHTML = "<div class='unitCel' style='cursor: pointer;'> <div type='button'class='fcData unitSold'> " +obj1[j].propstrength__car_parking_name__c+" <div> </div> &nbsp; </div>  </div>"
 				} else if (obj1[j].propstrength__allotted__c == true) {
@@ -171,21 +171,21 @@ function parkingLoad (){
 						}
 					} else if(obj1[j].hold_reason==='temp'){
 						
-						if (obj1[j].flatsfid == $('#unitSfid').val()) {
+						//if (obj1[j].flatsfid == $('#unitSfid').val()) {
 							unitHTML = "";
 							if (obj1[j].absolute_amount == '-1') {
 								unitHTML = "<div class='unitCel' style='cursor: pointer;'> "+unitcheckbox+" <div type='button'class='fcData unitEOIBlockAdmin'>  " +obj1[j].propstrength__car_parking_name__c+" <div>INR: not found</div> </div>   "+dropdown+" </div>"
 							} else {
 								unitHTML = "<div class='unitCel' style='cursor: pointer;'> "+unitcheckbox+" <div type='button'class='fcData unitEOIBlockAdmin radio'> <label> <input type='radio' name='optionsParking' value='"+obj1[j].propstrength__car_parking_name__c+"'  data-parkingSFID = '"+obj1[j].sfid+"' data-parkingAmount = '"+obj1[j].absolute_amount+"' data-parkingCategory  = '"+obj1[j].propstrength__category_of_parking__c+"' > " +obj1[j].propstrength__car_parking_name__c+" <div>INR: "+obj1[j].absolute_amount+"</div></label></div>   "+dropdown+" </div>"
 							} 
-						} else {
+						/*} else {
 							unitHTML = "";
 							if (obj1[j].absolute_amount == '-1') {
 								unitHTML = "<div class='unitCel' style='cursor: pointer;'> "+unitcheckbox+" <div type='button'class='fcData unitSold'>  " +obj1[j].propstrength__car_parking_name__c+" <div>INR: not found</div> </div>   "+dropdown+" </div>"
 							} else {
 								unitHTML = "<div class='unitCel' style='cursor: pointer;'> "+unitcheckbox+" <div type='button'class='fcData unitSold radio'> <label> <input type='radio' name='optionsParking' value='"+obj1[j].propstrength__car_parking_name__c+"'  data-parkingSFID = '"+obj1[j].sfid+"' data-parkingAmount = '"+obj1[j].absolute_amount+"' data-parkingCategory  = '"+obj1[j].propstrength__category_of_parking__c+"' > " +obj1[j].propstrength__car_parking_name__c+" <div>INR: "+obj1[j].absolute_amount+"</div></label></div>   "+dropdown+" </div>"
 							} 	
-						}
+						}*/
 					} else {
 						unitHTML = "";
 						unitHTML = "<div class='unitCel' style='cursor: pointer;'> <div type='button'class='fcData unitSold'> " +obj1[j].propstrength__car_parking_name__c+" <div> </div> &nbsp; </div>  </div>"

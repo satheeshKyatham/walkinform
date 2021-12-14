@@ -146,7 +146,7 @@ public static void ApplicationFormPDF(String appFormData, String enqSfid, String
 	      String reraLabel = "";
 	      String reraWebsite = "";
 	      
-	      if (projectid.equals("a1l6F000003TXloQAG") ) {
+	      if (projectid.equals("a1l6F000003TXloQAG") || projectid.equals("a1l2s000000ZtXPAA0") || projectid.equals("a1l2s000000UQ25AAG") ) {
 	    	  reraLabel = "WBHIRA Registration No.";
 	    	 // reraRegistrationNo = "HIRA/P/SOU/2019/000456 / HIRA/P/SOU/2019/000455";
 	    	  projectName = "Godrej Se7en, Kolkata";

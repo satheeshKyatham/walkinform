@@ -113,15 +113,15 @@ function parkingLoad (){
 					} else {
 						unitHTML = "<div class='unitCel' style='cursor: pointer;'> <div type='button'class='fcData unitHold'>  " +obj1[j].propstrength__car_parking_name__c+" <div>INR: "+obj1[j].absolute_amount+"</div> </div>   "+dropdown+" </div>"
 					}
-				} else if (obj1[j].propstrength__allotted__c == true) {
-					if(obj1[j].hold_reason==='block' && obj1[j].propstrength__is_parking_blocked__c != true && obj1[j].sfdc_propstrength__allotted__c != true) {
+				} else if (obj1[j].propstrength__allotted__c == true || obj1[j].allotted_through_offer__c == true) {
+					if(obj1[j].hold_reason==='block' && obj1[j].propstrength__is_parking_blocked__c != true && obj1[j].sfdc_propstrength__allotted__c != true && obj1[j].allotted_through_offer__c != true) {
 						unitHTML = "";
 						if (obj1[j].absolute_amount == '-1') {
 							unitHTML = "<div class='unitCel' style='cursor: pointer;'> <div type='button'class='fcData unitBlock'>  " +obj1[j].propstrength__car_parking_name__c+" <div>INR: not found</div> </div>   "+dropdown+" </div>"
 						} else {
 							unitHTML = "<div class='unitCel' style='cursor: pointer;'> <div type='button'class='fcData unitBlock'>  " +obj1[j].propstrength__car_parking_name__c+" <div>INR: "+obj1[j].absolute_amount+"</div> </div>   "+dropdown+" </div>"
 						}
-					} else if (obj1[j].hold_reason==='temp' && obj1[j].propstrength__is_parking_blocked__c != true && obj1[j].sfdc_propstrength__allotted__c != true) {
+					} else if (obj1[j].hold_reason==='temp' && obj1[j].propstrength__is_parking_blocked__c != true && obj1[j].sfdc_propstrength__allotted__c != true && obj1[j].allotted_through_offer__c != true) {
 						if (obj1[j].hold_status == true && obj1[j].flatsfid == $('#unitSfid').val()) {
 							if (obj1[j].flagForHold == 'Hold') {
 							//if (obj1[j].flagForHold == 'Hold' && obj1[j].hold_user_id == USERID_GV) {
@@ -335,6 +335,11 @@ function selectParking (source) {
 		$('#parkingAmountCS').val("0");
 		$('#parkingCatCS').val("");
 		$('#parkingNameCS').val("");
+		
+		$('#printableArea').hide(); 
+		$('#costsheetTab a').trigger('click');
+		
+		return;
 	}
 	
 	$.post(pageContext+"parkingSelection",{"propid":$('#unitSfid').val(), 
@@ -343,39 +348,49 @@ function selectParking (source) {
 		"userid":$('#userid').val()},function(data){                       
 	       
 	}).done(function(data){
-		parkingLoad();
+		//parkingLoad();
 		var obj =JSON.parse(data);
 		
 		if (obj!=null && obj.status =="STATUS_OK" && obj.record_found =="NO") {
-			
-			if (source == "NO_PARKING_SELECTION") {
-				$('#printableArea').hide(); 
-				$('#costsheetTab a').trigger('click');
-			} else {
-				swal({
-					title: "",
-				    text: "Your selected parking will not go under the hold because of the selection of Flat/Inventory is not held",
-				    //timer: 3000,
-				    type: "warning",
-				    allowOutsideClick: false,
-				     
-				    showCancelButton: true,
-				    confirmButtonText: 'Yes it\'\s okay!',
-				    cancelButtonText: "No, cancel it!",
-				    closeOnConfirm: false,
-				    closeOnCancel: false
-				}).then(function(isConfirm) {
-					if (isConfirm.value) {
-						$('#printableArea').hide(); $('#costsheetTab a').trigger('click');
-					}  
-				});
-			}
+			//if (source == "NO_PARKING_SELECTION") {
+				//$('#printableArea').hide(); 
+				//$('#costsheetTab a').trigger('click');
+			//} else {
+			swal({
+				title: "",
+			    text: " Parking will not get HOLD as Inventory is not under HOLD.",
+			    //timer: 3000,
+			    type: "warning",
+			    allowOutsideClick: false,
+			    showCancelButton: true,
+			    confirmButtonText: 'Yes - Proceed with selection',
+			    cancelButtonText: "No - Cancel selection",
+			    closeOnConfirm: false,
+			    closeOnCancel: false
+			}).then(function(isConfirm) {
+				if (isConfirm.value) {
+					$('#printableArea').hide(); $('#costsheetTab a').trigger('click');
+				}  
+			});
+			//}
 		} else if (obj!=null && obj.status =="STATUS_OK" && obj.record_found =="YES") {
 			$('#printableArea').hide(); $('#costsheetTab a').trigger('click');
+			parkingLoad();
+		} else if (obj!=null && obj.status =="STATUS_NOTOK") {
+			swal({
+				title: "Sorry this parking is Held by someone else, Please try again after some time.",
+			    text: "",
+			    type: "warning", 
+			});
 		}
 		
 	}).fail(function(xhr, status, error) {
-		   
+		swal({
+			title: "Sorry this parking is Held by someone else, Please Try again after some time.",
+		    text: "",
+		    type: "warning", 
+		});
+		parkingLoad();
 	});
 }
 

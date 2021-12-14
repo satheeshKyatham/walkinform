@@ -84,7 +84,13 @@ public class ParkingDaoImpl extends AbstractDao<Integer, Parking> implements Par
 				+ " END AS sfdc_propstrength__allotted__c, "
 				//END New
 				+ " a.location_of_parking__c,"
-				+ " a.propstrength__tower_code__c "
+				+ " a.propstrength__tower_code__c, "
+				
+				+ " CASE "
+					+ " WHEN a.allotted_through_offer__c IS NULL THEN false "
+					+ " ELSE a.allotted_through_offer__c "
+				+ " END AS allotted_through_offer__c "
+				
 				
 				+ " FROM salesforce.propstrength__car_parking__c a"
 				+ " LEFT JOIN salesforce.nv_parking_mapping b ON a.propstrength__category_of_parking__c = b.parking_category AND b.property_type_sfid = '"+propertyTypeSfid+"' AND b.tower_sfid = '"+towerMst+"' "
@@ -178,7 +184,12 @@ public class ParkingDaoImpl extends AbstractDao<Integer, Parking> implements Par
 				
 				+" CASE  WHEN d.absolute_amount  IS NULL  THEN -1  ELSE absolute_amount  END AS absolute_amount,  "
 				+ " a.location_of_parking__c,"
-				+ " a.propstrength__tower_code__c "
+				+ " a.propstrength__tower_code__c, "
+				
+				+ " CASE "
+					+ " WHEN a.allotted_through_offer__c IS NULL THEN false "
+					+ " ELSE a.allotted_through_offer__c "
+				+ " END AS allotted_through_offer__c "
 				
 				+ " FROM salesforce.propstrength__car_parking__c a "
 				
@@ -235,5 +246,52 @@ public class ParkingDaoImpl extends AbstractDao<Integer, Parking> implements Par
 			return parkingDtl;
 		}
 		return new ArrayList<>();
+	}
+	
+	@Override
+	public String updateParkingStatus(String parkingsfid) {
+		Session session = this.sessionFactory.getCurrentSession();	
+		Query q = session.createNativeQuery(" update salesforce.propstrength__car_parking__c set allotted_through_offer__c='t' where sfid='"+parkingsfid+"'");
+		q.executeUpdate();
+		return "updated";
+		
+	}
+	
+	@Override
+	public Parking getHeldUnit(String parkingsfid) {
+		Session session = this.sessionFactory.getCurrentSession();	
+		
+		try {
+			if (session == null) {
+				return null;
+			}
+			
+			List<Parking> authors =null;
+			
+			Query q = session.createNativeQuery(" SELECT "
+					+ " a.id, "
+					+ " a.sfid, "
+					+ " a.propstrength__active__c,"
+					+ " c.holdstatusyn "
+					      
+					+ " FROM salesforce.propstrength__car_parking__c a"
+					 
+					+ " LEFT JOIN salesforce.gpl_cs_hold_parking c ON c.parkingsfid = a.sfid "
+					
+					+ " where a.propstrength__active__c= true "
+					+ " AND a.sfid = '"+parkingsfid+"' "
+					+ " AND c.holdstatusyn='Y' ", Parking.class);
+				
+				authors = (List<Parking>)q.getResultList();
+				
+			if(authors.size()>0) {
+				return authors.get(0);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+		
 	}
 }	

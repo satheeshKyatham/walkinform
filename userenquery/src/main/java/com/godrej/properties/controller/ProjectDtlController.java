@@ -51,7 +51,7 @@ public class ProjectDtlController {
 		if (isParking != null) {
 			session.setAttribute("PARKING_MODULE",""+isParking);
 		} else {
-			session.setAttribute("PARKING_MODULE",null);		
+			session.setAttribute("PARKING_MODULE","N");		
 		}
 		// END PARKING
 		

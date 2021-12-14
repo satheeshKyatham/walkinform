@@ -88,6 +88,15 @@ aLog.setCostsheet_path(aLogDto.getCostsheet_path());
 		aLog.setTotal_abc(aLogDto.getTotal_abc());
 		aLog.setTotal_discount(aLogDto.getTotal_discount());
 		aLog.setPaymentplan_total(aLogDto.getPaymentplan_total());
+		
+		
+		//Parking
+		aLog.setParking_selection(aLogDto.getParking_selection());
+		aLog.setParking_name(aLogDto.getParking_name());
+		aLog.setParking_sfid(aLogDto.getParking_sfid());
+		aLog.setParking_amount(aLogDto.getParking_amount());
+		//END Parking
+		
 		//--------------------------------------------
 		
 		

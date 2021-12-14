@@ -90,6 +90,11 @@
 							<th>Payment Plan Total</th>
 							<th>CS Sales Comments</th>
 							<!--   -->
+							
+							<th>Parking Selection</th>
+							<th>Parking Name</th>
+							<th>Parking Amount</th>
+							
 						</tr>
 					</thead>
 					<tbody>

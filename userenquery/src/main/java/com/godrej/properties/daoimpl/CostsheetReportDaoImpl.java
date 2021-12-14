@@ -94,7 +94,16 @@ public class CostsheetReportDaoImpl implements CostsheetReportDao{
 					+ " g.propstrength__property_name__c, "
 					+ " h.name as paymentplan_name, "
 					+ " i.user_name,  "
-					+ " i.emailid "
+					+ " i.emailid, "
+					
+					//Parking
+					+ " a.parking_selection, "
+					+ " a.parking_name, "
+					+ " a.parking_sfid, "
+					+ " CASE WHEN a.parking_amount IS NULL THEN cast(0 as numeric (20,2))  ELSE cast(a.parking_amount as numeric (20,2))  END AS parking_amount "
+					
+					//END Parking
+					
 					+ " FROM salesforce.nv_d4u_costsheet_log a "
 					+ " LEFT JOIN salesforce.nv_token b ON b.nv_token_id = a.token_id "
 					+ " LEFT JOIN salesforce.contact c ON c.sfid = a.contact_sfid "

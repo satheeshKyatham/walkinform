@@ -11,4 +11,8 @@ public interface ParkingDao {
 	List<ParkingAdmin> getAdminParkingDtl(String propertyTypeSfid, String projectId, String towerMst, String unitCategory, String parkingLocation, String searchadminparking);
 	
 	List<Parking> getLocation(String towersfid);
+	
+	String updateParkingStatus(String parkingsfid);
+	
+	public Parking getHeldUnit(String parkingsfid);
 }

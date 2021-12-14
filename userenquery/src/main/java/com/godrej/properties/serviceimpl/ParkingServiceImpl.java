@@ -17,6 +17,7 @@ import com.godrej.properties.dto.HoldParkingAdminDao;
 import com.godrej.properties.model.HoldInventoryEntry;
 import com.godrej.properties.model.HoldParkingAdmin;
 import com.godrej.properties.model.HoldParkingEntry;
+import com.godrej.properties.model.Inventory;
 import com.godrej.properties.model.Parking;
 import com.godrej.properties.model.ParkingAdmin;
 import com.godrej.properties.service.ParkingService;
@@ -64,11 +65,6 @@ public class ParkingServiceImpl implements ParkingService {
 		
 		HoldInventoryEntry salesUnitStatus = salesUnitHoldStatusDao.getUnitHoldDtl(propid);
 		
-		// Reserve
-		//List<HoldInventoryEntry> plans = holdInventoryEntryService.holdDataExist(projectNameId, customerId);
-		
-		//ArrayList<HoldInventoryEntry> intList = new ArrayList<>(); 
-		
 		if (salesUnitStatus == null) {
 			result = "{\"status\":\"STATUS_OK\",\"record_found\":\"NO\", \"errorid\": \"E1\",\"error_msg\":\"Flat/Unit hold record not found\"}";
 			return result;
@@ -82,10 +78,6 @@ public class ParkingServiceImpl implements ParkingService {
 		// add a bunch of seconds to the calendar
 		cal.add(Calendar.SECOND, 98765);
 
-		//HoldInventoryEntry salesUnitStatus = salesUnitStatus.get(0);
-		//if(salesUnitStatus == null || salesUnitStatus.getCreated_at() == null ) {
-		//	continue;
-		//}
 		Timestamp createdAt  = salesUnitStatus.getCreated_at();
 		long time = createdAt.getTime();
 		// create a second time stamp
@@ -94,29 +86,13 @@ public class ParkingServiceImpl implements ParkingService {
 
 		long milliseconds = timestampValue.getTime() - currentTpm.getTime();
 		
-		System.out.println(milliseconds);
-		
 		int seconds = (int) milliseconds / 1000;
-
 		int hours = seconds / 3600;
-		
 		int minutes = (int) ((milliseconds / 1000)  / 60);
-		//int minutes = (seconds % 3600) / 60;
 		seconds = (seconds % 3600) % 60;
-		 
-		//salesUnitStatus.get(k).setHoldMin(minutes);
-		//salesUnitStatus.get(k).setHoldSec(seconds);
-
-		//intList.add(plans.get(k));
-	
-		// END Reserve
-		
-		
-		
 		
 		//Insert Entry
 		//log.info("Unit Exit Query No Entry found************************* HOLD Issue");
-		
 		HoldParkingEntry action = new HoldParkingEntry();
 		action.setParkingsfid(parkingsfid);
 		action.setHoldstatusyn("Y");
@@ -128,25 +104,42 @@ public class ParkingServiceImpl implements ParkingService {
 		action.setCreated_at(new Timestamp(System.currentTimeMillis()));
 		//log.info("Before Insert************************* HOLD Issue");
 
-		try {
+		
+		
+		//New
+		Parking parkingDtl = parkingDao.getHeldUnit(parkingsfid);
+		
+		if (parkingDtl != null && !parkingDtl.equals("")) {
+			result = "{\"status\":\"STATUS_NOTOK\",\"record_found\":\"NO\", \"errorid\": \"E2\",\"error_msg\":\"Sorry this parking is Held by someone else, Please Try again after some time.\"}";
+		} else {
 			holdParkingEntryDao.insertHoldRqst(action);
-			
-			//holdParkingEntryService.insertHoldRqst(action);
-		}catch (Exception e) {
+			result = "{\"status\":\"STATUS_OK\",\"record_found\":\"YES\", \"errorid\": \"-\",\"error_msg\":\"Parking successfully held\"}";
+		}
+		
+		return result;
+		//END New
+		
+		
+		//try {
+		//Boolean isParkingHold = holdParkingEntryDao.insertHoldRqst(action);
+	
+		/*if (isParkingHold) {
+			result = "{\"status\":\"STATUS_OK\",\"record_found\":\"YES\", \"errorid\": \"-\",\"error_msg\":\"Parking successfully held\"}";
+		} else {
+			result = "{\"status\":\"STATUS_NOTOK\",\"record_found\":\"NO\", \"errorid\": \"E2\",\"error_msg\":\"Selected parking is no longer available, please select another parking.\"}";
+		}*/
+		
+		
+		//} catch (Exception e) {
+			//result = "{\"status\":\"STATUS_NOTOK\",\"record_found\":\"NO\", \"errorid\": \"E2\",\"error_msg\":\"Selected parking is no longer available please select another parking.\"}";
 			//log.error("Exception while holding inventory " + e);
 			//return gson.toJson("Sorry this unit is Held by someone else, Please Try again after some time");
-		}
+		//}
 		//log.info("After Insert************************* HOLD Issue");
-		result = "{\"status\":\"STATUS_OK\",\"record_found\":\"YES\", \"errorid\": \"-\",\"error_msg\":\"Parking successfully held\"}";
-		return result;
+		
+		//return result;
 		//END Insert Entry
-		
-		
-		//System.out.println(salesUnitStatus);
-		
-		//return null;
 	}
-	
 	
 	
 	@Override
@@ -184,5 +177,16 @@ public class ParkingServiceImpl implements ParkingService {
 	@Override
 	public List<Parking> getLocation(String towersfid) {
 		return parkingDao.getLocation(towersfid);
+	}
+	
+	
+	@Override
+	public Boolean getSalesParkingHold(String parkingsfid, String userid) {
+		return holdParkingEntryDao.getSalesParkingHold(parkingsfid, userid);
+	}
+	
+	@Override
+	public String updateParkingStatus(String parkingsfid) {
+		return parkingDao.updateParkingStatus(parkingsfid);
 	}
 }

@@ -76,11 +76,20 @@ public class KeyConstants {
 	public static final String ERROR_MSG_105 = "errorNoUserid"; //No User ID.
 	public static final String ERROR_MSG_106 = "errorNoProOrUnitid"; //Project ID or Unit ID is not available, because of enquiry may not sync.
 	
+	//Parking
+	public static final String ERROR_MSG_107 = "errorInvalidParkingSFID"; //Invalid Parking SFID.
+	public static final String ERROR_MSG_108 = "errorParkingNotAvailable";//This parking is no longer available please select another parking.
+	public static final String ERROR_MSG_109 = "errorParkingInactive"; //Parking is not activated
+	// END Parking
 	
 	public static final String SUCCESS_MSG_101 = "successOfferCreate101"; //Offer Successfully Created
 	public static final String SUCCESS_MSG_102 = "successUnitAvailable102"; //Unit Available
 	
 	public static final String SFDC_OFFERAPI = "https://godrej.my.salesforce.com/services/apexrest/api/CreateOfferPrepayment";
+	//Parking
+	public static final String SFDC_OFFERAPIV2 = "https://godrej.my.salesforce.com/services/apexrest/api/CreateOfferPrepaymentV2";
+	//END Parking
+	
 	public static final String SFDC_OFFERAPI_BULKY = "https://godrej.my.salesforce.com/services/apexrest/api/CreateOfferPrepaymentBulky";
 	public static final String SFDC_OFFERPREPAYMENTAPI = "https://godrej.my.salesforce.com/services/apexrest/api/OfferPrepayments";
 	

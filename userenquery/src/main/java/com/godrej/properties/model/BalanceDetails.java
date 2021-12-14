@@ -75,6 +75,8 @@ public class BalanceDetails implements Serializable{
 	@Transient
 	private String apiError;
 	
+	@Column(name = "parkingsfid") private String parkingsfid;
+	
 	public int getId() {
 		return id;
 	}
@@ -251,5 +253,12 @@ public class BalanceDetails implements Serializable{
 	public void setApiError(String apiError) {
 		this.apiError = apiError;
 	}
-	
+
+	public String getParkingsfid() {
+		return parkingsfid;
+	}
+
+	public void setParkingsfid(String parkingsfid) {
+		this.parkingsfid = parkingsfid;
+	}
 }

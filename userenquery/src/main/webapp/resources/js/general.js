@@ -43,11 +43,13 @@ $(document).ready(function () {
 		$('#parkingTab').show();
 		$('#parkingAdminTab').show();
 		$('#allParkingReportTab').show();
+		$('#carParkDDCol').hide();
 		//$('#foyrFram').html('<iframe src="'+FOYRAPI_GV+'"  style="width:100%; height:500px;"></iframe>');
 	} else {
 		$('#parkingTab').hide();
 		$('#parkingAdminTab').hide();
 		$('#allParkingReportTab').hide();
+		$('#carParkDDCol').show();
 		//alert ("Test Inactive");
 	}
 	

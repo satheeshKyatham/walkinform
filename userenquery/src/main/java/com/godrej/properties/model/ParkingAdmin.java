@@ -45,6 +45,8 @@ public class ParkingAdmin implements Serializable{
 	
 	@Transient private String flagForHold;
 	
+	@Column(name = "allotted_through_offer__c") private Boolean allotted_through_offer__c;
+	
 	public int getId() {
 		return id;
 	}
@@ -176,5 +178,11 @@ public class ParkingAdmin implements Serializable{
 	}
 	public void setAbsolute_amount(Double absolute_amount) {
 		this.absolute_amount = absolute_amount;
+	}
+	public Boolean getAllotted_through_offer__c() {
+		return allotted_through_offer__c;
+	}
+	public void setAllotted_through_offer__c(Boolean allotted_through_offer__c) {
+		this.allotted_through_offer__c = allotted_through_offer__c;
 	}
 }
