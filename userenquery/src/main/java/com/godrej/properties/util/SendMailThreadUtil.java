@@ -14,11 +14,15 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+/*import org.apache.log4j.Logger;*/
 
 public class SendMailThreadUtil implements Runnable{
 	String to,message,subject,cc,smtpip,smtpport;
-	static Logger logger = Logger.getLogger(SendMailThreadUtil.class);
+	/*static Logger logger = Logger.getLogger(SendMailThreadUtil.class);*/
+	private Logger logger = LogManager.getLogger(getClass());
 	
 	public SendMailThreadUtil(String to,String cc,String subject,String message,String smtpIP,String smtpPort)
 	{

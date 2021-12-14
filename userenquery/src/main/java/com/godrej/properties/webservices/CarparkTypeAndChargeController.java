@@ -7,11 +7,15 @@ import javax.servlet.ServletContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.godrej.properties.model.CarParkingMapping;
 import com.godrej.properties.model.CarparkCount;
 import com.godrej.properties.model.CarparkTypeAndCharge;
 import com.godrej.properties.service.CarparkTypeAndChargeService;
@@ -47,6 +51,28 @@ public class CarparkTypeAndChargeController {
 		List<CarparkCount> carparkTypeList=carparkTypeAndChargeService.getCarparkCount(projectSFID);
 		
 		return gson.toJson(carparkTypeList); 
+	}
+	
+	@GetMapping(value = "/getCarParkingCombination", produces = "application/json")
+	public String getCarParkingCombination(@RequestParam("towersfid") String towersfid) {
+		Gson gson = new GsonBuilder().disableHtmlEscaping().serializeNulls().create();
+		List<CarParkingMapping> carparkTypeList=carparkTypeAndChargeService.getCarParkingCombination(towersfid);
+		return gson.toJson(carparkTypeList); 
+	}
+	
+	
+	@PostMapping(value = "/insertCarParkingCombination", produces = "application/json")
+	public @ResponseBody CarParkingMapping insertCarParkingCombination(@RequestBody List<CarParkingMapping> carParkingMapping) {
+		System.out.println("Tower SFID:-"+carParkingMapping.get(0).getTower_sfid());
+		List<CarParkingMapping> carparkTypeList=carparkTypeAndChargeService.insertCarParkingCombination(carParkingMapping);
+		CarParkingMapping cap = new CarParkingMapping();
+		return cap;
+	}
+	
+	@GetMapping(value = "/inActiveParkingCombination", produces = "application/json")
+	public String inActiveParkingCombination(@RequestParam("property_type_sfid") String property_type_sfid,@RequestParam("parking_category") String parking_category,@RequestParam("isactive") String isactive) {
+		return carparkTypeAndChargeService.inActiveCarParkingCombination(property_type_sfid,parking_category,isactive);
+		
 	}
 	
 	/*@RequestMapping(value = "/getCarparkCount", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")

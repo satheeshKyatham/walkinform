@@ -17,7 +17,8 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.joda.time.LocalDate;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -35,7 +36,8 @@ public class InventoryStatusController {
 	
 	
 	
-	static Logger logger = Logger.getLogger(InventoryStatusController.class);
+	/*static Logger logger = Logger.getLogger(InventoryStatusController.class);*/
+	private static Logger logger = LogManager.getLogger(InventoryStatusController.class);
 	
 	@Autowired
 	@Qualifier("userContactService")

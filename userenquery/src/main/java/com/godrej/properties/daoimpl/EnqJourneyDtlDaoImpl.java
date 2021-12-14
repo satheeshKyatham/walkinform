@@ -2,7 +2,8 @@ package com.godrej.properties.daoimpl;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,8 @@ import com.godrej.properties.model.EnqJourneyDtl;
 @Repository("enqJourneyDtlDao")
 public class EnqJourneyDtlDaoImpl extends AbstractDao<Integer, EnqJourneyDtl> implements EnqJourneyDtlDao {
 
-	static Logger logger = Logger.getLogger(EnqJourneyDtlDaoImpl.class);
+	/*static Logger logger = Logger.getLogger(EnqJourneyDtlDaoImpl.class);*/
+	private Logger logger = LogManager.getLogger(getClass());
 	
 	@Autowired
 	private SessionFactory sessionFactory;

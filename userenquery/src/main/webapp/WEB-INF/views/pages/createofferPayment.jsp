@@ -74,7 +74,13 @@
 					<th>Balance Amount</th>
 					<th>Description</th>
 					<th>Final Amount</th>
-					<th>Cost Sheet</th>		
+					<th>Cost Sheet</th>
+					
+					<th>Car Park Name</th>
+					<th>Parking Category</th>
+					<th>Parking Location</th>
+					<th>Parking Area(Sqft)</th>
+					<th>Dimensions</th>
 					<th>Action</th>
 					<!-- <th>Application</th> -->				
 				  </tr>

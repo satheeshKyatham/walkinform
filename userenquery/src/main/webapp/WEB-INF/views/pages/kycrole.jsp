@@ -14,6 +14,8 @@
 <link rel="shortcut icon" href="<c:url value='/resources/images/favicon.ico' />" type="image/x-icon">
 <link rel="icon" href="<c:url value='/resources/images/favicon.ico' />" type="image/x-icon">
 <link rel="stylesheet" href="<c:url value='/resources/css/bootstrap.min.css' />" type="text/css" />
+
+
      
 	<link rel="stylesheet" href="<c:url value='/resources/css/inner.css?v=${sessionScope.version}' />">
 	<link rel="stylesheet" href="<c:url value='/resources/css/style.css?v=${sessionScope.version}' />">
@@ -30,6 +32,10 @@
 <script src="<c:url value='/resources/js/bootstrap.min.js'/>"></script>
 <script type="text/javascript" charset="utf8" src="<c:url value='/resources/js/jquery.dataTables.js'/>"></script>
 <script type="text/javascript" charset="utf8" src="<c:url value='/resources/js/separate/kycdetails.js?v=${sessionScope.version}'/>"></script>
+
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.3.1/js/dataTables.buttons.min.js"></script> 
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.3.1/js/buttons.html5.min.js"></script>
 </head> 
 <%! String projectname,projectid ,projectrole,userid;%>
 <%
@@ -124,6 +130,7 @@ if(ses!=null){
 								<th>Booking Name</th>
 								<th>Booking Status</th>
 								<th>Description</th>
+								<th>Link</th>
 							</tr>
 						</thead>
 						<tbody>

@@ -11,7 +11,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 @Entity
-@Table(name = "salesforce.vw_allotment_report") 
+@Table(name = "salesforce.vw_allotment_report_uat") 
 public class AllotmentReport {
 	
 	@Id 
@@ -63,6 +63,14 @@ public class AllotmentReport {
 	@Transient private String qry_msg;
 	@Column(name="project_name__c") private String project_name__c;
 	@Column(name="propstrength__total_agreement_amount__c") private String propstrength__total_agreement_amount__c;
+	
+	@Column(name="carpark_name") private String carpark_name;
+	@Column(name="PropStrength__Car_Parking_Name__c") private String propStrength__Car_Parking_Name__c;
+	@Column(name="PropStrength__Parking_Type__c") private String propStrength__Parking_Type__c;
+	@Column(name="PropStrength__Category_of_Parking__c") private String propStrength__Category_of_Parking__c;
+	@Column(name="Location_of_Parking__c") private String location_of_Parking__c;
+	@Column(name="Parking_Area_Sq_Ft__c") private String parking_Area_Sq_Ft__c;
+	@Column(name="Dimensions__c") private String dimensions__c;
 	
 	public int getId() {
 		return id;
@@ -310,4 +318,48 @@ public class AllotmentReport {
 	public void setPropstrength__total_agreement_amount__c(String propstrength__total_agreement_amount__c) {
 		this.propstrength__total_agreement_amount__c = propstrength__total_agreement_amount__c;
 	}
+	public String getCarpark_name() {
+		return carpark_name;
+	}
+	public void setCarpark_name(String carpark_name) {
+		this.carpark_name = carpark_name;
+	}
+	public String getPropStrength__Car_Parking_Name__c() {
+		return propStrength__Car_Parking_Name__c;
+	}
+	public void setPropStrength__Car_Parking_Name__c(String propStrength__Car_Parking_Name__c) {
+		this.propStrength__Car_Parking_Name__c = propStrength__Car_Parking_Name__c;
+	}
+	public String getPropStrength__Parking_Type__c() {
+		return propStrength__Parking_Type__c;
+	}
+	public void setPropStrength__Parking_Type__c(String propStrength__Parking_Type__c) {
+		this.propStrength__Parking_Type__c = propStrength__Parking_Type__c;
+	}
+	public String getPropStrength__Category_of_Parking__c() {
+		return propStrength__Category_of_Parking__c;
+	}
+	public void setPropStrength__Category_of_Parking__c(String propStrength__Category_of_Parking__c) {
+		this.propStrength__Category_of_Parking__c = propStrength__Category_of_Parking__c;
+	}
+	public String getLocation_of_Parking__c() {
+		return location_of_Parking__c;
+	}
+	public void setLocation_of_Parking__c(String location_of_Parking__c) {
+		this.location_of_Parking__c = location_of_Parking__c;
+	}
+	public String getParking_Area_Sq_Ft__c() {
+		return parking_Area_Sq_Ft__c;
+	}
+	public void setParking_Area_Sq_Ft__c(String parking_Area_Sq_Ft__c) {
+		this.parking_Area_Sq_Ft__c = parking_Area_Sq_Ft__c;
+	}
+	public String getDimensions__c() {
+		return dimensions__c;
+	}
+	public void setDimensions__c(String dimensions__c) {
+		this.dimensions__c = dimensions__c;
+	}
+	
+	
 }

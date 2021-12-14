@@ -209,6 +209,11 @@
 								<th>Sourcing TL</th>
 								<th>Closing TL</th>
 								<th>Total Agreement Value</th>
+								<th>Car Park Name</th>
+								<th>Parking Category</th>
+								<th>Parking Location</th>
+								<th>Parking Area(Sqft)</th>
+								<th>Dimensions</th>
 							</tr>
 						</thead>
 						<tbody>
