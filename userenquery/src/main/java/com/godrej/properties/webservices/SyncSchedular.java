@@ -12,12 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.godrej.properties.model.HoldInventoryEntry;
-import com.godrej.properties.model.HoldParkingEntry;
 import com.godrej.properties.service.BalanceDetailsService;
 import com.godrej.properties.service.ContactReportService;
 import com.godrej.properties.service.EnquiryReportService;
 import com.godrej.properties.service.HoldInventoryEntryService;
-import com.godrej.properties.service.HoldParkingEntryService;
 import com.godrej.properties.service.PushEnquiryDataService;
 
 @Configuration
@@ -38,11 +36,12 @@ public class SyncSchedular {
 	@Autowired
 	private HoldInventoryEntryService holdInventoryEntryService;
 	
-	@Autowired
-	private HoldParkingEntryService holdParkingEntryService;
-	
-	//Parking  Comment // @ResponseBody
-	//Parking  Comment // @Scheduled(cron="0 0/2 * * * ?")
+	/*@Scheduled(fixedRate=60*60*1000)*/	
+	/*@RequestMapping("/syncContactAndEnquiry")*/
+	@ResponseBody
+	//@Scheduled(cron="0 0/2 * * * ?")
+	/* 2 min schedular time*/
+	@Scheduled(cron="0 0/2 * * * ?")
 	public void hourlySchedular(){
 		LOG.info("hourlySchedular ::*************");
 		try {
@@ -52,8 +51,8 @@ public class SyncSchedular {
 			LOG.error("hourlySchedular ::*************",e);
 		}
 	}
-	//Parking  Comment //@ResponseBody
-	//Parking  Comment //@Scheduled(cron="0 0/2 * * * ?")/* 2 min schedular time*/
+	@ResponseBody
+	@Scheduled(cron="0 0/2 * * * ?")/* 2 min schedular time*/
 	@RequestMapping("/updateCustomContactAndEnquiry")
 	public void customUpdateSchedular(){
 		LOG.info("customUpdateSchedular ::*************");
@@ -76,27 +75,15 @@ public class SyncSchedular {
 			HoldInventoryEntry updateHold = new HoldInventoryEntry ();
 			updateHold.setStatusai("I");
 			updateHold.setHoldstatusyn("N");
-			holdInventoryEntryService.updatePreviousHold(updateHold);//20 
+			holdInventoryEntryService.updatePreviousHold(updateHold);//20
 		}
 		catch (Exception e) {
 			LOG.error("updateBulkInventoryStatus ::*************",e);
 		}
-		
-		try {
-			LOG.info("updateBulkParkingStatus ::*************");
-			//Parking
-			HoldParkingEntry updateParkingHold = new HoldParkingEntry ();
-			updateParkingHold.setStatusai("I");
-			updateParkingHold.setHoldstatusyn("N");
-			holdParkingEntryService.updateParkingPreviousHold(updateParkingHold);//20
-			// END Parking
-		} catch (Exception e) {
-			LOG.error("updateBulkParkingStatus ::*************",e);
-		}
 	}
 	/*For SFDC Cancelled offer inactive in D4U*/
-	//Parking  Comment //@ResponseBody
-	//Parking  Comment // @Scheduled(cron = "0 0/55 * * * ?")//@Scheduled(cron = "0/20 * * * * ?")/* 30 Sec schedular time*///"0/15 * * * * *" //--20 Sec "*/20 * * * * *"
+	@ResponseBody
+	@Scheduled(cron = "0 0/55 * * * ?")//@Scheduled(cron = "0/20 * * * * ?")/* 30 Sec schedular time*///"0/15 * * * * *" //--20 Sec "*/20 * * * * *"
 	@RequestMapping("/cancelledOfferInactive")
 	public void cancelledOfferInactive(){
 		LOG.info("cancelledOfferInactive ::*************");

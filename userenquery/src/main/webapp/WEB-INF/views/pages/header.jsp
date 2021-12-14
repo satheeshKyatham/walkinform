@@ -5,7 +5,7 @@
 <%  
 /* Cookie ck=new Cookie("version","18.20");  
 response.addCookie(ck);   */
-session.setAttribute("version","4.14");  
+session.setAttribute("version","4.09");  
 
 %>  
 
@@ -35,7 +35,6 @@ session.setAttribute("version","4.14");
 		USEREMAIL_GV = '';
 	}	
 	var FOYRAPI_GV = '<%= session.getAttribute("FOYRAPI")%>';
-	var PARKING_MODULE_GV = '<%= session.getAttribute("PARKING_MODULE")%>';
 </script>
 
 <script src="<c:url value='/resources/js/salesdesk.js?v=${sessionScope.version}'/>"></script>

@@ -483,4 +483,12 @@ public class ParkingController {
 		return gson.toJson(allParkingDataService.getParkingReportDtl(whereCondition));
 	}
 	
+	//Get Parking Dtl
+	@RequestMapping(value = "/getParkingRec", method = RequestMethod.GET)
+	public String getParkingRec(@RequestParam("parkingsfid") String parkingsfid, 
+			@RequestParam("projectsfid") String projectsfid) {
+		Gson gson = new GsonBuilder().disableHtmlEscaping().serializeNulls().create();
+		return gson.toJson(parkingService.getParking(parkingsfid, projectsfid));
+	}
+	// END Get Parking Dtl
 }

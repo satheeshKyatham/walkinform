@@ -286,7 +286,26 @@ function proceedParking (source) {
 		$('#parkingAmountCS').val('0');
 		$('#parkingCatCS').val('-');
 		$('#parkingNameCS').val('-');*/
-		parkingReleaseFromHold ("NO_PARKING_SELECTION");
+		
+		
+		swal({
+			title: "",
+		    text: "If any parking is HOLD it will be released.",
+		    type: "warning",
+		    allowOutsideClick: false,
+		    showCancelButton: true,
+		    cancelButtonText: "No - Cancel",
+		    confirmButtonText: 'Yes - Proceed',
+		    closeOnConfirm: false,
+		    closeOnCancel: false
+		}).then(function(isConfirm) {
+			if (isConfirm.value) {
+				parkingReleaseFromHold ("NO_PARKING_SELECTION");
+			}  
+		});
+		
+		
+		//parkingReleaseFromHold ("NO_PARKING_SELECTION");
 	} else if (source == "PARKING" && ! $("input[name=optionsParking]").is(':checked')) {
 		swal({
 			title: "Please select the parking",
@@ -363,8 +382,8 @@ function selectParking (source) {
 			    type: "warning",
 			    allowOutsideClick: false,
 			    showCancelButton: true,
-			    confirmButtonText: 'Yes - Proceed with selection',
 			    cancelButtonText: "No - Cancel selection",
+			    confirmButtonText: 'Yes - Proceed with selection',
 			    closeOnConfirm: false,
 			    closeOnCancel: false
 			}).then(function(isConfirm) {

@@ -680,7 +680,7 @@ function towerList (e, source) {
 			$('#parkingTowerMst').append("<option value='"+value.towersfid+"'>"+value.tower_name__c+"</option>");
 			//END Parking
 			$('#towerMstReport').append("<option value='"+value.tower_code__c+"'>"+value.tower_name__c+"</option>");
-			$('#towerMstReportParking').append("<option value='"+value.tower_code__c+"'>"+value.tower_name__c+"</option>");
+			$('#towerMstReportParking').append("<option value='"+value.towersfid+"'>"+value.tower_name__c+"</option>");
 			
 			$('#allUnitTowerMstReport').append("<option value='"+value.tower_code__c+"'>"+value.tower_name__c+"</option>");
 			$('#towerMstSalesHoldReport').append("<option value='"+value.tower_code__c+"'>"+value.tower_name__c+"</option>");

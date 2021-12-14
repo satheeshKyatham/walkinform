@@ -17,9 +17,9 @@ import com.godrej.properties.dto.HoldParkingAdminDao;
 import com.godrej.properties.model.HoldInventoryEntry;
 import com.godrej.properties.model.HoldParkingAdmin;
 import com.godrej.properties.model.HoldParkingEntry;
-import com.godrej.properties.model.Inventory;
 import com.godrej.properties.model.Parking;
 import com.godrej.properties.model.ParkingAdmin;
+import com.godrej.properties.model.ParkingRec;
 import com.godrej.properties.service.ParkingService;
 
 @Service("parkingService")
@@ -188,5 +188,10 @@ public class ParkingServiceImpl implements ParkingService {
 	@Override
 	public String updateParkingStatus(String parkingsfid) {
 		return parkingDao.updateParkingStatus(parkingsfid);
+	}
+	
+	@Override
+	public List<ParkingRec> getParking(String parkingsfid, String projectsfid) {
+		return parkingDao.getParking(parkingsfid, projectsfid);
 	}
 }

@@ -62,13 +62,14 @@ if(ses!=null){
 
 
 
-  	<nav class="navbar topMainBar">
-	  <div style="padding:0 25px;"> 
+  <nav class="navbar topMainBar">
+	  <div class="container">
 	  <%@ include file="/WEB-INF/views/pages/header.jsp" %>
 	   </div>
 	</nav>
 	
-	<div style="padding-left:20px; padding-right:20px; margin-bottom:30px;">
+	
+	<div class="container" style="margin-bottom:30px;">
 	
 		<div class="titleCol">
 				<h4 class="">
@@ -80,32 +81,21 @@ if(ses!=null){
 		<div>
 			<ul class="nav nav-tabs tabNav">
 				<li class="active" id="basicInfoTabId" >
-					<a href="#tab1" data-toggle="tab">Inventory</a>
+					<a href="#tab1" data-toggle="tab">Admin Inventory</a>
 				</li>
-				
-				<!-- Parking -->
-				<li id="parkingTab"> 
-					<a href="#parkingTabCont" data-toggle="tab">Parking</a>
-				</li>
-				<!-- END Parking -->
-				
 				<li id="costsheetTab">
 					<a href="#costsheetTabCont" data-toggle="tab">Costsheet</a>
 				</li>
 				<li>
-					<a href="#inventoryReport" data-toggle="tab">Hold/ Block Inventory</a>
+					<a href="#inventoryReport" data-toggle="tab">Hold/ Block Inventory Report</a>
 				</li>
-				<li id="parkingAdminTab">
-					<a href="#hbParkingReport" data-toggle="tab">Hold/ Block Parking</a>
-				</li>
+				
 				<li>
-					<a href="#allInventoryReport" data-toggle="tab">Inventory Report</a> 
+					<a href="#allInventoryReport" data-toggle="tab">Inventory Report</a>
 				</li>
-				<li id="allParkingReportTab">
-					<a href="#allParkingReport" data-toggle="tab" onclick="userParkingRepRegionMultiselect();">Parking Report</a> 
-				</li> 
+				
 				<li>
-					<a href="#inventorySalesHoldReport" data-toggle="tab">Closing Hold Inventory</a>
+					<a href="#inventorySalesHoldReport" data-toggle="tab">Closing Manager Hold Inventory Report</a>
 				</li>
 				<li>
 					<a href="#costsheetLogReport" onclick="usertowermultiselect('');" data-toggle="tab">Cost Sheet Log</a>
@@ -116,26 +106,29 @@ if(ses!=null){
 				<li>
 					<a href="#promoCode" onclick="getTypologyPromoCode(); fetchPromoCode()" data-toggle="tab">Promo Code</a>
 				</li>
+				<li>
+					<a href="#carparkMapping" onclick="" data-toggle="tab">Car Park Mapping</a>
+				</li>
 			</ul>
 			<div class=""></div>
 		</div>
 		
 		<div class="tab-content formTabCont">
 			<div class="tab-pane active" id="tab1">			   
-		  		<!-- <div class="col-md-12"> -->
-			 	<div id="inventoryTabCont">
-				  <jsp:include page="inventoryholdrel.jsp"></jsp:include>
-				</div> 
-				<div class="clearfix"></div>
-	 			<!-- </div> -->
+			  	
+			  	<div class="col-md-2" style="margin-top:10px; margin-bottom:10px;">
+			   
+				  <div class="clearfix"></div>
+				</div>  
+			      
+				  	<!-- <div class="col-md-12"> -->
+					 <div class="tab-pane" id="inventoryTabCont">
+						  <jsp:include page="inventoryholdrel.jsp"></jsp:include>
+						</div>
+					<div class="clearfix"></div>
+			 	<!-- </div> -->
 		 	</div>
-		 	<!-- Parking -->
-		 	<div class="tab-pane" id="parkingTabCont">
-				<jsp:include page="adminparking.jsp"></jsp:include>
-			</div>
-			<!-- END Parking -->
-			
-		 	<div class="tab-pane col-md-10" id="costsheetTabCont" style="margin: 0 auto; float: none;">
+		 	<div class="tab-pane" id="costsheetTabCont">
 				<jsp:include page="costsheetSalesinfo2.jsp"></jsp:include>
 			</div>
 		 	<div class="tab-pane" id="tab2" >
@@ -146,15 +139,9 @@ if(ses!=null){
 			<div class="tab-pane" id="inventoryReport" >
 				<%@ include file="/WEB-INF/views/pages/inventoryReport.jsp" %>
 			</div>
-			<div class="tab-pane" id="hbParkingReport">
-				<%@ include file="/WEB-INF/views/pages/parkingReport.jsp" %>
-			</div>
+			
 			<div class="tab-pane" id="allInventoryReport" >
 				<%@ include file="/WEB-INF/views/pages/allInventoryReport.jsp" %>
-			</div>
-			
-			<div class="tab-pane" id="allParkingReport" >
-				<%@ include file="/WEB-INF/views/pages/allParkingReport.jsp" %>
 			</div>
 			
 			<div class="tab-pane" id="inventorySalesHoldReport" >
@@ -172,6 +159,9 @@ if(ses!=null){
 			<div class="tab-pane" id="promoCode">
 				<%@ include file="/WEB-INF/views/pages/promoCode.jsp" %>
 			</div>
+			<div class="tab-pane" id="carparkMapping">
+				<%@ include file="/WEB-INF/views/pages/prakingcharges/carchargesmapping.jsp" %>
+			</div>
 	 	</div>
 	</div>
 	
@@ -187,17 +177,7 @@ if(ses!=null){
 	
 	<script src="<c:url value='/resources/js/sweetalert2.min.js' />"></script>
 	<script src="<c:url value='/resources/js/separate/admininventory.js?v=${sessionScope.version}'/>"></script>
-	
-	<!-- Parking -->
-	<script src="<c:url value='/resources/js/separate/adminparking.js?v=${sessionScope.version}'/>"></script>
-	<!-- END Parking -->
-	
 	<script src="<c:url value='/resources/js/separate/admininventoryReport.js?v=${sessionScope.version}'/>"></script>
-	
-	<!-- Parking -->
-	<script src="<c:url value='/resources/js/separate/adminParkingReport.js?v=${sessionScope.version}'/>"></script>
-	<!-- END Parking -->
-	
 	<script src="<c:url value='/resources/js/separate/costsheetLogReport.js?v=${sessionScope.version}'/>"></script>
 	<script src="<c:url value='/resources/js/separate/salesHoldinventoryReport.js?v=${sessionScope.version}'/>"></script>
 	<script src="<c:url value='/resources/js/separate/costsheet.js?v=${sessionScope.version}'/>"></script>
@@ -207,6 +187,7 @@ if(ses!=null){
 	<script src="<c:url value='/resources/js/separate/promocode.js?v=${sessionScope.version}'/>"></script>
 
 	<script src="<c:url value='/resources/js/enquiryRequest/common.js?v=${sessionScope.version}'/>"></script>
+	<script src="<c:url value='/resources/js/prakingcharges/carchargesmapping.js?v=${sessionScope.version}'/>"></script>
 	
 	
 

@@ -18,7 +18,9 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+/*import org.apache.log4j.Logger;*/
 import org.joda.time.LocalDate;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -31,10 +33,13 @@ import com.godrej.properties.constants.KeyConstants;
 import com.godrej.properties.dto.SysConfigEnum;
 import com.godrej.properties.master.service.SysConfigService;
 import com.godrej.properties.service.UserContactService;
+
 @Component
 public class CreateOffer {
 
-	static Logger logger = Logger.getLogger(CreateOffer.class);
+	private Logger logger = LogManager.getLogger(getClass());
+	
+	/*static Logger logger = Logger.getLogger(CreateOffer.class);*/
 	
 	@Autowired
 	@Qualifier("userContactService")
@@ -224,7 +229,7 @@ public class CreateOffer {
 			/* ----------- End -------------*/
 			
 			account.put("Tdspaidby",tdsPaidBy);
-			 
+			
 			logger.info("Final Creat Offer Data:-"+account);
 		
 		}

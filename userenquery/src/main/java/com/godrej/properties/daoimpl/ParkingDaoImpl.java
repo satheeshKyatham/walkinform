@@ -15,6 +15,7 @@ import com.godrej.properties.dao.AbstractDao;
 import com.godrej.properties.dao.ParkingDao;
 import com.godrej.properties.model.Parking;
 import com.godrej.properties.model.ParkingAdmin;
+import com.godrej.properties.model.ParkingRec;
 
 @Repository("parkingDao")
 public class ParkingDaoImpl extends AbstractDao<Integer, Parking> implements ParkingDao{
@@ -293,5 +294,31 @@ public class ParkingDaoImpl extends AbstractDao<Integer, Parking> implements Par
 		}
 		return null;
 		
+	}
+	
+	@Override
+	public List<ParkingRec> getParking(String parkingsfid, String projectsfid) {
+		Session session = this.sessionFactory.getCurrentSession();	
+		
+		List<ParkingRec> authors=null;
+		
+		Query q = session.createNativeQuery("SELECT a.id, "
+				+ " a.sfid, "
+				+ " a.propstrength__car_parking_name__c, "
+				+ " a.propstrength__parking_type__c, "
+				+ " a.propstrength__category_of_parking__c, "
+				+ " a.propstrength__parking_size__c, "
+				+ " a.location_of_parking__c, "
+				+ " a.dimensions__c "
+				
+				+ " FROM salesforce.propstrength__car_parking__c a "
+				+ " where propstrength__project__c = '"+projectsfid+"' AND sfid = '"+parkingsfid+"'  " , ParkingRec.class); 
+
+		authors = q.getResultList();
+		
+		if (authors.size() > 0)
+			return authors;
+
+		return null;
 	}
 }	

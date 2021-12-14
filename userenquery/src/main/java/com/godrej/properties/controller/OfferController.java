@@ -1,8 +1,6 @@
 package com.godrej.properties.controller;
 
 import java.io.IOException;
-import java.sql.Timestamp;
-import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -21,20 +19,16 @@ import com.godrej.properties.dao.TokenDao;
 import com.godrej.properties.dto.PaymentDto;
 import com.godrej.properties.dto.PaymentRequestDto;
 import com.godrej.properties.model.BalanceDetails;
-import com.godrej.properties.model.HoldParkingAdmin;
 import com.godrej.properties.model.UnitDtl;
 import com.godrej.properties.service.AdminUnitHoldStatusService;
 import com.godrej.properties.service.BSPUpdateService;
 import com.godrej.properties.service.BalanceDetailsService;
 import com.godrej.properties.service.HoldInventoryEntryService;
-import com.godrej.properties.service.HoldParkingEntryService;
 import com.godrej.properties.service.InventoryService;
-import com.godrej.properties.service.ParkingService;
 import com.godrej.properties.service.PropOtherChargesService;
 import com.godrej.properties.service.SalesUnitHoldStatusService;
 import com.godrej.properties.validator.OfferValidator;
 import com.godrej.properties.webservices.CreateOffer;
-import com.godrej.properties.webservices.CreateOfferV2;
 import com.godrej.properties.webservices.InventoryStatusController;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -84,15 +78,6 @@ public class OfferController {
 	@Autowired
 	private TokenDao tokenDao;
 	
-	@Autowired
-	private ParkingService parkingService;
-	
-	@Autowired
- 	private HoldParkingEntryService holdParkingEntryService;
-	
-	@Autowired
-	private CreateOfferV2 creatOfferV2;
-	
 	@PostMapping(value = { "/updateBSP" })
 	public @ResponseBody String updateBSP (@RequestParam("salesConsiderationTotal") double salesConsiderationTotal,  @RequestParam("bspTaxGST") double bspTaxGST,   @RequestParam("bspDis") String bspDis, @RequestParam("token") String token, @RequestParam("projectsfid") String projectsfid,   @RequestParam("enquirysfid") String enquirysfid,  @RequestParam("primarycontactsfid") String primarycontactsfid,   @RequestParam("sentToCrmYN") String sentToCrmYN
 			, @RequestParam("timeid") String timeid_str, @RequestParam("propid") String propid, @RequestParam("ppid") String ppid
@@ -118,37 +103,17 @@ public class OfferController {
 			,@RequestParam("priceWithTax") Double priceWithTax
 			,@RequestParam("tokenTax") Double tokenTax
 			,@RequestParam("reraCarpetAreaSqm") double reraCarpetAreaSqm
-			
-			,@RequestParam("parkingsfid") String parkingsfid
-			,@RequestParam("isParkingModule") String isParkingModule) throws JRException, IOException {
+			) throws JRException, IOException {
 		
-		BalanceDetails action = new BalanceDetails ();
-		GsonBuilder gsonBuilder = new GsonBuilder();
-		Gson gson = gsonBuilder.create();
-		
+
 		String errorMsg1 = KeyConstants.ERROR_MSG_101; //This unit is no longer available please select another unit.
 		String errorMsg2 = KeyConstants.ERROR_MSG_102; //Inventory is not activated
 		String errorMsg3 = KeyConstants.ERROR_MSG_103; //Yes, There is some technical problem.
 		String errorMsg4 = KeyConstants.ERROR_MSG_104;
 		String successMsg1 = KeyConstants.SUCCESS_MSG_101; //Offer Successfully Created
+
 		
-		//Parking
-		String errorMsg8 = KeyConstants.ERROR_MSG_108; 
-		
-		Integer useridInt = -1;
-		
-		if(userid!=null && userid.length()>0) {
-			if(!userid.equals("null")) {
-				useridInt = Integer.valueOf(userid);
-			} else {
-				action.setOffer_successMsg(errorMsg3);
-				return gson.toJson(action);
-			}	
-		} else {
-			action.setOffer_successMsg(errorMsg3);
-			return gson.toJson(action);
-		}
-		//END Parking
+		BalanceDetails action = new BalanceDetails ();
 		
 		ObjectMapper mapper =  new ObjectMapper();
 		PaymentDto [] payments = mapper.readValue(paymentDetails.getBytes(), PaymentDto[].class);
@@ -165,8 +130,8 @@ public class OfferController {
 		Errors errors=  new Errors();
 		offerValidator.validate(paymentRequest, errors);
 
-		//GsonBuilder gsonBuilder = new GsonBuilder();
-		//Gson gson = gsonBuilder.create();
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		Gson gson = gsonBuilder.create();
 		
 		if(errors.getErrorCount()>0) {
 			List<ErrorDto> errorList = errors.getErrorList();
@@ -218,8 +183,6 @@ public class OfferController {
 				//Boolean adminUnitStatus = adminUnitHoldStatusService.getAdminUnitHold(propid);
 				Boolean salesUnitStatus = salesUnitHoldStatusService.getSalesUnitHold(propid, userid);
 				
-				Boolean salesParkingStatus = null;
-				
 				if (jsonArray.size() > 0) {
 					 JsonObject  jsonObject1 = jsonArray.get(0).getAsJsonObject();
 					 String propertyoholdforreallocation = jsonObject1.get("propertyoholdforreallocation").getAsString();
@@ -233,22 +196,7 @@ public class OfferController {
 					 if (propertyoholdforreallocation != null && PropertyForWebsite != null && PropertyForSales != null && PropertyForCP != null && Propertyallotedthroughoffer != null && alloted != null && active != null) {
 						 if (active.equals("true")) {
 							 if (Propertyallotedthroughoffer.equals("false") && alloted.equals("false")  && salesUnitStatus == false) {
-								 //inventoryStatusCondition = true;
-								 
-								 //parking
-								 if (isParkingModule.equals("Y")) {
-									 salesParkingStatus = parkingService.getSalesParkingHold(parkingsfid, userid);
-									 if (salesParkingStatus != null && salesParkingStatus == true) {
-										 action.setOffer_successMsg(errorMsg8);
-										 return gson.toJson(action);
-									 } else {
-										 inventoryStatusCondition = true;
-									 }
-								 } else {
-									 inventoryStatusCondition = true; 
-								 }
-								 //END parking
-								 
+								 inventoryStatusCondition = true;
 							 } else {
 								 action.setOffer_successMsg(errorMsg1);
 								 return gson.toJson(action);
@@ -266,38 +214,12 @@ public class OfferController {
 				}
 				
 				if(inventoryStatusCondition) {
-					
-					String parkingsfidNew = "";
-					if (parkingsfid!=null && parkingsfid.length()==18 && !parkingsfid.equals("null")) {
-						parkingsfidNew = parkingsfid;
-					} else {
-						parkingsfidNew = "";
-					}
-					
 					//Create Offer through SFDC API
-					//String offerId = creatOffer.PropOffer(bspDis,token,projectsfid,enquirysfid,primarycontactsfid,propid,ppid,offerthrough,brokersfid,discount_Value,enquiry_name,prepaymentamt,bankname,trxdate,trxno,paymentmode,tdsPaidBy,isOthers,bankGL,parkingsfidNew);
-					
-					//Parking
-					String offerId = "";
-					if (isParkingModule.equals("Y")) {
-						offerId = creatOfferV2.PropOffer(bspDis,token,projectsfid,enquirysfid,primarycontactsfid,propid,ppid,offerthrough,brokersfid,discount_Value,enquiry_name,prepaymentamt,bankname,trxdate,trxno,paymentmode,tdsPaidBy,isOthers,bankGL,parkingsfidNew);
-					} else {
-						offerId = creatOffer.PropOffer(bspDis,token,projectsfid,enquirysfid,primarycontactsfid,propid,ppid,offerthrough,brokersfid,discount_Value,enquiry_name,prepaymentamt,bankname,trxdate,trxno,paymentmode,tdsPaidBy,isOthers,bankGL);
-					}
-					// END Parking
-					
+					String offerId = creatOffer.PropOffer(bspDis,token,projectsfid,enquirysfid,primarycontactsfid,propid,ppid,offerthrough,brokersfid,discount_Value,enquiry_name,prepaymentamt,bankname,trxdate,trxno,paymentmode,tdsPaidBy,isOthers,bankGL);
 					action.setApiError(offerId);		
 					JsonObject jobj = new Gson().fromJson(offerId, JsonObject.class);
 					String offerid = jobj.get("offerid").getAsString();
 					String message = jobj.get("message").getAsString();
-					
-					//Parking
-					if (jobj.get("offerid").getAsString().equals("Offer not created")) {
-						log.info(" Create Offer Controller - Yes, There is some technical problem (code:3) ");
-						action.setOffer_successMsg(errorMsg3);
-						return gson.toJson(action);
-					}
-					//END Parking
 					
 					//Offer Success
 					//Check closing manager tagged or not, if not add no closing manager if yes no required changes
@@ -313,18 +235,12 @@ public class OfferController {
 					 
 					//Update offer created flag in sfdc property table through HEROKU
 					if((offerid!=null && offerid.length()==18)) {
-						if("a1l2s000000ZtXPAA0".equals(projectsfid) || "a1l2s000000UQ25AAG".equals(projectsfid) || "a1l2s000000g6kZAAQ".equals(projectsfid) || "a1l2s000000g6eqAAA".equals(projectsfid) || "a1l6F000004RvPHQA0".equals(projectsfid) || "a1l2s000000PKrrAAG".equals(projectsfid) || "a1l2s000000PK3IAAW".equals(projectsfid) || "a1l2s000000PJPmAAO".equals(projectsfid) || "a1l6F000002X6IOQA0".equals(projectsfid) || "a1l6F0000081xb4QAA".equals(projectsfid) || "a1l2s00000000X5AAI".equals(projectsfid) || "a1l2s00000003VlAAI".equals(projectsfid)  || "a1l6F000003TXloQAG".equals(projectsfid) || "a1l2s000000PGu3AAG".equals(projectsfid)  || "a1l2s000000PGu8AAG".equals(projectsfid) || "a1l2s000000PGuDAAW".equals(projectsfid) || "a1l2s000000PGuIAAW".equals(projectsfid) || "a1l2s000000PGuNAAW".equals(projectsfid) || "a1l2s000000PGuSAAW".equals(projectsfid) || "a1l2s000000XoezAAC".equals(projectsfid)) {
+						//if("a1l2s000000g6kZAAQ".equals(projectsfid) || "a1l2s000000g6eqAAA".equals(projectsfid) || "a1l6F000004RvPHQA0".equals(projectsfid) || "a1l2s000000PKrrAAG".equals(projectsfid) || "a1l2s000000PK3IAAW".equals(projectsfid) || "a1l2s000000PJPmAAO".equals(projectsfid) || "a1l6F000002X6IOQA0".equals(projectsfid) || "a1l6F0000081xb4QAA".equals(projectsfid) || "a1l2s00000000X5AAI".equals(projectsfid) || "a1l2s00000003VlAAI".equals(projectsfid)  || "a1l6F000003TXloQAG".equals(projectsfid) || "a1l2s000000PGu3AAG".equals(projectsfid)  || "a1l2s000000PGu8AAG".equals(projectsfid) || "a1l2s000000PGuDAAW".equals(projectsfid) || "a1l2s000000PGuIAAW".equals(projectsfid) || "a1l2s000000PGuNAAW".equals(projectsfid) || "a1l2s000000PGuSAAW".equals(projectsfid) || "a1l2s000000XoezAAC".equals(projectsfid)) {
+						if("a1l2s000000ZtXPAA0".equals(projectsfid) || "a1l2s000000UQ25AAG".equals(projectsfid) || "a1l2s000000g6kZAAQ".equals(projectsfid) || "a1l2s000000g6eqAAA".equals(projectsfid) || "a1l6F000004RvPHQA0".equals(projectsfid) || "a1l2s000000PKrrAAG".equals(projectsfid) || "a1l2s000000PK3IAAW".equals(projectsfid) || "a1l2s000000PJPmAAO".equals(projectsfid) || "a1l6F000002X6IOQA0".equals(projectsfid) || "a1l6F0000081xb4QAA".equals(projectsfid) || "a1l2s00000000X5AAI".equals(projectsfid) || "a1l2s00000003VlAAI".equals(projectsfid) || "a1l6F000003TXloQAG".equals(projectsfid) || "a1l2s000000PGu3AAG".equals(projectsfid) || "a1l2s000000PGu8AAG".equals(projectsfid) || "a1l2s000000PGuDAAW".equals(projectsfid) || "a1l2s000000PGuIAAW".equals(projectsfid) || "a1l2s000000PGuNAAW".equals(projectsfid) || "a1l2s000000PGuSAAW".equals(projectsfid) || "a1l2s000000XoezAAC".equals(projectsfid)) {	
 							boolean isPMAY = isUnderPMAY(offerid, projectsfid,salesConsiderationTotal, reraCarpetAreaSqm);
 							propOtherChargesService.updatePropertyStatus(propid, isPMAY);
 						} else {
 							propOtherChargesService.updatePropertyStatus(propid);
-							//Parking
-							if (isParkingModule.equals("Y")) {
-								if(parkingsfid!=null && parkingsfid.length()==18 && !parkingsfid.equals("null")) {
-									parkingService.updateParkingStatus(parkingsfid);
-								}	
-							}
-							// END Parking
 						}
 						tokenDao.updateClosingMangerOnOfferCreation(enquirysfid);
 						//Call Update query for clsoing manager update
@@ -348,10 +264,7 @@ public class OfferController {
 					action.setCostsheet_path(costsheet_path);
 					action.setCs_final_amount(cs_final_amount);
 					action.setGst_tax(bspTaxGST);
-					
-					if(parkingsfid!=null && parkingsfid.length()==18 && !parkingsfid.equals("null")) {
-						 action.setParkingsfid(parkingsfid);
-					}
+			
 					
 					if(userid!=null && userid.length()>0)
 					{
@@ -361,27 +274,6 @@ public class OfferController {
 					action.setOffer_successMsg(successMsg1);
 					holdInventoryEntryService.releaseInventory(projectsfid, propid, null);
 					inventoryService.releaseInventory(projectsfid, propid, userid, null);
-					
-					//Parking
-					if (isParkingModule.equals("Y")) {
-						String flatsfid = "";
-						holdParkingEntryService.releaseInventory(projectsfid, useridInt, flatsfid);
-						
-						if(parkingsfid!=null && parkingsfid.length()==18) {
-							if(!parkingsfid.equals("null")) {
-								HoldParkingAdmin parkingAdmin = new HoldParkingAdmin();
-								parkingAdmin.setParkingsfid(parkingsfid);
-								parkingAdmin.setProjectsfid(projectsfid);
-								parkingAdmin.setCreated_at(new Timestamp(new Date().getTime()));
-								parkingAdmin.setCreated_by(userid);
-								parkingAdmin.setHold_reason("Release Admin");
-								parkingAdmin.setHold_status(false);
-
-								parkingService.updateHoldParkingAdmin(parkingAdmin);
-							}
-						}
-					}
-					//END Parking
 					
 					return gson.toJson(balanceDetailsService.insertBalanceDetails(action));
 				} else {
@@ -402,7 +294,8 @@ public class OfferController {
 	}
 	
 	private boolean isUnderPMAY(String offerId, String projectSfid, double basicSalePrice, double reraCarpetAreaSqm) {
-		if (projectSfid.equals("a1l2s000000ZtXPAA0") || projectSfid.equals("a1l2s000000UQ25AAG") || projectSfid.equals("a1l2s000000g6kZAAQ") || projectSfid.equals("a1l6F000004RvPHQA0") || projectSfid.equals("a1l2s000000PKrrAAG") || projectSfid.equals("a1l2s000000PK3IAAW") ||  projectSfid.equals("a1l2s00000000X5AAI") || projectSfid.equals("a1l6F000003TXloQAG") || projectSfid.equals("a1l2s000000XoezAAC")) {
+		//if (projectSfid.equals("a1l2s000000g6kZAAQ") || projectSfid.equals("a1l6F000004RvPHQA0") || projectSfid.equals("a1l2s000000PKrrAAG") || projectSfid.equals("a1l2s000000PK3IAAW") ||  projectSfid.equals("a1l2s00000000X5AAI") || projectSfid.equals("a1l6F000003TXloQAG") || projectSfid.equals("a1l2s000000XoezAAC")) {
+		if (projectSfid.equals("a1l2s000000ZtXPAA0") || projectSfid.equals("a1l2s000000UQ25AAG") || projectSfid.equals("a1l2s000000g6kZAAQ") || projectSfid.equals("a1l6F000004RvPHQA0") || projectSfid.equals("a1l2s000000PKrrAAG") || projectSfid.equals("a1l2s000000PK3IAAW") || projectSfid.equals("a1l2s00000000X5AAI") || projectSfid.equals("a1l6F000003TXloQAG") || projectSfid.equals("a1l2s000000XoezAAC")) {	
 			return (offerId!=null && offerId.length()==18 && basicSalePrice < 4500000  &&  reraCarpetAreaSqm < 90) ;
 		}
 		

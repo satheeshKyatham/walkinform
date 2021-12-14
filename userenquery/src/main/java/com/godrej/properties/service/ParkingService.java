@@ -5,6 +5,7 @@ import java.util.List;
 import com.godrej.properties.model.HoldParkingAdmin;
 import com.godrej.properties.model.Parking;
 import com.godrej.properties.model.ParkingAdmin;
+import com.godrej.properties.model.ParkingRec;
 
 public interface ParkingService {
 	List<Parking> getParkingDtl(String propertyTypeSfid, String projectId, String towerMst, String unitCategory, String parkingLocation);
@@ -23,4 +24,6 @@ public interface ParkingService {
 	Boolean getSalesParkingHold(String parkingsfid, String userid);
 	
 	String updateParkingStatus(String parkingsfid);
+	
+	List<ParkingRec> getParking(String parkingsfid, String projectsfid);
 }

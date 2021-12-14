@@ -5,7 +5,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.StringReader;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+/*import org.apache.log4j.Logger;*/
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -16,7 +19,8 @@ import com.itextpdf.tool.xml.XMLWorkerHelper;
 import net.sf.jasperreports.engine.JRException;
 
 public class iTextHTMLtoPDF {
-	static Logger logger = Logger.getLogger(iTextHTMLtoPDF.class);
+	/*static Logger logger = Logger.getLogger(iTextHTMLtoPDF.class);*/
+	private static Logger logger = LogManager.getLogger(iTextHTMLtoPDF.class);
 	public static void main( String[] args ) throws DocumentException, IOException
     {
 		try {
@@ -146,7 +150,7 @@ public static void ApplicationFormPDF(String appFormData, String enqSfid, String
 	      String reraLabel = "";
 	      String reraWebsite = "";
 	      
-	      if (projectid.equals("a1l6F000003TXloQAG") || projectid.equals("a1l2s000000ZtXPAA0") || projectid.equals("a1l2s000000UQ25AAG") ) {
+	      if (projectid.equals("a1l6F000003TXloQAG") ) {
 	    	  reraLabel = "WBHIRA Registration No.";
 	    	 // reraRegistrationNo = "HIRA/P/SOU/2019/000456 / HIRA/P/SOU/2019/000455";
 	    	  projectName = "Godrej Se7en, Kolkata";
