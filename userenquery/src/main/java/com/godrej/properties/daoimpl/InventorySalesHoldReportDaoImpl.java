@@ -55,14 +55,22 @@ public class InventorySalesHoldReportDaoImpl implements InventorySalesHoldReport
 					+ " d.name, "
 					+ " d.mobile__c, "
 					+ " a.customer_id, "
-					+ " a.sfid " 
+					+ " a.sfid, "
+					//Parking
+					+ " q.propstrength__car_parking_name__c, "
+					+ " q.sfid as parkingsfid, "
+					+ " a.user_id as flat_hold_by " 
+					//END Parking
 					
 					+ " FROM salesforce.gpl_cs_hold_unit_uat a "
 					+ " INNER JOIN salesforce.propstrength__property__c b ON   b.sfid = a.sfid AND b.propstrength__active__c = true   "
+					
+					//Parking
+					+ " LEFT JOIN salesforce.gpl_cs_hold_parking p on p.flatsfid = a.sfid AND p.holdstatusyn = 'Y' AND p.statusai = 'A' "
+					+ " LEFT JOIN salesforce.propstrength__car_parking__c q ON q.sfid = p.parkingsfid "
+					// END Parking
 					+ " LEFT JOIN salesforce.mst_user c ON  a.user_id = c.user_id   "
-					
 					+ " LEFT JOIN salesforce.contact d ON d.sfid = a.contact_sfid "
-					
 					+ " where "+whereCondition+"    ", InventorySalesHoldReport.class);
 			
 			authors = q.getResultList();

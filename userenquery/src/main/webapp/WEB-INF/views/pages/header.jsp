@@ -35,6 +35,7 @@ session.setAttribute("version","4.09");
 		USEREMAIL_GV = '';
 	}	
 	var FOYRAPI_GV = '<%= session.getAttribute("FOYRAPI")%>';
+	var PARKING_MODULE_GV = '<%= session.getAttribute("PARKING_MODULE")%>';
 </script>
 
 <script src="<c:url value='/resources/js/salesdesk.js?v=${sessionScope.version}'/>"></script>
