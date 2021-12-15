@@ -36,7 +36,7 @@ import net.sf.jasperreports.engine.JRException;
 public class ParkingStatusController {
 	
 	
-	private Logger logger = LogManager.getLogger(getClass());
+	private static Logger logger = LogManager.getLogger(ParkingStatusController.class);
 	//static Logger logger = Logger.getLogger(ParkingStatusController.class);
 	
 	@Autowired

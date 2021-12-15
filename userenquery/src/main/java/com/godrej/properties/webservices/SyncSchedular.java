@@ -41,8 +41,8 @@ public class SyncSchedular {
 	@Autowired
 	private HoldParkingEntryService holdParkingEntryService;
 	
-	//Parking  Comment // @ResponseBody
-	//Parking  Comment // @Scheduled(cron="0 0/2 * * * ?")
+	@ResponseBody
+	@Scheduled(cron="0 0/2 * * * ?")
 	public void hourlySchedular(){
 		LOG.info("hourlySchedular ::*************");
 		try {
@@ -52,8 +52,8 @@ public class SyncSchedular {
 			LOG.error("hourlySchedular ::*************",e);
 		}
 	}
-	//Parking  Comment //@ResponseBody
-	//Parking  Comment //@Scheduled(cron="0 0/2 * * * ?")/* 2 min schedular time*/
+	@ResponseBody
+	@Scheduled(cron="0 0/2 * * * ?")/* 2 min schedular time*/
 	@RequestMapping("/updateCustomContactAndEnquiry")
 	public void customUpdateSchedular(){
 		LOG.info("customUpdateSchedular ::*************");
@@ -71,7 +71,7 @@ public class SyncSchedular {
 	@Scheduled(cron = "0/30 * * * * ?")//@Scheduled(cron = "0/20 * * * * ?")/* 30 Sec schedular time*///"0/15 * * * * *" //--20 Sec "*/20 * * * * *"
 	@RequestMapping("/updateBulkInventoryStatus")
 	public void updateBulkInventoryStatus(){
-		/*LOG.info("updateBulkInventoryStatus ::*************");
+		LOG.info("updateBulkInventoryStatus ::*************");
 		try {
 			HoldInventoryEntry updateHold = new HoldInventoryEntry ();
 			updateHold.setStatusai("I");
@@ -80,7 +80,7 @@ public class SyncSchedular {
 		}
 		catch (Exception e) {
 			LOG.error("updateBulkInventoryStatus ::*************",e);
-		}*/
+		}
 		
 		try {
 			LOG.info("updateBulkParkingStatus ::*************");
@@ -95,8 +95,8 @@ public class SyncSchedular {
 		}
 	}
 	/*For SFDC Cancelled offer inactive in D4U*/
-	//Parking  Comment //@ResponseBody
-	//Parking  Comment // @Scheduled(cron = "0 0/55 * * * ?")//@Scheduled(cron = "0/20 * * * * ?")/* 30 Sec schedular time*///"0/15 * * * * *" //--20 Sec "*/20 * * * * *"
+	@ResponseBody
+	@Scheduled(cron = "0 0/55 * * * ?")//@Scheduled(cron = "0/20 * * * * ?")/* 30 Sec schedular time*///"0/15 * * * * *" //--20 Sec "*/20 * * * * *"
 	@RequestMapping("/cancelledOfferInactive")
 	public void cancelledOfferInactive(){
 		LOG.info("cancelledOfferInactive ::*************");
