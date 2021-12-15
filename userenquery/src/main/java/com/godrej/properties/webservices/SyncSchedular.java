@@ -20,8 +20,8 @@ import com.godrej.properties.service.HoldInventoryEntryService;
 import com.godrej.properties.service.HoldParkingEntryService;
 import com.godrej.properties.service.PushEnquiryDataService;
 
-@Configuration
-@EnableScheduling
+/*@Configuration
+@EnableScheduling*/
 @Controller
 @Transactional 
 public class SyncSchedular {

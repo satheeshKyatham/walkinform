@@ -6,6 +6,10 @@ $.ajaxSetup({
     }
 });
 
+if (PARKING_MODULE_GV == "Y"){
+	parkingLocationList();
+} 
+
 var pageContext = $("#pageContext").val()+"/";	
  
 var enqSFIDforHoldUnit = '';
@@ -32,7 +36,7 @@ $(document).ready(function () {
 	
 	
 	$('#searchadminparking').change(function(){ 
-	 	if ( $('#parkingTowerMst option:selected').val() != '') {
+	 	if ( $('#parkingTypeCP option:selected').val() != '') {
 	 		var value = $(this).val();
 			if(value=='all'){
 				$('#btnParkingHOldSave').hide(); 
@@ -53,7 +57,7 @@ $(document).ready(function () {
 		   // getFloor(value);
 		} else {
 			swal({
-				title: "Please select the Tower",
+				title: "Please select the Parking Type",
 			    text: "",
 			    timer: 3000,
 			    type: "warning",
@@ -70,19 +74,16 @@ $(document).on('change','input[name=optionsParking]',function(){
 });
 
 function getParkingRec () {
-	// Comment for Admin
-	/*if ( $('#parkingTowerMst option:selected').val() != '') {
+	if ( $('#parkingTypeCP option:selected').val() != '') {	
 		parkingLoad ();
 	} else {
 		swal({
-			title: "Please select the Tower",
+			title: "Please select the Parking Type",
 		    text: "",
 		    timer: 3000,
-		    type: "error",
+		    type: "warning",
 		});
-	}*/
-	
-	parkingLoad ();
+	}
 }
 
 function parkingLoad (){
@@ -110,7 +111,7 @@ function parkingLoad (){
 	$.post(pageContext+"getAdminParkingDetails",{
 		"propertyTypeSfid":$('#propertyTypeSfidCS').val(), 
 		"projectId":$('#projectId').val(), 
-		"towerMst":$('#parkingTowerMst').val(), 
+		"towerMst":"", 
 		//"typoMst":"", 
 		//"holdMst":"", 
 		//"soldMst":"", 
@@ -118,8 +119,8 @@ function parkingLoad (){
 		//"unitAvailable":"", 
 		"unitCategory":$("#parkingCategory").val(),
 		"parkingLocation":$("#parkingLocationMst").val(),
-		"searchadminparking":$("#searchadminparking").val()
-		},function(data){				 
+		"searchadminparking":$("#searchadminparking").val(),
+		"parkingTypeCP":$("#parkingTypeCP").val()},function(data){				 
 		
 	}).done(function(data){
 		
@@ -504,8 +505,8 @@ function SaveParkingForRelease(){
 }
 
 function parkingLocationList () {
-	var towersfid = $("#parkingTowerMst").val();
-	var urlTower = pageContext+"getParkingLocation?towersfid="+towersfid;
+	var projectsfid = $('#projectId').val();
+	var urlTower = pageContext+"getParkingLocation?projectsfid="+projectsfid;
 	
 	var html = "";
 	

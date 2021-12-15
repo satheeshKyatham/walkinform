@@ -26,10 +26,18 @@ public class ParkingDaoImpl extends AbstractDao<Integer, Parking> implements Par
 	@SuppressWarnings("unchecked")
 	
 	//public List<Parking> getParkingDtl(String propertyTypeSfid, String project_code, String towerMst, String typoMst, String holdMst, String soldMst,String facing, String unitAvailable, String unitCategory) {	 
-	public List<Parking> getParkingDtl(String propertyTypeSfid, String projectId, String towerMst, String unitCategory, String parkingLocation) {	
+	public List<Parking> getParkingDtl(String propertyTypeSfid, String projectId, String towerMst, String unitCategory, String parkingLocation, String parkingTypeCP) {	
 		 
 		String category = "";
 		String location = "";
+		String parkingTypeCondition = "";
+		
+		if (parkingTypeCP.equals("")) {
+			parkingTypeCondition = "";
+		} else {
+			parkingTypeCondition = " and a.propstrength__category_of_parking__c = '"+parkingTypeCP+"' ";
+		}
+		
 		
 		if (unitCategory.equals("All")) {
 			category = "";
@@ -94,7 +102,10 @@ public class ParkingDaoImpl extends AbstractDao<Integer, Parking> implements Par
 				
 				
 				+ " FROM salesforce.propstrength__car_parking__c a"
-				+ " LEFT JOIN salesforce.nv_parking_mapping b ON a.propstrength__category_of_parking__c = b.parking_category AND b.property_type_sfid = '"+propertyTypeSfid+"' AND b.tower_sfid = '"+towerMst+"' "
+				+ " LEFT JOIN salesforce.nv_parking_mapping b ON a.propstrength__category_of_parking__c = b.parking_category AND b.property_type_sfid = '"+propertyTypeSfid+"' "
+				
+				//+ " AND b.tower_sfid = '"+towerMst+"' "
+				+ " AND b.tower_sfid = a.propstrength__tower_code__c "
 				
 				//New
 				+ " LEFT JOIN salesforce.gpl_cs_hold_parking c ON c.parkingsfid = a.sfid AND c.holdstatusyn <> 'N' AND c.statusai <> 'I' "
@@ -103,9 +114,10 @@ public class ParkingDaoImpl extends AbstractDao<Integer, Parking> implements Par
 				
 				+ " where a.propstrength__project__c = '"+projectId+"' "
 				+ " AND a.propstrength__active__c='t' "
-				+ " AND  a.propstrength__tower_code__c = '"+towerMst+"'   "
+				//+ " AND  a.propstrength__tower_code__c = '"+towerMst+"'   "
 				+ category
 				+ location
+				+ parkingTypeCondition
 				+ " ORDER BY a.propstrength__category_of_parking__c,  "
 				//+ " location_of_parking__c, "
 				+ " a.propstrength__car_parking_name__c  ", Parking.class);
@@ -125,12 +137,18 @@ public class ParkingDaoImpl extends AbstractDao<Integer, Parking> implements Par
 	
 	
 	//public List<ParkingAdmin> getAdminParkingDtl(String propertyTypeSfid, String project_code, String towerMst, String typoMst, String holdMst, String soldMst,String facing, String unitAvailable, String unitCategory) {	 
-	public List<ParkingAdmin> getAdminParkingDtl(String propertyTypeSfid, String projectId, String towerMst, String unitCategory, String parkingLocation, String searchadminparking) {	
+	public List<ParkingAdmin> getAdminParkingDtl(String propertyTypeSfid, String projectId, String towerMst, String unitCategory, String parkingLocation, String searchadminparking, String parkingTypeCP) {	
 		 
 		String category = "";
 		String location = "";
 		String adminParkingFilter ="";
+		String parkingTypeCondition = "";
 		
+		if (parkingTypeCP.equals("")) {
+			parkingTypeCondition = "";
+		} else {
+			parkingTypeCondition = " and a.propstrength__category_of_parking__c = '"+parkingTypeCP+"' ";
+		}
 		
 		if (unitCategory.equals("All")) {
 			category = "";
@@ -194,16 +212,20 @@ public class ParkingDaoImpl extends AbstractDao<Integer, Parking> implements Par
 				
 				+ " FROM salesforce.propstrength__car_parking__c a "
 				
-				+ " LEFT JOIN salesforce.nv_parking_mapping d ON a.propstrength__category_of_parking__c = d.parking_category AND d.property_type_sfid = '"+propertyTypeSfid+"' AND d.tower_sfid = '"+towerMst+"' "
+				+ " LEFT JOIN salesforce.nv_parking_mapping d ON a.propstrength__category_of_parking__c = d.parking_category AND d.property_type_sfid = '"+propertyTypeSfid+"' "
+				
+				//+ " AND d.tower_sfid = '"+towerMst+"' "
+				+ " AND d.tower_sfid = a.propstrength__tower_code__c "
 				
 				+ " LEFT JOIN salesforce.gpl_cs_hold_parking b ON a.sfid = b.parkingsfid AND b.holdstatusyn <> 'N' AND b.statusai <> 'I' "
 				+ " LEFT JOIN salesforce.gpl_cs_hold_admin_parking c ON a.sfid = c.parkingsfid AND c.projectsfid = a.propstrength__project__c AND c.version = 0 "
 				  
 				+ " where a.propstrength__project__c = '"+projectId+"' "
 				+ " AND a.propstrength__active__c='t' "
-				+ " AND  a.propstrength__tower_code__c = '"+towerMst+"'   "
+				//+ " AND  a.propstrength__tower_code__c = '"+towerMst+"'   "
 				+ category
 				+ location
+				+ parkingTypeCondition
 				+ adminParkingFilter
 				+ " ORDER BY a.propstrength__category_of_parking__c,  "
 				+ " a.propstrength__car_parking_name__c  ", ParkingAdmin.class);
@@ -219,9 +241,9 @@ public class ParkingDaoImpl extends AbstractDao<Integer, Parking> implements Par
 	}
 	
 	@Override
-	public List<Parking> getLocation(String towersfid) {
+	public List<Parking> getLocation(String projectsfid) {
 		Session session = this.sessionFactory.getCurrentSession();
-		List<Object>  list  =(List<Object>)session.createQuery( " select Distinct(location_of_parking__c),propstrength__tower_code__c FROM  Parking  where propstrength__tower_code__c='"+towersfid+"'" + " order by location_of_parking__c" ).list();
+		List<Object>  list  =(List<Object>)session.createQuery( " select Distinct(location_of_parking__c), location_of_parking__c FROM  Parking  where propstrength__project__c='"+projectsfid+"'" + " order by location_of_parking__c" ).list();
 		if(list.size()>0)
 		{
 			List<Parking> parkingDtl = new ArrayList<Parking>();
@@ -232,14 +254,14 @@ public class ParkingDaoImpl extends AbstractDao<Integer, Parking> implements Par
 			     Object[] obj = (Object[]) itr.next();
 			      
 			     String location = String.valueOf(obj[0]); 
-			     String tower = String.valueOf(obj[1]); 
+			     //String tower = String.valueOf(obj[1]); 
 			     
 			     if (!location.equals("null")) {
 			    	 paymentPlan.setLocation_of_parking__c(location);
 			     } else {
 			    	 paymentPlan.setLocation_of_parking__c("-");
 			     }
-			     paymentPlan.setPropstrength__tower_code__c(tower); 
+			     //paymentPlan.setPropstrength__tower_code__c(tower); 
 			     
 			     parkingDtl.add(paymentPlan);
 			  }

@@ -6,18 +6,22 @@ $.ajaxSetup({
     }
 });
 
+if (PARKING_MODULE_GV == "Y"){
+	parkingLocationList();
+} 
+
 var pageContext = $("#pageContext").val()+"/";	
   
 setInterval(function(){
 	if ($('#parkingTab').hasClass('active')) {
-		if ($('#parkingTowerMst').val().trim() != ""){
+		if ($('#parkingTypeCP').val().trim() != ""){
 			parkingLoad();
 		}
 	}
 },30000);
 
 function getParkingRec () {
-	if ( $('#parkingTowerMst option:selected').val() != '') {
+	if ( $('#parkingTypeCP option:selected').val() != '') {
 		parkingLoad ();
 	} else {
 		/*swal({
@@ -33,17 +37,20 @@ function getParkingRec () {
 
 function parkingLoad (){
 	
-	if ($('#propertyTypeSfidCS').val().trim() == "" ) {
+	/*if ($('#propertyTypeSfidCS').val().trim() == "" ) {
 		swal({
 			title: "Please select the inventory",
 		    text: "",
-		    //timer: 3000,
-		    type: "warning",
-		    //allowOutsideClick: false,
-		    //confirmButtonText: 'Yes it\'\s okay!',
-		    //cancelButtonText: "No, cancel it!",
-		    //closeOnConfirm: false,
-		    //closeOnCancel: false
+		    type: "warning", 
+		});
+		return;
+	}*/
+	
+	if ($('#parkingTypeCP').val().trim() == "" ) {
+		swal({
+			title: "Please select the parking type",
+		    text: "",
+		    type: "warning", 
 		});
 		return;
 	}
@@ -67,14 +74,15 @@ function parkingLoad (){
 	$.post(pageContext+"getParkingDetails",{
 		"propertyTypeSfid":$('#propertyTypeSfidCS').val(), 
 		"projectId":$('#projectId').val(), 
-		"towerMst":$('#parkingTowerMst').val(), 
+		"towerMst":"", 
 		//"typoMst":$("#typoMst").val(), 
 		//"holdMst":holdVal, 
 		//"soldMst":soldVal, 
 		//"facing":$("#facing").val(), 
 		//"unitAvailable":unitAvailable, 
 		"unitCategory":$("#parkingCategory").val(),
-		"parkingLocation":$("#parkingLocationMst").val()},function(data){				 
+		"parkingLocation":$("#parkingLocationMst").val(),
+		"parkingTypeCP":$("#parkingTypeCP").val()},function(data){				 
 		
 	}).done(function(data){
 		
@@ -244,25 +252,6 @@ $(document).ready(function () {
 });
 // END - Fixed parking type
 
-/*function parkingTowerList () {
-	$('#parkingTowerMst').empty();	
-	var projectNameVal = $("#projectId").val();
-	
-	var urlTower = pageContext+"getTowerMaster?project_code="+projectNameVal;
-	
-	
-	$.getJSON(urlTower, function (data) {
-		$('#parkingTowerMst').append('<option value="">Select</option>');
-		$.each(data, function (index, value) {
-			$('#parkingTowerMst').append("<option value='"+value.sfid+"'>"+value.tower_name__c+"</option>");
-		});					
-	}).done(function() {
-		
-	});
-}*/
-
-
-
 $(document).on('change','input[name=optionsParking]',function(){
 	var parkingName = $( 'input[name=optionsParking]:checked' ).val();
 	/*var parkingSFID = $( 'input[name=optionsParking]:checked' ).attr("data-parkingSFID");
@@ -415,8 +404,8 @@ function selectParking (source) {
 
 
 function parkingLocationList () {
-	var towersfid = $("#parkingTowerMst").val();
-	var urlTower = pageContext+"getParkingLocation?towersfid="+towersfid;
+	var projectsfid = $('#projectId').val();
+	var urlTower = pageContext+"getParkingLocation?projectsfid="+projectsfid;
 	
 	var html = "";
 	

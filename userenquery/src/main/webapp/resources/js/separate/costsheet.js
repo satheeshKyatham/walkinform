@@ -4311,11 +4311,16 @@ function costsheetLogger (cstype) {
 			formData.append('parking_name', "");
 			formData.append('parking_sfid', "");
 			formData.append('parking_amount', "0");
-		} else {
+		} else if ($('#parkingSFIDCS').val() == "PARKING_SELECTION") {
 			formData.append('parking_selection', "PARKING_SELECTION");
 			formData.append('parking_name', $('#parkingNameCS').val());
 			formData.append('parking_sfid', $('#parkingSFIDCS').val());
 			formData.append('parking_amount', $('#parkingAmountCS').val());
+		} else {
+			formData.append('parking_selection', "NO_PARKING_SELECTION");
+			formData.append('parking_name', "");
+			formData.append('parking_sfid', "");
+			formData.append('parking_amount', "0");
 		}
 	} else {
 		formData.append('parking_selection', "");

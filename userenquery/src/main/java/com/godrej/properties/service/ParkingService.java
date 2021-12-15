@@ -8,9 +8,9 @@ import com.godrej.properties.model.ParkingAdmin;
 import com.godrej.properties.model.ParkingRec;
 
 public interface ParkingService {
-	List<Parking> getParkingDtl(String propertyTypeSfid, String projectId, String towerMst, String unitCategory, String parkingLocation);
+	List<Parking> getParkingDtl(String propertyTypeSfid, String projectId, String towerMst, String unitCategory, String parkingLocation, String parkingTypeCP);
 	
-	List<ParkingAdmin> getAdminParkingDtl(String propertyTypeSfid, String projectId, String towerMst, String unitCategory, String parkingLocation, String searchadminparking);
+	List<ParkingAdmin> getAdminParkingDtl(String propertyTypeSfid, String projectId, String towerMst, String unitCategory, String parkingLocation, String searchadminparking, String parkingTypeCP);
 	
 	String parkingHold (String propid, String parkingsfid, String projectsfid, Integer userid);
 	
@@ -19,7 +19,7 @@ public interface ParkingService {
 	
 	void updateHoldParkingAdmin(HoldParkingAdmin parkingAdmin);
 	
-	List<Parking> getLocation(String towersfid);
+	List<Parking> getLocation(String projectsfid);
 	
 	Boolean getSalesParkingHold(String parkingsfid, String userid);
 	

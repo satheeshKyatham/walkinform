@@ -65,7 +65,8 @@ public class ParkingController {
 			@RequestParam("projectId") String projectId, 
 			@RequestParam("towerMst") String towerMst, 
 			@RequestParam("unitCategory") String unitCategory,
-			@RequestParam("parkingLocation") String parkingLocation) {
+			@RequestParam("parkingLocation") String parkingLocation,
+			@RequestParam("parkingTypeCP") String parkingTypeCP) {
 			GsonBuilder gsonBuilder = new GsonBuilder();
 			Gson gson = gsonBuilder.create();
 						
@@ -78,7 +79,7 @@ public class ParkingController {
 				isPlot = false;
 			}*/
 			
-			List<Parking> plans=parkingService.getParkingDtl(propertyTypeSfid, projectId, towerMst, unitCategory, parkingLocation);
+			List<Parking> plans=parkingService.getParkingDtl(propertyTypeSfid, projectId, towerMst, unitCategory, parkingLocation, parkingTypeCP);
 			//List<Parking> plans=parkingService.getParkingDtl(propertyTypeSfid, projectId, towerMst, typoMst, holdMst, soldMst,facing, unitAvailable, unitCategory);
 			
 			HashSet<String> floorName=new HashSet<>();
@@ -205,7 +206,8 @@ public class ParkingController {
 			@RequestParam("towerMst") String towerMst, 
 			@RequestParam("unitCategory") String unitCategory,
 			@RequestParam("parkingLocation") String parkingLocation,
-			@RequestParam("searchadminparking") String searchadminparking) {
+			@RequestParam("searchadminparking") String searchadminparking,
+			@RequestParam("parkingTypeCP") String parkingTypeCP) {
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		Gson gson = gsonBuilder.create();
 					
@@ -219,7 +221,7 @@ public class ParkingController {
 		}*/
 		
 		
-		List<ParkingAdmin> plans=parkingService.getAdminParkingDtl(propertyTypeSfid, projectId, towerMst, unitCategory, parkingLocation, searchadminparking);
+		List<ParkingAdmin> plans=parkingService.getAdminParkingDtl(propertyTypeSfid, projectId, towerMst, unitCategory, parkingLocation, searchadminparking, parkingTypeCP);
 		
 		HashSet<String> floorName=new HashSet<>();
 		HashSet<Integer> floor=new HashSet<>();
@@ -412,9 +414,9 @@ public class ParkingController {
 	
 	
 	@RequestMapping(value = "/getParkingLocation", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
-	public String getParkingLocation(@RequestParam("towersfid") String towersfid) {
+	public String getParkingLocation(@RequestParam("projectsfid") String projectsfid) {
 		Gson gson = new GsonBuilder().disableHtmlEscaping().create();
-		return gson.toJson(parkingService.getLocation(towersfid));
+		return gson.toJson(parkingService.getLocation(projectsfid));
 	}
 	
 	

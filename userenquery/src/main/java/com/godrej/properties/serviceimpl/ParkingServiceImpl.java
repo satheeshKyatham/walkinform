@@ -40,13 +40,13 @@ public class ParkingServiceImpl implements ParkingService {
 	
 	
 	@Override
-	public List<Parking> getParkingDtl(String propertyTypeSfid, String projectId, String towerMst, String unitCategory, String parkingLocation) {
-		return parkingDao.getParkingDtl(propertyTypeSfid, projectId, towerMst, unitCategory, parkingLocation);
+	public List<Parking> getParkingDtl(String propertyTypeSfid, String projectId, String towerMst, String unitCategory, String parkingLocation, String parkingTypeCP) {
+		return parkingDao.getParkingDtl(propertyTypeSfid, projectId, towerMst, unitCategory, parkingLocation, parkingTypeCP);
 	}
 	
 	@Override
-	public List<ParkingAdmin> getAdminParkingDtl(String propertyTypeSfid, String projectId, String towerMst, String unitCategory, String parkingLocation, String searchadminparking) {
-		return parkingDao.getAdminParkingDtl(propertyTypeSfid, projectId, towerMst, unitCategory, parkingLocation, searchadminparking);
+	public List<ParkingAdmin> getAdminParkingDtl(String propertyTypeSfid, String projectId, String towerMst, String unitCategory, String parkingLocation, String searchadminparking, String parkingTypeCP) {
+		return parkingDao.getAdminParkingDtl(propertyTypeSfid, projectId, towerMst, unitCategory, parkingLocation, searchadminparking, parkingTypeCP);
 	}
 	
 	public void saveHoldInventoryAdmin(HoldParkingAdmin parkingAdmin) {
@@ -175,8 +175,8 @@ public class ParkingServiceImpl implements ParkingService {
 	}
 	
 	@Override
-	public List<Parking> getLocation(String towersfid) {
-		return parkingDao.getLocation(towersfid);
+	public List<Parking> getLocation(String projectsfid) {
+		return parkingDao.getLocation(projectsfid);
 	}
 	
 	

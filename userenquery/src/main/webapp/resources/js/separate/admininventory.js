@@ -684,7 +684,10 @@ function towerList (e, source) {
 			
 			$('#allUnitTowerMstReport').append("<option value='"+value.tower_code__c+"'>"+value.tower_name__c+"</option>");
 			$('#towerMstSalesHoldReport').append("<option value='"+value.tower_code__c+"'>"+value.tower_name__c+"</option>");
-		});					
+		});			
+		
+		//$('#parkingTowerMst').append("<option data-towertype='CUSTOMTOWER' value='P1'>P1</option>");
+		
 	}).done(function() {
 			
 		// $('#tdd .commonLoad').hide();

@@ -20,10 +20,21 @@
 	<div class="col-md-10" style="margin: 0 auto; float: none;">
 		<div class="mainCont " style="padding-top: 10px;">
 			<div class="">
-				<div class="form-group col-md-5">
+				<div class="form-group col-md-5" style="display:none;">
 					<label>Parking Tower</label>
 					<select class="form-control" id="parkingTowerMst" onclick="parkingLocationList();"> </select>
 				 </div>
+				 
+				 <div class="form-group col-md-5">
+					<label>Parking Type</label>
+					<select class="form-control" id="parkingTypeCP">
+						<option value = ''>Select</option>
+						<option value = 'Covered'>Covered</option>
+						<option value = 'Stack Parking'>Stack Parking</option>
+						<option value = 'Tandem'>Tandem</option>
+					</select>
+				 </div>
+				 
 				 <div class="form-group col-md-3 col-sm-6">
 					<label>Parking Location</label>
 					<select id="parkingLocationMst" class="form-control">
