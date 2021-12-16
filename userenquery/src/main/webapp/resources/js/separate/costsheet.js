@@ -4549,7 +4549,7 @@ function getParkingRecForCS (){
 					" </tr>" +
 					" <tr> " +
 	          		"<td>"+value.propstrength__car_parking_name__c+"</td>" +
-	          		"<td>"+value.propstrength__category_of_parking__c+"</td>";
+	          		"<td>"+value.propstrength__category_of_parking__c +" ("+value.dimensions__c+")</td>";
 	         /* " </tr> "+	
 				'</tbody>'+
 				'</table>';	*/
