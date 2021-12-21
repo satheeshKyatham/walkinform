@@ -152,9 +152,16 @@ public static void ApplicationFormPDF(String appFormData, String enqSfid, String
 	      
 	      if (projectid.equals("a1l6F000003TXloQAG") ) {
 	    	  reraLabel = "WBHIRA Registration No.";
-	    	 // reraRegistrationNo = "HIRA/P/SOU/2019/000456 / HIRA/P/SOU/2019/000455";
 	    	  projectName = "Godrej Se7en, Kolkata";
-	      } else if(projectid.equals("a1l6F000002X6IOQA0") ){
+	      } else if(projectid.equals("a1l2s000000ZtXPAA0") ){
+	    	  reraLabel = "WBHIRA Registration No.";
+	    	  projectName = "Orchard at Godrej SE7EN";
+	      } else if(projectid.equals("a1l2s000000UQ25AAG") ){
+	    	  reraLabel = "WBHIRA Registration No.";
+	    	  projectName = "Retreat at Godrej Prakriti";
+	      }
+	      
+	      else if(projectid.equals("a1l6F000002X6IOQA0") ){
 	    	  projectName = "The Highlands at Godrej City, Panvel";
 	    	  reraLabel = "RERA Registration No.";
 	      } else if (projectid.equals("a1l6F000004RvPHQA0") ) {

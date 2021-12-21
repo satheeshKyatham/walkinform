@@ -72,6 +72,13 @@ public class CostsheetLog {
 	@Column(name="createddate") private Timestamp createddate;
 	@Column(name="updateddate") private Timestamp updateddate;
 	
+	//Parking
+	@Column(name="parking_selection") private String parking_selection;
+	@Column(name="parking_name") private String parking_name;
+	@Column(name="parking_sfid") private String parking_sfid;
+	@Column(name="parking_amount", precision = 10, scale = 2)  private BigDecimal parking_amount;
+	//END Parking
+	
 	public int getId() {
 		return id;
 	}
@@ -353,5 +360,29 @@ public class CostsheetLog {
 	}
 	public void setUpdateddate(Timestamp updateddate) {
 		this.updateddate = updateddate;
+	}
+	public String getParking_selection() {
+		return parking_selection;
+	}
+	public void setParking_selection(String parking_selection) {
+		this.parking_selection = parking_selection;
+	}
+	public String getParking_name() {
+		return parking_name;
+	}
+	public void setParking_name(String parking_name) {
+		this.parking_name = parking_name;
+	}
+	public String getParking_sfid() {
+		return parking_sfid;
+	}
+	public void setParking_sfid(String parking_sfid) {
+		this.parking_sfid = parking_sfid;
+	}
+	public BigDecimal getParking_amount() {
+		return parking_amount;
+	}
+	public void setParking_amount(BigDecimal parking_amount) {
+		this.parking_amount = parking_amount;
 	}
 }

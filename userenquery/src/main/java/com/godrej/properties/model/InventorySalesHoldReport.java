@@ -85,6 +85,9 @@ public class InventorySalesHoldReport implements Serializable{
 	@Column(name = "sfid")
 	private String sfid;
 	
+	@Column(name = "propstrength__car_parking_name__c") private String propstrength__car_parking_name__c;
+	@Column(name = "parkingsfid") private String parkingsfid;
+	@Column(name = "flat_hold_by") private Integer flat_hold_by;
 	
 	public int getId() {
 		return id;
@@ -272,5 +275,21 @@ public class InventorySalesHoldReport implements Serializable{
 
 	public void setSfid(String sfid) {
 		this.sfid = sfid;
+	}
+
+	public String getPropstrength__car_parking_name__c() {
+		return propstrength__car_parking_name__c;
+	}
+
+	public void setPropstrength__car_parking_name__c(String propstrength__car_parking_name__c) {
+		this.propstrength__car_parking_name__c = propstrength__car_parking_name__c;
+	}
+
+	public String getParkingsfid() {
+		return parkingsfid;
+	}
+
+	public void setParkingsfid(String parkingsfid) {
+		this.parkingsfid = parkingsfid;
 	}
 }

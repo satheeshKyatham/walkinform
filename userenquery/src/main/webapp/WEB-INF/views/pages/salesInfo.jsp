@@ -236,6 +236,9 @@ if(ses!=null){
 					<a href="#inventoryTabCont" data-toggle="tab">Inventory</a>
 				</li>
 				
+				<li id="parkingTab" onclick="holdExistData();"> 
+					<a href="#parkingTabCont" data-toggle="tab">Parking</a>
+				</li>
 				
 				<li id="costsheetTab" onclick="holdExistData();">
 				<!-- <li id="costsheetTab" onclick="holdExistData(); schemeDropdown (); getSchemeSource();"> -->
@@ -1721,6 +1724,10 @@ if(ses!=null){
 			  <jsp:include page="inventory.jsp"></jsp:include>
 			</div>	
 			
+			<div class="tab-pane" id="parkingTabCont">
+				<jsp:include page="parking.jsp"></jsp:include>
+			</div>
+			
 			<div class="tab-pane" id="foyrFram">
 			   
 			</div>
@@ -1901,6 +1908,8 @@ if(ses!=null){
  <script src="<c:url value='/resources/js/bootstrap-datetimepicker.min.js' />"></script> 
  
  <script src="<c:url value='/resources/js/separate/inventory.js?v=${sessionScope.version}'/>"></script>
+ 
+ <script src="<c:url value='/resources/js/separate/parking.js?v=${sessionScope.version}'/>"></script>
  
 <!-- Costsheet --> 
 <script src="<c:url value='/resources/js/jquery.tabletojson.min.js'/>"></script>

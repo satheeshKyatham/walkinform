@@ -2,7 +2,6 @@ package com.godrej.properties.serviceimpl;
 
 import java.sql.Timestamp;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
@@ -12,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.godrej.properties.dao.CarParkingMappingDao;
 import com.godrej.properties.dao.CarParkingMappingLogDao;
 import com.godrej.properties.dao.CarparkTypeAndChargeDao;
+import com.godrej.properties.dto.SoldCarParkDTO;
 import com.godrej.properties.model.CarParkingMapping;
 import com.godrej.properties.model.CarParkingMappingLog;
 import com.godrej.properties.model.CarparkCount;
@@ -111,5 +111,11 @@ public class CarparkTypeAndChargeServiceImpl implements CarparkTypeAndChargeServ
 	public String inActiveCarParkingCombination(String property_type_sfid,String parking_category,String isactive) {
 		// TODO Auto-generated method stub
 		return carparkingMappingDao.inActiveCarParkingCombination(property_type_sfid,parking_category,isactive);
+	}
+
+	@Override
+	public List<SoldCarParkDTO> getCarParkingCount(String projectsfid) {
+		// TODO Auto-generated method stub
+		return carparkingMappingDao.getCarParkingCount(projectsfid);
 	}
 }

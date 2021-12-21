@@ -12,7 +12,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 @Entity
-@Table(name="salesforce.vw_project_inventory_admin")
+@Table(name="salesforce.vw_project_inventory_admin_v2")
 public class InventoryAdmin implements Serializable{
 	
 	private static final long serialVersionUID = 1L; 
@@ -100,6 +100,11 @@ public class InventoryAdmin implements Serializable{
 	private String propstrength__tower__c;
 	
 	@Column(name = "inventory_category__c") private String inventory_category__c;
+	
+	//Parking
+	@Column(name = "parking_hold_reason") private String parking_hold_reason;
+	@Column(name = "parking_hold_status") private Boolean parking_hold_status;
+	//END Parking
 	
 	
 	public String isHold_status() {

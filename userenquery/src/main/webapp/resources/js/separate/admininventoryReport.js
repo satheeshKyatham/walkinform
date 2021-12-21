@@ -49,6 +49,9 @@ function getInventoryReportDtl () {
 			var enq_name = [];
 			var customer_name = [];
 			var customer_mobile = [];
+			//Parking
+			var parkingname = [];
+			//END Parking
 			var tower_name__c = [];
 			var floor_number__c = [];
 			var propstrength__house_unit_no__c = [];
@@ -82,7 +85,12 @@ function getInventoryReportDtl () {
                     enq_name.push(obj1[i].enq_name); 
                     customer_name.push(obj1[i].customer_name); 
                     customer_mobile.push(obj1[i].customer_mobile); 
-					tower_name__c.push(obj1[i].tower_name__c); 
+					
+                    //Parking
+                    parkingname.push(obj1[i].parkingname); 
+        			//END Parking
+                    
+                    tower_name__c.push(obj1[i].tower_name__c); 
                     floor_number__c.push(obj1[i].floor_number__c); 
                     propstrength__house_unit_no__c.push(obj1[i].propstrength__house_unit_no__c); 
                     propstrength__unit_type__c.push(obj1[i].propstrength__unit_type__c); 
@@ -172,6 +180,7 @@ function getInventoryReportDtl () {
 							"<td>"+verticle__c[j]+"</td>" +
 							"<td>"+customer_name[j]+"</td>" +
 							"<td>"+customer_mobile[j]+"</td>" +
+							"<td>"+parkingname[j]+"</td>" +
 							" <td>"+tower_name__c[j]+"</td>" +
 							" <td>"+floor_number__c[j]+"</td>" +
 							" <td>"+propstrength__house_unit_no__c[j]+"</td>" +

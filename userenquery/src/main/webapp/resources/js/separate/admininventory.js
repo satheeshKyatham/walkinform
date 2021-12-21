@@ -429,6 +429,8 @@ function inventoryLoad (){
 				var floorNo = '"'+obj1[0].floor_number__c+'"';
 				var towerCode = '"'+obj1[0].propstrength__tower__c+'"';
 				
+				var property_type_sfid= '"'+obj1[j].propstrength__property_type__C+'"';
+				
 				if (obj1[j].propstrength__property_on_hold_for_reallocation__c == 't' || obj1[j].PropStrength__Property_Alloted_Through_Offer__c == 't' ) {
 					/*dropdown = "";
 					caret = "";
@@ -507,7 +509,7 @@ function inventoryLoad (){
 				}
 				
 				dropdown = "<ul class='dropdown-menu'> " +
-							"	<li><a onclick='viewCostsheet(this, "+unitSfid+", "+houseNo+", "+floorNo+", "+towerCode+")'>View Costsheet</a></li> " +
+							"	<li><a onclick='viewCostsheet(this, "+unitSfid+", "+houseNo+", "+floorNo+", "+towerCode+", "+property_type_sfid+")'>View Costsheet</a></li> " +
 						" </ul>";
 				caret = "caret";
 				
@@ -519,8 +521,14 @@ function inventoryLoad (){
 				} else {
 					wing = "";
 				}
+				//Parking
+				var parkingIcon = '';
+				if (unitStatus != "unitSold" && obj1[j].parking_hold_reason == 'temp' && obj1[j].parking_hold_status == true) {
+					parkingIcon = '<div style="position: absolute; background-color: #fff; padding: 1px; border-radius: 4px; right: 4px; top: -4px; border: 1px solid grey;"><i class="fa fa-car" style=" font-size: 17px; color: #000000;"></i></div>';
+				}
+				//END Parking
 				
-				html += "<div class='unitCel dropdown'> "+unitcheckbox+" <div type='button' data-toggle='dropdown' class='fcData dropdown-toggle "+ unitStatus +"'>" +wing+obj1[j].propstrength__house_unit_no__c+"<span class='"+caret+"'></span></div>   "+dropdown+" </div>";
+				html += "<div class='unitCel dropdown'> "+parkingIcon+" "+unitcheckbox+" <div type='button' data-toggle='dropdown' class='fcData dropdown-toggle "+ unitStatus +"'>" +wing+obj1[j].propstrength__house_unit_no__c+"<span class='"+caret+"'></span></div>   "+dropdown+" </div>";
 				//html += "<div class='unitCel dropdown'> "+unitcheckbox+" <div type='button' data-toggle='dropdown' class='fcData dropdown-toggle "+ unitStatus +"'>" +wing+obj1[j].propstrength__house_unit_no__c+"</div> </div>";
 				
 			}
@@ -562,9 +570,9 @@ function holdInterval (e, sfid, unitNo, floor) {
 	$("#typoMst").val();*/
 	
 	
-	$('#inventoryBreadcrumb').empty();
+	$('.inventoryBreadcrumb').empty();
 	
-	$('#inventoryBreadcrumb').append("<nav aria-label='breadcrumb'><ol class='breadcrumb'>  <li class='breadcrumb-item'> "+ $('#towerRec').val()+" </li> <li class='breadcrumb-item'>"+floor+"</li>  <li class='breadcrumb-item'> "+unitNo+" </li></ol></nav>");
+	$('.inventoryBreadcrumb').append("<nav aria-label='breadcrumb'><ol class='breadcrumb'>  <li class='breadcrumb-item'> "+ $('#towerRec').val()+" </li> <li class='breadcrumb-item'>"+floor+"</li>  <li class='breadcrumb-item'> "+unitNo+" </li></ol></nav>");
 	
 	
 	
@@ -655,6 +663,7 @@ towerList ();
 function towerList (e, source) {
 	$('#towerMst').empty();	
 	//alert($("#projectid").val())
+	$('#parkingTowerMst').empty();	
 	var projectNameVal = $("#projectid").val();
 	var urlTower = pageContext+"getTower?project_code="+projectNameVal;
 	
@@ -662,12 +671,23 @@ function towerList (e, source) {
 	$.getJSON(urlTower, function (data) {
 		
 		$('#towerMst').append('<option value="">Select</option>');
+		//Parking
+		$('#parkingTowerMst').append('<option value="">Select</option>');
+		//END Parking
 		$.each(data, function (index, value) {
 			$('#towerMst').append("<option value='"+value.tower_code__c+"'>"+value.tower_name__c+"</option>");
+			//Parking
+			$('#parkingTowerMst').append("<option value='"+value.towersfid+"'>"+value.tower_name__c+"</option>");
+			//END Parking
 			$('#towerMstReport').append("<option value='"+value.tower_code__c+"'>"+value.tower_name__c+"</option>");
+			$('#towerMstReportParking').append("<option value='"+value.towersfid+"'>"+value.tower_name__c+"</option>");
+			
 			$('#allUnitTowerMstReport').append("<option value='"+value.tower_code__c+"'>"+value.tower_name__c+"</option>");
 			$('#towerMstSalesHoldReport').append("<option value='"+value.tower_code__c+"'>"+value.tower_name__c+"</option>");
-		});					
+		});			
+		
+		//$('#parkingTowerMst').append("<option data-towertype='CUSTOMTOWER' value='P1'>P1</option>");
+		
 	}).done(function() {
 			
 		// $('#tdd .commonLoad').hide();
@@ -777,7 +797,6 @@ function enqDtlForAdminHold () {
  
  
 //usertowermultiselect ();
-
 
 function sendEmail() {
     var email = "atulbhanushali93@gmail.com";//message.emailId;

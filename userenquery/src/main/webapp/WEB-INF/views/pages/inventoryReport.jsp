@@ -75,6 +75,7 @@
 							<th>Customer</th>
 							<th>Mobile No.</th>
 							
+							<th>Parking</th>
 							
 							<th>Tower</th>
 							<th>Floor No.</th>

@@ -41,6 +41,7 @@ function getCostsheetLogReportDtl () {
 		var obj1 =JSON.parse(data);
 		var html = '';
 		var schemeType = "";
+		var parkingSelection = "";
 			
 		if (obj1 != null) {
 			for(var i=0;i<obj1.length;i++){
@@ -55,6 +56,15 @@ function getCostsheetLogReportDtl () {
 						schemeType = "Scheme";
 					} else {
 						schemeType = "";
+					}
+					
+					
+					if (obj1[i].parking_selection == "PARKING_SELECTION") {
+						parkingSelection = "Continue with parking";
+					} else if (obj1[i].parking_selection == "NO_PARKING_SELECTION") {
+						parkingSelection = "Continue without parking";
+					} else {
+						parkingSelection = "";
 					}
 					
 					html += "<tr>" +
@@ -105,10 +115,11 @@ function getCostsheetLogReportDtl () {
 						"<td>"+obj1[i].total_discount+"</td>" +
 						"<td>"+obj1[i].paymentplan_total+"</td>" +
 						"<td>"+obj1[i].cs_sales_comments+"</td>" +
+						
+						"<td>"+parkingSelection+"</td>" +
+						"<td>"+obj1[i].parking_name+"</td>" +
+						"<td>"+obj1[i].parking_amount+"</td>" + 
 						//------------------------------------
-						
-						
-						
 						
 					" </tr>";
 				

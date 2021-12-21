@@ -73,11 +73,22 @@ public class InventoryReportDaoImpl implements InventoryReportDao{
 				+ " CASE WHEN g.propstrength__fixed_charge__c IS NULL THEN cast(0 as numeric (20,2)) ELSE cast(g.propstrength__fixed_charge__c as numeric (20,2)) END AS propstrength__fixed_charge__c, "
 				
 				+ " e.verticle__c, "
-				+ " e.closing_manager_name__c "
+				+ " e.closing_manager_name__c, "
 				
+				//Parking
+				+ " p.parkingname"
+				//END Parking
 				
 				+ " FROM salesforce.gpl_cs_hold_admin_unit a "
 				+ " LEFT JOIN salesforce.propstrength__property__c b ON   b.sfid = a.sfid AND b.propstrength__active__c = true "
+				
+				//Parking
+				+ " LEFT JOIN (SELECT x.flatsfid, string_agg(y.propstrength__car_parking_name__c, ', ') AS parkingname  FROM salesforce.gpl_cs_hold_admin_parking x  "
+					+ " LEFT JOIN salesforce.propstrength__car_parking__c y ON x.parkingsfid = y.sfid "
+					+ " where  x.hold_reason = 'temp' AND x.hold_status = true "
+					+ " GROUP  BY 1 ) p ON p.flatsfid = a.sfid "
+				//END Parking
+				
 				+ " LEFT JOIN salesforce.mst_user c ON cast(a.customer_id as integer) = c.user_id "
 				+ " LEFT JOIN salesforce.mst_user d ON a.hold_behalf_userid = d.user_id  "
 				+ " LEFT  JOIN salesforce.propstrength__request__c e ON e.sfid = a.enq_sfid " 
