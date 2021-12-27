@@ -6,5 +6,5 @@ public interface SalesUnitHoldStatusService {
 	
 	Boolean getSalesUnitHold(String unitSFID, String userid);
 	
-	HoldInventoryEntry getUnitHoldDtl(String unitSFID);
+	HoldInventoryEntry getUnitHoldDtl(String unitSFID, Integer userid);
 }

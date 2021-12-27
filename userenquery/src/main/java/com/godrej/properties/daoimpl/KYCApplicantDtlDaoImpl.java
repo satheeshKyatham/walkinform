@@ -155,11 +155,12 @@ public class KYCApplicantDtlDaoImpl extends AbstractDao<Integer, KYCApplicantDtl
 				+ "a.userdocid,a.userid,a.kyclink,a.kycapproval_status,a.kycreject_comment,a.project_sfid,"
 				+ "b.sfid AS enquirysfid,b.propstrength__primary_contact__c AS contactsfid,c.name AS offername,"
 				+ "c.sfid AS offersfid,balnce.description,"
-				+ "( SELECT gpl_cs_balance_details.costsheet_path FROM salesforce.gpl_cs_balance_details WHERE gpl_cs_balance_details.offer_sfid = c.sfid AND gpl_cs_balance_details.isactive = 'A') AS costsheet_path,"
+				//+ "( SELECT gpl_cs_balance_details.costsheet_path FROM salesforce.gpl_cs_balance_details WHERE gpl_cs_balance_details.offer_sfid = c.sfid AND gpl_cs_balance_details.isactive = 'A') AS costsheet_path,"
+				+ "balnce.costsheet_path,"
 				+ "c.property_name1__c,sum(e.propstrength__amount__c) AS totalamount,balnce.userid AS createdoffer_userid,"
-				+ "mstuser.user_name AS offercreatedname,kycapproval.user_name AS kycapproval_name,application.name AS booking_name,application.propstrength__status__c AS booking_status"
+				+ " mstuser.user_name AS offercreatedname,kycapproval.user_name AS kycapproval_name,application.name AS booking_name,application.propstrength__status__c AS booking_status"
 				+ " FROM salesforce.nv_eoi_form a"
-				+ " LEFT JOIN salesforce.propstrength__request__c b ON a.enquiryid = b.name"
+				+ " INNER JOIN salesforce.propstrength__request__c b ON a.enquiryid = b.name and b.PropStrength__Project__c='"+projectid+"'"
 				+ " LEFT JOIN salesforce.propstrength__offer__c c ON b.sfid = c.propstrength__request__c AND c.propstrength__status__c = 'Closed Won' AND c.propstrength__status__c IS NOT NULL"
 				+ " LEFT JOIN salesforce.propstrength__prepayment_received__c e ON c.sfid = e.propstrength__offer__c"
 				+ " LEFT JOIN salesforce.gpl_cs_balance_details balnce ON c.sfid = balnce.offer_sfid AND balnce.isactive = 'A'"
@@ -167,7 +168,7 @@ public class KYCApplicantDtlDaoImpl extends AbstractDao<Integer, KYCApplicantDtl
 				+ " LEFT JOIN salesforce.propstrength__application_booking__c application ON c.sfid = application.propstrength__offer__c"
 				+ " LEFT JOIN salesforce.mst_user kycapproval ON kycapproval.user_id = a.approve_reject_by"
 				+ " WHERE a.enquiryid IS NOT NULL "+whereCondintion+""
-				+ " GROUP BY a.id, a.enquiryid, a.application_name, a.phone_number, a.issubmitted, a.userdocid, a.userid, a.kyclink, a.kycapproval_status, a.kycreject_comment, a.project_sfid, b.sfid, b.propstrength__primary_contact__c, c.name, c.sfid, c.property_name1__c, balnce.userid, mstuser.user_name, application.name, kycapproval.user_name, application.propstrength__status__c, balnce.description ", EOIDataVW.class);
+				+ " GROUP BY a.id, a.enquiryid, a.application_name, a.phone_number, a.issubmitted, a.userdocid, a.userid, a.kyclink, a.kycapproval_status, a.kycreject_comment, a.project_sfid, b.sfid, b.propstrength__primary_contact__c, c.name, c.sfid, c.property_name1__c, balnce.userid, mstuser.user_name, application.name, kycapproval.user_name, application.propstrength__status__c, balnce.description,balnce.costsheet_path ", EOIDataVW.class);
 		
 		authors = (List<EOIDataVW>)q.getResultList();
 		log.info("KYC List Admin Query ::: {}", q);

@@ -293,6 +293,7 @@ public class OfferController {
 					
 					//Parking
 					if (jobj.get("offerid").getAsString().equals("Offer not created")) {
+						//if (jobj.get("offerid").getAsString().trim().equals("") || jobj.get("offerid").getAsString().trim().equals("Offer not created")) {
 						log.info(" Create Offer Controller - Yes, There is some technical problem (code:3) ");
 						action.setOffer_successMsg(errorMsg3);
 						return gson.toJson(action);
@@ -316,6 +317,14 @@ public class OfferController {
 						if("a1l2s000000ZtWvAAK".equals(projectsfid) || "a1l2s000000ZtXPAA0".equals(projectsfid) || "a1l2s000000UQ25AAG".equals(projectsfid) || "a1l2s000000g6kZAAQ".equals(projectsfid) || "a1l2s000000g6eqAAA".equals(projectsfid) || "a1l6F000004RvPHQA0".equals(projectsfid) || "a1l2s000000PKrrAAG".equals(projectsfid) || "a1l2s000000PK3IAAW".equals(projectsfid) || "a1l2s000000PJPmAAO".equals(projectsfid) || "a1l6F000002X6IOQA0".equals(projectsfid) || "a1l6F0000081xb4QAA".equals(projectsfid) || "a1l2s00000000X5AAI".equals(projectsfid) || "a1l2s00000003VlAAI".equals(projectsfid)  || "a1l6F000003TXloQAG".equals(projectsfid) || "a1l2s000000PGu3AAG".equals(projectsfid)  || "a1l2s000000PGu8AAG".equals(projectsfid) || "a1l2s000000PGuDAAW".equals(projectsfid) || "a1l2s000000PGuIAAW".equals(projectsfid) || "a1l2s000000PGuNAAW".equals(projectsfid) || "a1l2s000000PGuSAAW".equals(projectsfid) || "a1l2s000000XoezAAC".equals(projectsfid)) {
 							boolean isPMAY = isUnderPMAY(offerid, projectsfid,salesConsiderationTotal, reraCarpetAreaSqm);
 							propOtherChargesService.updatePropertyStatus(propid, isPMAY);
+							
+							//Parking
+							if (isParkingModule.equals("Y")) {
+								if(parkingsfid!=null && parkingsfid.length()==18 && !parkingsfid.equals("null")) {
+									parkingService.updateParkingStatus(parkingsfid);
+								}	
+							}
+							// END Parking
 						} else {
 							propOtherChargesService.updatePropertyStatus(propid);
 							//Parking

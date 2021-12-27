@@ -309,6 +309,25 @@ function proceedParking (source) {
 
 //Parking
 function parkingReleaseFromHold (source) {
+	
+	if (USERID_GV == null || 
+		USERID_GV == 'null' || 
+		USERID_GV == undefined || 
+		USERID_GV == 'undefined' || 
+		USERID_GV == '' ) {
+		
+		swal({
+		   		title: "Your session has expired. please login again", 
+				text: "",
+				type: "warning",
+				allowOutsideClick: true,
+				showConfirmButton: true
+		});
+		
+		return;
+	}
+	
+	
 	$.post(pageContext+"parkingReleaseFromHold",{"projectsfid":$('#projectId').val(), "userid":USERID_GV, "flatsfid":""},function(data){				 
 		
 	}).done(function(data){
@@ -322,6 +341,23 @@ function parkingReleaseFromHold (source) {
 // END parking
 
 function selectParking (source) {
+	
+	if ($('#userid').val() == null || 
+		$('#userid').val() == 'null' || 
+		$('#userid').val() == undefined || 
+		$('#userid').val() == 'undefined' || 
+		$('#userid').val() == '' ) {
+		
+		swal({
+		   		title: "Your session has expired. please login again", 
+				text: "",
+				type: "warning",
+				allowOutsideClick: true,
+				showConfirmButton: true
+		});
+		
+		return;
+	}
 	
 	var parkingName = "";
 	var parkingSFID = "";
