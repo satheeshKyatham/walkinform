@@ -216,7 +216,7 @@ function getAllotmentDashboardReport () {
 function carparkCountList (){
 	//alert(PARKING_MODULE_GV);
 	$('#soldCarparkTab i').show();
-	if($('#projectid').val()=="a1l2s000000ZtWvAAK")
+	if(PARKING_MODULE_GV=="Y")
 		{
 			$.get("getParkingCount_D4U_Enabled",{"projectsfid":$('#projectid').val() },function(data){
 				
