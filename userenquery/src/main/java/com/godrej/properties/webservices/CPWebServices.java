@@ -1,5 +1,8 @@
 package com.godrej.properties.webservices;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.sql.Timestamp;
@@ -43,21 +46,26 @@ import com.godrej.properties.dto.EnquiryDto;
 import com.godrej.properties.dto.GPLAppBookingAPIDto;
 import com.godrej.properties.dto.GPLAppEnquiryReqAPIDto;
 import com.godrej.properties.dto.GPLAppEnquiryRespAPIDto;
+import com.godrej.properties.dto.SysConfigEnum;
 import com.godrej.properties.master.dto.ReferenceListDto;
 import com.godrej.properties.master.service.ReferenceListService;
+import com.godrej.properties.master.service.SysConfigService;
 import com.godrej.properties.model.CPAPP_EnquiryRequest;
 import com.godrej.properties.model.Contact;
 import com.godrej.properties.model.EOIPaymentDtl;
+import com.godrej.properties.model.EnqJourneyDtl;
 import com.godrej.properties.model.GeneratePayment;
 import com.godrej.properties.model.ProjectLaunch;
 import com.godrej.properties.service.CPAPP_Service;
 import com.godrej.properties.service.EOIReportService;
+import com.godrej.properties.service.EnqJourneyDtlService;
 import com.godrej.properties.service.EnquiryRequestService;
 import com.godrej.properties.service.GeneratePaymentService;
 import com.godrej.properties.service.ProjectLaunchService;
 import com.godrej.properties.service.UserContactService;
 import com.godrej.properties.serviceimpl.GPLAppsWebServiceImpl;
 import com.godrej.properties.util.CommonUtil;
+import com.godrej.properties.util.SendMailThreadUtil;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
@@ -97,6 +105,12 @@ public class CPWebServices {
 	
 	@Autowired
 	private GPLAppsWebServiceImpl gplAppsWebServiceImpl;
+	
+	@Autowired
+	private EnqJourneyDtlService enqJourneyDtlService;
+	
+	@Autowired
+	private SysConfigService sysConfigService;
 	
 	@RequestMapping(value = "/validateEnquiryExist", method = RequestMethod.GET, produces = "application/json")
 	public String validateEnquiryExist(@RequestParam("countryCode") String countryCode,
@@ -765,7 +779,8 @@ public class CPWebServices {
 					if (isInserted) {
 						try {
 							//String status = new GeneratePaymentController().mailLinkSend(project_sfid,enq_sfid,user_email,userid,user_name,request);
-							String status="STATUS_OK";
+							String status = mailLinkSend(project_sfid,enq_sfid,user_email,userid,user_name,paymentRequest);
+							//String status="STATUS_OK";
 							if (status.equals("STATUS_OK")) {
 								String response = "{\"status\":\"STATUS_OK\",\"error_msg\":\"Successfully submitted & Link sent to customer\",\"error_id\":null}";
 								return response;
@@ -797,4 +812,83 @@ public class CPWebServices {
 		}
 	}	
 	
+	public String mailLinkSend(String projectid,String enqid,String emailid,String userid,String user_name,String paymentRequestURL
+			) throws UnsupportedEncodingException {
+		
+		String STATUS_NOTOK="STATUS_NOTOK";
+		String STATUS_OK = "STATUS_OK";
+		
+		if(    !projectid.equals("")  
+				&& !enqid.equals("")  
+				&& !emailid.equals("")  
+				&& !userid.equals("")  
+				&& !user_name.equals("") )  {
+			
+			try {
+				int useridInt = Integer.parseInt(userid);
+				
+				List<EnqJourneyDtl> enqList = enqJourneyDtlService.getAllData(projectid,enqid);
+				
+				if(enqList!=null && enqList.size()>0) {
+					for(EnqJourneyDtl eoi: enqList)
+					{
+						if(eoi.getPhone_number()!=null && eoi.getPhone_number().length()>0)
+						{
+							//String str = encriptString(eoi.getPhone_number());
+							//String resultPath = request.getHeader("Host") + request.getContextPath();
+							//String kyclink= "https://"+resultPath+"/ccAvenueLogin?num="+str.replaceAll("\"", "")+"&projectid="+URLEncoder.encode(eoi.getProjectsfid(), "UTF-8")+"&enqsfid="+URLEncoder.encode(enqid, "UTF-8")+"&projectname="+URLEncoder.encode(eoi.getProjectname(), "UTF-8");
+							//String text = readContentFromFile("D://atul_data//apache-tomcat-9.0.22//QR//payment_request.htm");
+							String text = readContentFromFile("D://SW//apache-tomcat-9.0.0.M22//apache-tomcat-9.0.0.M22//QR//payment_request.htm");
+							
+							text = text.replaceAll("@CustomerName@", eoi.getApplication_name());
+							text = text.replaceAll("@ProjectName@", eoi.getProjectname());
+							text = text.replaceAll("@ClosingMName@", user_name);
+							text = text.replaceAll("@ClosingMEmail@", emailid);
+							text = text.replaceAll("@Link@", paymentRequestURL);
+							
+							String emailTempl = "Please find herewith the <a href=\"@Link@\">link</a> to update your KYC details. </br></br>Regards</br>Godrej Properties";
+							emailTempl = emailTempl.replaceAll("@Link@", paymentRequestURL);
+							
+							if(eoi.getEmail_id()!=null && eoi.getEmail_id().length()>0) {
+								String projectName = "Godrej Properties : Payment Requested for "+ eoi.getProjectname();
+								String smtpip = sysConfigService.getValue(SysConfigEnum.SMTP_IP, "SMTP_IP");
+								String smtpPort = sysConfigService.getValue(SysConfigEnum.SMTP_PORT, "SMTP_PORT");
+								SendMailThreadUtil mail =new SendMailThreadUtil(eoi.getEmail_id(),	emailid, projectName, text,smtpip,smtpPort);
+							} 
+						}
+					}
+					return STATUS_OK;
+				} else {
+					return STATUS_NOTOK;
+				}
+			} catch (Exception e) {
+				log.info("Payment Request - Getting error while link mail to customer Error:- ",e);
+				return STATUS_NOTOK;
+			}
+		} else {
+			return STATUS_NOTOK;
+		}
+	}
+	
+	private static String readContentFromFile(String fileName) throws UnsupportedEncodingException {
+	    StringBuffer contents = new StringBuffer();
+	    try {
+	      //use buffering, reading one line at a time
+	      BufferedReader reader =  new BufferedReader(new FileReader(fileName));
+	      try {
+	        String line = null; 
+	        while (( line = reader.readLine()) != null){
+	          contents.append(line);
+	          contents.append(System.getProperty("line.separator"));
+	        }
+	      }
+	      finally {
+	          reader.close();
+	      }
+	    }
+	    catch (IOException ex){
+	      ex.printStackTrace();
+	    }
+	    return contents.toString();
+	}
 }

@@ -31,8 +31,10 @@ public class CarParkingMapping implements Serializable{
 	@Column(name = "property_type_name")  private String property_type_name;
 	@Column(name = "property_type_code")  private String property_type_code;
 	
+	
 	@Transient
 	private int row_count;
+	
 	
 	public int getId() {
 		return id;
