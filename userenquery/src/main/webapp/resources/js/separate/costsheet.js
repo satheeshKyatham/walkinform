@@ -4522,6 +4522,8 @@ function getParkingRecForCS (){
      
  	 if (data != null) {
  		
+ 		var parkingDimensions = '';
+ 		 
  		parkingHTMLPrint += 	'<h4 style="margin-bottom:0px !important; padding-bottom:0px !important;">Parking Details</h4>' +
 		'<div class="clearfix"></div>' +
 		'<table class="table table-bordered bgWhite" style="width:100%; font-size:8px !important;">' +
@@ -4537,7 +4539,17 @@ function getParkingRecForCS (){
  		 
  		 $.each(data, function (index, value) {
  	    	
+ 			if (value.dimensions__c != null && 
+ 				value.dimensions__c != undefined && 
+ 				value.dimensions__c != "null" &&
+ 				value.dimensions__c != "undefined" &&
+ 				value.dimensions__c != "") {
+ 				
+ 				parkingDimensions = " ("+value.dimensions__c+")";
  			
+ 			} else {
+ 				parkingDimensions = "";
+ 			}
  			
  			/*parkingHTMLPrint += 	'<h4 style="margin-bottom:0px !important; padding-bottom:0px !important;">Parking Details</h4>' +
 				'<div class="clearfix"></div>' +
@@ -4549,7 +4561,7 @@ function getParkingRecForCS (){
 					" </tr>" +
 					" <tr> " +
 	          		"<td>"+value.propstrength__car_parking_name__c+"</td>" +
-	          		"<td>"+value.propstrength__category_of_parking__c +" ("+value.dimensions__c+")</td>";
+	          		"<td>"+value.propstrength__category_of_parking__c + parkingDimensions + "</td>";
 	         /* " </tr> "+	
 				'</tbody>'+
 				'</table>';	*/
@@ -4564,7 +4576,7 @@ function getParkingRecForCS (){
 						"</tr>" +
 						"<tr> " +
 			      		"<td>"+value.propstrength__car_parking_name__c+"</td>" +
-			      		"<td>"+value.propstrength__category_of_parking__c +" ("+value.dimensions__c+")</td>";
+			      		"<td>"+value.propstrength__category_of_parking__c + parkingDimensions + "</td>";
 			      	/*"</tr> "+	
 					'</tbody>'+
 					'</table>';*/
@@ -4594,8 +4606,4 @@ function getParkingRecForCS (){
   }).done(function() {
        
   });
-          
-     
-    
-    
 }

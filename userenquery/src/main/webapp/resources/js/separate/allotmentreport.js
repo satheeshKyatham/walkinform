@@ -9,7 +9,7 @@ $.ajaxSetup({
 $(document).ready(function() {
 	
 	
-	alert(PARKING_MODULE_GV);
+	//alert(PARKING_MODULE_GV);
 	var today = new Date();
 	document.getElementById("txtAllotFromDate").value = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
 	document.getElementById("txtAllotToDate").value = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
@@ -214,60 +214,128 @@ function getAllotmentDashboardReport () {
 }
 
 function carparkCountList (){
+	//alert(PARKING_MODULE_GV);
 	$('#soldCarparkTab i').show();
-	$.get("getCarparkCount",{"projectSFID":$('#projectid').val() },function(data){				 
-		//var obj =JSON.stringify(data);
-		
-		var countHTML = "";
-		var carparkTypeName = "";
-		
-		if(data!=null) {
-			$("#carparkCountTbl").html("");
-			
-			var totalSold = 0;
-			var totalCarpark = 0;
-			
-			countHTML += "<div class='clearfix'></div> <h4>Sold Car Park</h4> <table class='table table-bordered table-striped'>" 
-							+ "<thead>" 
-								+ "<tr>"
-									+ "<th>Car park type</th>"
-									+ "<th>Car park <small><b>(*Indicative - Its considering offers created through D4U only)</b><small></th>" 
-								+ "</tr>"
-							+ "</thead>"
-							+ "<tbody>";
+	if($('#projectid').val()=="a1l2s000000ZtWvAAK")
+		{
+			$.get("getParkingCount_D4U_Enabled",{"projectsfid":$('#projectid').val() },function(data){
 				
-								for(var i=0;i<data.length;i++){
-									
-									if (data[i].carpark_alias != "null" && data[i].carpark_alias != undefined && data[i].carpark_alias != null){
-										carparkTypeName = data[i].carpark_alias;
-									} else {
-										carparkTypeName = data[i].carpark_type;
-									}
-									
-									countHTML += "<tr>" 
-													+ "<td>"+carparkTypeName+"</td>" 
-													+ "<td>"+data[i].sold_carpark+"/"+data[i].total_carpark+"</td>"  
-												+ "</tr>"; 
-									
-									totalSold = parseInt(data[i].sold_carpark)+parseInt(totalSold);
-									totalCarpark = parseInt(data[i].total_carpark)+parseInt(totalCarpark); 
-									
-								}
-			
-				countHTML += "<tr><th>Grand Total</th><th>"+totalSold+"/"+totalCarpark+"</th></tr>"; 
-								
-				countHTML += "</tbody>" 
-						+ "</table>";		
+				var countHTML = "";
+				var carparkTypeName = "";
 				
-				$("#carparkCountTbl").html(countHTML);
-				
-		} else {
-			$('#soldCarparkTab i').hide();
-			$("#carparkCountTbl").html("");
+				if(data!=null) {
+					$("#carparkCountTbl").html("");
+					
+					var totalSold = 0;
+					var totalCarpark = 0;
+					var alloted_totalCarpark = 0;
+					countHTML += "<div class='clearfix'></div> <h4>Sold Car Park</h4> <table class='table table-bordered table-striped'>" 
+									+ "<thead>" 
+										+ "<tr>"
+											+ "<th>Parking type</th>"
+											+ "<th>Parking Sold<small><b>(*Post Offer Creation)</b><small></th>" 
+											+ "<th>Parking Alloted<small><b>(*Post Booking Creation)</b><small></th>"
+											+ "</tr>"
+									+ "</thead>"
+									+ "<tbody>";
+						
+										/*for(var i=0;i<data.length;i++){
+											
+											if (data[i].carpark_alias != "null" && data[i].carpark_alias != undefined && data[i].carpark_alias != null){
+												carparkTypeName = data[i].carpark_alias;
+											} else {
+												carparkTypeName = data[i].carpark_type;
+											}
+											
+											countHTML += "<tr>" 
+															+ "<td>"+carparkTypeName+"</td>" 
+															+ "<td>"+data[i].sold_carpark+"/"+data[i].total_carpark+"</td>"  
+														+ "</tr>"; 
+											
+											totalSold = parseInt(data[i].sold_carpark)+parseInt(totalSold);
+											totalCarpark = parseInt(data[i].total_carpark)+parseInt(totalCarpark); 
+											
+										}*/
+					for(var i=0;i<data.length;i++){
+										countHTML += "<tr>" 
+											+ "<td>"+data[i].category_Name+"</td>" 
+											+ "<td>"+data[i].sold_parking_count+"/"+data[i].total_parking_count+"</td>"  
+											+ "<td>"+data[i].alloted_through_offer_count+"/"+data[i].total_parking_count+"</td>"  
+										+ "</tr>"; 
+					
+										totalSold=parseInt(totalSold)+parseInt(data[i].sold_parking_count);
+										totalCarpark=parseInt(totalCarpark)+parseInt(data[i].total_parking_count);
+										alloted_totalCarpark = parseInt(alloted_totalCarpark)+parseInt(data[i].alloted_through_offer_count)
+					}
+						countHTML += "<tr><th>Grand Total</th><th>"+totalSold+"/"+totalCarpark+"</th><th>"+alloted_totalCarpark+"/"+totalCarpark+"</th></tr>"; 
+										
+						countHTML += "</tbody>" 
+								+ "</table>";		
+						
+						$("#carparkCountTbl").html(countHTML);
+						
+				} else {
+					$('#soldCarparkTab i').hide();
+					$("#carparkCountTbl").html("");
+				}
+			}).done(function(data){
+				$('#soldCarparkTab i').hide();
+			});	
 		}
-	}).done(function(data){
-		$('#soldCarparkTab i').hide();
-	});	
+	else
+		{
+			$.get("getCarparkCount",{"projectSFID":$('#projectid').val() },function(data){				 
+				var countHTML = "";
+				var carparkTypeName = "";
+				
+				if(data!=null) {
+					$("#carparkCountTbl").html("");
+					
+					var totalSold = 0;
+					var totalCarpark = 0;
+					
+					countHTML += "<div class='clearfix'></div> <h4>Sold Car Park</h4> <table class='table table-bordered table-striped'>" 
+									+ "<thead>" 
+										+ "<tr>"
+											+ "<th>Car park type</th>"
+											+ "<th>Car park <small><b>(*Indicative - Its considering offers created through D4U only)</b><small></th>" 
+										+ "</tr>"
+									+ "</thead>"
+									+ "<tbody>";
+						
+										for(var i=0;i<data.length;i++){
+											
+											if (data[i].carpark_alias != "null" && data[i].carpark_alias != undefined && data[i].carpark_alias != null){
+												carparkTypeName = data[i].carpark_alias;
+											} else {
+												carparkTypeName = data[i].carpark_type;
+											}
+											
+											countHTML += "<tr>" 
+															+ "<td>"+carparkTypeName+"</td>" 
+															+ "<td>"+data[i].sold_carpark+"/"+data[i].total_carpark+"</td>"  
+														+ "</tr>"; 
+											
+											totalSold = parseInt(data[i].sold_carpark)+parseInt(totalSold);
+											totalCarpark = parseInt(data[i].total_carpark)+parseInt(totalCarpark); 
+											
+										}
+					
+						countHTML += "<tr><th>Grand Total</th><th>"+totalSold+"/"+totalCarpark+"</th></tr>"; 
+										
+						countHTML += "</tbody>" 
+								+ "</table>";		
+						
+						$("#carparkCountTbl").html(countHTML);
+						
+				} else {
+					$('#soldCarparkTab i').hide();
+					$("#carparkCountTbl").html("");
+				}
+			}).done(function(data){
+				$('#soldCarparkTab i').hide();
+			});	
+		}
 }
 
 /*

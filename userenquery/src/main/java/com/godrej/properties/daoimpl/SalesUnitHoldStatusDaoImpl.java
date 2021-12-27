@@ -37,14 +37,14 @@ public class SalesUnitHoldStatusDaoImpl extends AbstractDao<Integer, HoldInvento
 		
 	}
 	
-	public HoldInventoryEntry getUnitHoldDtl(String unitSFID) {	 
+	public HoldInventoryEntry getUnitHoldDtl(String unitSFID, Integer userid) {	 
 		
 		Session session = this.sessionFactory.getCurrentSession();	
 		
 		List<HoldInventoryEntry> authors=null;
 		
 		Query q = session.createNativeQuery(" select * from salesforce.gpl_cs_hold_unit_uat "
-				+ " where sfid = '"+unitSFID+"' and  statusai = 'A' and holdstatusyn = 'Y'  ", HoldInventoryEntry.class);
+				+ " where sfid = '"+unitSFID+"' and user_id = '"+userid+"' and  statusai = 'A' and holdstatusyn = 'Y'  ", HoldInventoryEntry.class);
 		
 		authors = q.getResultList();
 		

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.godrej.properties.dto.SoldCarParkDTO;
 import com.godrej.properties.model.CarParkingMapping;
 import com.godrej.properties.model.CarparkCount;
 import com.godrej.properties.model.CarparkTypeAndCharge;
@@ -73,6 +74,11 @@ public class CarparkTypeAndChargeController {
 	public String inActiveParkingCombination(@RequestParam("property_type_sfid") String property_type_sfid,@RequestParam("parking_category") String parking_category,@RequestParam("isactive") String isactive) {
 		return carparkTypeAndChargeService.inActiveCarParkingCombination(property_type_sfid,parking_category,isactive);
 		
+	}
+	
+	@GetMapping(value = "/getParkingCount_D4U_Enabled", produces = "application/json")
+	public @ResponseBody List<SoldCarParkDTO> getParkingCount(@RequestParam("projectsfid") String projectsfid) {
+		return carparkTypeAndChargeService.getCarParkingCount(projectsfid);
 	}
 	
 	/*@RequestMapping(value = "/getCarparkCount", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")

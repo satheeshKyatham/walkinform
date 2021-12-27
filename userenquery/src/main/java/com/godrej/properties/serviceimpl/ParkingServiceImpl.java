@@ -63,7 +63,7 @@ public class ParkingServiceImpl implements ParkingService {
 		
 		String result = "";
 		
-		HoldInventoryEntry salesUnitStatus = salesUnitHoldStatusDao.getUnitHoldDtl(propid);
+		HoldInventoryEntry salesUnitStatus = salesUnitHoldStatusDao.getUnitHoldDtl(propid, userid);
 		
 		if (salesUnitStatus == null) {
 			result = "{\"status\":\"STATUS_OK\",\"record_found\":\"NO\", \"errorid\": \"E1\",\"error_msg\":\"Flat/Unit hold record not found\"}";

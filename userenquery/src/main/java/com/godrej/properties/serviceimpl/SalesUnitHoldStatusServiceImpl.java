@@ -20,7 +20,7 @@ public class SalesUnitHoldStatusServiceImpl implements SalesUnitHoldStatusServic
 	}
 	
 	@Override
-	public HoldInventoryEntry getUnitHoldDtl(String unitSFID) {
-		return salesUnitHoldStatusDao.getUnitHoldDtl(unitSFID);
+	public HoldInventoryEntry getUnitHoldDtl(String unitSFID, Integer userid) {
+		return salesUnitHoldStatusDao.getUnitHoldDtl(unitSFID, userid);
 	}
 }
