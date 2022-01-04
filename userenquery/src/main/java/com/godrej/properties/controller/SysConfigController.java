@@ -23,6 +23,5 @@ public class SysConfigController {
 	public @ResponseBody String reload(@RequestParam ("key") String key,
 			@RequestParam ("recordId") String recordId) {
 		return sysConfigService.reload(key, recordId);
-	}
-	
+	}	
 }

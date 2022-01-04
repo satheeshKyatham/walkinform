@@ -49,10 +49,12 @@ public class Test {
         String formatDateTime = now.format(formatter);
         System.out.println("After : " + formatDateTime);*/
 		
-		String inputString="509015 is the access code to initiate your meeting for a Godrej Properties Home.  Kindly share this code with Godrej Properties representative to confirm your interest %26 source of your enquiry - Channel Partner (Reliable Trading and Real Estate). Regards, Godrej Properties";
+		/*String inputString="509015 is the access code to initiate your meeting for a Godrej Properties Home.  Kindly share this code with Godrej Properties representative to confirm your interest %26 source of your enquiry - Channel Partner (Reliable Trading and Real Estate). Regards, Godrej Properties";
 		String encodedString = UrlEscapers.urlFragmentEscaper().escape(inputString);
 		System.out.println("encodedString:-"+encodedString);
-		System.out.println(""+inputString.replaceAll("\\s", "%20"));
+		System.out.println(""+inputString.replaceAll("\\s", "%20"));*/
+		
+		System.gc();
 		
 		/*String animals = "dog; cat; bear; elephant; cat";
 
