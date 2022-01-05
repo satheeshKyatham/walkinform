@@ -276,21 +276,28 @@ $(document).ready(function() {
 			//alert($("#"+slectedID+" option:selected").text())
 			//debugger;
 			//$("#mainPageLoad").show();
-			  $.get("updateassignstatus",
-					{
-						"id" :tokenid,
-						"assinedto":$("#"+slectedID+"").val(),
-						"tokenType":tokenType,
-						"tokenNo":tokenNo,
-						"cust_name":cust_name,
-						"cust_mobileNo":cust_mobileNo,
-						"salesPerson":$("#"+slectedID+" option:selected").text()
-					},
-					function(data) {	
-						alert("Successfully Assigned...");
-						loadData();
-						//$("#mainPageLoad").hide();
-					});   
+			if($("#"+slectedID+" option:selected").text()=="Select Type")
+				{
+					alert("Please select assign to");
+				}
+			else
+				{
+				  $.get("updateassignstatus",
+						{
+							"id" :tokenid,
+							"assinedto":$("#"+slectedID+"").val(),
+							"tokenType":tokenType,
+							"tokenNo":tokenNo,
+							"cust_name":cust_name,
+							"cust_mobileNo":cust_mobileNo,
+							"salesPerson":$("#"+slectedID+" option:selected").text()
+						},
+						function(data) {	
+							alert("Successfully Assigned...");
+							loadData();
+							//$("#mainPageLoad").hide();
+						}); 
+				}
 		}
 		
 		function reAsignedTokenUpdate(tokenid,assignedid,tokenNo,cust_name,cust_mobileNo)

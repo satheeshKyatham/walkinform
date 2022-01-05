@@ -50,6 +50,12 @@ public class GeneratePayment implements Serializable{
 	@Transient private String transaction_date_string;
 	@Column(name = "requestsource") private String requestsource;
 	
+	@Column(name = "cp_floor_band") private String cp_floor_band;
+	@Column(name = "cp_typology") private String cp_typology;
+	@Column(name = "cp_broker_name") private String cp_broker_name;
+	@Column(name = "cp_broker_sfid") private String cp_broker_sfid;
+	@Column(name = "cp_broker_email") private String cp_broker_email;
+	
 	public String getRequestsource() {
 		return requestsource;
 	}
@@ -209,6 +215,37 @@ public class GeneratePayment implements Serializable{
 	public void setTowersfid(String towersfid) {
 		this.towersfid = towersfid;
 	}
+	public String getCp_floor_band() {
+		return cp_floor_band;
+	}
+	public void setCp_floor_band(String cp_floor_band) {
+		this.cp_floor_band = cp_floor_band;
+	}
+	public String getCp_typology() {
+		return cp_typology;
+	}
+	public void setCp_typology(String cp_typology) {
+		this.cp_typology = cp_typology;
+	}
+	public String getCp_broker_name() {
+		return cp_broker_name;
+	}
+	public void setCp_broker_name(String cp_broker_name) {
+		this.cp_broker_name = cp_broker_name;
+	}
+	public String getCp_broker_sfid() {
+		return cp_broker_sfid;
+	}
+	public void setCp_broker_sfid(String cp_broker_sfid) {
+		this.cp_broker_sfid = cp_broker_sfid;
+	}
+	public String getCp_broker_email() {
+		return cp_broker_email;
+	}
+	public void setCp_broker_email(String cp_broker_email) {
+		this.cp_broker_email = cp_broker_email;
+	}
+	
 	
 	
 }

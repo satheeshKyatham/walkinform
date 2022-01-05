@@ -507,7 +507,7 @@ public class GPLAppsWebServiceImpl implements GPLAppsWebService{
 				//if(eoiJourneyFlag==True && bookingJourneyFlag==False)
 				TowerMaster towerMaster =null;
 				String propertyName="";
-				if(bookingData.getEoiJourneyFlag().equals("T") && bookingData.getBookingJourneyFlag().equals("F"))
+				/*if(bookingData.getEoiJourneyFlag().equals("T") && bookingData.getBookingJourneyFlag().equals("F"))
 				{
 					//if(paymentStatus=="Success")
 					if(bookingData.getPaymentStatus().equals("Success"))
@@ -557,7 +557,7 @@ public class GPLAppsWebServiceImpl implements GPLAppsWebService{
 					}
 					
 				}
-				else if(bookingData.getEoiJourneyFlag().equals("F") && bookingData.getBookingJourneyFlag().equals("T"))//else(eoiJourneyFlag==False && bookingJourneyFlag==True)
+				else*/ if(bookingData.getEoiJourneyFlag().equals("F") && bookingData.getBookingJourneyFlag().equals("T"))//else(eoiJourneyFlag==False && bookingJourneyFlag==True)
 				{
 					//if(paymentStatus=="Success")
 					if(bookingData.getPaymentStatus().equals("Success"))
@@ -585,9 +585,9 @@ public class GPLAppsWebServiceImpl implements GPLAppsWebService{
 						
 						bookingData = insertEOIPreference(bookingData);
 						
-						bookingData = insertPaymentDtl(bookingData);
+						//bookingData = insertPaymentDtl(bookingData);
 						
-						updateData=" PropStrength__Request_Status__c='Initiate Offer', ";
+						//updateData=" PropStrength__Request_Status__c='Initiate Offer', ";
 						bookingData.setTokenType("F");
 						bookingData.setTokenName("REFUNDABLE");
 						

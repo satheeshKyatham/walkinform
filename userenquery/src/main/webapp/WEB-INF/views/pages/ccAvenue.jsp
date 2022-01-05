@@ -74,9 +74,9 @@ if(ses!=null){
 										<th id="enquiry_Id">Enquiry</th>
 										<th>Project Name</th>
 										<th>Amount</th>	
-										<th>Transaction Id</th>	
-										<th>Transaction Status</th>									
-										<th>Action</th>
+										<!-- <th>Transaction Id</th>	
+										<th>Transaction Status</th>	 -->								
+										<!-- <th>Action</th> -->
 									</tr>
 								</thead>
 								<tbody>
@@ -101,8 +101,24 @@ if(ses!=null){
 	<script src="<c:url value='/resources/js/dataTables.buttons.min.js'/>"></script>
 	<script src="<c:url value='/resources/js/jszip.min.js'/>"></script>
 	<script src="<c:url value='/resources/js/buttons.html5.min.js'/>"></script>
-	<script src="<c:url value='/resources/js/payment/ccAvenue.js?v=18.54'/>"></script>
+	<script src="<c:url value='/resources/js/payment/ccAvenue.js?v=18.56'/>"></script>
 	 <script type="text/javascript">	getCCAvenuePaymentDetails();</script> 
-	<%@ include file="/WEB-INF/views/pages/footer.jsp" %>
+	 <footer id="d4uFooter"> 
+	<div class="footer-main">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="logo">
+						<img src="<c:url value="/resources/images/d4u_logo.png"/>" alt="D4U">
+					</div>
+					<ul class="footer-links">
+						<li>Copyright © 2021. Godrej Properties</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+	<%-- <%@ include file="/WEB-INF/views/pages/footer.jsp" %> --%>
 </body>
 </html>

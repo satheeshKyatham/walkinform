@@ -93,7 +93,7 @@
 									<th> Typology </th>
 									<th> Unit </th>
 									<th> Floor Band </th>
-									<th> Car Park Type </th>
+									<th> Parking Space(s) </th>
 									<th> Description </th>
 									<th style="width:32px;"></th>
 								</tr>
@@ -219,7 +219,7 @@
 					<th>Floor Band</th>
 					<th>Tower</th>
 					<th>Unit No.</th>
-					<th>Car Park Type</th>
+					<th>Parking Space(s)</th>
 					<th>Description</th>
 		      	</tr>
 		    </thead>

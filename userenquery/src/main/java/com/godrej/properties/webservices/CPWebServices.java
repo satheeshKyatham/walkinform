@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.math.BigDecimal;
 import java.net.URLEncoder;
 import java.sql.Timestamp;
 import java.text.DateFormat;
@@ -33,6 +34,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.godrej.properties.common.dto.CustomCPResponseDto;
 import com.godrej.properties.common.dto.CustomResponseDto;
+import com.godrej.properties.common.utilities.CommonValidations;
 import com.godrej.properties.constants.KeyConstants;
 import com.godrej.properties.constants.MessageConstants;
 import com.godrej.properties.controller.EnquiryRequestController;
@@ -162,7 +164,7 @@ public class CPWebServices {
 					projectSfid, emailid);
 			if (!enquiryList.isEmpty()) {
 				if (enquiryList.get(0).getChannelPartner().getSfid().equals(brokeraccid)) {
-					System.out.println("Entry found");
+					log.info("Entry found");
 					resp.setSuccess(true);
 					resp.setMessage(MessageConstants.ENQUIRY_GET_SUCCESS);
 					String resultPath = request.getScheme() + "://" + request.getHeader("Host")
@@ -171,15 +173,15 @@ public class CPWebServices {
 							+ enquiryList.get(0).getProject().getSfid() + "/"
 							+ enquiryList.get(0).getProject().getPname() + "/42/D");
 				} else {
-					System.out.println("The LEAD IS ALREADY CREATED");
+					log.info("Lead exist in system with different source");
 					resp.setSuccess(false);
-					resp.setMessage("The LEAD IS ALREADY CREATED");
+					resp.setMessage("Lead exist in system with different source");
 					resp.setUrl("");
 				}
 			} else {
-				System.out.println("The LEAD IS ALREADY CREATED");
+				log.info("The LEAD IS ALREADY CREATED");
 				resp.setSuccess(false);
-				resp.setMessage("The LEAD IS ALREADY CREATED");
+				resp.setMessage("Lead exist in system with different source");
 				resp.setUrl("");
 			}
 			ContactDto contact = null;
@@ -300,13 +302,16 @@ public class CPWebServices {
 				} 
 				else if(CommonUtil.isCollectionEmpty(enquiryListDto)){
 					ContactDto contact=userContactService.findMobileNoExist(enqReqDto.getCountrycode(),enqReqDto.getMobileno());
-					dto.setContact_sfid(contact.getSfid());
-					dto.setContact_firstname(contact.getFirstName());
-					dto.setContact_lastname(contact.getLastName());
-					dto.setContact_id(contact.getContactId().toString());
-					dto.setContact_mobileno(contact.getMobile());
-					dto.setContact_emailid(contact.getEmail());
-					dto.setContact_countrycode(contact.getCountryCode());
+					if(contact!=null)
+					{
+						dto.setContact_sfid(contact.getSfid());
+						dto.setContact_firstname(contact.getFirstName());
+						dto.setContact_lastname(contact.getLastName());
+						dto.setContact_id(contact.getContactId().toString());
+						dto.setContact_mobileno(contact.getMobile());
+						dto.setContact_emailid(contact.getEmail());
+						dto.setContact_countrycode(contact.getCountryCode());
+					}
 					dto.setSrc_protection_flag("New");
 					dto.setLead_status(true);
 					dto.setResp_msg("Success");
@@ -456,15 +461,15 @@ public class CPWebServices {
 		} else
 			enqResp.setWalkin_source_mobile("");
 
-		// Condition Add for broker id same as input
-		if (brokerId.equals(enqResp.getBroker_account_sfid())) {
+		// Condition Added for broker id same as input
+		if (brokerId.equals(enqResp.getBroker_account_sfid()) || enqResp.getBroker_account_sfid().isEmpty()) {
 			enqResp.setIs_same_broker("True");
 			enqResp.setLead_status(true);
 			enqResp.setResp_msg("Success");
 		} else {
 			enqResp.setIs_same_broker("False");
 			enqResp.setLead_status(false);
-			enqResp.setResp_msg("EOI cannot be generated");
+			enqResp.setResp_msg("Lead exist in system with different source");
 		}
 		
 		return enqResp;
@@ -575,7 +580,14 @@ public class CPWebServices {
 					cpContactEnquiryCreateUpdateReqDto.getCust_emailId(),
 					cpContactEnquiryCreateUpdateReqDto.getTowercode(),
 					cpContactEnquiryCreateUpdateReqDto.getTowersfid(),
-					cpContactEnquiryCreateUpdateReqDto.getRequestsource(), request);
+					cpContactEnquiryCreateUpdateReqDto.getRequestsource(),
+					cpContactEnquiryCreateUpdateReqDto.getToken_amount(),
+					cpContactEnquiryCreateUpdateReqDto.getTypology(),
+					cpContactEnquiryCreateUpdateReqDto.getFloor_band(),
+					cpContactEnquiryCreateUpdateReqDto.getBroker_name(),
+					cpContactEnquiryCreateUpdateReqDto.getBroker_sfid(),
+					cpContactEnquiryCreateUpdateReqDto.getBroker_email(),
+					request);
 			
 			
 			
@@ -688,7 +700,7 @@ public class CPWebServices {
 			String customer_email,
 			String towercode,
 			String towersfid,
-			String requestSource, HttpServletRequest request) throws UnsupportedEncodingException {	
+			String requestSource,String token_amount,String typology,String floor_band, String broker_name,String broker_sfid,String broker_email, HttpServletRequest request) throws UnsupportedEncodingException {	
 		
 		if(    !enq_sfid.equals("")  
 			&& !enquiry_name.equals("")  
@@ -710,6 +722,109 @@ public class CPWebServices {
 				
 				String strMobile =new GeneratePaymentController().encriptString(customer_mobile);
 				/*String strEnq_sfid = encriptString(enq_sfid);*/
+				String resultPath = request.getHeader("Host") + request.getContextPath();
+				String paymentRequest= "https://"+resultPath+"/ccAvenueLogin?num="+strMobile.replaceAll("\"", "")+"&projectid="+URLEncoder.encode(project_sfid, "UTF-8")+"&enqsfid="+URLEncoder.encode(enq_sfid, "UTF-8")+"&projectname="+URLEncoder.encode(project_name, "UTF-8");
+				
+				
+				List<GeneratePayment> charges1=new ArrayList<>();
+				
+					Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
+						GeneratePayment ecData1= new GeneratePayment();
+							ecData1.setEnquiry_sfid(enq_sfid);
+							ecData1.setEnquiry_name(enquiry_name);
+							ecData1.setProject_sfid(project_sfid);
+							ecData1.setProject_name(project_name);
+							ecData1.setCreatedby(useridInt);
+							ecData1.setUpdatedby(useridInt);
+							ecData1.setCustomer_email(customer_email);
+							ecData1.setCustomer_mobile(customer_mobile);
+							ecData1.setCustomer_name(customer_name);
+							ecData1.setIspayment_status("N");
+							ecData1.setIsactive("Y");
+							ecData1.setCreated_date(currentTimestamp);
+							ecData1.setUpdate_date(currentTimestamp);
+							ecData1.setRequest_url(paymentRequest);
+							ecData1.setTowercode(towercode);
+							ecData1.setTowersfid(towersfid);
+							ecData1.setRequestsource(requestSource);
+							if(token_amount!=null && token_amount.length()>0)
+								ecData1.setAmount(new BigDecimal(token_amount));
+							ecData1.setCp_typology(typology);
+							ecData1.setCp_floor_band(floor_band);
+							ecData1.setCp_broker_name(broker_name);
+							ecData1.setCp_broker_sfid(broker_sfid);
+							ecData1.setCp_broker_email(broker_email);
+							charges1.add(ecData1);
+						
+					boolean isInserted = generatePaymentService.insertPaymentDtl(charges1);
+					
+					if (isInserted) {
+						try {
+							//String status = new GeneratePaymentController().mailLinkSend(project_sfid,enq_sfid,user_email,userid,user_name,request);
+							String status = mailLinkSend(project_sfid,enq_sfid,user_email,userid,user_name,paymentRequest,towercode,typology,floor_band,broker_name,broker_email);
+							//String status="STATUS_OK";
+							if (status.equals("STATUS_OK")) {
+								String response = "{\"status\":\"STATUS_OK\",\"error_msg\":\"Successfully submitted & Link sent to customer\",\"error_id\":null}";
+								return response;
+							} else {
+								String response = "{\"status\":\"STATUS_NOTOK\",\"error_msg\":\"Details is successfully submitted & getting error while link mail to customer\",\"error_id\":\"ER1005\"}";
+								return response;
+							}
+						} catch (Exception e) {
+							log.info("Payment Request - Getting error while call method mailLinkSend Error:- ",e);
+							String response = "{\"status\":\"STATUS_NOTOK\",\"error_msg\":\"Details is successfully submitted & getting error while link mail to customer\",\"error_id\":\"ER1005\"}";
+							return response;
+						}
+					} else {
+						String response = "{\"status\":\"STATUS_NOTOK\",\"error_msg\":\"Details is not submitted on portal\",\"error_id\":\"ER1006\"}";
+						return response;
+					}
+			} catch(Exception e) {
+				log.info("Payment Request is not submitted Error:- ",e);				
+				String response = "{\"status\":\"STATUS_NOTOK\",\"error_msg\":\"Details is not submitted on portal, please try again later\",\"error_id\":\"ER1003\"}";
+				return response;
+			}
+		} else {
+			String response = "{\"status\":\"STATUS_NOTOK\",\"error_msg\":\"Invalid Data Provide\",\"error_id\":\"ER1004\"}";
+			return response;
+		}
+	}	
+	
+	/*public String insertPaymentRequest(String paymentDtlJson, 
+			String userid,
+			String enq_sfid,
+			String enquiry_name,
+			String project_sfid,
+			String project_name,
+			String customer_mobile, 
+			String user_email,
+			String user_name,
+			String customer_name,
+			String customer_email,
+			String towercode,
+			String towersfid,
+			String requestSource, HttpServletRequest request) throws UnsupportedEncodingException {	
+		
+		if(    !enq_sfid.equals("")  
+			&& !enquiry_name.equals("")  
+			&& !project_sfid.equals("")  
+			&& !project_name.equals("")  
+			&& !customer_mobile.equals("")  
+			&& !userid.equals("")  
+			&& !user_email.equals("")
+			&& !user_name.equals("")
+			&& !customer_name.equals("")
+			&& !customer_email.equals("")) 
+		{
+			try {
+				GsonBuilder gsonBuilder = new GsonBuilder();
+				Gson gson = gsonBuilder.create();
+				
+				int useridInt = Integer.parseInt(userid);
+				//int customerMobileInt = Integer.parseInt(customer_mobile);
+				
+				String strMobile =new GeneratePaymentController().encriptString(customer_mobile);
+				String strEnq_sfid = encriptString(enq_sfid);
 				String resultPath = request.getHeader("Host") + request.getContextPath();
 				String paymentRequest= "https://"+resultPath+"/ccAvenueLogin?num="+strMobile.replaceAll("\"", "")+"&projectid="+URLEncoder.encode(project_sfid, "UTF-8")+"&enqsfid="+URLEncoder.encode(enq_sfid, "UTF-8")+"&projectname="+URLEncoder.encode(project_name, "UTF-8");
 				
@@ -766,7 +881,7 @@ public class CPWebServices {
 							ecData1.setTowercode(towercode);
 							ecData1.setTowersfid(towersfid);
 							ecData1.setRequestsource(requestSource);
-							//ecData1.setAmount(amount);
+							ecData1.setAmount(new BigDecimal(jobj.get("amount").getAsString()));
 							charges1.add(ecData1);
 						
 						} else {
@@ -810,9 +925,9 @@ public class CPWebServices {
 			String response = "{\"status\":\"STATUS_NOTOK\",\"error_msg\":\"Invalid Data Provide\",\"error_id\":\"ER1004\"}";
 			return response;
 		}
-	}	
+	}	*/
 	
-	public String mailLinkSend(String projectid,String enqid,String emailid,String userid,String user_name,String paymentRequestURL
+	public String mailLinkSend(String projectid,String enqid,String emailid,String userid,String user_name,String paymentRequestURL,String towercode,String  typology,String floor_band,String broker_name, String broker_email
 			) throws UnsupportedEncodingException {
 		
 		String STATUS_NOTOK="STATUS_NOTOK";
@@ -838,22 +953,27 @@ public class CPWebServices {
 							//String resultPath = request.getHeader("Host") + request.getContextPath();
 							//String kyclink= "https://"+resultPath+"/ccAvenueLogin?num="+str.replaceAll("\"", "")+"&projectid="+URLEncoder.encode(eoi.getProjectsfid(), "UTF-8")+"&enqsfid="+URLEncoder.encode(enqid, "UTF-8")+"&projectname="+URLEncoder.encode(eoi.getProjectname(), "UTF-8");
 							//String text = readContentFromFile("D://atul_data//apache-tomcat-9.0.22//QR//payment_request.htm");
-							String text = readContentFromFile("D://SW//apache-tomcat-9.0.0.M22//apache-tomcat-9.0.0.M22//QR//payment_request.htm");
+							String text = readContentFromFile("D://SW//apache-tomcat-9.0.0.M22//apache-tomcat-9.0.0.M22//QR//cp_payment_request_email.htm");
 							
 							text = text.replaceAll("@CustomerName@", eoi.getApplication_name());
 							text = text.replaceAll("@ProjectName@", eoi.getProjectname());
-							text = text.replaceAll("@ClosingMName@", user_name);
-							text = text.replaceAll("@ClosingMEmail@", emailid);
+							/*text = text.replaceAll("@ClosingMName@", user_name);
+							text = text.replaceAll("@ClosingMEmail@", emailid);*/
 							text = text.replaceAll("@Link@", paymentRequestURL);
 							
-							String emailTempl = "Please find herewith the <a href=\"@Link@\">link</a> to update your KYC details. </br></br>Regards</br>Godrej Properties";
-							emailTempl = emailTempl.replaceAll("@Link@", paymentRequestURL);
+							text = text.replaceAll("@Typology@", typology);
+							text = text.replaceAll("@Tower@", towercode);
+							text = text.replaceAll("@Floor@", floor_band);
+							text = text.replaceAll("@CPName@", broker_name);
+							text = text.replaceAll("@CPEmailID@", broker_email);
+							/*String emailTempl = "Please find herewith the <a href=\"@Link@\">link</a> to update your KYC details. </br></br>Regards</br>Godrej Properties";
+							emailTempl = emailTempl.replaceAll("@Link@", paymentRequestURL);*/
 							
 							if(eoi.getEmail_id()!=null && eoi.getEmail_id().length()>0) {
 								String projectName = "Godrej Properties : Payment Requested for "+ eoi.getProjectname();
 								String smtpip = sysConfigService.getValue(SysConfigEnum.SMTP_IP, "SMTP_IP");
 								String smtpPort = sysConfigService.getValue(SysConfigEnum.SMTP_PORT, "SMTP_PORT");
-								SendMailThreadUtil mail =new SendMailThreadUtil(eoi.getEmail_id(),	emailid, projectName, text,smtpip,smtpPort);
+								SendMailThreadUtil mail =new SendMailThreadUtil(eoi.getEmail_id(),	broker_email, projectName, text,smtpip,smtpPort);
 							} 
 						}
 					}
