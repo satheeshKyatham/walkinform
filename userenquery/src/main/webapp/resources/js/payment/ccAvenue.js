@@ -84,7 +84,7 @@ function _search_data(inpuNum, project_sfid) {
 function getCCAvenuePaymentDetails()
 					{
 						
-					debugger;
+					
 					
 						$("#dtOrderExample").dataTable().fnDestroy();
 						$("#dtOrderExample tbody").empty();
@@ -106,6 +106,24 @@ function getCCAvenuePaymentDetails()
 						
 						
 						$.getJSON(urlPP, function (data) {
+							
+							/*<thead>
+							<tr>
+								<th id="enquiry_Id">Enquiry</th>
+								<th>Project Name</th>
+								<th>Amount</th>	
+								<th>Transaction Id</th>	
+								<th>Transaction Status</th>									
+								<th>Action</th>
+							</tr>
+						</thead>*/
+							if(data[0].requestsource=="CP APP")
+							{
+								var headData="<th>Typology</th><th>Floor Band</th><th>Broker Name</th><th>Transaction Id</th><th>Transaction Status</th><th>Action</th>"
+								$("#dtOrderExample thead tr").append(headData);
+							}
+							else
+								$("#dtOrderExample thead tr").append("<th>Transaction Id</th><th>Transaction Status</th><th>Action</th>");
 							if(respid=="1")//Success
 							{
 								msgShow="Dear "+data[0].customer_name+", payment has been initiated for "+amt+""
@@ -124,7 +142,6 @@ function getCCAvenuePaymentDetails()
 							}
 							$('#payment_resp').text(msgShow);
 							$.each(data, function (index, value) {
-								debugger;
 								console.log("test",value)
 								if(value.ispayment_status=='N'){
 									paymentButton="<button class='btn btn-primary btnNext' onclick='requestCCPaymentGateway("+value.id+");'>Pay Now</button>";
@@ -149,7 +166,15 @@ function getCCAvenuePaymentDetails()
 								}
 								/*var transactionStatus=value==null?'':value.payment_status==null?'':value.payment_status;*/
 								$('#enquiry_Id').val(value.id);
-								var val = "<tr><td><label>"+value.enquiry_name+"</label></td><td>"+value.project_name+"</td><td>"+value.amount+"</td><td>"+transactionId+"</td><td>"+transactionStatus+"</td><td>"+paymentButton+"</td>";
+								
+								var brokerData="";
+								if(data[0].requestsource=="CP APP")
+									{
+										brokerData="<td>"+value.cp_typology+"</td><td>"+value.cp_floor_band+"</td><td>"+value.cp_broker_name+"</td><td>"+transactionId+"</td><td>"+transactionStatus+"</td>";
+									}
+								else
+									brokerData="<td>"+transactionId+"</td><td>"+transactionStatus+"</td>";
+								var val = "<tr><td><label>"+value.enquiry_name+"</label></td><td>"+value.project_name+"</td><td>"+value.amount+"</td>"+brokerData+"<td>"+paymentButton+"</td>";
 								val=val+"</tr>";
 								$("#dtOrderExample tbody").append(val);
 								$('#projectTitle').text(value.project_name);

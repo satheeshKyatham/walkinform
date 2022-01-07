@@ -857,7 +857,7 @@ function getTaxPercentage(basicSaleprice, projectSfid, currentTaxRate, TotalA, r
 		
 		//if (projectSfid == 'a1l2s00000000X5AAI' || projectSfid == 'a1l6F000003TXloQAG'){
 		//Remove GST logic for Godrej Garden City - JV 
-		if (projectSfid == 'a1l2s000000ZtWvAAK' || projectSfid == 'a1l2s000000ZtXPAA0' || projectSfid == 'a1l2s000000UQ25AAG' || projectSfid == 'a1l2s000000g6kZAAQ' || projectSfid == 'a1l2s000000PKrrAAG' || projectSfid == 'a1l2s000000PK3IAAW' || projectSfid == 'a1l2s00000000X5AAI' || projectSfid == 'a1l6F000003TXloQAG' || projectSfid == 'a1l2s000000XoezAAC'){
+		if (projectSfid == 'a1l2s000000ZthtAAC' || projectSfid == 'a1l2s000000ZtX0AAK' || projectSfid == 'a1l2s000000ZtWvAAK' || projectSfid == 'a1l2s000000ZtXPAA0' || projectSfid == 'a1l2s000000UQ25AAG' || projectSfid == 'a1l2s000000g6kZAAQ' || projectSfid == 'a1l2s000000PKrrAAG' || projectSfid == 'a1l2s000000PK3IAAW' || projectSfid == 'a1l2s00000000X5AAI' || projectSfid == 'a1l6F000003TXloQAG' || projectSfid == 'a1l2s000000XoezAAC'){
 		//if (projectSfid == 'a1l6F000004RvPHQA0' || projectSfid == 'a1l2s000000PKrrAAG' || projectSfid == 'a1l2s000000PK3IAAW' || projectSfid == 'a1l2s00000000X5AAI' || projectSfid == 'a1l6F000003TXloQAG' || projectSfid == 'a1l2s000000XoezAAC'){
 			if(TotalA>=4500000 || reraCarpetSqm >= 90){
 				return 5;

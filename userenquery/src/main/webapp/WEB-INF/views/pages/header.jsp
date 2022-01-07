@@ -5,7 +5,7 @@
 <%  
 /* Cookie ck=new Cookie("version","18.20");  
 response.addCookie(ck);   */
-session.setAttribute("version","8.11");  
+session.setAttribute("version","8.18");  
 
 %>  
 
@@ -21,6 +21,10 @@ session.setAttribute("version","8.11");
 
 <script type="text/javascript">
 	var PAGECONTEXT_GV = '${pageContext.request.contextPath}/';
+	if('<%=session.getAttribute("USERNAME")%>'=="null")
+	{
+		window.location.href =PAGECONTEXT_GV+"saleslogin";
+	}
 	
 	var USERID_GV = '<%= session.getAttribute("USERID")%>';
 	var ROLE_GV = '<%= session.getAttribute("ROLE")%>';
@@ -114,7 +118,6 @@ session.setAttribute("version","8.11");
 document.getElementById('userNameLoggedInShow').innerHTML = 'Welcome '+'<%= session.getAttribute("USERNAME")%>';
 var useridGlobvar = <%= session.getAttribute("USERID")%>
 var USERNAME_GV = '<%= session.getAttribute("USERNAME")%>';
-
 function logoutSession(){ 
 	$.get("logout", {
 	},
@@ -127,4 +130,6 @@ if ('<%=session.getAttribute("ISOTPADMIN")%>' != "Y") {
 	document.getElementById('OTPModal').innerHTML = "";
 	document.getElementById('adminOTPLink').innerHTML = "";
 }
+
+
 </script>

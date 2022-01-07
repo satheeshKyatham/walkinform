@@ -49,7 +49,9 @@ public class CPContactEnquiryCreateUpdateReqDto implements Serializable{
 	private String requestsource="CP APP";
 	private Integer contactId;
 	private Integer enquiryId;
-	
+	private String token_amount;
+	private String broker_name;
+	private String broker_email;
 	
 	
 	public String getRequestsource() {
@@ -258,6 +260,24 @@ public class CPContactEnquiryCreateUpdateReqDto implements Serializable{
 	}
 	public void setEnquiryId(Integer enquiryId) {
 		this.enquiryId = enquiryId;
+	}
+	public String getToken_amount() {
+		return token_amount;
+	}
+	public void setToken_amount(String token_amount) {
+		this.token_amount = token_amount;
+	}
+	public String getBroker_name() {
+		return broker_name;
+	}
+	public void setBroker_name(String broker_name) {
+		this.broker_name = broker_name;
+	}
+	public String getBroker_email() {
+		return broker_email;
+	}
+	public void setBroker_email(String broker_email) {
+		this.broker_email = broker_email;
 	}
 
 
